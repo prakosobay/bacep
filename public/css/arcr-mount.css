@@ -1,0 +1,138 @@
+body {
+    background-image: url(/hero-gb.jpg);
+    background-size: cover;
+}
+
+#form {
+    background-color: #000;
+    height: 1000px;
+    width: 600px;
+    margin: auto;
+    padding: 20px;
+    opacity: 0.89;
+}
+
+#form h3 {
+    width: 210px;
+    padding: 5px;
+    color: #fff;
+}
+
+#form h3 {
+    border-bottom: 4px solid #3399ff;
+    width: 150px;
+    padding: 5px;
+}
+
+::placeholder {
+    color: rgb(107, 107, 107)
+}
+
+#input #input-group4 {
+    width: 100px;
+    margin: 5px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline: none;
+    background: transparent;
+    color: rgb(255, 255, 255)
+}
+
+#input #input-group2 {
+    width: 100px;
+    margin: 5px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline: none;
+    background: transparent;
+    color: rgb(255, 255, 255)
+}
+
+#input #input-group3 {
+    width: 100px;
+    margin: 5px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline: none;
+    background: transparent;
+    color: rgb(255, 255, 255)
+}
+
+#input #input-group {
+    width: 263px;
+    margin: 5px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline: none;
+    background: transparent;
+    color: rgb(255, 255, 255)
+}
+
+#input2 #input-group {
+    width: 195px;
+    margin: 5px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline: none;
+    background: transparent;
+    color: #fff
+}
+
+#input3 #input-group {
+    margin-left: 50px;
+}
+
+#input4 #input-group {
+    width: 550px;
+    margin: 5px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline: none;
+    background: transparent;
+    color: #fff
+}
+
+#input4 #input-group1 {
+    width: 615px;
+    margin: 5px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline: none;
+    background: transparent;
+    color: #fff
+}
+
+#input5 h3 {
+    border-bottom: 4px solid #3399ff;
+    width: 320px;
+    padding: 10px;
+}
+
+#input6 #input-group {
+    width: 300px;
+    margin: 5px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline: none;
+    background: transparent;
+    color: #fff
+}
+
+#input6 #input-group1 {
+    width: 550px;
+    margin: 5px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline: none;
+    background: transparent;
+    color: #fff
+}
