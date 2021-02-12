@@ -64,7 +64,6 @@ class HomeController extends Controller
         $maintenance->perlatan = $request->perlatan;
         $maintenance->resiko_dampak = $request->resiko_dampak;
         $maintenance->jenis_rack = $request->jenis_rack;
-        $maintenance->permintaan = $request->permintaan;
 
         $save = $maintenance->save();
         if (!$save) {
@@ -201,7 +200,8 @@ class HomeController extends Controller
 
     public function surveyview()
     {
-        $survey = Survey::all();
+        // $survey = Survey::all();
+        $survey = DB::table('survey')->paginate(10);
         return view('hasil_survey', ['survey' => $survey]);
     }
 
@@ -210,13 +210,14 @@ class HomeController extends Controller
         $survey = Survey::all();
 
         $pdf = PDF::loadview('survey_pdf', ['survey' => $survey]);
-        // return $pdf->download('laporan-pegawai-pdf');
+        // return $pdf->download('laporan-survey-pdf');
         return $pdf->stream();
     }
 
     public function maintenance_view()
     {
-        $maintenance = Maintenance::all();
+        // $maintenance = Maintenance::all();
+        $maintenance = DB::table('maintenance')->paginate(10);
         return view('hasil_maintenance', ['maintenance' => $maintenance]);
     }
 
@@ -231,7 +232,8 @@ class HomeController extends Controller
 
     public function troubleshoot_view()
     {
-        $troubleshoot = Troubleshoot::all();
+        // $troubleshoot = Troubleshoot::all();
+        $troubleshoot = DB::table('troubleshoot')->paginate(10);
         return view('hasil_troubleshoot', ['troubleshoot' => $troubleshoot]);
     }
 
@@ -246,7 +248,9 @@ class HomeController extends Controller
 
     public function mounting_view()
     {
-        $mounting = Mounting::all();
+        // $mounting = Mounting::all();
+        $mounting = DB::table('mounting')->paginate(10);
+
         return view('hasil_mount', ['mounting' => $mounting]);
     }
 

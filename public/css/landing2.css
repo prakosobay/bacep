@@ -571,6 +571,7 @@ p {
         height: 100%;
     }
 
+
     @media only screen and (min-width: 1200px) {
         #header .hamburger {
             display: none;
@@ -600,5 +601,8 @@ p {
             flex-basis: 22%;
             margin: 1.5%;
         }
+
     }
+
+
 }

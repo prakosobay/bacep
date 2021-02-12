@@ -40,7 +40,7 @@
                 <strong>{{ $message }}</strong>
             </div>
             @endif
-            <div class="VisitDC-bottom">
+            {{-- <div class="VisitDC-bottom">
                 <div class="VisitDC-item">
                     <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png" /></div>
                     <h2>Survey Data Center</h2>
@@ -67,9 +67,9 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
 
-    <section id="ReadMore">
+    {{-- <section id="ReadMore">
         <div class="ReadMore container">
             <div class="ReadMore-header">
                 <h1 class="section-title">More About Us</span>
@@ -108,36 +108,15 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
 
     <!-- Footer -->
-    <section id="footer">
+    {{-- <section id="footer">
         <div class="footer container">
             <div class="brand">
                 <h1>Thank You</h1>
             </div>
             <h2>For Visiting Data Center Department</h2>
         </div>
-    </section>
-
-    {{-- <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">{{ __('Dashboard') }}</div>
-
-                    <div class="card-body">
-                        @if (session('status'))
-                            <div class="alert alert-success" role="alert">
-                                {{ session('status') }}
-                            </div>
-                        @endif
-
-                        {{ __('You are logged in!') }}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> --}}
-
+    </section> --}}
     @endsection

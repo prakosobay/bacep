@@ -16,7 +16,7 @@
         <!-- Styles -->
         <link href="{{ asset('css/landing2.css') }}" rel="stylesheet">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.14.0/sweetalert2.min.css" rel="stylesheet">
+        {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.14.0/sweetalert2.min.css" rel="stylesheet"> --}}
 
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.14.0/sweetalert2.all.min.js"></script>
@@ -52,7 +52,7 @@
                         <li><a href="#VisitDC" data-after="VisitDC">Visit Data Center</a></li>
                         <li><a href="/ReadMore" data-after="ReadMore">BM</a></li>
                         @else
-                        <li><a href="/ReadMore" data-after="ReadMore">Approval</a></li>
+                        <li><a href="#approval" data-after="Approval">Approval</a></li>
                         @endif
                         <li>
                                 <a class="dropdown-item" href="{{ route('logout') }}"
@@ -158,6 +158,9 @@
             </div>
         </div>
     </section>
+
+    @else
+
     @endif
 
     <!-- Footer -->
@@ -170,7 +173,7 @@
         </div>
     </section>
     <!-- End Footer -->
-    {{-- <script type="text/javascript" src="/js/landing.js"></script> --}}
+    {{-- <script type="text/javascript" src="/js/landing.js"></script>
 </body>
 
 
