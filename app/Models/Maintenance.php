@@ -9,6 +9,6 @@ class Maintenance extends Model
 {
     use HasFactory;
 
-    protected $table = 'maintenances';
+    protected $table = 'maintenance';
     protected $primaryKey = 'maintenance_id';
 }

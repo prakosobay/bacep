@@ -39,22 +39,20 @@
                                     <th>Visitor</th>
                                     <th>Date of Request</th>
                                     <th>Purpose</th>
-                                    <th>Detail</th>
                                     <th>Action</th>
                                     <th>File</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($survey as $p)
-                                        <tr>
-                                            <td>{{ $p->survey_id }}</td>
-                                            <td>{{ $p->visitor_name }}</td>
-                                            <td>{{ $p->created_at }}</td>
-                                            <td>{{ $p->purpose_work }}</td>
-                                            <td><a href="#detail_survey">Detail</a></td>
-                                            <td><a href="#approve_survey">Approve</a> | <a href="#reject_survey">Reject</a></td>
-                                            <td><a href="/survey_pdf" class="btn btn-primary" target="_blank">LIHAT PDF</a></td>
-                                        </tr>
+                                    <tr>
+                                        <td>{{ $p->survey_id }}</td>
+                                        <td>{{ $p->visitor_name }}</td>
+                                        <td>{{ $p->created_at }}</td>
+                                        <td>{{ $p->purpose_work }}</td>
+                                        <td><a href="#approve_survey">Approve</a> | <a href="#reject_survey">Reject</a></td>
+                                        <td><a href="/survey_pdf" class="btn btn-primary" target="_blank">LIHAT PDF</a></td>
+                                    </tr>
                                 @endforeach
                             </tbody>
                         </table>

@@ -201,7 +201,7 @@ class HomeController extends Controller
     public function surveyview()
     {
         // $survey = Survey::all();
-        $survey = DB::table('survey')->paginate(10);
+        $survey = DB::table('survey')->paginate(20);
         return view('hasil_survey', ['survey' => $survey]);
     }
 
@@ -217,7 +217,7 @@ class HomeController extends Controller
     public function maintenance_view()
     {
         // $maintenance = Maintenance::all();
-        $maintenance = DB::table('maintenance')->paginate(10);
+        $maintenance = DB::table('maintenance')->paginate(20);
         return view('hasil_maintenance', ['maintenance' => $maintenance]);
     }
 
@@ -249,7 +249,7 @@ class HomeController extends Controller
     public function mounting_view()
     {
         // $mounting = Mounting::all();
-        $mounting = DB::table('mounting')->paginate(10);
+        $mounting = DB::table('mounting')->paginate(20);
 
         return view('hasil_mount', ['mounting' => $mounting]);
     }

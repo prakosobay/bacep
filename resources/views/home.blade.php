@@ -129,7 +129,7 @@
 
                 <div class="Approval-item">
                     <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png" /></div>
-                    <a href="hasil_mounting" type="button" ><h2>Mounting</h2>
+                    <a href="hasil_mount" type="button" ><h2>Mounting</h2>
                 </div>
 
                 <div class="Approval-item">

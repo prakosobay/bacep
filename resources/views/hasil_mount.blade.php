@@ -39,7 +39,6 @@
                                 <th>Visitor</th>
                                 <th>Date</th>
                                 <th>Purpose</th>
-                                <th>Detail</th>
                                 <th>Action</th>
                                 <th>File</th>
                             </tr>
@@ -51,7 +50,6 @@
                                         <td>{{ $p->visitor_name }}</td>
                                         <td>{{ $p->created_at }}</td>
                                         <td>{{ $p->purpose_work }}</td>
-                                        <td><a href="#detail_mounting">Detail</a></td>
                                         <td><a href="#approve_mounting">Approve</a> | <a href="#reject_mounting">Reject</a></td>
                                         <td><a href="/mounting_pdf" class="btn btn-primary" target="_blank">LIHAT PDF</a></td>
                                     </tr>

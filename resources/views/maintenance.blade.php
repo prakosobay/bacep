@@ -61,7 +61,7 @@
 
                         <label><p style="color:white">Tahun</p></label>
                         <select id="input-group3" style="background: black;" name="year">
-                            <option value="0">Year</option>
+                            <option value="">Year</option>
                             <option value="2021">2021</option>
                             <option value="2022">2022</option>
                             <option value="2023">2023</option>
@@ -134,8 +134,6 @@
                             <input type="text" id="input-group" placeholder="Risk and Service Area Impact (Resiko dan Dampak Area Servis)" name="resiko_dampak">
                             <input type="text" id="input-group" placeholder="Item Operation (Barang yang digunakan)" name="perlatan">
                             <input type="text" id="input-group" placeholder="Detail Execution (Kegiatan)" name="kegiatan">
-
-
 
                         </div>
 
