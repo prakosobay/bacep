@@ -35,35 +35,29 @@
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                <th>No.</th>
-                                <th>Visitor</th>
-                                <th>Date</th>
-                                <th>Purpose</th>
-                                <th>Reviewed</th>
-                                <th>Checked</th>
-                                <th>Security</th>
-                                <th>Head. Dept</th>
-                                <th>Aprove</th>
-                                <th>File</th>
+                                    <th>No.</th>
+                                    <th>Visitor</th>
+                                    <th>Date</th>
+                                    <th>Purpose</th>
+                                    <th>Detail</th>
+                                    <th>Action</th>
+                                    <th>File</th>
                                 </tr>
                             </thead>
                             <tbody>
-                            @foreach($maintenance as $p)
-                                    <tr>
-                                        <td>{{ $p->maintenance_id }}</td>
-                                        <td>{{ $p->visitor_name }}</td>
-                                        <td>{{ $p->created_at }}</td>
-                                        <td>{{ $p->purpose_work }}</td>
-                                        <td>{{ $p->purpose_work }}</td>
-                                        <td>{{ $p->purpose_work }}</td>
-                                        <td>{{ $p->purpose_work }}</td>
-                                        <td>{{ $p->purpose_work }}</td>
-                                        <td>aprove disini</td>
-                                        <td><a href="/maintenance_pdf" class="btn btn-primary" target="_blank">LIHAT PDF</a></td>
-                                    </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                                @foreach($maintenance as $p)
+                                        <tr>
+                                                <td>{{ $p->maintenance_id }}</td>
+                                                <td>{{ $p->visitor_name }}</td>
+                                                <td>{{ $p->created_at }}</td>
+                                                <td>{{ $p->purpose_work }}</td>
+                                                <td><a href="#detail_maintenance">Detail</a></td>
+                                                <td><a href="#approve_maintenance">Approve</a> | <a href="#reject_maintenance">Reject</a></td>
+                                                <td><a href="/maintenance_pdf" class="btn btn-primary" target="_blank">LIHAT PDF</a></td>
+                                        </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                 </div>
             </div>
         </div>

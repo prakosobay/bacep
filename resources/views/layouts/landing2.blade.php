@@ -52,7 +52,7 @@
                         <li><a href="#VisitDC" data-after="VisitDC">Visit Data Center</a></li>
                         <li><a href="/ReadMore" data-after="ReadMore">BM</a></li>
                         @else
-                        <li><a href="#approval" data-after="Approval">Approval</a></li>
+                        <li><a href="#Approval" data-after="Approval">Approval</a></li>
                         @endif
                         <li>
                                 <a class="dropdown-item" href="{{ route('logout') }}"
@@ -71,7 +71,7 @@
             </div>
         </div>
     </section>
-    <section id="hero">
+    {{-- <section id="hero">
         <div class="hero container">
             <div>
                 <h1>Welcome <span></span></h1>
@@ -157,11 +157,7 @@
                 </div>
             </div>
         </div>
-    </section>
-
-    @else
-
-    @endif
+    </section> --}}
 
     <!-- Footer -->
     <section id="footer">
@@ -173,8 +169,6 @@
         </div>
     </section>
     <!-- End Footer -->
-    {{-- <script type="text/javascript" src="/js/landing.js"></script>
+    {{-- <script type="text/javascript" src="/js/landing.js"></script> --}}
 </body>
-
-
 </html>
