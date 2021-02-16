@@ -148,13 +148,11 @@
             e.preventDefault();
 
             var datastring = $("#form_survey").serialize();
-            console.log(datastring);
             $.ajax({
                 type:'POST',
                 url:"{{url('submit_data_survey')}}",
                 data: datastring,
                 error: function (request, error) {
-					console.log(arguments);
 					alert(" Can't do because: " + error);
                 },
 				success:function(data){
@@ -164,19 +162,18 @@
 							title: "Success!",
 							text: 'Data Saved',
                             type: "success",
-						}, function(IsConfirm){
-                            if (isConfirm){
-							location.href = "{{url("/home")}}";
-                            }
-						});
+						}).then(function(){
+                            location.href = "{{url("/home")}}";
+                        });
 
                     }else if(data.status == 'FAILED'){
 
 						Swal.fire({
 							title: "Failed!",
 							text: 'Saving Data Failed',
-						}, function(){
-						});
+						}).then(function(){
+                            location.reload();
+                        });
                     }
                 }
             });

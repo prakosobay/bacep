@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Console\Kernel;
+use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -16,21 +17,36 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
+
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/maintenance', function () {
-    return view('maintenance');
-})->middleware('auth');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/maintenance', function () {
+        return view('maintenance');
+    });
 
-Route::get('/survey', function () {
-    return view('survey');
-})->middleware('auth');
+    Route::get('/survey', function () {
+        return view('survey');
+    });
 
-Route::get('/mount', function () {
-    return view('mount');
-})->middleware('auth');
+    Route::get('/mount', function () {
+        return view('mount');
+    });
+
+
+    Route::get('/troubleshoot', function () {
+        return view('troubleshoot');
+    });
+
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+});
+
+
+
+
+
 
 Route::post('/submit_data', [App\Http\Controllers\HomeController::class, 'submit_data']);
 Route::post('/submit_data_survey', [App\Http\Controllers\HomeController::class, 'submit_data_survey']);
@@ -46,10 +62,3 @@ Route::get('/survey_pdf', [App\Http\Controllers\HomeController::class, 'cetak_su
 Route::get('/maintenance_pdf', [App\Http\Controllers\HomeController::class, 'cetak_maintenance_pdf']);
 Route::get('/troubleshoot_pdf', [App\Http\Controllers\HomeController::class, 'cetak_troubleshoot_pdf']);
 Route::get('/mounting_pdf', [App\Http\Controllers\HomeController::class, 'cetak_mounting_pdf']);
-
-
-Route::get('/troubleshoot', function () {
-    return view('troubleshoot');
-})->middleware('auth');
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('auth');
