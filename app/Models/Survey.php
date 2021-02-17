@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\SurveyHistory;
+
 
 class Survey extends Model
 {
@@ -33,4 +35,9 @@ class Survey extends Model
         'lokasi',
         'akses',
     ];
+
+    public function surveyHistory()
+    {
+        return $this->hasMany(SurveyHistory::class);
+    }
 }

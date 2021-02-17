@@ -40,7 +40,9 @@ Route::middleware(['auth'])->group(function () {
         return view('troubleshoot');
     });
 
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+    Route::get('/detail_survey/{id}', [HomeController::class, 'detail_permit_survey']);
 });
 
 

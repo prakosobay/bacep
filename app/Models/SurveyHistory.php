@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
+use App\Models\Survey;
 
 class SurveyHistory extends Model
 {
@@ -22,4 +24,14 @@ class SurveyHistory extends Model
         'created_by',
         'status'
     ];
+
+    public function createdBy()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function survey()
+    {
+        return $this->belongsTo(Survey::class);
+    }
 }

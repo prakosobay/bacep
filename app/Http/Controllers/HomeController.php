@@ -108,6 +108,17 @@ class HomeController extends Controller
     }
 
 
+    public function detail_permit_survey($id)
+    {
+        $surveyHistory = DB::table('survey_histories')
+            ->join('survey', 'survey.survey_id', '=', 'survey_histories.survey_id')
+            ->join('users', 'users.id', '=', 'survey_histories.created_by')
+            ->where('survey_histories.survey_id', '=', $id)
+            ->select('survey_histories.*', 'users.name', 'survey.*')
+            ->get();
+        return view('detail_permit', ['surveyHistory' => $surveyHistory]);
+    }
+
 
     public function surveyview()
     {
