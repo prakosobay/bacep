@@ -138,15 +138,17 @@ class HomeController extends Controller
         WHERE
         `survey_histories`.`role_to` = '$role' ");
 
+        $survey = empty(DB::getQueryLog()) ? []  : $survey;
+
         return view('hasil_survey', ['survey' => $survey]);
     }
 
-    public function cetak_survey_pdf()
+
+    public function cetak_survey_pdf($id)
     {
-        $survey = Survey::all();
+        $survey = Survey::find($id);
 
         $pdf = PDF::loadview('survey_pdf', ['survey' => $survey]);
-        // return $pdf->download('laporan-survey-pdf');
         return $pdf->stream();
     }
 
@@ -173,12 +175,12 @@ class HomeController extends Controller
         return view('hasil_troubleshoot', ['troubleshoot' => $troubleshoot]);
     }
 
-    public function cetak_troubleshoot_pdf()
+    public function cetak_troubleshoot_pdf($id)
     {
-        $troubleshoot = Troubleshoot::all();
+        $troubleshoot = Troubleshoot::find($id);
 
         $pdf = PDF::loadview('troubleshoot_pdf', ['troubleshoot' => $troubleshoot]);
-        // return $pdf->download('laporan-pegawai-pdf');
+
         return $pdf->stream();
     }
 
