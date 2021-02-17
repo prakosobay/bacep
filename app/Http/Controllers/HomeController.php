@@ -45,6 +45,7 @@ class HomeController extends Controller
             $maintenanceHistory = MaintenanceHistory::create([
                 'maintenance_id' => $maintenance->maintenance_id,
                 'created_by' => Auth::user()->id,
+                'role_to' => 'dc_team',
                 'status' => 'created'
             ]);
 
@@ -62,6 +63,7 @@ class HomeController extends Controller
             $surveyHistory = SurveyHistory::create([
                 'survey_id' => $survey->survey_id,
                 'created_by' => Auth::user()->id,
+                'role_to' => 'dc_team',
                 'status' => 'created'
             ]);
 
@@ -80,6 +82,7 @@ class HomeController extends Controller
             $troubleshootHistory = TroubleshootHistory::create([
                 'troubleshoot_id' => $troubleshoot->troubleshoot_id,
                 'created_by' => Auth::user()->id,
+                'role_to' => 'dc_team',
                 'status' => 'created'
             ]);
 
@@ -98,6 +101,7 @@ class HomeController extends Controller
             $mountingHistory = MountingHistory::create([
                 'mounting_id' => $mounting->id,
                 'created_by' => Auth::user()->id,
+                'role_to' => 'dc_team',
                 'status' => 'created'
             ]);
 
@@ -122,8 +126,18 @@ class HomeController extends Controller
 
     public function surveyview()
     {
-        // $survey = Survey::all();
-        $survey = DB::table('survey')->paginate(20);
+
+        $role = Auth::user()->role;
+
+        $survey = DB::select("SELECT
+            MAX( survey_histories.survey_history_id ) as survey_history_id,
+            `survey`.*
+        FROM
+            `survey_histories`
+            INNER JOIN `survey` ON `survey`.`survey_id` = `survey_histories`.`survey_id`
+        WHERE
+        `survey_histories`.`role_to` = '$role' ");
+
         return view('hasil_survey', ['survey' => $survey]);
     }
 

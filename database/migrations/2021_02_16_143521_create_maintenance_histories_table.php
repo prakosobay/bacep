@@ -17,6 +17,7 @@ class CreateMaintenanceHistoriesTable extends Migration
             $table->increments('maintenance_history_id');
             $table->integer('maintenance_id');
             $table->integer('created_by');
+            $table->integer('role_to');
             $table->integer('status');
             $table->timestamps();
         });

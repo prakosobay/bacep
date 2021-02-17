@@ -15,6 +15,7 @@ class TroubleshootHistory extends Model
     protected $fillable = [
         'troubleshoot_id',
         'created_by',
+        'role_to',
         'status'
     ];
 }

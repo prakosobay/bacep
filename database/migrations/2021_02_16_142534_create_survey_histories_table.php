@@ -17,6 +17,7 @@ class CreateSurveyHistoriesTable extends Migration
             $table->increments('survey_history_id');
             $table->integer('survey_id');
             $table->integer('created_by');
+            $table->string('role_to');
             $table->string('status');
             $table->timestamps();
         });

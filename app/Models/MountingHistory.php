@@ -15,6 +15,7 @@ class MountingHistory extends Model
     protected $fillable = [
         'mounting_id',
         'created_by',
+        'role_to',
         'status'
     ];
 }

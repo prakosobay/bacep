@@ -22,6 +22,7 @@ class SurveyHistory extends Model
     protected $fillable = [
         'survey_id',
         'created_by',
+        'role_to',
         'status'
     ];
 
