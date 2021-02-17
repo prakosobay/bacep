@@ -17,8 +17,8 @@ class CreateMountingHistoriesTable extends Migration
             $table->increments('mounting_history_id');
             $table->integer('mounting_id');
             $table->integer('created_by');
-            $table->integer('role_to');
-            $table->integer('status');
+            $table->string('role_to');
+            $table->string('status');
             $table->timestamps();
         });
     }

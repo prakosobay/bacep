@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Survey Data Center</title>
+        <title>History Survey Data Center</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Font Awesome -->
@@ -17,15 +17,10 @@
     <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.14.0/sweetalert2.min.css" rel="stylesheet">
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.14.0/sweetalert2.all.min.js"></script>
-        <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
     {{-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> --}}
     </head>
     <body>
-        {{ csrf_field() }}
+
 
     <section class="content">
         <div class="container-fluid">
@@ -33,7 +28,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                        <h2 class="card-title">Data Aproval Permit Survey</h2>
+                        <h2 class="card-title">Data History Permit Survey</h2>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
@@ -41,22 +36,21 @@
                             <thead>
                                 <tr>
                                     <th>No.</th>
-                                    <th>Visitor</th>
-                                    <th>Date of Request</th>
-                                    <th>Purpose</th>
-                                    <th>Action</th>
-                                    <th>File</th>
+                                    <th>Checked By</th>
+                                    <th>Reviewed By</th>
+                                    <th>Security</th>
+                                    <th>Dept. Head</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($survey as $p)
                                     <tr>
-                                        <td>{{ $p->survey_id }}</td>
-                                        <td>{{ $p->visitor_name }}</td>
-                                        <td>{{ $p->created_at }}</td>
-                                        <td>{{ $p->purpose_work }}</td>
-                                        <td><a href="javascript:void(0)" class="approve" data-survey_id="{{$p->survey_id}}">Approve</a>  | <a href="#reject_survey">Reject</a> | <a href="/detail_survey/{{$p->survey_id}}">Detail</a></td>
-                                        <td><a href="/survey_pdf" class="btn btn-primary" target="_blank">LIHAT PDF</a></td>
+                                        <td>{{ $p->survey_history_id }}</td>
+                                        <td>{{ $p->created_by }}</td>
+                                        <td>{{ $p->created_by }}</td>
+                                        <td>{{ $p->created_by }}</td>
+                                        <td>{{ $p->created_by }}</td>
+                                        <td>{{ $p->status }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -96,45 +90,6 @@
       "autoWidth": false,
       "responsive": true,
     });
-
-    $(document).on('click', '.approve', function(){
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('input[name="_token"]').val()
-            }
-        });
-        let survey_id = $(this).data('survey_id');
-        console.log(survey_id);
-        $.ajax({
-            type:'POST',
-            url:"{{url('approve_survey')}}",
-            data: {survey_id},
-            error: function (request, error) {
-                alert(" Can't do because: " + error);
-            },
-            success:function(data){
-                console.log(data);
-                if(data.status == 'SUCCESS'){
-                    Swal.fire({
-                        title: "Success!",
-                        text: 'Data Approve Success',
-                        type: "success",
-                    }).then(function(){
-                        location.reload();
-                    });
-
-                }else if(data.status == 'FAILED'){
-
-                    Swal.fire({
-                        title: "Failed!",
-                        text: 'Saving Data Approved Failed',
-                    }).then(function(){
-                        location.reload();
-                    });
-                }
-            }
-        });
-    })
   });
 </script>
     </body>

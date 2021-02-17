@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Survey Data Center</title>
+    <title>Maintenance Data Center</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- Font Awesome -->
@@ -28,7 +28,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                    <h2 class="card-title">History Survey</h2>
+                    <h2 class="card-title">History Maintenance</h2>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
@@ -43,7 +43,7 @@
                         </thead>
                         <tbody>
                             {{$num = 1}}
-                            @foreach($surveyHistory as $p)
+                            @foreach($maintenanceHistory as $p)
                                 <tr>
                                     <td>{{ $num++ }}</td>
                                     <td>{{ $p->name }}</td>

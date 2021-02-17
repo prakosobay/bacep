@@ -23,7 +23,8 @@ class SurveyHistory extends Model
         'survey_id',
         'created_by',
         'role_to',
-        'status'
+        'status',
+        'aktif'
     ];
 
     public function createdBy()
