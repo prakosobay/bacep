@@ -129,17 +129,12 @@ class HomeController extends Controller
     {
         $role = Auth::user()->role;
 
-        $survey = DB::select("SELECT
-            MAX( survey_histories.survey_history_id ) as survey_history_id,
-            `survey`.*
-        FROM
-            `survey_histories`
-            INNER JOIN `survey` ON `survey`.`survey_id` = `survey_histories`.`survey_id`
-            Where survey_histories.role_to = '$role' AND survey_histories.aktif = 1
-        ");
-
-        $survey = empty(DB::getQueryLog()) ? []  : $survey;
-
+        $survey = DB::table('survey_histories')
+            ->join('survey', 'survey.survey_id', '=', 'survey_histories.survey_id')
+            ->where('survey_histories.role_to', '=', $role)
+            ->where('survey_histories.aktif', '=', 1)
+            ->select('survey.*')
+            ->get();
         return view('hasil_survey', ['survey' => $survey]);
     }
 
@@ -169,6 +164,8 @@ class HomeController extends Controller
             $role_to = 'boss';
         }
 
+
+
         $surveyHistory = SurveyHistory::create([
             'survey_id' => $request->survey_id,
             'created_by' => Auth::user()->id,
@@ -181,9 +178,10 @@ class HomeController extends Controller
     }
 
 
-    public function cetak_survey_pdf()
+    public function cetak_survey_pdf($id)
     {
         $survey = Survey::find($id);
+
 
         $pdf = PDF::loadview('survey_pdf', ['survey' => $survey]);
         return $pdf->stream();

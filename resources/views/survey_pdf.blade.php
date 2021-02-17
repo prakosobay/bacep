@@ -17,6 +17,7 @@
     </center>
 
     <table class='table table-bordered'>
+        <tr><td><b>No. </b>{{$survey->survey_id}}</td></tr>
         <tr><td><b>Time of Request : </b>{{$survey->created_at}}</td></tr>
         <tr><td><b>Purpose of Work : </b>{{$survey->purpose_work}}</td></tr>
     </table>

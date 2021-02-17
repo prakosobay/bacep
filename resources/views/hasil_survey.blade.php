@@ -56,7 +56,7 @@
                                         <td>{{ $p->created_at }}</td>
                                         <td>{{ $p->purpose_work }}</td>
                                         <td><a href="javascript:void(0)" class="approve" data-survey_id="{{$p->survey_id}}">Approve</a>  | <a href="#reject_survey">Reject</a> | <a href="/detail_survey/{{$p->survey_id}}">Detail</a></td>
-                                        <td><a href="/survey_pdf" class="btn btn-primary" target="_blank">LIHAT PDF</a></td>
+                                        <td><a href="/survey_pdf/{{$p->survey_id}}" class="btn btn-primary" target="_blank">LIHAT PDF</a></td>
                                     </tr>
                                 @endforeach
                             </tbody>
