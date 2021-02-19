@@ -43,6 +43,7 @@
                             <tr>
                                 <th>No.</th>
                                 <th>Created By</th>
+                                <th>Purpose</th>
                                 <th>Status</th>
                                 <th>Created Date</th>
                             </tr>
@@ -53,14 +54,9 @@
                                 <tr>
                                     <td>{{ $num++ }}</td>
                                     <td>{{ $p->name }}</td>
+                                    <td>{{ $p->purpose_work }}</td>
                                     <td>{{ $p->status }}</td>
                                     <td>{{ $p->created_at }}</td>
-                                </tr>
-                                <tr>
-                                    <td>{{ $num++ }}</td>
-                                    <td>{{ $p->name }}</td>
-                                    <td>{{ $p->status }}</td>
-                                    <td>{{ $p->updated_at }}</td>
                                 </tr>
                             @endforeach
                         </tbody>

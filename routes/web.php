@@ -43,7 +43,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
 
     Route::get('/detail_survey/{id}', [HomeController::class, 'detail_permit_survey']);
-
     Route::post('/approve_survey', [HomeController::class, 'approve_survey']);
 });
 

@@ -45,8 +45,9 @@ class HomeController extends Controller
             $maintenanceHistory = MaintenanceHistory::create([
                 'maintenance_id' => $maintenance->maintenance_id,
                 'created_by' => Auth::user()->id,
-                'role_to' => 'dc_team',
-                'status' => 'created'
+                'role_to' => 'review',
+                'status' => 'created',
+                'aktif' => 1
             ]);
 
             return $maintenanceHistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
@@ -83,8 +84,9 @@ class HomeController extends Controller
             $troubleshootHistory = TroubleshootHistory::create([
                 'troubleshoot_id' => $troubleshoot->troubleshoot_id,
                 'created_by' => Auth::user()->id,
-                'role_to' => 'dc_team',
-                'status' => 'created'
+                'role_to' => 'review',
+                'status' => 'created',
+                'aktif' => 1
             ]);
 
             return $troubleshootHistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
@@ -94,7 +96,6 @@ class HomeController extends Controller
     }
 
 
-
     public function submit_mounting(Request $request)
     {
         $mounting = Mounting::create($request->all());
@@ -102,8 +103,9 @@ class HomeController extends Controller
             $mountingHistory = MountingHistory::create([
                 'mounting_id' => $mounting->id,
                 'created_by' => Auth::user()->id,
-                'role_to' => 'dc_team',
-                'status' => 'created'
+                'role_to' => 'review',
+                'status' => 'created',
+                'aktif' => 1
             ]);
 
             return $mountingHistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
@@ -163,8 +165,6 @@ class HomeController extends Controller
         } elseif ($lasthistory->role_to == 'security') {
             $role_to = 'boss';
         }
-
-
 
         $surveyHistory = SurveyHistory::create([
             'survey_id' => $request->survey_id,
