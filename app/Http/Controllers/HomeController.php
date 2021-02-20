@@ -10,6 +10,7 @@ use App\Models\Troubleshoot;
 use App\Models\Mounting;
 use App\Models\MountingHistory;
 use App\Models\SurveyHistory;
+use App\Models\SurveyFull;
 use App\Models\TroubleshootHistory;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -83,14 +84,20 @@ class HomeController extends Controller
         return view('detail_survey', ['surveyHistory' => $surveyHistory]);
     }
 
+    public function full_approval_survey()
+    {
+        $surveyFull = DB::table('survey_fulls')
+
+    }
+
+
     public function cetak_survey_pdf($id)
     {
         $survey = Survey::find($id);
         // $surveyHistory = SurveyHistory::find($id);
-        $pdf = PDF::loadview('survey_pdf', ['survey' => $survey]);
+        $pdf = PDF::loadview('survey_pdf{id}', ['survey' => $survey]);
         // $pdf = PDF::loadview('survey_pdf', ['survey' => $surveyHistory]);
-        SurveyFull::put('survey_pdf', $pdf->output());
-
+        // SurveyFull::put('survey_pdf{id}', $pdf->output());
         return $pdf->stream();
     }
 
@@ -128,11 +135,17 @@ class HomeController extends Controller
             'status' => $status,
             'aktif' => true,
         ]);
-
         return $surveyHistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
+
+        $surveyFull = SurveyFull::create([
+            'survey_id' => $survey->survey_id,
+            'visitor_name' => $survey->visitor_name,
+            'visitor_company' => $survey->visitor_company,
+            'purpose_work' => $survey->purpose_work,
+            'created_at' => $survey->created_at,
+
+        ]);
     }
-
-
 
 
     // ---------- TROUBLESHOOT ----------
@@ -191,14 +204,6 @@ class HomeController extends Controller
 
         return response()->json(['status' => 'FAILED']);
     }
-
-
-
-
-
-
-
-
 
     public function detail_permit_maintenance($id)
     {

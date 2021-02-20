@@ -33,16 +33,17 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                        <h2 class="card-title">Data Aproval Permit Survey</h2>
+                        <h2 class="card-title"><strong>Data Aproval Permit Survey</strong></h2>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>No.</th>
-                                    <th>Visitor</th>
+                                    <th>ID Permit</th>
                                     <th>Date of Request</th>
+                                    <th>Visitor Name</th>
+                                    <th>Company</th>
                                     <th>Purpose</th>
                                     <th>Action</th>
                                     <th>File</th>
@@ -52,14 +53,58 @@
                                 @foreach($survey as $p)
                                     <tr>
                                         <td>{{ $p->survey_id }}</td>
-                                        <td>{{ $p->visitor_name }}</td>
                                         <td>{{ $p->created_at }}</td>
+                                        <td>{{ $p->visitor_name }}</td>
+                                        <td>{{ $p->visitor_company }}</td>
                                         <td>{{ $p->purpose_work }}</td>
-                                        <td><a href="javascript:void(0)" class="approve" data-survey_id="{{$p->survey_id}}">Approve</a>  | <a href="#reject_survey">Reject</a> | <a href="/detail_survey/{{$p->survey_id}}">Detail</a></td>
+                                        <td><a href="javascript:void(0)" class="approve" data-survey_id="{{$p->survey_id}}">Approve</a>  | <a href="#reject_survey">Reject</a> | <a href="/detail_survey/{{$p->survey_id}}">History</a></td>
                                         <td><a href="/survey_pdf/{{$p->survey_id}}" class="btn btn-primary" target="_blank">LIHAT PDF</a></td>
                                     </tr>
                                 @endforeach
                             </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                        <h2 class="card-title"><strong>Data Permit Survey Full Approval</strong></h2>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <table id="example1" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>ID Permit</th>
+                                    <th>Date of Request</th>
+                                    <th>Visitor Name</th>
+                                    <th>Company</th>
+                                    <th>Purpose</th>
+                                    <th>File</th>
+                                </tr>
+                            </thead>
+                            {{-- <tbody>
+                                @foreach($survey as $q)
+                                    <tr>
+                                        <td>{{ $q->survey_id }}</td>
+                                        <td>{{ $q->survey_id }}</td>
+                                        <td>{{ $q->created_at }}</td>
+                                        <td>{{ $q->visitor_name }}</td>
+                                        <td>{{ $q->visitor_company }}</td>
+                                        <td>{{ $q->purpose_work }}</td>
+                                        <td><a href="javascript:void(0)" class="approve" data-survey_id="{{$p->survey_id}}">Approve</a>  | <a href="#reject_survey">Reject</a> | <a href="/detail_survey/{{$p->survey_id}}">History</a></td>
+                                        <td><a href="/survey_pdf/{{$p->survey_id}}" class="btn btn-primary" target="_blank">LIHAT PDF</a></td>
+                                    </tr>
+                                @endforeach
+                            </tbody> --}}
                         </table>
                     </div>
                 </div>

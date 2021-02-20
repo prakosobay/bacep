@@ -22,7 +22,8 @@ class SurveyFull extends Model
         'survey_id',
         'visitor_name',
         'visitor_company',
-        'purpose_work'
-        'file'
+        'purpose_work',
+        'lokasi_file',
+        'nama_file',
     ];
 }

@@ -47,10 +47,6 @@ Route::middleware(['auth'])->group(function () {
 });
 
 
-
-
-
-
 Route::post('/submit_data', [App\Http\Controllers\HomeController::class, 'submit_data']);
 Route::post('/submit_data_survey', [App\Http\Controllers\HomeController::class, 'submit_data_survey']);
 Route::post('/submit_mounting', [App\Http\Controllers\HomeController::class, 'submit_mounting']);
