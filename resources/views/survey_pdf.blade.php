@@ -16,17 +16,27 @@
         <h4>Nomor : ARF/001/DCDV/XI/2019</h4>
     </center>
 
+    <div>
     <table class='table table-bordered'>
         <tr><td><b>No. </b>{{$survey->survey_id}}</td></tr>
         <tr><td><b>Time of Request : </b>{{$survey->created_at}}</td></tr>
         <tr><td><b>Purpose of Work : </b>{{$survey->purpose_work}}</td></tr>
     </table>
+    </div>
 
+    {{-- <div>
     <table class='table table-bordered'>
-        <label>Requestor</label>
-        <tr><td><b>Name        : </b>{{$survey->visitor_name}}</td></tr>
-        <tr><td><b>Department  : </b>{{$survey->visitor_department}}</td></tr>
+        <tr><td><b>Status        : </b>{{$surveyHistory->status}}</td></tr>
+        <tr><td><b>Approved By  : </b>{{$surveyHistory->role_to}}</td></tr>
     </table>
+    </div> --}}
+
+    {{-- @if($surveyHistory->status == 'reviewed')
+    <table class='table table-bordered'>
+        <label>Reviewed By :</label>
+        <tr><img src="{{asset('gambar/approved2.jpg')}}" alt="Logo" height="75px"></tr>
+    </table>
+    @endif --}}
 
 </body>
 </html>

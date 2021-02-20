@@ -38,25 +38,8 @@ class HomeController extends Controller
         return view('home');
     }
 
-    public function submit_data(Request $request)
-    {
-        $maintenance = Maintenance::create($request->all());
-        if ($maintenance->exists) {
-            $maintenanceHistory = MaintenanceHistory::create([
-                'maintenance_id' => $maintenance->maintenance_id,
-                'created_by' => Auth::user()->id,
-                'role_to' => 'review',
-                'status' => 'created',
-                'aktif' => 1
-            ]);
 
-            return $maintenanceHistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
-        }
-
-        return response()->json(['status' => 'FAILED']);
-    }
-
-
+    // ---------- SURVEY ----------
     public function submit_data_survey(Request $request)
     {
         $survey = Survey::create($request->all());
@@ -75,7 +58,84 @@ class HomeController extends Controller
         return response()->json(['status' => 'FAILED']);
     }
 
+    public function surveyview()
+    {
+        $role = Auth::user()->role;
 
+        $survey = DB::table('survey_histories')
+            ->join('survey', 'survey.survey_id', '=', 'survey_histories.survey_id')
+            ->where('survey_histories.role_to', '=', $role)
+            ->where('survey_histories.aktif', '=', 1)
+            ->select('survey.*')
+            ->get();
+        return view('hasil_survey', ['survey' => $survey]);
+    }
+
+
+    public function detail_permit_survey($id)
+    {
+        $surveyHistory = DB::table('survey_histories')
+            ->join('survey', 'survey.survey_id', '=', 'survey_histories.survey_id')
+            ->join('users', 'users.id', '=', 'survey_histories.created_by')
+            ->where('survey_histories.survey_id', '=', $id)
+            ->select('survey_histories.*', 'users.name', 'survey.*')
+            ->get();
+        return view('detail_survey', ['surveyHistory' => $surveyHistory]);
+    }
+
+    public function cetak_survey_pdf($id)
+    {
+        $survey = Survey::find($id);
+        // $surveyHistory = SurveyHistory::find($id);
+        $pdf = PDF::loadview('survey_pdf', ['survey' => $survey]);
+        // $pdf = PDF::loadview('survey_pdf', ['survey' => $surveyHistory]);
+        SurveyFull::put('survey_pdf', $pdf->output());
+
+        return $pdf->stream();
+    }
+
+    public function approve_survey(Request $request)
+    {
+        $lasthistory = SurveyHistory::where('survey_id', '=', $request->survey_id)->latest()->first();
+        $lasthistory->update(['aktif' => false]);
+
+        $status = '';
+        if ($lasthistory->status == 'created') {
+            $status = 'reviewed';
+        } elseif ($lasthistory->status == 'reviewed') {
+            $status = 'checked';
+        } elseif ($lasthistory->status == 'checked') {
+            $status = 'secured';
+        } elseif ($lasthistory->status == 'secured') {
+            $status = 'final';
+        }
+
+        $role_to = '';
+        if ($lasthistory->role_to == 'review') {
+            $role_to = 'check';
+        } elseif ($lasthistory->role_to == 'check') {
+            $role_to = 'security';
+        } elseif ($lasthistory->role_to == 'security') {
+            $role_to = 'boss';
+        } elseif ($lasthistory->role_to == 'boss') {
+            $role_to = 'akhir';
+        }
+
+        $surveyHistory = SurveyHistory::create([
+            'survey_id' => $request->survey_id,
+            'created_by' => Auth::user()->id,
+            'role_to' => $role_to,
+            'status' => $status,
+            'aktif' => true,
+        ]);
+
+        return $surveyHistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
+    }
+
+
+
+
+    // ---------- TROUBLESHOOT ----------
     public function submit_troubleshoot(Request $request)
     {
         $troubleshoot = Troubleshoot::create($request->all());
@@ -114,78 +174,31 @@ class HomeController extends Controller
         return $mounting->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
     }
 
-
-    public function detail_permit_survey($id)
+    public function submit_data(Request $request)
     {
-        $surveyHistory = DB::table('survey_histories')
-            ->join('survey', 'survey.survey_id', '=', 'survey_histories.survey_id')
-            ->join('users', 'users.id', '=', 'survey_histories.created_by')
-            ->where('survey_histories.survey_id', '=', $id)
-            ->select('survey_histories.*', 'users.name', 'survey.*')
-            ->get();
-        return view('detail_survey', ['surveyHistory' => $surveyHistory]);
-    }
+        $maintenance = Maintenance::create($request->all());
+        if ($maintenance->exists) {
+            $maintenanceHistory = MaintenanceHistory::create([
+                'maintenance_id' => $maintenance->maintenance_id,
+                'created_by' => Auth::user()->id,
+                'role_to' => 'review',
+                'status' => 'created',
+                'aktif' => 1
+            ]);
 
-
-    public function surveyview()
-    {
-        $role = Auth::user()->role;
-
-        $survey = DB::table('survey_histories')
-            ->join('survey', 'survey.survey_id', '=', 'survey_histories.survey_id')
-            ->where('survey_histories.role_to', '=', $role)
-            ->where('survey_histories.aktif', '=', 1)
-            ->select('survey.*')
-            ->get();
-        return view('hasil_survey', ['survey' => $survey]);
-    }
-
-    public function approve_survey(Request $request)
-    {
-        $lasthistory = SurveyHistory::where('survey_id', '=', $request->survey_id)->latest()->first();
-
-        $lasthistory->update(['aktif' => false]);
-
-        $status = '';
-        if ($lasthistory->status == 'created') {
-            $status = 'reviewed';
-        } elseif ($lasthistory->status == 'reviewed') {
-            $status = 'checked';
-        } elseif ($lasthistory->status == 'checked') {
-            $status = 'secured';
-        } elseif ($lasthistory->status == 'secured') {
-            $status = 'final';
+            return $maintenanceHistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
         }
 
-        $role_to = '';
-        if ($lasthistory->role_to == 'review') {
-            $role_to = 'check';
-        } elseif ($lasthistory->role_to == 'check') {
-            $role_to = 'security';
-        } elseif ($lasthistory->role_to == 'security') {
-            $role_to = 'boss';
-        }
-
-        $surveyHistory = SurveyHistory::create([
-            'survey_id' => $request->survey_id,
-            'created_by' => Auth::user()->id,
-            'role_to' => $role_to,
-            'status' => $status,
-            'aktif' => true,
-        ]);
-
-        return $surveyHistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
+        return response()->json(['status' => 'FAILED']);
     }
 
 
-    public function cetak_survey_pdf($id)
-    {
-        $survey = Survey::find($id);
 
 
-        $pdf = PDF::loadview('survey_pdf', ['survey' => $survey]);
-        return $pdf->stream();
-    }
+
+
+
+
 
     public function detail_permit_maintenance($id)
     {
