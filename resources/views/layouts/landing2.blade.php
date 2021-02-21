@@ -51,11 +51,14 @@
                         @if(Auth::user()->role == 'visitor')
                         <li><a href="#VisitDC" data-after="VisitDC">Visit Data Center</a></li>
                         <li><a href="/ReadMore" data-after="ReadMore">BM</a></li>
+                        @elseif(Auth::user()->role == 'security')
+                        <li><a href="#Approval" data-after="Approval">Approval</a></li>
                         @else
+                        <li><a href="{{ url('/survey_full') }}" data-after="Full">Full Approval</a></li>
                         <li><a href="#Approval" data-after="Approval">Approval</a></li>
                         @endif
                         <li>
-                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                <a href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
                                                 document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}

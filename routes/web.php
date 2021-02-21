@@ -63,3 +63,7 @@ Route::get('/survey_pdf/{id}', [App\Http\Controllers\HomeController::class, 'cet
 Route::get('/maintenance_pdf', [App\Http\Controllers\HomeController::class, 'cetak_maintenance_pdf']);
 Route::get('/troubleshoot_pdf', [App\Http\Controllers\HomeController::class, 'cetak_troubleshoot_pdf']);
 Route::get('/mounting_pdf', [App\Http\Controllers\HomeController::class, 'cetak_mounting_pdf']);
+
+Route::get('/survey_full', function () {
+    return view('survey_full');
+});

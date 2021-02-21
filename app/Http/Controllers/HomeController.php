@@ -57,12 +57,20 @@ class HomeController extends Controller
         }
 
         return response()->json(['status' => 'FAILED']);
+
+        $surveyFull = SurveyFull::create([
+            'survey_id' => $survey->survey_id,
+            'visitor_name' => $survey->visitor_name,
+            'visitor_company' => $survey->visitor_company,
+            'purpose_work' => $survey->purpose_work,
+            'status' => 'Full Approved'
+        ]);
+        return $surveyFull;
     }
 
     public function surveyview()
     {
         $role = Auth::user()->role;
-
         $survey = DB::table('survey_histories')
             ->join('survey', 'survey.survey_id', '=', 'survey_histories.survey_id')
             ->where('survey_histories.role_to', '=', $role)
@@ -82,12 +90,6 @@ class HomeController extends Controller
             ->select('survey_histories.*', 'users.name', 'survey.*')
             ->get();
         return view('detail_survey', ['surveyHistory' => $surveyHistory]);
-    }
-
-    public function full_approval_survey()
-    {
-        $surveyFull = DB::table('survey_fulls')
-
     }
 
 
@@ -136,16 +138,18 @@ class HomeController extends Controller
             'aktif' => true,
         ]);
         return $surveyHistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
-
-        $surveyFull = SurveyFull::create([
-            'survey_id' => $survey->survey_id,
-            'visitor_name' => $survey->visitor_name,
-            'visitor_company' => $survey->visitor_company,
-            'purpose_work' => $survey->purpose_work,
-            'created_at' => $survey->created_at,
-
-        ]);
     }
+
+    // public function survey_full()
+    // {
+    //     $surveyFull = DB::table('survey_fulls')
+    //         ->join('survey', 'survey.survey_id', '=', 'survey_histories.survey_id')
+    //         ->join('users', 'users.id', '=', 'survey_histories.created_by')
+    //         ->where('survey_histories.survey_id', '=', $id)
+    //         ->select('survey_histories.*', 'users.name', 'survey.*')
+    //         ->get();
+    //     return view('detail_survey', ['surveyHistory' => $surveyHistory]);
+    // }
 
 
     // ---------- TROUBLESHOOT ----------

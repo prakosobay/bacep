@@ -19,8 +19,9 @@ class CreateSurveyFullsTable extends Migration
             $table->string('visitor_name');
             $table->string('visitor_company');
             $table->string('purpose_work');
-            $table->string('lokasi_file');
-            $table->string('nama_file');
+            // $table->string('lokasi_file');
+            // $table->string('nama_file');
+            $table->string('status');
             $table->timestamps();
         });
     }
