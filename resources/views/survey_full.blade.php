@@ -46,20 +46,23 @@
                                     <th>Visitor Company</th>
                                     <th>Purpose Work</th>
                                     <th>Status</th>
+                                    <th>Link</th>
                                 </tr>
                             </thead>
-                            {{-- <tbody>
+                            <tbody>
                                 {{$num = 1}}
-                                @foreach($surveyHistory as $p)
+                                @foreach($surveyFull as $p)
                                     <tr>
                                         <td>{{ $num++ }}</td>
-                                        <td>{{ $p->name }}</td>
+                                        <td>{{ $p->survey_id }}</td>
+                                        <td>{{ $p->visitor_name }}</td>
+                                        <td>{{ $p->visitor_company }}</td>
                                         <td>{{ $p->purpose_work }}</td>
                                         <td>{{ $p->status }}</td>
-                                        <td>{{ $p->created_at }}</td>
+                                        <td>{{ $p->link }}</td>
                                     </tr>
                                 @endforeach
-                            </tbody> --}}
+                            </tbody>
                         </table>
                     </div>
                 </div>

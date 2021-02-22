@@ -69,7 +69,7 @@
         </div>
     </section>
 
-    <section class="content">
+    {{-- <section class="content">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
@@ -91,7 +91,7 @@
                                     <th>File</th>
                                 </tr>
                             </thead>
-                            {{-- <tbody>
+                            <tbody>
                                 @foreach($survey as $q)
                                     <tr>
                                         <td>{{ $q->survey_id }}</td>
@@ -104,16 +104,16 @@
                                         <td><a href="/survey_pdf/{{$p->survey_id}}" class="btn btn-primary" target="_blank">LIHAT PDF</a></td>
                                     </tr>
                                 @endforeach
-                            </tbody> --}}
+                            </tbody>
                         </table>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
 
     <!-- jQuery -->
-<script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
+{{-- <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
 <!-- Bootstrap 4 -->
 <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <!-- DataTables -->
@@ -124,8 +124,9 @@
 <!-- AdminLTE App -->
 <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
+<script src="{{ asset('dist/js/adminlte.min.js') }}"></script>--}}
 <!-- page script -->
+
 <script>
   $(function () {
     $("#example1").DataTable({
@@ -140,7 +141,7 @@
       "info": true,
       "autoWidth": false,
       "responsive": true,
-    });
+    }); --}}
 
     $(document).on('click', '.approve', function(){
         $.ajaxSetup({

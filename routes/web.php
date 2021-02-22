@@ -57,13 +57,15 @@ Route::get('/hasil_maintenance', [App\Http\Controllers\HomeController::class, 'm
 Route::get('/hasil_troubleshoot', [App\Http\Controllers\HomeController::class, 'troubleshoot_view']);
 Route::get('/hasil_mount', [App\Http\Controllers\HomeController::class, 'mounting_view']);
 
-Route::get('/detail_survey', [App\Http\Controllers\HomeController::class, 'approve_survey']);
+// Route::get('/detail_survey', [App\Http\Controllers\HomeController::class, 'approve_survey']);
 
 Route::get('/survey_pdf/{id}', [App\Http\Controllers\HomeController::class, 'cetak_survey_pdf']);
 Route::get('/maintenance_pdf', [App\Http\Controllers\HomeController::class, 'cetak_maintenance_pdf']);
 Route::get('/troubleshoot_pdf', [App\Http\Controllers\HomeController::class, 'cetak_troubleshoot_pdf']);
 Route::get('/mounting_pdf', [App\Http\Controllers\HomeController::class, 'cetak_mounting_pdf']);
 
-Route::get('/survey_full', function () {
-    return view('survey_full');
-});
+Route::get('/survey_full', [App\Http\Controllers\HomeController::class, 'approve_survey']);
+
+// Route::get('/survey_full', function () {
+//     return view('survey_full');
+// });
