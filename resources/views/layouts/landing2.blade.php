@@ -54,6 +54,12 @@
                         @elseif(Auth::user()->role == 'security')
                         <li><a href="#Approval" data-after="Approval">Approval</a></li>
                         @else
+                            {{-- @if(Route::has('register')) --}}
+                            <li>
+                                {{-- <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 ">Register</a> --}}
+                                <a href="{{ route('register') }}">register</a>
+                            </li>
+                            {{-- @endif --}}
                         <li><a href="{{ url('/survey_full') }}" data-after="Full">Full Approval</a></li>
                         <li><a href="#Approval" data-after="Approval">Approval</a></li>
                         @endif

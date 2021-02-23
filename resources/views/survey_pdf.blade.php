@@ -24,19 +24,20 @@
     </table>
     </div>
 
-    {{-- <div>
-    <table class='table table-bordered'>
-        <tr><td><b>Status        : </b>{{$surveyHistory->status}}</td></tr>
-        <tr><td><b>Approved By  : </b>{{$surveyHistory->role_to}}</td></tr>
-    </table>
-    </div> --}}
-
-    {{-- @if($surveyHistory->status == 'reviewed')
-    <table class='table table-bordered'>
-        <label>Reviewed By :</label>
-        <tr><img src="{{asset('gambar/approved2.jpg')}}" alt="Logo" height="75px"></tr>
-    </table>
-    @endif --}}
-
+    @if($lasthistory->status == 'reviewed')
+    <p>
+        <img src="{{ public_path('gambar/approved2.jpg') }}" style="width: 50px; height: 50px">
+    </p>
+    @elseif($lasthistory->status == 'checked')
+    <p>
+        <img src="{{ public_path('gambar/approved2.jpg') }}" style="width: 50px; height: 50px">
+    </p>
+    @elseif($lasthistory->status == 'secured')
+    <p>
+        <img src="{{ public_path('gambar/approved2.jpg') }}" style="width: 50px; height: 50px">
+    </p>
+    @elseif($lasthistory->status == 'boss')
+        <img src="{{ public_path('gambar/approved2.jpg') }}" style="width: 50px; height: 50px">
+    @endif
 </body>
 </html>

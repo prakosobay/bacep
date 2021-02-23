@@ -44,6 +44,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/detail_survey/{id}', [HomeController::class, 'detail_permit_survey']);
     Route::post('/approve_survey', [HomeController::class, 'approve_survey']);
+    Route::post('/survey_reject', [HomeController::class, 'survey_reject']);
 });
 
 
@@ -64,7 +65,7 @@ Route::get('/maintenance_pdf', [App\Http\Controllers\HomeController::class, 'cet
 Route::get('/troubleshoot_pdf', [App\Http\Controllers\HomeController::class, 'cetak_troubleshoot_pdf']);
 Route::get('/mounting_pdf', [App\Http\Controllers\HomeController::class, 'cetak_mounting_pdf']);
 
-Route::get('/survey_full', [App\Http\Controllers\HomeController::class, 'approve_survey']);
+Route::get('/survey_full', [App\Http\Controllers\HomeController::class, 'surveyfull']);
 
 // Route::get('/survey_full', function () {
 //     return view('survey_full');

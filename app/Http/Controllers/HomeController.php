@@ -71,6 +71,12 @@ class HomeController extends Controller
         return view('hasil_survey', ['survey' => $survey]);
     }
 
+    public function surveyfull()
+    {
+        $surveyFull = DB::table('survey_fulls')->get();
+        // dd($surveyFull);
+        return view('survey_full', ['surveyFull' => $surveyFull]);
+    }
 
     public function detail_permit_survey($id)
     {
@@ -78,8 +84,11 @@ class HomeController extends Controller
             ->join('survey', 'survey.survey_id', '=', 'survey_histories.survey_id')
             ->join('users', 'users.id', '=', 'survey_histories.created_by')
             ->where('survey_histories.survey_id', '=', $id)
-            ->select('survey_histories.*', 'users.name', 'survey.*')
+            ->select('survey_histories.*', 'users.name', 'survey.purpose_work')
             ->get();
+
+
+        // dd($surveyHistory);
 
         return view('detail_survey', ['surveyHistory' => $surveyHistory]);
     }
@@ -88,19 +97,35 @@ class HomeController extends Controller
     public function cetak_survey_pdf($id)
     {
         $survey = Survey::find($id);
+        $lasthistory = SurveyHistory::where('survey_id', $id)->where('aktif', 1)->first();
 
-        // $surveyHistory = SurveyHistory::find($id);
-        $pdf = PDF::loadview('survey_pdf', ['survey' => $survey]);
-        // $pdf = PDF::loadview('survey_pdf', ['survey' => $surveyHistory]);
-        // SurveyFull::put('survey_pdf{id}', $pdf->output());
+        $pdf = PDF::loadview('survey_pdf', ['survey' => $survey, 'lasthistory' => $lasthistory]);
         return $pdf->stream();
+    }
+
+    public function survey_reject(Request $request)
+    {
+        $lasthistory = SurveyHistory::where('survey_id', '=', $request->survey_id)->latest()->first();
+        if ($lasthistory->role_to != 'security') {
+            $lasthistory->update(['aktif' => false]);
+
+            $surveyHistory = SurveyHistory::create([
+                'survey_id' => $request->survey_id,
+                'created_by' => Auth::user()->id,
+                'role_to' => 0,
+                'status' => 'rejected',
+                'aktif' => true,
+            ]);
+
+            return $surveyHistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
+        }
     }
 
     public function approve_survey(Request $request)
     {
 
         $lasthistory = SurveyHistory::where('survey_id', '=', $request->survey_id)->latest()->first();
-
+        // dd($lasthistory);
         $lasthistory->update(['aktif' => false]);
 
         $status = '';
@@ -113,9 +138,6 @@ class HomeController extends Controller
         } elseif ($lasthistory->status == 'secured') {
             $status = 'final';
         }
-        // elseif ($lasthistory->status == 'final') {
-        //     $survey = Survey::find($request->survey_id)->first();
-        // }
 
         $role_to = '';
         if ($lasthistory->role_to == 'review') {
@@ -134,16 +156,20 @@ class HomeController extends Controller
             'aktif' => true,
         ]);
 
-        return $surveyHistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
+        if ($lasthistory->role_to == 'boss') {
+            $survey = Survey::where('survey_id', $request->survey_id)->first();
+            // dd($survey);
+            $surveyFull = SurveyFull::create([
+                'survey_id' => $survey->survey_id,
+                'visitor_name' => $survey->visitor_name,
+                'visitor_company' => $survey->visitor_company,
+                'purpose_work' => $survey->purpose_work,
+                'status' => 'Full Approved',
+                'link' =>  url("/survey_pdf/$survey->survey_id"),
+            ]);
+        }
 
-        // $surveyFull = SurveyFull::create([
-        //     'survey_id' => $survey->survey_id,
-        //     'visitor_name' => $survey->visitor_name,
-        //     'visitor_company' => $survey->visitor_company,
-        //     'purpose_work' => $survey->purpose_work,
-        //     'status' => 'Full Approved',
-        //     'link' =>  url("/survey_pdf/$survey->survey_id"),
-        // ]);
+        return $surveyHistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
     }
 
 

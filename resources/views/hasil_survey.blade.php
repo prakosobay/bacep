@@ -57,7 +57,15 @@
                                         <td>{{ $p->visitor_name }}</td>
                                         <td>{{ $p->visitor_company }}</td>
                                         <td>{{ $p->purpose_work }}</td>
-                                        <td><a href="javascript:void(0)" class="approve" data-survey_id="{{$p->survey_id}}">Approve</a>  | <a href="#reject_survey">Reject</a> | <a href="/detail_survey/{{$p->survey_id}}">History</a></td>
+                                        @if(Auth::user()->role != 'security')
+                                        <td><a href="javascript:void(0)" class="approve" data-survey_id="{{$p->survey_id}}">Approve</a> |
+                                            <a href="javascript:void(0)" class="reject" data-survey_id="{{$p->survey_id}}">Reject</a> |
+                                            <a href="/detail_survey/{{$p->survey_id}}">History</a></td>
+
+                                        @else<td>
+                                            <a href="javascript:void(0)" class="approve" data-survey_id="{{$p->survey_id}}">Approve</a> |
+                                            <a href="/detail_survey/{{$p->survey_id}}">History</a></td>
+                                        @endif
                                         <td><a href="/survey_pdf/{{$p->survey_id}}" class="btn btn-primary" target="_blank">LIHAT PDF</a></td>
                                     </tr>
                                 @endforeach
@@ -69,51 +77,8 @@
         </div>
     </section>
 
-    {{-- <section class="content">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                        <h2 class="card-title"><strong>Data Permit Survey Full Approval</strong></h2>
-                    </div>
-                    <!-- /.card-header -->
-                    <div class="card-body">
-                        <table id="example1" class="table table-bordered table-striped">
-                            <thead>
-                                <tr>
-                                    <th>No.</th>
-                                    <th>ID Permit</th>
-                                    <th>Date of Request</th>
-                                    <th>Visitor Name</th>
-                                    <th>Company</th>
-                                    <th>Purpose</th>
-                                    <th>File</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($survey as $q)
-                                    <tr>
-                                        <td>{{ $q->survey_id }}</td>
-                                        <td>{{ $q->survey_id }}</td>
-                                        <td>{{ $q->created_at }}</td>
-                                        <td>{{ $q->visitor_name }}</td>
-                                        <td>{{ $q->visitor_company }}</td>
-                                        <td>{{ $q->purpose_work }}</td>
-                                        <td><a href="javascript:void(0)" class="approve" data-survey_id="{{$p->survey_id}}">Approve</a>  | <a href="#reject_survey">Reject</a> | <a href="/detail_survey/{{$p->survey_id}}">History</a></td>
-                                        <td><a href="/survey_pdf/{{$p->survey_id}}" class="btn btn-primary" target="_blank">LIHAT PDF</a></td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section> --}}
-
     <!-- jQuery -->
-{{-- <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
+<script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
 <!-- Bootstrap 4 -->
 <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <!-- DataTables -->
@@ -124,7 +89,7 @@
 <!-- AdminLTE App -->
 <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="{{ asset('dist/js/adminlte.min.js') }}"></script>--}}
+<script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
 <!-- page script -->
 
 <script>
@@ -141,7 +106,7 @@
       "info": true,
       "autoWidth": false,
       "responsive": true,
-    }); --}}
+    });
 
     $(document).on('click', '.approve', function(){
         $.ajaxSetup({
@@ -174,6 +139,45 @@
                     Swal.fire({
                         title: "Failed!",
                         text: 'Saving Data Approved Failed',
+                    }).then(function(){
+                        location.reload();
+                    });
+                }
+            }
+        });
+    })
+
+    $(document).on('click', '.reject', function(){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('input[name="_token"]').val()
+            }
+        });
+        let survey_id = $(this).data('survey_id');
+        console.log(survey_id);
+        $.ajax({
+            type:'POST',
+            url:"{{url('survey_reject')}}",
+            data: {survey_id},
+            error: function (request, error) {
+                alert(" Can't do because: " + error);
+            },
+            success:function(data){
+                console.log(data);
+                if(data.status == 'SUCCESS'){
+                    Swal.fire({
+                        title: "Success!",
+                        text: 'Data Rejected',
+                        type: "success",
+                    }).then(function(){
+                        location.reload();
+                    });
+
+                }else if(data.status == 'FAILED'){
+
+                    Swal.fire({
+                        title: "Failed!",
+                        text: 'Failed to Reject',
                     }).then(function(){
                         location.reload();
                     });
