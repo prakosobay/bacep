@@ -18,26 +18,42 @@
 
     <div>
     <table class='table table-bordered'>
-        <tr><td><b>No. </b>{{$survey->survey_id}}</td></tr>
         <tr><td><b>Time of Request : </b>{{$survey->created_at}}</td></tr>
+        <tr><td><b>No. </b>{{$survey->survey_id}}</td></tr>
         <tr><td><b>Purpose of Work : </b>{{$survey->purpose_work}}</td></tr>
     </table>
     </div>
 
-    @if($lasthistory->status == 'reviewed')
-    <p>
-        <img src="{{ public_path('gambar/approved2.jpg') }}" style="width: 50px; height: 50px">
-    </p>
-    @elseif($lasthistory->status == 'checked')
-    <p>
-        <img src="{{ public_path('gambar/approved2.jpg') }}" style="width: 50px; height: 50px">
-    </p>
-    @elseif($lasthistory->status == 'secured')
-    <p>
-        <img src="{{ public_path('gambar/approved2.jpg') }}" style="width: 50px; height: 50px">
-    </p>
-    @elseif($lasthistory->status == 'boss')
-        <img src="{{ public_path('gambar/approved2.jpg') }}" style="width: 50px; height: 50px">
-    @endif
+    <div>
+        <table class='table table-bordered'>
+            <thead>
+                <tr>
+                    <th>Review</th>
+                    <th>Check</th>
+                    <th>Security</th>
+                    <th>Dept.Head</th>
+                </tr>
+            </thead>
+            <tbody>
+                    <tr>
+                        @if($lasthistory->status == 'reviewed')
+                        <td><strong>Reviewed By :</strong></td>
+                        @elseif($lasthistory->status == 'checked')
+                        <td><strong>Reviewed</strong></td>
+                        <td><strong>Checked</strong></td>
+                        @elseif($lasthistory->status == 'secured')
+                        <td><strong>Reviewed By : {{ $lasthistory->name }}</strong></td>
+                        <td><strong>Checked By : {{ $lasthistory->name }}</strong></td>
+                        <td><strong>Secured By : {{ $lasthistory->name }}</strong></td>
+                        @elseif($lasthistory->status == 'final')
+                        <td><strong>Reviewed By : {{ $lasthistory->name }}</strong></td>
+                        <td><strong>Checked By : {{ $lasthistory->name }}</strong></td>
+                        <td><strong>Secured By : {{ $lasthistory->name }}</strong></td>
+                        <td><strong>Approved By : {{ $lasthistory->name }}</strong></td>
+                        @endif
+                    </tr>
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>

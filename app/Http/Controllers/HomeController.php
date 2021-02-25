@@ -98,7 +98,7 @@ class HomeController extends Controller
     {
         $survey = Survey::find($id);
         $lasthistory = SurveyHistory::where('survey_id', $id)->where('aktif', 1)->first();
-
+        // $surveyHistory = SurveyHistory::where('created_byusers.name')->first();
         $pdf = PDF::loadview('survey_pdf', ['survey' => $survey, 'lasthistory' => $lasthistory]);
         return $pdf->stream();
     }

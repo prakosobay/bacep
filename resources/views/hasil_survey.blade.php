@@ -61,7 +61,6 @@
                                         <td><a href="javascript:void(0)" class="approve" data-survey_id="{{$p->survey_id}}">Approve</a> |
                                             <a href="javascript:void(0)" class="reject" data-survey_id="{{$p->survey_id}}">Reject</a> |
                                             <a href="/detail_survey/{{$p->survey_id}}">History</a></td>
-
                                         @else<td>
                                             <a href="javascript:void(0)" class="approve" data-survey_id="{{$p->survey_id}}">Approve</a> |
                                             <a href="/detail_survey/{{$p->survey_id}}">History</a></td>
