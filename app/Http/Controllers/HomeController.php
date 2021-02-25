@@ -99,8 +99,9 @@ class HomeController extends Controller
     public function approve_survey(Request $request)
     {
 
+        // $lasthistory = SurveyHistory::where('survey_id', '=', $request->survey_id)->latest()->first();
         $lasthistory = SurveyHistory::where('survey_id', '=', $request->survey_id)->latest()->first();
-
+        // dd($request);
         $lasthistory->update(['aktif' => false]);
 
         $status = '';
@@ -112,10 +113,9 @@ class HomeController extends Controller
             $status = 'secured';
         } elseif ($lasthistory->status == 'secured') {
             $status = 'final';
+        } elseif ($lasthistory->status == 'final') {
+            $survey = Survey::find($request->survey_id)->first();
         }
-        // elseif ($lasthistory->status == 'final') {
-        //     $survey = Survey::find($request->survey_id)->first();
-        // }
 
         $role_to = '';
         if ($lasthistory->role_to == 'review') {
@@ -135,15 +135,6 @@ class HomeController extends Controller
         ]);
 
         return $surveyHistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
-
-        // $surveyFull = SurveyFull::create([
-        //     'survey_id' => $survey->survey_id,
-        //     'visitor_name' => $survey->visitor_name,
-        //     'visitor_company' => $survey->visitor_company,
-        //     'purpose_work' => $survey->purpose_work,
-        //     'status' => 'Full Approved',
-        //     'link' =>  url("/survey_pdf/$survey->survey_id"),
-        // ]);
     }
 
 

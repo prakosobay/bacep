@@ -21,6 +21,7 @@
         <tr><td><b>No. </b>{{$survey->survey_id}}</td></tr>
         <tr><td><b>Time of Request : </b>{{$survey->created_at}}</td></tr>
         <tr><td><b>Purpose of Work : </b>{{$survey->purpose_work}}</td></tr>
+        <tr><td><b>Visitor Name : </b>{{$survey->visitor_name}}</td></tr>
     </table>
     </div>
 
@@ -33,8 +34,7 @@
 
     {{-- @if($surveyHistory->status == 'reviewed')
     <table class='table table-bordered'>
-        <label>Reviewed By :</label>
-        <tr><img src="{{asset('gambar/approved2.jpg')}}" alt="Logo" height="75px"></tr>
+        <tr><td><b> Reviewed By : </b><img src="{{asset('gambar/approved2.jpg')}}" alt="Logo" height="75px"></td></tr>
     </table>
     @endif --}}
 
