@@ -22,11 +22,6 @@ class CreateSurveyHistoriesTable extends Migration
             $table->boolean('aktif');
             $table->timestamps();
         });
-
-        // Schema::table('survey_histories', function (Blueprint $table) {
-        //     $table->foreign('survey_id')->references('survey_id')->on('survey');
-        //     $table->foreign('created_by')->references('id')->on('users');
-        // });
     }
 
     /**

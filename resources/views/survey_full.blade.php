@@ -59,7 +59,7 @@
                                         <td>{{ $p->visitor_company }}</td>
                                         <td>{{ $p->purpose_work }}</td>
                                         <td>{{ $p->status }}</td>
-                                        <td>{{ $p->link }}</td>
+                                        <td><a href="{{ $p->link }}">PDF</a></td>
                                     </tr>
                                 @endforeach
                             </tbody>

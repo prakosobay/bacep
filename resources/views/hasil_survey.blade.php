@@ -57,7 +57,14 @@
                                         <td>{{ $p->visitor_name }}</td>
                                         <td>{{ $p->visitor_company }}</td>
                                         <td>{{ $p->purpose_work }}</td>
-                                        <td><a href="javascript:void(0)" class="approve" data-survey_id="{{$p->survey_id}}">Approve</a>  | <a href="#reject_survey">Reject</a> | <a href="/detail_survey/{{$p->survey_id}}">History</a></td>
+                                        @if(Auth::user()->role != 'security')
+                                        <td><a href="javascript:void(0)" class="approve" data-survey_id="{{$p->survey_id}}">Approve</a> |
+                                            <a href="javascript:void(0)" class="reject" data-survey_id="{{$p->survey_id}}">Reject</a> |
+                                            <a href="/detail_survey/{{$p->survey_id}}">History</a></td>
+                                        @else<td>
+                                            <a href="javascript:void(0)" class="approve" data-survey_id="{{$p->survey_id}}">Approve</a> |
+                                            <a href="/detail_survey/{{$p->survey_id}}">History</a></td>
+                                        @endif
                                         <td><a href="/survey_pdf/{{$p->survey_id}}" class="btn btn-primary" target="_blank">LIHAT PDF</a></td>
                                     </tr>
                                 @endforeach
@@ -68,7 +75,6 @@
             </div>
         </div>
     </section>
-
 
     <!-- jQuery -->
 <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
@@ -132,6 +138,45 @@
                     Swal.fire({
                         title: "Failed!",
                         text: 'Saving Data Approved Failed',
+                    }).then(function(){
+                        location.reload();
+                    });
+                }
+            }
+        });
+    })
+
+    $(document).on('click', '.reject', function(){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('input[name="_token"]').val()
+            }
+        });
+        let survey_id = $(this).data('survey_id');
+        console.log(survey_id);
+        $.ajax({
+            type:'POST',
+            url:"{{url('survey_reject')}}",
+            data: {survey_id},
+            error: function (request, error) {
+                alert(" Can't do because: " + error);
+            },
+            success:function(data){
+                console.log(data);
+                if(data.status == 'SUCCESS'){
+                    Swal.fire({
+                        title: "Success!",
+                        text: 'Data Rejected',
+                        type: "success",
+                    }).then(function(){
+                        location.reload();
+                    });
+
+                }else if(data.status == 'FAILED'){
+
+                    Swal.fire({
+                        title: "Failed!",
+                        text: 'Failed to Reject',
                     }).then(function(){
                         location.reload();
                     });
