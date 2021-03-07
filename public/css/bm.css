@@ -1,0 +1,255 @@
+body {
+    background-image: url(/gambar/hero-gb.jpg);
+    background-size: cover;
+}
+
+#form {
+    background-color: #000;
+    height: 900px;
+    width: 600px;
+    margin: auto;
+    padding: 20px;
+    opacity: 0.8;
+}
+
+#form h3 {
+    width: 230px;
+    padding: 5px;
+    color: #fff;
+}
+
+#form h3 {
+    border-bottom: 2px solid #3399ff;
+    width: 135px;
+    padding: 5px;
+}
+
+::placeholder {
+    color: #fff
+}
+
+#input #input-group4 {
+    width: 100px;
+    margin: 5px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline: none;
+    background: transparent;
+    color: rgb(255, 255, 255)
+}
+
+#input #input-group2 {
+    width: 100px;
+    margin: 5px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline: none;
+    background: transparent;
+    color: rgb(255, 255, 255)
+}
+
+#input #input-group3 {
+    width: 100px;
+    margin: 5px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline: none;
+    background: transparent;
+    color: rgb(255, 255, 255)
+}
+
+#input #input-group {
+    width: 263px;
+    margin: 5px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline: none;
+    background: transparent;
+    color: rgb(255, 255, 255)
+}
+
+#input2 #input-group {
+    width: 195px;
+    margin: 5px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline: none;
+    background: transparent;
+    color: #fff
+}
+
+#input3 #input-group {
+    margin-left: 50px;
+}
+
+#input4 #input-group {
+    width: 550px;
+    margin: 5px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline: none;
+    background: transparent;
+    color: #fff
+}
+
+#input4 #input-group1 {
+    width: 615px;
+    margin: 5px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline: none;
+    background: transparent;
+    color: #fff
+}
+
+#input5 h3 {
+    border-bottom: 2px solid #3399ff;
+    width: 220px;
+    padding: 5px;
+}
+
+#input6 #input-group {
+    width: 300px;
+    margin: 5px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline: none;
+    background: transparent;
+    color: #fff
+}
+
+#input6 #input-group1 {
+    width: 550px;
+    margin: 5px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline: none;
+    background: transparent;
+    color: #fff
+}
+
+.radiobutton_container {
+    height: 50px;
+    line-height: 20px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    padding-left: 40px;
+    color: white;
+    cursor: pointer;
+    display: block;
+    position: relative;
+    /* #Bug: Cross Browser */
+    user-select: none;
+}
+
+.radiobutton_container .radiobutton_mark {
+    width: 30px;
+    height: 30px;
+    top: 0;
+    left: 0;
+    position: absolute;
+    background-color: #eeeeee;
+    /* #Bug: Cross Browser */
+    border-radius: 1px;
+    border-radius: 50%;
+}
+
+.radiobutton_container:hover input~.radiobutton_mark {
+    background-color: #cccccc;
+}
+
+.radiobutton_container input:checked~.radiobutton_mark {
+    background-color: #1DDBDE;
+}
+
+.radiobutton_container input {
+    position: absolute;
+    width: 0;
+    height: 0;
+    opacity: 0;
+}
+
+.radiobutton_container .radiobutton_mark:after {
+    display: none;
+    content: "";
+    /*
+    position: absolute;
+    */
+    position: relative;
+}
+
+.radiobutton_container input:checked~.radiobutton_mark:after {
+    display: block;
+}
+
+.radiobutton_container .radiobutton_mark:after {
+    width: 4px;
+    height: 10px;
+    top: 7px;
+    left: 12px;
+    border-style: solid;
+    border-color: white;
+    border-width: 0 3px 3px 0;
+    /* #Bug: Cross Browser */
+    /*
+    transform: rotate(405deg);
+    */
+    transform: rotate(45deg);
+}
+
+.drop-zone {
+    max-width: 200px;
+    height: 200px;
+    padding: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: "Quicksand", sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    cursor: pointer;
+    color: #cccccc;
+    border: 4px dashed #009578;
+    border-radius: 10px;
+}
+
+.drop-zone--over {
+    border-style: solid;
+}
+
+.drop-zone__input {
+    display: none;
+}
+
+.drop-zone__thumb {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #cccccc;
+    background-size: cover;
+    position: relative;
+}
+
+.drop-zone__thumb::after {
+    content: attr(data-label);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 5px 0;
+    color: #ffffff;
+    background: rgba(0, 0, 0, 0.75);
+    font-size: 14px;
+    text-align: center;
+}

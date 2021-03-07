@@ -34,63 +34,37 @@
             </thead>
             <tbody>
                     <tr>
-                        {{-- @if($lasthistory->status == 'reviewed')
-                        <td><strong>Reviewed By :</strong></td>
-                        @elseif($lasthistory->status == 'checked')
-                        <td><strong>Reviewed</strong></td>
-                        <td><strong>Checked</strong></td>
-                        @elseif($lasthistory->status == 'secured')
-                        <td><strong>Reviewed By : {{ $lasthistory->name }}</strong></td>
-                        <td><strong>Checked By : {{ $lasthistory->name }}</strong></td>
-                        <td><strong>Secured By : {{ $lasthistory->name }}</strong></td>
-                        @elseif($lasthistory->status == 'final')
-                        <td><strong>Reviewed By : {{ $lasthistory->name }}</strong></td>
-                        <td><strong>Checked By : {{ $lasthistory->name }}</strong></td>
-                        <td><strong>Secured By : {{ $lasthistory->name }}</strong></td>
-                        <td><strong>Approved By : {{ $lasthistory->name }}</strong></td>
-                        @endif --}}
                         @switch($lasthistory->status)
                             @case('reviewed')
-                                {{-- <td><strong>Reviewed</strong></td> --}}
-                                {{-- <td><img src="/gambar/approved2.jpg"  width="30" height="10"></td> --}}
-                                <td><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 100px; height: 40px;"></td>
+                                <td><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 100px; height: 50px;"></td>
                                 @break
 
                             @case('checked')
-                                {{-- <td><strong>Reviewed</strong></td> --}}
-                                {{-- <td><strong>Checked</strong></td> --}}
-                                {{-- <td><img src="/gambar/approved2.jpg"  width="30" height="10"></td>
-                                <td><img src="/gambar/approved2.jpg"  width="30" height="10"></td> --}}
-                                <td><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 100px; height: 40px;"></td>
-                                <td><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 100px; height: 40px;"></td>
-
+                                <td><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 100px; height: 50px;"></td>
+                                <td><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 100px; height: 50px;"></td>
                                 @break
 
                             @case('secured')
-                                {{-- <td><strong>Reviewed</strong></td>
-                                <td><strong>Checked</strong></td>
-                                <td><strong>Secured</strong></td> --}}
-                                {{-- <td><img src="/gambar/approved2.jpg"  width="30" height="10"></td>
-                                <td><img src="/gambar/approved2.jpg"  width="30" height="10"></td>
-                                <td><img src="/gambar/approved2.jpg"  width="30" height="10"></td> --}}
-                                <td><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 100px; height: 40px;"></td>
-                                <td><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 100px; height: 40px;"></td>
-                                <td><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 100px; height: 40px;"></td>
+                                <td><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 100px; height: 50px;"></td>
+                                <td><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 100px; height: 50px;"></td>
+                                <td><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 100px; height: 50px;"></td>
                                 @break
 
                             @case('final')
-                                {{-- <td><strong>Reviewed</strong></td>
-                                <td><strong>Checked</strong></td>
-                                <td><strong>Secured</strong></td>
-                                <td><strong>Approved</strong></td> --}}
-                                <td><img src="/gambar/approved2.jpg"  width="30" height="10"></td>
-                                <td><img src="/gambar/approved2.jpg"  width="30" height="10"></td>
-                                <td><img src="/gambar/approved2.jpg"  width="30" height="10"></td>
-                                <td><img src="/gambar/approved2.jpg"  width="30" height="10"></td>
+                                <td><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 100px; height: 50px;"></td>
+                                <td><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 100px; height: 50px;"></td>
+                                <td><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 100px; height: 50px;"></td>
+                                <td><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 100px; height: 50px;"></td>
                                 @break
                             @endswitch
                     </tr>
-            </tbody>
-        </table>
-</body>
-</html>
+                </tbody>
+            </table>
+        </body>
+        </html>
+        {{-- <tr>
+            <td><strong>{{ $surveyHistory->name }}</strong></td>
+            <td><strong>{{ $surveyHistory->name }}</strong></td>
+            <td><strong>{{ $surveyHistory->name }}</strong></td>
+            <td><strong>{{ $surveyHistory->name }}</strong></td>
+        </tr> --}}

@@ -40,6 +40,10 @@ Route::middleware(['auth'])->group(function () {
         return view('troubleshoot');
     });
 
+    Route::get('/cleaning', function () {
+        return view('cleaning');
+    });
+
     Route::get('/home', [HomeController::class, 'index'])->name('home');
 
     Route::get('/detail_survey/{id}', [HomeController::class, 'detail_permit_survey']);
@@ -66,7 +70,3 @@ Route::get('/troubleshoot_pdf', [App\Http\Controllers\HomeController::class, 'ce
 Route::get('/mounting_pdf', [App\Http\Controllers\HomeController::class, 'cetak_mounting_pdf']);
 
 Route::get('/survey_full', [App\Http\Controllers\HomeController::class, 'surveyfull']);
-
-// Route::get('/survey_full', function () {
-//     return view('survey_full');
-// });

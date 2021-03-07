@@ -26,14 +26,13 @@
 <body>
     <section id="header">
         @if ($message = Session::get('success'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
             <strong>{{$message}}</strong>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
-        </div>
+            </div>
         @endif
-
         <div class="header container">
             <div class="nav-bar">
                 <div class="brand">
@@ -50,7 +49,8 @@
                         <li><a href="/home" data-after="Home">Home</a></li>
                         @if(Auth::user()->role == 'visitor')
                         <li><a href="#VisitDC" data-after="VisitDC">Visit Data Center</a></li>
-                        <li><a href="/ReadMore" data-after="ReadMore">BM</a></li>
+                        @elseif(Auth::user()->role == 'bm')
+                        <li><a href="#BM" data-after="BM">BM</a></li>
                         @elseif(Auth::user()->role == 'security')
                         <li><a href="#Approval" data-after="Approval">Approval</a></li>
                         @else
