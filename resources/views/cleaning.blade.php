@@ -18,6 +18,11 @@
 
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.14.0/sweetalert2.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.14.0/sweetalert2.all.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
 
 </head>
 
@@ -27,130 +32,117 @@
         <!--container-->
 
         <form id="form_cleaning" class="form-group">
+            {{ csrf_field() }}
             <!--form-->
-
-
-
             <div id="form">
                 <!--form-->
                 <h1 class="text-white">Access Request Form</h1>
                 <h2 class="text-white">Nomor: ARF/001/DCDV/XI/2019</h2>
-
 
                 <div id="input">
                     <!--input-->
                     <div id="input4">
                         <!--input4-->
 
-                        <select id="input-group4" style="background: black;">
-                            <option value="">Hari</option>
-                            <option value="">1</option>
-                            <option value="">2</option>
-                            <option value="">3</option>
-                            <option value="">4</option>
-                            <option value="">5</option>
-                            <option value="">6</option>
-                            <option value="">7</option>
-                            <option value="">8</option>
-                            <option value="">9</option>
-                            <option value="">10</option>
-                            <option value="">11</option>
-                            <option value="">12</option>
-                            <option value="">13</option>
-                            <option value="">14</option>
-                            <option value="">15</option>
-                            <option value="">16</option>
-                            <option value="">17</option>
-                            <option value="">18</option>
-                            <option value="">19</option>
-                            <option value="">20</option>
-                            <option value="">21</option>
-                            <option value="">22</option>
-                            <option value="">23</option>
-                            <option value="">24</option>
-                            <option value="">25</option>
-                            <option value="">26</option>
-                            <option value="">27</option>
-                            <option value="">28</option>
-                            <option value="">29</option>
-                            <option value="">30</option>
-                            <option value="">31</option>
-                        </select>
-                        <select id="input-group2" style="background: black;">
-                            <option value="">Bulan</option>
-                            <option value="">1</option>
-                            <option value="">2</option>
-                            <option value="">3</option>
-                            <option value="">4</option>
-                            <option value="">5</option>
-                            <option value="">6</option>
-                            <option value="">7</option>
-                            <option value="">8</option>
-                            <option value="">9</option>
-                            <option value="">10</option>
-                            <option value="">11</option>
-                            <option value="">12</option>
-                        </select>
-
-                        <select id="input-group3" style="background: black;">
-                            <option value="">Tahun</option>
-                            <option value="">2021</option>
-                            <option value="">2022</option>
-                            <option value="">2023</option>
-                        </select>
-
-                        <h5 class="text-white">Purpose of Work</h3>
 
 
-
+                        <h5 class="text-white">Purpose of Work :</h3>
 
                             <div>
                                 <label class="radiobutton_container">
-                            <input name="type" type="radio">
-                            <span class="radiobutton_mark"></span>
-                            Pembersihan lantai 1 (MMR 1&2 - UPS - Server Wallmount - Fire Suppression System)
-                        </label>
-                            </div>
-                            <div>
-                                <label class="radiobutton_container">
-                            <input name="type" type="radio">
-                            <span class="radiobutton_mark"></span>
-                            Pembersihan Ruang Data Center (Pembersihan Plafon Atas, Besi Support, Rack & Raised Floor)
-                        </label>
-                            </div>
-                            <div>
-                                <label class="radiobutton_container">
-                            <input name="type" type="radio">
-                            <span class="radiobutton_mark"></span>
-                            Pembersihan Under Raised Floor Koridor Lantai 1 (MMR 1&2, Ruang UPS, Fire Suppression System & Server Wallmount)
-                        </label>
-                            </div>
-                            <div>
-                                <label class="radiobutton_container">
-                            <input name="type" type="radio" checked="checked">
-                            <span class="radiobutton_mark"></span>
-                            Pembersihan Lantai Dasar Ruang Facility Data Center (Trafo - Battery - PUTR - Genset - Bagian Luar PLN)
-                        </label>
-                            </div>
-                            <div>
-
-                                <label class="radiobutton_container">
-                            <input name="type" type="radio">
-                            <span class="radiobutton_mark"></span>
-                            Pembersihan Lantai Dasar Data Center (ruang Server)
-                        </label>
+                                <input id="1" name="radio" type="radio">
+                                <span class="radiobutton_mark"></span>
+                                Pembersihan lantai 1 (MMR 1&2 - UPS - Server Wallmount - Fire Suppression System)
+                                </label>
                             </div>
 
                             <div>
-
                                 <label class="radiobutton_container">
-                            <input name="type" type="radio">
-                            <span class="radiobutton_mark"></span>
-                            Pest Control (Insect & Rodent Control)
-                        </label>
+                                <input id="2" name="radio" type="radio">
+                                <span class="radiobutton_mark"></span>
+                                Pembersihan Ruang Data Center (Pembersihan Plafon Atas, Besi Support, Rack & Raised Floor)
+                            </label>
                             </div>
 
-                            <input type="text" id="input-group" placeholder="Nama Pengunjung">
+                            <div>
+                                <label class="radiobutton_container">
+                                <input id="3" name="radio" type="radio">
+                                <span class="radiobutton_mark"></span>
+                                Pembersihan Under Raised Floor Koridor Lantai 1 (MMR 1&2, Ruang UPS, Fire Suppression System & Server Wallmount)
+                            </label>
+                            </div>
+
+                            <div>
+                                <label class="radiobutton_container">
+                                <input id="4" name="radio" type="radio">
+                                <span class="radiobutton_mark"></span>
+                                Pembersihan Lantai Dasar Ruang Facility Data Center (Trafo - Battery - PUTR - Genset - Bagian Luar PLN)
+                            </label>
+                            </div>
+
+                            <div>
+                                <label class="radiobutton_container">
+                                <input id="5" name="radio" type="radio">
+                                <span class="radiobutton_mark"></span>
+                                Pembersihan Lantai Dasar Data Center (ruang Server)
+                            </label>
+                            </div>
+
+                            <div>
+                                <label class="radiobutton_container">
+                                <input id="6" name="radio" type="radio">
+                                <span class="radiobutton_mark"></span>
+                                Pest Control (Insect & Rodent Control)
+                            </label>
+                            </div>
+
+                            <h5 class="text-white">Visitor Name :</h3>
+                                <div>
+                                    <label class="radiobutton_container">
+                                    <input id="riko" name="riko" type="radio">
+                                    <span class="radiobutton_mark"></span>
+                                    Riko Adi Pratama
+                                </label>
+                                </div>
+
+                                <div>
+                                    <label class="radiobutton_container">
+                                    <input id="jejen" name="jejen" type="radio">
+                                    <span class="radiobutton_mark"></span>
+                                    Jejen Jenudin
+                                </label>
+                                </div>
+
+                                <div>
+                                    <label class="radiobutton_container">
+                                    <input id="fani" name="fani" type="radio">
+                                    <span class="radiobutton_mark"></span>
+                                    Alfani Sulaeman
+                                </label>
+                                </div>
+
+                                <div>
+                                    <label class="radiobutton_container">
+                                    <input id="andi" name="andi" type="radio">
+                                    <span class="radiobutton_mark"></span>
+                                    Andi Sugandi
+                                </label>
+                                </div>
+
+                                <h5 class="text-white">Tanggal Pengerjaan </h5>
+                                <div>
+                                    <p><label>Mulai :</label>
+                                    <input id="mulai" type="date" name="tanggal1" style="background: white;"/>
+                                    </p>
+                                </div>
+
+                                <div>
+                                    <p><label>Sampai :</label>
+                                    <input id="sampai" type="date" name="tanggal2" style="background: white;"/>
+                                    </p>
+                                </div>
+
+                            {{-- <input type="text" id="input-group" placeholder="Nama Pengunjung"> --}}
                             <input type="text" id="input-group" placeholder="Nama Perusahaan">
                             <input type="text" id="input-group" placeholder="Nomor ID">
                             <input type="text" id="input-group" placeholder="Departemen Pengunjung">
