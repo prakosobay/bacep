@@ -39,7 +39,6 @@ class HomeController extends Controller
         return view('home');
     }
 
-
     // ---------- SURVEY ----------
     public function submit_data_survey(Request $request)
     {
@@ -98,9 +97,18 @@ class HomeController extends Controller
     {
         $survey = Survey::find($id);
         $lasthistory = SurveyHistory::where('survey_id', $id)->where('aktif', 1)->first();
-        // $surveyHistory = SurveyHistory::where('users', 'users.id')->first();
-        // $pdf = PDF::loadview('survey_pdf', ['survey' => $survey, 'lasthistory' => $lasthistory, 'surveyHistory' => $surveyHistory]);
-        $pdf = PDF::loadview('survey_pdf', ['survey' => $survey, 'lasthistory' => $lasthistory]);
+        // $surveyHistory = SurveyHistory::join('')->where('survey.survey_id', $id)->where('status', )->orderBy('survey_history', 'ASC')->findAll();
+        $surveyHistory = DB::table('survey_histories')
+            ->join('survey', 'survey.survey_id', '=', 'survey_histories.survey_id')
+            ->join('users', 'users.id', '=', 'survey_histories.created_by')
+            ->where('survey_histories.survey_id', '=', $id)
+            ->where('survey_histories.role_to', '!=', '0')
+            ->where('survey_Histories.status', '!=', 'created')
+            ->select('survey_histories.*', 'users.name')
+            ->get();
+        // dd($surveyHistory);
+
+        $pdf = PDF::loadview('survey_pdf', ['survey' => $survey, 'lasthistory' => $lasthistory, 'surveyHistory' => $surveyHistory]);
         return $pdf->stream();
     }
 

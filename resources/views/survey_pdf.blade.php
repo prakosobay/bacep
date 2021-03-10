@@ -5,11 +5,11 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
-    {{-- <style type="text/css">
+    <style type="text/css">
         table tr td,
         table tr th{
             font-size: 9pt;
-        } --}}
+        }
     </style>
     <center>
         <h4>ACCESS REQUEST FORM</h4>
@@ -32,6 +32,7 @@
                     <th>Dept.Head</th>
                 </tr>
             </thead>
+
             <tbody>
                     <tr>
                         @switch($lasthistory->status)
@@ -58,13 +59,16 @@
                                 @break
                             @endswitch
                     </tr>
+
+                    @if($lasthistory->status != 'created')
+                    <tr>
+                        @foreach($surveyHistory as $p)
+                        <td><strong>{{ $p->name }}</strong></td>
+                        @endforeach
+                    </tr>
+                    @endif
+
                 </tbody>
             </table>
         </body>
         </html>
-        {{-- <tr>
-            <td><strong>{{ $surveyHistory->name }}</strong></td>
-            <td><strong>{{ $surveyHistory->name }}</strong></td>
-            <td><strong>{{ $surveyHistory->name }}</strong></td>
-            <td><strong>{{ $surveyHistory->name }}</strong></td>
-        </tr> --}}

@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+// use App\Http\Controllers\RegisController;
+// use App\Http\Controllers\LoginController;
 use App\Console\Kernel;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Auth;
@@ -21,6 +23,21 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', function () {
     return view('welcome');
 });
+
+// Route::get('/Register', function () {
+//     return view('auth.register');
+// });
+
+// Route::get('/Login', function () {
+//     return view('auth.login');
+// });
+
+// Route::post('/submit_register', [RegisController::class, 'sign_up']);
+
+// Route::post('/sign_in', [LoginController::class, 'sign_in']);
+
+// Route::get('/milih', [HomeController::class, 'milih_role']);
+
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/maintenance', function () {

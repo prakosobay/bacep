@@ -44,11 +44,9 @@
                     <div id="input4">
                         <!--input4-->
 
-
-
                         <h5 class="text-white">Purpose of Work :</h3>
 
-                            <div>
+                            <div value="1">
                                 <label class="radiobutton_container">
                                 <input id="1" name="radio" type="radio">
                                 <span class="radiobutton_mark"></span>
@@ -133,7 +131,6 @@
                                 <div>
                                     <p><label>Mulai :</label>
                                     <input id="mulai" type="date" name="tanggal1" style="background: white;"/>
-                                    </p>
                                 </div>
 
                                 <div>
@@ -220,9 +217,29 @@
                     </div>
                     <!--input-->
                     <h6 class="text-white">Area Yang Dimasuki</h6>
-                    <select id="input-group" style="background: black;">
 
-                <option value="">Server Room</option>
+
+                    <select id="input-group" style="background: black;">
+                        @if(value == "1")
+                        <div>
+                            <label class="radiobutton_container">
+                            <input id="3" name="radio" type="radio">
+                            <span class="radiobutton_mark"></span>
+                            MMR1
+                        </label>
+                        </div>
+
+                        <div>
+                            <label class="radiobutton_container">
+                            <input id="3" name="radio" type="radio">
+                            <span class="radiobutton_mark"></span>
+                            MMR2
+                        </label>
+                        </div>
+
+                        @endif
+
+                {{-- <option value="">Server Room</option>
                 <option value="">MMR 1</option>
                 <option value="">MMR 2</option>
                 <option value="">UPS Room</option>
@@ -233,7 +250,7 @@
                 <option value="">Trafo Room</option>
                 <option value="">Parking Lot</option>
                 <option value="">Yard</option>
-                <option value="">Other Lantai 1</option>
+                <option value="">Other Lantai 1</option> --}}
             </select>
                     <select id="input-group" style="background: black;">
                 <option value="">Tipe Akses</option>
