@@ -24,19 +24,19 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/Register', function () {
-    return view('auth.register');
-});
+// Route::get('/Register', function () {
+//     return view('auth.register');
+// });
 
-Route::get('/Login', function () {
-    return view('auth.login');
-});
+// Route::get('/Login', function () {
+//     return view('auth.login');
+// });
 
-Route::post('/submit_register', [RegisController::class, 'sign_up']);
+// Route::post('/submit_register', [RegisController::class, 'sign_up']);
 
-Route::post('/sign_in', [LoginController::class, 'sign_in']);
+// Route::post('/sign_in', [LoginController::class, 'sign_in']);
 
-Route::get('/milih', [HomeController::class, 'milih_role']);
+// Route::get('/milih', [HomeController::class, 'milih_role']);
 
 
 Route::middleware(['auth'])->group(function () {
