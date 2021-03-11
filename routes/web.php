@@ -35,7 +35,6 @@ Route::middleware(['auth'])->group(function () {
         return view('mount');
     });
 
-
     Route::get('/troubleshoot', function () {
         return view('troubleshoot');
     });
