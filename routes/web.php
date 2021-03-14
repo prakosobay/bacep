@@ -2,12 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-
-// use App\Http\Controllers\RegisController;
-// use App\Http\Controllers\LoginController;
 use App\Console\Kernel;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Auth;
+
 
 /*
 |--------------------------------------------------------------------------
