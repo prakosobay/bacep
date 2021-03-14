@@ -27,7 +27,7 @@
         </div>
     </section>
 
-    @if(Auth::user()->role == 'visitor')
+    @if(Auth::user()->role == 'visitor' && 'requestor')
     <section id="VisitDC">
         <div class="VisitDC container">
             <div class="VisitDC-top">
@@ -50,7 +50,6 @@
                 <div class="VisitDC-item">
                     <a href="mount" type="button" ><h2>Mounting/Un-Mounting</h2></a>
                 </div>
-
             </div>
         </div>
     </section>

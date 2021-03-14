@@ -85,8 +85,6 @@ class HomeController extends Controller
             ->where('survey_histories.survey_id', '=', $id)
             ->select('survey_histories.*', 'users.name', 'survey.purpose_work')
             ->get();
-
-
         // dd($surveyHistory);
 
         return view('detail_survey', ['surveyHistory' => $surveyHistory]);
@@ -104,7 +102,7 @@ class HomeController extends Controller
             ->where('survey_histories.survey_id', '=', $id)
             ->where('survey_histories.role_to', '!=', '0')
             ->where('survey_Histories.status', '!=', 'created')
-            ->select('survey_histories.*', 'users.name')
+            ->select('survey_histories.*', 'users.name', 'created_by')
             ->get();
         // dd($surveyHistory);
 
@@ -141,8 +139,6 @@ class HomeController extends Controller
         if ($lasthistory->status == 'created') {
             $status = 'reviewed';
         } elseif ($lasthistory->status == 'reviewed') {
-            $status = 'checked';
-        } elseif ($lasthistory->status == 'checked') {
             $status = 'secured';
         } elseif ($lasthistory->status == 'secured') {
             $status = 'final';
@@ -152,8 +148,6 @@ class HomeController extends Controller
 
         $role_to = '';
         if ($lasthistory->role_to == 'review') {
-            $role_to = 'check';
-        } elseif ($lasthistory->role_to == 'check') {
             $role_to = 'security';
         } elseif ($lasthistory->role_to == 'security') {
             $role_to = 'boss';
@@ -182,6 +176,59 @@ class HomeController extends Controller
 
         return $surveyHistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
     }
+
+    // public function approve_survey(Request $request)
+    // {
+
+    //     // $lasthistory = SurveyHistory::where('survey_id', '=', $request->survey_id)->latest()->first();
+    //     $lasthistory = SurveyHistory::where('survey_id', '=', $request->survey_id)->latest()->first();
+    //     $lasthistory->update(['aktif' => false]);
+
+    //     $status = '';
+    //     if ($lasthistory->status == 'created') {
+    //         $status = 'reviewed';
+    //     } elseif ($lasthistory->status == 'reviewed') {
+    //         $status = 'checked';
+    //     } elseif ($lasthistory->status == 'checked') {
+    //         $status = 'secured';
+    //     } elseif ($lasthistory->status == 'secured') {
+    //         $status = 'final';
+    //     } elseif ($lasthistory->status == 'final') {
+    //         $survey = Survey::find($request->survey_id)->first();
+    //     }
+
+    //     $role_to = '';
+    //     if ($lasthistory->role_to == 'review') {
+    //         $role_to = 'check';
+    //     } elseif ($lasthistory->role_to == 'check') {
+    //         $role_to = 'security';
+    //     } elseif ($lasthistory->role_to == 'security') {
+    //         $role_to = 'boss';
+    //     }
+
+    //     $surveyHistory = SurveyHistory::create([
+    //         'survey_id' => $request->survey_id,
+    //         'created_by' => Auth::user()->id,
+    //         'role_to' => $role_to,
+    //         'status' => $status,
+    //         'aktif' => true,
+    //     ]);
+
+    //     if ($lasthistory->role_to == 'boss') {
+    //         $survey = Survey::where('survey_id', $request->survey_id)->first();
+    //         // dd($survey);
+    //         $surveyFull = SurveyFull::create([
+    //             'survey_id' => $survey->survey_id,
+    //             'visitor_name' => $survey->visitor_name,
+    //             'visitor_company' => $survey->visitor_company,
+    //             'purpose_work' => $survey->purpose_work,
+    //             'status' => 'Full Approved',
+    //             'link' =>  url("/survey_pdf/$survey->survey_id"),
+    //         ]);
+    //     }
+
+    //     return $surveyHistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
+    // }
 
 
     // ---------- TROUBLESHOOT ----------

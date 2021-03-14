@@ -24,19 +24,19 @@
 
     <table class='table table-bordered'>
         <tr>
-            <td colspan="2"><b>Requestor Bali Tower</b></td>
+            <td colspan="2"><b>Bali Tower Requestor </b></td>
         </tr>
         <tr>
-            <td>Name :</td>
+            <td>Name : </td>
             <td>Phone Number : </td>
         </tr>
         <tr>
-            <td colspan="2">Department :</td>
+            <td colspan="2">Department : </td>
     </table>
 
     <table class='table table-bordered'>
         <tr>
-            <td colspan="2"><b>Visitor</b></td>
+            <td colspan="2"><b>VISITOR</b></td>
         </tr>
         <tr>
             <td>Name : {{$survey->visitor_name}}</td>
@@ -51,11 +51,18 @@
         </tr>
     </table>
 
+    <table class='table table-bordered'>
+        <tr>
+            <td><b>Authorized Entry Area :</b></td>
+            <td><b>Access Type :</b></td>
+        </tr>
+    </table>
+
         <table class='table table-bordered'>
             <thead>
                 <tr>
                     <th>Requestor By</th>
-                    <th>Dept.Head</th>
+                    <th>Approved By</th>
                     <th>Security</th>
                 </tr>
             </thead>
@@ -66,6 +73,10 @@
                             @case('reviewed')
                                 <td><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 100px; height: 50px;"></td>
                                 @break
+
+                            {{-- @case('checked')
+                                <td><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 100px; height: 50px;"></td>
+                                @break --}}
 
                             @case('final')
                                 <td><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 100px; height: 50px;"></td>
@@ -83,7 +94,7 @@
                         @endswitch
                     </tr>
 
-                    @if($lasthistory->status != 'created' && $lasthistory->status != 'checked')
+                    @if($lasthistory->status == 'created')
                     <tr>
                         @foreach($surveyHistory as $p)
                         <td><strong>{{ $p->name }}</strong></td>
