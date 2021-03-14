@@ -53,10 +53,9 @@
         <table class='table table-bordered'>
             <thead>
                 <tr>
-                    <th>Reviewed By</th>
-                    <th>Checked By</th>
-                    <th>Security</th>
+                    <th>Requestor By</th>
                     <th>Dept.Head</th>
+                    <th>Security</th>
                 </tr>
             </thead>
 
@@ -67,7 +66,9 @@
                                 <td><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 100px; height: 50px;"></td>
                                 @break
 
-                            @case('checked')
+                            @case('final')
+                                <td><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 100px; height: 50px;"></td>
+                                <td><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 100px; height: 50px;"></td>
                                 <td><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 100px; height: 50px;"></td>
                                 <td><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 100px; height: 50px;"></td>
                                 @break
@@ -78,16 +79,10 @@
                                 <td><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 100px; height: 50px;"></td>
                                 @break
 
-                            @case('final')
-                                <td><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 100px; height: 50px;"></td>
-                                <td><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 100px; height: 50px;"></td>
-                                <td><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 100px; height: 50px;"></td>
-                                <td><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 100px; height: 50px;"></td>
-                                @break
-                            @endswitch
+                        @endswitch
                     </tr>
 
-                    @if($lasthistory->status != 'created')
+                    @if($lasthistory->status != 'created' && $lasthistory->status != 'checked')
                     <tr>
                         @foreach($surveyHistory as $p)
                         <td><strong>{{ $p->name }}</strong></td>
