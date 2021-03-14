@@ -39,6 +39,11 @@ class HomeController extends Controller
         return view('home');
     }
 
+    // public function milih_role()
+    // {
+    //     return view('milih');
+    // }
+
     // ---------- SURVEY ----------
     public function submit_data_survey(Request $request)
     {
