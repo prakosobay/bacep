@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Maintenance Data Center</title>
+    <title>Survey Data Center</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
@@ -12,38 +12,90 @@
         }
     </style>
     <center>
-        <h4>ACCESS REQUEST FORM</h4>
-        <h4>Nomor : ARF/001/DCDV/XI/2019</h4>
-        <h6><a target="_blank" href="https://www.malasngoding.com/membuat-laporan-…n-dompdf-laravel/">www.malasngoding.com</a></h5>
+        <h5>ACCESS REQUEST FORM</h5>
+        <h5>Nomor : ARF/001/DCDV/XI/2019</h5>
     </center>
 
     <table class='table table-bordered'>
-        <thead>
-            <tr>
-                <th>No. </th>
-                <th>Time of Request</th>
-                <th>Tanggal</th>
-                <th>Bulan</th>
-                <th>Tahun</th>
-                <th>Purpose Work</th>
-                <th>Nama Visitor</th>
-            </tr>
-        </thead>
-        <tbody>
-            @php $i=1 @endphp
-            @foreach($survey as $p)
-            <tr>
-                <td>{{ $i++ }}</td>
-                <td>{{$p->created_at}}</td>
-                <td>{{$p->date}}</td>
-                <td>{{$p->months}}</td>
-                <td>{{$p->year}}</td>
-                <td>{{$p->purpose_work}}</td>
-                <td>{{$p->visitor_name}}</td>
-            </tr>
-            @endforeach
-        </tbody>
+        <tr><td>Time of Request : {{$survey->created_at}}</td></tr>
+        <tr><td>Purpose of Work : {{$survey->purpose_work}}</td></tr>
     </table>
 
-</body>
-</html>
+    <table class='table table-bordered'>
+        <tr>
+            <td colspan="2"><b>Requestor Bali Tower</b></td>
+        </tr>
+        <tr>
+            <td>Name :</td>
+            <td>Phone Number : </td>
+        </tr>
+        <tr>
+            <td colspan="2">Department :</td>
+    </table>
+
+    <table class='table table-bordered'>
+        <tr>
+            <td colspan="2"><b>Visitor</b></td>
+        </tr>
+        <tr>
+            <td>Name : {{$survey->visitor_name}}</td>
+            <td>ID : {{$survey->visitor_id}}</td>
+        </tr>
+        <tr>
+            <td>Company : {{$survey->visitor_company}}</td>
+            <td>Phone Number : {{$survey->visitor_phone}}</td>
+        </tr>
+        <tr>
+            <td colspan="2">Department : {{$survey->visitor_department}}</td>
+        </tr>
+    </table>
+
+        <table class='table table-bordered'>
+            <thead>
+                <tr>
+                    <th>Requestor By</th>
+                    <th>Checked By</th>
+                    <th>Security</th>
+                    <th>Dept.Head</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                    <tr>
+                        @switch($lasthistory->status)
+                            @case('reviewed')
+                                <td><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 100px; height: 50px;"></td>
+                                @break
+
+                            @case('checked')
+                                <td><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 100px; height: 50px;"></td>
+                                <td><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 100px; height: 50px;"></td>
+                                @break
+
+                            @case('secured')
+                                <td><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 100px; height: 50px;"></td>
+                                <td><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 100px; height: 50px;"></td>
+                                <td><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 100px; height: 50px;"></td>
+                                @break
+
+                            @case('final')
+                                <td><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 100px; height: 50px;"></td>
+                                <td><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 100px; height: 50px;"></td>
+                                <td><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 100px; height: 50px;"></td>
+                                <td><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 100px; height: 50px;"></td>
+                                @break
+                            @endswitch
+                    </tr>
+
+                    @if($lasthistory->status != 'created')
+                    <tr>
+                        @foreach($surveyHistory as $p)
+                        <td><strong>{{ $p->name }}</strong></td>
+                        @endforeach
+                    </tr>
+                    @endif
+
+                </tbody>
+            </table>
+        </body>
+        </html>

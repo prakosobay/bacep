@@ -10,13 +10,33 @@
 
     <title>PT Bali Towerindo Sentra</title>
     {{-- <title>{{ config('app.name', 'PT Bali Towerindo Sentra') }}PT Bali Towerindo Sentra</title> --}}
+    <script src="{{ asset('js/jquery/jquery.min.js') }}"></script>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
 
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/select2.min.css') }}" rel="stylesheet">
+
+    <script src="{{ asset('js/select2.min.js') }}"></script>
+
+    {{-- <style>
+        .select2-selection .select2-selection--multiple{
+            min-width: 330px;
+            margin-left: 15px!important;
+            border-color: lightgray;
+        }
+    </style> --}}
+
+    {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
+
+    <script>
+        $(document).ready(function() {
+            $('.my-select-multiple').select2();
+        });
+    </script>
+
 </head>
 <body>
     <div id="header">
@@ -75,4 +95,7 @@
         </main>
     </div>
 </body>
+
+
+
 </html>

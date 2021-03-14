@@ -2270,6 +2270,12 @@ textarea.form-control {
     margin-bottom: 1rem;
 }
 
+.select2-selection .select2-selection--multiple {
+    min-width: 330px;
+    margin-left: 15px !important;
+    border-color: lightgray;
+}
+
 .form-text {
     display: block;
     margin-top: 0.25rem;
