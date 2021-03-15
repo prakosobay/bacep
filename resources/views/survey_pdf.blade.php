@@ -21,154 +21,144 @@
         <h5 class="nmr">Nomor : ARF/001/DCDV/XI/2019</h5>
     </center>
 
-    <table class='table table-bordered'>
+    <table class='table table-bordered' width="600px">
         <tr>
-            <td>Time of Request</td>
-            <td>:</td>
-            <td>{{$survey->created_at}}</td>
+            <td width="100px">Time of Request</td>
+            <td width="500px">: {{$survey->created_at}}</td>
         </tr>
         <tr>
-            <td>Purpose of Work</td>
-            <td>:</td>
-            <td>{{$survey->purpose_work}}</td>
+            <td width="100px">Purpose of Work</td>
+            <td width="500px">: {{$survey->purpose_work}}</td>
         </tr>
     </table>
 
-    <table class='table table-bordered'>
+    <table class='table table-bordered' width="600px">
         <tr>
             <td colspan="2"><b>Bali Tower Requestor </b></td>
         </tr>
         <tr>
-            <td>Name</td>
-            <td>:</td>
-            <td></td>
-            <td>Phone Number</td>
-            <td>:</td>
-            <td></td>
+            <td width="100px">Name</td>
+            <td width="200px">: </td>
+            <td width="100px">Phone Number</td>
+            <td width="200px">: </td>
         </tr>
         <tr>
             <td>Department</td>
-            <td colspan="2"> : </td>
+            <td colspan="2">: </td>
     </table>
 
-    <table class='table table-bordered'>
+    <table class='table table-bordered' width="600px">
         <tr>
             <td colspan="2"><b>VISITOR</b></td>
         </tr>
         <tr>
-            <td>Name</td>
-            <td>:</td>
-            <td>{{$survey->visitor_name}}</td>
-            <td>ID</td>
-            <td>:</td>
-            <td>{{$survey->visitor_id}}</td>
+            <td width="100px">Name</td>
+            <td width="200px">: {{$survey->visitor_name}}</td>
+            <td width="100px">ID</td>
+            <td width="200px">: {{$survey->visitor_id}}</td>
         </tr>
         <tr>
-            <td>Company</td>
-            <td>:</td>
-            <td>{{$survey->visitor_company}}</td>
-            <td>Phone Number</td>
-            <td>:</td>
-            <td>{{$survey->visitor_phone}}</td>
+            <td width="100px">Company</td>
+            <td width="200px">: {{$survey->visitor_company}}</td>
+            <td width="100px">Phone Number</td>
+            <td width="200px">: {{$survey->visitor_phone}}</td>
         </tr>
         <tr>
             <td>Department</td>
-            <td>:</td>
-            <td>{{$survey->visitor_department}}</td>
+            <td colspan="2">: {{$survey->visitor_department}}</td>
         </tr>
     </table>
 
-    <table class='table table-bordered'>
-        <tr>
-            <td colspan="2"><b>Authorized Entry Area :</b></td>
-            <td><b>Access Type : </b></td>
+    <table class='table table-bordered' width="600px">
+        <tr height="10px">
+            <td width="200 px" colspan="2"><b>Authorized Entry Area :</b></td>
+            <td width="200px"><b>Access Type : </b></td>
         </tr>
-        <tr>
-            <td><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 15px; height: 5px;"><p>Server Room</p></td>
-            <td><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 15px; height: 5px;"><p>Generator Room</p></td>
-            <td><p>General Access  </p><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 15px; height: 5px;"></td>
+        <tr height="10px">
+            <td width="200px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 10;"><label>  Server Room</label></td>
+            <td width="200px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 10;"><label>  Generator Room</label></td>
+            <td width="200px"><label>General Access  </label><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 10;"></td>
         </tr>
-        {{-- <tr>
-            <td><input type='checkbox' name='lokasi3' value='mmr1' >MMR 1</td>
-            <td><input type='checkbox' name='lokasi4' value='panel'>Panel Room</td>
-            <td><input type='checkbox' name='akses2' value='limited'>Limited Access</td>
+        <tr height="10px">
+            <td width="200px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 10;"><label>  MMR 1</label></td>
+            <td width="200px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 10;"><label>  Panel Room</label></td>
+            <td width="200px"><label>Limited Access  </label><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 10;"></td>
         </tr>
-        <td>
-            <td><input type='checkbox' name='lokasi5' value='mmr2' >MMR 1</td>
-            <td><input type='checkbox' name='lokasi6' value='battery'>Battery Room</td>
-            <td><input type='checkbox' name='akses3' value='escorted'>Escorted Access</td>
+        <tr height="10px">
+            <td width="200px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 10;"><label>  MMR 2</label></td>
+            <td width="200px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 10;"><label>  Battery Room</label></td>
+            <td width="200px"><label>Escorted Access  </label><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 10;"></td>
         </tr>
-        <tr>
-            <td><input type='checkbox' name='lokasi7' value='ups' >UPS Room</td>
-            <td><input type='checkbox' name='lokasi8' value='battery'>Battery Room</td>
-            <td><b>Validity</b></td>
+        <tr height="10px">
+            <td width="200px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 10;"><label>  UPS Room</label></td>
+            <td width="200px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 10;"><label>  FSS Room</label></td>
+            <td width="200px"><b>Validity :</td>
         </tr>
-        <tr>
-            <td><input type='checkbox' name='lokasi9' value='office_2nd' >Office 2nd FL</td>
-            <td><input type='checkbox' name='lokasi10' value='office_3rd'>Office 3rd FL</td>
-            <td><b>From :</b></td>
+        <tr height="10px">
+            <td width="200px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 10;"><label>  Office 2nd FL</label></td>
+            <td width="200px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 10;"><label>  Office 3rd FL</label></td>
+            <td width="200px"><b>From :</td>
         </tr>
-        <tr>
-            <td><input type='checkbox' name='lokasi11' value='yard' checked='checked'>Yard</td>
-            <td><input type='checkbox' name='lokasi12' value='trafo_room'>Trafo Room</td>
-            <td><b>To :</b></td>
+        <tr height="10px">
+            <td width="200px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 10;"><label>  Yard</label></td>
+            <td width="200px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 10;"><label>  Trafo Room</label></td>
+            <td width="200px"><b>To :</td>
         </tr>
-        <tr>
-            <td><input type='checkbox' name='lokasi13' value='others' checked='checked'>Others :</td>
-            <td><input type='checkbox' name='lokasi14' value='parking_lot'>Parking Lot</td>
-        </tr> --}}
+        <tr height="10px">
+            <td width="200px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 10;"><label>  Others :</label></td>
+            <td width="200px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 10;"><label>  Parking Lot</label></td>
+        </tr>
     </table>
 
-        <table class='table table-bordered'>
-            <thead>
+    <table class='table table-bordered' width="600px">
+        <thead>
+            <tr>
+                <th>Requestor By</th>
+                <th>Approved By</th>
+                <th>Security</th>
+            </tr>
+        </thead>
+
+        <tbody>
                 <tr>
-                    <th>Requestor By</th>
-                    <th>Approved By</th>
-                    <th>Security</th>
+                    @switch($lasthistory->status)
+                        @case('reviewed')
+                            <td><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 100px; height: 50px;"></td>
+                            @break
+
+                        {{-- @case('checked')
+                            <td><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 100px; height: 50px;"></td>
+                            @break --}}
+
+                        @case('final')
+                            <td><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 100px; height: 50px;"></td>
+                            <td><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 100px; height: 50px;"></td>
+                            <td><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 100px; height: 50px;"></td>
+                            <td><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 100px; height: 50px;"></td>
+                            @break
+
+                        @case('secured')
+                            <td><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 100px; height: 50px;"></td>
+                            <td><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 100px; height: 50px;"></td>
+                            <td><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 100px; height: 50px;"></td>
+                            @break
+
+                    @endswitch
                 </tr>
-            </thead>
 
-            <tbody>
-                    <tr>
-                        @switch($lasthistory->status)
-                            @case('reviewed')
-                                <td><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 100px; height: 50px;"></td>
-                                @break
-
-                            {{-- @case('checked')
-                                <td><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 100px; height: 50px;"></td>
-                                @break --}}
-
-                            @case('final')
-                                <td><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 100px; height: 50px;"></td>
-                                <td><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 100px; height: 50px;"></td>
-                                <td><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 100px; height: 50px;"></td>
-                                <td><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 100px; height: 50px;"></td>
-                                @break
-
-                            @case('secured')
-                                <td><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 100px; height: 50px;"></td>
-                                <td><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 100px; height: 50px;"></td>
-                                <td><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 100px; height: 50px;"></td>
-                                @break
-
-                        @endswitch
-                    </tr>
-
-                    {{-- <tr>
-                        @if($lasthistory->status == 'created')
-                        <td><b>{{$surveyHsitory->name}}</b></td>
-                        @endif
-                    </tr> --}}
-                    {{-- @if($lasthistory->status == 'created')
-                    <tr>
-                        @foreach($surveyHistory as $p)
-                        <td><strong>{{ $p->name }}</strong></td>
-                        @endforeach
-                    </tr>
-                    @endif --}}
-
-                </tbody>
-            </table>
-        </body>
-        </html>
+                {{-- <tr>
+                    @if($lasthistory->status == 'created')
+                    <td><b>{{$surveyHsitory->name}}</b></td>
+                    @endif
+                </tr> --}}
+                {{-- @if($lasthistory->status == 'created')
+                <tr>
+                    @foreach($surveyHistory as $p)
+                    <td><strong>{{ $p->name }}</strong></td>
+                    @endforeach
+                </tr>
+                @endif --}}
+            </tbody>
+        </table>
+    </body>
+</html>
