@@ -10,11 +10,15 @@
         table tr th{
             font-size: 9pt;
         }
+
+        .nmr{
+            font-size:9pt;
+        }
     </style>
 
     <center>
         <h5>ACCESS REQUEST FORM</h5>
-        <h5>Nomor : ARF/001/DCDV/XI/2019</h5>
+        <h5 class="nmr">Nomor : ARF/001/DCDV/XI/2019</h5>
     </center>
 
     <table class='table table-bordered'>
@@ -94,13 +98,20 @@
                         @endswitch
                     </tr>
 
-                    @if($lasthistory->status == 'created')
+                    <tr>
+                        @if($lasthistory->status == 'created')
+                        <td><b>{{$surveyHsitory->name}}</b></td>
+                        @endif
+
+
+                    </tr>
+                    {{-- @if($lasthistory->status == 'created')
                     <tr>
                         @foreach($surveyHistory as $p)
                         <td><strong>{{ $p->name }}</strong></td>
                         @endforeach
                     </tr>
-                    @endif
+                    @endif --}}
 
                 </tbody>
             </table>
