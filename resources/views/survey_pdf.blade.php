@@ -22,8 +22,16 @@
     </center>
 
     <table class='table table-bordered'>
-        <tr><td>Time of Request : {{$survey->created_at}}</td></tr>
-        <tr><td>Purpose of Work : {{$survey->purpose_work}}</td></tr>
+        <tr>
+            <td>Time of Request</td>
+            <td>:</td>
+            <td>{{$survey->created_at}}</td>
+        </tr>
+        <tr>
+            <td>Purpose of Work</td>
+            <td>:</td>
+            <td>{{$survey->purpose_work}}</td>
+        </tr>
     </table>
 
     <table class='table table-bordered'>
@@ -31,11 +39,16 @@
             <td colspan="2"><b>Bali Tower Requestor </b></td>
         </tr>
         <tr>
-            <td>Name : </td>
-            <td>Phone Number : </td>
+            <td>Name</td>
+            <td>:</td>
+            <td></td>
+            <td>Phone Number</td>
+            <td>:</td>
+            <td></td>
         </tr>
         <tr>
-            <td colspan="2">Department : </td>
+            <td>Department</td>
+            <td colspan="2"> : </td>
     </table>
 
     <table class='table table-bordered'>
@@ -43,23 +56,67 @@
             <td colspan="2"><b>VISITOR</b></td>
         </tr>
         <tr>
-            <td>Name : {{$survey->visitor_name}}</td>
-            <td>ID : {{$survey->visitor_id}}</td>
+            <td>Name</td>
+            <td>:</td>
+            <td>{{$survey->visitor_name}}</td>
+            <td>ID</td>
+            <td>:</td>
+            <td>{{$survey->visitor_id}}</td>
         </tr>
         <tr>
-            <td>Company : {{$survey->visitor_company}}</td>
-            <td>Phone Number : {{$survey->visitor_phone}}</td>
+            <td>Company</td>
+            <td>:</td>
+            <td>{{$survey->visitor_company}}</td>
+            <td>Phone Number</td>
+            <td>:</td>
+            <td>{{$survey->visitor_phone}}</td>
         </tr>
         <tr>
-            <td colspan="2">Department : {{$survey->visitor_department}}</td>
+            <td>Department</td>
+            <td>:</td>
+            <td>{{$survey->visitor_department}}</td>
         </tr>
     </table>
 
     <table class='table table-bordered'>
         <tr>
-            <td><b>Authorized Entry Area :</b></td>
-            <td><b>Access Type :</b></td>
+            <td colspan="2"><b>Authorized Entry Area :</b></td>
+            <td><b>Access Type : </b></td>
         </tr>
+        <tr>
+            <td><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 15px; height: 5px;"><p>Server Room</p></td>
+            <td><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 15px; height: 5px;"><p>Generator Room</p></td>
+            <td><p>General Access  </p><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 15px; height: 5px;"></td>
+        </tr>
+        {{-- <tr>
+            <td><input type='checkbox' name='lokasi3' value='mmr1' >MMR 1</td>
+            <td><input type='checkbox' name='lokasi4' value='panel'>Panel Room</td>
+            <td><input type='checkbox' name='akses2' value='limited'>Limited Access</td>
+        </tr>
+        <td>
+            <td><input type='checkbox' name='lokasi5' value='mmr2' >MMR 1</td>
+            <td><input type='checkbox' name='lokasi6' value='battery'>Battery Room</td>
+            <td><input type='checkbox' name='akses3' value='escorted'>Escorted Access</td>
+        </tr>
+        <tr>
+            <td><input type='checkbox' name='lokasi7' value='ups' >UPS Room</td>
+            <td><input type='checkbox' name='lokasi8' value='battery'>Battery Room</td>
+            <td><b>Validity</b></td>
+        </tr>
+        <tr>
+            <td><input type='checkbox' name='lokasi9' value='office_2nd' >Office 2nd FL</td>
+            <td><input type='checkbox' name='lokasi10' value='office_3rd'>Office 3rd FL</td>
+            <td><b>From :</b></td>
+        </tr>
+        <tr>
+            <td><input type='checkbox' name='lokasi11' value='yard' checked='checked'>Yard</td>
+            <td><input type='checkbox' name='lokasi12' value='trafo_room'>Trafo Room</td>
+            <td><b>To :</b></td>
+        </tr>
+        <tr>
+            <td><input type='checkbox' name='lokasi13' value='others' checked='checked'>Others :</td>
+            <td><input type='checkbox' name='lokasi14' value='parking_lot'>Parking Lot</td>
+        </tr> --}}
     </table>
 
         <table class='table table-bordered'>
@@ -98,13 +155,11 @@
                         @endswitch
                     </tr>
 
-                    <tr>
+                    {{-- <tr>
                         @if($lasthistory->status == 'created')
                         <td><b>{{$surveyHsitory->name}}</b></td>
                         @endif
-
-
-                    </tr>
+                    </tr> --}}
                     {{-- @if($lasthistory->status == 'created')
                     <tr>
                         @foreach($surveyHistory as $p)
