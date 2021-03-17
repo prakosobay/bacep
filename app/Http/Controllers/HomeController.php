@@ -101,7 +101,9 @@ class HomeController extends Controller
             ->join('users', 'users.id', '=', 'survey_histories.created_by')
             ->where('survey_histories.survey_id', '=', $id)
             ->where('survey_histories.role_to', '!=', '0')
+            ->where('survey_histories.role_to', '!=', 'check')
             ->where('survey_Histories.status', '!=', 'created')
+            ->where('survey_Histories.status', '!=', 'checked')
             ->select('survey_histories.*', 'users.name', 'created_by')
             ->get();
         // dd($surveyHistory);
