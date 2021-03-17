@@ -49,6 +49,8 @@
                         <li><a href="/home" data-after="Home">Home</a></li>
                         @if(Auth::user()->role == 'visitor')
                         <li><a href="#VisitDC" data-after="VisitDC">Visit Data Center</a></li>
+                        @elseif(Auth::user()->role == 'requestor')
+                        <li><a href="#VisitDC" data-after="VisitDC">Visit Data Center</a></li>
                         @elseif(Auth::user()->role == 'bm')
                         <li><a href="#BM" data-after="BM">BM</a></li>
                         @elseif(Auth::user()->role == 'security')

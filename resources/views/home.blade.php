@@ -27,7 +27,34 @@
         </div>
     </section>
 
-    @if(Auth::user()->role == 'visitor' && 'requestor')
+    @if(Auth::user()->role == 'visitor')
+    <section id="VisitDC">
+        <div class="VisitDC container">
+            <div class="VisitDC-top">
+                <h1 class="section-title">Visit Data Center</h1>
+                <p>Welcome to Data Center Department, do you need help ? choose what you need and let us help you</p>
+            </div>
+            <div class="VisitDC-bottom">
+                <div class="VisitDC-item">
+                    <a href="survey" type="button" ><h2>Survey</h2></a>
+                </div>
+
+                <div class="VisitDC-item">
+                    <a href="maintenance" type="button" ><h2>Maintenance</h2></a>
+                </div>
+
+                <div class="VisitDC-item">
+                    <a href="troubleshoot" type="button" ><h2>Troubleshoot</h2></a>
+                </div>
+
+                <div class="VisitDC-item">
+                    <a href="mount" type="button" ><h2>Mounting/Un-Mounting</h2></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    @elseif(Auth::user()->role == 'requestor')
     <section id="VisitDC">
         <div class="VisitDC container">
             <div class="VisitDC-top">

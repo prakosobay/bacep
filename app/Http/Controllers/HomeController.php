@@ -99,6 +99,7 @@ class HomeController extends Controller
         $surveyHistory = DB::table('survey_histories')
             ->join('survey', 'survey.survey_id', '=', 'survey_histories.survey_id')
             ->join('users', 'users.id', '=', 'survey_histories.created_by')
+            // ->join('users', 'users.id', '=', 'survey_histories.name')
             ->where('survey_histories.survey_id', '=', $id)
             ->where('survey_histories.role_to', '!=', '0')
             ->where('survey_histories.role_to', '!=', 'check')
@@ -107,6 +108,7 @@ class HomeController extends Controller
             ->select('survey_histories.*', 'users.name', 'created_by')
             ->get();
         // dd($surveyHistory);
+        // $user = Users::where('id', $id)->where('name', $name)->get();
 
         $pdf = PDF::loadview('survey_pdf', ['survey' => $survey, 'lasthistory' => $lasthistory, 'surveyHistory' => $surveyHistory]);
         return $pdf->stream();
