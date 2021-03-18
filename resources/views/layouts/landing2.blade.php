@@ -15,7 +15,7 @@
 
         <!-- Styles -->
         <link href="{{ asset('css/landing2.css') }}" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+        {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous"> --}}
         {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.14.0/sweetalert2.min.css" rel="stylesheet"> --}}
 
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
@@ -33,6 +33,7 @@
             </button>
             </div>
         @endif
+
         <div class="header container">
             <div class="nav-bar">
                 <div class="brand">
@@ -62,7 +63,7 @@
                                 <a href="{{ route('register') }}">register</a>
                             </li>
                             @endif --}}
-                        <li><a href="{{ url('/survey_full') }}" data-after="Full">Full Approval</a></li>
+                        <li><a href="{{ url('/full_approval') }}" data-after="Full">Full Approval</a></li>
                         <li><a href="#Approval" data-after="Approval">Approval</a></li>
                         @endif
                         <li>

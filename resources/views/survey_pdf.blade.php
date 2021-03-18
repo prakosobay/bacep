@@ -86,43 +86,45 @@
             <td width="150px"><b>Access Type : </b></td>
         </tr>
         <tr height="10px">
-            <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 10;">   Server Room</td>
-            <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 10;">   Generator Room</td>
+            <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 8px;">   Server Room</td>
+            <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 8px;">   Generator Room</td>
             <td>General Access</td>
-            <td><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 10;"></td>
+            <td><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 8px;"></td>
         </tr>
         <tr height="10px">
-            <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 10;">   MMR 1</td>
-            <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 10;">   Panel Room</td>
+            <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 8px;">   MMR 1</td>
+            <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 8px;">   Panel Room</td>
             <td>Limited Access</td>
-            <td><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 10;"></td>
+            <td><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 8px;"></td>
         </tr>
         <tr height="10px">
-            <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 10;">   MMR 2</td>
-            <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 10;">   Battery Room</td>
+            <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 8px;">   MMR 2</td>
+            <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 8px;">   Battery Room</td>
             <td>Escorted Access</td>
-            <td><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 10;"></td>
+            <td><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 8px;"></td>
         </tr>
         <tr height="10px">
-            <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 10;">   UPS Room</td>
-            <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 10;">   FSS Room</td>
+            <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 8px;">   UPS Room</td>
+            <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 8px;">   FSS Room</td>
+            <td>  </td>
+            <td>  </td>
+        </tr>
+        <tr height="10px">
+            <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 8px;">   Office 2nd FL</td>
+            <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 8px;">   Office 3rd FL</td>
             <td width="150px"><b>Validity :</td>
-        </tr>
-        <tr height="10px">
-            <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 10;">   Office 2nd FL</td>
-            <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 10;">   Office 3rd FL</td>
-            <td><b>From</td>
+            </tr>
+            <tr height="10px">
+                <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 8px;">   Yard</td>
+                <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 8px;">   Trafo Room</td>
+                <td><b>From</td>
+                <td> : </td>
+            </tr>
+            <tr height="10px">
+                <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 8px;">   Others :</td>
+                <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 8px;">   Parking Lot</td>
+                <td><b>To</td>
             <td> : </td>
-        </tr>
-        <tr height="10px">
-            <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 10;">   Yard</td>
-            <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 10;">   Trafo Room</td>
-            <td><b>To</td>
-            <td> : </td>
-        </tr>
-        <tr height="10px">
-            <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 10;">   Others :</td>
-            <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 10;">   Parking Lot</td>
         </tr>
     </table>
 

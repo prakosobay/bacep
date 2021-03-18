@@ -74,7 +74,7 @@ class HomeController extends Controller
     {
         $surveyFull = DB::table('survey_fulls')->get();
         // dd($surveyFull);
-        return view('survey_full', ['surveyFull' => $surveyFull]);
+        return view('full_approval', ['surveyFull' => $surveyFull]);
     }
 
     public function detail_permit_survey($id)

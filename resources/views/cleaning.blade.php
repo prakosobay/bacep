@@ -220,7 +220,7 @@
 
 
                     <select id="input-group" style="background: black;">
-                        @if(value == "1")
+                        {{-- @if(value == "1")
                         <div>
                             <label class="radiobutton_container">
                             <input id="3" name="radio" type="radio">
@@ -237,9 +237,9 @@
                         </label>
                         </div>
 
-                        @endif
+                        @endif --}}
 
-                {{-- <option value="">Server Room</option>
+                <option value="">Server Room</option>
                 <option value="">MMR 1</option>
                 <option value="">MMR 2</option>
                 <option value="">UPS Room</option>
@@ -250,7 +250,7 @@
                 <option value="">Trafo Room</option>
                 <option value="">Parking Lot</option>
                 <option value="">Yard</option>
-                <option value="">Other Lantai 1</option> --}}
+                <option value="">Other Lantai 1</option>
             </select>
                     <select id="input-group" style="background: black;">
                 <option value="">Tipe Akses</option>

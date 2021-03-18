@@ -27,13 +27,59 @@
 
 </head>
 <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{{ url('/full_approval') }}">Full Approval</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/home">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/full_approval') }}">Survey</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Maintenance</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Troubleshoot</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Mounting</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/full_approval_cleaning') }}">Cleaning</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Other</a>
+                        </li>
+                        {{-- <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Permit</a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <li><a class="dropdown-item" href="#">Survey</a></li>
+                                    <li><a class="dropdown-item" href="#">Maintenance</a></li>
+                                    <li><a class="dropdown-item" href="#">Troubleshoot</a></li>
+                                    <li><a class="dropdown-item" href="#">Mounting</a></li>
+                                    <li><a class="dropdown-item" href="#">Cleaning</a></li>
+                                    <li><a class="dropdown-item" href="#">Other</a></li>
+                                </ul>
+                        </li> --}}
+                    </ul>
+                </div>
+        </div>
+    </nav>
+
+
     <section class="content">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                        <h2 class="card-title">Full Approval Permit Survey</h2>
+                        <h2 class="card-title">Table Full Approval Survey</h2>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
