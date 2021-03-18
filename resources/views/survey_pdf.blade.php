@@ -9,11 +9,11 @@
     <style type="text/css">
         table tr td,
         table tr th{
-            font-size: 9pt;
+            font-size: 7pt;
         }
 
         .nmr{
-            font-size:9pt;
+            font-size:8pt;
         }
 
         @page {
@@ -161,8 +161,8 @@
                     @endswitch
                 </tr>
 
-                @if($lasthistory->status != 'created' && $lasthistory->status != 'checked')
-                <tr height="10px">
+                @if($lasthistory->status != 'reviewed' && $lasthistory->status != 'checked')
+                <tr>
                         @foreach($surveyHistory as $p)
                         <td><strong>{{ $p->name }}</strong></td>
                         @endforeach
