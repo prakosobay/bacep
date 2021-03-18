@@ -64,24 +64,24 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/detail_survey/{id}', [HomeController::class, 'detail_permit_survey']);
     Route::post('/approve_survey', [HomeController::class, 'approve_survey']);
     Route::post('/survey_reject', [HomeController::class, 'survey_reject']);
+
+
+    Route::post('/submit_data', [App\Http\Controllers\HomeController::class, 'submit_data']);
+    Route::post('/submit_data_survey', [App\Http\Controllers\HomeController::class, 'submit_data_survey']);
+    Route::post('/submit_mounting', [App\Http\Controllers\HomeController::class, 'submit_mounting']);
+    Route::post('/submit_troubleshoot', [App\Http\Controllers\HomeController::class, 'submit_troubleshoot']);
+
+    Route::get('/hasil_survey', [App\Http\Controllers\HomeController::class, 'surveyview']);
+    Route::get('/hasil_maintenance', [App\Http\Controllers\HomeController::class, 'maintenance_view']);
+    Route::get('/hasil_troubleshoot', [App\Http\Controllers\HomeController::class, 'troubleshoot_view']);
+    Route::get('/hasil_mount', [App\Http\Controllers\HomeController::class, 'mounting_view']);
+
+    Route::get('/detail_survey', [App\Http\Controllers\HomeController::class, 'approve_survey']);
+
+    Route::get('/survey_pdf/{id}', [App\Http\Controllers\HomeController::class, 'cetak_survey_pdf']);
+    Route::get('/maintenance_pdf', [App\Http\Controllers\HomeController::class, 'cetak_maintenance_pdf']);
+    Route::get('/troubleshoot_pdf', [App\Http\Controllers\HomeController::class, 'cetak_troubleshoot_pdf']);
+    Route::get('/mounting_pdf', [App\Http\Controllers\HomeController::class, 'cetak_mounting_pdf']);
+
+    Route::get('/full_approval', [App\Http\Controllers\HomeController::class, 'surveyfull']);
 });
-
-
-Route::post('/submit_data', [App\Http\Controllers\HomeController::class, 'submit_data']);
-Route::post('/submit_data_survey', [App\Http\Controllers\HomeController::class, 'submit_data_survey']);
-Route::post('/submit_mounting', [App\Http\Controllers\HomeController::class, 'submit_mounting']);
-Route::post('/submit_troubleshoot', [App\Http\Controllers\HomeController::class, 'submit_troubleshoot']);
-
-Route::get('/hasil_survey', [App\Http\Controllers\HomeController::class, 'surveyview']);
-Route::get('/hasil_maintenance', [App\Http\Controllers\HomeController::class, 'maintenance_view']);
-Route::get('/hasil_troubleshoot', [App\Http\Controllers\HomeController::class, 'troubleshoot_view']);
-Route::get('/hasil_mount', [App\Http\Controllers\HomeController::class, 'mounting_view']);
-
-Route::get('/detail_survey', [App\Http\Controllers\HomeController::class, 'approve_survey']);
-
-Route::get('/survey_pdf/{id}', [App\Http\Controllers\HomeController::class, 'cetak_survey_pdf']);
-Route::get('/maintenance_pdf', [App\Http\Controllers\HomeController::class, 'cetak_maintenance_pdf']);
-Route::get('/troubleshoot_pdf', [App\Http\Controllers\HomeController::class, 'cetak_troubleshoot_pdf']);
-Route::get('/mounting_pdf', [App\Http\Controllers\HomeController::class, 'cetak_mounting_pdf']);
-
-Route::get('/full_approval', [App\Http\Controllers\HomeController::class, 'surveyfull']);

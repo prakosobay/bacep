@@ -29,7 +29,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container-fluid">
-            <a class="navbar-brand" href="{{ url('/full_approval_cleaning') }}">Full Approval</a>
+            <a class="navbar-brand" href="{{ url('/full_approval_maintenance') }}">Full Approval</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -42,7 +42,7 @@
                             <a class="nav-link" href="{{ url('/full_approval') }}">Survey</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Maintenance</a>
+                            <a class="nav-link" href="{{ url('/full_approval_maintenance') }}">Maintenance</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Troubleshoot</a>
