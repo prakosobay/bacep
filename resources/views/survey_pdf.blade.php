@@ -106,8 +106,7 @@
         <tr height="10px">
             <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 10;">   UPS Room</td>
             <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 10;">   FSS Room</td>
-            <td><b>Validity</td>
-            <td> : </td>
+            <td width="150px"><b>Validity :</td>
         </tr>
         <tr height="10px">
             <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 10;">   Office 2nd FL</td>
@@ -131,7 +130,7 @@
         <thead>
             <tr height="10px">
                 <th>Requestor By</th>
-                <th>Secured By</th>
+                <th>Security</th>
                 <th>Approved By</th>
             </tr>
         </thead>
@@ -161,7 +160,7 @@
                     @endswitch
                 </tr>
 
-                @if($lasthistory->status != 'reviewed' && $lasthistory->status != 'checked')
+                @if($lasthistory->status != 'checked')
                 <tr>
                         @foreach($surveyHistory as $p)
                         <td><strong>{{ $p->name }}</strong></td>
@@ -171,6 +170,10 @@
 
             </tbody>
         </table>
+        <center>
+            <h5 class="nmr">On public holiday signatory will be handled by appointed Data Center Operation Shift Engineer on duty</h5>
+            <h5 class="nmr">**(Pada hari libur Nasional tanda tangan akan diwakilkan kepetugas operasional yang ditunjuk)</h5>
+        </center>
     </body>
     </html>
 

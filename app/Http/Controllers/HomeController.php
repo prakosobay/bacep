@@ -103,7 +103,7 @@ class HomeController extends Controller
             ->where('survey_histories.survey_id', '=', $id)
             ->where('survey_histories.role_to', '!=', '0')
             ->where('survey_histories.role_to', '!=', 'check')
-            // ->where('survey_Histories.status', '!=', 'reviewed')
+            ->where('survey_Histories.status', '!=', 'reviewed')
             ->where('survey_Histories.status', '!=', 'checked')
             ->select('survey_histories.*', 'users.name', 'created_by')
             ->get();
