@@ -72,7 +72,8 @@ class HomeController extends Controller
 
     public function surveyfull()
     {
-        $surveyFull = DB::table('survey_fulls')->get();
+        if ((Auth::user()->role == 'boss') || (Auth::user()->role == 'check') || (Auth::user()->role == 'review'))
+            $surveyFull = DB::table('survey_fulls')->get();
         // dd($surveyFull);
         return view('full_approval', ['surveyFull' => $surveyFull]);
     }
