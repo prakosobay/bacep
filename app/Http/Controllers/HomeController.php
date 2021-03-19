@@ -60,13 +60,15 @@ class HomeController extends Controller
 
     public function surveyview()
     {
+
         $role = Auth::user()->role;
-        $survey = DB::table('survey_histories')
-            ->join('survey', 'survey.survey_id', '=', 'survey_histories.survey_id')
-            ->where('survey_histories.role_to', '=', $role)
-            ->where('survey_histories.aktif', '=', 1)
-            ->select('survey.*')
-            ->get();
+        if ((Auth::user()->role != 'requestor') && (Auth::user()->role != 'visitor'))
+            $survey = DB::table('survey_histories')
+                ->join('survey', 'survey.survey_id', '=', 'survey_histories.survey_id')
+                ->where('survey_histories.role_to', '=', $role)
+                ->where('survey_histories.aktif', '=', 1)
+                ->select('survey.*')
+                ->get();
         return view('hasil_survey', ['survey' => $survey]);
     }
 

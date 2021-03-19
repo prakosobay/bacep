@@ -65,7 +65,6 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/approve_survey', [HomeController::class, 'approve_survey']);
     Route::post('/survey_reject', [HomeController::class, 'survey_reject']);
 
-
     Route::post('/submit_data', [App\Http\Controllers\HomeController::class, 'submit_data']);
     Route::post('/submit_data_survey', [App\Http\Controllers\HomeController::class, 'submit_data_survey']);
     Route::post('/submit_mounting', [App\Http\Controllers\HomeController::class, 'submit_mounting']);
