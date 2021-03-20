@@ -1,137 +1,186 @@
 $(document).ready(function(){
     $flag=1;
-    $("#purpose_work").focusout(function(){
+    $("#survey_work").focusout(function(){
         if($(this).val()==''){
             $(this).css("border-color", "#FF0000");
                 $('#submit').attr('disabled',true);
-                 $("#error_purpose_work").text("* You have to enter your Purpose of Work!");
+                $("#error_survey_work").text("* You have to enter your Purpose of Work!");
         }
         else
         {
             $(this).css("border-color", "#2eb82e");
             $('#submit').attr('disabled',false);
-            $("#error_purpose_work").text("");
+            $("#error_survey_work").text("");
 
         }
-   });
-    $("#visitor_name").focusout(function(){
+});
+    $("#survey_name").focusout(function(){
         if($(this).val()==''){
             $(this).css("border-color", "#FF0000");
                 $('#submit').attr('disabled',true);
-                $("#error_visitor_name").text("* You have to enter your Name!");
+                $("#error_survey_name").text("* You have to enter your Name!");
         }
         else
         {
             $(this).css("border-color", "#2eb82e");
             $('#submit').attr('disabled',false);
-            $("#error_visitor_name").text("");
+            $("#error_survey_name").text("");
         }
-   });
-    $("#visitor_company").focusout(function(){
+});
+    $("#survey_company").focusout(function(){
         if($(this).val()==''){
             $(this).css("border-color", "#FF0000");
                 $('#submit').attr('disabled',true);
-                $("#error_visitor_company").text("* You have to enter your Company!");
+                $("#error_survey_company").text("* You have to enter your Company!");
         }
         else
         {
             $(this).css("border-color", "#2eb82e");
             $('#submit').attr('disabled',false);
-            $("#error_visitor_company").text("");
+            $("#error_survey_company").text("");
         }
-   });
+});
     $("#gender").focusout(function(){
         $(this).css("border-color", "#2eb82e");
 
-   });
-    $("#age").focusout(function(){
+});
+    $("#survey_department").focusout(function(){
         if($(this).val()==''){
             $(this).css("border-color", "#FF0000");
                 $('#submit').attr('disabled',true);
-                $("#error_age").text("* You have to enter your Age!");
+                $("#error_survey_department").text("* You have to enter your Department!");
         }
         else
         {
             $(this).css({"border-color":"#2eb82e"});
             $('#submit').attr('disabled',false);
-            $("#error_age").text("");
-
+            $("#error_survey_department").text("");
         }
-        });
+});
 
-    $("#survey_lokasi").focusout(function(){
+    $("#survey_id").focusout(function(){
         if($(this).val()==''){
             $(this).css("border-color", "#FF0000");
                 $('#submit').attr('disabled',true);
-                $("#error_survey_lokasi").text("* You have to enter your Entry Area!");
+                $("#error_survey_id").text("* You have to enter your ID Number!");
         }
         else
         {
             $(this).css("border-color", "#2eb82e");
             $('#submit').attr('disabled',false);
-            $("#error_survey_lokasi").text("");
+            $("#error_survey_id").text("");
         }
-    });
-    $("#phone").focusout(function(){
-        $pho =$("#phone").val();
+});
+
+    $("#survey_phone").focusout(function(){
+        $pho =$("#survey_phone").val();
         if($(this).val()==''){
             $(this).css("border-color", "#FF0000");
                 $('#submit').attr('disabled',true);
-                $("#error_phone").text("* You have to enter your Phone Number!");
+                $("#error_survey_phone").text("* You have to enter your Phone Number!");
         }
-        else if ($pho.length!=10)
+        else if ($pho.length > 12)
         {
                 $(this).css("border-color", "#FF0000");
                 $('#submit').attr('disabled',true);
-                $("#error_phone").text("* Lenght of Phone Number Should Be Ten");
+                $("#error_survey_phone").text("* Lenght of Phone Number is Too Long");
+        }
+        else if ($pho.length < 11)
+        {
+                $(this).css("border-color", "#FF0000");
+                $('#submit').attr('disabled',true);
+                $("#error_survey_phone").text("* Lenght of Phone Number is Too Short");
         }
         else if(!$.isNumeric($pho))
         {
                 $(this).css("border-color", "#FF0000");
                 $('#submit').attr('disabled',true);
-                $("#error_phone").text("* Phone Number Should Be Numeric");
+                $("#error_survey_phone").text("* survey_phone Number Should Be Numeric");
         }
         else{
             $(this).css({"border-color":"#2eb82e"});
             $('#submit').attr('disabled',false);
-            $("#error_phone").text("");
+            $("#error_survey_phone").text("");
         }
+});
 
+$("#survey_date_from").focusout(function(){
+    if($(this).val()==''){
+        $(this).css("border-color", "#FF0000");
+            $('#submit').attr('disabled',true);
+            $("#error_survey_date_from").text("* You have to enter your Time Visit!");
+    }
+    else
+    {
+        $(this).css({"border-color":"#2eb82e"});
+        $('#submit').attr('disabled',false);
+        $("#error_survey_date_from").text("");
+    }
+});
+
+$("#survey_date_to").focusout(function(){
+    if($(this).val()==''){
+        $(this).css("border-color", "#FF0000");
+            $('#submit').attr('disabled',true);
+            $("#error_survey_date_to").text("* You have to enter your Time Visit!");
+    }
+    else
+    {
+        $(this).css({"border-color":"#2eb82e"});
+        $('#submit').attr('disabled',false);
+        $("#error_survey_date_to").text("");
+    }
+});
+
+
+    $( "#submit" ).click(function() {
+        if($("#survey_work" ).val()=='')
+        {
+        $("#survey_work").css("border-color", "#FF0000");
+            $('#submit').attr('disabled',true);
+                $("#error_survey_work").text("* You have to enter your Purpose of Work!");
+        }
+        if($("#survey_name" ).val()=='')
+        {
+        $("#survey_name").css("border-color", "#FF0000");
+            $('#submit').attr('disabled',true);
+                $("#error_survey_name").text("* You have to enter your Name!");
+        }
+        if($("#survey_company" ).val()=='')
+        {
+        $("#survey_company").css("border-color", "#FF0000");
+            $('#submit').attr('disabled',true);
+                $("#error_survey_company").text("* You have to enter your Company!");
+        }
+        if($("#survey_department" ).val()=='')
+        {
+        $("#survey_department").css("border-color", "#FF0000");
+            $('#submit').attr('disabled',true);
+                $("#error_survey_department").text("* You have to enter your Department!");
+        }
+        if($("#survey_id" ).val()=='')
+        {
+        $("#survey_id").css("border-color", "#FF0000");
+            $('#submit').attr('disabled',true);
+                $("#error_survey_id").text("* You have to enter your ID Number!");
+        }
+        if($("#survey_phone" ).val()=='')
+        {
+        $("#survey_phone").css("border-color", "#FF0000");
+            $('#submit').attr('disabled',true);
+                $("#error_survey_phone").text("* You have to enter your Phone Number!");
+        }
+        if($("#survey_date_from" ).val()=='')
+        {
+        $("#survey_date_from").css("border-color", "#FF0000");
+            $('#submit').attr('disabled',true);
+                $("#error_survey_date_from").text("* You have to enter your Time Visit!");
+        }
+        if($("#survey_date_to" ).val()=='')
+        {
+        $("#survey_date_to").css("border-color", "#FF0000");
+            $('#submit').attr('disabled',true);
+                $("#error_survey_date_to").text("* You have to enter your Time Visit!");
+        }
     });
-
-       $( "#submit" ).click(function() {
-           if($("#myName" ).val()=='')
-           {
-            $("#myName").css("border-color", "#FF0000");
-                $('#submit').attr('disabled',true);
-                 $("#error_name").text("* You have to enter your first name!");
-        }
-        if($("#lastname" ).val()=='')
-           {
-            $("#lastname").css("border-color", "#FF0000");
-                $('#submit').attr('disabled',true);
-                 $("#error_lastname").text("* You have to enter your Last name!");
-        }
-           if($("#dob" ).val()=='')
-           {
-            $("#dob").css("border-color", "#FF0000");
-                $('#submit').attr('disabled',true);
-                 $("#error_dob").text("* You have to enter your Date of Birth!");
-        }
-           if($("#age" ).val()=='')
-           {
-            $("#age").css("border-color", "#FF0000");
-                $('#submit').attr('disabled',true);
-                 $("#error_age").text("* You have to enter your Age!");
-        }
-        if($("#phone" ).val()=='')
-           {
-            $("#phone").css("border-color", "#FF0000");
-                $('#submit').attr('disabled',true);
-                 $("#error_phone").text("* You have to enter your Phone Number!");
-        }
-        });
-
-
-
 });
