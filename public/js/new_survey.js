@@ -58,6 +58,20 @@ $(document).ready(function(){
 
         }
         });
+
+    $("#survey_lokasi").focusout(function(){
+        if($(this).val()==''){
+            $(this).css("border-color", "#FF0000");
+                $('#submit').attr('disabled',true);
+                $("#error_survey_lokasi").text("* You have to enter your Entry Area!");
+        }
+        else
+        {
+            $(this).css("border-color", "#2eb82e");
+            $('#submit').attr('disabled',false);
+            $("#error_survey_lokasi").text("");
+        }
+    });
     $("#phone").focusout(function(){
         $pho =$("#phone").val();
         if($(this).val()==''){
