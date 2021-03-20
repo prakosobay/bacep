@@ -53,7 +53,6 @@
                         </div>
 
 
-
                         <div class="form-group row">
                             <label for="phone" class="col-md-4 col-form-label text-md-right">{{ __('Phone Number') }}</label>
 

@@ -42,7 +42,8 @@ class HomeController extends Controller
     // ---------- SURVEY ----------
     public function submit_data_survey(Request $request)
     {
-        $survey = Survey::create($request->all());
+        if (Auth::user()->role == 'visitor')
+            $survey = Survey::create($request->all());
         if ($survey->exists) {
             $surveyHistory = SurveyHistory::create([
                 'survey_id' => $survey->survey_id,
@@ -92,7 +93,6 @@ class HomeController extends Controller
 
         return view('detail_survey', ['surveyHistory' => $surveyHistory]);
     }
-
 
     public function cetak_survey_pdf($id)
     {

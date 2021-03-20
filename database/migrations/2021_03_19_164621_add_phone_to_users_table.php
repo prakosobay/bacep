@@ -14,7 +14,7 @@ class AddPhoneToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->integer('phone', 13)->nullable()->unique()->after('name');
+            $table->bigInteger('phone')->unsigned()->nullable()->unique()->after('name');
         });
     }
 
