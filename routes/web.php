@@ -59,6 +59,10 @@ Route::middleware(['auth'])->group(function () {
         return view('cleaning');
     });
 
+    Route::get('/new_survey', function () {
+        return view('new_survey');
+    });
+
     Route::get('/home', [HomeController::class, 'index'])->name('home');
 
     Route::get('/detail_survey/{id}', [HomeController::class, 'detail_permit_survey']);
