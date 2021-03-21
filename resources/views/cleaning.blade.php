@@ -23,7 +23,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.14.0/sweetalert2.all.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
-
 </head>
 
 <body>
@@ -44,90 +43,26 @@
                     <div id="input4">
                         <!--input4-->
 
-                        <h5 class="text-white">Purpose of Work :</h3>
+                        <input type="text" id="input-group" placeholder="Purpose of Work (Pekerjaan yang dilakukan)">
+                        <input type="text" id="input-group" placeholder="Visitor Name (Nama Pengunjung1)">
+                        <input type="text" id="input-group" placeholder="Visitor Name (Nama Pengunjung2)">
+                        <input type="text" id="input-group" placeholder="Visitor Company (Nama Perusahaan1)">
+                        <input type="text" id="input-group" placeholder="Visitor Company (Nama Perusahaan2)">
+                        <input type="number" id="input-group" placeholder="Visitor ID Number (Nomor Identitas1)">
+                        <input type="number" id="input-group" placeholder="Visitor ID Number (Nomor Identitas2)">
+                        <input type="text" id="input-group" placeholder="Visitor Department (Departemen Pengunjung)">
+                        <input type="number" id="input-group" placeholder="Visitor Phone Number (Nomor Handphone1)">
+                        <input type="number" id="input-group" placeholder="Visitor Phone Number (Nomor Handphone2)">
 
-                            <div value="1">
-                                <label class="radiobutton_container">
-                                <input id="1" name="radio" type="radio">
-                                <span class="radiobutton_mark"></span>
-                                Pembersihan lantai 1 (MMR 1&2 - UPS - Server Wallmount - Fire Suppression System)
-                                </label>
-                            </div>
+                        <h6 class="text-white">Request Validity (Berlakunya Permintaan)</h6>
+                        <input type="date" name="dateofbirth" id="dateofbirth">
+                        <h6 class="text-white"></h6>
 
-                            <div>
-                                <label class="radiobutton_container">
-                                <input id="2" name="radio" type="radio">
-                                <span class="radiobutton_mark"></span>
-                                Pembersihan Ruang Data Center (Pembersihan Plafon Atas, Besi Support, Rack & Raised Floor)
-                            </label>
-                            </div>
+                        <h6 class="text-white">To (Sampai)</h6>
+                        <input type="date" name="dateofbirth" id="dateofbirth">
+                        <h6 class="text-white"></h6>
 
-                            <div>
-                                <label class="radiobutton_container">
-                                <input id="3" name="radio" type="radio">
-                                <span class="radiobutton_mark"></span>
-                                Pembersihan Under Raised Floor Koridor Lantai 1 (MMR 1&2, Ruang UPS, Fire Suppression System & Server Wallmount)
-                            </label>
-                            </div>
-
-                            <div>
-                                <label class="radiobutton_container">
-                                <input id="4" name="radio" type="radio">
-                                <span class="radiobutton_mark"></span>
-                                Pembersihan Lantai Dasar Ruang Facility Data Center (Trafo - Battery - PUTR - Genset - Bagian Luar PLN)
-                            </label>
-                            </div>
-
-                            <div>
-                                <label class="radiobutton_container">
-                                <input id="5" name="radio" type="radio">
-                                <span class="radiobutton_mark"></span>
-                                Pembersihan Lantai Dasar Data Center (ruang Server)
-                            </label>
-                            </div>
-
-                            <div>
-                                <label class="radiobutton_container">
-                                <input id="6" name="radio" type="radio">
-                                <span class="radiobutton_mark"></span>
-                                Pest Control (Insect & Rodent Control)
-                            </label>
-                            </div>
-
-                            <h5 class="text-white">Visitor Name :</h3>
-                                <div>
-                                    <label class="radiobutton_container">
-                                    <input id="riko" name="riko" type="radio">
-                                    <span class="radiobutton_mark"></span>
-                                    Riko Adi Pratama
-                                </label>
-                                </div>
-
-                                <div>
-                                    <label class="radiobutton_container">
-                                    <input id="jejen" name="jejen" type="radio">
-                                    <span class="radiobutton_mark"></span>
-                                    Jejen Jenudin
-                                </label>
-                                </div>
-
-                                <div>
-                                    <label class="radiobutton_container">
-                                    <input id="fani" name="fani" type="radio">
-                                    <span class="radiobutton_mark"></span>
-                                    Alfani Sulaeman
-                                </label>
-                                </div>
-
-                                <div>
-                                    <label class="radiobutton_container">
-                                    <input id="andi" name="andi" type="radio">
-                                    <span class="radiobutton_mark"></span>
-                                    Andi Sugandi
-                                </label>
-                                </div>
-
-                                <h5 class="text-white">Tanggal Pengerjaan </h5>
+                                {{-- <div class="text-white">Tanggal Pengerjaan </div>
                                 <div>
                                     <p><label>Mulai :</label>
                                     <input id="mulai" type="date" name="tanggal1" style="background: white;"/>
@@ -137,128 +72,67 @@
                                     <p><label>Sampai :</label>
                                     <input id="sampai" type="date" name="tanggal2" style="background: white;"/>
                                     </p>
-                                </div>
-
-                            {{-- <input type="text" id="input-group" placeholder="Nama Pengunjung"> --}}
-                            <input type="text" id="input-group" placeholder="Nama Perusahaan">
-                            <input type="text" id="input-group" placeholder="Nomor ID">
-                            <input type="text" id="input-group" placeholder="Departemen Pengunjung">
-                            <input type="text" id="input-group" placeholder="Nomor Handphone">
-
-                            <h6 class="text-white">Vadility</h6>
-                            <select id="input-group3" style="background: black;">
-                                <option value="">From</option>
-                                <option value="">00:00</option>
-                        </select>
-                            <select id="input-group3" style="background: black;">
-                            <option value="">To</option>
-                            <option value="">00:00</option>
-                        </select>
-
-                            <div>
-                                <h6 class="text-white">Waktu</h6>
-                                <select id="input-group3" style="background: black;">
-                            <option value="">Masuk</option>
-                            <option value="">00:00</option>
-                            <option value="">01:00</option>
-                            <option value="">02:00</option>
-                            <option value="">03:00</option>
-                            <option value="">04:00</option>
-                            <option value="">05:00</option>
-                            <option value="">06:00</option>
-                            <option value="">07:00</option>
-                            <option value="">08:00</option>
-                            <option value="">09:00</option>
-                            <option value="">10:00</option>
-                            <option value="">11:00</option>
-                            <option value="">12:00</option>
-                            <option value="">13:00</option>
-                            <option value="">14:00</option>
-                            <option value="">15:00</option>
-                            <option value="">16:00</option>
-                            <option value="">17:00</option>
-                            <option value="">18:00</option>
-                            <option value="">19:00</option>
-                            <option value="">20:00</option>
-                            <option value="">21:00</option>
-                            <option value="">22:00</option>
-                            <option value="">23:00</option>
-                            <option value="">24:00</option>
-                        </select>
-                                <select id="input-group3" style="background: black;">
-                            <option value="">Keluar</option>
-                            <option value="">00:00</option>
-                            <option value="">01:00</option>
-                            <option value="">02:00</option>
-                            <option value="">03:00</option>
-                            <option value="">04:00</option>
-                            <option value="">05:00</option>
-                            <option value="">06:00</option>
-                            <option value="">07:00</option>
-                            <option value="">08:00</option>
-                            <option value="">09:00</option>
-                            <option value="">10:00</option>
-                            <option value="">11:00</option>
-                            <option value="">12:00</option>
-                            <option value="">13:00</option>
-                            <option value="">14:00</option>
-                            <option value="">15:00</option>
-                            <option value="">16:00</option>
-                            <option value="">17:00</option>
-                            <option value="">18:00</option>
-                            <option value="">19:00</option>
-                            <option value="">20:00</option>
-                            <option value="">21:00</option>
-                            <option value="">22:00</option>
-                            <option value="">23:00</option>
-                            <option value="">24:00</option>
-                        </select>
+                                </div> --}}
+                    <!--input-->
+                    <div class="form-group">
+                        <h6 for="survey_area" class="text-white">Authorized Entry Area </h6>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="server" id="flexRadioDefault1">
+                                <label class="form-check-label" for="flexRadioDefault1"><b>Server Room</b></label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="generator" id="flexRadioDefault2">
+                                <label class="form-check-label" for="flexRadioDefault1"><b>Generator Room</b></b></label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="mmr1" id="flexRadioDefault3">
+                                <label class="form-check-label" for="flexRadioDefault1"><b>MMR 1</b></label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="panel" id="flexRadioDefault4">
+                                <label class="form-check-label" for="flexRadioDefault1"><b>Panel Room</b></label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="mmr2" id="flexRadioDefault5">
+                                <label class="form-check-label" for="flexRadioDefault1"><b>MMR 2</b></label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="battery" id="flexRadioDefault6">
+                                <label class="form-check-label" for="flexRadioDefault1"><b>Battery Room</b></label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="ups" id="flexRadioDefault7">
+                                <label class="form-check-label" for="flexRadioDefault1"><b>UPS Room</b></label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="fss" id="flexRadioDefault8">
+                                <label class="form-check-label" for="flexRadioDefault1"><b>FSS Room</b></label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="2nd" id="flexRadioDefault9">
+                                <label class="form-check-label" for="flexRadioDefault1"><b>Office 2nd FL</b></label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="3rd" id="flexRadioDefault10">
+                                <label class="form-check-label" for="flexRadioDefault1"><b>Office 3rd FL</b></label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="yard" id="flexRadioDefault11">
+                                <label class="form-check-label" for="flexRadioDefault1"><b>Yard</b></label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="trafo" id="flexRadioDefault12">
+                                <label class="form-check-label" for="flexRadioDefault1"><b>Trafo Room</b></label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="parking" id="flexRadioDefault13">
+                                <label class="form-check-label" for="flexRadioDefault1"><b>Parking Lot</b></label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="other" id="flexRadioDefault14">
+                                <label class="form-check-label" for="flexRadioDefault1"><b>Others</b></label>
                             </div>
                     </div>
-                    <!--input-->
-                    <h6 class="text-white">Area Yang Dimasuki</h6>
-
-
-                    <select id="input-group" style="background: black;">
-                        {{-- @if(value == "1")
-                        <div>
-                            <label class="radiobutton_container">
-                            <input id="3" name="radio" type="radio">
-                            <span class="radiobutton_mark"></span>
-                            MMR1
-                        </label>
-                        </div>
-
-                        <div>
-                            <label class="radiobutton_container">
-                            <input id="3" name="radio" type="radio">
-                            <span class="radiobutton_mark"></span>
-                            MMR2
-                        </label>
-                        </div>
-
-                        @endif --}}
-
-                <option value="">Server Room</option>
-                <option value="">MMR 1</option>
-                <option value="">MMR 2</option>
-                <option value="">UPS Room</option>
-                <option value="">Generator Room</option>
-                <option value="">Panel Room</option>
-                <option value="">Battery Room</option>
-                <option value="">FSS Room</option>
-                <option value="">Trafo Room</option>
-                <option value="">Parking Lot</option>
-                <option value="">Yard</option>
-                <option value="">Other Lantai 1</option>
-            </select>
-                    <select id="input-group" style="background: black;">
-                <option value="">Tipe Akses</option>
-                <option value="">General Access</option>
-                <option value="">Limited Access</option>
-                <option value="">Escorted Access</option>
-            </select>
-                </div>
                 <!--input4-->
 
                 <div id="form">
@@ -270,12 +144,230 @@
                         <!--input-->
                         <div id="input4">
                             <!--input4-->
-                            <input type="text" id="input-group" placeholder="Deskripsikan Pekerjaan">
-                            <input type="text" id="input-group" placeholder="Resiko dan Dampak Area Servis">
-                            <input type="text" id="input-group" placeholder="Barang yang Digunakan">
-                            <input type="text" id="input-group" placeholder="Testing & Verivication">
-                            <input type="text" id="input-group" placeholder="Rollback Plan">
-                        </div>
+                        <h4 class="text-white">1. Background and Objective (Jenis Pekerjaan)</h4>
+                            <input type="text" id="input-group" placeholder="Fill in here">
+                        <h4 class="text-white">2. Description os Scope of Work (Deskripsikan Pekerjaan)</h4>
+                            <input type="text" id="input-group" placeholder="Fill in here">
+                        <h4 class="text-white">3. All Activity (Aktivitas)</h4>
+                            <input type="text" id="input-group1" placeholder="Activity Description">
+                            <input type="text" id="input-group1" placeholder="Service Impact">
+                            <input type="text" id="input-group1" placeholder="Activity Description">
+                            <input type="text" id="input-group1" placeholder="Service Impact">
+                            <input type="text" id="input-group1" placeholder="Activity Description">
+                            <input type="text" id="input-group1" placeholder="Service Impact">
+                        <h4 class="text-white">4. Risk and Service Area Impact (Resiko dan Dampak Area Servis)</h4>
+                            <select id="input-group4" style="background: black;">
+                                <option value="">Risk Description</option>
+                                <option value="">Tersengat Listrik</option>
+                                <option value="">Menghirup Debu</option>
+                                <option value="">Bersenggolan dengan perangkat</option>
+                                <option value="">Korsleting</option>
+                                <option value="">Bersenggolan dengan solenoid tabung</option>
+                                <option value="">Bersenggolan dengan panel fire alarm</option>
+                                <option value="">Terjatuh dari tangga</option>
+                            </select>
+                            <select id="input-group2" style="background: black;">
+                                <option value="">Possibility</option>
+                                <option value="">Mengalami luka bakar, pingsan, kematian</option>
+                                <option value="">Batuk / tenggorokan sakit</option>
+                                <option value="">Sistem jaringan dan kelistrikan menjadi lumpuh</option>
+                                <option value="">Sistem kelistrikan menjadi terganggu, kebakaran</option>
+                                <option value="">Gas Discharge, solenoid rusak</option>
+                                <option value="">Alarm 1 gedung, gas discharge</option>
+                                <option value="">Patah tulang</option>
+                            </select>
+
+                            <select id="input-group3" style="background: black;">
+                                <option value="">Impact</option>
+                                <option value="">High</option>
+                                <option value="">Middle</option>
+                                <option value="">Low</option>
+                            </select>
+                            <select id="input-group5" style="background: black;">
+                                <option value="">Mitigation Plan</option>
+                                <option value="">Menggunakan APD</option>
+                                <option value="">Menggunakan masker</option>
+                                <option value="">Bekerja dengan hati-hati</option>
+                                <option value="">Menjaga jarak dari sumber listrik</option>
+                                <option value="">Menjaga jarak dengan perangkat-perangkat critical tersebut</option>
+                                <option value="">Pastikan tangga berdiri dengan benar</option>
+                            </select>
+                            <select id="input-group4" style="background: black;">
+                                <option value="">Risk Description</option>
+                                <option value="">Tersengat Listrik</option>
+                                <option value="">Menghirup Debu</option>
+                                <option value="">Bersenggolan dengan perangkat</option>
+                                <option value="">Korsleting</option>
+                                <option value="">Bersenggolan dengan solenoid tabung</option>
+                                <option value="">Bersenggolan dengan panel fire alarm</option>
+                                <option value="">Terjatuh dari tangga</option>
+                            </select>
+                            <select id="input-group2" style="background: black;">
+                                <option value="">Possibility</option>
+                                <option value="">Mengalami luka bakar, pingsan, kematian</option>
+                                <option value="">Batuk / tenggorokan sakit</option>
+                                <option value="">Sistem jaringan dan kelistrikan menjadi lumpuh</option>
+                                <option value="">Sistem kelistrikan menjadi terganggu, kebakaran</option>
+                                <option value="">Gas Discharge, solenoid rusak</option>
+                                <option value="">Alarm 1 gedung, gas discharge</option>
+                                <option value="">Patah tulang</option>
+                            </select>
+
+                            <select id="input-group3" style="background: black;">
+                                <option value="">Impact</option>
+                                <option value="">High</option>
+                                <option value="">Middle</option>
+                                <option value="">Low</option>
+                            </select>
+                            <select id="input-group5" style="background: black;">
+                                <option value="">Mitigation Plan</option>
+                                <option value="">Menggunakan APD</option>
+                                <option value="">Menggunakan masker</option>
+                                <option value="">Bekerja dengan hati-hati</option>
+                                <option value="">Menjaga jarak dari sumber listrik</option>
+                                <option value="">Menjaga jarak dengan perangkat-perangkat critical tersebut</option>
+                                <option value="">Pastikan tangga berdiri dengan benar</option>
+                            </select>
+                            <select id="input-group4" style="background: black;">
+                                <option value="">Risk Description</option>
+                                <option value="">Tersengat Listrik</option>
+                                <option value="">Menghirup Debu</option>
+                                <option value="">Bersenggolan dengan perangkat</option>
+                                <option value="">Korsleting</option>
+                                <option value="">Bersenggolan dengan solenoid tabung</option>
+                                <option value="">Bersenggolan dengan panel fire alarm</option>
+                                <option value="">Terjatuh dari tangga</option>
+                            </select>
+                            <select id="input-group2" style="background: black;">
+                                <option value="">Possibility</option>
+                                <option value="">Mengalami luka bakar, pingsan, kematian</option>
+                                <option value="">Batuk / tenggorokan sakit</option>
+                                <option value="">Sistem jaringan dan kelistrikan menjadi lumpuh</option>
+                                <option value="">Sistem kelistrikan menjadi terganggu, kebakaran</option>
+                                <option value="">Gas Discharge, solenoid rusak</option>
+                                <option value="">Alarm 1 gedung, gas discharge</option>
+                                <option value="">Patah tulang</option>
+                            </select>
+
+                            <select id="input-group3" style="background: black;">
+                                <option value="">Impact</option>
+                                <option value="">High</option>
+                                <option value="">Middle</option>
+                                <option value="">Low</option>
+                            </select>
+                            <select id="input-group5" style="background: black;">
+                                <option value="">Mitigation Plan</option>
+                                <option value="">Menggunakan APD</option>
+                                <option value="">Menggunakan masker</option>
+                                <option value="">Bekerja dengan hati-hati</option>
+                                <option value="">Menjaga jarak dari sumber listrik</option>
+                                <option value="">Menjaga jarak dengan perangkat-perangkat critical tersebut</option>
+                                <option value="">Pastikan tangga berdiri dengan benar</option>
+                            </select>
+                            <select id="input-group4" style="background: black;">
+                                <option value="">Risk Description</option>
+                                <option value="">Tersengat Listrik</option>
+                                <option value="">Menghirup Debu</option>
+                                <option value="">Bersenggolan dengan perangkat</option>
+                                <option value="">Korsleting</option>
+                                <option value="">Bersenggolan dengan solenoid tabung</option>
+                                <option value="">Bersenggolan dengan panel fire alarm</option>
+                                <option value="">Terjatuh dari tangga</option>
+                            </select>
+                            <select id="input-group2" style="background: black;">
+                                <option value="">Possibility</option>
+                                <option value="">Mengalami luka bakar, pingsan, kematian</option>
+                                <option value="">Batuk / tenggorokan sakit</option>
+                                <option value="">Sistem jaringan dan kelistrikan menjadi lumpuh</option>
+                                <option value="">Sistem kelistrikan menjadi terganggu, kebakaran</option>
+                                <option value="">Gas Discharge, solenoid rusak</option>
+                                <option value="">Alarm 1 gedung, gas discharge</option>
+                                <option value="">Patah tulang</option>
+                            </select>
+
+                            <select id="input-group3" style="background: black;">
+                                <option value="">Impact</option>
+                                <option value="">High</option>
+                                <option value="">Middle</option>
+                                <option value="">Low</option>
+                            </select>
+                            <select id="input-group5" style="background: black;">
+                                <option value="">Mitigation Plan</option>
+                                <option value="">Menggunakan APD</option>
+                                <option value="">Menggunakan masker</option>
+                                <option value="">Bekerja dengan hati-hati</option>
+                                <option value="">Menjaga jarak dari sumber listrik</option>
+                                <option value="">Menjaga jarak dengan perangkat-perangkat critical tersebut</option>
+                                <option value="">Pastikan tangga berdiri dengan benar</option>
+                            </select>
+                            <select id="input-group4" style="background: black;">
+                                <option value="">Risk Description</option>
+                                <option value="">Tersengat Listrik</option>
+                                <option value="">Menghirup Debu</option>
+                                <option value="">Bersenggolan dengan perangkat</option>
+                                <option value="">Korsleting</option>
+                                <option value="">Bersenggolan dengan solenoid tabung</option>
+                                <option value="">Bersenggolan dengan panel fire alarm</option>
+                                <option value="">Terjatuh dari tangga</option>
+                            </select>
+                            <select id="input-group2" style="background: black;">
+                                <option value="">Possibility</option>
+                                <option value="">Mengalami luka bakar, pingsan, kematian</option>
+                                <option value="">Batuk / tenggorokan sakit</option>
+                                <option value="">Sistem jaringan dan kelistrikan menjadi lumpuh</option>
+                                <option value="">Sistem kelistrikan menjadi terganggu, kebakaran</option>
+                                <option value="">Gas Discharge, solenoid rusak</option>
+                                <option value="">Alarm 1 gedung, gas discharge</option>
+                                <option value="">Patah tulang</option>
+                            </select>
+
+                            <select id="input-group3" style="background: black;">
+                                <option value="">Impact</option>
+                                <option value="">High</option>
+                                <option value="">Middle</option>
+                                <option value="">Low</option>
+                            </select>
+                            <select id="input-group5" style="background: black;">
+                                <option value="">Mitigation Plan</option>
+                                <option value="">Menggunakan APD</option>
+                                <option value="">Menggunakan masker</option>
+                                <option value="">Bekerja dengan hati-hati</option>
+                                <option value="">Menjaga jarak dari sumber listrik</option>
+                                <option value="">Menjaga jarak dengan perangkat-perangkat critical tersebut</option>
+                                <option value="">Pastikan tangga berdiri dengan benar</option>
+                            </select>
+                    <h4 class="text-white">5. Detail Execution (Kegiatan)</h4>
+                        <input type="text" id="input-group1" placeholder="Item Operation (Barang yang digunakan)">
+                        <input type="text" id="input-group1" placeholder="Working Procedure (Tata Kerja)">
+                        <input type="text" id="input-group1" placeholder="Item Operation (Barang yang digunakan)">
+                        <input type="text" id="input-group1" placeholder="Working Procedure (Tata Kerja)">
+                        <input type="text" id="input-group1" placeholder="Item Operation (Barang yang digunakan)">
+                        <input type="text" id="input-group1" placeholder="Working Procedure (Tata Kerja)">
+
+                    <h4 class="text-white">6. Testing and Verification</h4>
+                         <input type="text" id="input-group" placeholder="Fill in here (isi disini)">
+
+                    <h4 class="text-white">7. Rollback Plan</h4>
+                        <input type="text" id="input-group" placeholder="Fill in here (isi disini)">
+
+                    <h4 class="text-white">8. Person in charge</h4>
+                        <input type="text" id="input-group6" placeholder="Name">
+                        <input type="text" id="input-group6" placeholder="Company">
+                        <input type="text" id="input-group6" placeholder="Responsibility">
+                        <input type="text" id="input-group6" placeholder="Name">
+                        <input type="text" id="input-group6" placeholder="Company">
+                        <input type="text" id="input-group6" placeholder="Responsibility">
+                        <input type="text" id="input-group6" placeholder="Name">
+                        <input type="text" id="input-group6" placeholder="Company">
+                        <input type="text" id="input-group6" placeholder="Responsibility">
+                        <input type="text" id="input-group6" placeholder="Name">
+                        <input type="text" id="input-group6" placeholder="Company">
+                        <input type="text" id="input-group6" placeholder="Responsibility">
+                        <input type="text" id="input-group6" placeholder="Name">
+                        <input type="text" id="input-group6" placeholder="Company">
+                        <input type="text" id="input-group6" placeholder="Responsibility">
+        </div>
+
                         <button type="submit" class="btn btn-warning text-white btn-submit">Submit Form</button>
                         <button type="reset" class="btn btn-primary">Clear Form</button>
         </form>

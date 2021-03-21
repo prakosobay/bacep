@@ -91,7 +91,7 @@
 
             <div class="BM-bottom">
                 <div class="BM-item">
-                    <a href="cleaning" type="button" ><h2>Cleaning</h2></a>
+                    <a href="cleaning_bm" type="button" ><h2>Cleaning</h2></a>
                 </div>
 
                 <div class="BM-item">

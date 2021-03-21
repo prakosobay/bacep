@@ -55,8 +55,8 @@ Route::middleware(['auth'])->group(function () {
         return view('troubleshoot');
     });
 
-    Route::get('/cleaning', function () {
-        return view('cleaning');
+    Route::get('/cleaning_bm', function () {
+        return view('cleaning_bm');
     });
 
     Route::get('/new_survey', function () {
