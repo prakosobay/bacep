@@ -29,14 +29,15 @@
 <body>
 <div class="container">
 <!--container-->
+
     <form  id="form_cleaning" class="form-group">
         {{ csrf_field() }}
         <!--form-->
-        <div  id="form">
 
+        <div  id="form">
+        <!--form-->
             <h1 class="text-white">Access Request Form</h1>
             <h2 class="text-white">Nomor: ARF/001/DCDV/XI/2019</h2>
-            <h3 class="text-white">Fill In First</h3>
 
             <div id="input">
                 <!--input-->
