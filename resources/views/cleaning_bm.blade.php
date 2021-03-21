@@ -33,9 +33,9 @@
         {{ csrf_field() }}
         <!--form-->
         <div  id="form">
+
             <h1 class="text-white">Access Request Form</h1>
             <h2 class="text-white">Nomor: ARF/001/DCDV/XI/2019</h2>
-
             <h3 class="text-white">Fill In First</h3>
 
             <div id="input">
@@ -56,10 +56,13 @@
                     <h6 class="text-white">To (Sampai)</h6>
                     <input type="date" name="dateofbirth" id="dateofbirth">
                     <h6 class="text-white"></h6>
-                </div>
 
-                <div class="form-group">
                     <h6 for="survey_area" class="text-white">Authorized Entry Area </h6>
+                        <div class="form-check">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                        <label class="form-check-label" for="exampleRadios1">
+                          Default radio
+                        </label>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="server" id="flexRadioDefault1">
                             <label class="form-check-label" for="flexRadioDefault1"><b>Server Room</b></label>
@@ -118,27 +121,29 @@
                         </div>
                 </div>
             </div>
-            <!--input4-->
+        </div>
 
         <div  id="form2">
-                <h1 class="text-white">Change Request Form</h1>
-                <h2 class="text-white">Nomor: ARF/001/DCDV/XI/2019</h2>
-                <div id="input">
+
+            <h1 class="text-white">Change Request Form</h1>
+            <h2 class="text-white">Nomor: ARF/001/DCDV/XI/2019</h2>
+
+            <div id="input">
                     <!--input-->
-                    <div id="input4">
+                <div id="input4">
                         <!--input4-->
-                <h4 class="text-white">1. Background and Objective (Jenis Pekerjaan)</h4>
+                    <h4 class="text-white">1. Background and Objective (Jenis Pekerjaan)</h4>
                         <input type="text" id="input-group" placeholder="Fill in here">
-                <h4 class="text-white">2. Description os Scope of Work (Deskripsikan Pekerjaan)</h4>
+                    <h4 class="text-white">2. Description os Scope of Work (Deskripsikan Pekerjaan)</h4>
                         <input type="text" id="input-group" placeholder="Fill in here">
-                <h4 class="text-white">3. All Activity (Aktivitas)</h4>
+                    <h4 class="text-white">3. All Activity (Aktivitas)</h4>
                         <input type="text" id="input-group1" placeholder="Activity Description">
                         <input type="text" id="input-group1" placeholder="Service Impact">
                         <input type="text" id="input-group1" placeholder="Activity Description">
                         <input type="text" id="input-group1" placeholder="Service Impact">
                         <input type="text" id="input-group1" placeholder="Activity Description">
                         <input type="text" id="input-group1" placeholder="Service Impact">
-                <h4 class="text-white">4. Risk and Service Area Impact (Resiko dan Dampak Area Servis)</h4>
+                    <h4 class="text-white">4. Risk and Service Area Impact (Resiko dan Dampak Area Servis)</h4>
                         <select id="input-group4" style="background: black;">
                             <option value="">Risk Description</option>
                             <option value="">Tersengat Listrik</option>
@@ -314,39 +319,43 @@
                             <option value="">Menjaga jarak dengan perangkat-perangkat critical tersebut</option>
                             <option value="">Pastikan tangga berdiri dengan benar</option>
                         </select>
-                <h4 class="text-white">5. Detail Execution (Kegiatan)</h4>
-                    <input type="text" id="input-group1" placeholder="Item Operation (Barang yang digunakan)">
-                    <input type="text" id="input-group1" placeholder="Working Procedure (Tata Kerja)">
-                    <input type="text" id="input-group1" placeholder="Item Operation (Barang yang digunakan)">
-                    <input type="text" id="input-group1" placeholder="Working Procedure (Tata Kerja)">
-                    <input type="text" id="input-group1" placeholder="Item Operation (Barang yang digunakan)">
-                    <input type="text" id="input-group1" placeholder="Working Procedure (Tata Kerja)">
+                    <h4 class="text-white">5. Detail Execution (Kegiatan)</h4>
+                        <input type="text" id="input-group1" placeholder="Item Operation (Barang yang digunakan)">
+                        <input type="text" id="input-group1" placeholder="Working Procedure (Tata Kerja)">
+                        <input type="text" id="input-group1" placeholder="Item Operation (Barang yang digunakan)">
+                        <input type="text" id="input-group1" placeholder="Working Procedure (Tata Kerja)">
+                        <input type="text" id="input-group1" placeholder="Item Operation (Barang yang digunakan)">
+                        <input type="text" id="input-group1" placeholder="Working Procedure (Tata Kerja)">
 
-                <h4 class="text-white">6. Testing and Verification</h4>
+                    <h4 class="text-white">6. Testing and Verification</h4>
                     <input type="text" id="input-group" placeholder="Fill in here (isi disini)">
 
-                <h4 class="text-white">7. Rollback Plan</h4>
+                    <h4 class="text-white">7. Rollback Plan</h4>
                     <input type="text" id="input-group" placeholder="Fill in here (isi disini)">
 
-                <h4 class="text-white">8. Person in charge</h4>
-                    <input type="text" id="input-group6" placeholder="Name">
-                    <input type="text" id="input-group6" placeholder="Company">
-                    <input type="text" id="input-group6" placeholder="Responsibility">
-                    <input type="text" id="input-group6" placeholder="Name">
-                    <input type="text" id="input-group6" placeholder="Company">
-                    <input type="text" id="input-group6" placeholder="Responsibility">
-                    <input type="text" id="input-group6" placeholder="Name">
-                    <input type="text" id="input-group6" placeholder="Company">
-                    <input type="text" id="input-group6" placeholder="Responsibility">
-                    <input type="text" id="input-group6" placeholder="Name">
-                    <input type="text" id="input-group6" placeholder="Company">
-                    <input type="text" id="input-group6" placeholder="Responsibility">
-                    <input type="text" id="input-group6" placeholder="Name">
-                    <input type="text" id="input-group6" placeholder="Company">
-                    <input type="text" id="input-group6" placeholder="Responsibility">
+                    <h4 class="text-white">8. Person in charge</h4>
+                        <input type="text" id="input-group6" placeholder="Name">
+                        <input type="text" id="input-group6" placeholder="Company">
+                        <input type="text" id="input-group6" placeholder="Responsibility">
+                        <input type="text" id="input-group6" placeholder="Name">
+                        <input type="text" id="input-group6" placeholder="Company">
+                        <input type="text" id="input-group6" placeholder="Responsibility">
+                        <input type="text" id="input-group6" placeholder="Name">
+                        <input type="text" id="input-group6" placeholder="Company">
+                        <input type="text" id="input-group6" placeholder="Responsibility">
+                        <input type="text" id="input-group6" placeholder="Name">
+                        <input type="text" id="input-group6" placeholder="Company">
+                        <input type="text" id="input-group6" placeholder="Responsibility">
+                        <input type="text" id="input-group6" placeholder="Name">
+                        <input type="text" id="input-group6" placeholder="Company">
+                        <input type="text" id="input-group6" placeholder="Responsibility">
+                </div>
+            </div>
+
 
             <button type="submit" class="btn btn-warning text-white btn-submit">Submit Form</button>
             <button type="reset" class="btn btn-primary">Clear Form</button>
+        </div>
 
     <!--container-->
     </form>
