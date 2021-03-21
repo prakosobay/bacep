@@ -58,60 +58,104 @@
                     <h6 class="text-white"></h6>
 
                     <h6 for="survey_area" class="text-white">Authorized Entry Area </h6>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                            <label class="form-check-label" for="inlineCheckbox1"><strong>Server Room</strong></label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                            <label class="form-check-label" for="inlineCheckbox2"><strong>Generator Room</strong></label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
-                            <label class="form-check-label" for="inlineCheckbox3"><strong>Panel Room</strong></label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option6">
-                            <label class="form-check-label" for="inlineCheckbox6"><strong>Battery Room</strong></label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="inlineCheckbox7" value="option7">
-                            <label class="form-check-label" for="inlineCheckbox7"><strong>UPS Room</strong></label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="inlineCheckbox8" value="option8">
-                            <label class="form-check-label" for="inlineCheckbox8"><strong>Trafo Room</strong></label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="inlineCheckbox9" value="option9">
-                            <label class="form-check-label" for="inlineCheckbox9"><strong>FSS Room</strong></label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="inlineCheckbox10" value="option10">
-                            <label class="form-check-label" for="inlineCheckbox10"><strong>Office 2nd FL</strong></label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="inlineCheckbox11" value="option11">
-                            <label class="form-check-label" for="inlineCheckbox11"><strong>Office 3rd FL</strong></label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="inlineCheckbox13" value="option13">
-                            <label class="form-check-label" for="inlineCheckbox13"><strong>Parking Lot</strong></label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="inlineCheckbox12" value="option12">
-                            <label class="form-check-label" for="inlineCheckbox12"><strong>Yard</strong></label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option4">
-                            <label class="form-check-label" for="inlineCheckbox4"><strong>MMR 1</strong></label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="option5">
-                            <label class="form-check-label" for="inlineCheckbox5"><strong>MMR 2</strong></label>
-                        </div>
-
-
+                    <div>
+                        <label class="radiobutton_container">
+                        <input id="1" name="server" type="radio">
+                        <span class="radiobutton_mark"></span>
+                        Server Room
+                        </label>
+                    </div>
+                    <div >
+                        <label class="radiobutton_container">
+                        <input id="1" name="generator" type="radio">
+                        <span class="radiobutton_mark"></span>
+                        Generator Room
+                        </label>
+                    </div>
+                    <div>
+                        <label class="radiobutton_container">
+                        <input id="1" name="ups" type="radio">
+                        <span class="radiobutton_mark"></span>
+                        UPS Room
+                        </label>
+                    </div>
+                    <div >
+                        <label class="radiobutton_container">
+                        <input id="1" name="panel" type="radio">
+                        <span class="radiobutton_mark"></span>
+                        Panel Room
+                        </label>
+                    </div>
+                    <div >
+                        <label class="radiobutton_container">
+                        <input id="1" name="fss" type="radio">
+                        <span class="radiobutton_mark"></span>
+                        FSS Room
+                        </label>
+                    </div>
+                    <div >
+                        <label class="radiobutton_container">
+                        <input id="1" name="staging" type="radio">
+                        <span class="radiobutton_mark"></span>
+                        Staging Room
+                        </label>
+                    </div>
+                    <div >
+                        <label class="radiobutton_container">
+                        <input id="1" name="battery" type="radio">
+                        <span class="radiobutton_mark"></span>
+                        Battery Room
+                        </label>
+                    </div>
+                    <div >
+                        <label class="radiobutton_container">
+                        <input id="1" name="trafo" type="radio">
+                        <span class="radiobutton_mark"></span>
+                        Trafo Room
+                        </label>
+                    </div>
+                    <div >
+                        <label class="radiobutton_container">
+                        <input id="1" name="mmr1" type="radio">
+                        <span class="radiobutton_mark"></span>
+                        MMR 1
+                        </label>
+                    </div>
+                    <div >
+                        <label class="radiobutton_container">
+                        <input id="1" name="mmr2" type="radio">
+                        <span class="radiobutton_mark"></span>
+                        MMR 2
+                        </label>
+                    </div>
+                    <div >
+                        <label class="radiobutton_container">
+                        <input id="1" name="2nd" type="radio">
+                        <span class="radiobutton_mark"></span>
+                        Office 2nd FL
+                        </label>
+                    </div>
+                    <div >
+                        <label class="radiobutton_container">
+                        <input id="1" name="3rd" type="radio">
+                        <span class="radiobutton_mark"></span>
+                        Office 3rd FL
+                        </label>
+                    </div>
+                    <div >
+                        <label class="radiobutton_container">
+                        <input id="1" name="yard" type="radio">
+                        <span class="radiobutton_mark"></span>
+                        Yard
+                        </label>
+                    </div>
+                    <div >
+                        <label class="radiobutton_container">
+                        <input id="1" name="parking" type="radio">
+                        <span class="radiobutton_mark"></span>
+                        Parking Area
+                        </label>
+                    </div>
                 </div>
             </div>
         </div>
@@ -344,8 +388,6 @@
                         <input type="text" id="input-group6" placeholder="Responsibility">
                 </div>
             </div>
-
-
             <button type="submit" class="btn btn-warning text-white btn-submit">Submit Form</button>
             <button type="reset" class="btn btn-primary">Clear Form</button>
         </div>
