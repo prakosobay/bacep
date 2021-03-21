@@ -58,67 +58,60 @@
                     <h6 class="text-white"></h6>
 
                     <h6 for="survey_area" class="text-white">Authorized Entry Area </h6>
-                        <div class="form-check">
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-                        <label class="form-check-label" for="exampleRadios1">
-                          Default radio
-                        </label>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="server" id="flexRadioDefault1">
-                            <label class="form-check-label" for="flexRadioDefault1"><b>Server Room</b></label>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox1"><strong>Server Room</strong></label>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="generator" id="flexRadioDefault2">
-                            <label class="form-check-label" for="flexRadioDefault1"><b>Generator Room</b></b></label>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                            <label class="form-check-label" for="inlineCheckbox2"><strong>Generator Room</strong></label>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="mmr1" id="flexRadioDefault3">
-                            <label class="form-check-label" for="flexRadioDefault1"><b>MMR 1</b></label>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
+                            <label class="form-check-label" for="inlineCheckbox3"><strong>Panel Room</strong></label>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="panel" id="flexRadioDefault4">
-                            <label class="form-check-label" for="flexRadioDefault1"><b>Panel Room</b></label>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option6">
+                            <label class="form-check-label" for="inlineCheckbox6"><strong>Battery Room</strong></label>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="mmr2" id="flexRadioDefault5">
-                            <label class="form-check-label" for="flexRadioDefault1"><b>MMR 2</b></label>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox7" value="option7">
+                            <label class="form-check-label" for="inlineCheckbox7"><strong>UPS Room</strong></label>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="battery" id="flexRadioDefault6">
-                            <label class="form-check-label" for="flexRadioDefault1"><b>Battery Room</b></label>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox8" value="option8">
+                            <label class="form-check-label" for="inlineCheckbox8"><strong>Trafo Room</strong></label>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="ups" id="flexRadioDefault7">
-                            <label class="form-check-label" for="flexRadioDefault1"><b>UPS Room</b></label>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox9" value="option9">
+                            <label class="form-check-label" for="inlineCheckbox9"><strong>FSS Room</strong></label>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="fss" id="flexRadioDefault8">
-                            <label class="form-check-label" for="flexRadioDefault1"><b>FSS Room</b></label>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox10" value="option10">
+                            <label class="form-check-label" for="inlineCheckbox10"><strong>Office 2nd FL</strong></label>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="2nd" id="flexRadioDefault9">
-                            <label class="form-check-label" for="flexRadioDefault1"><b>Office 2nd FL</b></label>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox11" value="option11">
+                            <label class="form-check-label" for="inlineCheckbox11"><strong>Office 3rd FL</strong></label>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="3rd" id="flexRadioDefault10">
-                            <label class="form-check-label" for="flexRadioDefault1"><b>Office 3rd FL</b></label>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox13" value="option13">
+                            <label class="form-check-label" for="inlineCheckbox13"><strong>Parking Lot</strong></label>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="yard" id="flexRadioDefault11">
-                            <label class="form-check-label" for="flexRadioDefault1"><b>Yard</b></label>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox12" value="option12">
+                            <label class="form-check-label" for="inlineCheckbox12"><strong>Yard</strong></label>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="trafo" id="flexRadioDefault12">
-                            <label class="form-check-label" for="flexRadioDefault1"><b>Trafo Room</b></label>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option4">
+                            <label class="form-check-label" for="inlineCheckbox4"><strong>MMR 1</strong></label>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="parking" id="flexRadioDefault13">
-                            <label class="form-check-label" for="flexRadioDefault1"><b>Parking Lot</b></label>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="option5">
+                            <label class="form-check-label" for="inlineCheckbox5"><strong>MMR 2</strong></label>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="other" id="flexRadioDefault14">
-                            <label class="form-check-label" for="flexRadioDefault1"><b>Others</b></label>
-                        </div>
+
+
                 </div>
             </div>
         </div>
