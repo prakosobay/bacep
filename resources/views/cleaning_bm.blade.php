@@ -179,14 +179,21 @@
                     <h4 class="text-white">2. Description os Scope of Work (Deskripsikan Pekerjaan)</h4>
                         <input type="text" id="input-group" placeholder="Fill in here">
                     <h4 class="text-white">3. All Activity (Aktivitas)</h4>
+                        <input type="time" id="input-group7" placeholder="Time">
                         <input type="text" id="input-group1" placeholder="Activity Description">
                         <input type="text" id="input-group1" placeholder="Service Impact">
+                        <input type="time" id="input-group7" placeholder="Time">
                         <input type="text" id="input-group1" placeholder="Activity Description">
                         <input type="text" id="input-group1" placeholder="Service Impact">
+                        <input type="time" id="input-group7" placeholder="Time">
                         <input type="text" id="input-group1" placeholder="Activity Description">
                         <input type="text" id="input-group1" placeholder="Service Impact">
+                        <input type="time" id="input-group7" placeholder="Time">
+                        <input type="text" id="input-group1" placeholder="Activity Description">
+                        <input type="text" id="input-group1" placeholder="Service Impact">
+
                     <h4 class="text-white">4. Risk and Service Area Impact (Resiko dan Dampak Area Servis)</h4>
-                        <select id="input-group4" style="background: black;">
+                        <select id="input-group11" style="background: black;">
                             <option value="">Risk Description</option>
                             <option value="">Tersengat Listrik</option>
                             <option value="">Menghirup Debu</option>
@@ -196,7 +203,7 @@
                             <option value="">Bersenggolan dengan panel fire alarm</option>
                             <option value="">Terjatuh dari tangga</option>
                         </select>
-                        <select id="input-group2" style="background: black;">
+                        <select id="input-group12" style="background: black;">
                             <option value="">Possibility</option>
                             <option value="">Mengalami luka bakar, pingsan, kematian</option>
                             <option value="">Batuk / tenggorokan sakit</option>
@@ -221,7 +228,7 @@
                             <option value="">Menjaga jarak dengan perangkat-perangkat critical tersebut</option>
                             <option value="">Pastikan tangga berdiri dengan benar</option>
                         </select>
-                        <select id="input-group4" style="background: black;">
+                        <select id="input-group11" style="background: black;">
                             <option value="">Risk Description</option>
                             <option value="">Tersengat Listrik</option>
                             <option value="">Menghirup Debu</option>
@@ -231,7 +238,7 @@
                             <option value="">Bersenggolan dengan panel fire alarm</option>
                             <option value="">Terjatuh dari tangga</option>
                         </select>
-                        <select id="input-group2" style="background: black;">
+                        <select id="input-group12" style="background: black;">
                             <option value="">Possibility</option>
                             <option value="">Mengalami luka bakar, pingsan, kematian</option>
                             <option value="">Batuk / tenggorokan sakit</option>
@@ -256,7 +263,7 @@
                             <option value="">Menjaga jarak dengan perangkat-perangkat critical tersebut</option>
                             <option value="">Pastikan tangga berdiri dengan benar</option>
                         </select>
-                        <select id="input-group4" style="background: black;">
+                        <select id="input-group11" style="background: black;">
                             <option value="">Risk Description</option>
                             <option value="">Tersengat Listrik</option>
                             <option value="">Menghirup Debu</option>
@@ -266,7 +273,7 @@
                             <option value="">Bersenggolan dengan panel fire alarm</option>
                             <option value="">Terjatuh dari tangga</option>
                         </select>
-                        <select id="input-group2" style="background: black;">
+                        <select id="input-group12" style="background: black;">
                             <option value="">Possibility</option>
                             <option value="">Mengalami luka bakar, pingsan, kematian</option>
                             <option value="">Batuk / tenggorokan sakit</option>
@@ -291,7 +298,7 @@
                             <option value="">Menjaga jarak dengan perangkat-perangkat critical tersebut</option>
                             <option value="">Pastikan tangga berdiri dengan benar</option>
                         </select>
-                        <select id="input-group4" style="background: black;">
+                        <select id="input-group11" style="background: black;">
                             <option value="">Risk Description</option>
                             <option value="">Tersengat Listrik</option>
                             <option value="">Menghirup Debu</option>
@@ -301,7 +308,7 @@
                             <option value="">Bersenggolan dengan panel fire alarm</option>
                             <option value="">Terjatuh dari tangga</option>
                         </select>
-                        <select id="input-group2" style="background: black;">
+                        <select id="input-group12" style="background: black;">
                             <option value="">Possibility</option>
                             <option value="">Mengalami luka bakar, pingsan, kematian</option>
                             <option value="">Batuk / tenggorokan sakit</option>
@@ -326,7 +333,7 @@
                             <option value="">Menjaga jarak dengan perangkat-perangkat critical tersebut</option>
                             <option value="">Pastikan tangga berdiri dengan benar</option>
                         </select>
-                        <select id="input-group4" style="background: black;">
+                        <select id="input-group11" style="background: black;">
                             <option value="">Risk Description</option>
                             <option value="">Tersengat Listrik</option>
                             <option value="">Menghirup Debu</option>
@@ -336,7 +343,7 @@
                             <option value="">Bersenggolan dengan panel fire alarm</option>
                             <option value="">Terjatuh dari tangga</option>
                         </select>
-                        <select id="input-group2" style="background: black;">
+                        <select id="input-group12" style="background: black;">
                             <option value="">Possibility</option>
                             <option value="">Mengalami luka bakar, pingsan, kematian</option>
                             <option value="">Batuk / tenggorokan sakit</option>
@@ -362,10 +369,16 @@
                             <option value="">Pastikan tangga berdiri dengan benar</option>
                         </select>
                     <h4 class="text-white">5. Detail Execution (Kegiatan)</h4>
+                        <input type="time" id="input-group7" placeholder="Time">
                         <input type="text" id="input-group1" placeholder="Item Operation (Barang yang digunakan)">
                         <input type="text" id="input-group1" placeholder="Working Procedure (Tata Kerja)">
+                        <input type="time" id="input-group7" placeholder="Time">
                         <input type="text" id="input-group1" placeholder="Item Operation (Barang yang digunakan)">
                         <input type="text" id="input-group1" placeholder="Working Procedure (Tata Kerja)">
+                        <input type="time" id="input-group7" placeholder="Time">
+                        <input type="text" id="input-group1" placeholder="Item Operation (Barang yang digunakan)">
+                        <input type="text" id="input-group1" placeholder="Working Procedure (Tata Kerja)">
+                        <input type="time" id="input-group7" placeholder="Time">
                         <input type="text" id="input-group1" placeholder="Item Operation (Barang yang digunakan)">
                         <input type="text" id="input-group1" placeholder="Working Procedure (Tata Kerja)">
 
@@ -376,21 +389,99 @@
                     <input type="text" id="input-group" placeholder="Fill in here (isi disini)">
 
                     <h4 class="text-white">8. Person in charge</h4>
-                        <input type="text" id="input-group6" placeholder="Name">
-                        <input type="text" id="input-group6" placeholder="Company">
-                        <input type="text" id="input-group6" placeholder="Responsibility">
-                        <input type="text" id="input-group6" placeholder="Name">
-                        <input type="text" id="input-group6" placeholder="Company">
-                        <input type="text" id="input-group6" placeholder="Responsibility">
-                        <input type="text" id="input-group6" placeholder="Name">
-                        <input type="text" id="input-group6" placeholder="Company">
-                        <input type="text" id="input-group6" placeholder="Responsibility">
-                        <input type="text" id="input-group6" placeholder="Name">
-                        <input type="text" id="input-group6" placeholder="Company">
-                        <input type="text" id="input-group6" placeholder="Responsibility">
-                        <input type="text" id="input-group6" placeholder="Name">
-                        <input type="text" id="input-group6" placeholder="Company">
-                        <input type="text" id="input-group6" placeholder="Responsibility">
+                        <select id="input-group11" style="background: black;">
+                            <option value="">Name</option>
+                            <option value="">Alfani Sulaeman</option>
+                            <option value="">Andi Sugandi</option>
+                            <option value="">Jejen Jenudin</option>
+                            <option value="">Riko Adi Pratama</option>
+                        </select>
+                        <select id="input-group11" style="background: black;">
+                            <option value="">Company</option>
+                            <option value="">PT Bijac</option>
+                            <option value="">PT Enlulu</option>
+                        </select>
+                        <select id="input-group11" style="background: black;">
+                            <option value="">Responsibility</option>
+                            <option value="">Cleaner</option>
+                        </select>
+                        <select id="input-group11" style="background: black;">
+                            <option value="">Mobile Number</option>
+                            <option value="">0895-3339-40730</option>
+                            <option value="">0815-6461-7472</option>
+                            <option value="">0896-3051-3484</option>
+                            <option value="">0853-6864-8317</option>
+                        </select>
+                        <select id="input-group11" style="background: black;">
+                            <option value="">Name</option>
+                            <option value="">Alfani Sulaeman</option>
+                            <option value="">Andi Sugandi</option>
+                            <option value="">Jejen Jenudin</option>
+                            <option value="">Riko Adi Pratama</option>
+                        </select>
+                        <select id="input-group11" style="background: black;">
+                            <option value="">Company</option>
+                            <option value="">PT Bijac</option>
+                            <option value="">PT Enlulu</option>
+                        </select>
+                        <select id="input-group11" style="background: black;">
+                            <option value="">Responsibility</option>
+                            <option value="">Cleaner</option>
+                        </select>
+                        <select id="input-group11" style="background: black;">
+                            <option value="">Mobile Number</option>
+                            <option value="">0895-3339-40730</option>
+                            <option value="">0815-6461-7472</option>
+                            <option value="">0896-3051-3484</option>
+                            <option value="">0853-6864-8317</option>
+                        </select>
+                        <select id="input-group11" style="background: black;">
+                            <option value="">Name</option>
+                            <option value="">Alfani Sulaeman</option>
+                            <option value="">Andi Sugandi</option>
+                            <option value="">Jejen Jenudin</option>
+                            <option value="">Riko Adi Pratama</option>
+                        </select>
+                        <select id="input-group11" style="background: black;">
+                            <option value="">Company</option>
+                            <option value="">PT Bijac</option>
+                            <option value="">PT Enlulu</option>
+                        </select>
+                        <select id="input-group11" style="background: black;">
+                            <option value="">Responsibility</option>
+                            <option value="">Cleaner</option>
+                        </select>
+                        <select id="input-group11" style="background: black;">
+                            <option value="">Mobile Number</option>
+                            <option value="">0895-3339-40730</option>
+                            <option value="">0815-6461-7472</option>
+                            <option value="">0896-3051-3484</option>
+                            <option value="">0853-6864-8317</option>
+                        </select>
+                        <select id="input-group11" style="background: black;">
+                            <option value="">Name</option>
+                            <option value="">Alfani Sulaeman</option>
+                            <option value="">Andi Sugandi</option>
+                            <option value="">Jejen Jenudin</option>
+                            <option value="">Riko Adi Pratama</option>
+                        </select>
+                        <select id="input-group11" style="background: black;">
+                            <option value="">Company</option>
+                            <option value="">PT Bijac</option>
+                            <option value="">PT Enlulu</option>
+                        </select>
+                        <select id="input-group11" style="background: black;">
+                            <option value="">Responsibility</option>
+                            <option value="">Cleaner</option>
+                        </select>
+                        <select id="input-group11" style="background: black;">
+                            <option value="">Mobile Number</option>
+                            <option value="">0895-3339-40730</option>
+                            <option value="">0815-6461-7472</option>
+                            <option value="">0896-3051-3484</option>
+                            <option value="">0853-6864-8317</option>
+                        </select>
+
                 </div>
             </div>
             <button type="submit" class="btn btn-warning text-white btn-submit">Submit Form</button>

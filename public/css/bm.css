@@ -61,7 +61,7 @@ body {
 }
 
 #input #input-group2 {
-    width: 100px;
+    width: 150px;
     margin: 5px;
     border-top: none;
     border-left: none;
@@ -83,7 +83,29 @@ body {
 }
 
 #input #input-group5 {
-    width: 150px;
+    width: 200px;
+    margin: 5px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline: none;
+    background: transparent;
+    color: rgb(255, 255, 255)
+}
+
+#input #input-group11 {
+    width: 175px;
+    margin: 5px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline: none;
+    background: transparent;
+    color: rgb(255, 255, 255)
+}
+
+#input #input-group12 {
+    width: 200px;
     margin: 5px;
     border-top: none;
     border-left: none;
@@ -131,7 +153,18 @@ body {
 }
 
 #input4 #input-group1 {
-    width: 265px;
+    width: 320px;
+    margin: 5px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline: none;
+    background: transparent;
+    color: #fff
+}
+
+#input4 #input-group7 {
+    width: 80px;
     margin: 5px;
     border-top: none;
     border-left: none;
@@ -151,6 +184,7 @@ body {
     background: transparent;
     color: #fff
 }
+
 
 #input5 h3 {
     border-bottom: 2px solid #3399ff;
