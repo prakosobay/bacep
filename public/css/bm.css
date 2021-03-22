@@ -8,7 +8,7 @@ body {
 #form {
     background-color: #000;
     height: 1300px;
-    width: 600px;
+    width: 800px;
     margin: auto;
     padding: 20px;
     opacity: 0.8;
@@ -17,7 +17,7 @@ body {
 #form2 {
     background-color: #000;
     height: 1300px;
-    width: 600px;
+    width: 800px;
     margin: auto;
     padding: 20px;
     opacity: 0.8;
@@ -120,7 +120,7 @@ body {
 }
 
 #input4 #input-group {
-    width: 550px;
+    width: 750px;
     margin: 5px;
     border-top: none;
     border-left: none;
