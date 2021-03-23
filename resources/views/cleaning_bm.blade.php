@@ -167,16 +167,16 @@
                     <h4 class="text-white">2. Description os Scope of Work (Deskripsikan Pekerjaan)</h4>
                         <input type="text" id="input-group" placeholder="Fill in here" name="cleaning_describ">
                     <h4 class="text-white">3. All Activity (Aktivitas)</h4>
-                        <input type="time" id="input-group7" placeholder="Time" >
+                        <input type="time" id="input-group7" placeholder="Time" name="cleaning_time_1">
                         <input type="text" id="input-group1" placeholder="Activity Description" name="cleaning_activity_1">
                         <input type="text" id="input-group1" placeholder="Service Impact" name="cleaning_service_1">
-                        <input type="time" id="input-group7" placeholder="Time">
+                        <input type="time" id="input-group7" placeholder="Time" name="cleaning_time_2">
                         <input type="text" id="input-group1" placeholder="Activity Description" name="cleaning_activity_2">
                         <input type="text" id="input-group1" placeholder="Service Impact" name="cleaning_service_2">
-                        <input type="time" id="input-group7" placeholder="Time">
+                        <input type="time" id="input-group7" placeholder="Time" name="cleaning_time_3">
                         <input type="text" id="input-group1" placeholder="Activity Description" name="cleaning_activity_3">
                         <input type="text" id="input-group1" placeholder="Service Impact" name="cleaning_service_3">
-                        <input type="time" id="input-group7" placeholder="Time">
+                        <input type="time" id="input-group7" placeholder="Time" name="cleaning_time_4">
                         <input type="text" id="input-group1" placeholder="Activity Description" name="cleaning_activity_4">
                         <input type="text" id="input-group1" placeholder="Service Impact" name="cleaning_service_4">
 
@@ -216,6 +216,7 @@
                             <option value="Menjaga jarak dengan perangkat-perangkat critical tersebut">Menjaga jarak dengan perangkat-perangkat critical tersebut</option>
                             <option value="Pastikan tangga berdiri dengan benar">Pastikan tangga berdiri dengan benar</option>
                         </select>
+
                         <select id="input-group11" style="background: black;" name="cleaning_risk_2">
                             <option value="">Risk Description</option>
                             <option value="Tersengat Listrik">Tersengat Listrik</option>
@@ -251,6 +252,7 @@
                             <option value="Menjaga jarak dengan perangkat-perangkat critical tersebut">Menjaga jarak dengan perangkat-perangkat critical tersebut</option>
                             <option value="Pastikan tangga berdiri dengan benar">Pastikan tangga berdiri dengan benar</option>
                         </select>
+
                         <select id="input-group11" style="background: black;" name="cleaning_risk_3">
                             <option value="">Risk Description</option>
                             <option value="Tersengat Listrik">Tersengat Listrik</option>
@@ -286,6 +288,7 @@
                             <option value="Menjaga jarak dengan perangkat-perangkat critical tersebut">Menjaga jarak dengan perangkat-perangkat critical tersebut</option>
                             <option value="Pastikan tangga berdiri dengan benar">Pastikan tangga berdiri dengan benar</option>
                         </select>
+
                         <select id="input-group11" style="background: black;" name="cleaning_risk_4">
                             <option value="">Risk Description</option>
                             <option value="Tersengat Listrik">Tersengat Listrik</option>
@@ -321,6 +324,7 @@
                             <option value="Menjaga jarak dengan perangkat-perangkat critical tersebut">Menjaga jarak dengan perangkat-perangkat critical tersebut</option>
                             <option value="Pastikan tangga berdiri dengan benar">Pastikan tangga berdiri dengan benar</option>
                         </select>
+
                         <select id="input-group11" style="background: black;" name="cleaning_risk_5">
                             <option value="">Risk Description</option>
                             <option value="Tersengat Listrik">Tersengat Listrik</option>
@@ -356,22 +360,481 @@
                             <option value="Menjaga jarak dengan perangkat-perangkat critical tersebut<">Menjaga jarak dengan perangkat-perangkat critical tersebut</option>
                             <option value="Pastikan tangga berdiri dengan benar">Pastikan tangga berdiri dengan benar</option>
                         </select>
+
+                        <select id="input-group11" style="background: black;" name="cleaning_risk_6">
+                            <option value="">Risk Description</option>
+                            <option value="Tersengat Listrik">Tersengat Listrik</option>
+                            <option value="Menghirup Debu">Menghirup Debu</option>
+                            <option value="Bersenggolan dengan perangkat">Bersenggolan dengan perangkat</option>
+                            <option value="Korsleting">Korsleting</option>
+                            <option value="Bersenggolan dengan solenoid tabung">Bersenggolan dengan solenoid tabung</option>
+                            <option value="Bersenggolan dengan panel fire alarm">Bersenggolan dengan panel fire alarm</option>
+                            <option value="Terjatuh dari tangga">Terjatuh dari tangga</option>
+                        </select>
+                        <select id="input-group12" style="background: black;" name="cleaning_possibility_6">
+                            <option value="">Possibility</option>
+                            <option value="Mengalami luka bakar, pingsan, kematian">Mengalami luka bakar, pingsan, kematian</option>
+                            <option value="Batuk / tenggorokan sakit">Batuk / tenggorokan sakit</option>
+                            <option value="Sistem jaringan dan kelistrikan menjadi lumpuh">Sistem jaringan dan kelistrikan menjadi lumpuh</option>
+                            <option value="Sistem kelistrikan menjadi terganggu, kebakaran">Sistem kelistrikan menjadi terganggu, kebakaran</option>
+                            <option value="Gas Discharge, solenoid rusak">Gas Discharge, solenoid rusak</option>
+                            <option value="Alarm 1 gedung, gas discharge">Alarm 1 gedung, gas discharge</option>
+                            <option value="Patah tulang">Patah tulang</option>
+                        </select>
+                        <select id="input-group3" style="background: black;" name="cleaning_impact_6">
+                            <option value="">Impact</option>
+                            <option value="High">High</option>
+                            <option value="Middle">Middle</option>
+                            <option value="Low">Low</option>
+                        </select>
+                        <select id="input-group5" style="background: black;" name="cleaning_mitigation_6">
+                            <option value="">Mitigation Plan</option>
+                            <option value="Menggunakan APD">Menggunakan APD</option>
+                            <option value="Menggunakan masker">Menggunakan masker</option>
+                            <option value="Bekerja dengan hati-hati">Bekerja dengan hati-hati</option>
+                            <option value="Menjaga jarak dari sumber listrik">Menjaga jarak dari sumber listrik</option>
+                            <option value="Menjaga jarak dengan perangkat-perangkat critical tersebut<">Menjaga jarak dengan perangkat-perangkat critical tersebut</option>
+                            <option value="Pastikan tangga berdiri dengan benar">Pastikan tangga berdiri dengan benar</option>
+                        </select>
+
                     <h4 class="text-white">5. Detail Execution (Kegiatan)</h4>
-                        <input type="time" id="input-group7" placeholder="Time" name="cleaning_time_1">
-                        <input type="text" id="input-group1" placeholder="Item Operation (Barang yang digunakan)" name="cleaning_item_1">
-                        <input type="text" id="input-group1" placeholder="Working Procedure (Tata Kerja)" name="cleaning_procedure_1">
-                        <input type="time" id="input-group7" placeholder="Time" name="cleaning_time_2">
-                        <input type="text" id="input-group1" placeholder="Item Operation (Barang yang digunakan)" name="cleaning_item_2">
-                        <input type="text" id="input-group1" placeholder="Working Procedure (Tata Kerja)" name="cleaning_procedure_2">
-                        <input type="time" id="input-group7" placeholder="Time" name="cleaning_time_3">
-                        <input type="text" id="input-group1" placeholder="Item Operation (Barang yang digunakan)" name="cleaning_item_3">
-                        <input type="text" id="input-group1" placeholder="Working Procedure (Tata Kerja)" name="cleaning_procedure_3">
-                        <input type="time" id="input-group7" placeholder="Time" name="cleaning_time_4">
-                        <input type="text" id="input-group1" placeholder="Item Operation (Barang yang digunakan)" name="cleaning_item_4">
-                        <input type="text" id="input-group1" placeholder="Working Procedure (Tata Kerja)" name="cleaning_procedure_4">
-                        <input type="time" id="input-group7" placeholder="Time" name="cleaning_time_5">
-                        <input type="text" id="input-group1" placeholder="Item Operation (Barang yang digunakan)" name="cleaning_item_5">
-                        <input type="text" id="input-group1" placeholder="Working Procedure (Tata Kerja)" name="cleaning_procedure_5">
+                        <select id="input-group1" style="background: black;" name="cleaning_item_1">
+                            <option value="">Item Operation (Barang yang Digunakan)</option>
+                            <option value="Vacum-Majun-Kanebo-Kop">
+                                Vacum  -  Majun - Kanebo - Kop
+                            </option>
+                            <option value="Pel-Kanebo-Majun-Sapu-Rack Ball-Dusk Pan-Ember-Tangga">
+                                Pel - Kanebo - Majun - Sapu - Rack Ball - Dusk Pan - Ember - Tangga
+                            </option>
+                            <option value="Vacum-Kanebo-Kain Majun-Kop-Senter-Kabel Roll ">
+                                Vacum -  Kanebo - Kain Majun - Kop - Senter - Kabel Roll
+                            </option>
+                            <option value="Vacum-Pel-Majun-Tangga-Kanebo">
+                                Vacum  - Pel - Majun - Tangga - Kanebo
+                            </option>
+                            <option value="Pel-Kanebo-Majun-Sapu-Stick Ball-Dusk Pan-Ember-Tangga">
+                                Pel - Kanebo - Majun - Sapu - Stick Ball - Dusk Pan - Ember - Tangga
+                            </option>
+                        </select>
+                        <select id="input-group1" style="background: black;" name="cleaning_procedure_1">
+                            <option value="">Working Procedure (Tata Kerja)</option>
+                            <option value="Pembersihan Ruang Genset">
+                                Pembersihan Ruang Genset
+                            </option>
+                            <option value="Pembersihan Ruang Panel">
+                                Pembersihan Ruang Panel
+                            </option>
+                            <option value="Pembersihan Ruang Baterai">
+                                Pembersihan Ruang Baterai
+                            </option>
+                            <option value="Pembersihan Ruang Trafo">
+                                Pembersihan Ruang Trafo
+                            </option>
+                            <option value="Pembersihan Bagian Luar Gardu PLN">
+                                Pembersihan Bagian Luar Gardu PLN
+                            </option>
+                            <option value="Pembersihan Ruang MMR1">
+                                Pembersihan Ruang MMR1
+                            </option>
+                            <option value="Pembersihan Ruang UPS">
+                                Pembersihan Ruang UPS
+                            </option>
+                            <option value="Pembersihan Ruang Fire Suppression System">
+                                Pembersihan Ruang Fire Suppression System
+                            </option>
+                            <option value="Pembersihan Ruang Server Wallmount">
+                                Pembersihan Ruang Server Wallmount
+                            </option>
+                            <option value="Pembersihan Platfon Atas, Besi Support, Rack & Raised Floor Ruang Data Center">
+                                Pembersihan Platfon Atas, Besi Support, Rack & Raised Floor Ruang Data Center
+                            </option>
+                            <option value="Under Raised Floor Koridor Lantai 1">
+                                Under Raised Floor Koridor Lantai 1
+                            </option>
+                            <option value="Under Raised Floor Ruang MMR 1">
+                                Under Raised Floor Ruang MMR 1
+                            </option>
+                            <option value="Under Raised Floor Ruang Server Wallmount">
+                                Under Raised Floor Ruang Server Wallmount
+                            </option>
+                            <option value="Under Raised Floor Ruang UPS">
+                                Under Raised Floor Ruang UPS
+                            </option>
+                            <option value="Under Raised Floor Ruang Fire Suppression">
+                                Under Raised Floor Ruang Fire Suppression
+                            </option>
+                            <option value="Under Raised Floor Ruang MMR 2">
+                                Under Raised Floor Ruang MMR 2
+                            </option>
+                            <option value="Pembersihan Under Raised Floor Data Center">
+                                Pembersihan Under Raised Floor Data Center
+                            </option>
+                        </select>
+
+                        <select id="input-group1" style="background: black;" name="cleaning_item_2">
+                            <option value="">Item Operation (Barang yang Digunakan)</option>
+                            <option value="Vacum-Majun-Kanebo-Kop">
+                                Vacum  -  Majun - Kanebo - Kop
+                            </option>
+                            <option value="Pel-Kanebo-Majun-Sapu-Rack Ball-Dusk Pan-Ember-Tangga">
+                                Pel - Kanebo - Majun - Sapu - Rack Ball - Dusk Pan - Ember - Tangga
+                            </option>
+                            <option value="Vacum-Kanebo-Kain Majun-Kop-Senter-Kabel Roll ">
+                                Vacum -  Kanebo - Kain Majun - Kop - Senter - Kabel Roll
+                            </option>
+                            <option value="Vacum-Pel-Majun-Tangga-Kanebo">
+                                Vacum  - Pel - Majun - Tangga - Kanebo
+                            </option>
+                            <option value="Pel-Kanebo-Majun-Sapu-Stick Ball-Dusk Pan-Ember-Tangga">
+                                Pel - Kanebo - Majun - Sapu - Stick Ball - Dusk Pan - Ember - Tangga
+                            </option>
+                        </select>
+                        <select id="input-group1" style="background: black;" name="cleaning_procedure_2">
+                            <option value="">Working Procedure (Tata Kerja)</option>
+                            <option value="Pembersihan Ruang Genset">
+                                Pembersihan Ruang Genset
+                            </option>
+                            <option value="Pembersihan Ruang Panel">
+                                Pembersihan Ruang Panel
+                            </option>
+                            <option value="Pembersihan Ruang Baterai">
+                                Pembersihan Ruang Baterai
+                            </option>
+                            <option value="Pembersihan Ruang Trafo">
+                                Pembersihan Ruang Trafo
+                            </option>
+                            <option value="Pembersihan Bagian Luar Gardu PLN">
+                                Pembersihan Bagian Luar Gardu PLN
+                            </option>
+                            <option value="Pembersihan Ruang MMR1">
+                                Pembersihan Ruang MMR1
+                            </option>
+                            <option value="Pembersihan Ruang UPS">
+                                Pembersihan Ruang UPS
+                            </option>
+                            <option value="Pembersihan Ruang Fire Suppression System">
+                                Pembersihan Ruang Fire Suppression System
+                            </option>
+                            <option value="Pembersihan Ruang Server Wallmount">
+                                Pembersihan Ruang Server Wallmount
+                            </option>
+                            <option value="Pembersihan Platfon Atas, Besi Support, Rack & Raised Floor Ruang Data Center">
+                                Pembersihan Platfon Atas, Besi Support, Rack & Raised Floor Ruang Data Center
+                            </option>
+                            <option value="Under Raised Floor Koridor Lantai 1">
+                                Under Raised Floor Koridor Lantai 1
+                            </option>
+                            <option value="Under Raised Floor Ruang MMR 1">
+                                Under Raised Floor Ruang MMR 1
+                            </option>
+                            <option value="Under Raised Floor Ruang Server Wallmount">
+                                Under Raised Floor Ruang Server Wallmount
+                            </option>
+                            <option value="Under Raised Floor Ruang UPS">
+                                Under Raised Floor Ruang UPS
+                            </option>
+                            <option value="Under Raised Floor Ruang Fire Suppression">
+                                Under Raised Floor Ruang Fire Suppression
+                            </option>
+                            <option value="Under Raised Floor Ruang MMR 2">
+                                Under Raised Floor Ruang MMR 2
+                            </option>
+                            <option value="Pembersihan Under Raised Floor Data Center">
+                                Pembersihan Under Raised Floor Data Center
+                            </option>
+                        </select>
+
+                        <select id="input-group1" style="background: black;" name="cleaning_item_3">
+                            <option value="">Item Operation (Barang yang Digunakan)</option>
+                            <option value="Vacum-Majun-Kanebo-Kop">
+                                Vacum  -  Majun - Kanebo - Kop
+                            </option>
+                            <option value="Pel-Kanebo-Majun-Sapu-Rack Ball-Dusk Pan-Ember-Tangga">
+                                Pel - Kanebo - Majun - Sapu - Rack Ball - Dusk Pan - Ember - Tangga
+                            </option>
+                            <option value="Vacum-Kanebo-Kain Majun-Kop-Senter-Kabel Roll ">
+                                Vacum -  Kanebo - Kain Majun - Kop - Senter - Kabel Roll
+                            </option>
+                            <option value="Vacum-Pel-Majun-Tangga-Kanebo">
+                                Vacum  - Pel - Majun - Tangga - Kanebo
+                            </option>
+                            <option value="Pel-Kanebo-Majun-Sapu-Stick Ball-Dusk Pan-Ember-Tangga">
+                                Pel - Kanebo - Majun - Sapu - Stick Ball - Dusk Pan - Ember - Tangga
+                            </option>
+                        </select>
+                        <select id="input-group1" style="background: black;" name="cleaning_procedure_3">
+                            <option value="">Working Procedure (Tata Kerja)</option>
+                            <option value="Pembersihan Ruang Genset">
+                                Pembersihan Ruang Genset
+                            </option>
+                            <option value="Pembersihan Ruang Panel">
+                                Pembersihan Ruang Panel
+                            </option>
+                            <option value="Pembersihan Ruang Baterai">
+                                Pembersihan Ruang Baterai
+                            </option>
+                            <option value="Pembersihan Ruang Trafo">
+                                Pembersihan Ruang Trafo
+                            </option>
+                            <option value="Pembersihan Bagian Luar Gardu PLN">
+                                Pembersihan Bagian Luar Gardu PLN
+                            </option>
+                            <option value="Pembersihan Ruang MMR1">
+                                Pembersihan Ruang MMR1
+                            </option>
+                            <option value="Pembersihan Ruang UPS">
+                                Pembersihan Ruang UPS
+                            </option>
+                            <option value="Pembersihan Ruang Fire Suppression System">
+                                Pembersihan Ruang Fire Suppression System
+                            </option>
+                            <option value="Pembersihan Ruang Server Wallmount">
+                                Pembersihan Ruang Server Wallmount
+                            </option>
+                            <option value="Pembersihan Platfon Atas, Besi Support, Rack & Raised Floor Ruang Data Center">
+                                Pembersihan Platfon Atas, Besi Support, Rack & Raised Floor Ruang Data Center
+                            </option>
+                            <option value="Under Raised Floor Koridor Lantai 1">
+                                Under Raised Floor Koridor Lantai 1
+                            </option>
+                            <option value="Under Raised Floor Ruang MMR 1">
+                                Under Raised Floor Ruang MMR 1
+                            </option>
+                            <option value="Under Raised Floor Ruang Server Wallmount">
+                                Under Raised Floor Ruang Server Wallmount
+                            </option>
+                            <option value="Under Raised Floor Ruang UPS">
+                                Under Raised Floor Ruang UPS
+                            </option>
+                            <option value="Under Raised Floor Ruang Fire Suppression">
+                                Under Raised Floor Ruang Fire Suppression
+                            </option>
+                            <option value="Under Raised Floor Ruang MMR 2">
+                                Under Raised Floor Ruang MMR 2
+                            </option>
+                            <option value="Pembersihan Under Raised Floor Data Center">
+                                Pembersihan Under Raised Floor Data Center
+                            </option>
+                        </select>
+
+                        <select id="input-group1" style="background: black;" name="cleaning_item_4">
+                            <option value="">Item Operation (Barang yang Digunakan)</option>
+                            <option value="Vacum-Majun-Kanebo-Kop">
+                                Vacum  -  Majun - Kanebo - Kop
+                            </option>
+                            <option value="Pel-Kanebo-Majun-Sapu-Rack Ball-Dusk Pan-Ember-Tangga">
+                                Pel - Kanebo - Majun - Sapu - Rack Ball - Dusk Pan - Ember - Tangga
+                            </option>
+                            <option value="Vacum-Kanebo-Kain Majun-Kop-Senter-Kabel Roll ">
+                                Vacum -  Kanebo - Kain Majun - Kop - Senter - Kabel Roll
+                            </option>
+                            <option value="Vacum-Pel-Majun-Tangga-Kanebo">
+                                Vacum  - Pel - Majun - Tangga - Kanebo
+                            </option>
+                            <option value="Pel-Kanebo-Majun-Sapu-Stick Ball-Dusk Pan-Ember-Tangga">
+                                Pel - Kanebo - Majun - Sapu - Stick Ball - Dusk Pan - Ember - Tangga
+                            </option>
+                        </select>
+                        <select id="input-group1" style="background: black;" name="cleaning_procedure_4">
+                            <option value="">Working Procedure (Tata Kerja)</option>
+                            <option value="Pembersihan Ruang Genset">
+                                Pembersihan Ruang Genset
+                            </option>
+                            <option value="Pembersihan Ruang Panel">
+                                Pembersihan Ruang Panel
+                            </option>
+                            <option value="Pembersihan Ruang Baterai">
+                                Pembersihan Ruang Baterai
+                            </option>
+                            <option value="Pembersihan Ruang Trafo">
+                                Pembersihan Ruang Trafo
+                            </option>
+                            <option value="Pembersihan Bagian Luar Gardu PLN">
+                                Pembersihan Bagian Luar Gardu PLN
+                            </option>
+                            <option value="Pembersihan Ruang MMR1">
+                                Pembersihan Ruang MMR1
+                            </option>
+                            <option value="Pembersihan Ruang UPS">
+                                Pembersihan Ruang UPS
+                            </option>
+                            <option value="Pembersihan Ruang Fire Suppression System">
+                                Pembersihan Ruang Fire Suppression System
+                            </option>
+                            <option value="Pembersihan Ruang Server Wallmount">
+                                Pembersihan Ruang Server Wallmount
+                            </option>
+                            <option value="Pembersihan Platfon Atas, Besi Support, Rack & Raised Floor Ruang Data Center">
+                                Pembersihan Platfon Atas, Besi Support, Rack & Raised Floor Ruang Data Center
+                            </option>
+                            <option value="Under Raised Floor Koridor Lantai 1">
+                                Under Raised Floor Koridor Lantai 1
+                            </option>
+                            <option value="Under Raised Floor Ruang MMR 1">
+                                Under Raised Floor Ruang MMR 1
+                            </option>
+                            <option value="Under Raised Floor Ruang Server Wallmount">
+                                Under Raised Floor Ruang Server Wallmount
+                            </option>
+                            <option value="Under Raised Floor Ruang UPS">
+                                Under Raised Floor Ruang UPS
+                            </option>
+                            <option value="Under Raised Floor Ruang Fire Suppression">
+                                Under Raised Floor Ruang Fire Suppression
+                            </option>
+                            <option value="Under Raised Floor Ruang MMR 2">
+                                Under Raised Floor Ruang MMR 2
+                            </option>
+                            <option value="Pembersihan Under Raised Floor Data Center">
+                                Pembersihan Under Raised Floor Data Center
+                            </option>
+                        </select>
+
+                        <select id="input-group1" style="background: black;" name="cleaning_item_5">
+                            <option value="">Item Operation (Barang yang Digunakan)</option>
+                            <option value="Vacum-Majun-Kanebo-Kop">
+                                Vacum  -  Majun - Kanebo - Kop
+                            </option>
+                            <option value="Pel-Kanebo-Majun-Sapu-Rack Ball-Dusk Pan-Ember-Tangga">
+                                Pel - Kanebo - Majun - Sapu - Rack Ball - Dusk Pan - Ember - Tangga
+                            </option>
+                            <option value="Vacum-Kanebo-Kain Majun-Kop-Senter-Kabel Roll ">
+                                Vacum -  Kanebo - Kain Majun - Kop - Senter - Kabel Roll
+                            </option>
+                            <option value="Vacum-Pel-Majun-Tangga-Kanebo">
+                                Vacum  - Pel - Majun - Tangga - Kanebo
+                            </option>
+                            <option value="Pel-Kanebo-Majun-Sapu-Stick Ball-Dusk Pan-Ember-Tangga">
+                                Pel - Kanebo - Majun - Sapu - Stick Ball - Dusk Pan - Ember - Tangga
+                            </option>
+                        </select>
+                        <select id="input-group1" style="background: black;" name="cleaning_procedure_5">
+                            <option value="">Working Procedure (Tata Kerja)</option>
+                            <option value="Pembersihan Ruang Genset">
+                                Pembersihan Ruang Genset
+                            </option>
+                            <option value="Pembersihan Ruang Panel">
+                                Pembersihan Ruang Panel
+                            </option>
+                            <option value="Pembersihan Ruang Baterai">
+                                Pembersihan Ruang Baterai
+                            </option>
+                            <option value="Pembersihan Ruang Trafo">
+                                Pembersihan Ruang Trafo
+                            </option>
+                            <option value="Pembersihan Bagian Luar Gardu PLN">
+                                Pembersihan Bagian Luar Gardu PLN
+                            </option>
+                            <option value="Pembersihan Ruang MMR1">
+                                Pembersihan Ruang MMR1
+                            </option>
+                            <option value="Pembersihan Ruang UPS">
+                                Pembersihan Ruang UPS
+                            </option>
+                            <option value="Pembersihan Ruang Fire Suppression System">
+                                Pembersihan Ruang Fire Suppression System
+                            </option>
+                            <option value="Pembersihan Ruang Server Wallmount">
+                                Pembersihan Ruang Server Wallmount
+                            </option>
+                            <option value="Pembersihan Platfon Atas, Besi Support, Rack & Raised Floor Ruang Data Center">
+                                Pembersihan Platfon Atas, Besi Support, Rack & Raised Floor Ruang Data Center
+                            </option>
+                            <option value="Under Raised Floor Koridor Lantai 1">
+                                Under Raised Floor Koridor Lantai 1
+                            </option>
+                            <option value="Under Raised Floor Ruang MMR 1">
+                                Under Raised Floor Ruang MMR 1
+                            </option>
+                            <option value="Under Raised Floor Ruang Server Wallmount">
+                                Under Raised Floor Ruang Server Wallmount
+                            </option>
+                            <option value="Under Raised Floor Ruang UPS">
+                                Under Raised Floor Ruang UPS
+                            </option>
+                            <option value="Under Raised Floor Ruang Fire Suppression">
+                                Under Raised Floor Ruang Fire Suppression
+                            </option>
+                            <option value="Under Raised Floor Ruang MMR 2">
+                                Under Raised Floor Ruang MMR 2
+                            </option>
+                            <option value="Pembersihan Under Raised Floor Data Center">
+                                Pembersihan Under Raised Floor Data Center
+                            </option>
+                        </select>
+
+                        <select id="input-group1" style="background: black;" name="cleaning_item_6">
+                            <option value="">Item Operation (Barang yang Digunakan)</option>
+                            <option value="Vacum-Majun-Kanebo-Kop">
+                                Vacum  -  Majun - Kanebo - Kop
+                            </option>
+                            <option value="Pel-Kanebo-Majun-Sapu-Rack Ball-Dusk Pan-Ember-Tangga">
+                                Pel - Kanebo - Majun - Sapu - Rack Ball - Dusk Pan - Ember - Tangga
+                            </option>
+                            <option value="Vacum-Kanebo-Kain Majun-Kop-Senter-Kabel Roll ">
+                                Vacum -  Kanebo - Kain Majun - Kop - Senter - Kabel Roll
+                            </option>
+                            <option value="Vacum-Pel-Majun-Tangga-Kanebo">
+                                Vacum  - Pel - Majun - Tangga - Kanebo
+                            </option>
+                            <option value="Pel-Kanebo-Majun-Sapu-Stick Ball-Dusk Pan-Ember-Tangga">
+                                Pel - Kanebo - Majun - Sapu - Stick Ball - Dusk Pan - Ember - Tangga
+                            </option>
+                        </select>
+                        <select id="input-group1" style="background: black;" name="cleaning_procedure_6">
+                            <option value="">Working Procedure (Tata Kerja)</option>
+                            <option value="Pembersihan Ruang Genset">
+                                Pembersihan Ruang Genset
+                            </option>
+                            <option value="Pembersihan Ruang Panel">
+                                Pembersihan Ruang Panel
+                            </option>
+                            <option value="Pembersihan Ruang Baterai">
+                                Pembersihan Ruang Baterai
+                            </option>
+                            <option value="Pembersihan Ruang Trafo">
+                                Pembersihan Ruang Trafo
+                            </option>
+                            <option value="Pembersihan Bagian Luar Gardu PLN">
+                                Pembersihan Bagian Luar Gardu PLN
+                            </option>
+                            <option value="Pembersihan Ruang MMR1">
+                                Pembersihan Ruang MMR1
+                            </option>
+                            <option value="Pembersihan Ruang UPS">
+                                Pembersihan Ruang UPS
+                            </option>
+                            <option value="Pembersihan Ruang Fire Suppression System">
+                                Pembersihan Ruang Fire Suppression System
+                            </option>
+                            <option value="Pembersihan Ruang Server Wallmount">
+                                Pembersihan Ruang Server Wallmount
+                            </option>
+                            <option value="Pembersihan Platfon Atas, Besi Support, Rack & Raised Floor Ruang Data Center">
+                                Pembersihan Platfon Atas, Besi Support, Rack & Raised Floor Ruang Data Center
+                            </option>
+                            <option value="Under Raised Floor Koridor Lantai 1">
+                                Under Raised Floor Koridor Lantai 1
+                            </option>
+                            <option value="Under Raised Floor Ruang MMR 1">
+                                Under Raised Floor Ruang MMR 1
+                            </option>
+                            <option value="Under Raised Floor Ruang Server Wallmount">
+                                Under Raised Floor Ruang Server Wallmount
+                            </option>
+                            <option value="Under Raised Floor Ruang UPS">
+                                Under Raised Floor Ruang UPS
+                            </option>
+                            <option value="Under Raised Floor Ruang Fire Suppression">
+                                Under Raised Floor Ruang Fire Suppression
+                            </option>
+                            <option value="Under Raised Floor Ruang MMR 2">
+                                Under Raised Floor Ruang MMR 2
+                            </option>
+                            <option value="Pembersihan Under Raised Floor Data Center">
+                                Pembersihan Under Raised Floor Data Center
+                            </option>
+                        </select>
 
                     <h4 class="text-white">6. Testing and Verification</h4>
                     <input type="text" id="input-group" placeholder="Fill in here (isi disini)" name="cleaning_testing">
