@@ -9,7 +9,6 @@
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 
-
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{{ asset('js/cleaning.js') }}" defer></script>
@@ -68,14 +67,14 @@
                             Pembersihan lantai 1 (MMR 1 - MMR 2  - UPS - Server Wallmount - Fire Suppression System)
                         </option>
                     </select>
-
+                    <p>
                     <h6 class="text-white">Request Validity (Berlakunya Permintaan)</h6>
                     <input type="date" name="validity_from" id="dateofbirth">
                     <h6 class="text-white"></h6>
                     <h6 class="text-white">To (Sampai)</h6>
                     <input type="date" name="validity_to" id="dateofbirth">
                     <h6 class="text-white"></h6>
-
+                    <p>
                     <h6 for="survey_area" class="text-white">Authorized Entry Area </h6>
                     <div>
                         <label class="radiobutton_container">
@@ -151,6 +150,7 @@
             </div>
         </div>
 
+
         <div  id="form2">
 
             <center>
@@ -164,23 +164,25 @@
                         <!--input4-->
                     <h4 class="text-white">1. Background and Objective (Jenis Pekerjaan)</h4>
                         <input type="text" id="input-group" placeholder="Fill in here" name="cleaning_background">
+                    <p>
                     <h4 class="text-white">2. Description os Scope of Work (Deskripsikan Pekerjaan)</h4>
                         <input type="text" id="input-group" placeholder="Fill in here" name="cleaning_describ">
-                    <h4 class="text-white">3. All Activity (Aktivitas)</h4>
+                    <p>
+                    {{-- <h4 class="text-white">3. All Activity (Aktivitas)</h4>
                         <input type="time" id="input-group7" placeholder="Time" name="cleaning_time_1">
-                        <input type="text" id="input-group1" placeholder="Activity Description" name="cleaning_activity_1">
+
                         <input type="text" id="input-group1" placeholder="Service Impact" name="cleaning_service_1">
                         <input type="time" id="input-group7" placeholder="Time" name="cleaning_time_2">
-                        <input type="text" id="input-group1" placeholder="Activity Description" name="cleaning_activity_2">
+
                         <input type="text" id="input-group1" placeholder="Service Impact" name="cleaning_service_2">
                         <input type="time" id="input-group7" placeholder="Time" name="cleaning_time_3">
-                        <input type="text" id="input-group1" placeholder="Activity Description" name="cleaning_activity_3">
+
                         <input type="text" id="input-group1" placeholder="Service Impact" name="cleaning_service_3">
                         <input type="time" id="input-group7" placeholder="Time" name="cleaning_time_4">
-                        <input type="text" id="input-group1" placeholder="Activity Description" name="cleaning_activity_4">
-                        <input type="text" id="input-group1" placeholder="Service Impact" name="cleaning_service_4">
 
-                    <h4 class="text-white">4. Risk and Service Area Impact (Resiko dan Dampak Area Servis)</h4>
+                        <input type="text" id="input-group1" placeholder="Service Impact" name="cleaning_service_4"> --}}
+
+                    <h4 class="text-white">3. Risk and Service Area Impact (Resiko dan Dampak Area Servis)</h4>
                         <select id="input-group11" style="background: black;" name="cleaning_risk_1">
                             <option value="">Risk Description</option>
                             <option value="Tersengat Listrik">Tersengat Listrik</option>
@@ -396,8 +398,8 @@
                             <option value="Menjaga jarak dengan perangkat-perangkat critical tersebut<">Menjaga jarak dengan perangkat-perangkat critical tersebut</option>
                             <option value="Pastikan tangga berdiri dengan benar">Pastikan tangga berdiri dengan benar</option>
                         </select>
-
-                    <h4 class="text-white">5. Detail Execution (Kegiatan)</h4>
+                    <P>
+                    <h4 class="text-white">4. Detail Execution (Kegiatan)</h4>
                         <select id="input-group1" style="background: black;" name="cleaning_item_1">
                             <option value="">Item Operation (Barang yang Digunakan)</option>
                             <option value="Vacum-Majun-Kanebo-Kop">
@@ -835,14 +837,14 @@
                                 Pembersihan Under Raised Floor Data Center
                             </option>
                         </select>
-
-                    <h4 class="text-white">6. Testing and Verification</h4>
-                    <input type="text" id="input-group" placeholder="Fill in here (isi disini)" name="cleaning_testing">
-
-                    <h4 class="text-white">7. Rollback Plan</h4>
-                    <input type="text" id="input-group" placeholder="Fill in here (isi disini)" name="cleaning_rollback">
-
-                    <h4 class="text-white">8. Person in charge</h4>
+                    <p>
+                    <h4 class="text-white">5. Testing and Verification</h4>
+                        <input type="text" id="input-group" placeholder="Fill in here (isi disini)" name="cleaning_testing">
+                    <P>
+                    <h4 class="text-white">6. Rollback Plan</h4>
+                        <input type="text" id="input-group" placeholder="Fill in here (isi disini)" name="cleaning_rollback">
+                    <P>
+                    <h4 class="text-white">7. Person in charge</h4>
                         <select id="input-group11" style="background: black;" name="cleaning_name_1">
                             <option value="">Name</option>
                             <option value="Alfani Sulaeman">Alfani Sulaeman</option>
@@ -868,10 +870,10 @@
                         </select>
                         <select id="input-group11" style="background: black;" name="cleaning_id_1">
                             <option value="">ID Number</option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
+                            <option value="3171031201870006">3171031201870006</option>
+                            <option value="3204292311830001">3204292311830001</option>
+                            <option value="3671052411880001">3671052411880001</option>
+                            <option value="1802241705010001">1802241705010001</option>
                         </select>
                         <select id="input-group11" style="background: black;" name="cleaning_name_2">
                             <option value="">Name</option>
@@ -898,10 +900,10 @@
                         </select>
                         <select id="input-group11" style="background: black;" name="cleaning_id_2">
                             <option value="">ID Number</option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
+                            <option value="3171031201870006">3171031201870006</option>
+                            <option value="3204292311830001">3204292311830001</option>
+                            <option value="3671052411880001">3671052411880001</option>
+                            <option value="1802241705010001">1802241705010001</option>
                         </select>
                         <select id="input-group11" style="background: black;" name="cleaning_name_3">
                             <option value="">Name</option>
@@ -928,10 +930,10 @@
                         </select>
                         <select id="input-group11" style="background: black;" name="cleaning_id_3">
                             <option value="">ID Number</option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
+                            <option value="3171031201870006">3171031201870006</option>
+                            <option value="3204292311830001">3204292311830001</option>
+                            <option value="3671052411880001">3671052411880001</option>
+                            <option value="1802241705010001">1802241705010001</option>
                         </select>
                         <select id="input-group11" style="background: black;" name="cleaning_name_4">
                             <option value="">Name</option>
@@ -958,14 +960,15 @@
                         </select>
                         <select id="input-group11" style="background: black;" name="cleaning_id_4">
                             <option value="">ID Number</option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
+                            <option value="3171031201870006">3171031201870006</option>
+                            <option value="3204292311830001">3204292311830001</option>
+                            <option value="3671052411880001">3671052411880001</option>
+                            <option value="1802241705010001">1802241705010001</option>
                         </select>
 
                 </div>
             </div>
+            <P>
             <button type="submit" class="btn btn-warning text-white btn-submit">Submit Form</button>
             <button type="reset" class="btn btn-primary">Clear Form</button>
         </div>
