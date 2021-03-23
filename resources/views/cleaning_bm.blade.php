@@ -46,18 +46,35 @@
                 <div id="input4">
                     <!--input4-->
 
-                    <input type="text" id="input-group" placeholder="Purpose of Work (Pekerjaan yang dilakukan)">
-                    <input type="text" id="input-group" placeholder="Visitor Name (Nama Pengunjung)">
-                    <input type="text" id="input-group" placeholder="Visitor Company (Nama Perusahaan)">
-                    <input type="number" id="input-group" placeholder="Visitor ID Number (Nomor Identitas)">
-                    <input type="text" id="input-group" placeholder="Visitor Department (Departemen Pengunjung)">
-                    <input type="number" id="input-group" placeholder="Visitor Phone Number (Nomor Handphone)">
+                    {{-- <input type="text" id="input-group" placeholder="Purpose of Work (Pekerjaan yang dilakukan)" name="cleaning_work"> --}}
+                    <select id="input-group20" style="background: black;" name="cleaning_work">
+                        <option value="">Purpose of Work</option>
+                        <option value="Pembersihan Lantai Dasar Ruang Facility Data Center (Trafo-Battery-PUTR-Genset-Pintu Luar PLN">
+                            Pembersihan Lantai Dasar Ruang Facility Data Center (Trafo-Battery-PUTR-Genset-Pintu Luar PLN
+                        </option>
+                        <option value="Pembersihan Ruang Data Center (Pembersihan Plafon Atas, Besi Support, Rack & Raised Floor)">
+                            Pembersihan Ruang Data Center (Pembersihan Plafon Atas, Besi Support, Rack & Raised Floor)
+                        </option>
+                        <option value=" Pembersihan Under Raised Floor Data Center">
+                            Pembersihan Under Raised Floor Data Center
+                        </option>
+                        <option value="Pembersihan Lantai Dasar Data Center (Ruang Server)">
+                            Pembersihan Lantai Dasar Data Center (Ruang Server)
+                        </option>
+                        <option value="Pembersihan Under Raised Floor Koridor Lantai 1, (MMR 1, MMR 2, Ruang UPS, Fire Suppression System & Server Wallmount)">
+                            Pembersihan Under Raised Floor Koridor Lantai 1, (MMR 1, MMR 2, Ruang UPS, Fire Suppression System & Server Wallmount)
+                        </option>
+                        <option value="Pembersihan lantai 1 (MMR 1 - MMR 2  - UPS - Server Wallmount - Fire Suppression System)">
+                            Pembersihan lantai 1 (MMR 1 - MMR 2  - UPS - Server Wallmount - Fire Suppression System)
+                        </option>
+                    </select>
+
 
                     <h6 class="text-white">Request Validity (Berlakunya Permintaan)</h6>
-                    <input type="date" name="dateofbirth" id="dateofbirth">
+                    <input type="date" name="validity_from" id="dateofbirth">
                     <h6 class="text-white"></h6>
                     <h6 class="text-white">To (Sampai)</h6>
-                    <input type="date" name="dateofbirth" id="dateofbirth">
+                    <input type="date" name="validity_to" id="dateofbirth">
                     <h6 class="text-white"></h6>
 
                     <h6 for="survey_area" class="text-white">Authorized Entry Area </h6>
@@ -175,311 +192,342 @@
                 <div id="input4">
                         <!--input4-->
                     <h4 class="text-white">1. Background and Objective (Jenis Pekerjaan)</h4>
-                        <input type="text" id="input-group" placeholder="Fill in here">
+                        <input type="text" id="input-group" placeholder="Fill in here" name="cleaning_background">
                     <h4 class="text-white">2. Description os Scope of Work (Deskripsikan Pekerjaan)</h4>
-                        <input type="text" id="input-group" placeholder="Fill in here">
+                        <input type="text" id="input-group" placeholder="Fill in here" name="cleaning_describ">
                     <h4 class="text-white">3. All Activity (Aktivitas)</h4>
+                        <input type="time" id="input-group7" placeholder="Time" >
+                        <input type="text" id="input-group1" placeholder="Activity Description" name="cleaning_activity_1">
+                        <input type="text" id="input-group1" placeholder="Service Impact" name="cleaning_service_1">
                         <input type="time" id="input-group7" placeholder="Time">
-                        <input type="text" id="input-group1" placeholder="Activity Description">
-                        <input type="text" id="input-group1" placeholder="Service Impact">
+                        <input type="text" id="input-group1" placeholder="Activity Description" name="cleaning_activity_2">
+                        <input type="text" id="input-group1" placeholder="Service Impact" name="cleaning_service_2">
                         <input type="time" id="input-group7" placeholder="Time">
-                        <input type="text" id="input-group1" placeholder="Activity Description">
-                        <input type="text" id="input-group1" placeholder="Service Impact">
+                        <input type="text" id="input-group1" placeholder="Activity Description" name="cleaning_activity_3">
+                        <input type="text" id="input-group1" placeholder="Service Impact" name="cleaning_service_3">
                         <input type="time" id="input-group7" placeholder="Time">
-                        <input type="text" id="input-group1" placeholder="Activity Description">
-                        <input type="text" id="input-group1" placeholder="Service Impact">
-                        <input type="time" id="input-group7" placeholder="Time">
-                        <input type="text" id="input-group1" placeholder="Activity Description">
-                        <input type="text" id="input-group1" placeholder="Service Impact">
+                        <input type="text" id="input-group1" placeholder="Activity Description" name="cleaning_activity_4">
+                        <input type="text" id="input-group1" placeholder="Service Impact" name="cleaning_service_4">
 
                     <h4 class="text-white">4. Risk and Service Area Impact (Resiko dan Dampak Area Servis)</h4>
-                        <select id="input-group11" style="background: black;">
+                        <select id="input-group11" style="background: black;" name="cleaning_risk_1">
                             <option value="">Risk Description</option>
-                            <option value="">Tersengat Listrik</option>
-                            <option value="">Menghirup Debu</option>
-                            <option value="">Bersenggolan dengan perangkat</option>
-                            <option value="">Korsleting</option>
-                            <option value="">Bersenggolan dengan solenoid tabung</option>
-                            <option value="">Bersenggolan dengan panel fire alarm</option>
-                            <option value="">Terjatuh dari tangga</option>
+                            <option value="Tersengat Listrik">Tersengat Listrik</option>
+                            <option value="Menghirup Debu">Menghirup Debu</option>
+                            <option value="Bersenggolan dengan perangkat">Bersenggolan dengan perangkat</option>
+                            <option value="Korsleting">Korsleting</option>
+                            <option value="Bersenggolan dengan solenoid tabung">Bersenggolan dengan solenoid tabung</option>
+                            <option value="Bersenggolan dengan panel fire alarm">Bersenggolan dengan panel fire alarm</option>
+                            <option value="Terjatuh dari tangga">Terjatuh dari tangga</option>
                         </select>
-                        <select id="input-group12" style="background: black;">
+                        <select id="input-group12" style="background: black;" name="cleaning_possibility_1">
                             <option value="">Possibility</option>
-                            <option value="">Mengalami luka bakar, pingsan, kematian</option>
-                            <option value="">Batuk / tenggorokan sakit</option>
-                            <option value="">Sistem jaringan dan kelistrikan menjadi lumpuh</option>
-                            <option value="">Sistem kelistrikan menjadi terganggu, kebakaran</option>
-                            <option value="">Gas Discharge, solenoid rusak</option>
-                            <option value="">Alarm 1 gedung, gas discharge</option>
-                            <option value="">Patah tulang</option>
+                            <option value="Mengalami luka bakar, pingsan, kematian">Mengalami luka bakar, pingsan, kematian</option>
+                            <option value="Batuk / tenggorokan sakit">Batuk / tenggorokan sakit</option>
+                            <option value="Sistem jaringan dan kelistrikan menjadi lumpuh">Sistem jaringan dan kelistrikan menjadi lumpuh</option>
+                            <option value="Sistem kelistrikan menjadi terganggu, kebakaran">Sistem kelistrikan menjadi terganggu, kebakaran</option>
+                            <option value="Gas Discharge, solenoid rusak">Gas Discharge, solenoid rusak</option>
+                            <option value="Alarm 1 gedung, gas discharge">Alarm 1 gedung, gas discharge</option>
+                            <option value="Patah tulang">Patah tulang</option>
                         </select>
-                        <select id="input-group3" style="background: black;">
+                        <select id="input-group3" style="background: black;" name="cleaning_impact_1">
                             <option value="">Impact</option>
-                            <option value="">High</option>
-                            <option value="">Middle</option>
-                            <option value="">Low</option>
+                            <option value="High">High</option>
+                            <option value="Middle">Middle</option>
+                            <option value="Low">Low</option>
                         </select>
-                        <select id="input-group5" style="background: black;">
+                        <select id="input-group5" style="background: black;" name="cleaning_mitigation_1">
                             <option value="">Mitigation Plan</option>
-                            <option value="">Menggunakan APD</option>
-                            <option value="">Menggunakan masker</option>
-                            <option value="">Bekerja dengan hati-hati</option>
-                            <option value="">Menjaga jarak dari sumber listrik</option>
-                            <option value="">Menjaga jarak dengan perangkat-perangkat critical tersebut</option>
-                            <option value="">Pastikan tangga berdiri dengan benar</option>
+                            <option value="Menggunakan APD">Menggunakan APD</option>
+                            <option value="Menggunakan masker">Menggunakan masker</option>
+                            <option value="Bekerja dengan hati-hati">Bekerja dengan hati-hati</option>
+                            <option value="Menjaga jarak dari sumber listrik">Menjaga jarak dari sumber listrik</option>
+                            <option value="Menjaga jarak dengan perangkat-perangkat critical tersebut">Menjaga jarak dengan perangkat-perangkat critical tersebut</option>
+                            <option value="Pastikan tangga berdiri dengan benar">Pastikan tangga berdiri dengan benar</option>
                         </select>
-                        <select id="input-group11" style="background: black;">
+                        <select id="input-group11" style="background: black;" name="cleaning_risk_2">
                             <option value="">Risk Description</option>
-                            <option value="">Tersengat Listrik</option>
-                            <option value="">Menghirup Debu</option>
-                            <option value="">Bersenggolan dengan perangkat</option>
-                            <option value="">Korsleting</option>
-                            <option value="">Bersenggolan dengan solenoid tabung</option>
-                            <option value="">Bersenggolan dengan panel fire alarm</option>
-                            <option value="">Terjatuh dari tangga</option>
+                            <option value="Tersengat Listrik">Tersengat Listrik</option>
+                            <option value="Menghirup Debu">Menghirup Debu</option>
+                            <option value="Bersenggolan dengan perangkat">Bersenggolan dengan perangkat</option>
+                            <option value="Korsleting">Korsleting</option>
+                            <option value="Bersenggolan dengan solenoid tabung">Bersenggolan dengan solenoid tabung</option>
+                            <option value="Bersenggolan dengan panel fire alarm">Bersenggolan dengan panel fire alarm</option>
+                            <option value="Terjatuh dari tangga">Terjatuh dari tangga</option>
                         </select>
-                        <select id="input-group12" style="background: black;">
+                        <select id="input-group12" style="background: black;" name="cleaning_possibility_2">
                             <option value="">Possibility</option>
-                            <option value="">Mengalami luka bakar, pingsan, kematian</option>
-                            <option value="">Batuk / tenggorokan sakit</option>
-                            <option value="">Sistem jaringan dan kelistrikan menjadi lumpuh</option>
-                            <option value="">Sistem kelistrikan menjadi terganggu, kebakaran</option>
-                            <option value="">Gas Discharge, solenoid rusak</option>
-                            <option value="">Alarm 1 gedung, gas discharge</option>
-                            <option value="">Patah tulang</option>
+                            <option value="Mengalami luka bakar, pingsan, kematian">Mengalami luka bakar, pingsan, kematian</option>
+                            <option value="Batuk / tenggorokan sakit">Batuk / tenggorokan sakit</option>
+                            <option value="Sistem jaringan dan kelistrikan menjadi lumpuh">Sistem jaringan dan kelistrikan menjadi lumpuh</option>
+                            <option value="Sistem kelistrikan menjadi terganggu, kebakaran">Sistem kelistrikan menjadi terganggu, kebakaran</option>
+                            <option value="Gas Discharge, solenoid rusak">Gas Discharge, solenoid rusak</option>
+                            <option value="Alarm 1 gedung, gas discharge">Alarm 1 gedung, gas discharge</option>
+                            <option value="Patah tulang">Patah tulang</option>
                         </select>
-                        <select id="input-group3" style="background: black;">
+                        <select id="input-group3" style="background: black;" name="cleaning_impact_2">
                             <option value="">Impact</option>
-                            <option value="">High</option>
-                            <option value="">Middle</option>
-                            <option value="">Low</option>
+                            <option value="High">High</option>
+                            <option value="Middle">Middle</option>
+                            <option value="Low">Low</option>
                         </select>
-                        <select id="input-group5" style="background: black;">
+                        <select id="input-group5" style="background: black;" name="cleaning_mitigation_2">
                             <option value="">Mitigation Plan</option>
-                            <option value="">Menggunakan APD</option>
-                            <option value="">Menggunakan masker</option>
-                            <option value="">Bekerja dengan hati-hati</option>
-                            <option value="">Menjaga jarak dari sumber listrik</option>
-                            <option value="">Menjaga jarak dengan perangkat-perangkat critical tersebut</option>
-                            <option value="">Pastikan tangga berdiri dengan benar</option>
+                            <option value="Menggunakan APD">Menggunakan APD</option>
+                            <option value="Menggunakan masker">Menggunakan masker</option>
+                            <option value="Bekerja dengan hati-hati">Bekerja dengan hati-hati</option>
+                            <option value="Menjaga jarak dari sumber listrik">Menjaga jarak dari sumber listrik</option>
+                            <option value="Menjaga jarak dengan perangkat-perangkat critical tersebut">Menjaga jarak dengan perangkat-perangkat critical tersebut</option>
+                            <option value="Pastikan tangga berdiri dengan benar">Pastikan tangga berdiri dengan benar</option>
                         </select>
-                        <select id="input-group11" style="background: black;">
+                        <select id="input-group11" style="background: black;" name="cleaning_risk_3">
                             <option value="">Risk Description</option>
-                            <option value="">Tersengat Listrik</option>
-                            <option value="">Menghirup Debu</option>
-                            <option value="">Bersenggolan dengan perangkat</option>
-                            <option value="">Korsleting</option>
-                            <option value="">Bersenggolan dengan solenoid tabung</option>
-                            <option value="">Bersenggolan dengan panel fire alarm</option>
-                            <option value="">Terjatuh dari tangga</option>
+                            <option value="Tersengat Listrik">Tersengat Listrik</option>
+                            <option value="Menghirup Debu">Menghirup Debu</option>
+                            <option value="Bersenggolan dengan perangkat">Bersenggolan dengan perangkat</option>
+                            <option value="Korsleting">Korsleting</option>
+                            <option value="Bersenggolan dengan solenoid tabung">Bersenggolan dengan solenoid tabung</option>
+                            <option value="Bersenggolan dengan panel fire alarm">Bersenggolan dengan panel fire alarm</option>
+                            <option value="Terjatuh dari tangga">Terjatuh dari tangga</option>
                         </select>
-                        <select id="input-group12" style="background: black;">
+                        <select id="input-group12" style="background: black;" name="cleaning_possibility_3">
                             <option value="">Possibility</option>
-                            <option value="">Mengalami luka bakar, pingsan, kematian</option>
-                            <option value="">Batuk / tenggorokan sakit</option>
-                            <option value="">Sistem jaringan dan kelistrikan menjadi lumpuh</option>
-                            <option value="">Sistem kelistrikan menjadi terganggu, kebakaran</option>
-                            <option value="">Gas Discharge, solenoid rusak</option>
-                            <option value="">Alarm 1 gedung, gas discharge</option>
-                            <option value="">Patah tulang</option>
+                            <option value="Mengalami luka bakar, pingsan, kematian">Mengalami luka bakar, pingsan, kematian</option>
+                            <option value="Batuk / tenggorokan sakit">Batuk / tenggorokan sakit</option>
+                            <option value="Sistem jaringan dan kelistrikan menjadi lumpuh">Sistem jaringan dan kelistrikan menjadi lumpuh</option>
+                            <option value="Sistem kelistrikan menjadi terganggu, kebakaran">Sistem kelistrikan menjadi terganggu, kebakaran</option>
+                            <option value="Gas Discharge, solenoid rusak">Gas Discharge, solenoid rusak</option>
+                            <option value="Alarm 1 gedung, gas discharge">Alarm 1 gedung, gas discharge</option>
+                            <option value="Patah tulang">Patah tulang</option>
                         </select>
-                        <select id="input-group3" style="background: black;">
+                        <select id="input-group3" style="background: black;" name="cleaning_impact_3">
                             <option value="">Impact</option>
-                            <option value="">High</option>
-                            <option value="">Middle</option>
-                            <option value="">Low</option>
+                            <option value="High">High</option>
+                            <option value="Middle">Middle</option>
+                            <option value="Low">Low</option>
                         </select>
-                        <select id="input-group5" style="background: black;">
+                        <select id="input-group5" style="background: black;" name="cleaning_mitigation_3">
                             <option value="">Mitigation Plan</option>
-                            <option value="">Menggunakan APD</option>
-                            <option value="">Menggunakan masker</option>
-                            <option value="">Bekerja dengan hati-hati</option>
-                            <option value="">Menjaga jarak dari sumber listrik</option>
-                            <option value="">Menjaga jarak dengan perangkat-perangkat critical tersebut</option>
-                            <option value="">Pastikan tangga berdiri dengan benar</option>
+                            <option value="Menggunakan APD">Menggunakan APD</option>
+                            <option value="Menggunakan masker">Menggunakan masker</option>
+                            <option value="Bekerja dengan hati-hati">Bekerja dengan hati-hati</option>
+                            <option value="Menjaga jarak dari sumber listrik">Menjaga jarak dari sumber listrik</option>
+                            <option value="Menjaga jarak dengan perangkat-perangkat critical tersebut">Menjaga jarak dengan perangkat-perangkat critical tersebut</option>
+                            <option value="Pastikan tangga berdiri dengan benar">Pastikan tangga berdiri dengan benar</option>
                         </select>
-                        <select id="input-group11" style="background: black;">
+                        <select id="input-group11" style="background: black;" name="cleaning_risk_4">
                             <option value="">Risk Description</option>
-                            <option value="">Tersengat Listrik</option>
-                            <option value="">Menghirup Debu</option>
-                            <option value="">Bersenggolan dengan perangkat</option>
-                            <option value="">Korsleting</option>
-                            <option value="">Bersenggolan dengan solenoid tabung</option>
-                            <option value="">Bersenggolan dengan panel fire alarm</option>
-                            <option value="">Terjatuh dari tangga</option>
+                            <option value="Tersengat Listrik">Tersengat Listrik</option>
+                            <option value="Menghirup Debu">Menghirup Debu</option>
+                            <option value="Bersenggolan dengan perangkat">Bersenggolan dengan perangkat</option>
+                            <option value="Korsleting">Korsleting</option>
+                            <option value="Bersenggolan dengan solenoid tabung">Bersenggolan dengan solenoid tabung</option>
+                            <option value="Bersenggolan dengan panel fire alarm">Bersenggolan dengan panel fire alarm</option>
+                            <option value="Terjatuh dari tangga">Terjatuh dari tangga</option>
                         </select>
-                        <select id="input-group12" style="background: black;">
+                        <select id="input-group12" style="background: black;" name="cleaning_possibility_4">
                             <option value="">Possibility</option>
-                            <option value="">Mengalami luka bakar, pingsan, kematian</option>
-                            <option value="">Batuk / tenggorokan sakit</option>
-                            <option value="">Sistem jaringan dan kelistrikan menjadi lumpuh</option>
-                            <option value="">Sistem kelistrikan menjadi terganggu, kebakaran</option>
-                            <option value="">Gas Discharge, solenoid rusak</option>
-                            <option value="">Alarm 1 gedung, gas discharge</option>
-                            <option value="">Patah tulang</option>
+                            <option value="Mengalami luka bakar, pingsan, kematian">Mengalami luka bakar, pingsan, kematian</option>
+                            <option value="Batuk / tenggorokan sakit">Batuk / tenggorokan sakit</option>
+                            <option value="Sistem jaringan dan kelistrikan menjadi lumpuh">Sistem jaringan dan kelistrikan menjadi lumpuh</option>
+                            <option value="Sistem kelistrikan menjadi terganggu, kebakaran">Sistem kelistrikan menjadi terganggu, kebakaran</option>
+                            <option value="Gas Discharge, solenoid rusak">Gas Discharge, solenoid rusak</option>
+                            <option value="Alarm 1 gedung, gas discharge">Alarm 1 gedung, gas discharge</option>
+                            <option value="Patah tulang">Patah tulang</option>
                         </select>
-                        <select id="input-group3" style="background: black;">
+                        <select id="input-group3" style="background: black;" name="cleaning_impact_4">
                             <option value="">Impact</option>
-                            <option value="">High</option>
-                            <option value="">Middle</option>
-                            <option value="">Low</option>
+                            <option value="High">High</option>
+                            <option value="Middle">Middle</option>
+                            <option value="Low">Low</option>
                         </select>
-                        <select id="input-group5" style="background: black;">
+                        <select id="input-group5" style="background: black;" name="cleaning_mitigation_4">
                             <option value="">Mitigation Plan</option>
-                            <option value="">Menggunakan APD</option>
-                            <option value="">Menggunakan masker</option>
-                            <option value="">Bekerja dengan hati-hati</option>
-                            <option value="">Menjaga jarak dari sumber listrik</option>
-                            <option value="">Menjaga jarak dengan perangkat-perangkat critical tersebut</option>
-                            <option value="">Pastikan tangga berdiri dengan benar</option>
+                            <option value="Menggunakan APD">Menggunakan APD</option>
+                            <option value="Menggunakan masker">Menggunakan masker</option>
+                            <option value="Bekerja dengan hati-hati">Bekerja dengan hati-hati</option>
+                            <option value="Menjaga jarak dari sumber listrik">Menjaga jarak dari sumber listrik</option>
+                            <option value="Menjaga jarak dengan perangkat-perangkat critical tersebut">Menjaga jarak dengan perangkat-perangkat critical tersebut</option>
+                            <option value="Pastikan tangga berdiri dengan benar">Pastikan tangga berdiri dengan benar</option>
                         </select>
-                        <select id="input-group11" style="background: black;">
+                        <select id="input-group11" style="background: black;" name="cleaning_risk_5">
                             <option value="">Risk Description</option>
-                            <option value="">Tersengat Listrik</option>
-                            <option value="">Menghirup Debu</option>
-                            <option value="">Bersenggolan dengan perangkat</option>
-                            <option value="">Korsleting</option>
-                            <option value="">Bersenggolan dengan solenoid tabung</option>
-                            <option value="">Bersenggolan dengan panel fire alarm</option>
-                            <option value="">Terjatuh dari tangga</option>
+                            <option value="Tersengat Listrik">Tersengat Listrik</option>
+                            <option value="Menghirup Debu">Menghirup Debu</option>
+                            <option value="Bersenggolan dengan perangkat">Bersenggolan dengan perangkat</option>
+                            <option value="Korsleting">Korsleting</option>
+                            <option value="Bersenggolan dengan solenoid tabung">Bersenggolan dengan solenoid tabung</option>
+                            <option value="Bersenggolan dengan panel fire alarm">Bersenggolan dengan panel fire alarm</option>
+                            <option value="Terjatuh dari tangga">Terjatuh dari tangga</option>
                         </select>
-                        <select id="input-group12" style="background: black;">
+                        <select id="input-group12" style="background: black;" name="cleaning_possibility_5">
                             <option value="">Possibility</option>
-                            <option value="">Mengalami luka bakar, pingsan, kematian</option>
-                            <option value="">Batuk / tenggorokan sakit</option>
-                            <option value="">Sistem jaringan dan kelistrikan menjadi lumpuh</option>
-                            <option value="">Sistem kelistrikan menjadi terganggu, kebakaran</option>
-                            <option value="">Gas Discharge, solenoid rusak</option>
-                            <option value="">Alarm 1 gedung, gas discharge</option>
-                            <option value="">Patah tulang</option>
+                            <option value="Mengalami luka bakar, pingsan, kematian">Mengalami luka bakar, pingsan, kematian</option>
+                            <option value="Batuk / tenggorokan sakit">Batuk / tenggorokan sakit</option>
+                            <option value="Sistem jaringan dan kelistrikan menjadi lumpuh">Sistem jaringan dan kelistrikan menjadi lumpuh</option>
+                            <option value="Sistem kelistrikan menjadi terganggu, kebakaran">Sistem kelistrikan menjadi terganggu, kebakaran</option>
+                            <option value="Gas Discharge, solenoid rusak">Gas Discharge, solenoid rusak</option>
+                            <option value="Alarm 1 gedung, gas discharge">Alarm 1 gedung, gas discharge</option>
+                            <option value="Patah tulang">Patah tulang</option>
                         </select>
-                        <select id="input-group3" style="background: black;">
+                        <select id="input-group3" style="background: black;" name="cleaning_impact_5">
                             <option value="">Impact</option>
-                            <option value="">High</option>
-                            <option value="">Middle</option>
-                            <option value="">Low</option>
+                            <option value="High">High</option>
+                            <option value="Middle">Middle</option>
+                            <option value="Low">Low</option>
                         </select>
-                        <select id="input-group5" style="background: black;">
+                        <select id="input-group5" style="background: black;" name="cleaning_mitigation_5">
                             <option value="">Mitigation Plan</option>
-                            <option value="">Menggunakan APD</option>
-                            <option value="">Menggunakan masker</option>
-                            <option value="">Bekerja dengan hati-hati</option>
-                            <option value="">Menjaga jarak dari sumber listrik</option>
-                            <option value="">Menjaga jarak dengan perangkat-perangkat critical tersebut</option>
-                            <option value="">Pastikan tangga berdiri dengan benar</option>
+                            <option value="Menggunakan APD">Menggunakan APD</option>
+                            <option value="Menggunakan masker">Menggunakan masker</option>
+                            <option value="Bekerja dengan hati-hati">Bekerja dengan hati-hati</option>
+                            <option value="Menjaga jarak dari sumber listrik">Menjaga jarak dari sumber listrik</option>
+                            <option value="Menjaga jarak dengan perangkat-perangkat critical tersebut<">Menjaga jarak dengan perangkat-perangkat critical tersebut</option>
+                            <option value="Pastikan tangga berdiri dengan benar">Pastikan tangga berdiri dengan benar</option>
                         </select>
                     <h4 class="text-white">5. Detail Execution (Kegiatan)</h4>
-                        <input type="time" id="input-group7" placeholder="Time">
-                        <input type="text" id="input-group1" placeholder="Item Operation (Barang yang digunakan)">
-                        <input type="text" id="input-group1" placeholder="Working Procedure (Tata Kerja)">
-                        <input type="time" id="input-group7" placeholder="Time">
-                        <input type="text" id="input-group1" placeholder="Item Operation (Barang yang digunakan)">
-                        <input type="text" id="input-group1" placeholder="Working Procedure (Tata Kerja)">
-                        <input type="time" id="input-group7" placeholder="Time">
-                        <input type="text" id="input-group1" placeholder="Item Operation (Barang yang digunakan)">
-                        <input type="text" id="input-group1" placeholder="Working Procedure (Tata Kerja)">
-                        <input type="time" id="input-group7" placeholder="Time">
-                        <input type="text" id="input-group1" placeholder="Item Operation (Barang yang digunakan)">
-                        <input type="text" id="input-group1" placeholder="Working Procedure (Tata Kerja)">
+                        <input type="time" id="input-group7" placeholder="Time" name="cleaning_time_1">
+                        <input type="text" id="input-group1" placeholder="Item Operation (Barang yang digunakan)" name="cleaning_item_1">
+                        <input type="text" id="input-group1" placeholder="Working Procedure (Tata Kerja)" name="cleaning_procedure_1">
+                        <input type="time" id="input-group7" placeholder="Time" name="cleaning_time_2">
+                        <input type="text" id="input-group1" placeholder="Item Operation (Barang yang digunakan)" name="cleaning_item_2">
+                        <input type="text" id="input-group1" placeholder="Working Procedure (Tata Kerja)" name="cleaning_procedure_2">
+                        <input type="time" id="input-group7" placeholder="Time" name="cleaning_time_3">
+                        <input type="text" id="input-group1" placeholder="Item Operation (Barang yang digunakan)" name="cleaning_item_3">
+                        <input type="text" id="input-group1" placeholder="Working Procedure (Tata Kerja)" name="cleaning_procedure_3">
+                        <input type="time" id="input-group7" placeholder="Time" name="cleaning_time_4">
+                        <input type="text" id="input-group1" placeholder="Item Operation (Barang yang digunakan)" name="cleaning_item_4">
+                        <input type="text" id="input-group1" placeholder="Working Procedure (Tata Kerja)" name="cleaning_procedure_4">
+                        <input type="time" id="input-group7" placeholder="Time" name="cleaning_time_5">
+                        <input type="text" id="input-group1" placeholder="Item Operation (Barang yang digunakan)" name="cleaning_item_5">
+                        <input type="text" id="input-group1" placeholder="Working Procedure (Tata Kerja)" name="cleaning_procedure_5">
 
                     <h4 class="text-white">6. Testing and Verification</h4>
-                    <input type="text" id="input-group" placeholder="Fill in here (isi disini)">
+                    <input type="text" id="input-group" placeholder="Fill in here (isi disini)" name="cleaning_testing">
 
                     <h4 class="text-white">7. Rollback Plan</h4>
-                    <input type="text" id="input-group" placeholder="Fill in here (isi disini)">
+                    <input type="text" id="input-group" placeholder="Fill in here (isi disini)" name="cleaning_rollback">
 
                     <h4 class="text-white">8. Person in charge</h4>
-                        <select id="input-group11" style="background: black;">
+                        <select id="input-group11" style="background: black;" name="cleaning_name_1">
                             <option value="">Name</option>
-                            <option value="">Alfani Sulaeman</option>
-                            <option value="">Andi Sugandi</option>
-                            <option value="">Jejen Jenudin</option>
-                            <option value="">Riko Adi Pratama</option>
+                            <option value="Alfani Sulaeman">Alfani Sulaeman</option>
+                            <option value="Andi Sugandi">Andi Sugandi</option>
+                            <option value="Jejen Jenudin">Jejen Jenudin</option>
+                            <option value="Riko Adi Pratama">Riko Adi Pratama</option>
                         </select>
-                        <select id="input-group11" style="background: black;">
+                        <select id="input-group11" style="background: black;" name="cleaning_pt_1">
                             <option value="">Company</option>
-                            <option value="">PT Bijac</option>
-                            <option value="">PT Enlulu</option>
+                            <option value="PT Bijac">PT Bijac</option>
+                            <option value="PT Enlulu">PT Enlulu</option>
                         </select>
-                        <select id="input-group11" style="background: black;">
+                        <select id="input-group11" style="background: black;" name="cleaning_respon_1">
                             <option value="">Responsibility</option>
-                            <option value="">Cleaner</option>
+                            <option value="Cleaner">Cleaner</option>
                         </select>
-                        <select id="input-group11" style="background: black;">
+                        <select id="input-group11" style="background: black;" name="cleaning_number_1">
                             <option value="">Mobile Number</option>
-                            <option value="">0895-3339-40730</option>
-                            <option value="">0815-6461-7472</option>
-                            <option value="">0896-3051-3484</option>
-                            <option value="">0853-6864-8317</option>
+                            <option value="0895-3339-40730">0895-3339-40730</option>
+                            <option value="0815-6461-7472">0815-6461-7472</option>
+                            <option value="0896-3051-3484">0896-3051-3484</option>
+                            <option value="0853-6864-8317">0853-6864-8317</option>
                         </select>
-                        <select id="input-group11" style="background: black;">
+                        <select id="input-group11" style="background: black;" name="cleaning_id_1">
+                            <option value="">ID Number</option>
+                            <option value=""></option>
+                            <option value=""></option>
+                            <option value=""></option>
+                            <option value=""></option>
+                        </select>
+                        <select id="input-group11" style="background: black;" name="cleaning_name_2">
                             <option value="">Name</option>
-                            <option value="">Alfani Sulaeman</option>
-                            <option value="">Andi Sugandi</option>
-                            <option value="">Jejen Jenudin</option>
-                            <option value="">Riko Adi Pratama</option>
+                            <option value="Alfani Sulaeman">Alfani Sulaeman</option>
+                            <option value="Andi Sugandi">Andi Sugandi</option>
+                            <option value="Jejen Jenudin">Jejen Jenudin</option>
+                            <option value="Riko Adi Pratama">Riko Adi Pratama</option>
                         </select>
-                        <select id="input-group11" style="background: black;">
+                        <select id="input-group11" style="background: black;" name="cleaning_pt_2">
                             <option value="">Company</option>
-                            <option value="">PT Bijac</option>
-                            <option value="">PT Enlulu</option>
+                            <option value="PT Bijac">PT Bijac</option>
+                            <option value="PT Enlulu">PT Enlulu</option>
                         </select>
-                        <select id="input-group11" style="background: black;">
+                        <select id="input-group11" style="background: black;" name="cleaning_respon_2">
                             <option value="">Responsibility</option>
-                            <option value="">Cleaner</option>
+                            <option value="Cleaner">Cleaner</option>
                         </select>
-                        <select id="input-group11" style="background: black;">
+                        <select id="input-group11" style="background: black;" name="cleaning_number_2">
                             <option value="">Mobile Number</option>
-                            <option value="">0895-3339-40730</option>
-                            <option value="">0815-6461-7472</option>
-                            <option value="">0896-3051-3484</option>
-                            <option value="">0853-6864-8317</option>
+                            <option value="0895-3339-40730">0895-3339-40730</option>
+                            <option value="0815-6461-7472">0815-6461-7472</option>
+                            <option value="0896-3051-3484">0896-3051-3484</option>
+                            <option value="0853-6864-8317">0853-6864-8317</option>
                         </select>
-                        <select id="input-group11" style="background: black;">
+                        <select id="input-group11" style="background: black;" name="cleaning_id_2">
+                            <option value="">ID Number</option>
+                            <option value=""></option>
+                            <option value=""></option>
+                            <option value=""></option>
+                            <option value=""></option>
+                        </select>
+                        <select id="input-group11" style="background: black;" name="cleaning_name_3">
                             <option value="">Name</option>
-                            <option value="">Alfani Sulaeman</option>
-                            <option value="">Andi Sugandi</option>
-                            <option value="">Jejen Jenudin</option>
-                            <option value="">Riko Adi Pratama</option>
+                            <option value="Alfani Sulaeman">Alfani Sulaeman</option>
+                            <option value="Andi Sugandi">Andi Sugandi</option>
+                            <option value="Jejen Jenudin">Jejen Jenudin</option>
+                            <option value="Riko Adi Pratama">Riko Adi Pratama</option>
                         </select>
-                        <select id="input-group11" style="background: black;">
+                        <select id="input-group11" style="background: black;" name="cleaning_pt_3">
                             <option value="">Company</option>
-                            <option value="">PT Bijac</option>
-                            <option value="">PT Enlulu</option>
+                            <option value="PT Bijac">PT Bijac</option>
+                            <option value="PT Enlulu">PT Enlulu</option>
                         </select>
-                        <select id="input-group11" style="background: black;">
+                        <select id="input-group11" style="background: black;" name="cleaning_respon_3">
                             <option value="">Responsibility</option>
-                            <option value="">Cleaner</option>
+                            <option value="Cleaner">Cleaner</option>
                         </select>
-                        <select id="input-group11" style="background: black;">
+                        <select id="input-group11" style="background: black;" name="cleaning_number_3">
                             <option value="">Mobile Number</option>
-                            <option value="">0895-3339-40730</option>
-                            <option value="">0815-6461-7472</option>
-                            <option value="">0896-3051-3484</option>
-                            <option value="">0853-6864-8317</option>
+                            <option value="0895-3339-40730">0895-3339-40730</option>
+                            <option value="0815-6461-7472">0815-6461-7472</option>
+                            <option value="0896-3051-3484">0896-3051-3484</option>
+                            <option value="0853-6864-8317">0853-6864-8317</option>
                         </select>
-                        <select id="input-group11" style="background: black;">
+                        <select id="input-group11" style="background: black;" name="cleaning_id_3">
+                            <option value="">ID Number</option>
+                            <option value=""></option>
+                            <option value=""></option>
+                            <option value=""></option>
+                            <option value=""></option>
+                        </select>
+                        <select id="input-group11" style="background: black;" name="cleaning_name_4">
                             <option value="">Name</option>
-                            <option value="">Alfani Sulaeman</option>
-                            <option value="">Andi Sugandi</option>
-                            <option value="">Jejen Jenudin</option>
-                            <option value="">Riko Adi Pratama</option>
+                            <option value="Alfani Sulaeman">Alfani Sulaeman</option>
+                            <option value="Andi Sugandi">Andi Sugandi</option>
+                            <option value="Jejen Jenudin">Jejen Jenudin</option>
+                            <option value="Riko Adi Pratama">Riko Adi Pratama</option>
                         </select>
-                        <select id="input-group11" style="background: black;">
+                        <select id="input-group11" style="background: black;" name="cleaning_pt_4">
                             <option value="">Company</option>
-                            <option value="">PT Bijac</option>
-                            <option value="">PT Enlulu</option>
+                            <option value="PT Bijac">PT Bijac</option>
+                            <option value="PT Enlulu">PT Enlulu</option>
                         </select>
-                        <select id="input-group11" style="background: black;">
+                        <select id="input-group11" style="background: black;" name="cleaning_respon_4">
                             <option value="">Responsibility</option>
-                            <option value="">Cleaner</option>
+                            <option value="Cleaner">Cleaner</option>
                         </select>
-                        <select id="input-group11" style="background: black;">
+                        <select id="input-group11" style="background: black;" name="cleaning_number_4">
                             <option value="">Mobile Number</option>
-                            <option value="">0895-3339-40730</option>
-                            <option value="">0815-6461-7472</option>
-                            <option value="">0896-3051-3484</option>
-                            <option value="">0853-6864-8317</option>
+                            <option value="0895-3339-40730">0895-3339-40730</option>
+                            <option value="0815-6461-7472">0815-6461-7472</option>
+                            <option value="0896-3051-3484">0896-3051-3484</option>
+                            <option value="0853-6864-8317">0853-6864-8317</option>
+                        </select>
+                        <select id="input-group11" style="background: black;" name="cleaning_id_4">
+                            <option value="">ID Number</option>
+                            <option value=""></option>
+                            <option value=""></option>
+                            <option value=""></option>
+                            <option value=""></option>
                         </select>
 
                 </div>

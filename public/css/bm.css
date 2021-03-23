@@ -7,7 +7,7 @@ body {
 
 #form {
     background-color: #000;
-    height: 1300px;
+    height: 1100px;
     width: 800px;
     margin: auto;
     padding: 20px;
@@ -94,7 +94,7 @@ body {
 }
 
 #input #input-group11 {
-    width: 175px;
+    width: 135px;
     margin: 5px;
     border-top: none;
     border-left: none;
@@ -106,6 +106,17 @@ body {
 
 #input #input-group12 {
     width: 200px;
+    margin: 5px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline: none;
+    background: transparent;
+    color: rgb(255, 255, 255)
+}
+
+#input #input-group20 {
+    width: 700px;
     margin: 5px;
     border-top: none;
     border-left: none;
