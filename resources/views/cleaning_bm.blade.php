@@ -69,7 +69,6 @@
                         </option>
                     </select>
 
-
                     <h6 class="text-white">Request Validity (Berlakunya Permintaan)</h6>
                     <input type="date" name="validity_from" id="dateofbirth">
                     <h6 class="text-white"></h6>
@@ -146,34 +145,6 @@
                         <input id="1" name="mmr2" type="radio">
                         <span class="radiobutton_mark"></span>
                         MMR 2
-                        </label>
-                    </div>
-                    <div >
-                        <label class="radiobutton_container">
-                        <input id="1" name="2nd" type="radio">
-                        <span class="radiobutton_mark"></span>
-                        Office 2nd FL
-                        </label>
-                    </div>
-                    <div >
-                        <label class="radiobutton_container">
-                        <input id="1" name="3rd" type="radio">
-                        <span class="radiobutton_mark"></span>
-                        Office 3rd FL
-                        </label>
-                    </div>
-                    <div >
-                        <label class="radiobutton_container">
-                        <input id="1" name="yard" type="radio">
-                        <span class="radiobutton_mark"></span>
-                        Yard
-                        </label>
-                    </div>
-                    <div >
-                        <label class="radiobutton_container">
-                        <input id="1" name="parking" type="radio">
-                        <span class="radiobutton_mark"></span>
-                        Parking Area
                         </label>
                     </div>
                 </div>

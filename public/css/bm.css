@@ -2,12 +2,11 @@ body {
     background-image: url(/gambar/dc_wallpaper.jpg);
     background-size: cover;
     background-size: 1700px;
-
 }
 
 #form {
     background-color: #000;
-    height: 1100px;
+    height: 930px;
     width: 800px;
     margin: auto;
     padding: 20px;
@@ -41,9 +40,6 @@ body {
     color: #fff;
     font-size: 15px;
 }
-
-
-
 
 ::placeholder {
     color: #fff
