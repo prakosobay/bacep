@@ -87,5 +87,5 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/troubleshoot_pdf', [App\Http\Controllers\HomeController::class, 'cetak_troubleshoot_pdf']);
     Route::get('/mounting_pdf', [App\Http\Controllers\HomeController::class, 'cetak_mounting_pdf']);
 
-    Route::get('/full_approval', [App\Http\Controllers\HomeController::class, 'surveyfull']);
+    Route::get('/full_approval/{type_form}', [App\Http\Controllers\HomeController::class, 'surveyfull']);
 });

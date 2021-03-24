@@ -15,7 +15,8 @@ class CleaningHistory extends Model
         'cleaning_id',
         'created_by',
         'role_to',
-        'status'
+        'status',
+
     ];
 
     public function createdBy()

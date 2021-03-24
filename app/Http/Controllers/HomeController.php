@@ -73,12 +73,21 @@ class HomeController extends Controller
         return view('hasil_survey', ['survey' => $survey]);
     }
 
-    public function surveyfull()
+    public function surveyfull($type_form)
     {
-        if ((Auth::user()->role == 'boss') || (Auth::user()->role == 'check') || (Auth::user()->role == 'review'))
-            $surveyFull = DB::table('survey_fulls')->get();
-        // dd($surveyFull);
-        return view('full_approval', ['surveyFull' => $surveyFull]);
+        if ((Auth::user()->role == 'boss') || (Auth::user()->role == 'check') || (Auth::user()->role == 'review')) {
+            if ($type_form == 'all') {
+                return view('full_approval');
+            } elseif ($type_form == 'survey') {
+                $surveyFull = DB::table('survey_fulls')->get();
+                // dd($surveyFull);
+                return view('full_survey', ['surveyFull' => $surveyFull]);
+            } elseif ($type_form == 'cleaning') {
+                $surveyFull = DB::table('survey_fulls')->get();
+                // dd($surveyFull);
+                return view('full_cleaning', ['surveyFull' => $surveyFull]);
+            }
+        }
     }
 
     public function detail_permit_survey($id)

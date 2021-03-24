@@ -63,7 +63,7 @@
                                 <a href="{{ route('register') }}">register</a>
                             </li>
                             @endif --}}
-                        <li><a href="{{ url('/full_approval') }}" data-after="Full">Full Approval</a></li>
+                        <li><a href="{{ url('full_approval/all') }}" data-after="Full">Full Approval</a></li>
                         <li><a href="#Approval" data-after="Approval">Approval</a></li>
                         @endif
                         <li>

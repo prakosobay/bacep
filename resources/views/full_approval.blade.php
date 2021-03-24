@@ -29,7 +29,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container-fluid">
-            <a class="navbar-brand" href="{{ url('/full_approval') }}">Full Approval</a>
+            <a class="navbar-brand" href="{{ url('/full_approval/all') }}">Full Approval</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -39,7 +39,7 @@
                             <a class="nav-link active" aria-current="page" href="/home">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/full_approval') }}">Survey</a>
+                            <a class="nav-link" href="{{ url('/full_approval/survey') }}">Survey</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Maintenance</a>
@@ -51,7 +51,7 @@
                             <a class="nav-link" href="#">Mounting</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/full_approval_cleaning') }}">Cleaning</a>
+                            <a class="nav-link" href="{{ url('/full_approval/cleaning') }}">Cleaning</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Other</a>
@@ -61,49 +61,9 @@
         </div>
     </nav>
 
+    <h3> @yield('judul_halaman') </h3>
 
-    <section class="content">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                        <h2 class="card-title">Table Full Approval Survey</h2>
-                    </div>
-                    <!-- /.card-header -->
-                    <div class="card-body">
-                        <table id="example1" class="table table-bordered table-striped">
-                            <thead>
-                                <tr>
-                                    <th>No.</th>
-                                    <th>ID Permit</th>
-                                    <th>Visitor Name</th>
-                                    <th>Visitor Company</th>
-                                    <th>Purpose Work</th>
-                                    <th>Status</th>
-                                    <th>Link</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {{$num = 1}}
-                                @foreach($surveyFull as $p)
-                                    <tr>
-                                        <td>{{ $num++ }}</td>
-                                        <td>{{ $p->survey_id }}</td>
-                                        <td>{{ $p->visitor_name }}</td>
-                                        <td>{{ $p->visitor_company }}</td>
-                                        <td>{{ $p->purpose_work }}</td>
-                                        <td>{{ $p->status }}</td>
-                                        <td><a href="{{ $p->link }}">PDF</a></td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    @yield('konten')
 
     <!-- jQuery -->
     <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
@@ -135,6 +95,6 @@
       "responsive": true,
     });
     });
-    </script>
+    </script>--}}
 </body>
 </html>
