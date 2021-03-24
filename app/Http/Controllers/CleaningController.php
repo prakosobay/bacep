@@ -38,7 +38,7 @@ class CleaningController extends Controller
             ->join('cleanings', 'cleanings.cleaning_id', '=', 'cleaning_histories.cleaning_id')
             ->join('users', 'users.id', '=', 'cleaning_histories.created_by')
             ->where('cleaning_histories.cleaning_id', '=', $id)
-            ->select('cleaning_histories.*', 'users.name', 'cleaning.cleaning_work')
+            ->select('cleaning_histories.*', 'users.name', 'cleanings.cleaning_work')
             ->get();
         // dd($cleaningHistory);
 
