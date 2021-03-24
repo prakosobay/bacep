@@ -49,7 +49,7 @@
         </tr>
         <tr height="10px">
             <td width="100px">Name</td>
-            <td width="200px">: </td>
+            <td width="200px">: {{$surveyHistory[0]->name}}</td>
             <td width="100px">Phone Number</td>
             <td width="200px">: </td>
         </tr>
