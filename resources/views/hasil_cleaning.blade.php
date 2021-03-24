@@ -1,6 +1,6 @@
 @extends('approval')
 
-@section('judul_halaman', 'Table Approval Survey ')
+@section('judul_halaman', 'Table Approval Cleaning')
         {{ csrf_field() }}
 
 @section('konten')
@@ -9,9 +9,6 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        {{-- <div class="card-header">
-                        <h2 class="card-title"><strong>Data Aproval Permit Survey</strong></h2>
-                    </div> --}}
                     <!-- /.card-header -->
                     <div class="card-body">
                         <table id="example1" class="table table-bordered table-striped">
@@ -19,30 +16,30 @@
                                 <tr>
                                     <th>ID Permit</th>
                                     <th>Date of Request</th>
-                                    <th>Visitor Name</th>
-                                    <th>Company</th>
-                                    <th>Purpose</th>
+                                    <th>Visitor Name1</th>
+                                    <th>Visitor Name2</th>
+                                    <th>Purpose of Work</th>
                                     <th>Action</th>
                                     <th>File</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($survey as $p)
+                                @foreach($cleaning as $p)
                                     <tr>
-                                        <td>{{ $p->survey_id }}</td>
+                                        <td>{{ $p->cleaning_id }}</td>
                                         <td>{{ $p->created_at }}</td>
-                                        <td>{{ $p->visitor_name }}</td>
-                                        <td>{{ $p->visitor_company }}</td>
-                                        <td>{{ $p->purpose_work }}</td>
+                                        <td>{{ $p->cleaning_name_1 }}</td>
+                                        <td>{{ $p->cleaning_name_1 }}</td>
+                                        <td>{{ $p->cleaning_work }}</td>
                                         @if(Auth::user()->role != 'security')
-                                        <td><a href="javascript:void(0)" class="approve" data-survey_id="{{$p->survey_id}}">Approve</a> |
-                                            <a href="javascript:void(0)" class="reject" data-survey_id="{{$p->survey_id}}">Reject</a> |
-                                            <a href="/detail_survey/{{$p->survey_id}}">History</a></td>
+                                        <td><a href="javascript:void(0)" class="approve" data-cleaning_id="{{$p->cleaning_id}}">Approve</a> |
+                                            <a href="javascript:void(0)" class="reject" data-cleaning_id="{{$p->cleaning_id}}">Reject</a> |
+                                            <a href="/detail_cleaning/{{$p->cleaning_id}}">History</a></td>
                                         @else<td>
-                                            <a href="javascript:void(0)" class="approve" data-survey_id="{{$p->survey_id}}">Approve</a> |
-                                            <a href="/detail_survey/{{$p->survey_id}}">History</a></td>
+                                            <a href="javascript:void(0)" class="approve" data-cleaning_id="{{$p->cleaning_id}}">Approve</a> |
+                                            <a href="/detail_cleaning/{{$p->cleaning_id}}">History</a></td>
                                         @endif
-                                        <td><a href="/survey_pdf/{{$p->survey_id}}" class="btn btn-primary" target="_blank">LIHAT PDF</a></td>
+                                        <td><a href="/cleaning_pdf/{{$p->cleaning_id}}" class="btn btn-primary" target="_blank">LIHAT PDF</a></td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -69,20 +66,6 @@
 <!-- page script -->
 
 <script>
-//   $(function () {
-//     $("#example1").DataTable({
-//       "responsive": true,
-//       "autoWidth": true,
-//     });
-//     $('#example2').DataTable({
-//       "paging": true,
-//       "lengthChange": false,
-//       "searching": false,
-//       "ordering": true,
-//       "info": true,
-//       "autoWidth": false,
-//       "responsive": true,
-//     });
 
     $(document).on('click', '.approve', function(){
         $.ajaxSetup({
@@ -90,12 +73,12 @@
                 'X-CSRF-TOKEN': $('input[name="_token"]').val()
             }
         });
-        let survey_id = $(this).data('survey_id');
-        console.log(survey_id);
+        let cleaning_id = $(this).data('cleaning_id');
+        console.log(cleaning_id);
         $.ajax({
             type:'POST',
-            url:"{{url('approve_survey')}}",
-            data: {survey_id},
+            url:"{{url('approve_cleaning')}}",
+            data: {cleaning_id},
             error: function (request, error) {
                 alert(" Can't do because: " + error);
             },
@@ -129,12 +112,12 @@
                 'X-CSRF-TOKEN': $('input[name="_token"]').val()
             }
         });
-        let survey_id = $(this).data('survey_id');
-        console.log(survey_id);
+        let cleaning_id = $(this).data('cleaning_id');
+        console.log(cleaning_id);
         $.ajax({
             type:'POST',
-            url:"{{url('survey_reject')}}",
-            data: {survey_id},
+            url:"{{url('cleaning_reject')}}",
+            data: {cleaning_id},
             error: function (request, error) {
                 alert(" Can't do because: " + error);
             },

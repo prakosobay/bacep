@@ -4,13 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Maintenance;
-use App\Models\MaintenanceHistory;
 use App\Models\Survey;
+use App\Models\SurveyHistory;
+use App\Models\SurveyFull;
+use App\Models\Cleaning;
+use App\Models\CleaningHistory;
+use App\Models\CleaningFull;
+use App\Models\MaintenanceHistory;
 use App\Models\Troubleshoot;
 use App\Models\Mounting;
 use App\Models\MountingHistory;
-use App\Models\SurveyHistory;
-use App\Models\SurveyFull;
 use App\Models\TroubleshootHistory;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -59,33 +62,44 @@ class HomeController extends Controller
         return response()->json(['status' => 'FAILED']);
     }
 
-    public function surveyview()
+    public function approval_view($type_view)
     {
 
         $role = Auth::user()->role;
-        if ((Auth::user()->role != 'requestor') && (Auth::user()->role != 'visitor'))
-            $survey = DB::table('survey_histories')
-                ->join('survey', 'survey.survey_id', '=', 'survey_histories.survey_id')
-                ->where('survey_histories.role_to', '=', $role)
-                ->where('survey_histories.aktif', '=', 1)
-                ->select('survey.*')
-                ->get();
-        return view('hasil_survey', ['survey' => $survey]);
+        if ((Auth::user()->role == 'boss') || (Auth::user()->role == 'check') || (Auth::user()->role == 'review'))
+            if ($type_view == 'all') {
+
+                return view('approval');
+            } elseif ($type_view == 'survey') {
+                $survey = DB::table('survey_histories')
+                    ->join('survey', 'survey.survey_id', '=', 'survey_histories.survey_id')
+                    ->where('survey_histories.role_to', '=', $role)
+                    ->where('survey_histories.aktif', '=', 1)
+                    ->select('survey.*')
+                    ->get();
+                return view('hasil_survey', ['survey' => $survey]);
+            } elseif ($type_view == 'cleaning') {
+                $cleaning = DB::table('cleaning_histories')
+                    ->join('cleanings', 'cleanings.cleaning_id', '=', 'cleaning_histories.cleaning_id')
+                    ->where('cleaning_histories.role_to', '=', $role)
+                    ->where('cleaning_histories.aktif', '=', 1)
+                    ->select('cleanings.*')
+                    ->get();
+                return view('hasil_cleaning', ['cleaning' => $cleaning]);
+            }
     }
 
-    public function surveyfull($type_form)
+    public function approval_full($type_form)
     {
         if ((Auth::user()->role == 'boss') || (Auth::user()->role == 'check') || (Auth::user()->role == 'review')) {
             if ($type_form == 'all') {
                 return view('full_approval');
             } elseif ($type_form == 'survey') {
                 $surveyFull = DB::table('survey_fulls')->get();
-                // dd($surveyFull);
                 return view('full_survey', ['surveyFull' => $surveyFull]);
             } elseif ($type_form == 'cleaning') {
-                $surveyFull = DB::table('survey_fulls')->get();
-                // dd($surveyFull);
-                return view('full_cleaning', ['surveyFull' => $surveyFull]);
+                $cleaningFull = DB::table('cleaning_fulls')->get();
+                return view('full_cleaning', ['cleaningFull' => $cleaningFull]);
             }
         }
     }
@@ -192,60 +206,6 @@ class HomeController extends Controller
 
         return $surveyHistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
     }
-
-    // public function approve_survey(Request $request)
-    // {
-
-    //     // $lasthistory = SurveyHistory::where('survey_id', '=', $request->survey_id)->latest()->first();
-    //     $lasthistory = SurveyHistory::where('survey_id', '=', $request->survey_id)->latest()->first();
-    //     $lasthistory->update(['aktif' => false]);
-
-    //     $status = '';
-    //     if ($lasthistory->status == 'created') {
-    //         $status = 'reviewed';
-    //     } elseif ($lasthistory->status == 'reviewed') {
-    //         $status = 'checked';
-    //     } elseif ($lasthistory->status == 'checked') {
-    //         $status = 'secured';
-    //     } elseif ($lasthistory->status == 'secured') {
-    //         $status = 'final';
-    //     } elseif ($lasthistory->status == 'final') {
-    //         $survey = Survey::find($request->survey_id)->first();
-    //     }
-
-    //     $role_to = '';
-    //     if ($lasthistory->role_to == 'review') {
-    //         $role_to = 'check';
-    //     } elseif ($lasthistory->role_to == 'check') {
-    //         $role_to = 'security';
-    //     } elseif ($lasthistory->role_to == 'security') {
-    //         $role_to = 'boss';
-    //     }
-
-    //     $surveyHistory = SurveyHistory::create([
-    //         'survey_id' => $request->survey_id,
-    //         'created_by' => Auth::user()->id,
-    //         'role_to' => $role_to,
-    //         'status' => $status,
-    //         'aktif' => true,
-    //     ]);
-
-    //     if ($lasthistory->role_to == 'boss') {
-    //         $survey = Survey::where('survey_id', $request->survey_id)->first();
-    //         // dd($survey);
-    //         $surveyFull = SurveyFull::create([
-    //             'survey_id' => $survey->survey_id,
-    //             'visitor_name' => $survey->visitor_name,
-    //             'visitor_company' => $survey->visitor_company,
-    //             'purpose_work' => $survey->purpose_work,
-    //             'status' => 'Full Approved',
-    //             'link' =>  url("/survey_pdf/$survey->survey_id"),
-    //         ]);
-    //     }
-
-    //     return $surveyHistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
-    // }
-
 
     // ---------- TROUBLESHOOT ----------
     public function submit_troubleshoot(Request $request)

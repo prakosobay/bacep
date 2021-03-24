@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Full Approval</title>
+    <title>Table Approval</title>
 
     <!-- Font Awesome -->
 <link rel="stylesheet" href="{{ asset('css2/all.min.css') }}">
@@ -19,17 +19,22 @@
 <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
 <link href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.14.0/sweetalert2.min.css" rel="stylesheet">
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.14.0/sweetalert2.all.min.js"></script>
-        <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.14.0/sweetalert2.all.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
 {{-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> --}}
 
+<style>
+    .center{
+        text-align: center
+    }
+</style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container-fluid">
-            <a class="navbar-brand" href="{{ url('/full_approval/all') }}">Full Approval</a>
+            <a class="navbar-brand" href="{{ url('/approval/all') }}">Table Approval</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -39,7 +44,7 @@
                             <a class="nav-link active" aria-current="page" href="/home">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/full_approval/survey') }}">Survey</a>
+                            <a class="nav-link" href="{{ url('/approval/survey') }}">Survey</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Maintenance</a>
@@ -51,7 +56,7 @@
                             <a class="nav-link" href="#">Mounting</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/full_approval/cleaning') }}">Cleaning</a>
+                            <a class="nav-link" href="{{ url('/approval/cleaning') }}">Cleaning</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Other</a>
@@ -61,7 +66,7 @@
         </div>
     </nav>
 
-    <h3> @yield('judul_halaman') </h3>
+    <h3 class="center"> @yield('judul_halaman') </h3>
 
     @yield('konten')
 
@@ -79,6 +84,7 @@
     <!-- AdminLTE for demo purposes -->
     <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
     <!-- page script -->
+
     <script>
     $(function () {
     $("#example1").DataTable({

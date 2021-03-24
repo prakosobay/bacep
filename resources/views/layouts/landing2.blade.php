@@ -55,7 +55,7 @@
                         @elseif(Auth::user()->role == 'bm')
                         <li><a href="#BM" data-after="BM">BM</a></li>
                         @elseif(Auth::user()->role == 'security')
-                        <li><a href="#Approval" data-after="Approval">Approval</a></li>
+                        <li><a href="{{ url('approval/all') }}" data-after="Approval">Approval</a></li>
                         @else
                             {{-- @if(Route::has('register'))
                             <li>
@@ -64,7 +64,7 @@
                             </li>
                             @endif --}}
                         <li><a href="{{ url('full_approval/all') }}" data-after="Full">Full Approval</a></li>
-                        <li><a href="#Approval" data-after="Approval">Approval</a></li>
+                        <li><a href="{{ url('approval/all') }}" data-after="Approval">Approval</a></li>
                         @endif
                         <li>
                                 <a href="{{ route('logout') }}"
