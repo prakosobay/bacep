@@ -73,6 +73,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/submit_data_survey', [App\Http\Controllers\HomeController::class, 'submit_data_survey']);
     Route::post('/submit_mounting', [App\Http\Controllers\HomeController::class, 'submit_mounting']);
     Route::post('/submit_troubleshoot', [App\Http\Controllers\HomeController::class, 'submit_troubleshoot']);
+    Route::post('/submit_data_cleaning', [App\Http\Controllers\CleaningController::class, 'submit_data_cleaning']);
 
     Route::get('/hasil_survey', [App\Http\Controllers\HomeController::class, 'surveyview']);
     Route::get('/hasil_maintenance', [App\Http\Controllers\HomeController::class, 'maintenance_view']);

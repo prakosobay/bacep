@@ -9,6 +9,14 @@
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 
+    <style>
+        .center {
+        margin: auto;
+        width: 100%;
+        text-align: center
+        }
+    </style>
+
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{{ asset('js/cleaning.js') }}" defer></script>
@@ -35,10 +43,11 @@
 
         <div  id="form">
         <!--form-->
-        <center>
+
+        <div class="center">
             <h1 class="text-white">Access Request Form</h1>
             <h2 class="text-white">Nomor: ARF/001/DCDV/XI/2019</h2>
-        </center>
+        </div>
 
             <div id="input">
                 <!--input-->
@@ -78,70 +87,70 @@
                     <h6 for="survey_area" class="text-white">Authorized Entry Area </h6>
                     <div>
                         <label class="radiobutton_container">
-                        <input id="1" name="server" type="radio">
+                        <input id="1" name="server" type="checkbox" value="1">
                         <span class="radiobutton_mark"></span>
                         Server Room
                         </label>
                     </div>
                     <div >
                         <label class="radiobutton_container">
-                        <input id="1" name="generator" type="radio">
+                        <input id="1" name="generator" type="checkbox" value="1">
                         <span class="radiobutton_mark"></span>
                         Generator Room
                         </label>
                     </div>
                     <div>
                         <label class="radiobutton_container">
-                        <input id="1" name="ups" type="radio">
+                        <input id="1" name="ups" type="checkbox" value="1">
                         <span class="radiobutton_mark"></span>
                         UPS Room
                         </label>
                     </div>
                     <div >
                         <label class="radiobutton_container">
-                        <input id="1" name="panel" type="radio">
+                        <input id="1" name="panel" type="checkbox" value="1">
                         <span class="radiobutton_mark"></span>
                         Panel Room
                         </label>
                     </div>
                     <div >
                         <label class="radiobutton_container">
-                        <input id="1" name="fss" type="radio">
+                        <input id="1" name="fss" type="checkbox" value="1">
                         <span class="radiobutton_mark"></span>
                         FSS Room
                         </label>
                     </div>
                     <div >
                         <label class="radiobutton_container">
-                        <input id="1" name="staging" type="radio">
+                        <input id="1" name="staging" type="checkbox" value="1">
                         <span class="radiobutton_mark"></span>
                         Staging Room
                         </label>
                     </div>
                     <div >
                         <label class="radiobutton_container">
-                        <input id="1" name="battery" type="radio">
+                        <input id="1" name="battery" type="checkbox" value="1">
                         <span class="radiobutton_mark"></span>
                         Battery Room
                         </label>
                     </div>
                     <div >
                         <label class="radiobutton_container">
-                        <input id="1" name="trafo" type="radio">
+                        <input id="1" name="trafo" type="checkbox" value="1">
                         <span class="radiobutton_mark"></span>
                         Trafo Room
                         </label>
                     </div>
                     <div >
                         <label class="radiobutton_container">
-                        <input id="1" name="mmr1" type="radio">
+                        <input id="1" name="mmr1" type="checkbox" value="1">
                         <span class="radiobutton_mark"></span>
                         MMR 1
                         </label>
                     </div>
                     <div >
                         <label class="radiobutton_container">
-                        <input id="1" name="mmr2" type="radio">
+                        <input id="1" name="mmr2" type="checkbox" value="1">
                         <span class="radiobutton_mark"></span>
                         MMR 2
                         </label>
@@ -153,10 +162,10 @@
 
         <div  id="form2">
 
-            <center>
+            <div class="center">
             <h1 class="text-white">Change Request Form</h1>
             <h2 class="text-white">Nomor: ARF/001/DCDV/XI/2019</h2>
-            </center>
+            </div>
 
             <div id="input">
                     <!--input-->
@@ -857,10 +866,6 @@
                             <option value="PT Bijac">PT Bijac</option>
                             <option value="PT Enlulu">PT Enlulu</option>
                         </select>
-                        <select id="input-group11" style="background: black;" name="cleaning_respon_1">
-                            <option value="">Responsibility</option>
-                            <option value="Cleaner">Cleaner</option>
-                        </select>
                         <select id="input-group11" style="background: black;" name="cleaning_number_1">
                             <option value="">Mobile Number</option>
                             <option value="0895-3339-40730">0895-3339-40730</option>
@@ -886,10 +891,6 @@
                             <option value="">Company</option>
                             <option value="PT Bijac">PT Bijac</option>
                             <option value="PT Enlulu">PT Enlulu</option>
-                        </select>
-                        <select id="input-group11" style="background: black;" name="cleaning_respon_2">
-                            <option value="">Responsibility</option>
-                            <option value="Cleaner">Cleaner</option>
                         </select>
                         <select id="input-group11" style="background: black;" name="cleaning_number_2">
                             <option value="">Mobile Number</option>
@@ -917,10 +918,6 @@
                             <option value="PT Bijac">PT Bijac</option>
                             <option value="PT Enlulu">PT Enlulu</option>
                         </select>
-                        <select id="input-group11" style="background: black;" name="cleaning_respon_3">
-                            <option value="">Responsibility</option>
-                            <option value="Cleaner">Cleaner</option>
-                        </select>
                         <select id="input-group11" style="background: black;" name="cleaning_number_3">
                             <option value="">Mobile Number</option>
                             <option value="0895-3339-40730">0895-3339-40730</option>
@@ -946,10 +943,6 @@
                             <option value="">Company</option>
                             <option value="PT Bijac">PT Bijac</option>
                             <option value="PT Enlulu">PT Enlulu</option>
-                        </select>
-                        <select id="input-group11" style="background: black;" name="cleaning_respon_4">
-                            <option value="">Responsibility</option>
-                            <option value="Cleaner">Cleaner</option>
                         </select>
                         <select id="input-group11" style="background: black;" name="cleaning_number_4">
                             <option value="">Mobile Number</option>
@@ -996,6 +989,7 @@
             url:"{{url('submit_data_cleaning')}}",
             data: datastring,
             error: function (request, error) {
+                console.log(error)
                 alert(" Can't do because: " + error);
             },
             success:function(data){
