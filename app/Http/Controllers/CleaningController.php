@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\HomeController;
 use App\Models\Cleaning;
 use App\Models\CleaningHistory;
 use App\Models\CleaningFull;
@@ -23,7 +24,7 @@ class CleaningController extends Controller
                 'created_by' => Auth::user()->id,
                 'role_to' => 'review',
                 'status' => 'created',
-                'aktif' => 1
+                'aktif' => '1'
             ]);
 
             return $cleaningHistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
@@ -40,7 +41,6 @@ class CleaningController extends Controller
             ->where('cleaning_histories.cleaning_id', '=', $id)
             ->select('cleaning_histories.*', 'users.name', 'cleanings.cleaning_work')
             ->get();
-        // dd($cleaningHistory);
 
         return view('detail_cleaning', ['cleaningHistory' => $cleaningHistory]);
     }
@@ -100,9 +100,9 @@ class CleaningController extends Controller
 
     public function cleaning_reject(Request $request)
     {
-        $lasthistoryC = CleaningHistory::where('cleaning_id', '=', $request->cleaning_id)->latest()->first();
-        if ($lasthistoryC->role_to != 'security') {
-            $lasthistoryC->update(['aktif' => false]);
+        $lasthistory = CleaningHistory::where('cleaning_id', '=', $request->cleaning_id)->latest()->first();
+        if ($lasthistory->role_to != 'security') {
+            $lasthistory->update(['aktif' => false]);
 
             $cleaningHistory = CleaningHistory::create([
                 'cleaning_id' => $request->cleaning_id,
@@ -111,7 +111,7 @@ class CleaningController extends Controller
                 'status' => 'rejected',
                 'aktif' => true,
             ]);
-
+            dd($cleaningHistory);
             return $cleaningHistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
         }
     }
@@ -122,14 +122,14 @@ class CleaningController extends Controller
         $lasthistoryC = CleaningHistory::where('cleaning_id', $id)->where('aktif', 1)->first();
         // $cleaningHistory = cleaningHistory::join('')->where('cleaning.cleaning_id', $id)->where('status', )->orderBy('cleaning_history', 'ASC')->findAll();
         $cleaningHistory = DB::table('cleaning_histories')
-            ->join('cleanings', 'cleaning.cleaning_id', '=', 'cleaning_histories.cleaning_id')
+            ->join('cleanings', 'cleanings.cleaning_id', '=', 'cleaning_histories.cleaning_id')
             ->join('users', 'users.id', '=', 'cleaning_histories.created_by')
             // ->join('users', 'users.id', '=', 'cleaning_histories.name')
             ->where('cleaning_histories.cleaning_id', '=', $id)
             // ->where('cleaning_histories.role_to', '!=', '0')
             // ->where('cleaning_histories.role_to', '!=', 'check')
             // ->where('cleaning_Histories.status', '!=', 'reviewed')
-            ->where('cleaning_Histories.status', '!=', 'visitor')
+            ->where('cleaning_histories.status', '!=', 'visitor')
             ->select('cleaning_histories.*', 'users.name', 'created_by')
             ->get();
         // dd($cleaningHistory);

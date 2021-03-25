@@ -71,11 +71,11 @@ Route::middleware(['auth'])->group(function () {
 
     //Approve
     Route::post('/approve_survey', [HomeController::class, 'approve_survey']);
-    Route::post('/approve_cleaning', [CleaningController::class, 'approve_cleaning']);
+    Route::post('/approve_cleaning', [App\Http\Controllers\CleaningController::class, 'approve_cleaning']);
 
     //Reject
     Route::post('/survey_reject', [HomeController::class, 'survey_reject']);
-    Route::post('/cleaning_reject', [CleaningController::class, 'cleaning_reject']);
+    Route::post('/cleaning_reject', [App\Http\Controllers\CleaningController::class, 'cleaning_reject']);
 
     //Submit
     Route::post('/submit_data_survey', [App\Http\Controllers\HomeController::class, 'submit_data_survey']);

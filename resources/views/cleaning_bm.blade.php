@@ -971,6 +971,7 @@
 </div>
 
 </body>
+
 <script type="text/javascript">
 
     $.ajaxSetup({
