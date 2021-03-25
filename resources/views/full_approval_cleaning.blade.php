@@ -78,18 +78,16 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-header">
-                        <h2 class="card-title">Table Full Approval Cleaning</h2>
-                    </div>
+
                     <!-- /.card-header -->
                     <div class="card-body">
                         <table id="example1" class="table table-bordered table-striped">
-                            {{-- <thead>
+                            <thead>
                                 <tr>
                                     <th>No.</th>
                                     <th>ID Permit</th>
-                                    <th>Visitor Name</th>
-                                    <th>Visitor Company</th>
+                                    <th>Visitor Name </th>
+                                    <th>Visitor Name </th>
                                     <th>Purpose Work</th>
                                     <th>Status</th>
                                     <th>Link</th>
@@ -97,18 +95,18 @@
                             </thead>
                             <tbody>
                                 {{$num = 1}}
-                                @foreach($surveyFull as $p)
+                                @foreach($cleaningFull as $p)
                                     <tr>
                                         <td>{{ $num++ }}</td>
-                                        <td>{{ $p->survey_id }}</td>
-                                        <td>{{ $p->visitor_name }}</td>
-                                        <td>{{ $p->visitor_company }}</td>
-                                        <td>{{ $p->purpose_work }}</td>
+                                        <td>{{ $p->cleaning_id }}</td>
+                                        <td>{{ $p->cleaning_name_1 }}</td>
+                                        <td>{{ $p->cleaning_name_2 }}</td>
+                                        <td>{{ $p->cleaning_work }}</td>
                                         <td>{{ $p->status }}</td>
                                         <td><a href="{{ $p->link }}">PDF</a></td>
                                     </tr>
                                 @endforeach
-                            </tbody> --}}
+                            </tbody>
                         </table>
                     </div>
                 </div>

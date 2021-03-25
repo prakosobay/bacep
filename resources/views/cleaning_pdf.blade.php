@@ -70,13 +70,13 @@
             <td width="70px"><b>Name</td>
             <td width="230px"><b>: {{$cleaning->cleaning_name_1}} & {{$cleaning->cleaning_name_2}}</td>
             <td width="70px"><b>ID</td>
-            <td width="250px"><b>: {{$cleaning->cleaning_id_1}} & {{$cleaning->cleaning_id_2}}</td>
+            <td width="230px"><b>: {{$cleaning->cleaning_id_1}} & {{$cleaning->cleaning_id_2}}</td>
         </tr>
         <tr height="10px">
             <td width="70px"><b>Company</td>
             <td width="230px"><b>: {{$cleaning->cleaning_pt_1}} & {{$cleaning->cleaning_pt_2}}</td>
             <td width="70px"><b>Phone Number</td>
-            <td width="250px"><b>: {{$cleaning->cleaning_number_1}} & {{$cleaning->cleaning_number_2}}</td>
+            <td width="230px"><b>: {{$cleaning->cleaning_number_1}} & {{$cleaning->cleaning_number_2}}</td>
         </tr>
         <tr height="10px">
             <td><b>Department</td>
@@ -141,8 +141,7 @@
             </tr>
         </thead> --}}
 
-
-                <tr width="500px">
+                <tr width="600px">
                     @switch($lasthistoryC->status)
                         @case('created')
                             <td height="40px"> </td>
@@ -154,25 +153,47 @@
 
                         @case('secured')
                                 <td height="40px"></td>
-                                <td><img src="{{ public_path("gambar/Checked.png") }}" alt="" style="width: 80px; height: 40px;"></td>
+                                <td class="nmr"><img src="{{ public_path("gambar/Checked.png") }}" alt="" style="width: 80px; height: 40px;"></td>
                                 <td height="40px"></td>
                                 @break
 
                         @case('final')
                             <td height="40px"></td>
-                            <td><img src="{{ public_path("gambar/Checked.png") }}" alt="" style="width: 80px; height: 40px;"></td>
-                            <td><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 80px; height: 40px;"></td>
+                            <td class="nmr"><img src="{{ public_path("gambar/Checked.png") }}" alt="" style="width: 80px; height: 40px;"></td>
+                            <td class="nmr"><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 80px; height: 40px;"></td>
                             @break
                     @endswitch
                 </tr>
 
-                @if(($lasthistoryC->status != 'checked') || ($lasthistoryC->status != 'reviewed'))
+                {{-- @if(($lasthistoryC->status == 'created') || ($lasthistoryC->status == 'secured') || ($lasthistoryC->status == 'boss')) --}}
                 <tr height="10px">
-                    @foreach($cleaningHistory as $p)
-                    <td class="nmr"><strong>{{ $p->name }}</strong></td>
-                    @endforeach
+                    @if($lasthistoryC->status == 'created')
+                    <td width="200px" class="nmr"><strong>Badai Sino Jendrang</strong></td>
+                    <td width="200px" class="nmr"><strong></strong></td>
+                    <td width="200px" class="nmr"><strong></strong></td>
+
+                    @elseif($lasthistoryC->status == 'reviewed')
+                    <td width="200px" class="nmr"><strong>Badai Sino Jendrang</strong></td>
+                    <td width="200px" class="nmr"><strong></strong></td>
+                    <td width="200px" class="nmr"><strong></strong></td>
+
+                    @elseif($lasthistoryC->status == 'checked')
+                    <td width="200px" class="nmr"><strong>Badai Sino Jendrang</strong></td>
+                    <td width="200px" class="nmr"><strong></strong></td>
+                    <td width="200px" class="nmr"><strong></strong></td>
+
+                    @elseif($lasthistoryC->status == 'secured')
+                    <td width="200px" class="nmr"><strong>Badai Sino Jendrang</strong></td>
+                    <td width="200px" class="nmr"><strong>{{ $cleaningHistory[2]->name }}</strong></td>
+                    <td width="200px" class="nmr"><strong></strong></td>
+
+                    @elseif($lasthistoryC->status == 'boss')
+                    <td width="200px" class="nmr"><strong>Badai Sino Jendrang</strong></td>
+                    <td width="200px" class="nmr"><strong>{{ $cleaningHistory[2]->name }}</strong></td>
+                    <td width="200px" class="nmr"><strong>{{ $cleaningHistory[3]->name }}</strong></td>
+                    @endif
                 </tr>
-                @endif
+                {{-- @endif --}}
 
             <tr height="10px">
                 <td class="nmr"><b>Requestor</td>

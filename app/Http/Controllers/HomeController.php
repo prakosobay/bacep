@@ -66,7 +66,7 @@ class HomeController extends Controller
     {
 
         $role = Auth::user()->role;
-        if ((Auth::user()->role == 'boss') || (Auth::user()->role == 'check') || (Auth::user()->role == 'review'))
+        if ((Auth::user()->role == 'boss') || (Auth::user()->role == 'check') || (Auth::user()->role == 'review') || (Auth::user()->role == 'security'))
             if ($type_view == 'all') {
 
                 return view('approval');

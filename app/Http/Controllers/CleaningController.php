@@ -87,9 +87,9 @@ class CleaningController extends Controller
             // dd($cleaning);
             $cleaningFull = CleaningFull::create([
                 'cleaning_id' => $cleaning->cleaning_id,
-                'visitor_name' => $cleaning->visitor_name,
-                'visitor_company' => $cleaning->visitor_company,
-                'purpose_work' => $cleaning->purpose_work,
+                'visitor_name1' => $cleaning->cleaning_name_1,
+                'visitor_name2' => $cleaning->cleaning_name_2,
+                'cleaning_work' => $cleaning->cleaning_work,
                 'status' => 'Full Approved',
                 'link' =>  url("/cleaning_pdf/$cleaning->cleaning_id"),
             ]);
@@ -128,7 +128,7 @@ class CleaningController extends Controller
             ->where('cleaning_histories.cleaning_id', '=', $id)
             // ->where('cleaning_histories.role_to', '!=', '0')
             // ->where('cleaning_histories.role_to', '!=', 'check')
-            // ->where('cleaning_Histories.status', '!=', 'reviewed')
+            ->where('cleaning_Histories.status', '!=', 'created')
             ->where('cleaning_histories.status', '!=', 'visitor')
             ->select('cleaning_histories.*', 'users.name', 'created_by')
             ->get();
