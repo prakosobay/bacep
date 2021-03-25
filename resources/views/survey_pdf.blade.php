@@ -14,6 +14,12 @@
 
         .nmr{
             font-size:8pt;
+            text-align: center;
+        }
+
+        .center{
+            text-align: center;
+            text-size: 9pt;
         }
 
         @page {
@@ -23,10 +29,8 @@
 
     </style>
 
-    <center>
-        <h5>ACCESS REQUEST FORM</h5>
+        <h5 class="center">ACCESS REQUEST FORM</h5>
         <h5 class="nmr">Nomor : ARF/001/DCDV/XI/2019</h5>
-    </center>
 
     <table class='table table-bordered' width="600px" height="30px">
         <tr height="10px">
@@ -172,10 +176,10 @@
 
             </tbody>
         </table>
-        <center>
+
             <h5 class="nmr">On public holiday signatory will be handled by appointed Data Center Operation Shift Engineer on duty</h5>
             <h5 class="nmr">**(Pada hari libur Nasional tanda tangan akan diwakilkan kepetugas operasional yang ditunjuk)</h5>
-        </center>
+
     </body>
     </html>
 

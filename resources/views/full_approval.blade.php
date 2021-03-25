@@ -61,7 +61,7 @@
         </div>
     </nav>
 
-    <h3> @yield('judul_halaman') </h3>
+    <h3 class="center"> @yield('judul_halaman') </h3>
 
     @yield('konten')
 
@@ -79,7 +79,9 @@
     <!-- AdminLTE for demo purposes -->
     <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
     <!-- page script -->
+
     <script>
+
     $(function () {
     $("#example1").DataTable({
       "responsive": true,

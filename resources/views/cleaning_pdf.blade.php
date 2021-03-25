@@ -9,11 +9,17 @@
     <style type="text/css">
         table tr td,
         table tr th{
-            font-size: 7pt;
+            font-size: 6.5pt;
         }
 
         .nmr{
-            font-size:8pt;
+            font-size:7pt;
+            text-align: center;
+        }
+
+        .center{
+            text-align: center;
+            font-size: 9pt;
         }
 
         @page {
@@ -23,23 +29,21 @@
 
     </style>
 
-    <center>
-        <h5>ACCESS REQUEST FORM</h5>
+        <h5 class="center">ACCESS REQUEST FORM</h5>
         <h5 class="nmr">Nomor : ARF/001/DCDV/XI/2019</h5>
-    </center>
 
     <table class='table table-bordered' width="600px" height="30px">
         <tr height="10px">
-            <td width="100px">Time of Request</td>
-            <td width="500px">: </td>
+            <td width="100px"><b>Time of Request</td>
+            <td width="500px"><b>: {{$cleaning->created_at}}</td>
         </tr>
         <tr height="10px">
-            <td width="100px">No. </td>
-            <td width="500px">:</td>
+            <td width="100px"><b>No. </td>
+            <td width="500px"><b>: {{$cleaning->cleaning_id}}</td>
         </tr>
         <tr height="10px">
-            <td width="100px">Purpose of Work</td>
-            <td width="500px">: </td>
+            <td width="100px"><b>Purpose of Work</td>
+            <td width="500px"><b>: {{$cleaning->cleaning_work}}</td>
         </tr>
     </table>
 
@@ -48,14 +52,14 @@
             <td colspan="2"><b>Bali Tower Requestor </b></td>
         </tr>
         <tr height="10px">
-            <td width="100px">Name</td>
-            <td width="200px">: </td>
-            <td width="100px">Phone Number</td>
-            <td width="200px">: </td>
+            <td width="70px"><b>Name</td>
+            <td width="230px"><b>: Badai Sino Jendrang</td>
+            <td width="70px"><b>Phone Number</td>
+            <td width="230px"><b>: 0822-1028-2228</td>
         </tr>
         <tr height="10px">
-            <td>Department</td>
-            <td colspan="2">: </td>
+            <td width="70px"><b>Department</td>
+            <td colspan="2"><b>: Building Management</td>
     </table>
 
     <table class='table table-bordered' width="600px" height="40px">
@@ -63,20 +67,20 @@
             <td colspan="2"><b>VISITOR</b></td>
         </tr>
         <tr height="10px">
-            <td width="100px">Name</td>
-            <td width="200px">: </td>
-            <td width="100px">ID</td>
-            <td width="200px">: </td>
+            <td width="70px"><b>Name</td>
+            <td width="230px"><b>: {{$cleaning->cleaning_name_1}} & {{$cleaning->cleaning_name_2}}</td>
+            <td width="70px"><b>ID</td>
+            <td width="250px"><b>: {{$cleaning->cleaning_id_1}} & {{$cleaning->cleaning_id_2}}</td>
         </tr>
         <tr height="10px">
-            <td width="100px">Company</td>
-            <td width="200px">: </td>
-            <td width="100px">Phone Number</td>
-            <td width="200px">: </td>
+            <td width="70px"><b>Company</td>
+            <td width="230px"><b>: {{$cleaning->cleaning_pt_1}} & {{$cleaning->cleaning_pt_2}}</td>
+            <td width="70px"><b>Phone Number</td>
+            <td width="250px"><b>: {{$cleaning->cleaning_number_1}} & {{$cleaning->cleaning_number_2}}</td>
         </tr>
         <tr height="10px">
-            <td>Department</td>
-            <td colspan="2">: </td>
+            <td><b>Department</td>
+            <td colspan="2"><b>: Cleaner</td>
         </tr>
     </table>
 
@@ -86,61 +90,61 @@
             <td width="150px"><b>Access Type : </b></td>
         </tr>
         <tr height="10px">
-            <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 8px;">   Server Room</td>
-            <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 8px;">   Generator Room</td>
-            <td>General Access</td>
+            <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 8px;"><b>   Server Room</td>
+            <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 8px;"><b>   Generator Room</td>
+            <td><b>General Access</td>
             <td><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 8px;"></td>
         </tr>
         <tr height="10px">
-            <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 8px;">   MMR 1</td>
-            <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 8px;">   Panel Room</td>
-            <td>Limited Access</td>
+            <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 8px;"><b>   MMR 1</td>
+            <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 8px;"><b>   Panel Room</td>
+            <td><b>Limited Access</td>
             <td><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 8px;"></td>
         </tr>
         <tr height="10px">
-            <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 8px;">   MMR 2</td>
-            <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 8px;">   Battery Room</td>
-            <td>Escorted Access</td>
+            <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 8px;"><b>   MMR 2</td>
+            <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 8px;"><b>   Battery Room</td>
+            <td><b>Escorted Access</td>
             <td><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 8px;"></td>
         </tr>
         <tr height="10px">
-            <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 8px;">   UPS Room</td>
-            <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 8px;">   FSS Room</td>
+            <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 8px;"><b>   UPS Room</td>
+            <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 8px;"><b>   FSS Room</td>
             <td>  </td>
             <td>  </td>
         </tr>
         <tr height="10px">
-            <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 8px;">   Office 2nd FL</td>
-            <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 8px;">   Office 3rd FL</td>
+            <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 8px;"><b>   Office 2nd FL</td>
+            <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 8px;"><b>   Office 3rd FL</td>
             <td width="150px"><b>Validity :</td>
             </tr>
             <tr height="10px">
-                <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 8px;">   Yard</td>
-                <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 8px;">   Trafo Room</td>
+                <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 8px;"><b>   Yard</td>
+                <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 8px;"><b>   Trafo Room</td>
                 <td><b>From</td>
-                <td> : </td>
+                <td><b> : {{$cleaning->validity_from}}</td>
             </tr>
             <tr height="10px">
-                <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 8px;">   Others :</td>
-                <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 8px;">   Parking Lot</td>
+                <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 8px;"><b>   Others :</td>
+                <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 8px;"><b>   Parking Lot</td>
                 <td><b>To</td>
-            <td> : </td>
-        </tr>
+                <td><b> : {{$cleaning->validity_to}}</td>
+            </tr>
     </table>
 
     <table class='table table-bordered' width="600px" height="80px">
-        <thead>
+        {{-- <thead>
             <tr height="10px">
                 <th>Requestor By</th>
                 <th>Security</th>
                 <th>Approved By</th>
             </tr>
-        </thead>
+        </thead> --}}
 
-        <tbody>
-                <tr height="80px">
+
+                <tr width="500px">
                     @switch($lasthistoryC->status)
-                        @case('reviewed')
+                        @case('created')
                             <td height="40px"> </td>
                             @break
 
@@ -162,25 +166,23 @@
                     @endswitch
                 </tr>
 
-                @if($lasthistoryC->status != 'checked')
-                <tr>
-                        @foreach($surveyHistory as $p)
-                        <td><strong>{{ $p->name }}</strong></td>
-                        @endforeach
+                @if(($lasthistoryC->status != 'checked') || ($lasthistoryC->status != 'reviewed'))
+                <tr height="10px">
+                    @foreach($cleaningHistory as $p)
+                    <td class="nmr"><strong>{{ $p->name }}</strong></td>
+                    @endforeach
                 </tr>
                 @endif
 
-            </tbody>
+            <tr height="10px">
+                <td class="nmr"><b>Requestor</td>
+                <td class="nmr"><b>Security</td>
+                <td class="nmr"><b>Dept. Head Data Center</td>
+            </tr>
         </table>
-        <center>
+
             <h5 class="nmr">On public holiday signatory will be handled by appointed Data Center Operation Shift Engineer on duty</h5>
             <h5 class="nmr">**(Pada hari libur Nasional tanda tangan akan diwakilkan kepetugas operasional yang ditunjuk)</h5>
-        </center>
+
     </body>
     </html>
-
-    {{-- <tr>
-        @if($lasthistory->status == 'created')
-        <td><b>{{$surveyHsitory->name}}</b></td>
-        @endif
-    </tr> --}}

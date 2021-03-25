@@ -100,9 +100,9 @@ class CleaningController extends Controller
 
     public function cleaning_reject(Request $request)
     {
-        $lasthistory = CleaningHistory::where('cleaning_id', '=', $request->cleaning_id)->latest()->first();
-        if ($lasthistory->role_to != 'security') {
-            $lasthistory->update(['aktif' => false]);
+        $lasthistoryC = CleaningHistory::where('cleaning_id', '=', $request->cleaning_id)->latest()->first();
+        if ($lasthistoryC->role_to != 'security') {
+            $lasthistoryC->update(['aktif' => false]);
 
             $cleaningHistory = CleaningHistory::create([
                 'cleaning_id' => $request->cleaning_id,
@@ -111,7 +111,7 @@ class CleaningController extends Controller
                 'status' => 'rejected',
                 'aktif' => true,
             ]);
-            dd($cleaningHistory);
+            // dd($cleaningHistory);
             return $cleaningHistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
         }
     }

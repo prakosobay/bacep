@@ -29,7 +29,7 @@
                                         <td>{{ $p->cleaning_id }}</td>
                                         <td>{{ $p->created_at }}</td>
                                         <td>{{ $p->cleaning_name_1 }}</td>
-                                        <td>{{ $p->cleaning_name_1 }}</td>
+                                        <td>{{ $p->cleaning_name_2 }}</td>
                                         <td>{{ $p->cleaning_work }}</td>
                                         @if(Auth::user()->role != 'security')
                                         <td><a href="javascript:void(0)" class="approve" data-cleaning_id="{{$p->cleaning_id}}">Approve</a> |
