@@ -90,58 +90,74 @@
             <td width="150px"><b>Access Type : </b></td>
         </tr>
         <tr height="10px">
-            @if($cleaning->server == '1')
-            <td width="150px"><img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 20px; height: 8px;"><b>   Server Room</td>
-            <td width="150px"><img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 20px; height: 8px;"><b>   Generator Room</td>
-            @elseif($cleaning->generator == '1')
-            <td width="150px"><img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 20px; height: 8px;"><b>   Server Room</td>
-            <td width="150px"><img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 20px; height: 8px;"><b>   Generator Room</td>
-            @else
-            <td width="150px"><img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 20px; height: 8px;"><b>   Server Room</td>
-            <td width="150px"><img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 20px; height: 8px;"><b>   Generator Room</td>
-            @endif
+            <td width="150px">
+                @if($cleaning->server == '1')
+                <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 20px; height: 8px;"><b>   Server Room
+                @else
+                <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 20px; height: 8px;"><b>   Server Room
+                @endif
+            </td>
+            <td width="150px">
+                @if($cleaning->generator == '1')
+                <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 20px; height: 8px;"><b>   Generator Room
+                @else
+                <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 20px; height: 8px;"><b>   Generator Room
+                @endif
+            </td>
             <td><b>General Access</td>
             <td><img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 20px; height: 8px;"></td>
         </tr>
         <tr height="10px">
-            @if($cleaning->mmr1 == '1')
-            <td width="150px"><img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 20px; height: 8px;"><b>   MMR 1</td>
-            <td width="150px"><img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 20px; height: 8px;"><b>   Panel Room</td>
-            @elseif($cleaning->panel == '1')
-            <td width="150px"><img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 20px; height: 8px;"><b>   MMR 1</td>
-            <td width="150px"><img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 20px; height: 8px;"><b>   Panel Room</td>
-            @else
-            <td width="150px"><img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 20px; height: 8px;"><b>   MMR 1</td>
-            <td width="150px"><img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 20px; height: 8px;"><b>   Panel Room</td>
-            @endif
+            <td width="150px">
+                @if($cleaning->mmr1 == '1')
+                <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 20px; height: 8px;"><b>   MMR 1
+                @else
+                <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 20px; height: 8px;"><b>   MMR 1
+                @endif
+            </td>
+            <td width="150px">
+                @if($cleaning->panel == '1')
+                <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 20px; height: 8px;"><b>   Panel Room
+                @else
+                <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 20px; height: 8px;"><b>   Panel Room
+                @endif
+            </td>
             <td><b>Limited Access</td>
             <td><img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 20px; height: 8px;"></td>
         </tr>
         <tr height="10px">
-            @if($cleaning->mmr2 == '1')
-            <td width="150px"><img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 20px; height: 8px;"><b>   MMR 2</td>
-            <td width="150px"><img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 20px; height: 8px;"><b>   Battery Room</td>
-            @elseif($cleaning->battery == '1')
-            <td width="150px"><img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 20px; height: 8px;"><b>   MMR 2</td>
-            <td width="150px"><img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 20px; height: 8px;"><b>   Battery Room</td>
-            @else
-            <td width="150px"><img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 20px; height: 8px;"><b>   MMR 2</td>
-            <td width="150px"><img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 20px; height: 8px;"><b>   Battery Room</td>
-            @endif
+            <td width="150px">
+                @if($cleaning->mmr2 == '1')
+                <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 20px; height: 8px;"><b>   MMR 2
+                @else
+                <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 20px; height: 8px;"><b>   MMR 2
+                @endif
+            </td>
+            <td width="150px">
+                @if($cleaning->battery == '1')
+                <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 20px; height: 8px;"><b>   Battery Room
+                @else
+                <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 20px; height: 8px;"><b>   Battery Room
+                @endif
+            </td>
             <td><b>Escorted Access</td>
             <td><img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 20px; height: 8px;"></td>
         </tr>
         <tr height="10px">
-            @if($cleaning->ups == '1')
-            <td width="150px"><img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 20px; height: 8px;"><b>   UPS Room</td>
-            <td width="150px"><img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 20px; height: 8px;"><b>   FSS Room</td>
-            @elseif($cleanig->fss == '1')
-            <td width="150px"><img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 20px; height: 8px;"><b>   UPS Room</td>
-            <td width="150px"><img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 20px; height: 8px;"><b>   FSS Room</td>
-            @else
-            <td width="150px"><img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 20px; height: 8px;"><b>   UPS Room</td>
-            <td width="150px"><img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 20px; height: 8px;"><b>   FSS Room</td>
-            @endif
+            <td width="150px">
+                @if($cleaning->ups == '1')
+                <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 20px; height: 8px;"><b>   UPS Room
+                @else
+                <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 20px; height: 8px;"><b>   UPS Room
+                @endif
+            </td>
+            <td width="150px">
+                @if ($cleaning->fss == '1')
+                <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 20px; height: 8px;"><b>   FSS Room
+                @else
+                <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 20px; height: 8px;"><b>   FSS Room
+                @endif
+            </td>
             <td>  </td>
             <td>  </td>
         </tr>
@@ -151,21 +167,25 @@
             <td width="150px"><b>Validity :</td>
             </tr>
         <tr height="10px">
+            <td width="150px">
+                @if ($cleaning->trafo == '1')
+                <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 20px; height: 8px;"><b>   Trafo Room
+                @else
+                <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 20px; height: 8px;"><b>   Trafo Room
+                @endif
+            </td>
             <td width="150px"><img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 20px; height: 8px;"><b>   Yard</td>
-            @if($cleaning->trafo == '1')
-            <td width="150px"><img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 20px; height: 8px;"><b>   Trafo Room</td>
-            @else
-            <td width="150px"><img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 20px; height: 8px;"><b>   Trafo Room</td>
-            @endif
             <td><b>From</td>
             <td><b> : {{$cleaning->validity_from}}</td>
         </tr>
         <tr height="10px">
-            @if($cleaning->staging == '1')
-            <td width="150px"><img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 20px; height: 8px;"><b>   Others : Staging Room</td>
-            @else
-            <td width="150px"><img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 20px; height: 8px;"><b>   Others :</td>
-            @endif
+            <td width="150px">
+                @if($cleaning->staging == '1')
+                <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 20px; height: 8px;"><b>   Others : Staging Room
+                @else
+                <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 20px; height: 8px;"><b>   Others :
+                @endif
+            </td>
             <td width="150px"><img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 20px; height: 8px;"><b>   Parking Lot</td>
             <td><b>To</td>
             <td><b> : {{$cleaning->validity_to}}</td>
