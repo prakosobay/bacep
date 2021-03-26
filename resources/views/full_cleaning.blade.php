@@ -19,7 +19,7 @@
                             <tr>
                                 <th>No.</th>
                                 <th>ID Permit</th>
-                                <th>Visitor Name</th>
+                                <th>Date of Request</th>
                                 <th>Visitor Name</th>
                                 <th>Purpose Work</th>
                                 <th>Status</th>
@@ -32,8 +32,8 @@
                                 <tr>
                                     <td>{{ $num++ }}</td>
                                     <td>{{ $p->cleaning_id }}</td>
+                                    <td>{{ $p->created_at}}
                                     <td>{{ $p->cleaning_name_1 }}</td>
-                                    <td>{{ $p->cleaning_name_2 }}</td>
                                     <td>{{ $p->cleaning_work }}</td>
                                     <td>{{ $p->status }}</td>
                                     <td><a href="{{ $p->link }}">PDF</a></td>

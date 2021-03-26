@@ -90,117 +90,115 @@
             <td width="150px"><b>Access Type : </b></td>
         </tr>
         <tr height="10px">
-            <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 8px;"><b>   Server Room</td>
-            <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 8px;"><b>   Generator Room</td>
+            <td width="150px"><img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 20px; height: 8px;"><b>   Server Room</td>
+            <td width="150px"><img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 20px; height: 8px;"><b>   Generator Room</td>
             <td><b>General Access</td>
-            <td><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 8px;"></td>
+            <td><img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 20px; height: 8px;"></td>
         </tr>
         <tr height="10px">
-            <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 8px;"><b>   MMR 1</td>
-            <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 8px;"><b>   Panel Room</td>
+            <td width="150px"><img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 20px; height: 8px;"><b>   MMR 1</td>
+            <td width="150px"><img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 20px; height: 8px;"><b>   Panel Room</td>
             <td><b>Limited Access</td>
-            <td><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 8px;"></td>
+            <td><img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 20px; height: 8px;"></td>
         </tr>
         <tr height="10px">
-            <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 8px;"><b>   MMR 2</td>
-            <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 8px;"><b>   Battery Room</td>
+            <td width="150px"><img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 20px; height: 8px;"><b>   MMR 2</td>
+            <td width="150px"><img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 20px; height: 8px;"><b>   Battery Room</td>
             <td><b>Escorted Access</td>
-            <td><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 8px;"></td>
+            <td><img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 20px; height: 8px;"></td>
         </tr>
         <tr height="10px">
-            <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 8px;"><b>   UPS Room</td>
-            <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 8px;"><b>   FSS Room</td>
+            <td width="150px"><img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 20px; height: 8px;"><b>   UPS Room</td>
+            <td width="150px"><img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 20px; height: 8px;"><b>   FSS Room</td>
             <td>  </td>
             <td>  </td>
         </tr>
         <tr height="10px">
-            <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 8px;"><b>   Office 2nd FL</td>
-            <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 8px;"><b>   Office 3rd FL</td>
+            <td width="150px"><img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 20px; height: 8px;"><b>   Office 2nd FL</td>
+            <td width="150px"><img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 20px; height: 8px;"><b>   Office 3rd FL</td>
             <td width="150px"><b>Validity :</td>
             </tr>
-            <tr height="10px">
-                <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 8px;"><b>   Yard</td>
-                <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 8px;"><b>   Trafo Room</td>
-                <td><b>From</td>
-                <td><b> : {{$cleaning->validity_from}}</td>
-            </tr>
-            <tr height="10px">
-                <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 8px;"><b>   Others :</td>
-                <td width="150px"><img src="{{ public_path("gambar/kotak.png") }}" alt="" style="width: 20px; height: 8px;"><b>   Parking Lot</td>
-                <td><b>To</td>
-                <td><b> : {{$cleaning->validity_to}}</td>
-            </tr>
+        <tr height="10px">
+            <td width="150px"><img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 20px; height: 8px;"><b>   Yard</td>
+            <td width="150px"><img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 20px; height: 8px;"><b>   Trafo Room</td>
+            <td><b>From</td>
+            <td><b> : {{$cleaning->validity_from}}</td>
+        </tr>
+        <tr height="10px">
+            <td width="150px"><img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 20px; height: 8px;"><b>   Others :</td>
+            <td width="150px"><img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 20px; height: 8px;"><b>   Parking Lot</td>
+            <td><b>To</td>
+            <td><b> : {{$cleaning->validity_to}}</td>
+        </tr>
     </table>
 
+    {{-- <thead>
+        <tr height="10px">
+            <th>Requestor By</th>
+            <th>Security</th>
+            <th>Approved By</th>
+        </tr>
+    </thead> --}}
+
     <table class='table table-bordered' width="600px" height="80px">
-        {{-- <thead>
-            <tr height="10px">
-                <th>Requestor By</th>
-                <th>Security</th>
-                <th>Approved By</th>
-            </tr>
-        </thead> --}}
+        <tr>
+            @switch($lasthistoryC->status)
+                @case('created')
+                    <td width="200px" height="40px"> </td>
+                    @break
 
-                <tr width="600px">
-                    @switch($lasthistoryC->status)
-                        @case('created')
-                            <td height="40px"> </td>
-                            @break
+                {{-- @case('checked')
+                    <td><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 100px; height: 50px;"></td>
+                    @break --}}
 
-                        {{-- @case('checked')
-                            <td><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 100px; height: 50px;"></td>
-                            @break --}}
+                @case('secured')
+                        <td width="200px" height="40px"></td>
+                        <td width="200px" class="nmr"><img src="{{ public_path("gambar/Checked.png") }}" alt="" style="width: 80px; height: 40px;"></td>
+                        <td width="200px" height="40px"></td>
+                        @break
 
-                        @case('secured')
-                                <td height="40px"></td>
-                                <td class="nmr"><img src="{{ public_path("gambar/Checked.png") }}" alt="" style="width: 80px; height: 40px;"></td>
-                                <td height="40px"></td>
-                                @break
+                @case('final')
+                    <td width="200px" height="40px"></td>
+                    <td width="200px" class="nmr"><img src="{{ public_path("gambar/Checked.png") }}" alt="" style="width: 80px; height: 40px;"></td>
+                    <td width="200px" class="nmr"><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 80px; height: 40px;"></td>
+                    @break
+            @endswitch
+        </tr>
 
-                        @case('final')
-                            <td height="40px"></td>
-                            <td class="nmr"><img src="{{ public_path("gambar/Checked.png") }}" alt="" style="width: 80px; height: 40px;"></td>
-                            <td class="nmr"><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 80px; height: 40px;"></td>
-                            @break
-                    @endswitch
-                </tr>
+        <tr height="7px">
+            @if($lasthistoryC->status == 'created')
+            <td width="200px" class="nmr"><strong>Badai Sino Jendrang</strong></td>
+            <td width="200px" class="nmr"><strong></strong></td>
+            <td width="200px" class="nmr"><strong></strong></td>
 
-                {{-- @if(($lasthistoryC->status == 'created') || ($lasthistoryC->status == 'secured') || ($lasthistoryC->status == 'boss')) --}}
-                <tr height="10px">
-                    @if($lasthistoryC->status == 'created')
-                    <td width="200px" class="nmr"><strong>Badai Sino Jendrang</strong></td>
-                    <td width="200px" class="nmr"><strong></strong></td>
-                    <td width="200px" class="nmr"><strong></strong></td>
+            @elseif($lasthistoryC->status == 'reviewed')
+            <td width="200px" class="nmr"><strong>Badai Sino Jendrang</strong></td>
+            <td width="200px" class="nmr"><strong></strong></td>
+            <td width="200px" class="nmr"><strong></strong></td>
 
-                    @elseif($lasthistoryC->status == 'reviewed')
-                    <td width="200px" class="nmr"><strong>Badai Sino Jendrang</strong></td>
-                    <td width="200px" class="nmr"><strong></strong></td>
-                    <td width="200px" class="nmr"><strong></strong></td>
+            @elseif($lasthistoryC->status == 'checked')
+            <td width="200px" class="nmr"><strong>Badai Sino Jendrang</strong></td>
+            <td width="200px" class="nmr"><strong></strong></td>
+            <td width="200px" class="nmr"><strong></strong></td>
 
-                    @elseif($lasthistoryC->status == 'checked')
-                    <td width="200px" class="nmr"><strong>Badai Sino Jendrang</strong></td>
-                    <td width="200px" class="nmr"><strong></strong></td>
-                    <td width="200px" class="nmr"><strong></strong></td>
+            @elseif($lasthistoryC->status == 'secured')
+            <td width="200px" class="nmr"><strong>Badai Sino Jendrang</strong></td>
+            <td width="200px" class="nmr"><strong>{{ $cleaningHistory[2]->name }}</strong></td>
+            <td width="200px" class="nmr"><strong></strong></td>
 
-                    @elseif($lasthistoryC->status == 'secured')
-                    <td width="200px" class="nmr"><strong>Badai Sino Jendrang</strong></td>
-                    <td width="200px" class="nmr"><strong>{{ $cleaningHistory[2]->name }}</strong></td>
-                    <td width="200px" class="nmr"><strong></strong></td>
+            @elseif($lasthistoryC->status == 'final')
+            <td width="200px" class="nmr"><strong>Badai Sino Jendrang</strong></td>
+            <td width="200px" class="nmr"><strong>{{ $cleaningHistory[2]->name }}</strong></td>
+            <td width="200px" class="nmr"><strong>{{ $cleaningHistory[3]->name }}</strong></td>
+            @endif
+        </tr>
 
-                    @elseif($lasthistoryC->status == 'boss')
-                    <td width="200px" class="nmr"><strong>Badai Sino Jendrang</strong></td>
-                    <td width="200px" class="nmr"><strong>{{ $cleaningHistory[2]->name }}</strong></td>
-                    <td width="200px" class="nmr"><strong>{{ $cleaningHistory[3]->name }}</strong></td>
-                    @endif
-                </tr>
-                {{-- @endif --}}
-
-            <tr height="10px">
-                <td class="nmr"><b>Requestor</td>
-                <td class="nmr"><b>Security</td>
-                <td class="nmr"><b>Dept. Head Data Center</td>
-            </tr>
-        </table>
+        <tr>
+            <td width="200px" class="nmr"><b>Requestor</td>
+            <td width="200px" class="nmr"><b>Security</td>
+            <td width="200px" class="nmr"><b>Dept. Head Data Center</td>
+        </tr>
+    </table>
 
             <h5 class="nmr">On public holiday signatory will be handled by appointed Data Center Operation Shift Engineer on duty</h5>
             <h5 class="nmr">**(Pada hari libur Nasional tanda tangan akan diwakilkan kepetugas operasional yang ditunjuk)</h5>

@@ -87,8 +87,8 @@ class CleaningController extends Controller
             // dd($cleaning);
             $cleaningFull = CleaningFull::create([
                 'cleaning_id' => $cleaning->cleaning_id,
-                'visitor_name1' => $cleaning->cleaning_name_1,
-                'visitor_name2' => $cleaning->cleaning_name_2,
+                'cleaning_name_1' => $cleaning->cleaning_name_1,
+                'cleaning_name_2' => $cleaning->cleaning_name_2,
                 'cleaning_work' => $cleaning->cleaning_work,
                 'status' => 'Full Approved',
                 'link' =>  url("/cleaning_pdf/$cleaning->cleaning_id"),
@@ -135,7 +135,8 @@ class CleaningController extends Controller
         // dd($cleaningHistory);
         // $user = Users::where('id', $id)->where('name', $name)->get();
 
-        $pdf = PDF::loadview('cleaning_pdf', ['cleaning' => $cleaning, 'lasthistoryC' => $lasthistoryC, 'cleaningHistory' => $cleaningHistory]);
+        $pdf = PDF::loadview('cleaning_pdf', ['cleaning' => $cleaning, 'lasthistoryC' => $lasthistoryC, 'cleaningHistory' => $cleaningHistory])->setPaper('a4', 'portrait')->setWarnings(false);
         return $pdf->stream();
+        // PDF::loadHTML($html)->setPaper('a4', 'landscape')->setWarnings(false)->save('myfile.pdf')
     }
 }
