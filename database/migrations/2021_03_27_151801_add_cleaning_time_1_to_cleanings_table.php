@@ -14,12 +14,12 @@ class AddCleaningTime1ToCleaningsTable extends Migration
     public function up()
     {
         Schema::table('cleanings', function (Blueprint $table) {
-            $table->string('cleaning_time_1')->nullable()->after('cleaning_procedure_1');
-            $table->string('cleaning_time_2')->nullable()->after('cleaning_procedure_2');
-            $table->string('cleaning_time_3')->nullable()->after('cleaning_procedure_3');
-            $table->string('cleaning_time_4')->nullable()->after('cleaning_procedure_4');
-            $table->string('cleaning_time_5')->nullable()->after('cleaning_procedure_5');
-            $table->string('cleaning_time_6')->nullable()->after('cleaning_procedure_6');
+            $table->string('cleaning_time_1', 6)->nullable()->after('cleaning_procedure_1');
+            $table->string('cleaning_time_2', 6)->nullable()->after('cleaning_procedure_2');
+            $table->string('cleaning_time_3', 6)->nullable()->after('cleaning_procedure_3');
+            $table->string('cleaning_time_4', 6)->nullable()->after('cleaning_procedure_4');
+            $table->string('cleaning_time_5', 6)->nullable()->after('cleaning_procedure_5');
+            $table->string('cleaning_time_6', 6)->nullable()->after('cleaning_procedure_6');
         });
     }
 
