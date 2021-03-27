@@ -409,6 +409,7 @@
                         </select>
                     <P>
                     <h4 class="text-white">4. Detail Execution (Kegiatan)</h4>
+                        <input type="time" id="input-group7" placeholder="Time" name="cleaning_time_1">
                         <select id="input-group1" style="background: black;" name="cleaning_item_1">
                             <option value="">Item Operation (Barang yang Digunakan)</option>
                             <option value="Vacum-Majun-Kanebo-Kop">
@@ -425,6 +426,9 @@
                             </option>
                             <option value="Pel-Kanebo-Majun-Sapu-Stick Ball-Dusk Pan-Ember-Tangga">
                                 Pel - Kanebo - Majun - Sapu - Stick Ball - Dusk Pan - Ember - Tangga
+                            </option>
+                            <option value="Mesin Vacum-Ember-Pel">
+                                Mesin Vacum - Ember - Pel
                             </option>
                         </select>
                         <select id="input-group1" style="background: black;" name="cleaning_procedure_1">
@@ -480,8 +484,12 @@
                             <option value="Pembersihan Under Raised Floor Data Center">
                                 Pembersihan Under Raised Floor Data Center
                             </option>
+                            <option value="Vacum & pel ruangan Data Center (Server Room)">
+                                Vacum & pel ruangan Data Center (Server Room)
+                            </option>
                         </select>
 
+                        <input type="time" id="input-group7" placeholder="Time" name="cleaning_time_2">
                         <select id="input-group1" style="background: black;" name="cleaning_item_2">
                             <option value="">Item Operation (Barang yang Digunakan)</option>
                             <option value="Vacum-Majun-Kanebo-Kop">
@@ -498,6 +506,9 @@
                             </option>
                             <option value="Pel-Kanebo-Majun-Sapu-Stick Ball-Dusk Pan-Ember-Tangga">
                                 Pel - Kanebo - Majun - Sapu - Stick Ball - Dusk Pan - Ember - Tangga
+                            </option>
+                            <option value="Mesin Vacum-Ember-Pel">
+                                Mesin Vacum - Ember - Pel
                             </option>
                         </select>
                         <select id="input-group1" style="background: black;" name="cleaning_procedure_2">
@@ -553,8 +564,12 @@
                             <option value="Pembersihan Under Raised Floor Data Center">
                                 Pembersihan Under Raised Floor Data Center
                             </option>
+                            <option value="Vacum & pel ruangan Data Center (Server Room)">
+                                Vacum & pel ruangan Data Center (Server Room)
+                            </option>
                         </select>
 
+                        <input type="time" id="input-group7" placeholder="Time" name="cleaning_time_3">
                         <select id="input-group1" style="background: black;" name="cleaning_item_3">
                             <option value="">Item Operation (Barang yang Digunakan)</option>
                             <option value="Vacum-Majun-Kanebo-Kop">
@@ -571,6 +586,9 @@
                             </option>
                             <option value="Pel-Kanebo-Majun-Sapu-Stick Ball-Dusk Pan-Ember-Tangga">
                                 Pel - Kanebo - Majun - Sapu - Stick Ball - Dusk Pan - Ember - Tangga
+                            </option>
+                            <option value="Mesin Vacum-Ember-Pel">
+                                Mesin Vacum - Ember - Pel
                             </option>
                         </select>
                         <select id="input-group1" style="background: black;" name="cleaning_procedure_3">
@@ -626,8 +644,12 @@
                             <option value="Pembersihan Under Raised Floor Data Center">
                                 Pembersihan Under Raised Floor Data Center
                             </option>
+                            <option value="Vacum & pel ruangan Data Center (Server Room)">
+                                Vacum & pel ruangan Data Center (Server Room)
+                            </option>
                         </select>
 
+                        <input type="time" id="input-group7" placeholder="Time" name="cleaning_time_4">
                         <select id="input-group1" style="background: black;" name="cleaning_item_4">
                             <option value="">Item Operation (Barang yang Digunakan)</option>
                             <option value="Vacum-Majun-Kanebo-Kop">
@@ -644,6 +666,9 @@
                             </option>
                             <option value="Pel-Kanebo-Majun-Sapu-Stick Ball-Dusk Pan-Ember-Tangga">
                                 Pel - Kanebo - Majun - Sapu - Stick Ball - Dusk Pan - Ember - Tangga
+                            </option>
+                            <option value="Mesin Vacum-Ember-Pel">
+                                Mesin Vacum - Ember - Pel
                             </option>
                         </select>
                         <select id="input-group1" style="background: black;" name="cleaning_procedure_4">
@@ -699,8 +724,12 @@
                             <option value="Pembersihan Under Raised Floor Data Center">
                                 Pembersihan Under Raised Floor Data Center
                             </option>
+                            <option value="Vacum & pel ruangan Data Center (Server Room)">
+                                Vacum & pel ruangan Data Center (Server Room)
+                            </option>
                         </select>
 
+                        <input type="time" id="input-group7" placeholder="Time" name="cleaning_time_5">
                         <select id="input-group1" style="background: black;" name="cleaning_item_5">
                             <option value="">Item Operation (Barang yang Digunakan)</option>
                             <option value="Vacum-Majun-Kanebo-Kop">
@@ -717,6 +746,9 @@
                             </option>
                             <option value="Pel-Kanebo-Majun-Sapu-Stick Ball-Dusk Pan-Ember-Tangga">
                                 Pel - Kanebo - Majun - Sapu - Stick Ball - Dusk Pan - Ember - Tangga
+                            </option>
+                            <option value="Mesin Vacum-Ember-Pel">
+                                Mesin Vacum - Ember - Pel
                             </option>
                         </select>
                         <select id="input-group1" style="background: black;" name="cleaning_procedure_5">
@@ -772,8 +804,12 @@
                             <option value="Pembersihan Under Raised Floor Data Center">
                                 Pembersihan Under Raised Floor Data Center
                             </option>
+                            <option value="Vacum & pel ruangan Data Center (Server Room)">
+                                Vacum & pel ruangan Data Center (Server Room)
+                            </option>
                         </select>
 
+                        <input type="time" id="input-group7" placeholder="Time" name="cleaning_time_6">
                         <select id="input-group1" style="background: black;" name="cleaning_item_6">
                             <option value="">Item Operation (Barang yang Digunakan)</option>
                             <option value="Vacum-Majun-Kanebo-Kop">
@@ -790,6 +826,9 @@
                             </option>
                             <option value="Pel-Kanebo-Majun-Sapu-Stick Ball-Dusk Pan-Ember-Tangga">
                                 Pel - Kanebo - Majun - Sapu - Stick Ball - Dusk Pan - Ember - Tangga
+                            </option>
+                            <option value="Mesin Vacum-Ember-Pel">
+                                Mesin Vacum - Ember - Pel
                             </option>
                         </select>
                         <select id="input-group1" style="background: black;" name="cleaning_procedure_6">
@@ -844,6 +883,9 @@
                             </option>
                             <option value="Pembersihan Under Raised Floor Data Center">
                                 Pembersihan Under Raised Floor Data Center
+                            </option>
+                            <option value="Vacum & pel ruangan Data Center (Server Room)">
+                                Vacum & pel ruangan Data Center (Server Room)
                             </option>
                         </select>
                     <p>
