@@ -15,7 +15,6 @@
         .nmr{
             font-size:7pt;
             text-align: center;
-
         }
 
         .tujuh{
@@ -430,6 +429,68 @@
         <p class="tujuh">
             {{$cleaning->cleaning_rollback}}
         </p>
+        <p class="tujuh">
+            8. Person In Charge
+            <table class='table table-bordered' width="600px">
+                <thead>
+                    <tr>
+                        <th width="150px" class="nmr">Name</th>
+                        <th width="150px" class="nmr">Company</th>
+                        <th width="150px" class="nmr">Responsibility</th>
+                        <th width="150px" class="nmr">Mobile Number</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th class="nmr">{{$cleaning->cleaning_name_1}}</th>
+                        <th class="nmr">{{$cleaning->cleaning_pt_1}}</th>
+                        <th class="nmr">Cleaner</th>
+                        <th class="nmr">{{$cleaning->cleaning_number_1}}</th>
+                    </tr>
+                    <tr>
+                        <th class="nmr">{{$cleaning->cleaning_name_2}}</th>
+                        <th class="nmr">{{$cleaning->cleaning_pt_2}}</th>
+                        <th class="nmr">Cleaner</th>
+                        <th class="nmr">{{$cleaning->cleaning_number_2}}</th>
+                    </tr>
+                    <tr>
+                        <th class="nmr">{{$cleaning->cleaning_name_3}}</th>
+                        <th class="nmr">{{$cleaning->cleaning_pt_3}}</th>
+                        <th class="nmr"> </th>
+                        <th class="nmr">{{$cleaning->cleaning_number_3}}</th>
+                    </tr>
+                    <tr>
+                        <th class="nmr">{{$cleaning->cleaning_name_4}}</th>
+                        <th class="nmr">{{$cleaning->cleaning_pt_4}}</th>
+                        <th class="nmr"> </th>
+                        <th class="nmr">{{$cleaning->cleaning_number_4}}</th>
+                    </tr>
+                </tbody>
+            </table>
+        </p>
+        <p class="tujuh">
+            9. Supporting Documents
+        </p>
+        <p>    </p>
+        <p>    </p>
+        <div >
+            <table class='table table-bordered' width="600px">
+                <tr>
+                    <td><b>Prepared by:</b></td>
+                    <td>Badai Sino Jendrang</td>
+                    <td><b>Date</b></td>
+                    <td>{{$cleaning->created_at}}</td>
+                </tr>
+                <tr>
+                    <td><b>Reviewed by:</b></td>
+                </tr>
+                <tr>
+                    <td><b>Checked by:</b></td>
+                </tr>
+                <tr>
+                    <td><b>Approved by:</b></td>
+                </tr>
+            </table>
+        </div>
 </body>
-
 </html>
