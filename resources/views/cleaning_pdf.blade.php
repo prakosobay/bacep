@@ -20,6 +20,10 @@
         .center{
             text-align: center;
             font-size: 9pt;
+
+        div.page_break + div.page_break{
+            page-break-before: always;
+        }
         }
 
         @page {
@@ -29,6 +33,7 @@
 
     </style>
 
+<div class="page_break">
         <h5 class="center">ACCESS REQUEST FORM</h5>
         <h5 class="nmr">Nomor : ARF/001/DCDV/XI/2019</h5>
 
@@ -263,5 +268,10 @@
             <h5 class="nmr">On public holiday signatory will be handled by appointed Data Center Operation Shift Engineer on duty</h5>
             <h5 class="nmr">**(Pada hari libur Nasional tanda tangan akan diwakilkan kepetugas operasional yang ditunjuk)</h5>
 
-    </body>
-    </html>
+
+</div>
+        <h5 class="center">CHANGE REQUEST FORM</h5>
+        <h5 class="nmr">Nomor : CRF/001/DCDV/XI/2019</h5>
+
+</body>
+</html>
