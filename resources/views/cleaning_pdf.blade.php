@@ -15,25 +15,29 @@
         .nmr{
             font-size:7pt;
             text-align: center;
+
+        }
+
+        .tujuh{
+            font-size:7pt;
         }
 
         .center{
             text-align: center;
-            font-size: 9pt;
-
-        div.page_break + div.page_break{
-            page-break-before: always;
+            font-size: 10pt;
         }
+
+        .page_break + .page_break{
+            page-break-before: always;
         }
 
         @page {
-            margin-top: 0.5cm;
-            margin-bottom: 0.5cm;
+            margin-top: 0.4cm;
+            margin-bottom: 0.4cm;
         }
-
     </style>
 
-<div class="page_break">
+<div style="page-break-after: always;">
         <h5 class="center">ACCESS REQUEST FORM</h5>
         <h5 class="nmr">Nomor : ARF/001/DCDV/XI/2019</h5>
 
@@ -89,7 +93,7 @@
         </tr>
     </table>
 
-    <table class='table table-bordered' width="600px" height="175px">
+    <table class='table table-bordered' width="600px">
         <tr height="10px">
             <td width="150px" colspan="2"><b>Authorized Entry Area :</b></td>
             <td width="150px"><b>Access Type : </b></td>
@@ -197,14 +201,6 @@
         </tr>
     </table>
 
-    {{-- <thead>
-        <tr height="10px">
-            <th>Requestor By</th>
-            <th>Security</th>
-            <th>Approved By</th>
-        </tr>
-    </thead> --}}
-
     <table class='table table-bordered' width="600px" height="80px">
         <tr>
             @switch($lasthistoryC->status)
@@ -261,17 +257,179 @@
         <tr>
             <td width="200px" class="nmr"><b>Requestor</td>
             <td width="200px" class="nmr"><b>Security</td>
-            <td width="200px" class="nmr"><b>Dept. Head Data Center</td>
+            <td width="200px" class="nmr"><b>Head of Data Center Operation</td>
         </tr>
     </table>
 
-            <h5 class="nmr">On public holiday signatory will be handled by appointed Data Center Operation Shift Engineer on duty</h5>
-            <h5 class="nmr">**(Pada hari libur Nasional tanda tangan akan diwakilkan kepetugas operasional yang ditunjuk)</h5>
+        <h5 class="nmr">On public holiday signatory will be handled by appointed Data Center Operation Shift Engineer on duty</h5>
+        <h5 class="nmr">**(Pada hari libur Nasional tanda tangan akan diwakilkan kepetugas operasional yang ditunjuk)</h5>
 
-
-</div>
+    </div>
+    <div style="page-break-after: always;">
         <h5 class="center">CHANGE REQUEST FORM</h5>
         <h5 class="nmr">Nomor : CRF/001/DCDV/XI/2019</h5>
 
+        <p class="tujuh">
+            1. Background and Objectives
+        </p>
+        <p class="tujuh">
+            {{$cleaning->cleaning_background}}
+        </p>
+        <p class="tujuh">
+            2. Description of Scope of Work
+        </p>
+        <p class="tujuh">
+            {{$cleaning->cleaning_describ}}
+        </p>
+        <p class="tujuh">
+            3. Detail Time Table of All Activity
+            <table class='table table-bordered' width="600px">
+                <thead>
+                    <tr >
+                        <th width="50px" class="nmr">Date</th>
+                        <th width="70px" class="nmr">Time</th>
+                        <th width="190px" class="nmr">Activity Description</th>
+                        <th width="190px" class="nmr">Detail Service Impact</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr >
+                        <td class="nmr">{{$cleaning->validity_from}}</td>
+                        <td class="nmr">{{$cleaning->cleaning_time_1}}</td>
+                        <td class="nmr">{{$cleaning->cleaning_procedure_1}}</td>
+                        <td class="nmr">{{$cleaning->cleaning_risk_1}}</td>
+                    </tr>
+                    <tr >
+                        <td class="nmr">{{$cleaning->validity_from}}</td>
+                        <td class="nmr">{{$cleaning->cleaning_time_2}}</td>
+                        <td class="nmr">{{$cleaning->cleaning_procedure_2}}</td>
+                        <td class="nmr">{{$cleaning->cleaning_risk_2}}</td>
+                    </tr>
+                    <tr >
+                        <td class="nmr">{{$cleaning->validity_from}}</td>
+                        <td class="nmr">{{$cleaning->cleaning_time_3}}</td>
+                        <td class="nmr">{{$cleaning->cleaning_procedure_3}}</td>
+                        <td class="nmr">{{$cleaning->cleaning_risk_3}}</td>
+                    </tr>
+                    <tr >
+                        <td class="nmr">{{$cleaning->validity_from}}</td>
+                        <td class="nmr">{{$cleaning->cleaning_time_4}}</td>
+                        <td class="nmr">{{$cleaning->cleaning_procedure_4}}</td>
+                        <td class="nmr">{{$cleaning->cleaning_risk_4}}</td>
+                    </tr>
+                    <tr >
+                        <td class="nmr">{{$cleaning->validity_from}}</td>
+                        <td class="nmr">{{$cleaning->cleaning_time_5}}</td>
+                        <td class="nmr">{{$cleaning->cleaning_procedure_5}}</td>
+                        <td class="nmr">{{$cleaning->cleaning_risk_5}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </p>
+        <p class="tujuh">
+            4. Detail Operation and Execution
+            <table class='table table-bordered' width="600px">
+                <thead>
+                    <tr>
+                        <th width="70px" class="nmr">Time</th>
+                        <th width="230px" class="nmr">Item</th>
+                        <th width="200px" class="nmr">Working Procedure</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr >
+                        <td class="nmr">{{$cleaning->cleaning_time_1}}</td>
+                        <td class="nmr">{{$cleaning->cleaning_item_1}}</td>
+                        <td class="nmr">{{$cleaning->cleaning_procedure_1}}</td>
+                    </tr>
+                    <tr >
+                        <td class="nmr">{{$cleaning->cleaning_time_2}}</td>
+                        <td class="nmr">{{$cleaning->cleaning_item_2}}</td>
+                        <td class="nmr">{{$cleaning->cleaning_procedure_2}}</td>
+                    </tr>
+                    <tr >
+                        <td class="nmr">{{$cleaning->cleaning_time_3}}</td>
+                        <td class="nmr">{{$cleaning->cleaning_item_3}}</td>
+                        <td class="nmr">{{$cleaning->cleaning_procedure_3}}</td>
+                    </tr>
+                    <tr >
+                        <td class="nmr">{{$cleaning->cleaning_time_4}}</td>
+                        <td class="nmr">{{$cleaning->cleaning_item_4}}</td>
+                        <td class="nmr">{{$cleaning->cleaning_procedure_4}}</td>
+                    </tr>
+                    <tr >
+                        <td class="nmr">{{$cleaning->cleaning_time_5}}</td>
+                        <td class="nmr">{{$cleaning->cleaning_item_5}}</td>
+                        <td class="nmr">{{$cleaning->cleaning_procedure_5}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </p>
+        <p class="tujuh">
+            5. Risk and Service Area Impact
+            <table class='table table-bordered' width="600px">
+                <thead>
+                    <tr>
+                        <th width="120px" class="nmr">Risk Description</th>
+                        <th width="220px" class="nmr">Possibility</th>
+                        <th width="80px" class="nmr">Impact</th>
+                        <th width="180px" class="nmr">Mitigation Plan</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr >
+                        <td class="nmr">{{$cleaning->cleaning_risk_1}}</td>
+                        <td class="nmr">{{$cleaning->cleaning_possibility_1}}</td>
+                        <td class="nmr">{{$cleaning->cleaning_impact_1}}</td>
+                        <td class="nmr">{{$cleaning->cleaning_mitigation_1}}</td>
+                    </tr>
+                    <tr >
+                        <td class="nmr">{{$cleaning->cleaning_risk_2}}</td>
+                        <td class="nmr">{{$cleaning->cleaning_possibility_2}}</td>
+                        <td class="nmr">{{$cleaning->cleaning_impact_2}}</td>
+                        <td class="nmr">{{$cleaning->cleaning_mitigation_2}}</td>
+                    </tr>
+                    <tr >
+                        <td class="nmr">{{$cleaning->cleaning_risk_3}}</td>
+                        <td class="nmr">{{$cleaning->cleaning_possibility_3}}</td>
+                        <td class="nmr">{{$cleaning->cleaning_impact_3}}</td>
+                        <td class="nmr">{{$cleaning->cleaning_mitigation_3}}</td>
+                    </tr>
+                    <tr >
+                        <td class="nmr">{{$cleaning->cleaning_risk_4}}</td>
+                        <td class="nmr">{{$cleaning->cleaning_possibility_4}}</td>
+                        <td class="nmr">{{$cleaning->cleaning_impact_4}}</td>
+                        <td class="nmr">{{$cleaning->cleaning_mitigation_4}}</td>
+                    </tr>
+                    <tr >
+                        <td class="nmr">{{$cleaning->cleaning_risk_5}}</td>
+                        <td class="nmr">{{$cleaning->cleaning_possibility_5}}</td>
+                        <td class="nmr">{{$cleaning->cleaning_impact_5}}</td>
+                        <td class="nmr">{{$cleaning->cleaning_mitigation_5}}</td>
+                    </tr>
+                    <tr >
+                        <td class="nmr">{{$cleaning->cleaning_risk_6}}</td>
+                        <td class="nmr">{{$cleaning->cleaning_possibility_6}}</td>
+                        <td class="nmr">{{$cleaning->cleaning_impact_6}}</td>
+                        <td class="nmr">{{$cleaning->cleaning_mitigation_6}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </p>
+    </div>
+
+        <p class="tujuh">
+            6. Testing and Verification
+        </p>
+        <p class="tujuh">
+            {{$cleaning->cleaning_testing}}
+        </p>
+        <p class="tujuh">
+            7. Rollback Operation
+        </p>
+        <p class="tujuh">
+            {{$cleaning->cleaning_rollback}}
+        </p>
 </body>
+
 </html>

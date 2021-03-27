@@ -177,19 +177,6 @@
                     <h4 class="text-white">2. Description os Scope of Work (Deskripsikan Pekerjaan)</h4>
                         <input type="text" id="input-group" placeholder="Fill in here" name="cleaning_describ">
                     <p>
-                    {{-- <h4 class="text-white">3. All Activity (Aktivitas)</h4>
-                        <input type="time" id="input-group7" placeholder="Time" name="cleaning_time_1">
-
-                        <input type="text" id="input-group1" placeholder="Service Impact" name="cleaning_service_1">
-                        <input type="time" id="input-group7" placeholder="Time" name="cleaning_time_2">
-
-                        <input type="text" id="input-group1" placeholder="Service Impact" name="cleaning_service_2">
-                        <input type="time" id="input-group7" placeholder="Time" name="cleaning_time_3">
-
-                        <input type="text" id="input-group1" placeholder="Service Impact" name="cleaning_service_3">
-                        <input type="time" id="input-group7" placeholder="Time" name="cleaning_time_4">
-
-                        <input type="text" id="input-group1" placeholder="Service Impact" name="cleaning_service_4"> --}}
 
                     <h4 class="text-white">3. Risk and Service Area Impact (Resiko dan Dampak Area Servis)</h4>
                         <select id="input-group11" style="background: black;" name="cleaning_risk_1">
