@@ -155,6 +155,13 @@
                         MMR 2
                         </label>
                     </div>
+                    <div >
+                        <label class="radiobutton_container">
+                        <input id="1" name="pln" type="checkbox" value="1">
+                        <span class="radiobutton_mark"></span>
+                        Pintu Luar PLN
+                        </label>
+                    </div>
                 </div>
             </div>
         </div>
@@ -213,6 +220,7 @@
                             <option value="Menjaga jarak dari sumber listrik">Menjaga jarak dari sumber listrik</option>
                             <option value="Menjaga jarak dengan perangkat-perangkat critical tersebut">Menjaga jarak dengan perangkat-perangkat critical tersebut</option>
                             <option value="Pastikan tangga berdiri dengan benar">Pastikan tangga berdiri dengan benar</option>
+                            <option value="Tidak Menyentuh Tombol dan Display Parameter di Panel">Tidak Menyentuh Tombol dan Display Parameter di Panel</option>
                         </select>
 
                         <select id="input-group11" style="background: black;" name="cleaning_risk_2">
