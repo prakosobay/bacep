@@ -471,25 +471,51 @@
         <p class="tujuh">
             9. Supporting Documents
         </p>
-        <p>    </p>
-        <p>    </p>
+        <p>
+
+        </p>
+        <p>
+
+
+
+
+        </p>
         <div >
             <table class='table table-bordered' width="600px">
                 <tr>
-                    <td><b>Prepared by:</b></td>
-                    <td>Badai Sino Jendrang</td>
-                    <td><b>Date</b></td>
+                    <td width="70px"><b>Prepared by:</b></td>
+                    <td width="200px">Badai Sino Jendrang</td>
+                    <td >  </td>
+                    <td width="50px"><b>Date</b></td>
                     <td>{{$cleaning->created_at}}</td>
                 </tr>
+                @if($lasthistoryC->status == 'reviewed')
                 <tr>
                     <td><b>Reviewed by:</b></td>
+                    <td width="200px">{{$cleaningHistory[0]->name}}</td>
+                    <td >  </td>
+                    <td width="50px"><b>Date</b></td>
+                    <td>{{$cleaningHistory[0]->created_at}}</td>
                 </tr>
+                @endif
+                @if($lasthistoryC->status == 'checked')
                 <tr>
                     <td><b>Checked by:</b></td>
+                    <td width="200px">{{$cleaningHistory[1]->name}}</td>
+                    <td >  </td>
+                    <td width="50px"><b>Date</b></td>
+                    <td>{{$cleaningHistory[1]->created_at}}</td>
                 </tr>
+                @endif
+                @if($lasthistoryC->status == 'final')
                 <tr>
                     <td><b>Approved by:</b></td>
+                    <td width="200px">{{$cleaningHistory[3]->name}}</td>
+                    <td >  </td>
+                    <td width="50px"><b>Date</b></td>
+                    <td>{{$cleaningHistory[3]->created_at}}</td>
                 </tr>
+                @endif
             </table>
         </div>
 </body>

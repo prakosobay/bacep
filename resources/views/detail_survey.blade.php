@@ -45,7 +45,6 @@
                                 <th>Created By</th>
                                 <th>Purpose</th>
                                 <th>Status</th>
-                                <th>Created Date</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -56,7 +55,6 @@
                                     <td>{{ $p->name }}</td>
                                     <td>{{ $p->purpose_work }}</td>
                                     <td>{{ $p->status }}</td>
-                                    <td>{{ $p->created_at }}</td>
                                 </tr>
                             @endforeach
                         </tbody>

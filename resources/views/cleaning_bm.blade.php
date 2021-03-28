@@ -166,7 +166,6 @@
             </div>
         </div>
 
-
         <div  id="form2">
 
             <div class="center">
@@ -184,7 +183,6 @@
                     <h4 class="text-white">2. Description os Scope of Work (Deskripsikan Pekerjaan)</h4>
                         <input type="text" id="input-group" placeholder="Fill in here" name="cleaning_describ">
                     <p>
-
                     <h4 class="text-white">3. Risk and Service Area Impact (Resiko dan Dampak Area Servis)</h4>
                         <select id="input-group11" style="background: black;" name="cleaning_risk_1">
                             <option value="">Risk Description</option>
@@ -891,104 +889,104 @@
                         <input type="text" id="input-group" placeholder="Fill in here (isi disini)" name="cleaning_rollback">
                     <P>
                     <h4 class="text-white">7. Person in charge</h4>
-                        <select id="input-group11" style="background: black;" name="cleaning_name_1">
+                        <select id="input-group14" style="background: black;" name="cleaning_name_1">
                             <option value="">Name</option>
                             <option value="Alfani Sulaeman">Alfani Sulaeman</option>
                             <option value="Andi Sugandi">Andi Sugandi</option>
                             <option value="Jejen Jenudin">Jejen Jenudin</option>
                             <option value="Riko Adi Pratama">Riko Adi Pratama</option>
                         </select>
-                        <select id="input-group11" style="background: black;" name="cleaning_pt_1">
+                        <select id="input-group14" style="background: black;" name="cleaning_pt_1">
                             <option value="">Company</option>
                             <option value="PT Bijac">PT Bijac</option>
                             <option value="PT Enlulu">PT Enlulu</option>
                         </select>
-                        <select id="input-group11" style="background: black;" name="cleaning_number_1">
+                        <select id="input-group14" style="background: black;" name="cleaning_number_1">
                             <option value="">Mobile Number</option>
                             <option value="0895-3339-40730">0895-3339-40730</option>
                             <option value="0815-6461-7472">0815-6461-7472</option>
                             <option value="0896-3051-3484">0896-3051-3484</option>
                             <option value="0853-6864-8317">0853-6864-8317</option>
                         </select>
-                        <select id="input-group11" style="background: black;" name="cleaning_id_1">
+                        <select id="input-group14" style="background: black;" name="cleaning_id_1">
                             <option value="">ID Number</option>
                             <option value="3171031201870006">3171031201870006</option>
                             <option value="3204292311830001">3204292311830001</option>
                             <option value="3671052411880001">3671052411880001</option>
                             <option value="1802241705010001">1802241705010001</option>
                         </select>
-                        <select id="input-group11" style="background: black;" name="cleaning_name_2">
+                        <select id="input-group14" style="background: black;" name="cleaning_name_2">
                             <option value="">Name</option>
                             <option value="Alfani Sulaeman">Alfani Sulaeman</option>
                             <option value="Andi Sugandi">Andi Sugandi</option>
                             <option value="Jejen Jenudin">Jejen Jenudin</option>
                             <option value="Riko Adi Pratama">Riko Adi Pratama</option>
                         </select>
-                        <select id="input-group11" style="background: black;" name="cleaning_pt_2">
+                        <select id="input-group14" style="background: black;" name="cleaning_pt_2">
                             <option value="">Company</option>
                             <option value="PT Bijac">PT Bijac</option>
                             <option value="PT Enlulu">PT Enlulu</option>
                         </select>
-                        <select id="input-group11" style="background: black;" name="cleaning_number_2">
+                        <select id="input-group14" style="background: black;" name="cleaning_number_2">
                             <option value="">Mobile Number</option>
                             <option value="0895-3339-40730">0895-3339-40730</option>
                             <option value="0815-6461-7472">0815-6461-7472</option>
                             <option value="0896-3051-3484">0896-3051-3484</option>
                             <option value="0853-6864-8317">0853-6864-8317</option>
                         </select>
-                        <select id="input-group11" style="background: black;" name="cleaning_id_2">
+                        <select id="input-group14" style="background: black;" name="cleaning_id_2">
                             <option value="">ID Number</option>
                             <option value="3171031201870006">3171031201870006</option>
                             <option value="3204292311830001">3204292311830001</option>
                             <option value="3671052411880001">3671052411880001</option>
                             <option value="1802241705010001">1802241705010001</option>
                         </select>
-                        <select id="input-group11" style="background: black;" name="cleaning_name_3">
+                        <select id="input-group14" style="background: black;" name="cleaning_name_3">
                             <option value="">Name</option>
                             <option value="Alfani Sulaeman">Alfani Sulaeman</option>
                             <option value="Andi Sugandi">Andi Sugandi</option>
                             <option value="Jejen Jenudin">Jejen Jenudin</option>
                             <option value="Riko Adi Pratama">Riko Adi Pratama</option>
                         </select>
-                        <select id="input-group11" style="background: black;" name="cleaning_pt_3">
+                        <select id="input-group14" style="background: black;" name="cleaning_pt_3">
                             <option value="">Company</option>
                             <option value="PT Bijac">PT Bijac</option>
                             <option value="PT Enlulu">PT Enlulu</option>
                         </select>
-                        <select id="input-group11" style="background: black;" name="cleaning_number_3">
+                        <select id="input-group14" style="background: black;" name="cleaning_number_3">
                             <option value="">Mobile Number</option>
                             <option value="0895-3339-40730">0895-3339-40730</option>
                             <option value="0815-6461-7472">0815-6461-7472</option>
                             <option value="0896-3051-3484">0896-3051-3484</option>
                             <option value="0853-6864-8317">0853-6864-8317</option>
                         </select>
-                        <select id="input-group11" style="background: black;" name="cleaning_id_3">
+                        <select id="input-group14" style="background: black;" name="cleaning_id_3">
                             <option value="">ID Number</option>
                             <option value="3171031201870006">3171031201870006</option>
                             <option value="3204292311830001">3204292311830001</option>
                             <option value="3671052411880001">3671052411880001</option>
                             <option value="1802241705010001">1802241705010001</option>
                         </select>
-                        <select id="input-group11" style="background: black;" name="cleaning_name_4">
+                        <select id="input-group14" style="background: black;" name="cleaning_name_4">
                             <option value="">Name</option>
                             <option value="Alfani Sulaeman">Alfani Sulaeman</option>
                             <option value="Andi Sugandi">Andi Sugandi</option>
                             <option value="Jejen Jenudin">Jejen Jenudin</option>
                             <option value="Riko Adi Pratama">Riko Adi Pratama</option>
                         </select>
-                        <select id="input-group11" style="background: black;" name="cleaning_pt_4">
+                        <select id="input-group14" style="background: black;" name="cleaning_pt_4">
                             <option value="">Company</option>
                             <option value="PT Bijac">PT Bijac</option>
                             <option value="PT Enlulu">PT Enlulu</option>
                         </select>
-                        <select id="input-group11" style="background: black;" name="cleaning_number_4">
+                        <select id="input-group14" style="background: black;" name="cleaning_number_4">
                             <option value="">Mobile Number</option>
                             <option value="0895-3339-40730">0895-3339-40730</option>
                             <option value="0815-6461-7472">0815-6461-7472</option>
                             <option value="0896-3051-3484">0896-3051-3484</option>
                             <option value="0853-6864-8317">0853-6864-8317</option>
                         </select>
-                        <select id="input-group11" style="background: black;" name="cleaning_id_4">
+                        <select id="input-group14" style="background: black;" name="cleaning_id_4">
                             <option value="">ID Number</option>
                             <option value="3171031201870006">3171031201870006</option>
                             <option value="3204292311830001">3204292311830001</option>
@@ -998,7 +996,8 @@
 
                 </div>
             </div>
-            <P>
+            <p>
+            </p>
             <button type="submit" class="btn btn-warning text-white btn-submit">Submit Form</button>
             <button type="reset" class="btn btn-primary">Clear Form</button>
         </div>
