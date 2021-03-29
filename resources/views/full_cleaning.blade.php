@@ -19,6 +19,7 @@
                             <tr>
                                 <th>No.</th>
                                 <th>ID Permit</th>
+                                <th>Date of Request</th>
                                 <th>Visitor Name</th>
                                 <th>Purpose Work</th>
                                 <th>Status</th>
@@ -31,6 +32,7 @@
                                 <tr>
                                     <td>{{ $num++ }}</td>
                                     <td>{{ $p->cleaning_id }}</td>
+                                    <td>{{ $p->cleaning_date }}</td>
                                     <td>{{ $p->cleaning_name_1 }}</td>
                                     <td>{{ $p->cleaning_work }}</td>
                                     <td>{{ $p->status }}</td>

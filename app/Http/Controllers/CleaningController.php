@@ -90,6 +90,7 @@ class CleaningController extends Controller
                 'cleaning_name_1' => $cleaning->cleaning_name_1,
                 'cleaning_name_2' => $cleaning->cleaning_name_2,
                 'cleaning_work' => $cleaning->cleaning_work,
+                'cleaning_date' => $cleaning->created_at,
                 'status' => 'Full Approved',
                 'link' =>  url("/cleaning_pdf/$cleaning->cleaning_id"),
             ]);

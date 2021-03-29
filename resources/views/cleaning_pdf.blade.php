@@ -527,10 +527,33 @@
                 </tr>
                 <tr>
                     <td><b>Approved by:</b></td>
-                    <td width="200px">{{$cleaningHistory[3]->name}}</td>
+                    <td width="200px"></td>
                     <td >  </td>
                     <td ><b>Date</b></td>
-                    <td>{{$cleaningHistory[3]->created_at}}</td>
+                    <td></td>
+                </tr>
+                @endif
+                @if($lasthistoryC->status == 'secured')
+                <tr>
+                    <td><b>Reviewed by:</b></td>
+                    <td width="200px">{{$cleaningHistory[0]->name}}</td>
+                    <td ><img src="{{ public_path("gambar/Reviewed.png") }}" alt="" style="width: 80px; height: 40px;"></td>
+                    <td width="50px"><b>Date</b></td>
+                    <td>{{$cleaningHistory[0]->created_at}}</td>
+                </tr>
+                <tr>
+                    <td><b>Checked by:</b></td>
+                    <td width="200px">{{$cleaningHistory[1]->name}}</td>
+                    <td ><img src="{{ public_path("gambar/Checked.png") }}" alt="" style="width: 80px; height: 40px;"></td>
+                    <td ><b>Date</b></td>
+                    <td>{{$cleaningHistory[1]->created_at}}</td>
+                </tr>
+                <tr>
+                    <td><b>Approved by:</b></td>
+                    <td width="200px"></td>
+                    <td >  </td>
+                    <td ><b>Date</b></td>
+                    <td></td>
                 </tr>
                 @endif
                 @if($lasthistoryC->status == 'final')
