@@ -21,6 +21,10 @@
             font-size:7pt;
         }
 
+        .marginbottom{
+            margin-bottom:50px;
+        }
+
         .center{
             text-align: center;
             font-size: 10pt;
@@ -468,18 +472,12 @@
                 </tbody>
             </table>
         </p>
+        <div class="marginbottom">
         <p class="tujuh">
             9. Supporting Documents
         </p>
-        <p>
+        </div>
 
-        </p>
-        <p>
-
-
-
-
-        </p>
         <div >
             <table class='table table-bordered' width="600px">
                 <tr>
@@ -493,25 +491,67 @@
                 <tr>
                     <td><b>Reviewed by:</b></td>
                     <td width="200px">{{$cleaningHistory[0]->name}}</td>
-                    <td >  </td>
+                    <td ><img src="{{ public_path("gambar/Reviewed.png") }}" alt="" style="width: 80px; height: 40px;"></td></td>
                     <td width="50px"><b>Date</b></td>
                     <td>{{$cleaningHistory[0]->created_at}}</td>
+                </tr>
+                <tr>
+                    <td><b>Checked by:</b></td>
+                    <td width="200px"></td>
+                    <td >  </td>
+                    <td ><b>Date</b></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><b>Approved by:</b></td>
+                    <td width="200px"></td>
+                    <td >  </td>
+                    <td ><b>Date</b></td>
+                    <td></td>
                 </tr>
                 @endif
                 @if($lasthistoryC->status == 'checked')
                 <tr>
+                    <td><b>Reviewed by:</b></td>
+                    <td width="200px">{{$cleaningHistory[0]->name}}</td>
+                    <td ><img src="{{ public_path("gambar/Reviewed.png") }}" alt="" style="width: 80px; height: 40px;"></td>
+                    <td width="50px"><b>Date</b></td>
+                    <td>{{$cleaningHistory[0]->created_at}}</td>
+                </tr>
+                <tr>
                     <td><b>Checked by:</b></td>
                     <td width="200px">{{$cleaningHistory[1]->name}}</td>
-                    <td >  </td>
-                    <td width="50px"><b>Date</b></td>
+                    <td ><img src="{{ public_path("gambar/Checked.png") }}" alt="" style="width: 80px; height: 40px;"></td>
+                    <td ><b>Date</b></td>
                     <td>{{$cleaningHistory[1]->created_at}}</td>
                 </tr>
-                @endif
-                @if($lasthistoryC->status == 'final')
                 <tr>
                     <td><b>Approved by:</b></td>
                     <td width="200px">{{$cleaningHistory[3]->name}}</td>
                     <td >  </td>
+                    <td ><b>Date</b></td>
+                    <td>{{$cleaningHistory[3]->created_at}}</td>
+                </tr>
+                @endif
+                @if($lasthistoryC->status == 'final')
+                <tr>
+                    <td><b>Reviewed by:</b></td>
+                    <td width="200px">{{$cleaningHistory[0]->name}}</td>
+                    <td ><img src="{{ public_path("gambar/Reviewed.png") }}" alt="" style="width: 80px; height: 40px;"></td>
+                    <td width="50px"><b>Date</b></td>
+                    <td>{{$cleaningHistory[0]->created_at}}</td>
+                </tr>
+                <tr>
+                    <td><b>Checked by:</b></td>
+                    <td width="200px">{{$cleaningHistory[1]->name}}</td>
+                    <td ><img src="{{ public_path("gambar/Checked.png") }}" alt="" style="width: 80px; height: 40px;"></td>
+                    <td ><b>Date</b></td>
+                    <td>{{$cleaningHistory[1]->created_at}}</td>
+                </tr>
+                <tr>
+                    <td><b>Approved by:</b></td>
+                    <td width="200px">{{$cleaningHistory[3]->name}}</td>
+                    <td ><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 80px; height: 40px;"></td>
                     <td width="50px"><b>Date</b></td>
                     <td>{{$cleaningHistory[3]->created_at}}</td>
                 </tr>
