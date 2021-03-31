@@ -94,7 +94,11 @@ Route::middleware(['auth'])->group(function () {
     //Full Approval
     Route::get('/full_approval/{type_form}', [App\Http\Controllers\HomeController::class, 'approval_full']);
 
+
+
     //PDF
     Route::get('/survey_pdf/{id}', [App\Http\Controllers\HomeController::class, 'cetak_survey_pdf']);
     Route::get('/cleaning_pdf/{id}', [App\Http\Controllers\CleaningController::class, 'cetak_cleaning_pdf']);
 });
+
+Route::get('/kirim-email', [App\Http\Controllers\EmailController::class, 'index']);
