@@ -19,10 +19,12 @@ use Illuminate\Support\Facades\Auth;
 */
 
 
+Auth::routes(['verify' => true]);
 Route::get('/', function () {
     return view('auth.login');
 });
 
+Route::get('/testemail/send', [App\Http\Controllers\TestEmailController::class, 'send']);
 // Route::get('/Register', function () {
 //     return view('auth.register');
 // });
@@ -36,7 +38,7 @@ Route::get('/', function () {
 // Route::post('/sign_in', [LoginController::class, 'sign_in']);
 
 // Route::get('/milih', [HomeController::class, 'milih_role']);
-
+Route::get('/testemail/send', [App\Http\Controllers\TestEmailController::class, 'send']);
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/maintenance', function () {
@@ -63,7 +65,7 @@ Route::middleware(['auth'])->group(function () {
         return view('new_survey');
     });
 
-    Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware(['verified']);
 
     //Detail History
     Route::get('/detail_survey/{id}', [HomeController::class, 'detail_permit_survey']);
@@ -96,11 +98,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/testemail/send', [App\Http\Controllers\TestEmailController::class, 'send']);
 
-    // Route::get(, 'TestEmailController@sendEMail');
 
     //PDF
     Route::get('/survey_pdf/{id}', [App\Http\Controllers\HomeController::class, 'cetak_survey_pdf']);
     Route::get('/cleaning_pdf/{id}', [App\Http\Controllers\CleaningController::class, 'cetak_cleaning_pdf']);
 });
-
-Route::get('/kirim-email', [App\Http\Controllers\EmailController::class, 'index']);
