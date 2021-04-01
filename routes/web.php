@@ -94,7 +94,9 @@ Route::middleware(['auth'])->group(function () {
     //Full Approval
     Route::get('/full_approval/{type_form}', [App\Http\Controllers\HomeController::class, 'approval_full']);
 
+    Route::get('/testemail/send', [App\Http\Controllers\TestEmailController::class, 'send']);
 
+    // Route::get(, 'TestEmailController@sendEMail');
 
     //PDF
     Route::get('/survey_pdf/{id}', [App\Http\Controllers\HomeController::class, 'cetak_survey_pdf']);
