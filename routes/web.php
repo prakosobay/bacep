@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Auth;
 */
 
 
-Auth::routes(['verify' => true]);
+// Auth::routes(['verify' => true]);
 Route::get('/', function () {
     return view('auth.login');
 });
@@ -38,38 +38,34 @@ Route::get('/testemail/send', [App\Http\Controllers\TestEmailController::class, 
 // Route::post('/sign_in', [LoginController::class, 'sign_in']);
 
 // Route::get('/milih', [HomeController::class, 'milih_role']);
-Route::get('/testemail/send', [App\Http\Controllers\TestEmailController::class, 'send']);
+// Route::get('/testemail/send', [App\Http\Controllers\TestEmailController::class, 'send']);
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/maintenance', function () {
         return view('maintenance');
-    });
+    })->middleware(['verified']);
 
     Route::get('/survey', function () {
         return view('survey');
-    });
+    })->middleware(['verified']);
 
     Route::get('/mount', function () {
         return view('mount');
-    });
+    })->middleware(['verified']);
 
     Route::get('/troubleshoot', function () {
         return view('troubleshoot');
-    });
+    })->middleware(['verified']);
 
     Route::get('/cleaning_bm', function () {
         return view('cleaning_bm');
-    });
-
-    Route::get('/new_survey', function () {
-        return view('new_survey');
-    });
+    })->middleware(['verified']);
 
     Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware(['verified']);
 
     //Detail History
-    Route::get('/detail_survey/{id}', [HomeController::class, 'detail_permit_survey']);
-    Route::get('/detail_cleaning/{id}', [App\Http\Controllers\CleaningController::class, 'detail_permit_cleaning']);
+    Route::get('/detail_survey/{id}', [HomeController::class, 'detail_permit_survey'])->middleware(['verified']);
+    Route::get('/detail_cleaning/{id}', [App\Http\Controllers\CleaningController::class, 'detail_permit_cleaning'])->middleware(['verified']);
 
     //Approve
     Route::post('/approve_survey', [HomeController::class, 'approve_survey']);
@@ -91,15 +87,14 @@ Route::middleware(['auth'])->group(function () {
     // Route::get('/detail_cleaning{id}', [App\Http\Controllers\CleaningController::class, 'approve_cleaning']);
 
     //Approval view
-    Route::get('/approval/{type_view}', [App\Http\Controllers\HomeController::class, 'approval_view']);
+    Route::get('/approval/{type_view}', [App\Http\Controllers\HomeController::class, 'approval_view'])->middleware(['verified']);
 
     //Full Approval
-    Route::get('/full_approval/{type_form}', [App\Http\Controllers\HomeController::class, 'approval_full']);
+    Route::get('/full_approval/{type_form}', [App\Http\Controllers\HomeController::class, 'approval_full'])->middleware(['verified']);
 
-    Route::get('/testemail/send', [App\Http\Controllers\TestEmailController::class, 'send']);
-
+    Route::get('/testemail/send', [App\Http\Controllers\TestEmailController::class, 'send'])->middleware(['verified']);
 
     //PDF
-    Route::get('/survey_pdf/{id}', [App\Http\Controllers\HomeController::class, 'cetak_survey_pdf']);
-    Route::get('/cleaning_pdf/{id}', [App\Http\Controllers\CleaningController::class, 'cetak_cleaning_pdf']);
+    Route::get('/survey_pdf/{id}', [App\Http\Controllers\HomeController::class, 'cetak_survey_pdf'])->middleware(['verified']);
+    Route::get('/cleaning_pdf/{id}', [App\Http\Controllers\CleaningController::class, 'cetak_cleaning_pdf'])->middleware(['verified']);
 });
