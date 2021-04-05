@@ -184,6 +184,9 @@
                         <input type="text" id="input-group" placeholder="Fill in here" name="cleaning_describ">
                     <p>
                     <h4 class="text-white">3. Risk and Service Area Impact (Resiko dan Dampak Area Servis)</h4>
+                    <p>
+                        <font color="red" size="2">*Minimal Mengisi 4</font>
+                    </p>
                         <select id="input-group11" style="background: black;" name="cleaning_risk_1">
                             <option value="">Risk Description</option>
                             <option value="Tersengat Listrik">Tersengat Listrik</option>
@@ -402,6 +405,9 @@
                         </select>
                     <P>
                     <h4 class="text-white">4. Detail Execution (Kegiatan)</h4>
+                    <p>
+                        <font color="red" size="2">*Minimal Mengisi 4</font>
+                    </p>
                         <input type="time" id="input-group7" placeholder="Time" name="cleaning_time_1">
                         <select id="input-group1" style="background: black;" name="cleaning_item_1">
                             <option value="">Item Operation (Barang yang Digunakan)</option>
@@ -889,109 +895,114 @@
                         <input type="text" id="input-group" placeholder="Fill in here (isi disini)" name="cleaning_rollback">
                     <P>
                     <h4 class="text-white">7. Person in charge</h4>
-                        <select id="input-group14" style="background: black;" name="cleaning_name_1">
+                        <select id="input-group1" style="background: black;" name="cleaning_name_1">
                             <option value="">Name</option>
                             <option value="Alfani Sulaeman">Alfani Sulaeman</option>
                             <option value="Andi Sugandi">Andi Sugandi</option>
                             <option value="Jejen Jenudin">Jejen Jenudin</option>
-                            <option value="Riko Adi Pratama">Riko Adi Pratama</option>
-                        </select>
-                        <select id="input-group14" style="background: black;" name="cleaning_pt_1">
-                            <option value="">Company</option>
-                            <option value="PT Bijac">PT Bijac</option>
-                            <option value="PT Enlulu">PT Enlulu</option>
+                            <option value="Adam Qomaini">Adam Qomaini</option>
+                            <option value="Randi Andhika">Randi Andhika</option>
+                            <option value="Anita Aryani">Anita Aryani</option>
                         </select>
                         <select id="input-group14" style="background: black;" name="cleaning_number_1">
                             <option value="">Mobile Number</option>
                             <option value="0895-3339-40730">0895-3339-40730</option>
                             <option value="0815-6461-7472">0815-6461-7472</option>
                             <option value="0896-3051-3484">0896-3051-3484</option>
-                            <option value="0853-6864-8317">0853-6864-8317</option>
+                            <option value="0859-0544-4773">0859-0544-4773</option>
+                            <option value="0873-2124-378">0873-2124-378</option>
+                            <option value="0812-9073-7216">0812-9073-7216</option>
                         </select>
                         <select id="input-group14" style="background: black;" name="cleaning_id_1">
                             <option value="">ID Number</option>
                             <option value="3171031201870006">3171031201870006</option>
                             <option value="3204292311830001">3204292311830001</option>
                             <option value="3671052411880001">3671052411880001</option>
-                            <option value="1802241705010001">1802241705010001</option>
+                            <option value="3174011212980002">3174011212980002</option>
+                            <option value="3276011510880010">3276011510880010</option>
+                            <option value="5206025203881010">5206025203881010</option>
                         </select>
-                        <select id="input-group14" style="background: black;" name="cleaning_name_2">
+                        <select id="input-group1" style="background: black;" name="cleaning_name_2">
                             <option value="">Name</option>
                             <option value="Alfani Sulaeman">Alfani Sulaeman</option>
                             <option value="Andi Sugandi">Andi Sugandi</option>
                             <option value="Jejen Jenudin">Jejen Jenudin</option>
-                            <option value="Riko Adi Pratama">Riko Adi Pratama</option>
+                            <option value="Adam Qomaini">Adam Qomaini</option>
+                            <option value="Randi Andhika">Randi Andhika</option>
+                            <option value="Anita Aryani">Anita Aryani</option>
                         </select>
-                        <select id="input-group14" style="background: black;" name="cleaning_pt_2">
-                            <option value="">Company</option>
-                            <option value="PT Bijac">PT Bijac</option>
-                            <option value="PT Enlulu">PT Enlulu</option>
-                        </select>
+
                         <select id="input-group14" style="background: black;" name="cleaning_number_2">
                             <option value="">Mobile Number</option>
                             <option value="0895-3339-40730">0895-3339-40730</option>
                             <option value="0815-6461-7472">0815-6461-7472</option>
                             <option value="0896-3051-3484">0896-3051-3484</option>
-                            <option value="0853-6864-8317">0853-6864-8317</option>
+                            <option value="0859-0544-4773">0859-0544-4773</option>
+                            <option value="0873-2124-378">0873-2124-378</option>
+                            <option value="0812-9073-7216">0812-9073-7216</option>
                         </select>
                         <select id="input-group14" style="background: black;" name="cleaning_id_2">
                             <option value="">ID Number</option>
                             <option value="3171031201870006">3171031201870006</option>
                             <option value="3204292311830001">3204292311830001</option>
                             <option value="3671052411880001">3671052411880001</option>
-                            <option value="1802241705010001">1802241705010001</option>
+                            <option value="3174011212980002">3174011212980002</option>
+                            <option value="3276011510880010">3276011510880010</option>
+                            <option value="5206025203881010">5206025203881010</option>
                         </select>
-                        <select id="input-group14" style="background: black;" name="cleaning_name_3">
+                        <select id="input-group1" style="background: black;" name="cleaning_name_3">
                             <option value="">Name</option>
                             <option value="Alfani Sulaeman">Alfani Sulaeman</option>
                             <option value="Andi Sugandi">Andi Sugandi</option>
                             <option value="Jejen Jenudin">Jejen Jenudin</option>
-                            <option value="Riko Adi Pratama">Riko Adi Pratama</option>
-                        </select>
-                        <select id="input-group14" style="background: black;" name="cleaning_pt_3">
-                            <option value="">Company</option>
-                            <option value="PT Bijac">PT Bijac</option>
-                            <option value="PT Enlulu">PT Enlulu</option>
+                            <option value="Adam Qomaini">Adam Qomaini</option>
+                            <option value="Randi Andhika">Randi Andhika</option>
+                            <option value="Anita Aryani">Anita Aryani</option>
                         </select>
                         <select id="input-group14" style="background: black;" name="cleaning_number_3">
                             <option value="">Mobile Number</option>
                             <option value="0895-3339-40730">0895-3339-40730</option>
                             <option value="0815-6461-7472">0815-6461-7472</option>
                             <option value="0896-3051-3484">0896-3051-3484</option>
-                            <option value="0853-6864-8317">0853-6864-8317</option>
+                            <option value="0859-0544-4773">0859-0544-4773</option>
+                            <option value="0873-2124-378">0873-2124-378</option>
+                            <option value="0812-9073-7216">0812-9073-7216</option>
                         </select>
                         <select id="input-group14" style="background: black;" name="cleaning_id_3">
                             <option value="">ID Number</option>
                             <option value="3171031201870006">3171031201870006</option>
                             <option value="3204292311830001">3204292311830001</option>
                             <option value="3671052411880001">3671052411880001</option>
-                            <option value="1802241705010001">1802241705010001</option>
+                            <option value="3174011212980002">3174011212980002</option>
+                            <option value="3276011510880010">3276011510880010</option>
+                            <option value="5206025203881010">5206025203881010</option>
                         </select>
-                        <select id="input-group14" style="background: black;" name="cleaning_name_4">
+                        <select id="input-group1" style="background: black;" name="cleaning_name_4">
                             <option value="">Name</option>
                             <option value="Alfani Sulaeman">Alfani Sulaeman</option>
                             <option value="Andi Sugandi">Andi Sugandi</option>
                             <option value="Jejen Jenudin">Jejen Jenudin</option>
-                            <option value="Riko Adi Pratama">Riko Adi Pratama</option>
-                        </select>
-                        <select id="input-group14" style="background: black;" name="cleaning_pt_4">
-                            <option value="">Company</option>
-                            <option value="PT Bijac">PT Bijac</option>
-                            <option value="PT Enlulu">PT Enlulu</option>
+                            <option value="Adam Qomaini">Adam Qomaini</option>
+                            <option value="Randi Andhika">Randi Andhika</option>
+                            <option value="Anita Aryani">Anita Aryani</option>
                         </select>
                         <select id="input-group14" style="background: black;" name="cleaning_number_4">
                             <option value="">Mobile Number</option>
                             <option value="0895-3339-40730">0895-3339-40730</option>
                             <option value="0815-6461-7472">0815-6461-7472</option>
                             <option value="0896-3051-3484">0896-3051-3484</option>
-                            <option value="0853-6864-8317">0853-6864-8317</option>
+                            <option value="0859-0544-4773">0859-0544-4773</option>
+                            <option value="0873-2124-378">0873-2124-378</option>
+                            <option value="0812-9073-7216">0812-9073-7216</option>
                         </select>
                         <select id="input-group14" style="background: black;" name="cleaning_id_4">
                             <option value="">ID Number</option>
                             <option value="3171031201870006">3171031201870006</option>
                             <option value="3204292311830001">3204292311830001</option>
                             <option value="3671052411880001">3671052411880001</option>
-                            <option value="1802241705010001">1802241705010001</option>
+                            <option value="3174011212980002">3174011212980002</option>
+                            <option value="3276011510880010">3276011510880010</option>
+                            <option value="5206025203881010">5206025203881010</option>
                         </select>
 
                 </div>
