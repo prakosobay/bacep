@@ -10,6 +10,8 @@ use App\Models\CleaningFull;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Barryvdh\DomPDF\Facade as PDF;
+use App\Mail\MailTemp1;
+use Illuminate\Support\Facades\Mail;
 
 class CleaningController extends Controller
 {
@@ -18,6 +20,7 @@ class CleaningController extends Controller
         // dd($request);
         if (Auth::user()->role == 'bm')
             $cleaning = Cleaning::create($request->all());
+        Mail::to(Auth::user()->role == 'review')->send(new MailTemp1());
         if ($cleaning->exists) {
             $cleaningHistory = CleaningHistory::create([
                 'cleaning_id' => $cleaning->cleaning_id,
@@ -105,6 +108,7 @@ class CleaningController extends Controller
         if ($lasthistoryC->role_to != 'security') {
             $lasthistoryC->update(['aktif' => false]);
 
+            // Mail::to(Auth::user()->role)->send(new MailTemp1());
             $cleaningHistory = CleaningHistory::create([
                 'cleaning_id' => $request->cleaning_id,
                 'created_by' => Auth::user()->id,

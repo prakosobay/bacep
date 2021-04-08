@@ -61,7 +61,7 @@
 
     <table class='table table-bordered' width="600px" height="30px">
         <tr height="10px">
-            <td colspan="2"><b>Bali Tower Requestor </b></td>
+            <td width="600px" colspan="4"><b>Bali Tower Requestor </b></td>
         </tr>
         <tr height="10px">
             <td width="70px"><b>Name</td>
@@ -71,12 +71,12 @@
         </tr>
         <tr height="10px">
             <td width="70px"><b>Department</td>
-            <td colspan="2"><b>: Building Management</td>
+            <td colspan="3"><b>: Building Management</td>
     </table>
 
     <table class='table table-bordered' width="600px" height="40px">
         <tr height="10px">
-            <td colspan="2"><b>VISITOR</b></td>
+            <td width="600px" colspan="4"><b>VISITOR</b></td>
         </tr>
         <tr height="10px">
             <td width="70px"><b>Name</td>
@@ -86,20 +86,20 @@
         </tr>
         <tr height="10px">
             <td width="70px"><b>Company</td>
-            <td width="230px"><b>: {{$cleaning->cleaning_pt_1}} & {{$cleaning->cleaning_pt_2}}</td>
+            <td width="230px"><b>: PT Bijac</td>
             <td width="70px"><b>Phone Number</td>
             <td width="230px"><b>: {{$cleaning->cleaning_number_1}} & {{$cleaning->cleaning_number_2}}</td>
         </tr>
         <tr height="10px">
             <td><b>Department</td>
-            <td colspan="2"><b>: Cleaner</td>
+            <td colspan="4"><b>: Cleaner</td>
         </tr>
     </table>
 
     <table class='table table-bordered' width="600px">
         <tr height="10px">
             <td width="150px" colspan="2"><b>Authorized Entry Area :</b></td>
-            <td width="150px"><b>Access Type : </b></td>
+            <td width="150px" colspan="2"><b>Access Type : </b></td>
         </tr>
         <tr height="10px">
             <td width="150px">
@@ -170,13 +170,12 @@
                 <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 20px; height: 8px;"><b>   FSS Room
                 @endif
             </td>
-            <td>  </td>
-            <td>  </td>
+            <td colspan="2">  </td>
         </tr>
         <tr height="10px">
             <td width="150px"><img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 20px; height: 8px;"><b>   Office 2nd FL</td>
             <td width="150px"><img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 20px; height: 8px;"><b>   Office 3rd FL</td>
-            <td width="150px"><b>Validity :</td>
+            <td width="150px" colspan="2"><b>Validity :</td>
             </tr>
         <tr height="10px">
             <td width="150px">
