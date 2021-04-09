@@ -21,14 +21,6 @@
 
     <script src="{{ asset('js/select2.min.js') }}"></script>
 
-    {{-- <style>
-        .select2-selection .select2-selection--multiple{
-            min-width: 330px;
-            margin-left: 15px!important;
-            border-color: lightgray;
-        }
-    </style> --}}
-
     {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
 
     <script>

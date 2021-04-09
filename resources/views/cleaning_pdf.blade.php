@@ -74,7 +74,7 @@
             <td colspan="3"><b>: Building Management</td>
     </table>
 
-    <table class='table table-bordered' width="600px" height="40px">
+    <table class='table table-bordered' width="600px" height="30px">
         <tr height="10px">
             <td width="600px" colspan="4"><b>VISITOR</b></td>
         </tr>

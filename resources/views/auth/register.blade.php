@@ -38,7 +38,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        {{-- <div class="form-group row">
                             <label for="department" class="col-md-4 col-form-label text-md-right">{{ __('Department') }}</label>
 
                             <div class="col-md-6">
@@ -50,9 +50,26 @@
                                     </span>
                                 @enderror
                             </div>
-                        </div>
+                        </div> --}}
 
                         <div class="form-group row">
+                            <label for="department-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Department') }}</label>
+
+                            <div class="col-md-6">
+                            <select class="my-select-multiple form-control @error('department') is-invalid @enderror" id="department" name="department[]" value="{{ old('department') }}" multiple="multiple" required autocomplete="department">
+                                <option value="dc">Data Center</option>
+                                <option value="bm">Building Management</option>
+                            </select>
+
+                            @error('department')
+                                    <span class="invalid-feedback" department="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        {{-- <div class="form-group row">
                             <label for="role" class="col-md-4 col-form-label text-md-right">{{ __('Role') }}</label>
 
                             <div class="col-md-6">
@@ -64,8 +81,28 @@
                                     </span>
                                 @enderror
                             </div>
-                        </div>
+                        </div> --}}
 
+                        <div class="form-group row">
+                            <label for="role-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Role') }}</label>
+
+                            <div class="col-md-6">
+                            <select class="my-select-multiple form-control @error('role') is-invalid @enderror" id="role" name="roles[]" value="{{ old('role') }}" multiple="multiple" required autocomplete="role">
+                                <option value="review">Review</option>
+                                <option value="check">Check</option>
+                                <option value="security">Security</option>
+                                <option value="approve">Boss</option>
+                                <option value="visitor">Visitor</option>
+                                <option value="requestor">Requestor</option>
+                            </select>
+
+                            @error('role')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
 
                         <div class="form-group row">
                             <label for="phone" class="col-md-4 col-form-label text-md-right">{{ __('Phone Number') }}</label>
@@ -103,18 +140,6 @@
                             </div>
                         </div>
 
-                        {{-- <div class="form-group row">
-                            <label for="role-confirm" class="col-md-4 col-form-label text-md-right">Pilih Role</label>
-                            <select class="my-select-multiple" name="roles[]" multiple="multiple" style="min-width:330px" style="margin-left:15px">
-                                <option value="review">Review</option>
-                                <option value="check">Check</option>
-                                <option value="security">Security</option>
-                                <option value="boss">Boss</option>
-                                <option value="visitor">Visitor</option>
-                                <option value="bm">BM</option>
-                            </select>
-
-                        </div> --}}
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
