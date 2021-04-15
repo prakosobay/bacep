@@ -39,8 +39,8 @@ return [
             'host' => env('MAIL_HOST', 'mail.balitower.co.id'),
             'port' => env('MAIL_PORT', 587),
             'encryption' => env('MAIL_ENCRYPTION', 'tls'),
-            'username' => env('MAIL_USERNAME'),
-            'password' => env('MAIL_PASSWORD'),
+            'username' => env('MAIL_USERNAME', 'bayu.prakoso@balitower.co.id'),
+            'password' => env('MAIL_PASSWORD', 'B20111270'),
             'timeout' => null,
             'auth_mode' => null,
         ],
@@ -71,6 +71,7 @@ return [
             'transport' => 'array',
         ],
     ],
+
 
     /*
     |--------------------------------------------------------------------------

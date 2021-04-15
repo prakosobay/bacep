@@ -38,7 +38,7 @@
                             </div>
                         </div>
 
-                        {{-- <div class="form-group row">
+                        <div class="form-group row">
                             <label for="department" class="col-md-4 col-form-label text-md-right">{{ __('Department') }}</label>
 
                             <div class="col-md-6">
@@ -50,26 +50,11 @@
                                     </span>
                                 @enderror
                             </div>
-                        </div> --}}
-
-                        <div class="form-group row">
-                            <label for="department-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Department') }}</label>
-
-                            <div class="col-md-6">
-                            <select class="my-select-multiple form-control @error('department') is-invalid @enderror" id="department" name="department[]" value="{{ old('department') }}" multiple="multiple" required autocomplete="department">
-                                <option value="dc">Data Center</option>
-                                <option value="bm">Building Management</option>
-                            </select>
-
-                            @error('department')
-                                    <span class="invalid-feedback" department="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
                         </div>
 
-                        {{-- <div class="form-group row">
+
+
+                        <div class="form-group row">
                             <label for="role" class="col-md-4 col-form-label text-md-right">{{ __('Role') }}</label>
 
                             <div class="col-md-6">
@@ -81,9 +66,9 @@
                                     </span>
                                 @enderror
                             </div>
-                        </div> --}}
+                        </div>
 
-                        <div class="form-group row">
+                        {{-- <div class="form-group row">
                             <label for="role-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Role') }}</label>
 
                             <div class="col-md-6">
@@ -102,7 +87,7 @@
                                     </span>
                                 @enderror
                             </div>
-                        </div>
+                        </div> --}}
 
                         <div class="form-group row">
                             <label for="phone" class="col-md-4 col-form-label text-md-right">{{ __('Phone Number') }}</label>
