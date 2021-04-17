@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\HomeController;
+use App\Models\User;
 use App\Models\Cleaning;
 use App\Models\CleaningHistory;
 use App\Models\CleaningFull;
@@ -20,7 +21,7 @@ class CleaningController extends Controller
         // dd($request);
         if (Auth::user()->role == 'bm')
             $cleaning = Cleaning::create($request->all());
-        Mail::to(Auth::user()->role == 'review')->send(new MailTemp1());
+
         if ($cleaning->exists) {
             $cleaningHistory = CleaningHistory::create([
                 'cleaning_id' => $cleaning->cleaning_id,
@@ -32,6 +33,7 @@ class CleaningController extends Controller
 
             return $cleaningHistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
         }
+        Mail::to($table->email)->send(new MailTemp1($table->nama));
 
         return response()->json(['status' => 'FAILED']);
     }

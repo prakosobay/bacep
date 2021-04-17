@@ -11,7 +11,7 @@ class TestEmailController extends Controller
 {
     public function send()
     {
-        Mail::to("mz@balitower.co.id")->send(new MailTemp1());
+        Mail::to("bayu.prakoso@balitower.co.id")->send(new MailTemp1());
 
         return "Email telah dikirim";
     }
