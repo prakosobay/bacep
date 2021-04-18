@@ -4,15 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\HomeController;
-use App\Models\User;
 use App\Models\Cleaning;
 use App\Models\CleaningHistory;
 use App\Models\CleaningFull;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Barryvdh\DomPDF\Facade as PDF;
-use App\Mail\MailTemp1;
-use Illuminate\Support\Facades\Mail;
+
 
 class CleaningController extends Controller
 {
@@ -33,7 +31,7 @@ class CleaningController extends Controller
 
             return $cleaningHistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
         }
-        Mail::to($input->email)->send(new MailTemp1($input->nama));
+        // Mail::to($input->email)->send(new MailTemp1($input->nama));
 
         return response()->json(['status' => 'FAILED']);
     }

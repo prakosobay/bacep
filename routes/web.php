@@ -24,7 +24,8 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::get('/testemail/send', [App\Http\Controllers\TestEmailController::class, 'send']);
+// Route::get('/testemail/send', [App\Http\Controllers\TestEmailController::class, 'send']);
+Route::get('/kirimemail', [App\Http\Controllers\TesEmailController::class, 'index']);
 // Route::get('/Register', function () {
 //     return view('auth.register');
 // });

@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\MailTemp1;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Mail\NotifEmail;
 use Illuminate\Support\Facades\Mail;
 
-class TestEmailController extends Controller
+class TesEmailController extends Controller
 {
-    public function send()
+    public function index()
     {
-        Mail::to("bayu.prakoso@balitower.co.id")->send(new MailTemp1());
+
+        Mail::to("bayu.prakoso@balitower.co.id")->send(new NotifEmail());
 
         return "Email telah dikirim";
     }

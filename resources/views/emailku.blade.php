@@ -30,10 +30,12 @@
 </head>
 <body>
     <div class="card">
-        <h3 class="">Welcome To Our App {{$nama}}</h3>
+        <h3 class="">Hallo, {{ $nama }} !</h3>
         <hr class="garis">
-        <p>Form Permit Anda akan di review</p>
-        <h4>Terima kasih</h4>
+        <p>{{ $pesan }}</p>
+
+        <p>Silahkan Login di  <a href="http://localhost:8000/approval/all">http://localhost:8000/approval/all</a></p>
+        <p>Login oi</p>
     </div>
 </body>
 </html>
