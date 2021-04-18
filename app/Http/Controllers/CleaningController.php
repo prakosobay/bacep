@@ -33,7 +33,7 @@ class CleaningController extends Controller
 
             return $cleaningHistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
         }
-        Mail::to($table->email)->send(new MailTemp1($table->nama));
+        Mail::to($input->email)->send(new MailTemp1($input->nama));
 
         return response()->json(['status' => 'FAILED']);
     }
