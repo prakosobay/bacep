@@ -24,8 +24,8 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-// Route::get('/testemail/send', [App\Http\Controllers\TestEmailController::class, 'send']);
-Route::get('/kirimemail', [App\Http\Controllers\TesEmailController::class, 'index']);
+Route::get('/kirimemail', [App\Http\Controllers\TesEmailController::class, 'index'])->middleware(['verified']);
+
 // Route::get('/Register', function () {
 //     return view('auth.register');
 // });
@@ -39,7 +39,6 @@ Route::get('/kirimemail', [App\Http\Controllers\TesEmailController::class, 'inde
 // Route::post('/sign_in', [LoginController::class, 'sign_in']);
 
 // Route::get('/milih', [HomeController::class, 'milih_role']);
-// Route::get('/testemail/send', [App\Http\Controllers\TestEmailController::class, 'send']);
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/maintenance', function () {
@@ -92,8 +91,6 @@ Route::middleware(['auth'])->group(function () {
 
     //Full Approval
     Route::get('/full_approval/{type_form}', [App\Http\Controllers\HomeController::class, 'approval_full'])->middleware(['verified']);
-
-    Route::get('/testemail/send', [App\Http\Controllers\TestEmailController::class, 'send'])->middleware(['verified']);
 
     //PDF
     Route::get('/survey_pdf/{id}', [App\Http\Controllers\HomeController::class, 'cetak_survey_pdf'])->middleware(['verified']);

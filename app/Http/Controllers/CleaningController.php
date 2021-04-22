@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\TesEmailController;
 use App\Models\Cleaning;
 use App\Models\CleaningHistory;
 use App\Models\CleaningFull;
@@ -31,7 +32,6 @@ class CleaningController extends Controller
 
             return $cleaningHistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
         }
-        // Mail::to($input->email)->send(new MailTemp1($input->nama));
 
         return response()->json(['status' => 'FAILED']);
     }

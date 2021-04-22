@@ -12,8 +12,13 @@ class TesEmailController extends Controller
     public function index()
     {
 
-        Mail::to("bayu.prakoso@balitower.co.id")->send(new NotifEmail());
+        // Mail::to("bayu.prakoso@balitower.co.id")->send(new NotifEmail());
 
+        // return "Email telah dikirim";
+
+        foreach (['bayu230498@gmail.com', 'bayu.prakoso@balitower.co.id'] as $recipient) {
+            Mail::to($recipient)->send(new NotifEmail());
+        }
         return "Email telah dikirim";
     }
 }
