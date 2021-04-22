@@ -24,7 +24,7 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::get('/kirimemail', [App\Http\Controllers\TesEmailController::class, 'index'])->middleware(['verified']);
+// Route::get('/kirimemail', [App\Http\Controllers\TesEmailController::class, 'index'])->middleware(['verified']);
 
 // Route::get('/Register', function () {
 //     return view('auth.register');

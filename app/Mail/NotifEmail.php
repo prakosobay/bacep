@@ -32,7 +32,7 @@ class NotifEmail extends Mailable
             ->view('emailku')
             ->with(
                 [
-                    'nama' => 'Bay',
+                    'nama' => 'Guyss',
                     'pesan' => 'ada permit',
                 ]
             );

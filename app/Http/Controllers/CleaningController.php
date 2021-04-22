@@ -4,14 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\TesEmailController;
 use App\Models\Cleaning;
 use App\Models\CleaningHistory;
 use App\Models\CleaningFull;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Barryvdh\DomPDF\Facade as PDF;
-
+use App\Mail\NotifEmail;
+use Illuminate\Support\Facades\Mail;
 
 class CleaningController extends Controller
 {
@@ -20,6 +20,10 @@ class CleaningController extends Controller
         // dd($request);
         if (Auth::user()->role == 'bm')
             $cleaning = Cleaning::create($request->all());
+
+        foreach (['bayu230498@gmail.com', 'bayu.prakoso@balitower.co.id'] as $recipient) {
+            Mail::to($recipient)->send(new NotifEmail());
+        }
 
         if ($cleaning->exists) {
             $cleaningHistory = CleaningHistory::create([
