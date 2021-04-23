@@ -76,8 +76,14 @@ class CleaningController extends Controller
         if ($lasthistoryC->role_to == 'review') {
             $role_to = 'check';
         } elseif ($lasthistoryC->role_to == 'check') {
+            foreach (['bayu230498@gmail.com', 'bayu.prakoso@balitower.co.id'] as $recipient) {
+                Mail::to($recipient)->send(new NotifEmail());
+            }
             $role_to = 'security';
         } elseif ($lasthistoryC->role_to == 'security') {
+            foreach (['bayu230498@gmail.com', 'bayu.prakoso@balitower.co.id'] as $recipient) {
+                Mail::to($recipient)->send(new NotifEmail());
+            }
             $role_to = 'boss';
         }
 
@@ -90,6 +96,9 @@ class CleaningController extends Controller
         ]);
 
         if ($lasthistoryC->role_to == 'boss') {
+            foreach (['bayu230498@gmail.com', 'bayu.prakoso@balitower.co.id'] as $recipient) {
+                Mail::to($recipient)->send(new NotifEmail());
+            }
             $cleaning = Cleaning::where('cleaning_id', $request->cleaning_id)->first();
             // dd($cleaning);
             $cleaningFull = CleaningFull::create([
