@@ -21,7 +21,7 @@ class CleaningController extends Controller
         if (Auth::user()->role == 'bm')
             $cleaning = Cleaning::create($request->all());
 
-        foreach (['bayu230498@gmail.com', 'bayu.prakoso@balitower.co.id'] as $recipient) {
+        foreach (['darajat.indraputra@balitower.co.id', 'iqbal.tawakal@balitower.co.id'] as $recipient) {
             Mail::to($recipient)->send(new NotifEmail());
         }
 
@@ -76,12 +76,12 @@ class CleaningController extends Controller
         if ($lasthistoryC->role_to == 'review') {
             $role_to = 'check';
         } elseif ($lasthistoryC->role_to == 'check') {
-            foreach (['bayu230498@gmail.com', 'bayu.prakoso@balitower.co.id'] as $recipient) {
+            foreach (['rafli.ashshiddiqi@balitower.co.id', 'bayu.prakoso@balitower.co.id'] as $recipient) {
                 Mail::to($recipient)->send(new NotifEmail());
             }
             $role_to = 'security';
         } elseif ($lasthistoryC->role_to == 'security') {
-            foreach (['bayu230498@gmail.com', 'bayu.prakoso@balitower.co.id'] as $recipient) {
+            foreach (['bayu230498@gmail.com'] as $recipient) {
                 Mail::to($recipient)->send(new NotifEmail());
             }
             $role_to = 'boss';
