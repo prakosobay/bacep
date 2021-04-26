@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Barryvdh\DomPDF\Facade as PDF;
 use App\Mail\NotifEmail;
+use App\Mail\NotifReject;
 use Illuminate\Support\Facades\Mail;
 
 class CleaningController extends Controller
@@ -84,7 +85,7 @@ class CleaningController extends Controller
             }
             $role_to = 'security';
         } elseif ($lasthistoryC->role_to == 'security') {
-            foreach (['rafli.ashshiddiqi@balitower.co.id'] as $recipient) {
+            foreach (['rio.christian@balitower.co.id'] as $recipient) {
                 Mail::to($recipient)->send(new NotifEmail());
             }
             $role_to = 'boss';
@@ -121,7 +122,9 @@ class CleaningController extends Controller
         if ($lasthistoryC->role_to != 'security') {
             $lasthistoryC->update(['aktif' => false]);
 
-            // Mail::to(Auth::user()->role)->send(new MailTemp1());
+            foreach (['eebhermit@gmail.com'] as $recipient) {
+                Mail::to($recipient)->send(new NotifReject());
+            }
             $cleaningHistory = CleaningHistory::create([
                 'cleaning_id' => $request->cleaning_id,
                 'created_by' => Auth::user()->id,
