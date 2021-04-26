@@ -21,9 +21,9 @@ class CleaningController extends Controller
         if (Auth::user()->role == 'bm')
             $cleaning = Cleaning::create($request->all());
 
-        // foreach (['bayu.prakoso@balitower.co.id'] as $recipient) {
-        //     Mail::to($recipient)->send(new NotifEmail());
-        // }
+        foreach (['prakosobay@gmail.com'] as $recipient) {
+            Mail::to($recipient)->send(new NotifEmail());
+        }
 
         if ($cleaning->exists) {
             $cleaningHistory = CleaningHistory::create([
