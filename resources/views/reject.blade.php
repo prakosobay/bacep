@@ -12,7 +12,7 @@
         <h3 class="">Hallo, Om Sino !</h3>
         <p>Permit No. ....... di reject karena ......</p>
 
-        <p>Silahkan Login di  <a href="http://localhost:8000/">http://localhost:8000/</a></p>
+        <p>Silahkan Login di  <a href="http://172.16.45.239:8000/">http://172.16.45.239:8000/</a></p>
         <p>untuk request permit baru</p>
     </div>
 </body>

@@ -28,7 +28,7 @@ class NotifReject extends Mailable
      */
     public function build()
     {
-        return $this->from('ini.boongan77@gmail.com')
+        return $this->from('testing.dc@balitower.co.id')
             ->view('reject')
             ->with(
                 [
