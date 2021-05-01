@@ -54,7 +54,7 @@
     </section>
 @endsection
     <!-- jQuery -->
-<script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
+{{-- <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
 <!-- Bootstrap 4 -->
 <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <!-- DataTables -->
@@ -68,7 +68,6 @@
 <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
 <!-- page script -->
 
-<script>
 //   $(function () {
 //     $("#example1").DataTable({
 //       "responsive": true,
@@ -82,86 +81,8 @@
 //       "info": true,
 //       "autoWidth": false,
 //       "responsive": true,
-//     });
+//     }); --}}
 
-    $(document).on('click', '.approve', function(){
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('input[name="_token"]').val()
-            }
-        });
-        let survey_id = $(this).data('survey_id');
-        console.log(survey_id);
-        $.ajax({
-            type:'POST',
-            url:"{{url('approve_survey')}}",
-            data: {survey_id},
-            error: function (request, error) {
-                alert(" Can't do because: " + error);
-            },
-            success:function(data){
-                console.log(data);
-                if(data.status == 'SUCCESS'){
-                    Swal.fire({
-                        title: "Success!",
-                        text: 'Data Approve Success',
-                        type: "success",
-                    }).then(function(){
-                        location.reload();
-                    });
 
-                }else if(data.status == 'FAILED'){
-
-                    Swal.fire({
-                        title: "Failed!",
-                        text: 'Saving Data Approved Failed',
-                    }).then(function(){
-                        location.reload();
-                    });
-                }
-            }
-        });
-    })
-
-    $(document).on('click', '.reject', function(){
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('input[name="_token"]').val()
-            }
-        });
-        let survey_id = $(this).data('survey_id');
-        console.log(survey_id);
-        $.ajax({
-            type:'POST',
-            url:"{{url('survey_reject')}}",
-            data: {survey_id},
-            error: function (request, error) {
-                alert(" Can't do because: " + error);
-            },
-            success:function(data){
-                console.log(data);
-                if(data.status == 'SUCCESS'){
-                    Swal.fire({
-                        title: "Success!",
-                        text: 'Data Rejected',
-                        type: "success",
-                    }).then(function(){
-                        location.reload();
-                    });
-
-                }else if(data.status == 'FAILED'){
-
-                    Swal.fire({
-                        title: "Failed!",
-                        text: 'Failed to Reject',
-                    }).then(function(){
-                        location.reload();
-                    });
-                }
-            }
-        });
-    })
-  });
-</script>
     </body>
     </html>

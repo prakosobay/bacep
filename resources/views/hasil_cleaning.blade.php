@@ -49,7 +49,8 @@
             </div>
         </div>
     </section>
-@endsection
+    @endsection
+
     <!-- jQuery -->
 <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
 <!-- Bootstrap 4 -->
@@ -65,7 +66,22 @@
 <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
 <!-- page script -->
 
-<script>
+    <script>
+        $(function () {
+    $("#example1").DataTable({
+      "responsive": true,
+      "autoWidth": true,
+    });
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
+    });
 
     $(document).on('click', '.approve', function(){
         $.ajaxSetup({
@@ -73,12 +89,12 @@
                 'X-CSRF-TOKEN': $('input[name="_token"]').val()
             }
         });
-        let cleaning_id = $(this).data('cleaning_id');
-        console.log(cleaning_id);
+        let survey_id = $(this).data('survey_id');
+        console.log(survey_id);
         $.ajax({
             type:'POST',
-            url:"{{url('approve_cleaning')}}",
-            data: {cleaning_id},
+            url:"{{url('approve_survey')}}",
+            data: {survey_id},
             error: function (request, error) {
                 alert(" Can't do because: " + error);
             },
@@ -112,12 +128,12 @@
                 'X-CSRF-TOKEN': $('input[name="_token"]').val()
             }
         });
-        let cleaning_id = $(this).data('cleaning_id');
-        console.log(cleaning_id);
+        let survey_id = $(this).data('survey_id');
+        console.log(survey_id);
         $.ajax({
             type:'POST',
-            url:"{{url('cleaning_reject')}}",
-            data: {cleaning_id},
+            url:"{{url('survey_reject')}}",
+            data: {survey_id},
             error: function (request, error) {
                 alert(" Can't do because: " + error);
             },
@@ -143,7 +159,6 @@
                 }
             }
         });
-    })
-</script>
-    </body>
-    </html>
+    });
+    </script>
+
