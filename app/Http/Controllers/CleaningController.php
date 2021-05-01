@@ -125,9 +125,6 @@ class CleaningController extends Controller
         if ($lasthistoryC->role_to != 'security') {
             $lasthistoryC->update(['aktif' => false]);
 
-            foreach (['eebhermit@gmail.com'] as $recipient) {
-                Mail::to($recipient)->send(new NotifReject());
-            }
             $cleaningHistory = CleaningHistory::create([
                 'cleaning_id' => $request->cleaning_id,
                 'created_by' => Auth::user()->id,
@@ -135,6 +132,9 @@ class CleaningController extends Controller
                 'status' => 'rejected',
                 'aktif' => true,
             ]);
+            foreach (['eebhermit@gmail.com'] as $recipient) {
+                Mail::to($recipient)->send(new NotifReject());
+            }
             // dd($cleaningHistory);
             return $cleaningHistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
         }

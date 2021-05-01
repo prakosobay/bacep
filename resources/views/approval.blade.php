@@ -143,5 +143,6 @@
         $(this).find('ul.dropdown-menu').removeClass('show open');
     });
 });
+
 </script>
 </html>
