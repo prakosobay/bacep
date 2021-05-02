@@ -99,35 +99,4 @@
             </div>
         </div>
     </section>
-
-    @else
-    <section id="Approval">
-        <div class="Approval container" style="width: 500px">
-            <div class="Approval-top">
-                <h1 class="section-title">Approval</h1>
-                <p>Silahkan Pilih Form yang Akan di Approval</p>
-            </div>
-            <div class="Approval-bottom">
-                <div class="Approval-item">
-                    <a href="hasil_survey" type="button" ><h2>Survey</h2>
-                </div>
-
-                <div class="Approval-item">
-                    <a href="hasil_maintenance" type="button" ><h2>Maintenance</h2>
-                </div>
-
-                <div class="Approval-item">
-                    <a href="hasil_troubleshoot" type="button" ><h2>Troubleshoot</h2>
-                </div>
-
-                <div class="Approval-item">
-                    <a href="hasil_mount" type="button" ><h2>Mounting</h2>
-                </div>
-
-                <div class="Approval-item">
-                    <a href="hasil_BM" type="button" ><h2>BM</h2>
-                </div>
-            </div>
-        </div>
-    </section>
     @endif
