@@ -9,8 +9,7 @@
             border: 1px solid black;
             font-size: 10pt;
             border-collapse: collapse;
-            /* cellspacing:1;
-            cellpadding:1; */
+
         }
 
         .tujuh{
@@ -42,59 +41,59 @@
         <h5 class="center">ACCESS REQUEST FORM</h5>
         <h5 text-align="center">Nomor : ARF/001/DCDV/XI/2019</h5>
 
-    <table cellspacing="0" cellpadding="2" style="width:100%">
+    <table cellspacing="0" cellpadding="2" width="700px">
         <tr >
-            <td >Time of Request</td>
+            <td ><b>Time of Request</b></td>
             <td >: {{$cleaning->created_at}}</td>
         </tr>
         <tr >
-            <td >No. </td>
+            <td ><b>No. </b></td>
             <td >: {{$cleaning->cleaning_id}}</td>
         </tr>
         <tr >
-            <td >Purpose of Work</td>
+            <td ><b>Purpose of Work</b></td>
             <td >: {{$cleaning->cleaning_work}}</td>
         </tr>
     </table>
 
-    <table cellspacing="0" cellpadding="2"  style="width:100%">
+    <table cellspacing="0" cellpadding="2"  width="700px">
         <tr >
-            <td  colspan="4">Bali Tower Requestor </td>
+            <td  colspan="4"><b>Bali Tower Requestor </b></td>
         </tr>
         <tr >
-            <td width="70px">Name</td>
-            <td width="230px">: Badai Sino Jendrang</td>
-            <td width="70px">Phone Number</td>
-            <td width="230px">: 0822-1028-2228</td>
+            <td ><b>Name</b></td>
+            <td >: Badai Sino Jendrang</td>
+            <td ><b>Phone Number</b></td>
+            <td >: 0822-1028-2228</td>
         </tr>
         <tr >
-            <td width="70px">Department</td>
+            <td ><b>Department</b></td>
             <td colspan="3">: Building Management</td>
     </table>
 
-    <table cellspacing="0" cellpadding="2"  style="width:100%">
+    <table cellspacing="0" cellpadding="2"  width="700px">
         <tr >
-            <td  colspan="4">VISITOR</td>
+            <td  colspan="4"><b>Visitor</b></td>
         </tr>
         <tr >
-            <td >Name</td>
+            <td ><b>Name</b></td>
             <td >: {{$cleaning->cleaning_name_1}} & {{$cleaning->cleaning_name_2}}</td>
-            <td >ID</td>
+            <td ><b>ID</b></td>
             <td >: {{$cleaning->cleaning_id_1}} & {{$cleaning->cleaning_id_2}}</td>
         </tr>
         <tr >
-            <td >Company</td>
+            <td ><b>Company</b></td>
             <td >: PT Bijac</td>
-            <td >Phone Number</td>
+            <td ><b>Phone Number</b></td>
             <td >: {{$cleaning->cleaning_number_1}} & {{$cleaning->cleaning_number_2}}</td>
         </tr>
         <tr >
-            <td>Department</td>
+            <td><b>Department</b></td>
             <td colspan="4">: Cleaner</td>
         </tr>
     </table>
 
-    <table cellspacing="0" cellpadding="2"  style="width:100%">
+    <table cellspacing="0" cellpadding="2"  width="700px">
         <tr >
             <td  colspan="2">Authorized Entry Area :</td>
             <td  colspan="2">Access Type : </td>
