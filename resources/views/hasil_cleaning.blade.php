@@ -165,6 +165,3 @@
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
 <!-- page script -->
-
-
-
