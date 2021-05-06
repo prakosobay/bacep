@@ -29,6 +29,10 @@
             width: 100px;
         } */
 
+        .tengah{
+            text-align: center;
+            font-size: 9pt;
+        }
         .kedua{
             text-align: center;
             font-size: 10pt;
@@ -62,7 +66,7 @@
 
 <div style="page-break-after: always;">
         <h5 class="center">ACCESS REQUEST FORM</h5>
-        <h5 class="kedua">Nomor : ARF/001/DCDV/XI/2019</h5>
+        <p class="kedua"><b>Nomor : ARF/001/DCDV/XI/2019</b></p>
 
     <table >
         <tr >
@@ -223,63 +227,67 @@
         </tr>
     </table>
 
-    <table class="satu">
+    <table width="700px">
         <tr>
             @switch($lasthistoryC->status)
                 @case('created')
                     <td width="200px" height="40px"> </td>
                     @break
 
-                {{-- @case('checked')
-                    <td><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 100px; height: 50px;"></td>
-                    @break --}}
+                @case('reviewed')
+                    <td width="200px" height="40px"> </td>
+                    @break
+
+                @case('checked')
+                    <td width="200px" height="40px"> </td>
+                    @break
 
                 @case('secured')
-                        <td width="200px" height="40px"></td>
-                        <td width="200px" class="nmr"><img src="{{ public_path("gambar/Checked.png") }}" alt="" style="width: 80px; height: 40px;"></td>
-                        <td width="200px" height="40px"></td>
-                        @break
+                    <td width="200px" height="40px"></td>
+                    <td width="200px" ><img src="{{ public_path("gambar/Checked.png") }}"  alt="" style="width: 80px; height: 40px;" align="middle"></td>
+                    <td width="200px" height="40px"></td>
+                    @break
 
                 @case('final')
                     <td width="200px" height="40px"></td>
-                    <td width="200px" class="nmr"><img src="{{ public_path("gambar/Checked.png") }}" alt="" style="width: 80px; height: 40px;"></td>
-                    <td width="200px" class="nmr"><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 80px; height: 40px;"></td>
+                    <td width="200px" ><img src="{{ public_path("gambar/Checked.png") }}"  alt="" style="width: 80px; height: 40px;" align="middle"></td>
+                    <td width="200px" ><img src="{{ public_path("gambar/approved.png") }}"  alt="" style="width: 80px; height: 40px;" align="middle"></td>
                     @break
             @endswitch
         </tr>
 
         <tr height="7px">
             @if($lasthistoryC->status == 'created')
-            <td width="200px" class="nmr"><strong>Badai Sino Jendrang</strong></td>
-            <td width="200px" class="nmr"><strong></strong></td>
-            <td width="200px" class="nmr"><strong></strong></td>
+            <td width="200px" class="kedua"><strong>Badai Sino Jendrang</strong></td>
+            <td width="200px" class="kedua"><strong></strong></td>
+            <td width="200px" class="kedua"><strong></strong></td>
 
             @elseif($lasthistoryC->status == 'reviewed')
-            <td width="200px" class="nmr"><strong>Badai Sino Jendrang</strong></td>
-            <td width="200px" class="nmr"><strong></strong></td>
-            <td width="200px" class="nmr"><strong></strong></td>
+            <td width="200px" class="kedua"><strong>Badai Sino Jendrang</strong></td>
+            <td width="200px" class="kedua"><strong></strong></td>
+            <td width="200px" class="kedua"><strong></strong></td>
 
             @elseif($lasthistoryC->status == 'checked')
-            <td width="200px" class="nmr"><strong>Badai Sino Jendrang</strong></td>
-            <td width="200px" class="nmr"><strong></strong></td>
-            <td width="200px" class="nmr"><strong></strong></td>
+            <td width="200px" class="kedua"><strong>Badai Sino Jendrang</strong></td>
+            <td width="200px" class="kedua"><strong></strong></td>
+            <td width="200px" class="kedua"><strong></strong></td>
 
             @elseif($lasthistoryC->status == 'secured')
-            <td width="200px" class="nmr"><strong>Badai Sino Jendrang</strong></td>
-            <td width="200px" class="nmr"><strong>{{ $cleaningHistory[2]->name }}</strong></td>
-            <td width="200px" class="nmr"><strong></strong></td>
+            <td width="200px" class="kedua"><strong>Badai Sino Jendrang</strong></td>
+            <td width="200px" class="kedua"><strong>{{ $cleaningHistory[2]->name }}</strong></td>
+            <td width="200px" class="kedua"><strong></strong></td>
 
             @elseif($lasthistoryC->status == 'final')
-            <td width="200px" class="nmr"><strong>Badai Sino Jendrang</strong></td>
-            <td width="200px" class="nmr"><strong>{{ $cleaningHistory[2]->name }}</strong></td>
-            <td width="200px" class="nmr"><strong>{{ $cleaningHistory[3]->name }}</strong></td>
+            <td width="200px" class="kedua"><strong>Badai Sino Jendrang</strong></td>
+            <td width="200px" class="kedua"><strong>{{ $cleaningHistory[2]->name }}</strong></td>
+            <td width="200px" class="kedua"><strong>{{ $cleaningHistory[3]->name }}</strong></td>
             @endif
         </tr>
 
         <tr>
-            <td width="200px" class="nmr">Requestor</td>
-            <td width="200px" class="nmr">Security</td>
-            <td width="200px" class="nmr">Head of Data Center Operation</td>
+            <td width="200px" class="kedua">Requestor</td>
+            <td width="200px" class="kedua">Security</td>
+            <td width="200px" class="kedua">Head of Data Center Operation</td>
         </tr>
     </table>
 
@@ -289,7 +297,7 @@
     </div>
     <div style="page-break-after: always;">
         <h5 class="center">CHANGE REQUEST FORM</h5>
-        <h5 class="nmr">Nomor : CRF/001/DCDV/XI/2019</h5>
+        <p class="kedua"><b>Nomor : CRF/001/DCDV/XI/2019</b></p>
 
         <p class="tujuh">
             1. Background and Objectives
@@ -305,135 +313,135 @@
         </p>
         <p class="tujuh">
             3. Detail Time Table of All Activity
-            <table class='table table-bordered' width="600px">
+            <table width="700px">
                 <thead>
                     <tr >
-                        <th width="50px" class="nmr">Date</th>
-                        <th width="70px" class="nmr">Time</th>
-                        <th width="190px" class="nmr">Activity Description</th>
-                        <th width="190px" class="nmr">Detail Service Impact</th>
+                        <th  class="kedua">Date</th>
+                        <th  class="kedua">Time</th>
+                        <th  class="kedua">Activity Description</th>
+                        <th  class="kedua">Detail Service Impact</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr >
-                        <td class="nmr">{{$cleaning->validity_from}}</td>
-                        <td class="nmr">{{$cleaning->cleaning_time_1}}</td>
-                        <td class="nmr">{{$cleaning->cleaning_procedure_1}}</td>
-                        <td class="nmr">{{$cleaning->cleaning_risk_1}}</td>
+                        <td class="tengah">{{$cleaning->validity_from}}</td>
+                        <td class="tengah">{{$cleaning->cleaning_time_1}}</td>
+                        <td class="tengah">{{$cleaning->cleaning_procedure_1}}</td>
+                        <td class="tengah">{{$cleaning->cleaning_risk_1}}</td>
                     </tr>
                     <tr >
-                        <td class="nmr">{{$cleaning->validity_from}}</td>
-                        <td class="nmr">{{$cleaning->cleaning_time_2}}</td>
-                        <td class="nmr">{{$cleaning->cleaning_procedure_2}}</td>
-                        <td class="nmr">{{$cleaning->cleaning_risk_2}}</td>
+                        <td class="tengah">{{$cleaning->validity_from}}</td>
+                        <td class="tengah">{{$cleaning->cleaning_time_2}}</td>
+                        <td class="tengah">{{$cleaning->cleaning_procedure_2}}</td>
+                        <td class="tengah">{{$cleaning->cleaning_risk_2}}</td>
                     </tr>
                     <tr >
-                        <td class="nmr">{{$cleaning->validity_from}}</td>
-                        <td class="nmr">{{$cleaning->cleaning_time_3}}</td>
-                        <td class="nmr">{{$cleaning->cleaning_procedure_3}}</td>
-                        <td class="nmr">{{$cleaning->cleaning_risk_3}}</td>
+                        <td class="tengah">{{$cleaning->validity_from}}</td>
+                        <td class="tengah">{{$cleaning->cleaning_time_3}}</td>
+                        <td class="tengah">{{$cleaning->cleaning_procedure_3}}</td>
+                        <td class="tengah">{{$cleaning->cleaning_risk_3}}</td>
                     </tr>
                     <tr >
-                        <td class="nmr">{{$cleaning->validity_from}}</td>
-                        <td class="nmr">{{$cleaning->cleaning_time_4}}</td>
-                        <td class="nmr">{{$cleaning->cleaning_procedure_4}}</td>
-                        <td class="nmr">{{$cleaning->cleaning_risk_4}}</td>
+                        <td class="tengah">{{$cleaning->validity_from}}</td>
+                        <td class="tengah">{{$cleaning->cleaning_time_4}}</td>
+                        <td class="tengah">{{$cleaning->cleaning_procedure_4}}</td>
+                        <td class="tengah">{{$cleaning->cleaning_risk_4}}</td>
                     </tr>
                     <tr >
-                        <td class="nmr">{{$cleaning->validity_from}}</td>
-                        <td class="nmr">{{$cleaning->cleaning_time_5}}</td>
-                        <td class="nmr">{{$cleaning->cleaning_procedure_5}}</td>
-                        <td class="nmr">{{$cleaning->cleaning_risk_5}}</td>
+                        <td class="tengah">{{$cleaning->validity_from}}</td>
+                        <td class="tengah">{{$cleaning->cleaning_time_5}}</td>
+                        <td class="tengah">{{$cleaning->cleaning_procedure_5}}</td>
+                        <td class="tengah">{{$cleaning->cleaning_risk_5}}</td>
                     </tr>
                 </tbody>
             </table>
         </p>
         <p class="tujuh">
             4. Detail Operation and Execution
-            <table class='table table-bordered' width="600px">
+            <table width="700px">
                 <thead>
                     <tr>
-                        <th width="70px" class="nmr">Time</th>
-                        <th width="230px" class="nmr">Item</th>
-                        <th width="200px" class="nmr">Working Procedure</th>
+                        <th class="kedua">Time</th>
+                        <th  class="kedua">Item</th>
+                        <th  class="kedua">Working Procedure</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr >
-                        <td class="nmr">{{$cleaning->cleaning_time_1}}</td>
-                        <td class="nmr">{{$cleaning->cleaning_item_1}}</td>
-                        <td class="nmr">{{$cleaning->cleaning_procedure_1}}</td>
+                        <td class="tengah">{{$cleaning->cleaning_time_1}}</td>
+                        <td class="tengah">{{$cleaning->cleaning_item_1}}</td>
+                        <td class="tengah">{{$cleaning->cleaning_procedure_1}}</td>
                     </tr>
                     <tr >
-                        <td class="nmr">{{$cleaning->cleaning_time_2}}</td>
-                        <td class="nmr">{{$cleaning->cleaning_item_2}}</td>
-                        <td class="nmr">{{$cleaning->cleaning_procedure_2}}</td>
+                        <td class="tengah">{{$cleaning->cleaning_time_2}}</td>
+                        <td class="tengah">{{$cleaning->cleaning_item_2}}</td>
+                        <td class="tengah">{{$cleaning->cleaning_procedure_2}}</td>
                     </tr>
                     <tr >
-                        <td class="nmr">{{$cleaning->cleaning_time_3}}</td>
-                        <td class="nmr">{{$cleaning->cleaning_item_3}}</td>
-                        <td class="nmr">{{$cleaning->cleaning_procedure_3}}</td>
+                        <td class="tengah">{{$cleaning->cleaning_time_3}}</td>
+                        <td class="tengah">{{$cleaning->cleaning_item_3}}</td>
+                        <td class="tengah">{{$cleaning->cleaning_procedure_3}}</td>
                     </tr>
                     <tr >
-                        <td class="nmr">{{$cleaning->cleaning_time_4}}</td>
-                        <td class="nmr">{{$cleaning->cleaning_item_4}}</td>
-                        <td class="nmr">{{$cleaning->cleaning_procedure_4}}</td>
+                        <td class="tengah">{{$cleaning->cleaning_time_4}}</td>
+                        <td class="tengah">{{$cleaning->cleaning_item_4}}</td>
+                        <td class="tengah">{{$cleaning->cleaning_procedure_4}}</td>
                     </tr>
                     <tr >
-                        <td class="nmr">{{$cleaning->cleaning_time_5}}</td>
-                        <td class="nmr">{{$cleaning->cleaning_item_5}}</td>
-                        <td class="nmr">{{$cleaning->cleaning_procedure_5}}</td>
+                        <td class="tengah">{{$cleaning->cleaning_time_5}}</td>
+                        <td class="tengah">{{$cleaning->cleaning_item_5}}</td>
+                        <td class="tengah">{{$cleaning->cleaning_procedure_5}}</td>
                     </tr>
                 </tbody>
             </table>
         </p>
         <p class="tujuh">
             5. Risk and Service Area Impact
-            <table class='table table-bordered' width="600px">
+            <table  width="700px">
                 <thead>
                     <tr>
-                        <th width="120px" class="nmr">Risk Description</th>
-                        <th width="220px" class="nmr">Possibility</th>
-                        <th width="80px" class="nmr">Impact</th>
-                        <th width="180px" class="nmr">Mitigation Plan</th>
+                        <th  class="kedua">Risk Description</th>
+                        <th  class="kedua">Possibility</th>
+                        <th  class="kedua">Impact</th>
+                        <th class="kedua">Mitigation Plan</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr >
-                        <td class="nmr">{{$cleaning->cleaning_risk_1}}</td>
-                        <td class="nmr">{{$cleaning->cleaning_possibility_1}}</td>
-                        <td class="nmr">{{$cleaning->cleaning_impact_1}}</td>
-                        <td class="nmr">{{$cleaning->cleaning_mitigation_1}}</td>
+                        <td class="tengah">{{$cleaning->cleaning_risk_1}}</td>
+                        <td class="tengah">{{$cleaning->cleaning_possibility_1}}</td>
+                        <td class="tengah">{{$cleaning->cleaning_impact_1}}</td>
+                        <td class="tengah">{{$cleaning->cleaning_mitigation_1}}</td>
                     </tr>
                     <tr >
-                        <td class="nmr">{{$cleaning->cleaning_risk_2}}</td>
-                        <td class="nmr">{{$cleaning->cleaning_possibility_2}}</td>
-                        <td class="nmr">{{$cleaning->cleaning_impact_2}}</td>
-                        <td class="nmr">{{$cleaning->cleaning_mitigation_2}}</td>
+                        <td class="tengah">{{$cleaning->cleaning_risk_2}}</td>
+                        <td class="tengah">{{$cleaning->cleaning_possibility_2}}</td>
+                        <td class="tengah">{{$cleaning->cleaning_impact_2}}</td>
+                        <td class="tengah">{{$cleaning->cleaning_mitigation_2}}</td>
                     </tr>
                     <tr >
-                        <td class="nmr">{{$cleaning->cleaning_risk_3}}</td>
-                        <td class="nmr">{{$cleaning->cleaning_possibility_3}}</td>
-                        <td class="nmr">{{$cleaning->cleaning_impact_3}}</td>
-                        <td class="nmr">{{$cleaning->cleaning_mitigation_3}}</td>
+                        <td class="tengah">{{$cleaning->cleaning_risk_3}}</td>
+                        <td class="tengah">{{$cleaning->cleaning_possibility_3}}</td>
+                        <td class="tengah">{{$cleaning->cleaning_impact_3}}</td>
+                        <td class="tengah">{{$cleaning->cleaning_mitigation_3}}</td>
                     </tr>
                     <tr >
-                        <td class="nmr">{{$cleaning->cleaning_risk_4}}</td>
-                        <td class="nmr">{{$cleaning->cleaning_possibility_4}}</td>
-                        <td class="nmr">{{$cleaning->cleaning_impact_4}}</td>
-                        <td class="nmr">{{$cleaning->cleaning_mitigation_4}}</td>
+                        <td class="tengah">{{$cleaning->cleaning_risk_4}}</td>
+                        <td class="tengah">{{$cleaning->cleaning_possibility_4}}</td>
+                        <td class="tengah">{{$cleaning->cleaning_impact_4}}</td>
+                        <td class="tengah">{{$cleaning->cleaning_mitigation_4}}</td>
                     </tr>
                     <tr >
-                        <td class="nmr">{{$cleaning->cleaning_risk_5}}</td>
-                        <td class="nmr">{{$cleaning->cleaning_possibility_5}}</td>
-                        <td class="nmr">{{$cleaning->cleaning_impact_5}}</td>
-                        <td class="nmr">{{$cleaning->cleaning_mitigation_5}}</td>
+                        <td class="tengah">{{$cleaning->cleaning_risk_5}}</td>
+                        <td class="tengah">{{$cleaning->cleaning_possibility_5}}</td>
+                        <td class="tengah">{{$cleaning->cleaning_impact_5}}</td>
+                        <td class="tengah">{{$cleaning->cleaning_mitigation_5}}</td>
                     </tr>
                     <tr >
-                        <td class="nmr">{{$cleaning->cleaning_risk_6}}</td>
-                        <td class="nmr">{{$cleaning->cleaning_possibility_6}}</td>
-                        <td class="nmr">{{$cleaning->cleaning_impact_6}}</td>
-                        <td class="nmr">{{$cleaning->cleaning_mitigation_6}}</td>
+                        <td class="tengah">{{$cleaning->cleaning_risk_6}}</td>
+                        <td class="tengah">{{$cleaning->cleaning_possibility_6}}</td>
+                        <td class="tengah">{{$cleaning->cleaning_impact_6}}</td>
+                        <td class="tengah">{{$cleaning->cleaning_mitigation_6}}</td>
                     </tr>
                 </tbody>
             </table>
@@ -454,40 +462,40 @@
         </p>
         <p class="tujuh">
             8. Person In Charge
-            <table class='table table-bordered' width="600px">
+            <table width="700px">
                 <thead>
                     <tr>
-                        <th width="150px" class="nmr">Name</th>
-                        <th width="150px" class="nmr">Company</th>
-                        <th width="150px" class="nmr">Responsibility</th>
-                        <th width="150px" class="nmr">Mobile Number</th>
+                        <th  class="kedua">Name</th>
+                        <th  class="kedua">Company</th>
+                        <th  class="kedua">Responsibility</th>
+                        <th  class="kedua">Mobile Number</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <th class="nmr">{{$cleaning->cleaning_name_1}}</th>
-                        <th class="nmr">{{$cleaning->cleaning_pt_1}}</th>
-                        <th class="nmr">Cleaner</th>
-                        <th class="nmr">{{$cleaning->cleaning_number_1}}</th>
+                        <th class="tengah">{{$cleaning->cleaning_name_1}}</th>
+                        <th class="tengah">PT Bijac</th>
+                        <th class="tengah">Cleaner</th>
+                        <th class="tengah">{{$cleaning->cleaning_number_1}}</th>
                     </tr>
                     <tr>
-                        <th class="nmr">{{$cleaning->cleaning_name_2}}</th>
-                        <th class="nmr">{{$cleaning->cleaning_pt_2}}</th>
-                        <th class="nmr">Cleaner</th>
-                        <th class="nmr">{{$cleaning->cleaning_number_2}}</th>
+                        <th class="tengah">{{$cleaning->cleaning_name_2}}</th>
+                        <th class="tengah">PT Bijac</th>
+                        <th class="tengah">Cleaner</th>
+                        <th class="tengah">{{$cleaning->cleaning_number_2}}</th>
+                    </tr>
+                    {{-- <tr>
+                        <th class="tengah">{{$cleaning->cleaning_name_3}}</th>
+                        <th class="tengah">{{$cleaning->cleaning_pt_3}}</th>
+                        <th class="tengah"> </th>
+                        <th class="tengah">{{$cleaning->cleaning_number_3}}</th>
                     </tr>
                     <tr>
-                        <th class="nmr">{{$cleaning->cleaning_name_3}}</th>
-                        <th class="nmr">{{$cleaning->cleaning_pt_3}}</th>
-                        <th class="nmr"> </th>
-                        <th class="nmr">{{$cleaning->cleaning_number_3}}</th>
-                    </tr>
-                    <tr>
-                        <th class="nmr">{{$cleaning->cleaning_name_4}}</th>
-                        <th class="nmr">{{$cleaning->cleaning_pt_4}}</th>
-                        <th class="nmr"> </th>
-                        <th class="nmr">{{$cleaning->cleaning_number_4}}</th>
-                    </tr>
+                        <th class="tengah">{{$cleaning->cleaning_name_4}}</th>
+                        <th class="tengah">{{$cleaning->cleaning_pt_4}}</th>
+                        <th class="tengah"> </th>
+                        <th class="tengah">{{$cleaning->cleaning_number_4}}</th>
+                    </tr> --}}
                 </tbody>
             </table>
         </p>
@@ -498,32 +506,32 @@
         </div>
 
         <div >
-            <table class='table table-bordered' width="600px">
+            <table  width="700px">
                 <tr>
-                    <td width="70px"><b>Prepared by:</b></td>
-                    <td width="200px">Badai Sino Jendrang</td>
+                    <td ><b>Prepared by:</b></td>
+                    <td >Badai Sino Jendrang</td>
                     <td >  </td>
-                    <td width="50px"><b>Date</b></td>
+                    <td ><b>Date</b></td>
                     <td>{{$cleaning->created_at}}</td>
                 </tr>
                 @if($lasthistoryC->status == 'reviewed')
                 <tr>
                     <td><b>Reviewed by:</b></td>
-                    <td width="200px">{{$cleaningHistory[0]->name}}</td>
+                    <td >{{$cleaningHistory[0]->name}}</td>
                     <td ><img src="{{ public_path("gambar/Reviewed.png") }}" alt="" style="width: 80px; height: 40px;"></td></td>
-                    <td width="50px"><b>Date</b></td>
+                    <td ><b>Date</b></td>
                     <td>{{$cleaningHistory[0]->created_at}}</td>
                 </tr>
                 <tr>
                     <td><b>Checked by:</b></td>
-                    <td width="200px"></td>
+                    <td ></td>
                     <td >  </td>
                     <td ><b>Date</b></td>
                     <td></td>
                 </tr>
                 <tr>
                     <td><b>Approved by:</b></td>
-                    <td width="200px"></td>
+                    <td ></td>
                     <td >  </td>
                     <td ><b>Date</b></td>
                     <td></td>
@@ -532,21 +540,21 @@
                 @if($lasthistoryC->status == 'checked')
                 <tr>
                     <td><b>Reviewed by:</b></td>
-                    <td width="200px">{{$cleaningHistory[0]->name}}</td>
+                    <td >{{$cleaningHistory[0]->name}}</td>
                     <td ><img src="{{ public_path("gambar/Reviewed.png") }}" alt="" style="width: 80px; height: 40px;"></td>
                     <td width="50px"><b>Date</b></td>
                     <td>{{$cleaningHistory[0]->created_at}}</td>
                 </tr>
                 <tr>
                     <td><b>Checked by:</b></td>
-                    <td width="200px">{{$cleaningHistory[1]->name}}</td>
+                    <td >{{$cleaningHistory[1]->name}}</td>
                     <td ><img src="{{ public_path("gambar/Checked.png") }}" alt="" style="width: 80px; height: 40px;"></td>
                     <td ><b>Date</b></td>
                     <td>{{$cleaningHistory[1]->created_at}}</td>
                 </tr>
                 <tr>
                     <td><b>Approved by:</b></td>
-                    <td width="200px"></td>
+                    <td ></td>
                     <td >  </td>
                     <td ><b>Date</b></td>
                     <td></td>
@@ -555,21 +563,21 @@
                 @if($lasthistoryC->status == 'secured')
                 <tr>
                     <td><b>Reviewed by:</b></td>
-                    <td width="200px">{{$cleaningHistory[0]->name}}</td>
+                    <td >{{$cleaningHistory[0]->name}}</td>
                     <td ><img src="{{ public_path("gambar/Reviewed.png") }}" alt="" style="width: 80px; height: 40px;"></td>
-                    <td width="50px"><b>Date</b></td>
+                    <td ><b>Date</b></td>
                     <td>{{$cleaningHistory[0]->created_at}}</td>
                 </tr>
                 <tr>
                     <td><b>Checked by:</b></td>
-                    <td width="200px">{{$cleaningHistory[1]->name}}</td>
+                    <td >{{$cleaningHistory[1]->name}}</td>
                     <td ><img src="{{ public_path("gambar/Checked.png") }}" alt="" style="width: 80px; height: 40px;"></td>
                     <td ><b>Date</b></td>
                     <td>{{$cleaningHistory[1]->created_at}}</td>
                 </tr>
                 <tr>
                     <td><b>Approved by:</b></td>
-                    <td width="200px"></td>
+                    <td ></td>
                     <td >  </td>
                     <td ><b>Date</b></td>
                     <td></td>
@@ -578,23 +586,23 @@
                 @if($lasthistoryC->status == 'final')
                 <tr>
                     <td><b>Reviewed by:</b></td>
-                    <td width="200px">{{$cleaningHistory[0]->name}}</td>
+                    <td >{{$cleaningHistory[0]->name}}</td>
                     <td ><img src="{{ public_path("gambar/Reviewed.png") }}" alt="" style="width: 80px; height: 40px;"></td>
-                    <td width="50px"><b>Date</b></td>
+                    <td ><b>Date</b></td>
                     <td>{{$cleaningHistory[0]->created_at}}</td>
                 </tr>
                 <tr>
                     <td><b>Checked by:</b></td>
-                    <td width="200px">{{$cleaningHistory[1]->name}}</td>
+                    <td >{{$cleaningHistory[1]->name}}</td>
                     <td ><img src="{{ public_path("gambar/Checked.png") }}" alt="" style="width: 80px; height: 40px;"></td>
                     <td ><b>Date</b></td>
                     <td>{{$cleaningHistory[1]->created_at}}</td>
                 </tr>
                 <tr>
                     <td><b>Approved by:</b></td>
-                    <td width="200px">{{$cleaningHistory[3]->name}}</td>
+                    <td >{{$cleaningHistory[3]->name}}</td>
                     <td ><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 80px; height: 40px;"></td>
-                    <td width="50px"><b>Date</b></td>
+                    <td ><b>Date</b></td>
                     <td>{{$cleaningHistory[3]->created_at}}</td>
                 </tr>
                 @endif
