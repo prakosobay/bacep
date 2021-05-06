@@ -4,19 +4,36 @@
     <title>Cleaning Data Center</title>
     {{-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> --}}
     <style type="text/css">
-        /* table tr td,
-        table tr th{
-            border: 1px solid black;
-            font-size: 10pt;
-            border-collapse: collapse;
 
-        } */
-        table.satu{
+        table, th, td {
+            /* border-width: 700px; */
+            border-spacing: 0px;
+            border: 1px solid black;
+            border-collapse: collapse;
+            font-size: 10pt;
+            margin: 5px;
+            padding: 7px;
+		}
+        /* table.satu{
             border-width: 700px;
             border-spacing: 0px;
-            padding: 3px;
+            border: 1px solid black;
+            border-collapse: collapse;
+            font-size: 10pt;
+            margin: 7px;
         }
 
+        td.a{
+            padding: 7px;
+            border-width: 100px;
+            width: 100px;
+        } */
+
+        .kedua{
+            text-align: center;
+            font-size: 10pt;
+
+        }
         .tujuh{
             font-size:10pt;
         }
@@ -28,6 +45,7 @@
         .center{
             text-align: center;
             font-size: 15pt;
+            margin-bottom: 2px;
         }
 
         .page_break + .page_break{
@@ -44,61 +62,61 @@
 
 <div style="page-break-after: always;">
         <h5 class="center">ACCESS REQUEST FORM</h5>
-        <h5 text-align="center">Nomor : ARF/001/DCDV/XI/2019</h5>
+        <h5 class="kedua">Nomor : ARF/001/DCDV/XI/2019</h5>
 
-    <table class="satu" cellspacing="0" cellpadding="2" width="700px">
+    <table >
         <tr >
-            <td width="100px"><b>Time of Request</b></td>
-            <td >: {{$cleaning->created_at}}</td>
+            <td ><b>Time of Request</b></td>
+            <td width="550px">: {{$cleaning->created_at}}</td>
         </tr>
         <tr >
-            <td width="100px"><b>No. </b></td>
+            <td ><b>No. </b></td>
             <td >: {{$cleaning->cleaning_id}}</td>
         </tr>
         <tr >
-            <td width="100px"><b>Purpose of Work</b></td>
+            <td ><b>Purpose of Work</b></td>
             <td >: {{$cleaning->cleaning_work}}</td>
         </tr>
     </table>
 
-    <table cellspacing="0" cellpadding="2"  width="700px">
+    <table >
         <tr >
             <td  colspan="4"><b>Bali Tower Requestor </b></td>
         </tr>
         <tr >
-            <td width="100px"><b>Name</b></td>
-            <td width="300px">: Badai Sino Jendrang</td>
-            <td width="100px"><b>Phone Number</b></td>
-            <td >: 0822-1028-2228</td>
+            <td  ><b>Name</b></td>
+            <td  width="250px">: Badai Sino Jendrang</td>
+            <td  ><b>Phone Number</b></td>
+            <td  width="250px">: 0822-1028-2228</td>
         </tr>
         <tr >
-            <td width="100px"><b>Department</b></td>
+            <td  ><b>Department</b></td>
             <td colspan="3">: Building Management</td>
     </table>
 
-    <table cellspacing="0" cellpadding="2"  width="700px">
+    <table >
         <tr >
             <td  colspan="4"><b>Visitor</b></td>
         </tr>
         <tr >
-            <td width="100px"><b>Name</b></td>
-            <td width="300px">: {{$cleaning->cleaning_name_1}} & {{$cleaning->cleaning_name_2}}</td>
-            <td width="100px"><b>ID</b></td>
-            <td >: {{$cleaning->cleaning_id_1}} & {{$cleaning->cleaning_id_2}}</td>
+            <td  ><b>Name</b></td>
+            <td  width="250px">: {{$cleaning->cleaning_name_1}} & {{$cleaning->cleaning_name_2}}</td>
+            <td  ><b>ID</b></td>
+            <td  width="250px">: {{$cleaning->cleaning_id_1}} & {{$cleaning->cleaning_id_2}}</td>
         </tr>
         <tr >
-            <td width="100px"><b>Company</b></td>
-            <td >: PT Bijac</td>
-            <td ><b>Phone Number</b></td>
-            <td >: {{$cleaning->cleaning_number_1}} & {{$cleaning->cleaning_number_2}}</td>
+            <td  ><b>Company</b></td>
+            <td  width="250px">: PT Bijac</td>
+            <td  ><b>Phone Number</b></td>
+            <td  width="250px">: {{$cleaning->cleaning_number_1}} & {{$cleaning->cleaning_number_2}}</td>
         </tr>
         <tr >
-            <td width="100px"><b>Department</b></td>
-            <td colspan="4">: Cleaner</td>
+            <td  ><b>Department</b></td>
+            <td colspan="3">: Cleaner</td>
         </tr>
     </table>
 
-    <table cellspacing="0" cellpadding="2"  width="700px">
+    <table width="700px">
         <tr >
             <td  colspan="2"><b>Authorized Entry Area :</b></td>
             <td  colspan="2"><b>Access Type : </b></td>
@@ -205,7 +223,7 @@
         </tr>
     </table>
 
-    <table style="width:100%">
+    <table class="satu">
         <tr>
             @switch($lasthistoryC->status)
                 @case('created')
@@ -265,8 +283,8 @@
         </tr>
     </table>
 
-        <h5 class="nmr">On public holiday signatory will be handled by appointed Data Center Operation Shift Engineer on duty</h5>
-        <h5 class="nmr">**(Pada hari libur Nasional tanda tangan akan diwakilkan kepetugas operasional yang ditunjuk)</h5>
+        <h5 class="kedua">On public holiday signatory will be handled by appointed Data Center Operation Shift Engineer on duty</h5>
+        <h5 class="kedua">**(Pada hari libur Nasional tanda tangan akan diwakilkan kepetugas operasional yang ditunjuk)</h5>
 
     </div>
     <div style="page-break-after: always;">
