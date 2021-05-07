@@ -133,11 +133,11 @@ class CleaningController extends Controller
                 'aktif' => true,
             ]);
             foreach (['prakosobay@gmail.com'] as $recipient) {
-                $notification = new NotifReject();
-                Mail::to($recipient)->send(
-                    $this->notification->build($request)
-                );
-                // Mail::to($recipient)->send(new NotifReject());
+                // $notification = new NotifReject();
+                // Mail::to($recipient)->send(
+                //     $this->notification->build($request)
+                // );
+                Mail::to($recipient)->send(new NotifReject($request));
             }
             // dd($cleaningHistory);
             return $cleaningHistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
