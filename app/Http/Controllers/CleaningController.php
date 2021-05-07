@@ -61,13 +61,13 @@ class CleaningController extends Controller
         $lasthistoryC->update(['aktif' => false]);
 
         $status = '';
-        if ($lasthistoryC->status == 'created') {
+        if (($lasthistoryC->status == 'created') && (Auth::user()->role == 'review')) {
             $status = 'reviewed';
-        } elseif ($lasthistoryC->status == 'reviewed') {
+        } elseif (($lasthistoryC->status == 'reviewed') && (Auth::user()->role == 'check')) {
             $status = 'checked';
-        } elseif ($lasthistoryC->status == 'checked') {
+        } elseif (($lasthistoryC->status == 'checked') && (Auth::user()->role == 'security')) {
             $status = 'secured';
-        } elseif ($lasthistoryC->status == 'secured') {
+        } elseif (($lasthistoryC->status == 'secured') && (Auth::user()->role == 'boss')) {
             $status = 'final';
         } elseif ($lasthistoryC->status == 'final') {
             $cleaning = Cleaning::find($request->cleaning_id)->first();
@@ -100,9 +100,9 @@ class CleaningController extends Controller
         ]);
 
         if ($lasthistoryC->role_to == 'boss') {
-            foreach (['dc@balitower.co.id'] as $recipient) {
-                Mail::to($recipient)->send(new NotifEmail());
-            }
+            // foreach (['dc@balitower.co.id'] as $recipient) {
+            //     Mail::to($recipient)->send(new NotifEmail());
+            // }
             $cleaning = Cleaning::where('cleaning_id', $request->cleaning_id)->first();
             // dd($cleaning);
             $cleaningFull = CleaningFull::create([
@@ -112,7 +112,7 @@ class CleaningController extends Controller
                 'cleaning_work' => $cleaning->cleaning_work,
                 'cleaning_date' => $cleaning->created_at,
                 'status' => 'Full Approved',
-                'link' =>  url("/cleaning_pdf/$cleaning->cleaning_id"),
+                'link' => ("http://172.16.45.239:8000/cleaning_pdf/$cleaning->cleaning_id"),
             ]);
         }
 
@@ -133,7 +133,11 @@ class CleaningController extends Controller
                 'aktif' => true,
             ]);
             foreach (['prakosobay@gmail.com'] as $recipient) {
-                Mail::to($recipient)->send(new NotifReject());
+                $notification = new NotifReject();
+                Mail::to($recipient)->send(
+                    $this->notification->build($request)
+                );
+                // Mail::to($recipient)->send(new NotifReject());
             }
             // dd($cleaningHistory);
             return $cleaningHistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);

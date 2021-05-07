@@ -6,14 +6,44 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Email Notify</title>
 
+<style>
+    /* table{
+        border-collapse: collapse;
+        width: 300px;
+    }
+    th,td{
+        border: 2px solid black;
+        padding: 15px;
+    } */
+    table, th, td {
+            border-width: 300px;
+            border-spacing: 0px;
+            border: 1px solid black;
+            border-collapse: collapse;
+            font-size: 10pt;
+            margin: 5px;
+            padding: 7px;
+		}
+</style>
 </head>
-<body>
-    <div class="card">
-        <h3 class="">Hallo, Om Sino !</h3>
-        <p>Permit No. ....... di reject karena ......</p>
 
-        <p>Silahkan Login di  <a href="http://172.16.45.239:8000/">http://172.16.45.239:8000/</a></p>
-        <p>untuk request permit baru</p>
-    </div>
+<body>
+    <h1>Dear Bapak/Ibu,</h1>
+	<h2>Mohon maaf permit yang anda ajukan tidak dapat kami proses, mohon untuk mengajukan permit baru pada tautan di bawah ini.</h2>
+    <table>
+        <tr>
+            <td>No Permit</td>
+            <td>{{ $id }}</td>
+        </tr>
+        <tr>
+            <td>Tanggal Pekerjaan</td>
+            <td>{{ $validity }}</td>
+        </tr>
+        <tr>
+            <td>Tujuan Pekerjaan</td>
+            <td>{{ $purpose_work }}</td>
+        </tr>
+    </table>
+        <p><a href="http://172.16.45.239:8000">http://172.16.45.239:8000/approval/all</a></p>
 </body>
 </html>

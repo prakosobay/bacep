@@ -2,14 +2,17 @@
 
 namespace App\Mail;
 
+use Illuminate\Http\Request;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use App\Http\Controllers\CleaningController;
 
 class NotifReject extends Mailable
 {
     use Queueable, SerializesModels;
+
 
     /**
      * Create a new message instance.
@@ -24,16 +27,21 @@ class NotifReject extends Mailable
     /**
      * Build the message.
      *
-     * @return $this
+     * @return void
      */
-    public function build()
+    public function build($request)
     {
-        return $this->from('testing.dc@balitower.co.id')
+        return
+
+            $this->from('testing.dc@balitower.co.id')
             ->view('reject')
             ->with(
+
                 [
-                    'nama' => 'Om Sino',
-                    'pesan' => 'Permitnya harus di revisi',
+                    'nama' => 'Badai Sino',
+                    'id' => $request->cleaning_id,
+                    'validity' => $request->validity_from,
+                    'purpose_work' => $request->request_work,
                 ]
             );
     }
