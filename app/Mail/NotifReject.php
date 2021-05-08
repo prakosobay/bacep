@@ -2,7 +2,6 @@
 
 namespace App\Mail;
 
-use Illuminate\Http\Request;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -29,7 +28,7 @@ class NotifReject extends Mailable
      *
      * @return void
      */
-    public function build($request)
+    public function build()
     {
         return
 
@@ -39,9 +38,10 @@ class NotifReject extends Mailable
 
                 [
                     'nama' => 'Badai Sino',
-                    'id' => $request->cleaning_id,
-                    'validity' => $request->validity_from,
-                    'purpose_work' => $request->request_work,
+                    'pesan' => 'ditolak'
+                    // 'id' => $request->cleaning_id,
+                    // 'validity' => $request->validity_from,
+                    // 'purpose_work' =sssssss> $request->request_work,
                 ]
             );
     }

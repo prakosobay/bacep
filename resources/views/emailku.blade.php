@@ -9,11 +9,11 @@
 </head>
 <body>
     <div class="card">
-        <h3 class="">Hallo, {{ $nama }} !</h3>
-        <p>{{ $pesan }}</p>
+        <h3 class="">Hallo, DC Team!</h3>
+        <p>Mohon untuk review dan check permit dari team BM yang telah di submit.
+            Link terlampir </p>
+        <p>Silahkan Login di  <a href="http://172.16.45.239:8000/approval/all">http://172.16.45.239:8000/approval/all</a></p>
 
-        <p>Silahkan Login di  <a href="http://localhost:8000/approval/all">http://localhost:8000/approval/all</a></p>
-        <p>Login oi</p>
     </div>
 </body>
 </html>

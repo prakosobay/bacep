@@ -33,15 +33,15 @@
     <table>
         <tr>
             <td>No Permit</td>
-            <td>{{ $id }}</td>
+            <td>{{ $nama }}</td>
         </tr>
         <tr>
             <td>Tanggal Pekerjaan</td>
-            <td>{{ $validity }}</td>
+            <td>{{ $pesan }}</td>
         </tr>
         <tr>
             <td>Tujuan Pekerjaan</td>
-            <td>{{ $purpose_work }}</td>
+            <td>  </td>
         </tr>
     </table>
         <p><a href="http://172.16.45.239:8000">http://172.16.45.239:8000/approval/all</a></p>

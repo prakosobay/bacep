@@ -137,7 +137,7 @@ class CleaningController extends Controller
                 // Mail::to($recipient)->send(
                 //     $this->notification->build($request)
                 // );
-                Mail::to($recipient)->send(new NotifReject($request));
+                Mail::to($recipient)->send(new NotifReject());
             }
             // dd($cleaningHistory);
             return $cleaningHistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
