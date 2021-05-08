@@ -65,24 +65,7 @@
 <!-- page script -->
 
         <script>
-        //     $(function ()
-        //     {
-        //         $("#example1").DataTable
-        //         ({
-        //             "responsive": true,
-        //             "autoWidth": true,
-        //         });
 
-        //     $('#example2').DataTable({
-        //   "paging": true,
-        //   "lengthChange": false,
-        //   "searching": false,
-        //   "ordering": true,
-        //   "info": true,
-        //   "autoWidth": false,
-        //   "responsive": true,
-        // });
-        // });
 
         $(document).on('click', '.approve', function(){
             $.ajaxSetup({
@@ -90,38 +73,48 @@
                     'X-CSRF-TOKEN': $('input[name="_token"]').val()
                 }
             });
-            let cleaning_id = $(this).data('cleaning_id');
-            console.log(cleaning_id);
-            $.ajax({
-                type:'POST',
-                url:"{{url('approve_cleaning')}}",
-                data: {cleaning_id},
-                error: function (request, error) {
-                    alert(" Can't do because: " + error);
-                },
-                success:function(data){
-                    console.log(data);
-                    if(data.status == 'SUCCESS'){
-                        Swal.fire({
-                            title: "Success!",
-                            text: 'Data Approve Success',
-                            type: "success",
-                        }).then(function(){
-                            location.reload();
-                        });
-
-                    }else if(data.status == 'FAILED'){
-
-                        Swal.fire({
-                            title: "Failed!",
-                            text: 'Saving Data Approved Failed',
-                        }).then(function(){
-                            location.reload();
-                        });
-                    }
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, approve it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    let cleaning_id = $(this).data('cleaning_id');
+                    console.log(cleaning_id);
+                    $.ajax({
+                        type:'POST',
+                        url:"{{url('approve_cleaning')}}",
+                        data: {cleaning_id},
+                        error: function (request, error) {
+                            alert(" Can't do because: " + error);
+                        },
+                        success:function(data){
+                            console.log(data);
+                            if(data.status == 'SUCCESS'){
+                                    Swal.fire(
+                                    'Approved!',
+                                    'The form has been approved.',
+                                    'success'
+                                    ).then(function(){
+                                        location.reload();
+                                    })
+                            }else if(data.status == 'FAILED'){
+                                Swal.fire({
+                                    title: "Failed!",
+                                    text: 'Failed to Reject',
+                                }).then(function(){
+                                    location.reload();
+                                });
+                            }
+                        }
+                    });
                 }
             });
-        })
+        });
 
         $(document).on('click', '.reject', function(){
             $.ajaxSetup({
