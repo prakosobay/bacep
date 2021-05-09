@@ -7,14 +7,7 @@
     <title>Email Notify</title>
 
 <style>
-    /* table{
-        border-collapse: collapse;
-        width: 300px;
-    }
-    th,td{
-        border: 2px solid black;
-        padding: 15px;
-    } */
+
     table, th, td {
             border-width: 300px;
             border-spacing: 0px;
@@ -33,15 +26,15 @@
     <table>
         <tr>
             <td>No Permit</td>
-            <td>{{ $nama }}</td>
+            <td>{{ $cleaning->cleaning_id }}</td>
         </tr>
         <tr>
             <td>Tanggal Pekerjaan</td>
-            <td>{{ $pesan }}</td>
+            <td>{{ $cleaning->validity_from }}</td>
         </tr>
         <tr>
             <td>Tujuan Pekerjaan</td>
-            <td>  </td>
+            <td>{{ $cleaning->cleaning_work}}</td>
         </tr>
     </table>
         <p><a href="http://172.16.45.239:8000">http://172.16.45.239:8000/approval/all</a></p>
