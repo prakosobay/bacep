@@ -26,15 +26,15 @@
     <table>
         <tr>
             <td>No Permit</td>
-            <td>{{ $cleaning->cleaning_id }}</td>
+            <td>{{ $id }}</td>
         </tr>
         <tr>
             <td>Tanggal Pekerjaan</td>
-            <td>{{ $cleaning->validity_from }}</td>
+            <td>{{ $validity  }}</td>
         </tr>
         <tr>
             <td>Tujuan Pekerjaan</td>
-            <td>{{ $cleaning->cleaning_work}}</td>
+            <td>{{ $purpose_work }}</td>
         </tr>
     </table>
         <p><a href="http://172.16.45.239:8000">http://172.16.45.239:8000/approval/all</a></p>

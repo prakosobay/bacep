@@ -133,9 +133,9 @@ class CleaningController extends Controller
                 'aktif' => true,
             ]);
             foreach (['prakosobay@gmail.com'] as $recipient) {
-                // $notification = new NotifReject();
+                // $notification = new NotifReject($cleaning);
                 // Mail::to($recipient)->send(
-                //     $this->notification->build($request)
+                //     $this->build($cleaning)
                 // );
                 Mail::to($recipient)->send(new NotifReject());
             }

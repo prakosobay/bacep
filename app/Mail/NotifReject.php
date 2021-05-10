@@ -6,21 +6,23 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use App\Http\Controllers\CleaningController;
+use App\Models\Cleaning;
 
 class NotifReject extends Mailable
 {
     use Queueable, SerializesModels;
 
-
     /**
-     * Create a new message instance.
+     * The order instance.
      *
-     * @return void
+     * @var \App\Models\Cleaning
      */
+
+    protected $cleaning;
+
     public function __construct()
     {
-        //
+        // $this->cleaning = $cleaning;
     }
 
     /**
@@ -38,10 +40,10 @@ class NotifReject extends Mailable
 
                 [
                     'nama' => 'Badai Sino',
-                    'pesan' => 'ditolak'
-                    // 'id' => $request->cleaning_id,
-                    // 'validity' => $request->validity_from,
-                    // 'purpose_work' =sssssss> $request->request_work,
+                    'pesan' => 'ditolak',
+                    // 'id' => $this->cleaning->cleaning_id,
+                    // 'validity' => $this->cleaning->validity_from,
+                    // 'purpose_work' => $this->cleaning->cleaning_work,
                 ]
             );
     }
