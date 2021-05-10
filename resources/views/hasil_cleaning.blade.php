@@ -122,38 +122,87 @@
                     'X-CSRF-TOKEN': $('input[name="_token"]').val()
                 }
             });
-            let cleaning_id = $(this).data('cleaning_id');
-            console.log(cleaning_id);
-            $.ajax({
-                type:'POST',
-                url:"{{url('cleaning_reject')}}",
-                data: {cleaning_id},
-                error: function (request, error) {
-                    alert(" Can't do because: " + error);
-                },
-                success:function(data){
-                    console.log(data);
-                    if(data.status == 'SUCCESS'){
-                        Swal.fire({
-                            title: "Success!",
-                            text: 'Data Rejected',
-                            type: "success",
-                        }).then(function(){
-                            location.reload();
-                        });
-
-                    }else if(data.status == 'FAILED'){
-
-                        Swal.fire({
-                            title: "Failed!",
-                            text: 'Failed to Reject',
-                        }).then(function(){
-                            location.reload();
-                        });
-                    }
+            Swal.fire({
+                title: 'Are you sure want to reject?',
+                text: "You won't be able to revert this!",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, reject it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    let cleaning_id = $(this).data('cleaning_id');
+                    console.log(cleaning_id);
+                    $.ajax({
+                        type:'POST',
+                        url:"{{url('cleaning_reject')}}",
+                        data: {cleaning_id},
+                        error: function (request, error) {
+                            alert(" Can't do because: " + error);
+                        },
+                        success:function(data){
+                            console.log(data);
+                            if(data.status == 'SUCCESS'){
+                                    Swal.fire(
+                                    'Rejected!',
+                                    'The form has been rejected.',
+                                    'success'
+                                    ).then(function(){
+                                        location.reload();
+                                    })
+                            }else if(data.status == 'FAILED'){
+                                Swal.fire({
+                                    title: "Failed!",
+                                    text: 'Failed to Reject',
+                                }).then(function(){
+                                    location.reload();
+                                });
+                            }
+                        }
+                    });
                 }
             });
         });
+
+        // $(document).on('click', '.reject', function(){
+        //     $.ajaxSetup({
+        //         headers: {
+        //             'X-CSRF-TOKEN': $('input[name="_token"]').val()
+        //         }
+        //     });
+        //     let cleaning_id = $(this).data('cleaning_id');
+        //     console.log(cleaning_id);
+        //     $.ajax({
+        //         type:'POST',
+        //         url:"{{url('cleaning_reject')}}",
+        //         data: {cleaning_id},
+        //         error: function (request, error) {
+        //             alert(" Can't do because: " + error);
+        //         },
+        //         success:function(data){
+        //             console.log(data);
+        //             if(data.status == 'SUCCESS'){
+        //                 Swal.fire({
+        //                     title: "Success!",
+        //                     text: 'Data Rejected',
+        //                     type: "success",
+        //                 }).then(function(){
+        //                     location.reload();
+        //                 });
+
+        //             }else if(data.status == 'FAILED'){
+
+        //                 Swal.fire({
+        //                     title: "Failed!",
+        //                     text: 'Failed to Reject',
+        //                 }).then(function(){
+        //                     location.reload();
+        //                 });
+        //             }
+        //         }
+        //     });
+        // });
         </script>
 
     </section>
