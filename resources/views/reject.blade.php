@@ -23,10 +23,10 @@
 <body>
     <h1>Dear Bapak/Ibu,</h1>
 	<h2>Mohon maaf permit yang anda ajukan tidak dapat kami proses, mohon untuk mengajukan permit baru pada tautan di bawah ini.</h2>
-    <table>
+    {{-- <table>
         <tr>
             <td>No Permit</td>
-            <td>{{ $id }}</td>
+            <td>{{ $nama }}</td>
         </tr>
         <tr>
             <td>Tanggal Pekerjaan</td>
@@ -36,7 +36,7 @@
             <td>Tujuan Pekerjaan</td>
             <td>{{ $purpose_work }}</td>
         </tr>
-    </table>
+    </table> --}}
         <p><a href="http://172.16.45.239:8000">http://172.16.45.239:8000/approval/all</a></p>
 </body>
 </html>
