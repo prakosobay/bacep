@@ -32,11 +32,27 @@
                                         <td>{{ $p->cleaning_name_2 }}</td>
                                         <td>{{ $p->cleaning_work }}</td>
                                         @if(Auth::user()->role != 'security')
-                                        <td><a href="javascript:void(0)" class="approve" data-cleaning_id="{{$p->cleaning_id}}">Approve</a> |
-                                            <a href="javascript:void(0)" class="reject" data-cleaning_id="{{$p->cleaning_id}}">Reject</a> |
+                                        <td>
+                                            <a href="javascript:void(0)" id="ok" class="approve" data-cleaning_id="{{$p->cleaning_id}}">Approve</a>
+                                            {{-- <a id="elementId"
+                                                href="javascript:void(0)"
+                                                class="approve" data-cleaning_id="{{$p->cleaning_id}}"
+                                                onclick="setTimeout(function(){document.getElementById('elementId').removeAttribute('href');}, 1);"
+                                                >Approve</a>| --}}
+                                            <a href="javascript:void(0)" id="not" class="reject" data-cleaning_id="{{$p->cleaning_id}}">Reject</a>
+                                            {{-- <a id="elementId"
+                                                href="javascript:void(0)"
+                                                class="reject" data-cleaning_id="{{$p->cleaning_id}}"
+                                                onclick="setTimeout(function(){document.getElementById('elementId').removeAttribute('href');}, 1);"
+                                                >Reject</a>| --}}
                                             <a href="/detail_cleaning/{{$p->cleaning_id}}">History</a></td>
                                         @else<td>
-                                            <a href="javascript:void(0)" class="approve" data-cleaning_id="{{$p->cleaning_id}}">Approve</a> |
+                                            <a href="javascript:void(0)" id="ok" class="approve" data-cleaning_id="{{$p->cleaning_id}}">Approve</a>
+                                            {{-- <a id="elementId"
+                                                href="javascript:void(0)"
+                                                class="approve" data-cleaning_id="{{$p->cleaning_id}}"
+                                                onclick="setTimeout(function(){document.getElementById('elementId').removeAttribute('href');}, 1);"
+                                                >Approve</a>| --}}
                                             <a href="/detail_cleaning/{{$p->cleaning_id}}">History</a></td>
                                         @endif
                                         <td><a href="/cleaning_pdf/{{$p->cleaning_id}}" class="btn btn-primary" target="_blank">LIHAT PDF</a></td>
@@ -67,12 +83,14 @@
         <script>
 
 
-        $(document).on('click', '.approve', function(){
+        $(document).on('click', '.approve', function(event){
+
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('input[name="_token"]').val()
                 }
             });
+
             Swal.fire({
                 title: 'Are you sure?',
                 text: "You won't be able to revert this!",
@@ -81,8 +99,12 @@
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
                 confirmButtonText: 'Yes, approve it!'
-            }).then((result) => {
+            })
+            .then((result) => {
                 if (result.isConfirmed) {
+                        $('#ok').click(function () {
+                            return false;
+                        });
                     let cleaning_id = $(this).data('cleaning_id');
                     console.log(cleaning_id);
                     $.ajax({
@@ -165,44 +187,21 @@
             });
         });
 
-        // $(document).on('click', '.reject', function(){
-        //     $.ajaxSetup({
-        //         headers: {
-        //             'X-CSRF-TOKEN': $('input[name="_token"]').val()
-        //         }
-        //     });
-        //     let cleaning_id = $(this).data('cleaning_id');
-        //     console.log(cleaning_id);
-        //     $.ajax({
-        //         type:'POST',
-        //         url:"{{url('cleaning_reject')}}",
-        //         data: {cleaning_id},
-        //         error: function (request, error) {
-        //             alert(" Can't do because: " + error);
-        //         },
-        //         success:function(data){
-        //             console.log(data);
-        //             if(data.status == 'SUCCESS'){
-        //                 Swal.fire({
-        //                     title: "Success!",
-        //                     text: 'Data Rejected',
-        //                     type: "success",
-        //                 }).then(function(){
-        //                     location.reload();
-        //                 });
+//         var lnk = document.getElementById('ok');
 
-        //             }else if(data.status == 'FAILED'){
-
-        //                 Swal.fire({
-        //                     title: "Failed!",
-        //                     text: 'Failed to Reject',
-        //                 }).then(function(){
-        //                     location.reload();
-        //                 });
-        //             }
-        //         }
-        //     });
-        // });
+// if (window.addEventListener) {
+//     document.addEventListener('click', function (e) {
+//         if (e.target.name === 'ok') {
+//             e.preventDefault();         // Comment this line to enable the link tag again.
+//         }
+//     });
+// }
+//         function clickAndDisable(link) {
+//      // disable subsequent clicks
+//      link.onclick = function(event) {
+//         event.preventDefault();
+//      }
+//    }
         </script>
 
     </section>
