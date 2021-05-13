@@ -34,25 +34,10 @@
                                         @if(Auth::user()->role != 'security')
                                         <td>
                                             <a href="javascript:void(0)" id="ok" class="approve" data-cleaning_id="{{$p->cleaning_id}}">Approve</a>
-                                            {{-- <a id="elementId"
-                                                href="javascript:void(0)"
-                                                class="approve" data-cleaning_id="{{$p->cleaning_id}}"
-                                                onclick="setTimeout(function(){document.getElementById('elementId').removeAttribute('href');}, 1);"
-                                                >Approve</a>| --}}
                                             <a href="javascript:void(0)" id="not" class="reject" data-cleaning_id="{{$p->cleaning_id}}">Reject</a>
-                                            {{-- <a id="elementId"
-                                                href="javascript:void(0)"
-                                                class="reject" data-cleaning_id="{{$p->cleaning_id}}"
-                                                onclick="setTimeout(function(){document.getElementById('elementId').removeAttribute('href');}, 1);"
-                                                >Reject</a>| --}}
                                             <a href="/detail_cleaning/{{$p->cleaning_id}}">History</a></td>
                                         @else<td>
                                             <a href="javascript:void(0)" id="ok" class="approve" data-cleaning_id="{{$p->cleaning_id}}">Approve</a>
-                                            {{-- <a id="elementId"
-                                                href="javascript:void(0)"
-                                                class="approve" data-cleaning_id="{{$p->cleaning_id}}"
-                                                onclick="setTimeout(function(){document.getElementById('elementId').removeAttribute('href');}, 1);"
-                                                >Approve</a>| --}}
                                             <a href="/detail_cleaning/{{$p->cleaning_id}}">History</a></td>
                                         @endif
                                         <td><a href="/cleaning_pdf/{{$p->cleaning_id}}" class="btn btn-primary" target="_blank">LIHAT PDF</a></td>
@@ -154,6 +139,9 @@
                 confirmButtonText: 'Yes, reject it!'
             }).then((result) => {
                 if (result.isConfirmed) {
+                    $('#not').click(function () {
+                            return false;
+                        });
                     let cleaning_id = $(this).data('cleaning_id');
                     console.log(cleaning_id);
                     $.ajax({
