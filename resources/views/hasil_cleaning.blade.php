@@ -174,22 +174,6 @@
                 }
             });
         });
-
-//         var lnk = document.getElementById('ok');
-
-// if (window.addEventListener) {
-//     document.addEventListener('click', function (e) {
-//         if (e.target.name === 'ok') {
-//             e.preventDefault();         // Comment this line to enable the link tag again.
-//         }
-//     });
-// }
-//         function clickAndDisable(link) {
-//      // disable subsequent clicks
-//      link.onclick = function(event) {
-//         event.preventDefault();
-//      }
-//    }
         </script>
 
     </section>
