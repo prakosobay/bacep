@@ -15,6 +15,10 @@
         width: 100%;
         text-align: center
         }
+
+        .contoh2::-webkit-input-placeholder{
+            color:grey;
+        }
     </style>
 
     <!-- jQuery library -->
@@ -54,9 +58,10 @@
                 <div id="input4">
                     <!--input4-->
 
+                    <h6 class="text-white">Purpose of Work (Tujuan Pekerjaan)</h6>
                     {{-- <input type="text" id="input-group" placeholder="Purpose of Work (Pekerjaan yang dilakukan)" name="cleaning_work"> --}}
-                    <select id="input-group20" style="background: black;" name="cleaning_work">
-                        <option value="">Purpose of Work</option>
+                    <select id="input-group20" style="background: black;" name="cleaning_work" required>
+                        <option value="">  </option>
                         <option value="Pembersihan Lantai Dasar Ruang Facility Data Center (Trafo-Battery-PUTR-Genset-Pintu Luar PLN">
                             Pembersihan Lantai Dasar Ruang Facility Data Center (Trafo-Battery-PUTR-Genset-Pintu Luar PLN
                         </option>
@@ -177,10 +182,10 @@
                 <div id="input4">
                         <!--input4-->
                     <h4 class="text-white">1. Background and Objective (Jenis Pekerjaan)</h4>
-                        <input type="text" id="input-group" placeholder="Fill in here" name="cleaning_background">
+                        <input type="text" class="contoh2" id="input-group" placeholder="Fill in here" name="cleaning_background" required>
                     <p>
                     <h4 class="text-white">2. Description os Scope of Work (Deskripsikan Pekerjaan)</h4>
-                        <input type="text" id="input-group" placeholder="Fill in here" name="cleaning_describ">
+                        <input type="text" class="contoh2" id="input-group" placeholder="Fill in here" name="cleaning_describ">
                     <p>
                     <h4 class="text-white">3. Risk and Service Area Impact (Resiko dan Dampak Area Servis)</h4>
                     <p>
@@ -888,10 +893,10 @@
                         </select>
                     <p>
                     <h4 class="text-white">5. Testing and Verification</h4>
-                        <input type="text" id="input-group" placeholder="Fill in here (isi disini)" name="cleaning_testing">
+                        <input type="text" class="contoh2" id="input-group" placeholder="Fill in here (isi disini)" name="cleaning_testing">
                     <P>
                     <h4 class="text-white">6. Rollback Plan</h4>
-                        <input type="text" id="input-group" placeholder="Fill in here (isi disini)" name="cleaning_rollback">
+                        <input type="text" class="contoh2" id="input-group" placeholder="Fill in here (isi disini)" name="cleaning_rollback">
                     <P>
                     <h4 class="text-white">7. Person in charge</h4>
                         <select id="input-group1" style="background: black;" name="cleaning_name_1">
