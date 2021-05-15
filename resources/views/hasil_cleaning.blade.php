@@ -66,8 +66,6 @@
 <!-- page script -->
 
         <script>
-
-
         $(document).on('click', '.approve', function(event){
 
             $.ajaxSetup({

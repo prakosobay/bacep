@@ -60,31 +60,32 @@ class CleaningController extends Controller
         $lasthistoryC = CleaningHistory::where('cleaning_id', '=', $request->cleaning_id)->latest()->first();
         $lasthistoryC->update(['aktif' => false]);
 
+
         $status = '';
-        if (($lasthistoryC->status == 'created') && (Auth::user()->role == 'review')) {
+        if (($lasthistoryC->status == 'created') && (Auth::user()->role == 'review') && ($lasthistoryC->role_to == 'review') ) {
             $status = 'reviewed';
-        } elseif (($lasthistoryC->status == 'reviewed') && (Auth::user()->role == 'check')) {
+        } elseif (($lasthistoryC->status == 'reviewed') && (Auth::user()->role == 'check') && ($lasthistoryC->role_to == 'check'))  {
             $status = 'checked';
-        } elseif (($lasthistoryC->status == 'checked') && (Auth::user()->role == 'security')) {
+        } elseif (($lasthistoryC->status == 'checked') && (Auth::user()->role == 'security') && ($lasthistoryC->role_to == 'security'))  {
             $status = 'secured';
-        } elseif (($lasthistoryC->status == 'secured') && (Auth::user()->role == 'boss')) {
+        } elseif (($lasthistoryC->status == 'secured') && (Auth::user()->role == 'boss') && ($lasthistoryC->role_to == 'boss') ) {
             $status = 'final';
         } elseif ($lasthistoryC->status == 'final') {
             $cleaning = Cleaning::find($request->cleaning_id)->first();
         }
 
         $role_to = '';
-        if ($lasthistoryC->role_to == 'review') {
-            foreach (['bayu.prakoso@balitower.co.id', 'rizky.anindya@balitower.co.id'] as $recipient) {
+        if (($lasthistoryC->role_to == 'review')) {
+            foreach (['bayu.prakoso@balitower.co.id'] as $recipient) {
                 Mail::to($recipient)->send(new NotifEmail());
             }
             $role_to = 'check';
-        } elseif ($lasthistoryC->role_to == 'check') {
+        } elseif (($lasthistoryC->role_to == 'check')){
             foreach (['bayu230498@gmail.com'] as $recipient) {
                 Mail::to($recipient)->send(new NotifEmail());
             }
             $role_to = 'security';
-        } elseif ($lasthistoryC->role_to == 'security') {
+        } elseif (($lasthistoryC->role_to == 'security')){
             foreach (['rio.christian@balitower.co.id'] as $recipient) {
                 Mail::to($recipient)->send(new NotifEmail());
             }
@@ -115,6 +116,7 @@ class CleaningController extends Controller
                 'link' => ("http://172.16.45.239:8000/cleaning_pdf/$cleaning->cleaning_id"),
             ]);
         }
+
 
         return $cleaningHistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
     }
