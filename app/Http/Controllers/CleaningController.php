@@ -113,7 +113,7 @@ class CleaningController extends Controller
                 'cleaning_work' => $cleaning->cleaning_work,
                 'cleaning_date' => $cleaning->created_at,
                 'status' => 'Full Approved',
-                'link' => ("http://172.16.45.239:8000/cleaning_pdf/$cleaning->cleaning_id"),
+                'link' => ("http://172.16.45.195:8000/cleaning_pdf/$cleaning->cleaning_id"),
             ]);
         }
 
