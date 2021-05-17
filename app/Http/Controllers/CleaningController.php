@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Barryvdh\DomPDF\Facade as PDF;
 use App\Mail\NotifEmail;
 use App\Mail\NotifReject;
+use App\Mail\NotifFull;
 use Illuminate\Support\Facades\Mail;
 
 class CleaningController extends Controller
@@ -62,13 +63,13 @@ class CleaningController extends Controller
 
 
         $status = '';
-        if (($lasthistoryC->status == 'created') && (Auth::user()->role == 'review') && ($lasthistoryC->role_to == 'review') ) {
+        if (($lasthistoryC->status == 'created') && (Auth::user()->role == 'review') && ($lasthistoryC->role_to == 'review')) {
             $status = 'reviewed';
-        } elseif (($lasthistoryC->status == 'reviewed') && (Auth::user()->role == 'check') && ($lasthistoryC->role_to == 'check'))  {
+        } elseif (($lasthistoryC->status == 'reviewed') && (Auth::user()->role == 'check') && ($lasthistoryC->role_to == 'check')) {
             $status = 'checked';
-        } elseif (($lasthistoryC->status == 'checked') && (Auth::user()->role == 'security') && ($lasthistoryC->role_to == 'security'))  {
+        } elseif (($lasthistoryC->status == 'checked') && (Auth::user()->role == 'security') && ($lasthistoryC->role_to == 'security')) {
             $status = 'secured';
-        } elseif (($lasthistoryC->status == 'secured') && (Auth::user()->role == 'boss') && ($lasthistoryC->role_to == 'boss') ) {
+        } elseif (($lasthistoryC->status == 'secured') && (Auth::user()->role == 'boss') && ($lasthistoryC->role_to == 'boss')) {
             $status = 'final';
         } elseif ($lasthistoryC->status == 'final') {
             $cleaning = Cleaning::find($request->cleaning_id)->first();
@@ -80,12 +81,12 @@ class CleaningController extends Controller
                 Mail::to($recipient)->send(new NotifEmail());
             }
             $role_to = 'check';
-        } elseif (($lasthistoryC->role_to == 'check')){
+        } elseif (($lasthistoryC->role_to == 'check')) {
             foreach (['bayu230498@gmail.com'] as $recipient) {
                 Mail::to($recipient)->send(new NotifEmail());
             }
             $role_to = 'security';
-        } elseif (($lasthistoryC->role_to == 'security')){
+        } elseif (($lasthistoryC->role_to == 'security')) {
             foreach (['rio.christian@balitower.co.id'] as $recipient) {
                 Mail::to($recipient)->send(new NotifEmail());
             }
@@ -101,8 +102,8 @@ class CleaningController extends Controller
         ]);
 
         if ($lasthistoryC->role_to == 'boss') {
-            foreach (['dc@balitower.co.id'] as $recipient) {
-                Mail::to($recipient)->send(new NotifEmail());
+            foreach (['prakosobayu98@gmail.com'] as $recipient) {
+                Mail::to($recipient)->send(new NotifFull());
             }
             $cleaning = Cleaning::where('cleaning_id', $request->cleaning_id)->first();
             // dd($cleaning);
@@ -166,6 +167,7 @@ class CleaningController extends Controller
         // $user = Users::where('id', $id)->where('name', $name)->get();
         // dd($cleaningHistory);
         $pdf = PDF::loadview('cleaning_pdf', ['cleaning' => $cleaning, 'lasthistoryC' => $lasthistoryC, 'cleaningHistory' => $cleaningHistory])->setPaper('a4', 'portrait')->setWarnings(false);
+        // $pdf = PDF::loadview('cleaning_pdf_rev1', ['cleaning' => $cleaning, 'lasthistoryC' => $lasthistoryC, 'cleaningHistory' => $cleaningHistory])->setPaper('a4', 'portrait')->setWarnings(false);
         return $pdf->stream();
         // PDF::loadHTML($html)->setPaper('a4', 'landscape')->setWarnings(false)->save('myfile.pdf')
     }
