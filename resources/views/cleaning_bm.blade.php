@@ -221,10 +221,10 @@
                             <option value="">Mitigation Plan</option>
                             <option value="Menggunakan APD">Menggunakan APD</option>
                             <option value="Menggunakan masker">Menggunakan masker</option>
-                            <option value="Bekerja dengan hati-hati">Bekerja dengan hati-hati</option>
+                            <option value="Bekerja dengan hati-hati">Bekerja dengan hati-hati, menjaga jarak dengan perangkat di rack</option>
                             <option value="Menjaga jarak dari sumber listrik">Menjaga jarak dari sumber listrik</option>
                             <option value="Menjaga jarak dengan perangkat-perangkat critical tersebut">Menjaga jarak dengan perangkat-perangkat critical tersebut</option>
-                            <option value="Pastikan tangga berdiri dengan benar">Pastikan tangga berdiri dengan benar</option>
+                            <option value="Pastikan tangga berdiri dengan benar">Pastikan tangga berdiri dengan benar dan berhati-hati ketika bekerja</option>
                             <option value="Tidak Menyentuh Tombol dan Display Parameter di Panel">Tidak Menyentuh Tombol dan Display Parameter di Panel</option>
                         </select>
 
@@ -414,7 +414,7 @@
                     </p>
                         <input type="time" id="input-group7" placeholder="Time" name="cleaning_time_1">
                         <select id="input-group1" style="background: black;" name="cleaning_item_1">
-                            <option value="">Item Operation (Barang yang Digunakan)</option>
+                            <option value="">Item (Barang yang Digunakan)</option>
                             <option value="Vacum-Majun-Kanebo-Kop">
                                 Vacum  -  Majun - Kanebo - Kop
                             </option>

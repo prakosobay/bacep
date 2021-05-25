@@ -44,7 +44,7 @@
             border-spacing: 0.5px;
             border: 1px solid black;
             width: 100%;
-            font-size: 8pt;
+            font-size: 9pt;
             margin: 1px;
             padding: 1px;
         }
@@ -84,6 +84,13 @@
             margin-top: 10px;
         }
 
+        .table-approval {
+            border: 1px solid black;
+            border-collapse:collapse;
+            width: 100%;
+            font-size: 10pt;
+        }
+
         .table-grey {
             text-align: center;
             background-color: grey;
@@ -91,6 +98,17 @@
 
         .table-center {
             text-align: center;
+        }
+
+        .col_approval {
+            border: 1px solid black;
+            border-collapse: collapse;
+            text-align: center;
+        }
+
+        .col-gambar {
+            border: 1px solid black;
+            border-collapse: collapse;
         }
 
         .text_header {
@@ -106,6 +124,11 @@
         .img-fluid {
             height: 40px;
             width: 110px;
+        }
+
+        p {
+            text-align: center;
+            font-size: 10pt;
         }
 
         .page_break+.page_break {
@@ -327,6 +350,66 @@
                     <td ><img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   Parking Lot</td>
                     <td class="table-center">{{$cleaning->validity_from}}</td>
                     <td class="table-center">{{$cleaning->validity_to}}</td>
+                </tr>
+            </table>
+
+            <table cellpadding="5" class="table-approval">
+                <tr >
+                    <th class="col_approval">**Prepared by</th>
+                    <th class="col_approval">**Approved by</th>
+                    <th>     </th>
+                </tr>
+                <tr >
+                    @switch($lasthistoryC->status)
+                        @case('final')
+                            <td > </td>
+                            @break
+
+                        @case('reviewed')
+                            <td > </td>
+                            @break
+
+                        @case('checked')
+                            <td > </td>
+                            @break
+
+                        @case('secured')
+                            <td ><p>Badai Sino Jendrang</p><p>Tanggal</p></td>
+                            <td ><p>Anugrah Sandy Yudhastiya</p><p>Tanggal</p></td>
+                            <td class="col_approval"><img src="{{ public_path("gambar/Checked.png") }}"  alt="" style="width: 100px; height: 60px;" ><p>Agus</p><p>Tanggal</p></td>
+                            @break
+
+                        @case('created')
+                            <td ><p>Badai Sino Jendrang</p><p>Tanggal</p></td>
+                            <td class="col_approval"><img src="{{ public_path("gambar/approved.png") }}"  alt="" style="width: 100px; height: 60px;" ><p>Anugrah Sandy Yudhastiya</p><p>Tanggal</p></td>
+                            <td class="col_approval"><img src="{{ public_path("gambar/Checked.png") }}"  alt="" style="width: 100px; height: 60px;" ><p>Agus</p><p>Tanggal</p></td>
+                            @break
+                    @endswitch
+                </tr>
+                {{-- <tr >
+                    <td>Badai Sino Jendrang</td>
+                    <td>Anugrah Sandy Yudhastiya</td>
+                    <td>Agus</td>
+                </tr>
+                <tr >
+                    <td>tanggal</td>
+                    <td>tanggal</td>
+                    <td>tanggal</td>
+                </tr> --}}
+
+                <tr>
+                    <td class="col_approval"><b>Requestor</b></td>
+                    <td class="col_approval"><b>Head of Data Center Operation</b></td>
+                    <td class="col_approval"><b>Security</b></td>
+                </tr>
+            </table>
+            <p >** On public holiday signatory will be handled by appointed Data Center Operation Shift Engineer on duty</p>
+            <p>(Pada hari libur Nasional tanda tangan akan diwakilkan kepetugas operasional yang ditunjuk)</p>
+        </div>
+        <div style="page-break-after:always;">
+            <table cellpadding="3" class="table table-visitor">
+                <tr>
+                    <th>Background Objective</th>
                 </tr>
             </table>
         </div>
