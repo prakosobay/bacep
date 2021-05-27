@@ -13,31 +13,31 @@
 
         /** Define now the real margins of every page in the PDF **/
         body {
-            margin-top: 1.7cm;
+            margin-top: 0.3cm;
             margin-left: 0.5cm;
             margin-right: 0.5cm;
-            margin-bottom: 1cm;
+            margin-bottom: 0.3cm;
         }
 
         /** Define the header rules **/
-        header {
+        /* header {
             position: fixed;
             top: 0cm;
             left: 0.5cm;
             right: 0.5cm;
             height: 3cm;
             text-align: center;
-        }
+        } */
 
         /** Define the footer rules **/
-        footer {
+        /* footer {
             position: fixed;
             bottom: 0.1cm;
             height: 1cm;
             left: 0.5cm;
             right: 0.5cm;
             text-align: center;
-        }
+        } */
 
         .table-bordered,
         .col_header {
@@ -58,6 +58,7 @@
             text-align: center;
             margin: 1px;
             padding: 1px;
+            margin-bottom: 0.1cm;
         }
 
         .table-hover {
@@ -70,8 +71,16 @@
 
         .table-visitor {
             border: 1px solid black;
-            /* border-collapse: collapse; */
+            border-collapse: collapse;
             font-size: 10pt;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .table-detail {
+            border: 1px solid black;
+            border-collapse: collapse;
+            font-size: 8pt;
             width: 100%;
             margin-top: 10px;
         }
@@ -91,13 +100,29 @@
             font-size: 10pt;
         }
 
+        .table-background {
+            border-spacing: 0.5px;
+            border: 1px solid black;
+            border-collapse: collapse;
+            width: 100%;
+            font-size: 8pt;
+        }
+
         .table-grey {
             text-align: center;
             background-color: grey;
+            border: 1px solid black;
+        }
+
+        .table-white {
+            border: 1px solid black;
+            border-collapse: collapse;
         }
 
         .table-center {
             text-align: center;
+            border: 1px solid black;
+            border-collapse: collapse;
         }
 
         .col_approval {
@@ -131,6 +156,11 @@
             font-size: 10pt;
         }
 
+        .cr {
+            text-align: left;
+            font-size: 8pt;
+        }
+
         .page_break+.page_break {
             page-break-before: always;
         }
@@ -138,7 +168,7 @@
 
 </head>
 <body>
-    <header>
+    {{-- <header>
         <table class="table table-bordered">
             <tr >
                 <td class="col_header" rowspan="2" ><img src="{{ public_path("gambar/bts_logo.jpg") }}" class="img-fluid" alt="logo_bts"></td>
@@ -150,9 +180,9 @@
                 <td class="col_header"><b>Tanggal Berlaku : 18 Mei 2021</b></td>
             </tr>
         </table>
-    </header>
+    </header> --}}
 
-    <footer>
+    {{-- <footer>
         <table class="table table-bordered">
             <tr>
                 <td class="col_footer">Kode Dok: FRM-BTS-DCDV-2019-04</td>
@@ -161,18 +191,30 @@
                 <td class="col_footer">Hal : 1/1</td>
             </tr>
         </table>
-    </footer>
+    </footer> --}}
 
     <!-- Wrap the content of your PDF inside a main tag -->
     <main>
         <div style="page-break-after: always;">
+            <table class="table table-bordered">
+                <tr >
+                    <td class="col_header" rowspan="2" ><img src="{{ public_path("gambar/bts_logo.jpg") }}" class="img-fluid" alt="logo_bts"></td>
+                    <td class="col_header"><font size="10pt"><b>FORM</b></font></td>
+                    <td class="col_header"><b>Kode Dokumen : FRM-BTS-DCDV-2021-04</b></td>
+                </tr>
+                <tr>
+                    <td class="col_header"><font size="10pt"><b>Access Request</b></font></td>
+                    <td class="col_header"><b>Tanggal Berlaku : 18 Mei 2021</b></td>
+                </tr>
+            </table>
+
             <table cellpadding="3" class="table table-hover">
                 <tr >
                     <td width="150px">Date of Request</td>
                     <td >: {{$cleaning->created_at}}</td>
                 </tr>
                 <tr >
-                    <td width="150px">Access Request Number: </td>
+                    <td width="150px">Change Request Number: </td>
                     <td >: {{$cleaning->cleaning_id}}</td>
                 </tr>
                 <tr >
@@ -204,46 +246,46 @@
                     <td class="table-grey" colspan="5"><b>Visitor</b></td>
                 </tr>
                 <tr class="table-grey">
-                    <td >Name</td>
-                    <td >ID Number</td>
-                    <td >Phone Number</td>
-                    <td >Company</td>
-                    <td >Department</td>
+                    <td class="table-grey">Name</td>
+                    <td class="table-grey">ID Number</td>
+                    <td class="table-grey">Phone Number</td>
+                    <td class="table-grey">Company</td>
+                    <td class="table-grey">Department</td>
                 </tr>
                 <tr >
-                    <td >1. {{$cleaning->cleaning_name_1}}</td>
+                    <td class="table-white">1. {{$cleaning->cleaning_name_1}}</td>
                     <td class="table-center">{{$cleaning->cleaning_id_1}}</td>
                     <td class="table-center">{{$cleaning->cleaning_number_1}}</td>
                     <td class="table-center">PT BIJAC</td>
                     <td class="table-center">Building Management</td>
                 </tr>
                 <tr >
-                    <td >2. {{$cleaning->cleaning_name_2}}</td>
+                    <td class="table-white">2. {{$cleaning->cleaning_name_2}}</td>
                     <td class="table-center">{{$cleaning->cleaning_id_2}}</td>
                     <td class="table-center">{{$cleaning->cleaning_number_2}}</td>
                     <td class="table-center">PT BIJAC</td>
                     <td class="table-center">Building Management</td>
                 </tr>
                 <tr >
-                    <td >3. </td>
-                    <td ></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td class="table-white">3. </td>
+                    <td class="table-center"></td>
+                    <td class="table-center"></td>
+                    <td class="table-center"></td>
+                    <td class="table-center"></td>
                 </tr>
                 <tr >
-                    <td >4. </td>
-                    <td ></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td class="table-white">4. </td>
+                    <td class="table-center"></td>
+                    <td class="table-center"></td>
+                    <td class="table-center"></td>
+                    <td class="table-center"></td>
                 </tr>
                 <tr >
-                    <td >5. </td>
-                    <td ></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td class="table-white">5. </td>
+                    <td class="table-center"></td>
+                    <td class="table-center"></td>
+                    <td class="table-center"></td>
+                    <td class="table-center"></td>
                 </tr>
             </table>
 
@@ -348,8 +390,8 @@
                         @endif
                     </td>
                     <td ><img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   Parking Lot</td>
-                    <td class="table-center">{{$cleaning->validity_from}}</td>
-                    <td class="table-center">{{$cleaning->validity_to}}</td>
+                    <td class="table-white">{{$cleaning->validity_from}}</td>
+                    <td class="table-white">{{$cleaning->validity_to}}</td>
                 </tr>
             </table>
 
@@ -403,15 +445,133 @@
                     <td class="col_approval"><b>Security</b></td>
                 </tr>
             </table>
+
             <p >** On public holiday signatory will be handled by appointed Data Center Operation Shift Engineer on duty</p>
             <p>(Pada hari libur Nasional tanda tangan akan diwakilkan kepetugas operasional yang ditunjuk)</p>
-        </div>
-        <div style="page-break-after:always;">
-            <table cellpadding="3" class="table table-visitor">
+
+            <table class="table table-bordered">
                 <tr>
-                    <th>Background Objective</th>
+                    <td class="col_footer">Kode Dok: FRM-BTS-DCDV-2019-04</td>
+                    <td class="col_footer">Revisi : 01</td>
+                    <td class="col_footer"><font color="red">Kategori : Dokumen Terbatas</font></td>
+                    <td class="col_footer">Hal : 1/1</td>
                 </tr>
             </table>
+
+        </div>
+        <div style="page-break-after:always;">
+            <table class="table table-bordered">
+                <tr >
+                    <td class="col_header" rowspan="2" ><img src="{{ public_path("gambar/bts_logo.jpg") }}" class="img-fluid" alt="logo_bts"></td>
+                    <td class="col_header"><font size="10pt"><b>FORM</b></font></td>
+                    <td class="col_header"><b>Kode Dokumen : FRM-BTS-DCDV-2021-03</b></td>
+                </tr>
+                <tr>
+                    <td class="col_header"><font size="10pt"><b>Change Request</b></font></td>
+                    <td class="col_header"><b>Tanggal Berlaku : 18 Mei 2021</b></td>
+                </tr>
+            </table>
+
+            <p class="cr">Change Request Number : </p>
+
+            <table cellpadding="1.5" class="table table-background">
+                <tr >
+                    <td width="50%" class="table-grey"><b>Background and Objectives</b></td>
+                    <td width="50%" class="table-grey"><b>Description of Scope of Work</b></td>
+                </tr>
+                <tr >
+                    <td class="table-center">{{$cleaning->cleaning_background}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_describ}}</td>
+                </tr>
+            </table>
+
+            <table cellpadding="5" class="table table-detail">
+                <tr >
+                    <td class="table-grey" colspan="4"><b>Detail Time Table of All Activity</b></td>
+                </tr>
+                <tr class="table-grey">
+                    <td class="table-grey"><b>Day</b></td>
+                    <td class="table-grey"><b>Time</b></td>
+                    <td class="table-grey"><b>Activity Description</b></td>
+                    <td class="table-grey"><b>Detail Service Impact</b></td>
+                </tr>
+                <tr >
+                    <td class="table-white">1. {{$cleaning->cleaning_name_1}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_id_1}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_number_1}}</td>
+                    <td class="table-center">PT BIJAC</td>
+
+                </tr>
+                <tr >
+                    <td class="table-white">2. {{$cleaning->cleaning_name_2}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_id_2}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_number_2}}</td>
+                    <td class="table-center">PT BIJAC</td>
+
+                </tr>
+                <tr >
+                    <td class="table-white">3. </td>
+                    <td class="table-center"></td>
+                    <td class="table-center"></td>
+                    <td class="table-center"></td>
+
+                </tr>
+                <tr >
+                    <td class="table-white">4. </td>
+                    <td class="table-center"></td>
+                    <td class="table-center"></td>
+                    <td class="table-center"></td>
+
+                </tr>
+                <tr >
+                    <td class="table-white">5. </td>
+                    <td class="table-center"></td>
+                    <td class="table-center"></td>
+                    <td class="table-center"></td>
+
+                </tr>
+            </table>
+
+            <table cellpadding="5" class="table table-detail">
+                <tr >
+                    <td class="table-grey" colspan="4"><b>Detail Time Table of All Activity</b></td>
+                </tr>
+                <tr class="table-grey">
+                    <td class="table-grey"><b>Day</b></td>
+                    <td class="table-grey"><b>Time</b></td>
+                    <td class="table-grey"><b>Activity Description</b></td>
+                    <td class="table-grey"><b>Detail Service Impact</b></td>
+                </tr>
+                <tr >
+                    <td class="table-white">1. {{$cleaning->cleaning_name_1}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_id_1}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_number_1}}</td>
+                    <td class="table-center">PT BIJAC</td>
+                </tr>
+                <tr >
+                    <td class="table-white">{{$cleaning->cleaning_name_2}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_id_2}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_number_2}}</td>
+                    <td class="table-center">PT BIJAC</td>
+                </tr>
+                <tr >
+                    <td class="table-white"></td>
+                    <td class="table-center"></td>
+                    <td class="table-center"></td>
+                    <td class="table-center"></td>
+                </tr>
+                <tr >
+                    <td class="table-white"></td>
+                    <td class="table-center"></td>
+                    <td class="table-center"></td>
+                    <td class="table-center"></td>
+                </tr>
+                <tr >
+                    <td class="table-white"></td>
+                    <td class="table-center"></td>
+                    <td class="table-center"></td>
+                    <td class="table-center"></td>
+                </tr>
         </div>
     </main>
 </body>
