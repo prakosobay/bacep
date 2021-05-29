@@ -258,11 +258,11 @@
                     <td class="table-grey" colspan="5"><b>Visitor</b></td>
                 </tr>
                 <tr class="table-grey">
-                    <td class="table-grey">Name</td>
-                    <td class="table-grey">ID Number</td>
-                    <td class="table-grey">Phone Number</td>
-                    <td class="table-grey">Company</td>
-                    <td class="table-grey">Department</td>
+                    <td class="table-grey"><b>Name</b></td>
+                    <td class="table-grey"><b>ID Number</b></td>
+                    <td class="table-grey"><b>Phone Number</b></td>
+                    <td class="table-grey"><b>Company</b></td>
+                    <td class="table-grey"><b>Department</b></td>
                 </tr>
                 <tr >
                     <td class="table-white">1. {{$cleaning->cleaning_name_1}}</td>
@@ -279,16 +279,16 @@
                     <td class="table-center">Building Management</td>
                 </tr>
                 <tr >
-                    <td class="table-white">3. </td>
-                    <td class="table-center"></td>
-                    <td class="table-center"></td>
+                    <td class="table-white">3. {{$cleaning->cleaning_name_3}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_id_3}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_number_3}}</td>
                     <td class="table-center"></td>
                     <td class="table-center"></td>
                 </tr>
                 <tr >
-                    <td class="table-white">4. </td>
-                    <td class="table-center"></td>
-                    <td class="table-center"></td>
+                    <td class="table-white">4. {{$cleaning->cleaning_name_4}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_id_4}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_number_4}}</td>
                     <td class="table-center"></td>
                     <td class="table-center"></td>
                 </tr>
@@ -491,16 +491,6 @@
                             @break
                     @endswitch
                 </tr>
-                {{-- <tr >
-                    <td>Badai Sino Jendrang</td>
-                    <td>Anugrah Sandy Yudhastiya</td>
-                    <td>Agus</td>
-                </tr>
-                <tr >
-                    <td>tanggal</td>
-                    <td>tanggal</td>
-                    <td>tanggal</td>
-                </tr> --}}
 
                 <tr>
                     <td class="col_approval"><b>Requestor</b></td>
