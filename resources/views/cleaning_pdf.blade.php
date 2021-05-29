@@ -4,6 +4,33 @@
     <title>Cleaning Data Center</title>
     {{-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> --}}
     <style type="text/css">
+        @page {
+            margin-top: 0.1cm;
+            margin-bottom: 0.1cm;
+        }
+
+        body {
+            margin-top: 0.3cm;
+            margin-left: 0.5cm;
+            margin-right: 0.5cm;
+            margin-bottom: 0.3cm;
+        }
+
+        .header {
+                position: fixed;
+                top: 0cm;
+                left: 0cm;
+                right: 0cm;
+                height: 3cm;
+        }
+
+        .footer {
+                position: fixed;
+                bottom: 0cm;
+                left: 0cm;
+                right: 0cm;
+                height: 2cm;
+        }
 
         table, th, td {
             /* border-width: 700px; */
@@ -14,6 +41,7 @@
             margin: 5px;
             padding: 7px;
 		}
+
         /* table.satu{
             border-width: 700px;
             border-spacing: 0px;
@@ -55,19 +83,39 @@
         .page_break + .page_break{
             page-break-before: always;
         }
-
-        @page {
-            margin-top: 0.4cm;
-            margin-bottom: 0.4cm;
-        }
     </style>
 </head>
 <body>
 
-<div style="page-break-after: always;">
-        <h5 class="center">ACCESS REQUEST FORM</h5>
-        <p class="kedua"><b>Nomor : ARF/001/DCDV/XI/2019</b></p>
 
+    <header>
+        <table class="table table-bordered">
+            <tr>
+                <td rowspan="2"><img src="{{ public_path("gambar/logo_bts.png") }}" width="15px" height="6px"/></td>
+                <td ><b>FORM</b></td>
+                <td>Kode Dokumen : FRM-BTS-DCDV-2021-04
+            </tr>
+            <tr>
+                <td></td>
+                <td >Access Request</td>
+                <td>Tanggal Berlaku :</td>
+            </tr>
+        </table>
+    </header>
+
+    <footer>
+        <table class="table table-bordered">
+            <tr>
+                <td>Kode Dok: FRM-BTS-DCDV-2019-04</td>
+                <td>Revisi : 01</td>
+                <td>Kategori : Dokumen Terbatas</td>
+                <td>Hal : 1/1</td>
+            </tr>
+        </table>
+    </footer>
+
+    <main>
+    <div style="page-break-after: always;">
     <table >
         <tr >
             <td ><b>Time of Request</b></td>
@@ -293,8 +341,8 @@
 
         <h5 class="kedua">On public holiday signatory will be handled by appointed Data Center Operation Shift Engineer on duty</h5>
         <h5 class="kedua">**(Pada hari libur Nasional tanda tangan akan diwakilkan kepetugas operasional yang ditunjuk)</h5>
-
     </div>
+
     <div style="page-break-after: always;">
         <h5 class="center">CHANGE REQUEST FORM</h5>
         <p class="kedua"><b>Nomor : CRF/001/DCDV/XI/2019</b></p>
@@ -446,7 +494,6 @@
                 </tbody>
             </table>
         </p>
-    </div>
 
         <p class="tujuh">
             6. Testing and Verification
@@ -503,7 +550,7 @@
         <p class="tujuh">
             9. Supporting Documents
         </p>
-        </div>
+    </div>
 
         <div >
             <table  width="700px">
@@ -608,5 +655,8 @@
                 @endif
             </table>
         </div>
+
+    </main>
+
 </body>
 </html>
