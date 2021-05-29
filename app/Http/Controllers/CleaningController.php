@@ -114,8 +114,8 @@ class CleaningController extends Controller
                 'cleaning_work' => $cleaning->cleaning_work,
                 'cleaning_date' => $cleaning->created_at,
                 'status' => 'Full Approved',
-                // 'link' => ("http://172.16.45.195:8000/cleaning_pdf/$cleaning->cleaning_id"),
-                'link' => ("http://172.16.45.239:8000/cleaning_pdf_rev1/$cleaning->cleaning_id"),
+                'link' => ("http://172.16.45.195:8000/cleaning_pdf/$cleaning->cleaning_id"),
+                // 'link' => ("http://172.16.45.239:8000/cleaning_pdf_rev1/$cleaning->cleaning_id"),
             ]);
         }
 
@@ -167,8 +167,8 @@ class CleaningController extends Controller
         // dd($cleaningHistory);
         // $user = Users::where('id', $id)->where('name', $name)->get();
         // dd($cleaningHistory);
-        // $pdf = PDF::loadview('cleaning_pdf', ['cleaning' => $cleaning, 'lasthistoryC' => $lasthistoryC, 'cleaningHistory' => $cleaningHistory])->setPaper('a4', 'portrait')->setWarnings(false);
-        $pdf = PDF::loadview('cleaning_pdf_rev1', ['cleaning' => $cleaning, 'lasthistoryC' => $lasthistoryC, 'cleaningHistory' => $cleaningHistory])->setPaper('a4', 'portrait')->setWarnings(false);
+        $pdf = PDF::loadview('cleaning_pdf', ['cleaning' => $cleaning, 'lasthistoryC' => $lasthistoryC, 'cleaningHistory' => $cleaningHistory])->setPaper('a4', 'portrait')->setWarnings(false);
+        // $pdf = PDF::loadview('cleaning_pdf_rev1', ['cleaning' => $cleaning, 'lasthistoryC' => $lasthistoryC, 'cleaningHistory' => $cleaningHistory])->setPaper('a4', 'portrait')->setWarnings(false);
         return $pdf->stream();
         // PDF::loadHTML($html)->setPaper('a4', 'landscape')->setWarnings(false)->save('myfile.pdf')
     }
