@@ -210,6 +210,7 @@
                             <option value="Gas Discharge, solenoid rusak">Gas Discharge, solenoid rusak</option>
                             <option value="Alarm 1 gedung, gas discharge">Alarm 1 gedung, gas discharge</option>
                             <option value="Patah tulang">Patah tulang</option>
+                            <option value="Sistem perangkat menjadi lumpuh/error">Sistem perangkat menjadi lumpuh/error</option>
                         </select>
                         <select id="input-group3" style="background: black;" name="cleaning_impact_1">
                             <option value="">Impact</option>
@@ -247,6 +248,7 @@
                             <option value="Gas Discharge, solenoid rusak">Gas Discharge, solenoid rusak</option>
                             <option value="Alarm 1 gedung, gas discharge">Alarm 1 gedung, gas discharge</option>
                             <option value="Patah tulang">Patah tulang</option>
+                            <option value="Sistem perangkat menjadi lumpuh/error">Sistem perangkat menjadi lumpuh/error</option>
                         </select>
                         <select id="input-group3" style="background: black;" name="cleaning_impact_2">
                             <option value="">Impact</option>
@@ -258,10 +260,11 @@
                             <option value="">Mitigation Plan</option>
                             <option value="Menggunakan APD">Menggunakan APD</option>
                             <option value="Menggunakan masker">Menggunakan masker</option>
-                            <option value="Bekerja dengan hati-hati">Bekerja dengan hati-hati</option>
+                            <option value="Bekerja dengan hati-hati">Bekerja dengan hati-hati, menjaga jarak dengan perangkat di rack</option>
                             <option value="Menjaga jarak dari sumber listrik">Menjaga jarak dari sumber listrik</option>
                             <option value="Menjaga jarak dengan perangkat-perangkat critical tersebut">Menjaga jarak dengan perangkat-perangkat critical tersebut</option>
-                            <option value="Pastikan tangga berdiri dengan benar">Pastikan tangga berdiri dengan benar</option>
+                            <option value="Pastikan tangga berdiri dengan benar">Pastikan tangga berdiri dengan benar dan berhati-hati ketika bekerja</option>
+                            <option value="Tidak Menyentuh Tombol dan Display Parameter di Panel">Tidak Menyentuh Tombol dan Display Parameter di Panel</option>
                         </select>
 
                         <select id="input-group11" style="background: black;" name="cleaning_risk_3">
@@ -283,6 +286,7 @@
                             <option value="Gas Discharge, solenoid rusak">Gas Discharge, solenoid rusak</option>
                             <option value="Alarm 1 gedung, gas discharge">Alarm 1 gedung, gas discharge</option>
                             <option value="Patah tulang">Patah tulang</option>
+                            <option value="Sistem perangkat menjadi lumpuh/error">Sistem perangkat menjadi lumpuh/error</option>
                         </select>
                         <select id="input-group3" style="background: black;" name="cleaning_impact_3">
                             <option value="">Impact</option>
@@ -294,10 +298,11 @@
                             <option value="">Mitigation Plan</option>
                             <option value="Menggunakan APD">Menggunakan APD</option>
                             <option value="Menggunakan masker">Menggunakan masker</option>
-                            <option value="Bekerja dengan hati-hati">Bekerja dengan hati-hati</option>
+                            <option value="Bekerja dengan hati-hati">Bekerja dengan hati-hati, menjaga jarak dengan perangkat di rack</option>
                             <option value="Menjaga jarak dari sumber listrik">Menjaga jarak dari sumber listrik</option>
                             <option value="Menjaga jarak dengan perangkat-perangkat critical tersebut">Menjaga jarak dengan perangkat-perangkat critical tersebut</option>
-                            <option value="Pastikan tangga berdiri dengan benar">Pastikan tangga berdiri dengan benar</option>
+                            <option value="Pastikan tangga berdiri dengan benar">Pastikan tangga berdiri dengan benar dan berhati-hati ketika bekerja</option>
+                            <option value="Tidak Menyentuh Tombol dan Display Parameter di Panel">Tidak Menyentuh Tombol dan Display Parameter di Panel</option>
                         </select>
 
                         <select id="input-group11" style="background: black;" name="cleaning_risk_4">
@@ -319,6 +324,7 @@
                             <option value="Gas Discharge, solenoid rusak">Gas Discharge, solenoid rusak</option>
                             <option value="Alarm 1 gedung, gas discharge">Alarm 1 gedung, gas discharge</option>
                             <option value="Patah tulang">Patah tulang</option>
+                            <option value="Sistem perangkat menjadi lumpuh/error">Sistem perangkat menjadi lumpuh/error</option>
                         </select>
                         <select id="input-group3" style="background: black;" name="cleaning_impact_4">
                             <option value="">Impact</option>
@@ -330,10 +336,11 @@
                             <option value="">Mitigation Plan</option>
                             <option value="Menggunakan APD">Menggunakan APD</option>
                             <option value="Menggunakan masker">Menggunakan masker</option>
-                            <option value="Bekerja dengan hati-hati">Bekerja dengan hati-hati</option>
+                            <option value="Bekerja dengan hati-hati">Bekerja dengan hati-hati, menjaga jarak dengan perangkat di rack</option>
                             <option value="Menjaga jarak dari sumber listrik">Menjaga jarak dari sumber listrik</option>
                             <option value="Menjaga jarak dengan perangkat-perangkat critical tersebut">Menjaga jarak dengan perangkat-perangkat critical tersebut</option>
-                            <option value="Pastikan tangga berdiri dengan benar">Pastikan tangga berdiri dengan benar</option>
+                            <option value="Pastikan tangga berdiri dengan benar">Pastikan tangga berdiri dengan benar dan berhati-hati ketika bekerja</option>
+                            <option value="Tidak Menyentuh Tombol dan Display Parameter di Panel">Tidak Menyentuh Tombol dan Display Parameter di Panel</option>
                         </select>
 
                         <select id="input-group11" style="background: black;" name="cleaning_risk_5">
@@ -355,6 +362,7 @@
                             <option value="Gas Discharge, solenoid rusak">Gas Discharge, solenoid rusak</option>
                             <option value="Alarm 1 gedung, gas discharge">Alarm 1 gedung, gas discharge</option>
                             <option value="Patah tulang">Patah tulang</option>
+                            <option value="Sistem perangkat menjadi lumpuh/error">Sistem perangkat menjadi lumpuh/error</option>
                         </select>
                         <select id="input-group3" style="background: black;" name="cleaning_impact_5">
                             <option value="">Impact</option>
@@ -366,10 +374,11 @@
                             <option value="">Mitigation Plan</option>
                             <option value="Menggunakan APD">Menggunakan APD</option>
                             <option value="Menggunakan masker">Menggunakan masker</option>
-                            <option value="Bekerja dengan hati-hati">Bekerja dengan hati-hati</option>
+                            <option value="Bekerja dengan hati-hati">Bekerja dengan hati-hati, menjaga jarak dengan perangkat di rack</option>
                             <option value="Menjaga jarak dari sumber listrik">Menjaga jarak dari sumber listrik</option>
-                            <option value="Menjaga jarak dengan perangkat-perangkat critical tersebut<">Menjaga jarak dengan perangkat-perangkat critical tersebut</option>
-                            <option value="Pastikan tangga berdiri dengan benar">Pastikan tangga berdiri dengan benar</option>
+                            <option value="Menjaga jarak dengan perangkat-perangkat critical tersebut">Menjaga jarak dengan perangkat-perangkat critical tersebut</option>
+                            <option value="Pastikan tangga berdiri dengan benar">Pastikan tangga berdiri dengan benar dan berhati-hati ketika bekerja</option>
+                            <option value="Tidak Menyentuh Tombol dan Display Parameter di Panel">Tidak Menyentuh Tombol dan Display Parameter di Panel</option>
                         </select>
 
                         <select id="input-group11" style="background: black;" name="cleaning_risk_6">
@@ -391,6 +400,7 @@
                             <option value="Gas Discharge, solenoid rusak">Gas Discharge, solenoid rusak</option>
                             <option value="Alarm 1 gedung, gas discharge">Alarm 1 gedung, gas discharge</option>
                             <option value="Patah tulang">Patah tulang</option>
+                            <option value="Sistem perangkat menjadi lumpuh/error">Sistem perangkat menjadi lumpuh/error</option>
                         </select>
                         <select id="input-group3" style="background: black;" name="cleaning_impact_6">
                             <option value="">Impact</option>
@@ -402,10 +412,11 @@
                             <option value="">Mitigation Plan</option>
                             <option value="Menggunakan APD">Menggunakan APD</option>
                             <option value="Menggunakan masker">Menggunakan masker</option>
-                            <option value="Bekerja dengan hati-hati">Bekerja dengan hati-hati</option>
+                            <option value="Bekerja dengan hati-hati">Bekerja dengan hati-hati, menjaga jarak dengan perangkat di rack</option>
                             <option value="Menjaga jarak dari sumber listrik">Menjaga jarak dari sumber listrik</option>
-                            <option value="Menjaga jarak dengan perangkat-perangkat critical tersebut<">Menjaga jarak dengan perangkat-perangkat critical tersebut</option>
-                            <option value="Pastikan tangga berdiri dengan benar">Pastikan tangga berdiri dengan benar</option>
+                            <option value="Menjaga jarak dengan perangkat-perangkat critical tersebut">Menjaga jarak dengan perangkat-perangkat critical tersebut</option>
+                            <option value="Pastikan tangga berdiri dengan benar">Pastikan tangga berdiri dengan benar dan berhati-hati ketika bekerja</option>
+                            <option value="Tidak Menyentuh Tombol dan Display Parameter di Panel">Tidak Menyentuh Tombol dan Display Parameter di Panel</option>
                         </select>
                     <P>
                     <h4 class="text-white">4. Detail Execution (Kegiatan)</h4>
@@ -433,6 +444,9 @@
                             <option value="Mesin Vacum-Ember-Pel">
                                 Mesin Vacum - Ember - Pel
                             </option>
+                            <option value="Vacum - Kanebo - Kain Majun - Tanggal - Kop - Senter - Kabel Roll">
+                                Vacum - Kanebo - Kain Majun - Tanggal - Kop - Senter - Kabel Roll
+                            </option>
                         </select>
                         <select id="input-group1" style="background: black;" name="cleaning_procedure_1">
                             <option value="">Working Procedure (Tata Kerja)</option>
@@ -453,6 +467,9 @@
                             </option>
                             <option value="Pembersihan Ruang MMR1">
                                 Pembersihan Ruang MMR1
+                            </option>
+                            <option value="Pembersihan Ruang MMR1">
+                                Pembersihan Ruang MMR2
                             </option>
                             <option value="Pembersihan Ruang UPS">
                                 Pembersihan Ruang UPS
@@ -488,13 +505,13 @@
                                 Pembersihan Under Raised Floor Data Center
                             </option>
                             <option value="Vacum & pel ruangan Data Center (Server Room)">
-                                Vacum & pel ruangan Data Center (Server Room)
+                                Vacum & Pel Ruangan Data Center (Server Room)
                             </option>
                         </select>
 
                         <input type="time" id="input-group7" placeholder="Time" name="cleaning_time_2">
                         <select id="input-group1" style="background: black;" name="cleaning_item_2">
-                            <option value="">Item Operation (Barang yang Digunakan)</option>
+                            <option value="">Item (Barang yang Digunakan)</option>
                             <option value="Vacum-Majun-Kanebo-Kop">
                                 Vacum  -  Majun - Kanebo - Kop
                             </option>
@@ -512,6 +529,9 @@
                             </option>
                             <option value="Mesin Vacum-Ember-Pel">
                                 Mesin Vacum - Ember - Pel
+                            </option>
+                            <option value="Vacum - Kanebo - Kain Majun - Tanggal - Kop - Senter - Kabel Roll">
+                                Vacum - Kanebo - Kain Majun - Tanggal - Kop - Senter - Kabel Roll
                             </option>
                         </select>
                         <select id="input-group1" style="background: black;" name="cleaning_procedure_2">
@@ -534,6 +554,9 @@
                             <option value="Pembersihan Ruang MMR1">
                                 Pembersihan Ruang MMR1
                             </option>
+                            <option value="Pembersihan Ruang MMR1">
+                                Pembersihan Ruang MMR2
+                            </option>
                             <option value="Pembersihan Ruang UPS">
                                 Pembersihan Ruang UPS
                             </option>
@@ -568,13 +591,13 @@
                                 Pembersihan Under Raised Floor Data Center
                             </option>
                             <option value="Vacum & pel ruangan Data Center (Server Room)">
-                                Vacum & pel ruangan Data Center (Server Room)
+                                Vacum & Pel Ruangan Data Center (Server Room)
                             </option>
                         </select>
 
                         <input type="time" id="input-group7" placeholder="Time" name="cleaning_time_3">
                         <select id="input-group1" style="background: black;" name="cleaning_item_3">
-                            <option value="">Item Operation (Barang yang Digunakan)</option>
+                            <option value="">Item (Barang yang Digunakan)</option>
                             <option value="Vacum-Majun-Kanebo-Kop">
                                 Vacum  -  Majun - Kanebo - Kop
                             </option>
@@ -592,6 +615,9 @@
                             </option>
                             <option value="Mesin Vacum-Ember-Pel">
                                 Mesin Vacum - Ember - Pel
+                            </option>
+                            <option value="Vacum - Kanebo - Kain Majun - Tanggal - Kop - Senter - Kabel Roll">
+                                Vacum - Kanebo - Kain Majun - Tanggal - Kop - Senter - Kabel Roll
                             </option>
                         </select>
                         <select id="input-group1" style="background: black;" name="cleaning_procedure_3">
@@ -614,6 +640,9 @@
                             <option value="Pembersihan Ruang MMR1">
                                 Pembersihan Ruang MMR1
                             </option>
+                            <option value="Pembersihan Ruang MMR1">
+                                Pembersihan Ruang MMR2
+                            </option>
                             <option value="Pembersihan Ruang UPS">
                                 Pembersihan Ruang UPS
                             </option>
@@ -648,13 +677,13 @@
                                 Pembersihan Under Raised Floor Data Center
                             </option>
                             <option value="Vacum & pel ruangan Data Center (Server Room)">
-                                Vacum & pel ruangan Data Center (Server Room)
+                                Vacum & Pel Ruangan Data Center (Server Room)
                             </option>
                         </select>
 
                         <input type="time" id="input-group7" placeholder="Time" name="cleaning_time_4">
                         <select id="input-group1" style="background: black;" name="cleaning_item_4">
-                            <option value="">Item Operation (Barang yang Digunakan)</option>
+                            <option value="">Item (Barang yang Digunakan)</option>
                             <option value="Vacum-Majun-Kanebo-Kop">
                                 Vacum  -  Majun - Kanebo - Kop
                             </option>
@@ -672,6 +701,9 @@
                             </option>
                             <option value="Mesin Vacum-Ember-Pel">
                                 Mesin Vacum - Ember - Pel
+                            </option>
+                            <option value="Vacum - Kanebo - Kain Majun - Tanggal - Kop - Senter - Kabel Roll">
+                                Vacum - Kanebo - Kain Majun - Tanggal - Kop - Senter - Kabel Roll
                             </option>
                         </select>
                         <select id="input-group1" style="background: black;" name="cleaning_procedure_4">
@@ -694,6 +726,9 @@
                             <option value="Pembersihan Ruang MMR1">
                                 Pembersihan Ruang MMR1
                             </option>
+                            <option value="Pembersihan Ruang MMR1">
+                                Pembersihan Ruang MMR2
+                            </option>
                             <option value="Pembersihan Ruang UPS">
                                 Pembersihan Ruang UPS
                             </option>
@@ -728,13 +763,13 @@
                                 Pembersihan Under Raised Floor Data Center
                             </option>
                             <option value="Vacum & pel ruangan Data Center (Server Room)">
-                                Vacum & pel ruangan Data Center (Server Room)
+                                Vacum & Pel Ruangan Data Center (Server Room)
                             </option>
                         </select>
 
                         <input type="time" id="input-group7" placeholder="Time" name="cleaning_time_5">
                         <select id="input-group1" style="background: black;" name="cleaning_item_5">
-                            <option value="">Item Operation (Barang yang Digunakan)</option>
+                            <option value="">Item (Barang yang Digunakan)</option>
                             <option value="Vacum-Majun-Kanebo-Kop">
                                 Vacum  -  Majun - Kanebo - Kop
                             </option>
@@ -752,6 +787,9 @@
                             </option>
                             <option value="Mesin Vacum-Ember-Pel">
                                 Mesin Vacum - Ember - Pel
+                            </option>
+                            <option value="Vacum - Kanebo - Kain Majun - Tanggal - Kop - Senter - Kabel Roll">
+                                Vacum - Kanebo - Kain Majun - Tanggal - Kop - Senter - Kabel Roll
                             </option>
                         </select>
                         <select id="input-group1" style="background: black;" name="cleaning_procedure_5">
@@ -774,6 +812,9 @@
                             <option value="Pembersihan Ruang MMR1">
                                 Pembersihan Ruang MMR1
                             </option>
+                            <option value="Pembersihan Ruang MMR1">
+                                Pembersihan Ruang MMR2
+                            </option>
                             <option value="Pembersihan Ruang UPS">
                                 Pembersihan Ruang UPS
                             </option>
@@ -808,13 +849,13 @@
                                 Pembersihan Under Raised Floor Data Center
                             </option>
                             <option value="Vacum & pel ruangan Data Center (Server Room)">
-                                Vacum & pel ruangan Data Center (Server Room)
+                                Vacum & Pel Ruangan Data Center (Server Room)
                             </option>
                         </select>
 
                         <input type="time" id="input-group7" placeholder="Time" name="cleaning_time_6">
                         <select id="input-group1" style="background: black;" name="cleaning_item_6">
-                            <option value="">Item Operation (Barang yang Digunakan)</option>
+                            <option value="">Item (Barang yang Digunakan)</option>
                             <option value="Vacum-Majun-Kanebo-Kop">
                                 Vacum  -  Majun - Kanebo - Kop
                             </option>
@@ -832,6 +873,9 @@
                             </option>
                             <option value="Mesin Vacum-Ember-Pel">
                                 Mesin Vacum - Ember - Pel
+                            </option>
+                            <option value="Vacum - Kanebo - Kain Majun - Tanggal - Kop - Senter - Kabel Roll">
+                                Vacum - Kanebo - Kain Majun - Tanggal - Kop - Senter - Kabel Roll
                             </option>
                         </select>
                         <select id="input-group1" style="background: black;" name="cleaning_procedure_6">
@@ -854,6 +898,9 @@
                             <option value="Pembersihan Ruang MMR1">
                                 Pembersihan Ruang MMR1
                             </option>
+                            <option value="Pembersihan Ruang MMR1">
+                                Pembersihan Ruang MMR2
+                            </option>
                             <option value="Pembersihan Ruang UPS">
                                 Pembersihan Ruang UPS
                             </option>
@@ -888,7 +935,7 @@
                                 Pembersihan Under Raised Floor Data Center
                             </option>
                             <option value="Vacum & pel ruangan Data Center (Server Room)">
-                                Vacum & pel ruangan Data Center (Server Room)
+                                Vacum & Pel Ruangan Data Center (Server Room)
                             </option>
                         </select>
                     <p>
@@ -904,7 +951,6 @@
                             <option value="Alfani Sulaeman">Alfani Sulaeman</option>
                             <option value="Andi Sugandi">Andi Sugandi</option>
                             <option value="Jejen Jenudin">Jejen Jenudin</option>
-                            <option value="Adam Qomaini">Adam Qomaini</option>
                             <option value="Randi Andhika">Randi Andhika</option>
                             <option value="Anita Aryani">Anita Aryani</option>
                         </select>
@@ -913,7 +959,6 @@
                             <option value="0895-3339-40730">0895-3339-40730</option>
                             <option value="0815-6461-7472">0815-6461-7472</option>
                             <option value="0896-3051-3484">0896-3051-3484</option>
-                            <option value="0859-0544-4773">0859-0544-4773</option>
                             <option value="0873-2124-378">0873-2124-378</option>
                             <option value="0812-9073-7216">0812-9073-7216</option>
                         </select>
@@ -922,7 +967,6 @@
                             <option value="3171031201870006">3171031201870006</option>
                             <option value="3204292311830001">3204292311830001</option>
                             <option value="3671052411880001">3671052411880001</option>
-                            <option value="3174011212980002">3174011212980002</option>
                             <option value="3276011510880010">3276011510880010</option>
                             <option value="5206025203881010">5206025203881010</option>
                         </select>
@@ -931,7 +975,6 @@
                             <option value="Alfani Sulaeman">Alfani Sulaeman</option>
                             <option value="Andi Sugandi">Andi Sugandi</option>
                             <option value="Jejen Jenudin">Jejen Jenudin</option>
-                            <option value="Adam Qomaini">Adam Qomaini</option>
                             <option value="Randi Andhika">Randi Andhika</option>
                             <option value="Anita Aryani">Anita Aryani</option>
                         </select>
@@ -940,7 +983,6 @@
                             <option value="0895-3339-40730">0895-3339-40730</option>
                             <option value="0815-6461-7472">0815-6461-7472</option>
                             <option value="0896-3051-3484">0896-3051-3484</option>
-                            <option value="0859-0544-4773">0859-0544-4773</option>
                             <option value="0873-2124-378">0873-2124-378</option>
                             <option value="0812-9073-7216">0812-9073-7216</option>
                         </select>
@@ -949,7 +991,6 @@
                             <option value="3171031201870006">3171031201870006</option>
                             <option value="3204292311830001">3204292311830001</option>
                             <option value="3671052411880001">3671052411880001</option>
-                            <option value="3174011212980002">3174011212980002</option>
                             <option value="3276011510880010">3276011510880010</option>
                             <option value="5206025203881010">5206025203881010</option>
                         </select>
@@ -958,7 +999,6 @@
                             <option value="Alfani Sulaeman">Alfani Sulaeman</option>
                             <option value="Andi Sugandi">Andi Sugandi</option>
                             <option value="Jejen Jenudin">Jejen Jenudin</option>
-                            <option value="Adam Qomaini">Adam Qomaini</option>
                             <option value="Randi Andhika">Randi Andhika</option>
                             <option value="Anita Aryani">Anita Aryani</option>
                         </select>
@@ -967,7 +1007,6 @@
                             <option value="0895-3339-40730">0895-3339-40730</option>
                             <option value="0815-6461-7472">0815-6461-7472</option>
                             <option value="0896-3051-3484">0896-3051-3484</option>
-                            <option value="0859-0544-4773">0859-0544-4773</option>
                             <option value="0873-2124-378">0873-2124-378</option>
                             <option value="0812-9073-7216">0812-9073-7216</option>
                         </select>
@@ -976,7 +1015,6 @@
                             <option value="3171031201870006">3171031201870006</option>
                             <option value="3204292311830001">3204292311830001</option>
                             <option value="3671052411880001">3671052411880001</option>
-                            <option value="3174011212980002">3174011212980002</option>
                             <option value="3276011510880010">3276011510880010</option>
                             <option value="5206025203881010">5206025203881010</option>
                         </select>
@@ -985,7 +1023,6 @@
                             <option value="Alfani Sulaeman">Alfani Sulaeman</option>
                             <option value="Andi Sugandi">Andi Sugandi</option>
                             <option value="Jejen Jenudin">Jejen Jenudin</option>
-                            <option value="Adam Qomaini">Adam Qomaini</option>
                             <option value="Randi Andhika">Randi Andhika</option>
                             <option value="Anita Aryani">Anita Aryani</option>
                         </select>
@@ -994,7 +1031,6 @@
                             <option value="0895-3339-40730">0895-3339-40730</option>
                             <option value="0815-6461-7472">0815-6461-7472</option>
                             <option value="0896-3051-3484">0896-3051-3484</option>
-                            <option value="0859-0544-4773">0859-0544-4773</option>
                             <option value="0873-2124-378">0873-2124-378</option>
                             <option value="0812-9073-7216">0812-9073-7216</option>
                         </select>
@@ -1003,7 +1039,6 @@
                             <option value="3171031201870006">3171031201870006</option>
                             <option value="3204292311830001">3204292311830001</option>
                             <option value="3671052411880001">3671052411880001</option>
-                            <option value="3174011212980002">3174011212980002</option>
                             <option value="3276011510880010">3276011510880010</option>
                             <option value="5206025203881010">5206025203881010</option>
                         </select>
@@ -1019,9 +1054,7 @@
     <!--container-->
     </form>
 </div>
-
 </body>
-
 <script type="text/javascript">
 
     $.ajaxSetup({
