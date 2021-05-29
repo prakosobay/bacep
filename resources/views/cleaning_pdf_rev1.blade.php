@@ -106,7 +106,7 @@
             border: 1px solid black;
             border-collapse:collapse;
             width: 100%;
-            font-size: 10pt;
+            font-size: 8pt;
             margin-top: 10px;
         }
 
@@ -415,28 +415,79 @@
                 </tr>
                 <tr >
                     @switch($lasthistoryC->status)
-                        @case('final')
-                            <td > </td>
+                        @case('created')
+                            <td class="col_approval">
+                                <p class="cr">Nama    : Badai Sino Jendrang</p>
+                                <p class="cr">Tanggal : </p>
+                            </td>
+                            <td class="col_approval">
+                                <p class="cr">Nama    :</p>
+                                <p class="cr">Tanggal :</p>
+                            </td>
+                            <td class="col_approval">
+                                <p class="cr">Nama    :</p>
+                                <p class="cr">Tanggal :</p>
+                            </td>
                             @break
 
                         @case('reviewed')
-                            <td > </td>
-                            @break
+                        <td class="col_approval">
+                            <p class="cr">Nama    : Badai Sino Jendrang</p>
+                            <p class="cr">Tanggal : </p>
+                        </td>
+                        <td class="col_approval">
+                            <p class="cr">Nama    :</p>
+                            <p class="cr">Tanggal :</p>
+                        </td>
+                        <td class="col_approval">
+                            <p class="cr">Nama    :</p>
+                            <p class="cr">Tanggal :</p>
+                        </td>
+                        @break
 
                         @case('checked')
-                            <td > </td>
-                            @break
+                            <td class="col_approval">
+                                <p class="cr">Nama    : Badai Sino Jendrang</p>
+                                <p class="cr">Tanggal : </p>
+                            </td>
+                            <td class="col_approval">
+                                <p class="cr">Nama    :</p>
+                                <p class="cr">Tanggal :</p>
+                            </td>
+                            <td class="col_approval">
+                                <p class="cr">Nama    :</p>
+                                <p class="cr">Tanggal :</p>
+                            </td>
+                        @break
 
                         @case('secured')
-                            <td ><p>Badai Sino Jendrang</p><p>Tanggal</p></td>
-                            <td ><p>Anugrah Sandy Yudhastiya</p><p>Tanggal</p></td>
-                            <td class="col_approval"><img src="{{ public_path("gambar/Checked.png") }}"  alt="" style="width: 100px; height: 60px;" ><p>Agus</p><p>Tanggal</p></td>
+                            <td class="col_approval">
+                                <p class="cr">Nama    : Badai Sino Jendrang</p>
+                                <p class="cr">Tanggal : </p>
+                            </td>
+                            <td class="col_approval">
+                                <p class="cr">Nama    :</p>
+                                <p class="cr">Tanggal :</p>
+                            </td>
+                            <td class="col_approval"><img src="{{ public_path("gambar/Checked.png") }}" alt="" style="width: 80px; height: 40px;">
+                                <p class="cr">Nama    :{{$cleaningHistory[2]->name}}</p>
+                                <p class="cr">Tanggal :{{$cleaningHistory[2]->created_at}}</p>
+                            </td>
                             @break
 
-                        @case('created')
-                            <td ><p>Badai Sino Jendrang</p><p>Tanggal</p></td>
-                            <td class="col_approval"><img src="{{ public_path("gambar/approved.png") }}"  alt="" style="width: 100px; height: 60px;" ><p>Anugrah Sandy Yudhastiya</p><p>Tanggal</p></td>
-                            <td class="col_approval"><img src="{{ public_path("gambar/Checked.png") }}"  alt="" style="width: 100px; height: 60px;" ><p>Agus</p><p>Tanggal</p></td>
+                        @case('final')
+                            <td class="col_approval">
+                                <p class="cr">Nama    : Badai Sino Jendrang</p>
+                                <p class="cr">Tanggal : </p>
+                            </td>
+                            <td class="col_approval"><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 80px; height: 40px;">
+                                <p class="cr">Nama    :{{$cleaningHistory[3]->name}}</p>
+                                <p class="cr">Tanggal :{{$cleaningHistory[3]->created_at}}</p>
+                            </td>
+                            <td class="col_approval"><img src="{{ public_path("gambar/Checked.png") }}" alt="" style="width: 80px; height: 40px;">
+                                <p class="cr">Nama    :{{$cleaningHistory[2]->name}}</p>
+                                <p class="cr">Tanggal :{{$cleaningHistory[2]->created_at}}</p>
+                            </td>
                             @break
                     @endswitch
                 </tr>
@@ -486,7 +537,7 @@
 
             <p class="cr">Change Request Number : </p>
 
-            <table cellpadding="3" class="table table-background">
+            <table cellpadding="2" class="table table-background">
                 <tr >
                     <td width="50%" class="table-grey"><b>Background and Objectives</b></td>
                     <td width="50%" class="table-grey"><b>Description of Scope of Work</b></td>
@@ -497,7 +548,7 @@
                 </tr>
             </table>
 
-            <table cellpadding="3" class="table table-detail">
+            <table cellpadding="2" class="table table-detail">
                 <tr >
                     <td class="table-grey" colspan="4"><b>Detail Time Table of All Activity</b></td>
                 </tr>
@@ -508,43 +559,38 @@
                     <td class="table-grey"><b>Detail Service Impact</b></td>
                 </tr>
                 <tr >
-                    <td class="table-center">{{$cleaning->cleaning_name_1}}</td>
-                    <td class="table-center">{{$cleaning->cleaning_id_1}}</td>
-                    <td class="table-center">{{$cleaning->cleaning_number_1}}</td>
-                    <td class="table-center">PT BIJAC</td>
-
+                    <td height="10px" class="table-center">{{$cleaning->validity_from}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_1}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_procedure_1}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_risk_1}}</td>
                 </tr>
                 <tr >
-                    <td class="table-center">{{$cleaning->cleaning_name_2}}</td>
-                    <td class="table-center">{{$cleaning->cleaning_id_2}}</td>
-                    <td class="table-center">{{$cleaning->cleaning_number_2}}</td>
-                    <td class="table-center">PT BIJAC</td>
-
+                    <td height="10px" class="table-center">{{$cleaning->validity_from}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_2}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_procedure_2}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_risk_2}}</td>
                 </tr>
                 <tr >
-                    <td class="table-center"></td>
-                    <td class="table-center"></td>
-                    <td class="table-center"></td>
-                    <td class="table-center"></td>
-
+                    <td height="10px" class="table-center">{{$cleaning->validity_from}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_3}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_procedure_3}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_risk_3}}</td>
                 </tr>
                 <tr >
-                    <td class="table-center"></td>
-                    <td class="table-center"></td>
-                    <td class="table-center"></td>
-                    <td class="table-center"></td>
-
+                    <td height="10px" class="table-center">{{$cleaning->validity_from}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_4}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_procedure_4}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_risk_4}}</td>
                 </tr>
                 <tr >
-                    <td class="table-center"></td>
-                    <td class="table-center"></td>
-                    <td class="table-center"></td>
-                    <td class="table-center"></td>
-
+                    <td height="10px" class="table-center">{{$cleaning->validity_from}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_5}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_procedure_5}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_risk_5}}</td>
                 </tr>
             </table>
 
-            <table cellpadding="3" class="table table-detail">
+            <table cellpadding="2" class="table table-detail">
                 <tr >
                     <td class="table-grey" colspan="3"><b>Detail Operation and Execution</b></td>
                 </tr>
@@ -554,42 +600,42 @@
                     <td class="table-grey"><b>Working Procedure</b></td>
                 </tr>
                 <tr >
-                    <td class="table-center">{{$cleaning->cleaning_name_1}}</td>
-                    <td class="table-center">{{$cleaning->cleaning_id_1}}</td>
-                    <td class="table-center">{{$cleaning->cleaning_number_1}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_1}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_item_1}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_procedure_1}}</td>
                 </tr>
                 <tr >
-                    <td class="table-center">{{$cleaning->cleaning_name_2}}</td>
-                    <td class="table-center">{{$cleaning->cleaning_id_2}}</td>
-                    <td class="table-center">{{$cleaning->cleaning_number_2}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_2}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_item_2}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_procedure_2}}</td>
                 </tr>
                 <tr >
-                    <td class="table-center"></td>
-                    <td class="table-center"></td>
-                    <td class="table-center"></td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_3}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_item_3}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_procedure_3}}</td>
                 </tr>
                 <tr >
-                    <td class="table-center"></td>
-                    <td class="table-center"></td>
-                    <td class="table-center"></td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_4}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_item_4}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_procedure_4}}</td>
                 </tr>
                 <tr >
-                    <td class="table-center"></td>
-                    <td class="table-center"></td>
-                    <td class="table-center"></td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_5}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_item_5}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_procedure_5}}</td>
                 </tr>
             </table>
 
-            <table cellpadding="3" class="table table-detail">
+            <table cellpadding="2" class="table table-detail">
                 <tr >
                     <td class="table-grey" colspan="5"><b>Risk and Service Area Impact</b></td>
                 </tr>
                 <tr class="table-grey">
-                    <td class="table-grey">No.</td>
-                    <td class="table-grey">Risk Description</td>
-                    <td class="table-grey">Possibillity</td>
-                    <td class="table-grey">Impact</td>
-                    <td class="table-grey">Mitigation Plan</td>
+                    <td class="table-grey"><b>No.</b></td>
+                    <td class="table-grey"><b>Risk Description</b></td>
+                    <td class="table-grey"><b>Possibillity</b></td>
+                    <td class="table-grey"><b>Impact</b></td>
+                    <td class="table-grey"><b>Mitigation Plan</b></td>
                 </tr>
                 <tr >
                     <td class="table-white">1.</td>
@@ -628,18 +674,18 @@
                 </tr>
             </table>
 
-            <table cellpadding="3" class="table table-background">
+            <table cellpadding="2" class="table table-background">
                 <tr >
-                    <td height="10px" width="50%" class="table-grey"><b>Testing and Verification</b></td>
-                    <td heightwidth="50%" class="table-grey"><b>Rollback Operation</b></td>
+                    <td  width="50%" class="table-grey"><b>Testing and Verification</b></td>
+                    <td width="50%" class="table-grey"><b>Rollback Operation</b></td>
                 </tr>
                 <tr >
-                    <td class="table-center">{{$cleaning->cleaning_testing}}</td>
-                    <td class="table-center">{{$cleaning->cleaning_rollback}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_testing}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_rollback}}</td>
                 </tr>
             </table>
 
-            <table cellpadding="3" class="table table-detail">
+            <table cellpadding="2" class="table table-detail">
                 <tr >
                     <td class="table-grey" colspan="5"><b>Person in Charge</b></td>
                 </tr>
@@ -687,7 +733,7 @@
                 </tr>
             </table>
 
-            <table cellpadding="3" class="table table-background">
+            <table cellpadding="2" class="table table-background">
                 <tr >
                     <td height="10px" class="table-grey"><b>Supporting Documents</b></td>
                 </tr>
@@ -696,7 +742,7 @@
                 </tr>
             </table>
 
-            <table cellpadding="3" class="table-full">
+            <table cellpadding="2" class="table-full">
                 <tr >
                     <th class="col_approval">Prepared by,</th>
                     <th class="col_approval">Reviewed by,</th>
@@ -730,8 +776,8 @@
                                 <p class="cr">Tanggal :</p>
                             </td>
                             <td class="col_approval"><img src="{{ public_path("gambar/Reviewed.png") }}" alt="" style="width: 80px; height: 40px;">
-                                <p class="cr">Nama    :{{$cleaningHistory[1]->name}}</p>
-                                <p class="cr">Tanggal :{{$cleaningHistory[1]->created_at}}</p>
+                                <p class="cr">Nama    :{{$cleaningHistory[0]->name}}</p>
+                                <p class="cr">Tanggal :{{$cleaningHistory[0]->created_at}}</p>
                             </td>
                             <td class="col_approval">
                                 <p class="cr">Nama    : </p>
@@ -749,12 +795,31 @@
                                 <p class="cr">Tanggal :</p>
                             </td>
                             <td class="col_approval"><img src="{{ public_path("gambar/Reviewed.png") }}" alt="" style="width: 80px; height: 40px;">
+                                <p class="cr">Nama    :{{$cleaningHistory[0]->name}}</p>
+                                <p class="cr">Tanggal :{{$cleaningHistory[0]->created_at}}</p>
+                            </td>
+                            <td class="col_approval"><img src="{{ public_path("gambar/Checked.png") }}" alt="" style="width: 80px; height: 40px;">
                                 <p class="cr">Nama    :{{$cleaningHistory[1]->name}}</p>
                                 <p class="cr">Tanggal :{{$cleaningHistory[1]->created_at}}</p>
                             </td>
+                            <td class="col_approval">
+                                <p class="cr">Nama    : </p>
+                                <p class="cr">Tanggal :</p>
+                            </td>
+                            @break
+
+                        @case('secured')
+                            <td class="col_approval">
+                                <p class="cr">Nama    : Badai Sino Jendrang</p>
+                                <p class="cr">Tanggal :</p>
+                            </td>
+                            <td class="col_approval"><img src="{{ public_path("gambar/Reviewed.png") }}" alt="" style="width: 80px; height: 40px;">
+                                <p class="cr">Nama    :{{$cleaningHistory[0]->name}}</p>
+                                <p class="cr">Tanggal :{{$cleaningHistory[0]->created_at}}</p>
+                            </td>
                             <td class="col_approval"><img src="{{ public_path("gambar/Checked.png") }}" alt="" style="width: 80px; height: 40px;">
-                                <p class="cr">Nama    :{{$cleaningHistory[2]->name}}</p>
-                                <p class="cr">Tanggal :{{$cleaningHistory[2]->created_at}}</p>
+                                <p class="cr">Nama    :{{$cleaningHistory[1]->name}}</p>
+                                <p class="cr">Tanggal :{{$cleaningHistory[1]->created_at}}</p>
                             </td>
                             <td class="col_approval">
                                 <p class="cr">Nama    : </p>
@@ -768,16 +833,16 @@
                                 <p class="cr">Tanggal :</p>
                             </td>
                             <td class="col_approval"><img src="{{ public_path("gambar/Reviewed.png") }}" alt="" style="width: 80px; height: 40px;">
+                                <p class="cr">Nama    :{{$cleaningHistory[0]->name}}</p>
+                                <p class="cr">Tanggal :{{$cleaningHistory[0]->created_at}}</p>
+                            </td>
+                            <td class="col_approval"><img src="{{ public_path("gambar/Checked.png") }}" alt="" style="width: 80px; height: 40px;">
                                 <p class="cr">Nama    :{{$cleaningHistory[1]->name}}</p>
                                 <p class="cr">Tanggal :{{$cleaningHistory[1]->created_at}}</p>
                             </td>
-                            <td class="col_approval"><img src="{{ public_path("gambar/Checked.png") }}" alt="" style="width: 80px; height: 40px;">
+                            <td class="col_approval"><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 80px; height: 40px;">
                                 <p class="cr">Nama    :{{$cleaningHistory[2]->name}}</p>
                                 <p class="cr">Tanggal :{{$cleaningHistory[2]->created_at}}</p>
-                            </td>
-                            <td class="col_approval"><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 80px; height: 40px;">
-                                <p class="cr">Nama    :{{$cleaningHistory[3]->name}}</p>
-                                <p class="cr">Tanggal :{{$cleaningHistory[3]->created_at}}</p>
                             </td>
                             @break
                     @endswitch
@@ -787,7 +852,7 @@
                     <td class="col_approval">Requestor</td>
                     <td class="col_approval">Data Center Operation</td>
                     <td class="col_approval">Data Center Operation</td>
-                    <td class="col_approval">Haead of Data Center Operation</td>
+                    <td class="col_approval">Head of Data Center Operation</td>
                 </tr>
             </table>
 
