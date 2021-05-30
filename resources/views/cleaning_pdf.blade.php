@@ -418,7 +418,7 @@
                         @case('created')
                             <td class="col_approval">
                                 <p class="cr">Nama    : Badai Sino Jendrang</p>
-                                <p class="cr">Tanggal : </p>
+                                <p class="cr">Tanggal : {{$cleaning->created_at}}</p>
                             </td>
                             <td class="col_approval">
                                 <p class="cr">Nama    :</p>
@@ -433,7 +433,7 @@
                         @case('reviewed')
                         <td class="col_approval">
                             <p class="cr">Nama    : Badai Sino Jendrang</p>
-                            <p class="cr">Tanggal : </p>
+                            <p class="cr">Tanggal : {{$cleaning->created_at}}</p>
                         </td>
                         <td class="col_approval">
                             <p class="cr">Nama    :</p>
@@ -448,7 +448,7 @@
                         @case('checked')
                             <td class="col_approval">
                                 <p class="cr">Nama    : Badai Sino Jendrang</p>
-                                <p class="cr">Tanggal : </p>
+                                <p class="cr">Tanggal : {{$cleaning->created_at}}</p>
                             </td>
                             <td class="col_approval">
                                 <p class="cr">Nama    :</p>
@@ -463,7 +463,7 @@
                         @case('secured')
                             <td class="col_approval">
                                 <p class="cr">Nama    : Badai Sino Jendrang</p>
-                                <p class="cr">Tanggal : </p>
+                                <p class="cr">Tanggal : {{$cleaning->created_at}}</p>
                             </td>
                             <td class="col_approval">
                                 <p class="cr">Nama    :</p>
@@ -478,7 +478,7 @@
                         @case('final')
                             <td class="col_approval">
                                 <p class="cr">Nama    : Badai Sino Jendrang</p>
-                                <p class="cr">Tanggal : </p>
+                                <p class="cr">Tanggal : {{$cleaning->created_at}}</p>
                             </td>
                             <td class="col_approval"><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 80px; height: 40px;">
                                 <p class="cr">Nama    :{{$cleaningHistory[3]->name}}</p>
@@ -744,7 +744,7 @@
                         @case('created')
                             <td class="col_approval">
                                 <p class="cr">Nama    : Badai Sino Jendrang</p>
-                                <p class="cr">Tanggal :</p>
+                                <p class="cr">Tanggal : {{$cleaning->created_at}}</p>
                             </td>
                             <td class="col_approval">
                                 <p class="cr">Nama    :</p>
@@ -763,7 +763,7 @@
                         @case('reviewed')
                             <td class="col_approval">
                                 <p class="cr">Nama    : Badai Sino Jendrang</p>
-                                <p class="cr">Tanggal :</p>
+                                <p class="cr">Tanggal : {{$cleaning->created_at}}</p>
                             </td>
                             <td class="col_approval"><img src="{{ public_path("gambar/Reviewed.png") }}" alt="" style="width: 80px; height: 40px;">
                                 <p class="cr">Nama    :{{$cleaningHistory[0]->name}}</p>
@@ -782,7 +782,7 @@
                         @case('checked')
                             <td class="col_approval">
                                 <p class="cr">Nama    : Badai Sino Jendrang</p>
-                                <p class="cr">Tanggal :</p>
+                                <p class="cr">Tanggal :{{$cleaning->created_at}}</p>
                             </td>
                             <td class="col_approval"><img src="{{ public_path("gambar/Reviewed.png") }}" alt="" style="width: 80px; height: 40px;">
                                 <p class="cr">Nama    :{{$cleaningHistory[0]->name}}</p>
@@ -801,7 +801,7 @@
                         @case('secured')
                             <td class="col_approval">
                                 <p class="cr">Nama    : Badai Sino Jendrang</p>
-                                <p class="cr">Tanggal :</p>
+                                <p class="cr">Tanggal : {{$cleaning->created_at}}</p>
                             </td>
                             <td class="col_approval"><img src="{{ public_path("gambar/Reviewed.png") }}" alt="" style="width: 80px; height: 40px;">
                                 <p class="cr">Nama    :{{$cleaningHistory[0]->name}}</p>
@@ -820,7 +820,7 @@
                         @case('final')
                             <td class="col_approval">
                                 <p class="cr">Nama    : Badai Sino Jendrang</p>
-                                <p class="cr">Tanggal :</p>
+                                <p class="cr">Tanggal : {{$cleaning->created_at}}</p>
                             </td>
                             <td class="col_approval"><img src="{{ public_path("gambar/Reviewed.png") }}" alt="" style="width: 80px; height: 40px;">
                                 <p class="cr">Nama    :{{$cleaningHistory[0]->name}}</p>
