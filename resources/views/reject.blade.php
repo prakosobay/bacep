@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Email Notify</title>
+    <title>Notifikasi Reject</title>
 
 <style>
 
@@ -37,6 +37,6 @@
             <td>{{ $purpose_work }}</td>
         </tr>
     </table> --}}
-        <p><a href="http://172.16.45.239:8000">http://172.16.45.239:8000/approval/all</a></p>
+        <p><a href="http://172.16.45.195:8000">http://172.16.45.195:8000</a></p>
 </body>
 </html>
