@@ -245,7 +245,7 @@
                 </tr>
                 <tr >
                     <td width="150px">Department</td>
-                    <td >: Bulding Management</td>
+                    <td >: Building Management</td>
                 </tr>
                 <tr >
                     <td width="150px">Phone Number</td>
@@ -831,8 +831,8 @@
                                 <p class="cr">Tanggal :{{$cleaningHistory[1]->created_at}}</p>
                             </td>
                             <td class="col_approval"><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 80px; height: 40px;">
-                                <p class="cr">Nama    :{{$cleaningHistory[2]->name}}</p>
-                                <p class="cr">Tanggal :{{$cleaningHistory[2]->created_at}}</p>
+                                <p class="cr">Nama    :{{$cleaningHistory[3]->name}}</p>
+                                <p class="cr">Tanggal :{{$cleaningHistory[3]->created_at}}</p>
                             </td>
                             @break
                     @endswitch
