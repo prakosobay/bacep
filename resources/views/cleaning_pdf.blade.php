@@ -223,7 +223,8 @@
             <table cellpadding="3" class="table table-hover">
                 <tr >
                     <td width="150px">Date of Request</td>
-                    <td >: {{$cleaning->created_at}}</td>
+                    {{$date_of_request = $cleaning->created_at->isoFormat('dddd, D MMM Y')}}
+                    <td >: {{$date_of_request}}</td>
                 </tr>
                 <tr >
                     <td width="150px">Change Request Number: </td>
@@ -393,6 +394,8 @@
                     <td ><img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   Yard</td>
                     <td class="table-grey" colspan="2"><b>Validity</b></td>
                 </tr>
+                {{-- {{$from = $cleaning->validity_from->isoFormat('D MMMM Y')}}
+                {{$to = $cleaning->validity_to->isoFormat('D MMMM Y')}} --}}
                 <tr>
                     <td >
                         @if($cleaning->staging == '1')
@@ -402,6 +405,7 @@
                         @endif
                     </td>
                     <td ><img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   Parking Lot</td>
+
                     <td class="table-white">{{$cleaning->validity_from}}</td>
                     <td class="table-white">{{$cleaning->validity_to}}</td>
                 </tr>
@@ -418,7 +422,7 @@
                         @case('created')
                             <td class="col_approval">
                                 <p class="cr">Nama    : Badai Sino Jendrang</p>
-                                <p class="cr">Tanggal : {{$cleaning->created_at}}</p>
+                                <p class="cr">Tanggal : {{$date_of_request}}</p>
                             </td>
                             <td class="col_approval">
                                 <p class="cr">Nama    :</p>
@@ -433,7 +437,7 @@
                         @case('reviewed')
                         <td class="col_approval">
                             <p class="cr">Nama    : Badai Sino Jendrang</p>
-                            <p class="cr">Tanggal : {{$cleaning->created_at}}</p>
+                            <p class="cr">Tanggal : {{$date_of_request}}</p>
                         </td>
                         <td class="col_approval">
                             <p class="cr">Nama    :</p>
@@ -448,7 +452,7 @@
                         @case('checked')
                             <td class="col_approval">
                                 <p class="cr">Nama    : Badai Sino Jendrang</p>
-                                <p class="cr">Tanggal : {{$cleaning->created_at}}</p>
+                                <p class="cr">Tanggal : {{$date_of_request}}</p>
                             </td>
                             <td class="col_approval">
                                 <p class="cr">Nama    :</p>
@@ -463,7 +467,7 @@
                         @case('secured')
                             <td class="col_approval">
                                 <p class="cr">Nama    : Badai Sino Jendrang</p>
-                                <p class="cr">Tanggal : {{$cleaning->created_at}}</p>
+                                <p class="cr">Tanggal : {{$date_of_request}}</p>
                             </td>
                             <td class="col_approval">
                                 <p class="cr">Nama    :</p>
@@ -478,7 +482,7 @@
                         @case('final')
                             <td class="col_approval">
                                 <p class="cr">Nama    : Badai Sino Jendrang</p>
-                                <p class="cr">Tanggal : {{$cleaning->created_at}}</p>
+                                <p class="cr">Tanggal : {{$date_of_request}}</p>
                             </td>
                             <td class="col_approval"><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 80px; height: 40px;">
                                 <p class="cr">Nama    :{{$cleaningHistory[3]->name}}</p>
@@ -744,7 +748,7 @@
                         @case('created')
                             <td class="col_approval">
                                 <p class="cr">Nama    : Badai Sino Jendrang</p>
-                                <p class="cr">Tanggal : {{$cleaning->created_at}}</p>
+                                <p class="cr">Tanggal : {{$date_of_request}}</p>
                             </td>
                             <td class="col_approval">
                                 <p class="cr">Nama    :</p>
@@ -763,7 +767,7 @@
                         @case('reviewed')
                             <td class="col_approval">
                                 <p class="cr">Nama    : Badai Sino Jendrang</p>
-                                <p class="cr">Tanggal : {{$cleaning->created_at}}</p>
+                                <p class="cr">Tanggal : {{$date_of_request}}</p>
                             </td>
                             <td class="col_approval"><img src="{{ public_path("gambar/Reviewed.png") }}" alt="" style="width: 80px; height: 40px;">
                                 <p class="cr">Nama    :{{$cleaningHistory[0]->name}}</p>
@@ -782,7 +786,7 @@
                         @case('checked')
                             <td class="col_approval">
                                 <p class="cr">Nama    : Badai Sino Jendrang</p>
-                                <p class="cr">Tanggal :{{$cleaning->created_at}}</p>
+                                <p class="cr">Tanggal :{{$date_of_request}}</p>
                             </td>
                             <td class="col_approval"><img src="{{ public_path("gambar/Reviewed.png") }}" alt="" style="width: 80px; height: 40px;">
                                 <p class="cr">Nama    :{{$cleaningHistory[0]->name}}</p>
@@ -801,7 +805,7 @@
                         @case('secured')
                             <td class="col_approval">
                                 <p class="cr">Nama    : Badai Sino Jendrang</p>
-                                <p class="cr">Tanggal : {{$cleaning->created_at}}</p>
+                                <p class="cr">Tanggal : {{$date_of_request}}</p>
                             </td>
                             <td class="col_approval"><img src="{{ public_path("gambar/Reviewed.png") }}" alt="" style="width: 80px; height: 40px;">
                                 <p class="cr">Nama    :{{$cleaningHistory[0]->name}}</p>
@@ -820,7 +824,7 @@
                         @case('final')
                             <td class="col_approval">
                                 <p class="cr">Nama    : Badai Sino Jendrang</p>
-                                <p class="cr">Tanggal : {{$cleaning->created_at}}</p>
+                                <p class="cr">Tanggal : {{$date_of_request}}</p>
                             </td>
                             <td class="col_approval"><img src="{{ public_path("gambar/Reviewed.png") }}" alt="" style="width: 80px; height: 40px;">
                                 <p class="cr">Nama    :{{$cleaningHistory[0]->name}}</p>
