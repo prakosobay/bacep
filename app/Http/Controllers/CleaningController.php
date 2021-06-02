@@ -114,8 +114,8 @@ class CleaningController extends Controller
                 'cleaning_work' => $cleaning->cleaning_work,
                 'cleaning_date' => $cleaning->created_at,
                 'status' => 'Full Approved',
-                // 'link' => ("http://172.16.45.195:8000/cleaning_pdf/$cleaning->cleaning_id"),
-                'link' => ("http://172.16.45.239:8000/cleaning_pdf/$cleaning->cleaning_id"),
+                'link' => ("http://172.16.45.195:8000/cleaning_pdf/$cleaning->cleaning_id"),
+                // 'link' => ("http://172.16.45.239:8000/cleaning_pdf/$cleaning->cleaning_id"),
             ]);
         }
 
@@ -136,7 +136,7 @@ class CleaningController extends Controller
                 'status' => 'rejected',
                 'aktif' => true,
             ]);
-            foreach (['prakosobay@gmail.com'] as $recipient) {
+            foreach (['data.center7@balitower.co.id'] as $recipient) {
                 // $notification = new NotifReject($cleaning);
                 // Mail::to($recipient)->send(
                 //     $this->build($cleaning)
