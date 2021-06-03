@@ -20,11 +20,14 @@ class CleaningHistory extends Model
 
     protected $fillable = [
         'cleaning_id',
-        'created_by',
         'role_to',
         'status',
         'aktif'
 
+    ];
+
+    protected $date_time = [
+        'created_by'
     ];
 
     public function createdBy()

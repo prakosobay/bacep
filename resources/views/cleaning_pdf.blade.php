@@ -223,8 +223,8 @@
             <table cellpadding="3" class="table table-hover">
                 <tr >
                     <td width="150px">Date of Request</td>
-                    {{$date_of_request = $cleaning->created_at->isoFormat('dddd, D MMM Y')}}
-                    <td >: {{$date_of_request}}</td>
+                    {{Carbon\Carbon::parse($cleaning->created_at)->format('d-m-Y H:i')}}
+                    <td >: {{Carbon\Carbon::parse($cleaning->created_at)->format('d-m-Y H:i')}}</td>
                 </tr>
                 <tr >
                     <td width="150px">Change Request Number: </td>
@@ -422,7 +422,7 @@
                         @case('created')
                             <td class="col_approval">
                                 <p class="cr">Nama    : Badai Sino Jendrang</p>
-                                <p class="cr">Tanggal : {{$date_of_request}}</p>
+                                <p class="cr">Tanggal : {{Carbon\Carbon::parse($cleaning->created_at)->format('d-m-Y H:i')}}</p>
                             </td>
                             <td class="col_approval">
                                 <p class="cr">Nama    :</p>
@@ -437,7 +437,7 @@
                         @case('reviewed')
                         <td class="col_approval">
                             <p class="cr">Nama    : Badai Sino Jendrang</p>
-                            <p class="cr">Tanggal : {{$date_of_request}}</p>
+                            <p class="cr">Tanggal : {{Carbon\Carbon::parse($cleaning->created_at)->format('d-m-Y H:i')}}</p>
                         </td>
                         <td class="col_approval">
                             <p class="cr">Nama    :</p>
@@ -452,7 +452,7 @@
                         @case('checked')
                             <td class="col_approval">
                                 <p class="cr">Nama    : Badai Sino Jendrang</p>
-                                <p class="cr">Tanggal : {{$date_of_request}}</p>
+                                <p class="cr">Tanggal : {{Carbon\Carbon::parse($cleaning->created_at)->format('d-m-Y H:i')}}</p>
                             </td>
                             <td class="col_approval">
                                 <p class="cr">Nama    :</p>
@@ -467,7 +467,7 @@
                         @case('secured')
                             <td class="col_approval">
                                 <p class="cr">Nama    : Badai Sino Jendrang</p>
-                                <p class="cr">Tanggal : {{$date_of_request}}</p>
+                                <p class="cr">Tanggal : {{Carbon\Carbon::parse($cleaning->created_at)->format('d-m-Y H:i')}}</p>
                             </td>
                             <td class="col_approval">
                                 <p class="cr">Nama    :</p>
@@ -475,22 +475,22 @@
                             </td>
                             <td class="col_approval"><img src="{{ public_path("gambar/Checked.png") }}" alt="" style="width: 80px; height: 40px;">
                                 <p class="cr">Nama    :{{$cleaningHistory[2]->name}}</p>
-                                <p class="cr">Tanggal :{{$cleaningHistory[2]->created_at}}</p>
+                                <p class="cr">Tanggal :{{Carbon\Carbon::parse($cleaningHistory[2]->created_at)->format('d-m-Y H:i')}}</p>
                             </td>
                             @break
 
                         @case('final')
                             <td class="col_approval">
                                 <p class="cr">Nama    : Badai Sino Jendrang</p>
-                                <p class="cr">Tanggal : {{$date_of_request}}</p>
+                                <p class="cr">Tanggal : {{Carbon\Carbon::parse($cleaning->created_at)->format('d-m-Y H:i')}}</p>
                             </td>
                             <td class="col_approval"><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 80px; height: 40px;">
                                 <p class="cr">Nama    :{{$cleaningHistory[3]->name}}</p>
-                                <p class="cr">Tanggal :{{$cleaningHistory[3]->created_at}}</p>
+                                <p class="cr">Tanggal :{{ Carbon\Carbon::parse($cleaningHistory[3]->created_at)->format('d-m-Y H:i') }}</p>
                             </td>
                             <td class="col_approval"><img src="{{ public_path("gambar/Checked.png") }}" alt="" style="width: 80px; height: 40px;">
                                 <p class="cr">Nama    :{{$cleaningHistory[2]->name}}</p>
-                                <p class="cr">Tanggal :{{$cleaningHistory[2]->created_at}}</p>
+                                <p class="cr">Tanggal :{{ Carbon\Carbon::parse($cleaningHistory[2]->created_at)->format('d-m-Y H:i') }}</p>
                             </td>
                             @break
                     @endswitch
@@ -748,7 +748,7 @@
                         @case('created')
                             <td class="col_approval">
                                 <p class="cr">Nama    : Badai Sino Jendrang</p>
-                                <p class="cr">Tanggal : {{$date_of_request}}</p>
+                                <p class="cr">Tanggal : {{Carbon\Carbon::parse($cleaning->created_at)->format('d-m-Y H:i')}}</p>
                             </td>
                             <td class="col_approval">
                                 <p class="cr">Nama    :</p>
@@ -767,11 +767,11 @@
                         @case('reviewed')
                             <td class="col_approval">
                                 <p class="cr">Nama    : Badai Sino Jendrang</p>
-                                <p class="cr">Tanggal : {{$date_of_request}}</p>
+                                <p class="cr">Tanggal : {{Carbon\Carbon::parse($cleaning->created_at)->format('d-m-Y H:i')}}</p>
                             </td>
                             <td class="col_approval"><img src="{{ public_path("gambar/Reviewed.png") }}" alt="" style="width: 80px; height: 40px;">
                                 <p class="cr">Nama    :{{$cleaningHistory[0]->name}}</p>
-                                <p class="cr">Tanggal :{{$cleaningHistory[0]->created_at}}</p>
+                                <p class="cr">Tanggal :{{Carbon\Carbon::parse($cleaningHistory[0]->created_at)->format('d-m-Y H:i')}}</p>
                             </td>
                             <td class="col_approval">
                                 <p class="cr">Nama    : </p>
@@ -786,15 +786,15 @@
                         @case('checked')
                             <td class="col_approval">
                                 <p class="cr">Nama    : Badai Sino Jendrang</p>
-                                <p class="cr">Tanggal :{{$date_of_request}}</p>
+                                <p class="cr">Tanggal :{{Carbon\Carbon::parse($cleaning->created_at)->format('d-m-Y H:i')}}</p>
                             </td>
                             <td class="col_approval"><img src="{{ public_path("gambar/Reviewed.png") }}" alt="" style="width: 80px; height: 40px;">
                                 <p class="cr">Nama    :{{$cleaningHistory[0]->name}}</p>
-                                <p class="cr">Tanggal :{{$cleaningHistory[0]->created_at}}</p>
+                                <p class="cr">Tanggal :{{Carbon\Carbon::parse($cleaningHistory[0]->created_at)->format('d-m-Y H:i')}}</p>
                             </td>
                             <td class="col_approval"><img src="{{ public_path("gambar/Checked.png") }}" alt="" style="width: 80px; height: 40px;">
                                 <p class="cr">Nama    :{{$cleaningHistory[1]->name}}</p>
-                                <p class="cr">Tanggal :{{$cleaningHistory[1]->created_at}}</p>
+                                <p class="cr">Tanggal :{{Carbon\Carbon::parse($cleaningHistory[1]->created_at)->format('d-m-Y H:i')}}</p>
                             </td>
                             <td class="col_approval">
                                 <p class="cr">Nama    : </p>
@@ -805,15 +805,15 @@
                         @case('secured')
                             <td class="col_approval">
                                 <p class="cr">Nama    : Badai Sino Jendrang</p>
-                                <p class="cr">Tanggal : {{$date_of_request}}</p>
+                                <p class="cr">Tanggal : {{Carbon\Carbon::parse($cleaning->created_at)->format('d-m-Y H:i')}}</p>
                             </td>
                             <td class="col_approval"><img src="{{ public_path("gambar/Reviewed.png") }}" alt="" style="width: 80px; height: 40px;">
                                 <p class="cr">Nama    :{{$cleaningHistory[0]->name}}</p>
-                                <p class="cr">Tanggal :{{$cleaningHistory[0]->created_at}}</p>
+                                <p class="cr">Tanggal :{{Carbon\Carbon::parse($cleaningHistory[0]->created_at)->format('d-m-Y H:i')}}</p>
                             </td>
                             <td class="col_approval"><img src="{{ public_path("gambar/Checked.png") }}" alt="" style="width: 80px; height: 40px;">
                                 <p class="cr">Nama    :{{$cleaningHistory[1]->name}}</p>
-                                <p class="cr">Tanggal :{{$cleaningHistory[1]->created_at}}</p>
+                                <p class="cr">Tanggal :{{Carbon\Carbon::parse($cleaningHistory[1]->created_at)->format('d-m-Y H:i')}}</p>
                             </td>
                             <td class="col_approval">
                                 <p class="cr">Nama    : </p>
@@ -824,19 +824,19 @@
                         @case('final')
                             <td class="col_approval">
                                 <p class="cr">Nama    : Badai Sino Jendrang</p>
-                                <p class="cr">Tanggal : {{$date_of_request}}</p>
+                                <p class="cr">Tanggal : {{Carbon\Carbon::parse($cleaning->created_at)->format('d-m-Y H:i')}}</p>
                             </td>
                             <td class="col_approval"><img src="{{ public_path("gambar/Reviewed.png") }}" alt="" style="width: 80px; height: 40px;">
                                 <p class="cr">Nama    :{{$cleaningHistory[0]->name}}</p>
-                                <p class="cr">Tanggal :{{$cleaningHistory[0]->created_at}}</p>
+                                <p class="cr">Tanggal :{{ Carbon\Carbon::parse($cleaningHistory[0]->created_at)->format('d-m-Y H:i') }}</p>
                             </td>
                             <td class="col_approval"><img src="{{ public_path("gambar/Checked.png") }}" alt="" style="width: 80px; height: 40px;">
                                 <p class="cr">Nama    :{{$cleaningHistory[1]->name}}</p>
-                                <p class="cr">Tanggal :{{$cleaningHistory[1]->created_at}}</p>
+                                <p class="cr">Tanggal :{{ Carbon\Carbon::parse($cleaningHistory[1]->created_at)->format('d-m-Y H:i') }}</p>
                             </td>
                             <td class="col_approval"><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 80px; height: 40px;">
                                 <p class="cr">Nama    :{{$cleaningHistory[3]->name}}</p>
-                                <p class="cr">Tanggal :{{$cleaningHistory[3]->created_at}}</p>
+                                <p class="cr">Tanggal :{{ Carbon\Carbon::parse($cleaningHistory[3]->created_at)->format('d-m-Y H:i') }}</p>
                             </td>
                             @break
                     @endswitch
