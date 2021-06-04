@@ -162,6 +162,13 @@
                     </div>
                     <div >
                         <label class="radiobutton_container">
+                        <input id="1" name="koridor" type="checkbox" value="1">
+                        <span class="radiobutton_mark"></span>
+                        Koridor Lt. 1
+                        </label>
+                    </div>
+                    <div >
+                        <label class="radiobutton_container">
                         <input id="1" name="pln" type="checkbox" value="1">
                         <span class="radiobutton_mark"></span>
                         Pintu Luar PLN
