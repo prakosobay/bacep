@@ -41,7 +41,6 @@
                                             <a href="/detail_cleaning/{{$p->cleaning_id}}">History</a></td>
                                         @endif
                                         <td><a href="/cleaning_pdf/{{$p->cleaning_id}}" class="btn btn-primary" target="_blank">LIHAT PDF</a></td>
-                                        {{-- <td><a href="/cleaning_pdf_rev1/{{$p->cleaning_id}}" class="btn btn-primary" target="_blank">LIHAT PDF</a></td> --}}
                                     </tr>
                                 @endforeach
                             </tbody>
