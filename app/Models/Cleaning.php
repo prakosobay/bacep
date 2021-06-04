@@ -26,6 +26,7 @@ class Cleaning extends Model
         'mmr1',
         'mmr2',
         'panel',
+        'koridor',
         'pln',
         'cleaning_background',
         'cleaning_describ',
