@@ -89,7 +89,7 @@
                 <p>Welcome to Data Center Department, do you need help ? choose what you need and let us help you</p>
             </div>
 
-            <div class="VisitDC-bottom">
+            {{-- <div class="VisitDC-bottom">
                 <div class="VisitDC-item">
                     <a href="cleaning_bm" type="button" ><h2>Cleaning</h2></a>
                 </div>
@@ -97,15 +97,14 @@
                 <div class="VisitDC-item">
                     <a href="other" type="button" ><h2>Other</h2></a>
                 </div>
-            </div>
 
-            {{-- <div class="BM-bottom">
-                <div class="BM-item">
-                    <a href="cleaning_bm" type="button" ><h2>Cleaning</h2></a>
+                <div class="VisitDC-item">
+                    <a href="#" type="button" ><h2></h2></a>
                 </div>
 
-                <div class="BM-item">
-                    <a href="other" type="button" ><h2>Other</h2></a>
+                <div class="VisitDC-item">
+                    <a href="#" type="button" ><h2></h2></a>
+                </div>
             </div> --}}
         </div>
     </section>
