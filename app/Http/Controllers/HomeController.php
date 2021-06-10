@@ -66,7 +66,7 @@ class HomeController extends Controller
     {
 
         $role = Auth::user()->role;
-        if ((Auth::user()->role == 'boss') || (Auth::user()->role == 'check') || (Auth::user()->role == 'review') || (Auth::user()->role == 'security'))
+        if ((Auth::user()->role == 'Head Dept.') || (Auth::user()->role == 'check') || (Auth::user()->role == 'review') || (Auth::user()->role == 'security'))
             if ($type_view == 'all') {
 
                 return view('approval');
@@ -91,7 +91,7 @@ class HomeController extends Controller
 
     public function approval_full($type_form)
     {
-        if ((Auth::user()->role == 'boss') || (Auth::user()->role == 'check') || (Auth::user()->role == 'review')) {
+        if ((Auth::user()->role == 'Head Dept.') || (Auth::user()->role == 'check') || (Auth::user()->role == 'review')) {
             if ($type_form == 'all') {
                 return view('full_approval');
             } elseif ($type_form == 'survey') {
