@@ -23,7 +23,7 @@ class CleaningController extends Controller
         if (Auth::user()->role == 'bm')
             $cleaning = Cleaning::create($request->all());
 
-        foreach (['rizky.anindya@balitower.co.id'] as $recipient) {
+        foreach (['rizky.anindya@balitower.co.id', 'bayu.prakoso@balitower.co.id'] as $recipient) {
             Mail::to($recipient)->send(new NotifEmail());
         }
 
@@ -69,7 +69,7 @@ class CleaningController extends Controller
             $status = 'checked';
         } elseif (($lasthistoryC->status == 'checked') && (Auth::user()->role == 'security') && ($lasthistoryC->role_to == 'security')) {
             $status = 'secured';
-        } elseif (($lasthistoryC->status == 'secured') && (Auth::user()->role == 'boss') && ($lasthistoryC->role_to == 'boss')) {
+        } elseif (($lasthistoryC->status == 'secured') && (Auth::user()->role == 'Head Dept.') && ($lasthistoryC->role_to == 'Head Dept.')) {
             $status = 'final';
         } elseif ($lasthistoryC->status == 'final') {
             $cleaning = Cleaning::find($request->cleaning_id)->first();
@@ -77,7 +77,7 @@ class CleaningController extends Controller
 
         $role_to = '';
         if (($lasthistoryC->role_to == 'review')) {
-            foreach (['bayu.prakoso@balitower.co.id'] as $recipient) {
+            foreach (['rio.christian@balitower.co.id', 'rafli.ashshiddiqi@balitower.co.id', 'darajat.indraputra@balitower.co.id'] as $recipient) {
                 Mail::to($recipient)->send(new NotifEmail());
             }
             $role_to = 'check';
@@ -87,10 +87,10 @@ class CleaningController extends Controller
             }
             $role_to = 'security';
         } elseif (($lasthistoryC->role_to == 'security')) {
-            foreach (['darajat.indraputra@balitower.co.id'] as $recipient) {
+            foreach (['panggah@balitower.co.id'] as $recipient) {
                 Mail::to($recipient)->send(new NotifEmail());
             }
-            $role_to = 'boss';
+            $role_to = 'Head Dept.';
         }
 
         $cleaningHistory = CleaningHistory::create([
@@ -101,7 +101,7 @@ class CleaningController extends Controller
             'aktif' => true,
         ]);
 
-        if ($lasthistoryC->role_to == 'boss') {
+        if ($lasthistoryC->role_to == 'Head Dept.') {
             foreach (['rio.christian@balitower.co.id'] as $recipient) {
                 Mail::to($recipient)->send(new NotifFull());
             }
