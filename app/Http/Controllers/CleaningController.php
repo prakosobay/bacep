@@ -69,7 +69,7 @@ class CleaningController extends Controller
             $status = 'checked';
         } elseif (($lasthistoryC->status == 'checked') && (Auth::user()->role == 'security') && ($lasthistoryC->role_to == 'security')) {
             $status = 'secured';
-        } elseif (($lasthistoryC->status == 'secured') && (Auth::user()->role == 'Head Dept.') && ($lasthistoryC->role_to == 'Head Dept.')) {
+        } elseif (($lasthistoryC->status == 'secured') && (Auth::user()->role == 'head') && ($lasthistoryC->role_to == 'head')) {
             $status = 'final';
         } elseif ($lasthistoryC->status == 'final') {
             $cleaning = Cleaning::find($request->cleaning_id)->first();
@@ -87,10 +87,10 @@ class CleaningController extends Controller
             }
             $role_to = 'security';
         } elseif (($lasthistoryC->role_to == 'security')) {
-            foreach (['panggah@balitower.co.id'] as $recipient) {
-                Mail::to($recipient)->send(new NotifEmail());
-            }
-            $role_to = 'Head Dept.';
+            // foreach (['panggah@balitower.co.id'] as $recipient) {
+            //     Mail::to($recipient)->send(new NotifEmail());
+            // }
+            $role_to = 'head';
         }
 
         $cleaningHistory = CleaningHistory::create([
@@ -101,7 +101,7 @@ class CleaningController extends Controller
             'aktif' => true,
         ]);
 
-        if ($lasthistoryC->role_to == 'Head Dept.') {
+        if ($lasthistoryC->role_to == 'head') {
             foreach (['rio.christian@balitower.co.id'] as $recipient) {
                 Mail::to($recipient)->send(new NotifFull());
             }
