@@ -164,7 +164,7 @@ class CleaningController extends Controller
             ->where('cleaning_histories.status', '!=', 'visitor')
             ->select('cleaning_histories.*', 'users.name', 'created_by')
             ->get();
-        // dd($cleaningHistory);
+        // dd($lasthistoryC);
         // $user = Users::where('id', $id)->where('name', $name)->get();
         // dd($cleaningHistory);
         $pdf = PDF::loadview('cleaning_pdf', ['cleaning' => $cleaning, 'lasthistoryC' => $lasthistoryC, 'cleaningHistory' => $cleaningHistory])->setPaper('a4', 'portrait')->setWarnings(false);
