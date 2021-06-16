@@ -557,31 +557,31 @@
                     <td class="table-grey"><b>Detail Service Impact</b></td>
                 </tr>
                 <tr >
-                    <td height="10px" class="table-center">{{$cleaning->validity_from}}</td>
+                    <td height="10px" class="table-center">{{Carbon\Carbon::parse($cleaning->validity_from)->format('d-m-Y')}}</td>
                     <td height="10px" class="table-center">{{$cleaning->cleaning_time_1}}</td>
                     <td height="10px" class="table-center">{{$cleaning->cleaning_procedure_1}}</td>
                     <td height="10px" class="table-center">{{$cleaning->cleaning_risk_1}}</td>
                 </tr>
                 <tr >
-                    <td height="10px" class="table-center">{{$cleaning->validity_from}}</td>
+                    <td height="10px" class="table-center">{{Carbon\Carbon::parse($cleaning->validity_from)->format('d-m-Y')}}</td>
                     <td height="10px" class="table-center">{{$cleaning->cleaning_time_2}}</td>
                     <td height="10px" class="table-center">{{$cleaning->cleaning_procedure_2}}</td>
                     <td height="10px" class="table-center">{{$cleaning->cleaning_risk_2}}</td>
                 </tr>
                 <tr >
-                    <td height="10px" class="table-center">{{$cleaning->validity_from}}</td>
+                    <td height="10px" class="table-center">{{Carbon\Carbon::parse($cleaning->validity_from)->format('d-m-Y')}}</td>
                     <td height="10px" class="table-center">{{$cleaning->cleaning_time_3}}</td>
                     <td height="10px" class="table-center">{{$cleaning->cleaning_procedure_3}}</td>
                     <td height="10px" class="table-center">{{$cleaning->cleaning_risk_3}}</td>
                 </tr>
                 <tr >
-                    <td height="10px" class="table-center">{{$cleaning->validity_from}}</td>
+                    <td height="10px" class="table-center">{{Carbon\Carbon::parse($cleaning->validity_from)->format('d-m-Y')}}</td>
                     <td height="10px" class="table-center">{{$cleaning->cleaning_time_4}}</td>
                     <td height="10px" class="table-center">{{$cleaning->cleaning_procedure_4}}</td>
                     <td height="10px" class="table-center">{{$cleaning->cleaning_risk_4}}</td>
                 </tr>
                 <tr >
-                    <td height="10px" class="table-center">{{$cleaning->validity_from}}</td>
+                    <td height="10px" class="table-center">{{Carbon\Carbon::parse($cleaning->validity_from)->format('d-m-Y')}}</td>
                     <td height="10px" class="table-center">{{$cleaning->cleaning_time_5}}</td>
                     <td height="10px" class="table-center">{{$cleaning->cleaning_procedure_5}}</td>
                     <td height="10px" class="table-center">{{$cleaning->cleaning_risk_5}}</td>
