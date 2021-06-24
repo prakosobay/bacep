@@ -23,7 +23,7 @@ class CleaningController extends Controller
         if (Auth::user()->role == 'bm')
             $cleaning = Cleaning::create($request->all());
 
-        foreach (['rizky.anindya@balitower.co.id', 'bayu.prakoso@balitower.co.id'] as $recipient) {
+        foreach (['rizky.anindya@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'darajat.indraputra@balitower.co.id'] as $recipient) {
             Mail::to($recipient)->send(new NotifEmail());
         }
 
@@ -77,7 +77,7 @@ class CleaningController extends Controller
 
         $role_to = '';
         if (($lasthistoryC->role_to == 'review')) {
-            foreach (['rio.christian@balitower.co.id', 'rafli.ashshiddiqi@balitower.co.id', 'darajat.indraputra@balitower.co.id'] as $recipient) {
+            foreach (['rio.christian@balitower.co.id', 'rafli.ashshiddiqi@balitower.co.id', 'lingga.anugerah@balitower.co.id'] as $recipient) {
                 Mail::to($recipient)->send(new NotifEmail());
             }
             $role_to = 'check';

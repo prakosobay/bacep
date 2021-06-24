@@ -21,7 +21,7 @@
 </head>
 
 <body>
-    <h1>Dear Bapak/Ibu,</h1>
+    <h1>Dear Bapak Sino,</h1>
 	<h2>Mohon maaf permit yang anda ajukan tidak dapat kami proses, mohon untuk mengajukan permit baru pada tautan di bawah ini.</h2>
     {{-- <table>
         <tr>
