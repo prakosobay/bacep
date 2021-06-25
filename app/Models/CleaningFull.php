@@ -20,6 +20,7 @@ class CleaningFull extends Model
         'cleaning_full_id',
         'cleaning_id',
         'cleaning_name_1',
+        'cleaning_name_2',
         'cleaning_work',
         'cleaning_date',
         'status',

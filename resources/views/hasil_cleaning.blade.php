@@ -16,8 +16,7 @@
                                 <tr>
                                     <th>ID Permit</th>
                                     <th>Date of Request</th>
-                                    <th>Visitor Name1</th>
-                                    <th>Visitor Name2</th>
+                                    <th>Visitor Name</th>
                                     <th>Purpose of Work</th>
                                     <th>Action</th>
                                     <th>File</th>
@@ -28,8 +27,8 @@
                                     <tr>
                                         <td>{{ $p->cleaning_id }}</td>
                                         <td>{{ $p->created_at }}</td>
-                                        <td>{{ $p->cleaning_name_1 }}</td>
-                                        <td>{{ $p->cleaning_name_2 }}</td>
+                                        <td>- {{ $p->cleaning_name_1 }}</br>
+                                            - {{ $p->cleaning_name_2 }}</td>
                                         <td>{{ $p->cleaning_work }}</td>
                                         @if(Auth::user()->role != 'security')
                                         <td>

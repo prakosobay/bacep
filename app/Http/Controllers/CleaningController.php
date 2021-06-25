@@ -32,7 +32,7 @@ class CleaningController extends Controller
                 'cleaning_id' => $cleaning->cleaning_id,
                 'created_by' => Auth::user()->id,
                 'role_to' => 'review',
-                'status' => 'created',
+                'status' => 'requested',
                 'aktif' => '1'
             ]);
 
@@ -63,13 +63,13 @@ class CleaningController extends Controller
 
 
         $status = '';
-        if (($lasthistoryC->status == 'created') && (Auth::user()->role == 'review') && ($lasthistoryC->role_to == 'review')) {
+        if (($lasthistoryC->status == 'requested') && (Auth::user()->role == 'review') && ($lasthistoryC->role_to == 'review')) {
             $status = 'reviewed';
         } elseif (($lasthistoryC->status == 'reviewed') && (Auth::user()->role == 'check') && ($lasthistoryC->role_to == 'check')) {
             $status = 'checked';
         } elseif (($lasthistoryC->status == 'checked') && (Auth::user()->role == 'security') && ($lasthistoryC->role_to == 'security')) {
-            $status = 'secured';
-        } elseif (($lasthistoryC->status == 'secured') && (Auth::user()->role == 'head') && ($lasthistoryC->role_to == 'head')) {
+            $status = 'acknowledge';
+        } elseif (($lasthistoryC->status == 'acknowledge') && (Auth::user()->role == 'head') && ($lasthistoryC->role_to == 'head')) {
             $status = 'final';
         } elseif ($lasthistoryC->status == 'final') {
             $cleaning = Cleaning::find($request->cleaning_id)->first();
@@ -102,7 +102,7 @@ class CleaningController extends Controller
         ]);
 
         if ($lasthistoryC->role_to == 'head') {
-            foreach (['dc@balitower.co.id'] as $recipient) {
+            foreach (['dc@balitower.co.id', 'security.bacep@balitower.co.id'] as $recipient) {
                 Mail::to($recipient)->send(new NotifFull());
             }
             $cleaning = Cleaning::where('cleaning_id', $request->cleaning_id)->first();
