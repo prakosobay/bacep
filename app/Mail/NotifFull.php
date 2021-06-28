@@ -11,15 +11,15 @@ use App\Http\Controllers\CleaningController;
 class NotifFull extends Mailable
 {
     use Queueable, SerializesModels;
-
+    public $data;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($data)
     {
-        //
+        $this->data = $data;
     }
 
     /**
@@ -30,12 +30,6 @@ class NotifFull extends Mailable
     public function build()
     {
         return $this->from('testing.dc@balitower.co.id')
-            ->view('notif_full')
-            ->with(
-                [
-                    'nama' => 'Guyss',
-                    'pesan' => 'ada permit',
-                ]
-            );
+            ->view('notif_full');
     }
 }

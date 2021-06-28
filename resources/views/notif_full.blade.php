@@ -4,16 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Email Notify</title>
+    <title>Notifikasi Full Approval</title>
 
+<style>
+
+    table, th, td {
+            border-width: 300px;
+            border-spacing: 0px;
+            border: 3px solid black;
+            border-collapse: collapse;
+            font-size: 8pt;
+            margin: 5px;
+            padding: 7px;
+		}
+</style>
 </head>
-<body>
-    <div class="card">
-        <h3 class="">Hallo, DC Team!</h3>
-        <p>Ada permit yang sudah full approved. Untuk melihat bisa klik tautan di bawah ini.
-            Link terlampir </p>
-        <p>Silahkan Login di  <a href="http://172.16.45.195:8000/full_approval/all">http://172.16.45.195:8000/full_approval/all</a></p>
 
-    </div>
+<body>
+    <h2>Dear All,</h2>
+	<h3>Terlampir permit cleaning yang sudah <b>Full Approval</b></h3>
+    <table>
+        <thead>
+            <tr>
+                <th>No. Permit</thead>
+                <th>Date of Request</th>
+                <th>Purpose of Work</th>
+                <th>Validity</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ $data->cleaning_id }}</td>
+                <td>{{ Carbon\Carbon::parse($data->created_at)->format('d-m-Y')  }}</td>
+                <td>{{ $data->cleaning_work }}</td>
+                <td>{{ Carbon\Carbon::parse($data->validity_from)->format('d-m-Y') }}</td>
+            </tr>
+        </tbody>
+    </table>
+        <p><a href="http://172.16.45.195:8000">http://172.16.45.195:8000</a></p>
+        <p><a href="http://172.16.45.195:8000/cleaning_pdf/$data->cleaning_id"></a></p>
 </body>
 </html>

@@ -33,8 +33,7 @@
                                     <td>{{ $num++ }}</td>
                                     <td>{{ $p->cleaning_id }}</td>
                                     <td>{{ $p->cleaning_date }}</td>
-                                    <td>- {{ $p->cleaning_name_1 }}</br>
-                                        - {{ $p->cleaning_name_2}}</td>
+                                    <td>{{ $p->cleaning_name_1 }}
                                     <td>{{ $p->cleaning_work }}</td>
                                     <td>{{ $p->status }}</td>
                                     <td><a href="{{ $p->link }}">PDF</a></td>

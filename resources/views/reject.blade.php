@@ -40,19 +40,6 @@
                 <td>{{ Carbon\Carbon::parse($data->validity_from)->format('d-m-Y') }}</td>
             </tr>
         </tbody>
-
-        {{-- <tr>
-            <td>No Permit</td>
-            <td>{{ $data->cleaning_id }}</td>
-        </tr>
-        <tr>
-            <td>Tanggal Pekerjaan</td>
-            <td>{{ Carbon\Carbon::parse($data->validity_from)->format('d-m-Y')  }}</td>
-        </tr>
-        <tr>
-            <td>Tujuan Pekerjaan</td>
-            <td>{{ $data->cleaning_work }}</td>
-        </tr> --}}
     </table>
         <p><a href="http://172.16.45.195:8000">http://172.16.45.195:8000</a></p>
 </body>

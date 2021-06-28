@@ -102,9 +102,10 @@ class CleaningController extends Controller
         ]);
 
         if ($lasthistoryC->role_to == 'head') {
-            // foreach (['dc@balitower.co.id', 'security.bacep@balitower.co.id'] as $recipient) {
-            //     Mail::to($recipient)->send(new NotifFull());
-            // }
+            $cleaning = Cleaning::find($request->cleaning_id);
+            foreach (['bayu.prakoso@balitower.co.id'] as $recipient) {
+                Mail::to($recipient)->send(new NotifFull($cleaning));
+            }
             $cleaning = Cleaning::where('cleaning_id', $request->cleaning_id)->first();
             // dd($cleaning);
             $cleaningFull = CleaningFull::create([
