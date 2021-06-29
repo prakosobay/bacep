@@ -12,7 +12,7 @@
         <h3 class="">Hallo, DC Team!</h3>
         <p>Mohon untuk review dan check permit dari team BM yang telah di submit.
             Link terlampir </p>
-        <p>Silahkan Login di  <a href="http://172.16.45.195:8000/approval/all">http://172.16.45.195:8000/approval/all</a></p>
+        <p>Silahkan Login di  <a href="http://172.16.45.195:8000/approval/all">sini</a></p>
 
     </div>
 </body>

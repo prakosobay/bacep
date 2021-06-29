@@ -26,7 +26,7 @@
                                 @foreach($cleaning as $p)
                                     <tr>
                                         <td>{{ $p->cleaning_id }}</td>
-                                        <td>{{ $p->created_at }}</td>
+                                        <td>{{ Carbon\Carbon::parse($p->created_at)->format('d-m-Y') }}</td>
                                         <td>- {{ $p->cleaning_name_1 }}</br>
                                             - {{ $p->cleaning_name_2 }}</td>
                                         <td>{{ $p->cleaning_work }}</td>

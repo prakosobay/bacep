@@ -22,26 +22,26 @@
 
 <body>
     <h2>Dear All,</h2>
-	<h3>Terlampir permit cleaning yang sudah <b>Full Approval</b></h3>
+	<h3>Terlampir link permit cleaning yang sudah Full Approval</h3>
     <table>
         <thead>
             <tr>
                 <th>No. Permit</thead>
-                <th>Date of Request</th>
-                <th>Purpose of Work</th>
-                <th>Validity</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>{{ $data->cleaning_id }}</td>
-                <td>{{ Carbon\Carbon::parse($data->created_at)->format('d-m-Y')  }}</td>
-                <td>{{ $data->cleaning_work }}</td>
-                <td>{{ Carbon\Carbon::parse($data->validity_from)->format('d-m-Y') }}</td>
-            </tr>
-        </tbody>
-    </table>
-        <p><a href="http://172.16.45.195:8000">http://172.16.45.195:8000</a></p>
-        <p><a href="http://172.16.45.195:8000/cleaning_pdf/$data->cleaning_id"></a></p>
+                    <th>Date of Request</th>
+                    <th>Purpose of Work</th>
+                    <th>Validity</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ $data->cleaning_id }}</td>
+                    <td>{{ Carbon\Carbon::parse($data->created_at)->format('d-m-Y')  }}</td>
+                    <td>{{ $data->cleaning_work }}</td>
+                    <td>{{ Carbon\Carbon::parse($data->validity_from)->format('d-m-Y') }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <p><a href="http://127.0.0.1:8000/cleaning_pdf/$cleaning->cleaning_id">Klik tautan ini untuk melihat permit</a></p>
+        {{-- <p><a href="http://127.0.0.1:8000/cleaning_pdf/$data->cleaning_id">Klik tautan ini untuk melihat permit</a></p> --}}
 </body>
 </html>

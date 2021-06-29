@@ -56,7 +56,7 @@
                                     <td>{{ $p->name }}</td>
                                     <td>{{ $p->cleaning_work }}</td>
                                     <td>{{ $p->status }}</td>
-                                    <td>{{ $p->created_at }}</td>
+                                    <td>{{ Carbon\Carbon::parse($p->created_at)->format('d-m-Y') }}</td>
                                 </tr>
                             @endforeach
                         </tbody>
