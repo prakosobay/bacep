@@ -224,7 +224,7 @@
                 <tr >
                     <td width="150px">Date of Request</td>
 
-                    <td >: {{Carbon\Carbon::parse($cleaning->created_at)->format('d-m-Y H:i')}}</td>
+                    <td >: {{Carbon\Carbon::parse($cleaning['created_at'])->format('d-m-Y H:i')}}</td>
                 </tr>
                 <tr >
                     <td width="150px">Change Request Number: </td>
