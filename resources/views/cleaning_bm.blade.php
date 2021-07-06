@@ -983,7 +983,10 @@
                             <option value="{{ $p->nama }}">{{ $p->nama }}</option>
                             @endforeach
                         </select>
-                        <input type="text" class="" name="cleaning_number_2" value="{{ $p->phone_number }}" readonly>
+                        @if($master_ob->nama == 'Alfani Sulaeman')
+                        <input type="text" class="" name="cleaning_number_2" value="0895-3339-40730" value="0895-3339-40730" readonly>
+                        @endif
+                        {{-- <input type="text" class="" name="cleaning_number_2" value="{{ $p->phone_number }}" readonly> --}}
                         <input type="text" class="" name="cleaning_id_2" value="{{ $p->id_number }}" readonly>
                         {{-- <select id="input-group14" style="background: black;" name="cleaning_number_2">
                             <option value="">Mobile Number</option>

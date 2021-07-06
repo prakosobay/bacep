@@ -66,6 +66,7 @@
                         <li><a href="{{ url('full_approval/all') }}" data-after="Full">Full Approval</a></li>
                         <li><a href="{{ url('approval/all') }}" data-after="Approval">Approval</a></li>
                         @endif
+                        <li><a href="{{ url('log/all') }}" data-after="Log">Log</a></li>
                         <li>
                                 <a href="{{ route('logout') }}"
                                 onclick="event.preventDefault();

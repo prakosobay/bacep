@@ -57,9 +57,9 @@ Route::middleware(['auth'])->group(function () {
         return view('troubleshoot');
     })->middleware(['verified']);
 
-    Route::get('/cleaning_bm', function () {
-        return view('cleaning_bm');
-    })->middleware(['verified']);
+    // Route::get('/cleaning_bm', function () {
+    //     return view('cleaning_bm');
+    // })->middleware(['verified']);
 
     Route::get('/cleaning_bm', [App\Http\Controllers\CleaningController::class, 'detail_ob'])->middleware(['verified']);
 
@@ -94,6 +94,8 @@ Route::middleware(['auth'])->group(function () {
     //Full Approval
     Route::get('/full_approval/{type_form}', [App\Http\Controllers\HomeController::class, 'approval_full'])->middleware(['verified']);
 
+    //LOG
+    Route::get('/log/{type_view}', [App\Http\Controllers\HomeController::class, 'log_view'])->middleware(['verified']);
     //PDF
     Route::get('/survey_pdf/{id}', [App\Http\Controllers\HomeController::class, 'cetak_survey_pdf'])->middleware(['verified']);
     Route::get('/cleaning_pdf/{id}', [App\Http\Controllers\CleaningController::class, 'cetak_cleaning_pdf'])->middleware(['verified']);

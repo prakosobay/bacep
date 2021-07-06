@@ -7,6 +7,8 @@ use App\Http\Controllers\HomeController;
 use App\Models\Cleaning;
 use App\Models\CleaningHistory;
 use App\Models\CleaningFull;
+use App\Models\MasterOb;
+use App\Models\ObCompany;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Barryvdh\DomPDF\Facade as PDF;
@@ -152,7 +154,7 @@ class CleaningController extends Controller
 
             $cleaning = Cleaning::find($request->cleaning_id);
             // dd($cleaning);
-            foreach (['bayu.prakoso@balitower.co.id'] as $recipient) {
+            foreach (['bayu.prakoso@balitower.co.id', 'security@mail'] as $recipient) {
                 // $notification = new NotifReject($cleaning);
                 // Mail::to($recipient)->send(
                 //     $this->build($cleaning)
