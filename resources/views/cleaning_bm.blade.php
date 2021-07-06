@@ -430,7 +430,7 @@
                     <p>
                         <font color="red" size="2">*Minimal Mengisi 4</font>
                     </p>
-                        <input type="time" id="input-group7" placeholder="Time" name="cleaning_time_1">
+                        <input type="time" id="input-group7" style="background: white;" name="cleaning_time_1">
                         <select id="input-group1" style="background: black;" name="cleaning_item_1">
                             <option value="">Item (Barang yang Digunakan)</option>
                             <option value="Vacum-Majun-Kanebo-Kop">
@@ -516,7 +516,7 @@
                             </option>
                         </select>
 
-                        <input type="time" id="input-group7" placeholder="Time" name="cleaning_time_2">
+                        <input type="time" id="input-group7" style="background: white;" placeholder="Time" name="cleaning_time_2">
                         <select id="input-group1" style="background: black;" name="cleaning_item_2">
                             <option value="">Item (Barang yang Digunakan)</option>
                             <option value="Vacum-Majun-Kanebo-Kop">
@@ -602,7 +602,7 @@
                             </option>
                         </select>
 
-                        <input type="time" id="input-group7" placeholder="Time" name="cleaning_time_3">
+                        <input type="time" id="input-group7" style="background: white;" placeholder="Time" name="cleaning_time_3">
                         <select id="input-group1" style="background: black;" name="cleaning_item_3">
                             <option value="">Item (Barang yang Digunakan)</option>
                             <option value="Vacum-Majun-Kanebo-Kop">
@@ -688,7 +688,7 @@
                             </option>
                         </select>
 
-                        <input type="time" id="input-group7" placeholder="Time" name="cleaning_time_4">
+                        <input type="time" id="input-group7" style="background: white;"placeholder="Time" name="cleaning_time_4">
                         <select id="input-group1" style="background: black;" name="cleaning_item_4">
                             <option value="">Item (Barang yang Digunakan)</option>
                             <option value="Vacum-Majun-Kanebo-Kop">
@@ -774,7 +774,7 @@
                             </option>
                         </select>
 
-                        <input type="time" id="input-group7" placeholder="Time" name="cleaning_time_5">
+                        <input type="time" id="input-group7" style="background: white;" placeholder="Time" name="cleaning_time_5">
                         <select id="input-group1" style="background: black;" name="cleaning_item_5">
                             <option value="">Item (Barang yang Digunakan)</option>
                             <option value="Vacum-Majun-Kanebo-Kop">
@@ -860,7 +860,7 @@
                             </option>
                         </select>
 
-                        <input type="time" id="input-group7" placeholder="Time" name="cleaning_time_6">
+                        <input type="time" id="input-group7" style="background: white;" placeholder="Time" name="cleaning_time_6">
                         <select id="input-group1" style="background: black;" name="cleaning_item_6">
                             <option value="">Item (Barang yang Digunakan)</option>
                             <option value="Vacum-Majun-Kanebo-Kop">
@@ -983,10 +983,8 @@
                             <option value="{{ $p->nama }}">{{ $p->nama }}</option>
                             @endforeach
                         </select>
-                        @if($master_ob->nama == 'Alfani Sulaeman')
-                        <input type="text" class="" name="cleaning_number_2" value="0895-3339-40730" value="0895-3339-40730" readonly>
-                        @endif
-                        {{-- <input type="text" class="" name="cleaning_number_2" value="{{ $p->phone_number }}" readonly> --}}
+
+                        <input type="text" class="" name="cleaning_number_2" value="{{ $p->phone_number }}" readonly>
                         <input type="text" class="" name="cleaning_id_2" value="{{ $p->id_number }}" readonly>
                         {{-- <select id="input-group14" style="background: black;" name="cleaning_number_2">
                             <option value="">Mobile Number</option>
