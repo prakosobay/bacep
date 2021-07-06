@@ -959,8 +959,8 @@
                             <option value="{{ $p->nama }}">{{ $p->nama }}</option>
                             @endforeach
                         </select>
-                        <input type="text" class="" name="cleaning_number_1">
-                        <input type="text" class="" name="cleaning_id_1">
+                        <input type="text" class="" name="cleaning_number_1" readonly>
+                        <input type="text" class="" name="cleaning_id_1" readonly>
                         {{-- <select id="input-group14" style="background: black;" name="cleaning_number_1">
                             <option value="">Mobile Number</option>
                             <option value="0895-3339-40730">0895-3339-40730</option>
@@ -983,8 +983,8 @@
                             <option value="{{ $p->nama }}">{{ $p->nama }}</option>
                             @endforeach
                         </select>
-                        <input type="text" class="" name="cleaning_number_2">
-                        <input type="text" class="" name="cleaning_id_2">
+                        <input type="text" class="" name="cleaning_number_2" value="{{ $p->phone_number }}" readonly>
+                        <input type="text" class="" name="cleaning_id_2" value="{{ $p->id_number }}" readonly>
                         {{-- <select id="input-group14" style="background: black;" name="cleaning_number_2">
                             <option value="">Mobile Number</option>
                             <option value="0895-3339-40730">0895-3339-40730</option>
@@ -1007,8 +1007,8 @@
                             <option value="{{ $p->nama }}">{{ $p->nama }}</option>
                             @endforeach
                         </select>
-                        <input type="text" class="" name="cleaning_number_3">
-                        <input type="text" class="" name="cleaning_id_3">
+                        <input type="text" class="" name="cleaning_number_3" readonly>
+                        <input type="text" class="" name="cleaning_id_3" readonly>
                         {{-- <select id="input-group14" style="background: black;" name="cleaning_number_3">
                             <option value="">Mobile Number</option>
                             <option value="0895-3339-40730">0895-3339-40730</option>
