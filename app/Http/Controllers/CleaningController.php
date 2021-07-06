@@ -17,6 +17,17 @@ use Illuminate\Support\Facades\Mail;
 
 class CleaningController extends Controller
 {
+    public function detail_ob()
+    {
+        $master_ob = DB::table('master_obs')
+            ->join('ob_companies', 'ob_companies.company_id', '=', 'master_obs.company_id')
+            // ->where('master_obs.company_id', '=', $id)
+            ->select('master_obs.*')
+            ->get();
+
+        return view('cleaning_bm', ['master_ob' => $master_ob]);
+    }
+
     public function submit_data_cleaning(Request $request)
     {
         // dd($request);

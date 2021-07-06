@@ -61,6 +61,8 @@ Route::middleware(['auth'])->group(function () {
         return view('cleaning_bm');
     })->middleware(['verified']);
 
+    Route::get('/cleaning_bm', [App\Http\Controllers\CleaningController::class, 'detail_ob'])->middleware(['verified']);
+
     Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware(['verified']);
 
     //Detail History
