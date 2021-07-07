@@ -953,103 +953,32 @@
                         <input type="text" class="contoh2" id="input-group" placeholder="Fill in here (isi disini)" name="cleaning_rollback">
                     <P>
                     <h4 class="text-white">7. Person in charge</h4>
-                        <select id="input-group1" style="background: black;" name="cleaning_name_1">
+                        <select class="pilihan" id="input-group1" style="background: black;" name="cleaning_name_1">
                             <option value="">Name</option>
                             @foreach($master_ob as $p)
-                            <option value="{{ $p->nama }}">{{ $p->nama }}</option>
+                            <option value="{{ $p->ob_id }}">{{ $p->nama }}</option>
                             @endforeach
                         </select>
-                        <input type="text" class="" name="cleaning_number_1" readonly>
-                        <input type="text" class="" name="cleaning_id_1" readonly>
-                        {{-- <select id="input-group14" style="background: black;" name="cleaning_number_1">
-                            <option value="">Mobile Number</option>
-                            <option value="0895-3339-40730">0895-3339-40730</option>
-                            <option value="0815-6461-7472">0815-6461-7472</option>
-                            <option value="0896-3051-3484">0896-3051-3484</option>
-                            <option value="0873-2124-378">0873-2124-378</option>
-                            <option value="0812-9073-7216">0812-9073-7216</option>
-                        </select>
-                        <select id="input-group14" style="background: black;" name="cleaning_id_1">
-                            <option value="">ID Number</option>
-                            <option value="3171031201870006">3171031201870006</option>
-                            <option value="3204292311830001">3204292311830001</option>
-                            <option value="3671052411880001">3671052411880001</option>
-                            <option value="3276011510880010">3276011510880010</option>
-                            <option value="5206025203881010">5206025203881010</option>
-                        </select> --}}
-                        <select id="input-group1" style="background: black;" name="cleaning_name_2">
-                            <option value="">Name</option>
-                            @foreach($master_ob as $p)
-                            <option value="{{ $p->nama }}">{{ $p->nama }}</option>
-                            @endforeach
-                        </select>
+                        <input type="text" class="" name="cleaning_number_1" id="id_number" value="" readonly>
+                        <input type="text" class="" name="cleaning_id_1" id="phone_number" value="" readonly>
 
-                        <input type="text" class="" name="cleaning_number_2" value="{{ $p->phone_number }}" readonly>
-                        <input type="text" class="" name="cleaning_id_2" value="{{ $p->id_number }}" readonly>
-                        {{-- <select id="input-group14" style="background: black;" name="cleaning_number_2">
-                            <option value="">Mobile Number</option>
-                            <option value="0895-3339-40730">0895-3339-40730</option>
-                            <option value="0815-6461-7472">0815-6461-7472</option>
-                            <option value="0896-3051-3484">0896-3051-3484</option>
-                            <option value="0873-2124-378">0873-2124-378</option>
-                            <option value="0812-9073-7216">0812-9073-7216</option>
-                        </select>
-                        <select id="input-group14" style="background: black;" name="cleaning_id_2">
-                            <option value="">ID Number</option>
-                            <option value="3171031201870006">3171031201870006</option>
-                            <option value="3204292311830001">3204292311830001</option>
-                            <option value="3671052411880001">3671052411880001</option>
-                            <option value="3276011510880010">3276011510880010</option>
-                            <option value="5206025203881010">5206025203881010</option>
-                        </select> --}}
-                        <select id="input-group1" style="background: black;" name="cleaning_name_3">
+                        <select class="pilihan2" id="input-group1" style="background: black;" name="cleaning_name_2">
                             <option value="">Name</option>
                             @foreach($master_ob as $p)
-                            <option value="{{ $p->nama }}">{{ $p->nama }}</option>
+                            <option value="{{ $p->ob_id }}">{{ $p->nama }}</option>
                             @endforeach
                         </select>
-                        <input type="text" class="" name="cleaning_number_3" readonly>
-                        <input type="text" class="" name="cleaning_id_3" readonly>
-                        {{-- <select id="input-group14" style="background: black;" name="cleaning_number_3">
-                            <option value="">Mobile Number</option>
-                            <option value="0895-3339-40730">0895-3339-40730</option>
-                            <option value="0815-6461-7472">0815-6461-7472</option>
-                            <option value="0896-3051-3484">0896-3051-3484</option>
-                            <option value="0873-2124-378">0873-2124-378</option>
-                            <option value="0812-9073-7216">0812-9073-7216</option>
-                        </select>
-                        <select id="input-group14" style="background: black;" name="cleaning_id_3">
-                            <option value="">ID Number</option>
-                            <option value="3171031201870006">3171031201870006</option>
-                            <option value="3204292311830001">3204292311830001</option>
-                            <option value="3671052411880001">3671052411880001</option>
-                            <option value="3276011510880010">3276011510880010</option>
-                            <option value="5206025203881010">5206025203881010</option>
-                        </select>
-                        <select id="input-group1" style="background: black;" name="cleaning_name_4">
+                        <input type="text" class="" name="cleaning_number_2" id="id_number2" value="" readonly>
+                        <input type="text" class="" name="cleaning_id_2" id="phone_number2" value="" readonly>
+
+                        <select class="pilihan3" id="input-group1" style="background: black;" name="cleaning_name_3">
                             <option value="">Name</option>
-                            <option value="Alfani Sulaeman">Alfani Sulaeman</option>
-                            <option value="Andi Sugandi">Andi Sugandi</option>
-                            <option value="Jejen Jenudin">Jejen Jenudin</option>
-                            <option value="Randi Andhika">Randi Andhika</option>
-                            <option value="Anita Aryani">Anita Aryani</option>
+                            @foreach($master_ob as $p)
+                            <option value="{{ $p->ob_id }}">{{ $p->nama }}</option>
+                            @endforeach
                         </select>
-                        <select id="input-group14" style="background: black;" name="cleaning_number_4">
-                            <option value="">Mobile Number</option>
-                            <option value="0895-3339-40730">0895-3339-40730</option>
-                            <option value="0815-6461-7472">0815-6461-7472</option>
-                            <option value="0896-3051-3484">0896-3051-3484</option>
-                            <option value="0873-2124-378">0873-2124-378</option>
-                            <option value="0812-9073-7216">0812-9073-7216</option>
-                        </select>
-                        <select id="input-group14" style="background: black;" name="cleaning_id_4">
-                            <option value="">ID Number</option>
-                            <option value="3171031201870006">3171031201870006</option>
-                            <option value="3204292311830001">3204292311830001</option>
-                            <option value="3671052411880001">3671052411880001</option>
-                            <option value="3276011510880010">3276011510880010</option>
-                            <option value="5206025203881010">5206025203881010</option>
-                        </select> --}}
+                        <input type="text" class="" name="cleaning_number_3" id="phone_number3" value="" readonly>
+                        <input type="text" class="" name="cleaning_id_3" id="phone_number3" value="" readonly>
                 </div>
             </div>
             <p>
@@ -1106,5 +1035,51 @@
             }
         });
     });
+
+    $('.pilihan').change(function(){
+            let id = $(this).val();
+            $.ajax({
+                url: "{{url("/detail")}}"+'/'+id,
+                dataType:"json",
+                type: "get",
+                success: function(response){
+                    const {data} = response;
+                    console.log(data)
+                $('#id_number').val(data.id_number);
+                $('#phone_number').val(data.phone_number);
+                }
+            });
+        });
+
+        $('.pilihan2').change(function(){
+            let id = $(this).val();
+            $.ajax({
+                url: "{{url("/detail")}}"+'/'+id,
+                dataType:"json",
+                type: "get",
+                success: function(response){
+                    const {data} = response;
+                    console.log(data)
+                $('#id_number2').val(data.id_number_2);
+                $('#phone_number2').val(data.phone_number_2);
+                }
+            });
+        });
+
+        $('.pilihan3').change(function(){
+            let id = $(this).val();
+            $.ajax({
+                url: "{{url("/detail")}}"+'/'+id,
+                dataType:"json",
+                type: "get",
+                success: function(response){
+                    const {data} = response;
+                    console.log(data)
+                $('#id_number3').val(data.id_number_3);
+                $('#phone_number3').val(data.phone_number_3);
+                }
+            });
+        });
+
 </script>
 </html>

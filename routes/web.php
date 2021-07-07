@@ -57,11 +57,9 @@ Route::middleware(['auth'])->group(function () {
         return view('troubleshoot');
     })->middleware(['verified']);
 
-    // Route::get('/cleaning_bm', function () {
-    //     return view('cleaning_bm');
-    // })->middleware(['verified']);
+    Route::get('/cleaning_bm', [App\Http\Controllers\CleaningController::class, 'tampilan'])->middleware(['verified']);
 
-    Route::get('/cleaning_bm', [App\Http\Controllers\CleaningController::class, 'detail_ob'])->middleware(['verified']);
+    // Route::get('/cleaning_bm', [App\Http\Controllers\CleaningController::class, 'detail_ob'])->middleware(['verified']);
 
     Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware(['verified']);
 
@@ -98,6 +96,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/log/{type_view}', [App\Http\Controllers\HomeController::class, 'log_view'])->middleware(['verified']);
     // Route::get('/cleaning_logg', [App\Http\Controllers\CleaningController::class, 'log_cleaning']);
 
+    Route::get('/detail/{id}', [App\Http\Controllers\CleaningController::class, 'detail_ob'])->middleware(['verified']);
     //PDF
     Route::get('/survey_pdf/{id}', [App\Http\Controllers\HomeController::class, 'cetak_survey_pdf'])->middleware(['verified']);
     Route::get('/cleaning_pdf/{id}', [App\Http\Controllers\CleaningController::class, 'cetak_cleaning_pdf'])->middleware(['verified']);

@@ -20,15 +20,24 @@ use Illuminate\Support\Facades\Mail;
 
 class CleaningController extends Controller
 {
-    public function detail_ob()
+    public function tampilan()
     {
-        $master_ob = DB::table('master_obs')
-            ->join('ob_companies', 'ob_companies.company_id', '=', 'master_obs.company_id')
-            // ->where('master_obs.company_id', '=', $id)
-            ->select('master_obs.*')
-            ->get();
-
+        $master_ob = MasterOb::all();
         return view('cleaning_bm', ['master_ob' => $master_ob]);
+    }
+    public function detail_ob($id)
+    {
+        $data = DB::table('master_obs')
+            ->join('ob_companies', 'ob_companies.company_id', '=', 'master_obs.company_id')
+            ->where('master_obs.ob_id', '=', $id)
+            ->select('master_obs.*', 'ob_companies.company')
+            ->first();
+        // $data = MasterOb::find($id);
+        return isset($data) && !empty($data) ? response()->json(['status' => 'SUCCESS', 'data' => $data]) : response()->json(['status' => 'FAILED', 'data' => []]);
+
+        // return $cleaningHistory->exists ? response()->json(['status' => 'SUCCESS', 'data' => ]) : response()->json(['status' => 'FAILED']);
+
+        // return view('cleaning_bm', ['master_ob' => $master_ob]);
         // return Datatables::of(MasterOb::query())->make(true);
     }
 
