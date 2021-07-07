@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 use App\Http\Controllers\HomeController;
 use App\Models\Cleaning;
 use App\Models\CleaningHistory;
@@ -28,6 +29,7 @@ class CleaningController extends Controller
             ->get();
 
         return view('cleaning_bm', ['master_ob' => $master_ob]);
+        // return Datatables::of(MasterOb::query())->make(true);
     }
 
     public function submit_data_cleaning(Request $request)
@@ -189,5 +191,14 @@ class CleaningController extends Controller
         $pdf = PDF::loadview('cleaning_pdf', ['cleaning' => $cleaning, 'lasthistoryC' => $lasthistoryC, 'cleaningHistory' => $cleaningHistory])->setPaper('a4', 'portrait')->setWarnings(false);
         return $pdf->stream();
         // PDF::loadHTML($html)->setPaper('a4', 'landscape')->setWarnings(false)->save('myfile.pdf')
+    }
+
+    public function log_cleaning()
+    {
+        $log_cleaning = DB::table('cleaningHistory')
+            ->join('cleanings', 'cleanings.cleaning_id', '=', 'cleaning_histories.cleaning_id')
+            ->select(['cleaning_id', 'role_to', 'status', 'created_at', 'aktif']);
+
+        return Datatables::of($log_cleaning)->make();
     }
 }
