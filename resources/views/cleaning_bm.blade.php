@@ -430,7 +430,7 @@
                     <p>
                         <font color="red" size="2">*Minimal Mengisi 4</font>
                     </p>
-                        <input type="time" id="input-group7" style="background: white;" name="cleaning_time_1">
+                        <input type="time" id="input-group7" style="background: grey;" name="cleaning_time_1">
                         <select id="input-group1" style="background: black;" name="cleaning_item_1">
                             <option value="">Item (Barang yang Digunakan)</option>
                             <option value="Vacum-Majun-Kanebo-Kop">
@@ -516,7 +516,7 @@
                             </option>
                         </select>
 
-                        <input type="time" id="input-group7" style="background: white;" placeholder="Time" name="cleaning_time_2">
+                        <input type="time" id="input-group7" style="background: grey;"  name="cleaning_time_2">
                         <select id="input-group1" style="background: black;" name="cleaning_item_2">
                             <option value="">Item (Barang yang Digunakan)</option>
                             <option value="Vacum-Majun-Kanebo-Kop">
@@ -602,7 +602,7 @@
                             </option>
                         </select>
 
-                        <input type="time" id="input-group7" style="background: white;" placeholder="Time" name="cleaning_time_3">
+                        <input type="time" id="input-group7" style="background: grey;"  name="cleaning_time_3">
                         <select id="input-group1" style="background: black;" name="cleaning_item_3">
                             <option value="">Item (Barang yang Digunakan)</option>
                             <option value="Vacum-Majun-Kanebo-Kop">
@@ -688,7 +688,7 @@
                             </option>
                         </select>
 
-                        <input type="time" id="input-group7" style="background: white;"placeholder="Time" name="cleaning_time_4">
+                        <input type="time" id="input-group7" style="background: grey;" name="cleaning_time_4">
                         <select id="input-group1" style="background: black;" name="cleaning_item_4">
                             <option value="">Item (Barang yang Digunakan)</option>
                             <option value="Vacum-Majun-Kanebo-Kop">
@@ -774,7 +774,7 @@
                             </option>
                         </select>
 
-                        <input type="time" id="input-group7" style="background: white;" placeholder="Time" name="cleaning_time_5">
+                        <input type="time" id="input-group7" style="background: grey;"  name="cleaning_time_5">
                         <select id="input-group1" style="background: black;" name="cleaning_item_5">
                             <option value="">Item (Barang yang Digunakan)</option>
                             <option value="Vacum-Majun-Kanebo-Kop">
@@ -860,7 +860,7 @@
                             </option>
                         </select>
 
-                        <input type="time" id="input-group7" style="background: white;" placeholder="Time" name="cleaning_time_6">
+                        <input type="time" id="input-group7" style="background: grey;"  name="cleaning_time_6">
                         <select id="input-group1" style="background: black;" name="cleaning_item_6">
                             <option value="">Item (Barang yang Digunakan)</option>
                             <option value="Vacum-Majun-Kanebo-Kop">
@@ -977,7 +977,7 @@
                             <option value="{{ $p->ob_id }}">{{ $p->nama }}</option>
                             @endforeach
                         </select>
-                        <input type="text" class="" name="cleaning_number_3" id="phone_number3" value="" readonly>
+                        <input type="text" class="" name="cleaning_number_3" id="id_number3" value="" readonly>
                         <input type="text" class="" name="cleaning_id_3" id="phone_number3" value="" readonly>
                 </div>
             </div>
@@ -1060,8 +1060,8 @@
                 success: function(response){
                     const {data} = response;
                     console.log(data)
-                $('#id_number2').val(data.id_number_2);
-                $('#phone_number2').val(data.phone_number_2);
+                $('#id_number2').val(data.id_number);
+                $('#phone_number2').val(data.phone_number);
                 }
             });
         });
@@ -1075,11 +1075,10 @@
                 success: function(response){
                     const {data} = response;
                     console.log(data)
-                $('#id_number3').val(data.id_number_3);
-                $('#phone_number3').val(data.phone_number_3);
+                $('#id_number3').val(data.id_number);
+                $('#phone_number3').val(data.phone_number);
                 }
             });
         });
-
 </script>
 </html>

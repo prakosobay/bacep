@@ -34,11 +34,6 @@ class CleaningController extends Controller
             ->first();
         // $data = MasterOb::find($id);
         return isset($data) && !empty($data) ? response()->json(['status' => 'SUCCESS', 'data' => $data]) : response()->json(['status' => 'FAILED', 'data' => []]);
-
-        // return $cleaningHistory->exists ? response()->json(['status' => 'SUCCESS', 'data' => ]) : response()->json(['status' => 'FAILED']);
-
-        // return view('cleaning_bm', ['master_ob' => $master_ob]);
-        // return Datatables::of(MasterOb::query())->make(true);
     }
 
     public function submit_data_cleaning(Request $request)
@@ -188,15 +183,9 @@ class CleaningController extends Controller
             ->join('users', 'users.id', '=', 'cleaning_histories.created_by')
             // ->join('users', 'users.id', '=', 'cleaning_histories.name')
             ->where('cleaning_histories.cleaning_id', '=', $id)
-            // ->where('cleaning_histories.role_to', '!=', '0')
-            // ->where('cleaning_histories.role_to', '!=', 'check')
-            ->where('cleaning_Histories.status', '!=', 'created')
             ->where('cleaning_histories.status', '!=', 'visitor')
             ->select('cleaning_histories.*', 'users.name', 'created_by')
             ->get();
-        // dd($lasthistoryC);
-        // $user = Users::where('id', $id)->where('name', $name)->get();
-        // dd($cleaningHistory);
         $pdf = PDF::loadview('cleaning_pdf', ['cleaning' => $cleaning, 'lasthistoryC' => $lasthistoryC, 'cleaningHistory' => $cleaningHistory])->setPaper('a4', 'portrait')->setWarnings(false);
         return $pdf->stream();
         // PDF::loadHTML($html)->setPaper('a4', 'landscape')->setWarnings(false)->save('myfile.pdf')
