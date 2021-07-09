@@ -39,7 +39,17 @@ class HomeController extends Controller
     public function index()
     {
         // dd(Auth::user()->role);
-        return view('home');
+        if ((Auth::user()->role == 'head') ||
+            (Auth::user()->role == 'check') ||
+            (Auth::user()->role == 'review') ||
+            (Auth::user()->role == 'bm') ||
+            (Auth::user()->role == 'security')
+        ) {
+            return view('home');
+            // The user is logged in...
+        } else {
+            return view('auth.login');
+        }
     }
 
     // ---------- SURVEY ----------

@@ -190,13 +190,4 @@ class CleaningController extends Controller
         return $pdf->stream();
         // PDF::loadHTML($html)->setPaper('a4', 'landscape')->setWarnings(false)->save('myfile.pdf')
     }
-
-    public function log_cleaning()
-    {
-        $log_cleaning = DB::table('cleaningHistory')
-            ->join('cleanings', 'cleanings.cleaning_id', '=', 'cleaning_histories.cleaning_id')
-            ->select(['cleaning_id', 'role_to', 'status', 'created_at', 'aktif']);
-
-        return Datatables::of($log_cleaning)->make();
-    }
 }
