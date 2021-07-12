@@ -23,13 +23,16 @@ class CleaningController extends Controller
     public function tampilan()
     {
         $master_ob = MasterOb::all();
+        // $ob = $master_ob->find($id);
         return view('cleaning_bm', ['master_ob' => $master_ob]);
     }
     public function detail_ob($id)
     {
         $data = DB::table('master_obs')
             ->join('ob_companies', 'ob_companies.company_id', '=', 'master_obs.company_id')
+            // ->join('cleanings', 'cleanings.cleaning_name_1')
             ->where('master_obs.ob_id', '=', $id)
+            // ->pluck('nama')
             ->select('master_obs.*', 'ob_companies.company')
             ->first();
         // $data = MasterOb::find($id);
@@ -69,7 +72,7 @@ class CleaningController extends Controller
             ->where('cleaning_histories.cleaning_id', '=', $id)
             ->select('cleaning_histories.*', 'users.name', 'cleanings.cleaning_work')
             ->get();
-
+        dd($cleaningHistory);
         return view('detail_cleaning', ['cleaningHistory' => $cleaningHistory]);
     }
 
@@ -175,9 +178,18 @@ class CleaningController extends Controller
 
     public function cetak_cleaning_pdf($id)
     {
-        $cleaning = Cleaning::find($id);
+        // $cleaning = Cleaning::find($id);
+        // ->join('master_obs', 'master_obs.ob_id', '=', 'cleanings.cleaning_name_1')
+        // // ->join('master_obs', 'master_obs.ob_id', '=', 'cleanings.cleaning_name_2')
+        // ->select('cleanings.*', 'master_obs.nama')
+        // ->get();
+        $cleaning = DB::table('cleanings')
+            ->join('master_obs', 'master_obs.ob_id', '=', 'cleanings.cleaning_name_1')
+            ->where('cleanings.cleaning_id', '=', $id)
+            ->select('cleanings.*', 'master_obs.nama')
+            ->first();
+        // dd($cleaning);
         $lasthistoryC = CleaningHistory::where('cleaning_id', $id)->where('aktif', 1)->first();
-        // $cleaningHistory = cleaningHistory::join('')->where('cleaning.cleaning_id', $id)->where('status', )->orderBy('cleaning_history', 'ASC')->findAll();
         $cleaningHistory = DB::table('cleaning_histories')
             ->join('cleanings', 'cleanings.cleaning_id', '=', 'cleaning_histories.cleaning_id')
             ->join('users', 'users.id', '=', 'cleaning_histories.created_by')

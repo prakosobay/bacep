@@ -42,7 +42,7 @@
         </tbody>
     </table>
     {{-- http://127.0.0.1:8000/cleaning_pdf/$cleaning->cleaning_id --}}
-        <p><a href="http://127.0.0.1:8000/cleaning_pdf/$cleaning['cleaning_id']">Klik tautan ini untuk melihat permit</a></p>
-        {{-- <p><a href="http://127.0.0.1:8000/cleaning_pdf/$data->cleaning_id">Klik tautan ini untuk melihat permit</a></p> --}}
+        {{-- <p><a href="http://127.0.0.1:8000/cleaning_pdf/$cleaning['cleaning_id']">Klik tautan ini untuk melihat permit</a></p> --}}
+        <p><a href="http://127.0.0.1:8000/cleaning_pdf/$data->cleaning_id">Klik tautan ini untuk melihat permit</a></p>
 </body>
 </html>
