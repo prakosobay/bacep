@@ -22,33 +22,36 @@ class CleaningController extends Controller
 {
     public function tampilan()
     {
-        $master_ob = MasterOb::all();
-        // $ob = $master_ob->find($id);
-        return view('cleaning_bm', ['master_ob' => $master_ob]);
+        if (Auth::user()->role == 'bm') {
+            $master_ob = MasterOb::all();
+            // $ob = $master_ob->find($id);
+            return view('cleaning_bm', ['master_ob' => $master_ob]);
+        }
     }
+
     public function detail_ob($id)
     {
         $data = DB::table('master_obs')
             ->join('ob_companies', 'ob_companies.company_id', '=', 'master_obs.company_id')
-            // ->join('cleanings', 'cleanings.cleaning_name_1')
             ->where('master_obs.ob_id', '=', $id)
-            // ->pluck('nama')
             ->select('master_obs.*', 'ob_companies.company')
             ->first();
-        // $data = MasterOb::find($id);
         return isset($data) && !empty($data) ? response()->json(['status' => 'SUCCESS', 'data' => $data]) : response()->json(['status' => 'FAILED', 'data' => []]);
     }
 
     public function submit_data_cleaning(Request $request)
     {
-        // dd($request);
-        if (Auth::user()->role == 'bm')
-            $cleaning = Cleaning::create($request->all());
+        $data = $request->all();
+        if (Auth::user()->role == 'bm') {
+            $data['cleaning_name_1'] = MasterOb::find($data['cleaning_name_1'])->nama;
 
-        foreach (['rizky.anindya@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'darajat.indraputra@balitower.co.id'] as $recipient) {
-            Mail::to($recipient)->send(new NotifEmail());
+            $data['cleaning_name_2'] = MasterOb::find($data['cleaning_name_2'])->nama;
+            $cleaning = Cleaning::create($data);
+
+            foreach (['rizky.anindya@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'darajat.indraputra@balitower.co.id'] as $recipient) {
+                Mail::to($recipient)->send(new NotifEmail());
+            }
         }
-
         if ($cleaning->exists) {
             $cleaningHistory = CleaningHistory::create([
                 'cleaning_id' => $cleaning->cleaning_id,
@@ -72,7 +75,7 @@ class CleaningController extends Controller
             ->where('cleaning_histories.cleaning_id', '=', $id)
             ->select('cleaning_histories.*', 'users.name', 'cleanings.cleaning_work')
             ->get();
-        dd($cleaningHistory);
+        // dd($cleaningHistory);
         return view('detail_cleaning', ['cleaningHistory' => $cleaningHistory]);
     }
 
@@ -178,17 +181,7 @@ class CleaningController extends Controller
 
     public function cetak_cleaning_pdf($id)
     {
-        // $cleaning = Cleaning::find($id);
-        // ->join('master_obs', 'master_obs.ob_id', '=', 'cleanings.cleaning_name_1')
-        // // ->join('master_obs', 'master_obs.ob_id', '=', 'cleanings.cleaning_name_2')
-        // ->select('cleanings.*', 'master_obs.nama')
-        // ->get();
-        $cleaning = DB::table('cleanings')
-            ->join('master_obs', 'master_obs.ob_id', '=', 'cleanings.cleaning_name_1')
-            ->where('cleanings.cleaning_id', '=', $id)
-            ->select('cleanings.*', 'master_obs.nama')
-            ->first();
-        // dd($cleaning);
+        $cleaning = Cleaning::find($id);
         $lasthistoryC = CleaningHistory::where('cleaning_id', $id)->where('aktif', 1)->first();
         $cleaningHistory = DB::table('cleaning_histories')
             ->join('cleanings', 'cleanings.cleaning_id', '=', 'cleaning_histories.cleaning_id')

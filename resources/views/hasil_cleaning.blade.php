@@ -27,7 +27,7 @@
                                     <tr>
                                         <td>{{ $p->cleaning_id }}</td>
                                         <td>{{ Carbon\Carbon::parse($p->created_at)->format('d-m-Y') }}</td>
-                                        <td>- {{ $p->cleaning_name_1 }}</br>
+                                        <td>- {{ $p->cleaning_name_1 }}<br>
                                             - {{ $p->cleaning_name_2 }}</td>
                                         <td>{{ $p->cleaning_work }}</td>
                                         @if(Auth::user()->role != 'security')
