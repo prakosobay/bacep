@@ -20,9 +20,9 @@
     <section id="hero">
         <div class="hero container">
             <div>
-                <h1>Welcome <span></span></h1>
-                <h1>to <span></span></h1>
-                <h1>Data Center Department <span></span></h1>
+                <h1>Welcome<span></span></h1>
+                {{-- <h1>to <span></span></h1> --}}
+                <h1>{{Auth::user()->name}}<span></span></h1>
             </div>
         </div>
     </section>

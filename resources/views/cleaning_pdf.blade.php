@@ -224,7 +224,7 @@
                 <tr >
                     <td width="150px">Date of Request</td>
 
-                    <td >: {{Carbon\Carbon::parse($cleaning->created_at)->format('d-m-Y H:i')}}</td>
+                    <td >: {{Carbon\Carbon::parse($cleaning['created_at'])->format('d-m-Y H:i')}}</td>
                 </tr>
                 <tr >
                     <td width="150px">Change Request Number: </td>
@@ -770,7 +770,7 @@
 
                         @case('reviewed')
                             <td class="col_approval"><img src="{{ public_path("gambar/Requested.png") }}" alt="" style="width: 80px; height: 40px;">
-                                <p class="cr"></p>Nama    : Badai Sino Jendrang
+                                <p class="cr">Nama: Badai Sino Jendrang</p>
                                 <p class="cr">Tanggal : {{Carbon\Carbon::parse($cleaning->created_at)->format('d-m-Y H:i')}}</p>
                             </td>
                             <td class="col_approval"><img src="{{ public_path("gambar/Reviewed.png") }}" alt="" style="width: 80px; height: 40px;">

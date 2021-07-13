@@ -94,7 +94,5 @@
             <h2>For Visiting Data Center Department</h2>
         </div>
     </section>
-    <!-- End Footer -->
-    {{-- <script type="text/javascript" src="/js/landing.js"></script> --}}
 </body>
 </html>

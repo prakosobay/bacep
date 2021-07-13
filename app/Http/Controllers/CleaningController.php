@@ -88,13 +88,13 @@ class CleaningController extends Controller
 
 
         $status = '';
-        if (($lasthistoryC->status == 'requested') && (Auth::user()->role == 'review') && ($lasthistoryC->role_to == 'review')) {
+        if (($lasthistoryC->status == 'requested') && (Auth::user()->role == 'review')) {
             $status = 'reviewed';
-        } elseif (($lasthistoryC->status == 'reviewed') && (Auth::user()->role == 'check') && ($lasthistoryC->role_to == 'check')) {
+        } elseif (($lasthistoryC->status == 'reviewed') && (Auth::user()->role == 'check')) {
             $status = 'checked';
-        } elseif (($lasthistoryC->status == 'checked') && (Auth::user()->role == 'security') && ($lasthistoryC->role_to == 'security')) {
+        } elseif (($lasthistoryC->status == 'checked') && (Auth::user()->role == 'security')) {
             $status = 'acknowledge';
-        } elseif (($lasthistoryC->status == 'acknowledge') && (Auth::user()->role == 'head') && ($lasthistoryC->role_to == 'head')) {
+        } elseif (($lasthistoryC->status == 'acknowledge') && (Auth::user()->role == 'head')) {
             $status = 'final';
         } elseif ($lasthistoryC->status == 'final') {
             $cleaning = Cleaning::find($request->cleaning_id)->first();
@@ -145,7 +145,6 @@ class CleaningController extends Controller
                 // 'link' => ("http://172.16.45.239:8000/cleaning_pdf/$cleaning->cleaning_id"),
             ]);
         }
-
 
         return $cleaningHistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
     }
