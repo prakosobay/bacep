@@ -117,8 +117,7 @@ class HomeController extends Controller
         elseif ($type_view == 'cleaning') {
             $cleaningLog = DB::table('cleaning_histories')
                 ->join('cleanings', 'cleanings.cleaning_id', '=', 'cleaning_histories.cleaning_id')
-                ->select('cleaning_histories.*', 'cleanings.cleaning_work')
-                // ->select('cleanings.*', 'cleaning_histories.*')
+                ->select('cleaning_histories.*', 'cleanings.cleaning_work', 'cleanings.validity_from')
                 ->get();
             return view('log_cleaning', ['cleaningLog' => $cleaningLog]);
         }

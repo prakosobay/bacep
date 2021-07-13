@@ -23,6 +23,7 @@
                                 <th>Role</th>
                                 <th>Status</th>
                                 <th>Last Updated</th>
+                                <th>Validity</th>
                                 <th>Ket</th>
                             </tr>
                         </thead>
@@ -36,6 +37,7 @@
                                     <td>{{ $p->role_to }}</td>
                                     <td>{{ $p->status }}</td>
                                     <td>{{Carbon\Carbon::parse($p->created_at)->format('d-m-Y H:i')}}</td>
+                                    <td>{{Carbon\Carbon::parse($p->created_at)->format('d-m-Y')}}
                                     <td>{{ $p->aktif }}</td>
                                 </tr>
                             @endforeach
