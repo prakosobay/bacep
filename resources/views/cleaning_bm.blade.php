@@ -50,7 +50,6 @@
 
         <div class="center">
             <h1 class="text-white">Access Request Form</h1>
-            <h2 class="text-white">Nomor: ARF/001/DCDV/XI/2019</h2>
         </div>
 
             <div id="input">
@@ -181,7 +180,6 @@
         <div  id="form2">
             <div class="center">
             <h1 class="text-white">Change Request Form</h1>
-            <h2 class="text-white">Nomor: ARF/001/DCDV/XI/2019</h2>
             </div>
 
             <div id="input">
