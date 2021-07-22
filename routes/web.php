@@ -5,6 +5,8 @@ use App\Http\Controllers\HomeController;
 use App\Console\Kernel;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use App\Models\Duty;
 use App\Http\Controllers\CleaningController;
 
 /*
@@ -17,6 +19,7 @@ use App\Http\Controllers\CleaningController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 
 
 // Auth::routes(['verify' => true]);

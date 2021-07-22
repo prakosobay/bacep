@@ -103,6 +103,7 @@ class CleaningController extends Controller
         $role_to = '';
         if (($lasthistoryC->role_to == 'review')) {
             foreach (['rio.christian@balitower.co.id', 'rafli.ashshiddiqi@balitower.co.id', 'lingga.anugerah@balitower.co.id'] as $recipient) {
+                // foreach (['bayu.prakoso@balitower.co.id'] as $recipient) {
                 Mail::to($recipient)->send(new NotifEmail());
             }
             $role_to = 'check';
@@ -112,7 +113,7 @@ class CleaningController extends Controller
             }
             $role_to = 'security';
         } elseif (($lasthistoryC->role_to == 'security')) {
-            foreach (['panggah@balitower.co.id'] as $recipient) {
+            foreach (['bayu.prakoso@balitower.co.id'] as $recipient) {
                 Mail::to($recipient)->send(new NotifEmail());
             }
             $role_to = 'head';
@@ -142,7 +143,7 @@ class CleaningController extends Controller
                 'cleaning_date' => $cleaning->created_at,
                 'status' => 'Full Approved',
                 // 'link' => ("http://127.0.0.1:8000/cleaning_pdf/$cleaning->cleaning_id"),
-                'link' => ("http://172.16.45.195:8000/cleaning_pdf/$cleaning->cleaning_id"),
+                'link' => ("http://172.16.45.239:8000/cleaning_pdf/$cleaning->cleaning_id"),
             ]);
         }
 
@@ -190,6 +191,7 @@ class CleaningController extends Controller
             ->where('cleaning_histories.status', '!=', 'visitor')
             ->select('cleaning_histories.*', 'users.name', 'created_by')
             ->get();
+        // dd($cleaningHistory);
         $pdf = PDF::loadview('cleaning_pdf', ['cleaning' => $cleaning, 'lasthistoryC' => $lasthistoryC, 'cleaningHistory' => $cleaningHistory])->setPaper('a4', 'portrait')->setWarnings(false);
         return $pdf->stream();
         // PDF::loadHTML($html)->setPaper('a4', 'landscape')->setWarnings(false)->save('myfile.pdf')

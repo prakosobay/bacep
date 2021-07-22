@@ -11,7 +11,7 @@ use App\Http\Controllers\CleaningController;
 class NotifEmail extends Mailable
 {
     use Queueable, SerializesModels;
-
+    // public $data;
     /**
      * Create a new message instance.
      *
@@ -19,7 +19,7 @@ class NotifEmail extends Mailable
      */
     public function __construct()
     {
-        //
+        // $this->data = $data;
     }
 
     /**
@@ -30,12 +30,6 @@ class NotifEmail extends Mailable
     public function build()
     {
         return $this->from('testing.dc@balitower.co.id')
-            ->view('emailku')
-            ->with(
-                [
-                    'nama' => 'Guyss',
-                    'pesan' => 'ada permit',
-                ]
-            );
+            ->view('emailku');
     }
 }

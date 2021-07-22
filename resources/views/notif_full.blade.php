@@ -7,7 +7,6 @@
     <title>Notifikasi Full Approval</title>
 
 <style>
-
     table, th, td {
             border-width: 300px;
             border-spacing: 0px;
@@ -26,7 +25,7 @@
     <table>
         <thead>
             <tr>
-            <th>No. Permit</thead>
+                <th>No. Permit</th>
                 <th>Date of Request</th>
                 <th>Purpose of Work</th>
                 <th>Validity</th>
@@ -42,6 +41,6 @@
         </tbody>
     </table>
         {{-- <p><a href="http://127.0.0.1:8000/cleaning_pdf/$cleaning['cleaning_id']">Klik tautan ini untuk melihat permit</a></p> --}}
-        <p><a href="http://172.16.45.195:8000/cleaning_pdf/$cleaning->cleaning_id">Klik tautan ini untuk melihat permit</a></p>
+        <p><a href="http://172.16.45.195:8000/full_approval/all">Klik tautan ini untuk melihat permit</a></p>
 </body>
 </html>
