@@ -479,7 +479,7 @@
                             </td>
                             <td class="col_approval"><img src="{{ public_path("gambar/Checked.png") }}" alt="" style="width: 80px; height: 40px;">
                                 <p class="cr">Nama    :{{$cleaningHistory[3]->name}}</p>
-                                <p class="cr">Tanggal :{{Carbon\Carbon::parse($cleaningHistory[23->created_at)->format('d-m-Y H:i')}}</p>
+                                <p class="cr">Tanggal :{{Carbon\Carbon::parse($cleaningHistory[3]->created_at)->format('d-m-Y H:i')}}</p>
                             </td>
                             @break
 
@@ -817,7 +817,7 @@
                             </td>
                             <td class="col_approval"><img src="{{ public_path("gambar/Checked.png") }}" alt="" style="width: 80px; height: 40px;">
                                 <p class="cr">Nama    :{{$cleaningHistory[2]->name}}</p>
-                                <p class="cr">Tanggal :{{Carbon\Carbon::parse($cleaningHistory[12->created_at)->format('d-m-Y H:i')}}</p>
+                                <p class="cr">Tanggal :{{Carbon\Carbon::parse($cleaningHistory[2]->created_at)->format('d-m-Y H:i')}}</p>
                             </td>
                             <td class="col_approval">
                                 <p class="cr">Nama    : </p>
