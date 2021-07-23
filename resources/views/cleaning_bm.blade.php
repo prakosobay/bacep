@@ -966,8 +966,8 @@
                             <option value="{{ $p->ob_id }}">{{ $p->nama }}</option>
                             @endforeach
                         </select>
-                        <input type="text" class="" name="cleaning_number_2" id="id_number2" value="" readonly>
                         <input type="text" class="" name="cleaning_id_2" id="phone_number2" value="" readonly>
+                        <input type="text" class="" name="cleaning_number_2" id="id_number2" value="" readonly>
 
                         <select class="pilihan3" id="input-group1" style="background: black;" name="cleaning_name_3">
                             <option value="">Name</option>
@@ -975,8 +975,8 @@
                             <option value="{{ $p->ob_id }}">{{ $p->nama }}</option>
                             @endforeach
                         </select>
-                        <input type="text" class="" name="cleaning_number_3" id="id_number3" value="" readonly>
                         <input type="text" class="" name="cleaning_id_3" id="phone_number3" value="" readonly>
+                        <input type="text" class="" name="cleaning_number_3" id="id_number3" value="" readonly>
                 </div>
             </div>
             <p>
