@@ -957,8 +957,8 @@
                             <option value="{{ $p->ob_id }}">{{ $p->nama }}</option>
                             @endforeach
                         </select>
-                        <input type="text" class="" name="cleaning_number_1" id="id_number" value="" readonly>
-                        <input type="text" class="" name="cleaning_id_1" id="phone_number" value="" readonly>
+                        <input type="text" class="" name="cleaning_number_1" id="phone_number" value="" readonly>
+                        <input type="text" class="" name="cleaning_id_1" id="id_number" value="" readonly>
 
                         <select class="pilihan2" id="input-group1" style="background: black;" name="cleaning_name_2">
                             <option value="">Name</option>
@@ -966,8 +966,8 @@
                             <option value="{{ $p->ob_id }}">{{ $p->nama }}</option>
                             @endforeach
                         </select>
-                        <input type="text" class="" name="cleaning_id_2" id="phone_number2" value="" readonly>
-                        <input type="text" class="" name="cleaning_number_2" id="id_number2" value="" readonly>
+                        <input type="text" class="" name="cleaning_number_2" id="phone_number2" value="" readonly>
+                        <input type="text" class="" name="cleaning_id_2" id="id_number2" value="" readonly>
 
                         <select class="pilihan3" id="input-group1" style="background: black;" name="cleaning_name_3">
                             <option value="">Name</option>
@@ -975,8 +975,8 @@
                             <option value="{{ $p->ob_id }}">{{ $p->nama }}</option>
                             @endforeach
                         </select>
-                        <input type="text" class="" name="cleaning_id_3" id="phone_number3" value="" readonly>
-                        <input type="text" class="" name="cleaning_number_3" id="id_number3" value="" readonly>
+                        <input type="text" class="" name="cleaning_number_3" id="phone_number3" value="" readonly>
+                        <input type="text" class="" name="cleaning_id_3" id="id_number3" value="" readonly>
                 </div>
             </div>
             <p>
@@ -1043,8 +1043,8 @@
                 success: function(response){
                     const {data} = response;
                     console.log(data)
-                $('#id_number').val(data.id_number);
                 $('#phone_number').val(data.phone_number);
+                $('#id_number').val(data.id_number);
                 }
             });
         });
@@ -1058,8 +1058,8 @@
                 success: function(response){
                     const {data} = response;
                     console.log(data)
-                $('#id_number2').val(data.id_number);
                 $('#phone_number2').val(data.phone_number);
+                $('#id_number2').val(data.id_number);
                 }
             });
         });
@@ -1073,8 +1073,8 @@
                 success: function(response){
                     const {data} = response;
                     console.log(data)
-                $('#id_number3').val(data.id_number);
                 $('#phone_number3').val(data.phone_number);
+                $('#id_number3').val(data.id_number);
                 }
             });
         });
