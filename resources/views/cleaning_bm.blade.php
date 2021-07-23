@@ -952,6 +952,7 @@
                     <P>
                     <h4 class="text-white">7. Person in charge</h4>
                         <select class="pilihan" id="input-group1" style="background: black;" name="cleaning_name_1">
+                            <option value="">Name</option>
                             @foreach($master_ob as $p)
                             <option value="{{ $p->ob_id }}">{{ $p->nama }}</option>
                             @endforeach
@@ -960,6 +961,7 @@
                         <input type="text" class="" name="cleaning_id_1" id="phone_number" value="" readonly>
 
                         <select class="pilihan2" id="input-group1" style="background: black;" name="cleaning_name_2">
+                            <option value="">Name</option>
                             @foreach($master_ob as $p)
                             <option value="{{ $p->ob_id }}">{{ $p->nama }}</option>
                             @endforeach
@@ -968,6 +970,7 @@
                         <input type="text" class="" name="cleaning_id_2" id="phone_number2" value="" readonly>
 
                         <select class="pilihan3" id="input-group1" style="background: black;" name="cleaning_name_3">
+                            <option value="">Name</option>
                             @foreach($master_ob as $p)
                             <option value="{{ $p->ob_id }}">{{ $p->nama }}</option>
                             @endforeach
