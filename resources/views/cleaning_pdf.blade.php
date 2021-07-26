@@ -283,7 +283,7 @@
                     <td class="table-white">3. {{$cleaning->cleaning_name_3}}</td>
                     <td class="table-center">{{$cleaning->cleaning_id_3}}</td>
                     <td class="table-center">{{$cleaning->cleaning_number_3}}</td>
-                    <td class="table-center">{{$obcompany->company}}</td>
+                    <td class="table-center"></td>
                     <td class="table-center"></td>
                 </tr>
                 <tr >
@@ -697,23 +697,23 @@
                 <tr >
                     <td class="table-white">1.</td>
                     <td class="table-center">{{$cleaning->cleaning_name_1}}</td>
-                    <td class="table-center">{{$cleaning->company}}</td>
+                    <td class="table-center">{{$obcompany->company}}</td>
                     <td class="table-center">Cleaner</td>
                     <td class="table-center">{{$cleaning->cleaning_number_1}}</td>
                 </tr>
                 <tr >
                     <td class="table-white">2. </td>
                     <td class="table-center">{{$cleaning->cleaning_name_2}}</td>
-                    <td class="table-center">{{$cleaning->company}}</td>
+                    <td class="table-center">{{$obcompany->company}}</td>
                     <td class="table-center">Cleaner</td>
                     <td class="table-center">{{$cleaning->cleaning_number_2}}</td>
                 </tr>
                 <tr >
                     <td class="table-white">3. </td>
+                    <td class="table-center">{{$cleaning->cleaning_name_3}}</td>
                     <td class="table-center"></td>
-                    <td class="table-center">{{$cleaning->company}}</td>
                     <td class="table-center"></td>
-                    <td class="table-center"></td>
+                    <td class="table-center">{{$cleaning->cleaning_number_3}}</td>
                 </tr>
                 <tr >
                     <td class="table-white">4. </td>
