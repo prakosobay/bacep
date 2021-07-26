@@ -75,7 +75,7 @@
                         </option>
                         <option value="Pembersihan Under Raised Floor Koridor Lantai 1, (MMR 1, MMR 2, Ruang UPS, Fire Suppression System & Server Wallmount)">
                             Pembersihan Under Raised Floor Koridor Lantai 1, (MMR 1, MMR 2, Ruang UPS, Fire Suppression System & Server Wallmount)
-                        </option>
+                        </option>p
                         <option value="Pembersihan lantai 1 (MMR 1 - MMR 2  - UPS - Server Wallmount - Fire Suppression System)">
                             Pembersihan lantai 1 (MMR 1 - MMR 2  - UPS - Server Wallmount - Fire Suppression System)
                         </option>

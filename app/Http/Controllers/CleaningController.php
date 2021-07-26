@@ -48,6 +48,9 @@ class CleaningController extends Controller
             $data['cleaning_name_2'] = MasterOb::find($data['cleaning_name_2'])->nama;
             $cleaning = Cleaning::create($data);
 
+            $data['cleaning_name_3'] = MasterOb::find($data['cleaning_name_3'])->nama;
+            $cleaning = Cleaning::create($data);
+
             foreach (['rizky.anindya@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'anjar.yulianto@balitower.co.id', 'taufik.ismail@balitower.co.id'] as $recipient) {
                 Mail::to($recipient)->send(new NotifEmail());
             }
