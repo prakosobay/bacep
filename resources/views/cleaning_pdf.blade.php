@@ -396,11 +396,11 @@
                 </tr>
                 <tr>
                     <td >
-                        @if($cleaning->staging == '1' && $cleaning->koridor == '0')
+                        @if($cleaning->staging == '1' && $cleaning->koridor == '')
                         <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   Others : Staging Room
                         @elseif($cleaning->pln == '1')
                         <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   Others : Pintu Luar PLN
-                        @elseif($cleaning->koridor == '1' && $cleaning->staging == '0')
+                        @elseif($cleaning->koridor == '1' && $cleaning->staging == '')
                         <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   Others : Koridor Lt. 1
                         @elseif($cleaning->koridor == '1' && $cleaning->staging == '1')
                         <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   Others : Koridor Lt. 1 & Staging Room
