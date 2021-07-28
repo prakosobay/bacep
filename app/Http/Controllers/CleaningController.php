@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Yajra\DataTables\Facades\DataTables;
 use App\Http\Controllers\HomeController;
 use App\Models\Cleaning;
 use App\Models\CleaningHistory;
 use App\Models\CleaningFull;
 use App\Models\MasterOb;
 use App\Models\ObCompany;
+use App\Models\PilihanWork;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Barryvdh\DomPDF\Facade as PDF;
@@ -24,8 +24,9 @@ class CleaningController extends Controller
     {
         if (Auth::user()->role == 'bm') {
             $master_ob = MasterOb::all();
+            $pilihanwork = PilihanWork::all();
             // $ob = $master_ob->find($id);
-            return view('cleaning_bm', ['master_ob' => $master_ob]);
+            return view('cleaning.form', ['master_ob' => $master_ob, 'pilihanwork' => $pilihanwork]);
         }
     }
 
@@ -37,6 +38,13 @@ class CleaningController extends Controller
             ->select('master_obs.*', 'ob_companies.company')
             ->first();
         return isset($data) && !empty($data) ? response()->json(['status' => 'SUCCESS', 'data' => $data]) : response()->json(['status' => 'FAILED', 'data' => []]);
+    }
+
+    public function pilihan_work($id)
+    {
+        $permit = PilihanWork::find($id);
+
+        return isset($permit) && !empty($permit) ? response()->json(['status' => 'SUCCESS', 'permit' => $permit]) : response(['status' => 'FAILED', 'permit' => []]);
     }
 
     public function submit_data_cleaning(Request $request)
@@ -183,7 +191,7 @@ class CleaningController extends Controller
 
     public function cetak_cleaning_pdf($id)
     {
-        // $obcompany = ObCompany::find(1);
+        $obcompany = ObCompany::find(1);
         $cleaning = Cleaning::find($id);
         $lasthistoryC = CleaningHistory::where('cleaning_id', $id)->where('aktif', 1)->first();
         $cleaningHistory = DB::table('cleaning_histories')
@@ -195,7 +203,7 @@ class CleaningController extends Controller
             ->select('cleaning_histories.*', 'users.name', 'created_by')
             ->get();
         // dd($cleaningHistory);
-        $pdf = PDF::loadview('cleaning_pdf', ['cleaning' => $cleaning, 'lasthistoryC' => $lasthistoryC, 'cleaningHistory' => $cleaningHistory])->setPaper('a4', 'portrait')->setWarnings(false);
+        $pdf = PDF::loadview('cleaning_pdf', ['obcompany' => $obcompany, 'cleaning' => $cleaning, 'lasthistoryC' => $lasthistoryC, 'cleaningHistory' => $cleaningHistory])->setPaper('a4', 'portrait')->setWarnings(false);
         return $pdf->stream();
         // PDF::loadHTML($html)->setPaper('a4', 'landscape')->setWarnings(false)->save('myfile.pdf')
     }
