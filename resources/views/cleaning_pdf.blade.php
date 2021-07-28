@@ -269,14 +269,14 @@
                     <td class="table-white">1. {{$cleaning->cleaning_name_1}}</td>
                     <td class="table-center">{{$cleaning->cleaning_id_1}}</td>
                     <td class="table-center">{{$cleaning->cleaning_number_1}}</td>
-                    <td class="table-center">{{$obcompany->company}}</td>
+                    <td class="table-center">PT BIJAC</td>
                     <td class="table-center">Building Management</td>
                 </tr>
                 <tr >
                     <td class="table-white">2. {{$cleaning->cleaning_name_2}}</td>
                     <td class="table-center">{{$cleaning->cleaning_id_2}}</td>
                     <td class="table-center">{{$cleaning->cleaning_number_2}}</td>
-                    <td class="table-center">{{$obcompany->company}}</td>
+                    <td class="table-center">PT BIJAC</td>
                     <td class="table-center">Building Management</td>
                 </tr>
                 <tr >
@@ -697,14 +697,14 @@
                 <tr >
                     <td class="table-white">1.</td>
                     <td class="table-center">{{$cleaning->cleaning_name_1}}</td>
-                    <td class="table-center">{{$obcompany->company}}</td>
+                    <td class="table-center">PT BIJAC</td>
                     <td class="table-center">Cleaner</td>
                     <td class="table-center">{{$cleaning->cleaning_number_1}}</td>
                 </tr>
                 <tr >
                     <td class="table-white">2. </td>
                     <td class="table-center">{{$cleaning->cleaning_name_2}}</td>
-                    <td class="table-center">{{$obcompany->company}}</td>
+                    <td class="table-center">PT BIJAC</td>
                     <td class="table-center">Cleaner</td>
                     <td class="table-center">{{$cleaning->cleaning_number_2}}</td>
                 </tr>
