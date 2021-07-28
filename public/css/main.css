@@ -234,7 +234,7 @@ iframe {
 }
 
 .wrap-contact100 {
-    width: 920px;
+    width: 1300px;
     background: #fff;
     border-radius: 10px;
     overflow: hidden;
@@ -285,10 +285,11 @@ iframe {
     width: calc((100% - 30px) / 2);
 }
 
+
 .label-input100 {
     font-family: Montserrat-SemiBold;
     font-size: 10px;
-    color: red;
+    color: gray;
     line-height: 1.5;
     text-transform: uppercase;
 }

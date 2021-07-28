@@ -43,7 +43,6 @@ class CleaningController extends Controller
     public function pilihan_work($id)
     {
         $permit = PilihanWork::find($id);
-
         return isset($permit) && !empty($permit) ? response()->json(['status' => 'SUCCESS', 'permit' => $permit]) : response(['status' => 'FAILED', 'permit' => []]);
     }
 

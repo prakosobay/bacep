@@ -60,7 +60,6 @@ Route::middleware(['auth'])->group(function () {
         return view('troubleshoot');
     })->middleware(['verified']);
 
-    // Route::get('/cleaning_bm', [CleaningController::class, 'tampilan'])->middleware(['verified']);
 
     // Route::get('/cleaning_bm', [App\Http\Controllers\CleaningController::class, 'detail_ob'])->middleware(['verified']);
 
@@ -104,6 +103,7 @@ Route::middleware(['auth'])->group(function () {
     //Pilihan Work
     Route::get('/cleaning/{id}', [CleaningController::class, 'pilihan_work'])->middleware(['verified']);
     Route::get('/cleaning.form', [CleaningController::class, 'tampilan'])->middleware(['verified']);
+    // Route::get('/cleaning_bm', [CleaningController::class, 'tampilan'])->middleware(['verified']);
 
     //PDF
     Route::get('/survey_pdf/{id}', [HomeController::class, 'cetak_survey_pdf'])->middleware(['verified']);
