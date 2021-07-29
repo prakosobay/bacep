@@ -47,89 +47,44 @@
 				</div>
 
                 {{-- Entry Area --}}
-                {{-- <div class="wrap-contact100-form-radio">
+                <div class="wrap-contact100-form-radio">
                     <span class="label-input100">Authorized Entry Area</span>
-                    <div class="contact100-form-radio m-t-15">
-                        <input class="input-radio100" id="radio1" type="checkbox" name="generator" value="">
+                    <div class="contact100-form-radio">
                         <label class="label-radio100">
-                            Generator Room
+                            <input class="input100" id="loc1" name="loc1" value="" readonly>
                         </label>
                     </div>
 
                     <div class="contact100-form-radio">
-                        <input class="input-radio100" id="radio2" type="checkbox" name="panel" value="">
-                        <label class="label-radio100" >
-                            Panel Room
+                        <label class="label-radio100">
+                            <input class="input100" id="loc2" name="loc2" value="" readonly>
                         </label>
                     </div>
 
                     <div class="contact100-form-radio">
-                        <input class="input-radio100" id="radio3" type="checkbox" name="baterai" value="">
-                        <label class="label-radio100" >
-                            Battery Room
+                        <label class="label-radio100">
+                            <input class="input100" id="loc3" name="loc3" value="" readonly>
                         </label>
                     </div>
 
                     <div class="contact100-form-radio">
-                        <input class="input-radio100" id="radio4" type="checkbox" name="trafo" value="">
-                        <label class="label-radio100" >
-                            Trafo Room
+                        <label class="label-radio100">
+                            <input class="input100" id="loc4" name="loc4" value="" readonly>
                         </label>
                     </div>
 
                     <div class="contact100-form-radio">
-                        <input class="input-radio100" id="radio5" type="checkbox" name="server" value="">
-                        <label class="label-radio100" >
-                            Server Room
+                        <label class="label-radio100">
+                            <input class="input100" id="loc5" name="loc5" value="" readonly>
                         </label>
                     </div>
 
                     <div class="contact100-form-radio">
-                        <input class="input-radio100" id="radio6" type="checkbox" name="ups" value="">
-                        <label class="label-radio100" >
-                            UPS Room
+                        <label class="label-radio100">
+                            <input class="input100" id="loc6" name="loc6" value="" readonly>
                         </label>
                     </div>
-
-                    <div class="contact100-form-radio">
-                        <input class="input-radio100" id="radio7" type="checkbox" name="mmr1" value="">
-                        <label class="label-radio100" >
-                            MMR 1
-                        </label>
-                    </div>
-
-                    <div class="contact100-form-radio">
-                        <input class="input-radio100" id="radio8" type="checkbox" name="fss" value="">
-                        <label class="label-radio100" >
-                            FSS Room
-                        </label>
-                    </div>
-
-                    <div class="contact100-form-radio">
-                        <input class="input-radio100" id="radio0" type="checkbox" name="mmr2" value="">
-                        <label class="label-radio100" >
-                            MMR 2
-                        </label>
-                    </div>
-                    <div class="contact100-form-radio">
-                        <label class="label-radio100" for="radio9">
-                            <input class="input100" name="lainnya" placeholder="Lainnya...">
-                        </label>
-                    </div>
-                </div> --}}
-
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="generator" id="generator" value="">
-                    <label class="form-check-label" for="generator">
-                        Generator Room
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="panel" id="panel" value="">
-                    <label class="form-check-label" for="panel">
-                      Panel Room
-                    </label>
-                  </div>
+                </div>
 
                 <!-- Detail Time Activity -->
                 <table class="table table-bordered">
@@ -467,15 +422,12 @@
                 $('#describ').val(permit.describ);
                 $('#testing').val(permit.testing);
                 $('#rollback').val(permit.rollback);
-                $('#generator').val(permit.generator);
-                $('#panel').val(permit.panel);
-                $('#radio3').val(permit.battery);
-                $('#radio4').val(permit.trafo);
-                $('#radio5').val(permit.server);
-                $('#radio6').val(permit.ups);
-                $('#radio7').val(permit.mmr1);
-                $('#radio8').val(permit.fss);
-                $('#radio0').val(permit.mmr2);
+                $('#loc1').val(permit.loc1);
+                $('#loc2').val(permit.loc2);
+                $('#loc3').val(permit.loc3);
+                $('#loc4').val(permit.loc4);
+                $('#loc5').val(permit.loc5);
+                $('#loc6').val(permit.loc6);
                 }
             });
         });
