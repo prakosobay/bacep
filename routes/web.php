@@ -109,3 +109,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/survey_pdf/{id}', [HomeController::class, 'cetak_survey_pdf'])->middleware(['verified']);
     Route::get('/cleaning_pdf/{id}', [CleaningController::class, 'cetak_cleaning_pdf'])->middleware(['verified']);
 });
+//
+
+//

@@ -14,12 +14,12 @@ class AddLocationToPilihanWorksTable extends Migration
     public function up()
     {
         Schema::table('pilihan_works', function (Blueprint $table) {
-            $table->string('loc1')->nullable()->after('work');
-            $table->string('loc2')->nullable()->after('loc1');
-            $table->string('loc3')->nullable()->after('loc2');
-            $table->string('loc4')->nullable()->after('loc3');
-            $table->string('loc5')->nullable()->after('loc4');
-            $table->string('loc6')->nullable()->after('loc5');
+            $table->string('loc1', 20)->nullable()->after('work');
+            $table->string('loc2', 20)->nullable()->after('loc1');
+            $table->string('loc3', 20)->nullable()->after('loc2');
+            $table->string('loc4', 20)->nullable()->after('loc3');
+            $table->string('loc5', 20)->nullable()->after('loc4');
+            $table->string('loc6', 20)->nullable()->after('loc5');
         });
     }
 

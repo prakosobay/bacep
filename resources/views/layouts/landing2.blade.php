@@ -53,7 +53,7 @@
                         @elseif(Auth::user()->role == 'requestor')
                         <li><a href="#VisitDC" data-after="VisitDC">Visit Data Center</a></li>
                         @elseif(Auth::user()->role == 'bm')
-                        <li><a href="cleaning_bm" data-after="BM">Cleaning</a></li>
+                        <li><a href="cleaning.form" data-after="BM">Cleaning</a></li>
                         @elseif(Auth::user()->role == 'security')
                         <li><a href="{{ url('approval/all') }}" data-after="Approval">Approval</a></li>
                         @else

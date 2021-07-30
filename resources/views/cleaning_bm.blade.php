@@ -41,7 +41,7 @@
 <div class="container">
 <!--container-->
 
-    <form  id="form_cleaning" class="form-group">
+    <form id="form_cleaning" class="form-group">
         {{ csrf_field() }}
         <!--form-->
 
