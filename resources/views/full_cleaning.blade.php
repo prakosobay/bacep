@@ -33,8 +33,8 @@
                                     <td>{{ $num++ }}</td>
                                     <td>{{ $p->cleaning_id }}</td>
                                     <td>{{Carbon\Carbon::parse($p->cleaning_date)->format('d-m-Y H:i')}}</td>
-                                    <td>- {{ $p->cleaning_name_1 }}<br>
-                                        - {{ $p->cleaning_name_2}}</td>
+                                    <td>- {{ $p->cleaning_name }}<br>
+                                        - {{ $p->cleaning_name2}}</td>
                                     <td>{{ $p->cleaning_work }}</td>
                                     <td>{{ $p->status }}</td>
                                     <td><a href="{{ $p->link }}">PDF</a></td>

@@ -266,16 +266,16 @@
                     <td class="table-grey"><b>Department</b></td>
                 </tr>
                 <tr >
-                    <td class="table-white">1. {{$cleaning->cleaning_name_1}}</td>
-                    <td class="table-center">{{$cleaning->cleaning_id_1}}</td>
-                    <td class="table-center">{{$cleaning->cleaning_number_1}}</td>
+                    <td class="table-white">1. {{$cleaning->cleaning_name}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_nik}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_number}}</td>
                     <td class="table-center">PT BIJAC</td>
                     <td class="table-center">Building Management</td>
                 </tr>
                 <tr >
-                    <td class="table-white">2. {{$cleaning->cleaning_name_2}}</td>
-                    <td class="table-center">{{$cleaning->cleaning_id_2}}</td>
-                    <td class="table-center">{{$cleaning->cleaning_number_2}}</td>
+                    <td class="table-white">2. {{$cleaning->cleaning_name2}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_nik_2}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_number2}}</td>
                     <td class="table-center">PT BIJAC</td>
                     <td class="table-center">Building Management</td>
                 </tr>
@@ -548,7 +548,7 @@
 
             <table cellpadding="2" class="table table-detail">
                 <tr >
-                    <td class="table-grey" colspan="4"><b>Detail Time Table of All Activity</b></td>
+                    <td class="table-grey" colspan="5"><b>Detail Time Table of All Activity</b></td>
                 </tr>
                 <tr class="table-grey">
                     <td class="table-grey"><b>Day</b></td>
@@ -696,17 +696,17 @@
                 </tr>
                 <tr >
                     <td class="table-white">1.</td>
-                    <td class="table-center">{{$cleaning->cleaning_name_1}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_name}}</td>
                     <td class="table-center">PT BIJAC</td>
                     <td class="table-center">Cleaner</td>
-                    <td class="table-center">{{$cleaning->cleaning_number_1}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_number}}</td>
                 </tr>
                 <tr >
                     <td class="table-white">2. </td>
-                    <td class="table-center">{{$cleaning->cleaning_name_2}}</td>
-                    <td class="table-center">PT BIJAC</td>
+                    <td class="table-center">{{$cleaning->cleaning_name2}}</td>
+                    <td class="table-center">PT BIJnik_12td>
                     <td class="table-center">Cleaner</td>
-                    <td class="table-center">{{$cleaning->cleaning_number_2}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_number2}}</td>
                 </tr>
                 <tr >
                     <td class="table-white">3. </td>
