@@ -49,29 +49,29 @@ class CleaningController extends Controller
     public function submit_data_cleaning(Request $request)
     {
         $data = $request->all();
-        dd($data);
+        // dd($data);
         if (Auth::user()->role == 'bm') {
             $data['cleaning_name'] = MasterOb::find($data['cleaning_name'])->nama;
             $data['cleaning_name2'] = MasterOb::find($data['cleaning_name2'])->nama;
-            // $data['cleaning_work'] = PilihanWork::find($data['cleaning_work'])->work;
-            $cleaning = Cleaning::create([$data]);
+            $data['cleaning_work'] = PilihanWork::find($data['cleaning_work'])->work;
+            $cleaning = Cleaning::create($data);
+            // $cleaning = Cleaning::create([$data]);
 
-            // foreach (['rizky.anindya@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'anjar.yulianto@balitower.co.id', 'taufik.ismail@balitower.co.id'] as $recipient) {
+            // foreach (['bayu.prakoso@balitower.co.id', 'anjar.yulianto@balitower.co.id', 'taufik.ismail@balitower.co.id'] as $recipient) {
             //     Mail::to($recipient)->send(new NotifEmail());
             // }
-
-            // dd($cleaning);
-            if ($cleaning->exists) {
-                $cleaningHistory = CleaningHistory::create([
-                    'cleaning_id' => $cleaning->cleaning_id,
-                    'created_by' => Auth::user()->id,
-                    'role_to' => 'review',
-                    'status' => 'requested',
-                    'aktif' => '1'
-                ]);
-            }
-            return $cleaningHistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
         }
+        // dd($cleaning);
+        if ($cleaning->exists) {
+            $cleaningHistory = CleaningHistory::create([
+                'cleaning_id' => $cleaning->cleaning_id,
+                'created_by' => Auth::user()->id,
+                'role_to' => 'review',
+                'status' => 'requested',
+                'aktif' => '1'
+            ]);
+        }
+        return $cleaningHistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
 
         return response()->json(['status' => 'FAILED']);
     }

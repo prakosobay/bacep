@@ -10,8 +10,16 @@ class Cleaning extends Model
     use HasFactory;
 
     protected $table = 'cleanings';
-    protected $primarykey = 'cleaning_id';
+    protected $primaryKey = 'cleaning_id';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+
     protected $fillable = [
+        'cleaning_id',
         'cleaning_work',
         'loc1',
         'loc2',

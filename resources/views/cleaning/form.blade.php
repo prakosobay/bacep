@@ -27,7 +27,7 @@
 
 	<div class="container-contact100">
 		<div class="wrap-contact100">
-			<form id="cleaning_form" class="contact100-form validate-form">
+			<form id="form_cleaning" class="contact100-form validate-form">
                 {{ csrf_field() }}
 				<span class="contact100-form-title">
 					FORM
@@ -304,7 +304,7 @@
 				</div>
 
 				<div class="container-contact100-form-btn">
-					<button type="submit" class="contact100-form-btn btn-submit">
+					<button type="submit" class="contact100-form-btn">
 						<span>
 							Submit
 							<i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
@@ -324,6 +324,7 @@
 	<script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js')}}"></script>
 <!--===============================================================================================-->
 	<script src="{{ asset('vendor/select2/select2.min.js')}}"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script type="text/javascript">
 		$(".js-select2").each(function(){
 			$(this).select2({
@@ -439,10 +440,9 @@
         }
     });
 
-    $(".btn-submit").click(function(e){
-
+    $(".contact100-form-btn").click(function(e){
         e.preventDefault();
-        var datastring = $("#cleaning_form").serialize();
+        var datastring = $("#form_cleaning").serialize();
         $.ajax({
             type:'POST',
             url:"{{url('submit_data_cleaning')}}",
@@ -461,9 +461,7 @@
                     }).then(function(){
                         location.href = "{{url("/home")}}";
                     });
-
                 }else if(data.status == 'FAILED'){
-
                     Swal.fire({
                         title: "Failed!",
                         text: 'Saving Data Failed',
@@ -474,6 +472,7 @@
             }
         });
     });
+
 	</script>
 <!--===============================================================================================-->
 	<script src="{{ asset('vendor/countdowntime/countdowntime.js')}}"></script>
