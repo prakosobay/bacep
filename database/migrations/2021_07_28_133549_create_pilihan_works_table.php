@@ -17,11 +17,11 @@ class CreatePilihanWorksTable extends Migration
             $table->increments('id')->unique();
             $table->string('work');
             $table->string('loc1', 20);
-            $table->string('loc2', 20);
-            $table->string('loc3', 20);
-            $table->string('loc4', 20);
-            $table->string('loc5', 20);
-            $table->string('loc6', 20);
+            $table->string('loc2', 20)->nullable();
+            $table->string('loc3', 20)->nullable();
+            $table->string('loc4', 20)->nullable();
+            $table->string('loc5', 20)->nullable();
+            $table->string('loc6', 20)->nullable();
             $table->string('background');
             $table->text('describ');
             $table->string('activity_desciption_1', 100);

@@ -32,11 +32,8 @@ class CleaningController extends Controller
 
     public function detail_ob($id)
     {
-        $data = DB::table('master_obs')
-            ->join('ob_companies', 'ob_companies.company_id', '=', 'master_obs.company_id')
-            ->where('master_obs.ob_id', '=', $id)
-            ->select('master_obs.*', 'ob_companies.company')
-            ->first();
+        $data = MasterOb::find($id);
+        // dd($data);
         return isset($data) && !empty($data) ? response()->json(['status' => 'SUCCESS', 'data' => $data]) : response()->json(['status' => 'FAILED', 'data' => []]);
     }
 
