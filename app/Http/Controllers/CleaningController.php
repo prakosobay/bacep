@@ -186,7 +186,7 @@ class CleaningController extends Controller
 
     public function cetak_cleaning_pdf($id)
     {
-        $obcompany = ObCompany::find(1);
+        // $masterob = MasterOb::find(1);
         $cleaning = Cleaning::find($id);
         $lasthistoryC = CleaningHistory::where('cleaning_id', $id)->where('aktif', 1)->first();
         $cleaningHistory = DB::table('cleaning_histories')
@@ -198,7 +198,7 @@ class CleaningController extends Controller
             ->select('cleaning_histories.*', 'users.name', 'created_by')
             ->get();
         // dd($cleaningHistory);
-        $pdf = PDF::loadview('cleaning_pdf', ['obcompany' => $obcompany, 'cleaning' => $cleaning, 'lasthistoryC' => $lasthistoryC, 'cleaningHistory' => $cleaningHistory])->setPaper('a4', 'portrait')->setWarnings(false);
+        $pdf = PDF::loadview('cleaning_pdf', ['cleaning' => $cleaning, 'lasthistoryC' => $lasthistoryC, 'cleaningHistory' => $cleaningHistory])->setPaper('a4', 'portrait')->setWarnings(false);
         return $pdf->stream();
         // PDF::loadHTML($html)->setPaper('a4', 'landscape')->setWarnings(false)->save('myfile.pdf')
     }

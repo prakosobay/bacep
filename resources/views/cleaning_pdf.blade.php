@@ -552,39 +552,52 @@
                 </tr>
                 <tr class="table-grey">
                     <td class="table-grey"><b>Day</b></td>
-                    <td class="table-grey"><b>Time</b></td>
+                    <td class="table-grey"><b>Time Start</b></td>
+                    <td class="table-grey"><b>Time End</b></td>
                     <td class="table-grey"><b>Activity Description</b></td>
                     <td class="table-grey"><b>Detail Service Impact</b></td>
                 </tr>
                 <tr >
                     <td height="10px" class="table-center">{{Carbon\Carbon::parse($cleaning->validity_from)->format('d-m-Y')}}</td>
-                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_1}}</td>
-                    <td height="10px" class="table-center">{{$cleaning->cleaning_procedure_1}}</td>
-                    <td height="10px" class="table-center">{{$cleaning->cleaning_risk_1}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_start}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_end}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->activity}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->detail_service}}</td>
                 </tr>
                 <tr >
                     <td height="10px" class="table-center">{{Carbon\Carbon::parse($cleaning->validity_from)->format('d-m-Y')}}</td>
-                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_2}}</td>
-                    <td height="10px" class="table-center">{{$cleaning->cleaning_procedure_2}}</td>
-                    <td height="10px" class="table-center">{{$cleaning->cleaning_risk_2}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_start2}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_end2}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->activity2}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->detail_service2}}</td>
                 </tr>
                 <tr >
                     <td height="10px" class="table-center">{{Carbon\Carbon::parse($cleaning->validity_from)->format('d-m-Y')}}</td>
-                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_3}}</td>
-                    <td height="10px" class="table-center">{{$cleaning->cleaning_procedure_3}}</td>
-                    <td height="10px" class="table-center">{{$cleaning->cleaning_risk_3}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_start3}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_end3}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->activity3}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->detail_service3}}</td>
                 </tr>
                 <tr >
                     <td height="10px" class="table-center">{{Carbon\Carbon::parse($cleaning->validity_from)->format('d-m-Y')}}</td>
-                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_4}}</td>
-                    <td height="10px" class="table-center">{{$cleaning->cleaning_procedure_4}}</td>
-                    <td height="10px" class="table-center">{{$cleaning->cleaning_risk_4}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_start4}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_end4}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->activity4}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->detail_service4}}</td>
                 </tr>
                 <tr >
                     <td height="10px" class="table-center">{{Carbon\Carbon::parse($cleaning->validity_from)->format('d-m-Y')}}</td>
-                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_5}}</td>
-                    <td height="10px" class="table-center">{{$cleaning->cleaning_procedure_5}}</td>
-                    <td height="10px" class="table-center">{{$cleaning->cleaning_risk_5}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_start5}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_end5}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->activity5}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->detail_service5}}</td>
+                </tr>
+                <tr >
+                    <td height="10px" class="table-center">{{Carbon\Carbon::parse($cleaning->validity_from)->format('d-m-Y')}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_start6}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_end6}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->activity6}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->detail_service6}}</td>
                 </tr>
             </table>
 
