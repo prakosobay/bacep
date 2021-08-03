@@ -269,14 +269,14 @@
                     <td class="table-white">1. {{$cleaning->cleaning_name}}</td>
                     <td class="table-center">{{$cleaning->cleaning_nik}}</td>
                     <td class="table-center">{{$cleaning->cleaning_number}}</td>
-                    <td class="table-center">PT BIJAC</td>
+                    <td class="table-center">PT TSL</td>
                     <td class="table-center">Building Management</td>
                 </tr>
                 <tr >
                     <td class="table-white">2. {{$cleaning->cleaning_name2}}</td>
                     <td class="table-center">{{$cleaning->cleaning_nik_2}}</td>
                     <td class="table-center">{{$cleaning->cleaning_number2}}</td>
-                    <td class="table-center">PT BIJAC</td>
+                    <td class="table-center">PT TSL</td>
                     <td class="table-center">Building Management</td>
                 </tr>
                 <tr >
@@ -302,6 +302,7 @@
                 </tr>
             </table>
 
+            {{-- Entry Area --}}
             <table cellpadding="5" class="table table-borderless">
                 <tr>
                     <td class="table-grey" colspan="2"><b>Authorized Entry Area</b></td>
@@ -592,48 +593,53 @@
                     <td height="10px" class="table-center">{{$cleaning->activity5}}</td>
                     <td height="10px" class="table-center">{{$cleaning->detail_service5}}</td>
                 </tr>
-                <tr >
-                    <td height="10px" class="table-center">{{Carbon\Carbon::parse($cleaning->validity_from)->format('d-m-Y')}}</td>
-                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_start6}}</td>
-                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_end6}}</td>
-                    <td height="10px" class="table-center">{{$cleaning->activity6}}</td>
-                    <td height="10px" class="table-center">{{$cleaning->detail_service6}}</td>
-                </tr>
             </table>
 
             <table cellpadding="2" class="table table-detail">
                 <tr >
-                    <td class="table-grey" colspan="3"><b>Detail Operation and Execution</b></td>
+                    <td class="table-grey" colspan="4"><b>Detail Operation and Execution</b></td>
                 </tr>
                 <tr class="table-grey">
-                    <td class="table-grey"><b>Time</b></td>
+                    <td class="table-grey"><b>Time Start</b></td>
+                    <td class="table-grey"><b>Time End</b></td>
                     <td class="table-grey"><b>Item</b></td>
                     <td class="table-grey"><b>Working Procedure</b></td>
                 </tr>
                 <tr >
-                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_1}}</td>
-                    <td height="10px" class="table-center">{{$cleaning->cleaning_item_1}}</td>
-                    <td height="10px" class="table-center">{{$cleaning->cleaning_procedure_1}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_start}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_end}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->item}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_procedure}}</td>
                 </tr>
                 <tr >
-                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_2}}</td>
-                    <td height="10px" class="table-center">{{$cleaning->cleaning_item_2}}</td>
-                    <td height="10px" class="table-center">{{$cleaning->cleaning_procedure_2}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_start2}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_end2}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->item2}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_procedure2}}</td>
                 </tr>
                 <tr >
-                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_3}}</td>
-                    <td height="10px" class="table-center">{{$cleaning->cleaning_item_3}}</td>
-                    <td height="10px" class="table-center">{{$cleaning->cleaning_procedure_3}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_start3}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_end3}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->item3}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_procedure3}}</td>
                 </tr>
                 <tr >
-                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_4}}</td>
-                    <td height="10px" class="table-center">{{$cleaning->cleaning_item_4}}</td>
-                    <td height="10px" class="table-center">{{$cleaning->cleaning_procedure_4}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_start4}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_end4}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->item4}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_procedure4}}</td>
                 </tr>
                 <tr >
-                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_5}}</td>
-                    <td height="10px" class="table-center">{{$cleaning->cleaning_item_5}}</td>
-                    <td height="10px" class="table-center">{{$cleaning->cleaning_procedure_5}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_start5}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_end5}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->item5}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_procedure5}}</td>
+                </tr>
+                <tr >
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_start6}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_end6}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->item6}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_procedure6}}</td>
                 </tr>
             </table>
 
@@ -650,38 +656,45 @@
                 </tr>
                 <tr >
                     <td class="table-white">1.</td>
-                    <td class="table-center">{{$cleaning->cleaning_risk_1}}</td>
-                    <td class="table-center">{{$cleaning->cleaning_possibility_1}}</td>
-                    <td class="table-center">{{$cleaning->cleaning_impact_1}}</td>
-                    <td class="table-center">{{$cleaning->cleaning_mitigation_1}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_risk}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_possibility}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_impact}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_mitigation}}</td>
                 </tr>
                 <tr >
                     <td class="table-white">2.</td>
-                    <td class="table-center">{{$cleaning->cleaning_risk_2}}</td>
-                    <td class="table-center">{{$cleaning->cleaning_possibility_2}}</td>
-                    <td class="table-center">{{$cleaning->cleaning_impact_2}}</td>
-                    <td class="table-center">{{$cleaning->cleaning_mitigation_2}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_risk2}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_possibility2}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_impact2}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_mitigation2}}</td>
                 </tr>
                 <tr >
                     <td class="table-white">3.</td>
-                    <td class="table-center">{{$cleaning->cleaning_risk_3}}</td>
-                    <td class="table-center">{{$cleaning->cleaning_possibility_3}}</td>
-                    <td class="table-center">{{$cleaning->cleaning_impact_3}}</td>
-                    <td class="table-center">{{$cleaning->cleaning_mitigation_3}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_risk3}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_possibility3}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_impact3}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_mitigation3}}</td>
                 </tr>
                 <tr >
                     <td class="table-white">4.</td>
-                    <td class="table-center">{{$cleaning->cleaning_risk_4}}</td>
-                    <td class="table-center">{{$cleaning->cleaning_possibility_4}}</td>
-                    <td class="table-center">{{$cleaning->cleaning_impact_4}}</td>
-                    <td class="table-center">{{$cleaning->cleaning_mitigation_4}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_risk4}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_possibility4}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_impact4}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_mitigation4}}</td>
                 </tr>
                 <tr >
                     <td class="table-white">5.</td>
-                    <td class="table-center">{{$cleaning->cleaning_risk_5}}</td>
-                    <td class="table-center">{{$cleaning->cleaning_possibility_5}}</td>
-                    <td class="table-center">{{$cleaning->cleaning_impact_5}}</td>
-                    <td class="table-center">{{$cleaning->cleaning_mitigation_5}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_risk5}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_possibility5}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_impact5}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_mitigation5}}</td>
+                </tr>
+                <tr >
+                    <td class="table-white">6.</td>
+                    <td class="table-center">{{$cleaning->cleaning_risk6}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_possibility6}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_impact6}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_mitigation6}}</td>
                 </tr>
             </table>
 
@@ -710,14 +723,14 @@
                 <tr >
                     <td class="table-white">1.</td>
                     <td class="table-center">{{$cleaning->cleaning_name}}</td>
-                    <td class="table-center">PT BIJAC</td>
+                    <td class="table-center">PT TSL</td>
                     <td class="table-center">Cleaner</td>
                     <td class="table-center">{{$cleaning->cleaning_number}}</td>
                 </tr>
                 <tr >
                     <td class="table-white">2. </td>
                     <td class="table-center">{{$cleaning->cleaning_name2}}</td>
-                    <td class="table-center">PT BIJnik_12td>
+                    <td class="table-center">PT TSL</td>
                     <td class="table-center">Cleaner</td>
                     <td class="table-center">{{$cleaning->cleaning_number2}}</td>
                 </tr>
@@ -727,20 +740,6 @@
                     <td class="table-center"></td>
                     <td class="table-center"></td>
                     <td class="table-center">{{$cleaning->cleaning_number_3}}</td>
-                </tr>
-                <tr >
-                    <td class="table-white">4. </td>
-                    <td class="table-center"></td>
-                    <td class="table-center"></td>
-                    <td class="table-center"></td>
-                    <td class="table-center"></td>
-                </tr>
-                <tr >
-                    <td class="table-white">5. </td>
-                    <td class="table-center"></td>
-                    <td class="table-center"></td>
-                    <td class="table-center"></td>
-                    <td class="table-center"></td>
                 </tr>
             </table>
 

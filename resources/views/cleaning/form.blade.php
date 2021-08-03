@@ -35,7 +35,7 @@
 
                 {{-- Purpose of Work --}}
 				<div class="wrap-input100 validate-input bg1" data-validate="Pilih Tujuan Pekerjaan">
-					<span class="label-input100">Tujuan Pekerjaan *</span>
+					<span class="label-input100">Purpose of Work (Tujuan Pekerjaan) *</span>
                     <div>
                         <select class="js-select2" id="working" name="cleaning_work">
                             <option value=""></option>
@@ -49,7 +49,7 @@
 
                 {{-- Entry Area --}}
                 <div class="wrap-contact100-form-radio">
-                    <span class="label-input100">Authorized Entry Area</span>
+                    <span class="label-input100">Authorized Entry Area (Area yang Dimasuki)</span>
                     <div class="contact100-form-radio">
                         <label class="label-radio100">
                             <input class="input100" id="loc1" name="loc1" value="" readonly>
@@ -231,35 +231,35 @@
 
                 {{-- Isian --}}
                 <div class="wrap-input100 bg0 rs1-alert-validate">
-					<span class="label-input100">Background and Objective (Jenis Pekerjaan) *</span>
+					<span class="label-input100">Background and Objective (Latar Belakang dan Tujuan) *</span>
 					<input type="text" class="input100" name="cleaning_background" id="background" value="" readonly>
 				</div>
                 <div class="wrap-input100 bg0 rs1-alert-validate">
-					<span class="label-input100">Description of Scope of Work (Deskripsikan Pekerjaan) *</span>
+					<span class="label-input100">Description of Scope of Work (Deskripsikan Lingkup Pekerjaan) *</span>
 					<input type="text" class="input100" name="cleaning_describ" id="describ" value="" readonly>
 				</div>
                 <div class="wrap-input100 bg0 rs1-alert-validate">
-					<span class="label-input100">Testing and Verification *</span>
+					<span class="label-input100">Testing and Verification (Pengujian dan Verifikasi)</span>
 					<input type="text" class="input100" name="cleaning_testing" id="testing" value="" readonly>
 				</div>
                 <div class="wrap-input100 bg0 rs1-alert-validate">
-					<span class="label-input100">Rollback Operation *</span>
+					<span class="label-input100">Rollback Operation/Other Infomation (Operasi Pembatalan/Infomasi Lain)</span>
 					<input type="text" class="input100" name="cleaning_rollback" id="rollback" value="" readonly>
 				</div>
 
                 {{-- Validity --}}
 				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate = "Pilih Tanggal Pekerjaan">
-					<span class="label-input100">Tanggal Mulai Pekerjaan *</span>
+					<span class="label-input100">Validity (Tanggal Mulai Pekerjaan) *</span>
                     <input class="input100" type="date" name="validity_from" id="dateofbirth">
 				</div>
 				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate = "Pilih Tanggal Pekerjaan">
-					<span class="label-input100">Tanggal Selesai Pekerjaan *</span>
+					<span class="label-input100">Validity (Tanggal Selesai Pekerjaan) *</span>
 					<input class="input100" type="date" name="validity_to" id="dateofbirth">
 				</div>
 
                 {{-- Pilih Personil --}}
                 <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate="Pilih Personil">
-					<span class="label-input100">Nama Personil 1 *</span>
+					<span class="label-input100">Person In Charge 1(Nama Personil 1) *</span>
                     <div>
                         <select class="js-select2" id="pilihan1" name="cleaning_name">
                             <option value=""></option>
@@ -271,7 +271,7 @@
                     </div>
 				</div>
                 <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate="Pilih Personil">
-					<span class="label-input100">Nama Personil 2 *</span>
+					<span class="label-input100">Person In Charge 2(Nama Personil 2) *</span>
                     <div>
                         <select class="js-select2" id="pilihan2" name="cleaning_name2">
                             <option value=""></option>
@@ -285,21 +285,21 @@
 
                 {{-- Phone Number --}}
                 <div class="wrap-input100 validate-input bg1 rs1-wrap-input100">
-					<span class="label-input100">Nomor HP Personil 1</span>
+					<span class="label-input100">Number Phone (Nomor HP Personil 1)</span>
                     <input type="text" class="input100" name="cleaning_number" id="phone_number" value="" readonly>
 				</div>
                 <div class="wrap-input100 validate-input bg1 rs1-wrap-input100">
-					<span class="label-input100">Nomor HP Personil 2</span>
+					<span class="label-input100">Number Phone (Nomor HP Personil 2)</span>
                     <input type="text" class="input100" name="cleaning_number2" id="phone_number2" value="" readonly>
 				</div>
 
                 {{-- NIK  --}}
                 <div class="wrap-input100 validate-input bg1 rs1-wrap-input100">
-					<span class="label-input100">NIK Personil 1</span>
+					<span class="label-input100">ID Number (NIK Personil 1)</span>
                     <input type="text" class="input100" name="cleaning_nik" id="id_number" value="" readonly>
 				</div>
                 <div class="wrap-input100 validate-input bg1 rs1-wrap-input100">
-					<span class="label-input100">NIK Personil 2</span>
+					<span class="label-input100">ID Number (NIK Personil 2)</span>
                     <input type="text" class="input100" name="cleaning_nik_2" id="id_number2" value="" readonly>
 				</div>
 
