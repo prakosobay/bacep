@@ -188,6 +188,7 @@ class CleaningController extends Controller
     {
         // $masterob = MasterOb::find(1);
         $cleaning = Cleaning::find($id);
+        // dd($cleaning);
         $lasthistoryC = CleaningHistory::where('cleaning_id', $id)->where('aktif', 1)->first();
         $cleaningHistory = DB::table('cleaning_histories')
             ->join('cleanings', 'cleanings.cleaning_id', '=', 'cleaning_histories.cleaning_id')

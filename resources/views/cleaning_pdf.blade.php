@@ -310,14 +310,14 @@
                 </tr>
                 <tr>
                     <td>
-                        @if($cleaning->server == '1')
+                        @if(($cleaning->loc1 == 'Server Room') || ($cleaning->loc2 == 'Server Room') || ($cleaning->loc3 == 'Server Room') || ($cleaning->loc4 == 'Server Room') || ($cleaning->loc5 == 'Server Room') || ($cleaning->loc6 == 'Server Room'))
                         <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   Server Room
                         @else
                         <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   Server Room
                         @endif
                     </td>
                     <td >
-                        @if($cleaning->generator == '1')
+                        @if(($cleaning->loc1 === 'Generator Room') || ($cleaning->loc2 === 'Generator Room') || ($cleaning->loc3 === 'Generator Room') || ($cleaning->loc4 === 'Generator Room') || ($cleaning->loc5 == 'Generator Room') || ($cleaning->loc6 == 'Generator Room'))
                         <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   Generator Room
                         @else
                         <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   Generator Room
@@ -328,14 +328,14 @@
                 </tr>
                 <tr>
                     <td >
-                        @if($cleaning->mmr1 == '1')
+                        @if(($cleaning->loc1 == 'MMR 1') || ($cleaning->loc2 == 'MMR 1') || ($cleaning->loc3 == 'MMR 1') || ($cleaning->loc4 == 'MMR 1') || ($cleaning->loc5 == 'MMR 1') || ($cleaning->loc6 == 'MMR 1'))
                         <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   MMR 1
                         @else
                         <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   MMR 1
                         @endif
                     </td>
                     <td >
-                        @if($cleaning->panel == '1')
+                        @if(($cleaning->loc1 == 'Panel Room') || ($cleaning->loc2 == 'Panel Room') || ($cleaning->loc3 == 'Panel Room') || ($cleaning->loc4 == 'Panel Room') || ($cleaning->loc5 == 'Panel Room') || ($cleaning->loc6 == 'Panel Room'))
                         <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   Panel Room
                         @else
                         <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   Panel Room
@@ -346,14 +346,14 @@
                 </tr>
                 <tr>
                     <td >
-                        @if($cleaning->mmr2 == '1')
+                        @if(($cleaning->loc1 == 'MMR 2') || ($cleaning->loc2 == 'MMR 2') || ($cleaning->loc3 == 'MMR 2') || ($cleaning->loc4 == 'MMR 2') || ($cleaning->loc5 == 'MMR 2') || ($cleaning->loc6 == 'MMR 2'))
                         <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   MMR 2
                         @else
                         <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   MMR 2
                         @endif
                     </td>
                     <td >
-                        @if($cleaning->battery == '1')
+                        @if(($cleaning->loc1 == 'Baterai Room') || ($cleaning->loc2 == 'Baterai Room') || ($cleaning->loc3 == 'Baterai Room') || ($cleaning->loc4 == 'Baterai Room') || ($cleaning->loc5 == 'Baterai Room') || ($cleaning->loc6 == 'Baterai Room'))
                         <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   Battery Room
                         @else
                         <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   Battery Room
@@ -364,14 +364,14 @@
                 </tr>
                 <tr>
                     <td >
-                        @if($cleaning->ups == '1')
+                        @if(($cleaning->loc1 == 'UPS Room') || ($cleaning->loc2 == 'UPS Room') || ($cleaning->loc3 == 'UPS Room') || ($cleaning->loc4 == 'UPS Room') || ($cleaning->loc5 == 'UPS Room') || ($cleaning->loc6 == 'UPS Room'))
                         <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   UPS Room
                         @else
                         <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   UPS Room
                         @endif
                     </td>
                     <td >
-                        @if ($cleaning->fss == '1')
+                        @if(($cleaning->loc1 == 'FSS') || ($cleaning->loc2 == 'FSS') || ($cleaning->loc3 == 'FSS') || ($cleaning->loc4 == 'FSS') || ($cleaning->loc5 == 'FSS') || ($cleaning->loc6 == 'FSS'))
                         <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   FSS Room
                         @else
                         <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   FSS Room
@@ -386,7 +386,7 @@
                 </tr>
                 <tr>
                     <td >
-                        @if ($cleaning->trafo == '1')
+                        @if(($cleaning->loc1 == 'Trafo Room') || ($cleaning->loc2 == 'Trafo Room') || ($cleaning->loc3 == 'Trafo Room') || ($cleaning->loc4 == 'Trafo Room') || ($cleaning->loc5 == 'Trafo Room') || ($cleaning->loc6 == 'Trafo Room'))
                         <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   Trafo Room
                         @else
                         <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   Trafo Room
@@ -397,13 +397,13 @@
                 </tr>
                 <tr>
                     <td >
-                        @if($cleaning->staging == '1' && $cleaning->koridor == '')
+                        @if(($cleaning->loc1 == 'Staging Room') || ($cleaning->loc2 == 'Staging Room') || ($cleaning->loc3 == 'Staging Room') || ($cleaning->loc4 == 'Staging Room') || ($cleaning->loc5 == 'Staging Room') || ($cleaning->loc6 == 'Staging Room'))
                         <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   Others : Staging Room
-                        @elseif($cleaning->pln == '1')
+                        @elseif(($cleaning->loc1 == 'Pintu Luar PLN') || ($cleaning->loc2 == 'Pintu Luar PLN') || ($cleaning->loc3 == 'Pintu Luar PLN') || ($cleaning->loc4 == 'Pintu Luar PLN') || ($cleaning->loc5 == 'Pintu Luar PLN') || ($cleaning->loc6 == 'Pintu Luar PLN'))
                         <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   Others : Pintu Luar PLN
-                        @elseif($cleaning->koridor == '1' && $cleaning->staging == '')
+                        @elseif(($cleaning->loc1 == 'Koridor Lt. 1') || ($cleaning->loc2 == 'Koridor Lt. 1') || ($cleaning->loc3 == 'Koridor Lt. 1') || ($cleaning->loc4 == 'Koridor Lt. 1') || ($cleaning->loc5 == 'Koridor Lt. 1') || ($cleaning->loc6 == 'Koridor Lt. 1'))
                         <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   Others : Koridor Lt. 1
-                        @elseif($cleaning->koridor == '1' && $cleaning->staging == '1')
+                        @elseif(($cleaning->loc5 == 'Koridor Lt. 1') && ($cleaning->loc6 == 'Staging Room'))
                         <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   Others : Koridor Lt. 1 & Staging Room
                         @else
                         <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   Others :
