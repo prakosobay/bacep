@@ -403,7 +403,7 @@
                         <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   Others : Pintu Luar PLN
                         @elseif(($cleaning->loc1 == 'Koridor Lt. 1') || ($cleaning->loc2 == 'Koridor Lt. 1') || ($cleaning->loc3 == 'Koridor Lt. 1') || ($cleaning->loc4 == 'Koridor Lt. 1') || ($cleaning->loc5 == 'Koridor Lt. 1') || ($cleaning->loc6 == 'Koridor Lt. 1'))
                         <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   Others : Koridor Lt. 1
-                        @elseif(($cleaning->loc5 == 'Koridor Lt. 1') && ($cleaning->loc6 == 'Staging Room'))
+                        @elseif(($cleaning->loc1 == 'MMR 1') || ($cleaning->loc2 == 'MMR 2') || ($cleaning->loc3 == 'UPS Room') || ($cleaning->loc4 == 'FSS') || ($cleaning->loc5 == 'Koridor') || ($cleaning->loc6 == 'Staging Room'))
                         <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   Others : Koridor Lt. 1 & Staging Room
                         @else
                         <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   Others :
@@ -593,6 +593,13 @@
                     <td height="10px" class="table-center">{{$cleaning->activity5}}</td>
                     <td height="10px" class="table-center">{{$cleaning->detail_service5}}</td>
                 </tr>
+                <tr >
+                    <td height="10px" class="table-center">{{Carbon\Carbon::parse($cleaning->validity_from)->format('d-m-Y')}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_start6}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_end6}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->activity6}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->detail_service6}}</td>
+                </tr>
             </table>
 
             <table cellpadding="2" class="table table-detail">
@@ -762,7 +769,7 @@
                 <tr >
                     @switch($lasthistoryC->status)
                         @case('requested')
-                            <td class="col_approval"><img src="{{ public_path("gambar/Requested.png") }}" alt="" style="width: 80px; height: 40px;">
+                            <td class="col_approval"><img src="{{ public_path("gambar/Requested.png") }}" alt="" style="width: 80px; height: 30px;">
                                 <p class="cr">Nama    : Badai Sino Jendrang</p>
                                 <p class="cr">Tanggal : {{Carbon\Carbon::parse($cleaning->created_at)->format('d-m-Y H:i')}}</p>
                             </td>
@@ -781,11 +788,11 @@
                             @break
 
                         @case('reviewed')
-                            <td class="col_approval"><img src="{{ public_path("gambar/Requested.png") }}" alt="" style="width: 80px; height: 40px;">
+                            <td class="col_approval"><img src="{{ public_path("gambar/Requested.png") }}" alt="" style="width: 80px; height: 30px;">
                                 <p class="cr">Nama: Badai Sino Jendrang</p>
                                 <p class="cr">Tanggal : {{Carbon\Carbon::parse($cleaning->created_at)->format('d-m-Y H:i')}}</p>
                             </td>
-                            <td class="col_approval"><img src="{{ public_path("gambar/Reviewed.png") }}" alt="" style="width: 80px; height: 40px;">
+                            <td class="col_approval"><img src="{{ public_path("gambar/Reviewed.png") }}" alt="" style="width: 80px; height: 30px;">
                                 <p class="cr">Nama    :{{$cleaningHistory[1]->name}}</p>
                                 <p class="cr">Tanggal :{{Carbon\Carbon::parse($cleaningHistory[1]->created_at)->format('d-m-Y H:i')}}</p>
                             </td>
@@ -800,15 +807,15 @@
                             @break
 
                         @case('checked')
-                            <td class="col_approval"><img src="{{ public_path("gambar/Requested.png") }}" alt="" style="width: 80px; height: 40px;">
+                            <td class="col_approval"><img src="{{ public_path("gambar/Requested.png") }}" alt="" style="width: 80px; height: 30px;">
                                 <p class="cr">Nama    : Badai Sino Jendrang</p>
                                 <p class="cr">Tanggal :{{Carbon\Carbon::parse($cleaning->created_at)->format('d-m-Y H:i')}}</p>
                             </td>
-                            <td class="col_approval"><img src="{{ public_path("gambar/Reviewed.png") }}" alt="" style="width: 80px; height: 40px;">
+                            <td class="col_approval"><img src="{{ public_path("gambar/Reviewed.png") }}" alt="" style="width: 80px; height: 30px;">
                                 <p class="cr">Nama    :{{$cleaningHistory[1]->name}}</p>
                                 <p class="cr">Tanggal :{{Carbon\Carbon::parse($cleaningHistory[1]->created_at)->format('d-m-Y H:i')}}</p>
                             </td>
-                            <td class="col_approval"><img src="{{ public_path("gambar/Checked.png") }}" alt="" style="width: 80px; height: 40px;">
+                            <td class="col_approval"><img src="{{ public_path("gambar/Checked.png") }}" alt="" style="width: 80px; height: 30px;">
                                 <p class="cr">Nama    :{{$cleaningHistory[2]->name}}</p>
                                 <p class="cr">Tanggal :{{Carbon\Carbon::parse($cleaningHistory[2]->created_at)->format('d-m-Y H:i')}}</p>
                             </td>
@@ -819,15 +826,15 @@
                             @break
 
                         @case('acknowledge')
-                            <td class="col_approval"><img src="{{ public_path("gambar/Requested.png") }}" alt="" style="width: 80px; height: 40px;">
+                            <td class="col_approval"><img src="{{ public_path("gambar/Requested.png") }}" alt="" style="width: 80px; height: 30px;">
                                 <p class="cr">Nama    : Badai Sino Jendrang</p>
                                 <p class="cr">Tanggal : {{Carbon\Carbon::parse($cleaning->created_at)->format('d-m-Y H:i')}}</p>
                             </td>
-                            <td class="col_approval"><img src="{{ public_path("gambar/Reviewed.png") }}" alt="" style="width: 80px; height: 40px;">
+                            <td class="col_approval"><img src="{{ public_path("gambar/Reviewed.png") }}" alt="" style="width: 80px; height: 30px;">
                                 <p class="cr">Nama    :{{$cleaningHistory[1]->name}}</p>
                                 <p class="cr">Tanggal :{{Carbon\Carbon::parse($cleaningHistory[1]->created_at)->format('d-m-Y H:i')}}</p>
                             </td>
-                            <td class="col_approval"><img src="{{ public_path("gambar/Checked.png") }}" alt="" style="width: 80px; height: 40px;">
+                            <td class="col_approval"><img src="{{ public_path("gambar/Checked.png") }}" alt="" style="width: 80px; height: 30px;">
                                 <p class="cr">Nama    :{{$cleaningHistory[2]->name}}</p>
                                 <p class="cr">Tanggal :{{Carbon\Carbon::parse($cleaningHistory[2]->created_at)->format('d-m-Y H:i')}}</p>
                             </td>
@@ -838,19 +845,19 @@
                             @break
 
                         @case('final')
-                            <td class="col_approval"><img src="{{ public_path("gambar/Requested.png") }}" alt="" style="width: 80px; height: 40px;">
+                            <td class="col_approval"><img src="{{ public_path("gambar/Requested.png") }}" alt="" style="width: 80px; height: 30px;">
                                 <p class="cr">Nama    : Badai Sino Jendrang</p>
                                 <p class="cr">Tanggal : {{Carbon\Carbon::parse($cleaning->created_at)->format('d-m-Y H:i')}}</p>
                             </td>
-                            <td class="col_approval"><img src="{{ public_path("gambar/Reviewed.png") }}" alt="" style="width: 80px; height: 40px;">
+                            <td class="col_approval"><img src="{{ public_path("gambar/Reviewed.png") }}" alt="" style="width: 80px; height: 30px;">
                                 <p class="cr">Nama    :{{$cleaningHistory[1]->name}}</p>
                                 <p class="cr">Tanggal :{{ Carbon\Carbon::parse($cleaningHistory[1]->created_at)->format('d-m-Y H:i') }}</p>
                             </td>
-                            <td class="col_approval"><img src="{{ public_path("gambar/Checked.png") }}" alt="" style="width: 80px; height: 40px;">
+                            <td class="col_approval"><img src="{{ public_path("gambar/Checked.png") }}" alt="" style="width: 80px; height: 30px;">
                                 <p class="cr">Nama    :{{$cleaningHistory[2]->name}}</p>
                                 <p class="cr">Tanggal :{{ Carbon\Carbon::parse($cleaningHistory[2]->created_at)->format('d-m-Y H:i') }}</p>
                             </td>
-                            <td class="col_approval"><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 80px; height: 40px;">
+                            <td class="col_approval"><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 80px; height: 30px;">
                                 <p class="cr">Nama    :{{$cleaningHistory[4]->name}}</p>
                                 <p class="cr">Tanggal :{{ Carbon\Carbon::parse($cleaningHistory[4]->created_at)->format('d-m-Y H:i') }}</p>
                             </td>
