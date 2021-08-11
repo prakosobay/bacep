@@ -69,11 +69,11 @@ class HomeController extends Controller
                     ->get();
                 return view('hasil_survey', ['survey' => $survey]);
             } elseif ($type_view == 'cleaning') {
-                $cleaning = DB::table('cleaning_histories')
-                    ->join('cleanings', 'cleanings.cleaning_id', '=', 'cleaning_histories.cleaning_id')
-                    ->where('cleaning_histories.role_to', '=', $role)
-                    ->where('cleaning_histories.aktif', '=', 1)
-                    ->select('cleanings.*')
+                $cleaning = DB::table('log_cleanings')
+                    ->join('form_cleanings', 'form_cleanings.form_c_id', '=', 'log_cleanings.form_c_id')
+                    ->where('log_cleanings.role_to', '=', $role)
+                    ->where('log_cleanings.aktif', '=', 1)
+                    ->select('form_cleanings.*')
                     ->get();
                 return view('hasil_cleaning', ['cleaning' => $cleaning]);
             }
@@ -95,9 +95,9 @@ class HomeController extends Controller
         //     return view('log_survey', ['survey' => $survey]);
         // }
         elseif ($type_view == 'cleaning') {
-            $cleaningLog = DB::table('cleaning_histories')
-                ->join('cleanings', 'cleanings.cleaning_id', '=', 'cleaning_histories.cleaning_id')
-                ->select('cleaning_histories.*', 'cleanings.cleaning_work', 'cleanings.validity_from')
+            $cleaningLog = DB::table('log_cleanings')
+                ->join('form_cleanings', 'form_cleanings.form_c_id', '=', 'log_cleanings.form_c_id')
+                ->select('log_cleanings.*', 'form_cleanings.cleaning_work', 'form_cleanings.validity_from')
                 ->get();
             return view('log_cleaning', ['cleaningLog' => $cleaningLog]);
         }
@@ -112,7 +112,7 @@ class HomeController extends Controller
                 $surveyFull = DB::table('survey_fulls')->get();
                 return view('full_survey', ['surveyFull' => $surveyFull]);
             } elseif ($type_form == 'cleaning') {
-                $cleaningFull = DB::table('cleaning_fulls')->get();
+                $cleaningFull = DB::table('full_cleanings')->get();
                 return view('full_cleaning', ['cleaningFull' => $cleaningFull]);
             }
         }

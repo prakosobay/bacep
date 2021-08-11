@@ -228,7 +228,7 @@
                 </tr>
                 <tr >
                     <td width="150px">Change Request Number: </td>
-                    <td >: {{$cleaning->cleaning_id}}</td>
+                    <td >: {{$cleaning->form_c_id}}</td>
                 </tr>
                 <tr >
                     <td width="150px">Purpose of Work</td>
@@ -281,14 +281,14 @@
                 </tr>
                 <tr >
                     <td class="table-white">3. {{$cleaning->cleaning_name_3}}</td>
-                    <td class="table-center">{{$cleaning->cleaning_id_3}}</td>
+                    <td class="table-center">{{$cleaning->form_c_id_3}}</td>
                     <td class="table-center">{{$cleaning->cleaning_number_3}}</td>
                     <td class="table-center"></td>
                     <td class="table-center"></td>
                 </tr>
                 <tr >
                     <td class="table-white">4. {{$cleaning->cleaning_name_4}}</td>
-                    <td class="table-center">{{$cleaning->cleaning_id_4}}</td>
+                    <td class="table-center">{{$cleaning->form_c_id_4}}</td>
                     <td class="table-center">{{$cleaning->cleaning_number_4}}</td>
                     <td class="table-center"></td>
                     <td class="table-center"></td>

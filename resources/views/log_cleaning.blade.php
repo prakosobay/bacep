@@ -29,7 +29,7 @@
                         <tbody>
                             @foreach($cleaningLog as $p)
                                 <tr>
-                                    <td>{{ $p->cleaning_id }}</td>
+                                    <td>{{ $p->form_c_id }}</td>
                                     <td>{{ $p->cleaning_work }}</td>
                                     <td>{{ $p->role_to }}</td>
                                     <td>{{ $p->status }}</td>
