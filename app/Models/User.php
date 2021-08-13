@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Carbon\Carbon;
 
-class User extends Authenticatable 
+class User extends Authenticatable implements MustVerifyEmail
 
 {
     use HasFactory, Notifiable;
