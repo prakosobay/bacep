@@ -99,7 +99,7 @@ class HomeController extends Controller
                 $surveyFull = DB::table('survey_fulls')->get();
                 return view('full_survey', ['surveyFull' => $surveyFull]);
             } elseif ($type_form == 'cleaning') {
-                $cleaningFull = DB::table('cleaning_full')->get();
+                $cleaningFull = DB::table('cleaning_fulls')->get();
                 return view('full_cleaning', ['cleaningFull' => $cleaningFull]);
             }
         }
