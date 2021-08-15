@@ -17,10 +17,10 @@ class CreateCleaningFullsTable extends Migration
             $table->bigIncrements('cleaning_full_id');
             $table->foreignId('cleaning_id');
             $table->string('cleaning_date', 25);
-            $table->string('cleaning_name');
-            $table->string('cleaning_name2');
-            $table->string('cleaning_work');
-            $table->string('status');
+            $table->string('cleaning_name', 50);
+            $table->string('cleaning_name2', 50);
+            $table->string('cleaning_work', 100);
+            $table->string('status', 50);
             $table->string('link');
             $table->timestamps();
         });

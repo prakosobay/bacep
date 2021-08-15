@@ -14,7 +14,7 @@ class CreatePilihanWorksTable extends Migration
     public function up()
     {
         Schema::create('pilihan_works', function (Blueprint $table) {
-            $table->increments('id')->unique();
+            $table->bigIncrements('id')->unique();
             $table->string('work');
             $table->string('loc1', 20);
             $table->string('loc2', 20)->nullable();

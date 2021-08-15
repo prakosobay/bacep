@@ -17,9 +17,9 @@ class CreateCleaningHistoriesTable extends Migration
             $table->bigIncrements('cleaning_history_id');
             $table->foreignId('cleaning_id');
             $table->integer('created_by');
-            $table->string('role_to');
-            $table->string('status');
-            $table->boolean('aktif');
+            $table->string('role_to', 50);
+            $table->string('status', 50);
+            $table->boolean('aktif', 1);
             $table->timestamps();
         });
     }

@@ -180,30 +180,6 @@
 
 </head>
 <body>
-    {{-- <header>
-        <table class="table table-bordered">
-            <tr >
-                <td class="col_header" rowspan="2" ><img src="{{ public_path("gambar/bts_logo.jpg") }}" class="img-fluid" alt="logo_bts"></td>
-                <td class="col_header"><font size="10pt"><b>FORM</b></font></td>
-                <td class="col_header"><b>Kode Dokumen : FRM-BTS-DCDV-2021-04</b></td>
-            </tr>
-            <tr>
-                <td class="col_header"><font size="10pt"><b>Access Request</b></font></td>
-                <td class="col_header"><b>Tanggal Berlaku : 18 Mei 2021</b></td>
-            </tr>
-        </table>
-    </header> --}}
-
-    {{-- <footer>
-        <table class="table table-bordered">
-            <tr>
-                <td class="col_footer">Kode Dok: FRM-BTS-DCDV-2019-04</td>
-                <td class="col_footer">Revisi : 01</td>
-                <td class="col_footer"><font color="red">Kategori : Dokumen Terbatas</font></td>
-                <td class="col_footer">Hal : 1/1</td>
-            </tr>
-        </table>
-    </footer> --}}
 
     <!-- Wrap the content of your PDF inside a main tag -->
     <main>
@@ -223,12 +199,11 @@
             <table cellpadding="3" class="table table-hover">
                 <tr >
                     <td width="150px">Date of Request</td>
-
                     <td >: {{Carbon\Carbon::parse($cleaning->created_at)->format('d-m-Y H:i')}}</td>
                 </tr>
                 <tr >
                     <td width="150px">Change Request Number: </td>
-                    <td >: {{$cleaning->form_c_id}}</td>
+                    <td >: {{$cleaning->cleaning_id}}</td>
                 </tr>
                 <tr >
                     <td width="150px">Purpose of Work</td>
@@ -281,14 +256,14 @@
                 </tr>
                 <tr >
                     <td class="table-white">3. {{$cleaning->cleaning_name_3}}</td>
-                    <td class="table-center">{{$cleaning->form_c_id_3}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_id_3}}</td>
                     <td class="table-center">{{$cleaning->cleaning_number_3}}</td>
                     <td class="table-center"></td>
                     <td class="table-center"></td>
                 </tr>
                 <tr >
                     <td class="table-white">4. {{$cleaning->cleaning_name_4}}</td>
-                    <td class="table-center">{{$cleaning->form_c_id_4}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_id_4}}</td>
                     <td class="table-center">{{$cleaning->cleaning_number_4}}</td>
                     <td class="table-center"></td>
                     <td class="table-center"></td>

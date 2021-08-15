@@ -31,7 +31,7 @@
                             @foreach($cleaningFull as $p)
                                 <tr>
                                     <td>{{ $num++ }}</td>
-                                    <td>{{ $p->form_c_id }}</td>
+                                    <td>{{ $p->cleaning_id }}</td>
                                     <td>{{Carbon\Carbon::parse($p->cleaning_date)->format('d-m-Y H:i')}}</td>
                                     <td>- {{ $p->cleaning_name }}<br>
                                         - {{ $p->cleaning_name2}}</td>

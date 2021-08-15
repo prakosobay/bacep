@@ -8,7 +8,6 @@ use App\Models\Cleaning;
 use App\Models\CleaningHistory;
 use App\Models\CleaningFull;
 use App\Models\MasterOb;
-use App\Models\ObCompany;
 use App\Models\PilihanWork;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -16,9 +15,6 @@ use Barryvdh\DomPDF\Facade as PDF;
 use App\Mail\NotifEmail;
 use App\Mail\NotifReject;
 use App\Mail\NotifFull;
-use App\Models\FormCleaning;
-use App\Models\FullCleaning;
-use App\Models\LogCleaning;
 use Illuminate\Support\Facades\Mail;
 
 class CleaningController extends Controller
@@ -54,7 +50,7 @@ class CleaningController extends Controller
             $data['cleaning_name'] = MasterOb::find($data['cleaning_name'])->nama;
             $data['cleaning_name2'] = MasterOb::find($data['cleaning_name2'])->nama;
             $data['cleaning_work'] = PilihanWork::find($data['cleaning_work'])->work;
-            $cleaning = FormCleaning::create($data);
+            $cleaning = Cleaning::create($data);
 
             // foreach (['bayu.prakoso@balitower.co.id', 'anjar.yulianto@balitower.co.id', 'taufik.ismail@balitower.co.id'] as $recipient) {
             //     Mail::to($recipient)->send(new NotifEmail());
@@ -62,8 +58,8 @@ class CleaningController extends Controller
         }
         // dd($cleaning);
         if ($cleaning->exists) {
-            $cleaningHistory = LogCleaning::create([
-                'form_c_id' => $cleaning->form_c_id,
+            $cleaningHistory = CleaningHistory::create([
+                'cleaning_id' => $cleaning->cleaning_id,
                 'created_by' => Auth::user()->id,
                 'role_to' => 'review',
                 'status' => 'requested',
@@ -77,11 +73,11 @@ class CleaningController extends Controller
 
     public function detail_permit_cleaning($id)
     {
-        $cleaningHistory = DB::table('log_cleanings')
-            ->join('form_cleanings', 'form_cleanings.form_c_id', '=', 'log_cleanings.form_c_id')
-            ->join('users', 'users.id', '=', 'log_cleanings.created_by')
-            ->where('log_cleanings.form_c_id', '=', $id)
-            ->select('log_cleanings.*', 'users.name', 'form_cleanings.cleaning_work')
+        $cleaningHistory = DB::table('cleaning_histories')
+            ->join('cleanings', 'cleanings.cleaning_id', '=', 'cleaning_histories.cleaning_id')
+            ->join('users', 'users.id', '=', 'cleaning_histories.created_by')
+            ->where('cleaning_histories.cleaning_id', '=', $id)
+            ->select('cleaning_histories.*', 'users.name', 'cleanings.cleaning_work')
             ->get();
         // dd($cleaningHistory);
         return view('detail_cleaning', ['cleaningHistory' => $cleaningHistory]);
@@ -91,7 +87,7 @@ class CleaningController extends Controller
     {
 
         // $lasthistory = SurveyHistory::where('survey_id', '=', $request->survey_id)->latest()->first();
-        $lasthistoryC = LogCleaning::where('form_c_id', '=', $request->form_c_id)->latest()->first();
+        $lasthistoryC = CleaningHistory::where('cleaning_id', '=', $request->cleaning_id)->latest()->first();
         $lasthistoryC->update(['aktif' => false]);
 
         $status = '';
@@ -104,7 +100,7 @@ class CleaningController extends Controller
         } elseif (($lasthistoryC->status == 'acknowledge') && (Auth::user()->role == 'head')) {
             $status = 'final';
         } elseif ($lasthistoryC->status == 'final') {
-            $cleaning = FormCleaning::find($request->form_c_id)->first();
+            $cleaning = Cleaning::find($request->cleaning_id)->first();
         }
 
         $role_to = '';
@@ -126,8 +122,8 @@ class CleaningController extends Controller
             $role_to = 'head';
         }
 
-        $cleaningHistory = LogCleaning::create([
-            'form_c_id' => $request->form_c_id,
+        $cleaningHistory = CleaningHistory::create([
+            'cleaning_id' => $request->cleaning_id,
             'created_by' => Auth::user()->id,
             'role_to' => $role_to,
             'status' => $status,
@@ -135,22 +131,22 @@ class CleaningController extends Controller
         ]);
 
         if ($lasthistoryC->role_to == 'head') {
-            $cleaning = FormCleaning::find($request->form_c_id);
+            $cleaning = Cleaning::find($request->cleaning_id);
             // dd($cleaning);
             // foreach (['dc@balitower.co.id'] as $recipient) {
             //     Mail::to($recipient)->send(new NotifFull($cleaning));
             // }
-            $cleaning = FormCleaning::where('form_c_id', $request->form_c_id)->first();
+            $cleaning = Cleaning::where('cleaning_id', $request->cleaning_id)->first();
             // dd($cleaning);
-            $cleaningFull = FullCleaning::create([
-                'form_c_id' => $cleaning->form_c_id,
+            $cleaningFull = CleaningFull::create([
+                'cleaning_id' => $cleaning->cleaning_id,
                 'cleaning_name_1' => $cleaning->cleaning_name_1,
                 'cleaning_name_2' => $cleaning->cleaning_name_2,
                 'cleaning_work' => $cleaning->cleaning_work,
                 'cleaning_date' => $cleaning->created_at,
                 'status' => 'Full Approved',
-                // 'link' => ("http://127.0.0.1:8000/cleaning_pdf/$cleaning->form_c_id"),
-                'link' => ("http://172.16.45.195:8000/cleaning_pdf/$cleaning->form_c_id"),
+                // 'link' => ("http://127.0.0.1:8000/cleaning_pdf/$cleaning->cleaning_id"),
+                'link' => ("http://172.16.45.195:8000/cleaning_pdf/$cleaning->cleaning_id"),
             ]);
         }
 
@@ -159,28 +155,23 @@ class CleaningController extends Controller
 
     public function cleaning_reject(Request $request)
     {
-        $lasthistoryC = LogCleaning::where('form_c_id', '=', $request->form_c_id)->latest()->first();
+        $lasthistoryC = CleaningHistory::where('cleaning_id', '=', $request->cleaning_id)->latest()->first();
         if ($lasthistoryC->role_to != 'security') {
             $lasthistoryC->update(['aktif' => false]);
 
-            $cleaningHistory = LogCleaning::create([
-                'form_c_id' => $request->form_c_id,
+            $cleaningHistory = CleaningHistory::create([
+                'cleaning_id' => $request->cleaning_id,
                 'created_by' => Auth::user()->id,
                 'role_to' => 0,
                 'status' => 'rejected',
                 'aktif' => true,
             ]);
 
-            $cleaning = FormCleaning::find($request->form_c_id);
+            $cleaning = Cleaning::find($request->cleaning_id);
             // dd($cleaning);
-            foreach (['data.center7@balitower.co.id', 'security.bacep@balitower.co.id'] as $recipient) {
-                // $notification = new NotifReject($cleaning);
-                // Mail::to($recipient)->send(
-                //     $this->build($cleaning)
-                // );
-
-                Mail::to($recipient)->send(new NotifReject($cleaning));
-            }
+            // foreach (['data.center7@balitower.co.id', 'security.bacep@balitower.co.id'] as $recipient) {
+            //     Mail::to($recipient)->send(new NotifReject($cleaning));
+            // }
             // dd($cleaningHistory);
             return $cleaningHistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
         }
@@ -189,16 +180,16 @@ class CleaningController extends Controller
     public function cetak_cleaning_pdf($id)
     {
         // $masterob = MasterOb::find(1);
-        $cleaning = FormCleaning::find($id);
+        $cleaning = Cleaning::find($id);
         // dd($cleaning);
-        $lasthistoryC = LogCleaning::where('form_c_id', $id)->where('aktif', 1)->first();
-        $cleaningHistory = DB::table('log_cleanings')
-            ->join('form_cleanings', 'form_cleanings.form_c_id', '=', 'log_cleanings.form_c_id')
-            ->join('users', 'users.id', '=', 'log_cleanings.created_by')
-            // ->join('users', 'users.id', '=', 'log_cleanings.name')
-            ->where('log_cleanings.form_c_id', '=', $id)
-            ->where('log_cleanings.status', '!=', 'visitor')
-            ->select('log_cleanings.*', 'users.name', 'created_by')
+        $lasthistoryC = CleaningHistory::where('cleaning_id', $id)->where('aktif', 1)->first();
+        $cleaningHistory = DB::table('cleaning_histories')
+            ->join('cleanings', 'cleanings.cleaning_id', '=', 'cleaning_histories.cleaning_id')
+            ->join('users', 'users.id', '=', 'cleaning_histories.created_by')
+            // ->join('users', 'users.id', '=', 'cleaning_histories.name')
+            ->where('cleaning_histories.cleaning_id', '=', $id)
+            ->where('cleaning_histories.status', '!=', 'visitor')
+            ->select('cleaning_histories.*', 'users.name', 'created_by')
             ->get();
         // dd($cleaningHistory);
         $pdf = PDF::loadview('cleaning_pdf', ['cleaning' => $cleaning, 'lasthistoryC' => $lasthistoryC, 'cleaningHistory' => $cleaningHistory])->setPaper('a4', 'portrait')->setWarnings(false);

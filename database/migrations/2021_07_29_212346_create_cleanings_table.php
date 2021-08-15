@@ -16,12 +16,12 @@ class CreateCleaningsTable extends Migration
         Schema::create('cleanings', function (Blueprint $table) {
             $table->bigIncrements('cleaning_id')->unique();
             $table->string('cleaning_work');
-            $table->string('loc1', 30)->nullable();
-            $table->string('loc2', 30)->nullable();
-            $table->string('loc3', 30)->nullable();
-            $table->string('loc4', 30)->nullable();
-            $table->string('loc5', 30)->nullable();
-            $table->string('loc6', 30)->nullable();
+            $table->string('loc1', 50);
+            $table->string('loc2', 50)->nullable();
+            $table->string('loc3', 50)->nullable();
+            $table->string('loc4', 50)->nullable();
+            $table->string('loc5', 50)->nullable();
+            $table->string('loc6', 50)->nullable();
             $table->string('cleaning_time_start', 6);
             $table->string('cleaning_time_start2', 6)->nullable();
             $table->string('cleaning_time_start3', 6)->nullable();

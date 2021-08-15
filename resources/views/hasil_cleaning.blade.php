@@ -25,21 +25,21 @@
                             <tbody>
                                 @foreach($cleaning as $p)
                                     <tr>
-                                        <td>{{ $p->form_c_id }}</td>
+                                        <td>{{ $p->cleaning_id }}</td>
                                         <td>{{ Carbon\Carbon::parse($p->created_at)->format('d-m-Y') }}</td>
                                         <td>- {{ $p->cleaning_name }}<br>
                                             - {{ $p->cleaning_name2 }}</td>
                                         <td>{{ $p->cleaning_work }}</td>
                                         @if(Auth::user()->role != 'security')
                                         <td>
-                                            <a href="javascript:void(0)" id="ok" class="approve" data-form_c_id="{{$p->form_c_id}}">Approve</a>
-                                            <a href="javascript:void(0)" id="not" class="reject" data-form_c_id="{{$p->form_c_id}}">Reject</a>
-                                            <a href="/detail_cleaning/{{$p->form_c_id}}">History</a></td>
+                                            <a href="javascript:void(0)" id="ok" class="approve" data-cleaning_id="{{$p->cleaning_id}}">Approve</a>
+                                            <a href="javascript:void(0)" id="not" class="reject" data-cleaning_id="{{$p->cleaning_id}}">Reject</a>
+                                            <a href="/detail_cleaning/{{$p->cleaning_id}}">History</a></td>
                                         @else<td>
-                                            <a href="javascript:void(0)" id="ok" class="approve" data-form_c_id="{{$p->form_c_id}}">Approve</a>
-                                            <a href="/detail_cleaning/{{$p->form_c_id}}">History</a></td>
+                                            <a href="javascript:void(0)" id="ok" class="approve" data-cleaning_id="{{$p->cleaning_id}}">Approve</a>
+                                            <a href="/detail_cleaning/{{$p->cleaning_id}}">History</a></td>
                                         @endif
-                                        <td><a href="/cleaning_pdf/{{$p->form_c_id}}" class="btn btn-primary" target="_blank">LIHAT PDF</a></td>
+                                        <td><a href="/cleaning_pdf/{{$p->cleaning_id}}" class="btn btn-primary" target="_blank">LIHAT PDF</a></td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -87,12 +87,12 @@
                         $('#ok').click(function () {
                             return false;
                         });
-                    let form_c_id = $(this).data('form_c_id');
-                    console.log(form_c_id);
+                    let cleaning_id = $(this).data('cleaning_id');
+                    console.log(cleaning_id);
                     $.ajax({
                         type:'POST',
                         url:"{{url('approve_cleaning')}}",
-                        data: {form_c_id},
+                        data: {cleaning_id},
                         error: function (request, error) {
                             alert(" Can't do because: " + error);
                         },
@@ -139,12 +139,12 @@
                     $('#not').click(function () {
                             return false;
                         });
-                    let form_c_id = $(this).data('form_c_id');
-                    console.log(form_c_id);
+                    let cleaning_id = $(this).data('cleaning_id');
+                    console.log(cleaning_id);
                     $.ajax({
                         type:'POST',
                         url:"{{url('cleaning_reject')}}",
-                        data: {form_c_id},
+                        data: {cleaning_id},
                         error: function (request, error) {
                             alert(" Can't do because: " + error);
                         },
