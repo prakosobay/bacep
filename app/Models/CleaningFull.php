@@ -23,6 +23,7 @@ class CleaningFull extends Model
         'cleaning_date',
         'cleaning_name',
         'cleaning_name2',
+        'validity_from',
         'cleaning_work',
         'status',
         'link',

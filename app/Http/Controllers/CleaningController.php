@@ -140,8 +140,8 @@ class CleaningController extends Controller
             // dd($cleaning);
             $cleaningFull = CleaningFull::create([
                 'cleaning_id' => $cleaning->cleaning_id,
-                'cleaning_name_1' => $cleaning->cleaning_name,
-                'cleaning_name_2' => $cleaning->cleaning_name2,
+                'cleaning_name' => $cleaning->cleaning_name,
+                'cleaning_name2' => $cleaning->cleaning_name2,
                 'cleaning_work' => $cleaning->cleaning_work,
                 'validity_from' => $cleaning->validity_from,
                 'cleaning_date' => $cleaning->created_at,

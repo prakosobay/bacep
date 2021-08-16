@@ -35,7 +35,7 @@
                                     <td>- {{ $p->cleaning_name }}<br>
                                         - {{ $p->cleaning_name2}}</td>
                                     <td>{{ $p->cleaning_work }}</td>
-                                    <td>{{ $p->validity_from }}</td>
+                                    <td>{{Carbon\Carbon::parse($p->validity_from)->format('d-m-Y')}}</td>
                                     <td>{{ $p->status }}</td>
                                     <td><a href="{{ $p->link }}">PDF</a></td>
                                 </tr>
