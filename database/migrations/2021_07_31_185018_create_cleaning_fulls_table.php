@@ -20,6 +20,7 @@ class CreateCleaningFullsTable extends Migration
             $table->string('cleaning_name', 50);
             $table->string('cleaning_name2', 50);
             $table->string('cleaning_work', 100);
+            $table->string('validity_from', 100);
             $table->string('status', 50);
             $table->string('link');
             $table->timestamps();

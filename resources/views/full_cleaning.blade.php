@@ -17,11 +17,11 @@
                     <table id="example1" class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th>No.</th>
                                 <th>ID Permit</th>
                                 <th>Date of Request</th>
                                 <th>Visitor Name</th>
                                 <th>Purpose Work</th>
+                                <th>Validity</th>
                                 <th>Status</th>
                                 <th>Link</th>
                             </tr>
@@ -30,12 +30,12 @@
                             {{$num = 1}}
                             @foreach($cleaningFull as $p)
                                 <tr>
-                                    <td>{{ $num++ }}</td>
                                     <td>{{ $p->cleaning_id }}</td>
                                     <td>{{Carbon\Carbon::parse($p->cleaning_date)->format('d-m-Y H:i')}}</td>
                                     <td>- {{ $p->cleaning_name }}<br>
                                         - {{ $p->cleaning_name2}}</td>
                                     <td>{{ $p->cleaning_work }}</td>
+                                    <td>{{ $p->validity_from }}</td>
                                     <td>{{ $p->status }}</td>
                                     <td><a href="{{ $p->link }}">PDF</a></td>
                                 </tr>

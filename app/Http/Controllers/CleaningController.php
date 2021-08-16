@@ -143,10 +143,11 @@ class CleaningController extends Controller
                 'cleaning_name_1' => $cleaning->cleaning_name,
                 'cleaning_name_2' => $cleaning->cleaning_name2,
                 'cleaning_work' => $cleaning->cleaning_work,
+                'validity_from' => $cleaning->validity_from,
                 'cleaning_date' => $cleaning->created_at,
                 'status' => 'Full Approved',
-                // 'link' => ("http://127.0.0.1:8000/cleaning_pdf/$cleaning->cleaning_id"),
-                'link' => ("http://172.16.45.195:8000/cleaning_pdf/$cleaning->cleaning_id"),
+                'link' => ("http://127.0.0.1:8000/cleaning_pdf/$cleaning->cleaning_id"),
+                // 'link' => ("http://172.16.45.195:8000/cleaning_pdf/$cleaning->cleaning_id"),
             ]);
         }
 
