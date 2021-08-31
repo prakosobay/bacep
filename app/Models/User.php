@@ -20,9 +20,6 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected $fillable = [
         'name',
-        'department',
-        'role',
-        'phone',
         'email',
         'password',
     ];
@@ -46,8 +43,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
-    public function duties()
+    public function roles()
     {
-        return $this->belongsToMany(Duty::class);
+        return $this->belongsToMany(Role::class);
     }
 }
