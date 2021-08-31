@@ -23,7 +23,7 @@ use App\Http\Controllers\CleaningController;
 
 // Auth::routes(['verify' => true]);
 Route::get('/', function () {
-    return view('auth.login');
+    return view('welcome');
 });
 
 // Route::get('/kirimemail', [App\Http\Controllers\TesEmailController::class, 'index'])->middleware(['verified']);
