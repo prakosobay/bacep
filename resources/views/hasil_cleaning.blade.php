@@ -30,7 +30,7 @@
                                         <td>- {{ $p->cleaning_name }}<br>
                                             - {{ $p->cleaning_name2 }}</td>
                                         <td>{{ $p->cleaning_work }}</td>
-                                        @if(Auth::user()->role != 'security')
+                                        @if((Auth::user()->role1 != 'security') || (Auth::user()->role2 != 'security'))
                                         <td>
                                             <a href="javascript:void(0)" id="ok" class="approve" data-cleaning_id="{{$p->cleaning_id}}">Approve</a>
                                             <a href="javascript:void(0)" id="not" class="reject" data-cleaning_id="{{$p->cleaning_id}}">Reject</a>

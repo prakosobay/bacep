@@ -21,7 +21,7 @@ class CleaningController extends Controller
 {
     public function tampilan()
     {
-        if (Auth::user()->role == 'bm') {
+        if (Auth::user()->role1 == 'bm') {
             $master_ob = MasterOb::all();
             $pilihanwork = PilihanWork::all();
             return view('cleaning.form', ['master_ob' => $master_ob, 'pilihanwork' => $pilihanwork]);
@@ -45,15 +45,15 @@ class CleaningController extends Controller
     {
         $data = $request->all();
         // dd($data);
-        if (Auth::user()->role == 'bm') {
+        if (Auth::user()->role1 == 'bm') {
             $data['cleaning_name'] = MasterOb::find($data['cleaning_name'])->nama;
             $data['cleaning_name2'] = MasterOb::find($data['cleaning_name2'])->nama;
             $data['cleaning_work'] = PilihanWork::find($data['cleaning_work'])->work;
             $cleaning = Cleaning::create($data);
 
-            foreach (['bayu.prakoso@balitower.co.id', 'anjar.yulianto@balitower.co.id', 'taufik.ismail@balitower.co.id', 'rizky.anindya@balitower.co.id'] as $recipient) {
-                Mail::to($recipient)->send(new NotifEmail());
-            }
+            // foreach (['bayu.prakoso@balitower.co.id', 'anjar.yulianto@balitower.co.id', 'taufik.ismail@balitower.co.id', 'rizky.anindya@balitower.co.id'] as $recipient) {
+            //     Mail::to($recipient)->send(new NotifEmail());
+            // }
         }
         // dd($cleaning);
         if ($cleaning->exists) {
@@ -88,13 +88,13 @@ class CleaningController extends Controller
         $lasthistoryC->update(['aktif' => false]);
 
         $status = '';
-        if (($lasthistoryC->status == 'requested') && (Auth::user()->role == 'review')) {
+        if (($lasthistoryC->status == 'requested') && (Auth::user()->role1 == 'review') && (Auth::user()->role2 == 'check')) {
             $status = 'reviewed';
-        } elseif (($lasthistoryC->status == 'reviewed') && (Auth::user()->role == 'check')) {
+        } elseif (($lasthistoryC->status == 'reviewed') && (Auth::user()->role1 == 'review') && (Auth::user()->role2 == 'check')) {
             $status = 'checked';
-        } elseif (($lasthistoryC->status == 'checked') && (Auth::user()->role == 'security')) {
+        } elseif (($lasthistoryC->status == 'checked') && (Auth::user()->role1 == 'security')) {
             $status = 'acknowledge';
-        } elseif (($lasthistoryC->status == 'acknowledge') && (Auth::user()->role == 'head')) {
+        } elseif (($lasthistoryC->status == 'acknowledge') && (Auth::user()->role1 == 'head')) {
             $status = 'final';
         } elseif ($lasthistoryC->status == 'final') {
             $cleaning = Cleaning::find($request->cleaning_id)->first();
@@ -102,19 +102,19 @@ class CleaningController extends Controller
 
         $role_to = '';
         if (($lasthistoryC->role_to == 'review')) {
-            foreach (['rio.christian@balitower.co.id', 'rafli.ashshiddiqi@balitower.co.id', 'darajat.indraputra@balitower.co.id', 'lingga.anugerah@balitower.co.id'] as $recipient) {
-                Mail::to($recipient)->send(new NotifEmail());
-            }
+            // foreach (['rio.christian@balitower.co.id', 'rafli.ashshiddiqi@balitower.co.id', 'darajat.indraputra@balitower.co.id', 'lingga.anugerah@balitower.co.id'] as $recipient) {
+            //     Mail::to($recipient)->send(new NotifEmail());
+            // }
             $role_to = 'check';
         } elseif (($lasthistoryC->role_to == 'check')) {
-            foreach (['security.bacep@balitower.co.id'] as $recipient) {
-                Mail::to($recipient)->send(new NotifEmail());
-            }
+            // foreach (['security.bacep@balitower.co.id'] as $recipient) {
+            //     Mail::to($recipient)->send(new NotifEmail());
+            // }
             $role_to = 'security';
         } elseif (($lasthistoryC->role_to == 'security')) {
-            foreach (['panggah@balitower.co.id'] as $recipient) {
-                Mail::to($recipient)->send(new NotifEmail());
-            }
+            // foreach (['panggah@balitower.co.id'] as $recipient) {
+            //     Mail::to($recipient)->send(new NotifEmail());
+            // }
             $role_to = 'head';
         }
 
@@ -128,9 +128,9 @@ class CleaningController extends Controller
 
         if ($lasthistoryC->role_to == 'head') {
             $cleaning = Cleaning::find($request->cleaning_id);
-            foreach (['dc@balitower.co.id'] as $recipient) {
-                Mail::to($recipient)->send(new NotifFull($cleaning));
-            }
+            // foreach (['dc@balitower.co.id'] as $recipient) {
+            //     Mail::to($recipient)->send(new NotifFull($cleaning));
+            // }
             $cleaning = Cleaning::where('cleaning_id', $request->cleaning_id)->first();
             $cleaningFull = CleaningFull::create([
                 'cleaning_id' => $cleaning->cleaning_id,
@@ -140,8 +140,8 @@ class CleaningController extends Controller
                 'validity_from' => $cleaning->validity_from,
                 'cleaning_date' => $cleaning->created_at,
                 'status' => 'Full Approved',
-                // 'link' => ("http://127.0.0.1:8000/cleaning_pdf/$cleaning->cleaning_id"),
-                'link' => ("http://172.16.45.195:8000/cleaning_pdf/$cleaning->cleaning_id"),
+                'link' => ("http://127.0.0.1:8000/cleaning_pdf/$cleaning->cleaning_id"),
+                // 'link' => ("http://172.16.45.195:8000/cleaning_pdf/$cleaning->cleaning_id"),
             ]);
         }
 
@@ -163,9 +163,9 @@ class CleaningController extends Controller
             ]);
 
             $cleaning = Cleaning::find($request->cleaning_id);
-            foreach (['data.center7@balitower.co.id', 'security.bacep@balitower.co.id'] as $recipient) {
-                Mail::to($recipient)->send(new NotifReject($cleaning));
-            }
+            // foreach (['data.center7@balitower.co.id', 'security.bacep@balitower.co.id'] as $recipient) {
+            //     Mail::to($recipient)->send(new NotifReject($cleaning));
+            // }
             return $cleaningHistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
         }
     }

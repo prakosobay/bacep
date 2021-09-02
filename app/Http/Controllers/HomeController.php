@@ -25,25 +25,18 @@ class HomeController extends Controller
      */
     public function index()
     {
-        // dd(Auth::user()->role);
-        if ((Auth::user()->role == 'head') ||
-            (Auth::user()->role == 'check') ||
-            (Auth::user()->role == 'review') ||
-            (Auth::user()->role == 'bm') ||
-            (Auth::user()->role == 'security')
-        ) {
-            return view('home');
-            // The user is logged in...
-        } else {
-            return view('auth.login');
-        }
+        // $user = User::
+        // dd(auth()->user()->role1);
+        return view('home');
     }
 
     public function approval_view($type_view)
     {
 
-        $role = Auth::user()->role;
-        if ((Auth::user()->role == 'head') || (Auth::user()->role == 'check') || (Auth::user()->role == 'review') || (Auth::user()->role == 'security'))
+        $role = Auth::user()->role1;
+        if ((Auth::user()->role1 == 'head') || (Auth::user()->role1 == 'check') || (Auth::user()->role1 == 'review') || (Auth::user()->role1 == 'security')
+            || (Auth::user()->role2 == 'review') || (Auth::user()->role2 == 'check')
+        )
             if ($type_view == 'all') {
 
                 return view('approval');
@@ -92,7 +85,9 @@ class HomeController extends Controller
 
     public function approval_full($type_form)
     {
-        if ((Auth::user()->role == 'head') || (Auth::user()->role == 'check') || (Auth::user()->role == 'review')) {
+        if ((Auth::user()->role1 == 'head') || (Auth::user()->role1 == 'check') || (Auth::user()->role1 == 'review')
+            || (Auth::user()->role2 == 'check') || (Auth::user()->role2 == 'review')
+        ) {
             if ($type_form == 'all') {
                 return view('full_approval');
             } elseif ($type_form == 'survey') {
