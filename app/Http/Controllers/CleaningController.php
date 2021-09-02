@@ -101,16 +101,19 @@ class CleaningController extends Controller
         }
 
         $role_to = '';
-        if (($lasthistoryC->role_to == 'review')) {
+        $role_to2 = '';
+        if (($lasthistoryC->role_to == 'review') || ($lasthistoryC->role_to2 == 'review')) {
             // foreach (['rio.christian@balitower.co.id', 'rafli.ashshiddiqi@balitower.co.id', 'darajat.indraputra@balitower.co.id', 'lingga.anugerah@balitower.co.id'] as $recipient) {
             //     Mail::to($recipient)->send(new NotifEmail());
             // }
             $role_to = 'check';
-        } elseif (($lasthistoryC->role_to == 'check')) {
+            $role_to2 = 'check';
+        } elseif (($lasthistoryC->role_to == 'check') || ($lasthistoryC->role_to2 == 'check')) {
             // foreach (['security.bacep@balitower.co.id'] as $recipient) {
             //     Mail::to($recipient)->send(new NotifEmail());
             // }
             $role_to = 'security';
+            $role_to2 = '';
         } elseif (($lasthistoryC->role_to == 'security')) {
             // foreach (['panggah@balitower.co.id'] as $recipient) {
             //     Mail::to($recipient)->send(new NotifEmail());
@@ -122,6 +125,7 @@ class CleaningController extends Controller
             'cleaning_id' => $request->cleaning_id,
             'created_by' => Auth::user()->id,
             'role_to' => $role_to,
+            // 'role_to2' => $role_to2,
             'status' => $status,
             'aktif' => true,
         ]);

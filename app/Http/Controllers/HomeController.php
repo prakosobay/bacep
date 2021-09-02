@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CleaningHistory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -32,18 +33,19 @@ class HomeController extends Controller
 
     public function approval_view($type_view)
     {
-
-        $role = Auth::user()->role1;
+        // $role_1 = Auth::user()->role1;
+        // $role_2 = Auth::user()->role2;
+        $statuss = CleaningHistory::where('aktif', 1)->get();
+        // dd($statuss);
         if ((Auth::user()->role1 == 'head') || (Auth::user()->role1 == 'check') || (Auth::user()->role1 == 'review') || (Auth::user()->role1 == 'security')
             || (Auth::user()->role2 == 'review') || (Auth::user()->role2 == 'check')
-        )
-            if ($type_view == 'all') {
-
-                return view('approval');
-            } elseif ($type_view == 'survey') {
+        ) {
+            // if (Auth::user()->role1 != 'bm') {
+            if ($type_view == 'survey') {
                 $survey = DB::table('survey_histories')
                     ->join('survey', 'survey.survey_id', '=', 'survey_histories.survey_id')
-                    ->where('survey_histories.role_to', '=', $role)
+                    // ->where('survey_histories.role_to', '=', $role_1)
+                    // ->where('survey_histories.role_to', '=', $role_2)
                     ->where('survey_histories.aktif', '=', 1)
                     ->select('survey.*')
                     ->get();
@@ -51,12 +53,16 @@ class HomeController extends Controller
             } elseif ($type_view == 'cleaning') {
                 $cleaning = DB::table('cleaning_histories')
                     ->join('cleanings', 'cleanings.cleaning_id', '=', 'cleaning_histories.cleaning_id')
-                    ->where('cleaning_histories.role_to', '=', $role)
+                    ->where('cleaning_histories.status', '=', $statuss)
+                    // ->where('cleaning_histories.role_to', '=', $role_2)
                     ->where('cleaning_histories.aktif', '=', 1)
                     ->select('cleanings.*')
                     ->get();
                 return view('hasil_cleaning', ['cleaning' => $cleaning]);
+            } else {
+                return view('approval');
             }
+        }
     }
 
     public function log_view($type_view)
