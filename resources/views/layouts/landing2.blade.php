@@ -51,7 +51,7 @@
                         <li><a href="#VisitDC" data-after="VisitDC">Visit Data Center</a></li>
                         @elseif(Auth::user()->role1 == 'requestor')
                         <li><a href="#VisitDC" data-after="VisitDC">Visit Data Center</a></li>
-                        @elseif(Auth::user()->role1 == 'bm')
+                        {{-- @elseif(Auth::user()->role1 == 'bm') --}}
                         <li><a href="cleaning.form" data-after="BM">Cleaning</a></li>
                         @elseif(Auth::user()->role1 == 'security')
                         <li><a href="{{ url('approval/all') }}" data-after="Approval">Approval</a></li>

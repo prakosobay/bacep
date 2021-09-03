@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\CleaningHistory;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use Illuminate\Support\Facades\{DB, Auth, Gate, Session};
 
 class HomeController extends Controller
 {
@@ -26,21 +26,25 @@ class HomeController extends Controller
      */
     public function index()
     {
-        // $user = User::
-        // dd(auth()->user()->role1);
+        $role_2 = Auth::user()->roles;
+        // var_dump($role_2);
+        // die;
+        $arrole = [];
+        foreach ($role_2 as $rolee) {
+            // echo ($rolee->name);
+            $arrole[] = $rolee->name;
+        }
+        Session::put('arrole', $arrole);
+
         return view('home');
     }
 
-    public function approval_view($type_view, $status)
+    public function approval_view($type_view)
     {
-        // $role_1 = Auth::user()->role1;
-        // $role_2 = Auth::user()->role2;
-        $statuss = CleaningHistory::where('status', $status)->get();
-        // dd($statuss);
-        if ((Auth::user()->role1 == 'head') || (Auth::user()->role1 == 'check') || (Auth::user()->role1 == 'review') || (Auth::user()->role1 == 'security')
-            || (Auth::user()->role2 == 'review') || (Auth::user()->role2 == 'check')
-        ) {
-            // if (Auth::user()->role1 != 'bm') {
+        if ((Gate::denies('isAdmin')) && (Gate::denies('isBm'))) {
+            $role_1 = Session::get('arrole');
+            // $role_2 = auth()->user()->roles;
+            // $statuss = CleaningHistory::where('status', $status)->first();
             if ($type_view == 'survey') {
                 $survey = DB::table('survey_histories')
                     ->join('survey', 'survey.survey_id', '=', 'survey_histories.survey_id')
@@ -53,8 +57,8 @@ class HomeController extends Controller
             } elseif ($type_view == 'cleaning') {
                 $cleaning = DB::table('cleaning_histories')
                     ->join('cleanings', 'cleanings.cleaning_id', '=', 'cleaning_histories.cleaning_id')
-                    ->where('cleaning_histories.status', '=', $statuss)
-                    // ->where('cleaning_histories.role_to', '=', $role_2)
+                    // ->where('cleaning_histories.status', '=', $statuss)
+                    ->whereIn('cleaning_histories.role_to', $role_1)
                     ->where('cleaning_histories.aktif', '=', 1)
                     ->select('cleanings.*')
                     ->get();

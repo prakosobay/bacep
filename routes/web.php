@@ -44,7 +44,7 @@ Route::get('/', function () {
 
 // Route::get('/milih', [HomeController::class, 'milih_role']);
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/home', [HomeController::class, 'index']);
 
     //Detail History

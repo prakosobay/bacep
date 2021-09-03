@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('judul_halaman', 'Tabel User')
+@section('judul_halaman', 'Tabel User Web Permit')
         {{ csrf_field() }}
 
 @section('konten')
@@ -21,7 +21,6 @@
                                     <th>No. HP</th>
                                     <th>Department</th>
                                     <th>Action</th>
-                                    <th>File</th>
                                 </tr>
                             </thead>
                             <tbody>

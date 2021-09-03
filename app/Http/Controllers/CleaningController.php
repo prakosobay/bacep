@@ -4,27 +4,24 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\HomeController;
-use App\Models\Cleaning;
-use App\Models\CleaningHistory;
-use App\Models\CleaningFull;
-use App\Models\MasterOb;
-use App\Models\PilihanWork;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\{DB, Auth, Gate};
 use Barryvdh\DomPDF\Facade as PDF;
-use App\Mail\NotifEmail;
-use App\Mail\NotifReject;
-use App\Mail\NotifFull;
+use App\Mail\{NotifEmail, NotifReject, NotifFull};
+use App\Models\{User, Role, MasterOb, PilihanWork};
+use App\Models\{Cleaning, CleaningHistory, CleaningFull};
 use Illuminate\Support\Facades\Mail;
+
 
 class CleaningController extends Controller
 {
     public function tampilan()
     {
-        if (Auth::user()->role1 == 'bm') {
+        if (Gate::allows('isBm')) {
             $master_ob = MasterOb::all();
             $pilihanwork = PilihanWork::all();
             return view('cleaning.form', ['master_ob' => $master_ob, 'pilihanwork' => $pilihanwork]);
+        } else {
+            abort(403);
         }
     }
 
@@ -45,7 +42,7 @@ class CleaningController extends Controller
     {
         $data = $request->all();
         // dd($data);
-        if (Auth::user()->role1 == 'bm') {
+        if (Gate::allows('isBm')) {
             $data['cleaning_name'] = MasterOb::find($data['cleaning_name'])->nama;
             $data['cleaning_name2'] = MasterOb::find($data['cleaning_name2'])->nama;
             $data['cleaning_work'] = PilihanWork::find($data['cleaning_work'])->work;
