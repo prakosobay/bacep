@@ -28,11 +28,8 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('isAdmin', function ($user) {
             return $user->role1 == 'admin';
         });
-        Gate::define('isReview', function ($user) {
-            return $user->role1 == 'review';
-        });
-        Gate::define('isCheck', function ($user) {
-            return $user->role2 == 'check';
+        Gate::define('isApproval', function ($user) {
+            return $user->role1 == 'approval';
         });
         Gate::define('isBm', function ($user) {
             return $user->role1 == 'bm';
@@ -43,8 +40,5 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('isHead', function ($user) {
             return $user->role1 == 'head';
         });
-        // Gate::define('bm', function ($user, $role) {
-        //     return $user->id === $role->user_id;
-        // });
     }
 }

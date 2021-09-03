@@ -4,12 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\HomeController;
-use Illuminate\Support\Facades\{DB, Auth, Gate};
+use Illuminate\Support\Facades\{DB, Auth, Gate, Mail};
 use Barryvdh\DomPDF\Facade as PDF;
 use App\Mail\{NotifEmail, NotifReject, NotifFull};
 use App\Models\{User, Role, MasterOb, PilihanWork};
 use App\Models\{Cleaning, CleaningHistory, CleaningFull};
-use Illuminate\Support\Facades\Mail;
 
 
 class CleaningController extends Controller
@@ -85,9 +84,9 @@ class CleaningController extends Controller
         $lasthistoryC->update(['aktif' => false]);
 
         $status = '';
-        if (($lasthistoryC->status == 'requested') && (Auth::user()->role1 == 'review') && (Auth::user()->role2 == 'check')) {
+        if (($lasthistoryC->status == 'requested') && (Auth::user()->role1 == 'review')) {
             $status = 'reviewed';
-        } elseif (($lasthistoryC->status == 'reviewed') && (Auth::user()->role1 == 'review') && (Auth::user()->role2 == 'check')) {
+        } elseif (($lasthistoryC->status == 'reviewed') && (Auth::user()->role1 == 'review')) {
             $status = 'checked';
         } elseif (($lasthistoryC->status == 'checked') && (Auth::user()->role1 == 'security')) {
             $status = 'acknowledge';
@@ -98,19 +97,16 @@ class CleaningController extends Controller
         }
 
         $role_to = '';
-        $role_to2 = '';
-        if (($lasthistoryC->role_to == 'review') || ($lasthistoryC->role_to2 == 'review')) {
+        if (($lasthistoryC->role_to == 'review')) {
             // foreach (['rio.christian@balitower.co.id', 'rafli.ashshiddiqi@balitower.co.id', 'darajat.indraputra@balitower.co.id', 'lingga.anugerah@balitower.co.id'] as $recipient) {
             //     Mail::to($recipient)->send(new NotifEmail());
             // }
             $role_to = 'check';
-            $role_to2 = 'check';
-        } elseif (($lasthistoryC->role_to == 'check') || ($lasthistoryC->role_to2 == 'check')) {
+        } elseif (($lasthistoryC->role_to == 'check')) {
             // foreach (['security.bacep@balitower.co.id'] as $recipient) {
             //     Mail::to($recipient)->send(new NotifEmail());
             // }
             $role_to = 'security';
-            $role_to2 = '';
         } elseif (($lasthistoryC->role_to == 'security')) {
             // foreach (['panggah@balitower.co.id'] as $recipient) {
             //     Mail::to($recipient)->send(new NotifEmail());
@@ -122,7 +118,6 @@ class CleaningController extends Controller
             'cleaning_id' => $request->cleaning_id,
             'created_by' => Auth::user()->id,
             'role_to' => $role_to,
-            // 'role_to2' => $role_to2,
             'status' => $status,
             'aktif' => true,
         ]);

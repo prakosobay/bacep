@@ -27,11 +27,8 @@ class HomeController extends Controller
     public function index()
     {
         $role_2 = Auth::user()->roles;
-        // var_dump($role_2);
-        // die;
         $arrole = [];
         foreach ($role_2 as $rolee) {
-            // echo ($rolee->name);
             $arrole[] = $rolee->name;
         }
         Session::put('arrole', $arrole);
@@ -43,8 +40,6 @@ class HomeController extends Controller
     {
         if ((Gate::denies('isAdmin')) && (Gate::denies('isBm'))) {
             $role_1 = Session::get('arrole');
-            // $role_2 = auth()->user()->roles;
-            // $statuss = CleaningHistory::where('status', $status)->first();
             if ($type_view == 'survey') {
                 $survey = DB::table('survey_histories')
                     ->join('survey', 'survey.survey_id', '=', 'survey_histories.survey_id')
@@ -57,7 +52,6 @@ class HomeController extends Controller
             } elseif ($type_view == 'cleaning') {
                 $cleaning = DB::table('cleaning_histories')
                     ->join('cleanings', 'cleanings.cleaning_id', '=', 'cleaning_histories.cleaning_id')
-                    // ->where('cleaning_histories.status', '=', $statuss)
                     ->whereIn('cleaning_histories.role_to', $role_1)
                     ->where('cleaning_histories.aktif', '=', 1)
                     ->select('cleanings.*')
@@ -66,6 +60,8 @@ class HomeController extends Controller
             } else {
                 return view('approval');
             }
+        } else {
+            abort(403);
         }
     }
 
@@ -95,9 +91,7 @@ class HomeController extends Controller
 
     public function approval_full($type_form)
     {
-        if ((Auth::user()->role1 == 'head') || (Auth::user()->role1 == 'check') || (Auth::user()->role1 == 'review')
-            || (Auth::user()->role2 == 'check') || (Auth::user()->role2 == 'review')
-        ) {
+        if ((Gate::allows('isApproval')) || (Gate::allows('isBoss')) || (Gate::allows('isAdmin'))) {
             if ($type_form == 'all') {
                 return view('full_approval');
             } elseif ($type_form == 'survey') {
@@ -107,6 +101,8 @@ class HomeController extends Controller
                 $cleaningFull = DB::table('cleaning_fulls')->get();
                 return view('full_cleaning', ['cleaningFull' => $cleaningFull]);
             }
+        } else {
+            abort(403);
         }
     }
 }
