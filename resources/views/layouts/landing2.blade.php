@@ -56,7 +56,7 @@
                         @elseif(Auth::user()->role1 == 'security')
                         <li><a href="{{ url('approval/all') }}" data-after="Approval">Approval</a></li>
                         @elseif(Auth::user()->role1 == 'admin')
-                        <li><a href="{{ url('edit') }}" data-after="Approval">Edit User</a></li>
+                        <li><a href="{{ url('admin') }}" data-after="Approval">Admin Panel</a></li>
                         @else
                         <li><a href="{{ url('full_approval/all') }}" data-after="Full">Full Approval</a></li>
                         <li><a href="{{ url('approval/all') }}" data-after="Approval">Approval</a></li>

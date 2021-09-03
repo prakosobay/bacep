@@ -31,11 +31,11 @@ class HomeController extends Controller
         return view('home');
     }
 
-    public function approval_view($type_view)
+    public function approval_view($type_view, $status)
     {
         // $role_1 = Auth::user()->role1;
         // $role_2 = Auth::user()->role2;
-        $statuss = CleaningHistory::where('aktif', 1)->get();
+        $statuss = CleaningHistory::where('status', $status)->get();
         // dd($statuss);
         if ((Auth::user()->role1 == 'head') || (Auth::user()->role1 == 'check') || (Auth::user()->role1 == 'review') || (Auth::user()->role1 == 'security')
             || (Auth::user()->role2 == 'review') || (Auth::user()->role2 == 'check')

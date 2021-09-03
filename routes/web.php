@@ -90,4 +90,7 @@ Route::middleware(['auth'])->group(function () {
     //PDF
     Route::get('/survey_pdf/{id}', [HomeController::class, 'cetak_survey_pdf']);
     Route::get('/cleaning_pdf/{id}', [CleaningController::class, 'cetak_cleaning_pdf']);
+
+    //Admin Panel
+    Route::get('/admin', [AdminController::class, 'get_user']);
 });
