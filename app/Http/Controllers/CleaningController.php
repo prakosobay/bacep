@@ -84,13 +84,13 @@ class CleaningController extends Controller
         $lasthistoryC->update(['aktif' => false]);
 
         $status = '';
-        if (($lasthistoryC->status == 'requested') && (Auth::user()->role1 == 'review')) {
+        if ($lasthistoryC->status == 'requested') {
             $status = 'reviewed';
-        } elseif (($lasthistoryC->status == 'reviewed') && (Auth::user()->role1 == 'review')) {
+        } elseif ($lasthistoryC->status == 'reviewed') {
             $status = 'checked';
-        } elseif (($lasthistoryC->status == 'checked') && (Auth::user()->role1 == 'security')) {
+        } elseif ($lasthistoryC->status == 'checked') {
             $status = 'acknowledge';
-        } elseif (($lasthistoryC->status == 'acknowledge') && (Auth::user()->role1 == 'head')) {
+        } elseif ($lasthistoryC->status == 'acknowledge') {
             $status = 'final';
         } elseif ($lasthistoryC->status == 'final') {
             $cleaning = Cleaning::find($request->cleaning_id)->first();

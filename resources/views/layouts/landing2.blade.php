@@ -47,20 +47,21 @@
                         <div class="bar"></div>
                     </div>
                     <ul>
-                        @if(Auth::user()->role1 == 'visitor')
-                        <li><a href="#VisitDC" data-after="VisitDC">Visit Data Center</a></li>
-                        @elseif(Auth::user()->role1 == 'requestor')
-                        <li><a href="#VisitDC" data-after="VisitDC">Visit Data Center</a></li>
-                        {{-- @elseif(Auth::user()->role1 == 'bm') --}}
+                        {{-- <li><a href="#VisitDC" data-after="VisitDC">Visit Data Center</a></li>
+                        <li><a href="#VisitDC" data-after="VisitDC">Visit Data Center</a></li> --}}
+                        @can('isBm')
                         <li><a href="cleaning.form" data-after="BM">Cleaning</a></li>
-                        @elseif(Auth::user()->role1 == 'security')
-                        <li><a href="{{ url('approval/all') }}" data-after="Approval">Approval</a></li>
-                        @elseif(Auth::user()->role1 == 'admin')
+                        @elsecan('isAdmin')
                         <li><a href="{{ url('admin') }}" data-after="Approval">Admin Panel</a></li>
-                        @else
-                        <li><a href="{{ url('full_approval/all') }}" data-after="Full">Full Approval</a></li>
+                        @elsecan('isApproval')
                         <li><a href="{{ url('approval/all') }}" data-after="Approval">Approval</a></li>
-                        @endif
+                        <li><a href="{{ url('full_approval/all') }}" data-after="Full">Full Approval</a></li>
+                        @elsecan('isHead')
+                        <li><a href="{{ url('approval/all') }}" data-after="Approval">Approval</a></li>
+                        <li><a href="{{ url('full_approval/all') }}" data-after="Full">Full Approval</a></li>
+                        @elsecan('isSecurity')
+                        <li><a href="{{ url('approval/all') }}" data-after="Approval">Approval</a></li>
+                        @endcan
                         <li><a href="{{ url('log/all') }}" data-after="Log">Log</a></li>
                         <li>
                                 <a href="{{ route('logout') }}"
