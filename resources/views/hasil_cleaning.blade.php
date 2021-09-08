@@ -32,14 +32,22 @@
                                         <td>{{ $p->cleaning_work }}</td>
                                         <td>
                                             @can('isApproval')
+                                                @foreach ($lasthistoryC as $l)
+
+                                                @endforeach
+                                                    @if($l->pdf == true)
+                                                    <a href="javascript:void(0)" id="ok" class="approve" data-cleaning_id="{{$p->cleaning_id}}">Approve</a>
+                                                    <a href="javascript:void(0)" id="not" class="reject" data-cleaning_id="{{$p->cleaning_id}}">Reject</a>
+                                                    @else
+                                                    <a href="javascript:void(0)" id="ok" class="approve" data-role="disabled" data-cleaning_id="{{$p->cleaning_id}}">Approve</a>
+                                                    <a href="javascript:void(0)" id="not" class="reject" data-role="disabled" data-cleaning_id="{{$p->cleaning_id}}">Reject</a>
+                                                    @endif
+                                                @elsecan('isHead')
                                                 <a href="javascript:void(0)" id="ok" class="approve" data-cleaning_id="{{$p->cleaning_id}}">Approve</a>
                                                 <a href="javascript:void(0)" id="not" class="reject" data-cleaning_id="{{$p->cleaning_id}}">Reject</a>
-                                            @elsecan('isHead')
+                                                @elsecan('isSecurity')
                                                 <a href="javascript:void(0)" id="ok" class="approve" data-cleaning_id="{{$p->cleaning_id}}">Approve</a>
-                                                <a href="javascript:void(0)" id="not" class="reject" data-cleaning_id="{{$p->cleaning_id}}">Reject</a>
-                                            @elsecan('isSecurity')
-                                                <a href="javascript:void(0)" id="ok" class="approve" data-cleaning_id="{{$p->cleaning_id}}">Approve</a>
-                                            @endcan
+                                                @endcan
                                                 <a href="/detail_cleaning/{{$p->cleaning_id}}">History</a>
                                         </td>
                                         <td><a href="/cleaning_pdf/{{$p->cleaning_id}}" class="btn btn-primary" target="_blank">LIHAT PDF</a></td>

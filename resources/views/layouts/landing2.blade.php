@@ -50,15 +50,19 @@
                         {{-- <li><a href="#VisitDC" data-after="VisitDC">Visit Data Center</a></li>
                         <li><a href="#VisitDC" data-after="VisitDC">Visit Data Center</a></li> --}}
                         @can('isBm')
-                        <li><a href="cleaning.form" data-after="BM">Cleaning</a></li>
+                        <li><a href="cleaning.form" data-after="cleaning">Cleaning</a></li>
+                        <li><a href="other.form" data-after="other">Other</a></li>
                         @elsecan('isAdmin')
-                        <li><a href="{{ url('admin') }}" data-after="Approval">Admin Panel</a></li>
+                        <li><a href="{{ url('admin') }}" data-after="Admin">Admin Panel</a></li>
+                        <li><a href="{{ url('inventory') }}" data-after="inventory">Inventory</a></li>
                         @elsecan('isApproval')
                         <li><a href="{{ url('approval/all') }}" data-after="Approval">Approval</a></li>
                         <li><a href="{{ url('full_approval/all') }}" data-after="Full">Full Approval</a></li>
+                        <li><a href="{{ url('inventory') }}" data-after="inventory">Inventory</a></li>
                         @elsecan('isHead')
                         <li><a href="{{ url('approval/all') }}" data-after="Approval">Approval</a></li>
                         <li><a href="{{ url('full_approval/all') }}" data-after="Full">Full Approval</a></li>
+                        <li><a href="{{ url('inventory') }}" data-after="inventory">Inventory</a></li>
                         @elsecan('isSecurity')
                         <li><a href="{{ url('approval/all') }}" data-after="Approval">Approval</a></li>
                         @endcan
