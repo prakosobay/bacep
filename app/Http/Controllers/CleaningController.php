@@ -3,13 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\{DB, Auth, Gate, Mail};
 use Barryvdh\DomPDF\Facade as PDF;
 use App\Mail\{NotifEmail, NotifReject, NotifFull};
 use App\Models\{User, Role, MasterOb, PilihanWork};
 use App\Models\{Cleaning, CleaningHistory, CleaningFull};
-
 
 class CleaningController extends Controller
 {
@@ -81,7 +79,7 @@ class CleaningController extends Controller
     public function approve_cleaning(Request $request)
     {
         $lasthistoryC = CleaningHistory::where('cleaning_id', '=', $request->cleaning_id)->latest()->first();
-        $lasthistoryC->update(['aktif' => false]);
+        $lasthistoryC->update(['aktif' => false, 'pdf' => false]);
 
         $status = '';
         if ($lasthistoryC->status == 'requested') {

@@ -20,6 +20,7 @@ class CreateCleaningHistoriesTable extends Migration
             $table->string('role_to', 50);
             $table->string('status', 50);
             $table->boolean('aktif', 1);
+            $table->boolean('pdf', 1);
             $table->timestamps();
         });
     }

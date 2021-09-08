@@ -2,47 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
+use Illuminate\Support\Facades\{Route, Auth};
+use App\Http\Controllers\{HomeController, CleaningController, AdminController};
 use App\Console\Kernel;
 use Illuminate\Routing\Router;
-use Illuminate\Support\Facades\Auth;
 use App\Models\User;
-use App\Http\Controllers\CleaningController;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-
 
 // Auth::routes(['verify' => true]);
 Route::get('/', function () {
     return view('auth.login');
 })->middleware('guest');
-
-// Route::get('/kirimemail', [App\Http\Controllers\TesEmailController::class, 'index'])->middleware(['verified']);
-
-// Route::get('/Register', function () {
-//     return view('auth.register');
-// });
-
-// Route::get('/Login', function () {
-//     return view('auth.login');
-// });
-
-// Route::post('/submit_register', [RegisController::class, 'sign_up']);
-
-// Route::post('/sign_in', [LoginController::class, 'sign_in']);
-
-// Route::get('/milih', [HomeController::class, 'milih_role']);
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/home', [HomeController::class, 'index']);
@@ -80,7 +49,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/log/{type_view}', [HomeController::class, 'log_view']);
 
     //Paket OB
-    // Route::get('/cleaning_bm', [CleaningController::class, 'tampilan']);
     Route::get('/detail/{id}', [CleaningController::class, 'detail_ob']);
 
     //Pilihan Work

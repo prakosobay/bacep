@@ -24,6 +24,7 @@ class CleaningHistory extends Model
         'role_to',
         'status',
         'aktif',
+        'pdf',
     ];
 
     public function createdBy()
