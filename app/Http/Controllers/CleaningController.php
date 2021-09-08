@@ -56,7 +56,8 @@ class CleaningController extends Controller
                 'created_by' => Auth::user()->id,
                 'role_to' => 'review',
                 'status' => 'requested',
-                'aktif' => '1'
+                'aktif' => '1',
+                'pdf' => false
             ]);
         }
         return $cleaningHistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
@@ -79,45 +80,49 @@ class CleaningController extends Controller
     public function approve_cleaning(Request $request)
     {
         $lasthistoryC = CleaningHistory::where('cleaning_id', '=', $request->cleaning_id)->latest()->first();
-        $lasthistoryC->update(['aktif' => false, 'pdf' => false]);
+        $lasthistoryC->update(['aktif' => false]);
 
-        $status = '';
-        if ($lasthistoryC->status == 'requested') {
-            $status = 'reviewed';
-        } elseif ($lasthistoryC->status == 'reviewed') {
-            $status = 'checked';
-        } elseif ($lasthistoryC->status == 'checked') {
-            $status = 'acknowledge';
-        } elseif ($lasthistoryC->status == 'acknowledge') {
-            $status = 'final';
-        } elseif ($lasthistoryC->status == 'final') {
-            $cleaning = Cleaning::find($request->cleaning_id)->first();
+        if ('pdf' == true) {
+            $status = '';
+            if ($lasthistoryC->status == 'requested') {
+                $status = 'reviewed';
+            } elseif ($lasthistoryC->status == 'reviewed') {
+                $status = 'checked';
+            } elseif ($lasthistoryC->status == 'checked') {
+                $status = 'acknowledge';
+            } elseif ($lasthistoryC->status == 'acknowledge') {
+                $status = 'final';
+            } elseif ($lasthistoryC->status == 'final') {
+                $cleaning = Cleaning::find($request->cleaning_id)->first();
+            }
+
+            $role_to = '';
+            if (($lasthistoryC->role_to == 'review')) {
+                // foreach (['rio.christian@balitower.co.id', 'rafli.ashshiddiqi@balitower.co.id', 'darajat.indraputra@balitower.co.id', 'lingga.anugerah@balitower.co.id'] as $recipient) {
+                //     Mail::to($recipient)->send(new NotifEmail());
+                // }
+                $role_to = 'check';
+            } elseif (($lasthistoryC->role_to == 'check')) {
+                // foreach (['security.bacep@balitower.co.id'] as $recipient) {
+                //     Mail::to($recipient)->send(new NotifEmail());
+                // }
+                $role_to = 'security';
+            } elseif (($lasthistoryC->role_to == 'security')) {
+                // foreach (['panggah@balitower.co.id'] as $recipient) {
+                //     Mail::to($recipient)->send(new NotifEmail());
+                // }
+                $role_to = 'head';
+            }
+        } else {
+            abort(403);
         }
-
-        $role_to = '';
-        if (($lasthistoryC->role_to == 'review')) {
-            // foreach (['rio.christian@balitower.co.id', 'rafli.ashshiddiqi@balitower.co.id', 'darajat.indraputra@balitower.co.id', 'lingga.anugerah@balitower.co.id'] as $recipient) {
-            //     Mail::to($recipient)->send(new NotifEmail());
-            // }
-            $role_to = 'check';
-        } elseif (($lasthistoryC->role_to == 'check')) {
-            // foreach (['security.bacep@balitower.co.id'] as $recipient) {
-            //     Mail::to($recipient)->send(new NotifEmail());
-            // }
-            $role_to = 'security';
-        } elseif (($lasthistoryC->role_to == 'security')) {
-            // foreach (['panggah@balitower.co.id'] as $recipient) {
-            //     Mail::to($recipient)->send(new NotifEmail());
-            // }
-            $role_to = 'head';
-        }
-
         $cleaningHistory = CleaningHistory::create([
             'cleaning_id' => $request->cleaning_id,
             'created_by' => Auth::user()->id,
             'role_to' => $role_to,
             'status' => $status,
             'aktif' => true,
+            'pdf' => false,
         ]);
 
         if ($lasthistoryC->role_to == 'head') {
@@ -168,6 +173,8 @@ class CleaningController extends Controller
     {
         $cleaning = Cleaning::find($id);
         $lasthistoryC = CleaningHistory::where('cleaning_id', $id)->where('aktif', 1)->first();
+        $lasthistoryC->update(['pdf' => true]);
+
         $cleaningHistory = DB::table('cleaning_histories')
             ->join('cleanings', 'cleanings.cleaning_id', '=', 'cleaning_histories.cleaning_id')
             ->join('users', 'users.id', '=', 'cleaning_histories.created_by')
