@@ -80,42 +80,42 @@ class CleaningController extends Controller
     public function approve_cleaning(Request $request)
     {
         $lasthistoryC = CleaningHistory::where('cleaning_id', '=', $request->cleaning_id)->latest()->first();
-        $lasthistoryC->update(['aktif' => false]);
+        if ($lasthistoryC->pdf == true) {
+            $lasthistoryC->update(['aktif' => false]);
 
-        // if ($lasthistoryC->pdf == true) {
-        $status = '';
-        if ($lasthistoryC->status == 'requested') {
-            $status = 'reviewed';
-        } elseif ($lasthistoryC->status == 'reviewed') {
-            $status = 'checked';
-        } elseif ($lasthistoryC->status == 'checked') {
-            $status = 'acknowledge';
-        } elseif ($lasthistoryC->status == 'acknowledge') {
-            $status = 'final';
-        } elseif ($lasthistoryC->status == 'final') {
-            $cleaning = Cleaning::find($request->cleaning_id)->first();
-        }
+            $status = '';
+            if ($lasthistoryC->status == 'requested') {
+                $status = 'reviewed';
+            } elseif ($lasthistoryC->status == 'reviewed') {
+                $status = 'checked';
+            } elseif ($lasthistoryC->status == 'checked') {
+                $status = 'acknowledge';
+            } elseif ($lasthistoryC->status == 'acknowledge') {
+                $status = 'final';
+            } elseif ($lasthistoryC->status == 'final') {
+                $cleaning = Cleaning::find($request->cleaning_id)->first();
+            }
 
-        $role_to = '';
-        if (($lasthistoryC->role_to == 'review')) {
-            // foreach (['rio.christian@balitower.co.id', 'rafli.ashshiddiqi@balitower.co.id', 'darajat.indraputra@balitower.co.id', 'lingga.anugerah@balitower.co.id'] as $recipient) {
-            //     Mail::to($recipient)->send(new NotifEmail());
-            // }
-            $role_to = 'check';
-        } elseif (($lasthistoryC->role_to == 'check')) {
-            // foreach (['security.bacep@balitower.co.id'] as $recipient) {
-            //     Mail::to($recipient)->send(new NotifEmail());
-            // }
-            $role_to = 'security';
-        } elseif (($lasthistoryC->role_to == 'security')) {
-            // foreach (['panggah@balitower.co.id'] as $recipient) {
-            //     Mail::to($recipient)->send(new NotifEmail());
-            // }
-            $role_to = 'head';
+            $role_to = '';
+            if (($lasthistoryC->role_to == 'review')) {
+                // foreach (['rio.christian@balitower.co.id', 'rafli.ashshiddiqi@balitower.co.id', 'darajat.indraputra@balitower.co.id', 'lingga.anugerah@balitower.co.id'] as $recipient) {
+                //     Mail::to($recipient)->send(new NotifEmail());
+                // }
+                $role_to = 'check';
+            } elseif (($lasthistoryC->role_to == 'check')) {
+                // foreach (['security.bacep@balitower.co.id'] as $recipient) {
+                //     Mail::to($recipient)->send(new NotifEmail());
+                // }
+                $role_to = 'security';
+            } elseif (($lasthistoryC->role_to == 'security')) {
+                // foreach (['panggah@balitower.co.id'] as $recipient) {
+                //     Mail::to($recipient)->send(new NotifEmail());
+                // }
+                $role_to = 'head';
+            }
+        } else {
+            abort(403);
         }
-        // } else {
-        //     abort(403);
-        // }
         $cleaningHistory = CleaningHistory::create([
             'cleaning_id' => $request->cleaning_id,
             'created_by' => Auth::user()->id,

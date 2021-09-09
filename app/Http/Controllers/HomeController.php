@@ -56,8 +56,8 @@ class HomeController extends Controller
                     ->where('cleaning_histories.aktif', '=', 1)
                     ->select('cleanings.*')
                     ->get();
-                $lasthistoryC = CleaningHistory::all();
-                return view('hasil_cleaning', ['cleaning' => $cleaning, 'lasthistoryC' => $lasthistoryC]);
+                // $lasthistoryC = CleaningHistory::all();
+                return view('hasil_cleaning', ['cleaning' => $cleaning]);
             } else {
                 return view('approval');
             }
