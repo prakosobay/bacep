@@ -8,6 +8,7 @@ use Barryvdh\DomPDF\Facade as PDF;
 use App\Mail\{NotifEmail, NotifReject, NotifFull};
 use App\Models\{User, Role, MasterOb, PilihanWork};
 use App\Models\{Cleaning, CleaningHistory, CleaningFull};
+use phpDocumentor\Reflection\PseudoTypes\True_;
 
 class CleaningController extends Controller
 {
@@ -150,22 +151,28 @@ class CleaningController extends Controller
     public function cleaning_reject(Request $request)
     {
         $lasthistoryC = CleaningHistory::where('cleaning_id', '=', $request->cleaning_id)->latest()->first();
-        if ($lasthistoryC->role_to != 'security') {
-            $lasthistoryC->update(['aktif' => false]);
+        // if ($lasthistoryC->role_to != 'security') {
+        if (Gate::denies('isSecurity')) {
+            if ($lasthistoryC->pdf == true) {
+                $lasthistoryC->update(['aktif' => false]);
 
-            $cleaningHistory = CleaningHistory::create([
-                'cleaning_id' => $request->cleaning_id,
-                'created_by' => Auth::user()->id,
-                'role_to' => 0,
-                'status' => 'rejected',
-                'aktif' => true,
-            ]);
+                $cleaningHistory = CleaningHistory::create([
+                    'cleaning_id' => $request->cleaning_id,
+                    'created_by' => Auth::user()->id,
+                    'role_to' => 0,
+                    'status' => 'rejected',
+                    'aktif' => true,
+                    'pdf' => false,
+                ]);
 
-            $cleaning = Cleaning::find($request->cleaning_id);
-            // foreach (['data.center7@balitower.co.id', 'security.bacep@balitower.co.id'] as $recipient) {
-            //     Mail::to($recipient)->send(new NotifReject($cleaning));
-            // }
-            return $cleaningHistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
+                $cleaning = Cleaning::find($request->cleaning_id);
+                // foreach (['data.center7@balitower.co.id', 'security.bacep@balitower.co.id'] as $recipient) {
+                //     Mail::to($recipient)->send(new NotifReject($cleaning));
+                // }
+                return $cleaningHistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
+            } else {
+                abort(403);
+            }
         }
     }
 
