@@ -114,17 +114,17 @@ class CleaningController extends Controller
                 // }
                 $role_to = 'head';
             }
+            $cleaningHistory = CleaningHistory::create([
+                'cleaning_id' => $request->cleaning_id,
+                'created_by' => Auth::user()->id,
+                'role_to' => $role_to,
+                'status' => $status,
+                'aktif' => true,
+                'pdf' => false,
+            ]);
         } else {
             abort(403);
         }
-        $cleaningHistory = CleaningHistory::create([
-            'cleaning_id' => $request->cleaning_id,
-            'created_by' => Auth::user()->id,
-            'role_to' => $role_to,
-            'status' => $status,
-            'aktif' => true,
-            'pdf' => false,
-        ]);
 
         if ($lasthistoryC->role_to == 'head') {
             $cleaning = Cleaning::find($request->cleaning_id);
