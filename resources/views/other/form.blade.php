@@ -40,34 +40,72 @@
 				</div>
 
                 {{-- Validity --}}
-                <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate = "Pilih Tanggal Pekerjaan">
+                <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate = "Choose the date">
                     <span class="label-input100">Validity (Tanggal Mulai Pekerjaan) *</span>
                     <input class="input100" type="date" name="validity_from" id="dateofbirth">
                 </div>
-                <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate = "Pilih Tanggal Pekerjaan">
+                <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate = "Choose the date">
                     <span class="label-input100">Validity (Tanggal Selesai Pekerjaan) *</span>
                     <input class="input100" type="date" name="validity_to" id="dateofbirth">
                 </div>
 
+                {{-- Isian --}}
+                <div class="wrap-input100 validate-input bg1" data-validate="Please Type Correctly">
+                    <span class="label-input100">Background and Objective (Latar Belakang dan Tujuan) *</span>
+					<input class="input100" type="text" name="other_background" placeholder="Fill in here">
+				</div>
+                <div class="wrap-input100 bg0 rs1-alert-validate">
+					<span class="label-input100">Description of Scope of Work (Deskripsikan Lingkup Pekerjaan) *</span>
+					<input type="text" class="input100" name="other_describ" id="describ" value="">
+				</div>
+                <div class="wrap-input100 bg0 rs1-alert-validate">
+					<span class="label-input100">Testing and Verification (Pengujian dan Verifikasi) *</span>
+					<input type="text" class="input100" name="other_testing" id="testing" value="">
+				</div>
+                <div class="wrap-input100 bg0 rs1-alert-validate">
+					<span class="label-input100">Rollback Operation/Other Infomation (Operasi Pembatalan/Infomasi Lain) *</span>
+					<input type="text" class="input100" name="other_rollback" id="rollback" value="">
+				</div>
+
+                {{-- Pilih Personil --}}
+                {{-- <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate="Type the PIC">
+					<span class="label-input100">Person In Charge 1(Nama Personil 1) *</span>
+                    <div>
+                        <select class="js-select2" id="pilihan1" name="cleaning_name">
+                            <option value=""></option>
+                        </select>
+                        <div class="dropDownSelect2"></div>
+                    </div>
+				</div>
+                <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate="Pilih Personil">
+					<span class="label-input100">Person In Charge 2(Nama Personil 2) *</span>
+                    <div>
+                        <select class="js-select2" id="pilihan2" name="cleaning_name2">
+                            <option value=""></option>
+                        </select>
+                        <div class="dropDownSelect2"></div>
+                    </div>
+				</div> --}}
+
                 {{-- Entry Area --}}
-                <div class="wrap-input100 validate-input bg1 rs1-wrap-input100">
+                {{-- <div class="wrap-input100 validate-input bg1 rs1-wrap-input100">
                     <div class="contact100-form-radio m-t-15">
-                        <input class="input-radio100" id="radio1" type="textbox" name="server" value="server">
                         <label class="label-radio100" for="radio1">
+                            <input class="input-radio100" id="server" type="textbox" name="server" value="server">
                             Server Room
                         </label>
                     </div>
 
                     <div class="contact100-form-radio">
-                        <input class="input-radio100" id="radio2" type="textbox" name="mmr1" value="mmr1">
                         <label class="label-radio100" for="radio2">
+                            <input class="input-radio100" id="mmr1" type="textbox" name="mmr1" value="mmr1">
                             MMR 1
                         </label>
                     </div>
 
                     <div class="contact100-form-radio">
-                        <input class="input-radio100" id="radio3" type="textbox" name="mmr2" value="mmr2">
                         <label class="label-radio100" for="radio3">
+                            <input class="input-radio100" id="mmr2" type="textbox" name="mmr2" value="mmr2">
                             MMR 2
                         </label>
                     </div>
@@ -94,7 +132,7 @@
                             Battery Room
                         </label>
                     </div>
-                </div>
+                </div> --}}
 
                 <!-- Detail Time Activity -->
                 {{-- <table class="table table-bordered">
@@ -238,44 +276,10 @@
                     </tbody>
                 </table> --}}
 
-                {{-- Isian --}}
-                {{-- <div class="wrap-input100 bg0 rs1-alert-validate">
-					<span class="label-input100">Background and Objective (Latar Belakang dan Tujuan) *</span>
-					<input type="text" class="input100" name="cleaning_background" id="background" value="" readonly>
-				</div>
-                <div class="wrap-input100 bg0 rs1-alert-validate">
-					<span class="label-input100">Description of Scope of Work (Deskripsikan Lingkup Pekerjaan) *</span>
-					<input type="text" class="input100" name="cleaning_describ" id="describ" value="" readonly>
-				</div>
-                <div class="wrap-input100 bg0 rs1-alert-validate">
-					<span class="label-input100">Testing and Verification (Pengujian dan Verifikasi)</span>
-					<input type="text" class="input100" name="cleaning_testing" id="testing" value="" readonly>
-				</div>
-                <div class="wrap-input100 bg0 rs1-alert-validate">
-					<span class="label-input100">Rollback Operation/Other Infomation (Operasi Pembatalan/Infomasi Lain)</span>
-					<input type="text" class="input100" name="cleaning_rollback" id="rollback" value="" readonly>
-				</div> --}}
 
 
-                {{-- Pilih Personil --}}
-                {{-- <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate="Pilih Personil">
-					<span class="label-input100">Person In Charge 1(Nama Personil 1) *</span>
-                    <div>
-                        <select class="js-select2" id="pilihan1" name="cleaning_name">
-                            <option value=""></option>
-                        </select>
-                        <div class="dropDownSelect2"></div>
-                    </div>
-				</div>
-                <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate="Pilih Personil">
-					<span class="label-input100">Person In Charge 2(Nama Personil 2) *</span>
-                    <div>
-                        <select class="js-select2" id="pilihan2" name="cleaning_name2">
-                            <option value=""></option>
-                        </select>
-                        <div class="dropDownSelect2"></div>
-                    </div>
-				</div> --}}
+
+
 
                 {{-- Phone Number --}}
                 {{-- <div class="wrap-input100 validate-input bg1 rs1-wrap-input100">
