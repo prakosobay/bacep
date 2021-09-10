@@ -51,9 +51,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     //Paket OB
     Route::get('/detail/{id}', [CleaningController::class, 'detail_ob']);
 
+    //Form
+    Route::get('/cleaning.form', [CleaningController::class, 'tampilan']);
+    Route::get('/other', [OtherController::class, 'index']);
+
     //Pilihan Work
     Route::get('/cleaning/{id}', [CleaningController::class, 'pilihan_work']);
-    Route::get('/cleaning.form', [CleaningController::class, 'tampilan']);
 
     //PDF
     Route::get('/survey_pdf/{id}', [HomeController::class, 'cetak_survey_pdf']);

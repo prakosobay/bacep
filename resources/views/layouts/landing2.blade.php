@@ -51,7 +51,7 @@
                         <li><a href="#VisitDC" data-after="VisitDC">Visit Data Center</a></li> --}}
                         @can('isBm')
                         <li><a href="cleaning.form" data-after="cleaning">Cleaning</a></li>
-                        <li><a href="other.form" data-after="other">Other</a></li>
+                        <li><a href="other" data-after="other">Other</a></li>
                         @elsecan('isAdmin')
                         <li><a href="{{ url('admin') }}" data-after="Admin">Admin Panel</a></li>
                         {{-- <li><a href="{{ url('inventory') }}" data-after="inventory">Inventory</a></li> --}}

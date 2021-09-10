@@ -25,70 +25,79 @@
 </head>
 <body>
 
-	<div class="container-contact100">
-		<div class="wrap-contact100">
-			<form id="form_cleaning" class="contact100-form validate-form">
+    <div class="container-contact100">
+        <div class="wrap-contact100">
+            <form id="form_cleaning" class="contact100-form validate-form">
                 {{ csrf_field() }}
 				<span class="contact100-form-title">
 					FORM
 				</span>
 
                 {{-- Purpose of Work --}}
-				<div class="wrap-input100 validate-input bg1" data-validate="Pilih Tujuan Pekerjaan">
-					<span class="label-input100">Purpose of Work (Tujuan Pekerjaan) *</span>
-                    <div>
-                        <select class="js-select2" id="working" name="cleaning_work">
-                            <option value=""></option>
-                            @foreach($pilihanwork as $p)
-                            <option value="{{ $p->id }}">{{ $p->work }}</option>
-                            @endforeach
-                        </select>
-                        <div class="dropDownSelect2"></div>
-                    </div>
+                <div class="wrap-input100 validate-input bg1" data-validate="Please Type Correctly">
+                    <span class="label-input100">Purpose of Work (Tujuan Pekerjaan) *</span>
+					<input class="input100" type="text" name="other_work" placeholder="Fill in here">
 				</div>
 
+                {{-- Validity --}}
+                <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate = "Pilih Tanggal Pekerjaan">
+                    <span class="label-input100">Validity (Tanggal Mulai Pekerjaan) *</span>
+                    <input class="input100" type="date" name="validity_from" id="dateofbirth">
+                </div>
+                <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate = "Pilih Tanggal Pekerjaan">
+                    <span class="label-input100">Validity (Tanggal Selesai Pekerjaan) *</span>
+                    <input class="input100" type="date" name="validity_to" id="dateofbirth">
+                </div>
+
                 {{-- Entry Area --}}
-                <div class="wrap-contact100-form-radio">
-                    <span class="label-input100">Authorized Entry Area (Area yang Dimasuki)</span>
-                    <div class="contact100-form-radio">
-                        <label class="label-radio100">
-                            <input class="input100" id="loc1" name="loc1" value="" readonly>
+                <div class="wrap-input100 validate-input bg1 rs1-wrap-input100">
+                    <div class="contact100-form-radio m-t-15">
+                        <input class="input-radio100" id="radio1" type="textbox" name="server" value="server">
+                        <label class="label-radio100" for="radio1">
+                            Server Room
                         </label>
                     </div>
 
                     <div class="contact100-form-radio">
-                        <label class="label-radio100">
-                            <input class="input100" id="loc2" name="loc2" value="" readonly>
+                        <input class="input-radio100" id="radio2" type="textbox" name="mmr1" value="mmr1">
+                        <label class="label-radio100" for="radio2">
+                            MMR 1
                         </label>
                     </div>
 
                     <div class="contact100-form-radio">
-                        <label class="label-radio100">
-                            <input class="input100" id="loc3" name="loc3" value="" readonly>
+                        <input class="input-radio100" id="radio3" type="textbox" name="mmr2" value="mmr2">
+                        <label class="label-radio100" for="radio3">
+                            MMR 2
+                        </label>
+                    </div>
+                </div>
+
+                <div class="wrap-input100 validate-input bg1 rs1-wrap-input100">
+                    <div class="contact100-form-radio m-t-15">
+                        <input class="input-radio100" id="radio8" type="textbox" name="generator" value="generator">
+                        <label class="label-radio100" for="radio8">
+                            Generator Room
                         </label>
                     </div>
 
                     <div class="contact100-form-radio">
-                        <label class="label-radio100">
-                            <input class="input100" id="loc4" name="loc4" value="" readonly>
+                        <input class="input-radio100" id="radio9" type="textbox" name="panel" value="panel">
+                        <label class="label-radio100" for="radio9">
+                            Panel Room
                         </label>
                     </div>
 
                     <div class="contact100-form-radio">
-                        <label class="label-radio100">
-                            <input class="input100" id="loc5" name="loc5" value="" readonly>
-                        </label>
-                    </div>
-
-                    <div class="contact100-form-radio">
-                        <label class="label-radio100">
-                            <input class="input100" id="loc6" name="loc6" value="" readonly>
+                        <input class="input-radio100" id="radio10" type="textbox" name="battery value="battery">
+                        <label class="label-radio100" for="radio10">
+                            Battery Room
                         </label>
                     </div>
                 </div>
 
                 <!-- Detail Time Activity -->
-                <table class="table table-bordered">
+                {{-- <table class="table table-bordered">
                     <thead>
                         <tr>
                             <th colspan="4">Detail Time Table of All Activity</th>
@@ -137,10 +146,10 @@
                             <th><input type="text" class="input100" name="detail_service6" id="detail_service_6" value="" readonly></th>
                         </tr>
                     </tbody>
-                </table>
+                </table> --}}
 
                 <!-- Detail Operation and Execution -->
-                <table class="table table-bordered">
+                {{-- <table class="table table-bordered">
                     <thead>
                         <tr>
                             <th colspan="2">Detail Operation and Execution</th>
@@ -175,10 +184,10 @@
                             <th ><input type="text" class="input100" name="cleaning_procedure6" id="working_procedure_6" value="" readonly></th>
                         </tr>
                     </tbody>
-                </table>
+                </table> --}}
 
                 <!-- Risk and Service Area Impact -->
-                <table class="table table-bordered">
+                {{-- <table class="table table-bordered">
                     <thead>
                         <tr>
                             <th colspan="4">Risk and Service Area Impact</th>
@@ -227,10 +236,10 @@
                             <th><input type="text" class="input100" name="cleaning_mitigation6" id="mitigation_plan_6" value="" readonly></th>
                         </tr>
                     </tbody>
-                </table>
+                </table> --}}
 
                 {{-- Isian --}}
-                <div class="wrap-input100 bg0 rs1-alert-validate">
+                {{-- <div class="wrap-input100 bg0 rs1-alert-validate">
 					<span class="label-input100">Background and Objective (Latar Belakang dan Tujuan) *</span>
 					<input type="text" class="input100" name="cleaning_background" id="background" value="" readonly>
 				</div>
@@ -245,27 +254,15 @@
                 <div class="wrap-input100 bg0 rs1-alert-validate">
 					<span class="label-input100">Rollback Operation/Other Infomation (Operasi Pembatalan/Infomasi Lain)</span>
 					<input type="text" class="input100" name="cleaning_rollback" id="rollback" value="" readonly>
-				</div>
+				</div> --}}
 
-                {{-- Validity --}}
-				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate = "Pilih Tanggal Pekerjaan">
-					<span class="label-input100">Validity (Tanggal Mulai Pekerjaan) *</span>
-                    <input class="input100" type="date" name="validity_from" id="dateofbirth">
-				</div>
-				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate = "Pilih Tanggal Pekerjaan">
-					<span class="label-input100">Validity (Tanggal Selesai Pekerjaan) *</span>
-					<input class="input100" type="date" name="validity_to" id="dateofbirth">
-				</div>
 
                 {{-- Pilih Personil --}}
-                <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate="Pilih Personil">
+                {{-- <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate="Pilih Personil">
 					<span class="label-input100">Person In Charge 1(Nama Personil 1) *</span>
                     <div>
                         <select class="js-select2" id="pilihan1" name="cleaning_name">
                             <option value=""></option>
-                            @foreach($master_ob as $p)
-                            <option value="{{ $p->ob_id }}">{{ $p->nama }}</option>
-                            @endforeach
                         </select>
                         <div class="dropDownSelect2"></div>
                     </div>
@@ -275,33 +272,30 @@
                     <div>
                         <select class="js-select2" id="pilihan2" name="cleaning_name2">
                             <option value=""></option>
-                            @foreach($master_ob as $p)
-                            <option value="{{ $p->ob_id }}">{{ $p->nama }}</option>
-                            @endforeach
                         </select>
                         <div class="dropDownSelect2"></div>
                     </div>
-				</div>
+				</div> --}}
 
                 {{-- Phone Number --}}
-                <div class="wrap-input100 validate-input bg1 rs1-wrap-input100">
+                {{-- <div class="wrap-input100 validate-input bg1 rs1-wrap-input100">
 					<span class="label-input100">Number Phone (Nomor HP Personil 1)</span>
                     <input type="text" class="input100" name="cleaning_number" id="phone_number" value="" readonly>
 				</div>
                 <div class="wrap-input100 validate-input bg1 rs1-wrap-input100">
 					<span class="label-input100">Number Phone (Nomor HP Personil 2)</span>
                     <input type="text" class="input100" name="cleaning_number2" id="phone_number2" value="" readonly>
-				</div>
+				</div> --}}
 
                 {{-- NIK  --}}
-                <div class="wrap-input100 validate-input bg1 rs1-wrap-input100">
+                {{-- <div class="wrap-input100 validate-input bg1 rs1-wrap-input100">
 					<span class="label-input100">ID Number (NIK Personil 1)</span>
                     <input type="text" class="input100" name="cleaning_nik" id="id_number" value="" readonly>
 				</div>
                 <div class="wrap-input100 validate-input bg1 rs1-wrap-input100">
 					<span class="label-input100">ID Number (NIK Personil 2)</span>
                     <input type="text" class="input100" name="cleaning_nik_2" id="id_number2" value="" readonly>
-				</div>
+				</div> --}}
 
 				<div class="container-contact100-form-btn">
 					<button type="submit" class="contact100-form-btn">
@@ -326,158 +320,32 @@
 	<script src="{{ asset('vendor/select2/select2.min.js')}}"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script type="text/javascript">
-	// 	$(".js-select2").each(function(){
-	// 		$(this).select2({
-	// 			minimumResultsForSearch: 20,
-	// 			dropdownParent: $(this).next('.dropDownSelect2')
-	// 		});
-	// 	})
+	$(".js-select2").each(function(){
+			$(this).select2({
+				minimumResultsForSearch: 20,
+				dropdownParent: $(this).next('.dropDownSelect2')
+			});
 
-    //     $('#pilihan1').change(function(){
-    //         let id = $(this).val();
-    //         $.ajax({
-    //             url: "{{url("/detail")}}"+'/'+id,
-    //             dataType:"json",
-    //             type: "get",
-    //             success: function(response){
-    //                 const {data} = response;
-    //                 console.log(data)
-    //             $('#phone_number').val(data.phone_number);
-    //             $('#id_number').val(data.id_number);
-    //             }
-    //         });
-    //     });
 
-    //     $('#pilihan2').change(function(){
-    //         let id = $(this).val();
-    //         $.ajax({
-    //             url: "{{url("/detail")}}"+'/'+id,
-    //             dataType:"json",
-    //             type: "get",
-    //             success: function(response){
-    //                 const {data} = response;
-    //                 console.log(data)
-    //             $('#phone_number2').val(data.phone_number);
-    //             $('#id_number2').val(data.id_number);
-    //             }
-    //         });
-    //     });
-
-    //     $('#working').change(function(){
-    //         let id = $(this).val();
-    //         $.ajax({
-    //             url: "{{url("/cleaning")}}"+'/'+id,
-    //             dataType:"json",
-    //             type: "get",
-    //             success: function(response){
-    //                 const {permit} = response;
-    //                 console.log(permit)
-    //             $('#activity_desciption_1').val(permit.activity_desciption_1);
-    //             $('#activity_desciption_2').val(permit.activity_desciption_2);
-    //             $('#activity_desciption_3').val(permit.activity_desciption_3);
-    //             $('#activity_desciption_4').val(permit.activity_desciption_4);
-    //             $('#activity_desciption_5').val(permit.activity_desciption_5);
-    //             $('#activity_desciption_6').val(permit.activity_desciption_6);
-    //             $('#detail_service_1').val(permit.detail_service_1);
-    //             $('#detail_service_2').val(permit.detail_service_2);
-    //             $('#detail_service_3').val(permit.detail_service_3);
-    //             $('#detail_service_4').val(permit.detail_service_4);
-    //             $('#detail_service_5').val(permit.detail_service_5);
-    //             $('#detail_service_6').val(permit.detail_service_6);
-    //             $('#item_1').val(permit.item_1);
-    //             $('#item_2').val(permit.item_2);
-    //             $('#item_3').val(permit.item_3);
-    //             $('#item_4').val(permit.item_4);
-    //             $('#item_5').val(permit.item_5);
-    //             $('#item_6').val(permit.item_6);
-    //             $('#working_procedure_1').val(permit.working_procedure_1);
-    //             $('#working_procedure_2').val(permit.working_procedure_2);
-    //             $('#working_procedure_3').val(permit.working_procedure_3);
-    //             $('#working_procedure_4').val(permit.working_procedure_4);
-    //             $('#working_procedure_5').val(permit.working_procedure_5);
-    //             $('#working_procedure_6').val(permit.working_procedure_6);
-    //             $('#risk_description_1').val(permit.risk_description_1);
-    //             $('#risk_description_2').val(permit.risk_description_2);
-    //             $('#risk_description_3').val(permit.risk_description_3);
-    //             $('#risk_description_4').val(permit.risk_description_4);
-    //             $('#risk_description_5').val(permit.risk_description_5);
-    //             $('#risk_description_6').val(permit.risk_description_6);
-    //             $('#possibility_1').val(permit.possibility_1);
-    //             $('#possibility_2').val(permit.possibility_2);
-    //             $('#possibility_3').val(permit.possibility_3);
-    //             $('#possibility_4').val(permit.possibility_4);
-    //             $('#possibility_5').val(permit.possibility_5);
-    //             $('#possibility_6').val(permit.possibility_6);
-    //             $('#impact_1').val(permit.impact_1);
-    //             $('#impact_2').val(permit.impact_2);
-    //             $('#impact_3').val(permit.impact_3);
-    //             $('#impact_4').val(permit.impact_4);
-    //             $('#impact_5').val(permit.impact_5);
-    //             $('#impact_6').val(permit.impact_6);
-    //             $('#mitigation_plan_1').val(permit.mitigation_plan_1);
-    //             $('#mitigation_plan_2').val(permit.mitigation_plan_2);
-    //             $('#mitigation_plan_3').val(permit.mitigation_plan_3);
-    //             $('#mitigation_plan_4').val(permit.mitigation_plan_4);
-    //             $('#mitigation_plan_5').val(permit.mitigation_plan_5);
-    //             $('#mitigation_plan_6').val(permit.mitigation_plan_6);
-    //             $('#background').val(permit.background);
-    //             $('#describ').val(permit.describ);
-    //             $('#testing').val(permit.testing);
-    //             $('#rollback').val(permit.rollback);
-    //             $('#loc1').val(permit.loc1);
-    //             $('#loc2').val(permit.loc2);
-    //             $('#loc3').val(permit.loc3);
-    //             $('#loc4').val(permit.loc4);
-    //             $('#loc5').val(permit.loc5);
-    //             $('#loc6').val(permit.loc6);
-    //             }
-    //         });
-    //     });
-
-    //     $.ajaxSetup({
-    //     headers: {
-    //         'X-CSRF-TOKEN': $('input[name="_token"]').val()
-    //     }
-    // });
-
-    // $(".contact100-form-btn").click(function(e){
-    //     e.preventDefault();
-    //     var datastring = $("#form_cleaning").serialize();
-    //     $.ajax({
-    //         type:'POST',
-    //         url:"{{url('submit_data_cleaning')}}",
-    //         data: datastring,
-    //         error: function (request, error) {
-    //             console.log(error)
-    //             alert(" Can't do because: " + error);
-    //         },
-    //         success:function(data){
-    //             console.log(data);
-    //             if(data.status == 'SUCCESS'){
-    //                 Swal.fire({
-    //                     title: "Success!",
-    //                     text: 'Data Saved',
-    //                     type: "success",
-    //                 }).then(function(){
-    //                     location.href = "{{url("/home")}}";
-    //                 });
-    //             }else if(data.status == 'FAILED'){
-    //                 Swal.fire({
-    //                     title: "Failed!",
-    //                     text: 'Saving Data Failed',
-    //                 }).then(function(){
-    //                     location.reload();
-    //                 });
-    //             }
-    //         }
-    //     });
-    // });
-
+			$(".js-select2").each(function(){
+				$(this).on('select2:close', function (e){
+					if($(this).val() == "Please chooses") {
+						$('.js-show-service').slideUp();
+					}
+					else {
+						$('.js-show-service').slideUp();
+						$('.js-show-service').slideDown();
+					}
+				});
+			});
+		})
 	</script>
 <!--===============================================================================================-->
 	<script src="{{ asset('vendor/countdowntime/countdowntime.js')}}"></script>
 <!--===============================================================================================-->
 	<script src="{{ asset('js/main.js')}}"></script>
+
+
 
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
