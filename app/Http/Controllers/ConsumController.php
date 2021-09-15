@@ -15,7 +15,8 @@ class ConsumController extends Controller
      */
     public function index()
     {
-        return view('consum.stock');
+        $consum = StockBarang::all();
+        return view('consum.stock', ['consum' => $consum]);
     }
 
     /**
@@ -37,8 +38,8 @@ class ConsumController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama_barang' => 'required',
-            'jumlah' => 'required',
+            'nama_barang' => 'required|unique:stock_barangs',
+            'jumlah' => 'required|numeric',
             'satuan' => 'required',
             'notes' => 'required',
             'lokasi' => 'required',
