@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class StockBarang extends Model
+class Consum extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'consum_id';
     protected $table = 'stock_barangs';
     protected $fillable = [
         'nama_barang',
@@ -18,14 +19,4 @@ class StockBarang extends Model
         'notes',
         'lokasi'
     ];
-
-    public function foto()
-    {
-        return $this->belongsTo(ConsumFoto::class);
-    }
-
-    public function masuk()
-    {
-        return $this->belongsToMany(ConsumMasuk::class);
-    }
 }

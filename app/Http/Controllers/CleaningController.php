@@ -45,10 +45,10 @@ class CleaningController extends Controller
             $data['cleaning_work'] = PilihanWork::find($data['cleaning_work'])->work;
             $cleaning = Cleaning::create($data);
 
-            foreach (['bayu.prakoso@balitower.co.id', 'anjar.yulianto@balitower.co.id', 'taufik.ismail@balitower.co.id', 'rizky.anindya@balitower.co.id',
-            'rafli.ashshiddiqi@balitower.co.id', 'darajat.indraputra@balitower.co.id'] as $recipient) {
-                Mail::to($recipient)->send(new NotifEmail());
-            }
+            // foreach (['bayu.prakoso@balitower.co.id', 'anjar.yulianto@balitower.co.id', 'taufik.ismail@balitower.co.id', 'rizky.anindya@balitower.co.id',
+            // 'rafli.ashshiddiqi@balitower.co.id', 'darajat.indraputra@balitower.co.id'] as $recipient) {
+            //     Mail::to($recipient)->send(new NotifEmail());
+            // }
         }
         if ($cleaning->exists) {
             $cleaningHistory = CleaningHistory::create([
@@ -97,8 +97,10 @@ class CleaningController extends Controller
 
             $role_to = '';
             if (($lasthistoryC->role_to == 'review')) {
-                foreach (['bayu.prakoso@balitower.co.id', 'anjar.yulianto@balitower.co.id', 'taufik.ismail@balitower.co.id', 'rizky.anindya@balitower.co.id',
-                'rafli.ashshiddiqi@balitower.co.id', 'darajat.indraputra@balitower.co.id', 'lingga.anugerah@balitower.co.id'] as $recipient) {
+                foreach ([
+                    'bayu.prakoso@balitower.co.id', 'anjar.yulianto@balitower.co.id', 'taufik.ismail@balitower.co.id', 'rizky.anindya@balitower.co.id',
+                    'rafli.ashshiddiqi@balitower.co.id', 'darajat.indraputra@balitower.co.id', 'lingga.anugerah@balitower.co.id'
+                ] as $recipient) {
                     Mail::to($recipient)->send(new NotifEmail());
                 }
                 $role_to = 'check';

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateStockBarangsTable extends Migration
+class CreateConsumsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,14 @@ class CreateStockBarangsTable extends Migration
      */
     public function up()
     {
-        Schema::create('stock_barangs', function (Blueprint $table) {
-            $table->id()->unique();
+        Schema::create('consums', function (Blueprint $table) {
+            $table->id('consum_id');
             $table->string('nama_barang')->unique();
             $table->unsignedBigInteger('jumlah');
             $table->string('satuan', 50);
-            $table->string('kondisi', 100);
+            $table->string('kondisi', 100)->nullable();
             $table->text('notes', 500);
             $table->string('lokasi', 100);
-            $table->timestamps();
         });
     }
 
@@ -30,8 +29,9 @@ class CreateStockBarangsTable extends Migration
      *
      * @return void
      */
+
     public function down()
     {
-        Schema::dropIfExists('stock_barangs');
+        Schema::dropIfExists('consums');
     }
 }

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\StockBarang;
+use Barryvdh\DomPDF\Facade as PDF;
+use Illuminate\Support\Facades\{DB, Auth, Gate, Mail, Session};
+use App\Models\{ConsumMasuk, Consum, User};
 use Illuminate\Http\Request;
 
 class ConsumController extends Controller
@@ -15,7 +17,7 @@ class ConsumController extends Controller
      */
     public function index()
     {
-        $consum = StockBarang::all();
+        $consum = Consum::all();
         return view('consum.stock', ['consum' => $consum]);
     }
 
@@ -46,8 +48,20 @@ class ConsumController extends Controller
         ]);
 
         $input = $request->all();
-        $consum = StockBarang::create($input);
+
+        $consum = Consum::create($input);
+        // dd($consum);
+        if ($consum->exists) {
+            $masukHistory = ConsumMasuk::create([
+                'stock_barang_id' => $consum->stock_barang_id,
+                'masuk' => $consum->nama_barang,
+                'jumlah' => $consum->jumlah,
+                'ket' => $consum->notes,
+                'pencatat' => Auth::user()->name,
+            ]);
+        }
         return back()->with('success', ' Data baru berhasil ditambah.');
+        // return $masukHistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
     }
 
     /**
@@ -69,7 +83,9 @@ class ConsumController extends Controller
      */
     public function edit($id)
     {
-        //
+        $consum = Consum::findOrFail($id);
+
+        return view('consum.edit', ['consum' => $consum]);
     }
 
     /**
@@ -81,7 +97,14 @@ class ConsumController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'title' => 'required|unique:posts|max:150',
+            'body' => 'required',
+        ]);
+
+        $consum = Consum::find($id)->update($request->all());
+
+        return back()->with('success', ' Data consum diperbaharui!');
     }
 
     /**
