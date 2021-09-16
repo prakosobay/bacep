@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\StockBarang;
 use Illuminate\Http\Request;
 
 class ConsumController extends Controller
@@ -14,7 +15,8 @@ class ConsumController extends Controller
      */
     public function index()
     {
-        //
+        $consum = StockBarang::all();
+        return view('consum.stock', ['consum' => $consum]);
     }
 
     /**
@@ -24,7 +26,7 @@ class ConsumController extends Controller
      */
     public function create()
     {
-        //
+        return view('consum.create');
     }
 
     /**
@@ -35,7 +37,17 @@ class ConsumController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama_barang' => 'required|unique:stock_barangs',
+            'jumlah' => 'required|numeric',
+            'satuan' => 'required',
+            'notes' => 'required',
+            'lokasi' => 'required',
+        ]);
+
+        $input = $request->all();
+        $consum = StockBarang::create($input);
+        return back()->with('success', ' Data baru berhasil ditambah.');
     }
 
     /**

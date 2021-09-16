@@ -64,4 +64,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     //Admin Panel
     Route::get('/admin', [AdminController::class, 'get_user']);
+
+    //Barang Consume
 });
+Route::resource('/barang', ConsumController::class);

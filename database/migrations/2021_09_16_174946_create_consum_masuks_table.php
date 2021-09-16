@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddPdfToCleaningHistoriesTable extends Migration
+class CreateConsumMasuksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class AddPdfToCleaningHistoriesTable extends Migration
      */
     public function up()
     {
-        Schema::table('cleaning_histories', function (Blueprint $table) {
-            $table->boolean('pdf', 1)->nullable()->after('aktif');
+        Schema::create('consum_masuks', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
         });
     }
 
@@ -25,8 +26,6 @@ class AddPdfToCleaningHistoriesTable extends Migration
      */
     public function down()
     {
-        Schema::table('cleaning_histories', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('consum_masuks');
     }
 }

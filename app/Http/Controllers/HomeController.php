@@ -27,6 +27,7 @@ class HomeController extends Controller
     public function index()
     {
         $role_2 = Auth::user()->roles;
+        // dd($role_2);
         $arrole = [];
         foreach ($role_2 as $rolee) {
             $arrole[] = $rolee->name;
