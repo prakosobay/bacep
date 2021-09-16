@@ -18,4 +18,14 @@ class StockBarang extends Model
         'notes',
         'lokasi'
     ];
+
+    public function foto()
+    {
+        return $this->belongsTo(ConsumFoto::class);
+    }
+
+    public function masuk()
+    {
+        return $this->belongsToMany(ConsumMasuk::class);
+    }
 }

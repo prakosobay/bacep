@@ -13,6 +13,8 @@
         <th>Kondisi</th>
         <th>Notes</th>
         <th>Lokasi</th>
+        <th>Tambah</th>
+        <th>Kurang</th>
     </tr>
     </thead>
     <tbody>
@@ -25,6 +27,8 @@
         <td style="width: 500px" >kondisi brg</td>
         <td style="width: 500px" >{{ $c->notes }}</td>
         <td style="width: 500px" >{{ $c->lokasi }}</td>
+        <td style="width: 300px"><button class="btn-green">Tambah</button></td>
+        <td style="width: 300px"><button class="btn-red">Kurang</button></td>
     </tr>
     @endforeach
     </tbody>
