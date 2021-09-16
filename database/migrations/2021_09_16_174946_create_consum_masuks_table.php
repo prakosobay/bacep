@@ -15,7 +15,7 @@ class CreateConsumMasuksTable extends Migration
     {
         Schema::create('consum_masuks', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('stock_barang_id');
+            $table->foreignId('consum_id');
             $table->string('masuk')->nullable();
             $table->unsignedBigInteger('jumlah');
             $table->string('ket');

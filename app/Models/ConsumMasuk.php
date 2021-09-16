@@ -11,6 +11,7 @@ class ConsumMasuk extends Model
 
     protected $table = 'consum_masuks';
     protected $fillable = [
+        'consum_id',
         'masuk',
         'jumlah',
         'ket',

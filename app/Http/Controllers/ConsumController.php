@@ -40,7 +40,7 @@ class ConsumController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama_barang' => 'required|unique:stock_barangs',
+            'nama_barang' => 'required|unique:consums',
             'jumlah' => 'required|numeric',
             'satuan' => 'required',
             'notes' => 'required',
@@ -53,7 +53,7 @@ class ConsumController extends Controller
         // dd($consum);
         if ($consum->exists) {
             $masukHistory = ConsumMasuk::create([
-                'stock_barang_id' => $consum->stock_barang_id,
+                'consum_id' => $consum->consum_id,
                 'masuk' => $consum->nama_barang,
                 'jumlah' => $consum->jumlah,
                 'ket' => $consum->notes,
@@ -98,7 +98,7 @@ class ConsumController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'title' => 'required|unique:posts|max:150',
+            'title' => 'required|unique:consums|max:150',
             'body' => 'required',
         ]);
 

@@ -21,6 +21,7 @@ class CreateConsumsTable extends Migration
             $table->string('kondisi', 100)->nullable();
             $table->text('notes', 500);
             $table->string('lokasi', 100);
+            $table->timestamps();
         });
     }
 

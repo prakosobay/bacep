@@ -20,7 +20,7 @@
     <tbody>
     @foreach ($consum as $c)
     <tr>
-        <td style="width: 200px" >{{ $c->id}}</td>
+        <td style="width: 200px" >{{ $c->consum_id}}</td>
         <td style="width: 600px" >{{ $c->nama_barang}}</td>
         <td style="width: 300px" >{{ $c->jumlah }}</td>
         <td style="width: 500px" >{{ $c->satuan }}</td>

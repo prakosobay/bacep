@@ -10,7 +10,7 @@ class Consum extends Model
     use HasFactory;
 
     protected $primaryKey = 'consum_id';
-    protected $table = 'stock_barangs';
+    protected $table = 'consums';
     protected $fillable = [
         'nama_barang',
         'jumlah',
