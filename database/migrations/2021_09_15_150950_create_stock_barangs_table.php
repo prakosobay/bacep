@@ -15,7 +15,7 @@ class CreateStockBarangsTable extends Migration
     {
         Schema::create('stock_barangs', function (Blueprint $table) {
             $table->id()->unique();
-            $table->string('nama_barang');
+            $table->string('nama_barang')->unique();
             $table->unsignedBigInteger('jumlah');
             $table->string('satuan', 50);
             $table->string('kondisi', 100);

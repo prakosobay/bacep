@@ -46,9 +46,7 @@ class ConsumController extends Controller
         ]);
 
         $input = $request->all();
-
-        $stock = StockBarang::create($input);
-
+        $consum = StockBarang::create($input);
         return back()->with('success', ' Data baru berhasil ditambah.');
     }
 

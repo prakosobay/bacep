@@ -30,7 +30,7 @@
             <option value="Pasang">Pasang</option>
             <option value="Pcs">Pcs</option>
             <option value="Pack">Pack</option>
-         </select >
+         </select>
         <input name="notes" type="text" placeholder="notes...">
         <select name="lokasi">
             <option value="Gudang">Gudang</option>
