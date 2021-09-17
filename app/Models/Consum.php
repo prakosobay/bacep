@@ -19,4 +19,9 @@ class Consum extends Model
         'notes',
         'lokasi'
     ];
+
+    public function gambar()
+    {
+        return $this->belongsTo(ConsumGambar::class);
+    }
 }

@@ -21,7 +21,7 @@
     </div>
     @endif
 
-    <form method="POST" action="{{ url('barang') }}">
+    <form method="POST" action="{{ url('barang') }}" enctype="multipart/form-data">
         @csrf
         <input name="nama_barang" type="text" placeholder="barang...">
         <input name="jumlah" type="number" placeholder="jumlah...">
@@ -32,6 +32,7 @@
             <option value="Pack">Pack</option>
          </select>
         <input name="notes" type="text" placeholder="notes...">
+        <input name="gambar" type="file" >
         <select name="lokasi">
             <option value="Gudang">Gudang</option>
             <option value="Office">Office</option>
