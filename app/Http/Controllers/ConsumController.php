@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\{DB, Auth, Gate, Mail, Session};
-use App\Models\{ConsumMasuk, Consum, User};
+use App\Models\{ConsumMasuk, Consum, ConsumGambar, User};
 use Illuminate\Http\Request;
 
 class ConsumController extends Controller
@@ -45,12 +45,13 @@ class ConsumController extends Controller
             'satuan' => 'required',
             'notes' => 'required',
             'lokasi' => 'required',
+            'file' => 'image|required|file|max:2048',
         ]);
 
+        // dd($request);
         $input = $request->all();
 
         $consum = Consum::create($input);
-        // dd($consum);
         if ($consum->exists) {
             $masukHistory = ConsumMasuk::create([
                 'consum_id' => $consum->consum_id,
@@ -59,7 +60,17 @@ class ConsumController extends Controller
                 'ket' => $consum->notes,
                 'pencatat' => Auth::user()->name,
             ]);
+
+            $gambarHistory = ConsumGambar::create([
+                'consum_id' => $consum->consum_id,
+                'nama_barang' => $consum->nama_barang,
+                'file' => $request->file('file')->store('consum-image'),
+            ]);
         }
+
+        // if ($masukHistory->exist) {
+        //
+        // }
         return back()->with('success', ' Data baru berhasil ditambah.');
         // return $masukHistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
     }

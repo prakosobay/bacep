@@ -13,7 +13,12 @@ class ConsumGambar extends Model
     protected $table = 'consum_gambars';
     protected $fillable = [
         'consum_id',
+        'nama_barang',
         'file',
-        'ket',
     ];
+
+    public function gambar()
+    {
+        return $this->belongsTo(Consum::class);
+    }
 }

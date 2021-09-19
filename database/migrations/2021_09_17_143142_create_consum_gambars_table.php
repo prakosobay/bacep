@@ -16,8 +16,8 @@ class CreateConsumGambarsTable extends Migration
         Schema::create('consum_gambars', function (Blueprint $table) {
             $table->id();
             $table->foreignId('consum_id');
-            $table->string('file');
-            $table->string('ket');
+            $table->string('nama_barang')->unique();
+            $table->string('file')->nullable();
             $table->timestamps();
         });
     }

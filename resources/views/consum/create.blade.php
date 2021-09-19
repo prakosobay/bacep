@@ -32,7 +32,7 @@
             <option value="Pack">Pack</option>
          </select>
         <input name="notes" type="text" placeholder="notes...">
-        <input name="gambar" type="file" >
+        <input name="file" type="file" >
         <select name="lokasi">
             <option value="Gudang">Gudang</option>
             <option value="Office">Office</option>
