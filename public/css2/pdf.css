@@ -1,0 +1,79 @@
+@page {
+    margin: 0.5cm 0.5cm;
+}
+
+/** Define now the real margins of every page in the PDF **/
+body {
+    margin-top: 1.7cm;
+    margin-left: 0.5cm;
+    margin-right: 0.5cm;
+    margin-bottom: 1cm;
+}
+
+/** Define the header rules **/
+header {
+    position: fixed;
+    top: 0cm;
+    left: 0.5cm;
+    right: 0.5cm;
+    height: 3cm;
+    text-align: center;
+}
+
+/** Define the footer rules **/
+footer {
+    position: fixed;
+    bottom: 0.1cm;
+    height: 1cm;
+    left: 0.5cm;
+    right: 0.5cm;
+    text-align: center;
+}
+
+.table-bordered,
+.col_header {
+    border-spacing: 0.5px;
+    border: 1px solid black;
+    width: 100%;
+    font-size: 8pt;
+    margin: 1px;
+    padding: 1px;
+}
+
+.table-bordered,
+.col_footer {
+    border-spacing: 0.5px;
+    border: 1px solid black;
+    width: 100%;
+    font-size: 8pt;
+    text-align: center;
+    margin: 1px;
+    padding: 1px;
+}
+
+.table-hover {
+    border: 1px solid black;
+    border-collapse: collapse;
+    font-size: 8pt;
+    width: 100%;
+}
+
+.text_header {
+    text-align: center;
+    font-size: 10pt;
+}
+
+.text_footer {
+    text-align: center;
+    font-size: 8pt;
+}
+
+.img-fluid {
+    height: 40px;
+    width: 110px;
+}
+
+
+.page_break+.page_break {
+    page-break-before: always;
+}
