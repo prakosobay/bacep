@@ -15,12 +15,12 @@ class CreateConsumsTable extends Migration
     {
         Schema::create('consums', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('kode_barang')->unique();
+            // $table->integer('kode_barang')->nullable();
             $table->string('nama_barang')->unique();
-            $table->bigInteger('jumlah')->nullable();
-            $table->string('satuan', 30);
+            $table->unsignedInteger('jumlah')->nullable();
+            $table->string('satuan');
             $table->string('kondisi')->nullable();
-            $table->longText('note')->nullable();
+            $table->text('note')->nullable();
             $table->string('lokasi')->nullable();
             $table->timestamps();
         });

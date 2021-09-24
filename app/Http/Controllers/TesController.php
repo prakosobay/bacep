@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\{DB, Auth, Gate, Mail, Session};
 use App\Imports\ConsumImport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
-use App\Models\Consum;
+use App\Models\{Consum, ConsumKeluar};
 use Illuminate\Http\Request;
 
 class TesController extends Controller
@@ -17,20 +17,27 @@ class TesController extends Controller
         return view('consum.create', ['consum' => $consum]);
     }
 
+    public function update()
+    {
+        $ck = ConsumKeluar::all();
+        return view('consum.keluar', ['ck' => $ck]);
+    }
+
     public function import_csv(Request $request)
     {
-        // dd($request);
+        //
         // validasi
-        $request->validate([
-            'file' => 'required|mimes:csv,xlsx'
-        ]);
+        // $request->validate([
+        //     'file' => 'required|mimes:csv,xlsx'
+        // ]);
 
+        // dd($request);
         // $this->validate($request, [
         //     'file' => 'required|mimes:csv'
         // ]);
 
         $i = Excel::import(new ConsumImport, $request->file('file'));
-        dd($i);
+        // dd($i);
         return back();
         // menangkap file excel
         // $file = $request->file('file');

@@ -71,6 +71,7 @@ Route::middleware(['auth'])->group(function () {
 
     //Barang Consume
     Route::get('/create', [TesController::class, 'index']);
+    Route::get('/keluar', [TesController::class, 'update']);
     Route::post('/import', [TesController::class, 'import_csv']);
 });
 // Route::resource('/barang', ConsumController::class);

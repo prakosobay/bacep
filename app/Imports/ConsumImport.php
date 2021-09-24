@@ -2,8 +2,8 @@
 
 namespace App\Imports;
 
-use App\Models\Consum;
-use Maatwebsite\Excel\Concerns\{ToModel, WithHeadingRow, WithMultipleSheets};
+use App\Models\{Consum, ConsumKeluar};
+use Maatwebsite\Excel\Concerns\{ToModel, WithHeadingRow};
 
 class ConsumImport implements ToModel, WithHeadingRow
 {
@@ -12,49 +12,43 @@ class ConsumImport implements ToModel, WithHeadingRow
      *
      * @return \Illuminate\Database\Eloquent\Model|null
      */
+
+
     // public function model(array $row)
     // {
+    //     // echo '<pre>';
+    //     // var_dump($row);
+    //     // die;
     //     return new Consum([
     //         // 'consum_id' => 1,
-    //         'kode_barang' => $row[0],
-    //         'nama_barang' => $row[1],
-    //         'jumlah' => $row[5],
-    //         'satuan' => $row[6],
-    //         'kondisi' => $row[7],
-    //         'note' => $row[8],
-    //         'lokasi' => $row[9],
+    //         // 'kode_barang' => $row[0],
+    //         'nama_barang' => $row['nama'],
+    //         'jumlah' => $row['jumlah'],
+    //         'satuan' => $row['satuan'],
+    //         'note' => $row['note'],
+    //         'lokasi' => $row['lokasi'],
     //     ]);
     // }
 
     public function model(array $row)
     {
-        return new Consum([
+        // echo '<pre>';
+        // var_dump($row);
+        // die;
+        return new ConsumKeluar([
             // 'consum_id' => 1,
-            'kode_barang' => $row['kode'],
-            'nama_barang' => $row['nama'],
+            // 'kode_barang' => $row[0],
+            'tanggal' => $row['tanggal'],
+            'consum_id' => $row['kode_barang'],
+            'nama_barang' => $row['nama_barang'],
             'jumlah' => $row['jumlah'],
-            'satuan' => $row['satuan'],
-            'kondisi' => $row['kondisi'],
-            'note' => $row['note'],
-            'lokasi' => $row['lokasi'],
+            'ket' => $row['keterangan'],
+            'pencatat' => $row['nama_pencatat'],
         ]);
     }
 
-    // public function sheets(): array
+    // public function headingRow(): int
     // {
-    //     return [
-    //         0 => new FirstSheetImport(),
-    //         1 => new SecondSheetImport(),
-    //     ];
-    // }
-
-    // public function model(array $row)
-    // {
-    //     return new Consum([
-    //         // 'consum_id' => 1,
-    //         'kode_barang' => $row[1],
-    //         'nama_barang' => $row[2],
-    //         'jumlah' => $row[3],
-    //     ]);
+    //     return 5;
     // }
 }

@@ -12,8 +12,7 @@ class Consum extends Model
     protected $primaryKey = 'id';
     protected $table = 'consums';
     protected $fillable = [
-        'consum_id',
-        'kode_barang',
+        // 'kode_barang',
         'nama_barang',
         'jumlah',
         'satuan',

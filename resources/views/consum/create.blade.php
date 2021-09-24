@@ -68,7 +68,7 @@
 				@foreach($consum as $s)
 				<tr>
 					<td>{{ $i++ }}</td>
-					<td>{{$s->kode_barang}}</td>
+					<td>{{$s->id}}</td>
 					<td>{{$s->nama_barang}}</td>
 					<td>{{$s->jumlah}}</td>
 					<td>{{$s->satuan}}</td>
@@ -80,7 +80,4 @@
 			</tbody>
 		</table>
 	</div>
-
-
-
 @endsection
