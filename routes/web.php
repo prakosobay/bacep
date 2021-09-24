@@ -17,7 +17,7 @@ Route::get('/sabar', function () {
     return view('sabar');
 });
 
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::get('/home', [HomeController::class, 'index']);
 
     //Detail History
@@ -70,5 +70,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/admin', [AdminController::class, 'get_user']);
 
     //Barang Consume
+    Route::get('/create', [TesController::class, 'index']);
+    Route::post('/import', [TesController::class, 'import_csv']);
 });
-Route::resource('/barang', ConsumController::class);
+// Route::resource('/barang', ConsumController::class);

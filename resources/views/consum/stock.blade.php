@@ -3,7 +3,9 @@
 @section('content')
 <div class="wrapper">
 <h1 style="text-align: center;">Semua Barang Consum</h1>
-<table style="width:100%">
+
+
+{{-- <table style="width:100%">
     <thead>
     <tr>
         <th>Kode barang</th>
@@ -32,6 +34,16 @@
     </tr>
     @endforeach
     </tbody>
-</table>
-</div>
+</table> --}}
+
+
+                {{-- <form action="#" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="form-group">
+                        <input type="file" name="file" required>
+                    </div>
+                </form> --}}
+
+
+{{-- </div> --}}
 @endsection

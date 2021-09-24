@@ -9,14 +9,16 @@ class Consum extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'consum_id';
+    protected $primaryKey = 'id';
     protected $table = 'consums';
     protected $fillable = [
+        'consum_id',
+        'kode_barang',
         'nama_barang',
         'jumlah',
         'satuan',
         'kondisi',
-        'notes',
-        'lokasi'
+        'note',
+        'lokasi',
     ];
 }

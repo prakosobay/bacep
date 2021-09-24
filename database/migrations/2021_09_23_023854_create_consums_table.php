@@ -14,13 +14,14 @@ class CreateConsumsTable extends Migration
     public function up()
     {
         Schema::create('consums', function (Blueprint $table) {
-            $table->id('consum_id');
+            $table->id();
+            $table->bigInteger('kode_barang')->unique();
             $table->string('nama_barang')->unique();
-            $table->unsignedBigInteger('jumlah');
-            $table->string('satuan', 50);
-            $table->string('kondisi', 100)->nullable();
-            $table->text('notes', 500);
-            $table->string('lokasi', 100);
+            $table->bigInteger('jumlah')->nullable();
+            $table->string('satuan', 30);
+            $table->string('kondisi')->nullable();
+            $table->longText('note')->nullable();
+            $table->string('lokasi')->nullable();
             $table->timestamps();
         });
     }
@@ -30,7 +31,6 @@ class CreateConsumsTable extends Migration
      *
      * @return void
      */
-
     public function down()
     {
         Schema::dropIfExists('consums');

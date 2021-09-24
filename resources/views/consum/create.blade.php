@@ -2,42 +2,85 @@
 
 @section('title', 'Tambah Barang')
 @section('content')
-<div class="wrapper">
-    <h1>Tambah Barang Baru</h1>
 
-    @if (session('success'))
-    <div class="alert-success">
-    <p>{{ session('success') }}</p>
-    </div>
-    @endif
+    <div class="container">
+		{{-- notifikasi form validasi --}}
+		@if ($errors->has('file'))
+		<span class="invalid-feedback" role="alert">
+			<strong>{{ $errors->first('file') }}</strong>
+		</span>
+		@endif
 
-    @if ($errors->any())
-    <div class="alert-danger">
-    <ul>
-        @foreach ($errors->all() as $error)
-        <li>{{ $error }}</li>
-        @endforeach
-    </ul>
-    </div>
-    @endif
+		{{-- notifikasi sukses --}}
+		@if ($sukses = Session::get('sukses'))
+		<div class="alert alert-success alert-block">
+			<button type="button" class="close" data-dismiss="alert">×</button>
+			<strong>{{ $sukses }}</strong>
+		</div>
+		@endif
 
-    <form method="POST" action="{{ url('barang') }}" enctype="multipart/form-data">
-        @csrf
-        <input name="nama_barang" type="text" placeholder="barang...">
-        <input name="jumlah" type="number" placeholder="jumlah...">
-        <select name="satuan">
-            <option value="Unit">Unit</option>
-            <option value="Pasang">Pasang</option>
-            <option value="Pcs">Pcs</option>
-            <option value="Pack">Pack</option>
-         </select>
-        <input name="notes" type="text" placeholder="notes...">
-        <input name="file" type="file" >
-        <select name="lokasi">
-            <option value="Gudang">Gudang</option>
-            <option value="Office">Office</option>
-         </select >
-        <button class="btn-blue">Submit</button>
-    </form>
-</div>
+		<button type="button" class="btn btn-primary mr-5" data-toggle="modal" data-target="#importExcel">
+			IMPORT CSV
+		</button>
+
+		<!-- Import Excel -->
+		<div class="modal fade" id="importExcel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<form method="post" action="{{ url('/import')}}" enctype="multipart/form-data">
+                    {{ csrf_field() }}
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Import File CSV</h5>
+						</div>
+						<div class="modal-body">
+
+
+							<label>Pilih file CSV</label>
+							<div class="form-group">
+								<input type="file" name="file" required="required">
+							</div>
+
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+							<button type="submit" class="btn btn-primary">Import</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+
+		<table class='table table-bordered'>
+			<thead>
+				<tr>
+					<th>No</th>
+					<th>Kode Barang</th>
+					<th>Nama Barang</th>
+                    <th>Jumlah</th>
+                    <th>Satuan</th>
+                    <th>Kondisi</th>
+                    <th>Note</th>
+                    <th>Lokasi</th>
+				</tr>
+			</thead>
+			<tbody>
+				@php $i=1 @endphp
+				@foreach($consum as $s)
+				<tr>
+					<td>{{ $i++ }}</td>
+					<td>{{$s->kode_barang}}</td>
+					<td>{{$s->nama_barang}}</td>
+					<td>{{$s->jumlah}}</td>
+					<td>{{$s->satuan}}</td>
+					<td>{{$s->kondisi}}</td>
+					<td>{{$s->note}}</td>
+					<td>{{$s->lokasi}}</td>
+				</tr>
+				@endforeach
+			</tbody>
+		</table>
+	</div>
+
+
+
 @endsection

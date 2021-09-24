@@ -18,13 +18,13 @@ class ConsumMasuk extends Model
         'pencatat',
     ];
 
-    public function masuk()
-    {
-        return $this->belongsTo(Consum::class);
-    }
+    // public function masuk()
+    // {
+    //     return $this->belongsTo(Consum::class);
+    // }
 
-    public function pencatat()
-    {
-        return $this->belongsTo(User::class);
-    }
+    // public function pencatat()
+    // {
+    //     return $this->belongsTo(User::class);
+    // }
 }

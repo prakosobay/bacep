@@ -17,8 +17,8 @@ class ConsumGambar extends Model
         'file',
     ];
 
-    public function gambar()
-    {
-        return $this->belongsTo(Consum::class);
-    }
+    // public function gambar()
+    // {
+    //     return $this->belongsTo(Consum::class);
+    // }
 }
