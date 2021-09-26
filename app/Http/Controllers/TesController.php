@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\{DB, Auth, Gate, Mail, Session};
 use App\Imports\ConsumImport;
 use Maatwebsite\Excel\Facades\Excel;
@@ -14,7 +15,17 @@ class TesController extends Controller
     public function index()
     {
         $consum = Consum::all();
-        return view('consum.create', ['consum' => $consum]);
+        return view('consum.create');
+    }
+
+    public function data_consum()
+    {
+        return Datatables::of(Consum::query())->make(true);
+    }
+
+    public function data_keluar()
+    {
+        return Datatables::of(ConsumKeluar::query())->make(true);
     }
 
     public function update()

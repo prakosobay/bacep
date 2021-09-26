@@ -14,41 +14,36 @@ class ConsumImport implements ToModel, WithHeadingRow
      */
 
 
-    // public function model(array $row)
-    // {
-    //     // echo '<pre>';
-    //     // var_dump($row);
-    //     // die;
-    //     return new Consum([
-    //         // 'consum_id' => 1,
-    //         // 'kode_barang' => $row[0],
-    //         'nama_barang' => $row['nama'],
-    //         'jumlah' => $row['jumlah'],
-    //         'satuan' => $row['satuan'],
-    //         'note' => $row['note'],
-    //         'lokasi' => $row['lokasi'],
-    //     ]);
-    // }
-
     public function model(array $row)
     {
         // echo '<pre>';
         // var_dump($row);
         // die;
-        return new ConsumKeluar([
+        return new Consum([
             // 'consum_id' => 1,
             // 'kode_barang' => $row[0],
-            'tanggal' => $row['tanggal'],
-            'consum_id' => $row['kode_barang'],
-            'nama_barang' => $row['nama_barang'],
+            'nama_barang' => $row['nama'],
             'jumlah' => $row['jumlah'],
-            'ket' => $row['keterangan'],
-            'pencatat' => $row['nama_pencatat'],
+            'satuan' => $row['satuan'],
+            'note' => $row['note'],
+            'lokasi' => $row['lokasi'],
         ]);
     }
 
-    // public function headingRow(): int
+    // public function model(array $row)
     // {
-    //     return 5;
+    //     // echo '<pre>';
+    //     // var_dump($row);
+    //     // die;
+    //     return new ConsumKeluar([
+    //         // 'consum_id' => 1,
+    //         // 'kode_barang' => $row[0],
+    //         'tanggal' => $row['tanggal'],
+    //         'consum_id' => $row['kode_barang'],
+    //         'nama_barang' => $row['nama_barang'],
+    //         'jumlah' => $row['jumlah'],
+    //         'ket' => $row['keterangan'],
+    //         'pencatat' => $row['nama_pencatat'],
+    //     ]);
     // }
 }

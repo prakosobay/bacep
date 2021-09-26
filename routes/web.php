@@ -73,5 +73,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/create', [TesController::class, 'index']);
     Route::get('/keluar', [TesController::class, 'update']);
     Route::post('/import', [TesController::class, 'import_csv']);
+
+    //Datatable
+    Route::get('/datatable', [TesController::class, 'data_consum']);
+    Route::get('/out', [TesController::class, 'data_keluar']);
 });
 // Route::resource('/barang', ConsumController::class);

@@ -1,0 +1,207 @@
+﻿Kode Barang;Nama Barang;Stok Awal;Barang Masuk;Barang Keluar;Stok Akhir;Satuan ;Kondisi Stok;NOTE;Lokasi Penyimpanan
+1;Kertas A4;5;2;6;1;Pcs;Stok Sedikit;;-
+2;Pulpen Kenko Biru;0;0;0;0;Pcs;Stok Habis;;-
+3;Pulpen Kenko Hitam;3;0;3;0;Pcs;Stok Habis;;-
+4;Spidol Permanent Biru;0;0;0;0;Pcs;Stok Habis;;-
+5;Spidol Permanent Hitam;0;0;0;0;Pcs;Stok Habis;;-
+6;Spidol Permanent Merah;0;0;0;0;Pcs;Stok Habis;;-
+7;Spidol Snowman Biru;2;3;1;4;Pcs;Stok Cukup;;Office
+8;Spidol Snowman Hitam;3;0;1;2;Pcs;Stok Sedikit;;Office
+9;Spidol Snowman Merah;2;3;2;3;Pcs;Stok Cukup;;-
+10;Stabilo ;0;0;0;0;Pcs;Stok Habis;;-
+11;Kabel UTP Cat 6;4;0;2;2;Box;Stok Sedikit;;Gudang
+12;Kabel UTP Cat 5E;2;0;0;2;Box;Stok Sedikit;;Gudang
+13;Commscope CAT6 (Konektor CAT6);6;5;5;6;Kotak;Stok Banyak;Sebagian masih ada di plastik- plastik ;Office
+14;Commscope CAT5 (Konektor CAT5);5;0;4;1;Kotak;Stok Sedikit;;Office
+15;Pensil;0;0;0;0;Pcs;Stok Habis;;-
+16;Post it Besar ;1;0;1;0;Pcs;Stok Habis;;-
+17;Post it sedang;0;0;0;0;Pcs;Stok Habis;;-
+18;Post it Kecil;0;0;0;0;Pcs;Stok Habis;;-
+19;Stick Notes Mark and Notes;1;0;0;1;Pcs;Stok Sedikit;;Office
+20;joyco Clips 25 mm;0;0;0;0;Pcs;Stok Habis;;-
+21;Isi stapler;4;0;0;4;Kotak;Stok Cukup;;Office
+22;Double Tape 3M 2 inch;0;0;0;0;Pcs;Stok Habis;;-
+23;Lem kertas;0;0;0;0;Pcs;Stok Habis;;-
+24;Tanda Terima;2;0;0;2;Pcs;Stok Sedikit;;Office
+25;Map Bening/Clear Holder;0;0;0;0;Pcs;Stok Habis;;-
+26;Pita label printer label 9mm;3;12;10;5;Pcs;Stok Cukup;;Office
+27;Isi Tinta Spidol Merah;0;0;0;0;Pcs;Stok Habis;;-
+28;Isi Tinta Spidol Biru;2;0;0;2;Pcs;Stok Sedikit;;Office
+29;Isi Tinta Spidol Hitam;0;0;0;0;Pcs;Stok Habis;;-
+30;Isi Tinta Permanen Biru;2;0;0;2;Pcs;Stok Sedikit;;Office
+31;Isi Tinta Permanen Hitam ;2;0;0;2;Pcs;Stok Sedikit;;Office
+32;Isi Tinta Permanen Merah;2;0;0;2;Pcs;Stok Sedikit;;Office
+33;Odner Kecil;0;0;0;0;Pcs;Stok Habis;;-
+34;Odner Besar;0;0;0;0;Pcs;Stok Habis;;-
+35;Pipa Conduit;0;0;0;0;Pcs;Stok Habis;;-
+36;Pipa Flexible (Putih);5;0;1;4;Pcs;Stok Cukup;;Gudang
+37;Baterai AA ;0;0;0;0;Pcs;Stok Habis;;-
+38;Baterai AAA;4;0;4;0;Pcs;Stok Habis;;Office
+39;Buku catatan;0;0;0;0;Pcs;Stok Habis;;-
+40;Patchcord Multimode LC-FC 3m (Orange);50;0;0;50;Pcs;Stok Banyak;;Gudang
+41;Patchcord Multimode LC-FC 5m (Orange);50;0;0;50;Pcs;Stok Banyak;;Gudang
+42;Patchcord Singlemode LC-FC 10m;100;0;0;100;Pcs;Stok Banyak;;Office & Gudang
+43;Patchcord Multimode LC-LC 5m (Orange);14;0;12;2;Pcs;Stok Sedikit;;Office
+44;Patchcord Multimode LC-LC 10m (Orange);27;0;12;15;Pcs;Stok Banyak;;Office
+45;Patchcord Multimode LC-LC 15m (Orange);8;3;0;11;Pcs;Stok Banyak;;Office & Gudang
+46;Patchcord Multimode LC-LC 25m (Orange);19;6;0;25;Pcs;Stok Banyak;;Office & Gudang
+47;Patchcord Multimode LC-LC 50m (Orange);7;2;2;7;Pcs;Stok Banyak;;Office & Gudang
+48;Patchcord Singlemode LC-LC 3m ;40;5;1;44;Pcs;Stok Banyak;;Office & Gudang
+49;Patchcord Singlemode LC-LC 5m;34;0;1;33;Pcs;Stok Banyak;;Office & Gudang
+50;Patchcord Singlemode LC-LC 10m;25;5;6;24;Pcs;Stok Banyak;after stok opname 16 pcs;Office & Gudang
+51;Patchcord Singlemode LC-LC 15m;42;0;6;36;Pcs;Stok Banyak;;Office & Gudang
+52;Patchcord Singlemode LC-LC 20m;43;0;0;43;Pcs;Stok Banyak;after stok opname 38 pcs;Office & Gudang
+53;Patchcord Singlemode LC-LC 25m;50;0;1;49;Pcs;Stok Banyak;after stok opname 39 pcs;Office & Gudang
+54;Patchcord Singlemode LC-LC 30m;87;0;1;86;Pcs;Stok Banyak;;Office & Gudang
+55;Patchcord Singlemode LC-LC 50m;89;0;9;80;Pcs;Stok Banyak;;Office & Gudang
+56;Spidol Kocok Permanent Gold;9;0;1;8;Pcs;Stok Banyak;;Office
+57;Spidol Kocok Permanent Silver;11;0;0;11;Pcs;Stok Banyak;;Office
+58;Spidol Kocok Permanent Putih;9;0;0;9;Pcs;Stok Banyak;;Office
+59;Lakban Bening Sedang 1 inch;4;0;1;3;Pcs;Stok Cukup;;Office
+60;Lakban Bening Besar 2 inch;0;0;0;0;Pcs;Stok Habis;;-
+61;Lakban kertas 1nch;4;0;2;2;Pcs;Stok Sedikit;;Office
+62;Cleaner WD40 ;4;5;2;7;Pcs;Stok Banyak;;Office
+63;Refill Epson 003 L3110 Black;0;0;0;0;Pcs;Stok Habis;;-
+64;Velcro hook and loop 25m;9;0;0;9;Psg;Stok Banyak;;Gudang
+65;Velcro star 20m ;1;0;0;1;Psg;Stok Sedikit;;Gudang
+66;Velcro Brand One Wrap Strap 25Yard;5;0;0;5;Pcs;Stok Cukup;;Gudang
+67;Isi Cutter L-150 Besar;5;0;0;5;Pcs;Stok Cukup;;Office
+68;Marker Tie MCV 110x2.5 mm;6;0;2;4;Pcs;Stok Cukup;;Office
+69;Nylon Cable Ties 150x2.5mm;0;0;0;0;Pcs;Stok Habis;;-
+70;Cable Ties 300x3.6mm;0;0;0;0;Pcs;Stok Habis;;-
+71;Kabel Power C13 to C14;22;0;13;9;Pcs;Stok Banyak;;Office
+72;Double Tape Kecil kenko;0;0;0;0;Pcs;Stok Habis;;-
+73;Kuas Gambar Xeho No. 10 Kuas Lukis ;0;0;0;0;Pcs;Stok Habis;;-
+74;Kuas Panjang 3.6x300mm;43;0;2;41;Pcs;Stok Banyak;;Office
+75;Kuas sedang;0;0;0;0;Pcs;Stok Habis;;-
+76;RJ45 Steinlees CAT 5E (Konektor CAT 5E);7;0;0;7;Pcs;Stok Banyak;;Office
+77;Pulpen Pilot Hitam;0;0;0;0;Pcs;Stok Habis;;-
+78;Rautan Pensil;1;0;0;1;Pcs;Stok Sedikit;;Office
+79;Penghapus Pensil;0;0;0;0;Pcs;Stok Habis;;-
+80;Binder Clips no. 105mm;1;0;0;1;Kotak;Stok Sedikit;;Office
+81;Police Line Pembatas;2;0;1;1;Pcs;Stok Sedikit;;Office
+82;Kabel Grounding Kuning Hijau;1;0;0;1;Roll;Stok Sedikit;;Office
+83;Kuas Cat 1 Inch;0;0;0;0;Pcs;Stok Habis;;-
+84;Kuas Cat 0.5 Inch;0;0;0;0;Pcs;Stok Habis;;-
+85;Vinyl Skun Kabel ;5;0;0;5;Bks;Stok Cukup;;Office
+86;MCB 16A;95;2;0;97;Pcs;Stok Banyak;;Office
+87;MCB 32A;145;0;2;143;Pcs;Stok Banyak;;Office
+88;MCB 63A;10;0;0;10;Pcs;Stok Banyak;;Office
+89;Masker Mulut;0;0;0;0;Pcs;Stok Habis;;-
+90;Amplop coklat A4;0;0;0;0;Pcs;Stok Habis;;-
+91;Binder Clips no. 3;0;0;0;0;Kotak;Stok Habis;;-
+92;Binder Clips no. 260;1;0;0;1;Kotak;Stok Sedikit;;Office
+93;Binder Clips no. 155;1;0;0;1;Kotak;Stok Sedikit;;Office
+94;Lakban 3M;0;0;0;0;Pcs;Stok Habis;;-
+95;Tinta Refill Epson 664 1 set (B,C,Y,M);1;1;0;2;Set;Stok Sedikit;#NAME?;Office
+96;Oli Meditiran SC SAE (Oli Genset);3,5;10;12,5;1;Pcs;Stok Sedikit;;Gudang
+97;Battery Energizer 9v;4;0;4;0;Pcs;Stok Habis;;-
+98;Minyak Kayu Putih;0;0;0;0;Pcs;Stok Habis;;-
+99;Panadol Biru;0;0;0;0;Pcs;Stok Habis;;-
+100;Panadol Hijau;0;0;0;0;Pcs;Stok Habis;;-
+101;Fuel Filter Primary (Filter Solar Genset);0;4;2;2;Pcs;Stok Sedikit;;-
+102;Fuel Filter Secondary (Filter Solar Genset);0;4;2;2;Pcs;Stok Sedikit;;-
+103;Majun Kain Lap;3;0;2;1;Pcs;Stok Sedikit;;Office & Gudang
+104;Plester micropore 1 inch;1;0;0;1;Pcs;Stok Sedikit;;Office
+105;Plester micropore 0.5 inch;1;0;0;1;Pcs;Stok Sedikit;;Office
+106;Flexible metal conduit  (Hitam);2;0;1;1;Roll;Stok Sedikit;;Gudang
+107;Flexible PVC 20mm  (Hitam);0;0;0;0;Roll;Stok Habis;;-
+108;Klem pipa stainless  1 inch;5;0;0;5;Pcs;Stok Cukup;;Office
+109;Klem pipa stainless  3/4 inch;8;0;0;8;Pcs;Stok Banyak;;Office
+110;Klem pipa clipsal;0;0;0;0;Pcs;Stok Habis;;-
+111;Fischer S6 + Skrup;2;0;0;2;Kotak;Stok Sedikit;;Office
+112;Oksigen Portable Oxycan;4;6;6;4;Pcs;Stok Cukup;after stok opname menjadi 4 pcs;Office
+113;Lakban Hitam;1;0;1;0;Pcs;Stok Habis;;-
+114;Lem Korea;0;0;0;0;Pcs;Stok Habis;;-
+115;Polykote (Air Duster);9;0;4;5;Pcs;Stok Cukup;after stok opname menjadi 5 pcs;Office
+116;Co Contact Cleaner;5;10;5;10;Pcs;Stok Banyak;;Office
+117;Pilox Hitam;0;0;0;0;Pcs;Stok Habis;;-
+118;Baut Gantung;2;0;0;2;Kotak;Stok Sedikit;;Office
+119;Tipex Joyko;1;0;1;0;Pcs;Stok Habis;;-
+120;Connector Female to Female RJ45;37;1;19;19;Pcs;Stok Banyak;;Office
+121;Buku Hardcover Polio;5;2;4;3;Pcs;Stok Cukup;;Office
+122;Sarung Tangan Rajut;0;0;0;0;Pcs;Stok Habis;Barang Rusak dan Sudah dibuang;-
+123;Plug Boot RJ45 (Pelindung Konektor);5;0;1;4;Pcs;Stok Cukup;after stok opname menjadi 3 pcs, 1 pcs sudah terpakai;Office
+124;Bioplacenton;0;0;0;0;Pcs;Stok Habis;Barang sudah diletakan di kotak P3K;-
+125;Triplex Kayu;0;0;0;0;Pcs;Stok Habis;Barang habis dan sudah digunakan untuk Box APD;-
+126;Akrilik 5 mm;0;0;0;0;;Stok Habis;Barang habis dan sudah digunakan untuk Box APD;-
+127;Engsel Pintu;0;0;0;0;Pcs;Stok Habis;Barang habis dan sudah digunakan untuk Box APD;-
+128;Paku Triplek;0;0;0;0;Pcs;Stok Habis;Barang habis dan sudah digunakan untuk Box APD;-
+129;Lem Kayu;0;0;0;0;Pcs;Stok Habis;Barang habis dan sudah digunakan untuk Box APD;-
+130;Handle Pintu Box;3;0;0;3;Pcs;Stok Cukup;;Office
+131;Amplas Kayu;0;28;28;0;Pcs;Stok Habis;14 kasar (kode 80), 14 halus (kode 1000);-
+132;Lensa Cleaner;2;0;1;1;Pcs;Stok Sedikit;;Office
+133;3M Earplugs;6;0;0;6;Pcs;Stok Banyak;;Office
+134;Plastik Laminating;;1;0;1;Box;Stok Sedikit;;Office
+135;Pilox Merah;3;0;0;3;Pcs;Stok Cukup;;Office
+136;Pilox Putih;1;0;1;0;Pcs;Stok Habis;;-
+137;Map Bening Berkancing;0;0;0;0;Pcs;Stok Habis;;-
+138;Cable Ties 300x4.8mm;1;0;1;0;Pcs;Stok Habis;;-
+139;Skun SC95mm-10;2;0;0;2;Pcs;Stok Sedikit;;Office
+140;Skun SC50mm-10;1;0;0;1;Pcs;Stok Sedikit;;Office
+141;Kabel Inti Tunggal (merah);1;0;0;1;Pcs;Stok Sedikit;;Office
+142;Kabel Inti Tunggal (Hitam);1;0;0;1;Pcs;Stok Sedikit;;Office
+143;Air Radiator Genset;0;6;6;0;Pcs;Stok Habis;;-
+144;Buku tulis 100 sheet;0;0;0;0;Pcs;Stok Habis;;-
+145;Isolasi Listrik 3M Scotch (Hitam);3;10;5;8;Pcs;Stok Banyak;;Office
+146;Double Tape 3M 1 inch;1;0;1;0;Pcs;Stok Habis;;-
+147;Filter 5N11 (Filter Masker Respirator 3M);10;0;8;2;Pcs;Stok Sedikit;;Office
+148;Patchcord Singlemode SC-LC/UPC 15M ;10;0;0;10;Pcs;Stok Banyak;;Office & Gudang
+149;Patchcord Singlemode SC-LC/UPC 30M;13;0;0;13;Pcs;Stok Banyak;;Gudang
+150;Patchcord Singlemode SC-LC/UPC 50M;10;0;0;10;Pcs;Stok Banyak;;Gudang
+151;Isolasi Listrik 3M Scotch (Merah);3;5;0;8;Pcs;Stok Banyak;;Office
+152;Isolasi Listrik 3M Scotch (Kuning);4;5;1;8;Pcs;Stok Banyak;;Office
+153;Isolasi Listrik 3M Scotch (Biru);4;5;1;8;Pcs;Stok Banyak;;Office
+154;Sealant Foam ;0;0;0;0;Pcs;Stok Habis;;-
+155;Filter Air Humidifier 5 micron (Filter Air PAC);9;0;0;9;Pcs;Stok Banyak;;Office
+156;"Lakban Aluminium Foil 2""";7;0;7;0;Pcs;Stok Habis;;-
+157;"Lakban Aluminium Foil 1""";9;0;0;9;Pcs;Stok Banyak;;Office
+158;Patchcord Multimode LC-LC 3M (Orange);18;0;17;1;Pcs;Stok Sedikit;;Office
+159;Pulpen Pilot Biru;2;0;1;1;Pcs;Stok Sedikit;;Office
+160;Sealant Foam Fire Rated;9;0;0;9;Pcs;Stok Banyak;;Gudang
+161;Lampu LED Type 31092;0;4;2;2;Pcs;Stok Sedikit;;Office
+162;Filter Racor 2020PM 30 Micron (Water Separator Genset);0;4;2;2;Pcs;Stok Sedikit;;-
+163;Element Oil Filter CH 10929 (Filter Oli Genset);0;4;2;2;Pcs;Stok Sedikit;;-
+164;Map Bantex A4;2;0;2;0;Pcs;Stok Habis;;-
+165;Double tape bening;4;0;4;0;Pcs;Stok Habis;;-
+166;Fisher S8 & skrup 7cm;1;0;0;1;Kotak;Stok Sedikit;;Office
+167;Skrup S6;2;0;0;2;Pcs;Stok Sedikit;;Office
+168;Thermaflex 5/8;16;15;21;10;Pcs;Stok Banyak;;-
+169;Thermaflex 7/8;12;0;12;0;Pcs;Stok Habis;;-
+170;Fuse Legrand 10A;4;20;0;24;Pcs;Stok Banyak;;Office
+171;Lem Thermaflex;1;0;1;0;Pcs;Stok Habis;;-
+172;Alkohol;2;0;0;2;Pcs;Stok Sedikit;;Office
+173;Betadine;1;0;0;1;Pcs;Stok Sedikit;;Office
+174;Kapas;1;0;0;1;Pcs;Stok Sedikit;;Office
+175;MCB 10A;1;0;0;1;Pcs;Stok Sedikit;after stok opname menjadi 1 pcs;Office
+176;MCB 6A;2;0;0;2;Pcs;Stok Sedikit;;Office
+177;Plastik Bening;3;0;0;3;Pcs;Stok Cukup;;Office
+178;Scrup + Fischer S8;1;0;0;1;Pcs;Stok Sedikit;;Office
+179;Sticker Police Line;2;5;3;4;Pcs;Stok Cukup;;Office
+180;Battery LR44 (Battery Jam / Battery Buzzer);2;50;35;17;Pcs;Stok Banyak;;Office
+181;Kabel Power C13 To Kabel Power UK;3;0;2;1;Pcs;Stok Sedikit;;Office
+182;Kabel Power C13 To Kabel Power Europe;27;0;0;27;Pcs;Stok Banyak;;Office & Gudang
+183;Baterai ASD Yuasa NP.2.3-12 12V 2.3Ah;0;13;10;3;Pcs;Stok Cukup;Barang sudah terpasang pada Power Supply ASD;Office
+184;Baterai NFS 320 Yuasa 12v 7.0Ah;0;8;8;0;Pcs;Stok Habis;Barang sudah terpasang pada Panel NFS320;Office
+185;Lampu LED Rack 5 Meter;;22;20;2;Pcs;Stok Sedikit;Barang sudah terpasang di rack;Office
+186;Bearing;0;10;3;7;Pcs;Stok Banyak;;Office
+187;Lem aica aibon;;12;6;6;Pcs;Stok Banyak;;Office
+188;Battery Energizer Max 1,5 V;;24;12;12;Pcs;Stok Banyak;;Office
+189;Absorbent oil;;10;0;10;Pcs;Stok Banyak;;Gudang
+190;Relay LY4 N 220 VAC;0;14;1;13;Pcs;Stok Banyak;;Office
+191;Relay LY4 N 24 VDC ;0;2;0;2;Pcs;Stok Sedikit;;Office
+192;Relay LY2 N 220/250 VAC ;0;34;1;33;Pcs;Stok Banyak;;Office
+193;Relay LY2 N 24 VDC;0;15;0;15;Pcs;Stok Banyak;;Office
+194;Relay plug in RM22TR33 380-480VAC;0;7;7;0;Pcs;Stok Habis;;-
+195;Thinner Impala;;26;17;9;Pcs;Stok Banyak;;-
+196;Kuas Cat Eterna 4 inch;0;4;3;1;Pcs;Stok Sedikit;;Office
+197;Cable Ties  150x3.6mm;8;10;13;5;Pcs;Stok Cukup;;Office
+198;Cat Bulk Tank Seiv Paint Wrought Iron;0;20;11;9;Pcs;Stok Banyak;;Office
+199;ASB Bearing 6200-2RS;0;4;2;2;Pcs;Stok Sedikit;;Office
+200;Kabel Grounding (SRG);0;1;1;0;Pcs;Stok Habis;;Office
+201;Clamp Kabel Grounding;0;180;80;100;Pcs;Stok Banyak;;Office
+202;Seal Tape Onda;0;10;10;0;Pcs;Stok Habis;;Office
+203;Baterai Panasonic CR2032;0;5;0;5;Pcs;Stok Cukup;;Office
+204;Kertas F4;0;1;0;1;Pcs;Stok Berkurang;;Office
+205;Kertas A3L ;0;2;0;2;Pcs;Stok Berkurang;;Office
+206;Exhaust Wrap;0;2;2;0;Pcs;Stok Berkurang;;Office
