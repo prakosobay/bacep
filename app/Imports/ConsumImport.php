@@ -32,11 +32,13 @@ class ConsumImport implements ToModel, WithHeadingRow
 
     public function model(array $row)
     {
-        // echo '<pre>';
-        // var_dump($row);
-        // die;
+        echo '<pre>';
+        var_dump($row);
+        die;
         return new ConsumKeluar([
-            'tanggal' => ($row['tanggal']),
+            // 'tanggal' => intval($row['tanggal']),
+            // 'tanggal' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['tanggal'])->format('Y-m-d'),
+            // 'tanggal' => Carbon::createFormFormat('m/d/Y', $row['tanggal']),
             'consum_id' => $row['kode_barang'],
             'nama_barang' => $row['nama_barang'],
             'jumlah' => $row['jumlah'],

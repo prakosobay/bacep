@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateConsumKeluarsTable extends Migration
+class CreateConsumMasuksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class CreateConsumKeluarsTable extends Migration
      */
     public function up()
     {
-        Schema::create('consum_keluars', function (Blueprint $table) {
+        Schema::create('consum_masuks', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('consum_id');
-            $table->string('nama_barang');
             $table->dateTime('tanggal');
-            $table->unsignedInteger('jumlah');
-            $table->text('ket')->nullable();
+            $table->bigInteger('jumlah');
+            $table->string('nama_barang');
+            $table->string('ket');
             $table->string('pencatat');
             $table->timestamps();
         });
@@ -32,6 +31,6 @@ class CreateConsumKeluarsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('consum_keluars');
+        Schema::dropIfExists('consum_masuks');
     }
 }

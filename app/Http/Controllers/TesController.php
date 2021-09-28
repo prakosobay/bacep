@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\{DB, Auth, Gate, Mail, Session};
 use App\Imports\ConsumImport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
-use App\Models\{Consum, ConsumKeluar};
+use App\Models\{Consum, ConsumKeluar, ConsumMasuk};
 use Illuminate\Http\Request;
 
 class TesController extends Controller
@@ -28,10 +28,10 @@ class TesController extends Controller
         return Datatables::of(ConsumKeluar::query())->make(true);
     }
 
-    // public function data_masuk()
-    // {
-    //     return Datatables::of(ConsumMasuk::query())->make(true);
-    // }
+    public function data_masuk()
+    {
+        return Datatables::of(ConsumMasuk::query())->make(true);
+    }
 
     public function update()
     {

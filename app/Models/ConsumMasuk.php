@@ -10,21 +10,12 @@ class ConsumMasuk extends Model
     use HasFactory;
 
     protected $table = 'consum_masuks';
+    protected $primayKey = 'id';
     protected $fillable = [
-        'consum_id',
-        'masuk',
+        'tanggal',
+        'nama_barang',
         'jumlah',
         'ket',
-        'pencatat',
+        'pencatat'
     ];
-
-    // public function masuk()
-    // {
-    //     return $this->belongsTo(Consum::class);
-    // }
-
-    // public function pencatat()
-    // {
-    //     return $this->belongsTo(User::class);
-    // }
 }
