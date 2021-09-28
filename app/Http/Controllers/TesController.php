@@ -28,10 +28,19 @@ class TesController extends Controller
         return Datatables::of(ConsumKeluar::query())->make(true);
     }
 
+    // public function data_masuk()
+    // {
+    //     return Datatables::of(ConsumMasuk::query())->make(true);
+    // }
+
     public function update()
     {
         $ck = ConsumKeluar::all();
         return view('consum.keluar', ['ck' => $ck]);
+    }
+
+    public function store()
+    {
     }
 
     public function import_csv(Request $request)
