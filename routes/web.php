@@ -74,7 +74,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/keluar', [TesController::class, 'update']);
     Route::post('/import', [TesController::class, 'import_csv']);
 
-    //Datatable
+    //Yajra
     Route::get('/datatable', [TesController::class, 'data_consum']);
     Route::get('/out', [TesController::class, 'data_keluar']);
 });

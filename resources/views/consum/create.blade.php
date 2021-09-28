@@ -20,37 +20,38 @@
         </div>
         @endif
 
-        {{-- Modal --}}
-        <div class="modal fade" id="importExcel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <form method="post" action="{{ url('/import')}}" enctype="multipart/form-data">
+        <button type="button" class="btn btn-primary mr-5" data-toggle="modal" data-target="#importExcel">
+			IMPORT CSV
+		</button>
+
+		<!-- Import Excel -->
+		<div class="modal fade" id="importExcel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<form method="post" action="{{ url('/import')}}" enctype="multipart/form-data">
                     {{ csrf_field() }}
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Import File CSV</h5>
-                        </div>
-                        <div class="modal-body">
-                            <label>Pilih file CSV</label>
-                            <div class="form-group">
-                                <input type="file" name="file" required="required">
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Import</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Import File CSV</h5>
+						</div>
+						<div class="modal-body">
+							<label>Pilih file CSV</label>
+							<div class="form-group">
+								<input type="file" name="file" required="required">
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+							<button type="submit" class="btn btn-primary">Import</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
 
         <div class="row">
             <div class="col-12">
                 <div class="card">
                 <!-- /.card-header -->
-                <button type="button" class="btn btn-primary mr-5" data-toggle="modal" data-target="#importExcel">
-                    IMPORT CSV
-                </button>
                 <div class="card-body">
                     <!-- Import Excel -->
                     <table id="example1" class="table table-bordered table-striped">

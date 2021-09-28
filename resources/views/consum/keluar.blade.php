@@ -29,7 +29,6 @@
                     <table id="keluar" class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th>No</th>
                                 <th>Kode Barang</th>
                                 <th>Tanggal</th>
                                 <th>Nama Barang</th>
@@ -40,17 +39,6 @@
                         </thead>
                         <tbody>
                             @php $i=1 @endphp
-                            {{-- @foreach($ck as $s)
-                            <tr>
-                                <td>{{ $i++ }}</td>
-                                <td>{{$s->id}}</td>
-                                <td>{{$s->tanggal }}</td>
-                                <td>{{$s->nama_barang}}</td>
-                                <td>{{$s->jumlah}}</td>
-                                <td>{{$s->ket}}</td>
-                                <td>{{$s->pencatat}}</td>
-                            </tr>
-                            @endforeach --}}
                         </tbody>
                     </table>
                 </div>
@@ -67,13 +55,12 @@
             // ajax: {{ url('/index')}},
             ajax: '{{ url('/out') }}',
             columns: [
-                { data: 'id', name: 'id' },
+                { data: 'consum_id', name: 'consum_id' },
+                { data: 'tanggal', name: 'tanggal' },
                 { data: 'nama_barang', name: 'nama_barang' },
                 { data: 'jumlah', name: 'jumlah' },
-                { data: 'satuan', name: 'satuan' },
-                { data: 'kondisi', name: 'kondisi' },
-                { data: 'note', name: 'note' },
-                { data: 'lokasi', name: 'lokasi' },
+                { data: 'ket', name: 'ket' },
+                { data: 'pencatat', name: 'pencatat' },
             ]
         });
     });

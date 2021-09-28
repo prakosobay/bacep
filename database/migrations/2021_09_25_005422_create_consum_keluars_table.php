@@ -17,7 +17,7 @@ class CreateConsumKeluarsTable extends Migration
             $table->id();
             $table->foreignId('consum_id');
             $table->string('nama_barang');
-            $table->date('tanggal');
+            $table->string('tanggal');
             $table->unsignedInteger('jumlah');
             $table->text('ket')->nullable();
             $table->string('pencatat');
