@@ -73,6 +73,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/create', [TesController::class, 'index']);
     Route::get('/keluar', [TesController::class, 'update']);
     Route::post('/import', [TesController::class, 'import_csv']);
+    Route::get('/main', [TesController::class, 'main']);
 
     //Yajra
     Route::get('/datatable', [TesController::class, 'data_consum']);

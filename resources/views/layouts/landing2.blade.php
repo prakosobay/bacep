@@ -62,7 +62,7 @@
                         @elsecan('isHead')
                         <li><a href="{{ url('approval/all') }}" data-after="Approval">Approval</a></li>
                         <li><a href="{{ url('full_approval/all') }}" data-after="Full">Full Approval</a></li>
-                        <li><a href="{{ url('/sabar') }}" data-after="barang">Barang</a></li>
+                        <li><a href="{{ url('/main') }}" data-after="barang">Barang</a></li>
                         @elsecan('isSecurity')
                         <li><a href="{{ url('approval/all') }}" data-after="Approval">Approval</a></li>
                         @endcan

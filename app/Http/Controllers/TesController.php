@@ -12,6 +12,14 @@ use Illuminate\Http\Request;
 
 class TesController extends Controller
 {
+    public function main()
+    {
+        if (Gate::allows('isHead') || (Gate::allows('isApproval'))) {
+            return view('consum.main');
+        } else {
+            abort(403);
+        }
+    }
     public function index()
     {
         $consum = Consum::all();
