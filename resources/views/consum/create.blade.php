@@ -1,6 +1,6 @@
-@extends('layouts.consum')
+@extends('layouts.barang')
 
-{{-- @section('title', 'Tambah Barang') --}}
+@section('title', 'Data Barang')
 @section('content')
 <div class="content-wrapper">
     <section class="content">

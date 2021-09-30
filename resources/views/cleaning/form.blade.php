@@ -70,7 +70,7 @@
 
                     <div class="contact100-form-radio">
                         <label class="label-radio100">
-                            <input class="input100" id="loc4" name="loc4" value="" readonly>
+                            <input class="input100" id="loc4" name="loc4" value="">
                         </label>
                     </div>
 

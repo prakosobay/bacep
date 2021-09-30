@@ -70,8 +70,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin', [AdminController::class, 'get_user']);
 
     //Barang Consume
-    Route::get('/create', [TesController::class, 'index']);
-    Route::get('/keluar', [TesController::class, 'update']);
+    Route::get('/consum.create', [TesController::class, 'index']);
+    Route::get('/consum.keluar', [TesController::class, 'update']);
+    Route::get('/consum.masuk', [TesController::class, 'store']);
     Route::post('/import', [TesController::class, 'import_csv']);
     Route::get('/main', [TesController::class, 'main']);
 

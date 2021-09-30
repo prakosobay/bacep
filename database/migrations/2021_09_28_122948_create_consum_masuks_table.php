@@ -15,10 +15,11 @@ class CreateConsumMasuksTable extends Migration
     {
         Schema::create('consum_masuks', function (Blueprint $table) {
             $table->id();
-            $table->dateTime('tanggal');
-            $table->bigInteger('jumlah');
+            $table->foreignId('consum_id');
             $table->string('nama_barang');
-            $table->string('ket');
+            $table->unsignedInteger('jumlah');
+            $table->string('tanggal', 20);
+            $table->text('ket')->nullable();
             $table->string('pencatat');
             $table->timestamps();
         });

@@ -12,18 +12,14 @@ use Illuminate\Http\Request;
 
 class TesController extends Controller
 {
-    public function main()
+    public function index()
     {
         if (Gate::allows('isHead') || (Gate::allows('isApproval'))) {
-            return view('consum.main');
+            $consum = Consum::all();
+            return view('consum.create');
         } else {
             abort(403);
         }
-    }
-    public function index()
-    {
-        $consum = Consum::all();
-        return view('consum.create');
     }
 
     public function data_consum()
@@ -49,6 +45,8 @@ class TesController extends Controller
 
     public function store()
     {
+        $masuk = ConsumMasuk::all();
+        return view('consum.masuk', ['masuk' => $masuk]);
     }
 
     public function import_csv(Request $request)

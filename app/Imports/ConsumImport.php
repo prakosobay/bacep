@@ -2,7 +2,7 @@
 
 namespace App\Imports;
 
-use App\Models\{Consum, ConsumKeluar};
+use App\Models\{Consum, ConsumKeluar, ConsumMasuk};
 use Maatwebsite\Excel\Concerns\{ToModel, WithHeadingRow};
 
 class ConsumImport implements ToModel, WithHeadingRow
@@ -32,20 +32,34 @@ class ConsumImport implements ToModel, WithHeadingRow
 
     public function model(array $row)
     {
-        echo '<pre>';
-        var_dump($row);
-        die;
-        return new ConsumKeluar([
-            // 'tanggal' => intval($row['tanggal']),
-            // 'tanggal' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['tanggal'])->format('Y-m-d'),
-            // 'tanggal' => Carbon::createFormFormat('m/d/Y', $row['tanggal']),
-            'consum_id' => $row['kode_barang'],
-            'nama_barang' => $row['nama_barang'],
-            'jumlah' => $row['jumlah'],
-            'ket' => $row['keterangan'],
-            'pencatat' => $row['nama_pencatat'],
+        // echo '<pre>';
+        // var_dump($row);
+        // die;
+        return new ConsumMasuk([
+            'tanggal' => $row('tanggal'),
+            'nama_barang' => $row('nama_barang'),
+            'jumlah' => $row('jumlah'),
+            'ket' => $row('keterangan'),
+            'pencatat' => $row('nama_pencatat'),
         ]);
     }
+
+    // public function model(array $row)
+    // {
+    //     // echo '<pre>';
+    //     // var_dump($row);
+    //     // die;
+    //     return new ConsumKeluar([
+    //         'tanggal' => intval($row['tanggal']),
+    //         // 'tanggal' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['tanggal'])->format('Y-m-d'),
+    //         // 'tanggal' => Carbon::createFormFormat('m/d/Y', $row['tanggal']),
+    //         'consum_id' => $row['kode_barang'],
+    //         'nama_barang' => $row['nama_barang'],
+    //         'jumlah' => $row['jumlah'],
+    //         'ket' => $row['keterangan'],
+    //         'pencatat' => $row['nama_pencatat'],
+    //     ]);
+    // }
 
     // public function dateColumns(): array
     // {

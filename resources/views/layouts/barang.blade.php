@@ -13,6 +13,63 @@
 </head>
 
 <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Manajemen Barang</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{{url('home')}}">Home</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Asset
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#">Barang Masuk</a></li>
+                        <li><a class="dropdown-item" href="#">Barang Keluar</a></li>
+                        <li><a class="dropdown-item" href="#">Foto Barang</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Consumable
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="{{url('/consum.create')}}">Table Barang</a></li>
+                        <li><a class="dropdown-item" href="{{url('/consum.masuk')}}">Barang Masuk</a></li>
+                        <li><a class="dropdown-item" href="{{url('/consum.keluar')}}">Barang Keluar</a></li>
+                        <li><a class="dropdown-item" href="#">Foto Barang</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            {{-- Logout --}}
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" href="#">
+                            <span class="float-right text-muted text-sm">{{ Auth::user()->name}}</span>
+                        </a>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+
+
+                    <a href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();">
+                            <span class="dropdown-item dropdown-header">Logout</span>
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
+                </li>
+            </ul>
+
+        </div>
+        </div>
+    </nav>
     <div class="container">
         @yield('content')
     </div>

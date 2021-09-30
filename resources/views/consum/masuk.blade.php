@@ -1,6 +1,6 @@
 @extends('layouts.barang')
 
-@section('title', 'Barang Keluar')
+@section('title', 'Tambah Barang')
 @section('content')
 <div class="content-wrapper">
     <section class="content">

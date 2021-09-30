@@ -13,9 +13,15 @@ class ConsumMasuk extends Model
     protected $primayKey = 'id';
     protected $fillable = [
         'tanggal',
+        'consum_id',
         'nama_barang',
         'jumlah',
         'ket',
         'pencatat'
     ];
+
+    public function masuk()
+    {
+        return $this->belongsTo(Consum::class);
+    }
 }
