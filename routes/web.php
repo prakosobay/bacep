@@ -79,5 +79,6 @@ Route::middleware(['auth'])->group(function () {
     //Yajra
     Route::get('/datatable', [TesController::class, 'data_consum']);
     Route::get('/out', [TesController::class, 'data_keluar']);
+    Route::get('/input', [TesController::class, 'data_masuk']);
 });
 // Route::resource('/barang', ConsumController::class);

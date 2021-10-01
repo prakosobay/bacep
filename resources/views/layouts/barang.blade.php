@@ -70,7 +70,9 @@
         </div>
         </div>
     </nav>
+
     <div class="container">
+        <h3 class="center"> @yield('judul_halaman') </h3>
         @yield('content')
     </div>
 

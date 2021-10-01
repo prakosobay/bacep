@@ -1,6 +1,7 @@
 @extends('layouts.barang')
 
 @section('title', 'Barang Keluar')
+@section('judul_halaman', 'Barang Keluar')
 @section('content')
 <div class="content-wrapper">
     <section class="content">

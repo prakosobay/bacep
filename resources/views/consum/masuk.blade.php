@@ -1,6 +1,7 @@
 @extends('layouts.barang')
 
 @section('title', 'Tambah Barang')
+@section('judul_halaman', 'Barang Masuk')
 @section('content')
 <div class="content-wrapper">
     <section class="content">
@@ -53,7 +54,7 @@
             $('#keluar').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: '{{ url('/out') }}',
+                ajax: '{{ url('/input') }}',
                 columns: [
                     { data: 'consum_id', name: 'consum_id' },
                     { data: 'tanggal', name: 'tanggal' },

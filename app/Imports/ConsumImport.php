@@ -37,6 +37,7 @@ class ConsumImport implements ToModel, WithHeadingRow
         // die;
         return new ConsumMasuk([
             'tanggal' => $row('tanggal'),
+            // 'consum_id' => $row('kode_barang'),
             'nama_barang' => $row('nama_barang'),
             'jumlah' => $row('jumlah'),
             'ket' => $row('keterangan'),
@@ -50,7 +51,7 @@ class ConsumImport implements ToModel, WithHeadingRow
     //     // var_dump($row);
     //     // die;
     //     return new ConsumKeluar([
-    //         'tanggal' => intval($row['tanggal']),
+    //         'tanggal' => ($row['tanggal']),
     //         // 'tanggal' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['tanggal'])->format('Y-m-d'),
     //         // 'tanggal' => Carbon::createFormFormat('m/d/Y', $row['tanggal']),
     //         'consum_id' => $row['kode_barang'],
@@ -61,8 +62,8 @@ class ConsumImport implements ToModel, WithHeadingRow
     //     ]);
     // }
 
-    // public function dateColumns(): array
-    // {
-    //     return ['tanggal' => 'd/m/Y', 'tanggal'];
-    // }
+    public function dateColumns(): array
+    {
+        return ['tanggal' => 'd/m/Y', 'tanggal'];
+    }
 }
