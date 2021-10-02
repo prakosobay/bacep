@@ -10,6 +10,12 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.11.3/datatables.min.css"/>
+
+    <style>
+        .center{
+        text-align: center
+        }
+    </style>
 </head>
 
 <body>
@@ -42,7 +48,7 @@
                         <li><a class="dropdown-item" href="{{url('/consum.create')}}">Table Barang</a></li>
                         <li><a class="dropdown-item" href="{{url('/consum.masuk')}}">Barang Masuk</a></li>
                         <li><a class="dropdown-item" href="{{url('/consum.keluar')}}">Barang Keluar</a></li>
-                        <li><a class="dropdown-item" href="#">Foto Barang</a></li>
+                        <li><a class="dropdown-item" href="{{url('/consum.gambar')}}">Foto Barang</a></li>
                     </ul>
                 </li>
             </ul>
@@ -71,8 +77,8 @@
         </div>
     </nav>
 
-    <div class="container">
-        <h3 class="center"> @yield('judul_halaman') </h3>
+    <h3 class="center"> @yield('judul_halaman') </h3>
+    <div class="container-fluid">
         @yield('content')
     </div>
 

@@ -3,7 +3,6 @@
 @section('title', 'Data Barang')
 @section('judul_halaman', 'Data Barang')
 @section('content')
-<div class="content-wrapper">
     <section class="content">
         <div class="container-fluid">
             {{-- notifikasi form validasi --}}
@@ -97,5 +96,4 @@
         });
         </script>
     </section>
-</div>
 @endsection

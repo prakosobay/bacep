@@ -49,6 +49,11 @@ class TesController extends Controller
         return view('consum.masuk', ['masuk' => $masuk]);
     }
 
+    public function gambar()
+    {
+        return view('consum.gambar');
+    }
+
     public function import_csv(Request $request)
     {
         //

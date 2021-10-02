@@ -73,6 +73,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/consum.create', [TesController::class, 'index']);
     Route::get('/consum.keluar', [TesController::class, 'update']);
     Route::get('/consum.masuk', [TesController::class, 'store']);
+    Route::get('/consum.gambar', [TesController::class, 'gambar']);
     Route::post('/import', [TesController::class, 'import_csv']);
     Route::get('/main', [TesController::class, 'main']);
 
