@@ -35,6 +35,7 @@
                     Asset
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#">Table Barang</a></li>
                         <li><a class="dropdown-item" href="#">Barang Masuk</a></li>
                         <li><a class="dropdown-item" href="#">Barang Keluar</a></li>
                         <li><a class="dropdown-item" href="#">Foto Barang</a></li>

@@ -75,6 +75,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/consum.masuk', [TesController::class, 'store']);
     Route::get('/consum.gambar', [TesController::class, 'gambar']);
     Route::post('/import', [TesController::class, 'import_csv']);
+    Route::post('/edit', [TesController::class, 'edit_data']);
     Route::get('/main', [TesController::class, 'main']);
 
     //Yajra

@@ -54,6 +54,13 @@ class TesController extends Controller
         return view('consum.gambar');
     }
 
+    public function edit_data(Request $request)
+    {
+        $validated = $request->validate([
+            'image' => 'required|image|file|max:248',
+        ]);
+    }
+
     public function import_csv(Request $request)
     {
         //

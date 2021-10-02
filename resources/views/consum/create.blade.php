@@ -24,6 +24,10 @@
                 IMPORT CSV
             </button>
 
+            {{-- <button type="button" class="btn btn-primary mr-5" data-toggle="modal" data-target="#edit">
+                Edit Data
+            </button> --}}
+
             <!-- Import Excel -->
             <div class="modal fade" id="importExcel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -42,6 +46,30 @@
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                 <button type="submit" class="btn btn-primary">Import</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Tambah Gambar -->
+            <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <form method="post" action="{{ url('/edit')}}" enctype="multipart/form-data">
+                        {{ csrf_field() }}
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Tambahkan Gambar</h5>
+                            </div>
+                            <div class="modal-body">
+                                <label>Pilih Gambar</label>
+                                <div class="form-group">
+                                    <input type="file" name="image" required="required">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save</button>
                             </div>
                         </div>
                     </form>

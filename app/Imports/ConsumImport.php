@@ -20,8 +20,6 @@ class ConsumImport implements ToModel, WithHeadingRow
     //     // var_dump($row);
     //     // die;
     //     return new Consum([
-    //         // 'consum_id' => 1,
-    //         // 'kode_barang' => $row[0],
     //         'nama_barang' => $row['nama'],
     //         'jumlah' => $row['jumlah'],
     //         'satuan' => $row['satuan'],
@@ -36,12 +34,12 @@ class ConsumImport implements ToModel, WithHeadingRow
         // var_dump($row);
         // die;
         return new ConsumMasuk([
-            'tanggal' => $row('tanggal'),
-            // 'consum_id' => $row('kode_barang'),
-            'nama_barang' => $row('nama_barang'),
-            'jumlah' => $row('jumlah'),
-            'ket' => $row('keterangan'),
-            'pencatat' => $row('nama_pencatat'),
+            'consum_id' => $row['kode_barang'],
+            'tanggal' => $row['tanggal'],
+            'nama_barang' => $row['nama_barang'],
+            'jumlah' => $row['jumlah'],
+            'note' => $row['keterengan'],
+            'pencatat' => $row['nama_pencatat'],
         ]);
     }
 
