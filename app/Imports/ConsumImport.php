@@ -28,37 +28,37 @@ class ConsumImport implements ToModel, WithHeadingRow
     //     ]);
     // }
 
-    public function model(array $row)
-    {
-        // echo '<pre>';
-        // var_dump($row);
-        // die;
-        return new ConsumMasuk([
-            'consum_id' => $row['kode_barang'],
-            'tanggal' => $row['tanggal'],
-            'nama_barang' => $row['nama_barang'],
-            'jumlah' => $row['jumlah'],
-            'note' => $row['keterengan'],
-            'pencatat' => $row['nama_pencatat'],
-        ]);
-    }
-
     // public function model(array $row)
     // {
     //     // echo '<pre>';
     //     // var_dump($row);
     //     // die;
-    //     return new ConsumKeluar([
-    //         'tanggal' => ($row['tanggal']),
-    //         // 'tanggal' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['tanggal'])->format('Y-m-d'),
-    //         // 'tanggal' => Carbon::createFormFormat('m/d/Y', $row['tanggal']),
-    //         'consum_id' => $row['kode_barang'],
+    //     return new ConsumMasuk([
+    //         // 'consum_id' => $row['kode_barang'],
+    //         'tanggal' => $row['tanggal'],
     //         'nama_barang' => $row['nama_barang'],
     //         'jumlah' => $row['jumlah'],
-    //         'ket' => $row['keterangan'],
-    //         'pencatat' => $row['nama_pencatat'],
+    //         'note' => $row['keterengan'],
+    //         'pencatat' => $row['pencatat'],
     //     ]);
     // }
+
+    public function model(array $row)
+    {
+        echo '<pre>';
+        var_dump($row);
+        die;
+        return new ConsumKeluar([
+            'tanggal' => ($row['tanggal']),
+            // 'tanggal' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['tanggal'])->format('Y-m-d'),
+            // 'tanggal' => Carbon::createFormFormat('m/d/Y', $row['tanggal']),
+            'consum_id' => $row['kode'],
+            'nama_barang' => $row['nama_barang'],
+            'jumlah' => $row['jumlah'],
+            'ket' => $row['keterangan'],
+            'pencatat' => $row['pencatat'],
+        ]);
+    }
 
     // public function model(array $row)
     // {

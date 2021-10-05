@@ -12,6 +12,11 @@ use Illuminate\Http\Request;
 
 class TesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         if (Gate::allows('isHead') || (Gate::allows('isApproval'))) {
@@ -51,7 +56,8 @@ class TesController extends Controller
 
     public function gambar()
     {
-        return view('consum.gambar');
+        $gambar = Consum::all();
+        return view('consum.gambar', ['gambar' => $gambar]);
     }
 
     public function edit_data(Request $request)
@@ -74,7 +80,7 @@ class TesController extends Controller
         //     'file' => 'required|mimes:csv'
         // ]);
 
-        $i = Excel::import(new ConsumImport, $request->file('file'));
+        $i = Excel::import(new ConsumImport, $request->file('file'), \Maatwebsite\Excel\Excel::CSV);
         // dd($i);
         return back();
         // menangkap file excel

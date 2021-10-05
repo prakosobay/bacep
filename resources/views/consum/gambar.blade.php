@@ -18,6 +18,14 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach($gambar as $g)
+                                <tr>
+                                    <td>{{ $g->id}}</td>
+                                    <td>{{ $g->nama_barang}}</td>
+                                    <td>gambar </td>
+                                    <td>{{ $g->ket}}</td>
+                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

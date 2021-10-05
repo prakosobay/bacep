@@ -41,8 +41,7 @@ class CleaningController extends Controller
         $data = $request->all();
         if (Gate::allows('isBm')) {
             $data['cleaning_name'] = MasterOb::find($data['cleaning_name'])->nama;
-            $data['cleaning_name2'] = MasterOb::find($data['cleaning_name2'])->nama;
-            $data['cleaning_work'] = PilihanWork::find($data['cleaning_work'])->work;
+            $data['cleaning_work'] = PilihanWork::find($data['cleaning_work'])->nama;
             $cleaning = Cleaning::create($data);
 
             foreach ([

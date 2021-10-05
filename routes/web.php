@@ -77,10 +77,14 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/import', [TesController::class, 'import_csv']);
     Route::post('/edit', [TesController::class, 'edit_data']);
     Route::get('/main', [TesController::class, 'main']);
-
     //Yajra
     Route::get('/datatable', [TesController::class, 'data_consum']);
     Route::get('/out', [TesController::class, 'data_keluar']);
     Route::get('/input', [TesController::class, 'data_masuk']);
+
+    //Barang Asset
+    Route::get('/asset.create', [AssetController::class, 'show']);
+    Route::post('/import_asset', [AssetController::class, 'import_csv']);
+    Route::get('/asset', [AssetController::class, 'data_asset']);
 });
 // Route::resource('/barang', ConsumController::class);
