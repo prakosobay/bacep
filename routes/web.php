@@ -70,19 +70,21 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin', [AdminController::class, 'get_user']);
 
     //Barang Consume
-    Route::get('/consum.create', [TesController::class, 'index']);
-    Route::get('/consum.keluar', [TesController::class, 'update']);
-    Route::get('/consum.masuk', [TesController::class, 'store']);
-    Route::get('/consum.gambar', [TesController::class, 'gambar']);
-    Route::post('/import', [TesController::class, 'import_csv']);
-    Route::post('/edit', [TesController::class, 'edit_data']);
-    Route::get('/main', [TesController::class, 'main']);
+    Route::post('/consum', [ConsumController::class, 'csv']);
+    Route::get('/c.table', [ConsumController::class, 'index']);
+    Route::get('/c.masuk', [ConsumController::class, 'show_in']);
+    Route::get('/c.keluar', [ConsumController::class, 'show_out']);
+
     //Yajra
     Route::get('/datatable', [TesController::class, 'data_consum']);
     Route::get('/out', [TesController::class, 'data_keluar']);
     Route::get('/input', [TesController::class, 'data_masuk']);
 
     //Barang Asset
+    Route::get('/a.table', [AssetController::class, 'index']);
+    Route::get('/a.masuk', [AssetController::class, 'show_in']);
+    Route::get('/a.keluar', [AssetController::class, 'show_out']);
+
     Route::get('/asset.create', [AssetController::class, 'show']);
     Route::post('/import_asset', [AssetController::class, 'import_csv']);
     Route::get('/asset', [AssetController::class, 'data_asset']);

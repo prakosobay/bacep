@@ -1,72 +1,45 @@
-@extends('layouts.barang')
+@extends('layouts.dashboard')
 
-@section('title', 'Tambah Barang')
-@section('judul_halaman', 'Barang Masuk')
 @section('content')
-<div class="content-wrapper">
-    <section class="content">
-        <div class="container-fluid">
-            {{-- notifikasi form validasi --}}
-            @if ($errors->has('file'))
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $errors->first('file') }}</strong>
-            </span>
-            @endif
+<!-- Begin Page Content -->
+<div class="container-fluid">
 
-            {{-- notifikasi sukses --}}
-            @if ($sukses = Session::get('sukses'))
-            <div class="alert alert-success alert-block">
-                <button type="button" class="close" data-dismiss="alert">×</button>
-                <strong>{{ $sukses }}</strong>
-            </div>
-            @endif
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800 text-center">Data Barang Consumable</h1>
 
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <!-- /.card-header -->
-                        <div class="card-body">
-                            <!-- Import Excel -->
-                            <table id="keluar" class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Kode Barang</th>
-                                        <th>Tanggal</th>
-                                        <th>Nama Barang</th>
-                                        <th>Jumlah</th>
-                                        <th>Keterangan</th>
-                                        <th>Nama Pencatat</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {{-- @php $i=1 @endphp --}}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary text-center">Barang Masuk</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Kode Barang</th>
+                            <th>Nama Barang</th>
+                            <th>Jumlah</th>
+                            <th>Ket</th>
+                            <th>Tanggal</th>
+                            <th>Pencatat</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($in as $c)
+                            <tr>
+                                <td>{{$c->consum_id}}</td>
+                                <td>{{$c->nama_barang}}</td>
+                                <td>{{$c->jumlah}}</td>
+                                <td>{{$c->ket}}</td>
+                                <td>{{$c->tanggal}}</td>
+                                <td>{{$c->pencatat}}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
-
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-        <script>
-        $(function() {
-            $('#keluar').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: '{{ url('/input') }}',
-                columns: [
-                    { data: 'consum_id', name: 'consum_id' },
-                    { data: 'tanggal', name: 'tanggal' },
-                    { data: 'nama_barang', name: 'nama_barang' },
-                    { data: 'jumlah', name: 'jumlah' },
-                    { data: 'ket', name: 'ket' },
-                    { data: 'pencatat', name: 'pencatat' },
-                ]
-            });
-        });
-        </script>
-
-    </section>
+    </div>
 </div>
 @endsection

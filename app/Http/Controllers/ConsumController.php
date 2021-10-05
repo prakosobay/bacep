@@ -3,129 +3,52 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Imports\ConsumImport;
+use Maatwebsite\Excel\Facades\Excel;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\{DB, Auth, Gate, Mail, Session};
-use App\Models\{ConsumMasuk, Consum, ConsumGambar, User};
+use App\Models\{ConsumMasuk, Consum, ConsumGambar, ConsumKeluar, User};
 use Illuminate\Http\Request;
 
 class ConsumController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
-        $consum = Consum::all();
-        return view('consum.stock', ['consum' => $consum]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('consum.create');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $request->validate([
-            'nama_barang' => 'required|unique:consums',
-            'jumlah' => 'required|numeric',
-            'satuan' => 'required',
-            'notes' => 'required',
-            'lokasi' => 'required',
-            'file' => 'image|required|file|max:2048',
-        ]);
-
-        // dd($request);
-        $input = $request->all();
-
-        $consum = Consum::create($input);
-        if ($consum->exists) {
-            $masukHistory = ConsumMasuk::create([
-                'consum_id' => $consum->consum_id,
-                'masuk' => $consum->nama_barang,
-                'jumlah' => $consum->jumlah,
-                'ket' => $consum->notes,
-                'pencatat' => Auth::user()->name,
-            ]);
-
-            $gambarHistory = ConsumGambar::create([
-                'consum_id' => $consum->consum_id,
-                'nama_barang' => $consum->nama_barang,
-                'file' => $request->file('file')->store('consum-image'),
-            ]);
+        if ((Gate::allows('isHead')) || (Gate::allows('isApproval')) || (Gate::allows('isAdmin'))) {
+            $consum = Consum::all();
+            return view('consum.table', ['consum' => $consum]);
+        } else {
+            abort(403);
         }
-
-        // if ($masukHistory->exist) {
-        //
-        // }
-        return back()->with('success', ' Data baru berhasil ditambah.');
-        // return $masukHistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function show_in()
     {
-        //
+        if (Gate::allows('isHead') || (Gate::allows('isApproval')) || (Gate::allows('isAdmin'))) {
+            $in = ConsumMasuk::all();
+            return view('consum.masuk', ['in' => $in]);
+        } else {
+            abort(403);
+        }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function show_out()
     {
-        $consum = Consum::findOrFail($id);
-
-        return view('consum.edit', ['consum' => $consum]);
+        if (Gate::allows('isHead') || (Gate::allows('isApproval')) || (Gate::allows('isAdmin'))) {
+            $out = ConsumKeluar::all();
+            return view('consum.keluar', ['out' => $out]);
+        } else {
+            abort(403);
+        }
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function csv(Request $request)
     {
-        $request->validate([
-            'jumlah' => 'required|numeric',
-            'ket' => 'required',
-        ]);
-
-        $consum = Consum::find($id)->update($request->all());
-
-        return back()->with('success', ' Data consum diperbaharui!');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        $i = Excel::import(new ConsumImport, $request->file('file'));
     }
 }

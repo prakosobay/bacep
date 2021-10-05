@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\{DB, Auth, Gate, Mail, Session};
 use App\Imports\AssetImport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
-use App\Models\{Asset};
+use App\Models\{Asset, AssetMasuk, AssetKeluar};
 use Illuminate\Http\Request;
 
 class AssetController extends Controller
@@ -17,19 +17,37 @@ class AssetController extends Controller
         $this->middleware('auth');
     }
 
-    public function show()
+    public function index()
     {
-        if (Gate::allows('isApproval') || (Gate::allows('isHead'))) {
+        if (Gate::allows('isApproval') || (Gate::allows('isHead')) || (Gate::allows('isAdmin'))) {
             $asset = Asset::all();
-            return view('asset.create');
+            return view('asset.table', ['asset' => $asset]);
+        } else {
+            abort(403);
+        }
+    }
+    public function show_in()
+    {
+        if (Gate::allows('isApproval') || (Gate::allows('isHead')) || (Gate::allows('isAdmin'))) {
+            $in = AssetMasuk::all();
+            return view('asset.masuk', ['in' => $in]);
         } else {
             abort(403);
         }
     }
 
+    public function show_out()
+    {
+        if (Gate::allows('isApproval') || (Gate::allows('isHead')) || (Gate::allows('isAdmin'))) {
+            $out = AssetKeluar::all();
+            return view('asset.keluar', ['out' => $out]);
+        } else {
+            abort(403);
+        }
+    }
     public function import_csv(Request $request)
     {
-        Excel::import(new AssetImport, $request->file('file'));
+        $i = Excel::import(new AssetImport, $request->file('file'));
     }
 
     public function data_asset()

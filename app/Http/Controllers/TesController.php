@@ -20,8 +20,8 @@ class TesController extends Controller
     public function index()
     {
         if (Gate::allows('isHead') || (Gate::allows('isApproval'))) {
-            $consum = Consum::all();
-            return view('consum.create');
+            // $consum = Consum::all();
+            return view('item.input');
         } else {
             abort(403);
         }
@@ -80,7 +80,7 @@ class TesController extends Controller
         //     'file' => 'required|mimes:csv'
         // ]);
 
-        $i = Excel::import(new ConsumImport, $request->file('file'), \Maatwebsite\Excel\Excel::CSV);
+        $i = Excel::import(new ConsumImport, $request->file('file'));
         // dd($i);
         return back();
         // menangkap file excel
