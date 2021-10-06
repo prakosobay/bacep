@@ -14,16 +14,49 @@ class AssetImport implements ToCollection, WithStartRow
      * @return \Illuminate\Database\Eloquent\Model|null
      */
 
-    // public function sheets(): array
+    // private $assets;
+    // public function __construct()
     // {
-    //     return [
-    //         0 => new FirstSheetImport(),
-    //         1 => new SecondSheetImport(),
-    //         2 => new ThirdSheetImport(),
-    //     ];
+    //     $this->asset = Asset::select('id')->get();
     // }
+    // public function collection(Collection $rows1)
+    // {
+    //     echo '<pre>';
+    //     var_dump($rows1);
+    //     die;
+    //     foreach ($rows1 as $row) {
+    //         Asset::create([
+    //             'nama_barang' => $row[1],
+    //             'jumlah' => $row[5],
+    //             'satuan' => $row[6],
+    //             // 'kondisi' => $row[7],
+    //             'note' => $row[8],
+    //             'lokasi' => $row[9],
+    //         ]);
+    //     }
+    // }
+
+    // public function collection(Collection $rows3)
+    // {
+    //     echo '<pre>';
+    //     var_dump($rows3);
+    //     die;
+    //     foreach ($rows3 as $row) {
+    //         AssetMasuk::create([
+    //             'tanggal' => $row[0],
+    //             'nama_barang' => $row[2],
+    //             'jumlah' => $row[3],
+    //             'ket' => $row[4],
+    //             'pencatat' => $row[5],
+    //         ]);
+    //     }
+    // }
+
     public function collection(Collection $rows2)
     {
+        // echo '<pre>';
+        // var_dump($rows2);
+        // die;
         foreach ($rows2 as $row) {
             AssetKeluar::create([
                 'tanggal' => $row[0],
@@ -41,27 +74,6 @@ class AssetImport implements ToCollection, WithStartRow
     }
 }
 
-class FirstSheetImport implements ToCollection, WithStartRow
-{
-    public function collection(Collection $rows1)
-    {
-        foreach ($rows1 as $row) {
-            Asset::create([
-                'nama_barang' => $row[1],
-                'jumlah' => $row[5],
-                'satuan' => $row[6],
-                'kondisi' => $row[7],
-                'note' => $row[8],
-                'lokasi' => $row[9],
-            ]);
-        }
-    }
-
-    public function startRow(): int
-    {
-        return 2;
-    }
-}
 class SecondSheetImport implements ToCollection, WithStartRow
 {
     public function collection(Collection $rows2)

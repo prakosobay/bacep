@@ -19,4 +19,14 @@ class Asset extends Model
         'note',
         'lokasi'
     ];
+
+    public function asset_id()
+    {
+        return $this->hasMany(AssetKeluar::class);
+    }
+
+    public function asset_id2()
+    {
+        return $this->hasMany(AssetMasuk::class);
+    }
 }

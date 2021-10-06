@@ -77,6 +77,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/c.table', [ConsumController::class, 'index']);
     Route::get('/c.masuk', [ConsumController::class, 'show_in']);
     Route::get('/c.keluar', [ConsumController::class, 'show_out']);
+    Route::post('/c.update', [ConsumController::class, 'update']);
 
     //Yajra
     Route::get('/datatable', [TesController::class, 'data_consum']);
@@ -84,10 +85,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/input', [TesController::class, 'data_masuk']);
 
     //Barang Asset
+    Route::post('/asset', [AssetController::class, 'csv']);
     Route::get('/a.table', [AssetController::class, 'index']);
     Route::get('/a.masuk', [AssetController::class, 'show_in']);
     Route::get('/a.keluar', [AssetController::class, 'show_out']);
-    Route::post('/asset', [AssetController::class, 'csv']);
+    Route::get('/a.new', [AssetController::class, 'show_new']);
+    Route::post('/a.update', [AssetController::class, 'store_asset']);
 
     Route::get('/asset.create', [AssetController::class, 'show']);
     Route::get('/asset', [AssetController::class, 'data_asset']);

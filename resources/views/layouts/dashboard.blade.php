@@ -38,7 +38,7 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">Data Center</div>
+                <div class="sidebar-brand-text mx-3">Manajemen Barang</div>
             </a>
 
             <!-- Divider -->
@@ -72,6 +72,7 @@
                         <a class="collapse-item" href="{{url('a.table')}}">Barang Asset</a>
                         <a class="collapse-item" href="{{url('a.masuk')}}">Barang Masuk</a>
                         <a class="collapse-item" href="{{url('a.keluar')}}">Barang Keluar</a>
+                        {{-- <a class="collapse-item" href="{{url('a.update')}}">Update Barang</a> --}}
                     </div>
                 </div>
             </li>
@@ -90,6 +91,7 @@
                         <a class="collapse-item" href="{{url('c.table')}}">Barang Consumable</a>
                         <a class="collapse-item" href="{{url('c.masuk')}}">Barang Masuk</a>
                         <a class="collapse-item" href="{{url('c.keluar')}}">Barang Keluar</a>
+                        {{-- <a class="collapse-item" href="{{url('c.update')}}">Update Barang</a> --}}
                     </div>
                 </div>
             </li>

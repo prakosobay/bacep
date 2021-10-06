@@ -1,0 +1,224 @@
+Kode Barang,Nama Barang,Stok Awal,Barang Masuk,Barang Keluar,Stok Akhir,Satuan ,Kondisi Stok,NOTE,Lokasi Penyimpanan
+1,Grounding Tester ,1,0,0,1,Unit,Tersedia,,Office
+2,Casio Portable Printer KL 60,1,0,0,1,Unit,Tersedia,,Office
+3,Clamp Meter (Tang Amper),2,0,0,2,Unit,Tersedia,,Office
+4,Crimping Tools CAT 5 ( AMP ),2,0,0,2,Unit,Tersedia,,Office
+5,Crimping Tools CAT 6 ( AMP ),2,0,0,2,Unit,Tersedia,,Office
+6,Cutter L-500 Besar,2,0,0,2,Unit,Tersedia,,Office
+7,Gergaji Besi Jigsaw Boss,0,0,0,0,Unit,Stok Habis,,-
+8,Gunting Kawat Plato,0,0,0,0,Unit,Stok Habis,Barang Rusak dan Sudah di Buang,-
+9,HT Pxton 8600P,4,4,0,8,Unit,Tersedia,,Office
+10,KOP Kaca Raised Floor 3 Kaki,1,0,0,1,Unit,Tersedia,,Office
+11,KOP Kaca Raised Floor 1 Kaki,2,2,2,2,Unit,Tersedia,,Office
+12,Kotak Perkakas (Merah),1,0,0,1,Unit,Tersedia,,Office
+13,Stop Contac 6 Lubang,2,0,0,2,Unit,Tersedia,,Office
+14,Kulkas,1,0,0,1,Unit,Tersedia,Diletakkan di Pantry Lt.3,-
+15,Kuncil L Tekiro Balpoint (Type HEX),4,0,0,4,Unit,Tersedia,,Office
+16,Kunci L Tekiro Balpoint (Type Bintang),5,0,0,5,Unit,Tersedia,,Office
+17,Lampu Perangkap Nyamuk ,2,0,0,2,Unit,Tersedia,,Gudang
+18,LAN Tester (Kecil) ,1,0,1,0,Unit,Stok Habis,Barang sudah rusak,-
+19,Laptop Table T8 ,3,0,0,3,Unit,Tersedia,,Office
+20,Lemari Kantor Arsip (warna abu-abu),1,0,0,1,Unit,Tersedia,,Office
+21,Logitec Keyboard & Mouse,3,0,0,3,Unit,Tersedia,1 Unit sudah diletakan ke Ruang Security,Office
+22,Monitor LG 24Inc 24MP59G,2,0,1,1,Unit,Tersedia,1 unit rusak,Office
+23,Metabo Drill Box,1,0,0,1,Unit,Tersedia,,Office
+24,Obeng + Tekiro,2,0,0,2,Unit,Tersedia,,Office
+25,Obeng - Tekiro,2,0,0,2,Unit,Tersedia,,Office
+26,PC Lenovo ideacentre AIO 520-24ICB.,2,0,0,2,Unit,Tersedia,,Office
+27,Pocketman senter LED 2000 Lumens Waterproof - Black,2,0,0,2,Unit,Tersedia,,Office
+28,Projector,1,0,0,1,Unit,Tersedia,,Office
+29,Rack Server IRB Close Rack 600 x 42U x 1100,7,0,0,7,Unit,Tersedia,,Office
+30,"SHARP 40 Inch Aquos TV LED [LC-40LEI851] 40""",1,0,0,1,Unit,Tersedia,,Gudang
+31,Vacum Cleaner (Karcher),1,0,0,1,Unit,Tersedia,,Office
+32,Tang Potong Tekiro,3,0,0,3,Unit,Tersedia,,Office  
+33,Tangga Alumunium,2,0,0,2,Unit,Tersedia,"1 rusak, pengunci bagian atas patah",Office  
+34,Thermometer Gun (Biasa),2,0,0,2,Unit,Tersedia,,Office  
+35,Tespen Bolak Balik,1,3,0,4,Unit,Tersedia,,Office  
+36,Tone Tracer ,2,0,0,2,Unit,Tersedia,,Office
+37,Toolkits Tekiro,1,0,0,1,Unit,Tersedia,,Office
+38,Troley,1,0,0,1,Unit,Tersedia,,Office
+39,TV LED 50 Inch - SHARP - LC 50SA5200X,2,0,0,2,Unit,Tersedia,,Office
+40,Wiring Management (Cabel Management),2,0,0,2,Unit,Tersedia,,Office
+41,Meja Tinggi (Putih),2,0,0,2,Unit,Tersedia,,Office
+42,P3K,3,0,0,3,Unit,Tersedia,"Barang sudah diletakan di Lantai G, Lantai 1, & Lantai 3",Office
+43,Printer EPSON L3110,1,0,0,1,Unit,Tersedia,,Office
+44,"Samsung Galaxy TAB A6,7'",2,0,0,2,Unit,Tersedia,,Office
+45,Tang Crimping Skun,2,0,0,2,Unit,Tersedia,,Office  
+46,Oppo A37 Gold,2,0,0,2,Unit,Tersedia,,Office
+47,Loker 4 Pintu,1,0,0,1,Unit,Tersedia,,Office
+48,Loker 18 Pintu,2,0,0,2,Unit,Tersedia,,Office
+49,Rak Gudang Besi Siku Pallet,2,0,0,2,Unit,Tersedia,,Gudang
+50,Kotak Penyimpanan Kunci,1,0,0,1,Unit,Tersedia,,Office
+51,Sarung Tangan listrik krisbow(Abu-abu),0,0,0,0,Pasang,Stok Habis,Barang Rusak dan Sudah di Buang,-
+52,Meteran 50 m,1,0,0,1,Unit,Tersedia,,Office
+53,NTC 2 Thermometer (Thermometer Ruangan),9,0,0,9,Unit,Tersedia,Sudah Terpasang,-
+54,Gunting Plat Seng Baja,1,0,0,1,Unit,Tersedia,,Office
+55,Krisbow Palu Karet,2,0,0,2,Unit,Tersedia,,Office
+56,APAR 25KG CO2,6,0,0,6,Unit,Tersedia,Barang sudah diletakkan di ruang- ruang facility,Office
+57,APAR 5 KG CO2 ,14,0,0,14,Unit,Tersedia,Barang sudah diletakkan di ruang- ruang facility,Office
+58,Ventilator FAN 300MM (Exhaust Krisbow),1,1,0,2,Unit,Tersedia,1 di office dan 1 di gudang,Office & Gudang
+59,Duct Ventilator FAN 300MM (Saluran Udara Exhaust Krisbow),1,1,0,2,Unit,Tersedia,1 di office dan 1 di gudang,Office & Gudang
+60,Rakitan PC,1,0,0,1,Unit,Tersedia,Barang sudah diletakan di Ruang Security,-
+61,Monitor LED LG 20 Inch,1,0,0,1,Unit,Tersedia,,Office
+62,Senter LED kepala dan battery,2,0,0,2,Unit,Tersedia,,Office
+63,Earmuff Luxury Headband,3,0,0,3,Unit,Tersedia,Sudah diletakkan lemari APD depan ruang panel,-
+64,Visual Fault Locator (Laser Patchcore Kotak),1,0,0,1,Unit,Tersedia,,Office
+65,Sepatu Sandal DC,7,3,0,10,Pasang,Tersedia,"7 pcs diletakkan diletakkan di depan ruang server, 3 pcs di gudang",Office & Gudang
+66,Blank Panel 1U,455,0,0,455,Unit,Tersedia,Barang sudah terpasang pada Rack Data Center,-
+67,Blank Panel 2U,40,0,0,40,Unit,Tersedia,Barang sudah terpasang pada Rack Data Center,-
+68,Thermometer Gun (Fluke 561 Infrared),1,0,0,1,Unit,Tersedia,,Office  
+69,Rak Laci 3 Susun Arsip Buku ( Tray Document ),3,0,0,3,Unit,Tersedia,,Office
+70,Tempat Kartu Perdana,1,0,0,1,Unit,Tersedia,,Office  
+71,UPS Vesta VT 1200,8,0,0,8,Unit,Tersedia,"sudah terpasang di ruang trafo, ruang security, lt. G, lt.2, lt.5 dan 3 pcs di office.",Office
+72,Tape Dispanser (Dispanser Lakban),1,0,0,1,Unit,Tersedia,,Office  
+73,Pompa solar/ Oil fdp ,1,0,0,1,Unit,Tersedia,,Gudang
+74,Sepatu Novax 20kv Orange Hijau,2,0,0,2,Unit,Tersedia,Sudah diletakkan lemari APD depan ruang panel,-
+75,Sarung Tangan 20kv Honey Well,1,0,0,1,Unit,Tersedia,Sudah diletakkan lemari APD depan ruang panel,-
+76,Kunci Trecker CVT Matic,1,0,0,1,Unit,Tersedia,,Office
+77,Selang Oli per meter,1,0,0,1,Roll,Tersedia,,Gudang
+78,Jas Hujan Sepatu,20,0,0,20,Unit,Tersedia,,Gudang
+79,Traffic Cone 75cm,4,0,0,4,Unit,Tersedia,,Gudang
+80,Stop Contact 4 Lubang ,2,0,0,2,Unit,Tersedia,,Office
+81,Stop Contac 5 Lubang,4,0,2,2,Unit,Tersedia,,Office
+82,Ember 80 Liter,2,0,0,2,Unit,Tersedia,Sudah diletakkan ditaman belakang,-
+83,Jackphone,2,0,0,2,Unit,Tersedia,1 terpasang di ruang security dan 1 di office,Office
+84,Battery Tester (Hioki),1,0,0,1,Unit,Tersedia,,Office
+85,Timbangan Digital (Omron),1,0,0,1,Unit,Tersedia,,Office  
+86,Mata Bor Bosch Multipurpose,1,0,0,1,Unit,Tersedia,,Office
+87,Fire blanket (Kecil),6,0,0,6,Unit,Tersedia,"1 R.UPS, 1 Lt G, 2 Lt 2, 2 LT.3",Office
+88,Masker Repsirator (3M),2,0,0,2,Unit,Tersedia,Sudah diletakkan lemari APD depan ruang panel,-
+89,Kartu Access Card Karyawan,34,26,15,45,Unit,Tersedia,15 diserahkan ke Tim BM,Office
+90,Kartu Access Card Visitor,15,1,15,1,Unit,Tersedia,15 diserahkan ke Tim BM,Office
+91,Scan Card (RFID),1,0,0,1,Unit,Tersedia,,Office
+92,WEBCAM,1,0,0,1,Unit,Tersedia,,Office
+93,Ram V-GEN 4GB,1,0,0,1,Unit,Tersedia,,Office
+94,Converter USB To VGA,2,0,0,2,Unit,Tersedia,,Office
+95,Magnetic Door Closer,3,0,0,3,Unit,Tersedia,Barang sudah terpasang,-
+96,Stop Kontak 2 Lubang,1,0,0,1,Unit,Tersedia,,Office
+97,Corong Krisbow,1,0,0,1,Unit,Tersedia,,Gudang
+98,Kunci Inggris Tekiro 375mm (Besar),2,0,0,2,Unit,Tersedia,,Office
+99,"Tang Jepit Tekiro 10""",2,0,0,2,Unit,Tersedia,,Office  
+100,Tang Pipa Tekiro,2,0,0,2,Unit,Tersedia,,Office  
+101,"Pakaian kebakaran (Baju,Celana,Sarung tangan)",2,0,0,2,Unit,Tersedia,Barang sudah diletakan dilemari APD DAMKAR,Gudang
+102,Sepatu Safety Harvik (Sepatu DAMKAR),2,0,0,2,Unit,Tersedia,Barang sudah diletakan dilemari APD DAMKAR,Gudang
+103,Stop kontak 3 lubang,2,0,0,2,Unit,Tersedia,,Office
+104,Lan Tester (Besar),2,0,1,1,Unit,Tersedia,1 Unit Rusak,Office
+105,SOS Fulklguard Helmet (Helm DAMKAR),2,0,0,2,Unit,Tersedia,Barang sudah diletakan dilemari APD DAMKAR,-
+106,Lampu Senter Besar 15 Watt (Senter Damkar),1,0,0,1,Unit,Tersedia,Barang sudah diletakan dilemari APD DAMKAR,-
+107,Masker Double Respirator - NP306 (Kuning),1,0,0,1,Set,Tersedia,Barang sudah diletakan dilemari APD DAMKAR,-
+108,Rompi Safety Nankai,2,0,0,2,Unit,Tersedia,Barang sudah diletakan dilemari APD DAMKAR,-
+109,Gergaji Mini,1,0,0,1,Unit,Tersedia,,Office
+109,Kampak (Fire Axe) ,2,0,0,2,Unit,Tersedia,Barang sudah diletakan dilemari APD DAMKAR,-
+110,Helmet Safety ,9,0,1,8,Unit,Tersedia,"Sudah diletakkan lemari APD depan ruang panel, 1 unit Rusak",-
+112,Fire blanket (Besar),1,0,0,1,Unit,Tersedia,,Gudang
+113,Sarung Tangan Listrik Novax 500 volt,5,0,0,5,Unit,Tersedia,Sudah diletakkan lemari APD depan ruang panel,-
+114,Kacamata safety,9,0,0,9,Unit,Tersedia,Sudah diletakkan lemari APD depan ruang panel,-
+115,Mesin Laminating Kozure LM 102-A3,1,0,0,1,Unit,Tersedia,,Office
+116,Blower BOSCH GBL 82,1,0,0,1,Unit,Tersedia,,Office
+117,Swing Handle,50,0,0,50,Unit,Tersedia,Swing Handle sudah terpasang pada Rack,Gudang
+118,Smoke Detector,14,0,0,14,Unit,Tersedia,Barang sudah terpasang,Office
+119,Sign FO Cable,21,0,0,21,Unit,Tersedia,"1 di R. MMR1, 1 di R. MMR 2, 9 di. Ruang DC, 10 di Office ",-
+120,Sign UTP Cable,21,0,0,21,Unit,Tersedia,"1 di R. MMR1, 1 di R. MMR 2, 9 di. Ruang DC, 10 di Office ",-
+121,Sign Dilarang Membawa HP,1,0,0,1,Unit,Tersedia,Barang sudah terpasang di Ruang DC,-
+122,Sign Novec 1230,2,0,0,2,Unit,Tersedia,Barang sudah terpasang Ruang FSS dan Ruang DC,-
+123,Breathing Apparatus (Peralatan SCBA / Peralatan Oksigen DAMKAR),2,0,0,2,Unit,Tersedia,Barang sudah diletakan dilemari APD DAMKAR,Gudang
+124,Sepatu Safety Jogger X2020P S3,6,0,0,6,Unit,Tersedia,,Office
+125,Sarung Tangan Listrik Biru,4,0,0,4,Unit,Tersedia,,Office
+126,Tandu Lipat ,3,0,0,3,Unit,Tersedia,"Barang terletak di Office, Ruang Security dan Gudang",Office & Gudang
+127,Thermo Cam (Flir),1,0,0,1,Unit,Tersedia,,Office  
+128,Mesin Pompa Air Radiator,1,0,0,1,Unit,Tersedia,,Gudang
+129,Toa Megaphone,2,0,1,1,Unit,Tersedia,1 Unit Rusak,Office
+130,Selang Air 30M,1,0,0,1,Unit,Tersedia,,Gudang
+131,UPS Prolink Pro 2000 SFC,2,0,0,2,Unit,Tersedia,sudah dipasang pada pantry lantai 1 dan 3,Office
+132,AFO Fire Ball,8,0,0,8,Unit,Tersedia,Barang sudah terpasang di Bulk Tank,-
+133,CCTV Hikvision (Bullet),0,2,0,2,Unit,Tersedia,1 sudah terpasang di stangging room,Office
+134,CCTV ICA-8350 (Dome),6,0,0,6,Unit,Tersedia,"3 sudah terpasang di Ruang DC, Panel dan UPS",Office
+135,Buzzer,4,0,0,4,Unit,Tersedia,Barang sudah terpasang disetiap ruangan facility ,Office
+136,Thermometer Maxima,4,0,0,4,Unit,Tersedia,"2 Unit sudah terpasang di Bulk Tank, 2 di gudang",Gudang
+137,Kunci Panel MS 705,5,5,1,9,Pcs,Tersedia,1 Pergantian pada box Genset ,Office
+138,Hand Stacker ,1,0,0,1,Unit,Tersedia,,Gudang
+139,Flat Shelf,9,0,1,8,Unit,Tersedia,1 Digunakan pada Rack 29 & 1 di Rack 24,Gudang
+140,Penghancur kertas 1500 ST,1,0,0,1,Unit,Tersedia,,Office
+141,Visual Fault Locator (Laser Pathcore Panjang),2,0,0,2,Unit,Tersedia,,Office
+142,Cover Shoes (Ukuran L),13,0,0,13,Pcs,Tersedia,,Gudang
+143,Senter Henoyue (Senter DC),1,0,0,1,Unit,Tersedia,,Office
+144,Battery Eneloop AA ,8,0,0,8,Pcs,Tersedia,,Office
+145,Charger Battrey  Eneloop ,1,0,0,1,Unit,Tersedia,,Office
+146,Battery Eneloop AAA,4,0,0,4,Pcs,Tersedia,,Office
+147,Ballast lampu MYTH R-60-12 5A,7,0,1,6,Unit,Tersedia,1 terpasang di rack 18 dan 19 & 1 Terpasang pada ruang MMR 1,Office
+148,Gunting ,1,0,0,1,Unit,Tersedia,,Office
+149,Mesin Pompa Air (Gear Pump Koshin GL 25-5 Untuk Pompa Solar),1,0,0,1,Unit,Tersedia,,Gudang
+150,Quick coupler 3 pass (Saluran Angin Kompresor),1,0,0,1,Unit,Tersedia,,Office
+151,Recoil hose PC 5x8 mm panjang 6 M Tekiro (Selang Angin Kompresor),3,0,0,3,Unit,Tersedia,,Office
+152,"Air blow gun PC 5"" Tekiro (Alat Penembak Angin Kompresor)",3,0,0,3,Unit,Tersedia,,Office
+153,Kompressor  Angin Artix,1,0,0,1,Unit,Tersedia,,Office
+154,Cover Shoes (Ukuran M),70,0,0,70,Pcs,Tersedia,,Gudang
+155,Exhaust Fan (Ruang UPS),0,2,0,2,Unit,Tersedia,Sudah Terpasang pada Ruang UPS,-
+156,Gembok Besar,2,0,0,2,Unit,Tersedia,Barang sudah terpasang pada Tangki solar dan Pintu Gerbang Trafo,-
+157,Gembok Mini,17,0,0,17,Unit,Tersedia,"Barang sudah terpasang pada Mesin Finger, 6 di Lt. 1, 6 di Lt. Ground dan 5 di Tangga darurat",-
+158,Heat Detector,1,0,0,1,Unit,Tersedia,Sudah Terpasang pada ruang Genset,-
+159,Kabel Console Cisco RJ45 (RS232 (VGA) To RJ45),1,0,0,1,Unit,Tersedia,,Office
+160,Kabel HDMI Biasa,5,0,0,5,Unit,Tersedia,,Office
+161,Kabel HDMI Ultimate,3,0,0,3,Unit,Tersedia,,Office
+162,Kabel Roll 50M,2,0,0,2,Unit,Tersedia,,Office
+163,Kabel RS 232 (VGA) To RJ45,5,0,0,5,Unit,Tersedia,,Office
+164,Kabel USB Type A To USB Type B,2,0,0,2,Unit,Tersedia,,Office
+165,PDU 12 Port,4,0,0,4,Unit,Tersedia,,Gudang
+166,PDU 24 Port,16,0,0,16,Unit,Tersedia,,Gudang
+167,Pembolong Kertas,2,0,0,2,Unit,Tersedia,,Office
+168,ROR Heat Detector,0,2,0,2,Unit,Tersedia,Sudah terpasang pada ruang Trafo,-
+169,Stampel,1,0,0,1,Unit,Tersedia,,Office
+170,Converter USB to RJ45 ,2,0,0,2,Unit,Tersedia,,Office
+171,Stapler,1,0,0,1,Unit,Tersedia,,Office
+172,CCTV ICA-HM620 (PTZ),0,1,0,1,Unit,Tersedia,Barang sudah terpasang,-
+173,CCTV ICA-5260 (Dome),1,1,0,2,Unit,Tersedia,Barang sudah terpasang,Office
+174,Penghapus Papan tulis,1,0,0,1,Unit,Tersedia,,Office
+175,DC Power Supply ,0,1,0,1,Unit,Tersedia,,Office
+176,Kunci Panel MS 601,0,2,0,2,Set,Tersedia,Barang sudah terpasang,-
+177,Bearing Puller,0,1,0,1,Unit,Tersedia,,Office
+178,Snap Ring Pliers,0,1,0,1,Unit,Tersedia,,Office
+179,Pilot lamp (Merah),0,16,4,12,Unit,Tersedia,"12 dipasang pada panel tiap lantai, 4 Rusak",Office
+180,Pilot lamp (Hijau),0,16,2,14,Unit,Tersedia,"12 dipasang pada panel tiap lantai, 2 di office (Lemari abu- abu), 2 Rusak",Office
+181,Pilot lamp (Kuning),0,16,1,15,Unit,Tersedia,"12 dipasang pada panel tiap lantai, 3 di office (Lemari abu- abu), 1 Rusak",Office
+182,Akrilik Fingerprint,0,6,2,4,Unit,Tersedia,2 Pergantian di Ruang Genset,Office
+183,Lampu Philips IP 65 Bulk Tank,0,2,0,2,Unit,Tersedia,Sudah dipasang di bulk tank,Office
+184,Pompa Celup Bulktank,0,1,0,1,Unit,Tersedia,Sudah dipasang di bulk tank,-
+185,Drum Limbah B3,0,2,0,2,Unit,Tersedia,Sudah diletakkan ditaman belakang,-
+186,SHARP Air Purifier FP-J80Y-H,0,1,0,1,Unit,Tersedia,,Office
+187,Gelas Ukur,0,1,0,1,Unit,Tersedia,,Office
+188,Nofya NF-300 LAN Tester RJ45 BNC USB RJ11 Telephone Network Cable,0,1,0,1,Unit,Tersedia,,Office
+189,Terminal Konektor Baterai ,0,6,4,2,Pasang,Tersedia,4 Sudah Terpasang pada baterai Genset 1 dan 2,-
+190,"Kuas Roll Cat ACE oldfields 10mm (3/8"")",0,4,0,4,Unit,Tersedia,,Office
+191,Sikat Kawat,0,6,0,6,Unit,Tersedia,,Office
+192,Baki Cat,0,2,0,2,Unit,Tersedia,,Office
+193,Kunci Panel (Hitam),4,0,0,4,Unit,Tersedia,,Office
+194,Kotak Plakat Biru,1,0,0,1,Unit,Tersedia,,Office
+195,Tempered Glass,1,0,0,1,Unit,Tersedia,,Office  
+196,Penggaris Xeho ,2,0,0,2,Unit,Tersedia,,Office
+197,Penggaris Plastik,2,0,0,2,Unit,Tersedia,,Office
+198,Heatsing PC,1,0,0,1,Unit,Tersedia,,Office
+199,Kabel Grounding + Skun,1,0,0,1,Pcs,Tersedia,,Office
+200,Kunci Panel MS 603,0,5,1,4,Pcs,Tersedia,1 Pergantain pada Box Panel DC ,Office
+201,"Pipa Galvanis Sch40 SPINDO 1"" 6 meter",0,3,0,3,Pcs,Tersedia,,Gudang
+202,Pipa Galvanis 3/4 inch medium SPINDO 6 meter,0,4,0,4,Pcs,Tersedia,,Gudang
+203,Snai drat pipa 1/2 inch - 2 inch RATCHET DIE STOK NO 114,0,1,0,1,Set,Tersedia,,Gudang
+204,Gear Pump Oli/Solar Koshin ,0,1,0,1,Unit,Tersedia,1 terpakai untuk keperluan pipa solar,Gudang
+205,Semi rotary hand pump k2-1 inch,0,1,0,1,Unit,Tersedia,1 terpakai untuk keperluan pipa solar,Gudang
+206,Elbow Galvanis drat 1 inch,0,15,0,15,Pcs,Tersedia,8 terpakai untuk keperluan pipa solar,Office
+207,Elbow besi 3/4 inch,0,20,0,20,Pcs,Tersedia,9 terpakai untuk keperluan pipa solar,Gudang
+208,UNP 50 - Besi kanal U ,0,1,0,1,Pcs,Tersedia,,Gudang
+209,Tee Stainless steel 304 drat dalam 1 inch,0,10,0,10,Pcs,Tersedia,1 terpakai untuk keperluan pipa solar,Gudang
+210,Tee drat besi 3/4 inch TSP,0,10,0,10,Pcs,Tersedia,4 terpakai untuk keperluan pipa solar,Gudang
+211,Plug/Tutup/Dop drat luar stainless 304 3/4 inch,0,5,0,5,Pcs,Tersedia,3 terpakai untuk keperluan pipa solar,Gudang
+212,Swing check valve KITZ 1 inch,0,3,0,3,Pcs,Tersedia,2 terpakai untuk keperluan pipa solar,Gudang
+213,Watermur stainless 3/4 inch,0,10,0,10,Pcs,Tersedia,7 terpakai untuk keperluan pipa solar,Gudang
+214,Watermur stainless 1 inch,0,5,0,5,Pcs,Tersedia,2 terpakai untuk keperluan pipa solar,Gudang
+215,Ball valve 1 inch kitz/stop kran 1 inch,0,5,0,5,Pcs,Tersedia,3 terpakai untuk keperluan pipa solar,Gudang
+216,Ball valve kuningan KITZ 3/4 inch,0,15,0,15,Pcs,Tersedia,6 terpakai untuk keperluan pipa solar,Gudang
+217,Ubolt 1 inch,0,30,0,30,Pcs,Tersedia,5 terpakai untuk keperluan pipa solar,Gudang
+218,Reduser SOCK socket drat dalam stainless 304 SS 3/4 x 1/2 inch,0,8,0,8,Pcs,Tersedia,4 terpakai untuk keperluan pipa solar,Gudang
+219,Double naple besi 1/2 galvanis,0,8,0,8,Pcs,Tersedia,4 terpakai untuk keperluan pipa solar,Gudang
+220,Double naple besi 3/4 galvanis,0,4,0,4,Pcs,Tersedia,4 terpakai untuk keperluan pipa solar,-
+221,RAM V-GEN 8GB,0,2,0,2,Pcs,Tersedia,2 terpakai untuk pc monitoring 2,Office
+222,Flexible Pipe,0,2,0,2,Pcs,Tersedia,2 terpakai untuk keperluan pipa solar,Gudang
+223,Fuel Filter Racor water separator,0,2,0,2,Pcs,Tersedia,2 terpakai untuk keperluan pipa solar,Gudang

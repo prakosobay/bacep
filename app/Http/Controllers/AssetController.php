@@ -45,10 +45,20 @@ class AssetController extends Controller
             abort(403);
         }
     }
+
+    public function show_new()
+    {
+        return view('asset.new');
+    }
+
     public function csv(Request $request)
     {
         $i = Excel::import(new AssetImport, $request->file('file'));
-        return back()->withStatus('Success');
+        return back()->with('success', 'Excel Data Imported successfully.');
+    }
+
+    public function store_asset(Request $request)
+    {
     }
 
     // public function data_asset()

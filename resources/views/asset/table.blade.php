@@ -10,10 +10,13 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            {{-- <h6 class="m-0 font-weight-bold text-primary text-center">DataTables Example</h6> --}}
             <button type="button" class="btn btn-primary mr-5" data-toggle="modal" data-target="#asset">
                 IMPORT CSV
             </button>
+
+            <a href="{{url('/a.new')}}" type="button" class="btn btn-primary mr-5" >
+                <strong>Tambahkan Barang Asset Baru</strong>
+            </a>
 
             <!-- Import Excel -->
             <div class="modal fade" id="asset" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -52,6 +55,7 @@
                             <th>Kondisi</th>
                             <th>Note</th>
                             <th>Lokasi Penyimpanan</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -64,6 +68,10 @@
                                 <td>{{$c->kondisi}}</td>
                                 <td>{{$c->note}}</td>
                                 <td>{{$c->lokasi}}</td>
+                                <td>
+                                    <a type="button" href="javascript:void(0)" id="in" class="masuk" data-asset_id="{{$c->id}}">Masuk</a>
+                                    <a type="button" href="javascript:void(0)" id="out" class="keluar" data-asset_id="{{$c->id}}">Keluar</a>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
