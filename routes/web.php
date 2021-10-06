@@ -69,6 +69,9 @@ Route::middleware(['auth'])->group(function () {
     //Admin Panel
     Route::get('/admin', [AdminController::class, 'get_user']);
 
+    //Dashboard Barang
+    Route::get('/table_barang', [HomeController::class, 'dashboard']);
+
     //Barang Consume
     Route::post('/consum', [ConsumController::class, 'csv']);
     Route::get('/c.table', [ConsumController::class, 'index']);
@@ -84,9 +87,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/a.table', [AssetController::class, 'index']);
     Route::get('/a.masuk', [AssetController::class, 'show_in']);
     Route::get('/a.keluar', [AssetController::class, 'show_out']);
+    Route::post('/asset', [AssetController::class, 'csv']);
 
     Route::get('/asset.create', [AssetController::class, 'show']);
-    Route::post('/import_asset', [AssetController::class, 'import_csv']);
     Route::get('/asset', [AssetController::class, 'data_asset']);
 });
 // Route::resource('/barang', ConsumController::class);

@@ -45,13 +45,14 @@ class AssetController extends Controller
             abort(403);
         }
     }
-    public function import_csv(Request $request)
+    public function csv(Request $request)
     {
         $i = Excel::import(new AssetImport, $request->file('file'));
+        return back()->withStatus('Success');
     }
 
-    public function data_asset()
-    {
-        return Datatables::of(Asset::query())->make(true);
-    }
+    // public function data_asset()
+    // {
+    //     return Datatables::of(Asset::query())->make(true);
+    // }
 }

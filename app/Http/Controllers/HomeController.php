@@ -34,6 +34,11 @@ class HomeController extends Controller
         return view('home');
     }
 
+    public function dashboard()
+    {
+        return view('item.input');
+    }
+
     public function approval_view($type_view)
     {
         if ((Gate::denies('isAdmin')) && (Gate::denies('isBm'))) {
