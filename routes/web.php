@@ -91,6 +91,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/a.keluar', [AssetController::class, 'show_out']);
     Route::get('/a.new', [AssetController::class, 'show_new']);
     Route::post('/a.update', [AssetController::class, 'store_asset']);
+    Route::post('/update.keluar/{id}', [AssetController::class, 'update_keluar']);
+    Route::post('/update.masuk/{id}', [AssetController::class, 'update_masuk']);
 
     Route::get('/asset.create', [AssetController::class, 'show']);
     Route::get('/asset', [AssetController::class, 'data_asset']);

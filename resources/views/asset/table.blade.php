@@ -69,8 +69,8 @@
                                 <td>{{$c->note}}</td>
                                 <td>{{$c->lokasi}}</td>
                                 <td>
-                                    <a type="button" href="javascript:void(0)" id="in" class="masuk" data-asset_id="{{$c->id}}">Masuk</a>
-                                    <a type="button" href="javascript:void(0)" id="out" class="keluar" data-asset_id="{{$c->id}}">Keluar</a>
+                                    <a type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#masuk" data-id="{{$c->id}}" id="in">Masuk</a>
+                                    <a type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#keluar" data-id="{{$c->id}}" id="out">Keluar</a>
                                 </td>
                             </tr>
                         @endforeach
@@ -79,5 +79,70 @@
             </div>
         </div>
     </div>
+
+    <!-- Masuk -->
+    <div class="modal fade" id="masuk" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <form method="post" action="{{ url('/update.masuk', $c->id)}}" id="#in">
+                {{ csrf_field() }}
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Barang Masuk</h5>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>Nama Pencatat</label>
+                            <input type="text" name="pencatat" id="pencatat" value="{{Auth::user()->name}}" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Jumlah</label>
+                            <input type="number" name="jumlah" id="jumlah" aria-describedby="jumlah">
+                        </div>
+                        <div class="form-group">
+                            <label>Keterangan</label>
+                            <input width="100%" type="text" name="ket" id="ket" aria-describedby="ket">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    {{-- Keluar --}}
+    <div class="modal fade" id="keluar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <form method="post" action="{{ url('/update.keluar', $c->id)}}">
+                {{ csrf_field() }}
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Barang Keluar</h5>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>Nama Pencatat</label>
+                            <input type="text" name="pencatat" id="pencatat" value="{{Auth::user()->name}}" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Jumlah</label>
+                            <input type="number" name="jumlah" id="jumlah" aria-describedby="jumlah">
+                        </div>
+                        <div class="form-group">
+                            <label>Keterangan</label>
+                            <input width="100%" type="text" name="ket" id="ket" aria-describedby="ket">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
+<script src="vendor/jquery/jquery.min.js"></script>
 @endsection

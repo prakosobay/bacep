@@ -61,6 +61,37 @@ class AssetController extends Controller
     {
     }
 
+    public function update_masuk(Request $request, $id)
+    {
+        dd($request);
+        $request->validate([
+            'pencatat' => 'required',
+            'jumlah' => 'required|numeric',
+            'ket' => 'required',
+        ]);
+
+        // $exist = DB::select('asset_masuks')->
+        $new_input = AssetMasuk::find($id)->update([
+            'pencatat' => $request->pencatat,
+            'jumlah' => $request->jumlah,
+            'ket' => $request->ket,
+        ]);
+        return redirect()->view('asset.table')
+            ->with('success', 'Barang Berhasil Di Tambah');
+    }
+
+    public function update_keluar(Request $request, $id)
+    {
+        $request->validate([
+            'pencatat' => 'required',
+            'jumlah' => 'required|numeric',
+            'ket' => 'required',
+        ]);
+
+        $new_output = AssetMasuk::find($id)->update($request->all());
+        return redirect()->view('asset.table')
+            ->with('success', 'Barang Berhasil Di Kurang');
+    }
     // public function data_asset()
     // {
     //     return Datatables::of(Asset::query())->make(true);
