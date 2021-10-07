@@ -57,40 +57,52 @@ class AssetController extends Controller
         return back()->with('success', 'Excel Data Imported successfully.');
     }
 
-    public function store_asset(Request $request)
+    public function edit_masuk($id)
     {
+        if ((Gate::allows('isApproval') || (Gate::allows('isHead')) || (Gate::allows('isAdmin')))) {
+            $asset = Asset::find($id);
+            return view('asset.tambah', compact('asset'));
+        } else {
+            abort(403);
+        }
+        // return $cleaningHistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
     }
 
-    public function update_masuk(Request $request, $id)
+    public function edit_keluar($id)
     {
-        dd($request);
+        if ((Gate::allows('isApproval') || (Gate::allows('isHead')) || (Gate::allows('isAdmin')))) {
+            $asset = Asset::find($id);
+            return view('asset.kurang', compact('asset'));
+        } else {
+            abort(403);
+        }
+    }
+
+    public function update_masuk(Request $request)
+    {
+        dd($request->all());
         $request->validate([
-            'pencatat' => 'required',
-            'jumlah' => 'required|numeric',
+            'jumlah' => 'numeric|required',
             'ket' => 'required',
         ]);
 
-        // $exist = DB::select('asset_masuks')->
-        $new_input = AssetMasuk::find($id)->update([
-            'pencatat' => $request->pencatat,
-            'jumlah' => $request->jumlah,
-            'ket' => $request->ket,
-        ]);
-        return redirect()->view('asset.table')
-            ->with('success', 'Barang Berhasil Di Tambah');
+        // $assetmasuk = AssetMasuk::create([
+        //     ''
+        // ]);
+
+        // $asset = Asset::find($id);
+        // $asset->update([
+        //     'jumlah' => $asset->jumlah + $request->jumlah,
+        // ]);
     }
 
-    public function update_keluar(Request $request, $id)
+    public function update_keluar(Request $request)
     {
+        dd($request->all());
         $request->validate([
-            'pencatat' => 'required',
-            'jumlah' => 'required|numeric',
+            'jumlah' => 'numeric|required|',
             'ket' => 'required',
         ]);
-
-        $new_output = AssetMasuk::find($id)->update($request->all());
-        return redirect()->view('asset.table')
-            ->with('success', 'Barang Berhasil Di Kurang');
     }
     // public function data_asset()
     // {

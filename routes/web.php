@@ -78,11 +78,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/c.masuk', [ConsumController::class, 'show_in']);
     Route::get('/c.keluar', [ConsumController::class, 'show_out']);
     Route::post('/c.update', [ConsumController::class, 'update']);
-
-    //Yajra
-    Route::get('/datatable', [TesController::class, 'data_consum']);
-    Route::get('/out', [TesController::class, 'data_keluar']);
-    Route::get('/input', [TesController::class, 'data_masuk']);
+    Route::get('/c.tambah/{id}', [ConsumController::class, 'edit_masuk']);
+    Route::get('/c.kurang/{id}', [ConsumController::class, 'edit_keluar']);
 
     //Barang Asset
     Route::post('/asset', [AssetController::class, 'csv']);
@@ -91,8 +88,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/a.keluar', [AssetController::class, 'show_out']);
     Route::get('/a.new', [AssetController::class, 'show_new']);
     Route::post('/a.update', [AssetController::class, 'store_asset']);
-    Route::post('/update.keluar/{id}', [AssetController::class, 'update_keluar']);
-    Route::post('/update.masuk/{id}', [AssetController::class, 'update_masuk']);
+    Route::get('/a.tambah/{id}', [AssetController::class, 'edit_masuk']);
+    Route::get('/a.kurang/{id}', [AssetController::class, 'edit_keluar']);
+    Route::put('/asset_putin', [AssetController::class, 'update_masuk']);
+    Route::put('/asset_putout', [AssetController::class, 'update_keluar']);
 
     Route::get('/asset.create', [AssetController::class, 'show']);
     Route::get('/asset', [AssetController::class, 'data_asset']);

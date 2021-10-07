@@ -15,6 +15,10 @@
                 IMPORT CSV
             </button>
 
+            <a href="{{url('/c.new')}}" type="button" class="btn btn-primary mr-5" >
+                <strong>Tambahkan Barang Consumable Baru</strong>
+            </a>
+
             <!-- Import Excel -->
             <div class="modal fade" id="importExcel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -52,6 +56,7 @@
                             <th>Kondisi</th>
                             <th>Note</th>
                             <th>Lokasi Penyimpanan</th>
+                            <th>Update</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -64,6 +69,14 @@
                                 <td>{{$c->kondisi}}</td>
                                 <td>{{$c->note}}</td>
                                 <td>{{$c->lokasi}}</td>
+                                <td>
+                                    <div class="btn-toolbar">
+                                        <a href="{{url('/c.tambah', $c->id)}}" type="button" class="btn btn-success btn-sm col-xs-2 margin-bottom" id="in">Masuk</a>
+                                    </div>
+                                    <div class="btn-toolbar">
+                                        <a href="{{url('/c.kurang', $c->id)}}" type="button" class="btn btn-danger btn-sm" id="out">Keluar</a>
+                                    </div>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -72,4 +85,6 @@
         </div>
     </div>
 </div>
+
+<script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
 @endsection

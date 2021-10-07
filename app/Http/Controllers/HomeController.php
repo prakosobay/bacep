@@ -36,12 +36,16 @@ class HomeController extends Controller
 
     public function dashboard()
     {
-        return view('item.input');
+        if ((Gate::allows('isAdmin')) || (Gate::allows('isApproval')) || (Gate::allows('isHead'))) {
+            return view('item.input');
+        } else {
+            abort(403);
+        }
     }
 
     public function approval_view($type_view)
     {
-        if ((Gate::denies('isAdmin')) && (Gate::denies('isBm'))) {
+        if ((Gate::denies('isBm'))) {
             $role_1 = Session::get('arrole');
             if ($type_view == 'survey') {
                 $survey = DB::table('survey_histories')

@@ -47,6 +47,26 @@ class ConsumController extends Controller
         }
     }
 
+    public function edit_masuk($id)
+    {
+        if (Gate::allows('isAdmin') || (Gate::allows('isApproval')) || (Gate::allows('isHead'))) {
+            $consum = Consum::find($id);
+            return view('consum.tambah', compact('consum'));
+        } else {
+            abort(403);
+        }
+    }
+
+    public function edit_keluar($id)
+    {
+        if (Gate::allows('isAdmin') || (Gate::allows('isApproval')) || (Gate::allows('isHead'))) {
+            $consum = Consum::find($id);
+            return view('consum.kurang', compact('consum'));
+        } else {
+            abort(403);
+        }
+    }
+
     public function csv(Request $request)
     {
         $i = Excel::import(new ConsumImport, $request->file('file'));

@@ -62,8 +62,6 @@ class CleaningController extends Controller
             ]);
         }
         return $cleaningHistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
-
-        return response()->json(['status' => 'FAILED']);
     }
 
     public function detail_permit_cleaning($id)
