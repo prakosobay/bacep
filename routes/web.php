@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\{Route, Auth};
 use App\Http\Controllers\{HomeController, CleaningController, AdminController};
 use App\Console\Kernel;
+use App\Models\Consum;
 use Illuminate\Routing\Router;
-use App\Models\User;
 
 // Auth::routes(['verify' => true]);
 Route::get('/', function () {
@@ -33,11 +33,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/cleaning_reject', [CleaningController::class, 'cleaning_reject']);
 
     //Submit
-    // Route::post('/submit_data_survey', [HomeController::class, 'submit_data_survey']);
     Route::post('/submit_data_cleaning', [CleaningController::class, 'submit_data_cleaning']);
-    // Route::post('/submit_data', [HomeController::class, 'submit_data']);
-    // Route::post('/submit_mounting', [HomeController::class, 'submit_mounting']);
-    // Route::post('/submit_troubleshoot', [HomeController::class, 'submit_troubleshoot']);
 
     //Approval View
     // Route::get('/detail_survey{id}', [HomeController::class, 'approve_survey']);
@@ -75,23 +71,24 @@ Route::middleware(['auth'])->group(function () {
     //Barang Consume
     Route::post('/consum', [ConsumController::class, 'csv']);
     Route::get('/c.table', [ConsumController::class, 'index']);
+    Route::get('/c.new', [ConsumController::class, 'show_new']);
     Route::get('/c.masuk', [ConsumController::class, 'show_in']);
     Route::get('/c.keluar', [ConsumController::class, 'show_out']);
-    Route::post('/c.update', [ConsumController::class, 'update']);
     Route::get('/c.tambah/{id}', [ConsumController::class, 'edit_masuk']);
     Route::get('/c.kurang/{id}', [ConsumController::class, 'edit_keluar']);
+    Route::put('/consum_putin/{id}', [ConsumController::class, 'update_masuk']);
+    Route::put('/consum_putout/{id}', [ConsumController::class, 'update_keluar']);
 
     //Barang Asset
     Route::post('/asset', [AssetController::class, 'csv']);
     Route::get('/a.table', [AssetController::class, 'index']);
+    Route::get('/a.new', [AssetController::class, 'show_new']);
     Route::get('/a.masuk', [AssetController::class, 'show_in']);
     Route::get('/a.keluar', [AssetController::class, 'show_out']);
-    Route::get('/a.new', [AssetController::class, 'show_new']);
-    Route::post('/a.update', [AssetController::class, 'store_asset']);
     Route::get('/a.tambah/{id}', [AssetController::class, 'edit_masuk']);
     Route::get('/a.kurang/{id}', [AssetController::class, 'edit_keluar']);
-    Route::put('/asset_putin', [AssetController::class, 'update_masuk']);
-    Route::put('/asset_putout', [AssetController::class, 'update_keluar']);
+    Route::put('/asset_putin/{id}', [AssetController::class, 'update_masuk']);
+    Route::put('/asset_putout/{id}', [AssetController::class, 'update_keluar']);
 
     Route::get('/asset.create', [AssetController::class, 'show']);
     Route::get('/asset', [AssetController::class, 'data_asset']);

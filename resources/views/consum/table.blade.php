@@ -10,10 +10,9 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            {{-- <h6 class="m-0 font-weight-bold text-primary text-center">DataTables Example</h6> --}}
-            <button type="button" class="btn btn-primary mr-5" data-toggle="modal" data-target="#importExcel">
+            {{-- <button type="button" class="btn btn-primary mr-5" data-toggle="modal" data-target="#importExcel">
                 IMPORT CSV
-            </button>
+            </button> --}}
 
             <a href="{{url('/c.new')}}" type="button" class="btn btn-primary mr-5" >
                 <strong>Tambahkan Barang Consumable Baru</strong>

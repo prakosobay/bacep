@@ -16,7 +16,7 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <form method="post" id="asset" class="validate-form" action="{{url('asset_putout')}}">
+                <form method="post" id="asset" class="validate-form" action="{{url('asset_putout', $asset->id)}}">
                     @method('PUT')
                     @csrf
                     <div class="form-group">

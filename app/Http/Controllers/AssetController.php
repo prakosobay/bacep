@@ -48,7 +48,11 @@ class AssetController extends Controller
 
     public function show_new()
     {
-        return view('asset.new');
+        if ((Gate::allows('isHead')) || (Gate::allows('isApproval')) || (Gate::allows('isAdmin'))) {
+            return view('asset.new');
+        } else {
+            abort(403);
+        }
     }
 
     public function csv(Request $request)
@@ -78,34 +82,59 @@ class AssetController extends Controller
         }
     }
 
-    public function update_masuk(Request $request)
+    public function update_masuk(Request $request, $id)
     {
         dd($request->all());
         $request->validate([
+            'nama_barang' => 'required',
+            'consum_id' => 'required|numeric',
             'jumlah' => 'numeric|required',
             'ket' => 'required',
+            'pencatat' => 'required'
         ]);
 
-        // $assetmasuk = AssetMasuk::create([
-        //     ''
-        // ]);
+        $asset = Asset::find($id);
+        $asset->update([
+            'jumlah' => $asset->jumlah + $request->jumlah,
+        ]);
 
-        // $asset = Asset::find($id);
-        // $asset->update([
-        //     'jumlah' => $asset->jumlah + $request->jumlah,
-        // ]);
+        $assetmasuk = AssetMasuk::create([
+            'nama_barang' => $request->nama_barang,
+            'asset_id' => $request->asset_id,
+            'jumlah' => $request->jumlah,
+            'ket' => $request->ket,
+            'pencatat' => $request->pencatat,
+        ]);
+
+        return $assetmasuk->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
     }
 
-    public function update_keluar(Request $request)
+    public function update_keluar(Request $request, $id)
     {
-        dd($request->all());
+        // dd($request->all());
         $request->validate([
-            'jumlah' => 'numeric|required|',
+            'nama_barang' => 'required',
+            'consum_id' => 'required|numeric',
+            'jumlah' => 'numeric|required',
             'ket' => 'required',
+            'pencatat' => 'required'
         ]);
+
+        $asset = Asset::find($id);
+        if ($asset->jumlah >= $request->jumlah) {
+            $asset->update([
+                'jumlah' => $asset->jumlah - $request->jumlah,
+            ]);
+        }
+
+        $assetkeluar = AssetKeluar::create([
+            'nama_barang' => $request->nama_barang,
+            'asset_id' => $request->asset_id,
+            'jumlah' => $request->jumlah,
+            'ket' => $request->ket,
+            'pencatat' => $request->pencatat,
+        ]);
+
+        return $assetkeluar->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
     }
-    // public function data_asset()
-    // {
-    //     return Datatables::of(Asset::query())->make(true);
-    // }
 }
