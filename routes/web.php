@@ -64,6 +64,11 @@ Route::middleware(['auth'])->group(function () {
 
     //Admin Panel
     Route::get('/admin', [AdminController::class, 'get_user']);
+    Route::get('/a.user', [AdminController::class, 'show_user']);
+    Route::get('/a.role', [AdminController::class, 'show_role']);
+    Route::get('/u.edit/{id}', [AdminController::class, 'user_edit']);
+    Route::post('user_edit/{id}', [AdminController::class, 'user_update']);
+    Route::get('/u.hapus/{id}', [AdminController::class, 'delete']);
 
     //Dashboard Barang
     Route::get('/table_barang', [HomeController::class, 'dashboard']);

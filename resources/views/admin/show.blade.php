@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.dashboard')
 
 @section('judul_halaman', 'Tabel User Web Permit')
         {{ csrf_field() }}

@@ -72,9 +72,12 @@
                 <li class="nav-item active">
                     <a class="nav-link active" aria-current="page" href="/home">Home</a>
                 </li>
-                {{-- <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/admin.tambah') }}">Tambah User</a>
-                </li> --}}
+                <li class="nav-item active">
+                    <a class="nav-link active" aria-current="page" href="/home">User</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link active" aria-current="page" href="/home">Cleaning</a>
+                </li>
             </ul>
         </div>
     </div>

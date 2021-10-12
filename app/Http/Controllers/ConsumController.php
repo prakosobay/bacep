@@ -78,7 +78,7 @@ class ConsumController extends Controller
 
     public function update_masuk(Request $request, $id)
     {
-        dd($request->all());
+        // dd($request->all());
         $request->validate([
             'nama_barang' => 'required',
             'consum_id' => 'required|numeric',
@@ -105,7 +105,7 @@ class ConsumController extends Controller
 
     public function update_keluar(Request $request, $id)
     {
-        dd($request->all());
+        // dd($request->all());
         $request->validate([
             'nama_barang' => 'required',
             'consum_id' => 'required|numeric',
