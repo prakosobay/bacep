@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use RealRashid\SweetAlert\Facades\Alert;
 use App\Imports\ConsumImport;
 use Maatwebsite\Excel\Facades\Excel;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\{DB, Auth, Gate, Mail, Session};
-use App\Models\{ConsumMasuk, Consum, ConsumGambar, ConsumKeluar, User};
+use App\Models\{ConsumMasuk, Consum, ConsumKeluar};
 use Illuminate\Http\Request;
 
 class ConsumController extends Controller
@@ -100,7 +101,8 @@ class ConsumController extends Controller
             'pencatat' => $request->pencatat,
         ]);
 
-        return $consummasuk->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
+        Alert::success('Success', 'Data has been submited');
+        return back();
     }
 
     public function update_keluar(Request $request, $id)
@@ -114,13 +116,6 @@ class ConsumController extends Controller
             'pencatat' => 'required'
         ]);
 
-        $consum = Consum::find($id);
-        if ($consum->jumlah >= $request->jumlah) {
-            $consum->update([
-                'jumlah' => $consum->jumlah - $request->jumlah,
-            ]);
-        }
-
         $consumkeluar = ConsumKeluar::create([
             'nama_barang' => $request->nama_barang,
             'consum_id' => $request->consum_id,
@@ -129,7 +124,18 @@ class ConsumController extends Controller
             'pencatat' => $request->pencatat,
         ]);
 
-        return $consumkeluar->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
+        $consum = Consum::find($id);
+        if ($consum->jumlah >= $request->jumlah) {
+            $consum->update([
+                'jumlah' => $consum->jumlah - $request->jumlah,
+            ]);
+
+            Alert::success('Success', 'Data has been submited');
+        } else {
+            Alert::error('Error', 'Stock Kosong/Kurang !');
+        }
+
+        return back();
     }
 
     public function csv(Request $request)

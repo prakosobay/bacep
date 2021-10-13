@@ -20,6 +20,8 @@
     <!-- Custom styles for this template -->
     <link href="{{asset('css/sb-admin-2.min.css')}}" rel="stylesheet">
 
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <!-- Custom styles for this page -->
     <link href="{{asset('vendor2/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
 
@@ -32,6 +34,7 @@
 </head>
 
 <body id="page-top">
+    @include('sweetalert::alert')
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -281,6 +284,11 @@
 
     <!-- Custom scripts for all pages-->
     <script src="{{asset('js/sb-admin-2.min.js')}}"></script>
+
+    {{-- SweetAlert2 --}}
+
+    {{-- <script src="sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="sweetalert2.min.css"> --}}
 
     <!-- Page level plugins -->
     <script src="{{asset('vendor2/datatables/jquery.dataTables.min.js')}}"></script>

@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Yajra\DataTables\DataTables;
-use Illuminate\Support\Facades\{DB, Auth, Gate, Mail, Session};
 use App\Imports\AssetImport;
-use Maatwebsite\Excel\Facades\Excel;
-use App\Http\Controllers\Controller;
-use App\Models\{Asset, AssetMasuk, AssetKeluar};
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
+use App\Http\Controllers\Controller;
+use Maatwebsite\Excel\Facades\Excel;
+use RealRashid\SweetAlert\Facades\Alert;
+use App\Models\{Asset, AssetMasuk, AssetKeluar};
+use Illuminate\Support\Facades\{DB, Auth, Gate, Mail, Session};
 
 class AssetController extends Controller
 {
@@ -87,7 +88,7 @@ class AssetController extends Controller
         // dd($request->all());
         $request->validate([
             'nama_barang' => 'required',
-            'consum_id' => 'required|numeric',
+            'asset_id' => 'required|numeric',
             'jumlah' => 'numeric|required',
             'ket' => 'required',
             'pencatat' => 'required'
@@ -106,7 +107,8 @@ class AssetController extends Controller
             'pencatat' => $request->pencatat,
         ]);
 
-        return $assetmasuk->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
+        Alert::success('Success', 'Data has been submited');
+        return back();
     }
 
     public function update_keluar(Request $request, $id)
@@ -114,18 +116,11 @@ class AssetController extends Controller
         // dd($request->all());
         $request->validate([
             'nama_barang' => 'required',
-            'consum_id' => 'required|numeric',
+            'asset_id' => 'required|numeric',
             'jumlah' => 'numeric|required',
             'ket' => 'required',
             'pencatat' => 'required'
         ]);
-
-        $asset = Asset::find($id);
-        if ($asset->jumlah >= $request->jumlah) {
-            $asset->update([
-                'jumlah' => $asset->jumlah - $request->jumlah,
-            ]);
-        }
 
         $assetkeluar = AssetKeluar::create([
             'nama_barang' => $request->nama_barang,
@@ -135,6 +130,16 @@ class AssetController extends Controller
             'pencatat' => $request->pencatat,
         ]);
 
-        return $assetkeluar->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
+        $asset = Asset::find($id);
+        if ($asset->jumlah >= $request->jumlah) {
+            $asset->update([
+                'jumlah' => $asset->jumlah - $request->jumlah,
+            ]);
+            Alert::success('Success', 'Data has been submited');
+        } else {
+            Alert::error('Error', 'Stock Kosong/Kurang !');
+        }
+        return back();
+        // return $assetkeluar->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
     }
 }

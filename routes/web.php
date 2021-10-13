@@ -94,8 +94,5 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/a.kurang/{id}', [AssetController::class, 'edit_keluar']);
     Route::put('/asset_putin/{id}', [AssetController::class, 'update_masuk']);
     Route::put('/asset_putout/{id}', [AssetController::class, 'update_keluar']);
-
-    Route::get('/asset.create', [AssetController::class, 'show']);
-    Route::get('/asset', [AssetController::class, 'data_asset']);
 });
 // Route::resource('/barang', ConsumController::class);
