@@ -63,7 +63,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/cleaning_pdf/{id}', [CleaningController::class, 'cetak_cleaning_pdf']);
 
     //Admin Panel
-    Route::get('/admin', [AdminController::class, 'get_user']);
+    Route::get('/table_admin', [AdminController::class, 'index']);
+    Route::get('/table_relasi', [AdminController::class, 'show_relasi']);
+    Route::post('/role.new', [AdminController::class, 'store_role']);
+    Route::get('/edit.user/{id}', [AdminController::class, 'show_edit']);
     Route::get('/a.user', [AdminController::class, 'show_user']);
     Route::get('/a.role', [AdminController::class, 'show_role']);
     Route::get('/u.edit/{id}', [AdminController::class, 'user_edit']);
@@ -88,6 +91,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/asset', [AssetController::class, 'csv']);
     Route::get('/a.table', [AssetController::class, 'index']);
     Route::get('/a.new', [AssetController::class, 'show_new']);
+    Route::post('/asset_new', [AssetController::class, 'store_asset']);
     Route::get('/a.masuk', [AssetController::class, 'show_in']);
     Route::get('/a.keluar', [AssetController::class, 'show_out']);
     Route::get('/a.tambah/{id}', [AssetController::class, 'edit_masuk']);

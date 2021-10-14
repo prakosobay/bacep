@@ -1,4 +1,4 @@
-@extends('layouts.dashboard')
+@extends('layouts.admin')
 
 @section('judul_halaman', 'Tabel User Web Permit')
         {{ csrf_field() }}
@@ -8,21 +8,21 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800 text-center"><strong>Data Users</strong></h1>
+    <h1 class="h3 mb-2 text-gray-800 text-center"><strong>Data Users Role</strong></h1>
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <a type="button" class="btn btn-primary mr-5 sm" href="{{url('a.user')}}">
+            <a type="button" class="btn btn-primary mr-5 sm" href="{{url('table_admin')}}">
                 Kembali
             </a>
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <form method="post" id="user" class="validate-form" action="{{url('user_edit', $user->id)}}">
+                <form method="post" id="user" class="validate-form" action="{{url('u.edit')}}">
                     @method('PUT')
                     @csrf
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                         <label for="name"><strong>Nama Lengkap</strong></label>
                         <input type="text" class="form-control @error('name') is-invalid @enderror" required autocomplete="name" id="name" name="name" value="{{$user->name}}"><br>
                             @error('name')
@@ -73,12 +73,11 @@
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
-                    </div>
+                    </div> --}}
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
-<script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
 @endsection

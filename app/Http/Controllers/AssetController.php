@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Imports\AssetImport;
 use Illuminate\Http\Request;
-use Yajra\DataTables\DataTables;
 use App\Http\Controllers\Controller;
 use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -70,7 +69,6 @@ class AssetController extends Controller
         } else {
             abort(403);
         }
-        // return $cleaningHistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
     }
 
     public function edit_keluar($id)
@@ -94,9 +92,16 @@ class AssetController extends Controller
             'pencatat' => 'required'
         ]);
 
+
         $asset = Asset::find($id);
+        $jumlah = '';
+        if ($request->jumlah == 0) {
+            $jumlah = $asset->jumlah + 0;
+        } else {
+            $jumlah = $asset->jumlah + $request->jumlah;
+        }
         $asset->update([
-            'jumlah' => $asset->jumlah + $request->jumlah,
+            'jumlah' => $jumlah,
         ]);
 
         $assetmasuk = AssetMasuk::create([
@@ -105,6 +110,7 @@ class AssetController extends Controller
             'jumlah' => $request->jumlah,
             'ket' => $request->ket,
             'pencatat' => $request->pencatat,
+            'tanggal' => date('d/m/Y'),
         ]);
 
         Alert::success('Success', 'Data has been submited');
@@ -128,6 +134,7 @@ class AssetController extends Controller
             'jumlah' => $request->jumlah,
             'ket' => $request->ket,
             'pencatat' => $request->pencatat,
+            'tanggal' => date('d/m/Y'),
         ]);
 
         $asset = Asset::find($id);
@@ -140,6 +147,37 @@ class AssetController extends Controller
             Alert::error('Error', 'Stock Kosong/Kurang !');
         }
         return back();
-        // return $assetkeluar->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
+    }
+
+    public function store_asset(Request $request)
+    {
+        // dd($request->all());
+        $request->validate([
+            'nama_barang' => 'required|unique:assets,nama_barang',
+            'jumlah' => 'required|numeric',
+            'note' => 'nullable',
+            'lokasi' => 'required',
+            'satuan' => 'required',
+            'pencatat' => 'required',
+        ]);
+
+        $asset = Asset::create([
+            'nama_barang' => $request->nama_barang,
+            'jumlah' => $request->jumlah,
+            'note' => $request->note,
+            'lokasi' => $request->lokasi,
+            'satuan' => $request->satuan,
+        ]);
+
+        if ($asset->exist) {
+            $assetmasuk = AssetMasuk::create([
+                'nama_barang' => $request->nama_barang,
+                'asset_id' => $asset->id,
+                'jumlah' => $request->jumlah,
+                'ket' => $request->note,
+                'pencatat' => $request->pencatat,
+                'tanggal' => date('d/m/Y'),
+            ]);
+        }
     }
 }
