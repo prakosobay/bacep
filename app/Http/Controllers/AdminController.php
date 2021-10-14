@@ -16,22 +16,6 @@ class AdminController extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
-    {
-        if (Gate::allows('isAdmin')) {
-            // $join = DB::table('users')
-            //     ->join('roles', 'roles.id', '=', 'users.id')
-            //     // ->where('')
-            //     ->select('users.*', 'roles.name as rolename', 'roles.id')
-            //     ->get();
-            $user = User::all();
-            $role = Role::all();
-            return view('admin.index', compact('user', 'role'));
-        } else {
-            abort(403);
-        }
-    }
-
     public function show_relasi()
     {
         if (Gate::allows('isAdmin')) {
@@ -46,7 +30,7 @@ class AdminController extends Controller
     {
         // dd($request->all());
         $request->validate([
-            'name' => 'required'
+            'name' => 'required|unique:roles,name'
         ]);
 
         $role = Role::create([

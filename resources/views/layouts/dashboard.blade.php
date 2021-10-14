@@ -73,7 +73,8 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Option :</h6>
-                        <a class="collapse-item" href="{{url('table_admin')}}">Data User Role</a>
+                        <a class="collapse-item" href="{{url('table_admin')}}">Data User</a>
+                        <a class="collapse-item" href="{{url('table_admin')}}">Data Role</a>
                         <a class="collapse-item" href="{{url('a.relasi')}}">Relasi</a>
                         {{-- <a class="collapse-item" href="{{url('a.update')}}">Update Barang</a> --}}
                     </div>

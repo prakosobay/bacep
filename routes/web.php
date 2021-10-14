@@ -63,7 +63,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/cleaning_pdf/{id}', [CleaningController::class, 'cetak_cleaning_pdf']);
 
     //Admin Panel
-    Route::get('/table_admin', [AdminController::class, 'index']);
+    Route::get('/table_user', [AdminController::class, 'show_user']);
+    Route::get('/table_role', [AdminController::class, 'show_role']);
+    Route::post('/role.new', [AdminController::class, 'store_role']);
+
+
     Route::get('/table_relasi', [AdminController::class, 'show_relasi']);
     Route::post('/role.new', [AdminController::class, 'store_role']);
     Route::get('/edit.user/{id}', [AdminController::class, 'show_edit']);

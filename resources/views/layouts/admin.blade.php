@@ -72,7 +72,8 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Option :</h6>
-                        <a class="collapse-item" href="{{url('table_admin')}}">Data User Role</a>
+                        <a class="collapse-item" href="{{url('table_user')}}">Data User</a>
+                        <a class="collapse-item" href="{{url('table_role')}}">Data Role</a>
                         <a class="collapse-item" href="{{url('table_relasi')}}">Relasi</a>
                         {{-- <a class="collapse-item" href="{{url('a.update')}}">Update Barang</a> --}}
                     </div>
@@ -191,7 +192,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Manajemen Barang 2020</span>
+                        <span>Copyright &copy; Manajemen Admin 2020</span>
                     </div>
                 </div>
             </footer>

@@ -53,7 +53,7 @@
                         <li><a href="cleaning.form" data-after="cleaning">Cleaning</a></li>
                         <li><a href="other" data-after="other">Other</a></li>
                         @elsecan('isAdmin')
-                        <li><a href="{{ url('/table_admin') }}" data-after="Admin">Admin Panel</a></li>
+                        <li><a href="{{ url('/table_user') }}" data-after="Admin">Admin Panel</a></li>
                         @elsecan('isApproval')
                         <li><a href="{{ url('approval/all') }}" data-after="Approval">Approval</a></li>
                         <li><a href="{{ url('full_approval/all') }}" data-after="Full">Full Approval</a></li>
