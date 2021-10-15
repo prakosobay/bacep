@@ -80,8 +80,6 @@
                 </div>
             </li>
 
-
-
             <!-- Divider -->
             <hr class="sidebar-divider">
 
@@ -106,12 +104,29 @@
                 </div>
             </li>
 
-            {{-- <!-- Nav Item - Charts -->
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Form
+            </div>
+
+            <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link" href="charts.html">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Charts</span></a>
-            </li> --}}
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#revisi"
+                    aria-expanded="true" aria-controls="revisi">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Revisi Form</span>
+                </a>
+                <div id="revisi" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Option:</h6>
+                        <a class="collapse-item" href="{{url('revisi.cleaning')}}">Cleaning</a>
+                        {{-- <a class="collapse-item" href="{{url('cheklist.load')}}">Actual Load</a> --}}
+                    </div>
+                </div>
+            </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -223,7 +238,15 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <a href="{{ route('logout') }}" type="button" class="btn btn-primary sm"
+                        onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();">
+                            {{ __('Logout') }}
+                    </a>
+
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
                 </div>
             </div>
         </div>
@@ -232,17 +255,13 @@
     <!-- Bootstrap core JavaScript-->
     <script src="{{asset('vendor2/jquery/jquery.min.js')}}"></script>
     <script src="{{asset('vendor2/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajaxy/1.6.1/scripts/jquery.ajaxy.js"></script> --}}
 
     <!-- Core plugin JavaScript-->
     <script src="{{asset('vendor2/jquery-easing/jquery.easing.min.js')}}"></script>
 
     <!-- Custom scripts for all pages-->
     <script src="{{asset('js/sb-admin-2.min.js')}}"></script>
-
-    {{-- SweetAlert2 --}}
-
-    {{-- <script src="sweetalert2.min.js"></script>
-    <link rel="stylesheet" href="sweetalert2.min.css"> --}}
 
     <!-- Page level plugins -->
     <script src="{{asset('vendor2/datatables/jquery.dataTables.min.js')}}"></script>

@@ -66,8 +66,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/table_user', [AdminController::class, 'show_user']);
     Route::get('/table_role', [AdminController::class, 'show_role']);
     Route::post('/role.new', [AdminController::class, 'store_role']);
+    Route::post('/relasi.new', [AdminController::class, 'store_relasi']);
+    Route::post('/user.new', [AdminController::class, 'store_user']);
 
 
+    Route::get('/revisi.cleaning', [AdminController::class, 'update_cleaning']);
     Route::get('/table_relasi', [AdminController::class, 'show_relasi']);
     Route::post('/role.new', [AdminController::class, 'store_role']);
     Route::get('/edit.user/{id}', [AdminController::class, 'show_edit']);

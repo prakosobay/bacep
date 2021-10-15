@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cleaning;
 use App\Models\{User, Role};
 use Illuminate\Http\Request;
 use GuzzleHttp\Promise\Create;
+use Illuminate\Validation\Rule;
 use RealRashid\SweetAlert\Facades\Alert;
-use Illuminate\Support\Facades\{DB, Auth, Gate};
+use Illuminate\Support\Facades\{DB, Auth, Gate, Validator};
 
 class AdminController extends Controller
 {
@@ -28,16 +30,65 @@ class AdminController extends Controller
 
     public function store_role(Request $request)
     {
-        // dd($request->all());
+
         $request->validate([
-            'name' => 'required|unique:roles,name'
+            'name' => ['string', 'required', 'max:255', Rule::unique(Role::class)]
         ]);
 
         $role = Role::create([
             'name' => $request->name,
         ]);
         Alert::success('Success', 'Role has been submited');
+        return back();
+    }
 
+    public function store_user(Request $request)
+    {
+        dd($request->all());
+        Validator::make($request, [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => [
+                'required',
+                'string',
+                'email:dns',
+                'max:255',
+                Rule::unique(User::class),
+            ],
+            'hp' => ['required', 'numeric'],
+            'dept' => ['required', 'string', 'max:255'],
+            'password' => $this->passwordRules(),
+        ])->validate();
+
+        // $request->validate([
+        //     'name' => ['required', 'string', 'max:255', Rule::unique(User::class)],
+        //     'slug' => ['required', 'string', 'max:255'],
+        //     'dept' => ['required', 'string', 'max:255'],
+        //     'hp' => ['required', 'numeric'],
+        //     'email' => 'required|string|email:dns|unique:users,email',
+        //     ''
+        // ]);
+
+        $role = User::create([
+            'name' => $request->name,
+        ]);
+        Alert::success('Success', 'Role has been submited');
+
+        return back();
+    }
+
+    public function store_relasi(Request $request)
+    {
+        // dd($request->all());
+        $request->validate([
+            'role_id' => ['required', 'numeric'],
+            'user_id' => ['required', 'numeric'],
+        ]);
+
+        $user = User::find($request->user_id);
+        $role_new = $request->role_id;
+        // dd($role_new);
+        $user->roles()->attach($role_new);
+        Alert::success('Success', 'Relasi has been submited');
         return back();
     }
 
@@ -95,5 +146,12 @@ class AdminController extends Controller
             'ket' => 'required',
             'pencatat' => 'required'
         ]);
+    }
+
+    // CLEANING
+    public function update_cleaning()
+    {
+        $revisi = Cleaning::all();
+        return view('cleaning.revisi', compact('revisi'));
     }
 }

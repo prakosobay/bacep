@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('judul_halaman', 'Tabel User Web Permit')
-        {{ csrf_field() }}
+        {{-- {{ csrf_field() }} --}}
 
 @section('content')
 <div class="container-fluid">
@@ -13,9 +13,51 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h5 class="text-center"><strong>Data Users</strong></h5>
-            {{-- <a href="{{url('/user.new')}}" type="button" class="btn btn-primary mr-5" >
+            {{-- <button type="button" class="btn btn-primary mr-5" data-toggle="modal" data-target="#user">
                 <strong>Tambahkan User Baru</strong>
-            </a> --}}
+            </button> --}}
+            <div class="modal fade" id="user" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <form method="post" action="{{ url('/user.new')}}">
+                        {{ csrf_field() }}
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Tambah User Baru</h5>
+                            </div>
+                            <div class="modal-body">
+                                <label>Nama Lengkap:</label>
+                                <div class="form-group">
+                                    <input id="new" type="text" class="form-control" name="name" required="required"  autofocus>
+                                </div>
+                                <label>Email :</label>
+                                <div class="form-group">
+                                    <input id="email" type="email" class="form-control" name="email" required="required">
+                                </div>
+                                <label>Password :</label>
+                                <div class="form-group">
+                                    <input type="password" class="form-control" name="password" required="required">
+                                </div>
+                                <label>Slug :</label>
+                                <div class="form-group">
+                                    <input id="slug" type="text" class="form-control" name="slug"  required="required">
+                                </div>
+                                <label>Dept :</label>
+                                <div class="form-group">
+                                    <input id="dept" type="text" class="form-control" name="dept"  required="required">
+                                </div>
+                                <label>No. HP :</label>
+                                <div class="form-group">
+                                    <input id="hp" type="number" class="form-control" name="hp"  required="required">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -41,19 +83,12 @@
                                 <td>{{$c->dept}}</td>
                                 <td>{{$c->hp}}</td>
                                 <td>
-                                    <button type="button" class="btn btn-success mr-5 col-xs-2 margin-bottom" data-toggle="modal" data-target="#edit">
+                                    <button type="button" class="edit btn btn-success mr-2 col-xs-2 margin-bottom" data-toggle="modal" data-target="#edit">
                                         Edit
                                     </button>
-                                    <button type="button" class="btn btn-danger mr-5" data-toggle="modal" data-target="#delete">
+                                    <button type="button" class="hapus btn btn-danger mr-2 col-xs-2 margin-bottom" data-toggle="modal" data-target="#delete">
                                         Hapus
                                     </button>
-
-                                    {{-- <div class="btn-toolbar">
-                                        <a href="{{url('/edit', $c->id)}}" type="button" class="btn btn-success btn-sm col-xs-2 margin-bottom" id="in">Edit</a>
-                                    </div>
-                                    <div class="btn-toolbar">
-                                        <a href="{{url('/user.delete', $c->id)}}" type="button" class="btn btn-danger btn-sm" id="out">Hapus</a>
-                                    </div> --}}
                                 </td>
                             </tr>
                         @endforeach
@@ -66,7 +101,7 @@
     <!-- Edit User -->
     <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
-            <form method="post" action="{{ url('/user.edit')}}" enctype="multipart/form-data">
+            <form method="post" action="{{ url('/user.edit')}}">
                 {{ csrf_field() }}
                 <div class="modal-content">
                     <div class="modal-header">
@@ -75,46 +110,25 @@
                     <div class="modal-body">
                         <label>Nama :</label>
                         <div class="form-group">
-                            <input type="text" name="name" class="form-control" value="{{$c->name}}" readonly>
+                            <input id="name_edit" type="text" name="name" class="form-control">
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Import</button>
+                        <button type="submit" class="btn btn-primary edit">Edit</button>
                     </div>
                 </div>
             </form>
         </div>
     </div>
 
-    <!-- Delete User -->
-    <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <form method="post" action="{{ url('/user.delete')}}" enctype="multipart/form-data">
-                {{ csrf_field() }}
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Delete User</h5>
-                    </div>
-                    <div class="modal-body">
-                        <label>Nama :</label>
-                        <div class="form-group">
-                            <input type="text" name="name" class="form-control" value="{{$c->name}}" readonly>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Import</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
+<script src="{{asset('vendor2/jquery/jquery.min.js')}}"></script>
+<script>
+    $(document).ready(function(){
 
-</div>
+    });
 
-
-
+</script>
 @endsection
 
 

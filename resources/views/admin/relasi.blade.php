@@ -31,7 +31,7 @@
                                 </div>
                                 <label>ID User :</label>
                                 <div class="form-group">
-                                    <input type="number" name="user_id" required="required" autofocus>
+                                    <input type="number" name="user_id" required="required">
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -61,9 +61,6 @@
                                 <td>{{$c->role_id}}</td>
                                 <td>{{$c->user_id}}</td>
                                 <td>
-                                    <div class="btn-toolbar">
-                                        <a href="{{url('/edit.relasi', $c->id)}}" type="button" class="btn btn-success btn-sm col-xs-2 margin-bottom" id="in">Edit</a>
-                                    </div>
                                     <div class="btn-toolbar">
                                         <a href="{{url('/delete.relasi', $c->id)}}" type="button" class="btn btn-danger btn-sm" id="out">Hapus</a>
                                     </div>
