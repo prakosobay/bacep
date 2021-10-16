@@ -17,10 +17,19 @@
             <div class="table-responsive">
                 <form method="post" action="{{url('asset_new')}}" class="validate-form">
                     @csrf
+                    @if (count($errors) > 0)
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <div class="form-group">
                         <label for="nama_barang"><strong>Nama Barang</strong></label>
-                        <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama_barang" required autocomplete="nama" id="nama_barang" placeholder="Nama Barang" autofocus>
-                            @error('nama')
+                        <input type="text" class="form-control @error('nama_barang') is-invalid @enderror"  value="{{ old('nama_barang') }}" name="nama_barang" required autocomplete="nama_barang" id="nama_barang" placeholder="Nama Barang" autofocus>
+                            @error('nama_barang')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -29,7 +38,7 @@
 
                     <div class="form-group">
                         <label for="jumlah"><strong>Jumlah</strong></label>
-                        <input type="number" class="form-control @error('jumlah') is-invalid @enderror" name="jumlah" required autocomplete="jumlah" id="jumlah" placeholder="Jumlah">
+                        <input type="number" class="form-control @error('jumlah') is-invalid @enderror"  value="{{ old('jumlah') }}" name="jumlah" required autocomplete="jumlah" id="jumlah" placeholder="Jumlah">
                         @error('jumlah')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -39,7 +48,7 @@
 
                     <div class="form-group">
                         <label for="note"><strong>Note</strong></label>
-                        <input type="text" class="form-control @error('note') is-invalid @enderror" name="note" required autocomplete="note" id="note" placeholder="Note">
+                        <input type="text" class="form-control @error('note') is-invalid @enderror"  value="{{ old('note') }}" name="note" required autocomplete="note" id="note" placeholder="Note">
                         @error('note')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -49,7 +58,11 @@
 
                     <div class="form-group">
                         <label for="lokasi"><strong>Lokasi</strong></label>
-                        <input type="text" class="form-control @error('lokasi') is-invalid @enderror" name="lokasi" required autocomplete="lokasi" id="lokasi" placeholder="Lokasi">
+                        {{-- <input type="text" class="form-control @error('lokasi') is-invalid @enderror" name="lokasi" required autocomplete="lokasi" id="lokasi" placeholder="Lokasi"> --}}
+                        <select class="form-control" class="form-control @error('lokasi') is-invalid @enderror" name="lokasi" id="lokasi">
+                            <option>Office</option>
+                            <option>Gudang</option>
+                        </select>
                         @error('lokasi')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

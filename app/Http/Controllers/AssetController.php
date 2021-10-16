@@ -84,24 +84,17 @@ class AssetController extends Controller
     public function update_masuk(Request $request, $id)
     {
         // dd($request->all());
-        $request->validate([
-            'nama_barang' => 'required',
-            'asset_id' => 'required|numeric',
-            'jumlah' => 'numeric|required',
+        $this->validate($request, [
+            'nama_barang' => ['required'],
+            'asset_id' => ['required', 'numeric'],
+            'jumlah' => ['numeric', 'required', 'min:1'],
             'ket' => 'required',
-            'pencatat' => 'required'
+            'pencatat' => ['required', 'string']
         ]);
 
-
         $asset = Asset::find($id);
-        $jumlah = '';
-        if ($request->jumlah == 0) {
-            $jumlah = $asset->jumlah + 0;
-        } else {
-            $jumlah = $asset->jumlah + $request->jumlah;
-        }
         $asset->update([
-            'jumlah' => $jumlah,
+            'jumlah' => $asset->jumlah + $request->jumlah,
         ]);
 
         $assetmasuk = AssetMasuk::create([
@@ -120,21 +113,12 @@ class AssetController extends Controller
     public function update_keluar(Request $request, $id)
     {
         // dd($request->all());
-        $request->validate([
-            'nama_barang' => 'required',
-            'asset_id' => 'required|numeric',
-            'jumlah' => 'numeric|required',
+        $this->validate($request, [
+            'nama_barang' => ['required'],
+            'asset_id' => ['required', 'numeric'],
+            'jumlah' => ['numeric', 'required', 'min:1'],
             'ket' => 'required',
-            'pencatat' => 'required'
-        ]);
-
-        $assetkeluar = AssetKeluar::create([
-            'nama_barang' => $request->nama_barang,
-            'asset_id' => $request->asset_id,
-            'jumlah' => $request->jumlah,
-            'ket' => $request->ket,
-            'pencatat' => $request->pencatat,
-            'tanggal' => date('d/m/Y'),
+            'pencatat' => ['required', 'string']
         ]);
 
         $asset = Asset::find($id);
@@ -142,6 +126,16 @@ class AssetController extends Controller
             $asset->update([
                 'jumlah' => $asset->jumlah - $request->jumlah,
             ]);
+
+            $assetkeluar = AssetKeluar::create([
+                'nama_barang' => $request->nama_barang,
+                'asset_id' => $request->asset_id,
+                'jumlah' => $request->jumlah,
+                'ket' => $request->ket,
+                'pencatat' => $request->pencatat,
+                'tanggal' => date('d/m/Y'),
+            ]);
+
             Alert::success('Success', 'Data has been submited');
         } else {
             Alert::error('Error', 'Stock Kosong/Kurang !');
@@ -152,13 +146,13 @@ class AssetController extends Controller
     public function store_asset(Request $request)
     {
         // dd($request->all());
-        $request->validate([
-            'nama_barang' => 'required|unique:assets,nama_barang',
-            'jumlah' => 'required|numeric',
-            'note' => 'nullable',
+        $this->validate($request, [
+            'nama_barang' => ['required', 'unique:assets', 'max:150'],
+            'jumlah' => ['required', 'numeric', 'min:1'],
+            'note' => ['max:255'],
             'lokasi' => 'required',
-            'satuan' => 'required',
-            'pencatat' => 'required',
+            'satuan' => ['required', 'string'],
+            'pencatat' => ['required', 'string']
         ]);
 
         $asset = Asset::create([
@@ -169,15 +163,15 @@ class AssetController extends Controller
             'satuan' => $request->satuan,
         ]);
 
-        if ($asset->exist) {
-            $assetmasuk = AssetMasuk::create([
-                'nama_barang' => $request->nama_barang,
-                'asset_id' => $asset->id,
-                'jumlah' => $request->jumlah,
-                'ket' => $request->note,
-                'pencatat' => $request->pencatat,
-                'tanggal' => date('d/m/Y'),
-            ]);
-        }
+        $assetmasuk = AssetMasuk::create([
+            'nama_barang' => $request->nama_barang,
+            'asset_id' => $asset->id,
+            'jumlah' => $request->jumlah,
+            'ket' => $request->note,
+            'pencatat' => $request->pencatat,
+            'tanggal' => date('d/m/Y'),
+        ]);
+        Alert::success('Success', 'Data has been submited');
+        return back();
     }
 }
