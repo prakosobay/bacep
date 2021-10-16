@@ -147,7 +147,7 @@ class AssetController extends Controller
     {
         // dd($request->all());
         $this->validate($request, [
-            'nama_barang' => ['required', 'unique:assets', 'max:150'],
+            'nama_barang' => ['required', 'unique:assets', 'max:200'],
             'jumlah' => ['required', 'numeric', 'min:1'],
             'note' => ['max:255'],
             'lokasi' => 'required',

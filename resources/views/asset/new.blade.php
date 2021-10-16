@@ -58,7 +58,6 @@
 
                     <div class="form-group">
                         <label for="lokasi"><strong>Lokasi</strong></label>
-                        {{-- <input type="text" class="form-control @error('lokasi') is-invalid @enderror" name="lokasi" required autocomplete="lokasi" id="lokasi" placeholder="Lokasi"> --}}
                         <select class="form-control" class="form-control @error('lokasi') is-invalid @enderror" name="lokasi" id="lokasi">
                             <option>Office</option>
                             <option>Gudang</option>

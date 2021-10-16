@@ -19,6 +19,15 @@
                 <form method="post" id="consum" class="validate-form" action="{{url('consum_putin', $consum->id)}}">
                     @method('PUT')
                     @csrf
+                    @if (count($errors) > 0)
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <div class="form-group">
                         <label for="nama_barang"><strong>Nama Barang</strong></label>
                         <input type="text" class="form-control" id="nama_barang" name="nama_barang" value="{{$consum->nama_barang}}" readonly><br>
@@ -30,7 +39,7 @@
                         <input type="number" class="form-control" id="stok" value="{{$consum->jumlah}}" readonly><br>
 
                         <label for="jumlah"><strong>Jumlah</strong></label>
-                        <input type="number" class="form-control @error('jumlah') is-invalid @enderror" required autocomplete="jumlah" id="jumlah" name="jumlah" autofocus><br>
+                        <input type="number" class="form-control @error('jumlah') is-invalid @enderror" required autocomplete="jumlah" id="jumlah" name="jumlah" autofocus>
                             @error('jumlah')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -54,26 +63,4 @@
         </div>
     </div>
 </div>
-
-<script>
-    // $(document).on('click', '.btn-primary', function(event){
-        // Swal.fire({
-        //     title: 'Are you sure?',
-        //     text: "You won't be able to revert this!",
-        //     icon: 'warning',
-        //     showCancelButton: true,
-        //     confirmButtonColor: '#3085d6',
-        //     cancelButtonColor: '#d33',
-        //     confirmButtonText: 'Yes, submit!'
-        // }).then((result) => {
-        // if (result.isConfirmed) {
-        //     Swal.fire(
-        //     'Submited!',
-        //     'Your data has been submited.',
-        //     'success'
-        //     )
-        // }
-        // })
-    // });
-</script>
 @endsection

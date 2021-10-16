@@ -87,6 +87,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/consum', [ConsumController::class, 'csv']);
     Route::get('/c.table', [ConsumController::class, 'index']);
     Route::get('/c.new', [ConsumController::class, 'show_new']);
+    Route::post('/consum_new', [ConsumController::class, 'store_consum']);
     Route::get('/c.masuk', [ConsumController::class, 'show_in']);
     Route::get('/c.keluar', [ConsumController::class, 'show_out']);
     Route::get('/c.tambah/{id}', [ConsumController::class, 'edit_masuk']);

@@ -80,12 +80,12 @@ class ConsumController extends Controller
     public function update_masuk(Request $request, $id)
     {
         // dd($request->all());
-        $request->validate([
-            'nama_barang' => 'required',
-            'consum_id' => 'required|numeric',
-            'jumlah' => 'numeric|required',
+        $this->validate($request, [
+            'nama_barang' => ['required'],
+            'consum_id' => ['required', 'numeric'],
+            'jumlah' => ['numeric', 'required', 'min:1'],
             'ket' => 'required',
-            'pencatat' => 'required'
+            'pencatat' => ['required', 'string']
         ]);
 
         $consum = Consum::find($id);
@@ -99,6 +99,7 @@ class ConsumController extends Controller
             'jumlah' => $request->jumlah,
             'ket' => $request->ket,
             'pencatat' => $request->pencatat,
+            'tanggal' => date('d/m/Y'),
         ]);
 
         Alert::success('Success', 'Data has been submited');
@@ -108,20 +109,12 @@ class ConsumController extends Controller
     public function update_keluar(Request $request, $id)
     {
         // dd($request->all());
-        $request->validate([
-            'nama_barang' => 'required',
-            'consum_id' => 'required|numeric',
-            'jumlah' => 'numeric|required',
+        $this->validate($request, [
+            'nama_barang' => ['required'],
+            'consum_id' => ['required', 'numeric'],
+            'jumlah' => ['numeric', 'required', 'min:1'],
             'ket' => 'required',
-            'pencatat' => 'required'
-        ]);
-
-        $consumkeluar = ConsumKeluar::create([
-            'nama_barang' => $request->nama_barang,
-            'consum_id' => $request->consum_id,
-            'jumlah' => $request->jumlah,
-            'ket' => $request->ket,
-            'pencatat' => $request->pencatat,
+            'pencatat' => ['required', 'string']
         ]);
 
         $consum = Consum::find($id);
@@ -130,11 +123,52 @@ class ConsumController extends Controller
                 'jumlah' => $consum->jumlah - $request->jumlah,
             ]);
 
+            $consumkeluar = ConsumKeluar::create([
+                'nama_barang' => $request->nama_barang,
+                'consum_id' => $request->consum_id,
+                'jumlah' => $request->jumlah,
+                'ket' => $request->ket,
+                'pencatat' => $request->pencatat,
+                'tanggal' => date('d/m/Y'),
+            ]);
+
             Alert::success('Success', 'Data has been submited');
         } else {
             Alert::error('Error', 'Stock Kosong/Kurang !');
         }
+        return back();
+    }
 
+    public function store_consum(Request $request)
+    {
+        // dd($request->all());
+        $this->validate($request, [
+            'nama_barang' => ['required', 'unique:consums', 'max:200'],
+            'jumlah' => ['required', 'numeric', 'min:1'],
+            'note' => ['max:255'],
+            'lokasi' => 'required',
+            'satuan' => ['required', 'string'],
+            'pencatat' => ['required', 'string']
+        ]);
+
+        $consum = Consum::create([
+            'nama_barang' => $request->nama_barang,
+            'jumlah' => $request->jumlah,
+            'note' => $request->note,
+            'satuan' => $request->satuan,
+            'lokasi' => $request->lokasi,
+        ]);
+
+        $consummasuk = ConsumMasuk::create([
+            'nama_barang' => $request->nama_barang,
+            'consum_id' => $consum->id,
+            'jumlah' => $request->jumlah,
+            'ket' => $request->note,
+            'pencatat' => $request->pencatat,
+            'tanggal' => date('d/m/Y'),
+        ]);
+
+        Alert::success('Success', 'Data has been submited');
         return back();
     }
 
