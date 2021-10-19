@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\{AssetExport, AssetMasukExport, AssetKeluarExport};
 use App\Imports\AssetImport;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -173,5 +174,20 @@ class AssetController extends Controller
         ]);
         Alert::success('Success', 'Data has been submited');
         return back();
+    }
+
+    public function export_asset()
+    {
+        return Excel::download(new AssetExport, 'Asset.xlsx');
+    }
+
+    public function export_asset_masuk()
+    {
+        return Excel::download(new AssetMasukExport, 'AssetMasuk.xlsx');
+    }
+
+    public function export_asset_keluar()
+    {
+        return Excel::download(new AssetkeluarExport, 'AssetKeluar.xlsx');
     }
 }

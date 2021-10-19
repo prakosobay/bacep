@@ -18,6 +18,9 @@
                 <strong>Tambahkan Barang Consumable Baru</strong>
             </a>
 
+            <a href="{{url('/export.consum')}}" type="button" class="btn btn-success mr-5" >
+                <strong>Export Excel</strong>
+            </a>
             <!-- Import Excel -->
             <div class="modal fade" id="importExcel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">

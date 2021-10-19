@@ -11,8 +11,9 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary text-center">Barang Keluar</h6>
-
-
+            <a href="{{url('/export.a.k')}}" type="button" class="btn btn-success mr-5" >
+                <strong>Export Excel</strong>
+            </a>
         </div>
         <div class="card-body">
             <div class="table-responsive">

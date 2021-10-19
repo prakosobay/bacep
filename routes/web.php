@@ -94,6 +94,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/c.kurang/{id}', [ConsumController::class, 'edit_keluar']);
     Route::put('/consum_putin/{id}', [ConsumController::class, 'update_masuk']);
     Route::put('/consum_putout/{id}', [ConsumController::class, 'update_keluar']);
+    Route::get('/export.consum', [ConsumController::class, 'export_consum']);
+    Route::get('/export.c.m', [ConsumController::class, 'export_consum_masuk']);
+    Route::get('/export.c.k', [ConsumController::class, 'export_consum_keluar']);
 
     //Barang Asset
     Route::post('/asset', [AssetController::class, 'csv']);
@@ -106,5 +109,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/a.kurang/{id}', [AssetController::class, 'edit_keluar']);
     Route::put('/asset_putin/{id}', [AssetController::class, 'update_masuk']);
     Route::put('/asset_putout/{id}', [AssetController::class, 'update_keluar']);
+    Route::get('/export.asset', [AssetController::class, 'export_asset']);
+    Route::get('/export.a.m', [AssetController::class, 'export_asset_masuk']);
+    Route::get('/export.a.k', [AssetController::class, 'export_asset_keluar']);
 });
 // Route::resource('/barang', ConsumController::class);

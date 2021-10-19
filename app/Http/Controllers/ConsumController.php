@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\{ConsumKeluarExport, ConsumExport, ConsumMasukExport};
 use App\Http\Controllers\Controller;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Imports\ConsumImport;
 use Maatwebsite\Excel\Facades\Excel;
-use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\{DB, Auth, Gate, Mail, Session};
 use App\Models\{ConsumMasuk, Consum, ConsumKeluar};
 use Illuminate\Http\Request;
@@ -175,5 +175,20 @@ class ConsumController extends Controller
     public function csv(Request $request)
     {
         $i = Excel::import(new ConsumImport, $request->file('file'));
+    }
+
+    public function export_consum()
+    {
+        return Excel::download(new ConsumExport, 'Consum.xlsx');
+    }
+
+    public function export_consum_masuk()
+    {
+        return Excel::download(new ConsumMasukExport, 'ConsumMasuk.xlsx');
+    }
+
+    public function export_consum_keluar()
+    {
+        return Excel::download(new ConsumKeluarExport, 'ConsumKeluar.xlsx');
     }
 }

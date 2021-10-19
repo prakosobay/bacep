@@ -132,7 +132,10 @@ class AdminController extends Controller
     {
         if (Gate::allows('isAdmin')) {
             $user = User::find($id);
-            return view('admin.edit', compact('user'));
+            // return view('admin.edit', compact('user'));
+            return isset($user) && !empty($user) ? response()->json(['status' => 'SUCCESS', 'user' => $user]) : response(['status' => 'FAILED', 'user' => []]);
+        } else {
+            abort(403);
         }
     }
 

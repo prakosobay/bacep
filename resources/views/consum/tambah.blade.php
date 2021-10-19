@@ -13,6 +13,7 @@
             <a type="button" class="btn btn-primary mr-5 sm" href="{{url('c.table')}}">
                 Kembali
             </a>
+
         </div>
         <div class="card-body">
             <div class="table-responsive">
