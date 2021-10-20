@@ -4,7 +4,7 @@ namespace App\Imports;
 
 use App\Models\{Asset, AssetKeluar, AssetMasuk};
 use Illuminate\Support\Collection;
-use Maatwebsite\Excel\Concerns\{ToModel, WithHeadingRow, ToCollection, WithMultipleSheets, WithStartRow};
+use Maatwebsite\Excel\Concerns\{ToCollection, WithStartRow};
 
 class AssetImport implements ToCollection, WithStartRow
 {
@@ -21,9 +21,9 @@ class AssetImport implements ToCollection, WithStartRow
     // }
     // public function collection(Collection $rows1)
     // {
-    //     echo '<pre>';
-    //     var_dump($rows1);
-    //     die;
+    //     // echo '<pre>';
+    //     // var_dump($rows1);
+    //     // die;
     //     foreach ($rows1 as $row) {
     //         Asset::create([
     //             'nama_barang' => $row[1],
@@ -36,30 +36,13 @@ class AssetImport implements ToCollection, WithStartRow
     //     }
     // }
 
-    public function collection(Collection $rows3)
-    {
-        // echo '<pre>';
-        // var_dump($rows3);
-        // die;
-        foreach ($rows3 as $row) {
-            AssetMasuk::create([
-                'tanggal' => $row[0],
-                'asset_id' => $row[1],
-                'nama_barang' => $row[2],
-                'jumlah' => $row[3],
-                'ket' => $row[4],
-                'pencatat' => $row[5],
-            ]);
-        }
-    }
-
-    // public function collection(Collection $rows2)
+    // public function collection(Collection $rows3)
     // {
     //     // echo '<pre>';
-    //     // var_dump($rows2);
+    //     // var_dump($rows3);
     //     // die;
-    //     foreach ($rows2 as $row) {
-    //         AssetKeluar::create([
+    //     foreach ($rows3 as $row) {
+    //         AssetMasuk::create([
     //             'tanggal' => $row[0],
     //             'asset_id' => $row[1],
     //             'nama_barang' => $row[2],
@@ -70,39 +53,15 @@ class AssetImport implements ToCollection, WithStartRow
     //     }
     // }
 
-    public function startRow(): int
-    {
-        return 2;
-    }
-}
-
-class SecondSheetImport implements ToCollection, WithStartRow
-{
     public function collection(Collection $rows2)
     {
+        // echo '<pre>';
+        // var_dump($rows2);
+        // die;
         foreach ($rows2 as $row) {
             AssetKeluar::create([
                 'tanggal' => $row[0],
-                'nama_barang' => $row[2],
-                'jumlah' => $row[3],
-                'ket' => $row[4],
-                'pencatat' => $row[5],
-            ]);
-        }
-    }
-
-    public function startRow(): int
-    {
-        return 2;
-    }
-}
-class ThirdSheetImport implements ToCollection, WithStartRow
-{
-    public function collection(Collection $rows3)
-    {
-        foreach ($rows3 as $row) {
-            AssetMasuk::create([
-                'tanggal' => $row[0],
+                'asset_id' => $row[1],
                 'nama_barang' => $row[2],
                 'jumlah' => $row[3],
                 'ket' => $row[4],

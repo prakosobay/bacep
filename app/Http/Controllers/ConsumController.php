@@ -175,6 +175,7 @@ class ConsumController extends Controller
     public function csv(Request $request)
     {
         $i = Excel::import(new ConsumImport, $request->file('file'));
+        return back()->with('success', 'Excel Data Imported successfully.');
     }
 
     public function export_consum()

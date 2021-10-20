@@ -3,9 +3,10 @@
 namespace App\Imports;
 
 use App\Models\{Consum, ConsumKeluar, ConsumMasuk};
-use Maatwebsite\Excel\Concerns\{ToModel, WithHeadingRow};
+use Illuminate\Support\Collection;
+use Maatwebsite\Excel\Concerns\{ToCollection, WithStartRow};
 
-class ConsumImport implements ToModel, WithHeadingRow
+class ConsumImport implements ToCollection, WithStartRow
 {
     /**
      * @param array $row
@@ -14,69 +15,60 @@ class ConsumImport implements ToModel, WithHeadingRow
      */
 
 
-    // public function model(array $row)
+    // public function collection(Collection $rows1)
     // {
     //     // echo '<pre>';
-    //     // var_dump($row);
+    //     // var_dump($rows1);
     //     // die;
-    //     return new Consum([
-    //         'nama_barang' => $row['nama'],
-    //         'jumlah' => $row['jumlah'],
-    //         'satuan' => $row['satuan'],
-    //         'note' => $row['note'],
-    //         'lokasi' => $row['lokasi'],
-    //     ]);
+    //     foreach ($rows1 as $row) {
+    //         Consum::create([
+    //             'nama_barang' => $row[1],
+    //             'jumlah' => $row[5],
+    //             'satuan' => $row[6],
+    //             // 'kondisi' => $row[7],
+    //             'note' => $row[8],
+    //             'lokasi' => $row[9],
+    //         ]);
+    //     }
     // }
 
-    // public function model(array $row)
+
+    // public function collection(Collection $rows3)
     // {
     //     // echo '<pre>';
-    //     // var_dump($row);
+    //     // var_dump($rows3);
     //     // die;
-    //     return new ConsumMasuk([
-    //         // 'consum_id' => $row['kode_barang'],
-    //         'tanggal' => $row['tanggal'],
-    //         'nama_barang' => $row['nama_barang'],
-    //         'jumlah' => $row['jumlah'],
-    //         'note' => $row['keterengan'],
-    //         'pencatat' => $row['pencatat'],
-    //     ]);
+    //     foreach ($rows3 as $row) {
+    //         ConsumMasuk::create([
+    //             'tanggal' => $row[0],
+    //             'consum_id' => $row[1],
+    //             'nama_barang' => $row[2],
+    //             'jumlah' => $row[3],
+    //             'ket' => $row[4],
+    //             'pencatat' => $row[5],
+    //         ]);
+    //     }
     // }
 
-    public function model(array $row)
+    public function collection(Collection $rows2)
     {
-        echo '<pre>';
-        var_dump($row);
-        die;
-        return new ConsumKeluar([
-            'tanggal' => ($row['tanggal']),
-            // 'tanggal' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['tanggal'])->format('Y-m-d'),
-            // 'tanggal' => Carbon::createFormFormat('m/d/Y', $row['tanggal']),
-            'consum_id' => $row['kode'],
-            'nama_barang' => $row['nama_barang'],
-            'jumlah' => $row['jumlah'],
-            'ket' => $row['keterangan'],
-            'pencatat' => $row['pencatat'],
-        ]);
+        // echo '<pre>';
+        // var_dump($rows2);
+        // die;
+        foreach ($rows2 as $row) {
+            ConsumKeluar::create([
+                'tanggal' => $row[0],
+                'consum_id' => $row[1],
+                'nama_barang' => $row[2],
+                'jumlah' => $row[3],
+                'ket' => $row[4],
+                'pencatat' => $row[5],
+            ]);
+        }
     }
 
-    // public function model(array $row)
-    // {
-    //     echo '<pre>';
-    //     var_dump($row);
-    //     die;
-    //     return new ConsumMasuk([
-    //         'tanggal' => $row('tanggal'),
-    //         // 'consum_id' => $row('kode_barang'),
-    //         'nama_barang' => $row('nama_barang'),
-    //         'jumlah' => $row('jumlah'),
-    //         'ket' => $row('keterangan'),
-    //         'pencatat' => $row('nama_pencatat'),
-    //     ]);
-    // }
-
-    public function dateColumns(): array
+    public function startRow(): int
     {
-        return ['tanggal' => 'd/m/Y', 'tanggal'];
+        return 2;
     }
 }
