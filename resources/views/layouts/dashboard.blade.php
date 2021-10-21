@@ -142,20 +142,11 @@
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Option:</h6>
-                        <a class="collapse-item" href="{{url('cheklist.warming')}}">Warming Up</a>
-                        <a class="collapse-item" href="{{url('cheklist.load')}}">Actual Load</a>
+                        <a class="collapse-item" href="{{url('checklist.warming')}}">Warming Up</a>
+                        <a class="collapse-item" href="{{url('checklist.warming')}}">Actual Load</a>
                     </div>
                 </div>
             </li>
-
-            {{-- <!-- Nav Item - Charts -->
-            <li class="nav-item">
-                <a class="nav-link" href="charts.html">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Charts</span></a>
-            </li> --}}
-
-
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">

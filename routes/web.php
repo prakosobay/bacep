@@ -112,5 +112,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/export.asset', [AssetController::class, 'export_asset']);
     Route::get('/export.a.m', [AssetController::class, 'export_asset_masuk']);
     Route::get('/export.a.k', [AssetController::class, 'export_asset_keluar']);
+
+    //Checklist Genset
+    Route::get('/checklist.warming', [GensetController::class, 'show_warming']);
+    Route::post('/submit.form', [GensetController::class, 'store_warming']);
 });
 // Route::resource('/barang', ConsumController::class);
