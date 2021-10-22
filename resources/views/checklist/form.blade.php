@@ -172,7 +172,7 @@
                                 </select>
                             </td>
                             <td class="input">
-                                <input id="mode" class="form-control form-control-sm @error('mode') is-invalid @enderror" required autocomplete="mode" name="remark2" type="text" required>
+                                <input id="mode" class="form-control form-control-sm @error('mode') is-invalid @enderror" required autocomplete="mode" name="remark7" type="text" required>
                                     @error('mode')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -192,7 +192,7 @@
                                 </select>
                             </td>
                             <td class="input">
-                                <input id="switch" class="form-control form-control-sm @error('switch') is-invalid @enderror" required autocomplete="switch" name="remark2" type="text" required>
+                                <input id="switch" class="form-control form-control-sm @error('switch') is-invalid @enderror" required autocomplete="switch" name="remark8" type="text" required>
                                     @error('switch')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -212,7 +212,7 @@
                                 </select>
                             </td>
                             <td class="input">
-                                <input id="pkg" class="form-control form-control-sm @error('pkg') is-invalid @enderror" required autocomplete="pkg" name="remark2" type="text" required>
+                                <input id="pkg" class="form-control form-control-sm @error('pkg') is-invalid @enderror" required autocomplete="pkg" name="remark9" type="text" required>
                                     @error('pkg')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -231,7 +231,7 @@
                                 </select>
                             </td>
                             <td class="input">
-                                <input id="putr1" class="form-control form-control-sm @error('putr1') is-invalid @enderror" required autocomplete="putr1" name="remark2" type="text" required>
+                                <input id="putr1" class="form-control form-control-sm @error('putr1') is-invalid @enderror" required autocomplete="putr1" name="remark10" type="text" required>
                                     @error('putr1')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -251,7 +251,7 @@
                                 </select>
                             </td>
                             <td class="input">
-                                <input id="putr2" class="form-control form-control-sm @error('putr2') is-invalid @enderror" required autocomplete="putr2" name="remark2" type="text" required>
+                                <input id="putr2" class="form-control form-control-sm @error('putr2') is-invalid @enderror" required autocomplete="putr2" name="remark11" type="text" required>
                                     @error('putr2')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
