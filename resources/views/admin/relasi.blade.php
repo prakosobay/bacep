@@ -61,9 +61,10 @@
                                 <td>{{$c->role_id}}</td>
                                 <td>{{$c->user_id}}</td>
                                 <td>
-                                    <div class="btn-toolbar">
-                                        <a href="{{url('/delete.relasi', $c->id)}}" type="button" class="btn btn-danger btn-sm" id="out">Hapus</a>
-                                    </div>
+                                    <form action="{{ url('relasi.destroy',$c->id) }}" method="POST">
+                                        @csrf
+                                        <button type="submit"class="btn btn-danger mr-2 col-xs-2 margin-bottom hapus">Hapus</button>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach

@@ -7,7 +7,7 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800 text-center"><strong>Data User</strong></h1>
+    <h1 class="h3 mb-2 text-gray-800 text-center"><strong>User Role Manajemen</strong></h1>
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
@@ -86,9 +86,10 @@
                                     <button href="" type="button" id="edit" class="btn btn-success mr-2 col-xs-2 margin-bottom" data-toggle="modal" data-id={{ $c->id }} data-target="#edit">
                                         Edit
                                     </button>
-                                    <button type="button" class="hapus btn btn-danger mr-2 col-xs-2 margin-bottom" data-toggle="modal" data-target="#delete">
-                                        Hapus
-                                    </button>
+                                    <form action="{{ url('user.destroy',$c->id) }}" method="POST">
+                                        @csrf
+                                        <button type="submit"class="btn btn-danger mr-2 col-xs-2 margin-bottom hapus">Hapus</button>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach
@@ -127,7 +128,6 @@
             </form>
         </div>
     </div>
-
 <script src="{{asset('vendor2/jquery/jquery.min.js')}}"></script>
 <script>
     $(document).ready(function(){
@@ -185,8 +185,8 @@
         // })
 
 
-    });
-
+    })
+});
 </script>
 @endsection
 

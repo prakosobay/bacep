@@ -58,9 +58,10 @@
                                 <td>{{$c->id}}</td>
                                 <td>{{$c->name}}</td>
                                 <td>
-                                    <button type="button" class="btn btn-danger mr-5" data-toggle="modal" data-target="#delete">
-                                        Hapus
-                                    </button>
+                                    <form action="{{ url('role.destroy',$c->id) }}" method="POST">
+                                        @csrf
+                                        <button type="submit"class="btn btn-danger mr-2 col-xs-2 margin-bottom hapus">Hapus</button>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach

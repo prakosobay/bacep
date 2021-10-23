@@ -59,15 +59,6 @@ class AdminController extends Controller
             'password' => $this->passwordRules(),
         ])->validate();
 
-        // $request->validate([
-        //     'name' => ['required', 'string', 'max:255', Rule::unique(User::class)],
-        //     'slug' => ['required', 'string', 'max:255'],
-        //     'dept' => ['required', 'string', 'max:255'],
-        //     'hp' => ['required', 'numeric'],
-        //     'email' => 'required|string|email:dns|unique:users,email',
-        //     ''
-        // ]);
-
         $role = User::create([
             'name' => $request->name,
         ]);
@@ -149,6 +140,40 @@ class AdminController extends Controller
             'ket' => 'required',
             'pencatat' => 'required'
         ]);
+    }
+
+    public function delete_user($id)
+    {
+        // dd($id);
+        if ($id != 8) {
+            User::find($id)->delete();
+            Alert::success('Success', 'User has been deleted');
+            return back();
+        } else {
+            Alert::error('Failed', 'Cant Delete This !');
+            return back();
+        }
+    }
+
+    public function delete_role($id)
+    {
+        // dd($id);
+        if ($id != 6) {
+            Role::find($id)->delete();
+            Alert::success('Success', 'Role has been deleted');
+            return back();
+        } else {
+            Alert::error('Failed', 'Cant Delete This !');
+            return back();
+        }
+    }
+
+    public function delete_relasi($id)
+    {
+        // dd($id);
+        DB::table('role_user')->where('id', $id)->delete();
+        Alert::success('Success', 'Role has been deleted');
+        return back();
     }
 
     // CLEANING
