@@ -42,7 +42,8 @@ class CleaningController extends Controller
         // dd($data);
         if (Gate::allows('isBm')) {
             $data['cleaning_name'] = MasterOb::find($data['cleaning_name'])->nama;
-            $data['cleaning_work'] = PilihanWork::find($data['cleaning_work'])->nama;
+            $data['cleaning_name2'] = MasterOb::find($data['cleaning_name2'])->nama;
+            $data['cleaning_work'] = PilihanWork::find($data['cleaning_work'])->work;
             $cleaning = Cleaning::create($data);
 
             foreach ([
@@ -62,7 +63,7 @@ class CleaningController extends Controller
                 'pdf' => false
             ]);
         }
-        // return $cleaningHistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
+        return $cleaningHistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
     }
 
     public function detail_permit_cleaning($id)
