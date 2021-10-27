@@ -119,6 +119,6 @@ Route::middleware(['auth'])->group(function () {
 
     //Checklist Genset
     Route::get('/checklist.warming', [GensetController::class, 'show_warming']);
-    Route::post('/submit.form', [GensetController::class, 'store_warming']);
+    Route::post('/checklist', [GensetController::class, 'store_warming']);
 });
 // Route::resource('/barang', ConsumController::class);

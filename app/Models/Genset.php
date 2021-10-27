@@ -11,7 +11,5 @@ class Genset extends Model
 
     protected $table = 'gensets';
     protected $primaryKey = 'id';
-    protected $guarded = [
-        'id',
-    ];
+    protected $guarded = [];
 }
