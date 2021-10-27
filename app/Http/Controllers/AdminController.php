@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use GuzzleHttp\Promise\Create;
 use Illuminate\Validation\Rule;
 use RealRashid\SweetAlert\Facades\Alert;
-use Illuminate\Support\Facades\{DB, Auth, Gate, Validator};
+use Illuminate\Support\Facades\{DB, Auth, Gate, Validator, Hash};
 
 class AdminController extends Controller
 {
@@ -44,7 +44,7 @@ class AdminController extends Controller
 
     public function store_user(Request $request)
     {
-        dd($request->all());
+        // dd($request->all());
         Validator::make($request, [
             'name' => ['required', 'string', 'max:255'],
             'email' => [
@@ -61,6 +61,10 @@ class AdminController extends Controller
 
         $role = User::create([
             'name' => $request->name,
+            'email' => $request->email,
+            'hp' => $request->hp,
+            'dept' => $request->dept,
+            'password' => Hash::make($request['password']),
         ]);
         Alert::success('Success', 'Role has been submited');
 
@@ -123,8 +127,8 @@ class AdminController extends Controller
     {
         if (Gate::allows('isAdmin')) {
             $user = User::find($id);
-            // return view('admin.edit', compact('user'));
-            return isset($user) && !empty($user) ? response()->json(['status' => 'SUCCESS', 'user' => $user]) : response(['status' => 'FAILED', 'user' => []]);
+            return view('admin.edit', compact('user'));
+            // return isset($user) && !empty($user) ? response()->json(['status' => 'SUCCESS', 'user' => $user]) : response(['status' => 'FAILED', 'user' => []]);
         } else {
             abort(403);
         }
@@ -132,14 +136,41 @@ class AdminController extends Controller
 
     public function user_update(Request $request, $id)
     {
-        dd($request->all());
+        // dd($request->all());
         $request->validate([
-            'nama_barang' => 'required',
-            'consum_id' => 'required|numeric',
-            'jumlah' => 'numeric|required',
-            'ket' => 'required',
-            'pencatat' => 'required'
+            'name' => ['required', 'string', 'max:255'],
+            'slug' => ['required', 'string', 'max:255'],
+            'dept' => ['required', 'string', 'max:255'],
+            'hp' => ['required', 'numeric'],
         ]);
+
+        $user = User::find($id);
+        // if ($user->hp == '' && $user->dept == '') {
+        // $wait = User::where('id', '=', $request->id)->latest()->first();
+        // dd($wait);
+        $user->update([
+            'name' => $request->name,
+            'slug' => $request->slug,
+            'dept' => $request->dept,
+            'hp' => $request->hp,
+        ]);
+
+        // $user = User::find($id)->update([
+        //     'name' => $request->name,
+        //     'slug' => $request->slug,
+        //     'dept' => $request->dept,
+        //     'hp' => $request->hp,
+        // ]);
+
+        // } else {
+        // $user = User::find($id)->create([
+        //     'dept' => $request->dept,
+        //     'hp' => $request->hp,
+        // ]);
+        // echo "gagal";
+        // }
+        Alert::success('Success', 'Data has been updated');
+        return back();
     }
 
     public function delete_user($id)

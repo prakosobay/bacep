@@ -67,7 +67,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/table_role', [AdminController::class, 'show_role']);
     Route::post('/role.new', [AdminController::class, 'store_role']);
     Route::post('/relasi.new', [AdminController::class, 'store_relasi']);
-    Route::post('/user.new', [AdminController::class, 'store_user']);
+    // Route::post('/user.new', [AdminController::class, 'store_user']);
     Route::post('/user.destroy/{id}', [AdminController::class, 'delete_user']);
     Route::post('/role.destroy/{id}', [AdminController::class, 'delete_role']);
     Route::post('/role.destroy/{id}', [AdminController::class, 'delete_role']);
@@ -81,7 +81,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/a.user', [AdminController::class, 'show_user']);
     Route::get('/a.role', [AdminController::class, 'show_role']);
     Route::get('/u.edit/{id}', [AdminController::class, 'user_edit']);
-    Route::post('user_edit/{id}', [AdminController::class, 'user_update']);
+    Route::put('u.edit/{id}', [AdminController::class, 'user_update']);
     Route::get('/u.hapus/{id}', [AdminController::class, 'delete']);
 
     //Dashboard Barang

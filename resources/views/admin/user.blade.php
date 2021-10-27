@@ -19,7 +19,7 @@
             <div class="modal fade" id="user" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <form method="post" action="{{ url('/user.new')}}">
-                        {{ csrf_field() }}
+                        @csrf
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalLabel">Tambah User Baru</h5>
@@ -83,9 +83,7 @@
                                 <td>{{$c->dept}}</td>
                                 <td>{{$c->hp}}</td>
                                 <td>
-                                    <button href="" type="button" id="edit" class="btn btn-success mr-2 col-xs-2 margin-bottom" data-toggle="modal" data-id={{ $c->id }} data-target="#edit">
-                                        Edit
-                                    </button>
+                                    <a href="{{url('u.edit', $c->id)}}" type="button" class="btn btn-success mr-2 col-xs-2 margin-bottom">Edit</a>
                                     <form action="{{ url('user.destroy',$c->id) }}" method="POST">
                                         @csrf
                                         <button type="submit"class="btn btn-danger mr-2 col-xs-2 margin-bottom hapus">Hapus</button>
@@ -100,7 +98,7 @@
     </div>
 
     <!-- Edit User -->
-    <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    {{-- <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <form method="post" id="edit_form" action="{{ url('/user.edit')}}">
                 @csrf
@@ -127,9 +125,9 @@
                 </div>
             </form>
         </div>
-    </div>
+    </div> --}}
 <script src="{{asset('vendor2/jquery/jquery.min.js')}}"></script>
-<script>
+{{-- <script>
     $(document).ready(function(){
 
         $('body').on('click', '#edit', function (event) {
@@ -187,7 +185,7 @@
 
     })
 });
-</script>
+</script> --}}
 @endsection
 
 

@@ -16,7 +16,7 @@ class GensetController extends Controller
 
     public function store_warming(Request $request)
     {
-        // dd($request->all());
+        dd($request->all());
         // var_dump($request->all());
         // die;
         $this->validate($request, [
