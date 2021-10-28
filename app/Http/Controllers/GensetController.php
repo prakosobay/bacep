@@ -22,12 +22,7 @@ class GensetController extends Controller
         Alert::success('Success', 'Data has been submited');
         return redirect()->route('table_barang');
         // return $check->exists ? response()->json(['status' => 'FAILED']) : response()->json(['status' => 'SUCEESS']);
-        // if ($check->exist) {
-        //     echo '1';
-        // } else {
-        //     Alert::error('Error', 'Ada yang salah  !');
-        // }
-        // return back();
+
         // $this->validate($request, [
         //     '1' => ['required', 'boolean'],
         //     '2' => ['required', 'boolean'],

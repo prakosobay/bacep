@@ -44,7 +44,6 @@ class AdminController extends Controller
 
     public function store_user(Request $request)
     {
-        // dd($request->all());
         Validator::make($request, [
             'name' => ['required', 'string', 'max:255'],
             'email' => [
@@ -73,7 +72,6 @@ class AdminController extends Controller
 
     public function store_relasi(Request $request)
     {
-        // dd($request->all());
         $request->validate([
             'role_id' => ['required', 'numeric'],
             'user_id' => ['required', 'numeric'],
@@ -81,7 +79,6 @@ class AdminController extends Controller
 
         $user = User::find($request->user_id);
         $role_new = $request->role_id;
-        // dd($role_new);
         $user->roles()->attach($role_new);
         Alert::success('Success', 'Relasi has been submited');
         return back();
@@ -89,7 +86,6 @@ class AdminController extends Controller
 
     public function show_edit($id)
     {
-        // dd($id);
         if (Gate::allows('isAdmin')) {
             $join = DB::table('users')
                 ->join('roles', 'roles.id', '=', 'users.id')
@@ -128,7 +124,6 @@ class AdminController extends Controller
         if (Gate::allows('isAdmin')) {
             $user = User::find($id);
             return view('admin.edit', compact('user'));
-            // return isset($user) && !empty($user) ? response()->json(['status' => 'SUCCESS', 'user' => $user]) : response(['status' => 'FAILED', 'user' => []]);
         } else {
             abort(403);
         }
@@ -136,7 +131,6 @@ class AdminController extends Controller
 
     public function user_update(Request $request, $id)
     {
-        // dd($request->all());
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'slug' => ['required', 'string', 'max:255'],
@@ -145,9 +139,7 @@ class AdminController extends Controller
         ]);
 
         $user = User::find($id);
-        // if ($user->phone == '' && $user->department == '') {
-        // $wait = User::where('id', '=', $request->id)->latest()->first();
-        // dd($wait);
+
         $user->update([
             'name' => $request->name,
             'slug' => $request->slug,
@@ -155,28 +147,13 @@ class AdminController extends Controller
             'phone' => $request->phone,
         ]);
 
-        // $user = User::find($id)->update([
-        //     'name' => $request->name,
-        //     'slug' => $request->slug,
-        //     'department' => $request->department,
-        //     'phone' => $request->phone,
-        // ]);
-
-        // } else {
-        // $user = User::find($id)->create([
-        //     'department' => $request->department,
-        //     'phone' => $request->phone,
-        // ]);
-        // echo "gagal";
-        // }
         Alert::success('Success', 'Data has been updated');
         return back();
     }
 
     public function delete_user($id)
     {
-        // dd($id);
-        if ($id != 8) {
+        if ($id != 9) {
             User::find($id)->delete();
             Alert::success('Success', 'User has been deleted');
             return back();
@@ -188,7 +165,6 @@ class AdminController extends Controller
 
     public function delete_role($id)
     {
-        // dd($id);
         if ($id != 6) {
             Role::find($id)->delete();
             Alert::success('Success', 'Role has been deleted');
@@ -201,7 +177,6 @@ class AdminController extends Controller
 
     public function delete_relasi($id)
     {
-        // dd($id);
         DB::table('role_user')->where('id', $id)->delete();
         Alert::success('Success', 'Role has been deleted');
         return back();
