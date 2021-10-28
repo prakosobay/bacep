@@ -85,7 +85,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/u.hapus/{id}', [AdminController::class, 'delete']);
 
     //Dashboard Barang
-    Route::get('/table_barang', [HomeController::class, 'dashboard']);
+    Route::get('/table_barang', [HomeController::class, 'dashboard'])->name('table_barang');
 
     //Barang Consume
     Route::post('/consum', [ConsumController::class, 'csv']);
