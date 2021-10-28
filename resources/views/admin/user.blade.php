@@ -80,8 +80,8 @@
                                 <td>{{$c->name}}</td>
                                 <td>{{$c->email}}</td>
                                 <td>{{$c->slug}}</td>
-                                <td>{{$c->dept}}</td>
-                                <td>{{$c->hp}}</td>
+                                <td>{{$c->department}}</td>
+                                <td>{{$c->phone}}</td>
                                 <td>
                                     <a href="{{url('u.edit', $c->id)}}" type="button" class="btn btn-success mr-2 col-xs-2 margin-bottom">Edit</a>
                                     <form action="{{ url('user.destroy',$c->id) }}" method="POST">

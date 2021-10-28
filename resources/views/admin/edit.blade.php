@@ -51,17 +51,17 @@
                                 </span>
                             @enderror
 
-                        <label for="dept"><strong>Department</strong></label>
-                        <input type="text" id="dept" name="dept" class="form-control @error('dept') is-invalid @enderror" value="{{$user->dept}}" required autocomplete="dept">
-                            @error('dept')
+                        <label for="department"><strong>Department</strong></label>
+                        <input type="text" id="department" name="department" class="form-control @error('department') is-invalid @enderror" value="{{$user->department}}" required autocomplete="department">
+                            @error('department')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
 
-                        <label for="hp"><strong>Nomer HP</strong></label>
-                        <input type="text" class="form-control @error('hp') is-invalid @enderror" id="hp" name="hp" value="{{$user->hp}}" required autocomplete="hp">
-                            @error('hp')
+                        <label for="phone"><strong>Nomer HP</strong></label>
+                        <input type="text" class="form-control @error('phone') is-invalid @enderror" id="phone" name="phone" value="{{$user->phone}}" required autocomplete="phone">
+                            @error('phone')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>

@@ -140,32 +140,32 @@ class AdminController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'slug' => ['required', 'string', 'max:255'],
-            'dept' => ['required', 'string', 'max:255'],
-            'hp' => ['required', 'numeric'],
+            'department' => ['required', 'string', 'max:255'],
+            'phone' => ['required', 'numeric'],
         ]);
 
         $user = User::find($id);
-        // if ($user->hp == '' && $user->dept == '') {
+        // if ($user->phone == '' && $user->department == '') {
         // $wait = User::where('id', '=', $request->id)->latest()->first();
         // dd($wait);
         $user->update([
             'name' => $request->name,
             'slug' => $request->slug,
-            'dept' => $request->dept,
-            'hp' => $request->hp,
+            'department' => $request->department,
+            'phone' => $request->phone,
         ]);
 
         // $user = User::find($id)->update([
         //     'name' => $request->name,
         //     'slug' => $request->slug,
-        //     'dept' => $request->dept,
-        //     'hp' => $request->hp,
+        //     'department' => $request->department,
+        //     'phone' => $request->phone,
         // ]);
 
         // } else {
         // $user = User::find($id)->create([
-        //     'dept' => $request->dept,
-        //     'hp' => $request->hp,
+        //     'department' => $request->department,
+        //     'phone' => $request->phone,
         // ]);
         // echo "gagal";
         // }
