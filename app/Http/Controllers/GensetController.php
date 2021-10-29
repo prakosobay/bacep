@@ -17,6 +17,7 @@ class GensetController extends Controller
 
     public function store_warming(Request $request)
     {
+        // dd($request->all());
         $form = $request->all();
         $check = Genset::create($form);
         Alert::success('Success', 'Data has been submited');

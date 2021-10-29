@@ -133,7 +133,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <label for="engine">6. Measurement Engine Running (hours)</label>
+                                <label for="tank">6. Status Daily Tank Level</label>
                             </td>
                             <td class="input">
                                 <select id="input-group3" style="background: white;" name="6">
@@ -143,8 +143,8 @@
                                 </select>
                             </td>
                             <td class="input">
-                                <input id="engine" class="form-control form-control-sm @error('engine') is-invalid @enderror" required autocomplete="engine" name="remark6" type="text" required>
-                                    @error('engine')
+                                <input id="tank" class="form-control form-control-sm @error('tank') is-invalid @enderror" required autocomplete="tank" name="remark6" type="text" required>
+                                    @error('tank')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -153,7 +153,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <label for="mode">7. Genset Mode</label>
+                                <label for="engine">7. Measurement Engine Running (hours)</label>
                             </td>
                             <td class="input">
                                 <select id="input-group3" style="background: white;" name="7">
@@ -163,8 +163,8 @@
                                 </select>
                             </td>
                             <td class="input">
-                                <input id="mode" class="form-control form-control-sm @error('mode') is-invalid @enderror" required autocomplete="mode" name="remark7" type="text" required>
-                                    @error('mode')
+                                <input id="engine" class="form-control form-control-sm @error('engine') is-invalid @enderror" required autocomplete="engine" name="remark7" type="text" required>
+                                    @error('engine')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -173,7 +173,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <label for="switch">8. Switch Selector Panel Coupler</label>
+                                <label for="mode">8. Genset Mode</label>
                             </td>
                             <td class="input">
                                 <select id="input-group3" style="background: white;" name="8">
@@ -183,8 +183,8 @@
                                 </select>
                             </td>
                             <td class="input">
-                                <input id="switch" class="form-control form-control-sm @error('switch') is-invalid @enderror" required autocomplete="switch" name="remark8" type="text" required>
-                                    @error('switch')
+                                <input id="mode" class="form-control form-control-sm @error('mode') is-invalid @enderror" required autocomplete="mode" name="remark8" type="text" required>
+                                    @error('mode')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -193,7 +193,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <label for="pkg">9. Switch Selector Panel PKG</label>
+                                <label for="switch">9. Switch Selector Panel Coupler</label>
                             </td>
                             <td class="input">
                                 <select id="input-group3" style="background: white;" name="9">
@@ -203,7 +203,27 @@
                                 </select>
                             </td>
                             <td class="input">
-                                <input id="pkg" class="form-control form-control-sm @error('pkg') is-invalid @enderror" required autocomplete="pkg" name="remark9" type="text" required>
+                                <input id="switch" class="form-control form-control-sm @error('switch') is-invalid @enderror" required autocomplete="switch" name="remark9" type="text" required>
+                                    @error('switch')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="pkg">10. Switch Selector Panel PKG</label>
+                            </td>
+                            <td class="input">
+                                <select id="input-group3" style="background: white;" name="10">
+                                    <option value="">-</option>
+                                    <option value="1">OK</option>
+                                    <option value="0">Not OK</option>
+                                </select>
+                            </td>
+                            <td class="input">
+                                <input id="pkg" class="form-control form-control-sm @error('pkg') is-invalid @enderror" required autocomplete="pkg" name="remark10" type="text" required>
                                     @error('pkg')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -213,16 +233,16 @@
                         </tr>
                         <tr>
                             <td>
-                                <label for="putr1">10. Switch Selector PUTR 1</label>
+                                <label for="putr1">11. Switch Selector PUTR 1</label>
                             <td class="input">
-                                <select id="input-group3" style="background: white;" name="10">
+                                <select id="input-group3" style="background: white;" name="11">
                                     <option value="">-</option>
                                     <option value="1">OK</option>
                                     <option value="0">Not OK</option>
                                 </select>
                             </td>
                             <td class="input">
-                                <input id="putr1" class="form-control form-control-sm @error('putr1') is-invalid @enderror" required autocomplete="putr1" name="remark10" type="text" required>
+                                <input id="putr1" class="form-control form-control-sm @error('putr1') is-invalid @enderror" required autocomplete="putr1" name="remark11" type="text" required>
                                     @error('putr1')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -232,17 +252,17 @@
                         </tr>
                         <tr>
                             <td>
-                                <label for="putr2">11. Switch Selector PUTR 2</label>
+                                <label for="putr2">12. Switch Selector PUTR 2</label>
                             </td>
                             <td class="input">
-                                <select id="input-group3" style="background: white;" name="11">
+                                <select id="input-group3" style="background: white;" name="12">
                                     <option value="">-</option>
                                     <option value="1">OK</option>
                                     <option value="0">Not OK</option>
                                 </select>
                             </td>
                             <td class="input">
-                                <input id="putr2" class="form-control form-control-sm @error('putr2') is-invalid @enderror" required autocomplete="putr2" name="remark11" type="text" required>
+                                <input id="putr2" class="form-control form-control-sm @error('putr2') is-invalid @enderror" required autocomplete="putr2" name="remark12" type="text" required>
                                     @error('putr2')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -368,7 +388,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <label for="engine2">6. Measurement Engine Running (hours)</label>
+                                <label for="tank2">6. Status Daily Tank Level</label>
                             </td>
                             <td class="input">
                                 <select id="input-group4" style="background: white;" name="6a">
@@ -378,8 +398,8 @@
                                 </select>
                             </td>
                             <td class="input">
-                                <input id="engine2" class="form-control form-control-sm @error('engine2') is-invalid @enderror" required autocomplete="engine2" name="remark6a" type="text" required>
-                                    @error('engine2')
+                                <input id="tank2" class="form-control form-control-sm @error('tank2') is-invalid @enderror" required autocomplete="tank2" name="remark6a" type="text" required>
+                                    @error('tank2')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -388,7 +408,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <label for="mode2">7. Genset Mode</label>
+                                <label for="engine2">7. Measurement Engine Running (hours)</label>
                             </td>
                             <td class="input">
                                 <select id="input-group4" style="background: white;" name="7a">
@@ -398,8 +418,8 @@
                                 </select>
                             </td>
                             <td class="input">
-                                <input id="mode2" class="form-control form-control-sm @error('mode2') is-invalid @enderror" required autocomplete="mode2" name="remark7a" type="text" required>
-                                    @error('mode2')
+                                <input id="engine2" class="form-control form-control-sm @error('engine2') is-invalid @enderror" required autocomplete="engine2" name="remark7a" type="text" required>
+                                    @error('engine2')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -408,7 +428,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <label for="switch2">8. Switch Selector Panel Coupler</label>
+                                <label for="mode2">8. Genset Mode</label>
                             </td>
                             <td class="input">
                                 <select id="input-group4" style="background: white;" name="8a">
@@ -418,8 +438,8 @@
                                 </select>
                             </td>
                             <td class="input">
-                                <input id="switch2" class="form-control form-control-sm @error('switch2') is-invalid @enderror" required autocomplete="switch2" name="remark8a" type="text" required>
-                                    @error('switch2')
+                                <input id="mode2" class="form-control form-control-sm @error('mode2') is-invalid @enderror" required autocomplete="mode2" name="remark8a" type="text" required>
+                                    @error('mode2')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -428,7 +448,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <label for="pkg2">9. Switch Selector Panel pkg2</label>
+                                <label for="switch2">9. Switch Selector Panel Coupler</label>
                             </td>
                             <td class="input">
                                 <select id="input-group4" style="background: white;" name="9a">
@@ -438,7 +458,27 @@
                                 </select>
                             </td>
                             <td class="input">
-                                <input id="pkg2" class="form-control form-control-sm @error('pkg2') is-invalid @enderror" required autocomplete="pkg2" name="remark9a" type="text" required>
+                                <input id="switch2" class="form-control form-control-sm @error('switch2') is-invalid @enderror" required autocomplete="switch2" name="remark9a" type="text" required>
+                                    @error('switch2')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="pkg2">10. Switch Selector Panel pkg2</label>
+                            </td>
+                            <td class="input">
+                                <select id="input-group4" style="background: white;" name="10a">
+                                    <option value="">-</option>
+                                    <option value="1">OK</option>
+                                    <option value="0">Not OK</option>
+                                </select>
+                            </td>
+                            <td class="input">
+                                <input id="pkg2" class="form-control form-control-sm @error('pkg2') is-invalid @enderror" required autocomplete="pkg2" name="remark10a" type="text" required>
                                     @error('pkg2')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -448,16 +488,16 @@
                         </tr>
                         <tr>
                             <td>
-                                <label for="putr11">10. Switch Selector PUTR 1</label>
+                                <label for="putr11">11. Switch Selector PUTR 1</label>
                             <td class="input">
-                                <select id="input-group4" style="background: white;" name="10a">
+                                <select id="input-group4" style="background: white;" name="11a">
                                     <option value="">-</option>
                                     <option value="1">OK</option>
                                     <option value="0">Not OK</option>
                                 </select>
                             </td>
                             <td class="input">
-                                <input id="putr11" class="form-control form-control-sm @error('putr11') is-invalid @enderror" required autocomplete="putr11" name="remark10a" type="text" required>
+                                <input id="putr11" class="form-control form-control-sm @error('putr11') is-invalid @enderror" required autocomplete="putr11" name="remark11a" type="text" required>
                                     @error('putr11')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -467,17 +507,17 @@
                         </tr>
                         <tr>
                             <td>
-                                <label for="putr22">11. Switch Selector PUTR 2</label>
+                                <label for="putr22">12. Switch Selector PUTR 2</label>
                             </td>
                             <td class="input">
-                                <select id="input-group4" style="background: white;" name="11a">
+                                <select id="input-group4" style="background: white;" name="12a">
                                     <option value="">-</option>
                                     <option value="1">OK</option>
                                     <option value="0">Not OK</option>
                                 </select>
                             </td>
                             <td class="input">
-                                <input id="putr22" class="form-control form-control-sm @error('putr22') is-invalid @enderror" required autocomplete="putr22" name="remark11a" type="text" required>
+                                <input id="putr22" class="form-control form-control-sm @error('putr22') is-invalid @enderror" required autocomplete="putr22" name="remark12a" type="text" required>
                                     @error('putr22')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

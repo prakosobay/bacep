@@ -13,7 +13,7 @@ class CreateGensetsTable extends Migration
      */
     public function up()
     {
-        Schema::create('gensets', function (Blueprint $table) {
+        Schema::create('genset', function (Blueprint $table) {
             $table->id();
             $table->boolean('1');
             $table->boolean('2');
@@ -26,6 +26,7 @@ class CreateGensetsTable extends Migration
             $table->boolean('9');
             $table->boolean('10');
             $table->boolean('11');
+            $table->boolean('12');
             $table->string('remark1');
             $table->string('remark2');
             $table->string('remark3');
@@ -37,6 +38,7 @@ class CreateGensetsTable extends Migration
             $table->string('remark9');
             $table->string('remark10');
             $table->string('remark11');
+            $table->string('remark12');
             $table->boolean('1a');
             $table->boolean('2a');
             $table->boolean('3a');
@@ -48,6 +50,7 @@ class CreateGensetsTable extends Migration
             $table->boolean('9a');
             $table->boolean('10a');
             $table->boolean('11a');
+            $table->boolean('12a');
             $table->string('remark1a');
             $table->string('remark2a');
             $table->string('remark3a');
@@ -59,6 +62,7 @@ class CreateGensetsTable extends Migration
             $table->string('remark9a');
             $table->string('remark10a');
             $table->string('remark11a');
+            $table->string('remark12a');
             $table->string('date1');
             $table->string('time1');
             $table->string('date2');
@@ -74,6 +78,6 @@ class CreateGensetsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('gensets');
+        Schema::dropIfExists('genset');
     }
 }
