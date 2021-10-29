@@ -9,9 +9,7 @@ class Genset extends Model
 {
     use HasFactory;
 
-    protected $table = 'gensets';
+    protected $table = 'genset';
     protected $primaryKey = 'id';
-    protected $guarded = [
-        'id',
-    ];
+    protected $guarded = [];
 }

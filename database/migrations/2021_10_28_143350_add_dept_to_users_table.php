@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGensetsTable extends Migration
+class AddDeptToUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateGensetsTable extends Migration
      */
     public function up()
     {
-        Schema::create('gensets', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('department')->nullable()->after('name');
+            $table->string('phone')->nullable()->after('department');
         });
     }
 
@@ -26,6 +26,8 @@ class CreateGensetsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('gensets');
+        Schema::table('users', function (Blueprint $table) {
+            //
+        });
     }
 }
