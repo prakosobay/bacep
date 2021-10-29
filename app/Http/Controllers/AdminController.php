@@ -153,7 +153,7 @@ class AdminController extends Controller
 
     public function delete_user($id)
     {
-        if ($id != 9) {
+        if ($id != 15) {
             User::find($id)->delete();
             Alert::success('Success', 'User has been deleted');
             return back();
