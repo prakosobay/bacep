@@ -15,6 +15,20 @@ class GensetController extends Controller
         return view('checklist.form');
     }
 
+    public function index()
+    {
+        $table = Genset::all();
+        // dd($table);
+        return view('checklist.table', compact('table'));
+    }
+
+    public function show($id)
+    {
+        $show = Genset::find($id);
+        // dd($show);
+        return view('checklist.show', compact('show'));
+    }
+
     public function store_warming(Request $request)
     {
         // dd($request->all());

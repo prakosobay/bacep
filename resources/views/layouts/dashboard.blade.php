@@ -144,6 +144,7 @@
                         <h6 class="collapse-header">Option:</h6>
                         <a class="collapse-item" href="{{url('checklist.warming')}}">Warming Up</a>
                         <a class="collapse-item" href="{{url('checklist.warming')}}">Actual Load</a>
+                        <a class="collapse-item" href="{{url('checklist.table')}}">Table Checklist</a>
                     </div>
                 </div>
             </li>
