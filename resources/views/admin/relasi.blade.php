@@ -49,8 +49,8 @@
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>ID Role</th>
                             <th>ID User</th>
+                            <th>ID Role</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -58,8 +58,8 @@
                         @foreach ($ru as $c)
                             <tr>
                                 <td>{{$c->id}}</td>
-                                <td>{{$c->role_id}}</td>
                                 <td>{{$c->user_id}}</td>
+                                <td>{{$c->role_id}}</td>
                                 <td>
                                     <form action="{{ url('relasi.destroy',$c->id) }}" method="POST">
                                         @csrf

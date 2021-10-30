@@ -73,7 +73,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/role.destroy/{id}', [AdminController::class, 'delete_role']);
     Route::post('/relasi.destroy/{id}', [AdminController::class, 'delete_relasi']);
 
-
     Route::get('/revisi.cleaning', [AdminController::class, 'update_cleaning']);
     Route::get('/table_relasi', [AdminController::class, 'show_relasi']);
     Route::post('/role.new', [AdminController::class, 'store_role']);
@@ -119,6 +118,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     //Checklist Genset
     Route::get('/checklist.warming', [GensetController::class, 'show_warming']);
+    Route::get('/checklist.table', [GensetController::class, 'index']);
+    Route::get('/c.show/{id}', [GensetController::class, 'show']);
     Route::post('/checklist', [GensetController::class, 'store_warming']);
 });
 // Route::resource('/barang', ConsumController::class);
+//

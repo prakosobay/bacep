@@ -14,7 +14,8 @@
 <body>
     <div class="container-fluid">
         <h1><strong>Form Checklist Genset</strong></h1>
-            <a href="{{url('table_barang')}}" type="button" class="btn btn-primary">Kembali</a>
+            <a href="{{url('table_barang')}}" type="button" class="btn btn-primary">Kembali</a><br>
+
             <form method="POST" action="{{url('checklist')}}" id="checklist" class="validate-form">
                 @csrf
                 <table id="genset1" class="table table-bordered" >
@@ -36,7 +37,7 @@
                                 <label for="tighten">1. Tighten Battery Connection</label>
                             </td>
                             <td class="input">
-                                <select id="input-group3" style="background: white;" name="1">
+                                <select id="input-group3" style="background: white;" name="input1">
                                     <option value="">-</option>
                                     <option value="1">OK</option>
                                     <option value="0">Not OK</option>
@@ -56,7 +57,7 @@
                                 <label for="open">2. Measurement Battery Voltage (Open Circuit)</label>
                             </td>
                             <td class="input">
-                                <select id="input-group3" style="background: white;" name="2">
+                                <select id="input-group3" style="background: white;" name="input2">
                                     <option value="">-</option>
                                     <option value="1">OK</option>
                                     <option value="0">Not OK</option>
@@ -76,7 +77,7 @@
                                 <label for="charging">3. Measurement Battery Voltage (Charging Condition)</label>
                             </td>
                             <td class="input">
-                                <select id="input-group3" style="background: white;" name="3">
+                                <select id="input-group3" style="background: white;" name="input3">
                                     <option value="">-</option>
                                     <option value="1">OK</option>
                                     <option value="0">Not OK</option>
@@ -96,7 +97,7 @@
                                 <label for="oil">4. Check For Lubricant Oil Level</label>
                             </td>
                             <td class="input">
-                                <select id="input-group3" style="background: white;" name="4">
+                                <select id="input-group3" style="background: white;" name="input4">
                                     <option value="">-</option>
                                     <option value="1">OK</option>
                                     <option value="0">Not OK</option>
@@ -116,7 +117,7 @@
                                 <label for="tank">5. Status Storage Tank Level</label>
                             </td>
                             <td class="input">
-                                <select id="input-group3" style="background: white;" name="5">
+                                <select id="input-group3" style="background: white;" name="input5">
                                     <option value="">-</option>
                                     <option value="1">OK</option>
                                     <option value="0">Not OK</option>
@@ -136,7 +137,7 @@
                                 <label for="tank">6. Status Daily Tank Level</label>
                             </td>
                             <td class="input">
-                                <select id="input-group3" style="background: white;" name="6">
+                                <select id="input-group3" style="background: white;" name="input6">
                                     <option value="">-</option>
                                     <option value="1">OK</option>
                                     <option value="0">Not OK</option>
@@ -156,7 +157,7 @@
                                 <label for="engine">7. Measurement Engine Running (hours)</label>
                             </td>
                             <td class="input">
-                                <select id="input-group3" style="background: white;" name="7">
+                                <select id="input-group3" style="background: white;" name="input7">
                                     <option value="">-</option>
                                     <option value="1">OK</option>
                                     <option value="0">Not OK</option>
@@ -176,7 +177,7 @@
                                 <label for="mode">8. Genset Mode</label>
                             </td>
                             <td class="input">
-                                <select id="input-group3" style="background: white;" name="8">
+                                <select id="input-group3" style="background: white;" name="input8">
                                     <option value="">-</option>
                                     <option value="1">OK</option>
                                     <option value="0">Not OK</option>
@@ -196,7 +197,7 @@
                                 <label for="switch">9. Switch Selector Panel Coupler</label>
                             </td>
                             <td class="input">
-                                <select id="input-group3" style="background: white;" name="9">
+                                <select id="input-group3" style="background: white;" name="input9">
                                     <option value="">-</option>
                                     <option value="1">OK</option>
                                     <option value="0">Not OK</option>
@@ -216,7 +217,7 @@
                                 <label for="pkg">10. Switch Selector Panel PKG</label>
                             </td>
                             <td class="input">
-                                <select id="input-group3" style="background: white;" name="10">
+                                <select id="input-group3" style="background: white;" name="input10">
                                     <option value="">-</option>
                                     <option value="1">OK</option>
                                     <option value="0">Not OK</option>
@@ -235,7 +236,7 @@
                             <td>
                                 <label for="putr1">11. Switch Selector PUTR 1</label>
                             <td class="input">
-                                <select id="input-group3" style="background: white;" name="11">
+                                <select id="input-group3" style="background: white;" name="input11">
                                     <option value="">-</option>
                                     <option value="1">OK</option>
                                     <option value="0">Not OK</option>
@@ -255,7 +256,7 @@
                                 <label for="putr2">12. Switch Selector PUTR 2</label>
                             </td>
                             <td class="input">
-                                <select id="input-group3" style="background: white;" name="12">
+                                <select id="input-group3" style="background: white;" name="input12">
                                     <option value="">-</option>
                                     <option value="1">OK</option>
                                     <option value="0">Not OK</option>
@@ -268,6 +269,14 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="penginput" class="sr-only"><strong>Nama Penginput :</strong></label>
+                            </td>
+                            <td colspan="2" class="input">
+                                <input type="text" readonly class="form-control" id="penginput" name="penginput" value="{{Auth::user()->name}}">
                             </td>
                         </tr>
                     </tbody>
@@ -291,7 +300,7 @@
                                 <label for="tighten2">1. Tighten Battery Connection</label>
                             </td>
                             <td class="input">
-                                <select id="input-group4" style="background: white;" name="1a">
+                                <select id="input-group4" style="background: white;" name="input1a">
                                     <option value="">-</option>
                                     <option value="1">OK</option>
                                     <option value="0">Not OK</option>
@@ -311,7 +320,7 @@
                                 <label for="open2">2. Measurement Battery Voltage (Open Circuit)</label>
                             </td>
                             <td class="input">
-                                <select id="input-group4" style="background: white;" name="2a">
+                                <select id="input-group4" style="background: white;" name="input2a">
                                     <option value="">-</option>
                                     <option value="1">OK</option>
                                     <option value="0">Not OK</option>
@@ -331,7 +340,7 @@
                                 <label for="charging2">3. Measurement Battery Voltage (Charging Condition)</label>
                             </td>
                             <td class="input">
-                                <select id="input-group4" style="background: white;" name="3a">
+                                <select id="input-group4" style="background: white;" name="input3a">
                                     <option value="">-</option>
                                     <option value="1">OK</option>
                                     <option value="0">Not OK</option>
@@ -351,7 +360,7 @@
                                 <label for="oil2">4. Check For Lubricant Oil Level</label>
                             </td>
                             <td class="input">
-                                <select id="input-group4" style="background: white;" name="4a">
+                                <select id="input-group4" style="background: white;" name="input4a">
                                     <option value="">-</option>
                                     <option value="1">OK</option>
                                     <option value="0">Not OK</option>
@@ -371,7 +380,7 @@
                                 <label for="tank2">5. Status Storage Tank Level</label>
                             </td>
                             <td class="input">
-                                <select id="input-group4" style="background: white;" name="5a">
+                                <select id="input-group4" style="background: white;" name="input5a">
                                     <option value="">-</option>
                                     <option value="1">OK</option>
                                     <option value="0">Not OK</option>
@@ -391,7 +400,7 @@
                                 <label for="tank2">6. Status Daily Tank Level</label>
                             </td>
                             <td class="input">
-                                <select id="input-group4" style="background: white;" name="6a">
+                                <select id="input-group4" style="background: white;" name="input6a">
                                     <option value="">-</option>
                                     <option value="1">OK</option>
                                     <option value="0">Not OK</option>
@@ -411,7 +420,7 @@
                                 <label for="engine2">7. Measurement Engine Running (hours)</label>
                             </td>
                             <td class="input">
-                                <select id="input-group4" style="background: white;" name="7a">
+                                <select id="input-group4" style="background: white;" name="input7a">
                                     <option value="">-</option>
                                     <option value="1">OK</option>
                                     <option value="0">Not OK</option>
@@ -431,7 +440,7 @@
                                 <label for="mode2">8. Genset Mode</label>
                             </td>
                             <td class="input">
-                                <select id="input-group4" style="background: white;" name="8a">
+                                <select id="input-group4" style="background: white;" name="input8a">
                                     <option value="">-</option>
                                     <option value="1">OK</option>
                                     <option value="0">Not OK</option>
@@ -451,7 +460,7 @@
                                 <label for="switch2">9. Switch Selector Panel Coupler</label>
                             </td>
                             <td class="input">
-                                <select id="input-group4" style="background: white;" name="9a">
+                                <select id="input-group4" style="background: white;" name="input9a">
                                     <option value="">-</option>
                                     <option value="1">OK</option>
                                     <option value="0">Not OK</option>
@@ -471,7 +480,7 @@
                                 <label for="pkg2">10. Switch Selector Panel pkg2</label>
                             </td>
                             <td class="input">
-                                <select id="input-group4" style="background: white;" name="10a">
+                                <select id="input-group4" style="background: white;" name="input10a">
                                     <option value="">-</option>
                                     <option value="1">OK</option>
                                     <option value="0">Not OK</option>
@@ -490,7 +499,7 @@
                             <td>
                                 <label for="putr11">11. Switch Selector PUTR 1</label>
                             <td class="input">
-                                <select id="input-group4" style="background: white;" name="11a">
+                                <select id="input-group4" style="background: white;" name="input11a">
                                     <option value="">-</option>
                                     <option value="1">OK</option>
                                     <option value="0">Not OK</option>
@@ -510,7 +519,7 @@
                                 <label for="putr22">12. Switch Selector PUTR 2</label>
                             </td>
                             <td class="input">
-                                <select id="input-group4" style="background: white;" name="12a">
+                                <select id="input-group4" style="background: white;" name="input12a">
                                     <option value="">-</option>
                                     <option value="1">OK</option>
                                     <option value="0">Not OK</option>
