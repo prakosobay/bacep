@@ -9,10 +9,10 @@ use GuzzleHttp\Promise\Create;
 use Illuminate\Validation\Rule;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\{DB, Auth, Gate, Validator, Hash};
+use Laravel\Fortify\Contracts\CreatesNewUsers;
 
 class AdminController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware('auth');
@@ -44,7 +44,7 @@ class AdminController extends Controller
 
     public function store_user(Request $request)
     {
-        Validator::make($request, [
+        $credentials = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => [
                 'required',
@@ -53,20 +53,21 @@ class AdminController extends Controller
                 'max:255',
                 Rule::unique(User::class),
             ],
-            'hp' => ['required', 'numeric'],
-            'dept' => ['required', 'string', 'max:255'],
-            'password' => $this->passwordRules(),
-        ])->validate();
-
+            'phone' => ['required', 'numeric'],
+            'department' => ['required', 'string', 'max:255'],
+            'slug' => ['required', 'string', 'max:255'],
+            'password' => ['required'],
+        ]);
+        // dd($request->all());
         $role = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'hp' => $request->hp,
-            'dept' => $request->dept,
+            'phone' => $request->phone,
+            'department' => $request->department,
+            'slug' => $request->slug,
             'password' => Hash::make($request['password']),
         ]);
         Alert::success('Success', 'Role has been submited');
-
         return back();
     }
 
@@ -77,11 +78,17 @@ class AdminController extends Controller
             'user_id' => ['required', 'numeric'],
         ]);
 
-        $user = User::find($request->user_id);
-        $role_new = $request->role_id;
-        $user->roles()->attach($role_new);
-        Alert::success('Success', 'Relasi has been submited');
-        return back();
+        $user = DB::table('role_user')->where('user_id', '=', $request->user_id)->where('role_id', '=', $request->role_id)->get();
+        if (count($user) > 1) {
+            Alert::error('Error', 'Relasi sudah ada !');
+            return back();
+        } else {
+            $users = User::find($request->user_id);
+            $role_new = $request->role_id;
+            $users->roles()->attach($role_new);
+            Alert::success('Success', 'Relasi has been submited');
+            return back();
+        }
     }
 
     public function show_edit($id)

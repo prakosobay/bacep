@@ -13,9 +13,9 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h5 class="text-center"><strong>Data Users</strong></h5>
-            {{-- <button type="button" class="btn btn-primary mr-5" data-toggle="modal" data-target="#user">
+            <button type="button" class="btn btn-primary mr-5" data-toggle="modal" data-target="#user">
                 <strong>Tambahkan User Baru</strong>
-            </button> --}}
+            </button>
             <div class="modal fade" id="user" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <form method="post" action="{{ url('/user.new')}}">
@@ -43,11 +43,11 @@
                                 </div>
                                 <label>Dept :</label>
                                 <div class="form-group">
-                                    <input id="dept" type="text" class="form-control" name="dept"  required="required">
+                                    <input id="dept" type="text" class="form-control" name="department"  required="required">
                                 </div>
                                 <label>No. HP :</label>
                                 <div class="form-group">
-                                    <input id="hp" type="number" class="form-control" name="hp"  required="required">
+                                    <input id="hp" type="number" class="form-control" name="phone"  required="required">
                                 </div>
                             </div>
                             <div class="modal-footer">
