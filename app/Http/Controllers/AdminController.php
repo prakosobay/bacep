@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use GuzzleHttp\Promise\Create;
 use Illuminate\Validation\Rule;
 use RealRashid\SweetAlert\Facades\Alert;
-use Illuminate\Support\Facades\{DB, Auth, Gate, Validator};
+use Illuminate\Support\Facades\{DB, Auth, Gate, Validator, Hash};
 
 class AdminController extends Controller
 {
@@ -44,7 +44,6 @@ class AdminController extends Controller
 
     public function store_user(Request $request)
     {
-        dd($request->all());
         Validator::make($request, [
             'name' => ['required', 'string', 'max:255'],
             'email' => [
@@ -61,6 +60,10 @@ class AdminController extends Controller
 
         $role = User::create([
             'name' => $request->name,
+            'email' => $request->email,
+            'hp' => $request->hp,
+            'dept' => $request->dept,
+            'password' => Hash::make($request['password']),
         ]);
         Alert::success('Success', 'Role has been submited');
 
@@ -69,7 +72,6 @@ class AdminController extends Controller
 
     public function store_relasi(Request $request)
     {
-        // dd($request->all());
         $request->validate([
             'role_id' => ['required', 'numeric'],
             'user_id' => ['required', 'numeric'],
@@ -77,7 +79,6 @@ class AdminController extends Controller
 
         $user = User::find($request->user_id);
         $role_new = $request->role_id;
-        // dd($role_new);
         $user->roles()->attach($role_new);
         Alert::success('Success', 'Relasi has been submited');
         return back();
@@ -85,7 +86,6 @@ class AdminController extends Controller
 
     public function show_edit($id)
     {
-        // dd($id);
         if (Gate::allows('isAdmin')) {
             $join = DB::table('users')
                 ->join('roles', 'roles.id', '=', 'users.id')
@@ -123,8 +123,7 @@ class AdminController extends Controller
     {
         if (Gate::allows('isAdmin')) {
             $user = User::find($id);
-            // return view('admin.edit', compact('user'));
-            return isset($user) && !empty($user) ? response()->json(['status' => 'SUCCESS', 'user' => $user]) : response(['status' => 'FAILED', 'user' => []]);
+            return view('admin.edit', compact('user'));
         } else {
             abort(403);
         }
@@ -132,20 +131,30 @@ class AdminController extends Controller
 
     public function user_update(Request $request, $id)
     {
-        dd($request->all());
         $request->validate([
-            'nama_barang' => 'required',
-            'consum_id' => 'required|numeric',
-            'jumlah' => 'numeric|required',
-            'ket' => 'required',
-            'pencatat' => 'required'
+            'name' => ['required', 'string', 'max:255'],
+            'slug' => ['required', 'string', 'max:255'],
+            'department' => ['required', 'string', 'max:255'],
+            'phone' => ['required', 'numeric'],
         ]);
+
+        $user = User::find($id);
+
+        $user->update([
+            'name' => $request->name,
+            'slug' => $request->slug,
+            'department' => $request->department,
+            'phone' => $request->phone,
+        ]);
+
+        Alert::success('Success', 'Data has been updated');
+        return back();
     }
 
     public function delete_user($id)
     {
-        // dd($id);
-        if ($id != 8) {
+        //Prod = 15
+        if ($id != 15) {
             User::find($id)->delete();
             Alert::success('Success', 'User has been deleted');
             return back();
@@ -157,7 +166,6 @@ class AdminController extends Controller
 
     public function delete_role($id)
     {
-        // dd($id);
         if ($id != 6) {
             Role::find($id)->delete();
             Alert::success('Success', 'Role has been deleted');
@@ -170,7 +178,6 @@ class AdminController extends Controller
 
     public function delete_relasi($id)
     {
-        // dd($id);
         DB::table('role_user')->where('id', $id)->delete();
         Alert::success('Success', 'Role has been deleted');
         return back();

@@ -85,30 +85,6 @@
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Checklist
-            </div>
-
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-                    aria-expanded="true" aria-controls="collapsePages">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Checklist Generator</span>
-                </a>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Option:</h6>
-                        <a class="collapse-item" href="{{url('cheklist.warming')}}">Warming Up</a>
-                        <a class="collapse-item" href="{{url('cheklist.load')}}">Actual Load</a>
-                    </div>
-                </div>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
                 Form
             </div>
 
@@ -122,7 +98,7 @@
                 <div id="revisi" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Option:</h6>
-                        <a class="collapse-item" href="{{url('revisi.cleaning')}}">Cleaning</a>
+                        <a class="collapse-item" href="{{url('cleaning')}}">Cleaning</a>
                         {{-- <a class="collapse-item" href="{{url('cheklist.load')}}">Actual Load</a> --}}
                     </div>
                 </div>

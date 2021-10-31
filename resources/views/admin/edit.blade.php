@@ -13,18 +13,27 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <a type="button" class="btn btn-primary mr-5 sm" href="{{url('table_admin')}}">
+            <a type="button" class="btn btn-primary mr-5 sm" href="{{url('table_user')}}">
                 Kembali
             </a>
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <form method="post" id="user" class="validate-form" action="{{url('u.edit')}}">
-                    @method('PUT')
+                <form method="post" id="user" class="validate-form" action="{{url('u.edit', $user->id)}}">
                     @csrf
-                    {{-- <div class="form-group">
+                    @method('PUT')
+                    @if (count($errors) > 0)
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                    <div class="form-group">
                         <label for="name"><strong>Nama Lengkap</strong></label>
-                        <input type="text" class="form-control @error('name') is-invalid @enderror" required autocomplete="name" id="name" name="name" value="{{$user->name}}"><br>
+                        <input type="text" class="form-control @error('name') is-invalid @enderror" required autocomplete="name" id="name" name="name" value="{{$user->name}}" autofocus>
                             @error('name')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -32,48 +41,32 @@
                             @enderror
 
                         <label for="id"><strong>ID User</strong></label>
-                        <input type="number" class="form-control" id="id" name="user_id" value="{{$user->id}}" readonly><br>
-
-                        <label for="role"><strong>Role1</strong></label>
-                        <input type="number" class="form-control @error('role') is-invalid @enderror" id="role" name="role1"><br>
-                            @error('role')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-
-                        <label for="role2"><strong>Role2</strong></label>
-                        <input type="number" class="form-control @error('role2') is-invalid @enderror" id="role2" name="role2"><br>
-                            @error('role2')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
+                        <input type="number" class="form-control" id="id" name="user_id" value="{{$user->id}}" readonly>
 
                         <label for="slug"><strong>Slug</strong></label>
-                        <input type="text" class="form-control @error('slug') is-invalid @enderror" required autocomplete="slug" id="slug" name="slug" value="{{$user->slug}}"><br>
+                        <input type="text" class="form-control @error('slug') is-invalid @enderror" required autocomplete="slug" id="slug" name="slug" value="{{$user->slug}}">
                             @error('slug')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
 
-                        <label for="dept"><strong>Department</strong></label>
-                        <input type="text" id="dept" name="dept" class="form-control @error('dept') is-invalid @enderror" required autocomplete="dept" >
-                            @error('dept')
+                        <label for="department"><strong>Department</strong></label>
+                        <input type="text" id="department" name="department" class="form-control @error('department') is-invalid @enderror" value="{{$user->department}}" required autocomplete="department">
+                            @error('department')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
 
-                        <label for="hp"><strong>Nomer HP</strong></label>
-                        <input type="number" class="form-control @error('dept') is-invalid @enderror" id="hp" name="hp">
-                            @error('dept')
+                        <label for="phone"><strong>Nomer HP</strong></label>
+                        <input type="text" class="form-control @error('phone') is-invalid @enderror" id="phone" name="phone" value="{{$user->phone}}" required autocomplete="phone">
+                            @error('phone')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
-                    </div> --}}
+                    </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>

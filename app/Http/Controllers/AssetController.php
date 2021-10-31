@@ -84,7 +84,6 @@ class AssetController extends Controller
 
     public function update_masuk(Request $request, $id)
     {
-        // dd($request->all());
         $this->validate($request, [
             'nama_barang' => ['required'],
             'asset_id' => ['required', 'numeric'],
@@ -97,6 +96,16 @@ class AssetController extends Controller
         $asset->update([
             'jumlah' => $asset->jumlah + $request->jumlah,
         ]);
+
+        if ($asset->jumlah >= 1) {
+            $asset->update([
+                'kondisi' => 'Tersedia',
+            ]);
+        } elseif ($asset->jumlah == 0) {
+            $asset->update([
+                'kondisi' => 'Stock Habis',
+            ]);
+        }
 
         $assetmasuk = AssetMasuk::create([
             'nama_barang' => $request->nama_barang,
