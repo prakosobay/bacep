@@ -135,6 +135,7 @@ class AssetController extends Controller
         if ($asset->jumlah >= $request->jumlah) {
             $asset->update([
                 'jumlah' => $asset->jumlah - $request->jumlah,
+
             ]);
 
             $assetkeluar = AssetKeluar::create([

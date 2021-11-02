@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Fortify\CreateNewUser;
 use Illuminate\Support\Facades\{Route, Auth};
 use App\Http\Controllers\{HomeController, CleaningController, AdminController};
 use App\Console\Kernel;
@@ -17,7 +18,7 @@ Route::get('/sabar', function () {
     return view('sabar');
 });
 
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::get('/home', [HomeController::class, 'index']);
 
     //Detail History
@@ -67,7 +68,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/table_role', [AdminController::class, 'show_role']);
     Route::post('/role.new', [AdminController::class, 'store_role']);
     Route::post('/relasi.new', [AdminController::class, 'store_relasi']);
-    // Route::post('/user.new', [AdminController::class, 'store_user']);
+    Route::post('/user.new', [AdminController::class, 'store_user']);
     Route::post('/user.destroy/{id}', [AdminController::class, 'delete_user']);
     Route::post('/role.destroy/{id}', [AdminController::class, 'delete_role']);
     Route::post('/role.destroy/{id}', [AdminController::class, 'delete_role']);

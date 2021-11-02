@@ -69,7 +69,7 @@
                                 <td>{{$c->nama_barang}}</td>
                                 <td>{{$c->jumlah}}</td>
                                 <td>{{$c->satuan}}</td>
-                                <td>{{$c->kondisi}}</td>
+                                 <td>{{$c->jumlah <= 0 ? 'Stok Habis' : 'Tersedia'}}</td>
                                 <td>{{$c->note}}</td>
                                 <td>{{$c->lokasi}}</td>
                                 <td>

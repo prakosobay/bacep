@@ -68,7 +68,15 @@
                                 <td>{{$c->nama_barang}}</td>
                                 <td>{{$c->jumlah}}</td>
                                 <td>{{$c->satuan}}</td>
-                                <td>{{$c->kondisi}}</td>
+                                @if($c->jumlah <= 0)
+                                <td>Stok Habis</td>
+                                @elseif($c->jumlah > 0 && $c->jumlah <= 2)
+                                    <td>Stok Sedikit</td>
+                                @elseif($c->jumlah > 2 && $c->jumlah <= 5)
+                                    <td>Stok Cukup</td>
+                                @elseif($c->jumlah > 5)
+                                    <td>Stok Banyak</td>
+                                @endif
                                 <td>{{$c->note}}</td>
                                 <td>{{$c->lokasi}}</td>
                                 <td>
