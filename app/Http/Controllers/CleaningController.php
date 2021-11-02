@@ -80,6 +80,7 @@ class CleaningController extends Controller
     public function approve_cleaning(Request $request)
     {
         $lasthistoryC = CleaningHistory::where('cleaning_id', '=', $request->cleaning_id)->latest()->first();
+        // dd($lasthistoryC);
         if ($lasthistoryC->pdf == true) {
             $lasthistoryC->update(['aktif' => false]);
 
@@ -99,7 +100,7 @@ class CleaningController extends Controller
             $role_to = '';
             if (($lasthistoryC->role_to == 'review')) {
                 foreach ([
-                    'bayu.prakoso@balitower.co.id', 'anjar.yulianto@balitower.co.id', 'taufik.ismail@balitower.co.id', 'rizky.anindya@balitower.co.id',
+                    'bayu.prakoso@balitower.co.id', 'yona.ayu@balitower.co.id', 'taufik.ismail@balitower.co.id', 'rizky.anindya@balitower.co.id',
                     'rafli.ashshiddiqi@balitower.co.id', 'darajat.indraputra@balitower.co.id', 'lingga.anugerah@balitower.co.id'
                 ] as $recipient) {
                     Mail::to($recipient)->send(new NotifEmail());
