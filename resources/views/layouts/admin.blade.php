@@ -85,7 +85,7 @@
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Form
+                Revisi
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
@@ -93,12 +93,12 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#revisi"
                     aria-expanded="true" aria-controls="revisi">
                     <i class="fas fa-fw fa-folder"></i>
-                    <span>Revisi Form</span>
+                    <span>Revisi</span>
                 </a>
                 <div id="revisi" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Option:</h6>
-                        <a class="collapse-item" href="{{url('cleaning')}}">Cleaning</a>
+                        <a class="collapse-item" href="{{url('ob')}}">Personil OB</a>
                         {{-- <a class="collapse-item" href="{{url('cheklist.load')}}">Actual Load</a> --}}
                     </div>
                 </div>
