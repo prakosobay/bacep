@@ -125,9 +125,11 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/checklist', [GensetController::class, 'store_warming']);
 
     //Revisi
-    Route::get('/ob', [RevisiController::class, 'show_ob']);
+    Route::get('/ob', [RevisiController::class, 'show_ob'])->name('ob');
     Route::get('/ob.edit/{id}', [RevisiController::class, 'edit_ob']);
     Route::put('/ob.edit/{id}', [RevisiController::class, 'update_ob']);
+    Route::post('/ob.destroy/{id}', [RevisiController::class, 'destroy_ob']);
+    Route::post('/ob.new', [RevisiController::class, 'store_ob']);
 });
 // Route::resource('/barang', ConsumController::class);
 //

@@ -14,13 +14,13 @@ class CreateMasterObsTable extends Migration
     public function up()
     {
         Schema::create('master_obs', function (Blueprint $table) {
-            $table->bigIncrements('ob_id')->unique();
-            $table->string('nama', 100);
-            $table->string('id_number', 20);
-            $table->string('phone_number', 20);
-            $table->string('pt', 100);
-            $table->string('responsible', 10);
-            $table->string('department', 50);
+            $table->id('ob_id');
+            $table->string('nama');
+            $table->string('id_number')->unique();
+            $table->string('phone_number')->unique();
+            $table->string('pt');
+            $table->string('responsible');
+            $table->string('department');
             $table->timestamps();
         });
     }

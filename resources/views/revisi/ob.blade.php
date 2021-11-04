@@ -15,36 +15,36 @@
             </button>
             <div class="modal fade" id="user" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
-                    <form method="post" action="{{ url('/user.new')}}">
+                    <form method="post" action="{{ url('/ob.new')}}">
                         @csrf
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Tambah User Baru</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">Tambah Personil Cleaning Baru</h5>
                             </div>
                             <div class="modal-body">
-                                <label>Nama Lengkap:</label>
+                                <label for="name">Nama Lengkap :</label>
                                 <div class="form-group">
-                                    <input id="new" type="text" class="form-control" name="name" required="required"  autofocus>
+                                    <input id="name" type="text" class="form-control" name="nama" required="required"  autofocus>
                                 </div>
-                                <label>Email :</label>
+                                <label for="nik">No. ID :</label>
                                 <div class="form-group">
-                                    <input id="email" type="email" class="form-control" name="email" required="required">
+                                    <input id="nik" type="number" class="form-control" name="id_number" required="required">
                                 </div>
-                                <label>Password :</label>
+                                <label for="phone">No. HP :</label>
                                 <div class="form-group">
-                                    <input type="password" class="form-control" name="password" required="required">
+                                    <input id="phone" type="text" class="form-control" name="phone_number" required="required">
                                 </div>
-                                <label>Slug :</label>
+                                <label for="company">Perusahaan :</label>
                                 <div class="form-group">
-                                    <input id="slug" type="text" class="form-control" name="slug"  required="required">
+                                    <input id="company" type="text" class="form-control" name="pt"  required="required">
                                 </div>
-                                <label>Dept :</label>
+                                <label for="respons">Responsibility :</label>
+                                <div class="form-group">
+                                    <input id="respons" type="text" class="form-control" name="responsible"  required="required">
+                                </div>
+                                <label for="dept">Departemen :</label>
                                 <div class="form-group">
                                     <input id="dept" type="text" class="form-control" name="department"  required="required">
-                                </div>
-                                <label>No. HP :</label>
-                                <div class="form-group">
-                                    <input id="hp" type="number" class="form-control" name="phone"  required="required">
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -83,7 +83,7 @@
                                 <td>{{$c->department}}</td>
                                 <td>
                                     <a href="{{url('ob.edit', $c->ob_id)}}" type="button" class="btn btn-success mr-2 col-xs-2 margin-bottom">Edit</a>
-                                    <form action="{{ url('ob.destroy',$c->id) }}" method="POST">
+                                    <form action="{{ url('ob.destroy',$c->ob_id) }}" method="POST">
                                         @csrf
                                         <button type="submit"class="btn btn-danger mr-2 col-xs-2 margin-bottom hapus">Hapus</button>
                                     </form>
@@ -96,35 +96,6 @@
         </div>
     </div>
 
-    <!-- Edit User -->
-    {{-- <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <form method="post" id="edit_form" action="{{ url('/user.edit')}}">
-                @csrf
-                @method('PUT')
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Edit Data User</h5>
-                    </div>
-                    <div class="modal-body">
-                        <input type="hidden" id="user_id" name="id" value="">
-                        <label>Name :</label>
-                        <div class="form-group">
-                            <input id="edit_name" type="text" name="name" class="form-control">
-                        </div>
-                        <label>Department "</label>
-                        <div class="form-group">
-                            <input id="edit_dept" type="text" name="dept" class="form-control">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <a type="button" class="btn btn-secondary" data-dismiss="modal">Close</a>
-                        <a type="submit" class="btn btn-primary edit">Edit</a>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div> --}}
 <script src="{{asset('vendor2/jquery/jquery.min.js')}}"></script>
 @endsection
 
