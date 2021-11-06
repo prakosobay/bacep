@@ -35,6 +35,7 @@ Route::middleware(['auth'])->group(function () {
 
     //Submit
     Route::post('/submit_data_cleaning', [CleaningController::class, 'submit_data_cleaning']);
+    Route::post('/other.form', [OtherController::class, 'store_other']);
 
     //Approval View
     // Route::get('/detail_survey{id}', [HomeController::class, 'approve_survey']);

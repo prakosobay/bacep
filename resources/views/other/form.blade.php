@@ -1,366 +1,373 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<title>Contact V5</title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{{ asset('vendor/bootstrap/css/bootstrap.min.css')}}">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{{ asset('fonts/font-awesome-4.7.0/css/font-awesome.min.css')}}">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{{ asset('fonts/iconic/css/material-design-iconic-font.min.css')}}">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{{ asset('vendor/animate/animate.css')}}">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{{ asset('vendor/css-hamburgers/hamburgers.min.css')}}">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{{ asset('vendor/animsition/css/animsition.min.css')}}">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{{ asset('vendor/select2/select2.min.css')}}">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{{ asset('css/util.css')}}">
-	<link rel="stylesheet" type="text/css" href="{{ asset('css/main.css')}}">
-<!--===============================================================================================-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACCESS & CHANGE REQUEST FORM</title>
+    <link rel="stylesheet" href="{{asset('/css/other.css')}}">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- <script src="/cleaning.js" defer></script> -->
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.14.0/sweetalert2.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.14.0/sweetalert2.all.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
 </head>
+
 <body>
+<div class="container">
+<!--container-->
 
-    <div class="container-contact100">
-        <div class="wrap-contact100">
-            <form id="form_cleaning" class="contact100-form validate-form">
-                {{ csrf_field() }}
-				<span class="contact100-form-title">
-					FORM
-				</span>
+    <form  id="form_other" class="form-group" enctype="multipart/form-data" method="POST" action="{{url('other.form')}}">
+        <!-- {{ csrf_field() }} -->
+        <!--form-->
 
-                {{-- Purpose of Work --}}
-                <div class="wrap-input100 validate-input bg1" data-validate="Please Type Correctly">
-                    <span class="label-input100">Purpose of Work (Tujuan Pekerjaan) *</span>
-					<input class="input100" type="text" name="other_work" placeholder="Fill in here">
-				</div>
+        <div  id="form">
+        <!--form-->
 
-                {{-- Validity --}}
-                <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate = "Choose the date">
-                    <span class="label-input100">Validity (Tanggal Mulai Pekerjaan) *</span>
-                    <input class="input100" type="date" name="validity_from" id="dateofbirth">
+            <div class="center">
+                <h1 class="text-white">Access Request Form</h1>
+                <h2 class="text-white">Nomor: FRM-BTS-DCDV-2021-03</h2>
+            </div>
+
+            <div id="input">
+                <!--input-->
+                <div id="input4">
+                    <!--input4-->
+
+                    <input type="text" id="input-group" style="background: black;" name="other_work" placeholder="Purpose Of Work">
+                    <p>
+                    <h6 class="text-white">Request Validity (Berlakunya Permintaan)</h6>
+                    <input type="date" name="val_from" id="val_from">
+                    <h6 class="text-white"></h6>
+                    <h6 class="text-white">To (Sampai)</h6>
+                    <input type="date" name="val_to" id="val_to">
+                    <h6 class="text-white"></h6>
+                    <p>
+                    <h6 for="survey_area" style="text-align: left;" class="text-white">Authorized Entry Area </h6>
+                    <table class="table table-borderless">
+                        <tr>
+                            <td>
+                                <label class="radiobutton_container">
+                                <input id="1" name="server" type="checkbox" value="1">
+                                <span class="radiobutton_mark"></span>
+                                Server Room
+                                </label>
+                            </td>
+                            <td>
+                                <label class="radiobutton_container">
+                                <input id="1" name="genset" type="checkbox" value="1">
+                                <span class="radiobutton_mark"></span>
+                                Generator Room
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="radiobutton_container">
+                                <input id="1" name="mmr1" type="checkbox" value="1">
+                                <span class="radiobutton_mark"></span>
+                                MMR 1
+                                </label>
+                            </td>
+                            <td>
+                                <label class="radiobutton_container">
+                                <input id="1" name="panel" type="checkbox" value="1">
+                                <span class="radiobutton_mark"></span>
+                                Panel Room
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="radiobutton_container">
+                                <input id="1" name="mmr2" type="checkbox" value="1">
+                                <span class="radiobutton_mark"></span>
+                                MMR 2
+                                </label>
+                            </td>
+                            <td>
+                                <label class="radiobutton_container">
+                                <input id="1" name="batre" type="checkbox" value="1">
+                                <span class="radiobutton_mark"></span>
+                                Battery Room
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="radiobutton_container">
+                                <input id="1" name="ups" type="checkbox" value="1">
+                                <span class="radiobutton_mark"></span>
+                                UPS Room
+                                </label>
+                            </td>
+                            <td>
+                                <label class="radiobutton_container">
+                                <input id="1" name="fss" type="checkbox" value="1">
+                                <span class="radiobutton_mark"></span>
+                                FSS Room
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="radiobutton_container">
+                                <input id="1" name="2nd" type="checkbox" value="1">
+                                <span class="radiobutton_mark"></span>
+                                Office 2nd Fl
+                                </label>
+                            </td>
+                            <td>
+                                <label class="radiobutton_container">
+                                <input id="1" name="3rd" type="checkbox" value="1">
+                                <span class="radiobutton_mark"></span>
+                                Office 3rd Fl
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="radiobutton_container">
+                                <input id="1" name="trafo" type="checkbox" value="1">
+                                <span class="radiobutton_mark"></span>
+                                Trafo Room
+                                </label>
+                            </td>
+                            <td>
+                                <label class="radiobutton_container">
+                                <input id="1" name="yard" type="checkbox" value="1">
+                                <span class="radiobutton_mark"></span>
+                                Yard
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="radiobutton_container">
+                                <input id="1" name="parking" type="checkbox" value="1">
+                                <span class="radiobutton_mark"></span>
+                                Parking Lot
+                                </label>
+                            </td>
+                            <td>
+                                <label class="radiobutton_container">
+                                <input id="1" type="checkbox">
+                                <span class="radiobutton_mark"></span>
+                                <textarea id="1" name="other">Other</textarea>
+                            </td>
+                        </tr>
+                      </table>
                 </div>
-                <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate = "Choose the date">
-                    <span class="label-input100">Validity (Tanggal Selesai Pekerjaan) *</span>
-                    <input class="input100" type="date" name="validity_to" id="dateofbirth">
-                </div>
+            </div>
+        </div>
 
-                {{-- Isian --}}
-                <div class="wrap-input100 validate-input bg1" data-validate="Please Type Correctly">
-                    <span class="label-input100">Background and Objective (Latar Belakang dan Tujuan) *</span>
-					<input class="input100" type="text" name="other_background" placeholder="Fill in here">
-				</div>
-                <div class="wrap-input100 bg0 rs1-alert-validate">
-					<span class="label-input100">Description of Scope of Work (Deskripsikan Lingkup Pekerjaan) *</span>
-					<input type="text" class="input100" name="other_describ" id="describ" value="">
-				</div>
-                <div class="wrap-input100 bg0 rs1-alert-validate">
-					<span class="label-input100">Testing and Verification (Pengujian dan Verifikasi) *</span>
-					<input type="text" class="input100" name="other_testing" id="testing" value="">
-				</div>
-                <div class="wrap-input100 bg0 rs1-alert-validate">
-					<span class="label-input100">Rollback Operation/Other Infomation (Operasi Pembatalan/Infomasi Lain) *</span>
-					<input type="text" class="input100" name="other_rollback" id="rollback" value="">
-				</div>
+        <div  id="form2">
 
-                {{-- Pilih Personil --}}
-                {{-- <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate="Type the PIC">
-					<span class="label-input100">Person In Charge 1(Nama Personil 1) *</span>
-                    <div>
-                        <select class="js-select2" id="pilihan1" name="cleaning_name">
-                            <option value=""></option>
+            <div class="center">
+            <h1 class="text-white">Change Request Form</h1>
+            <h2 class="text-white">Nomor: FRM-BTS-DCDV-2021-03</h2>
+            </div>
+
+            <div id="input">
+                    <!--input-->
+                <div id="input4">
+                        <!--input4-->
+                    <h4 class="text-white">1. Background and Objective (Jenis Pekerjaan)</h4>
+                        <input type="text" id="input-group" placeholder="Fill in here" name="other_background">
+                    <p>
+                    <h4 class="text-white">2. Description os Scope of Work (Deskripsikan Pekerjaan)</h4>
+                        <input type="text" id="input-group" placeholder="Fill in here" name="other_describ">
+                    <p>
+
+                    {{-- Detail Time & Operation --}}
+                    <h4 class="text-white">3. Detail Time & Operation (Detail Waktu & Operasi) </h4>
+                    <p>
+                        <font color="red" size="2">*Minimal Mengisi 2</font>
+                    </p>
+                        <input type="time" id="input-group20" style="background: white; " name="time_1">
+                        <input id="input-group14" style="background: black ;" name="item_1" placeholder="Item">
+                        <input id="input-group8" style="background: black ;" name="procedure_1" placeholder="Working Procedure">
+
+                        <input type="time" id="input-group20" style="background: white; " name="time_2">
+                        <input id="input-group14" style="background: black ;" name="item_2" placeholder="Item">
+                        <input id="input-group8" style="background: black ;" name="procedure_2" placeholder="Working Procedure">
+
+                        <input type="time" id="input-group20" style="background: white; " name="time_3">
+                        <input id="input-group14" style="background: black ;" name="item_3" placeholder="Item">
+                        <input id="input-group8" style="background: black ;" name="procedure_3" placeholder="Working Procedure">
+
+                        <input type="time" id="input-group20" style="background: white; " name="time_4">
+                        <input id="input-group14" style="background: black ;" name="item_4" placeholder="Item">
+                        <input id="input-group8" style="background: black ;" name="procedure_4" placeholder="Working Procedure">
+
+                        <input type="time" id="input-group20" style="background: white; " name="time_5" placeholder="">
+                        <input id="input-group14" style="background: black ;" name="item_5" placeholder="Item">
+                        <input id="input-group8" style="background: black ;" name="procedure_5" placeholder="Working Procedure">
+
+                    {{-- Risk Service Area Impact --}}
+                    <P>
+                    <h4 class="text-white">4. Risk and Service Area Impact (Resiko dan Dampak Area Servis)</h4>
+                    <p>
+                        <font color="red" size="2">*Minimal Mengisi 2</font>
+                    </p>
+                        <input id="input-group1" style="background: black; " name="risk_1" placeholder="Risk Description">
+                        <input id="input-group14" style="background: black ;" name="possibility" placeholder="Possibility">
+                        <select id="input-group3" style="background: black;" name="impact">
+                            <option value="">Impact</option>
+                            <option value="High">High</option>
+                            <option value="Medium">Medium</option>
+                            <option value="Low">Low</option>
                         </select>
-                        <div class="dropDownSelect2"></div>
-                    </div>
-				</div>
-                <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate="Pilih Personil">
-					<span class="label-input100">Person In Charge 2(Nama Personil 2) *</span>
-                    <div>
-                        <select class="js-select2" id="pilihan2" name="cleaning_name2">
-                            <option value=""></option>
+                        <input id="input-group15" style="background: black;" name="mitigation_1" placeholder="Mitigation Plan">
+
+                        <input id="input-group1" style="background: black; " name="risk_2" placeholder="Risk Description">
+                        <input id="input-group14" style="background: black ;" name="possibility" placeholder="Possibility">
+                        <select id="input-group3" style="background: black;" name="impact">
+                            <option value="">Impact</option>
+                            <option value="High">High</option>
+                            <option value="Medium">Medium</option>
+                            <option value="Low">Low</option>
                         </select>
-                        <div class="dropDownSelect2"></div>
-                    </div>
-				</div> --}}
+                        <input id="input-group15" style="background: black;" name="mitigation_2" placeholder="Mitigation Plan">
 
-                {{-- Entry Area --}}
-                {{-- <div class="wrap-input100 validate-input bg1 rs1-wrap-input100">
-                    <div class="contact100-form-radio m-t-15">
-                        <label class="label-radio100" for="radio1">
-                            <input class="input-radio100" id="server" type="textbox" name="server" value="server">
-                            Server Room
-                        </label>
-                    </div>
+                        <input id="input-group1" style="background: black; " name="risk_3" placeholder="Risk Description">
+                        <input id="input-group14" style="background: black ;" name="possibility" placeholder="Possibility">
+                        <select id="input-group3" style="background: black;" name="impact">
+                            <option value="">Impact</option>
+                            <option value="High">High</option>
+                            <option value="Medium">Medium</option>
+                            <option value="Low">Low</option>
+                        </select>
+                        <input id="input-group15" style="background: black;" name="mitigation_3" placeholder="Mitigation Plan">
 
-                    <div class="contact100-form-radio">
-                        <label class="label-radio100" for="radio2">
-                            <input class="input-radio100" id="mmr1" type="textbox" name="mmr1" value="mmr1">
-                            MMR 1
-                        </label>
-                    </div>
+                        <input id="input-group1" style="background: black; " name="risk_4" placeholder="Risk Description">
+                        <input id="input-group14" style="background: black ;" name="possibility" placeholder="Possibility">
+                        <select id="input-group3" style="background: black;" name="impact">
+                            <option value="">Impact</option>
+                            <option value="High">High</option>
+                            <option value="Medium">Medium</option>
+                            <option value="Low">Low</option>
+                        </select>
+                        <input id="input-group15" style="background: black;" name="mitigation_4" placeholder="Mitigation Plan">
 
-                    <div class="contact100-form-radio">
-                        <label class="label-radio100" for="radio3">
-                            <input class="input-radio100" id="mmr2" type="textbox" name="mmr2" value="mmr2">
-                            MMR 2
-                        </label>
-                    </div>
+                        <input id="input-group1" style="background: black; " name="risk_5" placeholder="Risk Description">
+                        <input id="input-group14" style="background: black ;" name="possibility" placeholder="Possibility">
+                        <select id="input-group3" style="background: black;" name="impact">
+                            <option value="">Impact</option>
+                            <option value="High">High</option>
+                            <option value="Medium">Medium</option>
+                            <option value="Low">Low</option>
+                        </select>
+                        <input id="input-group15" style="background: black;" name="mitigation_5" placeholder="Mitigation Plan">
+
+                    <p>
+                    <h4 class="text-white">5. Testing and Verification</h4>
+                    <input type="text" class="contoh2" id="input-group" placeholder="Fill in here (isi disini)" name="cleaning_testing">
+                    <P>
+                    <h4 class="text-white">6. Rollback Plan</h4>
+                    <input type="text" class="contoh2" id="input-group" placeholder="Fill in here (isi disini)" name="cleaning_rollback">
+                    <P>
+                    <h4 class="text-white">7. Person in charge</h4>
+                        <input id="input-group1" style="background: black; " name="cleaning_name_1" placeholder="Name">
+                        <input id="input-group14" style="background: black;" name="cleaning_number_1" placeholder="Phone number">
+                        <input type="number" id="input-group14" style="background: black;" name="cleaning_id_1" placeholder="ID Number">
+                        <input id="input-group14" style="background: black;" name="cleaning_name_1" placeholder="Company">
+
+                        <input id="input-group1" style="background: black;" name="cleaning_number_1"placeholder="Name">
+                        <input id="input-group14" style="background: black;" name="cleaning_id_1" placeholder="Phone Number">
+                        <Input type="number" id="input-group14" style="background: black;" name="cleaning_name_1" placeholder="ID Number">
+                        <input id="input-group14" style="background: black;" name="cleaning_number_1"placeholder="Company">
+
+                        <Input id="input-group1" style="background: black;" name="cleaning_id_1" placeholder="Name">
+                        <input id="input-group14" style="background: black;" name="cleaning_name_1" placeholder="Phone Number">
+                        <input type="number" id="input-group14" style="background: black;" name="cleaning_number_1"placeholder="ID number">
+                        <input id="input-group14" style="background: black;" name="cleaning_id_1" placeholder="Company">
+
+                        <input id="input-group1" style="background: black;" name="cleaning_id_1" placeholder="Name">
+                        <input id="input-group14" style="background: black;" name="cleaning_id_1" placeholder="Phone Number">
+                        <input type="number" id="input-group14" style="background: black;" name="cleaning_id_1" placeholder="ID Number">
+                        <input id="input-group14" style="background: black;" name="cleaning_id_1" placeholder="Company">
+
+                        <input id="input-group1" style="background: black;" name="cleaning_id_1" placeholder="Name">
+                        <input id="input-group14" style="background: black;" name="cleaning_id_1" placeholder="Phone Number">
+                        <input type="number" id="input-group14" style="background: black;" name="cleaning_id_1" placeholder="ID Number">
+                        <input id="input-group14" style="background: black;" name="cleaning_id_1" placeholder="Company">
+
+                        <input id="input-group1" style="background: black;" name="cleaning_id_1" placeholder="Name">
+                        <input id="input-group14" style="background: black;" name="cleaning_id_1" placeholder="Phone Number">
+                        <input type="number" id="input-group14" style="background: black;" name="cleaning_id_1" placeholder="ID Number">
+                        <input id="input-group14" style="background: black;" name="cleaning_id_1" placeholder="Company">
+                            <p>
+                        <br>
+                    <h4 class="text-white">8. Foto KTP</h4>
+                        <input id="ktp" type="file" multiple="multiple" name="ktp" accept="image/*"/>
                 </div>
+            </div>
+            <button type="submit" class="btn btn-warning text-white btn-submit">Submit Form</button>
+            <button type="reset" class="btn btn-primary">Clear Form</button>
+        </div>
 
-                <div class="wrap-input100 validate-input bg1 rs1-wrap-input100">
-                    <div class="contact100-form-radio m-t-15">
-                        <input class="input-radio100" id="radio8" type="textbox" name="generator" value="generator">
-                        <label class="label-radio100" for="radio8">
-                            Generator Room
-                        </label>
-                    </div>
-
-                    <div class="contact100-form-radio">
-                        <input class="input-radio100" id="radio9" type="textbox" name="panel" value="panel">
-                        <label class="label-radio100" for="radio9">
-                            Panel Room
-                        </label>
-                    </div>
-
-                    <div class="contact100-form-radio">
-                        <input class="input-radio100" id="radio10" type="textbox" name="battery value="battery">
-                        <label class="label-radio100" for="radio10">
-                            Battery Room
-                        </label>
-                    </div>
-                </div> --}}
-
-                <!-- Detail Time Activity -->
-                {{-- <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th colspan="4">Detail Time Table of All Activity</th>
-                        <tr>
-                            <th scope="col">Time Start</th>
-                            <th scope="col">Time End</th>
-                            <th scope="col">Activity Description</th>
-                            <th scope="col">Detail Service Impact</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th><input type="time" name="cleaning_time_start"></th>
-                            <th><input type="time" name="cleaning_time_end"></th>
-                            <th><input type="text" class="input100" name="activity" id="activity_desciption_1" value="" readonly></th>
-                            <th><input type="text" class="input100" name="detail_service" id="detail_service_1" value="" readonly></th>
-                        </tr>
-                        <tr>
-                            <th><input type="time" name="cleaning_time_start2"></th>
-                            <th><input type="time" name="cleaning_time_end2"></th>
-                            <th><input type="text" class="input100" name="activity2" id="activity_desciption_2" value="" readonly></th>
-                            <th><input type="text" class="input100" name="detail_service2" id="detail_service_2" value="" readonly></th>
-                        </tr>
-                        <tr>
-                            <th><input type="time" name="cleaning_time_start3"></th>
-                            <th><input type="time" name="cleaning_time_end3"></th>
-                            <th><input type="text" class="input100" name="activity3" id="activity_desciption_3" value="" readonly></th>
-                            <th><input type="text" class="input100" name="detail_service3" id="detail_service_3" value="" readonly></th>
-                        </tr>
-                        <tr>
-                            <th><input type="time" name="cleaning_time_start4"></th>
-                            <th><input type="time" name="cleaning_time_end4"></th>
-                            <th><input type="text" class="input100" name="activity4" id="activity_desciption_4" value="" readonly></th>
-                            <th><input type="text" class="input100" name="detail_service4" id="detail_service_4" value="" readonly></th>
-                        </tr>
-                        <tr>
-                            <th><input type="time" name="cleaning_time_start5"></th>
-                            <th><input type="time" name="cleaning_time_end5"></th>
-                            <th><input type="text" class="input100" name="activity5" id="activity_desciption_5" value="" readonly></th>
-                            <th><input type="text" class="input100" name="detail_service5" id="detail_service_5" value="" readonly></th>
-                        </tr>
-                        <tr>
-                            <th><input type="time" name="cleaning_time_start6"></th>
-                            <th><input type="time" name="cleaning_time_end6"></th>
-                            <th><input type="text" class="input100" name="activity6" id="activity_desciption_6" value="" readonly></th>
-                            <th><input type="text" class="input100" name="detail_service6" id="detail_service_6" value="" readonly></th>
-                        </tr>
-                    </tbody>
-                </table> --}}
-
-                <!-- Detail Operation and Execution -->
-                {{-- <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th colspan="2">Detail Operation and Execution</th>
-                        <tr>
-                            <th scope="col">Item</th>
-                            <th scope="col">Working Procedure</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th><input type="text" class="input100" name="item" id="item_1" value="" readonly></th>
-                            <th ><input type="text" class="input100" name="cleaning_procedure" id="working_procedure_1" value="" readonly></th>
-                        </tr>
-                        <tr>
-                            <th><input type="text" class="input100" name="item2" id="item_2" value="" readonly></th>
-                            <th ><input type="text" class="input100" name="cleaning_procedure2" id="working_procedure_2" value="" readonly></th>
-                        </tr>
-                        <tr>
-                            <th><input type="text" class="input100" name="item3" id="item_3" value="" readonly></th>
-                            <th ><input type="text" class="input100" name="cleaning_procedure3" id="working_procedure_3" value="" readonly></th>
-                        </tr>
-                        <tr>
-                            <th><input type="text" class="input100" name="item4" id="item_4" value="" readonly></th>
-                            <th ><input type="text" class="input100" name="cleaning_procedure4" id="working_procedure_4" value="" readonly></th>
-                        </tr>
-                        <tr>
-                            <th><input type="text" class="input100" name="item5" id="item_5" value="" readonly></th>
-                            <th ><input type="text" class="input100" name="cleaning_procedure5" id="working_procedure_5" value="" readonly></th>
-                        </tr>
-                        <tr>
-                            <th><input type="text" class="input100" name="item6" id="item_6" value="" readonly></th>
-                            <th ><input type="text" class="input100" name="cleaning_procedure6" id="working_procedure_6" value="" readonly></th>
-                        </tr>
-                    </tbody>
-                </table> --}}
-
-                <!-- Risk and Service Area Impact -->
-                {{-- <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th colspan="4">Risk and Service Area Impact</th>
-                        <tr>
-                            <th scope="col">Risk Description</th>
-                            <th scope="col">Possibility</th>
-                            <th scope="col">Impact</th>
-                            <th scope="col">Mitigation Plan</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th><input type="text" class="input100" name="cleaning_risk" id="risk_description_1" value="" readonly></th>
-                            <th><input type="text" class="input100" name="cleaning_possibility" id="possibility_1" value="" readonly></th>
-                            <th><input type="text" class="input100" name="cleaning_impact" id="impact_1" value="" readonly></th>
-                            <th><input type="text" class="input100" name="cleaning_mitigation" id="mitigation_plan_1" value="" readonly></th>
-                        </tr>
-                        <tr>
-                            <th><input type="text" class="input100" name="cleaning_risk2" id="risk_description_2" value="" readonly></th>
-                            <th><input type="text" class="input100" name="cleaning_possibility2" id="possibility_2" value="" readonly></th>
-                            <th><input type="text" class="input100" name="cleaning_impact2" id="impact_2" value="" readonly></th>
-                            <th><input type="text" class="input100" name="cleaning_mitigation2" id="mitigation_plan_2" value="" readonly></th>
-                        </tr>
-                        <tr>
-                            <th><input type="text" class="input100" name="cleaning_risk3" id="risk_description_3" value="" readonly></th>
-                            <th><input type="text" class="input100" name="cleaning_possibility3" id="possibility_3" value="" readonly></th>
-                            <th><input type="text" class="input100" name="cleaning_impact3" id="impact_3" value="" readonly></th>
-                            <th><input type="text" class="input100" name="cleaning_mitigation3" id="mitigation_plan_3" value="" readonly></th>
-                        </tr>
-                        <tr>
-                            <th><input type="text" class="input100" name="cleaning_risk4" id="risk_description_4" value="" readonly></th>
-                            <th><input type="text" class="input100" name="cleaning_possibility4" id="possibility_4" value="" readonly></th>
-                            <th><input type="text" class="input100" name="cleaning_impact4" id="impact_4" value="" readonly></th>
-                            <th><input type="text" class="input100" name="cleaning_mitigation4" id="mitigation_plan_4" value="" readonly></th>
-                        </tr>
-                        <tr>
-                            <th><input type="text" class="input100" name="cleaning_risk5" id="risk_description_5" value="" readonly></th>
-                            <th><input type="text" class="input100" name="cleaning_possibility5" id="possibility_5" value="" readonly></th>
-                            <th><input type="text" class="input100" name="cleaning_impact5" id="impact_5" value="" readonly></th>
-                            <th><input type="text" class="input100" name="cleaning_mitigation5" id="mitigation_plan_5" value="" readonly></th>
-                        </tr>
-                        <tr>
-                            <th><input type="text" class="input100" name="cleaning_risk6" id="risk_description_6" value="" readonly></th>
-                            <th><input type="text" class="input100" name="cleaning_possibility6" id="possibility_6" value="" readonly></th>
-                            <th><input type="text" class="input100" name="cleaning_impact6" id="impact_6" value="" readonly></th>
-                            <th><input type="text" class="input100" name="cleaning_mitigation6" id="mitigation_plan_6" value="" readonly></th>
-                        </tr>
-                    </tbody>
-                </table> --}}
-
-
-
-
-
-
-                {{-- Phone Number --}}
-                {{-- <div class="wrap-input100 validate-input bg1 rs1-wrap-input100">
-					<span class="label-input100">Number Phone (Nomor HP Personil 1)</span>
-                    <input type="text" class="input100" name="cleaning_number" id="phone_number" value="" readonly>
-				</div>
-                <div class="wrap-input100 validate-input bg1 rs1-wrap-input100">
-					<span class="label-input100">Number Phone (Nomor HP Personil 2)</span>
-                    <input type="text" class="input100" name="cleaning_number2" id="phone_number2" value="" readonly>
-				</div> --}}
-
-                {{-- NIK  --}}
-                {{-- <div class="wrap-input100 validate-input bg1 rs1-wrap-input100">
-					<span class="label-input100">ID Number (NIK Personil 1)</span>
-                    <input type="text" class="input100" name="cleaning_nik" id="id_number" value="" readonly>
-				</div>
-                <div class="wrap-input100 validate-input bg1 rs1-wrap-input100">
-					<span class="label-input100">ID Number (NIK Personil 2)</span>
-                    <input type="text" class="input100" name="cleaning_nik_2" id="id_number2" value="" readonly>
-				</div> --}}
-
-				<div class="container-contact100-form-btn">
-					<button type="submit" class="contact100-form-btn">
-						<span>
-							Submit
-							<i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
-						</span>
-					</button>
-				</div>
-			</form>
-		</div>
-	</div>
-
-<!--===============================================================================================-->
-	<script src="{{ asset('vendor/jquery/jquery-3.2.1.min.js')}}"></script>
-<!--===============================================================================================-->
-	<script src="{{ asset('vendor/animsition/js/animsition.min.js')}}"></script>
-<!--===============================================================================================-->
-	<script src="{{ asset('vendor/bootstrap/js/popper.js')}}"></script>
-	<script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js')}}"></script>
-<!--===============================================================================================-->
-	<script src="{{ asset('vendor/select2/select2.min.js')}}"></script>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-	<script type="text/javascript">
-	$(".js-select2").each(function(){
-			$(this).select2({
-				minimumResultsForSearch: 20,
-				dropdownParent: $(this).next('.dropDownSelect2')
-			});
-
-
-			$(".js-select2").each(function(){
-				$(this).on('select2:close', function (e){
-					if($(this).val() == "Please chooses") {
-						$('.js-show-service').slideUp();
-					}
-					else {
-						$('.js-show-service').slideUp();
-						$('.js-show-service').slideDown();
-					}
-				});
-			});
-		})
-	</script>
-<!--===============================================================================================-->
-	<script src="{{ asset('vendor/countdowntime/countdowntime.js')}}"></script>
-<!--===============================================================================================-->
-	<script src="{{ asset('js/main.js')}}"></script>
-
-
-
-
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-23581568-13');
-</script>
+    <!--container-->
+    </form>
+</div>
 
 </body>
+
+<!-- {{-- <script type="text/javascript">
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('input[name="_token"]').val()
+        }
+    });
+
+    $(".btn-submit").click(function(e){
+
+        e.preventDefault();
+
+        var datastring = $("#form_cleaning").serialize();
+        $.ajax({
+            type:'POST',
+            url:"{{url('submit_data_cleaning')}}",
+            data: datastring,
+            error: function (request, error) {
+                console.log(error)
+                alert(" Can't do because: " + error);
+            },
+            success:function(data){
+                console.log(data);
+                if(data.status == 'SUCCESS'){
+                    Swal.fire({
+                        title: "Success!",
+                        text: 'Data Saved',
+                        type: "success",
+                    }).then(function(){
+                        location.href = "{{url("/home")}}";
+                    });
+
+                }else if(data.status == 'FAILED'){
+
+                    Swal.fire({
+                        title: "Failed!",
+                        text: 'Saving Data Failed',
+                    }).then(function(){
+                        location.reload();
+                    });
+                }
+            }
+        });
+    });
+</script> --}} -->
 </html>

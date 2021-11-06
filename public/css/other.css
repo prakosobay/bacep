@@ -1,0 +1,410 @@
+body {
+    background-image: url(/gambar/dc_wallpaper.jpg);
+    background-size: cover;
+    background-size: 1700px;
+}
+
+#form {
+    background-color: #000;
+    height: 650px;
+    width: 900px;
+    margin: auto;
+    padding: 20px;
+    opacity: 0.8;
+}
+
+#form2 {
+    background-color: #000;
+    height: 1400px;
+    width: 900px;
+    margin: auto;
+    padding: 20px;
+    opacity: 0.8;
+}
+
+#form h3 {
+    width: 500px;
+    padding: 5px;
+    color: #fff;
+}
+
+#form h3 {
+    border-bottom: 2px solid #3399ff;
+    width: 200px;
+    padding: 5px;
+}
+
+#form h4 {
+    width: 550px;
+    padding: 5px;
+    color: #fff;
+    font-size: 15px;
+}
+
+::placeholder {
+    color: #fff
+}
+
+#input #input-group4 {
+    width: 150px;
+    margin: 5px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline: none;
+    background: transparent;
+    color: rgb(255, 255, 255)
+}
+
+#input #input-group2 {
+    width: 150px;
+    margin: 5px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline: none;
+    background: transparent;
+    color: rgb(255, 255, 255)
+}
+
+#input #input-group3 {
+    width: 100px;
+    margin: 5px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline: none;
+    background: transparent;
+    color: rgb(255, 255, 255)
+}
+
+#input #input-group5 {
+    width: 255px;
+    margin: 5px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline: none;
+    background: transparent;
+    color: rgb(255, 255, 255)
+}
+
+#input #input-group11 {
+    width: 135px;
+    margin: 5px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline: none;
+    background: transparent;
+    color: rgb(255, 255, 255)
+}
+
+#input #input-group14 {
+    width: 175px;
+    margin: 5px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline: none;
+    background: transparent;
+    color: rgb(255, 255, 255)
+}
+
+#input #input-group12 {
+    width: 200px;
+    height: 200px;
+    margin: 5px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline: none;
+    background: transparent;
+    color: rgb(255, 255, 255)
+}
+
+#input #input-group20 {
+    width: 700px;
+    margin: 5px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline: none;
+    background: transparent;
+    color: rgb(255, 255, 255)
+}
+
+#input #input-group {
+    width: 261px;
+    margin: 2px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline: none;
+    background: transparent;
+    color: rgb(255, 255, 255)
+}
+
+#input2 #input-group {
+    width: 195px;
+    margin: 5px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline: none;
+    background: transparent;
+    color: #fff
+}
+
+#input3 #input-group {
+    margin-left: 50px;
+}
+
+#input4 #input-group {
+    width: 850px;
+    margin: 5px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline: none;
+    background: transparent;
+    color: #fff
+}
+
+#input4 #input-group1 {
+    width: 250px;
+    margin: 5px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline: none;
+    background: transparent;
+    color: #fff
+}
+
+#input4 #input-group7 {
+    width: 120px;
+    margin: 5px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline: none;
+    background: transparent;
+    color: #fff
+}
+
+#input4 #input-group6 {
+    width: 170px;
+    margin: 5px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline: none;
+    background: transparent;
+    color: #fff
+}
+
+#input4 #input-group8 {
+    width: 570px;
+    margin: 5px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline: none;
+    background: transparent;
+    color: #fff
+}
+
+#input4 #input-group15 {
+    width: 280px;
+    margin: 5px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline: none;
+    background: transparent;
+    color: #fff
+}
+
+#input4 #input-group20 {
+    width: 84px;
+    margin: 0px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline: none;
+    background: white;
+    color: black
+}
+
+#input5 h3 {
+    border-bottom: 2px solid #3399ff;
+    width: 220px;
+    padding: 5px;
+}
+
+#input6 #input-group {
+    width: 300px;
+    margin: 5px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline: none;
+    background: transparent;
+    color: #fff
+}
+
+#input6 #input-group1 {
+    width: 300px;
+    margin: 5px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline: none;
+    background: transparent;
+    color: #fff
+}
+
+
+.radiobutton_container {
+    height: 2px;
+    line-height: 20px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    padding-left: 40px;
+    color: white;
+    cursor: pointer;
+    display: block;
+    position: relative;
+    /* #Bug: Cross Browser */
+    user-select: none;
+}
+
+.radiobutton_container .radiobutton_mark {
+    width: 20px;
+    height: 20px;
+    top: 0;
+    left: 0;
+    position: absolute;
+    background-color: #eeeeee;
+    /* #Bug: Cross Browser */
+    border-radius: 1px;
+    border-radius: 50%;
+}
+
+.radiobutton_container:hover input~.radiobutton_mark {
+    background-color: #cccccc;
+}
+
+.radiobutton_container input:checked~.radiobutton_mark {
+    background-color: #1DDBDE;
+}
+
+.radiobutton_container input {
+    position: absolute;
+    width: 0;
+    height: 0;
+    opacity: 0;
+}
+
+.radiobutton_container .radiobutton_mark:after {
+    display: none;
+    content: "";
+    /*
+    position: absolute;
+    */
+    position: relative;
+}
+
+.radiobutton_container input:checked~.radiobutton_mark:after {
+    display: block;
+}
+
+.radiobutton_container .radiobutton_mark:after {
+    width: 4px;
+    height: 10px;
+    top: 7px;
+    left: 12px;
+    border-style: solid;
+    border-color: white;
+    border-width: 0 3px 3px 0;
+    /* #Bug: Cross Browser */
+    /*
+    transform: rotate(405deg);
+    */
+    transform: rotate(45deg);
+}
+
+.drop-zone {
+    max-width: 200px;
+    height: 200px;
+    padding: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: "Quicksand", sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    cursor: pointer;
+    color: #cccccc;
+    border: 4px dashed #009578;
+    border-radius: 10px;
+}
+
+.drop-zone--over {
+    border-style: solid;
+}
+
+.drop-zone__input {
+    display: none;
+}
+
+.drop-zone__thumb {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #cccccc;
+    background-size: cover;
+    position: relative;
+}
+
+.drop-zone__thumb::after {
+    content: attr(data-label);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 5px 0;
+    color: #ffffff;
+    background: rgba(0, 0, 0, 0.75);
+    font-size: 14px;
+    text-align: center;
+}
+
+[type="date"] {
+    background: #fff url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/calendar_2.png) 97% 50% no-repeat;
+}
+
+[type="date"]::-webkit-inner-spin-button {
+    display: none;
+}
+
+[type="date"]::-webkit-calendar-picker-indicator {
+    opacity: 0;
+}
+
+/* custom styles */
+label {
+    display: block;
+}
+
+input {
+    border: 1px solid #c4c4c4;
+    border-radius: 5px;
+    background-color: #fff;
+    padding: 3px 5px;
+    box-shadow: inset 0 px 6px rgba(0, 0, 0, 0.1);
+    width: 190px;
+}

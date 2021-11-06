@@ -11,4 +11,9 @@ class OtherController extends Controller
     {
         return view('other.form');
     }
+
+    public function store_other(Request $request)
+    {
+        dd($request->all());
+    }
 }
