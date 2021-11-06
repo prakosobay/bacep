@@ -372,14 +372,14 @@
                 </tr>
                 <tr>
                     <td >
-                        @if($cleaning->loc4 == 'Staging Room')
-                        <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   Others : Staging Room
+                        @if($cleaning->loc4 == 'CCTV Room')
+                        <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   Others : CCTV Room
                         @elseif(($cleaning->loc1 == 'Pintu Luar PLN') || ($cleaning->loc2 == 'Pintu Luar PLN') || ($cleaning->loc3 == 'Pintu Luar PLN') || ($cleaning->loc4 == 'Pintu Luar PLN') || ($cleaning->loc5 == 'Pintu Luar PLN') || ($cleaning->loc6 == 'Pintu Luar PLN'))
                         <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   Others : Pintu Luar PLN
                         @elseif(($cleaning->loc1 == 'Koridor Lt. 1') || ($cleaning->loc2 == 'Koridor Lt. 1') || ($cleaning->loc3 == 'Koridor Lt. 1') || ($cleaning->loc4 == 'Koridor Lt. 1') || ($cleaning->loc5 == 'Koridor Lt. 1') || ($cleaning->loc6 == 'Koridor Lt. 1'))
                         <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   Others : Koridor Lt. 1
-                        @elseif(($cleaning->loc5 == 'Koridor') && ($cleaning->loc6 == 'Staging Room'))
-                        <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   Others : Koridor Lt. 1 & Staging Room
+                        @elseif(($cleaning->loc5 == 'Koridor') && ($cleaning->loc6 == 'CCTV Room'))
+                        <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   Others : Koridor Lt. 1 & CCTV Room
                         @else
                         <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   Others :
                         @endif

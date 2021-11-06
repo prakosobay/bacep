@@ -35,6 +35,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     //Submit
     Route::post('/submit_data_cleaning', [CleaningController::class, 'submit_data_cleaning']);
+    Route::post('/other.form', [OtherController::class, 'store_other']);
 
     //Approval View
     // Route::get('/detail_survey{id}', [HomeController::class, 'approve_survey']);
@@ -121,7 +122,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/checklist.warming', [GensetController::class, 'show_warming']);
     Route::get('/checklist.table', [GensetController::class, 'index']);
     Route::get('/c.show/{id}', [GensetController::class, 'show']);
+    Route::get('/c.pdf/{id}', [GensetController::class, 'pdf']);
     Route::post('/checklist', [GensetController::class, 'store_warming']);
+
+    //Revisi
+    Route::get('/ob', [RevisiController::class, 'show_ob'])->name('ob');
+    Route::get('/ob.edit/{id}', [RevisiController::class, 'edit_ob']);
+    Route::put('/ob.edit/{id}', [RevisiController::class, 'update_ob']);
+    Route::post('/ob.destroy/{id}', [RevisiController::class, 'destroy_ob']);
+    Route::post('/ob.new', [RevisiController::class, 'store_ob']);
 });
 // Route::resource('/barang', ConsumController::class);
 //

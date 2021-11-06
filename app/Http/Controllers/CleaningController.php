@@ -47,7 +47,7 @@ class CleaningController extends Controller
             $cleaning = Cleaning::create($data);
 
             foreach ([
-                'bayu.prakoso@balitower.co.id', 'anjar.yulianto@balitower.co.id', 'taufik.ismail@balitower.co.id', 'rizky.anindya@balitower.co.id',
+                'bayu.prakoso@balitower.co.id', 'yona.ayu@balitower.co.id', 'taufik.ismail@balitower.co.id', 'rizky.anindya@balitower.co.id',
                 'rafli.ashshiddiqi@balitower.co.id', 'darajat.indraputra@balitower.co.id'
             ] as $recipient) {
                 Mail::to($recipient)->send(new NotifEmail());
