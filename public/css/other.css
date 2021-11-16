@@ -15,7 +15,7 @@ body {
 
 #form2 {
     background-color: #000;
-    height: 1400px;
+    height: 2000px;
     width: 900px;
     margin: auto;
     padding: 20px;
@@ -124,7 +124,7 @@ body {
 }
 
 #input #input-group20 {
-    width: 700px;
+    width: 90px;
     margin: 5px;
     border-top: none;
     border-left: none;
@@ -171,7 +171,7 @@ body {
     color: #fff
 }
 
-#input4 #input-group1 {
+/* #input4 #input-group1 {
     width: 250px;
     margin: 5px;
     border-top: none;
@@ -180,7 +180,7 @@ body {
     outline: none;
     background: transparent;
     color: #fff
-}
+} */
 
 #input4 #input-group7 {
     width: 120px;
@@ -254,7 +254,7 @@ body {
     color: #fff
 }
 
-#input6 #input-group1 {
+/* #input6 #input-group1 {
     width: 300px;
     margin: 5px;
     border-top: none;
@@ -263,7 +263,7 @@ body {
     outline: none;
     background: transparent;
     color: #fff
-}
+} */
 
 
 .radiobutton_container {
@@ -407,4 +407,50 @@ input {
     padding: 3px 5px;
     box-shadow: inset 0 px 6px rgba(0, 0, 0, 0.1);
     width: 190px;
+}
+
+.nama{
+    width: 200px;
+    margin: 5px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline: none;
+    background: transparent;
+    color: #fff
+}
+
+.personil{
+    width: 250px;
+    margin-right: 35px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline: none;
+    background: transparent;
+    color: #fff
+}
+
+.ktp{
+    width: 250px;
+    margin: 5px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline: none;
+}
+
+.btn{
+    margin-top: 50px;
+    margin-right: 10px;
+}
+
+.pic{
+    text-align: center;
+    margin-top: 30px;
+    color: white;
+}
+
+.form-control{
+
 }

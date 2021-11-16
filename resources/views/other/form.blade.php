@@ -7,7 +7,7 @@
     <title>ACCESS & CHANGE REQUEST FORM</title>
     <link rel="stylesheet" href="{{asset('/css/other.css')}}">
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -17,12 +17,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 
     <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.14.0/sweetalert2.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.14.0/sweetalert2.all.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -30,7 +29,7 @@
 <!--container-->
 
     <form  id="form_other" class="form-group" enctype="multipart/form-data" method="POST" action="{{url('other.form')}}">
-        <!-- {{ csrf_field() }} -->
+        @csrf
         <!--form-->
 
         <div  id="form">
@@ -184,16 +183,13 @@
                     <!--input-->
                 <div id="input4">
                         <!--input4-->
-                    <h4 class="text-white">1. Background and Objective (Jenis Pekerjaan)</h4>
-                        <input type="text" id="input-group" placeholder="Fill in here" name="other_background">
-                    <p>
-                    <h4 class="text-white">2. Description os Scope of Work (Deskripsikan Pekerjaan)</h4>
+                    <h4 class="text-white">Description of Scope of Work (Deskripsikan Pekerjaan)</h4>
                         <input type="text" id="input-group" placeholder="Fill in here" name="other_describ">
                     <p>
 
                     {{-- Detail Time & Operation --}}
-                    <h4 class="text-white">3. Detail Time & Operation (Detail Waktu & Operasi) </h4>
-                    <p>
+                    <h4 class="text-white">Detail Time & Operation (Detail Waktu & Operasi) </h4>
+
                         <font color="red" size="2">*Minimal Mengisi 2</font>
                     </p>
                         <input type="time" id="input-group20" style="background: white; " name="time_1">
@@ -217,102 +213,100 @@
                         <input id="input-group8" style="background: black ;" name="procedure_5" placeholder="Working Procedure">
 
                     {{-- Risk Service Area Impact --}}
-                    <P>
-                    <h4 class="text-white">4. Risk and Service Area Impact (Resiko dan Dampak Area Servis)</h4>
-                    <p>
-                        <font color="red" size="2">*Minimal Mengisi 2</font>
-                    </p>
-                        <input id="input-group1" style="background: black; " name="risk_1" placeholder="Risk Description">
-                        <input id="input-group14" style="background: black ;" name="possibility" placeholder="Possibility">
-                        <select id="input-group3" style="background: black;" name="impact">
-                            <option value="">Impact</option>
-                            <option value="High">High</option>
-                            <option value="Medium">Medium</option>
-                            <option value="Low">Low</option>
-                        </select>
-                        <input id="input-group15" style="background: black;" name="mitigation_1" placeholder="Mitigation Plan">
 
-                        <input id="input-group1" style="background: black; " name="risk_2" placeholder="Risk Description">
-                        <input id="input-group14" style="background: black ;" name="possibility" placeholder="Possibility">
-                        <select id="input-group3" style="background: black;" name="impact">
-                            <option value="">Impact</option>
-                            <option value="High">High</option>
-                            <option value="Medium">Medium</option>
-                            <option value="Low">Low</option>
-                        </select>
-                        <input id="input-group15" style="background: black;" name="mitigation_2" placeholder="Mitigation Plan">
+                    <h4 class="text-white mt-3">Risk and Service Area Impact (Resiko dan Dampak Area Servis)</h4>
 
-                        <input id="input-group1" style="background: black; " name="risk_3" placeholder="Risk Description">
-                        <input id="input-group14" style="background: black ;" name="possibility" placeholder="Possibility">
-                        <select id="input-group3" style="background: black;" name="impact">
-                            <option value="">Impact</option>
-                            <option value="High">High</option>
-                            <option value="Medium">Medium</option>
-                            <option value="Low">Low</option>
-                        </select>
-                        <input id="input-group15" style="background: black;" name="mitigation_3" placeholder="Mitigation Plan">
+                    <font class="mt-2" color="red" size="2">*Minimal Mengisi 2</font>
+                    <input class="form-control mt-2" name="risk_1" placeholder="Risk Description">
+                    <input name="possibility_1" placeholder="Possibility">
+                    <select name="impact_1">
+                        <option value="">Impact</option>3
+                        <option value="High">High</option>
+                        <option value="Medium">Medium</option>
+                        <option value="Low">Low</option>
+                    </select>
+                    <input name="mitigation_1" placeholder="Mitigation Plan">
 
-                        <input id="input-group1" style="background: black; " name="risk_4" placeholder="Risk Description">
-                        <input id="input-group14" style="background: black ;" name="possibility" placeholder="Possibility">
-                        <select id="input-group3" style="background: black;" name="impact">
-                            <option value="">Impact</option>
-                            <option value="High">High</option>
-                            <option value="Medium">Medium</option>
-                            <option value="Low">Low</option>
-                        </select>
-                        <input id="input-group15" style="background: black;" name="mitigation_4" placeholder="Mitigation Plan">
+                    <h4 class="text-white mt-3">Testing and Verification</h4>
+                    <input type="text" class="form-control" placeholder="Fill in here (isi disini)" name="testing">
 
-                        <input id="input-group1" style="background: black; " name="risk_5" placeholder="Risk Description">
-                        <input id="input-group14" style="background: black ;" name="possibility" placeholder="Possibility">
-                        <select id="input-group3" style="background: black;" name="impact">
-                            <option value="">Impact</option>
-                            <option value="High">High</option>
-                            <option value="Medium">Medium</option>
-                            <option value="Low">Low</option>
-                        </select>
-                        <input id="input-group15" style="background: black;" name="mitigation_5" placeholder="Mitigation Plan">
+                    <h4 class="text-white mt-3">Rollback Plan</h4>
+                    <input type="text" class="form-control" placeholder="Fill in here (isi disini)" name="rollback">
 
-                    <p>
-                    <h4 class="text-white">5. Testing and Verification</h4>
-                    <input type="text" class="contoh2" id="input-group" placeholder="Fill in here (isi disini)" name="cleaning_testing">
-                    <P>
-                    <h4 class="text-white">6. Rollback Plan</h4>
-                    <input type="text" class="contoh2" id="input-group" placeholder="Fill in here (isi disini)" name="cleaning_rollback">
-                    <P>
-                    <h4 class="text-white">7. Person in charge</h4>
-                        <input id="input-group1" style="background: black; " name="cleaning_name_1" placeholder="Name">
-                        <input id="input-group14" style="background: black;" name="cleaning_number_1" placeholder="Phone number">
-                        <input type="number" id="input-group14" style="background: black;" name="cleaning_id_1" placeholder="ID Number">
-                        <input id="input-group14" style="background: black;" name="cleaning_name_1" placeholder="Company">
+                    <h4 class="pic">Person in charge 1</h4>
+                        <input class="nama @error('nama1') is-invalid @enderror" required autocomplete="nama1" type="text" name="name_1" placeholder="Name">
+                        @error('nama1')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <input class="nama @error('company1') is-invalid @enderror" required autocomplete="company1" type="text" name="company_1" placeholder="Company">
+                        @error('company1')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <input class="nama @error('dept1') is-invalid @enderror" required autocomplete="dept1" type="text" name="department_1" placeholder="Department">
+                        @error('dept1')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <input class="nama @error('respon1') is-invalid @enderror" required autocomplete="respon1" type="text" name="respon_1" placeholder="Responsibility">
+                        @error('respon1')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <input class="personil @error('phone1') is-invalid @enderror" required autocomplete="phone1" type="text" name="phone_1" placeholder="Phone number">
+                        @error('phone1')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <input type="number" class="personil @error('id1') is-invalid @enderror" required autocomplete="id1"  name="id_1" placeholder="ID Number">
+                        @error('id1')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <input class="ktp" id="ktp" type="file" multiple="multiple" name="ktp_1" accept="image/*"/>
 
-                        <input id="input-group1" style="background: black;" name="cleaning_number_1"placeholder="Name">
-                        <input id="input-group14" style="background: black;" name="cleaning_id_1" placeholder="Phone Number">
-                        <Input type="number" id="input-group14" style="background: black;" name="cleaning_name_1" placeholder="ID Number">
-                        <input id="input-group14" style="background: black;" name="cleaning_number_1"placeholder="Company">
+                    <h4 class="pic">Person in charge 2</h4>
+                        <input class="nama" type="text" name="name_2" placeholder="Name">
+                        <input class="nama" type="text" name="company_2" placeholder="Company">
+                        <input class="nama" type="text" name="department_2" placeholder="Department">
+                        <input class="nama" type="text" name="respon_2" placeholder="Responsibility">
+                        <input class="personil" type="text" name="phone_2" placeholder="Phone number">
+                        <input type="number" class="personil"  name="id_2" placeholder="ID Number">
+                        <input class="ktp" id="ktp" type="file" multiple="multiple" name="ktp_2" accept="image/*"/>
 
-                        <Input id="input-group1" style="background: black;" name="cleaning_id_1" placeholder="Name">
-                        <input id="input-group14" style="background: black;" name="cleaning_name_1" placeholder="Phone Number">
-                        <input type="number" id="input-group14" style="background: black;" name="cleaning_number_1"placeholder="ID number">
-                        <input id="input-group14" style="background: black;" name="cleaning_id_1" placeholder="Company">
+                    <h4 class="pic">Person in charge 3</h4>
+                        <input class="nama" type="text" name="name_3" placeholder="Name">
+                        <input class="nama" type="text" name="company_3" placeholder="Company">
+                        <input class="nama" type="text" name="department_3" placeholder="Department">
+                        <input class="nama" type="text" name="respon_3" placeholder="Responsibility">
+                        <input class="personil" type="text" name="phone_3" placeholder="Phone number">
+                        <input type="number" class="personil"  name="id_3" placeholder="ID Number">
+                        <input class="ktp" id="ktp" type="file" multiple="multiple" name="ktp_3" accept="image/*"/>
 
-                        <input id="input-group1" style="background: black;" name="cleaning_id_1" placeholder="Name">
-                        <input id="input-group14" style="background: black;" name="cleaning_id_1" placeholder="Phone Number">
-                        <input type="number" id="input-group14" style="background: black;" name="cleaning_id_1" placeholder="ID Number">
-                        <input id="input-group14" style="background: black;" name="cleaning_id_1" placeholder="Company">
+                    <h4 class="pic">Person in charge 4</h4>
+                        <input class="nama" type="text" name="name_4" placeholder="Name">
+                        <input class="nama" type="text" name="company_4" placeholder="Company">
+                        <input class="nama" type="text" name="department_4" placeholder="Department">
+                        <input class="nama" type="text" name="respon_4" placeholder="Responsibility">
+                        <input class="personil" type="text" name="phone_4" placeholder="Phone number">
+                        <input type="number" class="personil"  name="id_4" placeholder="ID Number">
+                        <input class="ktp" id="ktp" type="file" multiple="multiple" name="ktp_4" accept="image/*"/>
 
-                        <input id="input-group1" style="background: black;" name="cleaning_id_1" placeholder="Name">
-                        <input id="input-group14" style="background: black;" name="cleaning_id_1" placeholder="Phone Number">
-                        <input type="number" id="input-group14" style="background: black;" name="cleaning_id_1" placeholder="ID Number">
-                        <input id="input-group14" style="background: black;" name="cleaning_id_1" placeholder="Company">
-
-                        <input id="input-group1" style="background: black;" name="cleaning_id_1" placeholder="Name">
-                        <input id="input-group14" style="background: black;" name="cleaning_id_1" placeholder="Phone Number">
-                        <input type="number" id="input-group14" style="background: black;" name="cleaning_id_1" placeholder="ID Number">
-                        <input id="input-group14" style="background: black;" name="cleaning_id_1" placeholder="Company">
-                            <p>
-                        <br>
-                    <h4 class="text-white">8. Foto KTP</h4>
-                        <input id="ktp" type="file" multiple="multiple" name="ktp" accept="image/*"/>
+                    <h4 class="pic">Person in charge 5</h4>
+                        <input class="nama" type="text" name="name_5" placeholder="Name">
+                        <input class="nama" type="text" name="company_5" placeholder="Company">
+                        <input class="nama" type="text" name="department_5" placeholder="Department">
+                        <input class="nama" type="text" name="respon_5" placeholder="Responsibility">
+                        <input class="personil" type="text" name="phone_5" placeholder="Phone number">
+                        <input type="number" class="personil"  name="id_5" placeholder="ID Number">
+                        <input class="ktp" id="ktp" type="file" multiple="multiple" name="ktp_5" accept="image/*"/>
                 </div>
             </div>
             <button type="submit" class="btn btn-warning text-white btn-submit">Submit Form</button>
@@ -325,7 +319,7 @@
 
 </body>
 
-<!-- {{-- <script type="text/javascript">
+{{-- <script type="text/javascript">
 
     $.ajaxSetup({
         headers: {
@@ -337,10 +331,10 @@
 
         e.preventDefault();
 
-        var datastring = $("#form_cleaning").serialize();
+        var datastring = $("#form_other").serialize();
         $.ajax({
             type:'POST',
-            url:"{{url('submit_data_cleaning')}}",
+            url:"{{url('other.form')}}",
             data: datastring,
             error: function (request, error) {
                 console.log(error)
@@ -369,5 +363,5 @@
             }
         });
     });
-</script> --}} -->
+</script> --}}
 </html>

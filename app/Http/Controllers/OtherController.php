@@ -14,6 +14,11 @@ class OtherController extends Controller
 
     public function store_other(Request $request)
     {
-        dd($request->all());
+        dd($request);
+    }
+
+    public function approve_other()
+    {
+        return "good";
     }
 }
