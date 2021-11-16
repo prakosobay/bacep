@@ -84,7 +84,7 @@
                                 <td>{{$c->phone}}</td>
                                 <td>
                                     <a href="{{url('u.edit', $c->id)}}" type="button" class="btn btn-success mr-2 col-xs-2 margin-bottom">Edit</a>
-                                    <form action="{{ url('user.destroy',$c->id) }}" method="POST">
+                                    <form action="{{ url('user.destroy',$c->id) }}" method="POST" onsubmit="return confirm('Are You Sure Want to Delete This User ?')">
                                         @csrf
                                         <button type="submit"class="btn btn-danger mr-2 col-xs-2 margin-bottom hapus">Hapus</button>
                                     </form>
