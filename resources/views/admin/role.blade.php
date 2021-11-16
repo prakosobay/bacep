@@ -58,7 +58,7 @@
                                 <td>{{$c->id}}</td>
                                 <td>{{$c->name}}</td>
                                 <td>
-                                    <form action="{{ url('role.destroy',$c->id) }}" method="POST">
+                                    <form action="{{ url('role.destroy',$c->id) }}" method="POST" onsubmit="return confirm('Are You Sure Want to Delete This Role ?')">
                                         @csrf
                                         <button type="submit"class="btn btn-danger mr-2 col-xs-2 margin-bottom hapus">Hapus</button>
                                     </form>
