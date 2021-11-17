@@ -184,7 +184,12 @@
                 <div id="input4">
                         <!--input4-->
                     <h4 class="text-white">Description of Scope of Work (Deskripsikan Pekerjaan)</h4>
-                        <input type="text" id="input-group" placeholder="Fill in here" name="other_describ">
+                    <input type="text" class="form-control @error('desc') is-invalid @enderror" required autocomplete="desc" placeholder="Fill in here (isi disini)" name="desc">
+                    @error('desc')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                     <p>
 
                     {{-- Detail Time & Operation --}}
@@ -217,15 +222,132 @@
                     <h4 class="text-white mt-3">Risk and Service Area Impact (Resiko dan Dampak Area Servis)</h4>
 
                     <font class="mt-2" color="red" size="2">*Minimal Mengisi 2</font>
-                    <input class="form-control mt-2" name="risk_1" placeholder="Risk Description">
-                    <input name="possibility_1" placeholder="Possibility">
-                    <select name="impact_1">
-                        <option value="">Impact</option>3
-                        <option value="High">High</option>
-                        <option value="Medium">Medium</option>
-                        <option value="Low">Low</option>
-                    </select>
-                    <input name="mitigation_1" placeholder="Mitigation Plan">
+                    <p>
+                        <input class="risk @error('risk1') is-invalid @enderror" required autocomplete="risk1" type="text" name="risk_1" placeholder="Risk">
+                        @error('risk1')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <input class="risk @error('poss1') is-invalid @enderror" required autocomplete="poss1" type="text" name="poss_1" placeholder="Possibility">
+                        @error('poss1')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <select class="risk" style="background: black" name="impact_1">
+                            <option value="">Impact</option>
+                            <option value="High">High</option>
+                            <option value="Medium">Medium</option>
+                            <option value="Low">Low</option>
+                        </select>
+                        <input class="risk @error('mitigation1') is-invalid @enderror" required autocomplete="mitigation1" type="text" name="mitigation_1" placeholder="Mitigation">
+                        @error('mitigation1')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+
+                        <input class="risk @error('risk2') is-invalid @enderror" required autocomplete="risk2" type="text" name="risk_2" placeholder="Risk">
+                        @error('risk2')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <input class="risk @error('poss2') is-invalid @enderror" required autocomplete="poss2" type="text" name="poss_2" placeholder="Possibility">
+                        @error('poss2')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <select class="risk" style="background: black" name="impact_2">
+                            <option value="">Impact</option>
+                            <option value="High">High</option>
+                            <option value="Medium">Medium</option>
+                            <option value="Low">Low</option>
+                        </select>
+                        <input class="risk @error('mitigation2') is-invalid @enderror" required autocomplete="mitigation2" type="text" name="mitigation_2" placeholder="Mitigation">
+                        @error('mitigation2')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+
+                        <input class="risk @error('risk3') is-invalid @enderror" required autocomplete="risk3" type="text" name="risk_3" placeholder="Risk">
+                        @error('risk3')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <input class="risk @error('poss3') is-invalid @enderror" required autocomplete="poss3" type="text" name="poss_3" placeholder="Possibility">
+                        @error('poss3')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <select class="risk" style="background: black" name="impact_3">
+                            <option value="">Impact</option>
+                            <option value="High">High</option>
+                            <option value="Medium">Medium</option>
+                            <option value="Low">Low</option>
+                        </select>
+                        <input class="risk @error('mitigation3') is-invalid @enderror" required autocomplete="mitigation3" type="text" name="mitigation_3" placeholder="Mitigation">
+                        @error('mitigation3')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+
+                        <input class="risk @error('risk4') is-invalid @enderror" required autocomplete="risk4" type="text" name="risk_4" placeholder="Risk">
+                        @error('risk4')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <input class="risk @error('poss4') is-invalid @enderror" required autocomplete="poss4" type="text" name="poss_4" placeholder="Possibility">
+                        @error('poss4')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <select class="risk" style="background: black" name="impact_4">
+                            <option value="">Impact</option>
+                            <option value="High">High</option>
+                            <option value="Medium">Medium</option>
+                            <option value="Low">Low</option>
+                        </select>
+                        <input class="risk @error('mitigation4') is-invalid @enderror" required autocomplete="mitigation4" type="text" name="mitigation_4" placeholder="Mitigation">
+                        @error('mitigation4')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+
+                        <input class="risk @error('risk5') is-invalid @enderror" required autocomplete="risk5" type="text" name="risk_5" placeholder="Risk">
+                        @error('risk5')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <input class="risk @error('poss5') is-invalid @enderror" required autocomplete="poss5" type="text" name="poss_5" placeholder="Possibility">
+                        @error('poss5')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <select class="risk" style="background: black" name="impact_5">
+                            <option value="">Impact</option>
+                            <option value="High">High</option>
+                            <option value="Medium">Medium</option>
+                            <option value="Low">Low</option>
+                        </select>
+                        <input class="risk @error('mitigation5') is-invalid @enderror" required autocomplete="mitigation5" type="text" name="mitigation_5" placeholder="Mitigation">
+                        @error('mitigation5')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </p>
 
                     <h4 class="text-white mt-3">Testing and Verification</h4>
                     <input type="text" class="form-control" placeholder="Fill in here (isi disini)" name="testing">

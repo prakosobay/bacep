@@ -451,6 +451,13 @@ input {
     color: white;
 }
 
-.form-control{
-
+.risk{
+    width: 200px;
+    margin: 5px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline: none;
+    background: transparent;
+    color: #fff
 }
