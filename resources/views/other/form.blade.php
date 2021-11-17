@@ -37,7 +37,7 @@
 
             <div class="center">
                 <h1 class="text-white">Access Request Form</h1>
-                <h2 class="text-white">Nomor: FRM-BTS-DCDV-2021-03</h2>
+                <h2 class="text-white">Nomor: FRM-BTS-DCDV-2021-04</h2>
             </div>
 
             <div id="input">
@@ -45,16 +45,19 @@
                 <div id="input4">
                     <!--input4-->
 
-                    <input type="text" id="input-group" style="background: black;" name="other_work" placeholder="Purpose Of Work">
-                    <p>
-                    <h6 class="text-white">Request Validity (Berlakunya Permintaan)</h6>
+                    <input type="text" class="form-control mt-3 @error('work') is-invalid @enderror" required autocomplete="work" name="other_work" placeholder="Purpose Of Work" autofocus>
+                    @error('work')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+
+                    <h6 class="text-white mt-3">Request Validity (Berlakunya Permintaan)</h6>
                     <input type="date" name="val_from" id="val_from">
-                    <h6 class="text-white"></h6>
-                    <h6 class="text-white">To (Sampai)</h6>
+                    <h6 class="text-white mt-3">To (Sampai)</h6>
                     <input type="date" name="val_to" id="val_to">
-                    <h6 class="text-white"></h6>
-                    <p>
-                    <h6 for="survey_area" style="text-align: left;" class="text-white">Authorized Entry Area </h6>
+
+                    <h6 style="text-align: left;" class="text-white mt-3">Authorized Entry Area </h6>
                     <table class="table table-borderless">
                         <tr>
                             <td>
@@ -175,52 +178,101 @@
         <div  id="form2">
 
             <div class="center">
-            <h1 class="text-white">Change Request Form</h1>
-            <h2 class="text-white">Nomor: FRM-BTS-DCDV-2021-03</h2>
+                <h1 class="text-white">Change Request Form</h1>
+                <h2 class="text-white">Nomor: FRM-BTS-DCDV-2021-03</h2>
             </div>
 
             <div id="input">
                     <!--input-->
                 <div id="input4">
                         <!--input4-->
-                    <h4 class="text-white">Description of Scope of Work (Deskripsikan Pekerjaan)</h4>
+                    {{-- Description of Work --}}
+                    <h4 class="text-white mt-5">Description of Scope of Work (Deskripsikan Pekerjaan)</h4>
                     <input type="text" class="form-control @error('desc') is-invalid @enderror" required autocomplete="desc" placeholder="Fill in here (isi disini)" name="desc">
                     @error('desc')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
-                    <p>
+
 
                     {{-- Detail Time & Operation --}}
-                    <h4 class="text-white">Detail Time & Operation (Detail Waktu & Operasi) </h4>
+                    <h4 class="text-white mt-5">Detail Time & Operation (Detail Waktu & Operasi) </h4>
+                    <font color="red" size="2">*Minimal Mengisi 2</font>
+                    <p>
+                        <input type="time" class="time" name="time_1">
+                        <input type="text" class="detail @error('item1') is-invalid @enderror" required autocomplete="item1" name="item_1" placeholder="Item">
+                        @error('item1')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <input type="text" class="detail @error('proce1') is-invalid @enderror" required autocomplete="proce1" name="procedure_1" placeholder="Working Procedure">
+                        @error('proce1')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
 
-                        <font color="red" size="2">*Minimal Mengisi 2</font>
+                        <input type="time" class="time" name="time_2">
+                        <input type="text" class="detail @error('item2') is-invalid @enderror" required autocomplete="item2" name="item_2" placeholder="Item">
+                        @error('item2')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <input type="text" class="detail @error('proce2') is-invalid @enderror" required autocomplete="proce2" name="procedure_2" placeholder="Working Procedure">
+                        @error('proce2')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+
+                        <input type="time" class="time" name="time_3">
+                        <input type="text" class="detail @error('item3') is-invalid @enderror" required autocomplete="item3" name="item_3" placeholder="Item">
+                        @error('item3')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <input type="text" class="detail @error('proce3') is-invalid @enderror" required autocomplete="proce3" name="procedure_3" placeholder="Working Procedure">
+                        @error('proce3')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+
+                        <input type="time" class="time" name="time_4">
+                        <input type="text" class="detail @error('item4') is-invalid @enderror" required autocomplete="item4" name="item_4" placeholder="Item">
+                        @error('item4')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <input type="text" class="detail @error('proce4') is-invalid @enderror" required autocomplete="proce4" name="procedure_4" placeholder="Working Procedure">
+                        @error('proce4')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+
+                        <input type="time" class="time" name="time_5">
+                        <input type="text" class="detail @error('item5') is-invalid @enderror" required autocomplete="item5" name="item_5" placeholder="Item">
+                        @error('item5')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <input type="text" class="detail @error('proce5') is-invalid @enderror" required autocomplete="proce5" name="procedure_5" placeholder="Working Procedure">
+                        @error('proce5')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </p>
-                        <input type="time" id="input-group20" style="background: white; " name="time_1">
-                        <input id="input-group14" style="background: black ;" name="item_1" placeholder="Item">
-                        <input id="input-group8" style="background: black ;" name="procedure_1" placeholder="Working Procedure">
-
-                        <input type="time" id="input-group20" style="background: white; " name="time_2">
-                        <input id="input-group14" style="background: black ;" name="item_2" placeholder="Item">
-                        <input id="input-group8" style="background: black ;" name="procedure_2" placeholder="Working Procedure">
-
-                        <input type="time" id="input-group20" style="background: white; " name="time_3">
-                        <input id="input-group14" style="background: black ;" name="item_3" placeholder="Item">
-                        <input id="input-group8" style="background: black ;" name="procedure_3" placeholder="Working Procedure">
-
-                        <input type="time" id="input-group20" style="background: white; " name="time_4">
-                        <input id="input-group14" style="background: black ;" name="item_4" placeholder="Item">
-                        <input id="input-group8" style="background: black ;" name="procedure_4" placeholder="Working Procedure">
-
-                        <input type="time" id="input-group20" style="background: white; " name="time_5" placeholder="">
-                        <input id="input-group14" style="background: black ;" name="item_5" placeholder="Item">
-                        <input id="input-group8" style="background: black ;" name="procedure_5" placeholder="Working Procedure">
 
                     {{-- Risk Service Area Impact --}}
-
-                    <h4 class="text-white mt-3">Risk and Service Area Impact (Resiko dan Dampak Area Servis)</h4>
-
+                    <h4 class="text-white mt-5">Risk and Service Area Impact (Resiko dan Dampak Area Servis)</h4>
                     <font class="mt-2" color="red" size="2">*Minimal Mengisi 2</font>
                     <p>
                         <input class="risk @error('risk1') is-invalid @enderror" required autocomplete="risk1" type="text" name="risk_1" placeholder="Risk">
@@ -349,12 +401,15 @@
                         @enderror
                     </p>
 
-                    <h4 class="text-white mt-3">Testing and Verification</h4>
+                    {{-- Testing Verification --}}
+                    <h4 class="text-white mt-5">Testing and Verification</h4>
                     <input type="text" class="form-control" placeholder="Fill in here (isi disini)" name="testing">
 
-                    <h4 class="text-white mt-3">Rollback Plan</h4>
+                    {{-- Rollback  --}}
+                    <h4 class="text-white mt-5">Rollback Plan</h4>
                     <input type="text" class="form-control" placeholder="Fill in here (isi disini)" name="rollback">
 
+                    {{-- PIC --}}
                     <h4 class="pic">Person in charge 1</h4>
                         <input class="nama @error('nama1') is-invalid @enderror" required autocomplete="nama1" type="text" name="name_1" placeholder="Name">
                         @error('nama1')
@@ -438,7 +493,6 @@
     <!--container-->
     </form>
 </div>
-
 </body>
 
 {{-- <script type="text/javascript">

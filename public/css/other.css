@@ -461,3 +461,27 @@ input {
     background: transparent;
     color: #fff
 }
+
+.time{
+    width: 120px;
+    margin: 5px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline: none;
+}
+
+.detail{
+    width: 350px;
+    margin: 5px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline: none;
+    background: transparent;
+    color: white;
+}
+
+.table{
+    margin-bottom: 20px;
+}
