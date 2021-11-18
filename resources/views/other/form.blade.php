@@ -26,9 +26,7 @@
 
 <body>
 <div class="container">
-<!--container-->
-
-    <form  id="form_other" class="form-group" enctype="multipart/form-data" method="POST" action="{{url('other.form')}}">
+    <form  id="form_other" class="form-group" enctype="multipart/form-data" method="POST">
         @csrf
         <!--form-->
 
@@ -195,7 +193,6 @@
                         </span>
                     @enderror
 
-
                     {{-- Detail Time & Operation --}}
                     <h4 class="text-white mt-5">Detail Time & Operation (Detail Waktu & Operasi) </h4>
                     <font color="red" size="2">*Minimal Mengisi 2</font>
@@ -229,46 +226,16 @@
                         @enderror
 
                         <input type="time" class="time" name="time_3">
-                        <input type="text" class="detail @error('item3') is-invalid @enderror" required autocomplete="item3" name="item_3" placeholder="Item">
-                        @error('item3')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                        <input type="text" class="detail @error('proce3') is-invalid @enderror" required autocomplete="proce3" name="procedure_3" placeholder="Working Procedure">
-                        @error('proce3')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
+                        <input type="text" class="detail" name="item_3" placeholder="Item">
+                        <input type="text" class="detail" name="procedure_3" placeholder="Working Procedure">
 
                         <input type="time" class="time" name="time_4">
-                        <input type="text" class="detail @error('item4') is-invalid @enderror" required autocomplete="item4" name="item_4" placeholder="Item">
-                        @error('item4')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                        <input type="text" class="detail @error('proce4') is-invalid @enderror" required autocomplete="proce4" name="procedure_4" placeholder="Working Procedure">
-                        @error('proce4')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
+                        <input type="text" class="detail" name="item_4" placeholder="Item">
+                        <input type="text" class="detail" name="procedure_4" placeholder="Working Procedure">
 
                         <input type="time" class="time" name="time_5">
-                        <input type="text" class="detail @error('item5') is-invalid @enderror" required autocomplete="item5" name="item_5" placeholder="Item">
-                        @error('item5')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                        <input type="text" class="detail @error('proce5') is-invalid @enderror" required autocomplete="proce5" name="procedure_5" placeholder="Working Procedure">
-                        @error('proce5')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
+                        <input type="text" class="detail" name="item_5" placeholder="Item">
+                        <input type="text" class="detail" name="procedure_5" placeholder="Working Procedure">
                     </p>
 
                     {{-- Risk Service Area Impact --}}
@@ -325,80 +292,37 @@
                             </span>
                         @enderror
 
-                        <input class="risk @error('risk3') is-invalid @enderror" required autocomplete="risk3" type="text" name="risk_3" placeholder="Risk">
-                        @error('risk3')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                        <input class="risk @error('poss3') is-invalid @enderror" required autocomplete="poss3" type="text" name="poss_3" placeholder="Possibility">
-                        @error('poss3')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
+                        <input class="risk" type="text" name="risk_3" placeholder="Risk">
+                        <input class="risk" type="text" name="poss_3" placeholder="Possibility">
                         <select class="risk" style="background: black" name="impact_3">
                             <option value="">Impact</option>
                             <option value="High">High</option>
                             <option value="Medium">Medium</option>
                             <option value="Low">Low</option>
                         </select>
-                        <input class="risk @error('mitigation3') is-invalid @enderror" required autocomplete="mitigation3" type="text" name="mitigation_3" placeholder="Mitigation">
-                        @error('mitigation3')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
+                        <input class="risk" type="text" name="mitigation_3" placeholder="Mitigation">
 
-                        <input class="risk @error('risk4') is-invalid @enderror" required autocomplete="risk4" type="text" name="risk_4" placeholder="Risk">
-                        @error('risk4')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                        <input class="risk @error('poss4') is-invalid @enderror" required autocomplete="poss4" type="text" name="poss_4" placeholder="Possibility">
-                        @error('poss4')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
+
+                        <input class="risk" type="text" name="risk_4" placeholder="Risk">
+                        <input class="risk" type="text" name="poss_4" placeholder="Possibility">
                         <select class="risk" style="background: black" name="impact_4">
                             <option value="">Impact</option>
                             <option value="High">High</option>
                             <option value="Medium">Medium</option>
                             <option value="Low">Low</option>
                         </select>
-                        <input class="risk @error('mitigation4') is-invalid @enderror" required autocomplete="mitigation4" type="text" name="mitigation_4" placeholder="Mitigation">
-                        @error('mitigation4')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
+                        <input class="risk" type="text" name="mitigation_4" placeholder="Mitigation">
 
-                        <input class="risk @error('risk5') is-invalid @enderror" required autocomplete="risk5" type="text" name="risk_5" placeholder="Risk">
-                        @error('risk5')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                        <input class="risk @error('poss5') is-invalid @enderror" required autocomplete="poss5" type="text" name="poss_5" placeholder="Possibility">
-                        @error('poss5')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
+
+                        <input class="risk" type="text" name="risk_5" placeholder="Risk">
+                        <input class="risk" type="text" name="poss_5" placeholder="Possibility">
                         <select class="risk" style="background: black" name="impact_5">
                             <option value="">Impact</option>
                             <option value="High">High</option>
                             <option value="Medium">Medium</option>
                             <option value="Low">Low</option>
                         </select>
-                        <input class="risk @error('mitigation5') is-invalid @enderror" required autocomplete="mitigation5" type="text" name="mitigation_5" placeholder="Mitigation">
-                        @error('mitigation5')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
+                        <input class="risk" type="text" name="mitigation_5" placeholder="Mitigation">
                     </p>
 
                     {{-- Testing Verification --}}
@@ -490,13 +414,11 @@
             <button type="reset" class="btn btn-primary">Clear Form</button>
         </div>
 
-    <!--container-->
     </form>
 </div>
 </body>
 
-{{-- <script type="text/javascript">
-
+<script type="text/javascript">
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('input[name="_token"]').val()
@@ -504,9 +426,7 @@
     });
 
     $(".btn-submit").click(function(e){
-
         e.preventDefault();
-
         var datastring = $("#form_other").serialize();
         $.ajax({
             type:'POST',
@@ -526,9 +446,7 @@
                     }).then(function(){
                         location.href = "{{url("/home")}}";
                     });
-
                 }else if(data.status == 'FAILED'){
-
                     Swal.fire({
                         title: "Failed!",
                         text: 'Saving Data Failed',
@@ -539,5 +457,5 @@
             }
         });
     });
-</script> --}}
+</script>
 </html>
