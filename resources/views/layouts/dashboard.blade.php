@@ -87,7 +87,7 @@
                 Data Barang
             </div>
 
-            <!-- Nav Item - Pages Collapse Menu -->
+            <!-- Asset  Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
@@ -105,7 +105,7 @@
                 </div>
             </li>
 
-            <!-- Nav Item - Utilities Collapse Menu -->
+            <!-- Consumable Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
@@ -127,12 +127,12 @@
             <!-- Divider -->
             <hr class="sidebar-divider">
 
-            <!-- Heading -->
+            <!-- Checklist -->
             <div class="sidebar-heading">
                 Checklist
             </div>
 
-            <!-- Nav Item - Pages Collapse Menu -->
+            <!-- Checklist Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
                     aria-expanded="true" aria-controls="collapsePages">
@@ -142,8 +142,7 @@
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Option:</h6>
-                        <a class="collapse-item" href="{{url('checklist.warming')}}">Warming Up</a>
-                        <a class="collapse-item" href="{{url('checklist.warming')}}">Actual Load</a>
+                        <a class="collapse-item" href="{{url('checklist.warming')}}">Checklist Genset</a>
                         <a class="collapse-item" href="{{url('checklist.table')}}">Table Checklist</a>
                     </div>
                 </div>

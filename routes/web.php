@@ -14,9 +14,9 @@ Route::get('/sabar', [OtherController::class, 'liat']);
 
 //tes gambar
 
-Route::post('gambar2', [OtherController::class, 'time'])->name('gambar2');
+// Route::post('gambar2', [OtherController::class, 'time'])->name('gambar2');
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/home', [HomeController::class, 'index']);
 
     //Detail History

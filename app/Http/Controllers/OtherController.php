@@ -51,6 +51,8 @@ class OtherController extends Controller
             'jam2' => ['required'],
         ]);
 
+        // $jam_end = (00:10:00);
+
         $time = Time::create([
             'jam1' => $request->jam1,
             'jam2' => $request->jam2
@@ -60,7 +62,8 @@ class OtherController extends Controller
     public function liat()
     {
         $jam = Time::all();
-        return isset($jam) && !empty($jam) ? response()->json(['status' => 'SUCCESS', 'jam' => $jam]) : response()->json(['status' => 'FAILED', 'jam' => []]);
+        return view('other.gambar', compact('jam'));
+        // return isset($jam) && !empty($jam) ? response()->json(['status' => 'SUCCESS', 'jam' => $jam]) : response()->json(['status' => 'FAILED', 'jam' => []]);
     }
 
     public function store_other(Request $request)
