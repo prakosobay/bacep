@@ -335,6 +335,7 @@
 
                     {{-- PIC --}}
                     <h4 class="pic">Person in charge 1</h4>
+                    <font color="red" size="2">*File harus berbentuk jpg,png,jpeg; maks 500kb</font><br>
                         <input class="nama @error('nama1') is-invalid @enderror" required autocomplete="nama1" type="text" name="name_1" placeholder="Name">
                         @error('nama1')
                             <span class="invalid-feedback" role="alert">

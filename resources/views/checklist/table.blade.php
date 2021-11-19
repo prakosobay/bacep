@@ -9,7 +9,7 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <a type="button" class="btn btn-primary mr-5 sm" href="{{url('table_user')}}">
+            <a type="button" class="btn btn-primary mr-5 sm" href="{{url('checklist.table')}}">
                 Kembali
             </a>
         </div>
