@@ -14,17 +14,10 @@
 <body>
     <div class="container-fluid">
         <h1><strong>Form Checklist Genset</strong></h1>
-        <a href="{{url('table_barang')}}" type="button" class="btn btn-primary">Kembali</a>
+            <a href="{{url('table_barang')}}" type="button" class="btn btn-primary">Kembali</a><br>
+
             <form method="POST" action="{{url('checklist')}}" id="checklist" class="validate-form">
                 @csrf
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="ket" id="inlineRadio1" value="1">
-                    <label class="form-check-label" for="inlineRadio1"><strong>Actual Load</strong></label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="ket" id="inlineRadio2" value="0">
-                    <label class="form-check-label" for="inlineRadio2"><strong>Warming Up</strong></label>
-                </div>
                 <table id="genset1" class="table table-bordered" >
                     <thead>
                         <tr>

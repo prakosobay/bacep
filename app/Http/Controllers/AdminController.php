@@ -173,6 +173,7 @@ class AdminController extends Controller
 
     public function delete_role($id)
     {
+        // prod = 6
         if ($id != 6) {
             Role::find($id)->delete();
             Alert::success('Success', 'Role has been deleted');

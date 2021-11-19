@@ -22,6 +22,7 @@
                             <th colspan="2" >Generator 1</th>
                             <th colspan="2" >Generator 2</th>
                             <th rowspan="2">Penginput</th>
+                            <th rowspan="2">Ket</th>
                             <th rowspan="2">Action</th>
                         </tr>
                         <tr>
@@ -41,6 +42,11 @@
                                 <td>{{$c->date2}}</td>
                                 <td>{{$c->time2}}</td>
                                 <td>{{$c->penginput}}</td>
+                            @if($c->ket == false)
+                                <td>Warming Up</td>
+                            @elseif ($c->ket == true)
+                                <td>Actual Load</td>
+                            @endif
                                 <td>
                                     <a href="{{url('c.show', $c->id)}}" type="button" class="btn btn-success btn-md mr-3" id="in">Detail</a>
                                     <a href="{{url('c.pdf', $c->id)}}" type="button" class="btn btn-danger btn-md" id="out">PDF</a>

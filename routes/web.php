@@ -2,21 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Actions\Fortify\CreateNewUser;
 use Illuminate\Support\Facades\{Route, Auth};
-use App\Http\Controllers\{HomeController, CleaningController, AdminController};
-use App\Console\Kernel;
-use App\Models\Consum;
-use Illuminate\Routing\Router;
+use App\Http\Controllers\{HomeController, CleaningController, AdminController, OtherController};
 
 // Auth::routes(['verify' => true]);
 Route::get('/', function () {
     return view('auth.login');
 })->middleware('guest');
 
-Route::get('/sabar', function () {
-    return view('sabar');
-});
+Route::get('/sabar', [OtherController::class, 'liat']);
+
+//tes gambar
+
+// Route::post('gambar2', [OtherController::class, 'time'])->name('gambar2');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/home', [HomeController::class, 'index']);
@@ -131,6 +129,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::put('/ob.edit/{id}', [RevisiController::class, 'update_ob']);
     Route::post('/ob.destroy/{id}', [RevisiController::class, 'destroy_ob']);
     Route::post('/ob.new', [RevisiController::class, 'store_ob']);
+
+
 });
 // Route::resource('/barang', ConsumController::class);
 //
