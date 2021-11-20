@@ -67,7 +67,7 @@ class CreateOthersTable extends Migration
             $table->string('mitigation_3')->nullable();
             $table->string('mitigation_4')->nullable();
             $table->string('mitigation_5')->nullable();
-            $table->string('cleaning_describ');
+            $table->string('desc');
             $table->string('testing')->nullable();
             $table->string('rollback')->nullable();
             $table->string('name_1');

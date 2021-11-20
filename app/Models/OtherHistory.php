@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class OtherHistory extends Model
 {
     use HasFactory;
+
+    protected $table = 'other_histories';
+    protected $guarded = [];
 }
