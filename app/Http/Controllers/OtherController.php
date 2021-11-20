@@ -175,4 +175,15 @@ class OtherController extends Controller
             abort(403);
         }
     }
+
+    public function detail($id)
+    {
+        $details = DB::table('other_histories')
+            ->join('other', 'other.other_id', '=', 'other_histories.other_id')
+            ->join('users', 'users.id', '=', 'other_histories.created_by')
+            ->where('other_histories.other_id', '=', $id)
+            ->select('other_histories.*', 'users.name', 'other.other_work')
+            ->get();
+        return view('other.detail', compact('details'));
+    }
 }

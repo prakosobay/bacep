@@ -1,56 +1,56 @@
 @extends('approval')
-
-@section('judul_halaman', 'Table Approval Cleaning')
+@section('judul_halaman', 'Table Approval Other')
         {{ csrf_field() }}
 
 @section('konten')
-    <section class="content">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                    <!-- /.card-header -->
-                    <div class="card-body">
-                        <table id="example1" class="table table-bordered table-striped">
-                            <thead>
+
+<section class="content">
+    <section class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <table id="example1" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>ID Permit</th>
+                                <th>Date of Request</th>
+                                <th>Visitor Name</th>
+                                <th>Purpose of Work</th>
+                                <th>Action</th>
+                                <th>File</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($tes as $p)
                                 <tr>
-                                    <th>ID Permit</th>
-                                    <th>Date of Request</th>
-                                    <th>Visitor Name</th>
-                                    <th>Purpose of Work</th>
-                                    <th>Action</th>
-                                    <th>File</th>
+                                    <td>{{ $p->other_id }}</td>
+                                    <td>{{ Carbon\Carbon::parse($p->created_at)->format('d-m-Y') }}</td>
+                                    <td>{{ $p->name_1 }}<br>
+                                    <td>{{ $p->other_work }}</td>
+                                    <td>
+                                        @can('isApproval')
+                                            <a href="javascript:void(0)" id="ok" class="approve" data-other_id="{{$p->other_id}}">Approve</a>
+                                            <a href="javascript:void(0)" id="not" class="reject" data-other_id="{{$p->other_id}}">Reject</a>
+                                        @elsecan('isHead')
+                                            <a href="javascript:void(0)" id="ok" class="approve" data-other_id="{{$p->other_id}}">Approve</a>
+                                            <a href="javascript:void(0)" id="not" class="reject" data-other_id="{{$p->other_id}}">Reject</a>
+                                        @elsecan('isSecurity')
+                                            <a href="javascript:void(0)" id="ok" class="approve" data-other_id="{{$p->other_id}}">Approve</a>
+                                        @endcan
+                                            <a href="/detail_other/{{$p->other_id}}">History</a>
+                                    </td>
+                                    <td><a href="/other_pdf/{{$p->other_id}}" class="btn btn-primary" target="_blank">LIHAT PDF</a></td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($cleaning as $p)
-                                    <tr>
-                                        <td>{{ $p->cleaning_id }}</td>
-                                        <td>{{ Carbon\Carbon::parse($p->created_at)->format('d-m-Y') }}</td>
-                                        <td>- {{ $p->cleaning_name }}<br>
-                                            - {{ $p->cleaning_name2 }}</td>
-                                        <td>{{ $p->cleaning_work }}</td>
-                                        <td>
-                                            @can('isApproval')
-                                                <a href="javascript:void(0)" id="ok" class="approve" data-cleaning_id="{{$p->cleaning_id}}">Approve</a>
-                                                <a href="javascript:void(0)" id="not" class="reject" data-cleaning_id="{{$p->cleaning_id}}">Reject</a>
-                                            @elsecan('isHead')
-                                                <a href="javascript:void(0)" id="ok" class="approve" data-cleaning_id="{{$p->cleaning_id}}">Approve</a>
-                                                <a href="javascript:void(0)" id="not" class="reject" data-cleaning_id="{{$p->cleaning_id}}">Reject</a>
-                                            @elsecan('isSecurity')
-                                                <a href="javascript:void(0)" id="ok" class="approve" data-cleaning_id="{{$p->cleaning_id}}">Approve</a>
-                                            @endcan
-                                                <a href="/detail_cleaning/{{$p->cleaning_id}}">History</a>
-                                        </td>
-                                        <td><a href="/cleaning_pdf/{{$p->cleaning_id}}" class="btn btn-primary" target="_blank">LIHAT PDF</a></td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
+    </div>
+</section>
 
 <!-- jQuery -->
 <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
@@ -175,8 +175,4 @@
             });
         });
         </script>
-
-    </section>
-    @endsection
-
-
+@endsection

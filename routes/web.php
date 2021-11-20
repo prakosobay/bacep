@@ -16,19 +16,17 @@ Route::get('/sabar', [OtherController::class, 'liat']);
 
 // Route::post('gambar2', [OtherController::class, 'time'])->name('gambar2');
 
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::get('/home', [HomeController::class, 'index']);
 
     //Detail History
-    Route::get('/detail_survey/{id}', [HomeController::class, 'detail_permit_survey']);
     Route::get('/detail_cleaning/{id}', [CleaningController::class, 'detail_permit_cleaning']);
+    Route::get('/detail/{id}', [OtherController::class, 'detail']);
 
     //Approve
-    Route::post('/approve_survey', [HomeController::class, 'approve_survey']);
     Route::post('/approve_cleaning', [CleaningController::class, 'approve_cleaning']);
 
     //Reject
-    Route::post('/survey_reject', [HomeController::class, 'survey_reject']);
     Route::post('/cleaning_reject', [CleaningController::class, 'cleaning_reject']);
 
     //Submit
@@ -36,7 +34,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/other.form', [OtherController::class, 'store_other']);
 
     //Approval View
-    // Route::get('/detail_survey{id}', [HomeController::class, 'approve_survey']);
     Route::get('/detail_cleaning{id}', [CleaningController::class, 'approve_cleaning']);
 
     //Approval view
