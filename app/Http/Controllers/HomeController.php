@@ -43,6 +43,7 @@ class HomeController extends Controller
         }
     }
 
+    //cleaning
     public function approval_view($type_view)
     {
         if ((Gate::denies('isBm'))) {
@@ -63,9 +64,16 @@ class HomeController extends Controller
                     ->where('cleaning_histories.aktif', '=', 1)
                     ->select('cleanings.*')
                     ->get();
-                // $lasthistoryC = CleaningHistory::all();
-                return view('hasil_cleaning', ['cleaning' => $cleaning]);
-            } else {
+                return view('hasil_cleaning', compact('cleaning'));
+            } else if ($type_view == 'other') {
+                $tes = DB::table('other_histories')
+                    ->join('other', 'other.other_id', '=', 'other_histories.other_id')
+                    ->whereIn('other_histories.role_to', $role_1)
+                    ->where('other_histories.aktif', '=', 1)
+                    ->select('other.*')
+                    ->get();
+                return view('other.show', compact('tes'));
+            }else {
                 return view('approval');
             }
         } else {
@@ -94,6 +102,14 @@ class HomeController extends Controller
                 ->select('cleaning_histories.*', 'cleanings.cleaning_work', 'cleanings.validity_from')
                 ->get();
             return view('log_cleaning', ['cleaningLog' => $cleaningLog]);
+
+        }
+        elseif ($type_view == 'other') {
+            $other_log = DB::table('other_histories')
+                ->join('other', 'other.other_id', '=', 'other_histories.other_id')
+                ->select('other_histories.*', 'other.other_work', 'other.val_from')
+                ->get();
+            return view('other.log', compact('other_log'));
         }
     }
 
