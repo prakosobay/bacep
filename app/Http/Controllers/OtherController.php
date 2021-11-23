@@ -238,5 +238,25 @@ class OtherController extends Controller
         } else {
             abort(403);
         }
+
+        if ($log->role_to == 'head') {
+            $other = Other::find($request->other_id);
+            foreach (['bayu.prakoso@balitower.co.id'] as $recipient) {
+                Mail::to($recipient)->send(new NotifFull($other));
+            }
+            $other = Other::where('other_id', $request->other_id)->first();
+            // $cleaningFull = CleaningFull::create([
+            //     'cleaning_id' => $cleaning->cleaning_id,
+            //     'cleaning_name' => $cleaning->cleaning_name,
+            //     'cleaning_name2' => $cleaning->cleaning_name2,
+            //     'cleaning_work' => $cleaning->cleaning_work,
+            //     'validity_from' => $cleaning->validity_from,
+            //     'cleaning_date' => $cleaning->created_at,
+            //     'status' => 'Full Approved',
+            //     // 'link' => ("http://127.0.0.1:8000/cleaning_pdf/$cleaning->cleaning_id"),
+            //     'link' => ("http://172.16.45.195:8000/cleaning_pdf/$cleaning->cleaning_id"),
+            // ]);
+        }
+        return $log->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
     }
 }

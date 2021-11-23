@@ -16,7 +16,7 @@ Route::get('/sabar', [OtherController::class, 'liat']);
 
 // Route::post('gambar2', [OtherController::class, 'time'])->name('gambar2');
 
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::get('/home', [HomeController::class, 'index']);
 
     //Detail History
@@ -25,6 +25,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     //Approve
     Route::post('/approve_cleaning', [CleaningController::class, 'approve_cleaning']);
+    Route::post('/approve_other', [OtherController::class, 'approve_other']);
 
     //Reject
     Route::post('/cleaning_reject', [CleaningController::class, 'cleaning_reject']);
