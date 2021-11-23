@@ -16,12 +16,12 @@ Route::get('/sabar', [OtherController::class, 'liat']);
 
 // Route::post('gambar2', [OtherController::class, 'time'])->name('gambar2');
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/home', [HomeController::class, 'index']);
 
     //Detail History
     Route::get('/detail_cleaning/{id}', [CleaningController::class, 'detail_permit_cleaning']);
-    Route::get('/detail/{id}', [OtherController::class, 'detail']);
+    Route::get('/detail_other/{id}', [OtherController::class, 'detail']);
 
     //Approve
     Route::post('/approve_cleaning', [CleaningController::class, 'approve_cleaning']);

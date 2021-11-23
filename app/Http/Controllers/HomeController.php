@@ -102,6 +102,14 @@ class HomeController extends Controller
                 ->select('cleaning_histories.*', 'cleanings.cleaning_work', 'cleanings.validity_from')
                 ->get();
             return view('log_cleaning', ['cleaningLog' => $cleaningLog]);
+
+        }
+        elseif ($type_view == 'other') {
+            $other_log = DB::table('other_histories')
+                ->join('other', 'other.other_id', '=', 'other_histories.other_id')
+                ->select('other_histories.*', 'other.other_work', 'other.val_from')
+                ->get();
+            return view('other.log', compact('other_log'));
         }
     }
 

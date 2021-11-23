@@ -184,6 +184,59 @@ class OtherController extends Controller
             ->where('other_histories.other_id', '=', $id)
             ->select('other_histories.*', 'users.name', 'other.other_work')
             ->get();
+        // $details = OtherHistory::all($id);
         return view('other.detail', compact('details'));
+    }
+
+    public function approve_other(Request $request)
+    {
+        $log = OtherHistory::where('other_id', '=', $request->other_id)->latest()->first();
+        if ($log->pdf == true) {
+            $log->update(['aktif' => false]);
+
+            $status = '';
+            if ($log->status == 'requested') {
+                $status = 'reviewed';
+            } elseif ($log->status == 'reviewed') {
+                $status = 'checked';
+            } elseif ($log->status == 'checked') {
+                $status = 'acknowledge';
+            } elseif ($log->status == 'acknowledge') {
+                $status = 'final';
+            } elseif ($log->status == 'final') {
+                $other = Other::find($request->other_id)->first();
+            }
+
+            $role_to = '';
+            if (($log->role_to == 'review')) {
+                // foreach ([
+                //     'bayu.prakoso@balitower.co.id', 'yona.ayu@balitower.co.id', 'taufik.ismail@balitower.co.id', 'rizky.anindya@balitower.co.id',
+                //     'rafli.ashshiddiqi@balitower.co.id', 'darajat.indraputra@balitower.co.id', 'lingga.anugerah@balitower.co.id'
+                // ] as $recipient) {
+                //     Mail::to($recipient)->send(new NotifEmail());
+                // }
+                $role_to = 'check';
+            } elseif (($log->role_to == 'check')) {
+                // foreach (['security.bacep@balitower.co.id'] as $recipient) {
+                //     Mail::to($recipient)->send(new NotifEmail());
+                // }
+                $role_to = 'security';
+            } elseif (($log->role_to == 'security')) {
+                // foreach (['rio.christian@balitower.co.id', 'lingga.anugerah@balitower.co.id'] as $recipient) {
+                //     Mail::to($recipient)->send(new NotifEmail());
+                // }
+                $role_to = 'head';
+            }
+            $otherHistory = OtherHistory::create([
+                'other_id' => $request->other_id,
+                'created_by' => Auth::user()->id,
+                'role_to' => $role_to,
+                'status' => $status,
+                'aktif' => true,
+                'pdf' => false,
+            ]);
+        } else {
+            abort(403);
+        }
     }
 }
