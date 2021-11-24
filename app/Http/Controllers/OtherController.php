@@ -190,73 +190,97 @@ class OtherController extends Controller
 
     public function approve_other(Request $request)
     {
-        $log = OtherHistory::where('other_id', '=', $request->other_id)->latest()->first();
-        if ($log->pdf == true) {
-            $log->update(['aktif' => false]);
+        if(Gate::allows('isApproval') || Gate::allows('isHead') || Gate::allows('isSecurity')){
+            $log = OtherHistory::where('other_id', '=', $request->other_id)->latest()->first();
+            if ($log->pdf == false) {
+                $log->update(['aktif' => false]);
 
-            $status = '';
-            if ($log->status == 'requested') {
-                $status = 'reviewed';
-            } elseif ($log->status == 'reviewed') {
-                $status = 'checked';
-            } elseif ($log->status == 'checked') {
-                $status = 'acknowledge';
-            } elseif ($log->status == 'acknowledge') {
-                $status = 'final';
-            } elseif ($log->status == 'final') {
-                $other = Other::find($request->other_id)->first();
+                $status = '';
+                if ($log->status == 'requested') {
+                    $status = 'reviewed';
+                } elseif ($log->status == 'reviewed') {
+                    $status = 'checked';
+                } elseif ($log->status == 'checked') {
+                    $status = 'acknowledge';
+                } elseif ($log->status == 'acknowledge') {
+                    $status = 'final';
+                } elseif ($log->status == 'final') {
+                    $other = Other::find($request->other_id)->first();
+                }
+
+                $role_to = '';
+                if (($log->role_to == 'review')) {
+                    // foreach ([
+                    //     'bayu.prakoso@balitower.co.id', 'yona.ayu@balitower.co.id', 'taufik.ismail@balitower.co.id', 'rizky.anindya@balitower.co.id',
+                    //     'rafli.ashshiddiqi@balitower.co.id', 'darajat.indraputra@balitower.co.id', 'lingga.anugerah@balitower.co.id'
+                    // ] as $recipient) {
+                    //     Mail::to($recipient)->send(new NotifEmail());
+                    // }
+                    $role_to = 'check';
+                } elseif (($log->role_to == 'check')) {
+                    // foreach (['security.bacep@balitower.co.id'] as $recipient) {
+                    //     Mail::to($recipient)->send(new NotifEmail());
+                    // }
+                    $role_to = 'security';
+                } elseif (($log->role_to == 'security')) {
+                    // foreach (['rio.christian@balitower.co.id', 'lingga.anugerah@balitower.co.id'] as $recipient) {
+                    //     Mail::to($recipient)->send(new NotifEmail());
+                    // }
+                    $role_to = 'head';
+                }
+                $otherHistory = OtherHistory::create([
+                    'other_id' => $request->other_id,
+                    'created_by' => Auth::user()->id,
+                    'role_to' => $role_to,
+                    'status' => $status,
+                    'aktif' => true,
+                    'pdf' => false,
+                ]);
+            } else{
+                return response()->json(['status' => 'failed']);
             }
 
-            $role_to = '';
-            if (($log->role_to == 'review')) {
-                // foreach ([
-                //     'bayu.prakoso@balitower.co.id', 'yona.ayu@balitower.co.id', 'taufik.ismail@balitower.co.id', 'rizky.anindya@balitower.co.id',
-                //     'rafli.ashshiddiqi@balitower.co.id', 'darajat.indraputra@balitower.co.id', 'lingga.anugerah@balitower.co.id'
-                // ] as $recipient) {
-                //     Mail::to($recipient)->send(new NotifEmail());
-                // }
-                $role_to = 'check';
-            } elseif (($log->role_to == 'check')) {
-                // foreach (['security.bacep@balitower.co.id'] as $recipient) {
-                //     Mail::to($recipient)->send(new NotifEmail());
-                // }
-                $role_to = 'security';
-            } elseif (($log->role_to == 'security')) {
-                // foreach (['rio.christian@balitower.co.id', 'lingga.anugerah@balitower.co.id'] as $recipient) {
-                //     Mail::to($recipient)->send(new NotifEmail());
-                // }
-                $role_to = 'head';
+            if ($log->role_to == 'head') {
+                $other = Other::find($request->other_id);
+                foreach (['bayu.prakoso@balitower.co.id'] as $recipient) {
+                    Mail::to($recipient)->send(new NotifFull($other));
+                }
+                $other = Other::where('other_id', $request->other_id)->first();
+                // $cleaningFull = CleaningFull::create([
+                //     'cleaning_id' => $cleaning->cleaning_id,
+                //     'cleaning_name' => $cleaning->cleaning_name,
+                //     'cleaning_name2' => $cleaning->cleaning_name2,
+                //     'cleaning_work' => $cleaning->cleaning_work,
+                //     'validity_from' => $cleaning->validity_from,
+                //     'cleaning_date' => $cleaning->created_at,
+                //     'status' => 'Full Approved',
+                //     // 'link' => ("http://127.0.0.1:8000/cleaning_pdf/$cleaning->cleaning_id"),
+                //     'link' => ("http://172.16.45.195:8000/cleaning_pdf/$cleaning->cleaning_id"),
+                // ]);
+            } else {
+                abort(403);
             }
-            $otherHistory = OtherHistory::create([
-                'other_id' => $request->other_id,
-                'created_by' => Auth::user()->id,
-                'role_to' => $role_to,
-                'status' => $status,
-                'aktif' => true,
-                'pdf' => false,
-            ]);
-        } else {
+            return $log->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
+        } else{
             abort(403);
         }
+    }
 
-        if ($log->role_to == 'head') {
-            $other = Other::find($request->other_id);
-            foreach (['bayu.prakoso@balitower.co.id'] as $recipient) {
-                Mail::to($recipient)->send(new NotifFull($other));
-            }
-            $other = Other::where('other_id', $request->other_id)->first();
-            // $cleaningFull = CleaningFull::create([
-            //     'cleaning_id' => $cleaning->cleaning_id,
-            //     'cleaning_name' => $cleaning->cleaning_name,
-            //     'cleaning_name2' => $cleaning->cleaning_name2,
-            //     'cleaning_work' => $cleaning->cleaning_work,
-            //     'validity_from' => $cleaning->validity_from,
-            //     'cleaning_date' => $cleaning->created_at,
-            //     'status' => 'Full Approved',
-            //     // 'link' => ("http://127.0.0.1:8000/cleaning_pdf/$cleaning->cleaning_id"),
-            //     'link' => ("http://172.16.45.195:8000/cleaning_pdf/$cleaning->cleaning_id"),
-            // ]);
-        }
-        return $log->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
+    public function pdf($id)
+    {
+        $other = Other::find($id);
+        dd($other);
+        $lasthistoryC = OtherHistory::where('other_id', $id)->where('aktif', 1)->first();
+        $lasthistoryC->update(['pdf' => true]);
+
+        $otherHistory = DB::table('other_histories')
+            ->join('other', 'other.other_id', '=', 'other_histories.other_id')
+            ->join('users', 'users.id', '=', 'other_histories.created_by')
+            ->where('other_histories.other_id', '=', $id)
+            ->where('other_histories.status', '!=', 'visitor')
+            ->select('other_histories.*', 'users.name', 'created_by')
+            ->get();
+        $pdf = PDF::loadview('other.pdf', compact('other', 'otherHistory', 'lasthistoryC'))->setPaper('a4', 'portrait')->setWarnings(false);
+        return $pdf->stream();
     }
 }

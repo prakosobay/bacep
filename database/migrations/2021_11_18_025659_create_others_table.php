@@ -100,11 +100,6 @@ class CreateOthersTable extends Migration
             $table->string('id_3', 16)->nullable();
             $table->string('id_4', 16)->nullable();
             $table->string('id_5', 16)->nullable();
-            $table->string('ktp_1');
-            $table->string('ktp_2')->nullable();
-            $table->string('ktp_3')->nullable();
-            $table->string('ktp_4')->nullable();
-            $table->string('ktp_5')->nullable();
             $table->timestamps();
         });
     }
