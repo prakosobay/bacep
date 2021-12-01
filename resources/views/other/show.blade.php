@@ -90,12 +90,12 @@
                         $('#ok').click(function () {
                             return false;
                         });
-                    let cleaning_id = $(this).data('cleaning_id');
-                    console.log(cleaning_id);
+                    let other_id = $(this).data('other_id');
+                    console.log(other_id);
                     $.ajax({
                         type:'POST',
-                        url:"{{url('approve_cleaning')}}",
-                        data: {cleaning_id},
+                        url:"{{url('approve_other')}}",
+                        data: {other_id},
                         error: function (request, error) {
                             alert(" Can't do because: " + error);
                         },

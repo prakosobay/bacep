@@ -105,6 +105,16 @@ class CreateOthersTable extends Migration
             $table->string('ktp_3')->nullable();
             $table->string('ktp_4')->nullable();
             $table->string('ktp_5')->nullable();
+            $table->string('vaksina_1');
+            $table->string('vaksina_2')->nullable();
+            $table->string('vaksina_3')->nullable();
+            $table->string('vaksina_4')->nullable();
+            $table->string('vaksina_5')->nullable();
+            $table->string('vaksinb_1');
+            $table->string('vaksinb_2')->nullable();
+            $table->string('vaksinb_3')->nullable();
+            $table->string('vaksinb_4')->nullable();
+            $table->string('vaksinb_5')->nullable();
             $table->timestamps();
         });
     }

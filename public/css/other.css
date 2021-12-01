@@ -6,7 +6,7 @@ body {
 
 #form {
     background-color: #000;
-    height: 650px;
+    height: 600px;
     width: 900px;
     margin: auto;
     padding: 20px;
@@ -15,7 +15,7 @@ body {
 
 #form2 {
     background-color: #000;
-    height: 2000px;
+    height: 2500px;
     width: 900px;
     margin: auto;
     padding: 20px;
@@ -184,6 +184,7 @@ body {
 /* custom styles */
 label {
     display: block;
+    color: white;
 }
 
 input {
@@ -196,7 +197,7 @@ input {
 }
 
 .nama{
-    width: 200px;
+    width: 250px;
     margin: 5px;
     border-top: none;
     border-left: none;
@@ -208,7 +209,7 @@ input {
 
 .personil{
     width: 250px;
-    margin-right: 35px;
+    margin-right: 15px;
     border-top: none;
     border-left: none;
     border-right: none;

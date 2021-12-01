@@ -25,6 +25,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     //Approve
     Route::post('/approve_cleaning', [CleaningController::class, 'approve_cleaning']);
+    Route::post('/approve_other', [OtherController::class, 'approve_other']);
 
     //Reject
     Route::post('/cleaning_reject', [CleaningController::class, 'cleaning_reject']);
@@ -56,7 +57,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/cleaning/{id}', [CleaningController::class, 'pilihan_work']);
 
     //PDF
-    Route::get('/survey_pdf/{id}', [HomeController::class, 'cetak_survey_pdf']);
+    Route::get('/other_pdf/{id}', [OtherController::class, 'pdf']);
     Route::get('/cleaning_pdf/{id}', [CleaningController::class, 'cetak_cleaning_pdf']);
 
     //Admin Panel

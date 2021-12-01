@@ -1,8 +1,5 @@
 @extends('layouts.admin')
 
-{{-- @section('judul_halaman', 'Tabel User Web Permit') --}}
-        {{-- {{ csrf_field() }} --}}
-
 @section('content')
 <div class="container-fluid">
 
@@ -39,7 +36,15 @@
                                 </div>
                                 <label>Slug :</label>
                                 <div class="form-group">
-                                    <input id="slug" type="text" class="form-control" name="slug"  required="required">
+                                    {{-- <input id="slug" type="text" class="form-control" name="slug"  required="required"> --}}
+                                    <select class="form-control">
+                                        <option selected>Pilih 1 Slug</option>
+                                        <option value="approval">Approval</option>
+                                        <option value="bm">BM</option>
+                                        <option value="head">Head</option>
+                                        <option value="security">Security</option>
+                                        <option value="tenant">Tenant</option>
+                                    </select>
                                 </div>
                                 <label>Dept :</label>
                                 <div class="form-group">
