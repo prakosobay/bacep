@@ -11,4 +11,5 @@ class Personil extends Model
 
     protected $table = 'personil';
     protected $guarded = [];
+    protected $primaryKey = 'id';
 }
