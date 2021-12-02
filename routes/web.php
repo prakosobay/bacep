@@ -16,7 +16,7 @@ Route::get('/sabar', [OtherController::class, 'liat']);
 
 // Route::post('gambar2', [OtherController::class, 'time'])->name('gambar2');
 
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::get('/home', [HomeController::class, 'index']);
 
     //Detail History
@@ -51,7 +51,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     //Form
     Route::get('/cleaning.form', [CleaningController::class, 'tampilan']);
-    Route::get('/other', [OtherController::class, 'index']);
+
 
     //Pilihan Work
     Route::get('/cleaning/{id}', [CleaningController::class, 'pilihan_work']);
@@ -128,7 +128,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/ob.destroy/{id}', [RevisiController::class, 'destroy_ob']);
     Route::post('/ob.new', [RevisiController::class, 'store_ob']);
 
+    //TNN
+    Route::get('tnn', [TNNController::class, 'index']);
 
+
+    //Other
+    Route::get('/perbaikan', [OtherController::class, 'index']);
 });
 // Route::resource('/barang', ConsumController::class);
 //

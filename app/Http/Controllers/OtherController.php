@@ -19,146 +19,93 @@ class OtherController extends Controller
     public function index()
     {
         if (Gate::allows('isBm')){
-        return view('other.form');
+        return view('other.perbaikan');
         } else{
             abort(403);
         }
     }
 
-    public function files(Request $request)
-    {
-        // dd($request);
-        $request->validate([
-            'pict' => ['required', 'image', 'mimes:png,jpg,jpeg', 'max:500'],
-        ]);
+    // public function files(Request $request)
+    // {
+    //     // dd($request);
+    //     $request->validate([
+    //         'pict' => ['required', 'image', 'mimes:png,jpg,jpeg', 'max:500'],
+    //     ]);
 
-        $file = $request->file('pict');
-        $nama_file = time()."_".$file->getClientOriginalName();
-        $tujuan_upload = 'gambar';
-	    $file->move($tujuan_upload,$file->getClientOriginalName());
+    //     $file = $request->file('pict');
+    //     $nama_file = time()."_".$file->getClientOriginalName();
+    //     $tujuan_upload = 'gambar';
+	//     $file->move($tujuan_upload,$file->getClientOriginalName());
 
-        Gambar::create([
-            'file' => $nama_file,
-        ]);
-    }
+    //     Gambar::create([
+    //         'file' => $nama_file,
+    //     ]);
+    // }
 
-    public function time(Request $request)
-    {
-        // dd($request);
-        $request->validate([
-            'jam1' => ['required'],
-            'jam2' => ['required'],
-        ]);
+    // public function time(Request $request)
+    // {
+    //     // dd($request);
+    //     $request->validate([
+    //         'jam1' => ['required'],
+    //         'jam2' => ['required'],
+    //     ]);
 
-        // $jam_end = (00:10:00);
+    //     // $jam_end = (00:10:00);
 
-        $time = Time::create([
-            'jam1' => $request->jam1,
-            'jam2' => $request->jam2
-        ]);
-    }
+    //     $time = Time::create([
+    //         'jam1' => $request->jam1,
+    //         'jam2' => $request->jam2
+    //     ]);
+    // }
 
-    public function liat()
-    {
-        $jam = Time::all();
-        return view('other.gambar', compact('jam'));
-        // return isset($jam) && !empty($jam) ? response()->json(['status' => 'SUCCESS', 'jam' => $jam]) : response()->json(['status' => 'FAILED', 'jam' => []]);
-    }
+    // public function liat()
+    // {
+    //     $jam = Time::all();
+    //     return view('other.gambar', compact('jam'));
+    //     // return isset($jam) && !empty($jam) ? response()->json(['status' => 'SUCCESS', 'jam' => $jam]) : response()->json(['status' => 'FAILED', 'jam' => []]);
+    // }
 
     public function store_other(Request $request)
     {
-        // dd($request->all());
+        dd($request->all());
         if(Gate::allows('isBm')){
-            $form = $request->all();
-            $other = Other::create($form);
+            // $form = $request->all();
+            // $other = Other::create($form);
 
-            // $request->validate([
-            //     'other_work' => ['required', 'string', 'max:255'],
-            //     'val_from' => ['required', 'date'],
-            //     'val_to' => ['required', 'date'],
-            //     'server' => ['boolean'],
-            //     'genset' => ['boolean'],
-            //     'mmr1' => ['boolean'],
-            //     'mmr2' => ['boolean'],
-            //     'panel' => ['boolean'],
-            //     'batre' => ['boolean'],
-            //     'ups' => ['boolean'],
-            //     'fss' => ['boolean'],
-            //     '2nd' => ['boolean'],
-            //     '3rd' => ['boolean'],
-            //     'trafo' => ['boolean'],
-            //     'yard' => ['boolean'],
-            //     'parking' => ['boolean'],
-            //     'other' => ['string', 'max:255'],
-            //     'desc' => ['required', 'string', 'max:255'],
-            //     'time_1' => ['required', 'timezone'],
-            //     'time_2' => ['required', 'timezone'],
-            //     'time_3' => ['timezone'],
-            //     'time_4' => ['timezone'],
-            //     'time_5' => ['timezone'],
-            //     'item_1' => ['required', 'string', 'max:255'],
-            //     'item_2' => ['required', 'string', 'max:255'],
-            //     'item_3' => ['string', 'max:255'],
-            //     'item_4' => ['string', 'max:255'],
-            //     'item_5' => ['string', 'max:255'],
-            //     'procedure_1' => ['required', 'string', 'max:255'],
-            //     'procedure_2' => ['required', 'string', 'max:255'],
-            //     'procedure_3' => ['string', 'max:255'],
-            //     'procedure_4' => ['string', 'max:255'],
-            //     'procedure_5' => ['string', 'max:255'],
-            //     'risk_1' => ['required', 'string', 'max:255'],
-            //     'risk_2' => ['required', 'string', 'max:255'],
-            //     'risk_3' => ['string', 'max:255'],
-            //     'risk_4' => ['string', 'max:255'],
-            //     'risk_5' => ['string', 'max:255'],
-            //     'poss_1' => ['required', 'string', 'max:255'],
-            //     'poss_2' => ['required', 'string', 'max:255'],
-            //     'poss_3' => ['string', 'max:255'],
-            //     'poss_4' => ['string', 'max:255'],
-            //     'poss_5' => ['string', 'max:255'],
-            //     'impact_1' => ['required', 'string', 'max:6'],
-            //     'impact_2' => ['required', 'string', 'max:6'],
-            //     'impact_3' => ['string', 'max:6'],
-            //     'impact_4' => ['string', 'max:6'],
-            //     'impact_5' => ['string', 'max:6'],
-            //     'mitigation_1' => ['required', 'string', 'max:255'],
-            //     'mitigation_2' => ['required', 'string', 'max:255'],
-            //     'mitigation_3' => ['string', 'max:255'],
-            //     'mitigation_4' => ['string', 'max:255'],
-            //     'mitigation_5' => ['string', 'max:255'],
-            //     'testing' => ['string', 'max:255'],
-            //     'rollback' => ['string', 'max:255'],
-            //     'name_1' => ['required', 'string', 'max:255'],
-            //     'name_2' => ['string', 'max:255'],
-            //     'name_3' => ['string', 'max:255'],
-            //     'name_4' => ['string', 'max:255'],
-            //     'name_5' => ['string', 'max:255'],
-            //     'company_1' => ['required', 'string', 'max:255'],
-            //     'company_2' => ['string', 'max:255'],
-            //     'company_3' => ['string', 'max:255'],
-            //     'company_4' => ['string', 'max:255'],
-            //     'company_5' => ['string', 'max:255'],
-            //     'department_1' => ['required', 'string', 'max:255'],
-            //     'department_2' => ['string', 'max:255'],
-            //     'department_3' => ['string', 'max:255'],
-            //     'department_4' => ['string', 'max:255'],
-            //     'department_5' => ['string', 'max:255'],
-            //     'respon_1' => ['required', 'string', 'max:255'],
-            //     'respon_2' => ['string', 'max:255'],
-            //     'respon_3' => ['string', 'max:255'],
-            //     'respon_4' => ['string', 'max:255'],
-            //     'respon_5' => ['string', 'max:255'],
-            //     'phone_1' => ['required', 'string', 'max:15'],
-            //     'phone_2' => ['string', 'max:15'],
-            //     'phone_3' => ['string', 'max:15'],
-            //     'phone_4' => ['string', 'max:15'],
-            //     'phone_5' => ['string', 'max:15'],
-            //     'id_1' => ['required', 'numeric', 'max:17'],
-            //     'id_2' => ['numeric', 'max:17'],
-            //     'id_3' => ['numeric', 'max:17'],
-            //     'id_4' => ['numeric', 'max:17'],
-            //     'id_5' => ['numeric', 'max:17'],
-            // ]);
+            $other = Other::create([
+                'other_work' => $request->other_work,
+                'val_form' => $request->val_from,
+                'val_to' => $request->val_to,
+                'server' => $request->server,
+                'genset' => $request->genset,
+                'mmr1' => $request->mmr1,
+                'mmr2' => $request->mmr2,
+                'fss' => $request->fss,
+                'batre' => $request->batre,
+                'ups' => $request->ups,
+                'lt2' => $request->lt2,
+                'lt3' => $request->lt3,
+                'trafo' => $request->trafo,
+                'parking' => $request->parking,
+                'yard' => $request->yard,
+                'panel' => $request->panel,
+                'other' => $request->other,
+                'time_1' => $request->time_1,
+                'time_2' => $request->time_2,
+                'time_3' => $request->time_3,
+                'time_4' => $request->time_4,
+                'time_5' => $request->time_5,
+                'procedure_1' => $request->procedure_1,
+                'time_5' => $request->time_5,
+                'time_5' => $request->time_5,
+                'time_5' => $request->time_5,
+                'time_5' => $request->time_5,
+
+            ]);
+
+
+
+
 
             if($other->exists){
                 $log = OtherHistory::create([
@@ -284,3 +231,90 @@ class OtherController extends Controller
         return $pdf->stream();
     }
 }
+// $request->validate([
+            //     'other_work' => ['required', 'string', 'max:255'],
+            //     'val_from' => ['required', 'date'],
+            //     'val_to' => ['required', 'date'],
+            //     'server' => ['boolean'],
+            //     'genset' => ['boolean'],
+            //     'mmr1' => ['boolean'],
+            //     'mmr2' => ['boolean'],
+            //     'panel' => ['boolean'],
+            //     'batre' => ['boolean'],
+            //     'ups' => ['boolean'],
+            //     'fss' => ['boolean'],
+            //     '2nd' => ['boolean'],
+            //     '3rd' => ['boolean'],
+            //     'trafo' => ['boolean'],
+            //     'yard' => ['boolean'],
+            //     'parking' => ['boolean'],
+            //     'other' => ['string', 'max:255'],
+            //     'desc' => ['required', 'string', 'max:255'],
+            //     'time_1' => ['required', 'timezone'],
+            //     'time_2' => ['required', 'timezone'],
+            //     'time_3' => ['timezone'],
+            //     'time_4' => ['timezone'],
+            //     'time_5' => ['timezone'],
+            //     'item_1' => ['required', 'string', 'max:255'],
+            //     'item_2' => ['required', 'string', 'max:255'],
+            //     'item_3' => ['string', 'max:255'],
+            //     'item_4' => ['string', 'max:255'],
+            //     'item_5' => ['string', 'max:255'],
+            //     'procedure_1' => ['required', 'string', 'max:255'],
+            //     'procedure_2' => ['required', 'string', 'max:255'],
+            //     'procedure_3' => ['string', 'max:255'],
+            //     'procedure_4' => ['string', 'max:255'],
+            //     'procedure_5' => ['string', 'max:255'],
+            //     'risk_1' => ['required', 'string', 'max:255'],
+            //     'risk_2' => ['required', 'string', 'max:255'],
+            //     'risk_3' => ['string', 'max:255'],
+            //     'risk_4' => ['string', 'max:255'],
+            //     'risk_5' => ['string', 'max:255'],
+            //     'poss_1' => ['required', 'string', 'max:255'],
+            //     'poss_2' => ['required', 'string', 'max:255'],
+            //     'poss_3' => ['string', 'max:255'],
+            //     'poss_4' => ['string', 'max:255'],
+            //     'poss_5' => ['string', 'max:255'],
+            //     'impact_1' => ['required', 'string', 'max:6'],
+            //     'impact_2' => ['required', 'string', 'max:6'],
+            //     'impact_3' => ['string', 'max:6'],
+            //     'impact_4' => ['string', 'max:6'],
+            //     'impact_5' => ['string', 'max:6'],
+            //     'mitigation_1' => ['required', 'string', 'max:255'],
+            //     'mitigation_2' => ['required', 'string', 'max:255'],
+            //     'mitigation_3' => ['string', 'max:255'],
+            //     'mitigation_4' => ['string', 'max:255'],
+            //     'mitigation_5' => ['string', 'max:255'],
+            //     'testing' => ['string', 'max:255'],
+            //     'rollback' => ['string', 'max:255'],
+            //     'name_1' => ['required', 'string', 'max:255'],
+            //     'name_2' => ['string', 'max:255'],
+            //     'name_3' => ['string', 'max:255'],
+            //     'name_4' => ['string', 'max:255'],
+            //     'name_5' => ['string', 'max:255'],
+            //     'company_1' => ['required', 'string', 'max:255'],
+            //     'company_2' => ['string', 'max:255'],
+            //     'company_3' => ['string', 'max:255'],
+            //     'company_4' => ['string', 'max:255'],
+            //     'company_5' => ['string', 'max:255'],
+            //     'department_1' => ['required', 'string', 'max:255'],
+            //     'department_2' => ['string', 'max:255'],
+            //     'department_3' => ['string', 'max:255'],
+            //     'department_4' => ['string', 'max:255'],
+            //     'department_5' => ['string', 'max:255'],
+            //     'respon_1' => ['required', 'string', 'max:255'],
+            //     'respon_2' => ['string', 'max:255'],
+            //     'respon_3' => ['string', 'max:255'],
+            //     'respon_4' => ['string', 'max:255'],
+            //     'respon_5' => ['string', 'max:255'],
+            //     'phone_1' => ['required', 'string', 'max:15'],
+            //     'phone_2' => ['string', 'max:15'],
+            //     'phone_3' => ['string', 'max:15'],
+            //     'phone_4' => ['string', 'max:15'],
+            //     'phone_5' => ['string', 'max:15'],
+            //     'id_1' => ['required', 'numeric', 'max:17'],
+            //     'id_2' => ['numeric', 'max:17'],
+            //     'id_3' => ['numeric', 'max:17'],
+            //     'id_4' => ['numeric', 'max:17'],
+            //     'id_5' => ['numeric', 'max:17'],
+            // ]);
