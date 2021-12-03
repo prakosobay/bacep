@@ -52,7 +52,6 @@ Route::middleware(['auth'])->group(function () {
     //Form
     Route::get('/cleaning.form', [CleaningController::class, 'tampilan']);
 
-
     //Pilihan Work
     Route::get('/cleaning/{id}', [CleaningController::class, 'pilihan_work']);
 
@@ -128,12 +127,10 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/ob.destroy/{id}', [RevisiController::class, 'destroy_ob']);
     Route::post('/ob.new', [RevisiController::class, 'store_ob']);
 
-    //TNN
-    Route::get('tnn', [TNNController::class, 'index']);
-
-
     //Other
     Route::get('/perbaikan', [OtherController::class, 'index']);
+    Route::get('rutin', [RutinController::class, 'index']);
+    Route::get('/rutins/{id}', [RutinController::class, 'rutin']);
 });
 // Route::resource('/barang', ConsumController::class);
 //

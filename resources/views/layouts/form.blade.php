@@ -43,13 +43,13 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item mr-10">
-                <a class="nav-link" href="#"><strong>Isian</strong></a>
+                <a class="nav-link" href="{{url('/home')}}"><strong>Home</strong></a>
             </li>
             <li class="nav-item mr-10">
-                <a class="nav-link" href="{{url('tnn')}}"><strong>Rutin</strong></a>
+                <a class="nav-link" href="{{url('/perbaikan')}}"><strong>Isian</strong></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#"><strong>DAIKIN</strong></a>
+            <li class="nav-item mr-10">
+                <a class="nav-link" href="{{url('rutin')}}"><strong>Rutin</strong></a>
             </li>
         </ul>
     </div>
@@ -64,6 +64,50 @@
         headers: {
             'X-CSRF-TOKEN': $('input[name="_token"]').val()
         }
+    });
+
+    $('#rutin').change(function(){
+        let id = $(this).val();
+        $.ajax({
+            url: "{{url("/rutins")}}"+'/'+id,
+            dataType:"json",
+            type: "get",
+            success: function(response){
+                const {data} = response;
+                console.log(data)
+            $('#desc').val(data.desc);
+            $('#item_1').val(data.item_1);
+            $('#item_2').val(data.item_2);
+            $('#item_3').val(data.item_3);
+            $('#item_4').val(data.item_4);
+            $('#item_5').val(data.item_5);
+            $('#procedure_1').val(data.procedure_1);
+            $('#procedure_2').val(data.procedure_2);
+            $('#procedure_3').val(data.procedure_3);
+            $('#procedure_4').val(data.procedure_4);
+            $('#procedure_5').val(data.procedure_5);
+            $('#risk_1').val(data.risk_1);
+            $('#risk_2').val(data.risk_2);
+            $('#risk_3').val(data.risk_3);
+            $('#risk_4').val(data.risk_4);
+            $('#risk_5').val(data.risk_5);
+            $('#impact_1').val(data.impact_1);
+            $('#impact_2').val(data.impact_2);
+            $('#impact_3').val(data.impact_3);
+            $('#impact_4').val(data.impact_4);
+            $('#impact_5').val(data.impact_5);
+            $('#poss_1').val(data.poss_1);
+            $('#poss_2').val(data.poss_2);
+            $('#poss_3').val(data.poss_3);
+            $('#poss_4').val(data.poss_4);
+            $('#poss_5').val(data.poss_5);
+            $('#mitigation_1').val(data.mitigation_1);
+            $('#mitigation_2').val(data.mitigation_2);
+            $('#mitigation_3').val(data.mitigation_3);
+            $('#mitigation_4').val(data.mitigation_4);
+            $('#mitigation_5').val(data.mitigation_5);
+            }
+        });
     });
 
     $(".btn-submit").click(function(e){
