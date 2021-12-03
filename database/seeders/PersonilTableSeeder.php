@@ -92,6 +92,30 @@ class PersonilTableSeeder extends Seeder
                 'vaksin_2' => '',
             ],
 
+            [
+                'name' => 'Riga Ashar Rizki',
+                'company' => 'PT DAIKIN',
+                'department' => 'Teknisi',
+                'respon' => 'Teknisi',
+                'phone' => '0857-2608-8493',
+                'nik' => 3328174612980002,
+                'ktp' => '',
+                'vaksin_1' => '',
+                'vaksin_2' => '',
+            ],
+
+            [
+                'name' => 'Rendi Yulianto',
+                'company' => 'PT DAIKIN',
+                'department' => 'Teknisi',
+                'respon' => 'Teknisi',
+                'phone' => '0896-6923-8981',
+                'nik' => 3521120107920039,
+                'ktp' => '',
+                'vaksin_1' => '',
+                'vaksin_2' => '',
+            ],
+
             //KONE
             [
                 'name' => 'Muhammad Sofian',
