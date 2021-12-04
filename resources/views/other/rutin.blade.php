@@ -36,14 +36,14 @@
                         <tr>
                             <td>
                                 <label class="radiobutton_container">
-                                <input id="1" name="server" type="checkbox" value="1">
+                                <input id="server" name="server" type="checkbox" value="">
                                 <span class="radiobutton_mark"></span>
                                 Server Room
                                 </label>
                             </td>
                             <td>
                                 <label class="radiobutton_container">
-                                <input id="1" name="genset" type="checkbox" value="1">
+                                <input id="genset" name="genset" type="checkbox" value="">
                                 <span class="radiobutton_mark"></span>
                                 Generator Room
                                 </label>
@@ -52,14 +52,14 @@
                         <tr>
                             <td>
                                 <label class="radiobutton_container">
-                                <input id="1" name="mmr1" type="checkbox" value="1">
+                                <input id="mmr1" name="mmr1" type="checkbox" value="">
                                 <span class="radiobutton_mark"></span>
                                 MMR 1
                                 </label>
                             </td>
                             <td>
                                 <label class="radiobutton_container">
-                                <input id="1" name="panel" type="checkbox" value="1">
+                                <input id="panel" name="panel" type="checkbox" value="">
                                 <span class="radiobutton_mark"></span>
                                 Panel Room
                                 </label>
@@ -68,14 +68,14 @@
                         <tr>
                             <td>
                                 <label class="radiobutton_container">
-                                <input id="1" name="mmr2" type="checkbox" value="1">
+                                <input id="mmr2" name="mmr2" type="checkbox" value="">
                                 <span class="radiobutton_mark"></span>
                                 MMR 2
                                 </label>
                             </td>
                             <td>
                                 <label class="radiobutton_container">
-                                <input id="1" name="batre" type="checkbox" value="1">
+                                <input id="batre" name="batre" type="checkbox" value="">
                                 <span class="radiobutton_mark"></span>
                                 Battery Room
                                 </label>
@@ -84,14 +84,14 @@
                         <tr>
                             <td>
                                 <label class="radiobutton_container">
-                                <input id="1" name="ups" type="checkbox" value="1">
+                                <input id="ups" name="ups" type="checkbox" value="">
                                 <span class="radiobutton_mark"></span>
                                 UPS Room
                                 </label>
                             </td>
                             <td>
                                 <label class="radiobutton_container">
-                                <input id="1" name="fss" type="checkbox" value="1">
+                                <input id="fss" name="fss" type="checkbox" value="">
                                 <span class="radiobutton_mark"></span>
                                 FSS Room
                                 </label>
@@ -100,14 +100,14 @@
                         <tr>
                             <td>
                                 <label class="radiobutton_container">
-                                <input id="1" name="lt2" type="checkbox" value="1">
+                                <input id="lt2" name="lt2" type="checkbox" value="">
                                 <span class="radiobutton_mark"></span>
                                 Office 2nd Fl
                                 </label>
                             </td>
                             <td>
                                 <label class="radiobutton_container">
-                                <input id="1" name="lt3" type="checkbox" value="1">
+                                <input id="lt3" name="lt3" type="checkbox" value="">
                                 <span class="radiobutton_mark"></span>
                                 Office 3rd Fl
                                 </label>
@@ -116,14 +116,14 @@
                         <tr>
                             <td>
                                 <label class="radiobutton_container">
-                                <input id="1" name="trafo" type="checkbox" value="1">
+                                <input id="trafo" name="trafo" type="checkbox" value="">
                                 <span class="radiobutton_mark"></span>
                                 Trafo Room
                                 </label>
                             </td>
                             <td>
                                 <label class="radiobutton_container">
-                                <input id="1" name="yard" type="checkbox" value="1">
+                                <input id="yard" name="yard" type="checkbox" value="">
                                 <span class="radiobutton_mark"></span>
                                 Yard
                                 </label>
@@ -132,7 +132,7 @@
                         <tr>
                             <td>
                                 <label class="radiobutton_container">
-                                <input id="1" name="parking" type="checkbox" value="1">
+                                <input id="parking" name="parking" type="checkbox" value="">
                                 <span class="radiobutton_mark"></span>
                                 Parking Lot
                                 </label>
@@ -141,7 +141,7 @@
                                 <label class="radiobutton_container">
                                 <input id="1" type="checkbox">
                                 <span class="radiobutton_mark"></span>
-                                <textarea id="1" name="other">Other</textarea>
+                                <textarea id="other" name="other" value="">Other</textarea>
                             </td>
                         </tr>
                       </table>
