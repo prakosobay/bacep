@@ -30,7 +30,7 @@ class RutinController extends Controller
     public function rutin($id)
     {
         $data = Rutin::findOrFail($id);
-        // dd($data);
+        dd($data);
         return isset($data) && !empty($data) ? response()->json(['status' => 'SUCCESS', 'data' => $data]) : response()->json(['status' => 'FAILED', 'data' => []]);
     }
 

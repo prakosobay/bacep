@@ -106,6 +106,20 @@
             $('#mitigation_3').val(data.mitigation_3);
             $('#mitigation_4').val(data.mitigation_4);
             $('#mitigation_5').val(data.mitigation_5);
+            $('#loc1').val(data.loc1);
+            $('#loc2').val(data.loc2);
+            $('#loc3').val(data.loc3);
+            $('#loc4').val(data.loc4);
+            $('#loc5').val(data.loc5);
+            $('#loc6').val(data.loc6);
+            $('#loc7').val(data.loc7);
+            $('#loc8').val(data.loc8);
+            $('#loc9').val(data.loc9);
+            $('#loc10').val(data.loc10);
+            $('#loc11').val(data.loc11);
+            $('#loc12').val(data.loc12);
+            $('#loc13').val(data.loc13);
+            $('#loc14').val(data.loc14);
             }
         });
     });

@@ -36,112 +36,99 @@
                         <tr>
                             <td>
                                 <label class="radiobutton_container">
-                                <input id="server" name="server" type="checkbox" value="">
-                                <span class="radiobutton_mark"></span>
-                                Server Room
+                                <input id="loc1" name="server" type="checkbox" value="" readonly>
+1
                                 </label>
                             </td>
                             <td>
                                 <label class="radiobutton_container">
-                                <input id="genset" name="genset" type="checkbox" value="">
-                                <span class="radiobutton_mark"></span>
-                                Generator Room
-                                </label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label class="radiobutton_container">
-                                <input id="mmr1" name="mmr1" type="checkbox" value="">
-                                <span class="radiobutton_mark"></span>
-                                MMR 1
-                                </label>
-                            </td>
-                            <td>
-                                <label class="radiobutton_container">
-                                <input id="panel" name="panel" type="checkbox" value="">
-                                <span class="radiobutton_mark"></span>
-                                Panel Room
+                                <input id="loc2" name="genset" type="checkbox" value="" readonly>
+2
                                 </label>
                             </td>
                         </tr>
                         <tr>
                             <td>
                                 <label class="radiobutton_container">
-                                <input id="mmr2" name="mmr2" type="checkbox" value="">
-                                <span class="radiobutton_mark"></span>
-                                MMR 2
+                                <input id="loc3" name="mmr1" type="checkbox" value="" readonly>
+3
                                 </label>
                             </td>
                             <td>
                                 <label class="radiobutton_container">
-                                <input id="batre" name="batre" type="checkbox" value="">
-                                <span class="radiobutton_mark"></span>
-                                Battery Room
-                                </label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label class="radiobutton_container">
-                                <input id="ups" name="ups" type="checkbox" value="">
-                                <span class="radiobutton_mark"></span>
-                                UPS Room
-                                </label>
-                            </td>
-                            <td>
-                                <label class="radiobutton_container">
-                                <input id="fss" name="fss" type="checkbox" value="">
-                                <span class="radiobutton_mark"></span>
-                                FSS Room
+                                <input id="loc4" name="panel" type="checkbox" value="" readonly>
+4
                                 </label>
                             </td>
                         </tr>
                         <tr>
                             <td>
                                 <label class="radiobutton_container">
-                                <input id="lt2" name="lt2" type="checkbox" value="">
-                                <span class="radiobutton_mark"></span>
-                                Office 2nd Fl
+                                <input id="loc5" name="mmr2" type="checkbox" value="" readonly>
+5
                                 </label>
                             </td>
                             <td>
                                 <label class="radiobutton_container">
-                                <input id="lt3" name="lt3" type="checkbox" value="">
-                                <span class="radiobutton_mark"></span>
-                                Office 3rd Fl
-                                </label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label class="radiobutton_container">
-                                <input id="trafo" name="trafo" type="checkbox" value="">
-                                <span class="radiobutton_mark"></span>
-                                Trafo Room
-                                </label>
-                            </td>
-                            <td>
-                                <label class="radiobutton_container">
-                                <input id="yard" name="yard" type="checkbox" value="">
-                                <span class="radiobutton_mark"></span>
-                                Yard
+                                <input id="loc6" name="batre" type="checkbox" value="" readonly>
+6
                                 </label>
                             </td>
                         </tr>
                         <tr>
                             <td>
                                 <label class="radiobutton_container">
-                                <input id="parking" name="parking" type="checkbox" value="">
-                                <span class="radiobutton_mark"></span>
-                                Parking Lot
+                                <input id="loc7" name="ups" type="checkbox" value="" readonly>
+7
                                 </label>
                             </td>
                             <td>
                                 <label class="radiobutton_container">
-                                <input id="1" type="checkbox">
-                                <span class="radiobutton_mark"></span>
-                                <textarea id="other" name="other" value="">Other</textarea>
+                                <input id="loc8" name="fss" type="checkbox" value="" readonly>
+8
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="radiobutton_container">
+                                <input id="loc9" name="lt2" type="checkbox" value="" readonly>
+9
+                                </label>
+                            </td>
+                            <td>
+                                <label class="radiobutton_container">
+                                <input id="loc10" name="lt3" type="checkbox" value="" readonly>
+10
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="radiobutton_container">
+                                <input id="loc11" name="trafo" type="checkbox" value="" readonly>
+11
+                                </label>
+                            </td>
+                            <td>
+                                <label class="radiobutton_container">
+                                <input id="loc12" name="yard" type="checkbox" value="" readonly>
+12
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="radiobutton_container">
+                                <input id="loc13" name="parking" type="checkbox" value="" readonly>
+13
+                                </label>
+                            </td>
+                            <td>
+                                <label class="radiobutton_container">
+                                <input id="loc14" name="other" value="" type="checkbox" readonly>
+                                14
+                                </label>
                             </td>
                         </tr>
                       </table>
