@@ -21,8 +21,8 @@ class RutinSeeder extends Seeder
             //KONE
             [
                 'work' => 'Service Lift Kantor Batu Ceper',
-                'loc1' => 'Parking', //server
-                'loc2' => 'Lantai 5, Lift dan Lantai G', //genset
+                'loc1' => 'Lantai 5, Lift dan Lantai G', //server
+                'loc2' => '', //genset
                 'loc3' => '', //mmr
                 'loc4' => '', //panel
                 'loc5' => '', //mmr2
@@ -262,6 +262,68 @@ class RutinSeeder extends Seeder
                 'mitigation_2' => 'Menggunakan masker',
                 'mitigation_3' => 'Bekerja dengan hati-hati dan menjaga jarak dari sumber listrik',
                 'mitigation_4' => 'Pastikan lantai untuk tangga rata, pegang tangga dengan erat',
+                'mitigation_5' => '',
+                'testing' => '',
+                'rollback' => '',
+            ],
+
+            //Service Habitat
+            [
+                'work' => 'Service Habitat (Penggantian Lady Bin)',
+                'loc1' => 'Lantai 1 dan Lantai G', //server
+                'loc2' => 'Office 2nd Fl', //genset
+                'loc3' => 'Office 3rd Fl', //mmr
+                'loc4' => '', //panel
+                'loc5' => '', //mmr2
+                'loc6' => '', //batre
+                'loc7' => '', //ups
+                'loc8' => '', //fss
+                'loc9' => '', //lt2
+                'loc10' => '', //lt3
+                'loc11' => '', //yard
+                'loc12' => '', //trafo
+                'loc13' => '', //parking
+                'loc14' => '',  //other
+                'desc' => 'Service habitat (Penggantian Lady Bin)',
+                'activity_1' => 'Service habitat (Penggantian Lady Bin)',
+                'activity_2' => '',
+                'activity_3' => '',
+                'activity_4' => '',
+                'activity_5' => '',
+                'detail_1' => 'Menghirup bau tidak sedap',
+                'detail_2' => 'Sampah berserakan di lantai',
+                'detail_3' => '',
+                'detail_4' => '',
+                'detail_5' => '',
+                'item_1' => 'Kantong plastik sampah',
+                'item_2' => 'APD',
+                'item_3' => '',
+                'item_4' => '',
+                'item_5' => '',
+                'procedure_1' => 'Penggantian plastik yang lama dengan yang baru',
+                'procedure_2' => '',
+                'procedure_3' => '',
+                'procedure_4' => '',
+                'procedure_5' => '',
+                'risk_1' => 'Sampah berserakan di lantai',
+                'risk_2' => 'Menghirup bau tidak sedap',
+                'risk_3' => '',
+                'risk_4' => '',
+                'risk_5' => '',
+                'poss_1' => 'Lantai kotor',
+                'poss_2' => 'Mual-mual',
+                'poss_3' => '',
+                'poss_4' => '',
+                'poss_5' => '',
+                'impact_1' => 'Low',
+                'impact_2' => 'Low',
+                'impact_3' => '',
+                'impact_4' => '',
+                'impact_5' => '',
+                'mitigation_1' => 'Pastikan bekerja dengan rapi dan bila ada sampah berceceran agar dibersihkan',
+                'mitigation_2' => 'Menggunakan masker',
+                'mitigation_3' => '',
+                'mitigation_4' => '',
                 'mitigation_5' => '',
                 'testing' => '',
                 'rollback' => '',

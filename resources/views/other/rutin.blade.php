@@ -136,7 +136,6 @@
 
                     {{-- Detail Time & Operation --}}
                     <h4 class="text-white mt-5">Detail Time & Operation (Detail Waktu & Operasi) </h4>
-                    <font color="red" size="2">*Minimal Mengisi 2</font>
                     <p>
                         <input type="time" class="time" name="time_1">
                         <input type="text" id="item_1" class="detail @error('item1') is-invalid @enderror" required autocomplete="item1" value="" name="item_1" placeholder="Item" readonly>
@@ -161,7 +160,6 @@
 
                     {{-- Risk Service Area Impact --}}
                     <h4 class="text-white mt-5">Risk and Service Area Impact (Resiko dan Dampak Area Servis)</h4>
-                    <font class="mt-2" color="red" size="2">*Minimal Mengisi 2</font>
                     <p>
                         <input id="risk_1" class="risk" value="" type="text" name="risk_1" placeholder="Risk" readonly>
                         <input id="poss_1" class="risk" value="" type="text" name="poss_1" placeholder="Possibility" readonly>
@@ -199,13 +197,7 @@
 
                     {{-- PIC --}}
                     <h4 class="pic">Person in charge 1</h4>
-                    <font color="red" size="2">*File harus berbentuk jpg,png,jpeg; maks 500kb</font><br>
-                        <input class="nama @error('nama1') is-invalid @enderror" required autocomplete="nama1" type="text" name="name_1" placeholder="Name">
-                        @error('nama1')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
+                        <input id="risk_1" class="risk" value="" type="text" name="risk_1" placeholder="Risk" readonly>
                         <input class="nama @error('company1') is-invalid @enderror" required autocomplete="company1" type="text" name="company_1" placeholder="Company">
                         @error('company1')
                             <span class="invalid-feedback" role="alert">
@@ -237,12 +229,12 @@
                             </span>
                         @enderror
 
-                        <label ><strong>Sertifikat Vaksin 1 :</strong></label>
+                        {{-- <label ><strong>Sertifikat Vaksin 1 :</strong></label>
                         <input class="ktp" id="vaksina" type="file" name="vaksina_1" accept="image/*"/>
                         <label ><strong>Sertifikat Vaksin 2 :</strong></label>
                         <input class="ktp" id="vaksinb" type="file" name="vaksinb_1" accept="image/*"/>
                         <label ><strong>Foto KTP :</strong></label>
-                        <input class="ktp ml-2" id="ktp" type="file" name="ktp_1" accept="image/*"/>
+                        <input class="ktp ml-2" id="ktp" type="file" name="ktp_1" accept="image/*"/> --}}
 
                     <h4 class="pic">Person in charge 2</h4>
                         <input class="nama" type="text" name="name_2" placeholder="Name">
@@ -251,12 +243,6 @@
                         <input class="nama" type="text" name="respon_2" placeholder="Responsibility">
                         <input class="personil" type="text" name="phone_2" placeholder="Phone number">
                         <input type="number" class="personil"  name="id_2" placeholder="ID Number">
-                        <label ><strong>Sertifikat Vaksin 1 :</strong></label>
-                        <input class="ktp" id="vaksina_2" type="file" name="vaksina_2" accept="image/*"/>
-                        <label ><strong>Sertifikat Vaksin 2 :</strong></label>
-                        <input class="ktp" id="vaksinb_2" type="file" name="vaksinb_2" accept="image/*"/>
-                        <label ><strong>Foto KTP :</strong></label>
-                        <input class="ktp ml-2" id="ktp_2" type="file" name="ktp_2" accept="image/*"/>
 
                     <h4 class="pic">Person in charge 3</h4>
                         <input class="nama" type="text" name="name_3" placeholder="Name">
@@ -266,11 +252,6 @@
                         <input class="personil" type="text" name="phone_3" placeholder="Phone number">
                         <input type="number" class="personil"  name="id_3" placeholder="ID Number">
                         <label ><strong>Sertifikat Vaksin 1 :</strong></label>
-                        <input class="ktp" id="vaksina_3" type="file" name="vaksina_3" accept="image/*"/>
-                        <label ><strong>Sertifikat Vaksin 2 :</strong></label>
-                        <input class="ktp" id="vaksinb_3" type="file" name="vaksinb_3" accept="image/*"/>
-                        <label ><strong>Foto KTP :</strong></label>
-                        <input class="ktp ml-2" id="ktp_3" type="file" name="ktp_3" accept="image/*"/>
 
                     <h4 class="pic">Person in charge 4</h4>
                         <input class="nama" type="text" name="name_4" placeholder="Name">
@@ -279,12 +260,6 @@
                         <input class="nama" type="text" name="respon_4" placeholder="Responsibility">
                         <input class="personil" type="text" name="phone_4" placeholder="Phone number">
                         <input type="number" class="personil"  name="id_4" placeholder="ID Number">
-                        <label ><strong>Sertifikat Vaksin 1 :</strong></label>
-                        <input class="ktp" id="vaksina_4" type="file" name="vaksina_4" accept="image/*"/>
-                        <label ><strong>Sertifikat Vaksin 2 :</strong></label>
-                        <input class="ktp" id="vaksinb_4" type="file" name="vaksinb_4" accept="image/*"/>
-                        <label ><strong>Foto KTP :</strong></label>
-                        <input class="ktp ml-2" id="ktp_4" type="file" name="ktp_4" accept="image/*"/>
 
                     <h4 class="pic">Person in charge 5</h4>
                         <input class="nama" type="text" name="name_5" placeholder="Name">
@@ -293,12 +268,6 @@
                         <input class="nama" type="text" name="respon_5" placeholder="Responsibility">
                         <input class="personil" type="text" name="phone_5" placeholder="Phone number">
                         <input type="number" class="personil"  name="id_5" placeholder="ID Number">
-                        <label ><strong>Sertifikat Vaksin 1 :</strong></label>
-                        <input class="ktp" id="vaksina_5" type="file" name="vaksina_5" accept="image/*"/>
-                        <label ><strong>Sertifikat Vaksin 2 :</strong></label>
-                        <input class="ktp" id="vaksinb_5" type="file" name="vaksinb_5" accept="image/*"/>
-                        <label ><strong>Foto KTP :</strong></label>
-                        <input class="ktp ml-2" id="ktp_5" type="file" name="ktp_5" accept="image/*"/>
                 </div>
             </div>
             <button type="submit" class="btn btn-warning text-white btn-submit">Submit Form</button>

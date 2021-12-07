@@ -93,6 +93,18 @@ class PersonilTableSeeder extends Seeder
             ],
 
             [
+                'name' => 'Agus Taufik',
+                'company' => 'PT DAIKIN',
+                'department' => 'Teknisi',
+                'respon' => 'Teknisi',
+                'phone' => '0878-2980-0705',
+                'nik' => 3329122404930603,
+                'ktp' => '',
+                'vaksin_1' => '',
+                'vaksin_2' => '',
+            ],
+
+            [
                 'name' => 'Riga Ashar Rizki',
                 'company' => 'PT DAIKIN',
                 'department' => 'Teknisi',
@@ -129,6 +141,30 @@ class PersonilTableSeeder extends Seeder
                 'vaksin_2' => '',
             ],
 
+            [
+                'name' => 'Andriyanto',
+                'company' => 'PT KONE',
+                'department' => 'Teknisi',
+                'respon' => 'Teknisi',
+                'phone' => '0857-3211-4378',
+                'nik' => 317510130188004,
+                'ktp' => '',
+                'vaksin_1' => '',
+                'vaksin_2' => '',
+            ],
+
+            [
+                'name' => 'Rahmadani',
+                'company' => 'PT KONE',
+                'department' => 'Teknisi',
+                'respon' => 'Teknisi',
+                'phone' => '0811-9319-296',
+                'nik' => 317510130188004,
+                'ktp' => '',
+                'vaksin_1' => '',
+                'vaksin_2' => '',
+            ],
+
             //BTS
             [
                 'name' => 'Badai Sino Jendrang',
@@ -153,9 +189,8 @@ class PersonilTableSeeder extends Seeder
                 'vaksin_1' => '',
                 'vaksin_2' => '',
             ]
-            ];
+        ];
 
         Personil::insert($row);
-
     }
 }
