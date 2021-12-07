@@ -24,7 +24,6 @@
                         <option value="{{ $p->id }}">{{ $p->work }}</option>
                         @endforeach
                     </select>
-                    {{-- <div class="dropDownSelect2"></div> --}}
 
                     <h6 class="text-white mt-3">Request Validity (Berlakunya Permintaan)</h6>
                     <input type="date" name="val_from" id="val_from">
@@ -35,100 +34,86 @@
                     <table class="table table-borderless">
                         <tr>
                             <td>
-                                <label class="radiobutton_container">
-                                <input id="loc1" name="server" type="checkbox" value="" readonly>
-1
-                                </label>
+
+                                    <input type="text" id="loc1" name="server" value="" readonly>
+
                             </td>
                             <td>
-                                <label class="radiobutton_container">
-                                <input id="loc2" name="genset" type="checkbox" value="" readonly>
-2
-                                </label>
+
+                                    <input type="text" id="loc2" name="genset" value="" readonly>
+
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <label class="radiobutton_container">
-                                <input id="loc3" name="mmr1" type="checkbox" value="" readonly>
-3
-                                </label>
+
+                                    <input type="text" id="loc3" name="mmr1" value="" readonly>
+
                             </td>
                             <td>
-                                <label class="radiobutton_container">
-                                <input id="loc4" name="panel" type="checkbox" value="" readonly>
-4
-                                </label>
+
+                                    <input type="text" id="loc4" name="panel" value="" readonly>
+
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <label class="radiobutton_container">
-                                <input id="loc5" name="mmr2" type="checkbox" value="" readonly>
-5
-                                </label>
+
+                                    <input type="text" id="loc5" name="mmr2" value="" readonly>
+
                             </td>
                             <td>
-                                <label class="radiobutton_container">
-                                <input id="loc6" name="batre" type="checkbox" value="" readonly>
-6
-                                </label>
+
+                                    <input type="text" id="loc6" name="batre" value="" readonly>
+
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <label class="radiobutton_container">
-                                <input id="loc7" name="ups" type="checkbox" value="" readonly>
-7
-                                </label>
+
+                                    <input type="text" id="loc7" name="ups" value="" readonly>
+
                             </td>
                             <td>
-                                <label class="radiobutton_container">
-                                <input id="loc8" name="fss" type="checkbox" value="" readonly>
-8
-                                </label>
+
+                                    <input type="text" id="loc8" name="fss" value="" readonly>
+
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <label class="radiobutton_container">
-                                <input id="loc9" name="lt2" type="checkbox" value="" readonly>
-9
-                                </label>
+
+                                    <input type="text" id="loc9" name="lt2" value="" readonly>
+
                             </td>
                             <td>
-                                <label class="radiobutton_container">
-                                <input id="loc10" name="lt3" type="checkbox" value="" readonly>
-10
-                                </label>
+
+                                    <input type="text" id="loc10" name="lt3" value="" readonly>
+
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <label class="radiobutton_container">
-                                <input id="loc11" name="trafo" type="checkbox" value="" readonly>
-11
-                                </label>
+
+                                    <input type="text" id="loc11" name="trafo" value="" readonly>
+
                             </td>
                             <td>
-                                <label class="radiobutton_container">
-                                <input id="loc12" name="yard" type="checkbox" value="" readonly>
-12
-                                </label>
+
+                                    <input type="text" id="loc12" name="yard" value="" readonly>
+
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <label class="radiobutton_container">
-                                <input id="loc13" name="parking" type="checkbox" value="" readonly>
-13
-                                </label>
+
+                                    <input type="text" id="loc13" name="parking" value="" readonly>
+
                             </td>
                             <td>
-                                <label class="radiobutton_container">
-                                <input id="loc14" name="other" value="" type="checkbox" readonly>
-                                14
-                                </label>
+
+                                    <input type="text" id="loc14" name="other" value="" readonly>
+
                             </td>
                         </tr>
                       </table>
@@ -147,7 +132,7 @@
 
                     {{-- Description of Work --}}
                     <h4 class="text-white mt-5">Description of Scope of Work (Deskripsikan Pekerjaan)</h4>
-                    <input type="text" id="desc" value="" class="form-control @error('desc') is-invalid @enderror" required autocomplete="desc" placeholder="Pick in here (pilih disini)" name="desc" readonly>
+                    <input type="text" id="desc" value="" class="form-control @error('desc') is-invalid @enderror" required autocomplete="desc"  name="desc" readonly>
 
                     {{-- Detail Time & Operation --}}
                     <h4 class="text-white mt-5">Detail Time & Operation (Detail Waktu & Operasi) </h4>

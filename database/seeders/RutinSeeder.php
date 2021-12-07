@@ -21,8 +21,8 @@ class RutinSeeder extends Seeder
             //KONE
             [
                 'work' => 'Service Lift Kantor Batu Ceper',
-                'loc1' => '', //server
-                'loc2' => '', //genset
+                'loc1' => 'Parking', //server
+                'loc2' => 'Lantai 5, Lift dan Lantai G', //genset
                 'loc3' => '', //mmr
                 'loc4' => '', //panel
                 'loc5' => '', //mmr2
@@ -33,8 +33,8 @@ class RutinSeeder extends Seeder
                 'loc10' => '', //lt3
                 'loc11' => '', //yard
                 'loc12' => '', //trafo
-                'loc13' => 'parking', //parking
-                'loc14' => 'Lantai 5, Lift dan Lantai G',  //other
+                'loc13' => '', //parking
+                'loc14' => '',  //other
                 'desc' => 'Service Lift',
                 'activity_1' => 'Pengecekan car, mesin, panel control, elevator shaft & CCTV',
                 'activity_2' => '',
@@ -83,20 +83,20 @@ class RutinSeeder extends Seeder
             //TNN
             [
                 'work' => 'Pest Control (Insect & Rodent Control)',
-                'loc1' => '', //server
-                'loc2' => '', //genset
-                'loc3' => '', //mmr
-                'loc4' => '', //panel
-                'loc5' => '', //mmr2
-                'loc6' => '', //batre
+                'loc1' => 'Lantai 5, Lantai 1 dan Lantai G', //server
+                'loc2' => 'Office 2nd Fl', //genset
+                'loc3' => 'Office 3rd Fl', //mmr
+                'loc4' => 'Yard', //panel
+                'loc5' => 'Trafo Room', //mmr2
+                'loc6' => 'Parking Lot', //batre
                 'loc7' => '', //ups
                 'loc8' => '', //fss
-                'loc9' => 'lt2', //lt2
-                'loc10' => 'lt3', //lt3
-                'loc11' => 'yard', //yard
-                'loc12' => 'trafo', //trafo
-                'loc13' => 'parking', //parking
-                'loc14' => 'Lantai 5, Lantai 1 dan Lantai G',  //other
+                'loc9' => '', //lt2
+                'loc10' => '', //lt3
+                'loc11' => '', //yard
+                'loc12' => '', //trafo
+                'loc13' => '',
+                'loc14' => '',
                 'desc' => 'Pest Control terdiri dari Insect Control & Rodent Control. Insect Control adalah pengendalian perkembangan hama serangga terbang
                             merayap (nyamuk, lalat, kecoa dan semut). Sedangkan Rodent Control adalah pengendalian hama tikus.',
                 'activity_1' => 'Pest Control (Insect & Rodent Control)',
@@ -146,20 +146,20 @@ class RutinSeeder extends Seeder
             //CALMIC
             [
                 'work' => 'Service Habitat (Penggantian pengharum ruangan dan penggantian handsanitizer)',
-                'loc1' => 'server', //server
-                'loc2' => '', //genset
-                'loc3' => '', //mmr
-                'loc4' => '', //panel
+                'loc1' => 'Lantai 1 dan Lantai G', //server
+                'loc2' => 'Office 2nd Fl', //genset
+                'loc3' => 'Office 3rd Fl', //mmr
+                'loc4' => 'Server Room', //panel
                 'loc5' => '', //mmr2
                 'loc6' => '', //batre
                 'loc7' => '', //ups
                 'loc8' => '', //fss
-                'loc9' => 'lt2', //lt2
-                'loc10' => 'lt3', //lt3
+                'loc9' => '', //lt2
+                'loc10' => '', //lt3
                 'loc11' => '', //yard
                 'loc12' => '', //trafo
                 'loc13' => '', //parking
-                'loc14' => 'Lantai 1 dan Lantai G',  //other
+                'loc14' => '',  //other
                 'desc' => 'Service habitat (penggantian pengharum ruangan dan penggantian handsanitizer)',
                 'activity_1' => 'Penggantian pengharum ruangan dan handsanitizer',
                 'activity_2' => '',
@@ -208,20 +208,20 @@ class RutinSeeder extends Seeder
             //DAIKIN
             [
                 'work' => 'Pembersihan AC Split & AC VRV Indoor/outdoor lantai 1 s/d lantai 3 kantor batu ceper',
-                'loc1' => '', //server
-                'loc2' => '', //genset
-                'loc3' => 'mmr1', //mmr1
-                'loc4' => '', //panel
-                'loc5' => 'mmr2', //mmr2
-                'loc6' => 'batre', //batre
-                'loc7' => 'ups', //ups
+                'loc1' => 'Lantai 1 dan Lantai G', //server
+                'loc2' => 'Office 2nd Fl', //genset
+                'loc3' => 'Office 3rd Fl', //mmr1
+                'loc4' => 'MMR 2', //panel
+                'loc5' => 'Battery Room', //mmr2
+                'loc6' => 'UPS Room', //batre
+                'loc7' => 'MMR 1', //ups
                 'loc8' => '', //fss
-                'loc9' => 'lt2', //lt2
-                'loc10' => 'lt3', //lt3
+                'loc9' => '', //lt
+                'loc10' => '', //lt3
                 'loc11' => '', //yard
                 'loc12' => '', //trafo
                 'loc13' => '', //parking
-                'loc14' => 'Lantai 1 dan Lantai G',  //other
+                'loc14' => '',  //other
                 'desc' => 'Service dan Pembersihan AC Split & AC VRV Indoor/outdoor lantai 1 s/d lantai 3 kantor batu ceper',
                 'activity_1' => 'Service & pembersihan AC Split & AC VRV indoor/outdoor lantai 1 s/d lantai 5 kantor Batu Ceper',
                 'activity_2' => '',
