@@ -36,9 +36,9 @@ class RutinController extends Controller
 
     public function personil($id)
     {
-        $permit = Personil::findOrFail($id);
-        dd($permit);
-        return isset($permit) && !empty($permit) ? response()->json(['status' => 'SUCCESS', 'permit' => $permit]) : response()->json(['status' => 'FAILED', 'data' => []]);
+        $personil = Personil::findOrFail($id);
+        // dd($personil);
+        return isset($personil) && !empty($personil) ? response()->json(['status' => 'SUCCESS', 'personil' => $personil]) : response()->json(['status' => 'FAILED', 'data' => []]);
     }
 
     public function store_rutin(Request $request)

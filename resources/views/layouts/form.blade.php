@@ -66,6 +66,25 @@
         }
     });
 
+    $('#pic1').change(function(){
+        let id = $(this).val();
+        $.ajax({
+            url: "{{url("/personil")}}"+'/'+id,
+            dataType:"json",
+            type: "get",
+            success: function(response){
+                const {personil} = response;
+                console.log(personil)
+            $('#name').val(personil.name);
+            $('#company_1').val(personil.company_1);
+            $('#department_1').val(personil.department_1);
+            $('#respon_1').val(personil.respon_1);
+            $('#phone_1').val(personil.phone_1);
+            $('#id_1').val(personil.id_1);
+            }
+        });
+    });
+
     $('#rutin').change(function(){
         let id = $(this).val();
         $.ajax({

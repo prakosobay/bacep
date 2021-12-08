@@ -131,6 +131,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/perbaikan', [OtherController::class, 'index']);
     Route::get('rutin', [RutinController::class, 'index']);
     Route::get('/rutins/{id}', [RutinController::class, 'rutin']);
+    Route::get('/personil/{id}', [RutinController::class, 'personil']);
 });
 // Route::resource('/barang', ConsumController::class);
 //

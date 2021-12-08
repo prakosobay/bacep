@@ -197,37 +197,17 @@
 
                     {{-- PIC --}}
                     <h4 class="pic">Person in charge 1</h4>
-                        <input id="risk_1" class="risk" value="" type="text" name="risk_1" placeholder="Risk" readonly>
-                        <input class="nama @error('company1') is-invalid @enderror" required autocomplete="company1" type="text" name="company_1" placeholder="Company">
-                        @error('company1')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                        <input class="nama @error('dept1') is-invalid @enderror" required autocomplete="dept1" type="text" name="department_1" placeholder="Department">
-                        @error('dept1')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                        <input class="nama @error('respon1') is-invalid @enderror" required autocomplete="respon1" type="text" name="respon_1" placeholder="Responsibility">
-                        @error('respon1')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                        <input class="personil @error('phone1') is-invalid @enderror" required autocomplete="phone1" type="text" name="phone_1" placeholder="Phone number">
-                        @error('phone1')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                        <input type="number" class="personil @error('id1') is-invalid @enderror" required autocomplete="id1"  name="id_1" placeholder="ID Number">
-                        @error('id1')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
+                        <select class="form-control" name="nama" id="pic1">
+                                <option value=""></option>
+                            @foreach($personil as $p)
+                                <option value="{{ $p->id }}">{{ $p->nama }}</option>
+                            @endforeach
+                        </select>
+                        <input class="nama" required autocomplete="company_1" type="text" id="company_1" name="company_1" placeholder="Company" readonly>
+                        <input class="nama" required autocomplete="dept1" type="text" id="department_1" name="department_1" placeholder="Department" readonly>
+                        <input class="nama " required autocomplete="respon1" type="text" id="respon_1" name="respon_1" placeholder="Responsibility" readonly>
+                        <input class="personil " required autocomplete="phone1" type="text" id="phone_1" name="phone_1" placeholder="Phone number" readonly>
+                        <input type="number" class="personil" required autocomplete="id1" id="id_1" name="id_1" placeholder="ID Number" readonly>
 
                         {{-- <label ><strong>Sertifikat Vaksin 1 :</strong></label>
                         <input class="ktp" id="vaksina" type="file" name="vaksina_1" accept="image/*"/>

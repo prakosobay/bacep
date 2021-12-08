@@ -15,12 +15,12 @@ class CreatePersonilsTable extends Migration
     {
         Schema::create('personil', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('nama');
             $table->string('company');
             $table->string('department');
             $table->string('respon');
             $table->string('phone')->unique();
-            $table->unsignedInteger('nik')->unique();
+            $table->string('nik')->unique();
             $table->string('ktp')->nullable();
             $table->string('vaksin_1')->nullable();
             $table->string('vaksin_2')->nullable();
