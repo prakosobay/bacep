@@ -75,12 +75,83 @@
             success: function(response){
                 const {personil} = response;
                 console.log(personil)
-            $('#name').val(personil.name);
-            $('#company_1').val(personil.company_1);
-            $('#department_1').val(personil.department_1);
-            $('#respon_1').val(personil.respon_1);
-            $('#phone_1').val(personil.phone_1);
-            $('#id_1').val(personil.id_1);
+            $('#company_1').val(personil.company);
+            $('#department_1').val(personil.department);
+            $('#respon_1').val(personil.respon);
+            $('#phone_1').val(personil.phone);
+            $('#id_1').val(personil.nik);
+            }
+        });
+    });
+
+    $('#pic2').change(function(){
+        let id = $(this).val();
+        $.ajax({
+            url: "{{url("/personil")}}"+'/'+id,
+            dataType:"json",
+            type: "get",
+            success: function(response){
+                const {personil} = response;
+                console.log(personil)
+            $('#company_2').val(personil.company);
+            $('#department_2').val(personil.department);
+            $('#respon_2').val(personil.respon);
+            $('#phone_2').val(personil.phone);
+            $('#id_2').val(personil.nik);
+            }
+        });
+    });
+
+    $('#pic3').change(function(){
+        let id = $(this).val();
+        $.ajax({
+            url: "{{url("/personil")}}"+'/'+id,
+            dataType:"json",
+            type: "get",
+            success: function(response){
+                const {personil} = response;
+                console.log(personil)
+            $('#company_3').val(personil.company);
+            $('#department_3').val(personil.department);
+            $('#respon_3').val(personil.respon);
+            $('#phone_3').val(personil.phone);
+            $('#id_3').val(personil.nik);
+            }
+        });
+    });
+
+    $('#pic4').change(function(){
+        let id = $(this).val();
+        $.ajax({
+            url: "{{url("/personil")}}"+'/'+id,
+            dataType:"json",
+            type: "get",
+            success: function(response){
+                const {personil} = response;
+                console.log(personil)
+            $('#company_4').val(personil.company);
+            $('#department_4').val(personil.department);
+            $('#respon_4').val(personil.respon);
+            $('#phone_4').val(personil.phone);
+            $('#id_4').val(personil.nik);
+            }
+        });
+    });
+
+    $('#pic5').change(function(){
+        let id = $(this).val();
+        $.ajax({
+            url: "{{url("/personil")}}"+'/'+id,
+            dataType:"json",
+            type: "get",
+            success: function(response){
+                const {personil} = response;
+                console.log(personil)
+            $('#company_5').val(personil.company);
+            $('#department_5').val(personil.department);
+            $('#respon_5').val(personil.respon);
+            $('#phone_5').val(personil.phone);
+            $('#id_5').val(personil.nik);
             }
         });
     });
