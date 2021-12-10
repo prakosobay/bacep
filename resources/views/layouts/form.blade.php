@@ -214,12 +214,12 @@
         });
     });
 
-    $(".btn-submit").click(function(e){
+    $(".btn-submit2").click(function(e){
         e.preventDefault();
-        var datastring = $("#form_other").serialize();
+        var datastring = $("#form_rutin").serialize();
         $.ajax({
             type:'POST',
-            url:"{{url('other.form')}}",
+            url:"{{url('rutin.form')}}",
             data: datastring,
             error: function (request, error) {
                 console.log(error)

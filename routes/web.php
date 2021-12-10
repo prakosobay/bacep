@@ -129,9 +129,12 @@ Route::middleware(['auth'])->group(function () {
 
     //Other
     Route::get('/perbaikan', [OtherController::class, 'index']);
+
+    //Rutin
     Route::get('rutin', [RutinController::class, 'index']);
     Route::get('/rutins/{id}', [RutinController::class, 'rutin']);
     Route::get('/personil/{id}', [RutinController::class, 'personil']);
+    Route::post('/rutin.form', [RutinController::class, 'store_rutin']);
 });
 // Route::resource('/barang', ConsumController::class);
 //

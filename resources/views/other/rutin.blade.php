@@ -18,7 +18,7 @@
                     </div>
 
                     <label class="mt-4 mb-2"><strong>Purpose of Work</strong></label>
-                    <select class="form-control" name="rutin_work" id="rutin">
+                    <select class="form-control" name="other_work" id="rutin">
                         <option value=""></option>
                         @foreach($rutin as $p)
                         <option value="{{ $p->id }}">{{ $p->work }}</option>
@@ -34,86 +34,58 @@
                     <table class="table table-borderless">
                         <tr>
                             <td>
-
-                                    <input type="text" id="loc1" name="server" value="" readonly>
-
+                                <input type="text" id="loc1" name="loc1" value="" readonly>
                             </td>
                             <td>
-
-                                    <input type="text" id="loc2" name="genset" value="" readonly>
-
+                                <input type="text" id="loc2" name="loc2" value="" readonly>
                             </td>
                         </tr>
                         <tr>
                             <td>
-
-                                    <input type="text" id="loc3" name="mmr1" value="" readonly>
-
+                                <input type="text" id="loc3" name="loc3" value="" readonly>
                             </td>
                             <td>
-
-                                    <input type="text" id="loc4" name="panel" value="" readonly>
-
+                                <input type="text" id="loc4" name="loc4" value="" readonly>
                             </td>
                         </tr>
                         <tr>
                             <td>
-
-                                    <input type="text" id="loc5" name="mmr2" value="" readonly>
-
+                                <input type="text" id="loc5" name="loc5" value="" readonly>
                             </td>
                             <td>
-
-                                    <input type="text" id="loc6" name="batre" value="" readonly>
-
+                                <input type="text" id="loc6" name="loc6" value="" readonly>
                             </td>
                         </tr>
                         <tr>
                             <td>
-
-                                    <input type="text" id="loc7" name="ups" value="" readonly>
-
+                                <input type="text" id="loc7" name="loc7" value="" readonly>
                             </td>
                             <td>
-
-                                    <input type="text" id="loc8" name="fss" value="" readonly>
-
+                                <input type="text" id="loc8" name="loc8" value="" readonly>
                             </td>
                         </tr>
                         <tr>
                             <td>
-
-                                    <input type="text" id="loc9" name="lt2" value="" readonly>
-
+                                <input type="text" id="loc9" name="loc9" value="" readonly>
                             </td>
                             <td>
-
-                                    <input type="text" id="loc10" name="lt3" value="" readonly>
-
+                                <input type="text" id="loc10" name="loc10" value="" readonly>
                             </td>
                         </tr>
                         <tr>
                             <td>
-
-                                    <input type="text" id="loc11" name="trafo" value="" readonly>
-
+                                <input type="text" id="loc11" name="loc11" value="" readonly>
                             </td>
                             <td>
-
-                                    <input type="text" id="loc12" name="yard" value="" readonly>
-
+                                <input type="text" id="loc12" name="loc12" value="" readonly>
                             </td>
                         </tr>
                         <tr>
                             <td>
-
-                                    <input type="text" id="loc13" name="parking" value="" readonly>
-
+                                <input type="text" id="loc13" name="loc13" value="" readonly>
                             </td>
                             <td>
-
-                                    <input type="text" id="loc14" name="other" value="" readonly>
-
+                                <input type="text" id="loc14" name="loc14" value="" readonly>
                             </td>
                         </tr>
                       </table>
@@ -138,12 +110,12 @@
                     <h4 class="text-white mt-5">Detail Time & Operation (Detail Waktu & Operasi) </h4>
                     <p>
                         <input type="time" class="time" name="time_1">
-                        <input type="text" id="item_1" class="detail @error('item1') is-invalid @enderror" required autocomplete="item1" value="" name="item_1" placeholder="Item" readonly>
-                        <input type="text" id="procedure_1" class="detail @error('proce1') is-invalid @enderror" required autocomplete="proce1" value="" name="procedure_1" placeholder="Working Procedure" readonly>
+                        <input type="text" id="item_1" class="detail" required autocomplete="item1" value="" name="item_1" placeholder="Item" readonly>
+                        <input type="text" id="procedure_1" class="detail" required autocomplete="proce1" value="" name="procedure_1" placeholder="Working Procedure" readonly>
 
                         <input type="time" class="time" name="time_2">
-                        <input type="text" id="item_2" class="detail @error('item2') is-invalid @enderror" required autocomplete="item2" value="" name="item_2" placeholder="Item" readonly>
-                        <input type="text" id="procedure_2" class="detail @error('proce2') is-invalid @enderror" required autocomplete="proce2" value="" name="procedure_2" placeholder="Working Procedure" readonly>
+                        <input type="text" id="item_2" class="detail" required autocomplete="item2" value="" name="item_2" placeholder="Item" readonly>
+                        <input type="text" id="procedure_2" class="detail" required autocomplete="proce2" value="" name="procedure_2" placeholder="Working Procedure" readonly>
 
                         <input type="time" class="time" name="time_3">
                         <input type="text" id="item_3" class="detail" value="" name="item_3" placeholder="Item" readonly>
@@ -269,7 +241,7 @@
                         <input type="number" class="personil" id="id_5" name="id_5" placeholder="ID Number" readonly> --}}
                 </div>
             </div>
-            <button type="submit" class="btn btn-warning text-white btn-submit">Submit Form</button>
+            <button type="submit" class="btn btn-warning text-white btn-submit2">Submit Form</button>
             <button type="reset" class="btn btn-primary">Clear Form</button>
         </div>
     </form>

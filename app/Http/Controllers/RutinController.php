@@ -44,6 +44,10 @@ class RutinController extends Controller
     public function store_rutin(Request $request)
     {
         dd($request);
+
+        if (Gate::allows('isBm')) {
+            $data['other_work'] = Rutin::find($data['other_work'])->work;
+        }
         // $request->validate([
         //     'other_work'
         // ]);
@@ -86,6 +90,24 @@ class RutinController extends Controller
             'risk_3' => $request->risk_3,
             'risk_4' => $request->risk_4,
             'risk_5' => $request->risk_5,
+            'poss_1' => $request->poss_1,
+            'poss_2' => $request->poss_2,
+            'poss_3' => $request->poss_3,
+            'poss_4' => $request->poss_4,
+            'poss_5' => $request->poss_5,
+            'impact_1' => $request->impact_1,
+            'impact_2' => $request->impact_2,
+            'impact_3' => $request->impact_3,
+            'impact_4' => $request->impact_4,
+            'impact_5' => $request->impact_5,
+            'mitigation_1' => $request->mitigation_1,
+            'mitigation_2' => $request->mitigation_2,
+            'mitigation_3' => $request->mitigation_3,
+            'mitigation_4' => $request->mitigation_4,
+            'mitigation_5' => $request->mitigation_5,
+            'desc' => $request->desc,
+            'testing' => $request->testing,
+            'rollback' => $request->rollback,
         ]);
     }
 
