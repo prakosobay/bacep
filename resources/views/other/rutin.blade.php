@@ -18,7 +18,7 @@
                     </div>
 
                     <label class="mt-4 mb-2"><strong>Purpose of Work</strong></label>
-                    <select class="form-control" name="other_work" id="rutin">
+                    <select class="form-control" name="other_work" id="rutin" required>
                         <option value=""></option>
                         @foreach($rutin as $p)
                         <option value="{{ $p->id }}">{{ $p->work }}</option>
@@ -26,9 +26,9 @@
                     </select>
 
                     <h6 class="text-white mt-3">Request Validity (Berlakunya Permintaan)</h6>
-                    <input type="date" name="val_from" id="val_from">
+                    <input type="date" name="val_from" id="val_from" required>
                     <h6 class="text-white mt-3">To (Sampai)</h6>
-                    <input type="date" name="val_to" id="val_to">
+                    <input type="date" name="val_to" id="val_to" required>
 
                     <h6 style="text-align: left;" class="text-white mt-3">Authorized Entry Area </h6>
                     <table class="table table-borderless">
@@ -168,8 +168,8 @@
                     <input type="text" class="form-control" placeholder="Fill in here (isi disini)" name="rollback">
 
                     {{-- PIC --}}
-                    {{-- <h4 class="pic">Person in charge 1</h4>
-                        <select class="form-control" name="nama" id="pic1">
+                    <h4 class="pic">Person in charge 1</h4>
+                        <select class="form-control" name="pic1" id="pic1">
                                 <option value=""></option>
                             @foreach($personil as $p)
                                 <option value="{{ $p->id }}">{{ $p->nama }}</option>
@@ -179,7 +179,7 @@
                         <input class="nama" type="text" id="department_1" name="department_1" placeholder="Department" readonly>
                         <input class="nama " type="text" id="respon_1" name="respon_1" placeholder="Responsibility" readonly>
                         <input class="personil " type="text" id="phone_1" name="phone_1" placeholder="Phone number" readonly>
-                        <input type="number" class="personil" id="id_1" name="id_1" placeholder="ID Number" readonly> --}}
+                        <input type="number" class="personil" id="id_1" name="id_1" placeholder="ID Number" readonly>
 
                         {{-- <label ><strong>Sertifikat Vaksin 1 :</strong></label>
                         <input class="ktp" id="vaksina" type="file" name="vaksina_1" accept="image/*"/>
@@ -188,8 +188,8 @@
                         <label ><strong>Foto KTP :</strong></label>
                         <input class="ktp ml-2" id="ktp" type="file" name="ktp_1" accept="image/*"/> --}}
 
-                    {{-- <h4 class="pic">Person in charge 2</h4>
-                        <select class="form-control" name="nama" id="pic2">
+                    <h4 class="pic">Person in charge 2</h4>
+                        <select class="form-control" name="pic2" id="pic2">
                                 <option value=""></option>
                             @foreach($personil as $p)
                                 <option value="{{ $p->id }}">{{ $p->nama }}</option>
@@ -199,10 +199,10 @@
                         <input class="nama" type="text" id="department_2" name="department_2" placeholder="Department" readonly>
                         <input class="nama " type="text" id="respon_2" name="respon_2" placeholder="Responsibility" readonly>
                         <input class="personil " type="text" id="phone_2" name="phone_2" placeholder="Phone number" readonly>
-                        <input type="number" class="personil" id="id_2" name="id_2" placeholder="ID Number" readonly> --}}
+                        <input type="number" class="personil" id="id_2" name="id_2" placeholder="ID Number" readonly>
 
-                    {{-- <h4 class="pic">Person in charge 3</h4>
-                        <select class="form-control" name="nama" id="pic3">
+                    <h4 class="pic">Person in charge 3</h4>
+                        <select class="form-control" name="pic3" id="pic3">
                                 <option value=""></option>
                             @foreach($personil as $p)
                                 <option value="{{ $p->id }}">{{ $p->nama }}</option>
@@ -212,10 +212,10 @@
                         <input class="nama" type="text" id="department_3" name="department_3" placeholder="Department" readonly>
                         <input class="nama " type="text" id="respon_3" name="respon_3" placeholder="Responsibility" readonly>
                         <input class="personil " type="text" id="phone_3" name="phone_3" placeholder="Phone number" readonly>
-                        <input type="number" class="personil" id="id_3" name="id_3" placeholder="ID Number" readonly> --}}
+                        <input type="number" class="personil" id="id_3" name="id_3" placeholder="ID Number" readonly>
 
-                    {{-- <h4 class="pic">Person in charge 4</h4>
-                        <select class="form-control" name="nama" id="pic4">
+                    <h4 class="pic">Person in charge 4</h4>
+                        <select class="form-control" name="pic4" id="pic4">
                                 <option value=""></option>
                             @foreach($personil as $p)
                                 <option value="{{ $p->id }}">{{ $p->nama }}</option>
@@ -225,10 +225,10 @@
                         <input class="nama" type="text" id="department_4" name="department_4" placeholder="Department" readonly>
                         <input class="nama " type="text" id="respon_4" name="respon_4" placeholder="Responsibility" readonly>
                         <input class="personil " type="text" id="phone_4" name="phone_4" placeholder="Phone number" readonly>
-                        <input type="number" class="personil" id="id_4" name="id_4" placeholder="ID Number" readonly> --}}
+                        <input type="number" class="personil" id="id_4" name="id_4" placeholder="ID Number" readonly>
 
-                    {{-- <h4 class="pic">Person in charge 5</h4>
-                        <select class="form-control" name="nama" id="pic5">
+                    <h4 class="pic">Person in charge 5</h4>
+                        <select class="form-control" name="pic5" id="pic5">
                                 <option value=""></option>
                             @foreach($personil as $p)
                                 <option value="{{ $p->id }}">{{ $p->nama }}</option>
@@ -238,7 +238,7 @@
                         <input class="nama" type="text" id="department_5" name="department_5" placeholder="Department" readonly>
                         <input class="nama " type="text" id="respon_5" name="respon_5" placeholder="Responsibility" readonly>
                         <input class="personil " type="text" id="phone_5" name="phone_5" placeholder="Phone number" readonly>
-                        <input type="number" class="personil" id="id_5" name="id_5" placeholder="ID Number" readonly> --}}
+                        <input type="number" class="personil" id="id_5" name="id_5" placeholder="ID Number" readonly>
                 </div>
             </div>
             <button type="submit" class="btn btn-warning text-white btn-submit2">Submit Form</button>

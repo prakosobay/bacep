@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\{DB, Auth, Gate, Mail};
 use Barryvdh\DomPDF\Facade as PDF;
 use App\Mail\{NotifEmail, NotifReject, NotifFull};
 use App\Models\{Other, Rutin, Personil};
-use Faker\Provider\ar_JO\Person;
 
 class RutinController extends Controller
 {
@@ -43,72 +42,71 @@ class RutinController extends Controller
 
     public function store_rutin(Request $request)
     {
-        dd($request);
-
-        if (Gate::allows('isBm')) {
-            $data['other_work'] = Rutin::find($data['other_work'])->work;
-        }
-        // $request->validate([
-        //     'other_work'
-        // ]);
-
-        $other = Other::create([
-            'other_work' => $request->other_work,
-            'val_from' => $request->val_from,
-            'val_to' => $request->val_to,
-            'loc5' => $request->loc1,
-            'loc2' => $request->loc2,
-            'loc3' => $request->loc3,
-            'loc4' => $request->loc4,
-            'loc5' => $request->loc5,
-            'loc6' => $request->loc6,
-            'loc7' => $request->loc7,
-            'loc8' => $request->loc8,
-            'loc9' => $request->loc9,
-            'loc10' => $request->loc10,
-            'loc11' => $request->loc11,
-            'loc12' => $request->loc12,
-            'loc13' => $request->loc13,
-            'loc14' => $request->loc14,
-            'time_1' => $request->time_1,
-            'time_2' => $request->time_2,
-            'time_3' => $request->time_3,
-            'time_4' => $request->time_4,
-            'time_5' => $request->time_5,
-            'procedure_1' => $request->procedure_1,
-            'procedure_2' => $request->procedure_2,
-            'procedure_3' => $request->procedure_3,
-            'procedure_4' => $request->procedure_4,
-            'procedure_5' => $request->procedure_5,
-            'item_1' => $request->item_1,
-            'item_2' => $request->item_2,
-            'item_3' => $request->item_3,
-            'item_4' => $request->item_4,
-            'item_5' => $request->item_5,
-            'risk_1' => $request->risk_1,
-            'risk_2' => $request->risk_2,
-            'risk_3' => $request->risk_3,
-            'risk_4' => $request->risk_4,
-            'risk_5' => $request->risk_5,
-            'poss_1' => $request->poss_1,
-            'poss_2' => $request->poss_2,
-            'poss_3' => $request->poss_3,
-            'poss_4' => $request->poss_4,
-            'poss_5' => $request->poss_5,
-            'impact_1' => $request->impact_1,
-            'impact_2' => $request->impact_2,
-            'impact_3' => $request->impact_3,
-            'impact_4' => $request->impact_4,
-            'impact_5' => $request->impact_5,
-            'mitigation_1' => $request->mitigation_1,
-            'mitigation_2' => $request->mitigation_2,
-            'mitigation_3' => $request->mitigation_3,
-            'mitigation_4' => $request->mitigation_4,
-            'mitigation_5' => $request->mitigation_5,
-            'desc' => $request->desc,
-            'testing' => $request->testing,
-            'rollback' => $request->rollback,
-        ]);
+        // dd($request->all());
+        $data = $request->all();
+        $data['other_work'] = Rutin::find($data['other_work'])->work;
+        $data['pic1'] = Personil::find($data['pic1'])->nama;
+        $data['pic2'] = Personil::find($data['pic2'])->nama;
+        $data['pic3'] = Personil::find($data['pic3'])->nama;
+        $data['pic4'] = Personil::find($data['pic4'])->nama;
+        $data['pic5'] = Personil::find($data['pic5'])->nama;
+        // dd($data);
+        $other = Other::create($data);
+        return $other->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
     }
-
 }
+            // 'other_work' => $data->other_work,
+            // 'val_from' => $data->val_from,
+            // 'val_to' => $data->val_to,
+            // 'loc5' => $data->loc1,
+            // 'loc2' => $data->loc2,
+            // 'loc3' => $data->loc3,
+            // 'loc4' => $data->loc4,
+            // 'loc5' => $data->loc5,
+            // 'loc6' => $data->loc6,
+            // 'loc7' => $data->loc7,
+            // 'loc8' => $data->loc8,
+            // 'loc9' => $data->loc9,
+            // 'loc10' => $data->loc10,
+            // 'loc11' => $data->loc11,
+            // 'loc12' => $data->loc12,
+            // 'loc13' => $data->loc13,
+            // 'loc14' => $data->loc14,
+            // 'time_1' => $data->time_1,
+            // 'time_2' => $data->time_2,
+            // 'time_3' => $data->time_3,
+            // 'time_4' => $data->time_4,
+            // 'time_5' => $data->time_5,
+            // 'procedure_1' => $data->procedure_1,
+            // 'procedure_2' => $data->procedure_2,
+            // 'procedure_3' => $data->procedure_3,
+            // 'procedure_4' => $data->procedure_4,
+            // 'procedure_5' => $data->procedure_5,
+            // 'item_1' => $data->item_1,
+            // 'item_2' => $data->item_2,
+            // 'item_3' => $data->item_3,
+            // 'item_4' => $data->item_4,
+            // 'item_5' => $data->item_5,
+            // 'risk_1' => $data->risk_1,
+            // 'risk_2' => $data->risk_2,
+            // 'risk_3' => $data->risk_3,
+            // 'risk_4' => $data->risk_4,
+            // 'risk_5' => $data->risk_5,
+            // 'poss_1' => $data->poss_1,
+            // 'poss_2' => $data->poss_2,
+            // 'poss_3' => $data->poss_3,
+            // 'poss_4' => $data->poss_4,
+            // 'poss_5' => $data->poss_5,
+            // 'impact_1' => $data->impact_1,
+            // 'impact_2' => $data->impact_2,
+            // 'impact_3' => $data->impact_3,
+            // 'impact_4' => $data->impact_4,
+            // 'impact_5' => $data->impact_5,
+            // 'mitigation_1' => $data->mitigation_1,
+            // 'mitigation_2' => $data->mitigation_2,
+            // 'mitigation_3' => $data->mitigation_3,
+            // 'mitigation_4' => $data->mitigation_4,
+            // 'mitigation_5' => $data->mitigation_5,
+            // 'desc' => $data->desc,
+            // 'testing' => $data->testing,
+            // 'rollback' => $data->rollback,
