@@ -21,6 +21,7 @@ class CreateOtherHistoriesTable extends Migration
             $table->string('status', 50);
             $table->boolean('aktif', 1);
             $table->boolean('pdf', 1);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

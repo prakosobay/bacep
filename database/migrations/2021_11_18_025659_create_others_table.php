@@ -100,6 +100,7 @@ class CreateOthersTable extends Migration
             $table->unsignedBigInteger('id_3')->nullable();
             $table->unsignedBigInteger('id_4')->nullable();
             $table->unsignedBigInteger('id_5')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

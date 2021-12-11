@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\{DB, Auth, Gate, Mail};
 use Barryvdh\DomPDF\Facade as PDF;
 use App\Mail\{NotifEmail, NotifReject, NotifFull};
-use App\Models\{Other, Rutin, Personil};
+use App\Models\{Other, Rutin, Personil, OtherHistory};
 
 class RutinController extends Controller
 {
@@ -52,7 +52,17 @@ class RutinController extends Controller
         $data['pic5'] = Personil::find($data['pic5'])->nama;
         // dd($data);
         $other = Other::create($data);
-        return $other->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
+        if ($other->exists) {
+            $otherHistory = OtherHistory::create([
+                'other_id' => $other->other_id,
+                'created_by' => Auth::user()->id,
+                'role_to' => 'review',
+                'status' => 'requested',
+                'aktif' => '1',
+                'pdf' => false
+            ]);
+        }
+        return $otherHistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
     }
 }
             // 'other_work' => $data->other_work,
