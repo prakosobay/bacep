@@ -64,6 +64,23 @@ class RutinController extends Controller
         }
         return $otherHistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
     }
+
+    public function other_pdf($id)
+    {
+        $other = Other::find($id);
+        $lasthistoryC = OtherHistory::where('other_id', $id)->where('aktif', 1)->first();
+        $lasthistoryC->update(['pdf' => true]);
+
+        $otherHistory = DB::table('other_histories')
+            ->join('other', 'other.other_id', '=', 'other_histories.other_id')
+            ->join('users', 'users.id', '=', 'other_histories.created_by')
+            ->where('other_histories.other_id', '=', $id)
+            ->where('other_histories.status', '!=', 'visitor')
+            ->select('other_histories.*', 'users.name', 'created_by')
+            ->get();
+        $pdf = PDF::loadview('other.pdf', compact('other', 'lasthistoryC', 'otherHistory'))->setPaper('a4', 'portrait')->setWarnings(false);
+        return $pdf->stream();
+    }
 }
             // 'other_work' => $data->other_work,
             // 'val_from' => $data->val_from,

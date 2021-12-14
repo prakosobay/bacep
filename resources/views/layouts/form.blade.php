@@ -61,6 +61,7 @@
 </body>
 
 <script type="text/javascript">
+$(document).ready(function(){
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('input[name="_token"]').val()
@@ -247,5 +248,6 @@
             }
         });
     });
+})
 </script>
 </html>

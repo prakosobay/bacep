@@ -241,36 +241,36 @@
                     <td class="table-grey"><b>Department</b></td>
                 </tr>
                 <tr >
-                    <td class="table-white">1. {{$other->name_1}}</td>
-                    <td class="table-center">{{$other->ktp_1}}</td>
+                    <td class="table-white">1. {{$other->pic1}}</td>
+                    <td class="table-center">{{$other->id_1}}</td>
                     <td class="table-center">{{$other->phone_1}}</td>
                     <td class="table-center">{{$other->company_1}}</td>
                     <td class="table-center">{{$other->department_1}}</td>
                 </tr>
                 <tr >
-                    <td class="table-white">2. {{$other->name2}}</td>
-                    <td class="table-center">{{$other->ktp_2}}</td>
+                    <td class="table-white">2. {{$other->pic2}}</td>
+                    <td class="table-center">{{$other->id_2}}</td>
                     <td class="table-center">{{$other->phone_2}}</td>
                     <td class="table-center">{{$other->company_2}}</td>
                     <td class="table-center">{{$other->department_2}}</td>
                 </tr>
                 <tr >
-                    <td class="table-white">3. {{$other->name_3}}</td>
-                    <td class="table-center">{{$other->ktp_3}}</td>
+                    <td class="table-white">3. {{$other->pic3}}</td>
+                    <td class="table-center">{{$other->id_3}}</td>
                     <td class="table-center">{{$other->phone_3}}</td>
                     <td class="table-center">{{$other->company_3}}</td>
                     <td class="table-center">{{$other->department_3}}</td>
                 </tr>
                 <tr >
-                    <td class="table-white">4. {{$other->name_4}}</td>
-                    <td class="table-center">{{$other->ktp_4}}</td>
+                    <td class="table-white">4. {{$other->pic4}}</td>
+                    <td class="table-center">{{$other->id_4}}</td>
                     <td class="table-center">{{$other->phone_4}}</td>
                     <td class="table-center">{{$other->company_4}}</td>
                     <td class="table-center">{{$other->department_4}}</td>
                 </tr>
                 <tr >
-                    <td class="table-white">5. {{$other->name_5}}</td>
-                    <td class="table-center">{{$other->ktp_5}}</td>
+                    <td class="table-white">5. {{$other->pic5}}</td>
+                    <td class="table-center">{{$other->id_5}}</td>
                     <td class="table-center">{{$other->phone_5}}</td>
                     <td class="table-center">{{$other->company_5}}</td>
                     <td class="table-center">{{$other->department_5}}</td>
@@ -517,8 +517,8 @@
                     <td width="50%" class="table-grey"><b>Description of Scope of Work</b></td>
                 </tr>
                 <tr >
-                    <td class="table-center">{{$other->other_background}}</td>
-                    <td class="table-center">{{$other->other_describ}}</td>
+                    <td class="table-center">{{$other->other_work}}</td>
+                    <td class="table-center">{{$other->desc}}</td>
                 </tr>
             </table>
 

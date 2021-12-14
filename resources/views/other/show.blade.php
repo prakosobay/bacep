@@ -68,6 +68,7 @@
 <!-- page script -->
 
         <script>
+            // Approve
         $(document).on('click', '.approve', function(event){
 
             $.ajaxSetup({
@@ -123,6 +124,7 @@
             });
         });
 
+        //Reject
         $(document).on('click', '.reject', function(){
             $.ajaxSetup({
                 headers: {
