@@ -51,13 +51,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     //Form
     Route::get('/cleaning.form', [CleaningController::class, 'tampilan']);
-    Route::get('/other', [OtherController::class, 'index']);
 
     //Pilihan Work
     Route::get('/cleaning/{id}', [CleaningController::class, 'pilihan_work']);
 
     //PDF
-    Route::get('/other_pdf/{id}', [OtherController::class, 'pdf']);
+    Route::get('/other_pdf/{id}', [RutinController::class, 'other_pdf']);
     Route::get('/cleaning_pdf/{id}', [CleaningController::class, 'cetak_cleaning_pdf']);
 
     //Admin Panel
@@ -128,7 +127,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/ob.destroy/{id}', [RevisiController::class, 'destroy_ob']);
     Route::post('/ob.new', [RevisiController::class, 'store_ob']);
 
+    //Other
+    Route::get('/perbaikan', [OtherController::class, 'index']);
 
+    //Rutin
+    Route::get('rutin', [RutinController::class, 'index']);
+    Route::get('/rutins/{id}', [RutinController::class, 'rutin']);
+    Route::get('/personil/{id}', [RutinController::class, 'personil']);
+    Route::post('/rutin.form', [RutinController::class, 'store_rutin']);
 });
 // Route::resource('/barang', ConsumController::class);
 //

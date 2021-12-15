@@ -13,8 +13,17 @@ class CreatePersonilsTable extends Migration
      */
     public function up()
     {
-        Schema::create('personils', function (Blueprint $table) {
+        Schema::create('personil', function (Blueprint $table) {
             $table->id();
+            $table->string('nama');
+            $table->string('company');
+            $table->string('department');
+            $table->string('respon');
+            $table->string('phone')->unique();
+            $table->string('nik')->unique();
+            $table->string('ktp')->nullable();
+            $table->string('vaksin_1')->nullable();
+            $table->string('vaksin_2')->nullable();
             $table->timestamps();
         });
     }
@@ -26,6 +35,6 @@ class CreatePersonilsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('personils');
+        Schema::dropIfExists('personil');
     }
 }

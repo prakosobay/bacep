@@ -1,30 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.form')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ACCESS & CHANGE REQUEST FORM</title>
-    <link rel="stylesheet" href="{{asset('/css/other.css')}}">
-    <!-- Latest compiled and minified CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <!-- <script src="/cleaning.js" defer></script> -->
-
-    <!-- Popper JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-
-    <!-- Latest compiled JavaScript -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.14.0/sweetalert2.min.css" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.14.0/sweetalert2.all.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-</head>
-
-<body>
+@section('content')
 <div class="container">
     <form  id="form_other" class="form-group" enctype="multipart/form-data" method="POST">
         @csrf
@@ -123,14 +99,14 @@
                         <tr>
                             <td>
                                 <label class="radiobutton_container">
-                                <input id="1" name="2nd" type="checkbox" value="1">
+                                <input id="1" name="lt2" type="checkbox" value="1">
                                 <span class="radiobutton_mark"></span>
                                 Office 2nd Fl
                                 </label>
                             </td>
                             <td>
                                 <label class="radiobutton_container">
-                                <input id="1" name="3rd" type="checkbox" value="1">
+                                <input id="1" name="lt3" type="checkbox" value="1">
                                 <span class="radiobutton_mark"></span>
                                 Office 3rd Fl
                                 </label>
@@ -438,46 +414,4 @@
         </div>
     </form>
 </div>
-</body>
-
-<script type="text/javascript">
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('input[name="_token"]').val()
-        }
-    });
-
-    $(".btn-submit").click(function(e){
-        e.preventDefault();
-        var datastring = $("#form_other").serialize();
-        $.ajax({
-            type:'POST',
-            url:"{{url('other.form')}}",
-            data: datastring,
-            error: function (request, error) {
-                console.log(error)
-                alert(" Can't do because: " + error);
-            },
-            success:function(data){
-                console.log(data);
-                if(data.status == 'SUCCESS'){
-                    Swal.fire({
-                        title: "Success!",
-                        text: 'Data Saved',
-                        type: "success",
-                    }).then(function(){
-                        location.href = "{{url("/home")}}";
-                    });
-                }else if(data.status == 'FAILED'){
-                    Swal.fire({
-                        title: "Failed!",
-                        text: 'Saving Data Failed',
-                    }).then(function(){
-                        location.reload();
-                    });
-                }
-            }
-        });
-    });
-</script>
-</html>
+@endsection
