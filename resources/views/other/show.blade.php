@@ -23,11 +23,11 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($tes as $p)
+                            @foreach($otherHistories as $p)
                                 <tr>
                                     <td>{{ $p->other_id }}</td>
                                     <td>{{ Carbon\Carbon::parse($p->created_at)->format('d-m-Y') }}</td>
-                                    <td>{{ $p->name_1 }}<br>
+                                    <td>{{ $p->pic1 }}<br>
                                     <td>{{ $p->other_work }}</td>
                                     <td>
                                         @can('isApproval')

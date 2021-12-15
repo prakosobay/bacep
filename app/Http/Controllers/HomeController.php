@@ -66,13 +66,14 @@ class HomeController extends Controller
                     ->get();
                 return view('hasil_cleaning', compact('cleaning'));
             } else if ($type_view == 'other') {
-                $tes = DB::table('other_histories')
+                $otherHistories = DB::table('other_histories')
                     ->join('other', 'other.other_id', '=', 'other_histories.other_id')
                     ->whereIn('other_histories.role_to', $role_1)
                     ->where('other_histories.aktif', '=', 1)
                     ->select('other.*')
                     ->get();
-                return view('other.show', compact('tes'));
+                    // dd($otherHistories);
+                return view('other.show', compact('otherHistories'));
             }else {
                 return view('approval');
             }

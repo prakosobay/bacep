@@ -56,7 +56,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/cleaning/{id}', [CleaningController::class, 'pilihan_work']);
 
     //PDF
-    Route::get('/other_pdf/{id}', [OtherController::class, 'pdf']);
+    Route::get('/other_pdf/{id}', [RutinController::class, 'other_pdf']);
     Route::get('/cleaning_pdf/{id}', [CleaningController::class, 'cetak_cleaning_pdf']);
 
     //Admin Panel
