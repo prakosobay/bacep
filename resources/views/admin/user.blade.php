@@ -37,7 +37,7 @@
                                 <label>Slug :</label>
                                 <div class="form-group">
                                     {{-- <input id="slug" type="text" class="form-control" name="slug"  required="required"> --}}
-                                    <select class="form-control">
+                                    <select class="form-control" name="slug">
                                         <option selected>Pilih 1 Slug</option>
                                         <option value="approval">Approval</option>
                                         <option value="bm">BM</option>
