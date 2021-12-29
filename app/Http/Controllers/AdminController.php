@@ -44,7 +44,7 @@ class AdminController extends Controller
 
     public function store_user(Request $request)
     {
-        $credentials = $request->validate([
+        $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => [
                 'required',
@@ -55,11 +55,11 @@ class AdminController extends Controller
             ],
             'phone' => ['required', 'numeric'],
             'department' => ['required', 'string', 'max:255'],
-            'slug' => ['required', 'string', 'max:255'],
+            'slug' => ['required', 'string'],
             'password' => ['required'],
         ]);
         // dd($request->all());
-        $role = User::create([
+        $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
