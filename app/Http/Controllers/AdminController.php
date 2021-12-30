@@ -67,7 +67,7 @@ class AdminController extends Controller
             'slug' => $request->slug,
             'password' => Hash::make($request['password']),
         ]);
-        Alert::success('Success', 'Role has been submited');
+        Alert::success('Success', 'User has been submited');
         return back();
     }
 
