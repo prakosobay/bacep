@@ -44,20 +44,21 @@ class RutinController extends Controller
     {
         $data = $request->all();
         $data['other_work'] = Rutin::find($data['other_work'])->work;
-        $pic1 = $data['pic1'] = Personil::find($data['pic1'])->nama;
-        if($pic2 = $data['pic2']){
-            $pic2 = Personil::find($data['pic2'])->nama;
-            if($pic3 = $data['pic3']){
-                $pic3 = Personil::find($data['pic3'])->nama;
-                if($pic4 = $data['pic4']){
-                    $pic4 = Personil::find($data['pic4'])->nama;
-                    if($pic5 = $data['pic5']){
-                        $pic5 = Personil::find($data['pic5'])->nama;
+        $data['pic1'] = Personil::find($data['pic1'])->nama;
+        if($data['pic2']){
+            $data['pic2'] = Personil::find($data['pic2'])->nama;
+            if($data['pic3']){
+                $data['pic3'] = Personil::find($data['pic3'])->nama;
+                if($data['pic4']){
+                    $data['pic4'] = Personil::find($data['pic4'])->nama;
+                    if($data['pic5']){
+                        $data['pic5'] = Personil::find($data['pic5'])->nama;
                     }
                 }
             }
         }
 
+        // dd($data);
         $other = Other::create($data);
         if ($other->exists) {
             $otherHistory = OtherHistory::create([

@@ -529,49 +529,42 @@
                 <tr class="table-grey">
                     <td class="table-grey"><b>Day</b></td>
                     <td class="table-grey"><b>Time Start</b></td>
-                    <td class="table-grey"><b>Time End</b></td>
                     <td class="table-grey"><b>Activity Description</b></td>
                     <td class="table-grey"><b>Detail Service Impact</b></td>
                 </tr>
                 <tr >
                     <td height="10px" class="table-center">{{Carbon\Carbon::parse($other->val_from)->format('d-m-Y')}}</td>
                     <td height="10px" class="table-center">{{$other->time_1}}</td>
-                    <td height="10px" class="table-center">{{$other->other_time_end}}</td>
                     <td height="10px" class="table-center">{{$other->activity}}</td>
                     <td height="10px" class="table-center">{{$other->detail_service}}</td>
                 </tr>
                 <tr >
                     <td height="10px" class="table-center">{{Carbon\Carbon::parse($other->val_from)->format('d-m-Y')}}</td>
                     <td height="10px" class="table-center">{{$other->time_1}}</td>
-                    <td height="10px" class="table-center">{{$other->other_time_end2}}</td>
                     <td height="10px" class="table-center">{{$other->activity2}}</td>
                     <td height="10px" class="table-center">{{$other->detail_service2}}</td>
                 </tr>
                 <tr >
                     <td height="10px" class="table-center">{{Carbon\Carbon::parse($other->val_from)->format('d-m-Y')}}</td>
                     <td height="10px" class="table-center">{{$other->time_1}}</td>
-                    <td height="10px" class="table-center">{{$other->other_time_end3}}</td>
                     <td height="10px" class="table-center">{{$other->activity3}}</td>
                     <td height="10px" class="table-center">{{$other->detail_service3}}</td>
                 </tr>
                 <tr >
                     <td height="10px" class="table-center">{{Carbon\Carbon::parse($other->val_from)->format('d-m-Y')}}</td>
                     <td height="10px" class="table-center">{{$other->time_1}}</td>
-                    <td height="10px" class="table-center">{{$other->other_time_end4}}</td>
                     <td height="10px" class="table-center">{{$other->activity4}}</td>
                     <td height="10px" class="table-center">{{$other->detail_service4}}</td>
                 </tr>
                 <tr >
                     <td height="10px" class="table-center">{{Carbon\Carbon::parse($other->val_from)->format('d-m-Y')}}</td>
                     <td height="10px" class="table-center">{{$other->time_1}}</td>
-                    <td height="10px" class="table-center">{{$other->other_time_end5}}</td>
                     <td height="10px" class="table-center">{{$other->activity5}}</td>
                     <td height="10px" class="table-center">{{$other->detail_service5}}</td>
                 </tr>
                 <tr >
                     <td height="10px" class="table-center">{{Carbon\Carbon::parse($other->val_from)->format('d-m-Y')}}</td>
                     <td height="10px" class="table-center">{{$other->time_1}}</td>
-                    <td height="10px" class="table-center">{{$other->other_time_end6}}</td>
                     <td height="10px" class="table-center">{{$other->activity6}}</td>
                     <td height="10px" class="table-center">{{$other->detail_service6}}</td>
                 </tr>
@@ -583,43 +576,36 @@
                 </tr>
                 <tr class="table-grey">
                     <td class="table-grey"><b>Time Start</b></td>
-                    <td class="table-grey"><b>Time End</b></td>
                     <td class="table-grey"><b>Item</b></td>
                     <td class="table-grey"><b>Working Procedure</b></td>
                 </tr>
                 <tr >
-                    <td height="10px" class="table-center">{{$other->other_time_start}}</td>
-                    <td height="10px" class="table-center">{{$other->other_time_end}}</td>
+                    <td height="10px" class="table-center">{{$other->time_1}}</td>
                     <td height="10px" class="table-center">{{$other->item}}</td>
                     <td height="10px" class="table-center">{{$other->other_procedure}}</td>
                 </tr>
                 <tr >
-                    <td height="10px" class="table-center">{{$other->other_time_start2}}</td>
-                    <td height="10px" class="table-center">{{$other->other_time_end2}}</td>
+                    <td height="10px" class="table-center">{{$other->time_2}}</td>
                     <td height="10px" class="table-center">{{$other->item2}}</td>
                     <td height="10px" class="table-center">{{$other->other_procedure2}}</td>
                 </tr>
                 <tr >
-                    <td height="10px" class="table-center">{{$other->other_time_start3}}</td>
-                    <td height="10px" class="table-center">{{$other->other_time_end3}}</td>
+                    <td height="10px" class="table-center">{{$other->time_3}}</td>
                     <td height="10px" class="table-center">{{$other->item3}}</td>
                     <td height="10px" class="table-center">{{$other->other_procedure3}}</td>
                 </tr>
                 <tr >
-                    <td height="10px" class="table-center">{{$other->other_time_start4}}</td>
-                    <td height="10px" class="table-center">{{$other->other_time_end4}}</td>
+                    <td height="10px" class="table-center">{{$other->time_4}}</td>
                     <td height="10px" class="table-center">{{$other->item4}}</td>
                     <td height="10px" class="table-center">{{$other->other_procedure4}}</td>
                 </tr>
                 <tr >
-                    <td height="10px" class="table-center">{{$other->other_time_start5}}</td>
-                    <td height="10px" class="table-center">{{$other->other_time_end5}}</td>
+                    <td height="10px" class="table-center">{{$other->time_5}}</td>
                     <td height="10px" class="table-center">{{$other->item5}}</td>
                     <td height="10px" class="table-center">{{$other->other_procedure5}}</td>
                 </tr>
                 <tr >
-                    <td height="10px" class="table-center">{{$other->other_time_start6}}</td>
-                    <td height="10px" class="table-center">{{$other->other_time_end6}}</td>
+                    <td height="10px" class="table-center">{{$other->time_6}}</td>
                     <td height="10px" class="table-center">{{$other->item6}}</td>
                     <td height="10px" class="table-center">{{$other->other_procedure6}}</td>
                 </tr>
@@ -718,10 +704,24 @@
                 </tr>
                 <tr >
                     <td class="table-white">3. </td>
-                    <td class="table-center">{{$other->pic_3}}</td>
+                    <td class="table-center">{{$other->pic3}}</td>
                     <td class="table-center">{{$other->company_3}}</td>
                     <td class="table-center">{{$other->respon_3}}</td>
-                    <td class="table-center">{{$other->phone__3}}</td>
+                    <td class="table-center">{{$other->phone_3}}</td>
+                </tr>
+                <tr >
+                    <td class="table-white">4. </td>
+                    <td class="table-center">{{$other->pic4}}</td>
+                    <td class="table-center">{{$other->company_4}}</td>
+                    <td class="table-center">{{$other->respon_4}}</td>
+                    <td class="table-center">{{$other->phone_4}}</td>
+                </tr>
+                <tr >
+                    <td class="table-white">5. </td>
+                    <td class="table-center">{{$other->pic5}}</td>
+                    <td class="table-center">{{$other->company_5}}</td>
+                    <td class="table-center">{{$other->respon_5}}</td>
+                    <td class="table-center">{{$other->phone_5}}</td>
                 </tr>
             </table>
 
