@@ -42,16 +42,23 @@ class RutinController extends Controller
 
     public function store_rutin(Request $request)
     {
-        // dd($request->all());
         $data = $request->all();
         $data['other_work'] = Rutin::find($data['other_work'])->work;
-        $data['pic1'] = Personil::find($data['pic1'])->nama;
-        // $data['pic2'] = Personil::find($data['pic2'])->nama;
-        // $data['pic4'] = Personil::find($data['pic4'])->nama;
-        // $data['pic3'] = Personil::find($data['pic3'])->nama;
-        // $data['pic5'] = Personil::find($data['pic5'])->nama;
+        $pic1 = $data['pic1'] = Personil::find($data['pic1'])->nama;
+        if($pic2 = $data['pic2']){
+            $pic2 = Personil::find($data['pic2'])->nama;
+            if($pic3 = $data['pic3']){
+                $pic3 = Personil::find($data['pic3'])->nama;
+                if($pic4 = $data['pic4']){
+                    $pic4 = Personil::find($data['pic4'])->nama;
+                    if($pic5 = $data['pic5']){
+                        $pic5 = Personil::find($data['pic5'])->nama;
+                    }
+                }
+            }
+        }
 
-            $other = Other::create($data);
+        $other = Other::create($data);
         if ($other->exists) {
             $otherHistory = OtherHistory::create([
                 'other_id' => $other->other_id,

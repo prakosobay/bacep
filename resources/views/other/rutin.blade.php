@@ -190,9 +190,9 @@
 
                     <h4 class="pic">Person in charge 2</h4>
                         <select class="nama nama-pic2" name="pic2" id="js-example-basic-single2">
-                                <option value=""></option>
+                            <option value=""></option>
                             @foreach($personil as $p)
-                                <option value="{{ $p->id }}">{{ $p->nama }}</option>
+                            <option value="{{ $p->id }}">{{ $p->nama }}</option>
                             @endforeach
                         </select>
                         <input class="nama" type="text" id="company_2" name="company_2" placeholder="Company" readonly>
