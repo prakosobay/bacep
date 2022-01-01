@@ -169,10 +169,10 @@
 
                     {{-- PIC --}}
                     <h4 class="pic">Person in charge 1</h4>
-                        <select class="form-control" name="pic1" id="pic1">
-                                <option value=""></option>
+                        <select class="nama nama-pic1" name="pic1" id="js-example-basic-single1">
+                            <option value=""> </option>
                             @foreach($personil as $p)
-                                <option value="{{ $p->id }}">{{ $p->nama }}</option>
+                            <option value="{{ $p->id }}">{{ $p->nama }}</option>
                             @endforeach
                         </select>
                         <input class="nama" type="text" id="company_1" name="company_1" placeholder="Company" readonly>
@@ -189,7 +189,7 @@
                         <input class="ktp ml-2" id="ktp" type="file" name="ktp_1" accept="image/*"/> --}}
 
                     <h4 class="pic">Person in charge 2</h4>
-                        <select class="form-control" name="pic2" id="pic2">
+                        <select class="nama nama-pic2" name="pic2" id="js-example-basic-single2">
                                 <option value=""></option>
                             @foreach($personil as $p)
                                 <option value="{{ $p->id }}">{{ $p->nama }}</option>
@@ -202,7 +202,7 @@
                         <input type="number" class="personil" id="id_2" name="id_2" placeholder="ID Number" readonly>
 
                     <h4 class="pic">Person in charge 3</h4>
-                        <select class="form-control" name="pic3" id="pic3">
+                        <select class="nama nama-pic3" name="pic3" id="js-example-basic-single3">
                                 <option value=""></option>
                             @foreach($personil as $p)
                                 <option value="{{ $p->id }}">{{ $p->nama }}</option>
@@ -215,7 +215,7 @@
                         <input type="number" class="personil" id="id_3" name="id_3" placeholder="ID Number" readonly>
 
                     <h4 class="pic">Person in charge 4</h4>
-                        <select class="form-control" name="pic4" id="pic4">
+                        <select class="nama nama-pic4" name="pic4" id="js-example-basic-single4">
                                 <option value=""></option>
                             @foreach($personil as $p)
                                 <option value="{{ $p->id }}">{{ $p->nama }}</option>
@@ -228,7 +228,7 @@
                         <input type="number" class="personil" id="id_4" name="id_4" placeholder="ID Number" readonly>
 
                     <h4 class="pic">Person in charge 5</h4>
-                        <select class="form-control" name="pic5" id="pic5">
+                        <select class="nama nama-pic5" name="pic5" id="js-example-basic-single5">
                                 <option value=""></option>
                             @foreach($personil as $p)
                                 <option value="{{ $p->id }}">{{ $p->nama }}</option>
@@ -247,4 +247,23 @@
     </form>
 </div>
 
+<script>
+$(document).ready(function() {
+    $('#js-example-basic-single1').select2({
+        placeholder: "Pilih Personil",
+    });
+    $('#js-example-basic-single2').select2({
+        placeholder: "Pilih Personil",
+    });
+    $('#js-example-basic-single3').select2({
+        placeholder: "Pilih Personil",
+    });
+    $('#js-example-basic-single4').select2({
+        placeholder: "Pilih Personil",
+    });
+    $('#js-example-basic-single5').select2({
+        placeholder: "Pilih Personil",
+    });
+});
+</script>
 @endsection
