@@ -269,6 +269,17 @@ input {
     color: white;
 }
 
+.kedua{
+    width: 400px;
+    margin: 5px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline: none;
+    background: transparent;
+    color: white;
+}
+
 .table{
     margin-bottom: 20px;
 }

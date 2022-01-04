@@ -106,6 +106,25 @@
                     <h4 class="text-white mt-5">Description of Scope of Work (Deskripsikan Pekerjaan)</h4>
                     <input type="text" id="desc" value="" class="form-control @error('desc') is-invalid @enderror" required autocomplete="desc"  name="desc" readonly>
 
+                    {{-- Time table --}}
+                    <h4 class="text-white mt-5">Detail Time Table of All Activity</h4>
+                    <p>
+                        <input type="text" id="activity_1" class="kedua" value="" name="item_1" placeholder="Activity Description" readonly>
+                        <input type="text" id="detail_1" class="kedua" value="" name="procedure_1" placeholder="Detail Service Impact" readonly>
+
+                        <input type="text" id="activity_2" class="kedua" value="" name="item_2" placeholder="Activity Description" readonly>
+                        <input type="text" id="detail_2" class="kedua" value="" name="procedure_2" placeholder="Detail Service Impact" readonly>
+
+                        <input type="text" id="activity_3" class="kedua" value="" name="item_3" placeholder="Activity Description" readonly>
+                        <input type="text" id="detail_3" class="kedua" value="" name="procedure_3" placeholder="Detail Service Impact" readonly>
+
+                        <input type="text" id="activity_4" class="kedua" value="" name="item_4" placeholder="Activity Description" readonly>
+                        <input type="text" id="detail4" class="kedua" value="" name="procedure_4" placeholder="Detail Service Impact" readonly>
+
+                        <input type="text" id="activity_5" class="kedua" value="" name="item_5" placeholder="Activity Description" readonly>
+                        <input type="text" id="detail_5" class="kedua" value="" name="procedure_5" placeholder="Detail Service Impact" readonly>
+
+                    </p>
                     {{-- Detail Time & Operation --}}
                     <h4 class="text-white mt-5">Detail Time & Operation (Detail Waktu & Operasi) </h4>
                     <p>

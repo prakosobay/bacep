@@ -174,6 +174,16 @@ $(document).ready(function(){
                 const {data} = response;
                 console.log(data)
             $('#desc').val(data.desc);
+            $('#activity_1').val(data.activity_1);
+            $('#activity_2').val(data.activity_2);
+            $('#activity_3').val(data.activity_3);
+            $('#activity_4').val(data.activity_4);
+            $('#activity_5').val(data.activity_5);
+            $('#detail_1').val(data.detail_1);
+            $('#detail_2').val(data.detail_2);
+            $('#detail_3').val(data.detail_3);
+            $('#detail_4').val(data.detail_4);
+            $('#detail_5').val(data.detail_5);
             $('#item_1').val(data.item_1);
             $('#item_2').val(data.item_2);
             $('#item_3').val(data.item_3);

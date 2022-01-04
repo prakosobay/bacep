@@ -76,7 +76,7 @@ class RutinController extends Controller
     public function other_pdf($id)
     {
         $other = Other::find($id);
-        // dd($id);
+        // dd($other);
         $lasthistoryC = OtherHistory::where('other_id', $id)->where('aktif', 1)->first();
         // $lasthistoryC->update(['pdf' => true]);
 
