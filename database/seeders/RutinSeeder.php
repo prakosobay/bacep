@@ -207,7 +207,7 @@ class RutinSeeder extends Seeder
 
             //DAIKIN
             [
-                'work' => 'Pembersihan AC Split & AC VRV Indoor/outdoor lantai 1 s/d lantai 3 kantor batu ceper',
+                'work' => 'Service & Pembersihan AC Split & AC VRV Indoor/outdoor lantai G - 5 Batu Ceper',
                 'loc1' => 'Lantai 1 dan Lantai G', //server
                 'loc2' => 'Office 2nd Fl', //genset
                 'loc3' => 'Office 3rd Fl', //mmr1
@@ -222,8 +222,8 @@ class RutinSeeder extends Seeder
                 'loc12' => '', //trafo
                 'loc13' => '', //parking
                 'loc14' => '',  //other
-                'desc' => 'Service dan Pembersihan AC Split & AC VRV Indoor/outdoor lantai 1 s/d lantai 3 kantor batu ceper',
-                'activity_1' => 'Service & pembersihan AC Split & AC VRV indoor/outdoor lantai 1 s/d lantai 5 kantor Batu Ceper',
+                'desc' => 'Service dan Pembersihan AC Split & AC VRV Indoor/outdoor lantai G-3 batu ceper',
+                'activity_1' => 'Service & pembersihan AC Split & AC VRV indoor/outdoor lantai G-5 Batu Ceper',
                 'activity_2' => '',
                 'activity_3' => '',
                 'activity_4' => '',
