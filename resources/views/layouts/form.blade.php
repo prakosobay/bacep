@@ -23,6 +23,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.14.0/sweetalert2.all.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+    //Select 2
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
@@ -63,14 +65,16 @@
 </body>
 
 <script type="text/javascript">
+
 $(document).ready(function(){
+    $('.js-example-basic-single').select2();
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('input[name="_token"]').val()
         }
     });
 
-    $('#pic1').change(function(){
+    $('.nama-pic1').change(function(){
         let id = $(this).val();
         $.ajax({
             url: "{{url("/personil")}}"+'/'+id,
@@ -88,7 +92,7 @@ $(document).ready(function(){
         });
     });
 
-    $('#pic2').change(function(){
+    $('.nama-pic2').change(function(){
         let id = $(this).val();
         $.ajax({
             url: "{{url("/personil")}}"+'/'+id,
@@ -106,7 +110,7 @@ $(document).ready(function(){
         });
     });
 
-    $('#pic3').change(function(){
+    $('.nama-pic3').change(function(){
         let id = $(this).val();
         $.ajax({
             url: "{{url("/personil")}}"+'/'+id,
@@ -124,7 +128,7 @@ $(document).ready(function(){
         });
     });
 
-    $('#pic4').change(function(){
+    $('.nama-pic4').change(function(){
         let id = $(this).val();
         $.ajax({
             url: "{{url("/personil")}}"+'/'+id,
@@ -142,7 +146,7 @@ $(document).ready(function(){
         });
     });
 
-    $('#pic5').change(function(){
+    $('.nama-pic5').change(function(){
         let id = $(this).val();
         $.ajax({
             url: "{{url("/personil")}}"+'/'+id,
@@ -170,6 +174,16 @@ $(document).ready(function(){
                 const {data} = response;
                 console.log(data)
             $('#desc').val(data.desc);
+            $('#activity_1').val(data.activity_1);
+            $('#activity_2').val(data.activity_2);
+            $('#activity_3').val(data.activity_3);
+            $('#activity_4').val(data.activity_4);
+            $('#activity_5').val(data.activity_5);
+            $('#detail_1').val(data.detail_1);
+            $('#detail_2').val(data.detail_2);
+            $('#detail_3').val(data.detail_3);
+            $('#detail_4').val(data.detail_4);
+            $('#detail_5').val(data.detail_5);
             $('#item_1').val(data.item_1);
             $('#item_2').val(data.item_2);
             $('#item_3').val(data.item_3);

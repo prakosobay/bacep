@@ -106,6 +106,25 @@
                     <h4 class="text-white mt-5">Description of Scope of Work (Deskripsikan Pekerjaan)</h4>
                     <input type="text" id="desc" value="" class="form-control @error('desc') is-invalid @enderror" required autocomplete="desc"  name="desc" readonly>
 
+                    {{-- Time table --}}
+                    <h4 class="text-white mt-5">Detail Time Table of All Activity</h4>
+                    <p>
+                        <input type="text" id="activity_1" class="kedua" value="" name="item_1" placeholder="Activity Description" readonly>
+                        <input type="text" id="detail_1" class="kedua" value="" name="procedure_1" placeholder="Detail Service Impact" readonly>
+
+                        <input type="text" id="activity_2" class="kedua" value="" name="item_2" placeholder="Activity Description" readonly>
+                        <input type="text" id="detail_2" class="kedua" value="" name="procedure_2" placeholder="Detail Service Impact" readonly>
+
+                        <input type="text" id="activity_3" class="kedua" value="" name="item_3" placeholder="Activity Description" readonly>
+                        <input type="text" id="detail_3" class="kedua" value="" name="procedure_3" placeholder="Detail Service Impact" readonly>
+
+                        <input type="text" id="activity_4" class="kedua" value="" name="item_4" placeholder="Activity Description" readonly>
+                        <input type="text" id="detail4" class="kedua" value="" name="procedure_4" placeholder="Detail Service Impact" readonly>
+
+                        <input type="text" id="activity_5" class="kedua" value="" name="item_5" placeholder="Activity Description" readonly>
+                        <input type="text" id="detail_5" class="kedua" value="" name="procedure_5" placeholder="Detail Service Impact" readonly>
+
+                    </p>
                     {{-- Detail Time & Operation --}}
                     <h4 class="text-white mt-5">Detail Time & Operation (Detail Waktu & Operasi) </h4>
                     <p>
@@ -169,10 +188,10 @@
 
                     {{-- PIC --}}
                     <h4 class="pic">Person in charge 1</h4>
-                        <select class="form-control" name="pic1" id="pic1">
-                                <option value=""></option>
+                        <select class="nama nama-pic1" name="pic1" id="js-example-basic-single1">
+                            <option value=""> </option>
                             @foreach($personil as $p)
-                                <option value="{{ $p->id }}">{{ $p->nama }}</option>
+                            <option value="{{ $p->id }}">{{ $p->nama }}</option>
                             @endforeach
                         </select>
                         <input class="nama" type="text" id="company_1" name="company_1" placeholder="Company" readonly>
@@ -189,10 +208,10 @@
                         <input class="ktp ml-2" id="ktp" type="file" name="ktp_1" accept="image/*"/> --}}
 
                     <h4 class="pic">Person in charge 2</h4>
-                        <select class="form-control" name="pic2" id="pic2">
-                                <option value=""></option>
+                        <select class="nama nama-pic2" name="pic2" id="js-example-basic-single2">
+                            <option value=""></option>
                             @foreach($personil as $p)
-                                <option value="{{ $p->id }}">{{ $p->nama }}</option>
+                            <option value="{{ $p->id }}">{{ $p->nama }}</option>
                             @endforeach
                         </select>
                         <input class="nama" type="text" id="company_2" name="company_2" placeholder="Company" readonly>
@@ -202,7 +221,7 @@
                         <input type="number" class="personil" id="id_2" name="id_2" placeholder="ID Number" readonly>
 
                     <h4 class="pic">Person in charge 3</h4>
-                        <select class="form-control" name="pic3" id="pic3">
+                        <select class="nama nama-pic3" name="pic3" id="js-example-basic-single3">
                                 <option value=""></option>
                             @foreach($personil as $p)
                                 <option value="{{ $p->id }}">{{ $p->nama }}</option>
@@ -215,7 +234,7 @@
                         <input type="number" class="personil" id="id_3" name="id_3" placeholder="ID Number" readonly>
 
                     <h4 class="pic">Person in charge 4</h4>
-                        <select class="form-control" name="pic4" id="pic4">
+                        <select class="nama nama-pic4" name="pic4" id="js-example-basic-single4">
                                 <option value=""></option>
                             @foreach($personil as $p)
                                 <option value="{{ $p->id }}">{{ $p->nama }}</option>
@@ -228,7 +247,7 @@
                         <input type="number" class="personil" id="id_4" name="id_4" placeholder="ID Number" readonly>
 
                     <h4 class="pic">Person in charge 5</h4>
-                        <select class="form-control" name="pic5" id="pic5">
+                        <select class="nama nama-pic5" name="pic5" id="js-example-basic-single5">
                                 <option value=""></option>
                             @foreach($personil as $p)
                                 <option value="{{ $p->id }}">{{ $p->nama }}</option>
@@ -247,4 +266,23 @@
     </form>
 </div>
 
+<script>
+$(document).ready(function() {
+    $('#js-example-basic-single1').select2({
+        placeholder: "Pilih Personil",
+    });
+    $('#js-example-basic-single2').select2({
+        placeholder: "Pilih Personil",
+    });
+    $('#js-example-basic-single3').select2({
+        placeholder: "Pilih Personil",
+    });
+    $('#js-example-basic-single4').select2({
+        placeholder: "Pilih Personil",
+    });
+    $('#js-example-basic-single5').select2({
+        placeholder: "Pilih Personil",
+    });
+});
+</script>
 @endsection

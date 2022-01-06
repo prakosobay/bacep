@@ -42,16 +42,24 @@ class RutinController extends Controller
 
     public function store_rutin(Request $request)
     {
-        // dd($request->all());
         $data = $request->all();
         $data['other_work'] = Rutin::find($data['other_work'])->work;
         $data['pic1'] = Personil::find($data['pic1'])->nama;
-        // $data['pic2'] = Personil::find($data['pic2'])->nama;
-        // $data['pic4'] = Personil::find($data['pic4'])->nama;
-        // $data['pic3'] = Personil::find($data['pic3'])->nama;
-        // $data['pic5'] = Personil::find($data['pic5'])->nama;
+        if($data['pic2']){
+            $data['pic2'] = Personil::find($data['pic2'])->nama;
+            if($data['pic3']){
+                $data['pic3'] = Personil::find($data['pic3'])->nama;
+                if($data['pic4']){
+                    $data['pic4'] = Personil::find($data['pic4'])->nama;
+                    if($data['pic5']){
+                        $data['pic5'] = Personil::find($data['pic5'])->nama;
+                    }
+                }
+            }
+        }
 
-            $other = Other::create($data);
+        // dd($data);
+        $other = Other::create($data);
         if ($other->exists) {
             $otherHistory = OtherHistory::create([
                 'other_id' => $other->other_id,
@@ -68,7 +76,7 @@ class RutinController extends Controller
     public function other_pdf($id)
     {
         $other = Other::find($id);
-        // dd($id);
+        // dd($other);
         $lasthistoryC = OtherHistory::where('other_id', $id)->where('aktif', 1)->first();
         // $lasthistoryC->update(['pdf' => true]);
 

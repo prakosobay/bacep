@@ -37,6 +37,16 @@ class CreateOthersTable extends Migration
             $table->timeTz('time_3')->nullable();
             $table->timeTz('time_4')->nullable();
             $table->timeTz('time_5')->nullable();
+            $table->string('activity_1');
+            $table->string('activity_2')->nullable();
+            $table->string('activity_3')->nullable();
+            $table->string('activity_4')->nullable();
+            $table->string('activity_5')->nullable();
+            $table->string('detail_1');
+            $table->string('detail_2')->nullable();
+            $table->string('detail_3')->nullable();
+            $table->string('detail_4')->nullable();
+            $table->string('detail_5')->nullable();
             $table->string('procedure_1');
             $table->string('procedure_2')->nullable();
             $table->string('procedure_3')->nullable();
@@ -67,7 +77,7 @@ class CreateOthersTable extends Migration
             $table->string('mitigation_3')->nullable();
             $table->string('mitigation_4')->nullable();
             $table->string('mitigation_5')->nullable();
-            $table->string('desc', 1000);
+            $table->string('desc', 500);
             $table->string('testing')->nullable();
             $table->string('rollback')->nullable();
             $table->string('pic1');

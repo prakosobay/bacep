@@ -25,45 +25,7 @@ class OtherController extends Controller
         }
     }
 
-    // public function files(Request $request)
-    // {
-    //     // dd($request);
-    //     $request->validate([
-    //         'pict' => ['required', 'image', 'mimes:png,jpg,jpeg', 'max:500'],
-    //     ]);
 
-    //     $file = $request->file('pict');
-    //     $nama_file = time()."_".$file->getClientOriginalName();
-    //     $tujuan_upload = 'gambar';
-	//     $file->move($tujuan_upload,$file->getClientOriginalName());
-
-    //     Gambar::create([
-    //         'file' => $nama_file,
-    //     ]);
-    // }
-
-    // public function time(Request $request)
-    // {
-    //     // dd($request);
-    //     $request->validate([
-    //         'jam1' => ['required'],
-    //         'jam2' => ['required'],
-    //     ]);
-
-    //     // $jam_end = (00:10:00);
-
-    //     $time = Time::create([
-    //         'jam1' => $request->jam1,
-    //         'jam2' => $request->jam2
-    //     ]);
-    // }
-
-    // public function liat()
-    // {
-    //     $jam = Time::all();
-    //     return view('other.gambar', compact('jam'));
-    //     // return isset($jam) && !empty($jam) ? response()->json(['status' => 'SUCCESS', 'jam' => $jam]) : response()->json(['status' => 'FAILED', 'jam' => []]);
-    // }
 
     public function store_other(Request $request)
     {
