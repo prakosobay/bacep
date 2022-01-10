@@ -16,8 +16,8 @@ class RutinSeeder extends Seeder
      */
     public function run()
     {
-        Rutin::truncate();
-            $row = [
+        // Rutin::truncate();
+        $row = [
             //KONE
             [
                 'work' => 'Service Lift Kantor Batu Ceper',

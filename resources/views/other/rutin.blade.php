@@ -109,20 +109,20 @@
                     {{-- Time table --}}
                     <h4 class="text-white mt-5">Detail Time Table of All Activity</h4>
                     <p>
-                        <input type="text" id="activity_1" class="kedua" value="" name="item_1" placeholder="Activity Description" readonly>
-                        <input type="text" id="detail_1" class="kedua" value="" name="procedure_1" placeholder="Detail Service Impact" readonly>
+                        <input type="text" id="activity_1" class="kedua" value="" name="activity_1" placeholder="Activity Description" readonly>
+                        <input type="text" id="detail_1" class="kedua" value="" name="detail_1" placeholder="Detail Service Impact" readonly>
 
-                        <input type="text" id="activity_2" class="kedua" value="" name="item_2" placeholder="Activity Description" readonly>
-                        <input type="text" id="detail_2" class="kedua" value="" name="procedure_2" placeholder="Detail Service Impact" readonly>
+                        <input type="text" id="activity_2" class="kedua" value="" name="activity_2" placeholder="Activity Description" readonly>
+                        <input type="text" id="detail_2" class="kedua" value="" name="detail_2" placeholder="Detail Service Impact" readonly>
 
-                        <input type="text" id="activity_3" class="kedua" value="" name="item_3" placeholder="Activity Description" readonly>
-                        <input type="text" id="detail_3" class="kedua" value="" name="procedure_3" placeholder="Detail Service Impact" readonly>
+                        <input type="text" id="activity_3" class="kedua" value="" name="activity_3" placeholder="Activity Description" readonly>
+                        <input type="text" id="detail_3" class="kedua" value="" name="detail_3" placeholder="Detail Service Impact" readonly>
 
-                        <input type="text" id="activity_4" class="kedua" value="" name="item_4" placeholder="Activity Description" readonly>
-                        <input type="text" id="detail4" class="kedua" value="" name="procedure_4" placeholder="Detail Service Impact" readonly>
+                        <input type="text" id="activity_4" class="kedua" value="" name="activity_4" placeholder="Activity Description" readonly>
+                        <input type="text" id="detail4" class="kedua" value="" name="detail_4" placeholder="Detail Service Impact" readonly>
 
-                        <input type="text" id="activity_5" class="kedua" value="" name="item_5" placeholder="Activity Description" readonly>
-                        <input type="text" id="detail_5" class="kedua" value="" name="procedure_5" placeholder="Detail Service Impact" readonly>
+                        <input type="text" id="activity_5" class="kedua" value="" name="activity_5" placeholder="Activity Description" readonly>
+                        <input type="text" id="detail_5" class="kedua" value="" name="detail_5" placeholder="Detail Service Impact" readonly>
 
                     </p>
                     {{-- Detail Time & Operation --}}

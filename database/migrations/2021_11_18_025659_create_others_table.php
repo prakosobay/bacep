@@ -18,7 +18,7 @@ class CreateOthersTable extends Migration
             $table->string('other_work');
             $table->date('val_from', 20);
             $table->date('val_to', 20);
-            $table->string('loc1')->nullable();//other
+            $table->string('loc1')->nullable(); //other
             $table->string('loc2', 20)->nullable();
             $table->string('loc3', 20)->nullable();
             $table->string('loc4', 20)->nullable();
@@ -32,11 +32,11 @@ class CreateOthersTable extends Migration
             $table->string('loc12', 20)->nullable();
             $table->string('loc13', 20)->nullable();
             $table->string('loc14', 20)->nullable();
-            $table->timeTz('time_1');
-            $table->timeTz('time_2')->nullable();
-            $table->timeTz('time_3')->nullable();
-            $table->timeTz('time_4')->nullable();
-            $table->timeTz('time_5')->nullable();
+            $table->time('time_1');
+            $table->time('time_2')->nullable();
+            $table->time('time_3')->nullable();
+            $table->time('time_4')->nullable();
+            $table->time('time_5')->nullable();
             $table->string('activity_1');
             $table->string('activity_2')->nullable();
             $table->string('activity_3')->nullable();

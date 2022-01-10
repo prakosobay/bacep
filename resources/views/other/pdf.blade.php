@@ -535,31 +535,31 @@
                 <tr >
                     <td height="10px" class="table-center">{{Carbon\Carbon::parse($other->val_from)->format('d-m-Y')}}</td>
                     <td height="10px" class="table-center">{{$other->time_1}}</td>
-                    <td height="10px" class="table-center">{{$other->desc}}</td>
+                    <td height="10px" class="table-center">{{$other->activity_1}}</td>
                     <td height="10px" class="table-center">{{$other->risk_1}}</td>
                 </tr>
                 <tr >
                     <td height="10px" class="table-center">{{Carbon\Carbon::parse($other->val_from)->format('d-m-Y')}}</td>
                     <td height="10px" class="table-center">{{$other->time_2}}</td>
-                    <td height="10px" class="table-center">{{$other->desc}}</td>
+                    <td height="10px" class="table-center">{{$other->activity_2}}</td>
                     <td height="10px" class="table-center">{{$other->risk_2}}</td>
                 </tr>
                 <tr >
                     <td height="10px" class="table-center">{{Carbon\Carbon::parse($other->val_from)->format('d-m-Y')}}</td>
                     <td height="10px" class="table-center">{{$other->time_3}}</td>
-                    <td height="10px" class="table-center">{{$other->desc}}</td>
+                    <td height="10px" class="table-center">{{$other->activity_3}}</td>
                     <td height="10px" class="table-center">{{$other->risk_3}}</td>
                 </tr>
                 <tr >
                     <td height="10px" class="table-center">{{Carbon\Carbon::parse($other->val_from)->format('d-m-Y')}}</td>
                     <td height="10px" class="table-center">{{$other->time_4}}</td>
-                    <td height="10px" class="table-center">{{$other->desc}}</td>
+                    <td height="10px" class="table-center">{{$other->activity_4}}</td>
                     <td height="10px" class="table-center">{{$other->risk_4}}</td>
                 </tr>
                 <tr >
                     <td height="10px" class="table-center">{{Carbon\Carbon::parse($other->val_from)->format('d-m-Y')}}</td>
                     <td height="10px" class="table-center">{{$other->time_5}}</td>
-                    <td height="10px" class="table-center">{{$other->desc}}</td>
+                    <td height="10px" class="table-center">{{$other->activity_5}}</td>
                     <td height="10px" class="table-center">{{$other->risk_5}}</td>
                 </tr>
             </table>
