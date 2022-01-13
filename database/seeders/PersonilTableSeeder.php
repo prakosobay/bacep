@@ -14,7 +14,7 @@ class PersonilTableSeeder extends Seeder
      */
     public function run()
     {
-        // Personil::truncate();
+        Personil::truncate();
         $row =
             [
                 //CALMIC

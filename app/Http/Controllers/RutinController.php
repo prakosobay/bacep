@@ -26,6 +26,13 @@ class RutinController extends Controller
         }
     }
 
+    public function form_perbaikan()
+    {
+        if(Gate::allows('isBm')){
+            return view('other.perbaikan');
+        }
+    }
+
     public function rutin($id)
     {
         $data = Rutin::findOrFail($id);

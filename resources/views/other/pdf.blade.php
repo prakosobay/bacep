@@ -285,14 +285,14 @@
                 </tr>
                 <tr>
                     <td>
-                        @if(($other->loc1 == 'Server Room') || ($other->loc2 == 'Server Room') || ($other->loc3 == 'Server Room') || ($other->loc4 == 'Server Room') || ($other->loc5 == 'Server Room') || ($other->loc6 == 'Server Room'))
+                        @if($other->loc4 == 'Server Room')
                         <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   Server Room
                         @else
                         <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   Server Room
                         @endif
                     </td>
                     <td >
-                        @if(($other->loc1 === 'Generator Room') || ($other->loc2 === 'Generator Room') || ($other->loc3 === 'Generator Room') || ($other->loc4 === 'Generator Room') || ($other->loc5 == 'Generator Room') || ($other->loc6 == 'Generator Room'))
+                        @if($other->loc9 === 'Generator Room'))
                         <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   Generator Room
                         @else
                         <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   Generator Room
@@ -303,14 +303,14 @@
                 </tr>
                 <tr>
                     <td >
-                        @if(($other->loc1 == 'MMR 1') || ($other->loc2 == 'MMR 1') || ($other->loc3 == 'MMR 1') || ($other->loc4 == 'MMR 1') || ($other->loc5 == 'MMR 1') || ($other->loc6 == 'MMR 1'))
+                        @if($other->loc6 == 'MMR 1')
                         <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   MMR 1
                         @else
                         <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   MMR 1
                         @endif
                     </td>
                     <td >
-                        @if(($other->loc1 == 'Panel Room') || ($other->loc2 == 'Panel Room') || ($other->loc3 == 'Panel Room') || ($other->loc4 == 'Panel Room') || ($other->loc5 == 'Panel Room') || ($other->loc6 == 'Panel Room'))
+                        @if($other->loc10 == 'Panel Room')
                         <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   Panel Room
                         @else
                         <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   Panel Room
@@ -321,14 +321,14 @@
                 </tr>
                 <tr>
                     <td >
-                        @if(($other->loc1 == 'MMR 2') || ($other->loc2 == 'MMR 2') || ($other->loc3 == 'MMR 2') || ($other->loc4 == 'MMR 2') || ($other->loc5 == 'MMR 2') || ($other->loc6 == 'MMR 2'))
+                        @if($other->loc8 == 'MMR 2')
                         <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   MMR 2
                         @else
                         <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   MMR 2
                         @endif
                     </td>
                     <td >
-                        @if(($other->loc1 == 'Baterai Room') || ($other->loc2 == 'Baterai Room') || ($other->loc3 == 'Baterai Room') || ($other->loc4 == 'Baterai Room') || ($other->loc5 == 'Baterai Room') || ($other->loc6 == 'Baterai Room'))
+                        @if($other->loc11 == 'Battery Room')
                         <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   Battery Room
                         @else
                         <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   Battery Room
@@ -339,14 +339,14 @@
                 </tr>
                 <tr>
                     <td >
-                        @if(($other->loc1 == 'UPS Room') || ($other->loc2 == 'UPS Room') || ($other->loc3 == 'UPS Room') || ($other->loc4 == 'UPS Room') || ($other->loc5 == 'UPS Room') || ($other->loc6 == 'UPS Room'))
+                        @if($other->loc5 == 'UPS Room')
                         <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   UPS Room
                         @else
                         <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   UPS Room
                         @endif
                     </td>
                     <td >
-                        @if(($other->loc1 == 'FSS') || ($other->loc2 == 'FSS') || ($other->loc3 == 'FSS') || ($other->loc4 == 'FSS') || ($other->loc5 == 'FSS') || ($other->loc6 == 'FSS'))
+                        @if($other->loc7 == 'FSS')
                         <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   FSS Room
                         @else
                         <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   FSS Room
@@ -355,36 +355,59 @@
                     <td colspan="2">  </td>
                 </tr>
                 <tr>
-                    <td ><img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   Office 2nd FL</td>
-                    <td ><img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   Office 3rd FL</td>
+                    <td >
+                        @if($other->loc2 == 'Office 2nd Fl')
+                        <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   Office 2nd FL
+                        @else
+                        <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   Office 2nd FL
+                        @endif
+                    </td>
+                    <td >
+                        @if($other->loc3 == 'Office 3rd Fl')
+                        <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   Office 3rd FL
+                        @else
+                        <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   Office 3rd FL
+                        @endif
+                    </td>
                     <td colspan="2"></td>
                 </tr>
                 <tr>
                     <td >
-                        @if(($other->loc1 == 'Trafo Room') || ($other->loc2 == 'Trafo Room') || ($other->loc3 == 'Trafo Room') || ($other->loc4 == 'Trafo Room') || ($other->loc5 == 'Trafo Room') || ($other->loc6 == 'Trafo Room'))
+                        @if($other->loc12 == 'Trafo Room')
                         <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   Trafo Room
                         @else
                         <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   Trafo Room
                         @endif
                     </td>
-                    <td ><img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   Yard</td>
+                    <td >
+                        @if($other->loc14 == 'Yard')
+                        <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   Yard
+                        @else
+                        <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   Yard
+                        @endif
+                    </td>
                     <td class="table-grey" colspan="2"><b>Validity</b></td>
                 </tr>
                 <tr>
                     <td >
-                        @if($other->loc4 == 'CCTV Room')
+                        @if($other->loc1 == 'Lantai 5, Lift dan Lantai G')
+                        <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   Others : Lantai 5, Lift dan Lantai G
+                        @elseif($other->loc1 == 'Lantai 5, Lantai 1 dan Lantai G')
+                        <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   Others : Lantai 5, Lantai 1 dan Lantai G
+                        @elseif($other->loc1 == 'Lantai 1 dan Lantai G')
+                        <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   Others : Lantai 1 dan Lantai G
+                        @elseif($other->loc1 == 'CCTV Room')
                         <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   Others : CCTV Room
-                        @elseif(($other->loc1 == 'Pintu Luar PLN') || ($other->loc2 == 'Pintu Luar PLN') || ($other->loc3 == 'Pintu Luar PLN') || ($other->loc4 == 'Pintu Luar PLN') || ($other->loc5 == 'Pintu Luar PLN') || ($other->loc6 == 'Pintu Luar PLN'))
-                        <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   Others : Pintu Luar PLN
-                        @elseif(($other->loc1 == 'Koridor Lt. 1') || ($other->loc2 == 'Koridor Lt. 1') || ($other->loc3 == 'Koridor Lt. 1') || ($other->loc4 == 'Koridor Lt. 1') || ($other->loc5 == 'Koridor Lt. 1') || ($other->loc6 == 'Koridor Lt. 1'))
-                        <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   Others : Koridor Lt. 1
-                        @elseif(($other->loc5 == 'Koridor') && ($other->loc6 == 'CCTV Room'))
-                        <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   Others : Koridor Lt. 1 & CCTV Room
                         @else
                         <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   Others :
                         @endif
                     </td>
-                    <td ><img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   Parking Lot</td>
+                    <td >@if($other->loc13 == 'Parking Lot')
+                        <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   Parking Lot
+                        @else
+                        <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   Parking Lot
+                        @endif
+                    </td>
 
                     <td class="table-white">{{Carbon\Carbon::parse($other->validity_from)->format('d-m-Y')}}</td>
                     <td class="table-white">{{Carbon\Carbon::parse($other->validity_to)->format('d-m-Y')}}</td>

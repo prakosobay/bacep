@@ -3,36 +3,28 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\{Route, Auth};
-use App\Http\Controllers\{HomeController, CleaningController, AdminController, OtherController};
+use App\Http\Controllers\{HomeController, CleaningController, AdminController};
 
 // Auth::routes(['verify' => true]);
 Route::get('/', function () {
     return view('auth.login');
 })->middleware('guest');
 
-Route::get('/sabar', [OtherController::class, 'liat']);
-
-//tes gambar
-
-// Route::post('gambar2', [OtherController::class, 'time'])->name('gambar2');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', [HomeController::class, 'index']);
 
     //Detail History
     Route::get('/detail_cleaning/{id}', [CleaningController::class, 'detail_permit_cleaning']);
-    Route::get('/detail_other/{id}', [OtherController::class, 'detail']);
 
     //Approve
     Route::post('/approve_cleaning', [CleaningController::class, 'approve_cleaning']);
-    Route::post('/approve_other', [OtherController::class, 'approve_other']);
 
     //Reject
     Route::post('/cleaning_reject', [CleaningController::class, 'cleaning_reject']);
 
     //Submit
     Route::post('/submit_data_cleaning', [CleaningController::class, 'submit_data_cleaning']);
-    Route::post('/other.form', [OtherController::class, 'store_other']);
 
     //Approval View
     Route::get('/detail_cleaning{id}', [CleaningController::class, 'approve_cleaning']);
@@ -56,8 +48,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/cleaning/{id}', [CleaningController::class, 'pilihan_work']);
 
     //PDF
-    Route::get('/other_pdf/{id}', [RutinController::class, 'other_pdf']);
     Route::get('/cleaning_pdf/{id}', [CleaningController::class, 'cetak_cleaning_pdf']);
+    Route::get('/other_pdf/{id}', [RutinController::class, 'other_pdf']);
 
     //Admin Panel
     Route::get('/table_user', [AdminController::class, 'show_user']);
@@ -127,8 +119,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/ob.destroy/{id}', [RevisiController::class, 'destroy_ob']);
     Route::post('/ob.new', [RevisiController::class, 'store_ob']);
 
-    //Other
-    Route::get('/perbaikan', [OtherController::class, 'index']);
+    //Perbaikan
+    Route::get('/perbaikan', [RutinController::class, 'form_perbaikan']);
 
     //Rutin
     Route::get('rutin', [RutinController::class, 'index']);
