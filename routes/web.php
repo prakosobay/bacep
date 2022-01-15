@@ -16,17 +16,20 @@ Route::middleware(['auth'])->group(function () {
 
     //Detail History
     Route::get('/detail_cleaning/{id}', [CleaningController::class, 'detail_permit_cleaning']);
+    Route::get('detail_other{id}', [RutinController::class, 'detail_permit_other']);
 
-    //Approve
+    //Approve flow
     Route::post('/approve_cleaning', [CleaningController::class, 'approve_cleaning']);
+    Route::post('/approve_other', [RutinController::class, 'approve_other']);
 
     //Reject
     Route::post('/cleaning_reject', [CleaningController::class, 'cleaning_reject']);
 
     //Submit
     Route::post('/submit_data_cleaning', [CleaningController::class, 'submit_data_cleaning']);
+    Route::post('/rutin.form', [RutinController::class, 'store_rutin']);
 
-    //Approval View
+    //History
     Route::get('/detail_cleaning{id}', [CleaningController::class, 'approve_cleaning']);
 
     //Approval view
@@ -126,7 +129,4 @@ Route::middleware(['auth'])->group(function () {
     Route::get('rutin', [RutinController::class, 'index']);
     Route::get('/rutins/{id}', [RutinController::class, 'rutin']);
     Route::get('/personil/{id}', [RutinController::class, 'personil']);
-    Route::post('/rutin.form', [RutinController::class, 'store_rutin']);
 });
-// Route::resource('/barang', ConsumController::class);
-//
