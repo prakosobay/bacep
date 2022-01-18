@@ -36,6 +36,8 @@
                                         @elsecan('isHead')
                                             <a href="javascript:void(0)" id="ok" class="approve" data-other_id="{{$p->other_id}}">Approve</a>
                                             <a href="javascript:void(0)" id="not" class="reject" data-other_id="{{$p->other_id}}">Reject</a>
+                                        @elsecan('isBm')
+                                            <a href="javascript:void(0)" id="ok" class="approve" data-other_id="{{$p->other_id}}">Approve</a>
                                         @elsecan('isSecurity')
                                             <a href="javascript:void(0)" id="ok" class="approve" data-other_id="{{$p->other_id}}">Approve</a>
                                         @endcan

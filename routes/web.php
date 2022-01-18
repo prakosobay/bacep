@@ -11,7 +11,7 @@ Route::get('/', function () {
 })->middleware('guest');
 
 
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::get('/home', [HomeController::class, 'index']);
 
     //Detail History

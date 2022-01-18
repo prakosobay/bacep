@@ -47,11 +47,10 @@
                         <div class="bar"></div>
                     </div>
                     <ul>
-                        {{-- <li><a href="#VisitDC" data-after="VisitDC">Visit Data Center</a></li>
-                        <li><a href="#VisitDC" data-after="VisitDC">Visit Data Center</a></li> --}}
                         @can('isBm')
                         <li><a href="cleaning.form" data-after="cleaning">Cleaning</a></li>
                         <li><a href="perbaikan" data-after="other">Other</a></li>
+                        <li><a href="{{ url('approval/other') }}" data-after="Approval">Approval</a></li>
                         @elsecan('isAdmin')
                         <li><a href="{{ url('/table_user') }}" data-after="Admin">Admin Panel</a></li>
                         @elsecan('isApproval')

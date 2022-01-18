@@ -98,6 +98,10 @@ class RutinController extends Controller
         return $pdf->stream();
     }
 
+    public function omsino()
+    {
+
+    }
     public function detail_permit_other($id)
     {
         dd($id);
