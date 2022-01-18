@@ -26,6 +26,13 @@ class RutinController extends Controller
         }
     }
 
+    public function form_perbaikan()
+    {
+        if(Gate::allows('isBm')){
+            return view('other.perbaikan');
+        }
+    }
+
     public function rutin($id)
     {
         $data = Rutin::findOrFail($id);
@@ -89,6 +96,24 @@ class RutinController extends Controller
             ->get();
         $pdf = PDF::loadview('other.pdf', compact('other', 'lasthistoryC', 'otherHistory'))->setPaper('a4', 'portrait')->setWarnings(false);
         return $pdf->stream();
+    }
+
+    public function detail_permit_other($id)
+    {
+        dd($id);
+        $cleaningHistory = DB::table('cleaning_histories')
+            ->join('cleanings', 'cleanings.cleaning_id', '=', 'cleaning_histories.cleaning_id')
+            ->join('users', 'users.id', '=', 'cleaning_histories.created_by')
+            ->where('cleaning_histories.cleaning_id', '=', $id)
+            ->select('cleaning_histories.*', 'users.name', 'cleanings.cleaning_work')
+            ->get();
+        return view('detail_cleaning', ['cleaningHistory' => $cleaningHistory]);
+    }
+
+    public function approve_other(Request $request)
+    {
+        $lasthistoryO = OtherHistory::where('other_id', '=', $request->other_id)->latest()->first();
+        dd($lasthistoryO);
     }
 }
             // 'other_work' => $data->other_work,

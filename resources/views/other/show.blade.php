@@ -39,7 +39,7 @@
                                         @elsecan('isSecurity')
                                             <a href="javascript:void(0)" id="ok" class="approve" data-other_id="{{$p->other_id}}">Approve</a>
                                         @endcan
-                                            <a href="/detail_other/{{$p->other_id}}">History</a>
+                                            <a href="detail_other/{{$p->other_id}}">History</a>
                                     </td>
                                     <td><a href="/other_pdf/{{$p->other_id}}" class="btn btn-primary" target="_blank">LIHAT PDF</a></td>
                                 </tr>
