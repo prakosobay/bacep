@@ -46,12 +46,12 @@ class CleaningController extends Controller
             $data['cleaning_work'] = PilihanWork::find($data['cleaning_work'])->work;
             $cleaning = Cleaning::create($data);
 
-            foreach ([
-                'yona.ayu@balitower.co.id', 'taufik.ismail@balitower.co.id', 'hilman.fariqi@balitower.co.id',
-                'ilham.pangestu@balitower.co.id', 'irwan.trisna@balitower.co.id'
-            ] as $recipient) {
-                Mail::to($recipient)->send(new NotifEmail());
-            }
+            // foreach ([
+            //     'yona.ayu@balitower.co.id', 'taufik.ismail@balitower.co.id', 'hilman.fariqi@balitower.co.id',
+            //     'ilham.pangestu@balitower.co.id', 'irwan.trisna@balitower.co.id'
+            // ] as $recipient) {
+            //     Mail::to($recipient)->send(new NotifEmail());
+            // }
         }
         if ($cleaning->exists) {
             $cleaningHistory = CleaningHistory::create([

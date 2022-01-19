@@ -35,13 +35,14 @@
                                             <a href="javascript:void(0)" id="not" class="reject" data-other_id="{{$p->other_id}}">Reject</a>
                                         @elsecan('isHead')
                                             <a href="javascript:void(0)" id="ok" class="approve" data-other_id="{{$p->other_id}}">Approve</a>
-                                            <a href="javascript:void(0)" id="not" class="reject" data-other_id="{{$p->other_id}}">Reject</a>
+                                            <a href="javascript:void(0)" type="button" id="not" class="reject btn btn-danger" data-other_id="{{$p->other_id}}">Reject</a>
                                         @elsecan('isBm')
-                                            <a href="javascript:void(0)" id="ok" class="approve" data-other_id="{{$p->other_id}}">Approve</a>
+                                            <a href="javascript:void(0)" type="button" id="ok" class="approve btn btn-success mr-2" data-other_id="{{$p->other_id}}">Approve</a>
+                                            <a href="javascript:void(0)" type="button" id="why" class="update btn btn-warning mr-2" data-other_id="{{$p->other_id}}">Update</a>
                                         @elsecan('isSecurity')
                                             <a href="javascript:void(0)" id="ok" class="approve" data-other_id="{{$p->other_id}}">Approve</a>
                                         @endcan
-                                            <a href="detail_other/{{$p->other_id}}">History</a>
+                                            <a href="detail_other/{{$p->other_id}}" type="button" class="btn btn-info">History</a>
                                     </td>
                                     <td><a href="/other_pdf/{{$p->other_id}}" class="btn btn-primary" target="_blank">LIHAT PDF</a></td>
                                 </tr>

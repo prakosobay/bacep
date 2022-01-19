@@ -71,7 +71,7 @@ class RutinController extends Controller
             $otherHistory = OtherHistory::create([
                 'other_id' => $other->other_id,
                 'created_by' => Auth::user()->id,
-                'role_to' => 'review',
+                'role_to' => 'bm',
                 'status' => 'requested',
                 'aktif' => '1',
                 'pdf' => false
@@ -116,8 +116,8 @@ class RutinController extends Controller
 
     public function approve_other(Request $request)
     {
-        $lasthistoryO = OtherHistory::where('other_id', '=', $request->other_id)->latest()->first();
-        dd($lasthistoryO);
+        $other_history = OtherHistory::where('other_id', '=', $request->other_id)->first();
+        dd($other_history);
     }
 }
             // 'other_work' => $data->other_work,
