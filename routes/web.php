@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\{Route, Auth};
 use App\Http\Controllers\{HomeController, CleaningController, AdminController};
+use Maatwebsite\Excel\Row;
 
 // Auth::routes(['verify' => true]);
 Route::get('/', function () {
@@ -11,7 +12,7 @@ Route::get('/', function () {
 })->middleware('guest');
 
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/home', [HomeController::class, 'index']);
 
     //Detail History
@@ -24,6 +25,7 @@ Route::middleware(['auth'])->group(function () {
 
     //Reject
     Route::post('/cleaning_reject', [CleaningController::class, 'cleaning_reject']);
+    Route::post('other_reject', [RutinController::class, 'reject']);
 
     //Submit
     Route::post('/submit_data_cleaning', [CleaningController::class, 'submit_data_cleaning']);
@@ -46,6 +48,9 @@ Route::middleware(['auth'])->group(function () {
 
     //Form
     Route::get('/cleaning.form', [CleaningController::class, 'tampilan']);
+
+    //Revisi
+    Route::get('revisi', [RutinController::class, 'other']);
 
     //Pilihan Work
     Route::get('/cleaning/{id}', [CleaningController::class, 'pilihan_work']);

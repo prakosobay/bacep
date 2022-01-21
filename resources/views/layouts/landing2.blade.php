@@ -51,6 +51,7 @@
                         <li><a href="cleaning.form" data-after="cleaning">Cleaning</a></li>
                         <li><a href="perbaikan" data-after="other">Other</a></li>
                         <li><a href="{{ url('approval/other') }}" data-after="Approval">Approval</a></li>
+                        <li><a href="{{ url('revisi') }}" data-after="Revisi">Revisi</a></li>
                         @elsecan('isAdmin')
                         <li><a href="{{ url('/table_user') }}" data-after="Admin">Admin Panel</a></li>
                         @elsecan('isApproval')

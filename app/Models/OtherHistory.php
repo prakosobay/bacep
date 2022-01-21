@@ -11,4 +11,5 @@ class OtherHistory extends Model
 
     protected $table = 'other_histories';
     protected $guarded = [];
+    protected $primaryKey = 'histories_id';
 }

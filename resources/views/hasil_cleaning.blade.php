@@ -32,15 +32,15 @@
                                         <td>{{ $p->cleaning_work }}</td>
                                         <td>
                                             @can('isApproval')
-                                                <a href="javascript:void(0)" id="ok" class="approve" data-cleaning_id="{{$p->cleaning_id}}">Approve</a>
-                                                <a href="javascript:void(0)" id="not" class="reject" data-cleaning_id="{{$p->cleaning_id}}">Reject</a>
+                                                <a href="javascript:void(0)" type="button" id="ok" class="approve btn btn-success mr-2" data-cleaning_id="{{$p->cleaning_id}}">Approve</a>
+                                                <a href="javascript:void(0)" type="button" id="not" class="reject btn btn-danger mr-2" data-cleaning_id="{{$p->cleaning_id}}">Reject</a>
                                             @elsecan('isHead')
-                                                <a href="javascript:void(0)" id="ok" class="approve" data-cleaning_id="{{$p->cleaning_id}}">Approve</a>
-                                                <a href="javascript:void(0)" id="not" class="reject" data-cleaning_id="{{$p->cleaning_id}}">Reject</a>
+                                                <a href="javascript:void(0)" type="button" id="ok" class="approve btn btn-success mr-2" data-cleaning_id="{{$p->cleaning_id}}">Approve</a>
+                                                <a href="javascript:void(0)" type="button" id="not" class="reject btn btn-danger mr-2" data-cleaning_id="{{$p->cleaning_id}}">Reject</a>
                                             @elsecan('isSecurity')
-                                                <a href="javascript:void(0)" id="ok" class="approve" data-cleaning_id="{{$p->cleaning_id}}">Approve</a>
+                                                <a href="javascript:void(0)" type="button" id="ok" class="approve btn btn-success mr-2" data-cleaning_id="{{$p->cleaning_id}}">Approve</a>
                                             @endcan
-                                                <a href="/detail_cleaning/{{$p->cleaning_id}}">History</a>
+                                                <a href="/detail_cleaning/{{$p->cleaning_id}}" class="btn btn-info">History</a>
                                         </td>
                                         <td><a href="/cleaning_pdf/{{$p->cleaning_id}}" class="btn btn-primary" target="_blank">LIHAT PDF</a></td>
                                     </tr>

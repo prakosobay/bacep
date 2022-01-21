@@ -84,8 +84,9 @@ class RutinController extends Controller
     {
         $other = Other::find($id);
         // dd($other);
-        $lasthistoryC = OtherHistory::where('other_id', $id)->where('aktif', 1)->first();
-        // $lasthistoryC->update(['pdf' => true]);
+        $lasthistoryC = OtherHistory::where('other_id', '=', $id)->where('aktif', 1)->first();
+        $lasthistoryC->update(['pdf' => true]);
+        // dd($lasthistoryC);
 
         $otherHistory = DB::table('other_histories')
             ->join('other', 'other.other_id', '=', 'other_histories.other_id')
@@ -98,10 +99,6 @@ class RutinController extends Controller
         return $pdf->stream();
     }
 
-    public function omsino()
-    {
-
-    }
     public function detail_permit_other($id)
     {
         dd($id);
@@ -118,6 +115,42 @@ class RutinController extends Controller
     {
         $other_history = OtherHistory::where('other_id', '=', $request->other_id)->first();
         dd($other_history);
+    }
+
+    public function other()
+    {
+        $revisi = OtherHistory::where('status', '=', 'Revisi')->first();
+        dd($revisi, compact('revisi'));
+    }
+
+    public function reject(Request $request)
+    {
+        $other_history = OtherHistory::where('other_id', '=', $request->other_id)->latest()->first();
+        if (Gate::denies('isSecurity')) {
+            // dd($other_history);
+            if ($other_history->pdf == true) {
+                $other_history->update(['aktif' => false]);
+
+                $otherHistory = OtherHistory::create([
+                    'other_id' => $request->other_id,
+                    'created_by' => Auth::user()->id,
+                    'role_to' => 'bm',
+                    'status' => 'Revisi',
+                    'aktif' => true,
+                    'pdf' => false,
+                ]);
+
+                $other = Other::find($request->other_id);
+                foreach (['bayu.prakoso@balitower.co.id'] as $recipient) {
+                    Mail::to($recipient)->send(new NotifReject($other));
+                }
+                return $otherHistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
+            } else {
+                abort(404);
+            }
+        } else{
+            abort(403);
+        }
     }
 }
             // 'other_work' => $data->other_work,
