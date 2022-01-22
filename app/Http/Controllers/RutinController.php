@@ -119,8 +119,9 @@ class RutinController extends Controller
 
     public function other()
     {
-        $revisi = OtherHistory::where('status', '=', 'Revisi')->first();
-        dd($revisi, compact('revisi'));
+        $revisi = OtherHistory::where('status', '=', 'Revisi')->get();
+        // dd($revisi);
+        return view('other.revisi', compact('revisi'));
     }
 
     public function reject(Request $request)

@@ -30,19 +30,9 @@
                                     <td>{{ $p->pic1 }}<br>
                                     <td>{{ $p->other_work }}</td>
                                     <td>
-                                        @can('isApproval')
-                                            <a href="javascript:void(0)" type="button" id="ok" class="approve btn btn-success mr-2" data-other_id="{{$p->other_id}}">Approve</a>
-                                            <a href="javascript:void(0)" type="button" id="not" class="reject btn btn-danger mr-2" data-other_id="{{$p->other_id}}">Reject</a>
-                                        @elsecan('isHead')
-                                            <a href="javascript:void(0)" type="button" id="ok" class="approve btn btn-success mr-2" data-other_id="{{$p->other_id}}">Approve</a>
-                                            <a href="javascript:void(0)" type="button" id="not" class="reject btn btn-danger mr-2" data-other_id="{{$p->other_id}}">Reject</a>
-                                        @elsecan('isBm')
-                                            <a href="javascript:void(0)" type="button" id="ok" class="approve btn btn-success mr-2" data-other_id="{{$p->other_id}}">Approve</a>
-                                            <a href="javascript:void(0)" type="button" id="not" class="reject btn btn-danger mr-2" data-other_id="{{$p->other_id}}">Reject</a>
-                                        @elsecan('isSecurity')
-                                            <a href="javascript:void(0)" type="button" id="ok" class="approve btn btn-success" data-other_id="{{$p->other_id}}">Approve</a>
-                                        @endcan
-                                            <a href="detail_other/{{$p->other_id}}" type="button" class="btn btn-info">History</a>
+                                        @can('isBm')
+                                            <a href="edit" type="button" id="edit" class="edit btn btn-primary mr-2" data-other_id="{{$p->other_id}}">Edit</a>
+                                            @endcan
                                     </td>
                                     <td><a href="/other_pdf/{{$p->other_id}}" class="btn btn-primary" target="_blank">LIHAT PDF</a></td>
                                 </tr>
