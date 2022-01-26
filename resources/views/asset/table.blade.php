@@ -53,6 +53,7 @@
                     <thead>
                         <tr>
                             <th>Kode Barang</th>
+                            <th>Item Code</th>
                             <th>Nama Barang</th>
                             <th>Jumlah</th>
                             <th>Satuan</th>
@@ -66,6 +67,7 @@
                         @foreach ($asset as $c)
                             <tr>
                                 <td>{{$c->id}}</td>
+                                <td>Item Code</td>
                                 <td>{{$c->nama_barang}}</td>
                                 <td>{{$c->jumlah}}</td>
                                 <td>{{$c->satuan}}</td>
