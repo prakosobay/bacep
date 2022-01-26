@@ -47,6 +47,16 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="itemcode"><strong>Item Code</strong></label>
+                        <input type="text" class="form-control @error('itemcode') is-invalid @enderror"  value="{{ old('itemcode') }}" name="itemcode" required autocomplete="itemcode" id="itemcode" placeholder="itemcode">
+                        @error('itemcode')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                    </div>
+
+                    <div class="form-group">
                         <label for="note"><strong>Note</strong></label>
                         <input type="text" class="form-control @error('note') is-invalid @enderror"  value="{{ old('note') }}" name="note" required autocomplete="note" id="note" placeholder="Note">
                         @error('note')

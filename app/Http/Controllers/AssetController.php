@@ -87,6 +87,7 @@ class AssetController extends Controller
         $this->validate($request, [
             'nama_barang' => ['required'],
             'asset_id' => ['required', 'numeric'],
+            'itemcode' => ['required', 'numeric'],
             'jumlah' => ['numeric', 'required', 'min:1'],
             'ket' => 'required',
             'pencatat' => ['required', 'string']
@@ -126,6 +127,7 @@ class AssetController extends Controller
         $this->validate($request, [
             'nama_barang' => ['required'],
             'asset_id' => ['required', 'numeric'],
+            'itemcode' => ['required', 'numeric'],
             'jumlah' => ['numeric', 'required', 'min:1'],
             'ket' => 'required',
             'pencatat' => ['required', 'string']
@@ -160,6 +162,7 @@ class AssetController extends Controller
         $this->validate($request, [
             'nama_barang' => ['required', 'unique:assets', 'max:200'],
             'jumlah' => ['required', 'numeric', 'min:1'],
+            'itemcode' => ['numeric', 'max:5'],
             'note' => ['max:255'],
             'lokasi' => 'required',
             'satuan' => ['required', 'string'],
@@ -168,6 +171,7 @@ class AssetController extends Controller
 
         $asset = Asset::create([
             'nama_barang' => $request->nama_barang,
+            'itemcode' => $request->itemcode,
             'jumlah' => $request->jumlah,
             'note' => $request->note,
             'lokasi' => $request->lokasi,
@@ -177,6 +181,7 @@ class AssetController extends Controller
         $assetmasuk = AssetMasuk::create([
             'nama_barang' => $request->nama_barang,
             'asset_id' => $asset->id,
+            'itemcode' => $asset->itemcode,
             'jumlah' => $request->jumlah,
             'ket' => $request->note,
             'pencatat' => $request->pencatat,
