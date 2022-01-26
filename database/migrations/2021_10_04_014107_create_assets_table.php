@@ -16,6 +16,7 @@ class CreateAssetsTable extends Migration
         Schema::create('assets', function (Blueprint $table) {
             $table->id();
             $table->string('nama_barang')->unique();
+            $table->integer('itemcode')->nullable();
             $table->unsignedBigInteger('jumlah')->nullable();
             $table->string('satuan');
             $table->string('kondisi');

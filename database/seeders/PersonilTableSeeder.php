@@ -177,18 +177,6 @@ class PersonilTableSeeder extends Seeder
                     'vaksin_2' => '',
                 ],
 
-                [
-                    'nama' => 'Rahmadani',
-                    'company' => 'PT KONE',
-                    'department' => 'Teknisi',
-                    'respon' => 'Teknisi',
-                    'phone' => '0811-9319-296',
-                    'nik' => '',
-                    'ktp' => '',
-                    'vaksin_1' => '',
-                    'vaksin_2' => '',
-                ],
-
                 //BTS
                 [
                     'nama' => 'Badai Sino Jendrang',

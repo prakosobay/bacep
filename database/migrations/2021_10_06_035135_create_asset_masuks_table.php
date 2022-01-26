@@ -16,6 +16,7 @@ class CreateAssetMasuksTable extends Migration
         Schema::create('asset_masuks', function (Blueprint $table) {
             $table->id();
             $table->foreignId('asset_id');
+            $table->integer('itemcode')->nullable();
             $table->string('nama_barang');
             $table->unsignedBigInteger('jumlah');
             $table->text('ket')->nullable();

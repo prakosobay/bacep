@@ -12,6 +12,7 @@ class AssetMasuk extends Model
     protected $primaryKey = 'id';
     protected $fillable = [
         'asset_id',
+        'itemcode',
         'nama_barang',
         'jumlah',
         'ket',

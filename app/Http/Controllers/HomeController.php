@@ -46,7 +46,7 @@ class HomeController extends Controller
     //cleaning
     public function approval_view($type_view)
     {
-        if ((Gate::denies('isBm'))) {
+        if ((Gate::denies('isAdmin'))) {
             $role_1 = Session::get('arrole');
             if ($type_view == 'survey') {
                 $survey = DB::table('survey_histories')
@@ -69,6 +69,7 @@ class HomeController extends Controller
                 $otherHistories = DB::table('other_histories')
                     ->join('other', 'other.other_id', '=', 'other_histories.other_id')
                     ->whereIn('other_histories.role_to', $role_1)
+                    ->where('other_histories.status', '!=', 'Revisi')
                     ->where('other_histories.aktif', '=', 1)
                     ->select('other.*')
                     ->get();
