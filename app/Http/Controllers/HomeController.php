@@ -69,7 +69,7 @@ class HomeController extends Controller
                 $otherHistories = DB::table('other_histories')
                     ->join('other', 'other.other_id', '=', 'other_histories.other_id')
                     ->whereIn('other_histories.role_to', $role_1)
-                    ->where('other_histories.status', '!=', 'Revisi')
+                    // ->where('other_histories.status', '!=', 'Revisi')
                     ->where('other_histories.aktif', '=', 1)
                     ->select('other.*')
                     ->get();

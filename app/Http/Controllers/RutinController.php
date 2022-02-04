@@ -126,6 +126,7 @@ class RutinController extends Controller
         $revisi = DB::table('other_histories')
                     ->join('other', 'other.other_id', '=', 'other_histories.other_id')
                     // ->where('other_histories.other_id', '=', $id)
+                    ->where('other_histories.status', '=', 'Revisi')
                     ->select('other_histories.*', 'other.other_work')
                     ->get();
         dd($revisi);
