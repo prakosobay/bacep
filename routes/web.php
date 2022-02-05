@@ -50,7 +50,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/cleaning.form', [CleaningController::class, 'tampilan']);
 
     //Revisi
-    Route::get('revisi', [RutinController::class, 'other']);
+    Route::get('revisi/{type_view}', [HomeController::class, 'revisi_view']);
 
     //Pilihan Work
     Route::get('/cleaning/{id}', [CleaningController::class, 'pilihan_work']);

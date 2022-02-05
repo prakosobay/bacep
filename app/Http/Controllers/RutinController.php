@@ -113,24 +113,20 @@ class RutinController extends Controller
 
     public function approve_other(Request $request)
     {
-        $other_history = OtherHistory::where('other_id', '=', $request->other_id)->first();
-        dd($other_history);
+
     }
 
     public function other()
     {
-        // $revisi = OtherHistory::where('other_id', '=', $request->other_id)
-        //                         ->where('status', '=', 'Revisi')
-        //                         ->first();
 
-        $revisi = DB::table('other_histories')
-                    ->join('other', 'other.other_id', '=', 'other_histories.other_id')
-                    // ->where('other_histories.other_id', '=', $id)
-                    ->where('other_histories.status', '=', 'Revisi')
-                    ->select('other_histories.*', 'other.other_work')
-                    ->get();
-        dd($revisi);
-        return view('other.revisi', compact('revisi'));
+        // $revisi = DB::table('other_histories')
+        //             ->join('other', 'other.other_id', '=', 'other_histories.other_id')
+        //             // ->where('other_histories.other_id', '=', $id)
+        //             ->where('other_histories.status', '=', 'Revisi')
+        //             ->select('other_histories.*', 'other.other_work')
+        //             ->get();
+        // dd($revisi);
+        // return view('other.revisi', compact('revisi'));
     }
 
     public function reject(Request $request)
@@ -145,15 +141,15 @@ class RutinController extends Controller
                     'other_id' => $request->other_id,
                     'created_by' => Auth::user()->id,
                     'role_to' => 'bm',
-                    'status' => 'Revisi',
+                    'status' => 'revisi',
                     'aktif' => true,
                     'pdf' => false,
                 ]);
 
-                $other = Other::find($request->other_id);
-                foreach (['bayu.prakoso@balitower.co.id'] as $recipient) {
-                    Mail::to($recipient)->send(new NotifReject($other));
-                }
+                // $other = Other::find($request->other_id);
+                // foreach (['bayu.prakoso@balitower.co.id'] as $recipient) {
+                //     Mail::to($recipient)->send(new NotifReject($other));
+                // }
                 return $otherHistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
             } else {
                 abort(404);
