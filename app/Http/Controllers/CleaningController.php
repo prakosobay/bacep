@@ -48,7 +48,8 @@ class CleaningController extends Controller
 
             foreach ([
                 'aurellius.putra@balitower.co.id', 'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
-                'ilham.pangestu@balitower.co.id', 'irwan.trisna@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id'
+                'ilham.pangestu@balitower.co.id', 'irwan.trisna@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id',
+                'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id',
             ] as $recipient) {
                 Mail::to($recipient)->send(new NotifEmail());
             }
@@ -101,6 +102,7 @@ class CleaningController extends Controller
                 foreach ([
                     'aurellius.putra@balitower.co.id', 'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
                 'ilham.pangestu@balitower.co.id', 'irwan.trisna@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id'
+                ,'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id',
                 ] as $recipient) {
                     Mail::to($recipient)->send(new NotifEmail());
                 }
