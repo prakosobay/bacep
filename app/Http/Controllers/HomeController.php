@@ -43,7 +43,6 @@ class HomeController extends Controller
         }
     }
 
-    //cleaning
     public function approval_view($type_view)
     {
         if ((Gate::denies('isAdmin'))) {
@@ -69,7 +68,7 @@ class HomeController extends Controller
                 $otherHistories = DB::table('other_histories')
                     ->join('other', 'other.other_id', '=', 'other_histories.other_id')
                     ->whereIn('other_histories.role_to', $role_1)
-                    ->where('other_histories.status', '!=', 'Revisi')
+                    ->where('other_histories.status', '!=', 'revisi')
                     ->where('other_histories.aktif', '=', 1)
                     ->select('other.*')
                     ->get();
@@ -80,6 +79,23 @@ class HomeController extends Controller
             }
         } else {
             abort(403);
+        }
+    }
+
+    public function revisi_view($type_view){
+        if(Gate::denies('isAdmin')){
+            $role_1 = Session::get('arrole');
+            if($type_view == 'other'){
+            $revisi = DB::table('other_histories')
+                    ->join('other', 'other.other_id', '=', 'other_histories.other_id')
+                    ->whereIn('other_histories.role_to', $role_1)
+                    ->where('other_histories.status', '=', 'revisi')
+                    ->where('other_histories.aktif', '=', 1)
+                    ->select('other.*')
+                    ->get();
+                    // dd($revisi);
+                return view('other.revisi', compact('revisi'));
+            }
         }
     }
 

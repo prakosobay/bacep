@@ -1,5 +1,5 @@
 @extends('approval')
-@section('judul_halaman', 'Table Approval Other')
+@section('judul_halaman', 'Table Revisi Other')
         {{ csrf_field() }}
 
 @section('konten')

@@ -42,7 +42,7 @@
                                         @elsecan('isSecurity')
                                             <a href="javascript:void(0)" type="button" id="ok" class="approve btn btn-success" data-other_id="{{$p->other_id}}">Approve</a>
                                         @endcan
-                                            <a href="detail_other/{{$p->other_id}}" type="button" class="btn btn-info">History</a>
+                                            {{-- <a href="detail_other/{{$p->other_id}}" type="button" class="btn btn-info">History</a> --}}
                                     </td>
                                     <td><a href="/other_pdf/{{$p->other_id}}" class="btn btn-primary" target="_blank">LIHAT PDF</a></td>
                                 </tr>
