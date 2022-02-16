@@ -114,7 +114,8 @@ class ConsumController extends Controller
             'consum_id' => ['required', 'numeric'],
             'jumlah' => ['numeric', 'required', 'min:1'],
             'ket' => 'required',
-            'pencatat' => ['required', 'string']
+            'pencatat' => ['required', 'string'],
+            'itemcode' => ['required', 'numeric'],
         ]);
 
         $consum = Consum::find($id);
@@ -141,14 +142,15 @@ class ConsumController extends Controller
 
     public function store_consum(Request $request)
     {
-        // dd($request->all());
+        dd($request->all());
         $this->validate($request, [
             'nama_barang' => ['required', 'unique:consums', 'max:200'],
             'jumlah' => ['required', 'numeric', 'min:1'],
             'note' => ['max:255'],
             'lokasi' => 'required',
             'satuan' => ['required', 'string'],
-            'pencatat' => ['required', 'string']
+            'pencatat' => ['required', 'string'],
+            'itemcode' => ['required', 'numeric'],
         ]);
 
         $consum = Consum::create([
@@ -157,6 +159,7 @@ class ConsumController extends Controller
             'note' => $request->note,
             'satuan' => $request->satuan,
             'lokasi' => $request->lokasi,
+            'itemcode' => $request->itemcode,
         ]);
 
         $consummasuk = ConsumMasuk::create([
@@ -165,6 +168,7 @@ class ConsumController extends Controller
             'jumlah' => $request->jumlah,
             'ket' => $request->note,
             'pencatat' => $request->pencatat,
+            'itemcode' => $request->itemcode,
             'tanggal' => date('d/m/Y'),
         ]);
 

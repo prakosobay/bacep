@@ -16,6 +16,7 @@ class CreateConsumsTable extends Migration
         Schema::create('consums', function (Blueprint $table) {
             $table->id();
             $table->string('nama_barang')->unique();
+            $table->integer('itemcode')->nullable();
             $table->unsignedInteger('jumlah')->nullable();
             $table->string('satuan');
             $table->string('kondisi')->nullable();
