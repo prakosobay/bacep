@@ -162,30 +162,30 @@ class AssetController extends Controller
         $this->validate($request, [
             'nama_barang' => ['required', 'unique:assets', 'max:200'],
             'jumlah' => ['required', 'numeric', 'min:1'],
-            'itemcode' => ['numeric', 'max:5'],
             'note' => ['max:255'],
             'lokasi' => 'required',
             'satuan' => ['required', 'string'],
-            'pencatat' => ['required', 'string']
+            'pencatat' => ['required', 'string'],
+            'itemcode' => ['required', 'numeric', 'digits:6']
         ]);
 
         $asset = Asset::create([
             'nama_barang' => $request->nama_barang,
-            'itemcode' => $request->itemcode,
             'jumlah' => $request->jumlah,
             'note' => $request->note,
             'lokasi' => $request->lokasi,
             'satuan' => $request->satuan,
+            'itemcode' => $request->itemcode,
         ]);
 
         $assetmasuk = AssetMasuk::create([
             'nama_barang' => $request->nama_barang,
             'asset_id' => $asset->id,
-            'itemcode' => $asset->itemcode,
             'jumlah' => $request->jumlah,
             'ket' => $request->note,
             'pencatat' => $request->pencatat,
             'tanggal' => date('d/m/Y'),
+            'itemcode' => $asset->itemcode,
         ]);
         Alert::success('Success', 'Data has been submited');
         return back();
