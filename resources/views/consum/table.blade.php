@@ -66,7 +66,7 @@
                         @foreach ($consum as $c)
                             <tr>
                                 <td>{{$c->id}}</td>
-                                <td>Item Code</td>
+                                <td>{{$c->itemcode}}</td>
                                 <td>{{$c->nama_barang}}</td>
                                 <td>{{$c->jumlah}}</td>
                                 <td>{{$c->satuan}}</td>

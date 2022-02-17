@@ -85,11 +85,13 @@ class ConsumController extends Controller
             'consum_id' => ['required', 'numeric'],
             'jumlah' => ['numeric', 'required', 'min:1'],
             'ket' => 'required',
-            'pencatat' => ['required', 'string']
+            'pencatat' => ['required', 'string'],
+            'itemcode' => ['required', 'numeric'],
         ]);
 
         $consum = Consum::find($id);
         $consum->update([
+            'nama_barang' => $consum->nama_barang,
             'jumlah' => $consum->jumlah + $request->jumlah,
         ]);
 
@@ -99,6 +101,7 @@ class ConsumController extends Controller
             'jumlah' => $request->jumlah,
             'ket' => $request->ket,
             'pencatat' => $request->pencatat,
+            'itemcode' => $request->itemcode,
             'tanggal' => date('d/m/Y'),
         ]);
 
@@ -121,6 +124,7 @@ class ConsumController extends Controller
         $consum = Consum::find($id);
         if ($consum->jumlah >= $request->jumlah) {
             $consum->update([
+                'nama_barang' => $consum->nama_barang,
                 'jumlah' => $consum->jumlah - $request->jumlah,
             ]);
 
@@ -130,6 +134,7 @@ class ConsumController extends Controller
                 'jumlah' => $request->jumlah,
                 'ket' => $request->ket,
                 'pencatat' => $request->pencatat,
+                'itemcode' => $request->itemcode,
                 'tanggal' => date('d/m/Y'),
             ]);
 
@@ -142,7 +147,7 @@ class ConsumController extends Controller
 
     public function store_consum(Request $request)
     {
-        dd($request->all());
+        // dd($request->all());
         $this->validate($request, [
             'nama_barang' => ['required', 'unique:consums', 'max:200'],
             'jumlah' => ['required', 'numeric', 'min:1'],
@@ -150,7 +155,7 @@ class ConsumController extends Controller
             'lokasi' => 'required',
             'satuan' => ['required', 'string'],
             'pencatat' => ['required', 'string'],
-            'itemcode' => ['required', 'numeric'],
+            'itemcode' => ['required', 'numeric', 'digits:6'],
         ]);
 
         $consum = Consum::create([
