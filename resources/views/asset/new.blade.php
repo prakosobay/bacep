@@ -87,6 +87,8 @@
                             <option>Set</option>
                             <option>Pasang</option>
                             <option>Box</option>
+                            <option>Pack</option>
+                            <option>Rim</option>
                         </select>
                     </div>
 

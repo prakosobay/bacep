@@ -14,6 +14,7 @@ class ConsumKeluar extends Model
     protected $table = 'consum_keluars';
     protected $fillable = [
         'tanggal',
+        'itemcode',
         'consum_id',
         'nama_barang',
         'jumlah',

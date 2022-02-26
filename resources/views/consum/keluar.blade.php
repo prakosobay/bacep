@@ -21,6 +21,7 @@
                     <thead>
                         <tr>
                             <th>Kode Barang</th>
+                            <th>Item Code</th>
                             <th>Nama Barang</th>
                             <th>Jumlah</th>
                             <th>Ket</th>
@@ -32,6 +33,7 @@
                         @foreach ($out as $c)
                             <tr>
                                 <td>{{$c->consum_id}}</td>
+                                <td>{{$c->itemcode}}</td>
                                 <td>{{$c->nama_barang}}</td>
                                 <td>{{$c->jumlah}}</td>
                                 <td>{{$c->ket}}</td>

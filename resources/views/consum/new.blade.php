@@ -37,6 +37,16 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="item_code"><strong>Item Code</strong></label>
+                        <input type="text" class="form-control @error('item_code') is-invalid @enderror"  value="{{ old('item_code') }}" name="itemcode" required autocomplete="item_code" id="item_code" placeholder="Item Code">
+                            @error('item_code')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                    </div>
+
+                    <div class="form-group">
                         <label for="jumlah"><strong>Jumlah</strong></label>
                         <input type="number" class="form-control @error('jumlah') is-invalid @enderror"  value="{{ old('jumlah') }}" name="jumlah" required autocomplete="jumlah" id="jumlah" placeholder="Jumlah">
                         @error('jumlah')
@@ -77,6 +87,8 @@
                             <option>Set</option>
                             <option>Pasang</option>
                             <option>Box</option>
+                            <option>Pack</option>
+                            <option>Rim</option>
                         </select>
                     </div>
 

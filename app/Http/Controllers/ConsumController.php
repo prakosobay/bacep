@@ -85,11 +85,13 @@ class ConsumController extends Controller
             'consum_id' => ['required', 'numeric'],
             'jumlah' => ['numeric', 'required', 'min:1'],
             'ket' => 'required',
-            'pencatat' => ['required', 'string']
+            'pencatat' => ['required', 'string'],
+            'itemcode' => ['required', 'numeric'],
         ]);
 
         $consum = Consum::find($id);
         $consum->update([
+            'nama_barang' => $consum->nama_barang,
             'jumlah' => $consum->jumlah + $request->jumlah,
         ]);
 
@@ -99,6 +101,7 @@ class ConsumController extends Controller
             'jumlah' => $request->jumlah,
             'ket' => $request->ket,
             'pencatat' => $request->pencatat,
+            'itemcode' => $request->itemcode,
             'tanggal' => date('d/m/Y'),
         ]);
 
@@ -114,12 +117,14 @@ class ConsumController extends Controller
             'consum_id' => ['required', 'numeric'],
             'jumlah' => ['numeric', 'required', 'min:1'],
             'ket' => 'required',
-            'pencatat' => ['required', 'string']
+            'pencatat' => ['required', 'string'],
+            'itemcode' => ['required', 'numeric'],
         ]);
 
         $consum = Consum::find($id);
         if ($consum->jumlah >= $request->jumlah) {
             $consum->update([
+                'nama_barang' => $consum->nama_barang,
                 'jumlah' => $consum->jumlah - $request->jumlah,
             ]);
 
@@ -129,6 +134,7 @@ class ConsumController extends Controller
                 'jumlah' => $request->jumlah,
                 'ket' => $request->ket,
                 'pencatat' => $request->pencatat,
+                'itemcode' => $request->itemcode,
                 'tanggal' => date('d/m/Y'),
             ]);
 
@@ -148,7 +154,8 @@ class ConsumController extends Controller
             'note' => ['max:255'],
             'lokasi' => 'required',
             'satuan' => ['required', 'string'],
-            'pencatat' => ['required', 'string']
+            'pencatat' => ['required', 'string'],
+            'itemcode' => ['required', 'numeric', 'digits:6'],
         ]);
 
         $consum = Consum::create([
@@ -157,6 +164,7 @@ class ConsumController extends Controller
             'note' => $request->note,
             'satuan' => $request->satuan,
             'lokasi' => $request->lokasi,
+            'itemcode' => $request->itemcode,
         ]);
 
         $consummasuk = ConsumMasuk::create([
@@ -165,6 +173,7 @@ class ConsumController extends Controller
             'jumlah' => $request->jumlah,
             'ket' => $request->note,
             'pencatat' => $request->pencatat,
+            'itemcode' => $request->itemcode,
             'tanggal' => date('d/m/Y'),
         ]);
 

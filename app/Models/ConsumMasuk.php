@@ -14,6 +14,7 @@ class ConsumMasuk extends Model
     protected $primayKey = 'id';
     protected $fillable = [
         'tanggal',
+        'itemcode',
         'consum_id',
         'nama_barang',
         'jumlah',
