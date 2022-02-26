@@ -86,7 +86,7 @@ class ConsumController extends Controller
             'jumlah' => ['numeric', 'required', 'min:1'],
             'ket' => 'required',
             'pencatat' => ['required', 'string'],
-            'itemcode' => ['required', 'numeric'],
+            // 'itemcode' => ['required', 'numeric'],
         ]);
 
         $consum = Consum::find($id);
@@ -101,7 +101,7 @@ class ConsumController extends Controller
             'jumlah' => $request->jumlah,
             'ket' => $request->ket,
             'pencatat' => $request->pencatat,
-            'itemcode' => $request->itemcode,
+            // 'itemcode' => $request->itemcode,
             'tanggal' => date('d/m/Y'),
         ]);
 
@@ -118,7 +118,7 @@ class ConsumController extends Controller
             'jumlah' => ['numeric', 'required', 'min:1'],
             'ket' => 'required',
             'pencatat' => ['required', 'string'],
-            'itemcode' => ['required', 'numeric'],
+            // 'itemcode' => ['required', 'numeric'],
         ]);
 
         $consum = Consum::find($id);
@@ -134,7 +134,7 @@ class ConsumController extends Controller
                 'jumlah' => $request->jumlah,
                 'ket' => $request->ket,
                 'pencatat' => $request->pencatat,
-                'itemcode' => $request->itemcode,
+                // 'itemcode' => $request->itemcode,
                 'tanggal' => date('d/m/Y'),
             ]);
 
