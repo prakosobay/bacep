@@ -87,7 +87,6 @@ class AssetController extends Controller
         $this->validate($request, [
             'nama_barang' => ['required'],
             'asset_id' => ['required', 'numeric'],
-            'itemcode' => ['required', 'numeric'],
             'jumlah' => ['numeric', 'required', 'min:1'],
             'ket' => 'required',
             'pencatat' => ['required', 'string']
@@ -127,7 +126,6 @@ class AssetController extends Controller
         $this->validate($request, [
             'nama_barang' => ['required'],
             'asset_id' => ['required', 'numeric'],
-            'itemcode' => ['required', 'numeric'],
             'jumlah' => ['numeric', 'required', 'min:1'],
             'ket' => 'required',
             'pencatat' => ['required', 'string']

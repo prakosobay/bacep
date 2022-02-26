@@ -35,8 +35,8 @@
                         <label for="id"><strong>Kode Barang</strong></label>
                         <input type="number" class="form-control" id="id" name="asset_id" value="{{$asset->id}}" readonly><br>
 
-                        <label for="itemcode"><strong>Item Code</strong></label>
-                        <input type="text" class="form-control @error('itemcode') is-invalid @enderror" required autocomplete="itemcode" id="itemcode" name="itemcode" value="{{$asset->itemcode}}"><br>
+                        {{-- <label for="itemcode"><strong>Item Code</strong></label>
+                        <input type="text" class="form-control @error('itemcode') is-invalid @enderror" required autocomplete="itemcode" id="itemcode" name="itemcode" value="{{$asset->itemcode}}"><br> --}}
 
                         <label for="stok"><strong>Stock Saat Ini</strong></label>
                         <input type="number" class="form-control" id="stok" value="{{$asset->jumlah}}" readonly><br>
