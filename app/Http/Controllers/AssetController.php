@@ -140,7 +140,6 @@ class AssetController extends Controller
             $assetkeluar = AssetKeluar::create([
                 'nama_barang' => $request->nama_barang,
                 'asset_id' => $request->asset_id,
-                'itemcode' => $request->itemcode,
                 'jumlah' => $request->jumlah,
                 'ket' => $request->ket,
                 'pencatat' => $request->pencatat,
