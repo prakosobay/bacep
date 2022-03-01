@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
-use App\Models\{Asset, AssetMasuk, AssetKeluar};
+use App\Models\{Asset, AssetMasuk, AssetKeluar, AssetUse};
 use Illuminate\Support\Facades\{DB, Auth, Gate, Mail, Session};
 
 class AssetController extends Controller
@@ -47,6 +47,17 @@ class AssetController extends Controller
         }
     }
 
+    public function show_use()
+    {
+        if (Gate::allows('isApproval') || (Gate::allows('isHead')) || (Gate::allows('isAdmin'))){
+            $use = AssetUse::all();
+            return view('asset.digunakan', compact('use'));
+        }
+        else{
+            abort(403);
+        }
+    }
+
     public function show_new()
     {
         if ((Gate::allows('isHead')) || (Gate::allows('isApproval')) || (Gate::allows('isAdmin'))) {
@@ -78,6 +89,17 @@ class AssetController extends Controller
             $asset = Asset::find($id);
             return view('asset.kurang', compact('asset'));
         } else {
+            abort(403);
+        }
+    }
+
+    public function edit_use($id)
+    {
+        if((Gate::allows('isApproval') || (Gate::allows('isHead')) || (Gate::allows('isAdmin')))){
+            $use = Asset::find($id);
+            // dd($use);
+            return view('asset.pakai', compact('use'));
+        } else{
             abort(403);
         }
     }
@@ -151,6 +173,39 @@ class AssetController extends Controller
             Alert::error('Error', 'Stock Kosong/Kurang !');
         }
         return back();
+    }
+
+    public function update_use(Request $request, $id)
+    {
+        // dd($request->all());
+        $this->validate($request, [
+            'nama_barang' => ['required'],
+            'asset_id' => ['required', 'numeric'],
+            'jumlah' => ['numeric', 'required', 'min:1'],
+            'ket' => 'required',
+            'pencatat' => ['required', 'string']
+        ]);
+
+        // $asset = Asset::find($id);
+        // if ($asset->jumlah >= $request->jumlah) {
+        //     $asset->update([
+        //         'jumlah' => $asset->jumlah - $request->jumlah,
+        //     ]);
+
+        //     $assetkeluar = AssetKeluar::create([
+        //         'nama_barang' => $request->nama_barang,
+        //         'asset_id' => $request->asset_id,
+        //         'jumlah' => $request->jumlah,
+        //         'ket' => $request->ket,
+        //         'pencatat' => $request->pencatat,
+        //         'tanggal' => date('d/m/Y'),
+        //     ]);
+
+        //     Alert::success('Success', 'Data has been submited');
+        // } else {
+        //     Alert::error('Error', 'Stock Kosong/Kurang !');
+        // }
+        // return back();
     }
 
     public function store_asset(Request $request)

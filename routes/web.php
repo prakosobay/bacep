@@ -107,11 +107,14 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/a.keluar', [AssetController::class, 'show_out']);
     Route::get('/a.tambah/{id}', [AssetController::class, 'edit_masuk']);
     Route::get('/a.kurang/{id}', [AssetController::class, 'edit_keluar']);
+    Route::get('/a.uses/{id}', [AssetController::class, 'edit_use']);
     Route::put('/asset_putin/{id}', [AssetController::class, 'update_masuk']);
     Route::put('/asset_putout/{id}', [AssetController::class, 'update_keluar']);
+    Route::put('/asset_use/{id}', [AssetController::class, 'update_use']);
     Route::get('/export.asset', [AssetController::class, 'export_asset']);
     Route::get('/export.a.m', [AssetController::class, 'export_asset_masuk']);
     Route::get('/export.a.k', [AssetController::class, 'export_asset_keluar']);
+    Route::get('/a.use', [AssetController::class, 'show_use']);
 
     //Checklist Genset
     Route::get('/checklist.warming', [GensetController::class, 'show_warming']);

@@ -55,7 +55,9 @@
                             <th>Kode Barang</th>
                             <th>Item Code</th>
                             <th>Nama Barang</th>
-                            <th>Jumlah</th>
+                            <th>Total</th>
+                            <th>Terpasang</th>
+                            <th>Sisa</th>
                             <th>Satuan</th>
                             <th>Kondisi</th>
                             <th>Note</th>
@@ -70,6 +72,8 @@
                                 <td>{{$c->itemcode}}</td>
                                 <td>{{$c->nama_barang}}</td>
                                 <td>{{$c->jumlah}}</td>
+                                <td>{{$c->terpasang}}</td>
+                                <td>{{$c->sisa}}</td>
                                 <td>{{$c->satuan}}</td>
                                 <td>{{$c->jumlah <= 0 ? 'Stok Habis' : 'Tersedia'}}</td>
                                 <td>{{$c->note}}</td>
@@ -79,7 +83,10 @@
                                         <a href="{{url('/a.tambah', $c->id)}}" type="button" class="btn btn-success btn-sm col-xs-2 margin-bottom" id="in">Masuk</a>
                                     </div>
                                     <div class="btn-toolbar">
-                                        <a href="{{url('/a.kurang', $c->id)}}" type="button" class="btn btn-danger btn-sm" id="out">Keluar</a>
+                                        <a href="{{url('/a.kurang', $c->id)}}" type="button" class="btn btn-danger btn-sm col-xs-2 margin-bottom" id="out">Keluar</a>
+                                    </div>
+                                    <div class="btn-toolbar">
+                                        <a href="{{url('/a.uses', $c->id)}}" type="button" class="btn btn-primary btn-sm" id="use">Digunakan</a>
                                     </div>
                                 </td>
                             </tr>
