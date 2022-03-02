@@ -181,7 +181,7 @@ class AssetController extends Controller
         $this->validate($request, [
             'nama_barang' => ['required'],
             'asset_id' => ['required', 'numeric'],
-            'jumlah' => ['numeric', 'required', 'min:1'],
+            'use' => ['numeric', 'required', 'min:1'],
             'ket' => 'required',
             'pencatat' => ['required', 'string']
         ]);
@@ -190,6 +190,7 @@ class AssetController extends Controller
         // if ($asset->jumlah >= $request->jumlah) {
         //     $asset->update([
         //         'jumlah' => $asset->jumlah - $request->jumlah,
+        // stok sisa = $asset->jumlah - $request->jumlah,
         //     ]);
 
         //     $assetkeluar = AssetKeluar::create([

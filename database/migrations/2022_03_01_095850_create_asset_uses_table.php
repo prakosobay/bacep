@@ -16,7 +16,6 @@ class CreateAssetUsesTable extends Migration
         Schema::create('asset_uses', function (Blueprint $table) {
             $table->id();
             $table->foreignId('asset_id');
-            $table->integer('itemcode')->nullable();
             $table->string('nama_barang');
             $table->unsignedInteger('jumlah');
             $table->text('ket')->nullable();

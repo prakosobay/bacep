@@ -36,10 +36,16 @@
                         <input type="number" class="form-control" id="id" name="asset_id" value="{{$asset->id}}" readonly><br>
 
                         <label for="itemcode"><strong>Item Code</strong></label>
-                        <input type="text" class="form-control id="itemcode" name="itemcode" value="{{$asset->itemcode}}" readonly><br>
+                        <input type="text" class="form-control" id="itemcode" name="itemcode" value="{{$asset->itemcode}}" readonly><br>
 
-                        <label for="stok"><strong>Stock Saat Ini</strong></label>
+                        <label for="stok"><strong>Stock Total</strong></label>
                         <input type="number" class="form-control" id="stok" value="{{$asset->jumlah}}" readonly><br>
+
+                        <label for="use"><strong>Stock Digunakan</strong></label>
+                        <input type="number" class="form-control" id="use" value="{{$asset->use}}" readonly><br>
+
+                        <label for="sisa"><strong>Stock Sisa</strong></label>
+                        <input type="number" class="form-control" id="sisa" value="{{$asset->sisa}}" readonly><br>
 
                         <label for="jumlah"><strong>Jumlah</strong></label>
                         <input type="number" class="form-control @error('jumlah') is-invalid @enderror" required autocomplete="jumlah"
@@ -51,7 +57,7 @@
                             @enderror
 
                         <label for="ket"><strong>Keterangan</strong></label>
-                        <input type="text" id="ket" name="ket" class="form-control @error('ket') is-invalid @enderror" required autocomplete="ket" >
+                        <input type="text" id="ket" name="ket" class="form-control @error('ket') is-invalid @enderror" required autocomplete="ket" ><br>
                             @error('ket')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

@@ -13,7 +13,6 @@ class AssetUse extends Model
     protected $table = 'asset_uses';
     protected $fillable = [
         'asset_id',
-        'itemcode',
         'nama_barang',
         'jumlah',
         'ket',
