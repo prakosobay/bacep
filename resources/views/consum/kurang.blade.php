@@ -39,7 +39,7 @@
                         <input type="number" class="form-control" id="stok" value="{{$consum->jumlah}}" readonly><br>
 
                         <label for="satuan"><strong>Satuan</strong></label>
-                        <input type="number" class="form-control" id="satuan" value="{{$consum->satuan}}" readonly><br>
+                        <input type="text" class="form-control" id="satuan" value="{{$consum->satuan}}" readonly><br>
 
                         <label for="jumlah"><strong>Jumlah</strong></label>
                         <input type="number" class="form-control @error('jumlah') is-invalid @enderror" required autocomplete="jumlah" id="jumlah" name="jumlah" autofocus><br>

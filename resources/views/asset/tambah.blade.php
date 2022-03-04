@@ -35,9 +35,6 @@
                         <label for="id"><strong>Kode Barang</strong></label>
                         <input type="number" class="form-control" id="id" name="asset_id" value="{{$asset->id}}" readonly><br>
 
-                        <label for="itemcode"><strong>Item Code</strong></label>
-                        <input type="text" class="form-control" id="itemcode" name="itemcode" value="{{$asset->itemcode}}" readonly><br>
-
                         <label for="stok"><strong>Stock Total</strong></label>
                         <input type="number" class="form-control" id="stok" value="{{$asset->jumlah}}" readonly><br>
 
