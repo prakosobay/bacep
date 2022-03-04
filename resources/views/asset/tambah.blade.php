@@ -47,6 +47,9 @@
                         <label for="sisa"><strong>Stock Sisa</strong></label>
                         <input type="number" class="form-control" id="sisa" value="{{$asset->sisa}}" readonly><br>
 
+                        <label for="satuan"><strong>Satuan</strong></label>
+                        <input type="text" class="form-control" id="satuan" value="{{$asset->satuan}}" readonly><br>
+
                         <label for="jumlah"><strong>Jumlah</strong></label>
                         <input type="number" class="form-control @error('jumlah') is-invalid @enderror" required autocomplete="jumlah" id="jumlah" name="jumlah" autofocus><br>
                             @error('jumlah')
