@@ -30,24 +30,28 @@
                     @endif
                     <div class="form-group">
                         <label for="nama_barang"><strong>Nama Barang</strong></label>
-                        <input type="text" class="form-control" id="nama_barang" name="nama_barang" value="{{$asset->nama_barang}}"><br>
-                        @error('nama_barang')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                        <input type="text" class="form-control" id="nama_barang" name="nama_barang" value="{{$asset->nama_barang}}" readonly><br>
 
                         <label for="id"><strong>Kode Barang</strong></label>
                         <input type="number" class="form-control" id="id" name="asset_id" value="{{$asset->id}}" readonly><br>
 
-                        {{-- <label for="itemcode"><strong>Item Code</strong></label>
-                        <input type="text" class="form-control @error('itemcode') is-invalid @enderror" required autocomplete="itemcode" id="itemcode" name="itemcode" value="{{$asset->itemcode}}" readonly><br> --}}
+                        <label for="itemcode"><strong>Item Code</strong></label>
+                        <input type="text" class="form-control" id="itemcode" name="itemcode" value="{{$asset->itemcode}}" readonly><br>
 
-                        <label for="stok"><strong>Stock Saat Ini</strong></label>
+                        <label for="stok"><strong>Stock Total</strong></label>
                         <input type="number" class="form-control" id="stok" value="{{$asset->jumlah}}" readonly><br>
 
+                        <label for="use"><strong>Stock Digunakan</strong></label>
+                        <input type="number" class="form-control" id="use" value="{{$asset->use}}" readonly><br>
+
+                        <label for="sisa"><strong>Stock Sisa</strong></label>
+                        <input type="number" class="form-control" id="sisa" value="{{$asset->sisa}}" readonly><br>
+
+                        <label for="satuan"><strong>Satuan</strong></label>
+                        <input type="text" class="form-control" id="satuan" value="{{$asset->satuan}}" readonly><br>
+
                         <label for="jumlah"><strong>Jumlah</strong></label>
-                        <input type="number" class="form-control @error('jumlah') is-invalid @enderror" required autocomplete="jumlah" id="jumlah" name="jumlah" autofocus>
+                        <input type="number" class="form-control @error('jumlah') is-invalid @enderror" required autocomplete="jumlah" id="jumlah" name="jumlah" autofocus><br>
                             @error('jumlah')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -55,7 +59,7 @@
                             @enderror
 
                         <label for="ket"><strong>Keterangan</strong></label>
-                        <input type="text" id="ket" name="ket" class="form-control @error('ket') is-invalid @enderror" required autocomplete="ket" >
+                        <input type="text" id="ket" name="ket" class="form-control @error('ket') is-invalid @enderror" required autocomplete="ket"><br>
                             @error('ket')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

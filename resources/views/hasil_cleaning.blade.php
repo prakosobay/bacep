@@ -15,7 +15,7 @@
                             <thead>
                                 <tr>
                                     <th>ID Permit</th>
-                                    <th>Date of Request</th>
+                                    <th>Validity</th>
                                     <th>Visitor Name</th>
                                     <th>Purpose of Work</th>
                                     <th>Action</th>
@@ -26,7 +26,7 @@
                                 @foreach($cleaning as $p)
                                     <tr>
                                         <td>{{ $p->cleaning_id }}</td>
-                                        <td>{{ Carbon\Carbon::parse($p->created_at)->format('d-m-Y') }}</td>
+                                        <td>{{ Carbon\Carbon::parse($p->validity_from)->format('d-m-Y') }}</td>
                                         <td>- {{ $p->cleaning_name }}<br>
                                             - {{ $p->cleaning_name2 }}</td>
                                         <td>{{ $p->cleaning_work }}</td>

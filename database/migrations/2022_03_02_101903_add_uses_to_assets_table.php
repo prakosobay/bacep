@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddItemcodeToAssetMasuksTable extends Migration
+class AddUsesToAssetsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class AddItemcodeToAssetMasuksTable extends Migration
      */
     public function up()
     {
-        Schema::table('asset_masuks', function (Blueprint $table) {
-            $table->integer('itemcode')->nullable()->after('asset_id');
+        Schema::table('assets', function (Blueprint $table) {
+            $table->unsignedInteger('digunakan')->nullable()->after('jumlah');
+            $table->unsignedInteger('sisa')->nullable()->after('digunakan');
         });
     }
 
@@ -25,7 +26,7 @@ class AddItemcodeToAssetMasuksTable extends Migration
      */
     public function down()
     {
-        Schema::table('asset_masuks', function (Blueprint $table) {
+        Schema::table('assets', function (Blueprint $table) {
             //
         });
     }

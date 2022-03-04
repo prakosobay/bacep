@@ -16,10 +16,9 @@ class CreateConsumMasuksTable extends Migration
         Schema::create('consum_masuks', function (Blueprint $table) {
             $table->id();
             $table->foreignId('consum_id');
-            $table->integer('itemcode')->nullable();
             $table->string('nama_barang');
-            $table->string('tanggal');
             $table->unsignedInteger('jumlah');
+            $table->string('tanggal');
             $table->text('ket')->nullable();
             $table->string('pencatat', 50);
             $table->timestamps();

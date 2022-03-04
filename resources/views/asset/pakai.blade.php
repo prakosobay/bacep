@@ -5,7 +5,7 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800 text-center"><strong>Barang Asset Keluar</strong></h1>
+    <h1 class="h3 mb-2 text-gray-800 text-center"><strong>Barang Asset Digunakan</strong></h1>
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
@@ -16,7 +16,7 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <form method="post" id="asset" class="validate-form" action="{{url('asset_putout', $asset->id)}}">
+                <form method="post" id="asset" class="validate-form" action="{{url('asset_use', $use->id)}}">
                     @method('PUT')
                     @csrf
                     @if (count($errors) > 0)
@@ -30,26 +30,25 @@
                     @endif
                     <div class="form-group">
                         <label for="nama_barang"><strong>Nama Barang</strong></label>
-                        <input type="text" class="form-control" id="nama_barang" name="nama_barang" value="{{$asset->nama_barang}}" readonly><br>
+                        <input type="text" class="form-control" id="nama_barang" name="nama_barang" value="{{$use->nama_barang}}" readonly><br>
 
                         <label for="id"><strong>Kode Barang</strong></label>
-                        <input type="number" class="form-control" id="id" name="asset_id" value="{{$asset->id}}" readonly><br>
+                        <input type="number" class="form-control" id="id" name="asset_id" value="{{$use->id}}" readonly><br>
+
+                        <label for="itemcode"><strong>Item Code</strong></label>
+                        <input type="text" class="form-control" id="itemcode" name="itemcode" value="{{$use->itemcode}}" readonly><br>
 
                         <label for="stok"><strong>Stock Total</strong></label>
-                        <input type="number" class="form-control" id="stok" value="{{$asset->jumlah}}" readonly><br>
+                        <input type="number" class="form-control" id="stok" value="{{$use->jumlah}}" readonly><br>
 
                         <label for="use"><strong>Stock Digunakan</strong></label>
-                        <input type="number" class="form-control" id="use" value="{{$asset->use}}" readonly><br>
+                        <input type="number" class="form-control" id="use" value="{{$use->use}}" readonly><br>
 
                         <label for="sisa"><strong>Stock Sisa</strong></label>
-                        <input type="number" class="form-control" id="sisa" value="{{$asset->sisa}}" readonly><br>
-
-                        <label for="satuan"><strong>Satuan</strong></label>
-                        <input type="text" class="form-control" id="satuan" value="{{$asset->satuan}}" readonly><br>
+                        <input type="number" class="form-control" id="sisa" value="{{$use->sisa}}" readonly><br>
 
                         <label for="jumlah"><strong>Jumlah</strong></label>
-                        <input type="number" class="form-control @error('jumlah') is-invalid @enderror" required autocomplete="jumlah"
-                        id="jumlah" name="jumlah" value="{{old('jumlah')}}" autofocus><br>
+                        <input type="number" class="form-control @error('jumlah') is-invalid @enderror" required autocomplete="jumlah" id="jumlah" name="jumlah" autofocus><br>
                             @error('jumlah')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

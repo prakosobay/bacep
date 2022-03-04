@@ -36,10 +36,11 @@ class HomeController extends Controller
 
     public function dashboard()
     {
-        if ((Gate::allows('isAdmin')) || (Gate::allows('isApproval')) || (Gate::allows('isHead'))) {
-            return view('item.input');
-        } else {
-            abort(403);
+        // if ((Gate::allows('isAdmin')) || (Gate::allows('isApproval')) || (Gate::allows('isHead'))) {
+        //     return view('item.input');
+        // } else
+         {
+            abort(404);
         }
     }
 

@@ -100,7 +100,7 @@
                         <a class="collapse-item" href="{{url('a.table')}}">Barang Asset</a>
                         <a class="collapse-item" href="{{url('a.masuk')}}">Barang Masuk</a>
                         <a class="collapse-item" href="{{url('a.keluar')}}">Barang Keluar</a>
-                        {{-- <a class="collapse-item" href="{{url('a.update')}}">Update Barang</a> --}}
+                        <a class="collapse-item" href="{{url('a.use')}}">Barang Digunakan</a>
                     </div>
                 </div>
             </li>

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAssetKeluarsTable extends Migration
+class CreateAssetUsesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateAssetKeluarsTable extends Migration
      */
     public function up()
     {
-        Schema::create('asset_keluars', function (Blueprint $table) {
+        Schema::create('asset_uses', function (Blueprint $table) {
             $table->id();
             $table->foreignId('asset_id');
             $table->string('nama_barang');
-            $table->unsignedBigInteger('jumlah');
+            $table->unsignedInteger('jumlah');
             $table->text('ket')->nullable();
             $table->string('pencatat');
             $table->string('tanggal');
@@ -32,6 +32,6 @@ class CreateAssetKeluarsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('asset_keluars');
+        Schema::dropIfExists('asset_uses');
     }
 }

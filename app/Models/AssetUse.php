@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class AssetKeluar extends Model
+class AssetUse extends Model
 {
     use HasFactory;
 
-    protected $table = 'asset_keluars';
     protected $primaryKey = 'id';
+    protected $table = 'asset_uses';
     protected $fillable = [
         'asset_id',
         'nama_barang',
@@ -20,8 +20,9 @@ class AssetKeluar extends Model
         'tanggal'
     ];
 
-    public function asset_id2()
+    public function asset_id()
     {
         return $this->belongsTo(Asset::class);
     }
+
 }

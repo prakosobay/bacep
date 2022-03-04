@@ -15,6 +15,8 @@ class Asset extends Model
         'nama_barang',
         'itemcode',
         'jumlah',
+        'digunakan',
+        'sisa',
         'satuan',
         'kondisi',
         'note',
