@@ -72,7 +72,7 @@
                                 <td>{{$c->itemcode}}</td>
                                 <td>{{$c->nama_barang}}</td>
                                 <td>{{$c->jumlah}}</td>
-                                <td>{{$c->terpasang}}</td>
+                                <td>{{$c->digunakan}}</td>
                                 <td>{{$c->sisa}}</td>
                                 <td>{{$c->satuan}}</td>
                                 <td>{{$c->jumlah <= 0 ? 'Stok Habis' : 'Tersedia'}}</td>

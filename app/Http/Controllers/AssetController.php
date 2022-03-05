@@ -186,25 +186,42 @@ class AssetController extends Controller
             'pencatat' => ['required', 'string']
         ]);
 
+
+
         $asset = Asset::find($id);
         // dd($asset);
-        if (($asset->jumlah >= $request->banyak) && ($asset->digunakan == 0)) {
-            $asset->update([
-                'digunakan' => $request->banyak,
-                'sisa' => $asset->jumlah - $asset->digunakan,
-            ]);
-            else if(){
+        if ($asset->jumlah >= $request->banyak) {
 
-        // $assetuse = AssetUse::create([
-        //     'nama_barang' => $request->nama_barang,
-        //     'asset_id' => $request->asset_id,
-        //     'jumlah' => $request->banyak,
-        //     'ket' => $request->ket,
-        //     'pencatat' => $request->pencatat,
-        //     'tanggal' => date('d/m/Y'),
-        // ]);
+            if($asset->digunakan < 1){
+                $asset->update([
+                    'digunakan' => $request->banyak,
+                ]);
+                $sisa = $asset->jumlah - $asset->digunakan;
+                $asset->update([
+                    'sisa' => $sisa,
+                ]);
+            }
+            elseif($asset->digunakan >= 1){
+                $asset->update([
+                    'digunakan' => $asset->digunakan + $request->banyak,
+                ]);
+                $sisa = $asset->jumlah - $asset->digunakan;
+                $asset->update([
+                    'sisa' => $sisa,
+                ]);
+            }
+
+            $assetuse = AssetUse::create([
+                'nama_barang' => $request->nama_barang,
+                'asset_id' => $request->asset_id,
+                'jumlah' => $request->banyak,
+                'ket' => $request->ket,
+                'pencatat' => $request->pencatat,
+                'tanggal' => date('d/m/Y'),
+            ]);
 
             Alert::success('Success', 'Data has been submited');
+
         } else {
             Alert::error('Error', 'Stock Kosong/Kurang !');
         }

@@ -39,7 +39,7 @@
                         <input type="number" class="form-control" id="stok" name="stok" value="{{$use->jumlah}}" readonly><br>
 
                         <label for="use"><strong>Stock Digunakan</strong></label>
-                        <input type="number" class="form-control" id="use" name="use" value="{{$use->use}}" readonly><br>
+                        <input type="number" class="form-control" id="use" name="use" value="{{$use->digunakan}}" readonly><br>
 
                         <label for="sisa"><strong>Stock Sisa</strong></label>
                         <input type="number" class="form-control" id="sisa" name="sisa" value="{{$use->sisa}}" readonly><br>
