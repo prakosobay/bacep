@@ -20,6 +20,7 @@
                                 <th>ID Permit</th>
                                 <th>Tujuan</th>
                                 <th>Role</th>
+                                <th>Nama</th>
                                 <th>Status</th>
                                 <th>Last Updated</th>
                                 <th>Validity</th>
@@ -32,6 +33,7 @@
                                     <td>{{ $p->other_id }}</td>
                                     <td>{{ $p->other_work }}</td>
                                     <td>{{ $p->role_to }}</td>
+                                    <td>{{ $p->name }}</td>
                                     <td>{{ $p->status }}</td>
                                     <td>{{Carbon\Carbon::parse($p->created_at)->format('d-m-Y H:i')}}</td>
                                     <td>{{Carbon\Carbon::parse($p->val_from)->format('d-m-Y')}}

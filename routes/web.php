@@ -12,7 +12,7 @@ Route::get('/', function () {
 })->middleware('guest');
 
 
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::get('/home', [HomeController::class, 'index']);
 
     //Detail History
@@ -22,6 +22,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     //Approve flow
     Route::post('/approve_cleaning', [CleaningController::class, 'approve_cleaning']);
     Route::post('/approve_other', [RutinController::class, 'approve_other']);
+    // Route::get('/approve_other', [RutinController::class, 'approve_other']);
 
     //Reject
     Route::post('/cleaning_reject', [CleaningController::class, 'cleaning_reject']);

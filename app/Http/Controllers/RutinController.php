@@ -72,7 +72,7 @@ class RutinController extends Controller
                 'other_id' => $other->other_id,
                 'created_by' => Auth::user()->id,
                 'role_to' => 'bm',
-                'status' => 'requested',
+                'status' => 'created',
                 'aktif' => '1',
                 'pdf' => false
             ]);
@@ -113,7 +113,68 @@ class RutinController extends Controller
 
     public function approve_other(Request $request)
     {
+        // dd($request);
+        $lasthistoryC = OtherHistory::where('other_id', '=', $request->other_id)->latest()->first();
+        // dd($lasthistoryC);
+        if($lasthistoryC->pdf == true)
+        {
+            $lasthistoryC->update(['aktif' => false]);
+            $status = '';
+            if ($lasthistoryC->status == 'created') {
+                $status = 'requested';
+            } elseif($lasthistoryC->status == 'requested'){
+                $status = 'reviewed';
+            } elseif ($lasthistoryC->status == 'reviewed') {
+                $status = 'checked';
+            } elseif ($lasthistoryC->status == 'checked') {
+                $status = 'acknowledge';
+            } elseif ($lasthistoryC->status == 'acknowledge') {
+                $status = 'final';
+            } elseif ($lasthistoryC->status == 'final') {
+                $other = Other::find($request->other_id)->first();
+            }
 
+            $role_to = '';
+            if ($lasthistoryC->role_to == 'bm') {
+                $role_to = 'review';
+            } elseif($lasthistoryC->role_to == 'review'){
+                // foreach ([
+                //     'aurellius.putra@balitower.co.id', 'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
+                // 'ilham.pangestu@balitower.co.id', 'irwan.trisna@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id'
+                // ,'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id',
+                // ] as $recipient) {
+                //     Mail::to($recipient)->send(new NotifEmail());
+                // }
+                $role_to = 'check';
+            } elseif ($lasthistoryC->role_to == 'check') {
+                // foreach (['security.bacep@balitower.co.id'] as $recipient) {
+                //     Mail::to($recipient)->send(new NotifEmail());
+                // }
+                $role_to = 'security';
+            } elseif ($lasthistoryC->role_to == 'security') {
+                // foreach (['bayu.prakoso@balitower.co.id'] as $recipient) {
+                //     Mail::to($recipient)->send(new NotifEmail());
+                // }
+                $role_to = 'head';
+            } elseif($lasthistoryC->role_to == 'head'){
+                $other = Other::find($request->other_id);
+                // foreach (['dc@balitower.co.id'] as $recipient) {
+                //     Mail::to($recipient)->send(new NotifFull($other));
+                // }
+            }
+
+            $otherhistory = OtherHistory::create([
+                'other_id' => $request->other_id,
+                'created_by' => Auth::user()->id,
+                'role_to' => $role_to,
+                'status' => $status,
+                'aktif' => true,
+                'pdf' => false,
+            ]);
+            dd($otherhistory);
+        } else{
+            abort(403);
+        }
     }
 
     public function other()

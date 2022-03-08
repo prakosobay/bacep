@@ -80,6 +80,7 @@ class CleaningController extends Controller
 
     public function approve_cleaning(Request $request)
     {
+        // dd($request->all());
         $lasthistoryC = CleaningHistory::where('cleaning_id', '=', $request->cleaning_id)->latest()->first();
         // dd($lasthistoryC);
         if ($lasthistoryC->pdf == true) {

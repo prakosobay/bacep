@@ -16,8 +16,8 @@
                             <tr>
                                 <th>ID Permit</th>
                                 <th>Date of Request</th>
-                                <th>Visitor Name</th>
                                 <th>Purpose of Work</th>
+                                <th>Status</th>
                                 <th>Action</th>
                                 <th>File</th>
                             </tr>
@@ -27,22 +27,30 @@
                                 <tr>
                                     <td>{{ $p->other_id }}</td>
                                     <td>{{ Carbon\Carbon::parse($p->created_at)->format('d-m-Y') }}</td>
-                                    <td>{{ $p->pic1 }}<br>
-                                    <td>{{ $p->other_work }}</td>
+                                    <td>{{ $p->other_work }}<br>
+                                    <td>{{ $p->status }}<br>
                                     <td>
                                         @can('isApproval')
-                                            <a href="javascript:void(0)" type="button" id="ok" class="approve btn btn-success mr-2" data-other_id="{{$p->other_id}}">Approve</a>
-                                            <a href="javascript:void(0)" type="button" id="not" class="reject btn btn-danger mr-2" data-other_id="{{$p->other_id}}">Reject</a>
+                                            @if($p->pdf == true)
+                                                <a href="javascript:void(0)" type="button" id="ok" class="approve btn btn-success mr-2" data-other_id="{{$p->other_id}}">Approve</a>
+                                                <a href="javascript:void(0)" type="button" id="not" class="reject btn btn-danger mr-2" data-other_id="{{$p->other_id}}">Reject</a>
+                                            @endif
                                         @elsecan('isHead')
-                                            <a href="javascript:void(0)" type="button" id="ok" class="approve btn btn-success mr-2" data-other_id="{{$p->other_id}}">Approve</a>
-                                            <a href="javascript:void(0)" type="button" id="not" class="reject btn btn-danger mr-2" data-other_id="{{$p->other_id}}">Reject</a>
+                                            @if($p->pdf == true)
+                                                <a href="javascript:void(0)" type="button" id="ok" class="approve btn btn-success mr-2" data-other_id="{{$p->other_id}}">Approve</a>
+                                                <a href="javascript:void(0)" type="button" id="not" class="reject btn btn-danger mr-2" data-other_id="{{$p->other_id}}">Reject</a>
+                                            @endif
                                         @elsecan('isBm')
-                                            <a href="javascript:void(0)" type="button" id="ok" class="approve btn btn-success mr-2" data-other_id="{{$p->other_id}}">Approve</a>
-                                            <a href="javascript:void(0)" type="button" id="not" class="reject btn btn-danger mr-2" data-other_id="{{$p->other_id}}">Reject</a>
+                                            @if($p->pdf == true)
+                                                <a href="javascript:void(0)" type="button" id="ok" class="approve btn btn-success mr-2 mt-2" data-other_id="{{$p->other_id}}">Approve</a>
+                                                <a href="" type="button" id="rev" class="rev btn btn-warning mr-2 mt-2" data-other_id="{{$p->other_id}}">Revisi</a>
+                                                <a href="javascript:void(0)" type="button" id="not" class="reject btn btn-danger mr-2 mt-2" data-other_id="{{$p->other_id}}">Reject</a>
+                                            @endif
                                         @elsecan('isSecurity')
-                                            <a href="javascript:void(0)" type="button" id="ok" class="approve btn btn-success" data-other_id="{{$p->other_id}}">Approve</a>
+                                            @if($p->pdf == true)
+                                                <a href="javascript:void(0)" type="button" id="ok" class="approve btn btn-success" data-other_id="{{$p->other_id}}">Approve</a>
+                                            @endif
                                         @endcan
-                                            {{-- <a href="detail_other/{{$p->other_id}}" type="button" class="btn btn-info">History</a> --}}
                                     </td>
                                     <td><a href="/other_pdf/{{$p->other_id}}" class="btn btn-primary" target="_blank">LIHAT PDF</a></td>
                                 </tr>

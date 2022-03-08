@@ -71,7 +71,7 @@ class HomeController extends Controller
                     ->whereIn('other_histories.role_to', $role_1)
                     ->where('other_histories.status', '!=', 'revisi')
                     ->where('other_histories.aktif', '=', 1)
-                    ->select('other.*')
+                    ->select('other.*', 'other_histories.status', 'other_histories.pdf')
                     ->get();
                     // dd($otherHistories);
                 return view('other.show', compact('otherHistories'));
@@ -126,8 +126,10 @@ class HomeController extends Controller
         elseif ($type_view == 'other') {
             $other_log = DB::table('other_histories')
                 ->join('other', 'other.other_id', '=', 'other_histories.other_id')
-                ->select('other_histories.*', 'other.other_work', 'other.val_from')
+                ->join('users', 'users.id', '=', 'other_histories.created_by')
+                ->select('other_histories.*', 'other.other_work', 'other.val_from', 'users.name')
                 ->get();
+                // dd($other_log);
             return view('other.log', compact('other_log'));
         }
     }
