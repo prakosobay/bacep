@@ -71,6 +71,7 @@ class ConsumController extends Controller
     {
         if (Gate::allows('isAdmin') || (Gate::allows('isApproval')) || (Gate::allows('isHead'))) {
             $consum = Consum::find($id);
+            // dd($consum);
             return view('consum.kurang', compact('consum'));
         } else {
             abort(403,  'Anda Tidak Punya Akses Ke Halaman Ini');

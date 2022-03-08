@@ -35,20 +35,20 @@
                         <label for="id"><strong>Kode Barang</strong></label>
                         <input type="number" class="form-control" id="id" name="asset_id" value="{{$use->id}}" readonly><br>
 
-                        <label for="itemcode"><strong>Item Code</strong></label>
-                        <input type="text" class="form-control" id="itemcode" name="itemcode" value="{{$use->itemcode}}" readonly><br>
-
                         <label for="stok"><strong>Stock Total</strong></label>
-                        <input type="number" class="form-control" id="stok" value="{{$use->jumlah}}" readonly><br>
+                        <input type="number" class="form-control" id="stok" name="stok" value="{{$use->jumlah}}" readonly><br>
 
                         <label for="use"><strong>Stock Digunakan</strong></label>
-                        <input type="number" class="form-control" id="use" value="{{$use->use}}" readonly><br>
+                        <input type="number" class="form-control" id="use" name="use" value="{{$use->digunakan}}" readonly><br>
 
                         <label for="sisa"><strong>Stock Sisa</strong></label>
-                        <input type="number" class="form-control" id="sisa" value="{{$use->sisa}}" readonly><br>
+                        <input type="number" class="form-control" id="sisa" name="sisa" value="{{$use->sisa}}" readonly><br>
+
+                        <label for="satuan"><strong>Satuan</strong></label>
+                        <input type="text" class="form-control" id="satuan" value="{{$use->satuan}}" readonly><br>
 
                         <label for="jumlah"><strong>Jumlah</strong></label>
-                        <input type="number" class="form-control @error('jumlah') is-invalid @enderror" required autocomplete="jumlah" id="jumlah" name="jumlah" autofocus><br>
+                        <input type="number" class="form-control @error('jumlah') is-invalid @enderror" required autocomplete="jumlah" id="jumlah" name="banyak" autofocus><br>
                             @error('jumlah')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

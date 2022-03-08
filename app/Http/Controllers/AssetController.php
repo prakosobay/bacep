@@ -181,32 +181,51 @@ class AssetController extends Controller
         $this->validate($request, [
             'nama_barang' => ['required'],
             'asset_id' => ['required', 'numeric'],
-            'use' => ['numeric', 'required', 'min:1'],
+            'banyak' => ['numeric', 'required', 'min:1'],
             'ket' => 'required',
             'pencatat' => ['required', 'string']
         ]);
 
-        // $asset = Asset::find($id);
-        // if ($asset->jumlah >= $request->jumlah) {
-        //     $asset->update([
-        //         'jumlah' => $asset->jumlah - $request->jumlah,
-        // stok sisa = $asset->jumlah - $request->jumlah,
-        //     ]);
 
-        //     $assetkeluar = AssetKeluar::create([
-        //         'nama_barang' => $request->nama_barang,
-        //         'asset_id' => $request->asset_id,
-        //         'jumlah' => $request->jumlah,
-        //         'ket' => $request->ket,
-        //         'pencatat' => $request->pencatat,
-        //         'tanggal' => date('d/m/Y'),
-        //     ]);
 
-        //     Alert::success('Success', 'Data has been submited');
-        // } else {
-        //     Alert::error('Error', 'Stock Kosong/Kurang !');
-        // }
-        // return back();
+        $asset = Asset::find($id);
+        // dd($asset);
+        if ($asset->jumlah >= $request->banyak) {
+
+            if($asset->digunakan < 1){
+                $asset->update([
+                    'digunakan' => $request->banyak,
+                ]);
+                $sisa = $asset->jumlah - $asset->digunakan;
+                $asset->update([
+                    'sisa' => $sisa,
+                ]);
+            }
+            elseif($asset->digunakan >= 1){
+                $asset->update([
+                    'digunakan' => $asset->digunakan + $request->banyak,
+                ]);
+                $sisa = $asset->jumlah - $asset->digunakan;
+                $asset->update([
+                    'sisa' => $sisa,
+                ]);
+            }
+
+            $assetuse = AssetUse::create([
+                'nama_barang' => $request->nama_barang,
+                'asset_id' => $request->asset_id,
+                'jumlah' => $request->banyak,
+                'ket' => $request->ket,
+                'pencatat' => $request->pencatat,
+                'tanggal' => date('d/m/Y'),
+            ]);
+
+            Alert::success('Success', 'Data has been submited');
+
+        } else {
+            Alert::error('Error', 'Stock Kosong/Kurang !');
+        }
+        return back();
     }
 
     public function store_asset(Request $request)
