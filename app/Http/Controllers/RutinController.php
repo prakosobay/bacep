@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\{DB, Auth, Gate, Mail};
 use Barryvdh\DomPDF\Facade as PDF;
 use App\Mail\{NotifEmail, NotifReject, NotifFull};
 use App\Models\{Other, Rutin, Personil, OtherHistory, OtherFull};
+use RealRashid\SweetAlert\Facades\Alert;
 
 class RutinController extends Controller
 {
@@ -64,9 +65,15 @@ class RutinController extends Controller
                 }
             }
         }
-
         // dd($data);
         $other = Other::create($data);
+        // foreach ([
+        //     'aurellius.putra@balitower.co.id', 'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
+        //     'ilham.pangestu@balitower.co.id', 'irwan.trisna@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id',
+        //     'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id',
+        // ] as $recipient) {
+        //     Mail::to($recipient)->send(new NotifEmail());
+        // }
         if ($other->exists) {
             $otherHistory = OtherHistory::create([
                 'other_id' => $other->other_id,
@@ -99,18 +106,6 @@ class RutinController extends Controller
         return $pdf->stream();
     }
 
-    public function detail_permit_other($id)
-    {
-        dd($id);
-        $cleaningHistory = DB::table('cleaning_histories')
-            ->join('cleanings', 'cleanings.cleaning_id', '=', 'cleaning_histories.cleaning_id')
-            ->join('users', 'users.id', '=', 'cleaning_histories.created_by')
-            ->where('cleaning_histories.cleaning_id', '=', $id)
-            ->select('cleaning_histories.*', 'users.name', 'cleanings.cleaning_work')
-            ->get();
-        return view('detail_cleaning', ['cleaningHistory' => $cleaningHistory]);
-    }
-
     public function approve_other(Request $request)
     {
         // dd($request);
@@ -141,7 +136,7 @@ class RutinController extends Controller
                 // foreach ([
                 //     'aurellius.putra@balitower.co.id', 'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
                 // 'ilham.pangestu@balitower.co.id', 'irwan.trisna@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id'
-                // ,'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id',
+                // ,'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id',
                 // ] as $recipient) {
                 //     Mail::to($recipient)->send(new NotifEmail());
                 // }
@@ -152,15 +147,15 @@ class RutinController extends Controller
                 // }
                 $role_to = 'security';
             } elseif ($lasthistoryC->role_to == 'security') {
-                // foreach (['bayu.prakoso@balitower.co.id'] as $recipient) {
+                // foreach (['tofiq.hidayat@balitower.co.id'] as $recipient) {
                 //     Mail::to($recipient)->send(new NotifEmail());
                 // }
                 $role_to = 'head';
             } elseif($lasthistoryC->role_to == 'head'){
-                $other = Other::find($request->other_id);
-                foreach (['bayu.prakoso@balitower.co.id'] as $recipient) {
-                    Mail::to($recipient)->send(new NotifFull($other));
-                }
+                // $other = Other::find($request->other_id);
+                // foreach (['dc@balitower.co.id'] as $recipient) {
+                //     Mail::to($recipient)->send(new NotifFull($other));
+                // }
                 $pick = Other::where('other_id', $request->other_id)->first();
                 // dd($pick);
                 $full = OtherFull::create([
@@ -208,29 +203,29 @@ class RutinController extends Controller
 
     public function reject(Request $request)
     {
-        $other_history = OtherHistory::where('other_id', '=', $request->other_id)->latest()->first();
-        if (Gate::denies('isSecurity')) {
-            // dd($other_history);
-            if ($other_history->pdf == true) {
-                $other_history->update(['aktif' => false]);
+        if(Gate::denies('isSecurity')){
+            $otherhistory = OtherHistory::where('other_id', '=', $request->other_id)->latest()->first();
+            // dd($otherhistory);
+            if($otherhistory->pdf == true){
+                $otherhistory->update([
+                    'aktif' => false,
+                ]);
 
-                $otherHistory = OtherHistory::create([
+                $otherhistory = OtherHistory::create([
                     'other_id' => $request->other_id,
                     'created_by' => Auth::user()->id,
-                    'role_to' => 'bm',
-                    'status' => 'revisi',
+                    'role_to' => 0,
+                    'status' => 'rejected',
                     'aktif' => true,
                     'pdf' => false,
                 ]);
 
-                // $other = Other::find($request->other_id);
-                // foreach (['bayu.prakoso@balitower.co.id'] as $recipient) {
-                //     Mail::to($recipient)->send(new NotifReject($other));
+                // $cleaning = Cleaning::find($request->cleaning_id);
+                // foreach (['badai.sino@balitower.co.id', 'security.bacep@balitower.co.id'] as $recipient) {
+                //     Mail::to($recipient)->send(new NotifReject($cleaning));
                 // }
-                return $otherHistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
-            } else {
-                abort(404);
             }
+            return $otherhistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
         } else{
             abort(403);
         }

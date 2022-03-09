@@ -136,15 +136,19 @@ class HomeController extends Controller
 
     public function approval_full($type_form)
     {
-        if ((Gate::allows('isApproval')) || (Gate::allows('isBoss')) || (Gate::allows('isAdmin'))) {
+        if ((Gate::allows('isApproval')) || (Gate::allows('isHead')) || (Gate::allows('isAdmin'))) {
             if ($type_form == 'all') {
                 return view('full_approval');
             } elseif ($type_form == 'survey') {
                 $surveyFull = DB::table('survey_fulls')->get();
-                return view('full_survey', ['surveyFull' => $surveyFull]);
+                return view('full_survey', compact('surveyFull'));
             } elseif ($type_form == 'cleaning') {
                 $cleaningFull = DB::table('cleaning_fulls')->get();
-                return view('full_cleaning', ['cleaningFull' => $cleaningFull]);
+                return view('full_cleaning', compact('cleaningFull'));
+            } elseif ($type_form == 'other') {
+                $otherFull = DB::table('other_fulls')->get();
+                // dd($otherFull);
+                return view('other.full', compact('otherFull'));
             }
         } else {
             abort(403);

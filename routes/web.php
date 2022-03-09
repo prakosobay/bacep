@@ -17,7 +17,6 @@ Route::middleware(['auth'])->group(function () {
 
     //Detail History
     Route::get('/detail_cleaning/{id}', [CleaningController::class, 'detail_permit_cleaning']);
-    Route::get('detail_other{id}', [RutinController::class, 'detail_permit_other']);
 
     //Approve flow
     Route::post('/approve_cleaning', [CleaningController::class, 'approve_cleaning']);
