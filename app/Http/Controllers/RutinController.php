@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\{DB, Auth, Gate, Mail};
 use Barryvdh\DomPDF\Facade as PDF;
 use App\Mail\{NotifEmail, NotifReject, NotifFull};
-use App\Models\{Other, Rutin, Personil, OtherHistory};
+use App\Models\{Other, Rutin, Personil, OtherHistory, OtherFull};
 
 class RutinController extends Controller
 {
@@ -158,9 +158,23 @@ class RutinController extends Controller
                 $role_to = 'head';
             } elseif($lasthistoryC->role_to == 'head'){
                 $other = Other::find($request->other_id);
-                // foreach (['dc@balitower.co.id'] as $recipient) {
-                //     Mail::to($recipient)->send(new NotifFull($other));
-                // }
+                foreach (['bayu.prakoso@balitower.co.id'] as $recipient) {
+                    Mail::to($recipient)->send(new NotifFull($other));
+                }
+                $pick = Other::where('other_id', $request->other_id)->first();
+                // dd($pick);
+                $full = OtherFull::create([
+                    'other_id' => $pick->other_id,
+                    'other_name' => $pick->pic1,
+                    'other_name2' => $pick->pic2,
+                    'other_work' => $pick->other_work,
+                    'val_from' => $pick->val_from,
+                    'other_date' => $pick->updated_at,
+                    'status' => 'Full Approved',
+                    'link' => ("http://127.0.0.1:8000/other_pdf/$other->other_id"),
+                    // 'link' => ("http://172.16.45.195:8000/cleaning_pdf/$cleaning->cleaning_id"),
+                ]);
+                // dd($full);
             }
 
             $otherhistory = OtherHistory::create([
@@ -171,10 +185,12 @@ class RutinController extends Controller
                 'aktif' => true,
                 'pdf' => false,
             ]);
-            dd($otherhistory);
+
+            // dd($otherhistory);
         } else{
             abort(403);
         }
+        return $otherhistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
     }
 
     public function other()
