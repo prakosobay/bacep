@@ -84,7 +84,7 @@ class HomeController extends Controller
     }
 
     public function revisi_view($type_view){
-        if(Gate::denies('isAdmin')){
+        if((Gate::denies('isSecurity'))){
             $role_1 = Session::get('arrole');
             if($type_view == 'other'){
             $revisi = DB::table('other_histories')

@@ -32,18 +32,19 @@
                                     <td>
                                         @can('isApproval')
                                             @if($p->pdf == true)
-                                                <a href="javascript:void(0)" type="button" id="ok" class="approve btn btn-success mr-2" data-other_id="{{$p->other_id}}">Approve</a>
-                                                <a href="javascript:void(0)" type="button" id="not" class="reject btn btn-danger mr-2" data-other_id="{{$p->other_id}}">Reject</a>
+                                                <a href="javascript:void(0)" type="button" id="ok" class="approve btn btn-success mr-2 mt-2" data-other_id="{{$p->other_id}}">Approve</a>
+                                                <a href="javascript:void(0)" type="button" id="rev" class="revise btn btn-warning mr-2 mt-2" data-other_id="{{$p->other_id}}">Revisi</a>
+                                                <a href="javascript:void(0)" type="button" id="not" class="reject btn btn-danger mr-2 mt-2" data-other_id="{{$p->other_id}}">Reject</a>
                                             @endif
                                         @elsecan('isHead')
                                             @if($p->pdf == true)
-                                                <a href="javascript:void(0)" type="button" id="ok" class="approve btn btn-success mr-2" data-other_id="{{$p->other_id}}">Approve</a>
-                                                <a href="javascript:void(0)" type="button" id="not" class="reject btn btn-danger mr-2" data-other_id="{{$p->other_id}}">Reject</a>
+                                                <a href="javascript:void(0)" type="button" id="ok" class="approve btn btn-success mr-2 mt-2" data-other_id="{{$p->other_id}}">Approve</a>
+                                                <a href="javascript:void(0)" type="button" id="not" class="reject btn btn-danger mr-2 mt-2" data-other_id="{{$p->other_id}}">Reject</a>
                                             @endif
                                         @elsecan('isBm')
                                             @if($p->pdf == true)
                                                 <a href="javascript:void(0)" type="button" id="ok" class="approve btn btn-success mr-2 mt-2" data-other_id="{{$p->other_id}}">Approve</a>
-                                                <a href="" type="button" id="rev" class="rev btn btn-warning mr-2 mt-2" data-other_id="{{$p->other_id}}">Revisi</a>
+                                                <a href="javascript:void(0)" type="button" id="rev" class="revise btn btn-warning mr-2 mt-2" data-other_id="{{$p->other_id}}">Revisi</a>
                                                 <a href="javascript:void(0)" type="button" id="not" class="reject btn btn-danger mr-2 mt-2" data-other_id="{{$p->other_id}}">Reject</a>
                                             @endif
                                         @elsecan('isSecurity')
@@ -89,7 +90,7 @@
             });
 
             Swal.fire({
-                title: 'Are you sure?',
+                title: 'Are you sure wan to approve?',
                 text: "You won't be able to revert this!",
                 type: 'warning',
                 showCancelButton: true,
@@ -187,5 +188,59 @@
                 }
             });
         });
+
+        //Revisi
+        $(document).on('click', '.revise', function(){
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('input[name="_token"]').val()
+                }
+            });
+            Swal.fire({
+                title: 'Are you sure want to revisi?',
+                text: "You won't be able to revert this!",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, revisi it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $('#rev').click(function () {
+                            return false;
+                        });
+                    let other_id = $(this).data('other_id');
+                    console.log(other_id);
+                    $.ajax({
+                        type:'POST',
+                        url:"{{url('other_revisi')}}",
+                        data: {other_id},
+                        error: function (request, error) {
+                            alert(" Can't do because: " + error);
+                        },
+                        success:function(data){
+                            console.log(data);
+                            if(data.status == 'SUCCESS'){
+                                    Swal.fire(
+                                    'Revisi!',
+                                    'The form has been revisi.',
+                                    'success'
+                                    ).then(function(){
+                                        location.reload();
+                                    })
+                            }else if(data.status == 'FAILED'){
+                                Swal.fire({
+                                    title: "Failed!",
+                                    text: 'Failed to Revisi',
+                                }).then(function(){
+                                    location.reload();
+                                });
+                            }
+                        }
+                    });
+                }
+            });
+        });
+
         </script>
 @endsection

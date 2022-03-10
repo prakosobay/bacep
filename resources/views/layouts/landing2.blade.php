@@ -48,35 +48,35 @@
                     </div>
                     <ul>
                         @can('isBm')
-                        <li><a href="cleaning.form" data-after="cleaning">Cleaning</a></li>
-                        <li><a href="perbaikan" data-after="other">Other</a></li>
-                        <li><a href="{{ url('approval/other') }}" data-after="Approval">Approval</a></li>
-                        <li><a href="{{ url('revisi') }}" data-after="Revisi">Revisi</a></li>
+                            <li><a href="cleaning.form" data-after="cleaning">Cleaning</a></li>
+                            <li><a href="perbaikan" data-after="other">Other</a></li>
+                            <li><a href="{{ url('approval/other') }}" data-after="Approval">Approval</a></li>
+                            <li><a href="{{ url('revisi/other') }}" data-after="Revisi">Revisi</a></li>
                         @elsecan('isAdmin')
-                        <li><a href="{{ url('/table_user') }}" data-after="Admin">Admin Panel</a></li>
+                            <li><a href="{{ url('/table_user') }}" data-after="Admin">Admin Panel</a></li>
                         @elsecan('isApproval')
-                        <li><a href="{{ url('approval/all') }}" data-after="Approval">Approval</a></li>
-                        <li><a href="{{ url('full_approval/all') }}" data-after="Full">Full Approval</a></li>
-                        <li><a href="{{ url('/table_barang') }}" data-after="barang">Barang</a></li>
+                            <li><a href="{{ url('approval/all') }}" data-after="Approval">Approval</a></li>
+                            <li><a href="{{ url('full_approval/all') }}" data-after="Full">Full Approval</a></li>
+                            <li><a href="{{ url('/table_barang') }}" data-after="barang">Barang</a></li>
                         @elsecan('isHead')
-                        <li><a href="{{ url('approval/all') }}" data-after="Approval">Approval</a></li>
-                        <li><a href="{{ url('full_approval/all') }}" data-after="Full">Full Approval</a></li>
-                        <li><a href="{{ url('/table_barang') }}" data-after="barang">Barang</a></li>
+                            <li><a href="{{ url('approval/all') }}" data-after="Approval">Approval</a></li>
+                            <li><a href="{{ url('full_approval/all') }}" data-after="Full">Full Approval</a></li>
+                            <li><a href="{{ url('/table_barang') }}" data-after="barang">Barang</a></li>
                         @elsecan('isSecurity')
-                        <li><a href="{{ url('approval/all') }}" data-after="Approval">Approval</a></li>
+                            <li><a href="{{ url('approval/all') }}" data-after="Approval">Approval</a></li>
                         @endcan
-                        <li><a href="{{ url('log/all') }}" data-after="Log">Log</a></li>
-                        <li>
-                            <a href="{{ route('logout') }}"
-                            onclick="event.preventDefault();
-                                            document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
-                            </a>
+                            <li><a href="{{ url('log/all') }}" data-after="Log">Log</a></li>
+                            <li>
+                                <a href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                                document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
+                                </a>
 
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                @csrf
-                            </form>
-                        </li>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                            </li>
                     </ul>
                 </div>
             </div>

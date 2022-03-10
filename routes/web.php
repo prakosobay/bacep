@@ -21,7 +21,6 @@ Route::middleware(['auth'])->group(function () {
     //Approve flow
     Route::post('/approve_cleaning', [CleaningController::class, 'approve_cleaning']);
     Route::post('/approve_other', [RutinController::class, 'approve_other']);
-    // Route::get('/approve_other', [RutinController::class, 'approve_other']);
 
     //Reject
     Route::post('/cleaning_reject', [CleaningController::class, 'cleaning_reject']);
@@ -51,6 +50,8 @@ Route::middleware(['auth'])->group(function () {
 
     //Revisi
     Route::get('revisi/{type_view}', [HomeController::class, 'revisi_view']);
+    Route::post('/other_revisi', [RutinController::class, 'revisi']);
+    Route::get('/rev/{id}', [RutinController::class, 'other_revisi']);
 
     //Pilihan Work
     Route::get('/cleaning/{id}', [CleaningController::class, 'pilihan_work']);

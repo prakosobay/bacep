@@ -18,8 +18,8 @@
                                 <th>Date of Request</th>
                                 <th>Visitor Name</th>
                                 <th>Purpose of Work</th>
+                                <th>Validity</th>
                                 <th>Action</th>
-                                <th>File</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -29,12 +29,12 @@
                                     <td>{{ Carbon\Carbon::parse($p->created_at)->format('d-m-Y') }}</td>
                                     <td>{{ $p->pic1 }}<br>
                                     <td>{{ $p->other_work }}</td>
+                                    <td>{{ $p->val_from }}</td>
                                     <td>
                                         @can('isBm')
-                                            <a href="edit" type="button" id="edit" class="edit btn btn-primary mr-2" data-other_id="{{$p->other_id}}">Edit</a>
-                                            @endcan
+                                            <a href="{{url('/rev', $p->other_id)}}" type="button" id="edit" class="edit btn btn-primary mr-2">Edit</a>
+                                        @endcan
                                     </td>
-                                    <td><a href="/other_pdf/{{$p->other_id}}" class="btn btn-primary" target="_blank">LIHAT PDF</a></td>
                                 </tr>
                             @endforeach
                         </tbody>

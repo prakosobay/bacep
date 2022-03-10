@@ -44,7 +44,6 @@ class RutinController extends Controller
     public function personil($id)
     {
         $personil = Personil::findOrFail($id);
-        // dd($personil);
         return isset($personil) && !empty($personil) ? response()->json(['status' => 'SUCCESS', 'personil' => $personil]) : response()->json(['status' => 'FAILED', 'data' => []]);
     }
 
@@ -65,7 +64,7 @@ class RutinController extends Controller
                 }
             }
         }
-        // dd($data);
+
         $other = Other::create($data);
         // foreach ([
         //     'aurellius.putra@balitower.co.id', 'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
@@ -188,17 +187,44 @@ class RutinController extends Controller
         return $otherhistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
     }
 
-    public function other()
+    public function revisi(Request $request)
     {
+        if(Gate::denies('isSecurity')){
+            $revisi = OtherHistory::where('other_id', '=', $request->other_id)->latest()->first();
+                if($revisi->pdf == true){
+                    // dd($revisi);
+                    $revisi->update(['aktif' => false]);
 
-        // $revisi = DB::table('other_histories')
-        //             ->join('other', 'other.other_id', '=', 'other_histories.other_id')
-        //             // ->where('other_histories.other_id', '=', $id)
-        //             ->where('other_histories.status', '=', 'Revisi')
-        //             ->select('other_histories.*', 'other.other_work')
-        //             ->get();
-        // dd($revisi);
-        // return view('other.revisi', compact('revisi'));
+                    // $other = Other::find($request->other_id);
+                    // foreach (['bayu.prakoso@balitower.co.id'] as $recipient) {
+                    //     Mail::to($recipient)->send(new NotifRev($other));
+                    // }
+
+                    $otherhistory = OtherHistory::create([
+                        'other_id' => $request->other_id,
+                        'created_by' => Auth::user()->id,
+                        'role_to' => 'bm',
+                        'status' => 'revisi',
+                        'aktif' => true,
+                        'pdf' => false,
+                    ]);
+                }
+        } else {
+            abort(403);
+        }
+        return $otherhistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
+    }
+
+    public function other_revisi($id)
+    {
+        $rev = Other::findOrFail($id);
+        $personil = Personil::all();
+        $requestor = OtherHistory::where('other_id', '=', $id)
+        ->join('users', 'users.id', '=', 'other_histories.created_by')
+        ->select('users.name', 'other_histories.*')
+        ->first();
+        return view('other.rev_permit', compact('rev', 'personil', 'requestor'));
+        dd($requestor);
     }
 
     public function reject(Request $request)
