@@ -223,8 +223,9 @@ class RutinController extends Controller
         ->join('users', 'users.id', '=', 'other_histories.created_by')
         ->select('users.name', 'other_histories.*')
         ->first();
+
         return view('other.rev_permit', compact('rev', 'personil', 'requestor'));
-        dd($requestor);
+        dd($rev);
     }
 
     public function reject(Request $request)
