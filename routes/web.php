@@ -8,7 +8,8 @@ use Maatwebsite\Excel\Row;
 
 // Auth::routes(['verify' => true]);
 Route::get('/', function () {
-    return view('auth.login');
+    // return view('auth.login');
+    return view('auth.login2');
 })->middleware('guest');
 
 
