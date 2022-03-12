@@ -214,30 +214,27 @@
                             </div>
                         </div>
 
-                        {{-- Authorized Entry Area --}}
+                        {{-- Validity --}}
                         <div class="card-body">
-
                             <div class="row">
-                                <div class="col-1">
-
-                                        <div class="form-check">
-                                            <input type="checkbox" name="loc4" class="form-check-input" value="" id="loc4">
-                                            <label class="form-check-label" for="loc4">Server Room</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input type="checkbox" name="loc5" class="form-check-input" value="" id="loc5">
-                                            <label class="form-check-label" for="loc5">UPS Room</label>
-                                        </div>
-                                        {{-- <div class="form-check">
-                                            <input type="checkbox" name="loc10" class="form-check-input" value="" id="loc10">
-                                            <label class="form-check-label" for="loc10">Panel Room</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input type="checkbox" name="loc9" class="form-check-input" value="" id="loc9">
-                                            <label class="form-check-label" for="loc9">Genset Room</label>
-                                        </div> --}}
-                                    </div>
-
+                                <div class="col-2">
+                                    <label class="mt-4" for="val_from"><strong>Validity From :</strong></label>
+                                    <input type="date" class="form-control @error('val_from') is-invalid @enderror" required autocomplete="val_from" id="val_from" name="val_from" value="{{$rev->val_from}}"><br>
+                                    @error('val_from')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="col-2">
+                                    <label class="mt-4" for="val_to"><strong>Validity To :</strong></label>
+                                    <input type="date" class="form-control @error('val_to') is-invalid @enderror" required autocomplete="val_to" id="val_to" name="val_to" value="{{$rev->val_to}}"><br>
+                                    @error('val_to')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
                             </div>
                         </div>
 
@@ -318,21 +315,7 @@
 </body>
 {{-- <div class="row">
 
-    <label class="mt-4" for="val_from"><strong>Validity From :</strong></label>
-    <input type="date" class="form-control @error('val_from') is-invalid @enderror" required autocomplete="val_from" id="val_from" name="val_from" value="{{$rev->val_from}}"><br>
-    @error('val_from')
-        <span class="invalid-feedback" role="alert">
-            <strong>{{ $message }}</strong>
-        </span>
-    @enderror
 
-    <label class="mt-4" for="val_to"><strong>Validity To :</strong></label>
-    <input type="date" class="form-control @error('val_to') is-invalid @enderror" required autocomplete="val_to" id="val_to" name="val_to" value="{{$rev->val_to}}"><br>
-    @error('val_to')
-        <span class="invalid-feedback" role="alert">
-            <strong>{{ $message }}</strong>
-        </span>
-    @enderror
 </div>
 <div class="col-1">
     <div class="form-check">
