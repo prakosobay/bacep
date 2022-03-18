@@ -1,0 +1,56 @@
+/* banner */
+#banner{
+    height: 600px;
+    background-image: url('/gambar/home/banner.png');
+    background-size: cover;
+}
+
+.banner-content{
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+/* button */
+#btn-new{
+    border-radius: 3em;
+    display: flex;
+    font-size: 15px;
+    line-height: 0.5;
+    padding: 18px;
+    text-align: center;
+    background-color: #09458F;
+    color: #FFFFFF;
+}
+
+/* carousel */
+.logo{
+    align-items: center;
+    /* display: flex; */
+    padding: 50px;
+    justify-content: center;
+    border: solid;
+}
+
+.bg-carousel{
+    background-color: #F4F4F4;
+}
+
+.judul-carousel{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.text-carousel-1{
+    color: #1D1D1D;
+    font-size: x-large;
+
+}
+
+.text-carousel-2{
+    color: #828282;
+    font-size: smaller;
+}
