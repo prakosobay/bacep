@@ -8,12 +8,12 @@ use Maatwebsite\Excel\Row;
 
 // Auth::routes(['verify' => true]);
 Route::get('/', function () {
-    // return view('auth.login');
-    return view('homepage');
+    return view('auth.login');
+    // return view('homepage');
 })->middleware('guest');
 
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'auth'])->group(function () {
     Route::get('/home', [HomeController::class, 'index']);
 
     //Detail History
