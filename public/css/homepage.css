@@ -27,10 +27,17 @@
 /* carousel */
 .logo{
     align-items: center;
-    /* display: flex; */
-    padding: 50px;
+    align-content: center;
+    display: flex;
     justify-content: center;
+    /* border: solid; */
+    margin: 3px;
+}
+
+.container-logo{
     border: solid;
+    color: red;
+    /* align-content: flex-end; */
 }
 
 .bg-carousel{
@@ -47,10 +54,27 @@
 .text-carousel-1{
     color: #1D1D1D;
     font-size: x-large;
-
 }
 
 .text-carousel-2{
     color: #828282;
     font-size: smaller;
 }
+
+.block {
+    overflow: hidden;
+    width: 800px;
+    margin: 30px auto;
+    /* border: solid; */
+  }
+  .animation {
+    width: auto;
+    height: 200px;
+    font-size: 0px;
+  }
+  .animation div {
+    display: inline-block;
+    width: auto;
+    float: none;
+    padding: 0 30px;
+  }
