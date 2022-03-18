@@ -16,10 +16,13 @@ class MasterOb extends Model
         'nama',
         'id_number',
         'phone_number',
+        'pt',
+        'responsible',
+        'department',
     ];
 
-    public function company()
-    {
-        return $this->belongsTo(ObCompany::class);
-    }
+    // public function company()
+    // {
+    //     return $this->belongsTo(ObCompany::class);
+    // }
 }
