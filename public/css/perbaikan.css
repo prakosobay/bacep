@@ -1,0 +1,130 @@
+body {
+    color: #4E4E4E;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    width: 100%;
+    height: 100%;
+    font-smooth: antialiased;
+    background-color: greenyellow;
+    background-image: -webkit-gradient(radial, center center, 0, center center, 212, from(white), to(#c7c7c7));
+    background-image: -webkit-radial-gradient(center center, cover, white, #c7c7c7);
+    background-image: -moz-radial-gradient(center center, cover, white, #c7c7c7);
+    background-image: -o-radial-gradient(center center, cover, white, #c7c7c7);
+    background-image: -ms-radial-gradient(center center, cover, white, #c7c7c7);
+    background-image: radial-gradient(center center, cover, white, #c7c7c7);
+    margin: 0;
+    padding: 0;
+}
+
+/* =============================================================================
+     Tables
+     ========================================================================== */
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    overflow: hidden;
+    border: 1px solid #d3d3d3;
+    background: #fefefe;
+    width: 80%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    -moz-box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+}
+
+thead {
+    text-align: center;
+}
+
+tbody {
+    text-align: left;
+}
+
+h1 {
+    text-emphasis-color: black;
+    margin-top: 10px;
+    text-align: center;
+}
+
+th,
+td {
+    padding: 5px 20px;
+    /* text-align: center; */
+}
+
+.input {
+    text-align: center;
+}
+
+td {
+    vertical-align: top;
+    border-top: 1px solid #e0e0e0;
+    border-right: 1px solid #e0e0e0;
+    background: #f9f9f9;
+    /* background: -moz-linear-gradient(top, #f9f9f9 0%, #fefefe 25%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #f9f9f9), color-stop(25%, #fefefe));
+    background: -webkit-linear-gradient(top, #f9f9f9 0%, #fefefe 25%);
+    background: -o-linear-gradient(top, #f9f9f9 0%, #fefefe 25%);
+    background: -ms-linear-gradient(top, #f9f9f9 0%, #fefefe 25%);
+    background: linear-gradient(to bottom, #f9f9f9 0%, #fefefe 25%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f9f9f9', endColorstr='#fefefe', GradientType=0); */
+}
+
+tr.odd-row td {
+    background: #f6f6f6;
+    background: -moz-linear-gradient(top, #f1f1f1 0%, #f6f6f6 25%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #f1f1f1), color-stop(25%, #f6f6f6));
+    background: -webkit-linear-gradient(top, #f1f1f1 0%, #f6f6f6 25%);
+    background: -o-linear-gradient(top, #f1f1f1 0%, #f6f6f6 25%);
+    background: -ms-linear-gradient(top, #f1f1f1 0%, #f6f6f6 25%);
+    background: linear-gradient(to bottom, #f1f1f1 0%, #f6f6f6 25%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f1f1f1', endColorstr='#f6f6f6', GradientType=0);
+}
+
+th {
+    padding-top: 10px;
+    text-shadow: 1px 1px 1px #fff;
+    background: #e8eaeb;
+    background: -moz-linear-gradient(top, #f2f2f2 0%, #e8eaeb 20%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #f2f2f2), color-stop(20%, #e8eaeb));
+    background: -webkit-linear-gradient(top, #f2f2f2 0%, #e8eaeb 20%);
+    background: -o-linear-gradient(top, #f2f2f2 0%, #e8eaeb 20%);
+    background: -ms-linear-gradient(top, #f2f2f2 0%, #e8eaeb 20%);
+    background: linear-gradient(to bottom, #f2f2f2 0%, #e8eaeb 20%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f2f2f2', endColorstr='#e8eaeb', GradientType=0);
+}
+
+/*
+  I know this is annoying, but we need additional styling so webkit will recognize rounded corners on background elements.
+  Nice write up of this issue: http://www.onenaught.com/posts/266/css-inner-elements-breaking-border-radius
+
+  And, since we've applied the background colors to td/th element because of IE, Gecko browsers also need it.
+  */
+/* tr:first-child th.first {
+    -moz-border-radius-topleft: 5px;
+    border-Top-left-radius: 5px;
+    border-radius: 5px 0px 0px 0px;
+}
+
+tr:first-child th.last {
+    -moz-border-radius-topright: 5px;
+    border-Top-right-radius: 5px;
+    border-radius: 0px 5px 0px 0px;
+}
+
+tr:last-child td.first {
+    -moz-border-radius-bottomleft: 5px;
+    border-bottom-left-radius: 5px;
+    border-radius: 0px 0px 0px 5px;
+}
+
+tr:last-child td.last {
+    -moz-border-radius-bottomright: 5px;
+    border-bottom-right-radius: 5px;
+    border-radius: 0px 0px 5px 0px;
+} */

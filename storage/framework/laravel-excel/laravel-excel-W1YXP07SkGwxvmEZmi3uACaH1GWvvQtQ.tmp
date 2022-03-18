@@ -1,0 +1,76 @@
+Tanggal,Kode Barang,Nama Barang,Jumlah,Keterangan,Nama Pencatat
+29/08/2020,147,Ballast lampu MYTH R-60-12 5A,1,Untuk rack 18 dan 19,Imam
+07/02/2021,139,Flat Shelf,1,Untuk rack 29,Bayu
+22/04/2021,182,Akrilik Fingerprint,1,Untuk mesin finger genset 2 ,Rafli
+25/04/2021,189,Terminal Konektor Baterai ,4,Penggantian baterai konektor genset 1 dan 2,Rafli
+14/05/2021,182,Akrilik Fingerprint,1,Untuk mesin finger genset 3,Rafli
+27/06/2021,200,Kunci Panel MS 603,1,Penggantian pada panel Box DC,Rafli
+27/06/2021,137,Kunci Panel MS 705,1,Penggantian pada panel BO Genset,Rafli
+15/01/2022,239,Roda Trolley,1,Terpasang  di troley,Taufik
+20/02/2022,81,Stop Contac 5 Lubang,3,Digunakan di office,Bayu
+26/02/2022,81,Stop Contac 5 Lubang,4,Digunakan di panel adaptor fingerprint,Bayu
+26/02/2022,152,"Air blow gun PC 5"" Tekiro (Alat Penembak Angin Kompresor)",1,Digunakan pada kompressor,Bayu
+26/02/2022,56,APAR 25KG CO2,6,Diletakkan di ruang-ruang facility,Bayu
+26/02/2022,227,APAR 25KG FOAM,2,Diletakkan di ruang trafo dan genset,Bayu
+26/02/2022,57,APAR 5 KG CO2 ,14,Diletakkan di ruang-ruang facility,Bayu
+26/02/2022,230,Apar Powder 5 Kg Chemguard,2,Diletakkan di ruang panel dan battery,Bayu
+26/02/2022,215,Ball valve 1 inch kitz/stop kran 1 inch,3,Keperluan modifikasi pipa solar,Bayu
+26/02/2022,216,Ball valve kuningan KITZ 3/4 inch,6,Keperluan modifikasi pipa solar,Bayu
+26/02/2022,231,Battery 9 volt Doublepow,1,Digunakan untuk LAN Tester,Bayu
+26/02/2022,144,Battery Eneloop AA ,8,Digunakan di HIOKI Tester,Bayu
+26/02/2022,144,Battery Eneloop AA ,6,Digunakan di Casio Portable Printer,Bayu
+26/02/2022,144,Battery Eneloop AA ,1,Digunakan untuk  Thermo Gun Fluks,Bayu
+26/02/2022,144,Battery Eneloop AA ,4,Digunakan di 2 laser patchcore,Bayu
+26/02/2022,146,Battery Eneloop AAA,6,Digunakan di 2 Headlamp,Bayu
+26/02/2022,224,Battery NS,4,Digunakan di genset,Bayu
+26/02/2022,238,Box Panel 70x50x15,1,Digunakan untuk penyimpanan adaptor fingerprint di CCTV Room,Bayu
+26/02/2022,229,Buzzer Escort ES46 Horn,1,Terpasang di atas plafon office,Bayu
+26/02/2022,219,Double naple besi 1/2 galvanis,4,Terpakai untuk modifikasi pipa solar,Bayu
+26/02/2022,220,Double naple besi 3/4 galvanis,4,Terpakai untuk modifikasi pipa solar,Bayu
+26/02/2022,207,Elbow besi 3/4 inch,9,Terpakai untuk modifikasi pipa solar,Bayu
+26/02/2022,206,Elbow Galvanis drat 1 inch,8,Terpakai untuk modifikasi pipa solar,Bayu
+26/02/2022,155,Exhaust Fan (Ruang UPS),2,Terpasang di ruang UPS,Bayu
+26/02/2022,222,Flexible Pipe,2,Terpakai untuk modifikasi pipa solar,Bayu
+26/02/2022,204,Gear Pump Oli/Solar Koshin ,1,Digunakan untuk daily tank 2,Bayu
+26/02/2022,156,Gembok Besar,2,Barang sudah terpasang pada Tangki solar dan Pintu Gerbang Trafo,Bayu
+26/02/2022,157,Gembok Mini,17,"Barang sudah terpasang pada Mesin Finger, 6 di Lt. 1, 6 di Lt. Ground dan 5 di Tangga darurat",Bayu
+26/02/2022,17,Lampu Perangkap Nyamuk ,1,Digunakan di pos security,Bayu
+26/02/2022,183,Lampu Philips IP 65 Bulk Tank,2,Dipasang di bulk tank,Bayu
+26/02/2022,95,Magnetic Door Closer,5,Dipasang di pintu facility,Bayu
+26/02/2022,135,Buzzer,14,Terpasang di pintu facility,Bayu
+26/02/2022,172,CCTV ICA-HM620 (PTZ),1,Terpasang di taman belakang,Bayu
+26/02/2022,134,CCTV ICA-8350 (Dome),6,"Terpasang 3 di DC, ruang panel dan UPS",Bayu
+26/02/2022,173,CCTV ICA-5260 (Dome),2,Terpasang di lift dan DC,Bayu
+26/02/2022,133,CCTV Hikvision (Bullet),2,Terpasang di cctv roo dan fss room,Bayu
+26/02/2022,87,Fire blanket (Kecil),6,"Terpasang di R UPS, 1 Lt.G, 2 Lt. 2, 3 Lt. 3",Bayu
+26/02/2022,158,Heat Detector,1,Terpasang di ruang genset,Bayu
+26/02/2022,53,NTC 2 Thermometer (Thermometer Ruangan),15,Terpasang di facility,Bayu
+26/02/2022,42,P3K,3,"Digunakan di Lt.1, G, 3",Bayu
+26/02/2022,211,Plug/Tutup/Dop drat luar stainless 304 3/4 inch,3,Terpakai keperluan pipa solar,Bayu
+26/02/2022,184,Pompa Celup Bulktank,1,Terpasang di bulk tank,Bayu
+26/02/2022,201,"Pipa Galvanis Sch40 SPINDO 1"" 6 meter",2,Terpakai keperluan pipa solar,Bayu
+26/02/2022,202,Pipa Galvanis 3/4 inch medium SPINDO 6 meter,3,Terpakai keperluan pipa solar,Bayu
+26/02/2022,221,RAM V-GEN 8GB,2,Terpakai di PC Monitoring 1 dan 2,Bayu
+26/02/2022,151,Recoil hose PC 5x8 mm panjang 6 M Tekiro (Selang Angin Kompresor),1,Terpasang pada kompressor,Bayu
+26/02/2022,218,Reduser SOCK socket drat dalam stainless 304 SS 3/4 x 1/2 inch,4,Terpakai untuk modifikasi pipa solar,Bayu
+26/02/2022,168,ROR Heat Detector,2,Terpasang di ruang trafo,Bayu
+26/02/2022,254,Sign Exit 30 cm x 10 cm,2,Terpasang di CCTV room dan trafo room,Bayu
+26/02/2022,121,Sign Dilarang Membawa HP,1,Terpasang di pintu DC,Bayu
+26/02/2022,119,Sign FO Cable,11,Terpasang di MMR1 dan 2 dan DC,Bayu
+26/02/2022,122,Sign Novec 1230,2,Terpasang di DC dan FSS,Bayu
+26/02/2022,120,Sign UTP Cable,11,Terpasang di MMR 1 dan 2 dan DC,Bayu
+26/02/2022,13,Stop Contac 6 Lubang,5,Terpasang di Office,Bayu
+26/02/2022,212,Swing check valve KITZ 1 inch,2,Terpakai untuk modifikasi pipa solar,Bayu
+26/02/2022,210,Tee drat besi 3/4 inch TSP,6,Terpakai untuk modifikasi pipa solar,Bayu
+26/02/2022,209,Tee Stainless steel 304 drat dalam 1 inch,1,Terpakai untuk modifikasi pipa solar,Bayu
+26/02/2022,243,Terminal Block 12 pin 15 A,3,Terpasang di panel adaptor fingerprint,Bayu
+26/02/2022,237,Termometer Higrometer Layar LCD Besar Tahan Air,1,Terpasang di bulk tank,Bayu
+26/02/2022,136,Thermometer Maxima,2,Terpasang di bulk tank,Bayu
+26/02/2022,217,Ubolt 1 inch,9,Terpakai untuk modifikasi pipa solar,Bayu
+26/02/2022,234,UPS APC 650 VA,2,Terpasang di Lt. 1 dan Lt. 3,Bayu
+26/02/2022,71,UPS Vesta VT 1200,8,"Terpasang di office (2), Pantry Lt. 1 (1), Pantry Lt. 2 (1), Pantry Lt. 5 (1), Lt. G(1), Ruang Trafo (1), Pos Security (1)",Bayu
+26/02/2022,214,Watermur stainless 1 inch,4,Terpakai untuk modifikasi pipa solar,Bayu
+26/02/2022,213,Watermur stainless 3/4 inch,8,Terpakai untuk modifikasi pipa solar,Bayu
+26/02/2022,40,Wiring Management (Cabel Management),3,Terpasang di rack MMR 1 dan MMR 2,Bayu
+26/02/2022,21,Logitec Keyboard & Mouse,1,Terpasang di pos security,Bayu
+26/02/2022,60,Rakitan PC,1,Digunakan di pos security,Bayu
