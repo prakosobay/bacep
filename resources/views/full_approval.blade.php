@@ -82,7 +82,7 @@
                     <a class="nav-link" href="{{ url('/full_approval/cleaning') }}">Cleaning</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/full_approval/other') }}">Other</a>
+                    <a class="nav-link" href="#">Other</a>
                 </li>
             </ul>
         </div>

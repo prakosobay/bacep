@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Carbon\Carbon;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 
 {
     use HasFactory, Notifiable;
@@ -20,11 +20,11 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'department',
+        'role',
+        'phone',
         'email',
         'password',
-        'slug',
-        'department',
-        'phone',
     ];
 
     /**
@@ -46,8 +46,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function roles()
+    public function duties()
     {
-        return $this->belongsToMany(Role::class);
+        return $this->belongsToMany(Duty::class);
     }
 }

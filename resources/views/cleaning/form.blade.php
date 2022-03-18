@@ -27,15 +27,14 @@
 
 	<div class="container-contact100">
 		<div class="wrap-contact100">
-			<form id="form_cleaning" class="contact100-form validate-form">
-                {{ csrf_field() }}
+			<form class="contact100-form validate-form">
 				<span class="contact100-form-title">
 					FORM
 				</span>
 
                 {{-- Purpose of Work --}}
 				<div class="wrap-input100 validate-input bg1" data-validate="Pilih Tujuan Pekerjaan">
-					<span class="label-input100">Purpose of Work (Tujuan Pekerjaan) *</span>
+					<span class="label-input100">Tujuan Pekerjaan *</span>
                     <div>
                         <select class="js-select2" id="working" name="cleaning_work">
                             <option value=""></option>
@@ -46,46 +45,6 @@
                         <div class="dropDownSelect2"></div>
                     </div>
 				</div>
-
-                {{-- Entry Area --}}
-                <div class="wrap-contact100-form-radio">
-                    <span class="label-input100">Authorized Entry Area (Area yang Dimasuki)</span>
-                    <div class="contact100-form-radio">
-                        <label class="label-radio100">
-                            <input class="input100" id="loc1" name="loc1" value="" readonly>
-                        </label>
-                    </div>
-
-                    <div class="contact100-form-radio">
-                        <label class="label-radio100">
-                            <input class="input100" id="loc2" name="loc2" value="" readonly>
-                        </label>
-                    </div>
-
-                    <div class="contact100-form-radio">
-                        <label class="label-radio100">
-                            <input class="input100" id="loc3" name="loc3" value="" readonly>
-                        </label>
-                    </div>
-
-                    <div class="contact100-form-radio">
-                        <label class="label-radio100">
-                            <input class="input100" id="loc4" name="loc4" value="">
-                        </label>
-                    </div>
-
-                    <div class="contact100-form-radio">
-                        <label class="label-radio100">
-                            <input class="input100" id="loc5" name="loc5" value="" readonly>
-                        </label>
-                    </div>
-
-                    <div class="contact100-form-radio">
-                        <label class="label-radio100">
-                            <input class="input100" id="loc6" name="loc6" value="" readonly>
-                        </label>
-                    </div>
-                </div>
 
                 <!-- Detail Time Activity -->
                 <table class="table table-bordered">
@@ -152,27 +111,27 @@
                     <tbody>
                         <tr>
                             <th><input type="text" class="input100" name="item" id="item_1" value="" readonly></th>
-                            <th ><input type="text" class="input100" name="cleaning_procedure" id="working_procedure_1" value="" readonly></th>
+                            <th class="procedure"><input type="text" class="input100" name="cleaning_procedure" id="working_procedure_1" value="" readonly></th>
                         </tr>
                         <tr>
                             <th><input type="text" class="input100" name="item2" id="item_2" value="" readonly></th>
-                            <th ><input type="text" class="input100" name="cleaning_procedure2" id="working_procedure_2" value="" readonly></th>
+                            <th class="procedure"><input type="text" class="input100" name="cleaning_procedure2" id="working_procedure_2" value="" readonly></th>
                         </tr>
                         <tr>
                             <th><input type="text" class="input100" name="item3" id="item_3" value="" readonly></th>
-                            <th ><input type="text" class="input100" name="cleaning_procedure3" id="working_procedure_3" value="" readonly></th>
+                            <th class="procedure"><input type="text" class="input100" name="cleaning_procedure3" id="working_procedure_3" value="" readonly></th>
                         </tr>
                         <tr>
                             <th><input type="text" class="input100" name="item4" id="item_4" value="" readonly></th>
-                            <th ><input type="text" class="input100" name="cleaning_procedure4" id="working_procedure_4" value="" readonly></th>
+                            <th class="procedure"><input type="text" class="input100" name="cleaning_procedure4" id="working_procedure_4" value="" readonly></th>
                         </tr>
                         <tr>
                             <th><input type="text" class="input100" name="item5" id="item_5" value="" readonly></th>
-                            <th ><input type="text" class="input100" name="cleaning_procedure5" id="working_procedure_5" value="" readonly></th>
+                            <th class="procedure"><input type="text" class="input100" name="cleaning_procedure5" id="working_procedure_5" value="" readonly></th>
                         </tr>
                         <tr>
                             <th><input type="text" class="input100" name="item6" id="item_6" value="" readonly></th>
-                            <th ><input type="text" class="input100" name="cleaning_procedure6" id="working_procedure_6" value="" readonly></th>
+                            <th class="procedure"><input type="text" class="input100" name="cleaning_procedure6" id="working_procedure_6" value="" readonly></th>
                         </tr>
                     </tbody>
                 </table>
@@ -200,68 +159,68 @@
                             <th><input type="text" class="input100" name="cleaning_risk2" id="risk_description_2" value="" readonly></th>
                             <th><input type="text" class="input100" name="cleaning_possibility2" id="possibility_2" value="" readonly></th>
                             <th><input type="text" class="input100" name="cleaning_impact2" id="impact_2" value="" readonly></th>
-                            <th><input type="text" class="input100" name="cleaning_mitigation2" id="mitigation_plan_2" value="" readonly></th>
+                            <th><input type="text" class="input100" name="detail_mitigation2" id="mitigation_plan_2" value="" readonly></th>
                         </tr>
                         <tr>
                             <th><input type="text" class="input100" name="cleaning_risk3" id="risk_description_3" value="" readonly></th>
                             <th><input type="text" class="input100" name="cleaning_possibility3" id="possibility_3" value="" readonly></th>
                             <th><input type="text" class="input100" name="cleaning_impact3" id="impact_3" value="" readonly></th>
-                            <th><input type="text" class="input100" name="cleaning_mitigation3" id="mitigation_plan_3" value="" readonly></th>
+                            <th><input type="text" class="input100" name="detail_mitigation3" id="mitigation_plan_3" value="" readonly></th>
                         </tr>
                         <tr>
                             <th><input type="text" class="input100" name="cleaning_risk4" id="risk_description_4" value="" readonly></th>
                             <th><input type="text" class="input100" name="cleaning_possibility4" id="possibility_4" value="" readonly></th>
                             <th><input type="text" class="input100" name="cleaning_impact4" id="impact_4" value="" readonly></th>
-                            <th><input type="text" class="input100" name="cleaning_mitigation4" id="mitigation_plan_4" value="" readonly></th>
+                            <th><input type="text" class="input100" name="detail_mitigation4" id="mitigation_plan_4" value="" readonly></th>
                         </tr>
                         <tr>
                             <th><input type="text" class="input100" name="cleaning_risk5" id="risk_description_5" value="" readonly></th>
                             <th><input type="text" class="input100" name="cleaning_possibility5" id="possibility_5" value="" readonly></th>
                             <th><input type="text" class="input100" name="cleaning_impact5" id="impact_5" value="" readonly></th>
-                            <th><input type="text" class="input100" name="cleaning_mitigation5" id="mitigation_plan_5" value="" readonly></th>
+                            <th><input type="text" class="input100" name="detail_mitigation5" id="mitigation_plan_5" value="" readonly></th>
                         </tr>
                         <tr>
                             <th><input type="text" class="input100" name="cleaning_risk6" id="risk_description_6" value="" readonly></th>
                             <th><input type="text" class="input100" name="cleaning_possibility6" id="possibility_6" value="" readonly></th>
                             <th><input type="text" class="input100" name="cleaning_impact6" id="impact_6" value="" readonly></th>
-                            <th><input type="text" class="input100" name="cleaning_mitigation6" id="mitigation_plan_6" value="" readonly></th>
+                            <th><input type="text" class="input100" name="detail_mitigation6" id="mitigation_plan_6" value="" readonly></th>
                         </tr>
                     </tbody>
                 </table>
 
                 {{-- Isian --}}
                 <div class="wrap-input100 bg0 rs1-alert-validate">
-					<span class="label-input100">Background and Objective (Latar Belakang dan Tujuan) *</span>
+					<span class="label-input100">Background and Objective (Jenis Pekerjaan) *</span>
 					<input type="text" class="input100" name="cleaning_background" id="background" value="" readonly>
 				</div>
                 <div class="wrap-input100 bg0 rs1-alert-validate">
-					<span class="label-input100">Description of Scope of Work (Deskripsikan Lingkup Pekerjaan) *</span>
+					<span class="label-input100">Description of Scope of Work (Deskripsikan Pekerjaan) *</span>
 					<input type="text" class="input100" name="cleaning_describ" id="describ" value="" readonly>
 				</div>
                 <div class="wrap-input100 bg0 rs1-alert-validate">
-					<span class="label-input100">Testing and Verification (Pengujian dan Verifikasi)</span>
+					<span class="label-input100">Testing and Verification *</span>
 					<input type="text" class="input100" name="cleaning_testing" id="testing" value="" readonly>
 				</div>
                 <div class="wrap-input100 bg0 rs1-alert-validate">
-					<span class="label-input100">Rollback Operation/Other Infomation (Operasi Pembatalan/Infomasi Lain)</span>
+					<span class="label-input100">Rollback Operation *</span>
 					<input type="text" class="input100" name="cleaning_rollback" id="rollback" value="" readonly>
 				</div>
 
                 {{-- Validity --}}
 				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate = "Pilih Tanggal Pekerjaan">
-					<span class="label-input100">Validity (Tanggal Mulai Pekerjaan) *</span>
+					<span class="label-input100">Tanggal Mulai Pekerjaan *</span>
                     <input class="input100" type="date" name="validity_from" id="dateofbirth">
 				</div>
 				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate = "Pilih Tanggal Pekerjaan">
-					<span class="label-input100">Validity (Tanggal Selesai Pekerjaan) *</span>
+					<span class="label-input100">Tanggal Selesai Pekerjaan *</span>
 					<input class="input100" type="date" name="validity_to" id="dateofbirth">
 				</div>
 
                 {{-- Pilih Personil --}}
                 <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate="Pilih Personil">
-					<span class="label-input100">Person In Charge 1(Nama Personil 1) *</span>
+					<span class="label-input100">Nama Personil 1 *</span>
                     <div>
-                        <select class="js-select2" id="pilihan1" name="cleaning_name">
+                        <select class="js-select2" id="pilihan1" name="cleaning_nama">
                             <option value=""></option>
                             @foreach($master_ob as $p)
                             <option value="{{ $p->ob_id }}">{{ $p->nama }}</option>
@@ -271,9 +230,9 @@
                     </div>
 				</div>
                 <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate="Pilih Personil">
-					<span class="label-input100">Person In Charge 2(Nama Personil 2) *</span>
+					<span class="label-input100">Nama Personil 2 *</span>
                     <div>
-                        <select class="js-select2" id="pilihan2" name="cleaning_name2">
+                        <select class="js-select2" id="pilihan2" name="cleaning_nama">
                             <option value=""></option>
                             @foreach($master_ob as $p)
                             <option value="{{ $p->ob_id }}">{{ $p->nama }}</option>
@@ -285,26 +244,28 @@
 
                 {{-- Phone Number --}}
                 <div class="wrap-input100 validate-input bg1 rs1-wrap-input100">
-					<span class="label-input100">Number Phone (Nomor HP Personil 1)</span>
-                    <input type="text" class="input100" name="cleaning_number" id="phone_number" value="" readonly>
+					<span class="label-input100">Nomor HP Personil 1</span>
+                    <input type="text" class="input100" name="cleaning_number_1" id="phone_number" value="" readonly>
 				</div>
                 <div class="wrap-input100 validate-input bg1 rs1-wrap-input100">
-					<span class="label-input100">Number Phone (Nomor HP Personil 2)</span>
-                    <input type="text" class="input100" name="cleaning_number2" id="phone_number2" value="" readonly>
+					<span class="label-input100">Nomor HP Personil 2</span>
+                    <input type="text" class="input100" name="cleaning_number_2" id="phone_number2" value="" readonly>
 				</div>
 
                 {{-- NIK  --}}
                 <div class="wrap-input100 validate-input bg1 rs1-wrap-input100">
-					<span class="label-input100">ID Number (NIK Personil 1)</span>
-                    <input type="text" class="input100" name="cleaning_nik" id="id_number" value="" readonly>
+					<span class="label-input100">NIK Personil 1</span>
+                    <input type="text" class="input100" name="cleaning_id_1" id="id_number" value="" readonly>
 				</div>
                 <div class="wrap-input100 validate-input bg1 rs1-wrap-input100">
-					<span class="label-input100">ID Number (NIK Personil 2)</span>
-                    <input type="text" class="input100" name="cleaning_nik_2" id="id_number2" value="" readonly>
+					<span class="label-input100">NIK Personil 2</span>
+                    <input type="text" class="input100" name="cleaning_id_2" id="id_number2" value="" readonly>
 				</div>
 
+
+
 				<div class="container-contact100-form-btn">
-					<button type="submit" class="contact100-form-btn">
+					<button class="contact100-form-btn">
 						<span>
 							Submit
 							<i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
@@ -324,7 +285,6 @@
 	<script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js')}}"></script>
 <!--===============================================================================================-->
 	<script src="{{ asset('vendor/select2/select2.min.js')}}"></script>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script type="text/javascript">
 		$(".js-select2").each(function(){
 			$(this).select2({
@@ -424,54 +384,10 @@
                 $('#describ').val(permit.describ);
                 $('#testing').val(permit.testing);
                 $('#rollback').val(permit.rollback);
-                $('#loc1').val(permit.loc1);
-                $('#loc2').val(permit.loc2);
-                $('#loc3').val(permit.loc3);
-                $('#loc4').val(permit.loc4);
-                $('#loc5').val(permit.loc5);
-                $('#loc6').val(permit.loc6);
+                $('#id_number2').val(permit.id_number);
                 }
             });
         });
-
-        $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('input[name="_token"]').val()
-        }
-    });
-
-    $(".contact100-form-btn").click(function(e){
-        e.preventDefault();
-        var datastring = $("#form_cleaning").serialize();
-        $.ajax({
-            type:'POST',
-            url:"{{url('submit_data_cleaning')}}",
-            data: datastring,
-            error: function (request, error) {
-                console.log(error)
-                alert(" Can't do because: " + error);
-            },
-            success:function(data){
-                console.log(data);
-                if(data.status == 'SUCCESS'){
-                    Swal.fire({
-                        title: "Success!",
-                        text: 'Data Saved',
-                        type: "success",
-                    }).then(function(){
-                        location.href = "{{url("/home")}}";
-                    });
-                }else if(data.status == 'FAILED'){
-                    Swal.fire({
-                        title: "Failed!",
-                        text: 'Saving Data Failed',
-                    }).then(function(){
-                        location.reload();
-                    });
-                }
-            }
-        });
-    });
 
 	</script>
 <!--===============================================================================================-->

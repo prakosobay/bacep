@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class CleaningFull extends Model
 {
     use HasFactory;
-
     protected $table = 'cleaning_fulls';
     protected $primaryKey = 'cleaning_full_id';
 
@@ -17,14 +16,13 @@ class CleaningFull extends Model
      *
      * @var array
      */
-
     protected $fillable = [
+        'cleaning_full_id',
         'cleaning_id',
-        'cleaning_date',
-        'cleaning_name',
-        'cleaning_name2',
-        'validity_from',
+        'cleaning_name_1',
+        'cleaning_name_2',
         'cleaning_work',
+        'cleaning_date',
         'status',
         'link',
     ];

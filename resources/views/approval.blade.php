@@ -66,7 +66,7 @@
 </head>
 <body>
     <div class="navbar navbar-expand-md navbar-dark bg-dark mb-4" role="navigation">
-        <a class="navbar-brand" href="{{ url('/approval/all') }}">Table Approval</a>
+        <a class="navbar-brand" href="{{ url('/approval/all') }}"> Table Approval</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -82,7 +82,7 @@
                     <a class="nav-link" href="{{ url('/approval/cleaning') }}">Cleaning</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{url('/approval/other')}}">Other</a>
+                    <a class="nav-link" href="#">Other</a>
                 </li>
             </ul>
         </div>

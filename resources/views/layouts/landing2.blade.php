@@ -20,7 +20,7 @@
 
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.14.0/sweetalert2.all.min.js"></script>
-        {{-- <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script> --}}
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -47,26 +47,27 @@
                         <div class="bar"></div>
                     </div>
                     <ul>
-                        @can('isBm')
-                            <li><a href="cleaning.form" data-after="cleaning">Cleaning</a></li>
-                            <li><a href="perbaikan" data-after="other">Other</a></li>
-                            <li><a href="{{ url('approval/other') }}" data-after="Approval">Approval</a></li>
-                            <li><a href="{{ url('revisi/other') }}" data-after="Revisi">Revisi</a></li>
-                        @elsecan('isAdmin')
-                            <li><a href="{{ url('/table_user') }}" data-after="Admin">Admin Panel</a></li>
-                        @elsecan('isApproval')
-                            <li><a href="{{ url('approval/all') }}" data-after="Approval">Approval</a></li>
-                            <li><a href="{{ url('full_approval/all') }}" data-after="Full">Full Approval</a></li>
-                            <li><a href="{{ url('/table_barang') }}" data-after="barang">Barang</a></li>
-                        @elsecan('isHead')
-                            <li><a href="{{ url('approval/all') }}" data-after="Approval">Approval</a></li>
-                            <li><a href="{{ url('full_approval/all') }}" data-after="Full">Full Approval</a></li>
-                            <li><a href="{{ url('/table_barang') }}" data-after="barang">Barang</a></li>
-                        @elsecan('isSecurity')
-                            <li><a href="{{ url('approval/all') }}" data-after="Approval">Approval</a></li>
-                        @endcan
-                            <li><a href="{{ url('log/all') }}" data-after="Log">Log</a></li>
+                        <li><a href="/home" data-after="Home">Home</a></li>
+                        @if(Auth::user()->role == 'visitor')
+                        <li><a href="#VisitDC" data-after="VisitDC">Visit Data Center</a></li>
+                        @elseif(Auth::user()->role == 'requestor')
+                        <li><a href="#VisitDC" data-after="VisitDC">Visit Data Center</a></li>
+                        @elseif(Auth::user()->role == 'bm')
+                        <li><a href="cleaning_bm" data-after="BM">Cleaning</a></li>
+                        @elseif(Auth::user()->role == 'security')
+                        <li><a href="{{ url('approval/all') }}" data-after="Approval">Approval</a></li>
+                        @else
+                            {{-- @if(Route::has('register'))
                             <li>
+                                <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 ">Register</a>
+                                <a href="{{ route('register') }}">register</a>
+                            </li>
+                            @endif --}}
+                        <li><a href="{{ url('full_approval/all') }}" data-after="Full">Full Approval</a></li>
+                        <li><a href="{{ url('approval/all') }}" data-after="Approval">Approval</a></li>
+                        @endif
+                        <li><a href="{{ url('log/all') }}" data-after="Log">Log</a></li>
+                        <li>
                                 <a href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
                                                 document.getElementById('logout-form').submit();">
@@ -76,7 +77,8 @@
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                     @csrf
                                 </form>
-                            </li>
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </div>

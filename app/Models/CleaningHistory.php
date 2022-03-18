@@ -23,9 +23,13 @@ class CleaningHistory extends Model
         'created_by',
         'role_to',
         'status',
-        'aktif',
-        'pdf',
+        'aktif'
+
     ];
+
+    // protected $date_time = [
+    //     'created_by'
+    // ];
 
     public function createdBy()
     {

@@ -10,18 +10,35 @@ class PilihanWork extends Model
     use HasFactory;
 
     protected $table = 'pilihan_works';
-    protected $primaryKey = 'id';
-
+    protected $primarykey = 'id';
     protected $fillable = [
         'work',
-        'loc1',
-        'loc2',
-        'loc3',
-        'loc4',
-        'loc5',
-        'loc6',
+        'server',
+        'generator',
+        'ups',
+        'fss',
+        'staging',
+        'battery',
+        'trafo',
+        'mmr1',
+        'mmr2',
+        'panel',
+        'koridor',
+        'pln',
         'background',
         'describ',
+        'time_1_start',
+        'time_2_start',
+        'time_3_start',
+        'time_4_start',
+        'time_5_start',
+        'time_6_start',
+        'time_1_end',
+        'time_2_end',
+        'time_3_end',
+        'time_4_end',
+        'time_5_end',
+        'time_6_end',
         'activity_desciption_1',
         'activity_desciption_2',
         'activity_desciption_3',

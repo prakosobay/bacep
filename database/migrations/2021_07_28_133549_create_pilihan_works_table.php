@@ -14,16 +14,34 @@ class CreatePilihanWorksTable extends Migration
     public function up()
     {
         Schema::create('pilihan_works', function (Blueprint $table) {
-            $table->bigIncrements('id')->unique();
+            $table->increments('id')->unique();
             $table->string('work');
-            $table->string('loc1', 20);
-            $table->string('loc2', 20)->nullable();
-            $table->string('loc3', 20)->nullable();
-            $table->string('loc4', 20)->nullable();
-            $table->string('loc5', 20)->nullable();
-            $table->string('loc6', 20)->nullable();
+            $table->boolean('server');
+            $table->boolean('generator');
+            $table->boolean('ups');
+            $table->boolean('fss');
+            $table->boolean('staging');
+            $table->boolean('battery');
+            $table->boolean('trafo');
+            $table->boolean('mmr1');
+            $table->boolean('mmr2');
+            $table->boolean('panel');
+            $table->boolean('koridor');
+            $table->boolean('pln');
             $table->string('background');
             $table->text('describ');
+            $table->string('time_1_start', 6);
+            $table->string('time_2_start', 6)->nullable();
+            $table->string('time_3_start', 6)->nullable();
+            $table->string('time_4_start', 6)->nullable();
+            $table->string('time_5_start', 6)->nullable();
+            $table->string('time_6_start', 6)->nullable();
+            $table->string('time_1_end', 6);
+            $table->string('time_2_end', 6)->nullable();
+            $table->string('time_3_end', 6)->nullable();
+            $table->string('time_4_end', 6)->nullable();
+            $table->string('time_5_end', 6)->nullable();
+            $table->string('time_6_end', 6)->nullable();
             $table->string('activity_desciption_1', 100);
             $table->string('activity_desciption_2', 100)->nullable();
             $table->string('activity_desciption_3', 100)->nullable();
