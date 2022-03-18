@@ -15,7 +15,7 @@
                             <thead>
                                 <tr>
                                     <th>ID Permit</th>
-                                    <th>Date of Request</th>
+                                    <th>Validity</th>
                                     <th>Visitor Name</th>
                                     <th>Purpose of Work</th>
                                     <th>Action</th>
@@ -26,19 +26,22 @@
                                 @foreach($cleaning as $p)
                                     <tr>
                                         <td>{{ $p->cleaning_id }}</td>
-                                        <td>{{ Carbon\Carbon::parse($p->created_at)->format('d-m-Y') }}</td>
-                                        <td>- {{ $p->cleaning_name_1 }}<br>
-                                            - {{ $p->cleaning_name_2 }}</td>
+                                        <td>{{ Carbon\Carbon::parse($p->validity_from)->format('d-m-Y') }}</td>
+                                        <td>- {{ $p->cleaning_name }}<br>
+                                            - {{ $p->cleaning_name2 }}</td>
                                         <td>{{ $p->cleaning_work }}</td>
-                                        @if(Auth::user()->role != 'security')
                                         <td>
-                                            <a href="javascript:void(0)" id="ok" class="approve" data-cleaning_id="{{$p->cleaning_id}}">Approve</a>
-                                            <a href="javascript:void(0)" id="not" class="reject" data-cleaning_id="{{$p->cleaning_id}}">Reject</a>
-                                            <a href="/detail_cleaning/{{$p->cleaning_id}}">History</a></td>
-                                        @else<td>
-                                            <a href="javascript:void(0)" id="ok" class="approve" data-cleaning_id="{{$p->cleaning_id}}">Approve</a>
-                                            <a href="/detail_cleaning/{{$p->cleaning_id}}">History</a></td>
-                                        @endif
+                                            @can('isApproval')
+                                                <a href="javascript:void(0)" type="button" id="ok" class="approve btn btn-success mr-2" data-cleaning_id="{{$p->cleaning_id}}">Approve</a>
+                                                <a href="javascript:void(0)" type="button" id="not" class="reject btn btn-danger mr-2" data-cleaning_id="{{$p->cleaning_id}}">Reject</a>
+                                            @elsecan('isHead')
+                                                <a href="javascript:void(0)" type="button" id="ok" class="approve btn btn-success mr-2" data-cleaning_id="{{$p->cleaning_id}}">Approve</a>
+                                                <a href="javascript:void(0)" type="button" id="not" class="reject btn btn-danger mr-2" data-cleaning_id="{{$p->cleaning_id}}">Reject</a>
+                                            @elsecan('isSecurity')
+                                                <a href="javascript:void(0)" type="button" id="ok" class="approve btn btn-success mr-2" data-cleaning_id="{{$p->cleaning_id}}">Approve</a>
+                                            @endcan
+                                                <a href="/detail_cleaning/{{$p->cleaning_id}}" class="btn btn-info">History</a>
+                                        </td>
                                         <td><a href="/cleaning_pdf/{{$p->cleaning_id}}" class="btn btn-primary" target="_blank">LIHAT PDF</a></td>
                                     </tr>
                                 @endforeach
@@ -49,7 +52,7 @@
             </div>
         </div>
 
-            <!-- jQuery -->
+<!-- jQuery -->
 <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
 <!-- Bootstrap 4 -->
 <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>

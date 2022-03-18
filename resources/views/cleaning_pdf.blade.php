@@ -180,30 +180,6 @@
 
 </head>
 <body>
-    {{-- <header>
-        <table class="table table-bordered">
-            <tr >
-                <td class="col_header" rowspan="2" ><img src="{{ public_path("gambar/bts_logo.jpg") }}" class="img-fluid" alt="logo_bts"></td>
-                <td class="col_header"><font size="10pt"><b>FORM</b></font></td>
-                <td class="col_header"><b>Kode Dokumen : FRM-BTS-DCDV-2021-04</b></td>
-            </tr>
-            <tr>
-                <td class="col_header"><font size="10pt"><b>Access Request</b></font></td>
-                <td class="col_header"><b>Tanggal Berlaku : 18 Mei 2021</b></td>
-            </tr>
-        </table>
-    </header> --}}
-
-    {{-- <footer>
-        <table class="table table-bordered">
-            <tr>
-                <td class="col_footer">Kode Dok: FRM-BTS-DCDV-2019-04</td>
-                <td class="col_footer">Revisi : 01</td>
-                <td class="col_footer"><font color="red">Kategori : Dokumen Terbatas</font></td>
-                <td class="col_footer">Hal : 1/1</td>
-            </tr>
-        </table>
-    </footer> --}}
 
     <!-- Wrap the content of your PDF inside a main tag -->
     <main>
@@ -265,17 +241,17 @@
                     <td class="table-grey"><b>Department</b></td>
                 </tr>
                 <tr >
-                    <td class="table-white">1. {{$cleaning->cleaning_name_1}}</td>
-                    <td class="table-center">{{$cleaning->cleaning_id_1}}</td>
-                    <td class="table-center">{{$cleaning->cleaning_number_1}}</td>
-                    <td class="table-center">PT BIJAC</td>
+                    <td class="table-white">1. {{$cleaning->cleaning_name}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_nik}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_number}}</td>
+                    <td class="table-center">PT TSL</td>
                     <td class="table-center">Building Management</td>
                 </tr>
                 <tr >
-                    <td class="table-white">2. {{$cleaning->cleaning_name_2}}</td>
-                    <td class="table-center">{{$cleaning->cleaning_id_2}}</td>
-                    <td class="table-center">{{$cleaning->cleaning_number_2}}</td>
-                    <td class="table-center">PT BIJAC</td>
+                    <td class="table-white">2. {{$cleaning->cleaning_name2}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_nik_2}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_number2}}</td>
+                    <td class="table-center">PT TSL</td>
                     <td class="table-center">Building Management</td>
                 </tr>
                 <tr >
@@ -301,6 +277,7 @@
                 </tr>
             </table>
 
+            {{-- Entry Area --}}
             <table cellpadding="5" class="table table-borderless">
                 <tr>
                     <td class="table-grey" colspan="2"><b>Authorized Entry Area</b></td>
@@ -308,14 +285,14 @@
                 </tr>
                 <tr>
                     <td>
-                        @if($cleaning->server == '1')
+                        @if(($cleaning->loc1 == 'Server Room') || ($cleaning->loc2 == 'Server Room') || ($cleaning->loc3 == 'Server Room') || ($cleaning->loc4 == 'Server Room') || ($cleaning->loc5 == 'Server Room') || ($cleaning->loc6 == 'Server Room'))
                         <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   Server Room
                         @else
                         <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   Server Room
                         @endif
                     </td>
                     <td >
-                        @if($cleaning->generator == '1')
+                        @if(($cleaning->loc1 === 'Generator Room') || ($cleaning->loc2 === 'Generator Room') || ($cleaning->loc3 === 'Generator Room') || ($cleaning->loc4 === 'Generator Room') || ($cleaning->loc5 == 'Generator Room') || ($cleaning->loc6 == 'Generator Room'))
                         <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   Generator Room
                         @else
                         <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   Generator Room
@@ -326,14 +303,14 @@
                 </tr>
                 <tr>
                     <td >
-                        @if($cleaning->mmr1 == '1')
+                        @if(($cleaning->loc1 == 'MMR 1') || ($cleaning->loc2 == 'MMR 1') || ($cleaning->loc3 == 'MMR 1') || ($cleaning->loc4 == 'MMR 1') || ($cleaning->loc5 == 'MMR 1') || ($cleaning->loc6 == 'MMR 1'))
                         <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   MMR 1
                         @else
                         <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   MMR 1
                         @endif
                     </td>
                     <td >
-                        @if($cleaning->panel == '1')
+                        @if(($cleaning->loc1 == 'Panel Room') || ($cleaning->loc2 == 'Panel Room') || ($cleaning->loc3 == 'Panel Room') || ($cleaning->loc4 == 'Panel Room') || ($cleaning->loc5 == 'Panel Room') || ($cleaning->loc6 == 'Panel Room'))
                         <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   Panel Room
                         @else
                         <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   Panel Room
@@ -344,14 +321,14 @@
                 </tr>
                 <tr>
                     <td >
-                        @if($cleaning->mmr2 == '1')
+                        @if(($cleaning->loc1 == 'MMR 2') || ($cleaning->loc2 == 'MMR 2') || ($cleaning->loc3 == 'MMR 2') || ($cleaning->loc4 == 'MMR 2') || ($cleaning->loc5 == 'MMR 2') || ($cleaning->loc6 == 'MMR 2'))
                         <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   MMR 2
                         @else
                         <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   MMR 2
                         @endif
                     </td>
                     <td >
-                        @if($cleaning->battery == '1')
+                        @if(($cleaning->loc1 == 'Baterai Room') || ($cleaning->loc2 == 'Baterai Room') || ($cleaning->loc3 == 'Baterai Room') || ($cleaning->loc4 == 'Baterai Room') || ($cleaning->loc5 == 'Baterai Room') || ($cleaning->loc6 == 'Baterai Room'))
                         <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   Battery Room
                         @else
                         <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   Battery Room
@@ -362,14 +339,14 @@
                 </tr>
                 <tr>
                     <td >
-                        @if($cleaning->ups == '1')
+                        @if(($cleaning->loc1 == 'UPS Room') || ($cleaning->loc2 == 'UPS Room') || ($cleaning->loc3 == 'UPS Room') || ($cleaning->loc4 == 'UPS Room') || ($cleaning->loc5 == 'UPS Room') || ($cleaning->loc6 == 'UPS Room'))
                         <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   UPS Room
                         @else
                         <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   UPS Room
                         @endif
                     </td>
                     <td >
-                        @if ($cleaning->fss == '1')
+                        @if(($cleaning->loc1 == 'FSS') || ($cleaning->loc2 == 'FSS') || ($cleaning->loc3 == 'FSS') || ($cleaning->loc4 == 'FSS') || ($cleaning->loc5 == 'FSS') || ($cleaning->loc6 == 'FSS'))
                         <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   FSS Room
                         @else
                         <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   FSS Room
@@ -384,7 +361,7 @@
                 </tr>
                 <tr>
                     <td >
-                        @if ($cleaning->trafo == '1')
+                        @if(($cleaning->loc1 == 'Trafo Room') || ($cleaning->loc2 == 'Trafo Room') || ($cleaning->loc3 == 'Trafo Room') || ($cleaning->loc4 == 'Trafo Room') || ($cleaning->loc5 == 'Trafo Room') || ($cleaning->loc6 == 'Trafo Room'))
                         <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   Trafo Room
                         @else
                         <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   Trafo Room
@@ -395,14 +372,14 @@
                 </tr>
                 <tr>
                     <td >
-                        @if($cleaning->staging == '1' && $cleaning->koridor == '')
-                        <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   Others : Staging Room
-                        @elseif($cleaning->pln == '1')
+                        @if($cleaning->loc4 == 'CCTV Room')
+                        <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   Others : CCTV Room
+                        @elseif(($cleaning->loc1 == 'Pintu Luar PLN') || ($cleaning->loc2 == 'Pintu Luar PLN') || ($cleaning->loc3 == 'Pintu Luar PLN') || ($cleaning->loc4 == 'Pintu Luar PLN') || ($cleaning->loc5 == 'Pintu Luar PLN') || ($cleaning->loc6 == 'Pintu Luar PLN'))
                         <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   Others : Pintu Luar PLN
-                        @elseif($cleaning->koridor == '1' && $cleaning->staging == '')
+                        @elseif(($cleaning->loc1 == 'Koridor Lt. 1') || ($cleaning->loc2 == 'Koridor Lt. 1') || ($cleaning->loc3 == 'Koridor Lt. 1') || ($cleaning->loc4 == 'Koridor Lt. 1') || ($cleaning->loc5 == 'Koridor Lt. 1') || ($cleaning->loc6 == 'Koridor Lt. 1'))
                         <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   Others : Koridor Lt. 1
-                        @elseif($cleaning->koridor == '1' && $cleaning->staging == '1')
-                        <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   Others : Koridor Lt. 1 & Staging Room
+                        @elseif(($cleaning->loc5 == 'Koridor') && ($cleaning->loc6 == 'CCTV Room'))
+                        <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   Others : Koridor Lt. 1 & CCTV Room
                         @else
                         <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   Others :
                         @endif
@@ -547,79 +524,104 @@
 
             <table cellpadding="2" class="table table-detail">
                 <tr >
-                    <td class="table-grey" colspan="4"><b>Detail Time Table of All Activity</b></td>
+                    <td class="table-grey" colspan="5"><b>Detail Time Table of All Activity</b></td>
                 </tr>
                 <tr class="table-grey">
                     <td class="table-grey"><b>Day</b></td>
-                    <td class="table-grey"><b>Time</b></td>
+                    <td class="table-grey"><b>Time Start</b></td>
+                    <td class="table-grey"><b>Time End</b></td>
                     <td class="table-grey"><b>Activity Description</b></td>
                     <td class="table-grey"><b>Detail Service Impact</b></td>
                 </tr>
                 <tr >
                     <td height="10px" class="table-center">{{Carbon\Carbon::parse($cleaning->validity_from)->format('d-m-Y')}}</td>
-                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_1}}</td>
-                    <td height="10px" class="table-center">{{$cleaning->cleaning_procedure_1}}</td>
-                    <td height="10px" class="table-center">{{$cleaning->cleaning_risk_1}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_start}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_end}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->activity}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->detail_service}}</td>
                 </tr>
                 <tr >
                     <td height="10px" class="table-center">{{Carbon\Carbon::parse($cleaning->validity_from)->format('d-m-Y')}}</td>
-                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_2}}</td>
-                    <td height="10px" class="table-center">{{$cleaning->cleaning_procedure_2}}</td>
-                    <td height="10px" class="table-center">{{$cleaning->cleaning_risk_2}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_start2}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_end2}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->activity2}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->detail_service2}}</td>
                 </tr>
                 <tr >
                     <td height="10px" class="table-center">{{Carbon\Carbon::parse($cleaning->validity_from)->format('d-m-Y')}}</td>
-                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_3}}</td>
-                    <td height="10px" class="table-center">{{$cleaning->cleaning_procedure_3}}</td>
-                    <td height="10px" class="table-center">{{$cleaning->cleaning_risk_3}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_start3}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_end3}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->activity3}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->detail_service3}}</td>
                 </tr>
                 <tr >
                     <td height="10px" class="table-center">{{Carbon\Carbon::parse($cleaning->validity_from)->format('d-m-Y')}}</td>
-                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_4}}</td>
-                    <td height="10px" class="table-center">{{$cleaning->cleaning_procedure_4}}</td>
-                    <td height="10px" class="table-center">{{$cleaning->cleaning_risk_4}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_start4}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_end4}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->activity4}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->detail_service4}}</td>
                 </tr>
                 <tr >
                     <td height="10px" class="table-center">{{Carbon\Carbon::parse($cleaning->validity_from)->format('d-m-Y')}}</td>
-                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_5}}</td>
-                    <td height="10px" class="table-center">{{$cleaning->cleaning_procedure_5}}</td>
-                    <td height="10px" class="table-center">{{$cleaning->cleaning_risk_5}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_start5}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_end5}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->activity5}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->detail_service5}}</td>
+                </tr>
+                <tr >
+                    <td height="10px" class="table-center">{{Carbon\Carbon::parse($cleaning->validity_from)->format('d-m-Y')}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_start6}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_end6}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->activity6}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->detail_service6}}</td>
                 </tr>
             </table>
 
             <table cellpadding="2" class="table table-detail">
                 <tr >
-                    <td class="table-grey" colspan="3"><b>Detail Operation and Execution</b></td>
+                    <td class="table-grey" colspan="4"><b>Detail Operation and Execution</b></td>
                 </tr>
                 <tr class="table-grey">
-                    <td class="table-grey"><b>Time</b></td>
+                    <td class="table-grey"><b>Time Start</b></td>
+                    <td class="table-grey"><b>Time End</b></td>
                     <td class="table-grey"><b>Item</b></td>
                     <td class="table-grey"><b>Working Procedure</b></td>
                 </tr>
                 <tr >
-                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_1}}</td>
-                    <td height="10px" class="table-center">{{$cleaning->cleaning_item_1}}</td>
-                    <td height="10px" class="table-center">{{$cleaning->cleaning_procedure_1}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_start}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_end}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->item}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_procedure}}</td>
                 </tr>
                 <tr >
-                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_2}}</td>
-                    <td height="10px" class="table-center">{{$cleaning->cleaning_item_2}}</td>
-                    <td height="10px" class="table-center">{{$cleaning->cleaning_procedure_2}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_start2}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_end2}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->item2}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_procedure2}}</td>
                 </tr>
                 <tr >
-                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_3}}</td>
-                    <td height="10px" class="table-center">{{$cleaning->cleaning_item_3}}</td>
-                    <td height="10px" class="table-center">{{$cleaning->cleaning_procedure_3}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_start3}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_end3}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->item3}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_procedure3}}</td>
                 </tr>
                 <tr >
-                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_4}}</td>
-                    <td height="10px" class="table-center">{{$cleaning->cleaning_item_4}}</td>
-                    <td height="10px" class="table-center">{{$cleaning->cleaning_procedure_4}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_start4}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_end4}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->item4}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_procedure4}}</td>
                 </tr>
                 <tr >
-                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_5}}</td>
-                    <td height="10px" class="table-center">{{$cleaning->cleaning_item_5}}</td>
-                    <td height="10px" class="table-center">{{$cleaning->cleaning_procedure_5}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_start5}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_end5}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->item5}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_procedure5}}</td>
+                </tr>
+                <tr >
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_start6}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_time_end6}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->item6}}</td>
+                    <td height="10px" class="table-center">{{$cleaning->cleaning_procedure6}}</td>
                 </tr>
             </table>
 
@@ -636,38 +638,45 @@
                 </tr>
                 <tr >
                     <td class="table-white">1.</td>
-                    <td class="table-center">{{$cleaning->cleaning_risk_1}}</td>
-                    <td class="table-center">{{$cleaning->cleaning_possibility_1}}</td>
-                    <td class="table-center">{{$cleaning->cleaning_impact_1}}</td>
-                    <td class="table-center">{{$cleaning->cleaning_mitigation_1}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_risk}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_possibility}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_impact}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_mitigation}}</td>
                 </tr>
                 <tr >
                     <td class="table-white">2.</td>
-                    <td class="table-center">{{$cleaning->cleaning_risk_2}}</td>
-                    <td class="table-center">{{$cleaning->cleaning_possibility_2}}</td>
-                    <td class="table-center">{{$cleaning->cleaning_impact_2}}</td>
-                    <td class="table-center">{{$cleaning->cleaning_mitigation_2}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_risk2}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_possibility2}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_impact2}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_mitigation2}}</td>
                 </tr>
                 <tr >
                     <td class="table-white">3.</td>
-                    <td class="table-center">{{$cleaning->cleaning_risk_3}}</td>
-                    <td class="table-center">{{$cleaning->cleaning_possibility_3}}</td>
-                    <td class="table-center">{{$cleaning->cleaning_impact_3}}</td>
-                    <td class="table-center">{{$cleaning->cleaning_mitigation_3}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_risk3}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_possibility3}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_impact3}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_mitigation3}}</td>
                 </tr>
                 <tr >
                     <td class="table-white">4.</td>
-                    <td class="table-center">{{$cleaning->cleaning_risk_4}}</td>
-                    <td class="table-center">{{$cleaning->cleaning_possibility_4}}</td>
-                    <td class="table-center">{{$cleaning->cleaning_impact_4}}</td>
-                    <td class="table-center">{{$cleaning->cleaning_mitigation_4}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_risk4}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_possibility4}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_impact4}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_mitigation4}}</td>
                 </tr>
                 <tr >
                     <td class="table-white">5.</td>
-                    <td class="table-center">{{$cleaning->cleaning_risk_5}}</td>
-                    <td class="table-center">{{$cleaning->cleaning_possibility_5}}</td>
-                    <td class="table-center">{{$cleaning->cleaning_impact_5}}</td>
-                    <td class="table-center">{{$cleaning->cleaning_mitigation_5}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_risk5}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_possibility5}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_impact5}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_mitigation5}}</td>
+                </tr>
+                <tr >
+                    <td class="table-white">6.</td>
+                    <td class="table-center">{{$cleaning->cleaning_risk6}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_possibility6}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_impact6}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_mitigation6}}</td>
                 </tr>
             </table>
 
@@ -695,17 +704,17 @@
                 </tr>
                 <tr >
                     <td class="table-white">1.</td>
-                    <td class="table-center">{{$cleaning->cleaning_name_1}}</td>
-                    <td class="table-center">PT BIJAC</td>
+                    <td class="table-center">{{$cleaning->cleaning_name}}</td>
+                    <td class="table-center">PT TSL</td>
                     <td class="table-center">Cleaner</td>
-                    <td class="table-center">{{$cleaning->cleaning_number_1}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_number}}</td>
                 </tr>
                 <tr >
                     <td class="table-white">2. </td>
-                    <td class="table-center">{{$cleaning->cleaning_name_2}}</td>
-                    <td class="table-center">PT BIJAC</td>
+                    <td class="table-center">{{$cleaning->cleaning_name2}}</td>
+                    <td class="table-center">PT TSL</td>
                     <td class="table-center">Cleaner</td>
-                    <td class="table-center">{{$cleaning->cleaning_number_2}}</td>
+                    <td class="table-center">{{$cleaning->cleaning_number2}}</td>
                 </tr>
                 <tr >
                     <td class="table-white">3. </td>
@@ -713,20 +722,6 @@
                     <td class="table-center"></td>
                     <td class="table-center"></td>
                     <td class="table-center">{{$cleaning->cleaning_number_3}}</td>
-                </tr>
-                <tr >
-                    <td class="table-white">4. </td>
-                    <td class="table-center"></td>
-                    <td class="table-center"></td>
-                    <td class="table-center"></td>
-                    <td class="table-center"></td>
-                </tr>
-                <tr >
-                    <td class="table-white">5. </td>
-                    <td class="table-center"></td>
-                    <td class="table-center"></td>
-                    <td class="table-center"></td>
-                    <td class="table-center"></td>
                 </tr>
             </table>
 
@@ -749,7 +744,7 @@
                 <tr >
                     @switch($lasthistoryC->status)
                         @case('requested')
-                            <td class="col_approval"><img src="{{ public_path("gambar/Requested.png") }}" alt="" style="width: 80px; height: 40px;">
+                            <td class="col_approval"><img src="{{ public_path("gambar/Requested.png") }}" alt="" style="width: 80px; height: 30px;">
                                 <p class="cr">Nama    : Badai Sino Jendrang</p>
                                 <p class="cr">Tanggal : {{Carbon\Carbon::parse($cleaning->created_at)->format('d-m-Y H:i')}}</p>
                             </td>
@@ -768,11 +763,11 @@
                             @break
 
                         @case('reviewed')
-                            <td class="col_approval"><img src="{{ public_path("gambar/Requested.png") }}" alt="" style="width: 80px; height: 40px;">
+                            <td class="col_approval"><img src="{{ public_path("gambar/Requested.png") }}" alt="" style="width: 80px; height: 30px;">
                                 <p class="cr">Nama: Badai Sino Jendrang</p>
                                 <p class="cr">Tanggal : {{Carbon\Carbon::parse($cleaning->created_at)->format('d-m-Y H:i')}}</p>
                             </td>
-                            <td class="col_approval"><img src="{{ public_path("gambar/Reviewed.png") }}" alt="" style="width: 80px; height: 40px;">
+                            <td class="col_approval"><img src="{{ public_path("gambar/Reviewed.png") }}" alt="" style="width: 80px; height: 30px;">
                                 <p class="cr">Nama    :{{$cleaningHistory[1]->name}}</p>
                                 <p class="cr">Tanggal :{{Carbon\Carbon::parse($cleaningHistory[1]->created_at)->format('d-m-Y H:i')}}</p>
                             </td>
@@ -787,15 +782,15 @@
                             @break
 
                         @case('checked')
-                            <td class="col_approval"><img src="{{ public_path("gambar/Requested.png") }}" alt="" style="width: 80px; height: 40px;">
+                            <td class="col_approval"><img src="{{ public_path("gambar/Requested.png") }}" alt="" style="width: 80px; height: 30px;">
                                 <p class="cr">Nama    : Badai Sino Jendrang</p>
                                 <p class="cr">Tanggal :{{Carbon\Carbon::parse($cleaning->created_at)->format('d-m-Y H:i')}}</p>
                             </td>
-                            <td class="col_approval"><img src="{{ public_path("gambar/Reviewed.png") }}" alt="" style="width: 80px; height: 40px;">
+                            <td class="col_approval"><img src="{{ public_path("gambar/Reviewed.png") }}" alt="" style="width: 80px; height: 30px;">
                                 <p class="cr">Nama    :{{$cleaningHistory[1]->name}}</p>
                                 <p class="cr">Tanggal :{{Carbon\Carbon::parse($cleaningHistory[1]->created_at)->format('d-m-Y H:i')}}</p>
                             </td>
-                            <td class="col_approval"><img src="{{ public_path("gambar/Checked.png") }}" alt="" style="width: 80px; height: 40px;">
+                            <td class="col_approval"><img src="{{ public_path("gambar/Checked.png") }}" alt="" style="width: 80px; height: 30px;">
                                 <p class="cr">Nama    :{{$cleaningHistory[2]->name}}</p>
                                 <p class="cr">Tanggal :{{Carbon\Carbon::parse($cleaningHistory[2]->created_at)->format('d-m-Y H:i')}}</p>
                             </td>
@@ -806,15 +801,15 @@
                             @break
 
                         @case('acknowledge')
-                            <td class="col_approval"><img src="{{ public_path("gambar/Requested.png") }}" alt="" style="width: 80px; height: 40px;">
+                            <td class="col_approval"><img src="{{ public_path("gambar/Requested.png") }}" alt="" style="width: 80px; height: 30px;">
                                 <p class="cr">Nama    : Badai Sino Jendrang</p>
                                 <p class="cr">Tanggal : {{Carbon\Carbon::parse($cleaning->created_at)->format('d-m-Y H:i')}}</p>
                             </td>
-                            <td class="col_approval"><img src="{{ public_path("gambar/Reviewed.png") }}" alt="" style="width: 80px; height: 40px;">
+                            <td class="col_approval"><img src="{{ public_path("gambar/Reviewed.png") }}" alt="" style="width: 80px; height: 30px;">
                                 <p class="cr">Nama    :{{$cleaningHistory[1]->name}}</p>
                                 <p class="cr">Tanggal :{{Carbon\Carbon::parse($cleaningHistory[1]->created_at)->format('d-m-Y H:i')}}</p>
                             </td>
-                            <td class="col_approval"><img src="{{ public_path("gambar/Checked.png") }}" alt="" style="width: 80px; height: 40px;">
+                            <td class="col_approval"><img src="{{ public_path("gambar/Checked.png") }}" alt="" style="width: 80px; height: 30px;">
                                 <p class="cr">Nama    :{{$cleaningHistory[2]->name}}</p>
                                 <p class="cr">Tanggal :{{Carbon\Carbon::parse($cleaningHistory[2]->created_at)->format('d-m-Y H:i')}}</p>
                             </td>
@@ -825,19 +820,19 @@
                             @break
 
                         @case('final')
-                            <td class="col_approval"><img src="{{ public_path("gambar/Requested.png") }}" alt="" style="width: 80px; height: 40px;">
+                            <td class="col_approval"><img src="{{ public_path("gambar/Requested.png") }}" alt="" style="width: 80px; height: 30px;">
                                 <p class="cr">Nama    : Badai Sino Jendrang</p>
                                 <p class="cr">Tanggal : {{Carbon\Carbon::parse($cleaning->created_at)->format('d-m-Y H:i')}}</p>
                             </td>
-                            <td class="col_approval"><img src="{{ public_path("gambar/Reviewed.png") }}" alt="" style="width: 80px; height: 40px;">
+                            <td class="col_approval"><img src="{{ public_path("gambar/Reviewed.png") }}" alt="" style="width: 80px; height: 30px;">
                                 <p class="cr">Nama    :{{$cleaningHistory[1]->name}}</p>
                                 <p class="cr">Tanggal :{{ Carbon\Carbon::parse($cleaningHistory[1]->created_at)->format('d-m-Y H:i') }}</p>
                             </td>
-                            <td class="col_approval"><img src="{{ public_path("gambar/Checked.png") }}" alt="" style="width: 80px; height: 40px;">
+                            <td class="col_approval"><img src="{{ public_path("gambar/Checked.png") }}" alt="" style="width: 80px; height: 30px;">
                                 <p class="cr">Nama    :{{$cleaningHistory[2]->name}}</p>
                                 <p class="cr">Tanggal :{{ Carbon\Carbon::parse($cleaningHistory[2]->created_at)->format('d-m-Y H:i') }}</p>
                             </td>
-                            <td class="col_approval"><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 80px; height: 40px;">
+                            <td class="col_approval"><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 80px; height: 30px;">
                                 <p class="cr">Nama    :{{$cleaningHistory[4]->name}}</p>
                                 <p class="cr">Tanggal :{{ Carbon\Carbon::parse($cleaningHistory[4]->created_at)->format('d-m-Y H:i') }}</p>
                             </td>
