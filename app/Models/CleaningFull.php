@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class CleaningFull extends Model
 {
     use HasFactory;
-
     protected $table = 'cleaning_fulls';
     protected $primaryKey = 'cleaning_full_id';
 
