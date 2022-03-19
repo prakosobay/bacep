@@ -13,15 +13,26 @@
 }
 
 /* button */
-#btn-new{
+.new-btn{
     border-radius: 3em;
-    display: flex;
-    font-size: 15px;
+    font-size: 12px;
     line-height: 0.5;
     padding: 18px;
     text-align: center;
     background-color: #09458F;
     color: #FFFFFF;
+    text-decoration: none;
+}
+
+.new-btn-oren{
+    border-radius: 3em;
+    font-size: 12px;
+    line-height: 0.5;
+    padding: 18px;
+    text-align: center;
+    background-color: #EA8C00;
+    color: #FFFFFF;
+    text-decoration: none;
 }
 
 /* carousel */
@@ -30,14 +41,12 @@
     align-content: center;
     display: flex;
     justify-content: center;
-    /* border: solid; */
     margin: 3px;
 }
 
 .container-logo{
     border: solid;
     color: red;
-    /* align-content: flex-end; */
 }
 
 .bg-carousel{
@@ -61,20 +70,17 @@
     font-size: smaller;
 }
 
-.block {
-    overflow: hidden;
-    width: 800px;
-    margin: 30px auto;
-    /* border: solid; */
-  }
-  .animation {
-    width: auto;
-    height: 200px;
-    font-size: 0px;
-  }
-  .animation div {
-    display: inline-block;
-    width: auto;
-    float: none;
-    padding: 0 30px;
-  }
+.bg-benefit{
+    background-color: #F4F4F4;
+}
+
+.bg-new{
+    background-color: #09458F;
+    height: auto;
+}
+
+.bg-contact{
+    background-color: #062A61;
+    height: auto;
+}
+

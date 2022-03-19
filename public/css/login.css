@@ -11,11 +11,12 @@
     color: black;
 }
 .html, .bg-image {
-    position: absolute;
+    /* position: absolute; */
     width: 100%;
+    background-size: cover;
     min-height: 1080px;
     background: url("/gambar/bclogin.png");
-	background-repeat: no-repeat;
+	/* background-repeat: no-repeat; */
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 .form-login{
@@ -31,16 +32,18 @@
     top: 108px;
     background: rgba(255, 255, 255, 0.8);
     border-radius: 8px;
-  
+
 }
-.logo1{
+/* .logo1{
     position: static;
     width: 396px;
     height: 140px;
+    background-size: cover;
     left: 97px;
     top: 94px;
     background: url("/gambar/logo1.png")
-}
+} */
+
 .h3{
     position: static;
     font-size: 40px;

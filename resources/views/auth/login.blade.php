@@ -10,24 +10,24 @@
 
     <title>PT Bali Towerindo Sentra Tbk</title>
 
-    <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" href="{{asset('css/login.css')}}">
 </head>
 <body>
     <div class="row bg-image">
         <div class="col-lg-4 justify-content-center container form-login d-flex">
             <form method="POST" action="{{ route('login') }}">
                 @csrf
-                <div class ="bungkuslogin"> 
+                <div class ="bungkuslogin">
                     <label for="email" class="col-md-4 col-form-label text-md-right"></label>
-                    <div class="logo1 row"></div>
+                    <div class="logo1"></div>
                     <p class="row h3">Data Center Login</p>
 
                     <div class="username">
-                            
+
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Username/E-Mail') }}</label>
                         <input type="text" action="{{ route('login') }}" class="form-control" placeholder="Example@balitower.co.id" aria-label="Username" aria-describedby="basic-addon1" @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
                         @error('email')
-                        
+
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -58,16 +58,14 @@
                     <button type="submit" class="btn btn-primary">
                         {{ __('Login') }}
                     </button>
-            
-                    @if (Route::has('password.request'))
-                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                        {{ __('Forgot Your Password?') }}
-                    </a>
 
-                @endif
+                    @if (Route::has('password.request'))
+                        <a class="btn btn-link" href="{{ route('password.request') }}">
+                            {{ __('Forgot Your Password?') }}
+                        </a>
+                    @endif
                 </div>
             </form>
-
         </div>
     </div>
 </body>

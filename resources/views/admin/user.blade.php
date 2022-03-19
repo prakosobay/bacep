@@ -43,7 +43,7 @@
                                         <option value="bm">BM</option>
                                         <option value="head">Head</option>
                                         <option value="security">Security</option>
-                                        <option value="tenant">Tenant</option>
+                                        <option value="visitor">Visitor</option>
                                     </select>
                                 </div>
                                 <label>Dept :</label>
