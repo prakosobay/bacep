@@ -30,8 +30,9 @@ class HomeController extends Controller
             $arrole[] = $rolee->name;
         }
         Session::put('arrole', $arrole);
-
-        return view('home');
+        // dd($arrole);
+        // return view('home');
+        return view('homepage');
     }
 
     public function dashboard()

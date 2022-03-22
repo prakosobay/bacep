@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\{DB, Auth, Gate, Mail};
+use Illuminate\Support\Facades\{DB, Auth, Gate, Mail, Session};
 use Barryvdh\DomPDF\Facade as PDF;
 use App\Mail\{NotifEmail, NotifReject, NotifFull};
 use App\Models\{Other, Rutin, Personil, OtherHistory, OtherFull};
@@ -18,10 +18,12 @@ class RutinController extends Controller
 
     public function index()
     {
-        if (Gate::allows('isBm')) {
-            $rutin = Rutin::all();
-            $personil = Personil::all();
-            return view('other.rutin', compact('rutin', 'personil'));
+        if (Gate::allows('isVisitor')) {
+
+                $rutin = Rutin::all();
+                $personil = Personil::all();
+                return view('other.rutin', compact('rutin', 'personil'));
+
         } else {
             abort(403);
         }
@@ -29,8 +31,12 @@ class RutinController extends Controller
 
     public function form_perbaikan()
     {
-        if(Gate::allows('isBm')){
+        $roles = Session::get('arrole');
+        if($roles[0] == 'bm'){
             return view('other.perbaikan');
+        }
+        else{
+            abort(403);
         }
     }
 
