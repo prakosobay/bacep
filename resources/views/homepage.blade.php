@@ -63,20 +63,20 @@
                 <p class="fs-5 inter-600-oren">
                     DATA CENTER BALITOWER
                 </p>
-                <p class="fs-5" style="color: #FFFFFF">
+                <p class="fs-5 lora-700">
                     Hi, {{Auth::user()->name}}
                 </p>
-                <p class="fs-1" style="color: #FFFFFF">
+                <h3 class="lora-800">
                     Welcome to
-                </p>
-                <p class="fs-1" style="color: #FFFFFF">
+                </h3>
+                <h3 class="lora-800">
                     Bali Tower
-                </p>
+                </h3>
                 <p class="inter-400-putih">
                     Protecting Your Technology Investment
                 </p>
                 <p class="">
-                    <a href="{{ url('perbaikan') }}" type="button" id="" class="new-btn" data-cleaning_id="">Create New Permit</a>
+                    <a href="{{ url('perbaikan') }}" type="button" id="" class="new-btn inter-btn" data-cleaning_id="">Create New Permit</a>
                 </p>
             </div>
         </div>
@@ -163,25 +163,25 @@
 
     {{-- about  --}}
     <div class="container py-5 px-5">
-        <div class="row justify-content-start">
-            <div class="col-5 text-center">
-                <p class="fs-6" style="color: #EA8C00">
+        <div class="row justify-content-center">
+            <div class="col-4 text-center">
+                <h4 class="text-about">
                     <b>ABOUT US: BALI TOWER DATA CENTER</b>
-                </p>
+                </h4>
             </div>
         </div>
-        <div class="row justify-content-center">
-            <div class="col-4">
+        <div class="row justify-content-center mt-2">
+            <div class="col-4 px-0">
                 <img src="{{asset('gambar/home/wallpaper.png')}}" alt="" class="img-fluid">
             </div>
             <div class="col-6">
-                <p class="fs-1" style="#1D1D1D">
-                    <b>PT. Bali Towerindo Sentra - Data Center Building</b>
-                </p>
-                <p class="">
+                <h3 class="lora-about">
+                    PT. Bali Towerindo Sentra - Data Center Building
+                </h3>
+                <p class="paragraph1">
                     Bali Tower Data center offers many benefits and a reliable system. We housing for your IT and network systems in a high availability, secure environment, also the best possible physical and technical infrastructure.
                 </p>
-                <p class="">
+                <p class="paragraph1">
                     Bali Tower Data Center is a division of PT. Bali Towerindo Sentra. Tbk established in 2018. Being a leading telecommunication infrastructure provider in Bali, the company provide  tower equipped with integrated transmitting facilities both through fiber optic and wireless technology. Come over to <a href="https://www.balitower.co.id/" style="text-decoration: none; color : #EA8C00">www.balitower.co.id</a> for more info about companies package.
                 </p>
             </div>
@@ -193,7 +193,7 @@
         <div class="container px-5">
             <div class="row">
                 <div class="text-center">
-                    <p class="fs-4 fw-bold">
+                    <p class="fs-4 text-benefit">
                         Our Benefits
                     </p>
                 </div>
@@ -203,10 +203,10 @@
                     <p>
                         <img src="{{asset('gambar/home/ceklis.png')}}" alt="" class="img-fluid">
                     </p>
-                    <p class="fs-5 fw-bold" style="color: #09458F">
+                    <p class="fs-5 fw-bold text-benefit-sub">
                         Certified Data Center
                     </p>
-                    <p style="color: #1D1D1D">
+                    <p class="text-benefit-isi">
                         Bali Tower Data Center holds RATED 3 –TIA 942 & ISO 27001 certification. Also connected to major carrier hubs and cloud networks
                     </p>
                 </div>
@@ -214,10 +214,10 @@
                     <p>
                         <img src="{{asset('gambar/home/star.png')}}" alt="" class="img-fluid">
                     </p>
-                    <p class="fs-5 fw-bold" style="color : #09458F">
+                    <p class="fs-5 fw-bold text-benefit-sub">
                         Ring 1 Area
                     </p>
-                    <p style="color: #1D1D1D">
+                    <p class="text-benefit-isi">
                         Located at the heart of Jakarta (ring 1) area, we provide you with easy access, 24 hour electricity and flood-free location.
                     </p>
                 </div>
@@ -225,10 +225,10 @@
                     <p>
                         <img src="{{asset('gambar/home/gembok.png')}}" alt="" class="img-fluid">
                     </p>
-                    <p class="fs-5 fw-bold" style="color : #09458F">
+                    <p class="fs-5 fw-bold text-benefit-sub">
                         High Availability
                     </p>
-                    <p style="color:#1D1D1D">
+                    <p class="text-benefit-isi">
                         24/7 Data Center and NOC operation, High bandwith internet, 15 minute respond time standard remote hand & eye availability 24/7.
                     </p>
                 </div>
@@ -254,15 +254,15 @@
     {{-- create new permit --}}
     <div class="container-fluid py-5 bg-new">
         <div class="row justify-content-center">
-            <div class="col-3">
+            <div class="col-4">
                 <div class="text-center">
-                    <p class="fs-7" style="color: #EA8C00">
+                    <h3 class="fs-7 text-book-oren">
                         BOOK A VISIT TO OUR DATA CENTER
-                    </p>
-                    <p class="fs-1" style="color: #FFFFFF">
+                    </h3>
+                    <h1 class="fs-1 lora-800">
                         Create New Permit
-                    </p>
-                    <p style="color: #FFFFFF; font-size: 12px">
+                    </h1>
+                    <p class="text-book-putih">
                         Book a visit to our Data Center with <b>Permit</b>. Permit is a one-way access for our Data Center Building.
                     </p>
                     <p>
@@ -362,20 +362,20 @@
                 <p class="fs-5 inter-600-oren">
                     DATA CENTER BALITOWER
                 </p>
-                <p class="fs-5" style="color: #FFFFFF">
+                <p class="fs-5 lora-700">
                     Hi, {{Auth::user()->name}}
                 </p>
-                <p class="fs-1" style="color: #FFFFFF">
+                <h3 class="lora-800">
                     Welcome to
-                </p>
-                <p class="fs-1" style="color: #FFFFFF">
+                </h3>
+                <h3 class="lora-800">
                     Bali Tower
-                </p>
+                </h3>
                 <p class="inter-400-putih">
                     Protecting Your Technology Investment
                 </p>
                 <p class="">
-                    <a href="{{url('approval/all')}}" type="button" id="" class="new-btn" data-cleaning_id="">Approval Permit</a>
+                    <a href="{{url('approval/all')}}" type="button" id="" class="new-btn inter-btn" data-cleaning_id="">Approve Permit</a>
                 </p>
             </div>
         </div>
@@ -387,24 +387,24 @@
         <div class="container px-5">
             <div class="row justify-content-around px-5">
                 <div class="col-5">
-                    <p class="fs-6 pt-2" style="color : #EA8C00">
+                    <p class="fs-6 pt-2 text-contact">
                         CONTACT US
                     </p>
-                    <p class="fs-2 my-4" style="color: #FFFFFF;">
+                    <h5 class="fs-2 my-3 text-contact2">
                         Feel Free to Contact Us At
-                    </p>
-                    <p style="color : #FFFFFF; line-height: 10px; font-size: 15px">
+                    </h5>
+                    <h5 class="text-contact3">
                         Data Center PT. Bali Towerindo Sentra
-                    </p>
-                    <p style="color : #FFFFFF; line-height: 10px; font-size: 15px">
+                    </h5>
+                    <h5 class="text-contact3">
                         Jl. Batu Ceper no.53, Jakarta 10120
-                    </p>
-                    <p style="color : #FFFFFF; line-height: 10px; font-size: 15px">
+                    </h5>
+                    <h5 class="text-contact3">
                         Phone: <b>+62 882 3150 0851</b>
-                    </p>
-                    <p style="color : #FFFFFF; line-height: 10px; font-size: 15px">
+                    </h5>
+                    <h5 class="text-contact3">
                         Email: <b>customer.support@balitower.co.id</b>
-                    </p>
+                    </h5>
                 </div>
                 <div class="col-6">
                     <img src="{{asset('gambar/home/maps.png')}}" alt="" class="img-fluid">
@@ -416,7 +416,7 @@
     {{-- Footer --}}
     <footer class="sticky-footer py-2" style="background-color: #072249; height:auto">
         <div class="container my-auto">
-            <div class="copyright text-center text-white my-auto py-auto">
+            <div class="copyright text-center text-footer my-auto py-auto">
                 <span>PT Bali Tower Data Center - 2022</span>
             </div>
         </div>

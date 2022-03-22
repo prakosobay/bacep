@@ -3,6 +3,11 @@
     font-family: "inter";
 }
 
+@font-face {
+    font-family:"lora";
+    src: url('/../fonts/Lora/Lora-VariableFont_wght.ttf');
+}
+
 .inter {
     font-family: "inter";
     color: black;
@@ -32,6 +37,47 @@
     letter-spacing: 0.05em;
 }
 
+.inter-btn{
+    font-family: "inter";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -0.01em;
+    color: #FFFFFF;
+}
+
+/* lora */
+.lora-700{
+    font-family: "lora";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 32px;
+    color: #FFFFFF;
+}
+
+.lora-800{
+    font-family: "lora";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 56px;
+    line-height: 72px;
+    letter-spacing: 0.01em;
+    color: #FFFFFF;
+}
+
+.lora-about{
+    font-family: "lora";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 62px;
+    letter-spacing: 0.02em;
+    color: #1D1D1D;
+}
+
+
 /* banner */
 #banner{
     height: 600px;
@@ -52,22 +98,28 @@
     border-radius: 3em;
     font-size: 12px;
     line-height: 0.5;
-    padding: 18px;
+    padding: 20px;
     text-align: center;
     background-color: #09458F;
     color: #FFFFFF;
     text-decoration: none;
+    letter-spacing: 0.05em;
 }
 
 .new-btn-oren{
     border-radius: 3em;
-    font-size: 12px;
     line-height: 0.5;
     padding: 18px;
-    text-align: center;
     background-color: #EA8C00;
-    color: #FFFFFF;
     text-decoration: none;
+    font-family: "inter";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 8px;
+    text-align: center;
+    letter-spacing: -0.01em;
+    color: #FFFFFF;
 }
 
 /* carousel */
@@ -96,13 +148,137 @@
 }
 
 .text-carousel-1{
+    font-family: "lora";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 48px;
+    letter-spacing: 0.05em;
     color: #1D1D1D;
-    font-size: x-large;
 }
 
 .text-carousel-2{
+    font-family: "inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 26px;
+    text-align: center;
+    letter-spacing: -0.01em;
     color: #828282;
-    font-size: smaller;
+}
+
+.text-about{
+    font-family: "inter";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: 0.05em;
+    color: #EA8C00;
+}
+
+.paragraph1{
+    font-family: "inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 32px;
+    letter-spacing: -0.01em;
+    color: #1D1D1D;
+}
+
+.text-benefit{
+    font-family: "lora";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 35px;
+    line-height: 54px;
+    text-align: center;
+    letter-spacing: 0.01em;
+    color: #1D1D1D;
+}
+
+.text-benefit-sub{
+    font-family: "lora";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 32px;
+    color: #09458F;
+}
+
+.text-benefit-isi{
+    font-family: "inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 32px;
+    letter-spacing: -0.01em;
+    color: #1D1D1D;
+
+}
+
+.text-book-oren{
+    font-family: "inter";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 24px;
+    text-align: center;
+    letter-spacing: 0.08em;
+    color: #EA8C00;
+}
+
+.text-book-putih{
+    font-family: "inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 22px;
+    text-align: center;
+    letter-spacing: -0.01em;
+    color: #FFFFFF;
+}
+
+.text-contact{
+    font-family: "inter";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: 0.05em;
+    color: #EA8C00;
+}
+
+.text-contact2{
+    font-family: "lora";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 35px;
+    line-height: 44px;
+    letter-spacing: 0.01em;
+    color: #FFFFFF;
+}
+
+.text-contact3{
+    font-family: "inter";
+    font-style: normal;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -0.02em;
+    color: #FFFFFF;
+}
+
+.text-footer{
+    font-family: "lora";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 25px;
+    text-align: center;
+    color: #FFFFFF;
 }
 
 .bg-benefit{

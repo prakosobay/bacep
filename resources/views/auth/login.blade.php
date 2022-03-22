@@ -13,41 +13,40 @@
     <link rel="stylesheet" href="{{asset('css/login.css')}}">
 </head>
 <body>
-    <div class="row bg-image">
-        <div class="col-lg-4 justify-content-center container form-login d-flex">
-            <form method="POST" display= block action="{{ route('login') }}">
-                @csrf
-                <div class ="bungkuslogin">
-                    <label for="email" class="col-md-4 col-form-label text-md-right"></label>
+    <div class="container-fluid bg-image">
+        <div class="row">
+            <div class="col-lg-4 justify-content-center container form-login d-flex">
+                <form method="POST" display= block action="{{ route('login') }}">
+                    @csrf
+                    <div class ="bungkuslogin">
+                        <label for="email" class="col-md-4 col-form-label text-md-right"></label>
 
-                    <div class="logo1 row"></div>
-                    <p class="row h3" >Data Center Login</p>
+                        <div class="logo1 row"></div>
+                        <p class="row h3" >Data Center Login</p>
 
-                    <div class="username">
-                            
+                        <div class="username">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Email') }}</label>
+                            <input type="text" action="{{ route('login') }}" class="form-control" placeholder="Example@balitower.co.id" aria-label="Username" aria-describedby="basic-addon1" @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                            @error('email')
 
-                        <input type="text" action="{{ route('login') }}" class="form-control" placeholder="Example@balitower.co.id" aria-label="Username" aria-describedby="basic-addon1" @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-                        @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
 
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
+                        <div class="password">
+                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                            <input type="password" class="form-control" placeholder="Password" aria-label="Username" aria-describedby="basic-addon1"@error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
 
-                    <div class="password">
-                        <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-                        <input type="password" class="form-control" placeholder="Password" aria-label="Username" aria-describedby="basic-addon1"@error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                            @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
 
-                        @error('password')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-
-                    <div class="form-group row">
+                        <div class="form-group row">
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
@@ -55,19 +54,20 @@
                                     {{ __('Remember Me') }}
                                 </label>
                             </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">
+                            {{ __('Login') }}
+                        </button>
+
+                        @if (Route::has('password.request'))
+                            <a class="btn btn-link" href="{{ route('password.request') }}">
+                                {{ __('Forgot Your Password?') }}
+                            </a>
+                        @endif
                     </div>
-
-                    <button type="submit" class="btn btn-primary">
-                        {{ __('Login') }}
-                    </button>
-
-                    @if (Route::has('password.request'))
-                        <a class="btn btn-link" href="{{ route('password.request') }}">
-                            {{ __('Forgot Your Password?') }}
-                        </a>
-                    @endif
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
 </body>
