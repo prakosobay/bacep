@@ -18,10 +18,10 @@
 
     @can('isVisitor')
     {{-- navbar --}}
-    <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
+    <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-0 my-0">
         <div class="container">
             <a class="navbar-brand" href="#">
-                <img src="{{asset('gambar/home/logo_bts.png')}}" alt="" style="width: 160px; height:60px">
+                <img src="{{asset('gambar/home/logo_bts.png')}}" alt="" style="width: 170px; height:70px" class="img-fluid">
             </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,13 +30,13 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
                 <li class="nav-item mx-5">
-                    <a class="nav-link" aria-current="page" href="{{url('/home')}}">Home</a>
+                    <a class="nav-link inter" aria-current="page" href="{{url('/home')}}">Home</a>
                 </li>
                 <li class="nav-item mx-5">
-                    <a class="nav-link" href="#about">About Us</a>
+                    <a class="nav-link inter" href="#about">About Us</a>
                 </li>
                 <li class="nav-item mx-5">
-                    <a class="nav-link" href="#">Log Permit</a>
+                    <a class="nav-link inter" href="#">Log Permit</a>
                 </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
@@ -60,7 +60,7 @@
     <div class="container-fluid" id="banner">
         <div class="container banner-content">
             <div >
-                <p class="fs-5" style="color: #EA8C00">
+                <p class="fs-5 inter-600-oren">
                     DATA CENTER BALITOWER
                 </p>
                 <p class="fs-5" style="color: #FFFFFF">
@@ -72,7 +72,7 @@
                 <p class="fs-1" style="color: #FFFFFF">
                     Bali Tower
                 </p>
-                <p style="color: #FFFFFF">
+                <p class="inter-400-putih">
                     Protecting Your Technology Investment
                 </p>
                 <p class="">
@@ -292,48 +292,48 @@
                 @can('isSecurity')
                 <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
                     <li class="nav-item mx-5">
-                        <a class="nav-link" aria-current="page" href="{{url('/home')}}">Home</a>
+                        <a class="nav-link inter" aria-current="page" href="{{url('/home')}}">Home</a>
                     </li>
                     <li class="nav-item mx-5">
-                        <a class="nav-link" href="{{url('approval/all')}}">Approval</a>
+                        <a class="nav-link inter" href="{{url('approval/all')}}">Approval</a>
                     </li>
                     <li class="nav-item mx-5">
-                        <a class="nav-link" href="{{ url('log/all') }}">Log Permit</a>
+                        <a class="nav-link inter" href="{{ url('log/all') }}">Log Permit</a>
                     </li>
                 </ul>
 
                 @elsecan('isAdmin')
                 <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
                     <li class="nav-item mx-5">
-                        <a class="nav-link" aria-current="page" href="{{url('/home')}}">Home</a>
+                        <a class="nav-link inter" aria-current="page" href="{{url('/home')}}">Home</a>
                     </li>
                     <li class="nav-item mx-5">
-                        <a class="nav-link" href="{{ url('/table_user') }}">Admin Panel</a>
+                        <a class="nav-link inter" href="{{ url('/table_user') }}">Admin Panel</a>
                     </li>
                     <li class="nav-item mx-5">
-                        <a class="nav-link" href="{{ url('/table_barang') }}">Inventory</a>
+                        <a class="nav-link inter" href="{{ url('/table_barang') }}">Inventory</a>
                     </li>
                     <li class="nav-item mx-5">
-                        <a class="nav-link" href="{{ url('log/all') }}">Log Permit</a>
+                        <a class="nav-link inter" href="{{ url('log/all') }}">Log Permit</a>
                     </li>
                 </ul>
 
                 @else
                 <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
                     <li class="nav-item mx-5">
-                        <a class="nav-link" aria-current="page" href="{{url('/home')}}">Home</a>
+                        <a class="nav-link inter" aria-current="page" href="{{url('/home')}}">Home</a>
                     </li>
                     <li class="nav-item mx-5">
-                        <a class="nav-link" href="{{url('approval/all')}}">Approval</a>
+                        <a class="nav-link inter" href="{{url('approval/all')}}">Approval</a>
                     </li>
                     <li class="nav-item mx-5">
-                        <a class="nav-link" href="{{ url('full_approval/all') }}">Full Approval</a>
+                        <a class="nav-link inter" href="{{ url('full_approval/all') }}">Full Approval</a>
                     </li>
                     <li class="nav-item mx-5">
-                        <a class="nav-link" href="{{ url('/table_barang') }}">Inventory</a>
+                        <a class="nav-link inter" href="{{ url('/table_barang') }}">Inventory</a>
                     </li>
                     <li class="nav-item mx-5">
-                        <a class="nav-link" href="{{ url('log/all') }}">Log Permit</a>
+                        <a class="nav-link inter" href="{{ url('log/all') }}">Log Permit</a>
                     </li>
                 </ul>
 
@@ -359,7 +359,7 @@
     <div class="container-fluid" id="banner">
         <div class="container banner-content">
             <div >
-                <p class="fs-5" style="color: #EA8C00">
+                <p class="fs-5 inter-600-oren">
                     DATA CENTER BALITOWER
                 </p>
                 <p class="fs-5" style="color: #FFFFFF">
@@ -371,7 +371,7 @@
                 <p class="fs-1" style="color: #FFFFFF">
                     Bali Tower
                 </p>
-                <p style="color: #FFFFFF">
+                <p class="inter-400-putih">
                     Protecting Your Technology Investment
                 </p>
                 <p class="">

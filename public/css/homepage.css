@@ -1,6 +1,41 @@
+@font-face {
+    src: url('/../fonts/Inter/static/Inter-Medium.ttf');
+    font-family: "inter";
+}
+
+.inter {
+    font-family: "inter";
+    color: black;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    font-style: normal;
+}
+
+.inter-400-putih{
+    font-family: "inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 26px;
+    letter-spacing: -0.01em;
+    color: #FFFFFF;
+}
+
+.inter-600-oren{
+    font-family: "inter";
+    color: #EA8C00;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 24px;
+    font-style: normal;
+    letter-spacing: 0.05em;
+}
+
 /* banner */
 #banner{
     height: 600px;
+    width: auto;
     background-image: url('/gambar/home/banner.png');
     background-size: cover;
 }
