@@ -155,4 +155,19 @@ class HomeController extends Controller
             abort(403);
         }
     }
+
+    public function new_permit()
+    {
+        $role = Session::get('arrole');
+        // dd($role);
+        if($role[0] == 'it'){
+            return "ini role IT";
+        }
+        elseif($role[0] == 'bm'){
+            return "ini role bm";
+        }
+        else{
+            abort(403);
+        }
+    }
 }

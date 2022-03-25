@@ -8,8 +8,8 @@ use Maatwebsite\Excel\Row;
 
 // Auth::routes(['verify' => true]);
 Route::get('/', function () {
-    // return view('auth.login');
-    return view('new_approve');
+    return view('auth.login');
+    // return view('it.log');
 })->middleware('guest');
 
 
@@ -139,4 +139,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('rutin', [RutinController::class, 'index']);
     Route::get('/rutins/{id}', [RutinController::class, 'rutin']);
     Route::get('/personil/{id}', [RutinController::class, 'personil']);
+
+    //Visitor
+    Route::get('new_permit', [HomeController::class, 'new_permit']);
 });
