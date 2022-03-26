@@ -1,3 +1,80 @@
+.html, .body{
+    background-color: #818181;
+}
+
+.navbar{
+    position: fixed;
+    width: 100%;
+}
 .navbar-bg{
     background-color: #09458F;
 }
+/* Style the sidebar - fixed full height */
+.sidebar {
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    z-index: 1;
+    top: 80px;
+    left: 0;
+    background-color: rgb(255, 255, 255);
+    overflow-x: hidden;
+    padding-top: 16px;
+  }
+  
+  /* Style sidebar links */
+  .sidebar a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #25065f;
+    display: block;
+  }
+  
+  /* Style links on mouse-over */
+  .sidebar a:hover {
+    color: #cf501e;
+  }
+  
+  /* Style the main content */
+  .main {
+    margin-left: 160px; /* Same as the width of the sidenav */
+    padding: 0px 10px;
+  }
+  
+  /* Add media queries for small screens (when the height of the screen is less than 450px, add a smaller padding and font-size) */
+  @media screen and (max-height: 450px) {
+    .sidebar {padding-top: 15px;}
+    .sidebar a {font-size: 18px;}
+  }
+
+  .fa{
+    margin-left: 10px ;
+    margin-right: 20px;
+    width: 20px;
+    height: 20px;
+    margin-top: 30px;
+}
+
+.content{
+    
+        /* Auto layout */
+
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-top: 80px;
+
+        position:fixed;
+        width: 100%;
+        height: 1080px;
+        padding-left: 250px;
+        top: 80px;
+        /* Gray/Gray 6 */
+        background: #d6d6d6;
+        /* Inside auto layout */
+        flex: none;
+        order: 1;
+        flex-grow: 0;
+        margin: 0px 0px;}
+
