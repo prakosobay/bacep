@@ -171,6 +171,9 @@ class HomeController extends Controller
         elseif($dept == 'ipcore'){
             return "ini role ipcore";
         }
+        elseif($dept == 'Building Management'){
+            return view('');
+        }
         else{
             abort(403);
         }
