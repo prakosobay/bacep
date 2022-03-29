@@ -112,7 +112,7 @@
           </li>
           <li>
             <a href="#">
-              <i class='bx bx-history'></i>
+              <i class='bx bxs-face'></i>
               <span class="link_name">Permit BM</span>
             </a>
             <ul class="sub-menu blank">
