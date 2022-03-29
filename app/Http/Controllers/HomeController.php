@@ -159,14 +159,16 @@ class HomeController extends Controller
     public function new_permit()
     {
         $role = Session::get('arrole');
-        // dd($role);
-        if($role[0] == 'it'){
-            return "ini role IT";
+        $dept = Auth::user()->department;
+        $company = Auth::user()->company;
+        // dd($dept);
+        if($dept == 'IT'){
+            return view('it.form');
         }
-        elseif($role[0] == 'bm'){
-            return "ini role bm";
+        elseif($dept == 'IP Media'){
+            return view('ipmedia.form');
         }
-        elseif($role[0] == 'ipcore'){
+        elseif($dept == 'ipcore'){
             return "ini role ipcore";
         }
         else{
