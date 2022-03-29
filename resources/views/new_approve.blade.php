@@ -8,12 +8,14 @@
     <!-- Load an icon library -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{{asset('css/new_approve.css')}}" type="text/css">
-    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+
 </head>
-<div class="body">
-    <nav class="navbar navbar-expand-lg navbar-dark py-0 my-0 navbar-bg" position="fixed">
+<body id="body-pd">
+    <nav class="navbar navbar-expand-lg navbar-dark py-0 my-0 navbar-bg" >
         <div class="container">
             <a class="navbar-brand" href="#">
                 <img src="{{asset('gambar/approval/logo_approve.png')}}" alt="" style="width: 170px; height:70px" class="img-fluid">
@@ -55,28 +57,110 @@
             </div>
         </div>
     </nav>
-    
-    <!-- The sidebar -->
-    <div class="sidebar">
-        <a href="#home"><i class="fa fa-star-o"></i>Approval Permit</a>
-        <a href="#services"><i class="fa fa-weixin"></i>Customer Colo</a>
-        <a href="#clients"><i class="fa fa-fw fa-user"></i>Permit Internal</a>
-        <a href="#contact"><i class="fa fa-suitcase"></i>Customer Survey</a>
-        <a href="#contact"><i class="fa fa-address-card"></i>Permit Vendor </a>
-        <a href="#contact"><i class="fa fa-user-secret"></i>Permit BM</a>
-        <a href="#contact"><i class="fa fa-users"></i>Permit Guest</a>
-    </div>
-
-    <div class="content">
-        <h1>HOME</h1>
-    </div>
-
     {{-- YANG INI JANGAN DU HAPUS !!! --}}
     <main>
         @yield('content')
     </main>
     {{-- !!!!!!!!!!!! --}}
 
+      <div class="sidebar close">
+        <ul class="nav-links">
+          <li>
+            <a href="#">
+              <i class='bx bx-grid-alt' ></i>
+              <span class="link_name">Approval Permit</span>
+            </a>
+            <ul class="sub-menu blank">
+              <li><a class="link_name" href="#">Approval Permit</a></li>
+            </ul>
+          </li>
+          <li>
+              <a href="#">
+                <i class='bx bx-collection' ></i>
+                <span class="link_name">Customer Colo</span>
+              </a>
+            <ul class="sub-menu blank">
+              <li><a class="link_name" href="#">Customer Colo</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#">
+              <i class='bx bx-pie-chart-alt-2' ></i>
+              <span class="link_name">Permit Internal</span>
+            </a>
+            <ul class="sub-menu blank">
+              <li><a class="link_name" href="#">Permit Internal</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#">
+              <i class='bx bx-line-chart' ></i>
+              <span class="link_name">Customer Survey</span>
+            </a>
+            <ul class="sub-menu blank">
+              <li><a class="link_name" href="#">Customer Survey</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#">
+              <i class='bx bx-compass' ></i>
+              <span class="link_name">Permit Vendor</span>
+            </a>
+            <ul class="sub-menu blank">
+              <li><a class="link_name" href="#">Permit Vendor</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#">
+              <i class='bx bx-history'></i>
+              <span class="link_name">Permit BM</span>
+            </a>
+            <ul class="sub-menu blank">
+              <li><a class="link_name" href="#">Permit BM</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#">
+              <i class='bx bx-plug' ></i>
+              <span class="link_name">Permit Guest</span>
+            </a>
+            <ul class="sub-menu blank">
+              <li><a class="link_name" href="#">Permit Gues</a></li>
+            </ul>
+        </li>
+   
+        <li>
+            <section class="home-section">
+              <li class="home-content">
+                  <i class='bx bx-menu' ></i>
+                <a href="#">
+                    <span class="link_name">Sidebar</span>
+                  </a>
+              </li>
 
-</div>
+            </section>
+          </li>
+
+    </ul>
+    </div>
+      
+
+<script>
+      let arrow = document.querySelectorAll(".arrow");
+      for (var i = 0; i < arrow.length; i++) {
+        arrow[i].addEventListener("click", (e)=>{
+       let arrowParent = e.target.parentElement.parentElement;
+       arrowParent.classList.toggle("showMenu");
+        });
+      }
+      let sidebar = document.querySelector(".sidebar");
+      let sidebarBtn = document.querySelector(".bx-menu");
+      sidebarBtn.addEventListener("click", ()=>{
+        sidebar.classList.toggle("close");
+      });
+      </script>
+
+ </body>
+    
 </html>
+
