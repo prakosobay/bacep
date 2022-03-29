@@ -107,15 +107,6 @@ class HomeController extends Controller
 
             return view('log');
         }
-        //elseif ($type_view == 'survey') {
-        //     $survey = DB::table('survey_histories')
-        //         ->join('survey', 'survey.survey_id', '=', 'survey_histories.survey_id')
-        //         ->where('survey_histories.role_to', '=', $role)
-        //         ->where('survey_histories.aktif', '=', 1)
-        //         ->select('survey.*')
-        //         ->get();
-        //     return view('log_survey', ['survey' => $survey]);
-        // }
         elseif ($type_view == 'cleaning') {
             $cleaningLog = DB::table('cleaning_histories')
                 ->join('cleanings', 'cleanings.cleaning_id', '=', 'cleaning_histories.cleaning_id')
@@ -159,20 +150,25 @@ class HomeController extends Controller
     public function new_permit()
     {
         $role = Session::get('arrole');
-        $dept = Auth::user()->department;
-        $company = Auth::user()->company;
-        // dd($dept);
-        if($dept == 'IT'){
+        $email = Auth::user()->email;
+        // dd($email);
+        if($email == 'it@mail.com'){
             return view('it.form');
         }
-        elseif($dept == 'IP Media'){
+        elseif($email == 'ipmedia@mail.com'){
             return view('ipmedia.form');
         }
-        elseif($dept == 'ipcore'){
+        elseif($email == 'ipcore@mail.com'){
             return "ini role ipcore";
         }
-        elseif($dept == 'Building Management'){
-            return view('');
+        elseif($email == 'bm@mail.com'){
+            return "ini bm";
+        }
+        elseif($email == ''){
+            return "ini bm";
+        }
+        elseif($email == ''){
+            return "ini bm";
         }
         else{
             abort(403);

@@ -2,16 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\{Route, Auth};
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{HomeController, CleaningController, AdminController};
-use Maatwebsite\Excel\Row;
 
-// Auth::routes(['verify' => true]);
 Route::get('/', function () {
     return view('auth.login');
     // return view('new_approve');
 })->middleware('guest');
-
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', [HomeController::class, 'index']);
