@@ -166,6 +166,9 @@ class HomeController extends Controller
         elseif($role[0] == 'bm'){
             return "ini role bm";
         }
+        elseif($role[0] == 'ipcore'){
+            return "ini role ipcore";
+        }
         else{
             abort(403);
         }
