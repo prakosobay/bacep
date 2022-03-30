@@ -157,7 +157,7 @@ class HomeController extends Controller
             return view('it.form');
         }
         elseif($email == 'ipmedia@mail.com'){
-            return view('ipmedia.form');
+            return view('it.form');
         }
         elseif($email == 'ipcore@mail.com'){
             return "ini role ipcore";
@@ -169,7 +169,7 @@ class HomeController extends Controller
             $rutin = Rutin::all();
             return view('cleaning.form', compact('master_ob', 'pilihanwork', 'personil', 'rutin'));
         }
-        elseif($email == ''){
+        elseif($email == 'pac@mail.com'){
             return "ini bm";
         }
         elseif($email == ''){
