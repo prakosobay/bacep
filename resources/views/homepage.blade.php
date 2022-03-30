@@ -17,6 +17,7 @@
 <body>
 
     @can('isVisitor')
+
     {{-- navbar --}}
     <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-0 my-0">
         <div class="container">
@@ -36,7 +37,7 @@
                     <a class="nav-link inter" href="#about">About Us</a>
                 </li>
                 <li class="nav-item mx-5">
-                    <a class="nav-link inter" href="#">Log Permit</a>
+                    <a class="nav-link inter" href="{{url('logall')}}">Log Permit</a>
                 </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
@@ -266,7 +267,7 @@
                         Book a visit to our Data Center with <b>Permit</b>. Permit is a one-way access for our Data Center Building.
                     </p>
                     <p>
-                        <a href="new" type="button" id="" class="new-btn-oren" data-cleaning_id="">Create New Permit</a>
+                        <a href="{{ url('new_permit') }}" type="button" id="" class="new-btn-oren" data-cleaning_id="">Create New Permit</a>
                     </p>
                 </div>
             </div>
@@ -423,14 +424,14 @@
     </footer>
 
     <!-- Bootstrap core JavaScript-->
-<script src="vendor/jquery/jquery.min.js"></script>
-<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Core plugin JavaScript-->
-<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+        <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
-<!-- Custom scripts for all pages-->
-<script src="js/sb-admin-2.min.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
 </body>
 </html>
 

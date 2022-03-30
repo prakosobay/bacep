@@ -139,4 +139,9 @@ Route::middleware(['auth'])->group(function () {
 
     //Visitor
     Route::get('new_permit', [HomeController::class, 'new_permit']);
+
+
+    //Log
+    Route::get('logall', [HomeController::class, 'log_all']);
+    Route::get('datatables', [ItController::class, 'anydata']);
 });

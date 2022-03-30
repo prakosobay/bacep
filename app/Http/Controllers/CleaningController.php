@@ -12,16 +12,16 @@ use phpDocumentor\Reflection\PseudoTypes\True_;
 
 class CleaningController extends Controller
 {
-    public function tampilan()
-    {
-        if (Gate::allows('isBm')) {
-            $master_ob = MasterOb::all();
-            $pilihanwork = PilihanWork::all();
-            return view('cleaning.form', ['master_ob' => $master_ob, 'pilihanwork' => $pilihanwork]);
-        } else {
-            abort(403);
-        }
-    }
+    // public function tampilan()
+    // {
+    //     if (Gate::allows('isBm')) {
+    //         $master_ob = MasterOb::all();
+    //         $pilihanwork = PilihanWork::all();
+    //         return view('cleaning.form', ['master_ob' => $master_ob, 'pilihanwork' => $pilihanwork]);
+    //     } else {
+    //         abort(403);
+    //     }
+    // }
 
     public function detail_ob($id)
     {

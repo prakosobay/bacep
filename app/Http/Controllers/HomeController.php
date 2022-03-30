@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\{MasterOb, Personil, PilihanWork, Rutin};
 use Illuminate\Support\Facades\{DB, Auth, Gate, Session};
 
 class HomeController extends Controller
@@ -161,8 +162,12 @@ class HomeController extends Controller
         elseif($email == 'ipcore@mail.com'){
             return "ini role ipcore";
         }
-        elseif($email == 'bm@mail.com'){
-            return "ini bm";
+        elseif($email == 'data.center7@balitower.co.id'){
+            $master_ob = MasterOb::all();
+            $pilihanwork = PilihanWork::all();
+            $personil = Personil::all();
+            $rutin = Rutin::all();
+            return view('cleaning.form', compact('master_ob', 'pilihanwork', 'personil', 'rutin'));
         }
         elseif($email == ''){
             return "ini bm";
@@ -172,6 +177,19 @@ class HomeController extends Controller
         }
         else{
             abort(403);
+        }
+    }
+
+    public function log_all()
+    {
+        $email = Auth::user()->email;
+        // dd($email);
+
+        if($email == 'it@mail.com'){
+            return view('it.log');
+        }
+        elseif($email == 'ipcore@mail.com'){
+            return view('ipcore.log');
         }
     }
 }
