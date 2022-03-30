@@ -156,15 +156,15 @@ class HomeController extends Controller
             return view('it.form');
         }
         elseif($email == 'ipmedia@mail.com'){
-            return view('ipmedia.form');
+            return view('it.form');
         }
         elseif($email == 'ipcore@mail.com'){
             return "ini role ipcore";
         }
-        elseif($email == 'bm@mail.com'){
-            return "ini bm";
+        elseif($email == 'data.center7@balitower.co.id'){
+            return view('cleaning.form');
         }
-        elseif($email == ''){
+        elseif($email == 'pac@mail.com'){
             return "ini bm";
         }
         elseif($email == ''){

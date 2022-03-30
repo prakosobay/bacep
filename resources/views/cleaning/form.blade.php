@@ -39,9 +39,9 @@
                     <div>
                         <select class="js-select2" id="working" name="cleaning_work">
                             <option value=""></option>
-                            @foreach($pilihanwork as $p)
+                            {{-- @foreach($pilihanwork as $p)
                             <option value="{{ $p->id }}">{{ $p->work }}</option>
-                            @endforeach
+                            @endforeach --}}
                         </select>
                         <div class="dropDownSelect2"></div>
                     </div>
@@ -263,9 +263,9 @@
                     <div>
                         <select class="js-select2" id="pilihan1" name="cleaning_name">
                             <option value=""></option>
-                            @foreach($master_ob as $p)
+                            {{-- @foreach($master_ob as $p)
                             <option value="{{ $p->ob_id }}">{{ $p->nama }}</option>
-                            @endforeach
+                            @endforeach --}}
                         </select>
                         <div class="dropDownSelect2"></div>
                     </div>
@@ -275,9 +275,9 @@
                     <div>
                         <select class="js-select2" id="pilihan2" name="cleaning_name2">
                             <option value=""></option>
-                            @foreach($master_ob as $p)
+                            {{-- @foreach($master_ob as $p)
                             <option value="{{ $p->ob_id }}">{{ $p->nama }}</option>
-                            @endforeach
+                            @endforeach --}}
                         </select>
                         <div class="dropDownSelect2"></div>
                     </div>

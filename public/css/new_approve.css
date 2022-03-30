@@ -28,9 +28,7 @@
   background: #dddddd;
   z-index: 100;
   transition: all 0.5s ease;
-  margin-top:80px;
- ;
-  
+  margin-top:80px;  
 }
 .sidebar.close{
   width: 78px;
@@ -81,7 +79,8 @@
   transition: all 0.4s ease;
 }
 .sidebar .nav-links li:hover{
-  background: #bd440d;
+  background: #EA8C00;
+  color: white;
 }
 .sidebar .nav-links li .iocn-link{
   display: flex;
