@@ -16,6 +16,8 @@ class ObSeeder extends Seeder
     {
         MasterOb::truncate();
         $row = [
+
+            // Andi
             [
                 'nama' => 'Andi Sugandi',
                 'id_number' => '3204292311830001',
@@ -24,6 +26,8 @@ class ObSeeder extends Seeder
                 'responsible' => 'Cleaner',
                 'department' => 'Building Management',
             ],
+
+            // Rokhim
             [
                 'nama' => 'Rokhim',
                 'id_number' => '3174050404891001',
@@ -32,6 +36,8 @@ class ObSeeder extends Seeder
                 'responsible' => 'Cleaner',
                 'department' => 'Building Management',
             ],
+
+            // Jejen
             [
                 'nama' => 'Jejen Jenudin',
                 'id_number' => '3671052411880001',
@@ -40,6 +46,8 @@ class ObSeeder extends Seeder
                 'responsible' => 'Cleaner',
                 'department' => 'Building Management',
             ],
+
+            // Randi
             [
                 'nama' => 'Randi Andika',
                 'id_number' => '3276011510880010',
@@ -48,6 +56,8 @@ class ObSeeder extends Seeder
                 'responsible' => 'Cleaner',
                 'department' => 'Building Management',
             ],
+
+            // Anita
             [
                 'nama' => 'Anita Aryani',
                 'id_number' => '5206025203881010',
