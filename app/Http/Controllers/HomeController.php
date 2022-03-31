@@ -162,7 +162,7 @@ class HomeController extends Controller
         elseif($email == 'ipcore@mail.com'){
             return "ini role ipcore";
         }
-        elseif($email == 'data.center7@balitower.co.id'){
+        elseif(($email == 'data.center7@balitower.co.id') || ($email == 'badai.sino@balitower.co.id')){
             $master_ob = MasterOb::all();
             $pilihanwork = PilihanWork::all();
             $personil = Personil::all();
@@ -190,6 +190,9 @@ class HomeController extends Controller
         }
         elseif($email == 'ipcore@mail.com'){
             return view('ipcore.log');
+        }
+        elseif($email == 'badai.sino@balitower.co.id'){
+            return view('bm.log');
         }
     }
 }

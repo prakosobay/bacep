@@ -20,11 +20,12 @@ class CleaningFull extends Model
     protected $fillable = [
         'cleaning_id',
         'cleaning_date',
-        'cleaning_name',
-        'cleaning_name2',
         'validity_from',
+        'validity_to',
         'cleaning_work',
         'status',
         'link',
+        'cleaning_name',
+        'cleaning_name2',
     ];
 }

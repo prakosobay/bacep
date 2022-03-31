@@ -144,4 +144,5 @@ Route::middleware(['auth'])->group(function () {
     //Log
     Route::get('logall', [HomeController::class, 'log_all']);
     Route::get('datatables', [ItController::class, 'anydata']);
+    Route::get('log_bm', [CleaningController::class, 'log_carbon']);
 });

@@ -9,6 +9,8 @@ use App\Mail\{NotifEmail, NotifReject, NotifFull};
 use App\Models\{User, Role, MasterOb, PilihanWork};
 use App\Models\{Cleaning, CleaningHistory, CleaningFull};
 use phpDocumentor\Reflection\PseudoTypes\True_;
+use Yajra\Datatables\Datatables;
+use Carbon\Carbon;
 
 class CleaningController extends Controller
 {
@@ -196,5 +198,28 @@ class CleaningController extends Controller
             ->get();
         $pdf = PDF::loadview('cleaning_pdf', ['cleaning' => $cleaning, 'lasthistoryC' => $lasthistoryC, 'cleaningHistory' => $cleaningHistory])->setPaper('a4', 'portrait')->setWarnings(false);
         return $pdf->stream();
+    }
+
+    public function log_full()
+    {
+        return Datatables::of(CleaningFull::query())->make(true);
+    }
+
+    public function log_carbon()
+    {
+        $carbon = DB::table('cleaning_fulls')->get();
+
+        // dd($carbon);
+        return Datatables::of($carbon)
+            ->editColumn('cleaning_date', function ($carbon) {
+                return $carbon->cleaning_date ? with(new Carbon($carbon->cleaning_date))->format('d/m/Y') : '';
+            })
+            ->editColumn('validity_from', function ($carbon) {
+                return $carbon->validity_from ? with(new Carbon($carbon->validity_from))->format('d/m/Y') : '';
+            })
+            ->editColumn('validity_to', function ($carbon) {
+                return $carbon->validity_to ? with(new Carbon($carbon->validity_to))->format('d/m/Y') : '';
+            })
+            ->make(true);
     }
 }
