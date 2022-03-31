@@ -172,8 +172,8 @@ class HomeController extends Controller
         elseif($email == 'pac@mail.com'){
             return "ini bm";
         }
-        elseif($email == ''){
-            return "ini bm";
+        elseif($email == 'sales@mail.com'){
+            return view('sales.form');
         }
         else{
             abort(403);

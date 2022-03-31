@@ -26,8 +26,13 @@
                         <thead>
                             <tr>
                                 <th>ID </th>
-                                <th>Name </th>
-                                <th>Email</th>
+                                <th>Date of Request</th>
+                                <th>Date of Visit</th>
+                                <th>Date of Leave</th>
+                                <th>Visitor Name</th>
+                                <th>Purpose of Work </th>
+                                <th>Status</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -41,17 +46,5 @@
 
 @push('scripts')
     <script>
-        $(function() {
-            $('#example').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: "{{url('datatables')}}",
-                columns: [
-                    { data: 'id', name: 'id' },
-                    { data: 'name', name: 'name' },
-                    { data: 'email', name: 'email' },
-                ]
-            });
-        });
     </script>
 @endpush

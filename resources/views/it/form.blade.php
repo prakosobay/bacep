@@ -10,7 +10,7 @@
             </div>
             <h4 class="margin-row text-center">Form Permit IT</h4>
             <div class="margin-row">
-                <form id="myform" class="form-group" enctype="multipart/form-data" method="POST" action="#">
+                <form id="myform" class="validate-form" enctype="multipart/form-data" method="POST" action="#">
                     @csrf
 
                     @if (count($errors) > 0)
@@ -185,7 +185,8 @@
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
-                                    @enderror</td>
+                                    @enderror
+                                </td>
                                 <td><input class="form-control"></td>
                             </tr>
                             <tr>
@@ -361,8 +362,8 @@
                     </div>
 
                     <div class="submit-container margin-item">
-                        <a href="#" type="submit" class="btn btn-primary">Submit</a>
-                        <a type="cancel" class="btn btn-secondary">Cancel</a>
+                        <button href="#" type="submit" class="btn btn-primary">Submit</button>
+                        <button type="cancel" class="btn btn-secondary">Cancel</button>
                     </div>
                 </form>
             </div>
