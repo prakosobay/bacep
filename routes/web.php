@@ -27,7 +27,7 @@ Route::middleware(['auth'])->group(function () {
     //Submit
     Route::post('/submit_data_cleaning', [CleaningController::class, 'submit_data_cleaning']);
     Route::post('/rutin.form', [RutinController::class, 'store_rutin']);
-    Route::post('survey', [SurveyController::class, 'store']);
+    Route::post('/survey', [SurveyController::class, 'store']);
 
     //History
     Route::get('/detail_cleaning{id}', [CleaningController::class, 'approve_cleaning']);
