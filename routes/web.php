@@ -27,7 +27,6 @@ Route::middleware(['auth'])->group(function () {
     //Submit
     Route::post('/submit_data_cleaning', [CleaningController::class, 'submit_data_cleaning']);
     Route::post('/rutin.form', [RutinController::class, 'store_rutin']);
-    Route::post('/survey', [SurveyController::class, 'store']);
 
     //History
     Route::get('/detail_cleaning{id}', [CleaningController::class, 'approve_cleaning']);
@@ -47,7 +46,7 @@ Route::middleware(['auth'])->group(function () {
     //Form
     Route::get('/cleaning.form', [CleaningController::class, 'tampilan']);
 
-    //Revisi
+    //Revisi personil ob
     Route::get('revisi/{type_view}', [HomeController::class, 'revisi_view']);
     Route::post('/other_revisi', [RutinController::class, 'revisi']);
     Route::get('/rev/{id}', [RutinController::class, 'other_revisi']);
@@ -138,7 +137,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/rutins/{id}', [RutinController::class, 'rutin']);
     Route::get('/personil/{id}', [RutinController::class, 'personil']);
 
-    //Visitor
+    // Survey
+    Route::post('/survey', [SurveyController::class, 'store']);
+    Route::get('json/{id}', [SurveyController::class, 'json']);
+
+    //Visitor All Base Super
     Route::get('new_permit', [HomeController::class, 'new_permit']);
 
     //Log
@@ -146,5 +149,5 @@ Route::middleware(['auth'])->group(function () {
     Route::get('datatables', [ItController::class, 'anydata']);
     Route::get('log_bm', [CleaningController::class, 'log_carbon']);
 
-    Route::get('json/{id}', [SurveyController::class, 'json']);
+
 });

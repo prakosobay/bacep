@@ -693,6 +693,7 @@ class ComposerStaticInit582140f03abb5abd5ed2c14fd376fb64
         'App\\Models\\Role' => __DIR__ . '/../..' . '/app/Models/Role.php',
         'App\\Models\\Rutin' => __DIR__ . '/../..' . '/app/Models/Rutin.php',
         'App\\Models\\Survey' => __DIR__ . '/../..' . '/app/Models/Survey.php',
+        'App\\Models\\SurveyHistory' => __DIR__ . '/../..' . '/app/Models/SurveyHistory.php',
         'App\\Models\\SurveyVisitor' => __DIR__ . '/../..' . '/app/Models/SurveyVisitor.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
