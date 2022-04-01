@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use phpDocumentor\Reflection\Types\Nullable;
 use Validator;
 
 class SurveyController extends Controller
@@ -11,36 +12,32 @@ class SurveyController extends Controller
     {
         // dd($request->all());
         $validated = $request->validate([
-            'name-req' => ['required', 'string', 'max:100'],
-            'date_visit' => 'required',
-            'date_leave' => ['required', 'date', 'after:date_visit'],
-            'dept-req' => ['required', 'string', 'max:200'],
-            'phone-req' => ['required', 'numeric', 'max:14'],
-            'name1' => ['required', 'string', 'max:100'],
-            'nik1' => ['required', 'numeric', 'max:14'],
-            'phone1' => ['required', 'numeric', 'max:14'],
-            'company1' => ['required', 'string', 'max:200'],
-            'dept1' => ['required', 'string', 'max:200'],
-            'name2' => ['string', 'max:100'],
-            'nik2' => ['numeric', 'max:14'],
-            'phone2' => ['numeric', 'max:14'],
-            'company2' => ['string', 'max:200'],
-            'dept2' => ['string', 'max:200'],
-            'name3' => ['string', 'max:100'],
-            'nik3' => ['numeric', 'max:14'],
-            'phone3' => ['numeric', 'max:14'],
-            'company3' => ['string', 'max:200'],
-            'dept3' => ['string', 'max:200'],
-            'name4' => ['string', 'max:100'],
-            'nik4' => ['numeric', 'max:14'],
-            'phone4' => ['numeric', 'max:14'],
-            'company4' => ['string', 'max:200'],
-            'dept4' => ['string', 'max:200'],
-            'name5' => ['string', 'max:100'],
-            'nik5' => ['numeric', 'max:14'],
-            'phone5' => ['numeric', 'max:14'],
-            'company5' => ['string', 'max:200'],
-            'dept5' => ['string', 'max:200'],
+            'date_of_visit' => ['required', 'date', 'after:yesterday'],
+            'date_of_leave' => ['required', 'date', 'after:yesterday', 'after_or_equal:date_of_visit'],
+            'nama_requestor' => ['required', 'string', 'max:100'],
+            'dept_requestor' => ['required', 'string', 'max:200'],
+            'phone_requestor' => ['required', 'regex:/^([0-9\s\-\+\(\)]*)$/', 'min:10'],
+            'visitor_name1' => ['required', 'string', 'max:100'],
+            'visitor_nik1' => ['required'],
+            'visitor_phone1' => ['required', 'regex:/^([0-9\s\-\+\(\)]*)$/', 'min:10'],
+            'visitor_company1' => ['required', 'string', 'max:200'],
+            'visitor_dept1' => ['required', 'string', 'max:200'],
+            'visitor_name2' => ['string', 'max:100', 'nullable'],
+            'visitor_phone2' => ['regex:/^([0-9\s\-\+\(\)]*)$/', 'min:10', 'nullable'],
+            'visitor_company2' => ['string', 'max:200', 'nullable'],
+            'visitor_dept2' => ['string', 'max:200', 'nullable'],
+            'visitor_name3' => ['string', 'max:100', 'nullable'],
+            'visitor_phone3' => ['regex:/^([0-9\s\-\+\(\)]*)$/', 'min:10', 'nullable'],
+            'visitor_company3' => ['string', 'max:200', 'nullable'],
+            'visitor_dept3' => ['string', 'max:200', 'nullable'],
+            'visitor_name4' => ['string', 'max:100', 'nullable'],
+            'visitor_phone4' => ['regex:/^([0-9\s\-\+\(\)]*)$/', 'min:10', 'nullable'],
+            'visitor_company4' => ['string', 'max:200', 'nullable'],
+            'visitor_dept4' => ['string', 'max:200', 'nullable'],
+            'visitor_name5' => ['string', 'max:100', 'nullable'],
+            'visitor_phone5' => ['regex:/^([0-9\s\-\+\(\)]*)$/', 'min:10', 'nullable'],
+            'visitor_company5' => ['string', 'max:200', 'nullable'],
+            'visitor_dept5' => ['string', 'max:200', 'nullable'],
         ]);
 
         return "done";
