@@ -145,4 +145,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('logall', [HomeController::class, 'log_all']);
     Route::get('datatables', [ItController::class, 'anydata']);
     Route::get('log_bm', [CleaningController::class, 'log_carbon']);
+
+    Route::get('json/{id}', [SurveyController::class, 'json']);
 });
