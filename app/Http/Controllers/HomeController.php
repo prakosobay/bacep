@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\{MasterOb, Personil, PilihanWork, Rutin};
 use Illuminate\Support\Facades\{DB, Auth, Gate, Session};
 
 class HomeController extends Controller
@@ -52,8 +53,7 @@ class HomeController extends Controller
             if ($type_view == 'survey') {
                 $survey = DB::table('survey_histories')
                     ->join('survey', 'survey.survey_id', '=', 'survey_histories.survey_id')
-                    // ->where('survey_histories.role_to', '=', $role_1)
-                    // ->where('survey_histories.role_to', '=', $role_2)
+                    ->where('survey_histories.role_to', '=', $role_1)
                     ->where('survey_histories.aktif', '=', 1)
                     ->select('survey.*')
                     ->get();
@@ -107,15 +107,6 @@ class HomeController extends Controller
 
             return view('log');
         }
-        //elseif ($type_view == 'survey') {
-        //     $survey = DB::table('survey_histories')
-        //         ->join('survey', 'survey.survey_id', '=', 'survey_histories.survey_id')
-        //         ->where('survey_histories.role_to', '=', $role)
-        //         ->where('survey_histories.aktif', '=', 1)
-        //         ->select('survey.*')
-        //         ->get();
-        //     return view('log_survey', ['survey' => $survey]);
-        // }
         elseif ($type_view == 'cleaning') {
             $cleaningLog = DB::table('cleaning_histories')
                 ->join('cleanings', 'cleanings.cleaning_id', '=', 'cleaning_histories.cleaning_id')
@@ -159,12 +150,51 @@ class HomeController extends Controller
     public function new_permit()
     {
         $role = Session::get('arrole');
-        // dd($role);
-        if($role[0] == 'it'){
-            return "ini role IT";
+        $email = Auth::user()->email;
+        // dd($email);
+        if($email == 'it@mail.com'){
+            return view('it.form');
         }
-        elseif($role[0] == 'bm'){
-            return "ini role bm";
+        elseif($email == 'ipmedia@mail.com'){
+            return view('it.form');
+        }
+        elseif($email == 'ipcore@mail.com'){
+            return "ini role ipcore";
+        }
+        elseif(($email == 'data.center7@balitower.co.id') || ($email == 'badai.sino@balitower.co.id')){
+            $master_ob = MasterOb::all();
+            $pilihanwork = PilihanWork::all();
+            $personil = Personil::all();
+            $rutin = Rutin::all();
+            return view('cleaning.form', compact('master_ob', 'pilihanwork', 'personil', 'rutin'));
+        }
+        elseif($email == 'pac@mail.com'){
+            return "ini bm";
+        }
+        elseif($email == 'sales@mail.com'){
+            return view('sales.form');
+        }
+        else{
+            abort(403);
+        }
+    }
+
+    public function log_all()
+    {
+        $email = Auth::user()->email;
+        // dd($email);
+
+        if($email == 'it@mail.com'){
+            return view('it.log');
+        }
+        elseif($email == 'ipcore@mail.com'){
+            return view('ipcore.log');
+        }
+        elseif($email == 'badai.sino@balitower.co.id'){
+            return view('bm.log');
+        }
+        elseif($email == 'sales@mail.com'){
+            return view('sales.log');
         }
         else{
             abort(403);

@@ -2,16 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\{Route, Auth};
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{HomeController, CleaningController, AdminController};
-use Maatwebsite\Excel\Row;
 
-// Auth::routes(['verify' => true]);
 Route::get('/', function () {
-    //return view('auth.login');
-    return view('new_approve');
+    return view('auth.login');
+    // return view('new_approve');
 })->middleware('guest');
-
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', [HomeController::class, 'index']);
@@ -49,7 +46,7 @@ Route::middleware(['auth'])->group(function () {
     //Form
     Route::get('/cleaning.form', [CleaningController::class, 'tampilan']);
 
-    //Revisi
+    //Revisi personil ob
     Route::get('revisi/{type_view}', [HomeController::class, 'revisi_view']);
     Route::post('/other_revisi', [RutinController::class, 'revisi']);
     Route::get('/rev/{id}', [RutinController::class, 'other_revisi']);
@@ -140,6 +137,17 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/rutins/{id}', [RutinController::class, 'rutin']);
     Route::get('/personil/{id}', [RutinController::class, 'personil']);
 
-    //Visitor
+    // Survey
+    Route::post('/survey', [SurveyController::class, 'store']);
+    Route::get('json/{id}', [SurveyController::class, 'json']);
+
+    //Visitor All Base Super
     Route::get('new_permit', [HomeController::class, 'new_permit']);
+
+    //Log
+    Route::get('logall', [HomeController::class, 'log_all']);
+    Route::get('datatables', [ItController::class, 'anydata']);
+    Route::get('log_bm', [CleaningController::class, 'log_carbon']);
+
+
 });

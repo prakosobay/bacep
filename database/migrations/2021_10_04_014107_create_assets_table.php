@@ -18,6 +18,8 @@ class CreateAssetsTable extends Migration
             $table->string('nama_barang')->unique();
             $table->integer('itemcode')->nullable();
             $table->unsignedBigInteger('jumlah')->nullable();
+            $table->unsignedBigInteger('digunakan')->nullable();
+            $table->unsignedBigInteger('sisa')->nullable();
             $table->string('satuan');
             $table->string('kondisi');
             $table->text('note')->nullable();

@@ -1,0 +1,44 @@
+.navbar-bg{
+    background-color: #09458F;
+    font-family: 'inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -0.01em;
+    color: white;
+}
+
+@media (max-width: 420px) {
+  .sidebar.close .nav-links li .sub-menu{
+    display: none;
+  }
+}
+
+@font-face {
+    src: url('/../fonts/Inter/static/Inter-Medium.ttf');
+    font-family: "inter";
+}
+
+@font-face {
+    font-family:"lora";
+    src: url('/../fonts/Lora/Lora-VariableFont_wght.ttf');
+}
+
+.home-abu{
+    font-family: 'inter';
+    color: #828282;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: 0.01rem;
+}
+
+.table-font{
+    font-family: 'lora';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    color: #1D1D1D;
+}

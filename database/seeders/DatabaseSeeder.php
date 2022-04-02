@@ -15,5 +15,6 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(RutinSeeder::class);
         $this->call(PersonilTableSeeder::class);
+        $this->call(ObSeeder::class);
     }
 }

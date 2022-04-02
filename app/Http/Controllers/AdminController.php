@@ -55,6 +55,7 @@ class AdminController extends Controller
             ],
             'phone' => ['required', 'numeric'],
             'department' => ['required', 'string', 'max:255'],
+            'company' => ['required', 'string'],
             'slug' => ['required', 'string'],
             'password' => ['required'],
         ]);
@@ -64,6 +65,7 @@ class AdminController extends Controller
             'email' => $request->email,
             'phone' => $request->phone,
             'department' => $request->department,
+            'company' => $request->company,
             'slug' => $request->slug,
             'password' => Hash::make($request['password']),
         ]);
@@ -143,6 +145,7 @@ class AdminController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'slug' => ['required', 'string', 'max:255'],
             'department' => ['required', 'string', 'max:255'],
+            'company' => ['required', 'string'],
             'phone' => ['required', 'numeric'],
         ]);
 
@@ -152,6 +155,7 @@ class AdminController extends Controller
             'name' => $request->name,
             'slug' => $request->slug,
             'department' => $request->department,
+            'company' => $request->company,
             'phone' => $request->phone,
         ]);
 

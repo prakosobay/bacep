@@ -50,6 +50,10 @@
                                 <div class="form-group">
                                     <input id="dept" type="text" class="form-control" name="department"  required="required">
                                 </div>
+                                <label>Company :</label>
+                                <div class="form-group">
+                                    <input id="company" type="text" class="form-control" name="company"  required="required">
+                                </div>
                                 <label>No. HP :</label>
                                 <div class="form-group">
                                     <input id="hp" type="number" class="form-control" name="phone"  required="required">
@@ -74,6 +78,7 @@
                             <th>Email</th>
                             <th>Slug</th>
                             <th>Department</th>
+                            <th>Company</th>
                             <th>No. HP</th>
                             <th>Action</th>
                         </tr>
@@ -86,6 +91,7 @@
                                 <td>{{$c->email}}</td>
                                 <td>{{$c->slug}}</td>
                                 <td>{{$c->department}}</td>
+                                <td>{{$c->company}}</td>
                                 <td>{{$c->phone}}</td>
                                 <td>
                                     <a href="{{url('u.edit', $c->id)}}" type="button" class="btn btn-success mr-2 col-xs-2 margin-bottom">Edit</a>

@@ -72,6 +72,5 @@ class PilihanWork extends Model
         'mitigation_plan_6',
         'testing',
         'rollback',
-
     ];
 }
