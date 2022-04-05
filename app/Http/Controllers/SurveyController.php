@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use phpDocumentor\Reflection\Types\Nullable;
-use App\Models\{Survey, SurveyHistory, SurveyVisitor};
+use App\Models\{Survey, SurveyHistory, SurveyVisitor, User};
 use Illuminate\Support\Facades\{DB, Auth, Gate, Session};
+use Yajra\Datatables\Datatables;
+use Illuminate\Support\Carbon;
 
 class SurveyController extends Controller
 {
@@ -66,11 +68,10 @@ class SurveyController extends Controller
             'pdf' => false
         ]);
         if($survey && $log){
-            return "done";
+            return view('homepage');
         }else{
             return "gagal";
         }
-
     }
 
     public function approve_survey(Request $request)
@@ -91,7 +92,47 @@ class SurveyController extends Controller
             } elseif ($logsurvey->status == 'acknowledge') {
                 $status = 'final';
             }
+
+            $role_to = '';
+            if (($logsurvey->role_to == 'review')) {
+                $role_to = 'check';
+            } elseif (($logsurvey->role_to == 'check')) {
+                $role_to = 'security';
+            } elseif (($logsurvey->role_to == 'security')) {
+                $role_to = 'head';
+            }if ($logsurvey->role_to == 'head') {
+                $survey = Survey::where('id', $request->id)->first();
+            }
+
+            $history = SurveyHistory::create([
+                'survey_id' => $request->id,
+                'created_by' => Auth::user()->id,
+                'role_to' => $role_to,
+                'status' => $status,
+                'aktif' => true,
+                'pdf' => false,
+            ]);
         }
+        else{
+            abort(403);
+        }
+    }
+
+    public function data_approval()
+    {
+        // return Datatables::of(Survey::query())->make(true);
+
+        $survey = DB::table('surveys')->select(['id', 'created_at', 'visit', '']);
+        // $pic = $survey->pic;
+        // dd($pic);
+        return Datatables::of($survey)
+            ->editColumn('created_at', function ($survey) {
+                return $survey->created_at ? with(new Carbon($survey->created_at))->format('d/m/Y') : '';
+            })
+            ->editColumn('visit', function ($survey) {
+                return $survey->visit ? with(new Carbon($survey->visit))->format('d/m/Y') : '';;
+            })
+            ->make(true);
     }
 
     public function survey_pdf($id)
@@ -102,8 +143,8 @@ class SurveyController extends Controller
 
     public function json($id)
     {
-        $json = Survey::findOrFail($id);
-        $pic = $json->pic;
-        dd($pic);
+        // $survey = DB::table('surveys')->select(['pic', 'visit'])->get();
+        $user = Survey::find($id);
+        $user->pic['name'] = $value;
     }
 }

@@ -48,16 +48,16 @@ class HomeController extends Controller
 
     public function approval_view($type_view)
     {
-        if ((Gate::denies('isAdmin'))) {
+        if ((Gate::denies('isAdmin') && (Gate::denies('isVisitor')))) {
             $role_1 = Session::get('arrole');
             if ($type_view == 'survey') {
                 $survey = DB::table('survey_histories')
-                    ->join('survey', 'survey.survey_id', '=', 'survey_histories.survey_id')
+                    ->join('surveys', 'surveys.id', '=', 'survey_histories.survey_id')
                     ->where('survey_histories.role_to', '=', $role_1)
                     ->where('survey_histories.aktif', '=', 1)
-                    ->select('survey.*')
+                    ->select('surveys.*')
                     ->get();
-                return view('hasil_survey', ['survey' => $survey]);
+                return view('sales.approval', compact('survey'));
             } elseif ($type_view == 'cleaning') {
                 $cleaning = DB::table('cleaning_histories')
                     ->join('cleanings', 'cleanings.cleaning_id', '=', 'cleaning_histories.cleaning_id')
@@ -74,10 +74,9 @@ class HomeController extends Controller
                     ->where('other_histories.aktif', '=', 1)
                     ->select('other.*', 'other_histories.status', 'other_histories.pdf')
                     ->get();
-                    // dd($otherHistories);
                 return view('other.show', compact('otherHistories'));
             }else {
-                return view('approval');
+                return view('all_approval');
             }
         } else {
             abort(403);

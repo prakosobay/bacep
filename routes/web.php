@@ -7,7 +7,7 @@ use App\Http\Controllers\{HomeController, CleaningController, AdminController};
 
 Route::get('/', function () {
     return view('auth.login');
-    // return view('new_approve');
+    // return view('sales.approval');
 })->middleware('guest');
 
 Route::middleware(['auth'])->group(function () {
@@ -30,9 +30,6 @@ Route::middleware(['auth'])->group(function () {
 
     //History
     Route::get('/detail_cleaning{id}', [CleaningController::class, 'approve_cleaning']);
-
-    //Approval view
-    Route::get('/approval/{type_view}', [HomeController::class, 'approval_view']);
 
     //Full Approval
     Route::get('/full_approval/{type_form}', [HomeController::class, 'approval_full']);
@@ -139,10 +136,14 @@ Route::middleware(['auth'])->group(function () {
 
     // Survey
     Route::post('/survey', [SurveyController::class, 'store']);
-    Route::get('json/{id}', [SurveyController::class, 'json']);
+    Route::get('jsona', [SurveyController::class, 'json']);
+    Route::get('/survey_approval', [SurveyController::class, 'view_approval']);
+    Route::get('route_data_approval', [SurveyController::class, 'data_approval']);
 
     //Visitor All Base Super
     Route::get('new_permit', [HomeController::class, 'new_permit']);
+    Route::get('approval_route', [HomeController::class, 'all_approval']);
+    Route::get('/approval/{type_view}', [HomeController::class, 'approval_view']);
 
     //Log
     Route::get('logall', [HomeController::class, 'log_all']);

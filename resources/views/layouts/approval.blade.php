@@ -12,9 +12,14 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.css"/>
 
 </head>
 <body id="body-pd">
+
+<div id="wrapper">
+
+    {{-- navbar --}}
     <nav class="navbar navbar-expand-lg navbar-dark py-0 my-0 navbar-bg" >
         <div class="container">
             <a class="navbar-brand" href="#">
@@ -29,13 +34,13 @@
                         <a class="nav-link" aria-current="page" href="{{url('/home')}}">Home</a>
                     </li>
                     <li class="nav-item mx-5">
-                        <a class="nav-link" href="#about">Approval</a>
+                        <a class="nav-link" href="{{ url('approval_route')}}">Approval</a>
                     </li>
                     <li class="nav-item mx-5">
                         <a class="nav-link" href="#">Full Approval</a>
                     </li>
                     <li class="nav-item mx-5">
-                        <a class="nav-link" href="#">Inventory</a>
+                        <a class="nav-link" href="{{ url('/table_barang')}}">Inventory</a>
                     </li>
                     <li class="nav-item mx-5">
                         <a class="nav-link" href="#">Log Permit</a>
@@ -57,93 +62,112 @@
             </div>
         </div>
     </nav>
-    {{-- YANG INI JANGAN DU HAPUS !!! --}}
+
+    {{-- sidebar --}}
+
+    <div class="sidebar close">
+        <ul class="nav-links">
+            <li>
+                <a href="{{ url('approval/all')}}">
+                <i class='bx bx-grid-alt' ></i>
+                <span class="link_name">Approval Permit</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <span>Approval Permit</span>
+                </ul>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bx-collection' ></i>
+                    <span class="link_name">Customer Colo</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <span>Customer Colo</span>
+                </ul>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bx-pie-chart-alt-2' ></i>
+                    <span class="link_name">Permit Internal</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <span>Permit Internal</span>
+                </ul>
+            </li>
+            <li>
+                <a href="{{ url('approval/survey')}}">
+                    <i class='bx bx-line-chart' ></i>
+                    <span class="link_name">Customer Survey</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <span>Customer Survey</span>
+                </ul>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bx-compass' ></i>
+                    <span class="link_name">Permit Vendor</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <span>Permit Vendor</span>
+                </ul>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bx-history'></i>
+                    <span class="link_name">Permit BM</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <span class="link_name">Permit BM</span>
+                </ul>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bx-plug' ></i>
+                    <span class="link_name">Permit Guest</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <span class="link_name">Permit Guest</span>
+                </ul>
+            </li>
+            <li>
+                <li class="home-content">
+                    <i class='bx bx-menu' ></i>
+                    <a href="#">
+                        <span class="link_name">Sidebar</span>
+                    </a>
+                </li>
+            </li>
+        </ul>
+    </div>
+
     <main>
         @yield('content')
     </main>
-    {{-- !!!!!!!!!!!! --}}
 
-      <div class="sidebar close">
-        <ul class="nav-links">
-          <li>
-            <a href="#">
-              <i class='bx bx-grid-alt' ></i>
-              <span class="link_name">Approval Permit</span>
-            </a>
-            <ul class="sub-menu blank">
-              <li><a class="link_name" href="#">Approval Permit</a></li>
-            </ul>
-          </li>
-          <li>
-              <a href="#">
-                <i class='bx bx-collection' ></i>
-                <span class="link_name">Customer Colo</span>
-              </a>
-            <ul class="sub-menu blank">
-              <li><a class="link_name" href="#">Customer Colo</a></li>
-            </ul>
-          </li>
-          <li>
-            <a href="#">
-              <i class='bx bx-pie-chart-alt-2' ></i>
-              <span class="link_name">Permit Internal</span>
-            </a>
-            <ul class="sub-menu blank">
-              <li><a class="link_name" href="#">Permit Internal</a></li>
-            </ul>
-          </li>
-          <li>
-            <a href="#">
-              <i class='bx bx-line-chart' ></i>
-              <span class="link_name">Customer Survey</span>
-            </a>
-            <ul class="sub-menu blank">
-              <li><a class="link_name" href="#">Customer Survey</a></li>
-            </ul>
-          </li>
-          <li>
-            <a href="#">
-              <i class='bx bx-compass' ></i>
-              <span class="link_name">Permit Vendor</span>
-            </a>
-            <ul class="sub-menu blank">
-              <li><a class="link_name" href="#">Permit Vendor</a></li>
-            </ul>
-          </li>
-          <li>
-            <a href="#">
-              <i class='bx bx-history'></i>
-              <span class="link_name">Permit BM</span>
-            </a>
-            <ul class="sub-menu blank">
-              <li><a class="link_name" href="#">Permit BM</a></li>
-            </ul>
-          </li>
-          <li>
-            <a href="#">
-              <i class='bx bx-plug' ></i>
-              <span class="link_name">Permit Guest</span>
-            </a>
-            <ul class="sub-menu blank">
-              <li><a class="link_name" href="#">Permit Gues</a></li>
-            </ul>
-        </li>
+</div>
 
-        <li>
-            <section class="home-section">
-              <li class="home-content">
-                  <i class='bx bx-menu' ></i>
-                <a href="#">
-                    <span class="link_name">Sidebar</span>
-                  </a>
-              </li>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.js"></script>
 
-            </section>
-          </li>
+<script>
+    let arrow = document.querySelectorAll(".arrow");
+    for (var i = 0; i < arrow.length; i++) {
+        arrow[i].addEventListener("click", (e)=>{
+        let arrowParent = e.target.parentElement.parentElement;
+        arrowParent.classList.toggle("showMenu");
+        });
+    }
+    let sidebar = document.querySelector(".sidebar");
+    let sidebarBtn = document.querySelector(".bx-menu");
+    sidebarBtn.addEventListener("click", ()=>{
+        sidebar.classList.toggle("close");
+    });
+</script>
 
-    </ul>
-    </div>
- </body>
-
+@stack('scripts')
+</body>
 </html>
 
