@@ -22,6 +22,7 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+
     public function index()
     {
         $role_2 = Auth::user()->roles;
@@ -57,6 +58,7 @@ class HomeController extends Controller
                     ->where('survey_histories.aktif', '=', 1)
                     ->select('surveys.*')
                     ->get();
+                    dd($survey);
                 return view('sales.approval', compact('survey'));
             } elseif ($type_view == 'cleaning') {
                 $cleaning = DB::table('cleaning_histories')
@@ -122,6 +124,79 @@ class HomeController extends Controller
                 ->get();
                 // dd($other_log);
             return view('other.log', compact('other_log'));
+        }
+        elseif($type_view == 'survey'){
+            $survey_log = DB::table('survey_histories')
+                ->join('surveys', 'surveys.id', '=', 'survey_histories.survey_id')
+                ->join('users', 'users.id', '=', 'survey_histories.created_by')
+                ->select('survey_histories.*', 'surveys.visit', 'users.name')
+                ->get();
+                dd($survey_log);
+            return view('sales.history', compact('survey_log'));
+        }
+    }
+
+    public function history($type_view)
+    {
+        if ((Gate::denies('isAdmin') && (Gate::denies('isVisitor')))) {
+            if($type_view == 'all'){
+                return view('all_history');
+            }
+            elseif($type_view == 'survey'){
+                return view('sales.history');
+            }
+            elseif($type_view == 'cleaning'){
+                return view('cleaning.history');
+            }
+            else{
+                abort(403);
+            }
+        }
+        else{
+            abort(403);
+        }
+    }
+
+    public function approval($type_approve)
+    {
+        if ((Gate::denies('isAdmin') && (Gate::denies('isVisitor')))) {
+            $role_1 = Session::get('arrole');
+            if($type_approve == 'all'){
+                return view('all_approval');
+            }
+            elseif($type_approve == 'survey'){
+                return view('sales.approval');
+            }
+            elseif($type_approve == 'cleaning'){
+                $cleaning = DB::table('cleaning_histories')
+                    ->join('cleanings', 'cleanings.cleaning_id', '=', 'cleaning_histories.cleaning_id')
+                    ->whereIn('cleaning_histories.role_to', $role_1)
+                    ->where('cleaning_histories.aktif', '=', 1)
+                    ->select('cleanings.*')
+                    ->get();
+                return view('cleaning.approval', compact('cleaning'));
+            }
+            else{
+                abort(403);
+            }
+        }
+        else{
+            abort(403);
+        }
+    }
+
+    public function full($type_full)
+    {
+        if ((Gate::allows('isApproval')) || (Gate::allows('isHead')) || (Gate::allows('isAdmin'))) {
+            if($type_full == 'all'){
+                return view('all_full_approval');
+            } elseif($type_full == 'survey'){
+                return view('sales.full_approval');
+            } elseif($type_full == 'cleaning'){
+                return view('cleaning.full_approval');
+            } else{
+                abort(403);
+            }
         }
     }
 

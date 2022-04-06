@@ -296,7 +296,7 @@
                         <a class="nav-link inter" href="{{url('approval/all')}}">Approval</a>
                     </li>
                     <li class="nav-item mx-5">
-                        <a class="nav-link inter" href="{{ url('log/all') }}">Log Permit</a>
+                        <a class="nav-link inter" href="{{ url('history/all') }}">Log Permit</a>
                     </li>
                 </ul>
 
@@ -312,7 +312,7 @@
                         <a class="nav-link inter" href="{{ url('/table_barang') }}">Inventory</a>
                     </li>
                     <li class="nav-item mx-5">
-                        <a class="nav-link inter" href="{{ url('log/all') }}">Log Permit</a>
+                        <a class="nav-link inter" href="{{ url('history/all') }}">Log Permit</a>
                     </li>
                 </ul>
 
@@ -325,13 +325,13 @@
                         <a class="nav-link inter" href="{{url('approval/all')}}">Approval</a>
                     </li>
                     <li class="nav-item mx-5">
-                        <a class="nav-link inter" href="{{ url('full_approval/all') }}">Full Approval</a>
+                        <a class="nav-link inter" href="{{ url('full/all') }}">Full Approval</a>
                     </li>
                     <li class="nav-item mx-5">
                         <a class="nav-link inter" href="{{ url('/table_barang') }}">Inventory</a>
                     </li>
                     <li class="nav-item mx-5">
-                        <a class="nav-link inter" href="{{ url('log/all') }}">Log Permit</a>
+                        <a class="nav-link inter" href="{{ url('history/all') }}">Log Permit</a>
                     </li>
                 </ul>
 

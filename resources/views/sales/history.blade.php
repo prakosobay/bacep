@@ -1,10 +1,10 @@
-@extends('layouts.approval')
+@extends('layouts.history')
 
 @section('content')
 <div class="container">
 
     <!-- Page Heading -->
-    <h1 class="h3 my-2 text-gray-800 text-center">Approval Form Survey</h1>
+    <h1 class="h3 my-2 text-gray-800 text-center">History Form Survey</h1>
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
@@ -40,26 +40,18 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-striped table-hover" id="dataTable" width="100%" cellspacing="0">
+                <table class="table table-hover table-bordered text-center" id="dataTable" width="100%" cellspacing="0">
                     <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Date of Request</th>
+                        <tr class="text-center">
+                            <th>ID Permit</th>
+                            <th>Role</th>
+                            <th>Status</th>
+                            <th>Last Updated</th>
                             <th>Validity</th>
-                            <th>Visitor</th>
-                            <th>Company</th>
-                            <th>Action</th>
+                            <th>Ket</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($survey as $p)
-                        <tr>
-                            <td>{{ $p->id }}</td>
-                            <td>{{ Carbon\Carbon::parse($p->visit)->format('d-m-Y') }}</td>
-                            <td>{{ }}</td>
-                            <td>{{ $p->cleaning_work }}</td>
-                        </tr>
-                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -68,21 +60,22 @@
 </div>
 
 @push('scripts')
-    {{-- <script>
-        $(function() {
-            $('#dataTable').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: '{{url('route_data_approval')}}',
-                columns: [
-                    { data: 'id', name: 'id' },
-                    { data: 'created_at', name: 'created_at' },
-                    { data: 'visit', name: 'visit' },
-                    { data: 'name', name: 'pic' },
-                    { data: 'company', name: 'visit' },
-                ]
-            });
+<script>
+    $(function() {
+        $('#dataTable').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: '{{url('route_history_survey')}}',
+            columns: [
+                { data: 'id', name: 'surveys.id' },
+                { data: 'role_to', name: 'role_to' },
+                { data: 'status', name: 'status' },
+                { data: 'updated_at', name: 'updated_at' },
+                { data: 'visit', name: 'surveys.visit' },
+                { data: 'aktif', name: 'aktif' },
+            ]
         });
-    </script> --}}
+    });
+</script>
 @endpush
 @endsection

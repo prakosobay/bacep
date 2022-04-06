@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\{DB, Auth, Gate, Mail};
+use Illuminate\Support\Facades\{DB, Auth, Gate, Mail, Session};
 use Barryvdh\DomPDF\Facade as PDF;
 use App\Mail\{NotifEmail, NotifReject, NotifFull};
 use App\Models\{User, Role, MasterOb, PilihanWork};
@@ -24,6 +24,22 @@ class CleaningController extends Controller
     //         abort(403);
     //     }
     // }
+
+
+    public function data_history()
+    {
+        $cleaning_log = DB::table('cleaning_histories')
+                ->join('cleanings', 'cleanings.cleaning_id', '=', 'cleaning_histories.cleaning_id')
+                ->select('cleaning_histories.*', 'cleanings.validity_from');
+        return Datatables::of($cleaning_log)
+            ->editColumn('updated_at', function ($cleaning_log) {
+                return $cleaning_log->updated_at ? with(new Carbon($cleaning_log->updated_at))->format('d/m/Y') : '';
+            })
+            ->editColumn('validity_from', function ($cleaning_log) {
+                return $cleaning_log->validity_from ? with(new Carbon($cleaning_log->validity_from))->format('d/m/Y') : '';;
+            })
+            ->make(true);
+    }
 
     public function detail_ob($id)
     {
@@ -77,7 +93,7 @@ class CleaningController extends Controller
             ->where('cleaning_histories.cleaning_id', '=', $id)
             ->select('cleaning_histories.*', 'users.name', 'cleanings.cleaning_work')
             ->get();
-        return view('detail_cleaning', ['cleaningHistory' => $cleaningHistory]);
+        return view('detail_cleaning', compact('cleaningHistory'));
     }
 
     public function approve_cleaning(Request $request)

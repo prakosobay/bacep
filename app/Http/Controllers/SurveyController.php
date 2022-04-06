@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use phpDocumentor\Reflection\Types\Nullable;
-use App\Models\{Survey, SurveyHistory, SurveyVisitor, User};
+use App\Models\{Survey, SurveyHistory, User};
 use Illuminate\Support\Facades\{DB, Auth, Gate, Session};
 use Yajra\Datatables\Datatables;
 use Illuminate\Support\Carbon;
@@ -135,6 +135,22 @@ class SurveyController extends Controller
             ->make(true);
     }
 
+    public function data_history()
+    {
+        $survey_log = DB::table('survey_histories')
+                ->join('surveys', 'surveys.id', '=', 'survey_histories.survey_id')
+                ->join('users', 'users.id', '=', 'survey_histories.created_by')
+                ->select('survey_histories.*', 'surveys.visit', 'users.name');
+        return Datatables::of($survey_log)
+            ->editColumn('updated_at', function ($survey_log) {
+                return $survey_log->updated_at ? with(new Carbon($survey_log->updated_at))->format('d/m/Y') : '';
+            })
+            ->editColumn('visit', function ($survey_log) {
+                return $survey_log->visit ? with(new Carbon($survey_log->visit))->format('d/m/Y') : '';;
+            })
+            ->make(true);
+    }
+
     public function survey_pdf($id)
     {
         $survey = Survey::findOrFail($id);
@@ -144,7 +160,7 @@ class SurveyController extends Controller
     public function json($id)
     {
         // $survey = DB::table('surveys')->select(['pic', 'visit'])->get();
-        $user = Survey::find($id);
-        $user->pic['name'] = $value;
+        // $user = Survey::find($id);
+        // $user->pic['name'] = $value;
     }
 }

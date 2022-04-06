@@ -139,11 +139,19 @@ Route::middleware(['auth'])->group(function () {
     Route::get('jsona', [SurveyController::class, 'json']);
     Route::get('/survey_approval', [SurveyController::class, 'view_approval']);
     Route::get('route_data_approval', [SurveyController::class, 'data_approval']);
+    Route::get('route_history_survey', [SurveyController::class, 'data_history']);
+    Route::get('history/{type_view}', [HomeController::class, 'log_view']);
+
+    // Cleaning
+    Route::get('route_history_cleaning', [CleaningController::class, 'data_history']);
 
     //Visitor All Base Super
     Route::get('new_permit', [HomeController::class, 'new_permit']);
-    Route::get('approval_route', [HomeController::class, 'all_approval']);
-    Route::get('/approval/{type_view}', [HomeController::class, 'approval_view']);
+
+    // ALL
+    Route::get('history/{type_view}', [HomeController::class, 'history']);
+    Route::get('approval/{type_approve}', [HomeController::class, 'approval']);
+    Route::get('full/{type_full}', [HomeController::class, 'full']);
 
     //Log
     Route::get('logall', [HomeController::class, 'log_all']);

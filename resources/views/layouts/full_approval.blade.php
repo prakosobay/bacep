@@ -101,7 +101,7 @@
     <div class="sidebar close">
         <ul class="nav-links">
             <li>
-                <a href="{{ url('approval/all')}}">
+                <a href="{{ url('full/all')}}">
                 <i class='bx bx-grid-alt' ></i>
                 <span class="link_name">Approval Permit</span>
                 </a>
@@ -128,7 +128,7 @@
                 </ul>
             </li>
             <li>
-                <a href="{{ url('approval/survey')}}">
+                <a href="{{ url('full/survey')}}">
                     <i class='bx bx-line-chart' ></i>
                     <span class="link_name">Customer Survey</span>
                 </a>
@@ -146,7 +146,7 @@
                 </ul>
             </li>
             <li>
-                <a href="{{ url('approval/cleaning')}}">
+                <a href="{{ url('full/cleaning')}}">
                     <i class='bx bx-history'></i>
                     <span class="link_name">Permit Cleaning</span>
                 </a>
@@ -155,7 +155,7 @@
                 </ul>
             </li>
             <li>
-                <a href="{{ url('approval/other')}}">
+                <a href="{{ url('full/other')}}">
                     <i class='bx bx-history'></i>
                     <span class="link_name">Permit Other</span>
                 </a>
