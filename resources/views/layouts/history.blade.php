@@ -20,7 +20,7 @@
 <div id="wrapper">
 
     {{-- navbar --}}
-    <nav class="navbar navbar-expand-lg navbar-dark py-0 my-0 navbar-bg" >
+    <nav class="navbar navbar-expand-xl navbar-dark py-0 my-0 navbar-bg" >
         <div class="container">
             <a class="navbar-brand" href="#">
                 <img src="{{asset('gambar/approval/logo_approve.png')}}" alt="" style="width: 170px; height:70px" class="img-fluid">
@@ -32,49 +32,49 @@
                 @can('isApproval')
                     <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
                         <li class="nav-item mx-5">
-                            <a class="nav-link" aria-current="page" href="{{url('/home')}}">Home</a>
+                            <a class="nav-link inter" aria-current="page" href="{{url('/home')}}">Home</a>
                         </li>
                         <li class="nav-item mx-5">
-                            <a class="nav-link" href="{{ url('approval/all')}}">Approval</a>
+                            <a class="nav-link inter" href="{{ url('approval/all')}}">Approval</a>
                         </li>
                         <li class="nav-item mx-5">
-                            <a class="nav-link" href="{{ url('full')}}">Full Approval</a>
+                            <a class="nav-link inter" href="{{ url('full')}}">Full Approval</a>
                         </li>
                         <li class="nav-item mx-5">
-                            <a class="nav-link" href="{{ url('/table_barang')}}">Inventory</a>
+                            <a class="nav-link inter" href="{{ url('/table_barang')}}">Inventory</a>
                         </li>
                         <li class="nav-item mx-5">
-                            <a class="nav-link" href="{{ url('history/all')}}">Log Permit</a>
+                            <a class="nav-link inter" href="{{ url('history/all')}}">Log Permit</a>
                         </li>
                     </ul>
                 @elsecan('isHead')
                 <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
                     <li class="nav-item mx-5">
-                        <a class="nav-link" aria-current="page" href="{{url('/home')}}">Home</a>
+                        <a class="nav-link inter" aria-current="page" href="{{url('/home')}}">Home</a>
                     </li>
                     <li class="nav-item mx-5">
-                        <a class="nav-link" href="{{ url('approval/all')}}">Approval</a>
+                        <a class="nav-link inter" href="{{ url('approval/all')}}">Approval</a>
                     </li>
                     <li class="nav-item mx-5">
-                        <a class="nav-link" href="{{ url('full/all')}}">Full Approval</a>
+                        <a class="nav-link inter" href="{{ url('full/all')}}">Full Approval</a>
                     </li>
                     <li class="nav-item mx-5">
-                        <a class="nav-link" href="{{ url('/table_barang')}}">Inventory</a>
+                        <a class="nav-link inter" href="{{ url('/table_barang')}}">Inventory</a>
                     </li>
                     <li class="nav-item mx-5">
-                        <a class="nav-link" href="{{ url('history/all')}}">Log Permit</a>
+                        <a class="nav-link inter" href="{{ url('history/all')}}">Log Permit</a>
                     </li>
                 </ul>
                 @elsecan('isSecurity')
                     <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
                         <li class="nav-item mx-5">
-                            <a class="nav-link" aria-current="page" href="{{url('/home')}}">Home</a>
+                            <a class="nav-link inter" aria-current="page" href="{{url('/home')}}">Home</a>
                         </li>
                         <li class="nav-item mx-5">
-                            <a class="nav-link" href="{{ url('approval/all')}}">Approval</a>
+                            <a class="nav-link inter" href="{{ url('approval/all')}}">Approval</a>
                         </li>
                         <li class="nav-item mx-5">
-                            <a class="nav-link" href="{{ url('history/all')}}">Log Permit</a>
+                            <a class="nav-link inter" href="{{ url('history/all')}}">Log Permit</a>
                         </li>
                     </ul>
                 @endcan

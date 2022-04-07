@@ -7,7 +7,7 @@ use App\Http\Controllers\{HomeController, CleaningController, AdminController};
 
 Route::get('/', function () {
     return view('auth.login');
-    // return view('sales.approval');
+    // return view('layouts.tes');
 })->middleware('guest');
 
 Route::middleware(['auth'])->group(function () {
@@ -17,15 +17,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/detail_cleaning/{id}', [CleaningController::class, 'detail_permit_cleaning']);
 
     //Approve flow
-
     Route::post('/approve_other', [RutinController::class, 'approve_other']);
 
     //Reject
-
     Route::post('other_reject', [RutinController::class, 'reject']);
 
     //Submit
-
     Route::post('/rutin.form', [RutinController::class, 'store_rutin']);
 
     //History
@@ -126,7 +123,7 @@ Route::middleware(['auth'])->group(function () {
 
     // Survey
     Route::post('/survey', [SurveyController::class, 'store']);
-    Route::get('jsona', [SurveyController::class, 'json']);
+    Route::get('jsona/{$id}', [SurveyController::class, 'json']);
     Route::get('/survey_approval', [SurveyController::class, 'view_approval']);
     Route::get('route_data_approval', [SurveyController::class, 'data_approval']);
     Route::get('route_history_survey', [SurveyController::class, 'data_history']);

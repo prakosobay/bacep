@@ -2,14 +2,10 @@
 
 @section('content')
 <div class="container-fluid">
-
-    <!-- Page Heading -->
-    <h1 class="h3 my-2 text-gray-800 text-center">History Form Cleaning</h1>
-
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-
+            <h4 class="judul text-center">Log Form Cleaning</h4>
             <!-- Import Excel -->
             <div class="modal fade" id="asset" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -33,13 +29,12 @@
                     </form>
                 </div>
             </div>
-
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-striped table-hover" id="dataTable" width="100%" cellspacing="0">
+                <table class="table table-striped table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
-                        <tr class="text-center">
+                        <tr class="judul-table text-center">
                             <th>ID Permit</th>
                             <th>Role</th>
                             <th>Status</th>
@@ -48,7 +43,7 @@
                             <th>Ket</th>
                         </tr>
                     </thead>
-                    <tbody class="text-center">
+                    <tbody class="isi-table text-center">
                     </tbody>
                 </table>
             </div>

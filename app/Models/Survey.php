@@ -15,7 +15,7 @@ class Survey extends Model
     protected $primaryKey = 'id';
     protected $guarded = [];
     protected $casts = [
-        'pic' => AsCollection::class,
+        'pic' => AsArrayObject::class,
     ];
 
 

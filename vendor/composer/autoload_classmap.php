@@ -68,7 +68,6 @@ return array(
     'App\\Models\\Rutin' => $baseDir . '/app/Models/Rutin.php',
     'App\\Models\\Survey' => $baseDir . '/app/Models/Survey.php',
     'App\\Models\\SurveyHistory' => $baseDir . '/app/Models/SurveyHistory.php',
-    'App\\Models\\SurveyVisitor' => $baseDir . '/app/Models/SurveyVisitor.php',
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
     'App\\Providers\\AuthServiceProvider' => $baseDir . '/app/Providers/AuthServiceProvider.php',

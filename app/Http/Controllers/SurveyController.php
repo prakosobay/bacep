@@ -67,6 +67,7 @@ class SurveyController extends Controller
             'aktif' => '1',
             'pdf' => false
         ]);
+
         if($survey && $log){
             return view('homepage');
         }else{
@@ -77,7 +78,7 @@ class SurveyController extends Controller
     public function approve_survey(Request $request)
     {
         $logsurvey = SurveyHistory::where('id', '=', $request->id)->latest()->first();
-        dd($logsurvey);
+        // dd($logsurvey);
 
         if($logsurvey->pdf == true){
             $logsurvey->update(['aktif' => false]);
@@ -116,6 +117,7 @@ class SurveyController extends Controller
         else{
             abort(403);
         }
+        return $history->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
     }
 
     public function data_approval()
@@ -159,8 +161,23 @@ class SurveyController extends Controller
 
     public function json($id)
     {
+        $value = '';
         // $survey = DB::table('surveys')->select(['pic', 'visit'])->get();
-        // $user = Survey::find($id);
-        // $user->pic['name'] = $value;
+        $user = Survey::find($id);
+        $user->pic['name'] = $value;
+        dd ($value);
+        // $string = Survey::find($id);
+        // $area = json_decode($string, true);
+
+        //     foreach($area['pic'] as $i => $v)
+        //     {
+        //         echo $v['pic'].'<br/>';
+        //     }
+
+            // foreach (json_decode($user) as $area)
+            // {
+            //     print($area);
+            // }
+
     }
 }

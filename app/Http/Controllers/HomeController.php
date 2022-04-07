@@ -165,7 +165,15 @@ class HomeController extends Controller
                 return view('all_approval');
             }
             elseif($type_approve == 'survey'){
-                return view('sales.approval');
+                $survey = DB::table('survey_histories')
+                    ->join('surveys', 'surveys.id', '=', 'survey_histories.survey_id')
+                    ->whereIn('survey_histories.role_to', $role_1)
+                    ->where('survey_histories.aktif', '=', 1)
+                    ->select('surveys.*')
+                    ->get();
+                    $manage = json_decode($survey->name, true);
+                    dd($manage);
+                return view('sales.approval', compact('survey'));
             }
             elseif($type_approve == 'cleaning'){
                 $cleaning = DB::table('cleaning_histories')

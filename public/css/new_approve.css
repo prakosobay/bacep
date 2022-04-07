@@ -14,6 +14,16 @@
     src: url('/../fonts/Lora/Lora-VariableFont_wght.ttf');
 }
 
+.inter{
+    font-family: 'inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -0.01em;
+    color: #FFFFFF;
+}
+
 .judul{
     font-family: 'lora';
     font-style: normal;
@@ -28,6 +38,16 @@
     font-style: normal;
     font-weight: 700;
     font-size: 14px;
+    letter-spacing: 0.01em;
+    color: #1D1D1D;
+}
+
+.isi-table{
+    font-family: 'inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
     letter-spacing: 0.01em;
     color: #1D1D1D;
 }

@@ -1,88 +1,65 @@
 @extends('layouts.approval')
 
 @section('content')
-<div class="container">
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card ml-5 mt-3">
+                        <h4 class="judul">Table Approval Sales</h4>
+                        <div class="card-body">
+                            <table id="dataTable" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr class="judul-table text-center">
+                                        <th>ID Permit</th>
+                                        <th>Date of Request</th>
+                                        <th>Validity</th>
+                                        <th>Visitor</th>
+                                        <th>Purpose</th>
+                                        {{-- <th>Action</th> --}}
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($survey as $p)
+                                        <tr>
+                                            <td>{{ $p->id }}</td>
+                                            <td>{{ Carbon\Carbon::parse($p->created_at)->format('d-m-Y') }}</td>
+                                            <td>{{ Carbon\Carbon::parse($p->visit)->format('d-m-Y') }}</td>
 
-    <!-- Page Heading -->
-    <h1 class="h3 my-2 text-gray-800 text-center">Approval Form Survey</h1>
-
-    <!-- DataTales Example -->
-    <div class="card shadow mb-4">
-        <div class="card-header py-3">
-            <a href="#" type="button" class="btn btn-success mr-5" >
-                <strong>Export Excel</strong>
-            </a>
-
-            <!-- Import Excel -->
-            <div class="modal fade" id="asset" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <form method="post" action="{{ url('/asset')}}" enctype="multipart/form-data">
-                        {{ csrf_field() }}
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Import File CSV</h5>
-                            </div>
-                            <div class="modal-body">
-                                <label>Pilih file CSV</label>
-                                <div class="form-group">
-                                    <input type="file" name="file" required="required">
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Import</button>
-                            </div>
+                                            @foreach ($p->pic as $n)
+                                                <td>
+                                                    {{ $n->name }}
+                                                </td>
+                                            @endforeach
+                                            <td>Survey Facility</td>
+                                            {{-- <td>
+                                            @can('isApproval')
+                                                <a href="javascript:void(0)" type="button" id="ok" class="approve btn btn-success btn-sm" data-cleaning_id="{{$p->cleaning_id}}">Approve</a>
+                                                <a href="javascript:void(0)" type="button" id="not" class="reject btn btn-danger btn-sm" data-cleaning_id="{{$p->cleaning_id}}">Reject</a>
+                                            @elsecan('isHead')
+                                                <a href="javascript:void(0)" type="button" id="ok" class="approve btn btn-success btn-sm" data-cleaning_id="{{$p->cleaning_id}}">Approve</a>
+                                                <a href="javascript:void(0)" type="button" id="not" class="reject btn btn-danger btn-sm" data-cleaning_id="{{$p->cleaning_id}}">Reject</a>
+                                            @elsecan('isSecurity')
+                                                <a href="javascript:void(0)" type="button" id="ok" class="approve btn btn-success btn-sm" data-cleaning_id="{{$p->cleaning_id}}">Approve</a>
+                                            @endcan
+                                                <a href="/cleaning_pdf/{{$p->cleaning_id}}" class="btn btn-primary btn-sm" target="_blank">File</a>
+                                        </td> --}}
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
-
         </div>
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-striped table-hover" id="dataTable" width="100%" cellspacing="0">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Date of Request</th>
-                            <th>Validity</th>
-                            <th>Visitor</th>
-                            <th>Company</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($survey as $p)
-                        <tr>
-                            <td>{{ $p->id }}</td>
-                            <td>{{ Carbon\Carbon::parse($p->visit)->format('d-m-Y') }}</td>
-                            <td>{{ }}</td>
-                            <td>{{ $p->cleaning_work }}</td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
+    </section>
 
-@push('scripts')
-    {{-- <script>
-        $(function() {
-            $('#dataTable').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: '{{url('route_data_approval')}}',
-                columns: [
-                    { data: 'id', name: 'id' },
-                    { data: 'created_at', name: 'created_at' },
-                    { data: 'visit', name: 'visit' },
-                    { data: 'name', name: 'pic' },
-                    { data: 'company', name: 'visit' },
-                ]
+    @push('scripts')
+        <script>
+            $(document).ready(function() {
+                $('#dataTable').DataTable();
             });
-        });
-    </script> --}}
-@endpush
+        </script>
+    @endpush
 @endsection
