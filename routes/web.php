@@ -17,15 +17,15 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/detail_cleaning/{id}', [CleaningController::class, 'detail_permit_cleaning']);
 
     //Approve flow
-    Route::post('/approve_cleaning', [CleaningController::class, 'approve_cleaning']);
+
     Route::post('/approve_other', [RutinController::class, 'approve_other']);
 
     //Reject
-    Route::post('/cleaning_reject', [CleaningController::class, 'cleaning_reject']);
+
     Route::post('other_reject', [RutinController::class, 'reject']);
 
     //Submit
-    Route::post('/submit_data_cleaning', [CleaningController::class, 'submit_data_cleaning']);
+
     Route::post('/rutin.form', [RutinController::class, 'store_rutin']);
 
     //History
@@ -37,22 +37,12 @@ Route::middleware(['auth'])->group(function () {
     //LOG
     Route::get('/log/{type_view}', [HomeController::class, 'log_view']);
 
-    //Paket OB
-    Route::get('/detail/{id}', [CleaningController::class, 'detail_ob']);
-
-    //Form
-    Route::get('/cleaning.form', [CleaningController::class, 'tampilan']);
-
     //Revisi personil ob
     Route::get('revisi/{type_view}', [HomeController::class, 'revisi_view']);
     Route::post('/other_revisi', [RutinController::class, 'revisi']);
     Route::get('/rev/{id}', [RutinController::class, 'other_revisi']);
 
-    //Pilihan Work
-    Route::get('/cleaning/{id}', [CleaningController::class, 'pilihan_work']);
-
     //PDF
-    Route::get('/cleaning_pdf/{id}', [CleaningController::class, 'cetak_cleaning_pdf']);
     Route::get('/other_pdf/{id}', [RutinController::class, 'other_pdf']);
 
     //Admin Panel
@@ -144,6 +134,15 @@ Route::middleware(['auth'])->group(function () {
 
     // Cleaning
     Route::get('route_history_cleaning', [CleaningController::class, 'data_history']);
+    Route::get('route_full_cleaning', [CleaningController::class, 'data_full']);
+    Route::get('log_cleaning', [CleaningController::class, 'log_carbon']);
+    Route::get('/cleaning_pdf/{id}', [CleaningController::class, 'cetak_cleaning_pdf']);
+    Route::get('/cleaning/{id}', [CleaningController::class, 'pilihan_work']);
+    Route::get('/detail/{id}', [CleaningController::class, 'detail_ob']);
+    Route::get('/cleaning.form', [CleaningController::class, 'tampilan']);
+    Route::post('/submit_data_cleaning', [CleaningController::class, 'submit_data_cleaning']);
+    Route::post('/cleaning_reject', [CleaningController::class, 'cleaning_reject']);
+    Route::post('/approve_cleaning', [CleaningController::class, 'approve_cleaning']);
 
     //Visitor All Base Super
     Route::get('new_permit', [HomeController::class, 'new_permit']);
@@ -156,7 +155,7 @@ Route::middleware(['auth'])->group(function () {
     //Log
     Route::get('logall', [HomeController::class, 'log_all']);
     Route::get('datatables', [ItController::class, 'anydata']);
-    Route::get('log_bm', [CleaningController::class, 'log_carbon']);
+
 
 
 });

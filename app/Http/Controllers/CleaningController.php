@@ -36,7 +36,20 @@ class CleaningController extends Controller
                 return $cleaning_log->updated_at ? with(new Carbon($cleaning_log->updated_at))->format('d/m/Y') : '';
             })
             ->editColumn('validity_from', function ($cleaning_log) {
-                return $cleaning_log->validity_from ? with(new Carbon($cleaning_log->validity_from))->format('d/m/Y') : '';;
+                return $cleaning_log->validity_from ? with(new Carbon($cleaning_log->validity_from))->format('d/m/Y') : '';
+            })
+            ->make(true);
+    }
+
+    public function data_full()
+    {
+        $full = DB::table('cleaning_fulls');
+        return Datatables::of($full)
+            ->editColumn('validity_from', function ($full) {
+                return $full->validity_from ? with(new Carbon($full->validity_from))->format('d/m/Y') : '';
+            })
+            ->editColumn('validity_from', function ($full) {
+                return $full->validity_from ? with(new Carbon($full->validity_from))->format('d/m/Y') : '';;
             })
             ->make(true);
     }
@@ -152,7 +165,7 @@ class CleaningController extends Controller
 
         if ($lasthistoryC->role_to == 'head') {
             $cleaning = Cleaning::find($request->cleaning_id);
-            foreach (['dc@balitower.co.id'] as $recipient) {
+            foreach (['bayu.prakoso@balitower.co.id'] as $recipient) {
                 Mail::to($recipient)->send(new NotifFull($cleaning));
             }
             $cleaning = Cleaning::where('cleaning_id', $request->cleaning_id)->first();

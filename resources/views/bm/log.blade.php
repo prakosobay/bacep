@@ -17,28 +17,23 @@
                 </h4>
             </div>
         </div>
-        <div class="row justify-content-md-center mt-3">
-            <div class="col text-center">
-                <div class="card">
-                <!-- /.card-header -->
-                <div class="card-body">
-                    <table id="example" class="table table-striped table-bordered">
-                        <thead>
-                            <tr>
-                                <th>ID </th>
-                                <th>Date of Request</th>
-                                <th>Date of Visit</th>
-                                <th>Date of Leave</th>
-                                <th>Visitor Name</th>
-                                <th>Purpose of Work </th>
-                                <th>Status</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
-                </div>
+        <div class="card ml-5 mt-3">
+            <div class="card-body">
+                <table id="dataTable" class="table table-bordered table-striped">
+                    <thead>
+                        <tr class="judul-table text-center">
+                            <th>ID Permit</th>
+                            <th>Date of Request</th>
+                            <th>Date of Visit</th>
+                            <th>Date of Leave</th>
+                            <th>Name</th>
+                            <th>Purpose</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -47,10 +42,10 @@
 @push('scripts')
 <script>
     $(function() {
-        $('#example').DataTable({
+        $('#dataTable').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{url('log_bm')}}",
+            ajax: "{{url('log_cleaning')}}",
             columns: [
                 { data: 'cleaning_id', name: 'cleaning_id' },
                 { data: 'cleaning_date', name: 'cleaning_date' },
@@ -59,7 +54,6 @@
                 { data: 'cleaning_name', name: 'cleaning_name' },
                 { data: 'cleaning_work', name: 'cleaning_work' },
                 { data: 'status', name: 'status' },
-                // { data: 'action', name: '<a href="#" type=button class="btn btn-primary">'},
             ]
         });
     });

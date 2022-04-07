@@ -4,6 +4,34 @@
     width: 100%;
 }
 
+@font-face {
+    src: url('/../fonts/Inter/static/Inter-Medium.ttf');
+    font-family: "inter";
+}
+
+@font-face {
+    font-family:"lora";
+    src: url('/../fonts/Lora/Lora-VariableFont_wght.ttf');
+}
+
+.judul{
+    font-family: 'lora';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    color: #1D1D1D;
+}
+
+.judul-table{
+    font-family: 'inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.01em;
+    color: #1D1D1D;
+}
+
 .navbar{
     position: fixed;
     width: 100%;
@@ -28,7 +56,7 @@
   background: #dddddd;
   z-index: 100;
   transition: all 0.5s ease;
-  margin-top:80px;  
+  margin-top:80px;
 }
 .sidebar.close{
   width: 78px;
@@ -68,7 +96,7 @@
 }
 .sidebar.close .nav-links{
   overflow: visible;
-  
+
 }
 .sidebar .nav-links::-webkit-scrollbar{
   display: none;
