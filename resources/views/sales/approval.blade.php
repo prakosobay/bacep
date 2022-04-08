@@ -14,9 +14,9 @@
                                         <th>ID Permit</th>
                                         <th>Date of Request</th>
                                         <th>Validity</th>
-                                        <th>Visitor</th>
+                                        {{-- <th>Visitor</th> --}}
                                         <th>Purpose</th>
-                                        {{-- <th>Action</th> --}}
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -25,25 +25,23 @@
                                             <td>{{ $p->id }}</td>
                                             <td>{{ Carbon\Carbon::parse($p->created_at)->format('d-m-Y') }}</td>
                                             <td>{{ Carbon\Carbon::parse($p->visit)->format('d-m-Y') }}</td>
-
-                                            @foreach ($p->pic as $n)
-                                                <td>
-                                                    {{ $n->name }}
-                                                </td>
-                                            @endforeach
+                                            {{-- <td>{{ $p->visit_name[0] }}</td> --}}
+                                            {{-- @foreach ($json->visit_name[0] as $r)
+                                                <td>{{ $r }}</td>
+                                            @endforeach --}}
                                             <td>Survey Facility</td>
-                                            {{-- <td>
+                                            <td>
                                             @can('isApproval')
-                                                <a href="javascript:void(0)" type="button" id="ok" class="approve btn btn-success btn-sm" data-cleaning_id="{{$p->cleaning_id}}">Approve</a>
-                                                <a href="javascript:void(0)" type="button" id="not" class="reject btn btn-danger btn-sm" data-cleaning_id="{{$p->cleaning_id}}">Reject</a>
+                                                <a href="javascript:void(0)" type="button" id="ok" class="approve btn btn-success btn-sm" data-id="{{$p->id}}">Approve</a>
+                                                <a href="javascript:void(0)" type="button" id="not" class="reject btn btn-danger btn-sm" data-id="{{$p->id}}">Reject</a>
                                             @elsecan('isHead')
-                                                <a href="javascript:void(0)" type="button" id="ok" class="approve btn btn-success btn-sm" data-cleaning_id="{{$p->cleaning_id}}">Approve</a>
-                                                <a href="javascript:void(0)" type="button" id="not" class="reject btn btn-danger btn-sm" data-cleaning_id="{{$p->cleaning_id}}">Reject</a>
+                                                <a href="javascript:void(0)" type="button" id="ok" class="approve btn btn-success btn-sm" data-id="{{$p->id}}">Approve</a>
+                                                <a href="javascript:void(0)" type="button" id="not" class="reject btn btn-danger btn-sm" data-id="{{$p->id}}">Reject</a>
                                             @elsecan('isSecurity')
-                                                <a href="javascript:void(0)" type="button" id="ok" class="approve btn btn-success btn-sm" data-cleaning_id="{{$p->cleaning_id}}">Approve</a>
+                                                <a href="javascript:void(0)" type="button" id="ok" class="approve btn btn-success btn-sm" data-id="{{$p->id}}">Approve</a>
                                             @endcan
-                                                <a href="/cleaning_pdf/{{$p->cleaning_id}}" class="btn btn-primary btn-sm" target="_blank">File</a>
-                                        </td> --}}
+                                                <a href="#" class="btn btn-primary btn-sm" target="_blank">File</a>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>

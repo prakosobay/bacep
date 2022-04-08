@@ -81,7 +81,7 @@
                             <div class="form-group row mb-4">
                                 <div class="col-3">
                                     <label for="visitor_name1">Visitor 1 Name</label>
-                                    <input type="text" class="form-control @error('visitor_name1') is-invalid @enderror" required autocomplete="visitor_name1" value="{{ old('visitor_name1')}}" id="visitor_name1" name="visitor_name1" required>
+                                    <input type="text" class="form-control @error('visitor_name1') is-invalid @enderror" required autocomplete="visitor_name1" value="{{ old('visitor_name1')}}" id="visitor_name1" name="visitor_name[]" required>
                                         @error('visitor_name1')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -90,7 +90,7 @@
                                 </div>
                                 <div class="col-2">
                                     <label for="visitor_nik1">ID Number</label>
-                                    <input type="text" class="form-control @error('visitor_nik1') is-invalid @enderror" required autocomplete="visitor_nik1" value="{{ old('visitor_nik1')}}" id="visitor_nik1" name="visitor_nik1" required>
+                                    <input type="text" class="form-control @error('visitor_nik1') is-invalid @enderror" required autocomplete="visitor_nik1" value="{{ old('visitor_nik1')}}" id="visitor_nik1" name="visitor_nik[]" required>
                                         @error('visitor_nik1')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -99,7 +99,7 @@
                                 </div>
                                 <div class="col-2">
                                     <label for="visitor_phone1">Phone Number</label>
-                                    <input type="number" class="form-control @error('visitor_phone1') is-invalid @enderror" required autocomplete="visitor_phone1" value="{{ old('visitor_phone1')}}" id="visitor_phone1" name="visitor_phone1" required>
+                                    <input type="number" class="form-control @error('visitor_phone1') is-invalid @enderror" required autocomplete="visitor_phone1" value="{{ old('visitor_phone1')}}" id="visitor_phone1" name="visitor_phone[]" required>
                                         @error('visitor_phone1')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -108,7 +108,7 @@
                                 </div>
                                 <div class="col-3">
                                     <label for="visitor_company1">Company</label>
-                                    <input type="text" class="form-control @error('visitor_company1') is-invalid @enderror" required autocomplete="visitor_company1" value="{{ old('visitor_company1')}}" id="visitor_company1" name="visitor_company1" required>
+                                    <input type="text" class="form-control @error('visitor_company1') is-invalid @enderror" required autocomplete="visitor_company1" value="{{ old('visitor_company1')}}" id="visitor_company1" name="visitor_company[]" required>
                                         @error('visitor_company1')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -117,7 +117,7 @@
                                 </div>
                                 <div class="col-2">
                                     <label for="visitor_dept1">Department</label>
-                                    <input type="text" class="form-control @error('visitor_dept1') is-invalid @enderror" required autocomplete="visitor_dept1" value="{{old('visitor_dept1')}}" id="visitor_dept1" name="visitor_dept1" required>
+                                    <input type="text" class="form-control @error('visitor_dept1') is-invalid @enderror" required autocomplete="visitor_dept1" value="{{old('visitor_dept1')}}" id="visitor_dept1" name="visitor_dept[]" required>
                                         @error('visitor_dept1')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -130,7 +130,7 @@
                             <div class="form-group row mb-4">
                                 <div class="col-3">
                                     <label for="visitor_name2">Visitor 2 Name</label>
-                                    <input type="text" class="form-control @error('visitor_name2') is-invalid @enderror"  value="{{ old('visitor_name2')}}" id="visitor_name2" name="visitor_name2" >
+                                    <input type="text" class="form-control @error('visitor_name2') is-invalid @enderror"  value="{{ old('visitor_name2')}}" id="visitor_name2" name="visitor_name[]" >
                                         @error('visitor_name2')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -139,7 +139,7 @@
                                 </div>
                                 <div class="col-2">
                                     <label for="visitor_nik2">ID Number</label>
-                                    <input type="text" class="form-control @error('visitor_nik2') is-invalid @enderror" value="{{ old('visitor_nik2')}}" id="visitor_nik2" name="visitor_nik2">
+                                    <input type="text" class="form-control @error('visitor_nik2') is-invalid @enderror" value="{{ old('visitor_nik2')}}" id="visitor_nik2" name="visitor_nik[]">
                                         @error('visitor_nik2')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -148,7 +148,7 @@
                                 </div>
                                 <div class="col-2">
                                     <label for="visitor_phone2">Phone Number</label>
-                                    <input type="number" class="form-control @error('visitor_phone2') is-invalid @enderror"  value="{{ old('visitor_phone2')}}" id="visitor_phone2" name="visitor_phone2">
+                                    <input type="number" class="form-control @error('visitor_phone2') is-invalid @enderror"  value="{{ old('visitor_phone2')}}" id="visitor_phone2" name="visitor_phone[]">
                                         @error('visitor_phone2')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -157,7 +157,7 @@
                                 </div>
                                 <div class="col-3">
                                     <label for="visitor_company2">Company</label>
-                                    <input type="text" class="form-control @error('visitor_company2') is-invalid @enderror"  value="{{ old('visitor_company2')}}" id="visitor_company2" name="visitor_company2">
+                                    <input type="text" class="form-control @error('visitor_company2') is-invalid @enderror"  value="{{ old('visitor_company2')}}" id="visitor_company2" name="visitor_company[]">
                                         @error('visitor_company2')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -166,7 +166,7 @@
                                 </div>
                                 <div class="col-2">
                                     <label for="visitor_dept2">Department</label>
-                                    <input type="text" class="form-control @error('visitor_dept2') is-invalid @enderror"  value="{{old('visitor_dept2')}}" id="visitor_dept2" name="visitor_dept2">
+                                    <input type="text" class="form-control @error('visitor_dept2') is-invalid @enderror"  value="{{old('visitor_dept2')}}" id="visitor_dept2" name="visitor_dept[]">
                                         @error('visitor_dept2')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -179,7 +179,7 @@
                             <div class="form-group row mb-4">
                                 <div class="col-3">
                                     <label for="visitor_name3">Visitor 3 Name</label>
-                                    <input type="text" class="form-control @error('visitor_name3') is-invalid @enderror"  value="{{ old('visitor_name3')}}" id="visitor_name3" name="visitor_name3">
+                                    <input type="text" class="form-control @error('visitor_name3') is-invalid @enderror"  value="{{ old('visitor_name3')}}" id="visitor_name3" name="visitor_name[]">
                                         @error('visitor_name3')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -188,7 +188,7 @@
                                 </div>
                                 <div class="col-2">
                                     <label for="visitor_nik3">ID Number</label>
-                                    <input type="text" class="form-control @error('visitor_nik3') is-invalid @enderror"  value="{{ old('visitor_nik3')}}" id="visitor_nik3" name="visitor_nik3">
+                                    <input type="text" class="form-control @error('visitor_nik3') is-invalid @enderror"  value="{{ old('visitor_nik3')}}" id="visitor_nik3" name="visitor_nik[]">
                                         @error('visitor_nik3')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -197,7 +197,7 @@
                                 </div>
                                 <div class="col-2">
                                     <label for="visitor_phone3">Phone Number</label>
-                                    <input type="number" class="form-control @error('visitor_phone3') is-invalid @enderror"  value="{{ old('visitor_phone3')}}" id="visitor_phone3" name="visitor_phone3">
+                                    <input type="number" class="form-control @error('visitor_phone3') is-invalid @enderror"  value="{{ old('visitor_phone3')}}" id="visitor_phone3" name="visitor_phone[]">
                                         @error('visitor_phone3')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -206,7 +206,7 @@
                                 </div>
                                 <div class="col-3">
                                     <label for="visitor_company3">Company</label>
-                                    <input type="text" class="form-control @error('visitor_company3') is-invalid @enderror"  value="{{ old('visitor_company3')}}" id="visitor_company3" name="visitor_company3">
+                                    <input type="text" class="form-control @error('visitor_company3') is-invalid @enderror"  value="{{ old('visitor_company3')}}" id="visitor_company3" name="visitor_company[]">
                                         @error('visitor_company3')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -215,7 +215,7 @@
                                 </div>
                                 <div class="col-2">
                                     <label for="visitor_dept3">Department</label>
-                                    <input type="text" class="form-control @error('visitor_dept3') is-invalid @enderror"  value="{{old('visitor_dept3')}}" id="visitor_dept3" name="visitor_dept3">
+                                    <input type="text" class="form-control @error('visitor_dept3') is-invalid @enderror"  value="{{old('visitor_dept3')}}" id="visitor_dept3" name="visitor_dept[]">
                                         @error('visitor_dept3')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -228,7 +228,7 @@
                             <div class="form-group row mb-4">
                                 <div class="col-3">
                                     <label for="visitor_name4">Visitor 4 Name</label>
-                                    <input type="text" class="form-control @error('visitor_name4') is-invalid @enderror"  value="{{ old('visitor_name4')}}" id="visitor_name4" name="visitor_name4">
+                                    <input type="text" class="form-control @error('visitor_name4') is-invalid @enderror"  value="{{ old('visitor_name4')}}" id="visitor_name4" name="visitor_name[]">
                                         @error('visitor_name4')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -237,7 +237,7 @@
                                 </div>
                                 <div class="col-2">
                                     <label for="visitor_nik4">ID Number</label>
-                                    <input type="text" class="form-control @error('visitor_nik4') is-invalid @enderror"  value="{{ old('visitor_nik4')}}" id="visitor_nik4" name="visitor_nik4">
+                                    <input type="text" class="form-control @error('visitor_nik4') is-invalid @enderror"  value="{{ old('visitor_nik4')}}" id="visitor_nik4" name="visitor_nik[]">
                                         @error('visitor_nik4')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -246,7 +246,7 @@
                                 </div>
                                 <div class="col-2">
                                     <label for="visitor_phone4">Phone Number</label>
-                                    <input type="number" class="form-control @error('visitor_phone4') is-invalid @enderror"  value="{{ old('visitor_phone4')}}" id="visitor_phone4" name="visitor_phone4">
+                                    <input type="number" class="form-control @error('visitor_phone4') is-invalid @enderror"  value="{{ old('visitor_phone4')}}" id="visitor_phone4" name="visitor_phone[]">
                                         @error('visitor_phone4')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -255,7 +255,7 @@
                                 </div>
                                 <div class="col-3">
                                     <label for="visitor_company4">Company</label>
-                                    <input type="text" class="form-control @error('visitor_company4') is-invalid @enderror"  value="{{ old('visitor_company4')}}" id="visitor_company4" name="visitor_company4">
+                                    <input type="text" class="form-control @error('visitor_company4') is-invalid @enderror"  value="{{ old('visitor_company4')}}" id="visitor_company4" name="visitor_company[]">
                                         @error('visitor_company4')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -264,7 +264,7 @@
                                 </div>
                                 <div class="col-2">
                                     <label for="visitor_dept4">Department</label>
-                                    <input type="text" class="form-control @error('visitor_dept4') is-invalid @enderror"  value="{{old('visitor_dept4')}}" id="visitor_dept4" name="visitor_dept4">
+                                    <input type="text" class="form-control @error('visitor_dept4') is-invalid @enderror"  value="{{old('visitor_dept4')}}" id="visitor_dept4" name="visitor_dept[]">
                                         @error('visitor_dept4')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -277,7 +277,7 @@
                             <div class="form-group row mb-4">
                                 <div class="col-3">
                                     <label for="visitor_name5">Visitor 5 Name</label>
-                                    <input type="text" class="form-control @error('visitor_name5') is-invalid @enderror" value="{{ old('visitor_name5')}}" id="visitor_name5" name="visitor_name5">
+                                    <input type="text" class="form-control @error('visitor_name5') is-invalid @enderror" value="{{ old('visitor_name5')}}" id="visitor_name5" name="visitor_name[]">
                                         @error('visitor_name5')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -286,7 +286,7 @@
                                 </div>
                                 <div class="col-2">
                                     <label for="visitor_nik5">ID Number</label>
-                                    <input type="text" class="form-control @error('visitor_nik5') is-invalid @enderror"  value="{{ old('visitor_nik5')}}" id="visitor_nik5" name="visitor_nik5">
+                                    <input type="text" class="form-control @error('visitor_nik5') is-invalid @enderror"  value="{{ old('visitor_nik5')}}" id="visitor_nik5" name="visitor_nik[]">
                                         @error('visitor_nik5')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -295,7 +295,7 @@
                                 </div>
                                 <div class="col-2">
                                     <label for="visitor_phone5">Phone Number</label>
-                                    <input type="number" class="form-control @error('visitor_phone5') is-invalid @enderror"  value="{{ old('visitor_phone5')}}" id="visitor_phone5" name="visitor_phone5">
+                                    <input type="number" class="form-control @error('visitor_phone5') is-invalid @enderror"  value="{{ old('visitor_phone5')}}" id="visitor_phone5" name="visitor_phone[]">
                                         @error('visitor_phone5')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -304,7 +304,7 @@
                                 </div>
                                 <div class="col-3">
                                     <label for="visitor_company5">Company</label>
-                                    <input type="text" class="form-control @error('visitor_company5') is-invalid @enderror"  value="{{ old('visitor_company5')}}" id="visitor_company5" name="visitor_company5">
+                                    <input type="text" class="form-control @error('visitor_company5') is-invalid @enderror"  value="{{ old('visitor_company5')}}" id="visitor_company5" name="visitor_company[]">
                                         @error('visitor_company5')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -313,7 +313,7 @@
                                 </div>
                                 <div class="col-2">
                                     <label for="visitor_dept5">Department</label>
-                                    <input type="text" class="form-control @error('visitor_dept5') is-invalid @enderror"  value="{{old('visitor_dept5')}}" id="visitor_dept5" name="visitor_dept5">
+                                    <input type="text" class="form-control @error('visitor_dept5') is-invalid @enderror"  value="{{old('visitor_dept5')}}" id="visitor_dept5" name="visitor_dept[]">
                                         @error('visitor_dept5')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{MasterOb, Personil, PilihanWork, Rutin};
+use App\Models\{MasterOb, Personil, PilihanWork, Rutin, Survey};
 use Illuminate\Support\Facades\{DB, Auth, Gate, Session};
 
 class HomeController extends Controller
@@ -161,6 +161,7 @@ class HomeController extends Controller
     {
         if ((Gate::denies('isAdmin') && (Gate::denies('isVisitor')))) {
             $role_1 = Session::get('arrole');
+            $val = [];
             if($type_approve == 'all'){
                 return view('all_approval');
             }
@@ -171,9 +172,10 @@ class HomeController extends Controller
                     ->where('survey_histories.aktif', '=', 1)
                     ->select('surveys.*')
                     ->get();
-                    $manage = json_decode($survey->name, true);
-                    dd($manage);
-                return view('sales.approval', compact('survey'));
+                $pic = Survey::select('visit_name')->get();
+                $json = json_decode($survey, true);
+                // dd($pic);
+                return view('sales.approval', compact('survey', 'json'));
             }
             elseif($type_approve == 'cleaning'){
                 $cleaning = DB::table('cleaning_histories')

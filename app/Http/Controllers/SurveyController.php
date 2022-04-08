@@ -21,27 +21,27 @@ class SurveyController extends Controller
             'nama_requestor' => ['required', 'string', 'max:100'],
             'dept_requestor' => ['required', 'string', 'max:200'],
             'phone_requestor' => ['required', 'regex:/^([0-9\s\-\+\(\)]*)$/', 'min:10'],
-            'visitor_name1' => ['required', 'string', 'max:100'],
-            'visitor_nik1' => ['required'],
-            'visitor_phone1' => ['required', 'regex:/^([0-9\s\-\+\(\)]*)$/', 'min:10'],
-            'visitor_company1' => ['required', 'string', 'max:200'],
-            'visitor_dept1' => ['required', 'string', 'max:200'],
-            'visitor_name2' => ['string', 'max:100', 'nullable'],
-            'visitor_phone2' => ['regex:/^([0-9\s\-\+\(\)]*)$/', 'min:10', 'nullable'],
-            'visitor_company2' => ['string', 'max:200', 'nullable'],
-            'visitor_dept2' => ['string', 'max:200', 'nullable'],
-            'visitor_name3' => ['string', 'max:100', 'nullable'],
-            'visitor_phone3' => ['regex:/^([0-9\s\-\+\(\)]*)$/', 'min:10', 'nullable'],
-            'visitor_company3' => ['string', 'max:200', 'nullable'],
-            'visitor_dept3' => ['string', 'max:200', 'nullable'],
-            'visitor_name4' => ['string', 'max:100', 'nullable'],
-            'visitor_phone4' => ['regex:/^([0-9\s\-\+\(\)]*)$/', 'min:10', 'nullable'],
-            'visitor_company4' => ['string', 'max:200', 'nullable'],
-            'visitor_dept4' => ['string', 'max:200', 'nullable'],
-            'visitor_name5' => ['string', 'max:100', 'nullable'],
-            'visitor_phone5' => ['regex:/^([0-9\s\-\+\(\)]*)$/', 'min:10', 'nullable'],
-            'visitor_company5' => ['string', 'max:200', 'nullable'],
-            'visitor_dept5' => ['string', 'max:200', 'nullable'],
+            'visitor_name[]' => ['string', 'max:100'],
+            'visitor_nik[]' => [],
+            'visitor_phone[]' => ['regex:/^([0-9\s\-\+\(\)]*)$/', 'min:10'],
+            'visitor_company[]' => ['string', 'max:200'],
+            'visitor_dept[]' => ['string', 'max:200'],
+            // 'visitor_name2' => ['string', 'max:100', 'nullable'],
+            // 'visitor_phone2' => ['regex:/^([0-9\s\-\+\(\)]*)$/', 'min:10', 'nullable'],
+            // 'visitor_company2' => ['string', 'max:200', 'nullable'],
+            // 'visitor_dept2' => ['string', 'max:200', 'nullable'],
+            // 'visitor_name3' => ['string', 'max:100', 'nullable'],
+            // 'visitor_phone3' => ['regex:/^([0-9\s\-\+\(\)]*)$/', 'min:10', 'nullable'],
+            // 'visitor_company3' => ['string', 'max:200', 'nullable'],
+            // 'visitor_dept3' => ['string', 'max:200', 'nullable'],
+            // 'visitor_name4' => ['string', 'max:100', 'nullable'],
+            // 'visitor_phone4' => ['regex:/^([0-9\s\-\+\(\)]*)$/', 'min:10', 'nullable'],
+            // 'visitor_company4' => ['string', 'max:200', 'nullable'],
+            // 'visitor_dept4' => ['string', 'max:200', 'nullable'],
+            // 'visitor_name5' => ['string', 'max:100', 'nullable'],
+            // 'visitor_phone5' => ['regex:/^([0-9\s\-\+\(\)]*)$/', 'min:10', 'nullable'],
+            // 'visitor_company5' => ['string', 'max:200', 'nullable'],
+            // 'visitor_dept5' => ['string', 'max:200', 'nullable'],
         ]);
 
         $survey = Survey::create([
@@ -50,13 +50,18 @@ class SurveyController extends Controller
             'name-req' => $request->nama_requestor,
             'dept-req' => $request->dept_requestor,
             'phone-req' => $request->phone_requestor,
-            'pic' => [
-                        ['name' =>$request->visitor_name1, 'nik' => $request->visitor_nik1, 'phone' => $request->visitor_phone1, 'company' => $request->visitor_company1, 'dept' => $request->visitor_dept1],
-                        ['name' =>$request->visitor_name2, 'nik' => $request->visitor_nik2, 'phone' => $request->visitor_phone2, 'company' => $request->visitor_company2, 'dept' => $request->visitor_dept2],
-                        ['name' =>$request->visitor_name3, 'nik' => $request->visitor_nik3, 'phone' => $request->visitor_phone3, 'company' => $request->visitor_company3, 'dept' => $request->visitor_dept3],
-                        ['name' =>$request->visitor_name4, 'nik' => $request->visitor_nik4, 'phone' => $request->visitor_phone4, 'company' => $request->visitor_company4, 'dept' => $request->visitor_dept4],
-                        ['name' =>$request->visitor_name5, 'nik' => $request->visitor_nik5, 'phone' => $request->visitor_phone5, 'company' => $request->visitor_company5, 'dept' => $request->visitor_dept5],
-                    ]
+            'visit_name' => $request->visitor_name,
+            'visit_nik' => $request->visitor_nik,
+            'visit_phone' => $request->visitor_phone,
+            'visit_company' => $request->visitor_company,
+            'visit_dept' => $request->visitor_dept,
+            // [
+            //             ['name' =>$request->visitor_name1, 'nik' => $request->visitor_nik1, 'phone' => $request->visitor_phone1, 'company' => $request->visitor_company1, 'dept' => $request->visitor_dept1],
+            //             ['name' =>$request->visitor_name2, 'nik' => $request->visitor_nik2, 'phone' => $request->visitor_phone2, 'company' => $request->visitor_company2, 'dept' => $request->visitor_dept2],
+            //             ['name' =>$request->visitor_name3, 'nik' => $request->visitor_nik3, 'phone' => $request->visitor_phone3, 'company' => $request->visitor_company3, 'dept' => $request->visitor_dept3],
+            //             ['name' =>$request->visitor_name4, 'nik' => $request->visitor_nik4, 'phone' => $request->visitor_phone4, 'company' => $request->visitor_company4, 'dept' => $request->visitor_dept4],
+            //             ['name' =>$request->visitor_name5, 'nik' => $request->visitor_nik5, 'phone' => $request->visitor_phone5, 'company' => $request->visitor_company5, 'dept' => $request->visitor_dept5],
+            //         ]
         ]);
 
         $log = SurveyHistory::create([
@@ -159,13 +164,23 @@ class SurveyController extends Controller
         $pdf = $survey->pic;
     }
 
-    public function json($id)
+    public function json()
     {
-        $value = '';
+
         // $survey = DB::table('surveys')->select(['pic', 'visit'])->get();
-        $user = Survey::find($id);
-        $user->pic['name'] = $value;
-        dd ($value);
+        // $data = Survey::all();
+        // $user->pic['name'] = $value;
+        // dd ($value);
+        // $data = DB::table('surveys')
+            // ->whereJsonContains('pic->name', 'Sid Conroy')
+            // ->whereJsonContains('pic->nik', [])
+            // ->whereJsonContains('pic->company', [])
+            // ->whereJsonContains('pic->dept', [])
+            // ->get();
+
+
+        // echo $value[5];
+
         // $string = Survey::find($id);
         // $area = json_decode($string, true);
 
@@ -177,7 +192,43 @@ class SurveyController extends Controller
             // foreach (json_decode($user) as $area)
             // {
             //     print($area);
-            // }
-
+            //
+            //  [pic] => [
+            //     {
+            //         "name":"Mr. Isac Windler I",
+            //         "nik":[9],
+            //         "phone":"+1-724-607-2281",
+            //         "company":"Friesen PLC",
+            //         "dept":"Michele Russel Sr."
+            //     },
+            //     {
+            //         "name":"Wilhelmine West",
+            //         "nik":[4],
+            //         "phone":"907-856-3247",
+            //         "company":"Frami Inc",
+            //         "dept":"Ciara Zulauf"
+            //     },
+            //     {
+            //         "name":"Oswaldo Hackett",
+            //         "nik":[15],
+            //         "phone":"463.316.5400",
+            //         "company":"Smith-Nienow",
+            //         "dept":"Hudson Ernser"
+            //     },
+            //     {
+            //         "name":"Darien Mosciski",
+            //         "nik":[9],
+            //         "phone":"774.951.2350",
+            //         "company":"Stroman LLC",
+            //         "dept":"Alphonso Bashirian"
+            //     },
+            //     {
+            //         "name":"Christian Langworth",
+            //         "nik":[16],
+            //         "phone":"341.829.4589",
+            //         "company":"Bruen, Ortiz and Borer",
+            //         "dept":"Maryjane Cruickshank III"
+            //     }
+            // ];
     }
 }

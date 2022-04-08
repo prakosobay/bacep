@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use App\Models\Survey;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,5 +17,6 @@ class DatabaseSeeder extends Seeder
         $this->call(RutinSeeder::class);
         $this->call(PersonilTableSeeder::class);
         $this->call(ObSeeder::class);
+        Survey::factory(10)->create();
     }
 }

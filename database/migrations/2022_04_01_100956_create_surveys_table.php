@@ -20,7 +20,11 @@ class CreateSurveysTable extends Migration
             $table->string('name-req', 200);
             $table->string('dept-req', 200);
             $table->string('phone-req', 200);
-            $table->longText('pic');
+            $table->json('visit-name');
+            $table->json('visit-nik');
+            $table->json('visit-company');
+            $table->json('visit-dept');
+            $table->json('visit-phone');
             $table->time('checkin')->nullable();
             $table->time('checkout')->nullable();
             $table->softDeletes();

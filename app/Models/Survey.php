@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\AsArrayObject;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -15,7 +16,13 @@ class Survey extends Model
     protected $primaryKey = 'id';
     protected $guarded = [];
     protected $casts = [
-        'pic' => AsArrayObject::class,
+        'visit_name' => AsArrayObject::class,
+        'visit_nik' => AsArrayObject::class,
+        'visit_company' => AsArrayObject::class,
+        'visit_dept' => AsArrayObject::class,
+        'visit_phone' => AsArrayObject::class,
+        // 'pic' => AsCollection::class,
+        // 'pic' => 'array',
     ];
 
 

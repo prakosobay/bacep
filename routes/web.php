@@ -123,7 +123,7 @@ Route::middleware(['auth'])->group(function () {
 
     // Survey
     Route::post('/survey', [SurveyController::class, 'store']);
-    Route::get('jsona/{$id}', [SurveyController::class, 'json']);
+    Route::get('jsona', [SurveyController::class, 'json']);
     Route::get('/survey_approval', [SurveyController::class, 'view_approval']);
     Route::get('route_data_approval', [SurveyController::class, 'data_approval']);
     Route::get('route_history_survey', [SurveyController::class, 'data_history']);
