@@ -170,11 +170,11 @@ class HomeController extends Controller
                     ->join('surveys', 'surveys.id', '=', 'survey_histories.survey_id')
                     ->whereIn('survey_histories.role_to', $role_1)
                     ->where('survey_histories.aktif', '=', 1)
-                    ->select('surveys.*')
+                    ->select('surveys.*', 'survey_histories.pdf')
                     ->get();
-                $pic = Survey::select('visit_name')->get();
+                // $pic = Survey::select('visit_name')->get();
                 $json = json_decode($survey, true);
-                // dd($pic);
+                // dd($survey);
                 return view('sales.approval', compact('survey', 'json'));
             }
             elseif($type_approve == 'cleaning'){

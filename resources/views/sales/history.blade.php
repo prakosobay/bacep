@@ -67,7 +67,7 @@
             serverSide: true,
             ajax: '{{url('route_history_survey')}}',
             columns: [
-                { data: 'id', name: 'surveys.id' },
+                { data: 'survey_id', name: 'survey_id' },
                 { data: 'role_to', name: 'role_to' },
                 { data: 'status', name: 'status' },
                 { data: 'updated_at', name: 'updated_at' },

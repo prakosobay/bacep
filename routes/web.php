@@ -128,6 +128,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('route_data_approval', [SurveyController::class, 'data_approval']);
     Route::get('route_history_survey', [SurveyController::class, 'data_history']);
     Route::get('history/{type_view}', [HomeController::class, 'log_view']);
+    Route::get('/survey_pdf/{id}', [SurveyController::class, 'pdf']);
+    Route::post('/approve_survey', [SurveyController::class, 'approve']);
+    Route::post('/reject_survey', [SurveyController::class, 'reject']);
 
     // Cleaning
     Route::get('route_history_cleaning', [CleaningController::class, 'data_history']);

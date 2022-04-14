@@ -6,9 +6,11 @@ use Illuminate\Http\Request;
 
 use phpDocumentor\Reflection\Types\Nullable;
 use App\Models\{Survey, SurveyHistory, User};
-use Illuminate\Support\Facades\{DB, Auth, Gate, Session};
+use Illuminate\Support\Facades\{DB, Auth, Gate, Session, Mail};
+use App\Mail\{NotifEmail, NotifReject, NotifFull};
 use Yajra\Datatables\Datatables;
 use Illuminate\Support\Carbon;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class SurveyController extends Controller
 {
@@ -47,21 +49,14 @@ class SurveyController extends Controller
         $survey = Survey::create([
             'visit' => $request->date_of_visit,
             'leave' => $request->date_of_leave,
-            'name-req' => $request->nama_requestor,
-            'dept-req' => $request->dept_requestor,
-            'phone-req' => $request->phone_requestor,
+            'name_req' => $request->nama_requestor,
+            'dept_req' => $request->dept_requestor,
+            'phone_req' => $request->phone_requestor,
             'visit_name' => $request->visitor_name,
             'visit_nik' => $request->visitor_nik,
             'visit_phone' => $request->visitor_phone,
             'visit_company' => $request->visitor_company,
             'visit_dept' => $request->visitor_dept,
-            // [
-            //             ['name' =>$request->visitor_name1, 'nik' => $request->visitor_nik1, 'phone' => $request->visitor_phone1, 'company' => $request->visitor_company1, 'dept' => $request->visitor_dept1],
-            //             ['name' =>$request->visitor_name2, 'nik' => $request->visitor_nik2, 'phone' => $request->visitor_phone2, 'company' => $request->visitor_company2, 'dept' => $request->visitor_dept2],
-            //             ['name' =>$request->visitor_name3, 'nik' => $request->visitor_nik3, 'phone' => $request->visitor_phone3, 'company' => $request->visitor_company3, 'dept' => $request->visitor_dept3],
-            //             ['name' =>$request->visitor_name4, 'nik' => $request->visitor_nik4, 'phone' => $request->visitor_phone4, 'company' => $request->visitor_company4, 'dept' => $request->visitor_dept4],
-            //             ['name' =>$request->visitor_name5, 'nik' => $request->visitor_nik5, 'phone' => $request->visitor_phone5, 'company' => $request->visitor_company5, 'dept' => $request->visitor_dept5],
-            //         ]
         ]);
 
         $log = SurveyHistory::create([
@@ -80,7 +75,7 @@ class SurveyController extends Controller
         }
     }
 
-    public function approve_survey(Request $request)
+    public function approve(Request $request)
     {
         $logsurvey = SurveyHistory::where('id', '=', $request->id)->latest()->first();
         // dd($logsurvey);
@@ -92,17 +87,15 @@ class SurveyController extends Controller
             if ($logsurvey->status == 'requested') {
                 $status = 'reviewed';
             } elseif ($logsurvey->status == 'reviewed') {
-                $status = 'checked';
-            } elseif ($logsurvey->status == 'checked') {
                 $status = 'acknowledge';
             } elseif ($logsurvey->status == 'acknowledge') {
                 $status = 'final';
+            } elseif ($logsurvey->status == 'final') {
+                $survey = Survey::find($request->id)->first();
             }
 
             $role_to = '';
             if (($logsurvey->role_to == 'review')) {
-                $role_to = 'check';
-            } elseif (($logsurvey->role_to == 'check')) {
                 $role_to = 'security';
             } elseif (($logsurvey->role_to == 'security')) {
                 $role_to = 'head';
@@ -123,6 +116,11 @@ class SurveyController extends Controller
             abort(403);
         }
         return $history->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
+    }
+
+    public function reject(Request $request)
+    {
+        return "rejek";
     }
 
     public function data_approval()
@@ -158,10 +156,21 @@ class SurveyController extends Controller
             ->make(true);
     }
 
-    public function survey_pdf($id)
+    public function pdf($id)
     {
         $survey = Survey::findOrFail($id);
-        $pdf = $survey->pic;
+        $log = SurveyHistory::where('survey_id', $id)->where('aktif', 1)->first();
+        $log->update(['pdf' => true]);
+
+        $join = DB::table('survey_histories')
+            ->join('surveys', 'surveys.id', '=', 'survey_histories.survey_id')
+            ->join('users', 'users.id', '=', 'survey_histories.created_by')
+            ->where('survey_histories.survey_id', '=', $id)
+            ->select('survey_histories.*', 'users.name', 'created_by')
+            ->get();
+            // dd($survey);
+        $pdf = PDF::loadview('sales.pdf', compact('survey', 'log', 'join'));
+        return $pdf->stream();
     }
 
     public function json()
