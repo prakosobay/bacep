@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use phpDocumentor\Reflection\Types\Nullable;
-use App\Models\{Survey, SurveyHistory, User};
+use App\Models\{Survey, SurveyFull, SurveyHistory, User};
 use Illuminate\Support\Facades\{DB, Auth, Gate, Session, Mail};
 use App\Mail\{NotifEmail, NotifReject, NotifFull};
 use Yajra\Datatables\Datatables;
@@ -101,7 +101,15 @@ class SurveyController extends Controller
             } elseif (($logsurvey->role_to == 'security')) {
                 $role_to = 'head';
             } elseif ($logsurvey->role_to == 'head') {
-                $survey = Survey::where('id', $request->id)->first();
+                $pick = Survey::where('id', $request->id)->first();
+                $full = SurveyFull::create([
+                    'survey_id' => $pick->id,
+                    'visit' => $pick->visit,
+                    'leave' => $pick->leave,
+                    'company' => $pick->company[0],
+                    'link' => ("http://127.0.0.1:8000/survey_pdf/$survey->id"),
+                    // 'link' => ("http://172.16.45.195:8000/cleaning_pdf/$cleaning->cleaning_id"),
+                ]);
             }
 
             $history = SurveyHistory::create([

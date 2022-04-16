@@ -34,11 +34,11 @@ class HomeController extends Controller
         Session::put('arrole', $arrole);
         // dd($arrole);
         // return view('home');
-        if($arrole){
+        // if($arrole){
         return view('homepage');
-        } else{
-            abort(403);
-        }
+        // } else{
+        //     abort(403);
+        // }
     }
 
     public function dashboard()
