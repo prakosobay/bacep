@@ -34,7 +34,11 @@ class HomeController extends Controller
         Session::put('arrole', $arrole);
         // dd($arrole);
         // return view('home');
+        if($arrole){
         return view('homepage');
+        } else{
+            abort(403);
+        }
     }
 
     public function dashboard()
@@ -59,7 +63,7 @@ class HomeController extends Controller
                     ->select('surveys.*')
                     ->get();
                     dd($survey);
-                return view('sales.approval', compact('survey'));
+                return view('sales.approva', compact('survey'));
             } elseif ($type_view == 'cleaning') {
                 $cleaning = DB::table('cleaning_histories')
                     ->join('cleanings', 'cleanings.cleaning_id', '=', 'cleaning_histories.cleaning_id')
@@ -67,7 +71,7 @@ class HomeController extends Controller
                     ->where('cleaning_histories.aktif', '=', 1)
                     ->select('cleanings.*')
                     ->get();
-                return view('hasil_cleaning', compact('cleaning'));
+                return view('hasil_cleanings', compact('cleaning'));
             } else if ($type_view == 'other') {
                 $otherHistories = DB::table('other_histories')
                     ->join('other', 'other.other_id', '=', 'other_histories.other_id')
@@ -166,6 +170,7 @@ class HomeController extends Controller
                 return view('all_approval');
             }
             elseif($type_approve == 'survey'){
+                // dd($role_1);
                 $survey = DB::table('survey_histories')
                     ->join('surveys', 'surveys.id', '=', 'survey_histories.survey_id')
                     ->whereIn('survey_histories.role_to', $role_1)

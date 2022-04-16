@@ -77,7 +77,8 @@ class SurveyController extends Controller
 
     public function approve(Request $request)
     {
-        $logsurvey = SurveyHistory::where('id', '=', $request->id)->latest()->first();
+        // dd($request);
+        $logsurvey = SurveyHistory::where('survey_id', '=', $request->id)->latest()->first();
         // dd($logsurvey);
 
         if($logsurvey->pdf == true){
@@ -99,7 +100,7 @@ class SurveyController extends Controller
                 $role_to = 'security';
             } elseif (($logsurvey->role_to == 'security')) {
                 $role_to = 'head';
-            }if ($logsurvey->role_to == 'head') {
+            } elseif ($logsurvey->role_to == 'head') {
                 $survey = Survey::where('id', $request->id)->first();
             }
 
@@ -120,7 +121,30 @@ class SurveyController extends Controller
 
     public function reject(Request $request)
     {
-        return "rejek";
+        $logsurvey = SurveyHistory::where('survey_id', '=', $request->id)->latest()->first();
+        // dd($logsurvey);
+        if (Gate::denies('isSecurity')) {
+            if ($logsurvey->pdf == true) {
+                $logsurvey->update(['aktif' => false]);
+
+                $history = SurveyHistory::create([
+                    'survey_id' => $request->id,
+                    'created_by' => Auth::user()->id,
+                    'role_to' => 0,
+                    'status' => 'rejected',
+                    'aktif' => true,
+                    'pdf' => false,
+                ]);
+
+                // $survey = Survey::find($request->id);
+                // foreach (['badai.sino@balitower.co.id', 'security.bacep@balitower.co.id'] as $recipient) {
+                //     Mail::to($recipient)->send(new NotifReject($cleaning));
+                // }
+                return $history->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
+            } else {
+                abort(403);
+            }
+        }
     }
 
     public function data_approval()

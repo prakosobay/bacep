@@ -381,21 +381,6 @@
                         </td>
                         @break
 
-                        @case('checked')
-                            <td class="col_approval"><img src="{{ public_path("gambar/Requested.png") }}" alt="" style="width: 80px; height: 40px;">
-                                <p class="cr">Nama    : {{$survey->name_req}}</p>
-                                <p class="cr">Tanggal : {{Carbon\Carbon::parse($survey->created_at)->format('d-m-Y H:i')}}</p>
-                            </td>
-                            <td class="col_approval">
-                                <p class="cr">Nama    :</p>
-                                <p class="cr">Tanggal :</p>
-                            </td>
-                            <td class="col_approval">
-                                <p class="cr">Nama    :</p>
-                                <p class="cr">Tanggal :</p>
-                            </td>
-                        @break
-
                         @case('acknowledge')
                             <td class="col_approval"><img src="{{ public_path("gambar/Requested.png") }}" alt="" style="width: 80px; height: 40px;">
                                 <p class="cr">Nama    : {{$survey->name_req}}</p>
@@ -406,8 +391,8 @@
                                 <p class="cr">Tanggal :</p>
                             </td>
                             <td class="col_approval"><img src="{{ public_path("gambar/Checked.png") }}" alt="" style="width: 80px; height: 40px;">
-                                <p class="cr">Nama    :</p>
-                                <p class="cr">Tanggal :{{Carbon\Carbon::parse($join[3]->created_at)->format('d-m-Y H:i')}}</p>
+                                <p class="cr">Nama    :{{$join[2]->name}}</p>
+                                <p class="cr">Tanggal :{{Carbon\Carbon::parse($join[2]->created_at)->format('d-m-Y H:i')}}</p>
                             </td>
                             @break
 
@@ -417,12 +402,12 @@
                                 <p class="cr">Tanggal : {{Carbon\Carbon::parse($survey->created_at)->format('d-m-Y H:i')}}</p>
                             </td>
                             <td class="col_approval"><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 80px; height: 40px;">
-                                <p class="cr">Nama    :</p>
-                                <p class="cr">Tanggal :{{ Carbon\Carbon::parse($join[4]->created_at)->format('d-m-Y H:i') }}</p>
+                                <p class="cr">Nama    :{{$join[3]->name}}</p>
+                                <p class="cr">Tanggal :{{ Carbon\Carbon::parse($join[3]->created_at)->format('d-m-Y H:i') }}</p>
                             </td>
                             <td class="col_approval"><img src="{{ public_path("gambar/Checked.png") }}" alt="" style="width: 80px; height: 40px;">
-                                <p class="cr">Nama    :</p>
-                                <p class="cr">Tanggal :{{ Carbon\Carbon::parse($join[3]->created_at)->format('d-m-Y H:i') }}</p>
+                                <p class="cr">Nama    :{{$join[2]->name}}</p>
+                                <p class="cr">Tanggal :{{ Carbon\Carbon::parse($join[2]->created_at)->format('d-m-Y H:i') }}</p>
                             </td>
                             @break
                     @endswitch
