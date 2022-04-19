@@ -102,12 +102,13 @@ class SurveyController extends Controller
                 $role_to = 'head';
             } elseif ($logsurvey->role_to == 'head') {
                 $pick = Survey::where('id', $request->id)->first();
+                // dd($pick);
                 $full = SurveyFull::create([
                     'survey_id' => $pick->id,
                     'visit' => $pick->visit,
                     'leave' => $pick->leave,
-                    'company' => $pick->company[0],
-                    'link' => ("http://127.0.0.1:8000/survey_pdf/$survey->id"),
+                    'company' => $pick->visit_company[0],
+                    'link' => ("http://127.0.0.1:8000/survey_pdf/$pick->id"),
                     // 'link' => ("http://172.16.45.195:8000/cleaning_pdf/$cleaning->cleaning_id"),
                 ]);
             }
@@ -157,7 +158,6 @@ class SurveyController extends Controller
 
     public function data_approval()
     {
-        // return Datatables::of(Survey::query())->make(true);
 
         $survey = DB::table('surveys')->select(['id', 'created_at', 'visit', '']);
         // $pic = $survey->pic;
@@ -186,6 +186,12 @@ class SurveyController extends Controller
                 return $survey_log->visit ? with(new Carbon($survey_log->visit))->format('d/m/Y') : '';;
             })
             ->make(true);
+    }
+
+    public function full()
+    {
+        $full = SurveyFull::all();
+        return view('sales.full_approval', compact('full'));
     }
 
     public function pdf($id)

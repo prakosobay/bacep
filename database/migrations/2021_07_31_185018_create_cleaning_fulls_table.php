@@ -14,16 +14,20 @@ class CreateCleaningFullsTable extends Migration
     public function up()
     {
         Schema::create('cleaning_fulls', function (Blueprint $table) {
-            $table->bigIncrements('cleaning_full_id');
+            $table->id('cleaning_full_id');
             $table->foreignId('cleaning_id');
-            $table->string('cleaning_date', 25);
-            $table->string('cleaning_name', 50);
-            $table->string('cleaning_name2', 50);
-            $table->string('cleaning_work', 100);
-            $table->string('validity_from', 100);
-            $table->string('validity_to', 100)->nullable();
-            $table->string('status', 50);
+            $table->date('cleaning_date');
+            $table->date('validity_from');
+            $table->date('leave')->nullable();
+            $table->time('checkin')->nullable();
+            $table->time('checkout')->nullable();
+            $table->string('cleaning_name', 100);
+            $table->string('cleaning_name2', 100);
+            $table->string('cleaning_work');
+            $table->string('gambar')->nullable();
             $table->string('link');
+            $table->string('status');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -41,15 +41,15 @@ class CleaningController extends Controller
             ->make(true);
     }
 
-    public function data_full()
+    public function data_log_full()
     {
-        $full = DB::table('cleaning_fulls');
+        $full = DB::table('cleaning_fulls')->select(['cleaning_id', 'validity_from', 'cleaning_name', 'cleaning_work', 'checkin', 'checkout']);
         return Datatables::of($full)
             ->editColumn('validity_from', function ($full) {
                 return $full->validity_from ? with(new Carbon($full->validity_from))->format('d/m/Y') : '';
             })
-            ->editColumn('validity_from', function ($full) {
-                return $full->validity_from ? with(new Carbon($full->validity_from))->format('d/m/Y') : '';;
+            ->addColumn('action', function ($full) {
+                return '<a href="#edit-'.$full->cleaning_id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
             })
             ->make(true);
     }
@@ -176,7 +176,6 @@ class CleaningController extends Controller
                 'cleaning_work' => $cleaning->cleaning_work,
                 'validity_from' => $cleaning->validity_from,
                 'cleaning_date' => $cleaning->created_at,
-                'status' => 'Full Approved',
                 // 'link' => ("https://dcops.balifiber.id/cleaning_pdf/$cleaning->cleaning_id"),
                 'link' => ("http://172.16.45.195:8000/cleaning_pdf/$cleaning->cleaning_id"),
             ]);

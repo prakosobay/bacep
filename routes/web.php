@@ -128,12 +128,13 @@ Route::middleware(['auth'])->group(function () {
     Route::get('route_history_survey', [SurveyController::class, 'data_history']);
     Route::get('history/{type_view}', [HomeController::class, 'log_view']);
     Route::get('/survey_pdf/{id}', [SurveyController::class, 'pdf']);
+    Route::get('route_full_survey', [SurveyController::class, 'full']);
     Route::post('/approve_survey', [SurveyController::class, 'approve']);
     Route::post('/reject_survey', [SurveyController::class, 'reject']);
 
     // Cleaning
     Route::get('route_history_cleaning', [CleaningController::class, 'data_history']);
-    Route::get('route_full_cleaning', [CleaningController::class, 'data_full']);
+    Route::get('route_full_cleaning_other', [CleaningController::class, 'data_log_full']);
     Route::get('log_cleaning', [CleaningController::class, 'log_carbon']);
     Route::get('/cleaning_pdf/{id}', [CleaningController::class, 'cetak_cleaning_pdf']);
     Route::get('/cleaning/{id}', [CleaningController::class, 'pilihan_work']);

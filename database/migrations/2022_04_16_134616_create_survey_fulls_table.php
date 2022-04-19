@@ -22,6 +22,7 @@ class CreateSurveyFullsTable extends Migration
             $table->time('checkout')->nullable();
             $table->string('company');
             $table->string('link');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

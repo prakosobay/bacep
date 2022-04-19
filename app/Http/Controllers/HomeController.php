@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{MasterOb, Personil, PilihanWork, Rutin, Survey};
+use App\Models\{CleaningFull, MasterOb, Personil, PilihanWork, Rutin, Survey};
 use Illuminate\Support\Facades\{DB, Auth, Gate, Session};
 
 class HomeController extends Controller
@@ -280,7 +280,9 @@ class HomeController extends Controller
             return view('ipcore.log');
         }
         elseif($email == 'badai.sino@balitower.co.id'){
-            return view('bm.log');
+            // $full = CleaningFull::all();
+            // var_dump($full);
+            return view('cleaning.full_visitor');
         }
         elseif($email == 'sales@mail.com'){
             return view('sales.log');

@@ -1,20 +1,13 @@
-@extends('layouts.full_approval')
+@extends('layouts.log-visitor')
 
 @section('content')
-<div class="container">
-
-    <!-- Page Heading -->
-    <h1 class="h3 my-2 text-gray-800 text-center">Full Approve Form Survey</h1>
-
+<div class="container-fluid">
     <!-- DataTales Example -->
-    <div class="card shadow mb-4">
+    <div class="card shadow mb-1">
         <div class="card-header py-3">
-            <a href="#" type="button" class="btn btn-success mr-5" >
-                <strong>Export Excel</strong>
-            </a>
-
+            <h4 class="judul text-center">Log Form BM</h4>
             <!-- Import Excel -->
-            <div class="modal fade" id="asset" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            {{-- <div class="modal fade" id="asset" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <form method="post" action="{{ url('/asset')}}" enctype="multipart/form-data">
                         {{ csrf_field() }}
@@ -35,35 +28,23 @@
                         </div>
                     </form>
                 </div>
-            </div>
-
+            </div> --}}
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-hover table-bordered text-center" id="dataTable" width="100%" cellspacing="0">
+                <table class="table table-striped table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
-                        <tr class="text-center">
+                        <tr class="judul-table text-center">
                             <th>ID Permit</th>
-                            <th>Visit Date</th>
-                            <th>Company</th>
+                            <th>Date of Visit</th>
                             <th>Checkin</th>
                             <th>Checkout</th>
-                            <th>Link</th>
+                            <th>Visitor Name</th>
+                            <th>Purpose of Work</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        @foreach ($full as $p)
-                            <tr class="text-center">
-                                <th>{{$p->survey_id}}</th>
-                                <th>{{$p->visit}}</th>
-                                <th>{{$p->company}}</th>
-                                <th>checkin</th>
-                                <th>checkout</th>
-                                <th>
-                                    <a href="{{$p->link}}">Link</a>
-                                </th>
-                            </tr>
-                        @endforeach
+                    <tbody class="isi-table text-center">
                     </tbody>
                 </table>
             </div>
@@ -72,10 +53,23 @@
 </div>
 
 @push('scripts')
-<script>
-    @(document).ready(function (){
-        $('#dataTable').DataTable();
-    });
-</script>
+    <script>
+        $(function() {
+            $('#dataTable').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: '{{ url('route_full_cleaning_other')}}',
+                columns: [
+                    { data: 'cleaning_id', name: 'cleaning_id' },
+                    { data: 'validity_from', name: 'validity_from' },
+                    { data: 'checkin', name: 'checkin' },
+                    { data: 'checkout', name: 'checkout' },
+                    { data: 'cleaning_name', name: 'cleaning_name' },
+                    { data: 'cleaning_work', name: 'cleaning_work' },
+                    {data: 'action', name: 'action', orderable: false, searchable: false}
+                ]
+            });
+        });
+    </script>
 @endpush
 @endsection
