@@ -27,8 +27,9 @@
 
 	<div class="container-contact100">
 		<div class="wrap-contact100">
-			<form id="form_cleaning" class="contact100-form validate-form">
+			<form id="form_cleaning" class="contact100-form validate-form" enctype="multipart/form-data" method="PUT" action="{{ url('checkin/cleaning', $getForm->cleaning_id)}}">
                 @csrf
+
 				<span class="contact100-form-title">
 					Review Form
 				</span>
@@ -82,11 +83,11 @@
                 {{-- Validity --}}
 				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate = "Pilih Tanggal Pekerjaan">
 					<span class="label-input100">Validity (Tanggal Mulai Pekerjaan) *</span>
-                    <input class="input100" type="date" name="validity_from" id="dateofbirth" value="{{$getForm->validity_from}}" autofocus>
+                    <input class="input100" type="date" name="validity_from" id="dateofbirth" value="{{$getForm->validity_from}}" readonly>
 				</div>
                 <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate = "Pilih Tanggal Pekerjaan">
 					<span class="label-input100">Validity (Tanggal Selesai Pekerjaan) *</span>
-					<input class="input100" type="date" name="validity_to" id="dateofbirth" value="{{$getForm->validity_to}}">
+					<input class="input100" type="date" name="validity_to" id="dateofbirth" value="{{$getForm->validity_to}}" autofocus>
 				</div>
 
                 {{-- Pilih Personil --}}
@@ -295,6 +296,25 @@
                     </tbody>
                 </table>
 
+                {{-- take picture --}}
+                {{-- <div class="wrap-input100 bg0 rs1-alert-validate">
+					<span class="label-input100 form-label">Ambil Gambar *</span>
+					<input id="my_camera" type="button" class="input100" value="Take Snapshot" onclick="take_snapshot()">
+                    <input type="hidden" name="image" class="image-tag">
+				</div> --}}
+
+                <div class="row">
+                    <div class="col-md-6 mt-5">
+                        <div id="my_camera"></div>
+                        <br/>
+                        <input type=button value="Take Snapshot" onclick="take_snapshot()" required>
+                        <input type="hidden" name="image" class="image-tag">
+                    </div>
+                    <div class="col-md-6">
+                        <div id="results"><b>Your captured image will appear here...</b></div>
+                    </div>
+                </div>
+
 				<div class="container-contact100-form-btn">
 					<button type="submit" class="contact100-form-btn">
 						<span>
@@ -317,6 +337,7 @@
 <!--===============================================================================================-->
 	<script src="{{ asset('vendor/select2/select2.min.js')}}"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.25/webcam.min.js"></script>
 	<script type="text/javascript">
 		$(".js-select2").each(function(){
 			$(this).select2({
@@ -356,44 +377,26 @@
         });
 
         $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('input[name="_token"]').val()
-        }
-    });
-
-    $(".contact100-form-btn").click(function(e){
-        e.preventDefault();
-        var datastring = $("#form_cleaning").serialize();
-        $.ajax({
-            type:'POST',
-            url:"{{url('submit_data_cleaning')}}",
-            data: datastring,
-            error: function (request, error) {
-                console.log(error)
-                alert(" Can't do because: " + error);
-            },
-            success:function(data){
-                console.log(data);
-                if(data.status == 'SUCCESS'){
-                    Swal.fire({
-                        title: "Success!",
-                        text: 'Data Saved',
-                        type: "success",
-                    }).then(function(){
-                        location.href = "{{url("/home")}}";
-                    });
-                }else if(data.status == 'FAILED'){
-                    Swal.fire({
-                        title: "Failed!",
-                        text: 'Saving Data Failed',
-                    }).then(function(){
-                        location.reload();
-                    });
-                }
+            headers: {
+                'X-CSRF-TOKEN': $('input[name="_token"]').val()
             }
         });
-    });
 
+        Webcam.set({
+        width: 490,
+        height: 390,
+        image_format: 'jpeg',
+        jpeg_quality: 90
+        });
+
+        Webcam.attach( '#my_camera' );
+
+        function take_snapshot() {
+            Webcam.snap( function(data_uri) {
+                $(".image-tag").val(data_uri);
+                document.getElementById('results').innerHTML = '<img src="'+data_uri+'"/>';
+            } );
+        }
 	</script>
 <!--===============================================================================================-->
 	<script src="{{ asset('vendor/countdowntime/countdowntime.js')}}"></script>

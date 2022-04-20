@@ -14,16 +14,12 @@ use Carbon\Carbon;
 
 class CleaningController extends Controller
 {
-    // public function tampilan()
-    // {
-    //     if (Gate::allows('isBm')) {
-    //         $master_ob = MasterOb::all();
-    //         $pilihanwork = PilihanWork::all();
-    //         return view('cleaning.form', ['master_ob' => $master_ob, 'pilihanwork' => $pilihanwork]);
-    //     } else {
-    //         abort(403);
-    //     }
-    // }
+    public function show_form()
+    {
+        $master_ob = MasterOb::all();
+        $pilihanwork = PilihanWork::all();
+        return view('cleaning.form', compact('master_ob', 'pilihanwork'));
+    }
 
 
     public function data_history()
@@ -55,7 +51,9 @@ class CleaningController extends Controller
 
     public function data_log_full()
     {
-        $full = DB::table('cleaning_fulls')->select(['cleaning_id', 'validity_from', 'cleaning_name', 'cleaning_work', 'checkin', 'checkout']);
+        $full = DB::table('cleaning_fulls')
+        // ->join('other')
+        ->select(['cleaning_id', 'validity_from', 'cleaning_name', 'cleaning_work', 'checkin', 'checkout']);
         return Datatables::of($full)
             ->editColumn('validity_from', function ($full) {
                 return $full->validity_from ? with(new Carbon($full->validity_from))->format('d/m/Y') : '';

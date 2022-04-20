@@ -251,11 +251,7 @@ class HomeController extends Controller
             return "ini role ipcore";
         }
         elseif(($email == 'data.center7@balitower.co.id') || ($email == 'badai.sino@balitower.co.id')){
-            $master_ob = MasterOb::all();
-            $pilihanwork = PilihanWork::all();
-            $personil = Personil::all();
-            $rutin = Rutin::all();
-            return view('cleaning.form', compact('master_ob', 'pilihanwork', 'personil', 'rutin'));
+            return view('cleaning.full_visitor');
         }
         elseif($email == 'pac@mail.com'){
             return "ini bm";
