@@ -37,8 +37,11 @@
                         <tr class="judul-table text-center">
                             <th>ID Permit</th>
                             <th>Date of Visit</th>
-                            <th>Visito Name</th>
+                            <th>Checkin</th>
+                            <th>Checkout</th>
+                            <th>Visitor Name</th>
                             <th>Purpose of Work</th>
+                            <th>Link</th>
                         </tr>
                     </thead>
                     <tbody class="isi-table text-center">
@@ -55,12 +58,15 @@
             $('#dataTable').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: '{{ url('route_full_cleaning')}}',
+                ajax: '{{ url('yajra_full_approve_cleaning')}}',
                 columns: [
                     { data: 'cleaning_id', name: 'cleaning_id' },
                     { data: 'validity_from', name: 'validity_from' },
+                    { data: 'checkin', name: 'checkin' },
+                    { data: 'checkout', name: 'checkout' },
                     { data: 'cleaning_name', name: 'cleaning_name' },
                     { data: 'cleaning_work', name: 'cleaning_work' },
+                    {data: 'action', name: 'action', orderable: false, searchable: false}
                 ]
             });
         });

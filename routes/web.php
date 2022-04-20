@@ -134,13 +134,15 @@ Route::middleware(['auth'])->group(function () {
 
     // Cleaning
     Route::get('route_history_cleaning', [CleaningController::class, 'data_history']);
+    Route::get('yajra_full_approve_cleaning', [CleaningController::class, 'data_full_approve_cleaning']);
     Route::get('route_full_cleaning_other', [CleaningController::class, 'data_log_full']);
     Route::get('log_cleaning', [CleaningController::class, 'log_carbon']);
     Route::get('/cleaning_pdf/{id}', [CleaningController::class, 'cetak_cleaning_pdf']);
     Route::get('/cleaning/{id}', [CleaningController::class, 'pilihan_work']);
     Route::get('/detail/{id}', [CleaningController::class, 'detail_ob']);
     Route::get('/cleaning.form', [CleaningController::class, 'tampilan']);
-    Route::post('/submit_data_cleaning', [CleaningController::class, 'submit_data_cleaning']);
+    Route::get('/cleaning/action/edit/{id}', [CleaningController::class, 'edit_form']);
+    Route::post('/route_submit_cleaning', [CleaningController::class, 'submit_data_cleaning']);
     Route::post('/cleaning_reject', [CleaningController::class, 'cleaning_reject']);
     Route::post('/approve_cleaning', [CleaningController::class, 'approve_cleaning']);
 

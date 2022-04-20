@@ -41,6 +41,18 @@ class CleaningController extends Controller
             ->make(true);
     }
 
+    public function data_full_approve_cleaning()
+    {
+        $getFull = DB::table('cleaning_fulls')->select(['cleaning_id', 'validity_from', 'cleaning_name', 'checkin', 'checkout', 'cleaning_work', 'link'])->get();
+        // dd($getFull);
+        return Datatables::of($getFull)
+            ->editColumn('validity_from', function ($full) {
+                return $full->validity_from ? with(new Carbon($full->validity_from))->format('d/m/Y') : '';
+            })
+            ->addColumn('action', 'cleaning.actionLink')
+            ->make(true);
+    }
+
     public function data_log_full()
     {
         $full = DB::table('cleaning_fulls')->select(['cleaning_id', 'validity_from', 'cleaning_name', 'cleaning_work', 'checkin', 'checkout']);
@@ -48,9 +60,7 @@ class CleaningController extends Controller
             ->editColumn('validity_from', function ($full) {
                 return $full->validity_from ? with(new Carbon($full->validity_from))->format('d/m/Y') : '';
             })
-            ->addColumn('action', function ($full) {
-                return '<a href="#edit-'.$full->cleaning_id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
-            })
+            ->addColumn('action', 'cleaning.actionEdit')
             ->make(true);
     }
 
@@ -71,7 +81,6 @@ class CleaningController extends Controller
     {
         $data = $request->all();
         // dd($data);
-        if (Gate::allows('isBm')) {
             $data['cleaning_name'] = MasterOb::find($data['cleaning_name'])->nama;
             $data['cleaning_name2'] = MasterOb::find($data['cleaning_name2'])->nama;
             $data['cleaning_work'] = PilihanWork::find($data['cleaning_work'])->work;
@@ -84,7 +93,7 @@ class CleaningController extends Controller
             ] as $recipient) {
                 Mail::to($recipient)->send(new NotifEmail());
             }
-        }
+
         if ($cleaning->exists) {
             $cleaningHistory = CleaningHistory::create([
                 'cleaning_id' => $cleaning->cleaning_id,
@@ -226,6 +235,14 @@ class CleaningController extends Controller
             ->get();
         $pdf = PDF::loadview('cleaning_pdf', ['cleaning' => $cleaning, 'lasthistoryC' => $lasthistoryC, 'cleaningHistory' => $cleaningHistory])->setPaper('a4', 'portrait')->setWarnings(false);
         return $pdf->stream();
+    }
+
+    public function edit_form($id)
+    {
+        $getForm = Cleaning::findOrFail($id);
+        $getOb = MasterOb::all();
+        // return dd($getForm);
+        return view('cleaning.editForm', compact('getForm', 'getOb'));
     }
 
     public function log_full()
