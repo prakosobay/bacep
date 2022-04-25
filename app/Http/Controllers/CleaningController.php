@@ -25,8 +25,8 @@ class CleaningController extends Controller
     public function data_history()
     {
         $cleaning_log = DB::table('cleaning_histories')
-                ->join('cleanings', 'cleanings.cleaning_id', '=', 'cleaning_histories.cleaning_id')
-                ->select('cleaning_histories.*', 'cleanings.validity_from');
+            ->join('cleanings', 'cleanings.cleaning_id', '=', 'cleaning_histories.cleaning_id')
+            ->select('cleaning_histories.*', 'cleanings.validity_from');
         return Datatables::of($cleaning_log)
             ->editColumn('updated_at', function ($cleaning_log) {
                 return $cleaning_log->updated_at ? with(new Carbon($cleaning_log->updated_at))->format('d/m/Y') : '';
@@ -52,8 +52,8 @@ class CleaningController extends Controller
     public function data_log_full()
     {
         $full = DB::table('cleaning_fulls')
-        // ->join('other')
-        ->select(['cleaning_id', 'validity_from', 'cleaning_name', 'cleaning_work', 'checkin', 'checkout']);
+            // ->join('other')
+            ->select(['cleaning_id', 'validity_from', 'cleaning_name', 'cleaning_work', 'checkin', 'checkout']);
         return Datatables::of($full)
             ->editColumn('validity_from', function ($full) {
                 return $full->validity_from ? with(new Carbon($full->validity_from))->format('d/m/Y') : '';
@@ -79,18 +79,18 @@ class CleaningController extends Controller
     {
         $data = $request->all();
         // dd($data);
-            $data['cleaning_name'] = MasterOb::find($data['cleaning_name'])->nama;
-            $data['cleaning_name2'] = MasterOb::find($data['cleaning_name2'])->nama;
-            $data['cleaning_work'] = PilihanWork::find($data['cleaning_work'])->work;
-            $cleaning = Cleaning::create($data);
+        $data['cleaning_name'] = MasterOb::find($data['cleaning_name'])->nama;
+        $data['cleaning_name2'] = MasterOb::find($data['cleaning_name2'])->nama;
+        $data['cleaning_work'] = PilihanWork::find($data['cleaning_work'])->work;
+        $cleaning = Cleaning::create($data);
 
-            foreach ([
-                'aurellius.putra@balitower.co.id', 'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
-                'ilham.pangestu@balitower.co.id', 'irwan.trisna@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id',
-                'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id',
-            ] as $recipient) {
-                Mail::to($recipient)->send(new NotifEmail());
-            }
+        // foreach ([
+        //     'aurellius.putra@balitower.co.id', 'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
+        //     'ilham.pangestu@balitower.co.id', 'irwan.trisna@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id',
+        //     'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id',
+        // ] as $recipient) {
+        //     Mail::to($recipient)->send(new NotifEmail());
+        // }
 
         if ($cleaning->exists) {
             $cleaningHistory = CleaningHistory::create([
@@ -139,23 +139,23 @@ class CleaningController extends Controller
 
             $role_to = '';
             if (($lasthistoryC->role_to == 'review')) {
-                foreach ([
-                    'aurellius.putra@balitower.co.id', 'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
-                'ilham.pangestu@balitower.co.id', 'irwan.trisna@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id'
-                ,'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id',
-                ] as $recipient) {
-                    Mail::to($recipient)->send(new NotifEmail());
-                }
+                // foreach ([
+                //     'aurellius.putra@balitower.co.id', 'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
+                // 'ilham.pangestu@balitower.co.id', 'irwan.trisna@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id'
+                // ,'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id',
+                // ] as $recipient) {
+                //     Mail::to($recipient)->send(new NotifEmail());
+                // }
                 $role_to = 'check';
             } elseif (($lasthistoryC->role_to == 'check')) {
-                foreach (['security.bacep@balitower.co.id'] as $recipient) {
-                    Mail::to($recipient)->send(new NotifEmail());
-                }
+                // foreach (['security.bacep@balitower.co.id'] as $recipient) {
+                //     Mail::to($recipient)->send(new NotifEmail());
+                // }
                 $role_to = 'security';
             } elseif (($lasthistoryC->role_to == 'security')) {
-                foreach (['bayu.prakoso@balitower.co.id'] as $recipient) {
-                    Mail::to($recipient)->send(new NotifEmail());
-                }
+                // foreach (['bayu.prakoso@balitower.co.id'] as $recipient) {
+                //     Mail::to($recipient)->send(new NotifEmail());
+                // }
                 $role_to = 'head';
             }
             $cleaningHistory = CleaningHistory::create([
@@ -172,9 +172,9 @@ class CleaningController extends Controller
 
         if ($lasthistoryC->role_to == 'head') {
             $cleaning = Cleaning::find($request->cleaning_id);
-            foreach (['dco@balitower.co.id'] as $recipient) {
-                Mail::to($recipient)->send(new NotifFull($cleaning));
-            }
+            // foreach (['dco@balitower.co.id'] as $recipient) {
+            //     Mail::to($recipient)->send(new NotifFull($cleaning));
+            // }
             $cleaning = Cleaning::where('cleaning_id', $request->cleaning_id)->first();
             $cleaningFull = CleaningFull::create([
                 'cleaning_id' => $cleaning->cleaning_id,

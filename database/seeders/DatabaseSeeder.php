@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\PilihanWork;
 use Illuminate\Database\Seeder;
 use App\Models\Survey;
 
@@ -17,6 +18,7 @@ class DatabaseSeeder extends Seeder
         $this->call(RutinSeeder::class);
         $this->call(PersonilTableSeeder::class);
         $this->call(ObSeeder::class);
-        Survey::factory(10)->create();
+        $this->call(PilihanWorksTable::class);
+        // Survey::factory(10)->create();
     }
 }
