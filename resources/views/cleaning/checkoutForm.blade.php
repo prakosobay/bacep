@@ -31,7 +31,7 @@
                 @csrf
 
 				<span class="contact100-form-title">
-					Review Form
+					Checkout
 				</span>
 
                 {{-- Purpose of Work --}}
@@ -87,32 +87,20 @@
 				</div>
                 <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate = "Pilih Tanggal Pekerjaan">
 					<span class="label-input100">Validity (Tanggal Selesai Pekerjaan) *</span>
-					<input class="input100" type="date" name="validity_to" id="dateofbirth" value="{{$getForm->validity_to}}" autofocus>
+					<input class="input100" type="date" name="validity_to" id="dateofbirth" value="{{$getForm->validity_to}}" readonly>
 				</div>
 
                 {{-- Pilih Personil --}}
                 <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate="Pilih Personil">
 					<span class="label-input100">Person In Charge 1(Nama Personil 1) *</span>
                     <div>
-                        <select class="js-select2" id="pilihan1" name="cleaning_name">
-                            <option selected value="{{$getForm->cleaning_name}}">{{$getForm->cleaning_name}}</option>
-                            @foreach($getOb as $p)
-                            <option value="{{ $p->ob_id }}">{{ $p->nama }}</option>
-                            @endforeach
-                        </select>
-                        <div class="dropDownSelect2"></div>
+                        <input type="text" class="input100" name="cleaning_name" id="purpose" value="{{$getForm->cleaning_name}}" readonly>
                     </div>
 				</div>
                 <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate="Pilih Personil">
 					<span class="label-input100">Person In Charge 2(Nama Personil 2) *</span>
                     <div>
-                        <select class="js-select2" id="pilihan2" name="cleaning_name2">
-                            <option selected value="{{$getForm->cleaning_name2}}">{{$getForm->cleaning_name2}}</option>
-                            @foreach($getOb as $p)
-                            <option value="{{ $p->ob_id }}">{{ $p->nama }}</option>
-                            @endforeach
-                        </select>
-                        <div class="dropDownSelect2"></div>
+                        <input type="text" class="input100" name="cleaning_name2" id="purpose" value="{{$getForm->cleaning_name2}}" readonly>
                     </div>
 				</div>
 
@@ -150,38 +138,38 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <th><input type="time" name="cleaning_time_start" value="{{$getForm->cleaning_time_start}}"></th>
-                            <th><input type="time" name="cleaning_time_end" value="{{$getForm->cleaning_time_end}}"></th>
+                            <th><input type="time" name="cleaning_time_start" value="{{$getForm->cleaning_time_start}}" readonly></th>
+                            <th><input type="time" name="cleaning_time_end" value="{{$getForm->cleaning_time_end}}" readonly></th>
                             <th><input type="text" class="input100" name="activity" id="activity_desciption_1" value="{{$getForm->activity}}" readonly></th>
                             <th><input type="text" class="input100" name="detail_service" id="detail_service_1" value="{{$getForm->detail_service}}" readonly></th>
                         </tr>
                         <tr>
-                            <th><input type="time" name="cleaning_time_start2" value="{{$getForm->cleaning_time_start2}}"></th>
-                            <th><input type="time" name="cleaning_time_end2" value="{{$getForm->cleaning_time_end2}}"></th>
+                            <th><input type="time" name="cleaning_time_start2" value="{{$getForm->cleaning_time_start2}}" readonly></th>
+                            <th><input type="time" name="cleaning_time_end2" value="{{$getForm->cleaning_time_end2}}" readonly></th>
                             <th><input type="text" class="input100" name="activity2" id="activity_desciption_2" value="{{$getForm->activity2}}" readonly></th>
                             <th><input type="text" class="input100" name="detail_service2" id="detail_service_2" value="{{$getForm->detail_service2}}" readonly></th>
                         </tr>
                         <tr>
-                            <th><input type="time" name="cleaning_time_start3" value="{{$getForm->cleaning_time_start3}}"></th>
-                            <th><input type="time" name="cleaning_time_end3" value="{{$getForm->cleaning_time_end3}}"></th>
+                            <th><input type="time" name="cleaning_time_start3" value="{{$getForm->cleaning_time_start3}}" readonly></th>
+                            <th><input type="time" name="cleaning_time_end3" value="{{$getForm->cleaning_time_end3}}" readonly></th>
                             <th><input type="text" class="input100" name="activity3" id="activity_desciption_3" value="{{$getForm->activity3}}" readonly></th>
                             <th><input type="text" class="input100" name="detail_service3" id="detail_service_3" value="{{$getForm->detail_service3}}" readonly></th>
                         </tr>
                         <tr>
-                            <th><input type="time" name="cleaning_time_start4" value="{{$getForm->cleaning_time_start4}}"></th>
-                            <th><input type="time" name="cleaning_time_end4" value="{{$getForm->cleaning_time_end4}}"></th>
+                            <th><input type="time" name="cleaning_time_start4" value="{{$getForm->cleaning_time_start4}}" readonly></th>
+                            <th><input type="time" name="cleaning_time_end4" value="{{$getForm->cleaning_time_end4}}" readonly></th>
                             <th><input type="text" class="input100" name="activity4" id="activity_desciption_4" value="{{$getForm->activity4}}" readonly></th>
                             <th><input type="text" class="input100" name="detail_service4" id="detail_service_4" value="{{$getForm->detail_service4}}" readonly></th>
                         </tr>
                         <tr>
-                            <th><input type="time" name="cleaning_time_start5" value="{{$getForm->cleaning_time_start5}}"></th>
-                            <th><input type="time" name="cleaning_time_end5" value="{{$getForm->cleaning_time_end5}}"></th>
+                            <th><input type="time" name="cleaning_time_start5" value="{{$getForm->cleaning_time_start5}}" readonly></th>
+                            <th><input type="time" name="cleaning_time_end5" value="{{$getForm->cleaning_time_end5}}" readonly></th>
                             <th><input type="text" class="input100" name="activity5" id="activity_desciption_5" value="{{$getForm->activity5}}" readonly></th>
                             <th><input type="text" class="input100" name="detail_service5" id="detail_service_5" value="{{$getForm->detail_service5}}" readonly></th>
                         </tr>
                         <tr>
-                            <th><input type="time" name="cleaning_time_start6" value="{{$getForm->cleaning_time_start6}}"></th>
-                            <th><input type="time" name="cleaning_time_end6" value="{{$getForm->cleaning_time_end6}}"></th>
+                            <th><input type="time" name="cleaning_time_start6" value="{{$getForm->cleaning_time_start6}}" readonly></th>
+                            <th><input type="time" name="cleaning_time_end6" value="{{$getForm->cleaning_time_end6}}" readonly></th>
                             <th><input type="text" class="input100" name="activity6" id="activity_desciption_6" value="{{$getForm->activity6}}" readonly></th>
                             <th><input type="text" class="input100" name="detail_service6" id="detail_service_6" value="{{$getForm->detail_service6}}" readonly></th>
                         </tr>

@@ -26,7 +26,11 @@ class CreateCleaningFullsTable extends Migration
             $table->dateTime('checkin')->nullable();
             $table->dateTime('checkout')->nullable();
             $table->string('link');
-            $table->string('gambar')->nullable();
+            $table->string('gambar_pic1')->nullable();
+            $table->string('gambar_pic2')->nullable();
+            $table->string('gambar_dc')->nullable();
+            $table->string('dc_name')->nullable();
+            $table->text('note')->nullable();
             $table->date('cleaning_date');
             $table->string('status');
             $table->softDeletes();

@@ -21,7 +21,6 @@ class CleaningController extends Controller
         return view('cleaning.form', compact('master_ob', 'pilihanwork'));
     }
 
-
     public function data_history()
     {
         $cleaning_log = DB::table('cleaning_histories')
@@ -139,23 +138,23 @@ class CleaningController extends Controller
 
             $role_to = '';
             if (($lasthistoryC->role_to == 'review')) {
-                // foreach ([
-                //     'aurellius.putra@balitower.co.id', 'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
-                // 'ilham.pangestu@balitower.co.id', 'irwan.trisna@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id'
-                // ,'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id',
-                // ] as $recipient) {
-                //     Mail::to($recipient)->send(new NotifEmail());
-                // }
+                foreach ([
+                    'aurellius.putra@balitower.co.id', 'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
+                'ilham.pangestu@balitower.co.id', 'irwan.trisna@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id'
+                ,'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id',
+                ] as $recipient) {
+                    Mail::to($recipient)->send(new NotifEmail());
+                }
                 $role_to = 'check';
             } elseif (($lasthistoryC->role_to == 'check')) {
-                // foreach (['security.bacep@balitower.co.id'] as $recipient) {
-                //     Mail::to($recipient)->send(new NotifEmail());
-                // }
+                foreach (['security.bacep@balitower.co.id'] as $recipient) {
+                    Mail::to($recipient)->send(new NotifEmail());
+                }
                 $role_to = 'security';
             } elseif (($lasthistoryC->role_to == 'security')) {
-                // foreach (['bayu.prakoso@balitower.co.id'] as $recipient) {
-                //     Mail::to($recipient)->send(new NotifEmail());
-                // }
+                foreach (['bayu.prakoso@balitower.co.id'] as $recipient) {
+                    Mail::to($recipient)->send(new NotifEmail());
+                }
                 $role_to = 'head';
             }
             $cleaningHistory = CleaningHistory::create([
@@ -172,9 +171,9 @@ class CleaningController extends Controller
 
         if ($lasthistoryC->role_to == 'head') {
             $cleaning = Cleaning::find($request->cleaning_id);
-            // foreach (['dco@balitower.co.id'] as $recipient) {
-            //     Mail::to($recipient)->send(new NotifFull($cleaning));
-            // }
+            foreach (['dco@balitower.co.id'] as $recipient) {
+                Mail::to($recipient)->send(new NotifFull($cleaning));
+            }
             $cleaning = Cleaning::where('cleaning_id', $request->cleaning_id)->first();
             $cleaningFull = CleaningFull::create([
                 'cleaning_id' => $cleaning->cleaning_id,
@@ -235,12 +234,18 @@ class CleaningController extends Controller
         return $pdf->stream();
     }
 
-    public function edit_form($id)
+    public function checkin_form($id)
     {
         $getForm = Cleaning::findOrFail($id);
         $getOb = MasterOb::all();
-        // return dd($getForm);
-        return view('cleaning.editForm', compact('getForm', 'getOb'));
+        return view('cleaning.checkinForm', compact('getForm', 'getOb'));
+    }
+
+    public function checkout_form($id)
+    {
+        $getForm = Cleaning::findOrFail($id);
+        $getFull = CleaningFull::where('cleaning_id', $id)->first();
+        return view('cleaning.checkoutForm', compact('getForm'));
     }
 
     public function log_full()
