@@ -243,7 +243,25 @@ class CleaningController extends Controller
 
     public function checkin_update_cleaning(Request $request, $id)
     {
-        dd($request->all());
+        // dd($request);
+        $getImage = $request->image;
+        $storage = 'selfie';
+        // dd($getImage);
+
+        $image_parts = explode(";base64,", $getImage);
+        $image_type_aux = explode("image/", $image_parts[0]);
+        $image_type = $image_type_aux[1];
+
+        $image_base64 = base64_decode($image_parts[1]);
+        $fileName = uniqid() . '.png';
+
+        // $file = $storage . $fileName;
+        $file->move($storage,$fileName);
+        file_put_contents($fileName, $image_base64);
+
+        // return $fileName->store('selfie');
+        print_r($file);
+
     }
 
     public function checkout_form_cleaning($id)

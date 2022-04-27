@@ -147,7 +147,7 @@
                         <input type=button class="btn btn-primary btn-sm" value="Take Snapshot" onclick="take_snapshot()" required>
                     </div>
                     <div class="row justify-content-center">
-                        <input type="hidden" name="image" class="image-tag" hidden>
+                        <input type="hidden" name="image" id="image">
                     </div>
                     <div class="row justify-content-center my-2">
                         <input type="text" name="checkin" id="checkin" value="" readonly>
@@ -170,7 +170,7 @@
                         <input type=button class="btn btn-primary btn-sm" value="Take Snapshot" onclick="take_snapshot2()" required>
                     </div>
                     <div class="row">
-                        <input type="hidden" name="image2" class="image-tag2" hidden>
+                        <input type="hidden" name="image2" class="image-tag2">
                     </div>
                     <div class="row justify-content-center my-2">
                         <input type="text" name="checkin2" id="checkin2" value="" readonly>
@@ -379,6 +379,7 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.25/webcam.min.js"></script>
 	<script type="text/javascript">
+
 		$(".js-select2").each(function(){
 			$(this).select2({
 				minimumResultsForSearch: 20,
@@ -432,7 +433,7 @@
         Webcam.attach( '#my_camera' );
         function take_snapshot() {
             Webcam.snap( function(data_uri) {
-                $(".image-tag").val(data_uri);
+                $("#image").val(data_uri);
                 document.getElementById('results').innerHTML = '<img src="'+data_uri+'"/>';
             });
             var tanggal = new Date();
@@ -450,6 +451,7 @@
             var waktu = tanggal.getHours()+":"+tanggal.getMinutes()+":"+tanggal.getSeconds();
             $("#checkin2").val(waktu);
         }
+
 	</script>
 <!--===============================================================================================-->
 	<script src="{{ asset('vendor/countdowntime/countdowntime.js')}}"></script>
