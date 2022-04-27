@@ -234,18 +234,24 @@ class CleaningController extends Controller
         return $pdf->stream();
     }
 
-    public function checkin_form($id)
+    public function checkin_form_cleaning($id)
     {
         $getForm = Cleaning::findOrFail($id);
         $getOb = MasterOb::all();
         return view('cleaning.checkinForm', compact('getForm', 'getOb'));
     }
 
-    public function checkout_form($id)
+    public function checkin_update_cleaning(Request $request, $id)
+    {
+        dd($request->all());
+    }
+
+    public function checkout_form_cleaning($id)
     {
         $getForm = Cleaning::findOrFail($id);
         $getFull = CleaningFull::where('cleaning_id', $id)->first();
-        return view('cleaning.checkoutForm', compact('getForm'));
+        // dd($getFull);
+        return view('cleaning.checkoutForm', compact('getForm', 'getFull'));
     }
 
     public function log_full()
@@ -269,5 +275,11 @@ class CleaningController extends Controller
                 return $carbon->validity_to ? with(new Carbon($carbon->validity_to))->format('d/m/Y') : '';
             })
             ->make(true);
+    }
+
+    public function checkin_submit_cleaning($id)
+    {
+        $getFull = CleaningFull::findOrFail($id);
+        dd($getFull);
     }
 }
