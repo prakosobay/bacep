@@ -30,7 +30,15 @@
 			<form id="checkin_cleaning" class="contact100-form validate-form" enctype="multipart/form-data" method="POST" action="{{ url('cleaning/checkin', $getForm->cleaning_id)}}">
                 @csrf
                 @method('PUT')
-
+                @if (count($errors) > 0)
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
 				<span class="contact100-form-title">
 					Checkin
 				</span>
@@ -83,12 +91,17 @@
 
                 {{-- Validity --}}
 				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate = "Pilih Tanggal Pekerjaan">
-					<span class="label-input100">Validity (Tanggal Mulai Pekerjaan) *</span>
+					<span class="label-input100">Date of Visit (Tanggal Mulai Pekerjaan) *</span>
                     <input class="input100" type="date" name="validity_from" id="dateofbirth" value="{{$getForm->validity_from}}" readonly>
 				</div>
                 <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate = "Pilih Tanggal Pekerjaan">
-					<span class="label-input100">Validity (Tanggal Selesai Pekerjaan) *</span>
-					<input class="input100" type="date" name="validity_to" id="dateofbirth" value="{{$getForm->validity_to}}" autofocus>
+					<span class="label-input100">Date of Leave (Tanggal Selesai Pekerjaan) *</span>
+					<input class="input100 @error('date_of_leave') is-invalid @enderror" type="date" name="date_of_leave" id="date_of_leave" value="{{$getForm->validity_to}}" required autocomplete="date_of_leave" autofocus>
+                    @error('date_of_leave')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
 				</div>
 
                 {{-- Pilih Personil --}}
@@ -137,7 +150,7 @@
                     <input type="text" class="input100" name="cleaning_nik_2" id="id_number2" value="{{$getForm->cleaning_nik_2}}" readonly>
 				</div>
 
-                {{-- selfie 1 --}}
+                {{-- selfie & checkin 1--}}
                 <div class="wrap-input100 validate-input bg1 rs1-wrap-input100">
 					<span class="label-input100">Take a selfie (Personil 1)</span>
                     <div class="row justify-content-center">
@@ -147,10 +160,21 @@
                         <input type=button class="btn btn-primary btn-sm" value="Take Snapshot" onclick="take_snapshot()" required>
                     </div>
                     <div class="row justify-content-center">
-                        <input type="hidden" name="image" id="image">
+                        <input class="@error('photo_personil') is-invalid
+                        @enderror" required autocomplete="photo_personil" type="hidden" name="photo_personil" id="image">
+                        @error('photo_personil')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                     <div class="row justify-content-center my-2">
-                        <input type="text" name="checkin" id="checkin" value="" readonly>
+                        <input type="text" class="@error('checkin_personil')@enderror" name="checkin_personil" id="checkin_personil" value="" required autocomplete="checkin_personil" readonly>
+                        @error('checkin_personil')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
 				</div>
                 <div class="wrap-input100 validate-input bg1 rs1-wrap-input100">
@@ -160,7 +184,7 @@
                     </div>
                 </div>
 
-                {{-- selfie 2 --}}
+                {{-- selfie & checkin 2 --}}
                 <div class="wrap-input100 validate-input bg1 rs1-wrap-input100">
 					<span class="label-input100">Take a selfie (Personil 2)</span>
                     <div class="row justify-content-center">
@@ -169,11 +193,24 @@
                     <div class="row justify-content-center">
                         <input type=button class="btn btn-primary btn-sm" value="Take Snapshot" onclick="take_snapshot2()" required>
                     </div>
-                    <div class="row">
-                        <input type="hidden" name="image2" class="image-tag2">
+                    <div class="row justify-content-center" >
+                        <div class="row justify-content-center">
+                            <input class="@error('photo_personil2') is-invalid
+                            @enderror" required autocomplete="photo_personil2" type="hidden" name="photo_personil2" id="image2">
+                            @error('photo_personil2')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
                     </div>
                     <div class="row justify-content-center my-2">
-                        <input type="text" name="checkin2" id="checkin2" value="" readonly>
+                        <input type="text" class="@error('checkin_personil2')@enderror" name="checkin_personil2" id="checkin_personil2" value="" required autocomplete="checkin_personil2" readonly>
+                        @error('checkin_personil2')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
 				</div>
                 <div class="wrap-input100 validate-input bg1 rs1-wrap-input100">
@@ -182,18 +219,6 @@
                         <div id="results2"></div>
                     </div>
                 </div>
-
-                {{-- <div class="row">
-                    <div class="col-md-6 mt-5">
-                        <div id="my_camera"></div>
-                        <br/>
-                        <input type=button value="Take Snapshot" onclick="take_snapshot()" required>
-                        <input type="hidden" name="image" class="image-tag">
-                    </div>
-                    <div class="col-md-6">
-                        <div id="results"><b>Your captured image will appear here...</b></div>
-                    </div>
-                </div> --}}
 
                 <!-- Detail Time Activity -->
                 <table class="table table-bordered">
@@ -438,18 +463,18 @@
             });
             var tanggal = new Date();
             var waktu = tanggal.getHours()+":"+tanggal.getMinutes()+":"+tanggal.getSeconds();
-            $("#checkin").val(waktu);
+            $("#checkin_personil").val(waktu);
         }
 
         Webcam.attach( '#my_camera2' );
         function take_snapshot2() {
-            Webcam.snap( function(data_uri2) {
-                $(".image-tag2").val(data_uri2);
-                document.getElementById('results2').innerHTML = '<img src="'+data_uri2+'"/>';
+            Webcam.snap( function(data_uri) {
+                $("#image2").val(data_uri);
+                document.getElementById('results2').innerHTML = '<img src="'+data_uri+'"/>';
             });
             var tanggal = new Date();
             var waktu = tanggal.getHours()+":"+tanggal.getMinutes()+":"+tanggal.getSeconds();
-            $("#checkin2").val(waktu);
+            $("#checkin_personil2").val(waktu);
         }
 
 	</script>

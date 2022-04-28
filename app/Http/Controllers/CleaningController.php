@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\{DB, Auth, Gate, Mail, Session};
+use Illuminate\Support\Facades\{DB, Auth, Gate, Mail, Session, Storage};
+use Illuminate\Support\Str;
 use Barryvdh\DomPDF\Facade as PDF;
 use App\Mail\{NotifEmail, NotifReject, NotifFull};
 use App\Models\{User, Role, MasterOb, PilihanWork};
@@ -52,7 +53,7 @@ class CleaningController extends Controller
     {
         $full = DB::table('cleaning_fulls')
             // ->join('other')
-            ->select(['cleaning_id', 'validity_from', 'cleaning_name', 'cleaning_work', 'checkin', 'checkout']);
+            ->select(['cleaning_id', 'validity_from', 'cleaning_name', 'cleaning_work', 'checkin_personil', 'checkout_personil']);
         return Datatables::of($full)
             ->editColumn('validity_from', function ($full) {
                 return $full->validity_from ? with(new Carbon($full->validity_from))->format('d/m/Y') : '';
@@ -243,25 +244,72 @@ class CleaningController extends Controller
 
     public function checkin_update_cleaning(Request $request, $id)
     {
-        // dd($request);
-        $getImage = $request->image;
-        $storage = 'selfie';
-        // dd($getImage);
 
-        $image_parts = explode(";base64,", $getImage);
-        $image_type_aux = explode("image/", $image_parts[0]);
-        $image_type = $image_type_aux[1];
+        $validated = $request->validate([
+            'date_of_leave' => ['required', 'date', 'after:yesterday', 'after_or_equal:date_of_visit'],
+            'cleaning_name' => ['required', 'string'],
+            'cleaning_name2' => ['required', 'string'],
+            'cleaning_number' => ['required', 'regex:/^([0-9\s\-\+\(\)]*)$/'],
+            'cleaning_number2' => ['required', 'regex:/^([0-9\s\-\+\(\)]*)$/'],
+            'cleaning_nik' => ['required', 'numeric'],
+            'cleaning_nik_2' => ['required', 'numeric'],
+            'photo_personil' => ['required'],
+            'checkin_personil' => ['required'],
+            'photo_personil2' => ['required'],
+            'checkin_personil2' => ['required'],
+            'cleaning_time_start' => ['required'],
+            'cleaning_time_end' => ['required'],
+        ]);
 
-        $image_base64 = base64_decode($image_parts[1]);
-        $fileName = uniqid() . '.png';
+        $getFull = CleaningFull::where('cleaning_id', $id)->first();
+        $getCleaning = Cleaning::where('cleaning_id', $id)->first();
+        dd($getCleaning);
+        $getImage = $request->photo_personil;
+        $getImage2 = $request->photo_personil2;
 
-        // $file = $storage . $fileName;
-        $file->move($storage,$fileName);
-        file_put_contents($fileName, $image_base64);
+        // image1
+        $extension = explode('/', explode(':', substr($getImage, 0, strpos($getImage, ';')))[1])[1];   // .jpg .png .pdf
+        $replace = substr($getImage, 0, strpos($getImage, ',')+1);
+        $image = str_replace($replace, '', $getImage);
+        $image = str_replace(' ', '+', $image);
+        $imageName = Str::random(10).'.'.$extension;
 
-        // return $fileName->store('selfie');
-        print_r($file);
+        // image2
+        $extension2 = explode('/', explode(':', substr($getImage2, 0, strpos($getImage2, ';')))[1])[1];   // .jpg .png .pdf
+        $replace2 = substr($getImage2, 0, strpos($getImage2, ',')+1);
+        $image2 = str_replace($replace2, '', $getImage2);
+        $image2 = str_replace(' ', '+', $image2);
+        $imageName2 = Str::random(10).'.'.$extension2;
 
+        // simpan gambar
+        $gambar1 = Storage::disk('public')->put($imageName, base64_decode($image));
+        $gambar2 = Storage::disk('public')->put($imageName2, base64_decode($image2));
+
+        if($gambar1 && $gambar2){
+            $getFull->update([
+                'date_of_leave' => $request->date_of_leave,
+                'photo_checkin_personil' => $request->photo_personil,
+                'photo_checkin_personil2' => $request->photo_personil2,
+                'checkin_personil' => $request->checkin,
+                'checkin_personil2' => $request->checkin2,
+            ]);
+
+            $getCleaning->update([
+                'validity_to' => $request->date_of_leave,
+                'cleaning_time_start' => $request->cleaning_time_start,
+                'cleaning_time_end' => $request->cleaning_time_end,
+                'cleaning_name' => $request->cleaning_name,
+                'cleaning_name2' => $request->cleaning_name2,
+                'cleaning_number' => $request->cleaning_number,
+                'cleaning_number2' => $request->cleaning_number2,
+                'cleaning_nik' => $request->cleaning_nik,
+                'cleaning_nik_2' => $request->cleaning_nik_2,
+            ]);
+
+            return "success";
+        } else{
+            return "gagal";
+        }
     }
 
     public function checkout_form_cleaning($id)
