@@ -337,6 +337,54 @@ class CleaningController extends Controller
         }
     }
 
+    public function checkout_update_cleaning(Request $request, $id)
+    {
+        $data = $request->all();
+
+        $validated = $request->validate([
+            'photo_personil' => ['required'],
+            'photo_personil2' => ['required'],
+            'checkout_personil' => ['required'],
+            'checkout_personil2' => ['required'],
+        ]);
+
+        $getImage = $data['photo_personil'];
+        $getImage2 = $data['photo_personil2'];
+
+        // image1
+        $extension = explode('/', explode(':', substr($getImage, 0, strpos($getImage, ';')))[1])[1];   // .jpg .png .pdf
+        $replace = substr($getImage, 0, strpos($getImage, ',')+1);
+        $image = str_replace($replace, '', $getImage);
+        $image = str_replace(' ', '+', $image);
+        $imageName = Str::random(10).'.'.$extension;
+
+        // image2
+        $extension2 = explode('/', explode(':', substr($getImage2, 0, strpos($getImage2, ';')))[1])[1];   // .jpg .png .pdf
+        $replace2 = substr($getImage2, 0, strpos($getImage2, ',')+1);
+        $image2 = str_replace($replace2, '', $getImage2);
+        $image2 = str_replace(' ', '+', $image2);
+        $imageName2 = Str::random(10).'.'.$extension2;
+
+        // simpan gambar
+        $gambar1 = Storage::disk('public')->put($imageName, base64_decode($image));
+        $gambar2 = Storage::disk('public')->put($imageName2, base64_decode($image2));
+
+        $getFullCheckout = CleaningFull::where('cleaning_id', $id)->first();
+
+        if(($gambar1) && ($gambar2)){
+            $getFullCheckout->update([
+                'checkout_personil' => $data['checkout_personil'],
+                'checkout_personil2' => $data['checkout_personil2'],
+                'photo_checkout_personil' => $imageName,
+                'photo_checkout_personil2' => $imageName2,
+            ]);
+
+            return "success";
+        } else{
+            return "gagal";
+        }
+    }
+
     public function checkout_form_cleaning($id)
     {
         $getForm = Cleaning::findOrFail($id);

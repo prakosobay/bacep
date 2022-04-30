@@ -27,8 +27,9 @@
 
 	<div class="container-contact100">
 		<div class="wrap-contact100">
-			<form id="form_cleaning" class="contact100-form validate-form" enctype="multipart/form-data" method="PUT" action="{{ url('checkin/cleaning', $getForm->cleaning_id)}}">
+			<form id="form_cleaning" class="contact100-form validate-form" enctype="multipart/form-data" method="POST" action="{{ url('cleaning/checkout', $getForm->cleaning_id)}}">
                 @csrf
+                @method('PUT')
 
 				<span class="contact100-form-title">
 					Checkout
@@ -123,6 +124,76 @@
 					<span class="label-input100">ID Number (NIK Personil 2)</span>
                     <input type="text" class="input100" name="cleaning_nik_2" id="id_number2" value="{{$getForm->cleaning_nik_2}}" readonly>
 				</div>
+
+                {{-- selfie & checkout 1--}}
+                <div class="wrap-input100 validate-input bg1 rs1-wrap-input100">
+					<span class="label-input100">Take a selfie (Personil 1)</span>
+                    <div class="row justify-content-center">
+                        <div id="my_camera"></div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <input type=button class="btn btn-primary btn-sm" value="Take Snapshot" onclick="take_snapshot()" required>
+                    </div>
+                    <div class="row justify-content-center">
+                        <input class="@error('photo_personil') is-invalid
+                        @enderror" required autocomplete="photo_personil" type="hidden" name="photo_personil" id="image">
+                        @error('photo_personil')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="row justify-content-center my-2">
+                        <input type="time" class="@error('checkout_personil')@enderror" name="checkout_personil" id="checkout_personil" value="" required autocomplete="checkout_personil" readonly>
+                        @error('checkout_personil')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+				</div>
+                <div class="wrap-input100 validate-input bg1 rs1-wrap-input100">
+                    <span class="label-input100"><b>Your captured image will appear here...</b></span>
+                    <div class="row justify-content-center">
+                        <div id="results"></div>
+                    </div>
+                </div>
+
+                {{-- selfie & checkout 2 --}}
+                <div class="wrap-input100 validate-input bg1 rs1-wrap-input100">
+					<span class="label-input100">Take a selfie (Personil 2)</span>
+                    <div class="row justify-content-center">
+                        <div id="my_camera2"></div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <input type=button class="btn btn-primary btn-sm" value="Take Snapshot" onclick="take_snapshot2()" required>
+                    </div>
+                    <div class="row justify-content-center" >
+                        <div class="row justify-content-center">
+                            <input class="@error('photo_personil2') is-invalid
+                            @enderror" required autocomplete="photo_personil2" type="hidden" name="photo_personil2" id="image2">
+                            @error('photo_personil2')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="row justify-content-center my-2">
+                        <input type="time" class="@error('checkout_personil2')@enderror" name="checkout_personil2" id="checkout_personil2" value="" required autocomplete="checkout_personil2" readonly>
+                        @error('checkout_personil2')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+				</div>
+                <div class="wrap-input100 validate-input bg1 rs1-wrap-input100">
+                    <span class="label-input100"><b>Your captured image will appear here...</b></span>
+                    <div class="row justify-content-center">
+                        <div id="results2"></div>
+                    </div>
+                </div>
 
                 <!-- Detail Time Activity -->
                 <table class="table table-bordered">
@@ -284,25 +355,6 @@
                     </tbody>
                 </table>
 
-                {{-- take picture --}}
-                {{-- <div class="wrap-input100 bg0 rs1-alert-validate">
-					<span class="label-input100 form-label">Ambil Gambar *</span>
-					<input id="my_camera" type="button" class="input100" value="Take Snapshot" onclick="take_snapshot()">
-                    <input type="hidden" name="image" class="image-tag">
-				</div> --}}
-
-                <div class="row">
-                    <div class="col-md-6 mt-5">
-                        <div id="my_camera"></div>
-                        <br/>
-                        <input type=button value="Take Snapshot" onclick="take_snapshot()" required>
-                        <input type="hidden" name="image" class="image-tag">
-                    </div>
-                    <div class="col-md-6">
-                        <div id="results"><b>Your captured image will appear here...</b></div>
-                    </div>
-                </div>
-
 				<div class="container-contact100-form-btn">
 					<button type="submit" class="contact100-form-btn">
 						<span>
@@ -371,19 +423,45 @@
         });
 
         Webcam.set({
-        width: 490,
-        height: 390,
-        image_format: 'jpeg',
-        jpeg_quality: 90
+            width: 490,
+            height: 390,
+            image_format: 'jpeg',
+            jpeg_quality: 90
         });
 
         Webcam.attach( '#my_camera' );
-
         function take_snapshot() {
             Webcam.snap( function(data_uri) {
-                $(".image-tag").val(data_uri);
+                $("#image").val(data_uri);
                 document.getElementById('results').innerHTML = '<img src="'+data_uri+'"/>';
-            } );
+            });
+            var tanggal = new Date();
+            var jam = tanggal.getHours();
+            var menit = tanggal.getMinutes();
+            var detik = tanggal.getSeconds();
+            jam = jam < 10 ? '0' +jam : jam;
+            menit = menit < 10 ? '0'+menit : menit;
+            detik = detik < 10 ? '0'+detik : detik;
+            var waktu = jam + ':' + menit + ':' + detik;
+            $("#checkout_personil").val(waktu);
+        }
+
+        Webcam.attach( '#my_camera2' );
+        function take_snapshot2() {
+            Webcam.snap( function(data_uri) {
+                $("#image2").val(data_uri);
+                document.getElementById('results2').innerHTML = '<img src="'+data_uri+'"/>';
+            });
+            var tanggal = new Date();
+            var jam = tanggal.getHours();
+            var menit = tanggal.getMinutes();
+            var detik = tanggal.getSeconds();
+            jam = jam < 10 ? '0' +jam : jam;
+            menit = menit < 10 ? '0'+menit : menit;
+            detik = detik < 10 ? '0'+detik : detik;
+            var waktu = jam + ':' + menit + ':' + detik;
+
+            $("#checkout_personil2").val(waktu);
         }
 	</script>
 <!--===============================================================================================-->

@@ -147,6 +147,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/cleaning_reject', [CleaningController::class, 'cleaning_reject']);
     Route::post('/approve_cleaning', [CleaningController::class, 'approve_cleaning']);
     Route::put('/cleaning/checkin/{id}', [CleaningController::class, 'checkin_update_cleaning']);
+    Route::put('/cleaning/checkout/{id}', [CleaningController::class, 'checkout_update_cleaning']);
 
     //Visitor All Base Super
     Route::get('new_permit', [HomeController::class, 'new_permit']);
