@@ -245,8 +245,18 @@ class CleaningController extends Controller
     public function checkin_update_cleaning(Request $request, $id)
     {
         $data = ($request->all());
-        $data['cleaning_name'] = MasterOb::find($data['cleaning_name'])->nama;
-        $data['cleaning_name2'] = MasterOb::find($data['cleaning_name2'])->nama;
+
+        $jumlah_char_pic1 = strlen($data['cleaning_name']);
+        $jumlah_char_pic2 = strlen($data['cleaning_name2']);
+
+        if(($jumlah_char_pic1 < 3) && ($jumlah_char_pic2 < 3)){
+            $data['cleaning_name'] = MasterOb::find($data['cleaning_name'])->nama;
+            $data['cleaning_name2'] = MasterOb::find($data['cleaning_name2'])->nama;
+        } elseif(($jumlah_char_pic1 < 3) && ($jumlah_char_pic2 > 3)){
+            $data['cleaning_name'] = MasterOb::find($data['cleaning_name'])->nama;
+        } elseif(($jumlah_char_pic1 > 3) && ($jumlah_char_pic2 < 3)){
+            $data['cleaning_name2'] = MasterOb::find($data['cleaning_name2'])->nama;
+        }
 
         $validated = $request->validate([
             'date_of_leave' => ['required', 'date', 'after:yesterday', 'after_or_equal:date_of_visit'],
@@ -266,7 +276,7 @@ class CleaningController extends Controller
 
         $getFull = CleaningFull::where('cleaning_id', $id)->first();
         $getCleaning = Cleaning::where('cleaning_id', $id)->first();
-        // dd($getCleaning);
+
         $getImage = $data['photo_personil'];
         $getImage2 = $data['photo_personil2'];
 
@@ -285,17 +295,19 @@ class CleaningController extends Controller
         $imageName2 = Str::random(10).'.'.$extension2;
 
         // simpan gambar
-        $gambar1 = Storage::disk('photo_personil')->put($imageName, base64_decode($image));
-        $gambar2 = Storage::disk('photo_personil')->put($imageName2, base64_decode($image2));
+        $gambar1 = Storage::disk('public')->put($imageName, base64_decode($image));
+        $gambar2 = Storage::disk('public')->put($imageName2, base64_decode($image2));
 
         if($gambar1 && $gambar2){
-            // $getFull->update([
-            //     'date_of_leave' => $data['date_of_leave'],
-            //     'photo_checkin_personil' => $gambar1,
-            //     'photo_checkin_personil2' => $gambar2,
-            //     'checkin_personil' => $data['checkin'],
-            //     'checkin_personil2' => $data['checkin2'],
-            // ]);
+            $getFull->update([
+                'date_of_leave' => $data['date_of_leave'],
+                'cleaning_name' => $data['cleaning_name'],
+                'cleaning_name2' => $data['cleaning_name2'],
+                'photo_checkin_personil' => $imageName,
+                'photo_checkin_personil2' => $imageName2,
+                'checkin_personil' => $data['checkin_personil'],
+                'checkin_personil2' => $data['checkin_personil2'],
+            ]);
 
             $getCleaning->update([
                 'validity_to' => $data['date_of_leave'],
