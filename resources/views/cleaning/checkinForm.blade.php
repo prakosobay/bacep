@@ -169,7 +169,7 @@
                         @enderror
                     </div>
                     <div class="row justify-content-center my-2">
-                        <input type="text" class="@error('checkin_personil')@enderror" name="checkin_personil" id="checkin_personil" value="" required autocomplete="checkin_personil" readonly>
+                        <input type="time" class="@error('checkin_personil')@enderror" name="checkin_personil" id="checkin_personil" value="" required autocomplete="checkin_personil" readonly>
                         @error('checkin_personil')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -205,7 +205,7 @@
                         </div>
                     </div>
                     <div class="row justify-content-center my-2">
-                        <input type="text" class="@error('checkin_personil2')@enderror" name="checkin_personil2" id="checkin_personil2" value="" required autocomplete="checkin_personil2" readonly>
+                        <input type="time" class="@error('checkin_personil2')@enderror" name="checkin_personil2" id="checkin_personil2" value="" required autocomplete="checkin_personil2" readonly>
                         @error('checkin_personil2')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -462,7 +462,13 @@
                 document.getElementById('results').innerHTML = '<img src="'+data_uri+'"/>';
             });
             var tanggal = new Date();
-            var waktu = tanggal.getHours()+":"+tanggal.getMinutes()+":"+tanggal.getSeconds();
+            var jam = tanggal.getHours();
+            var menit = tanggal.getMinutes();
+            var detik = tanggal.getSeconds();
+            jam = jam < 10 ? '0' +jam : jam;
+            menit = menit < 10 ? '0'+menit : menit;
+            detik = detik < 10 ? '0'+detik : detik;
+            var waktu = jam + ':' + menit + ':' + detik;
             $("#checkin_personil").val(waktu);
         }
 
@@ -473,7 +479,14 @@
                 document.getElementById('results2').innerHTML = '<img src="'+data_uri+'"/>';
             });
             var tanggal = new Date();
-            var waktu = tanggal.getHours()+":"+tanggal.getMinutes()+":"+tanggal.getSeconds();
+            var jam = tanggal.getHours();
+            var menit = tanggal.getMinutes();
+            var detik = tanggal.getSeconds();
+            jam = jam < 10 ? '0' +jam : jam;
+            menit = menit < 10 ? '0'+menit : menit;
+            detik = detik < 10 ? '0'+detik : detik;
+            var waktu = jam + ':' + menit + ':' + detik;
+
             $("#checkin_personil2").val(waktu);
         }
 

@@ -244,6 +244,9 @@ class CleaningController extends Controller
 
     public function checkin_update_cleaning(Request $request, $id)
     {
+        $data = ($request->all());
+        $data['cleaning_name'] = MasterOb::find($data['cleaning_name'])->nama;
+        $data['cleaning_name2'] = MasterOb::find($data['cleaning_name2'])->nama;
 
         $validated = $request->validate([
             'date_of_leave' => ['required', 'date', 'after:yesterday', 'after_or_equal:date_of_visit'],
@@ -263,9 +266,9 @@ class CleaningController extends Controller
 
         $getFull = CleaningFull::where('cleaning_id', $id)->first();
         $getCleaning = Cleaning::where('cleaning_id', $id)->first();
-        dd($getCleaning);
-        $getImage = $request->photo_personil;
-        $getImage2 = $request->photo_personil2;
+        // dd($getCleaning);
+        $getImage = $data['photo_personil'];
+        $getImage2 = $data['photo_personil2'];
 
         // image1
         $extension = explode('/', explode(':', substr($getImage, 0, strpos($getImage, ';')))[1])[1];   // .jpg .png .pdf
@@ -282,28 +285,38 @@ class CleaningController extends Controller
         $imageName2 = Str::random(10).'.'.$extension2;
 
         // simpan gambar
-        $gambar1 = Storage::disk('public')->put($imageName, base64_decode($image));
-        $gambar2 = Storage::disk('public')->put($imageName2, base64_decode($image2));
+        $gambar1 = Storage::disk('photo_personil')->put($imageName, base64_decode($image));
+        $gambar2 = Storage::disk('photo_personil')->put($imageName2, base64_decode($image2));
 
         if($gambar1 && $gambar2){
-            $getFull->update([
-                'date_of_leave' => $request->date_of_leave,
-                'photo_checkin_personil' => $request->photo_personil,
-                'photo_checkin_personil2' => $request->photo_personil2,
-                'checkin_personil' => $request->checkin,
-                'checkin_personil2' => $request->checkin2,
-            ]);
+            // $getFull->update([
+            //     'date_of_leave' => $data['date_of_leave'],
+            //     'photo_checkin_personil' => $gambar1,
+            //     'photo_checkin_personil2' => $gambar2,
+            //     'checkin_personil' => $data['checkin'],
+            //     'checkin_personil2' => $data['checkin2'],
+            // ]);
 
             $getCleaning->update([
-                'validity_to' => $request->date_of_leave,
-                'cleaning_time_start' => $request->cleaning_time_start,
-                'cleaning_time_end' => $request->cleaning_time_end,
-                'cleaning_name' => $request->cleaning_name,
-                'cleaning_name2' => $request->cleaning_name2,
-                'cleaning_number' => $request->cleaning_number,
-                'cleaning_number2' => $request->cleaning_number2,
-                'cleaning_nik' => $request->cleaning_nik,
-                'cleaning_nik_2' => $request->cleaning_nik_2,
+                'validity_to' => $data['date_of_leave'],
+                'cleaning_time_start' => $data['cleaning_time_start'],
+                'cleaning_time_start2' => $data['cleaning_time_start2'],
+                'cleaning_time_start3' => $data['cleaning_time_start3'],
+                'cleaning_time_start4' => $data['cleaning_time_start4'],
+                'cleaning_time_start5' => $data['cleaning_time_start5'],
+                'cleaning_time_start6' => $data['cleaning_time_start6'],
+                'cleaning_time_end' => $data['cleaning_time_end'],
+                'cleaning_time_end2' => $data['cleaning_time_end2'],
+                'cleaning_time_end3' => $data['cleaning_time_end3'],
+                'cleaning_time_end4' => $data['cleaning_time_end4'],
+                'cleaning_time_end5' => $data['cleaning_time_end5'],
+                'cleaning_time_end6' => $data['cleaning_time_end6'],
+                'cleaning_name' => $data['cleaning_name'],
+                'cleaning_name2' => $data['cleaning_name2'],
+                'cleaning_number' => $data['cleaning_number'],
+                'cleaning_number2' => $data['cleaning_number2'],
+                'cleaning_nik' => $data['cleaning_nik'],
+                'cleaning_nik_2' => $data['cleaning_nik_2'],
             ]);
 
             return "success";
