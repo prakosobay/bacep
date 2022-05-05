@@ -9,6 +9,7 @@ use Barryvdh\DomPDF\Facade as PDF;
 use App\Mail\{NotifEmail, NotifReject, NotifFull};
 use App\Models\{User, Role, MasterOb, PilihanWork};
 use App\Models\{Cleaning, CleaningHistory, CleaningFull};
+use RealRashid\SweetAlert\Facades\Alert;
 use phpDocumentor\Reflection\PseudoTypes\True_;
 use Yajra\Datatables\Datatables;
 use Carbon\Carbon;
@@ -53,7 +54,8 @@ class CleaningController extends Controller
     {
         $full = DB::table('cleaning_fulls')
             // ->join('other')
-            ->select(['cleaning_id', 'validity_from', 'cleaning_name', 'cleaning_work', 'checkin_personil', 'checkout_personil']);
+            ->select(['cleaning_id', 'validity_from', 'cleaning_name', 'cleaning_work', 'checkin_personil', 'checkout_personil'])
+            ->orderBy('cleaning_id', 'desc');
         return Datatables::of($full)
             ->editColumn('validity_from', function ($full) {
                 return $full->validity_from ? with(new Carbon($full->validity_from))->format('d/m/Y') : '';
@@ -84,13 +86,13 @@ class CleaningController extends Controller
         $data['cleaning_work'] = PilihanWork::find($data['cleaning_work'])->work;
         $cleaning = Cleaning::create($data);
 
-        // foreach ([
-        //     'aurellius.putra@balitower.co.id', 'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
-        //     'ilham.pangestu@balitower.co.id', 'irwan.trisna@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id',
-        //     'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id',
-        // ] as $recipient) {
-        //     Mail::to($recipient)->send(new NotifEmail());
-        // }
+        foreach ([
+            'aurellius.putra@balitower.co.id', 'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
+            'ilham.pangestu@balitower.co.id', 'irwan.trisna@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id',
+            'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id',
+        ] as $recipient) {
+            Mail::to($recipient)->send(new NotifEmail());
+        }
 
         if ($cleaning->exists) {
             $cleaningHistory = CleaningHistory::create([
@@ -231,7 +233,7 @@ class CleaningController extends Controller
             ->where('cleaning_histories.status', '!=', 'visitor')
             ->select('cleaning_histories.*', 'users.name', 'created_by')
             ->get();
-        $pdf = PDF::loadview('cleaning_pdf', ['cleaning' => $cleaning, 'lasthistoryC' => $lasthistoryC, 'cleaningHistory' => $cleaningHistory])->setPaper('a4', 'portrait')->setWarnings(false);
+        $pdf = PDF::loadview('cleaning_pdf', compact('cleaning', 'cleaningHistory', 'lasthistoryC'))->setPaper('a4', 'portrait')->setWarnings(false);
         return $pdf->stream();
     }
 
@@ -240,6 +242,14 @@ class CleaningController extends Controller
         $getForm = Cleaning::findOrFail($id);
         $getOb = MasterOb::all();
         return view('cleaning.checkinForm', compact('getForm', 'getOb'));
+    }
+
+    public function checkout_form_cleaning($id)
+    {
+        $getForm = Cleaning::findOrFail($id);
+        $getFull = CleaningFull::where('cleaning_id', $id)->first();
+        // dd($getFull);
+        return view('cleaning.checkoutForm', compact('getForm', 'getFull'));
     }
 
     public function checkin_update_cleaning(Request $request, $id)
@@ -331,9 +341,11 @@ class CleaningController extends Controller
                 'cleaning_nik_2' => $data['cleaning_nik_2'],
             ]);
 
-            return "success";
+            Alert::success('Sukses', 'Checkin Berhasil !');
+            return redirect('logall');
         } else{
-            return "gagal";
+            Alert::danger('Gagal', 'Checkin Gagal !!!');
+            return back();
         }
     }
 
@@ -351,14 +363,14 @@ class CleaningController extends Controller
         $getImage = $data['photo_personil'];
         $getImage2 = $data['photo_personil2'];
 
-        // image1
+        // convert image1
         $extension = explode('/', explode(':', substr($getImage, 0, strpos($getImage, ';')))[1])[1];   // .jpg .png .pdf
         $replace = substr($getImage, 0, strpos($getImage, ',')+1);
         $image = str_replace($replace, '', $getImage);
         $image = str_replace(' ', '+', $image);
         $imageName = Str::random(10).'.'.$extension;
 
-        // image2
+        //convert image2
         $extension2 = explode('/', explode(':', substr($getImage2, 0, strpos($getImage2, ';')))[1])[1];   // .jpg .png .pdf
         $replace2 = substr($getImage2, 0, strpos($getImage2, ',')+1);
         $image2 = str_replace($replace2, '', $getImage2);
@@ -379,46 +391,24 @@ class CleaningController extends Controller
                 'photo_checkout_personil2' => $imageName2,
             ]);
 
-            return "success";
+            Alert::success('Sukses', 'Checkout Berhasil !');
+            return redirect('logall');
         } else{
-            return "gagal";
+            Alert::danger('Gagal', 'Checkout Gagal !!!');
+            return back();
         }
     }
 
-    public function checkout_form_cleaning($id)
+    public function show_form_cleaning($id)
     {
-        $getForm = Cleaning::findOrFail($id);
-        $getFull = CleaningFull::where('cleaning_id', $id)->first();
-        // dd($getFull);
-        return view('cleaning.checkoutForm', compact('getForm', 'getFull'));
-    }
+        $getCleaning = Cleaning::findOrFail($id);
+        $getLog = CleaningHistory::where('cleaning_id', $id)->where('aktif', 1)->first();
+        $getFull = CleaningFull::where('cleaning_id', $id)
 
-    public function log_full()
-    {
-        return Datatables::of(CleaningFull::query())->make(true);
-    }
-
-    public function log_carbon()
-    {
-        $carbon = DB::table('cleaning_fulls')->get();
-
-        // dd($carbon);
-        return Datatables::of($carbon)
-            ->editColumn('cleaning_date', function ($carbon) {
-                return $carbon->cleaning_date ? with(new Carbon($carbon->cleaning_date))->format('d/m/Y') : '';
-            })
-            ->editColumn('validity_from', function ($carbon) {
-                return $carbon->validity_from ? with(new Carbon($carbon->validity_from))->format('d/m/Y') : '';
-            })
-            ->editColumn('validity_to', function ($carbon) {
-                return $carbon->validity_to ? with(new Carbon($carbon->validity_to))->format('d/m/Y') : '';
-            })
-            ->make(true);
-    }
-
-    public function checkin_submit_cleaning($id)
-    {
-        $getFull = CleaningFull::findOrFail($id);
+            ->select()
+            ->first();
         dd($getFull);
+
+        // $showPDF = PDF::loadview('')
     }
 }

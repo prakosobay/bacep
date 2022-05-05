@@ -27,6 +27,7 @@ class AssetController extends Controller
             abort(403);
         }
     }
+
     public function show_in()
     {
         if (Gate::allows('isApproval') || (Gate::allows('isHead')) || (Gate::allows('isAdmin'))) {

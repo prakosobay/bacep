@@ -24,6 +24,7 @@
 <!--===============================================================================================-->
 </head>
 <body>
+    @include('sweetalert::alert')
 
 	<div class="container-contact100">
 		<div class="wrap-contact100">
