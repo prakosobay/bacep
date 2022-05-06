@@ -145,10 +145,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/cleaning/action/checkout/{id}', [CleaningController::class, 'checkout_form_cleaning']);
     Route::get('/cleaning/action/show/{id}', [CleaningController::class, 'show_form_cleaning']);
     Route::post('/route_submit_cleaning', [CleaningController::class, 'submit_data_cleaning']);
-    Route::post('/cleaning_reject', [CleaningController::class, 'cleaning_reject']);
+    Route::post('/cleaning_reject', [CleaningController::class, 'reject_form_cleaning']);
     Route::post('/approve_cleaning', [CleaningController::class, 'approve_cleaning']);
     Route::put('/cleaning/checkin/{id}', [CleaningController::class, 'checkin_update_cleaning']);
     Route::put('/cleaning/checkout/{id}', [CleaningController::class, 'checkout_update_cleaning']);
+    Route::put('/cleaning/reject/{id}', [CleaningController::class, 'reject_full_cleaning']);
 
     //Visitor All Base Super
     Route::get('new_permit', [HomeController::class, 'new_permit']);

@@ -53,8 +53,8 @@ class CleaningController extends Controller
     public function data_log_full()
     {
         $full = DB::table('cleaning_fulls')
-            // ->join('other')
             ->select(['cleaning_id', 'validity_from', 'cleaning_name', 'cleaning_work', 'checkin_personil', 'checkout_personil'])
+            ->where('note', null)
             ->orderBy('cleaning_id', 'desc');
         return Datatables::of($full)
             ->editColumn('validity_from', function ($full) {
@@ -193,8 +193,9 @@ class CleaningController extends Controller
         return $cleaningHistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
     }
 
-    public function cleaning_reject(Request $request)
+    public function reject_form_cleaning(Request $request)
     {
+        dd($request->all());
         $lasthistoryC = CleaningHistory::where('cleaning_id', '=', $request->cleaning_id)->latest()->first();
         if (Gate::denies('isSecurity')) {
             if ($lasthistoryC->pdf == true) {
@@ -210,7 +211,7 @@ class CleaningController extends Controller
                 ]);
 
                 $cleaning = Cleaning::find($request->cleaning_id);
-                foreach (['badai.sino@balitower.co.id', 'security.bacep@balitower.co.id'] as $recipient) {
+                foreach (['badai.sino@balitower.co.id'] as $recipient) {
                     Mail::to($recipient)->send(new NotifReject($cleaning));
                 }
                 return $cleaningHistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
@@ -410,5 +411,16 @@ class CleaningController extends Controller
         dd($getFull);
 
         // $showPDF = PDF::loadview('')
+    }
+
+    public function reject_full_cleaning(Request $request, $id)
+    {
+        $getLog = CleaningHistory::where('cleaning_id', $id)->where('aktif', 1)->first();
+        $getFull = CleaningFull::where('cleaning_id', $id)->first();
+
+        $getFull->update([
+            'note' => $request->note,
+        ]);
+        dd($getFull);
     }
 }
