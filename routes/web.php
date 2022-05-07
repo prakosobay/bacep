@@ -144,8 +144,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/cleaning/action/checkin/{id}', [CleaningController::class, 'checkin_form_cleaning']);
     Route::get('/cleaning/action/checkout/{id}', [CleaningController::class, 'checkout_form_cleaning']);
     Route::get('/cleaning/action/show/{id}', [CleaningController::class, 'show_form_cleaning']);
+    Route::get('/cleaning/reject/show', [CleaningController::class, 'show_reject_cleaning']);
     Route::post('/route_submit_cleaning', [CleaningController::class, 'submit_data_cleaning']);
     Route::post('/cleaning_reject', [CleaningController::class, 'reject_form_cleaning']);
+    Route::post('/cleaning/full/reject/{id}', [CleaningController::class, 'reject_full_cleaning']);
     Route::post('/approve_cleaning', [CleaningController::class, 'approve_cleaning']);
     Route::put('/cleaning/checkin/{id}', [CleaningController::class, 'checkin_update_cleaning']);
     Route::put('/cleaning/checkout/{id}', [CleaningController::class, 'checkout_update_cleaning']);

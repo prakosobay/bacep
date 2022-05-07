@@ -31,8 +31,11 @@
             </div>
         </div>
         <div class="card-body">
-            <a type="button" class="btn btn-sm btn-primary" href="{{url('cleaning_form')}}"><b>Create Permit Cleaning</b></a>
-            <a type="button" class="btn btn-sm btn-success" href="#"><b>Create Permit Other</b></a>
+            <div class="container-fluid">
+                <a type="button" class="btn btn-sm btn-primary" href="{{url('cleaning_form')}}"><b>Create Permit Cleaning</b></a>
+                <a type="button" class="btn btn-sm btn-success" href="#"><b>Create Permit Other</b></a>
+                <a type="button" class="btn btn-sm btn-danger" href="{{url('cleaning/reject/show')}}"><b>List Permit Reject</b></a>
+            </div>
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered" id="dataTable" width="100%" cellspacing="0">

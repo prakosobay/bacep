@@ -415,12 +415,30 @@ class CleaningController extends Controller
 
     public function reject_full_cleaning(Request $request, $id)
     {
+        // dd($request->all());
         $getLog = CleaningHistory::where('cleaning_id', $id)->where('aktif', 1)->first();
         $getFull = CleaningFull::where('cleaning_id', $id)->first();
+        dd($getFull);
+        $getLog->update(['aktif' => false]);
+
+        $getLog = CleaningHistory::create([
+            'cleaning_id' => $request->cleaning_id,
+            'created_by' => Auth::user()->id,
+            'role_to' => 0,
+            'status' => 'Full Rejected',
+            'aktif' => true,
+            'pdf' => false,
+        ]);
 
         $getFull->update([
             'note' => $request->note,
         ]);
-        dd($getFull);
+
+    }
+
+    public function show_reject_cleaning()
+    {
+        $getRejecFull = CleaningFull::where('note', '!=', null)->get();
+        dd($getRejecFull);
     }
 }

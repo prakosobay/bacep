@@ -74,7 +74,7 @@
                     Protecting Your Technology Investment
                 </p>
                 <p class="">
-                    <a href="{{ url('new_permit') }}" type="button" id="" class="new-btn inter-btn" data-cleaning_id="">Create New Permit</a>
+                    <a href="{{ url('logall') }}" type="button" id="" class="new-btn inter-btn" data-cleaning_id="">Create New Permit</a>
                 </p>
             </div>
         </div>

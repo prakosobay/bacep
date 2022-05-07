@@ -17,9 +17,9 @@
                 <h5 class="modal-title" id="exampleModalLabel">Reject Permit Cleaning</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="{{url('cleaning/reject', $model->cleaning_id)}}" method="POST" onsubmit="return confirm('Are you sure want to reject this permit ?')">
+            <form action="{{url('/cleaning/full/reject', $model->cleaning_id)}}" method="POST" onsubmit="return confirm('Are you sure want to reject this permit ?')">
                 @csrf
-                @method('PUT')
+                {{-- @method('PUT') --}}
                 <div class="modal-body">
                     <label for="note">Note :</label>
                     <input type="text" id="note" name="note" class="form-control mt-2" value="{{ old('note')}}" required>
