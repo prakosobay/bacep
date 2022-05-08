@@ -445,7 +445,7 @@
         var datastring = $("#form_cleaning").serialize();
         $.ajax({
             type:'POST',
-            url:"{{url('submit_data_cleaning')}}",
+            url:"{{url('route_submit_cleaning')}}",
             data: datastring,
             error: function (request, error) {
                 console.log(error)

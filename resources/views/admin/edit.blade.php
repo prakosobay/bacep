@@ -61,6 +61,14 @@
                                 </span>
                             @enderror
 
+                        <label class="mt-3" for="company"><strong>Company</strong></label>
+                        <input type="text" id="company" name="company" class="form-control @error('company') is-invalid @enderror" value="{{$user->company}}" required autocomplete="company">
+                            @error('company')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+
                         <label class="mt-3" for="phone"><strong>Nomer HP</strong></label>
                         <input type="text" class="form-control @error('phone') is-invalid @enderror" id="phone" name="phone" value="{{$user->phone}}" required autocomplete="phone">
                             @error('phone')

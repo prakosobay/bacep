@@ -3,24 +3,63 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\{DB, Auth, Gate, Mail};
+use Illuminate\Support\Facades\{DB, Auth, Gate, Mail, Session};
 use Barryvdh\DomPDF\Facade as PDF;
 use App\Mail\{NotifEmail, NotifReject, NotifFull};
 use App\Models\{User, Role, MasterOb, PilihanWork};
 use App\Models\{Cleaning, CleaningHistory, CleaningFull};
 use phpDocumentor\Reflection\PseudoTypes\True_;
+use Yajra\Datatables\Datatables;
+use Carbon\Carbon;
 
 class CleaningController extends Controller
 {
-    public function tampilan()
+    public function show_form()
     {
-        if (Gate::allows('isBm')) {
-            $master_ob = MasterOb::all();
-            $pilihanwork = PilihanWork::all();
-            return view('cleaning.form', ['master_ob' => $master_ob, 'pilihanwork' => $pilihanwork]);
-        } else {
-            abort(403);
-        }
+        $master_ob = MasterOb::all();
+        $pilihanwork = PilihanWork::all();
+        return view('cleaning.form', compact('master_ob', 'pilihanwork'));
+    }
+
+
+    public function data_history()
+    {
+        $cleaning_log = DB::table('cleaning_histories')
+                ->join('cleanings', 'cleanings.cleaning_id', '=', 'cleaning_histories.cleaning_id')
+                ->select('cleaning_histories.*', 'cleanings.validity_from');
+        return Datatables::of($cleaning_log)
+            ->editColumn('updated_at', function ($cleaning_log) {
+                return $cleaning_log->updated_at ? with(new Carbon($cleaning_log->updated_at))->format('d/m/Y') : '';
+            })
+            ->editColumn('validity_from', function ($cleaning_log) {
+                return $cleaning_log->validity_from ? with(new Carbon($cleaning_log->validity_from))->format('d/m/Y') : '';
+            })
+            ->make(true);
+    }
+
+    public function data_full_approve_cleaning()
+    {
+        $getFull = DB::table('cleaning_fulls')->select(['cleaning_id', 'validity_from', 'cleaning_name', 'checkin', 'checkout', 'cleaning_work', 'link'])->get();
+        // dd($getFull);
+        return Datatables::of($getFull)
+            ->editColumn('validity_from', function ($full) {
+                return $full->validity_from ? with(new Carbon($full->validity_from))->format('d/m/Y') : '';
+            })
+            ->addColumn('action', 'cleaning.actionLink')
+            ->make(true);
+    }
+
+    public function data_log_full()
+    {
+        $full = DB::table('cleaning_fulls')
+        // ->join('other')
+        ->select(['cleaning_id', 'validity_from', 'cleaning_name', 'cleaning_work', 'checkin', 'checkout']);
+        return Datatables::of($full)
+            ->editColumn('validity_from', function ($full) {
+                return $full->validity_from ? with(new Carbon($full->validity_from))->format('d/m/Y') : '';
+            })
+            ->addColumn('action', 'cleaning.actionEdit')
+            ->make(true);
     }
 
     public function detail_ob($id)
@@ -40,7 +79,6 @@ class CleaningController extends Controller
     {
         $data = $request->all();
         // dd($data);
-        if (Gate::allows('isBm')) {
             $data['cleaning_name'] = MasterOb::find($data['cleaning_name'])->nama;
             $data['cleaning_name2'] = MasterOb::find($data['cleaning_name2'])->nama;
             $data['cleaning_work'] = PilihanWork::find($data['cleaning_work'])->work;
@@ -53,7 +91,7 @@ class CleaningController extends Controller
             ] as $recipient) {
                 Mail::to($recipient)->send(new NotifEmail());
             }
-        }
+
         if ($cleaning->exists) {
             $cleaningHistory = CleaningHistory::create([
                 'cleaning_id' => $cleaning->cleaning_id,
@@ -75,7 +113,7 @@ class CleaningController extends Controller
             ->where('cleaning_histories.cleaning_id', '=', $id)
             ->select('cleaning_histories.*', 'users.name', 'cleanings.cleaning_work')
             ->get();
-        return view('detail_cleaning', ['cleaningHistory' => $cleaningHistory]);
+        return view('detail_cleaning', compact('cleaningHistory'));
     }
 
     public function approve_cleaning(Request $request)
@@ -134,7 +172,7 @@ class CleaningController extends Controller
 
         if ($lasthistoryC->role_to == 'head') {
             $cleaning = Cleaning::find($request->cleaning_id);
-            foreach (['dc@balitower.co.id'] as $recipient) {
+            foreach (['dco@balitower.co.id'] as $recipient) {
                 Mail::to($recipient)->send(new NotifFull($cleaning));
             }
             $cleaning = Cleaning::where('cleaning_id', $request->cleaning_id)->first();
@@ -145,8 +183,7 @@ class CleaningController extends Controller
                 'cleaning_work' => $cleaning->cleaning_work,
                 'validity_from' => $cleaning->validity_from,
                 'cleaning_date' => $cleaning->created_at,
-                'status' => 'Full Approved',
-                // 'link' => ("http://127.0.0.1:8000/cleaning_pdf/$cleaning->cleaning_id"),
+                // 'link' => ("https://dcops.balifiber.id/cleaning_pdf/$cleaning->cleaning_id"),
                 'link' => ("http://172.16.45.195:8000/cleaning_pdf/$cleaning->cleaning_id"),
             ]);
         }
@@ -196,5 +233,36 @@ class CleaningController extends Controller
             ->get();
         $pdf = PDF::loadview('cleaning_pdf', ['cleaning' => $cleaning, 'lasthistoryC' => $lasthistoryC, 'cleaningHistory' => $cleaningHistory])->setPaper('a4', 'portrait')->setWarnings(false);
         return $pdf->stream();
+    }
+
+    public function edit_form($id)
+    {
+        $getForm = Cleaning::findOrFail($id);
+        $getOb = MasterOb::all();
+        // return dd($getForm);
+        return view('cleaning.editForm', compact('getForm', 'getOb'));
+    }
+
+    public function log_full()
+    {
+        return Datatables::of(CleaningFull::query())->make(true);
+    }
+
+    public function log_carbon()
+    {
+        $carbon = DB::table('cleaning_fulls')->get();
+
+        // dd($carbon);
+        return Datatables::of($carbon)
+            ->editColumn('cleaning_date', function ($carbon) {
+                return $carbon->cleaning_date ? with(new Carbon($carbon->cleaning_date))->format('d/m/Y') : '';
+            })
+            ->editColumn('validity_from', function ($carbon) {
+                return $carbon->validity_from ? with(new Carbon($carbon->validity_from))->format('d/m/Y') : '';
+            })
+            ->editColumn('validity_to', function ($carbon) {
+                return $carbon->validity_to ? with(new Carbon($carbon->validity_to))->format('d/m/Y') : '';
+            })
+            ->make(true);
     }
 }

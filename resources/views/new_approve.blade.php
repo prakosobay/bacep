@@ -8,28 +8,19 @@
     <!-- Load an icon library -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{asset('css/new_approve.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('css/sb-admin-2.min.css')}}" type="text/css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
-    <link href="{{asset('vendor2/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
+    <!-- Custom fonts for this template -->
     <link href="{{asset('vendor2/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
-    <!-- Custom styles for this template -->
-    <link href="{{asset('css/sb-admin-2.min.css')}}" rel="stylesheet">
+    <link href="{{asset('css/new_approve.css')}}" rel="stylesheet">
 
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-    <!-- Custom styles for this page -->
-    <link href="{{asset('vendor2/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
-
-    <style>
-        .margin-bottom{
-        margin-bottom: 10px !important;}
-    </style>
+</head>
 </head>
 <body id="body-pd">
   <div class="semua">
@@ -76,174 +67,231 @@
         </div>
     </nav>
     {{-- YANG INI JANGAN DU HAPUS !!! --}}
-    <main>
+    </div>
         @yield('content')
-    </main>
+  
+    <div class="content">
+      </div>
     {{-- !!!!!!!!!!!! --}}
 <body id="page-top">
-    @include('sweetalert::alert')
+  @include('sweetalert::alert')
 
-    <!-- Page Wrapper -->
-    <div id="wrapper">
+  <!-- Page Wrapper -->
+  <div id="wrapper">
 
-        <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+      <!-- Sidebar -->
+      <ul class="navbar-nav bg-dark sidebar sidebar-dark accordion" id="accordionSidebar">
 
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
+          <!-- Divider -->
 
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item">
-                <a class="nav-link" href="">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Home</span></a>
-            </li>
-
-            <li class="nav-item">
+          <!-- Nav Item - Dashboard -->
+          <li class="nav-item">
               <a class="nav-link" href="">
-                  <i class="fas fa-fw fa-tachometer-alt"></i>
-                  <span>1</span></a>
-           </li>
+                  <i class="far fa-star"></i>
+                  <span>Approval Permit</span></a>
+          </li>
 
-           <li class="nav-item">
+
+          <!-- Nav Item - Tables -->
+
+          <li class="nav-item">
             <a class="nav-link" href="">
-                <i class="fas fa-fw fa-tachometer-alt"></i>
-                <span>2</span></a>
-         </li>
-         <li class="nav-item">
-          <a class="nav-link" href="">
-              <i class="fas fa-fw fa-tachometer-alt"></i>
-              <span>3</span></a>
-       </li>
-       <li class="nav-item">
-        <a class="nav-link" href="">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>4</span></a>
-     </li>
-     <li class="nav-item">
-      <a class="nav-link" href="">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>5</span></a>
-   </li>
+                <i class="far fa-comment"></i>
+                <span>Custumer Colo</span></a>
+        </li>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider">
+        <li class="nav-item">
+            <a class="nav-link" href="">
+                <i class="fas fa-fw far fa-users"></i>
+                <span>Permit Internal</span></a>
+        </li>
 
-            <!-- Nav Item - Tables -->
-            @can('isAdmin')
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Users</span>
-                </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Option :</h6>
-                        <a class="collapse-item" href="">Data User</a>
-                        <a class="collapse-item" href="">Data Role</a>
-                        <a class="collapse-item" href="">Relasi</a>
-                        {{-- <a class="collapse-item" href="{{url('a.update')}}">Update Barang</a> --}}
-                    </div>
-                </div>
-            </li>
-            @else
+        <li class="nav-item">
+            <a class="nav-link" href="">
+                <i class="far fa-address-card"></i>
+                <span>Custemer Survey</span></a>
+        </li>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider">
+        <li class="nav-item">
+            <a class="nav-link" href="">
+                <i class="far fa-list-alt"></i>
+                <span>Permit Vendor</span></a>
+        </li>
 
-            <!-- Checklist -->
-            <div class="sidebar-heading">
-                Checklist
-            </div>
 
-            <!-- Checklist Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-                    aria-expanded="true" aria-controls="collapsePages">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Checklist Generator</span>
-                </a>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Option:</h6>
-                        <a class="collapse-item" href="">Checklist Genset</a>
-                        <a class="collapse-item" href="">Table Checklist</a>
-                    </div>
-                </div>
-            </li>
+          <!-- Asset  Menu -->
+          <li class="nav-item">
+              <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                  aria-expanded="true" aria-controls="collapseTwo">
+                  <i class="fas fa-fw fa-cog"></i>
+                  <span>Permit BM</span>
+              </a>
+              <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                  <div class="bg-white py-2 collapse-inner rounded">
+                      <h6 class="collapse-header">Option :</h6>
+                      <a class="collapse-item" href="">Cleaning</a>
+                      <a class="collapse-item" href="">Servis</a>
+                      <a class="collapse-item" href="">Other</a>
+                  </div>
+              </div>
+          </li>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
+          <li class="nav-item">
+            <a class="nav-link" href="">
+                <i class="far fa-user-circle"></i>
+                <span>Permit Guest</span></a>
+        </li>
+          
 
-            <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
-            @endcan
-        </ul>
-        <!-- End of Sidebar -->
+          <!-- Divider -->
 
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
 
-            <!-- Main Content -->
-            <div id="content">
+          <!-- Sidebar Toggler (Sidebar) -->
+          <div class="text-center d-none d-md-inline">
+              <button class="rounded-circle border-0" id="sidebarToggle"></button>
+          </div>
+      </ul>
+      <!-- End of Sidebar -->
 
-                <!-- Topbar -->
-               
-                <main>
-                    @yield('content')
-                </main>
-                <!-- End of Topbar -->
-            </div>
-            <!-- End of Main Content -->
+      <!-- Content Wrapper -->
+      <div id="content-wrapper" class="d-flex flex-column">
 
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Manajemen Barang 2020</span>
-                    </div>
-                </div>
-            </footer>
-            <!-- End of Footer -->
+          <!-- Main Content -->
+          <div id="content">
+            <div class="container-fluid">
+                <a>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                    KOMPAS.com - Juventus menelan kekalahan ketika bertamu ke markas Genoa pada pekan ke-36 Serie A, kasta tertinggi Liga Italia, musim 2021-2022. Laga Genoa vs Juventus yang digelar di Stadion Luigi Ferraris, Italia, pada Sabtu (7/5/2022) dini hari WIB itu berakhir dengan skor 2-1 untuk kemenangan tim tuan rumah. Juventus selaku tim tamu sejatinya sempat unggul lebih dulu berkat gol Paulo Dybala pada menit ke-48. Itu merupakan gol ke-115 yang mampu dibukukan Paulo Dybala selama berseragam Juventus. Dia menyamai catatan Roberto Baggio yang menempati peringkat kesembilan dalam daftar pencetak gol terbanyak Bianconeri. Namun, gol tersebut belum menjamin kemenangan Juventus. Sebab, anak-anak asuh Massimiliano Allegri justru menjadi korban comeback pada pengujung babak kedua. Genoa sukses berbalik unggul lewat sepasang gol yang dibukukan oleh Albert Gudmundsson (87') dan Domenico Criscito (90+6'-penalti). Kekalahan 1-2 dari Genoa membuat Juventus tertahan di peringkat keempat klasemen Liga Italia 2021-2022. Mereka gagal menyalip Napoli yang menduduki peringkat ketiga. Sementara itu, Genoa mampu menambah raihan poin untuk berjuang terbebas dari zona degradasi.  Genoa kini menempati peringkat ke-19 dengan koleksi 26 poin dari 36 pertandingan.
 
-        </div>
-        <!-- End of Content Wrapper -->
+                    Artikel ini telah tayang di Kompas.com dengan judul "Hasil Genoa Vs Juventus 2-1: Jadi Korban Comeback, Bianconeri Tumbang", Klik untuk baca: https://bola.kompas.com/read/2022/05/07/04075028/hasil-genoa-vs-juventus-2-1-jadi-korban-comeback-bianconeri-tumbang.
+                    Penulis : Benediktus Agya Pradipta
+                    Editor : Ferril Dennys
+                    
+                    Download aplikasi Kompas.com untuk akses berita lebih mudah dan cepat:
+                    Android: https://bit.ly/3g85pkA
+                    iOS: https://apple.co/3hXWJ0L
+                    KOMPAS.com - Juventus menelan kekalahan ketika bertamu ke markas Genoa pada pekan ke-36 Serie A, kasta tertinggi Liga Italia, musim 2021-2022. Laga Genoa vs Juventus yang digelar di Stadion Luigi Ferraris, Italia, pada Sabtu (7/5/2022) dini hari WIB itu berakhir dengan skor 2-1 untuk kemenangan tim tuan rumah. Juventus selaku tim tamu sejatinya sempat unggul lebih dulu berkat gol Paulo Dybala pada menit ke-48. Itu merupakan gol ke-115 yang mampu dibukukan Paulo Dybala selama berseragam Juventus. Dia menyamai catatan Roberto Baggio yang menempati peringkat kesembilan dalam daftar pencetak gol terbanyak Bianconeri. Namun, gol tersebut belum menjamin kemenangan Juventus. Sebab, anak-anak asuh Massimiliano Allegri justru menjadi korban comeback pada pengujung babak kedua. Genoa sukses berbalik unggul lewat sepasang gol yang dibukukan oleh Albert Gudmundsson (87') dan Domenico Criscito (90+6'-penalti). Kekalahan 1-2 dari Genoa membuat Juventus tertahan di peringkat keempat klasemen Liga Italia 2021-2022. Mereka gagal menyalip Napoli yang menduduki peringkat ketiga. Sementara itu, Genoa mampu menambah raihan poin untuk berjuang terbebas dari zona degradasi.  Genoa kini menempati peringkat ke-19 dengan koleksi 26 poin dari 36 pertandingan.
 
-    </div>
-    <!-- End of Page Wrapper -->
+                    Artikel ini telah tayang di Kompas.com dengan judul "Hasil Genoa Vs Juventus 2-1: Jadi Korban Comeback, Bianconeri Tumbang", Klik untuk baca: https://bola.kompas.com/read/2022/05/07/04075028/hasil-genoa-vs-juventus-2-1-jadi-korban-comeback-bianconeri-tumbang.
+                    Penulis : Benediktus Agya Pradipta
+                    Editor : Ferril Dennys
+                    
+                    Download aplikasi Kompas.com untuk akses berita lebih mudah dan cepat:
+                    Android: https://bit.ly/3g85pkA
+                    iOS: https://apple.co/3hXWJ0L
+                    KOMPAS.com - Juventus menelan kekalahan ketika bertamu ke markas Genoa pada pekan ke-36 Serie A, kasta tertinggi Liga Italia, musim 2021-2022. Laga Genoa vs Juventus yang digelar di Stadion Luigi Ferraris, Italia, pada Sabtu (7/5/2022) dini hari WIB itu berakhir dengan skor 2-1 untuk kemenangan tim tuan rumah. Juventus selaku tim tamu sejatinya sempat unggul lebih dulu berkat gol Paulo Dybala pada menit ke-48. Itu merupakan gol ke-115 yang mampu dibukukan Paulo Dybala selama berseragam Juventus. Dia menyamai catatan Roberto Baggio yang menempati peringkat kesembilan dalam daftar pencetak gol terbanyak Bianconeri. Namun, gol tersebut belum menjamin kemenangan Juventus. Sebab, anak-anak asuh Massimiliano Allegri justru menjadi korban comeback pada pengujung babak kedua. Genoa sukses berbalik unggul lewat sepasang gol yang dibukukan oleh Albert Gudmundsson (87') dan Domenico Criscito (90+6'-penalti). Kekalahan 1-2 dari Genoa membuat Juventus tertahan di peringkat keempat klasemen Liga Italia 2021-2022. Mereka gagal menyalip Napoli yang menduduki peringkat ketiga. Sementara itu, Genoa mampu menambah raihan poin untuk berjuang terbebas dari zona degradasi.  Genoa kini menempati peringkat ke-19 dengan koleksi 26 poin dari 36 pertandingan.
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
+                    Artikel ini telah tayang di Kompas.com dengan judul "Hasil Genoa Vs Juventus 2-1: Jadi Korban Comeback, Bianconeri Tumbang", Klik untuk baca: https://bola.kompas.com/read/2022/05/07/04075028/hasil-genoa-vs-juventus-2-1-jadi-korban-comeback-bianconeri-tumbang.
+                    Penulis : Benediktus Agya Pradipta
+                    Editor : Ferril Dennys
+                    
+                    Download aplikasi Kompas.com untuk akses berita lebih mudah dan cepat:
+                    Android: https://bit.ly/3g85pkA
+                    iOS: https://apple.co/3hXWJ0L
+                    KOMPAS.com - Juventus menelan kekalahan ketika bertamu ke markas Genoa pada pekan ke-36 Serie A, kasta tertinggi Liga Italia, musim 2021-2022. Laga Genoa vs Juventus yang digelar di Stadion Luigi Ferraris, Italia, pada Sabtu (7/5/2022) dini hari WIB itu berakhir dengan skor 2-1 untuk kemenangan tim tuan rumah. Juventus selaku tim tamu sejatinya sempat unggul lebih dulu berkat gol Paulo Dybala pada menit ke-48. Itu merupakan gol ke-115 yang mampu dibukukan Paulo Dybala selama berseragam Juventus. Dia menyamai catatan Roberto Baggio yang menempati peringkat kesembilan dalam daftar pencetak gol terbanyak Bianconeri. Namun, gol tersebut belum menjamin kemenangan Juventus. Sebab, anak-anak asuh Massimiliano Allegri justru menjadi korban comeback pada pengujung babak kedua. Genoa sukses berbalik unggul lewat sepasang gol yang dibukukan oleh Albert Gudmundsson (87') dan Domenico Criscito (90+6'-penalti). Kekalahan 1-2 dari Genoa membuat Juventus tertahan di peringkat keempat klasemen Liga Italia 2021-2022. Mereka gagal menyalip Napoli yang menduduki peringkat ketiga. Sementara itu, Genoa mampu menambah raihan poin untuk berjuang terbebas dari zona degradasi.  Genoa kini menempati peringkat ke-19 dengan koleksi 26 poin dari 36 pertandingan.
 
-    <!-- Logout Modal-->
+                    Artikel ini telah tayang di Kompas.com dengan judul "Hasil Genoa Vs Juventus 2-1: Jadi Korban Comeback, Bianconeri Tumbang", Klik untuk baca: https://bola.kompas.com/read/2022/05/07/04075028/hasil-genoa-vs-juventus-2-1-jadi-korban-comeback-bianconeri-tumbang.
+                    Penulis : Benediktus Agya Pradipta
+                    Editor : Ferril Dennys
+                    
+                    Download aplikasi Kompas.com untuk akses berita lebih mudah dan cepat:
+                    Android: https://bit.ly/3g85pkA
+                    iOS: https://apple.co/3hXWJ0L</a>
+                    KOMPAS.com - Juventus menelan kekalahan ketika bertamu ke markas Genoa pada pekan ke-36 Serie A, kasta tertinggi Liga Italia, musim 2021-2022. Laga Genoa vs Juventus yang digelar di Stadion Luigi Ferraris, Italia, pada Sabtu (7/5/2022) dini hari WIB itu berakhir dengan skor 2-1 untuk kemenangan tim tuan rumah. Juventus selaku tim tamu sejatinya sempat unggul lebih dulu berkat gol Paulo Dybala pada menit ke-48. Itu merupakan gol ke-115 yang mampu dibukukan Paulo Dybala selama berseragam Juventus. Dia menyamai catatan Roberto Baggio yang menempati peringkat kesembilan dalam daftar pencetak gol terbanyak Bianconeri. Namun, gol tersebut belum menjamin kemenangan Juventus. Sebab, anak-anak asuh Massimiliano Allegri justru menjadi korban comeback pada pengujung babak kedua. Genoa sukses berbalik unggul lewat sepasang gol yang dibukukan oleh Albert Gudmundsson (87') dan Domenico Criscito (90+6'-penalti). Kekalahan 1-2 dari Genoa membuat Juventus tertahan di peringkat keempat klasemen Liga Italia 2021-2022. Mereka gagal menyalip Napoli yang menduduki peringkat ketiga. Sementara itu, Genoa mampu menambah raihan poin untuk berjuang terbebas dari zona degradasi.  Genoa kini menempati peringkat ke-19 dengan koleksi 26 poin dari 36 pertandingan.
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="{{asset('vendor2/jquery/jquery.min.js')}}"></script>
-    <script src="{{asset('vendor2/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+                    Artikel ini telah tayang di Kompas.com dengan judul "Hasil Genoa Vs Juventus 2-1: Jadi Korban Comeback, Bianconeri Tumbang", Klik untuk baca: https://bola.kompas.com/read/2022/05/07/04075028/hasil-genoa-vs-juventus-2-1-jadi-korban-comeback-bianconeri-tumbang.
+                    Penulis : Benediktus Agya Pradipta
+                    Editor : Ferril Dennys
 
-    <!-- Core plugin JavaScript-->
-    <script src="{{asset('vendor2/jquery-easing/jquery.easing.min.js')}}"></script>
+                    Download aplikasi Kompas.com untuk akses berita lebih mudah dan cepat:
+                    Android: https://bit.ly/3g85pkA
+                    iOS: https://apple.co/3hXWJ0L
+                    KOMPAS.com - Juventus menelan kekalahan ketika bertamu ke markas Genoa pada pekan ke-36 Serie A, kasta tertinggi Liga Italia, musim 2021-2022. Laga Genoa vs Juventus yang digelar di Stadion Luigi Ferraris, Italia, pada Sabtu (7/5/2022) dini hari WIB itu berakhir dengan skor 2-1 untuk kemenangan tim tuan rumah. Juventus selaku tim tamu sejatinya sempat unggul lebih dulu berkat gol Paulo Dybala pada menit ke-48. Itu merupakan gol ke-115 yang mampu dibukukan Paulo Dybala selama berseragam Juventus. Dia menyamai catatan Roberto Baggio yang menempati peringkat kesembilan dalam daftar pencetak gol terbanyak Bianconeri. Namun, gol tersebut belum menjamin kemenangan Juventus. Sebab, anak-anak asuh Massimiliano Allegri justru menjadi korban comeback pada pengujung babak kedua. Genoa sukses berbalik unggul lewat sepasang gol yang dibukukan oleh Albert Gudmundsson (87') dan Domenico Criscito (90+6'-penalti). Kekalahan 1-2 dari Genoa membuat Juventus tertahan di peringkat keempat klasemen Liga Italia 2021-2022. Mereka gagal menyalip Napoli yang menduduki peringkat ketiga. Sementara itu, Genoa mampu menambah raihan poin untuk berjuang terbebas dari zona degradasi.  Genoa kini menempati peringkat ke-19 dengan koleksi 26 poin dari 36 pertandingan.
 
-    <!-- Custom scripts for all pages-->
-    <script src="{{asset('js/sb-admin-2.min.js')}}"></script>
+                    Artikel ini telah tayang di Kompas.com dengan judul "Hasil Genoa Vs Juventus 2-1: Jadi Korban Comeback, Bianconeri Tumbang", Klik untuk baca: https://bola.kompas.com/read/2022/05/07/04075028/hasil-genoa-vs-juventus-2-1-jadi-korban-comeback-bianconeri-tumbang.
+                    Penulis : Benediktus Agya Pradipta
+                    Editor : Ferril Dennys
 
-    {{-- SweetAlert2 --}}
+                    Download aplikasi Kompas.com untuk akses berita lebih mudah dan cepat:
+                    Android: https://bit.ly/3g85pkA
+                    iOS: https://apple.co/3hXWJ0L
 
-    {{-- <script src="sweetalert2.min.js"></script>
-    <link rel="stylesheet" href="sweetalert2.min.css"> --}}
+            <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
+              <!-- End of Topbar -->
+          </div>
+          <!-- End of Main Content -->
 
-    <!-- Page level plugins -->
-    <script src="{{asset('vendor2/datatables/jquery.dataTables.min.js')}}"></script>
-    <script src="{{asset('vendor2/datatables/dataTables.bootstrap4.min.js')}}"></script>
+          <!-- Footer -->
+          <footer class="sticky-footer bg-white">
+              <div class="container my-auto">
+                  <div class="copyright text-center my-auto">
+                      <span>Copyright </span>
+                  </div>
+              </div>
+          </footer>
+          <!-- End of Footer -->
 
-    <!-- Page level custom scripts -->
-    <script src="{{asset('js/demo/datatables-demo.js')}}"></script>
+      </div>
+      <!-- End of Content Wrapper -->
+
+  </div>
+  <!-- End of Page Wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Logout Modal-->
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                  <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">×</span>
+                  </button>
+              </div>
+              <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+              <div class="modal-footer">
+                  <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                  <a href="{{ route('logout') }}" type="button" class="btn btn-primary sm"
+                      onclick="event.preventDefault();
+                                      document.getElementById('logout-form').submit();">
+                          {{ __('Logout') }}
+                  </a>
+
+                  <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                      @csrf
+                  </form>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="{{asset('vendor2/jquery/jquery.min.js')}}"></script>
+  <script src="{{asset('vendor2/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="{{asset('vendor2/jquery-easing/jquery.easing.min.js')}}"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="{{asset('js/sb-admin-2.min.js')}}"></script>
+
+  {{-- SweetAlert2 --}}
+
+  {{-- <script src="sweetalert2.min.js"></script>
+  <link rel="stylesheet" href="sweetalert2.min.css"> --}}
+
+  <!-- Page level plugins -->
+  <script src="{{asset('vendor2/datatables/jquery.dataTables.min.js')}}"></script>
+  <script src="{{asset('vendor2/datatables/dataTables.bootstrap4.min.js')}}"></script>
+
+  <!-- Page level custom scripts -->
+  <script src="{{asset('js/demo/datatables-demo.js')}}"></script>
 
 </body>
 
 </html>
+

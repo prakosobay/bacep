@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class CleaningFull extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
     protected $table = 'cleaning_fulls';
     protected $primaryKey = 'cleaning_full_id';
 
@@ -17,14 +18,5 @@ class CleaningFull extends Model
      * @var array
      */
 
-    protected $fillable = [
-        'cleaning_id',
-        'cleaning_date',
-        'cleaning_name',
-        'cleaning_name2',
-        'validity_from',
-        'cleaning_work',
-        'status',
-        'link',
-    ];
+    protected $guarded = [];
 }

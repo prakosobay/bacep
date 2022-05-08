@@ -1,4 +1,8 @@
-.navbar-bg{
+.navbar{
   background-color: #09458F;
+  color: white;
 }
 
+.navbar-nav .bg-light{
+  color: black;
+}

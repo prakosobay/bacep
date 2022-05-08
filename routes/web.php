@@ -2,16 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\{Route, Auth};
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{HomeController, CleaningController, AdminController};
-use Maatwebsite\Excel\Row;
 
-// Auth::routes(['verify' => true]);
 Route::get('/', function () {
-    //return view('auth.login');
     return view('new_approve');
+    // return view('layouts.tes');
 })->middleware('guest');
-
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', [HomeController::class, 'index']);
@@ -20,22 +17,16 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/detail_cleaning/{id}', [CleaningController::class, 'detail_permit_cleaning']);
 
     //Approve flow
-    Route::post('/approve_cleaning', [CleaningController::class, 'approve_cleaning']);
     Route::post('/approve_other', [RutinController::class, 'approve_other']);
 
     //Reject
-    Route::post('/cleaning_reject', [CleaningController::class, 'cleaning_reject']);
     Route::post('other_reject', [RutinController::class, 'reject']);
 
     //Submit
-    Route::post('/submit_data_cleaning', [CleaningController::class, 'submit_data_cleaning']);
     Route::post('/rutin.form', [RutinController::class, 'store_rutin']);
 
     //History
     Route::get('/detail_cleaning{id}', [CleaningController::class, 'approve_cleaning']);
-
-    //Approval view
-    Route::get('/approval/{type_view}', [HomeController::class, 'approval_view']);
 
     //Full Approval
     Route::get('/full_approval/{type_form}', [HomeController::class, 'approval_full']);
@@ -43,22 +34,12 @@ Route::middleware(['auth'])->group(function () {
     //LOG
     Route::get('/log/{type_view}', [HomeController::class, 'log_view']);
 
-    //Paket OB
-    Route::get('/detail/{id}', [CleaningController::class, 'detail_ob']);
-
-    //Form
-    Route::get('/cleaning.form', [CleaningController::class, 'tampilan']);
-
-    //Revisi
+    //Revisi personil ob
     Route::get('revisi/{type_view}', [HomeController::class, 'revisi_view']);
     Route::post('/other_revisi', [RutinController::class, 'revisi']);
     Route::get('/rev/{id}', [RutinController::class, 'other_revisi']);
 
-    //Pilihan Work
-    Route::get('/cleaning/{id}', [CleaningController::class, 'pilihan_work']);
-
     //PDF
-    Route::get('/cleaning_pdf/{id}', [CleaningController::class, 'cetak_cleaning_pdf']);
     Route::get('/other_pdf/{id}', [RutinController::class, 'other_pdf']);
 
     //Admin Panel
@@ -140,6 +121,43 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/rutins/{id}', [RutinController::class, 'rutin']);
     Route::get('/personil/{id}', [RutinController::class, 'personil']);
 
-    //Visitor
+    // Survey
+    Route::post('/survey', [SurveyController::class, 'store']);
+    Route::get('jsona', [SurveyController::class, 'json']);
+    Route::get('route_data_approval', [SurveyController::class, 'data_approval']);
+    Route::get('route_history_survey', [SurveyController::class, 'data_history']);
+    Route::get('history/{type_view}', [HomeController::class, 'log_view']);
+    Route::get('/survey_pdf/{id}', [SurveyController::class, 'pdf']);
+    Route::get('route_full_survey', [SurveyController::class, 'full']);
+    Route::post('/approve_survey', [SurveyController::class, 'approve']);
+    Route::post('/reject_survey', [SurveyController::class, 'reject']);
+
+    // Cleaning
+    Route::get('route_history_cleaning', [CleaningController::class, 'data_history']);
+    Route::get('yajra_full_approve_cleaning', [CleaningController::class, 'data_full_approve_cleaning']);
+    Route::get('yajra_full_approve_cleaning_other', [CleaningController::class, 'data_log_full']);
+    Route::get('log_cleaning', [CleaningController::class, 'log_carbon']);
+    Route::get('/cleaning_pdf/{id}', [CleaningController::class, 'cetak_cleaning_pdf']);
+    Route::get('/cleaning/{id}', [CleaningController::class, 'pilihan_work']);
+    Route::get('/detail/{id}', [CleaningController::class, 'detail_ob']);
+    Route::get('cleaning_form', [CleaningController::class, 'show_form']);
+    Route::get('/cleaning/action/edit/{id}', [CleaningController::class, 'edit_form']);
+    Route::post('/route_submit_cleaning', [CleaningController::class, 'submit_data_cleaning']);
+    Route::post('/cleaning_reject', [CleaningController::class, 'cleaning_reject']);
+    Route::post('/approve_cleaning', [CleaningController::class, 'approve_cleaning']);
+
+    //Visitor All Base Super
     Route::get('new_permit', [HomeController::class, 'new_permit']);
+
+    // ALL
+    Route::get('history/{type_view}', [HomeController::class, 'history']);
+    Route::get('approval/{type_approve}', [HomeController::class, 'approval']);
+    Route::get('full/{type_full}', [HomeController::class, 'full']);
+
+    //Log
+    Route::get('logall', [HomeController::class, 'log_all']);
+    Route::get('datatables', [ItController::class, 'anydata']);
+
+
+
 });
