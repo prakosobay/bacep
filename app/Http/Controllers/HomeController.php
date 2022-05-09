@@ -45,8 +45,7 @@ class HomeController extends Controller
     {
         if ((Gate::allows('isAdmin')) || (Gate::allows('isApproval')) || (Gate::allows('isHead'))) {
             return view('item.input');
-        } else
-         {
+        } else {
             abort(404);
         }
     }
@@ -62,7 +61,7 @@ class HomeController extends Controller
                     ->where('survey_histories.aktif', '=', 1)
                     ->select('surveys.*')
                     ->get();
-                    dd($survey);
+                dd($survey);
                 return view('sales.approva', compact('survey'));
             } elseif ($type_view == 'cleaning') {
                 $cleaning = DB::table('cleaning_histories')
@@ -81,7 +80,7 @@ class HomeController extends Controller
                     ->select('other.*', 'other_histories.status', 'other_histories.pdf')
                     ->get();
                 return view('other.show', compact('otherHistories'));
-            }else {
+            } else {
                 return view('all_approval');
             }
         } else {
@@ -89,18 +88,19 @@ class HomeController extends Controller
         }
     }
 
-    public function revisi_view($type_view){
-        if((Gate::denies('isSecurity'))){
+    public function revisi_view($type_view)
+    {
+        if ((Gate::denies('isSecurity'))) {
             $role_1 = Session::get('arrole');
-            if($type_view == 'other'){
-            $revisi = DB::table('other_histories')
+            if ($type_view == 'other') {
+                $revisi = DB::table('other_histories')
                     ->join('other', 'other.other_id', '=', 'other_histories.other_id')
                     ->whereIn('other_histories.role_to', $role_1)
                     ->where('other_histories.status', '=', 'revisi')
                     ->where('other_histories.aktif', '=', 1)
                     ->select('other.*')
                     ->get();
-                    // dd($revisi);
+                // dd($revisi);
                 return view('other.revisi', compact('revisi'));
             }
         }
@@ -111,31 +111,27 @@ class HomeController extends Controller
         if ($type_view == 'all') {
 
             return view('log');
-        }
-        elseif ($type_view == 'cleaning') {
+        } elseif ($type_view == 'cleaning') {
             $cleaningLog = DB::table('cleaning_histories')
                 ->join('cleanings', 'cleanings.cleaning_id', '=', 'cleaning_histories.cleaning_id')
                 ->select('cleaning_histories.*', 'cleanings.cleaning_work', 'cleanings.validity_from')
                 ->get();
             return view('log_cleaning', ['cleaningLog' => $cleaningLog]);
-
-        }
-        elseif ($type_view == 'other') {
+        } elseif ($type_view == 'other') {
             $other_log = DB::table('other_histories')
                 ->join('other', 'other.other_id', '=', 'other_histories.other_id')
                 ->join('users', 'users.id', '=', 'other_histories.created_by')
                 ->select('other_histories.*', 'other.other_work', 'other.val_from', 'users.name')
                 ->get();
-                // dd($other_log);
+            // dd($other_log);
             return view('other.log', compact('other_log'));
-        }
-        elseif($type_view == 'survey'){
+        } elseif ($type_view == 'survey') {
             $survey_log = DB::table('survey_histories')
                 ->join('surveys', 'surveys.id', '=', 'survey_histories.survey_id')
                 ->join('users', 'users.id', '=', 'survey_histories.created_by')
                 ->select('survey_histories.*', 'surveys.visit', 'users.name')
                 ->get();
-                dd($survey_log);
+            dd($survey_log);
             return view('sales.history', compact('survey_log'));
         }
     }
@@ -143,20 +139,16 @@ class HomeController extends Controller
     public function history($type_view)
     {
         if ((Gate::denies('isAdmin') && (Gate::denies('isVisitor')))) {
-            if($type_view == 'all'){
+            if ($type_view == 'all') {
                 return view('all_history');
-            }
-            elseif($type_view == 'survey'){
+            } elseif ($type_view == 'survey') {
                 return view('sales.history');
-            }
-            elseif($type_view == 'cleaning'){
+            } elseif ($type_view == 'cleaning') {
                 return view('cleaning.history');
-            }
-            else{
+            } else {
                 abort(403);
             }
-        }
-        else{
+        } else {
             abort(403);
         }
     }
@@ -166,10 +158,9 @@ class HomeController extends Controller
         if ((Gate::denies('isAdmin') && (Gate::denies('isVisitor')))) {
             $role_1 = Session::get('arrole');
             $val = [];
-            if($type_approve == 'all'){
+            if ($type_approve == 'all') {
                 return view('all_approval');
-            }
-            elseif($type_approve == 'survey'){
+            } elseif ($type_approve == 'survey') {
                 // dd($role_1);
                 $survey = DB::table('survey_histories')
                     ->join('surveys', 'surveys.id', '=', 'survey_histories.survey_id')
@@ -181,8 +172,7 @@ class HomeController extends Controller
                 $json = json_decode($survey, true);
                 // dd($survey);
                 return view('sales.approval', compact('survey', 'json'));
-            }
-            elseif($type_approve == 'cleaning'){
+            } elseif ($type_approve == 'cleaning') {
                 $cleaning = DB::table('cleaning_histories')
                     ->join('cleanings', 'cleanings.cleaning_id', '=', 'cleaning_histories.cleaning_id')
                     ->whereIn('cleaning_histories.role_to', $role_1)
@@ -190,12 +180,10 @@ class HomeController extends Controller
                     ->select('cleanings.*')
                     ->get();
                 return view('cleaning.approval', compact('cleaning'));
-            }
-            else{
+            } else {
                 abort(403);
             }
-        }
-        else{
+        } else {
             abort(403);
         }
     }
@@ -203,13 +191,13 @@ class HomeController extends Controller
     public function full($type_full)
     {
         if ((Gate::allows('isApproval')) || (Gate::allows('isHead')) || (Gate::allows('isAdmin'))) {
-            if($type_full == 'all'){
+            if ($type_full == 'all') {
                 return view('all_full_approval');
-            } elseif($type_full == 'survey'){
+            } elseif ($type_full == 'survey') {
                 return view('sales.full_approval');
-            } elseif($type_full == 'cleaning'){
+            } elseif ($type_full == 'cleaning') {
                 return view('cleaning.full_approval');
-            } else{
+            } else {
                 abort(403);
             }
         }
@@ -241,25 +229,19 @@ class HomeController extends Controller
         $role = Session::get('arrole');
         $email = Auth::user()->email;
         // dd($email);
-        if($email == 'it@mail.com'){
+        if ($email == 'it@mail.com') {
             return view('it.form');
-        }
-        elseif($email == 'ipmedia@mail.com'){
+        } elseif ($email == 'ipmedia@mail.com') {
             return view('it.form');
-        }
-        elseif($email == 'ipcore@mail.com'){
+        } elseif ($email == 'ipcore@mail.com') {
             return "ini role ipcore";
-        }
-        elseif(($email == 'data.center7@balitower.co.id') || ($email == 'badai.sino@balitower.co.id')){
+        } elseif (($email == 'data.center7@balitower.co.id') || ($email == 'badai.sino@balitower.co.id')) {
             return view('cleaning.full_visitor');
-        }
-        elseif($email == 'pac@mail.com'){
+        } elseif ($email == 'pac@mail.com') {
             return "ini bm";
-        }
-        elseif($email == 'sales@mail.com'){
+        } elseif ($email == 'sales@mail.com') {
             return view('sales.form');
-        }
-        else{
+        } else {
             abort(403);
         }
     }
@@ -269,21 +251,17 @@ class HomeController extends Controller
         $email = Auth::user()->email;
         // dd($email);
 
-        if($email == 'it@mail.com'){
+        if ($email == 'it@mail.com') {
             return view('it.log');
-        }
-        elseif($email == 'ipcore@mail.com'){
+        } elseif ($email == 'ipcore@mail.com') {
             return view('ipcore.log');
-        }
-        elseif($email == 'badai.sino@balitower.co.id'){
+        } elseif (($email == 'badai.sino@balitower.co.id') || ($email == 'data.center7@balitower.co.id')) {
             // $full = CleaningFull::all();
             // var_dump($full);
             return view('cleaning.full_visitor');
-        }
-        elseif($email == 'sales@mail.com'){
+        } elseif ($email == 'sales@mail.com') {
             return view('sales.log');
-        }
-        else{
+        } else {
             abort(403);
         }
     }
