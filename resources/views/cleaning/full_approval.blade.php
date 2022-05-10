@@ -37,10 +37,10 @@
                         <tr class="judul-table text-center">
                             <th>ID Permit</th>
                             <th>Date of Visit</th>
+                            <th>Purpose of Work</th>
+                            <th>Visitor Name</th>
                             <th>Checkin</th>
                             <th>Checkout</th>
-                            <th>Visitor Name</th>
-                            <th>Purpose of Work</th>
                             <th>Link</th>
                         </tr>
                     </thead>
@@ -62,10 +62,10 @@
                 columns: [
                     { data: 'cleaning_id', name: 'cleaning_id' },
                     { data: 'validity_from', name: 'validity_from' },
-                    { data: 'checkin', name: 'checkin' },
-                    { data: 'checkout', name: 'checkout' },
-                    { data: 'cleaning_name', name: 'cleaning_name' },
                     { data: 'cleaning_work', name: 'cleaning_work' },
+                    { data: 'cleaning_name', name: 'cleaning_name' },
+                    { data: 'checkin_personil', name: 'checkin_personil' },
+                    { data: 'checkout_personil', name: 'checkout_personil' },
                     {data: 'action', name: 'action', orderable: false, searchable: false}
                 ]
             });

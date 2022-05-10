@@ -1,35 +1,13 @@
 @extends('layouts.approval')
 
 @section('content')
-{{ csrf_field() }}
+@csrf
+
 <div class="container-fluid">
-    <!-- DataTales Example -->
-    <div class="card shadow mb-1">
+    {{-- datatable --}}
+    <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h4 class="judul text-center">Approval Form Cleaning</h4>
-            <!-- Import Excel -->
-            <div class="modal fade" id="asset" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <form method="post" action="{{ url('/asset')}}" enctype="multipart/form-data">
-                        {{ csrf_field() }}
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Import File CSV</h5>
-                            </div>
-                            <div class="modal-body">
-                                <label>Pilih file CSV</label>
-                                <div class="form-group">
-                                    <input type="file" name="file" required="required">
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Import</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
+            <h1 class="h3 mb-2 text-gray-800 text-center">Approval Permit Cleaning</h1>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -54,15 +32,15 @@
                             <td>{{ $p->cleaning_work }}</td>
                             <td>
                                 @can('isApproval')
-                                    <a href="javascript:void(0)" type="button" id="ok" class="approve btn btn-success btn-sm" data-cleaning_id="{{$p->cleaning_id}}">Approve</a>
-                                    <a href="javascript:void(0)" type="button" id="not" class="reject btn btn-danger btn-sm" data-cleaning_id="{{$p->cleaning_id}}">Reject</a>
+                                    <a href="javascript:void(0)" type="button" id="ok" class="approve btn btn-success btn-sm my-1 mx-1" data-cleaning_id="{{$p->cleaning_id}}">Approve</a>
+                                    <a href="javascript:void(0)" type="button" id="not" class="reject btn btn-danger btn-sm my-1 mx-1" data-cleaning_id="{{$p->cleaning_id}}">Reject</a>
                                 @elsecan('isHead')
-                                    <a href="javascript:void(0)" type="button" id="ok" class="approve btn btn-success btn-sm" data-cleaning_id="{{$p->cleaning_id}}">Approve</a>
-                                    <a href="javascript:void(0)" type="button" id="not" class="reject btn btn-danger btn-sm" data-cleaning_id="{{$p->cleaning_id}}">Reject</a>
+                                    <a href="javascript:void(0)" type="button" id="ok" class="approve btn btn-success btn-sm my-1 mx-1" data-cleaning_id="{{$p->cleaning_id}}">Approve</a>
+                                    <a href="javascript:void(0)" type="button" id="not" class="reject btn btn-danger btn-sm my-1 mx-1" data-cleaning_id="{{$p->cleaning_id}}">Reject</a>
                                 @elsecan('isSecurity')
-                                    <a href="javascript:void(0)" type="button" id="ok" class="approve btn btn-success btn-sm" data-cleaning_id="{{$p->cleaning_id}}">Approve</a>
+                                    <a href="javascript:void(0)" type="button" id="ok" class="approve btn btn-success btn-sm my-1 mx-1" data-cleaning_id="{{$p->cleaning_id}}">Approve</a>
                                 @endcan
-                                    <a href="/cleaning_pdf/{{$p->cleaning_id}}" class="btn btn-primary btn-sm mt-2" target="_blank">File</a>
+                                    <a href="/cleaning_pdf/{{$p->cleaning_id}}" class="btn btn-primary btn-sm my-1 mx-1" target="_blank">File</a>
                             </td>
                         </tr>
                         @endforeach
@@ -78,6 +56,8 @@
     <script>
         $(document).ready( function () {
             $('#dataTable').DataTable();
+
+            // approve
             $(document).on('click', '.approve', function(event){
 
                 $.ajaxSetup({

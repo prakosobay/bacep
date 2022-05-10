@@ -38,12 +38,12 @@ class CleaningController extends Controller
             ->make(true);
     }
 
-    public function data_full_approve_cleaning()
+    public function data_full_approve_cleaning() //versi approval
     {
         $getFull = DB::table('cleaning_fulls')
-                    ->select(['cleaning_id', 'validity_from', 'cleaning_name', 'checkin', 'checkout', 'cleaning_work', 'link'])
+                    ->select(['cleaning_id', 'validity_from', 'cleaning_name', 'checkin_personil', 'checkout_personil', 'cleaning_work', 'link'])
                     ->where('note', null)
-                    ->get();
+                    ->orderBy('cleaning_id', 'desc');
         return Datatables::of($getFull)
             ->editColumn('validity_from', function ($full) {
                 return $full->validity_from ? with(new Carbon($full->validity_from))->format('d/m/Y') : '';
@@ -52,7 +52,7 @@ class CleaningController extends Controller
             ->make(true);
     }
 
-    public function data_log_full()
+    public function data_log_full() //versi visitor
     {
         $full = DB::table('cleaning_fulls')
             ->select(['cleaning_id', 'validity_from', 'cleaning_name', 'cleaning_work', 'checkin_personil', 'checkout_personil'])

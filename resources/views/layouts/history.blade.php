@@ -5,19 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>History Log Permit</title>
+
     <!-- Load an icon library -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{asset('css/new_approve.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('css/sb-admin-2.min.css')}}" type="text/css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.css"/>
+    <link href="{{asset('vendor2/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <link href="{{asset('css/new_approve.css')}}" rel="stylesheet">
 
 </head>
 <body id="body-pd">
-
-<div id="wrapper">
 
     {{-- navbar --}}
     <nav class="navbar navbar-expand-xl navbar-dark py-0 my-0 navbar-bg" >
@@ -38,7 +43,7 @@
                             <a class="nav-link inter" href="{{ url('approval/all')}}">Approval</a>
                         </li>
                         <li class="nav-item mx-5">
-                            <a class="nav-link inter" href="{{ url('full')}}">Full Approval</a>
+                            <a class="nav-link inter" href="{{ url('full/all')}}">Full Approval</a>
                         </li>
                         <li class="nav-item mx-5">
                             <a class="nav-link inter" href="{{ url('/table_barang')}}">Inventory</a>
@@ -95,118 +100,113 @@
         </div>
     </nav>
 
-    {{-- sidebar --}}
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-dark sidebar sidebar-dark accordion" id="accordionSidebar">
 
-    <div class="sidebar close">
-        <ul class="nav-links">
-            <li>
-                <a href="{{ url('history/all')}}">
-                <i class='bx bx-grid-alt' ></i>
-                <span class="link_name">Log Permit</span>
+            <li class="nav-item">
+                <a class="nav-link" href="">
+                    <i class="far fa-star"></i>
+                    <span>Approval Permit</span>
                 </a>
-                <ul class="sub-menu blank">
-                    <span>Log Permit</span>
-                </ul>
             </li>
-            <li>
-                <a href="{{ url('history/colo')}}">
-                    <i class='bx bx-collection' ></i>
-                    <span class="link_name">Customer Colo</span>
+
+            <li class="nav-item">
+                <a class="nav-link" href="">
+                    <i class="far fa-comment"></i>
+                    <span>Custumer Colo</span>
                 </a>
-                <ul class="sub-menu blank">
-                    <span>Customer Colo</span>
-                </ul>
             </li>
-            <li>
-                <a href="{{ url('history/internal')}}">
-                    <i class='bx bx-pie-chart-alt-2' ></i>
-                    <span class="link_name">Permit Internal</span>
-                </a>
-                <ul class="sub-menu blank">
+
+            <li class="nav-item">
+                <a class="nav-link" href="">
+                    <i class="fas fa-fw far fa-users"></i>
                     <span>Permit Internal</span>
-                </ul>
-            </li>
-            <li>
-                <a href="{{ url('history/survey')}}">
-                    <i class='bx bx-line-chart' ></i>
-                    <span class="link_name">Customer Survey</span>
                 </a>
-                <ul class="sub-menu blank">
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="">
+                    <i class="far fa-address-card"></i>
                     <span>Customer Survey</span>
-                </ul>
-            </li>
-            <li>
-                <a href="#">
-                    <i class='bx bx-compass' ></i>
-                    <span class="link_name">Permit Vendor</span>
                 </a>
-                <ul class="sub-menu blank">
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="">
+                    <i class="far fa-list-alt"></i>
                     <span>Permit Vendor</span>
-                </ul>
-            </li>
-            <li>
-                <a href="{{ url('history/cleaning')}}">
-                    <i class='bx bx-history'></i>
-                    <span class="link_name">Permit Cleaning</span>
                 </a>
-                <ul class="sub-menu blank">
-                    <span>Permit Cleaning</span>
-                </ul>
             </li>
-            <li>
-                <a href="{{ url('history/other')}}">
-                    <i class='bx bx-history'></i>
-                    <span class="link_name">Permit Other</span>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Permit BM</span>
                 </a>
-                <ul class="sub-menu blank">
-                    <span>Permit Other</span>
-                </ul>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Option :</h6>
+                        <a class="collapse-item" href="{{ url('history/cleaning')}}">Cleaning</a>
+                        <a class="collapse-item" href="{{ url('history/other')}}">Other</a>
+                    </div>
+                </div>
             </li>
-            <li>
-                <a href="#">
-                    <i class='bx bx-plug' ></i>
-                    <span class="link_name">Permit Guest</span>
+
+            <li class="nav-item">
+                <a class="nav-link" href="">
+                    <i class="far fa-user-circle"></i>
+                    <span>Permit Guest</span>
                 </a>
-                <ul class="sub-menu blank">
-                    <span class="link_name">Permit Guest</span>
-                </ul>
             </li>
-            <li>
-                <li class="home-content">
-                    <i class='bx bx-menu' ></i>
-                    <a href="#">
-                        <span class="link_name">Sidebar</span>
-                    </a>
-                </li>
-            </li>
+
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
         </ul>
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+                <main>
+                    @yield('content')
+                <!-- End of Topbar -->
+                </main>
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright </span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+        </div>
     </div>
 
-    <main>
-        @yield('content')
-    </main>
+<!-- Bootstrap core JavaScript-->
+<script src="{{asset('vendor2/jquery/jquery.min.js')}}"></script>
+<script src="{{asset('vendor2/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 
-</div>
+<!-- Core plugin JavaScript-->
+<script src="{{asset('vendor2/jquery-easing/jquery.easing.min.js')}}"></script>
 
+<!-- Custom scripts for all pages-->
+<script src="{{asset('js/sb-admin-2.min.js')}}"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.js"></script>
 
-<script>
-    let arrow = document.querySelectorAll(".arrow");
-    for (var i = 0; i < arrow.length; i++) {
-        arrow[i].addEventListener("click", (e)=>{
-        let arrowParent = e.target.parentElement.parentElement;
-        arrowParent.classList.toggle("showMenu");
-        });
-    }
-    let sidebar = document.querySelector(".sidebar");
-    let sidebarBtn = document.querySelector(".bx-menu");
-    sidebarBtn.addEventListener("click", ()=>{
-        sidebar.classList.toggle("close");
-    });
-</script>
+{{-- datatable --}}
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.js"></script>
 
 @stack('scripts')
 </body>
