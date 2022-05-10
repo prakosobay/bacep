@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{HomeController, CleaningController, AdminController};
 
 Route::get('/', function () {
-    return view('auth.login');
+    return view('new_approve');
     // return view('layouts.tes');
 })->middleware('guest');
 
