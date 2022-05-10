@@ -40,8 +40,10 @@ class CleaningController extends Controller
 
     public function data_full_approve_cleaning()
     {
-        $getFull = DB::table('cleaning_fulls')->select(['cleaning_id', 'validity_from', 'cleaning_name', 'checkin', 'checkout', 'cleaning_work', 'link'])->get();
-        // dd($getFull);
+        $getFull = DB::table('cleaning_fulls')
+                    ->select(['cleaning_id', 'validity_from', 'cleaning_name', 'checkin', 'checkout', 'cleaning_work', 'link'])
+                    ->where('note', null)
+                    ->get();
         return Datatables::of($getFull)
             ->editColumn('validity_from', function ($full) {
                 return $full->validity_from ? with(new Carbon($full->validity_from))->format('d/m/Y') : '';
@@ -270,7 +272,6 @@ class CleaningController extends Controller
         }
 
         $validated = $request->validate([
-            'date_of_leave' => ['required', 'date', 'after:yesterday', 'after_or_equal:date_of_visit'],
             'cleaning_name' => ['required', 'string'],
             'cleaning_name2' => ['required', 'string'],
             'cleaning_number' => ['required', 'regex:/^([0-9\s\-\+\(\)]*)$/'],
@@ -311,7 +312,6 @@ class CleaningController extends Controller
 
         if($gambar1 && $gambar2){
             $getFull->update([
-                'date_of_leave' => $data['date_of_leave'],
                 'cleaning_name' => $data['cleaning_name'],
                 'cleaning_name2' => $data['cleaning_name2'],
                 'photo_checkin_personil' => $imageName,
@@ -321,7 +321,6 @@ class CleaningController extends Controller
             ]);
 
             $getCleaning->update([
-                'validity_to' => $data['date_of_leave'],
                 'cleaning_time_start' => $data['cleaning_time_start'],
                 'cleaning_time_start2' => $data['cleaning_time_start2'],
                 'cleaning_time_start3' => $data['cleaning_time_start3'],
@@ -342,11 +341,9 @@ class CleaningController extends Controller
                 'cleaning_nik_2' => $data['cleaning_nik_2'],
             ]);
 
-            Alert::success('Sukses', 'Checkin Berhasil !');
-            return redirect('logall');
+            return redirect('logall')->with('status', 'Checkin Berhasil!');
         } else{
-            Alert::danger('Gagal', 'Checkin Gagal !!!');
-            return back();
+            return back()->with('status', 'Checkin Gagal!');
         }
     }
 
@@ -392,11 +389,9 @@ class CleaningController extends Controller
                 'photo_checkout_personil2' => $imageName2,
             ]);
 
-            Alert::success('Sukses', 'Checkout Berhasil !');
-            return redirect('logall');
+            return redirect('logall')->with('status', 'Checkout Berhasil!');
         } else{
-            Alert::danger('Gagal', 'Checkout Gagal !!!');
-            return back();
+            return back()->with('status', 'Checkout Gagal!');
         }
     }
 
@@ -405,12 +400,9 @@ class CleaningController extends Controller
         $getCleaning = Cleaning::findOrFail($id);
         $getLog = CleaningHistory::where('cleaning_id', $id)->where('aktif', 1)->first();
         $getFull = CleaningFull::where('cleaning_id', $id)
-
             ->select()
             ->first();
         dd($getFull);
-
-        // $showPDF = PDF::loadview('')
     }
 
     public function reject_full_cleaning(Request $request, $id)
@@ -418,11 +410,11 @@ class CleaningController extends Controller
         // dd($request->all());
         $getLog = CleaningHistory::where('cleaning_id', $id)->where('aktif', 1)->first();
         $getFull = CleaningFull::where('cleaning_id', $id)->first();
-        dd($getFull);
+
         $getLog->update(['aktif' => false]);
 
         $getLog = CleaningHistory::create([
-            'cleaning_id' => $request->cleaning_id,
+            'cleaning_id' => $id,
             'created_by' => Auth::user()->id,
             'role_to' => 0,
             'status' => 'Full Rejected',
@@ -434,11 +426,29 @@ class CleaningController extends Controller
             'note' => $request->note,
         ]);
 
+        if(($getLog) && ($getFull)){
+            return redirect('logall')->with('status', 'Berhasil di Reject!');
+        }
+        else{
+            return redirect('logall')->with('status', 'gagal');
+        }
     }
 
     public function show_reject_cleaning()
     {
-        $getRejecFull = CleaningFull::where('note', '!=', null)->get();
-        dd($getRejecFull);
+        return view('cleaning.listReject');
+    }
+
+    public function data_reject_cleaning()
+    {
+        $getFull = DB::table('cleaning_fulls')
+                    ->select(['cleaning_id', 'validity_from', 'cleaning_name', 'cleaning_work', 'note'])
+                    ->where('note', '!=', null)
+                    ->get();
+        return Datatables::of($getFull)
+            ->editColumn('validity_from', function ($full) {
+                return $full->validity_from ? with(new Carbon($full->validity_from))->format('d/m/Y') : '';
+            })
+            ->make(true);
     }
 }

@@ -5,7 +5,7 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-1">
         <div class="card-header py-3">
-            <h4 class="judul text-center">Log Form BM</h4>
+            <h4 class="judul text-center">Log Reject Form BM</h4>
         </div>
         <div class="card-body">
             <div class="container-fluid">
@@ -31,10 +31,7 @@
                                 <th>Date of Visit</th>
                                 <th>Purpose of Work</th>
                                 <th>Visitor Name</th>
-                                {{-- <th>Visitor Company</th> --}}
-                                <th>Checkin</th>
-                                <th>Checkout</th>
-                                <th>Action</th>
+                                <th>Note</th>
                             </tr>
                         </thead>
                         <tbody class="isi-table text-center">
@@ -52,15 +49,13 @@
             $('#dataTable').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: '{{ url('yajra_full_approve_cleaning_other')}}',
+                ajax: '{{ url('yajra_reject_cleaning_other')}}',
                 columns: [
                     { data: 'cleaning_id', name: 'cleaning_id' },
                     { data: 'validity_from', name: 'validity_from' },
                     { data: 'cleaning_work', name: 'cleaning_work' },
                     { data: 'cleaning_name', name: 'cleaning_name' },
-                    { data: 'checkin_personil', name: 'checkin_personil' },
-                    { data: 'checkout_personil', name: 'checkout_personil' },
-                    {data: 'action', name: 'action', orderable: false, searchable: false}
+                    { data: 'note', name: 'note' },
                 ]
             });
         });

@@ -36,6 +36,12 @@
 					Checkout
 				</span>
 
+                @if (session('status'))
+                    <div class="alert alert-danger" role="alert">
+                        {{ session('status') }}
+                    </div>
+                @endif
+
                 {{-- Purpose of Work --}}
                 <div class="wrap-input100 bg0 rs1-alert-validate">
 					<span class="label-input100">Purpose of Work *</span>
@@ -359,7 +365,7 @@
 				<div class="container-contact100-form-btn">
 					<button type="submit" class="contact100-form-btn">
 						<span>
-							Checkin
+							Checkout
 							<i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
 						</span>
 					</button>

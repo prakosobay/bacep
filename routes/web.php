@@ -6,8 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{HomeController, CleaningController, AdminController};
 
 Route::get('/', function () {
-    return view('new_approve');
-    // return view('layouts.tes');
+    return view('auth.login');
 })->middleware('guest');
 
 Route::middleware(['auth'])->group(function () {
@@ -136,6 +135,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('route_history_cleaning', [CleaningController::class, 'data_history']);
     Route::get('yajra_full_approve_cleaning', [CleaningController::class, 'data_full_approve_cleaning']);
     Route::get('yajra_full_approve_cleaning_other', [CleaningController::class, 'data_log_full']);
+    Route::get('yajra_reject_cleaning_other', [CleaningController::class, 'data_reject_cleaning']);
     Route::get('log_cleaning', [CleaningController::class, 'log_carbon']);
     Route::get('/cleaning_pdf/{id}', [CleaningController::class, 'cetak_cleaning_pdf']);
     Route::get('/cleaning/{id}', [CleaningController::class, 'pilihan_work']);

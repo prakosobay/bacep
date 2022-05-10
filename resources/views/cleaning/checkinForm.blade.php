@@ -26,6 +26,12 @@
 <body>
     @include('sweetalert::alert')
 
+    @if (session('status'))
+        <div class="alert alert-danger" role="alert">
+            {{ session('status') }}
+        </div>
+    @endif
+
 	<div class="container-contact100">
 		<div class="wrap-contact100">
 			<form id="checkin_cleaning" class="contact100-form validate-form" enctype="multipart/form-data" method="POST" action="{{ url('cleaning/checkin', $getForm->cleaning_id)}}">
@@ -97,7 +103,7 @@
 				</div>
                 <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate = "Pilih Tanggal Pekerjaan">
 					<span class="label-input100">Date of Leave (Tanggal Selesai Pekerjaan) *</span>
-					<input class="input100 @error('date_of_leave') is-invalid @enderror" type="date" name="date_of_leave" id="date_of_leave" value="{{$getForm->validity_to}}" required autocomplete="date_of_leave" autofocus>
+					<input class="input100 @error('date_of_leave') is-invalid @enderror" type="date" name="date_of_leave" id="date_of_leave" value="{{$getForm->validity_to}}" autocomplete="date_of_leave" readonly>
                     @error('date_of_leave')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>

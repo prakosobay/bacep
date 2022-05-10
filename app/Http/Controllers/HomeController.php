@@ -256,8 +256,6 @@ class HomeController extends Controller
         } elseif ($email == 'ipcore@mail.com') {
             return view('ipcore.log');
         } elseif (($email == 'badai.sino@balitower.co.id') || ($email == 'data.center7@balitower.co.id')) {
-            // $full = CleaningFull::all();
-            // var_dump($full);
             return view('cleaning.full_visitor');
         } elseif ($email == 'sales@mail.com') {
             return view('sales.log');
