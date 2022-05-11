@@ -20,6 +20,7 @@
         rel="stylesheet">
 
     <link href="{{asset('css/new_approve.css')}}" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </head>
 <body id="body-pd">
