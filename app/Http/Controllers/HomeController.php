@@ -178,6 +178,7 @@ class HomeController extends Controller
                     ->whereIn('cleaning_histories.role_to', $role_1)
                     ->where('cleaning_histories.aktif', '=', 1)
                     ->select('cleanings.*')
+                    ->orderBy('cleaning_id', 'desc')
                     ->get();
                 return view('cleaning.approval', compact('cleaning'));
             } else {
@@ -188,20 +189,20 @@ class HomeController extends Controller
         }
     }
 
-    public function full($type_full)
-    {
-        if ((Gate::allows('isApproval')) || (Gate::allows('isHead')) || (Gate::allows('isAdmin'))) {
-            if ($type_full == 'all') {
-                return view('all_full_approval');
-            } elseif ($type_full == 'survey') {
-                return view('sales.full_approval');
-            } elseif ($type_full == 'cleaning') {
-                return view('cleaning.full_approval');
-            } else {
-                abort(403);
-            }
-        }
-    }
+    // public function full($type_full)
+    // {
+    //     if ((Gate::allows('isApproval')) || (Gate::allows('isHead')) || (Gate::allows('isAdmin'))) {
+    //         if ($type_full == 'all') {
+    //             return view('all_full_approval');
+    //         } elseif ($type_full == 'survey') {
+    //             return view('sales.full_approval');
+    //         } elseif ($type_full == 'cleaning') {
+    //             return view('cleaning.full_approval');
+    //         } else {
+    //             abort(403);
+    //         }
+    //     }
+    // }
 
     public function approval_full($type_form)
     {

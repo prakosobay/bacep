@@ -9,13 +9,15 @@ use Barryvdh\DomPDF\Facade as PDF;
 use App\Mail\{NotifEmail, NotifReject, NotifFull};
 use App\Models\{User, Role, MasterOb, PilihanWork};
 use App\Models\{Cleaning, CleaningHistory, CleaningFull};
-use RealRashid\SweetAlert\Facades\Alert;
 use phpDocumentor\Reflection\PseudoTypes\True_;
 use Yajra\Datatables\Datatables;
 use Carbon\Carbon;
 
 class CleaningController extends Controller
 {
+
+
+    // Show Pages
     public function show_form()
     {
         $master_ob = MasterOb::all();
@@ -23,49 +25,40 @@ class CleaningController extends Controller
         return view('cleaning.form', compact('master_ob', 'pilihanwork'));
     }
 
-    public function data_history()
+    public function checkin_form_cleaning($id)
     {
-        $cleaning_log = DB::table('cleaning_histories')
+        $getForm = Cleaning::findOrFail($id);
+        $getOb = MasterOb::all();
+        return view('cleaning.checkinForm', compact('getForm', 'getOb'));
+    }
+
+    public function checkout_form_cleaning($id)
+    {
+        $getForm = Cleaning::findOrFail($id);
+        $getFull = CleaningFull::where('cleaning_id', $id)->first();
+        // dd($getFull);
+        return view('cleaning.checkoutForm', compact('getForm', 'getFull'));
+    }
+
+    public function show_reject_cleaning()
+    {
+        return view('cleaning.listReject');
+    }
+
+    public function detail_permit_cleaning($id)
+    {
+        $cleaningHistory = DB::table('cleaning_histories')
             ->join('cleanings', 'cleanings.cleaning_id', '=', 'cleaning_histories.cleaning_id')
-            ->select('cleaning_histories.*', 'cleanings.validity_from');
-        return Datatables::of($cleaning_log)
-            ->editColumn('updated_at', function ($cleaning_log) {
-                return $cleaning_log->updated_at ? with(new Carbon($cleaning_log->updated_at))->format('d/m/Y') : '';
-            })
-            ->editColumn('validity_from', function ($cleaning_log) {
-                return $cleaning_log->validity_from ? with(new Carbon($cleaning_log->validity_from))->format('d/m/Y') : '';
-            })
-            ->make(true);
+            ->join('users', 'users.id', '=', 'cleaning_histories.created_by')
+            ->where('cleaning_histories.cleaning_id', '=', $id)
+            ->select('cleaning_histories.*', 'users.name', 'cleanings.cleaning_work')
+            ->get();
+        return view('detail_cleaning', compact('cleaningHistory'));
     }
 
-    public function data_full_approve_cleaning() //versi approval
-    {
-        $getFull = DB::table('cleaning_fulls')
-                    ->select(['cleaning_id', 'validity_from', 'cleaning_name', 'checkin_personil', 'checkout_personil', 'cleaning_work', 'link'])
-                    ->where('note', null)
-                    ->orderBy('cleaning_id', 'desc');
-        return Datatables::of($getFull)
-            ->editColumn('validity_from', function ($full) {
-                return $full->validity_from ? with(new Carbon($full->validity_from))->format('d/m/Y') : '';
-            })
-            ->addColumn('action', 'cleaning.actionLink')
-            ->make(true);
-    }
 
-    public function data_log_full() //versi visitor
-    {
-        $full = DB::table('cleaning_fulls')
-            ->select(['cleaning_id', 'validity_from', 'cleaning_name', 'cleaning_work', 'checkin_personil', 'checkout_personil'])
-            ->where('note', null)
-            ->orderBy('cleaning_id', 'desc');
-        return Datatables::of($full)
-            ->editColumn('validity_from', function ($full) {
-                return $full->validity_from ? with(new Carbon($full->validity_from))->format('d/m/Y') : '';
-            })
-            ->addColumn('action', 'cleaning.actionEdit')
-            ->make(true);
-    }
 
+    //Collect Data from DB
     public function detail_ob($id)
     {
         $data = MasterOb::find($id);
@@ -79,6 +72,9 @@ class CleaningController extends Controller
         return isset($permit) && !empty($permit) ? response()->json(['status' => 'SUCCESS', 'permit' => $permit]) : response(['status' => 'FAILED', 'permit' => []]);
     }
 
+
+
+    // Submit Data
     public function submit_data_cleaning(Request $request)
     {
         $data = $request->all();
@@ -109,22 +105,9 @@ class CleaningController extends Controller
         return $cleaningHistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
     }
 
-    public function detail_permit_cleaning($id)
-    {
-        $cleaningHistory = DB::table('cleaning_histories')
-            ->join('cleanings', 'cleanings.cleaning_id', '=', 'cleaning_histories.cleaning_id')
-            ->join('users', 'users.id', '=', 'cleaning_histories.created_by')
-            ->where('cleaning_histories.cleaning_id', '=', $id)
-            ->select('cleaning_histories.*', 'users.name', 'cleanings.cleaning_work')
-            ->get();
-        return view('detail_cleaning', compact('cleaningHistory'));
-    }
-
     public function approve_cleaning(Request $request)
     {
-        // dd($request->all());
         $lasthistoryC = CleaningHistory::where('cleaning_id', '=', $request->cleaning_id)->latest()->first();
-        // dd($lasthistoryC);
         if ($lasthistoryC->pdf == true) {
             $lasthistoryC->update(['aktif' => false]);
 
@@ -221,38 +204,6 @@ class CleaningController extends Controller
                 abort(403);
             }
         }
-    }
-
-    public function cetak_cleaning_pdf($id)
-    {
-        $cleaning = Cleaning::find($id);
-        $lasthistoryC = CleaningHistory::where('cleaning_id', $id)->where('aktif', 1)->first();
-        $lasthistoryC->update(['pdf' => true]);
-
-        $cleaningHistory = DB::table('cleaning_histories')
-            ->join('cleanings', 'cleanings.cleaning_id', '=', 'cleaning_histories.cleaning_id')
-            ->join('users', 'users.id', '=', 'cleaning_histories.created_by')
-            ->where('cleaning_histories.cleaning_id', '=', $id)
-            ->where('cleaning_histories.status', '!=', 'visitor')
-            ->select('cleaning_histories.*', 'users.name', 'created_by')
-            ->get();
-        $pdf = PDF::loadview('cleaning_pdf', compact('cleaning', 'cleaningHistory', 'lasthistoryC'))->setPaper('a4', 'portrait')->setWarnings(false);
-        return $pdf->stream();
-    }
-
-    public function checkin_form_cleaning($id)
-    {
-        $getForm = Cleaning::findOrFail($id);
-        $getOb = MasterOb::all();
-        return view('cleaning.checkinForm', compact('getForm', 'getOb'));
-    }
-
-    public function checkout_form_cleaning($id)
-    {
-        $getForm = Cleaning::findOrFail($id);
-        $getFull = CleaningFull::where('cleaning_id', $id)->first();
-        // dd($getFull);
-        return view('cleaning.checkoutForm', compact('getForm', 'getFull'));
     }
 
     public function checkin_update_cleaning(Request $request, $id)
@@ -395,16 +346,6 @@ class CleaningController extends Controller
         }
     }
 
-    public function show_form_cleaning($id)
-    {
-        $getCleaning = Cleaning::findOrFail($id);
-        $getLog = CleaningHistory::where('cleaning_id', $id)->where('aktif', 1)->first();
-        $getFull = CleaningFull::where('cleaning_id', $id)
-            ->select()
-            ->first();
-        dd($getFull);
-    }
-
     public function reject_full_cleaning(Request $request, $id)
     {
         // dd($request->all());
@@ -434,20 +375,100 @@ class CleaningController extends Controller
         }
     }
 
-    public function show_reject_cleaning()
+
+
+    // Convert PDF
+    public function cetak_cleaning_pdf($id)
     {
-        return view('cleaning.listReject');
+        $cleaning = Cleaning::find($id);
+        $lasthistoryC = CleaningHistory::where('cleaning_id', $id)->where('aktif', 1)->first();
+        $lasthistoryC->update(['pdf' => true]);
+
+        $cleaningHistory = DB::table('cleaning_histories')
+            ->join('cleanings', 'cleanings.cleaning_id', '=', 'cleaning_histories.cleaning_id')
+            ->join('users', 'users.id', '=', 'cleaning_histories.created_by')
+            ->where('cleaning_histories.cleaning_id', '=', $id)
+            ->where('cleaning_histories.status', '!=', 'visitor')
+            ->select('cleaning_histories.*', 'users.name', 'created_by')
+            ->get();
+        $pdf = PDF::loadview('cleaning_pdf', compact('cleaning', 'cleaningHistory', 'lasthistoryC'))->setPaper('a4', 'portrait')->setWarnings(false);
+        return $pdf->stream();
     }
 
-    public function data_reject_cleaning()
+    public function cetak_full_cleaning($id) //versi visitor
+    {
+        $getCleaning = Cleaning::findOrFail($id);
+        $getLastLog = CleaningHistory::where('cleaning_id', $id)->where('aktif', 1)->first();
+        $getFull = CleaningFull::where('cleaning_id', $id)->first();
+
+        $getLog = DB::table('cleaning_histories')
+                ->join('cleanings', 'cleanings.cleaning_id', '=', 'cleaning_histories.cleaning_id')
+                ->join('users', 'users.id', '=', 'cleaning_histories.created_by')
+                ->where('cleaning_histories.cleaning_id', '=', $id)
+                ->select('cleaning_histories.*', 'users.name', 'created_by')
+                ->get();
+
+                // dd($getLog);
+        $pdf = PDF::loadview('cleaning.fullpdf', compact('getCleaning', 'getLastLog', 'getFull', 'getLog'))->setPaper('a4', 'portrait')->setWarnings(false);
+        return $pdf->stream();
+    }
+
+
+
+    // Datatable Yajra
+    public function data_full_approve_cleaning() //versi approval
+    {
+        $getFull = DB::table('cleaning_fulls')
+                    ->select(['cleaning_id', 'validity_from', 'cleaning_name', 'checkin_personil', 'checkout_personil', 'cleaning_work', 'link'])
+                    ->where('note', null)
+                    ->orderBy('cleaning_id', 'desc');
+        return Datatables::of($getFull)
+            ->editColumn('validity_from', function ($full) {
+                return $full->validity_from ? with(new Carbon($full->validity_from))->format('d/m/Y') : '';
+            })
+            ->addColumn('action', 'cleaning.actionLink')
+            ->make(true);
+    }
+
+    public function data_log_full() //versi visitor
+    {
+        $full = DB::table('cleaning_fulls')
+            ->select(['cleaning_id', 'validity_from', 'cleaning_name', 'cleaning_work', 'checkin_personil', 'checkout_personil'])
+            ->where('note', null)
+            ->orderBy('cleaning_id', 'desc');
+        return Datatables::of($full)
+            ->editColumn('validity_from', function ($full) {
+                return $full->validity_from ? with(new Carbon($full->validity_from))->format('d/m/Y') : '';
+            })
+            ->addColumn('action', 'cleaning.actionEdit')
+            ->make(true);
+    }
+
+    public function data_reject_cleaning() //versi visitor
     {
         $getFull = DB::table('cleaning_fulls')
                     ->select(['cleaning_id', 'validity_from', 'cleaning_name', 'cleaning_work', 'note'])
                     ->where('note', '!=', null)
-                    ->get();
+                    ->orderBy('cleaning_id', 'desc');
         return Datatables::of($getFull)
             ->editColumn('validity_from', function ($full) {
                 return $full->validity_from ? with(new Carbon($full->validity_from))->format('d/m/Y') : '';
+            })
+            ->make(true);
+    }
+
+    public function data_history() //versi approval
+    {
+        $cleaning_log = DB::table('cleaning_histories')
+            ->join('cleanings', 'cleanings.cleaning_id', '=', 'cleaning_histories.cleaning_id')
+            ->select('cleaning_histories.*', 'cleanings.validity_from')
+            ->orderBy('cleaning_id', 'desc');
+        return Datatables::of($cleaning_log)
+            ->editColumn('updated_at', function ($cleaning_log) {
+                return $cleaning_log->updated_at ? with(new Carbon($cleaning_log->updated_at))->format('d/m/Y') : '';
+            })
+            ->editColumn('validity_from', function ($cleaning_log) {
+                return $cleaning_log->validity_from ? with(new Carbon($cleaning_log->validity_from))->format('d/m/Y') : '';
             })
             ->make(true);
     }
