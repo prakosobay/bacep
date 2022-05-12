@@ -144,7 +144,26 @@ class CleaningController extends Controller
                     Mail::to($recipient)->send(new NotifEmail());
                 }
                 $role_to = 'head';
+            } elseif ($lasthistoryC->role_to == 'head') {
+                $cleaning = Cleaning::find($request->cleaning_id);
+                foreach (['dc@balitower.co.id'] as $recipient) {
+                    Mail::to($recipient)->send(new NotifFull($cleaning));
+                }
+                $role_to = 'all';
+
+                $cleaning = Cleaning::where('cleaning_id', $request->cleaning_id)->first();
+                $cleaningFull = CleaningFull::create([
+                    'cleaning_id' => $cleaning->cleaning_id,
+                    'cleaning_name' => $cleaning->cleaning_name,
+                    'cleaning_name2' => $cleaning->cleaning_name2,
+                    'cleaning_work' => $cleaning->cleaning_work,
+                    'validity_from' => $cleaning->validity_from,
+                    'cleaning_date' => $cleaning->created_at,
+                    // 'link' => ("https://dcops.balifiber.id/cleaning_pdf/$cleaning->cleaning_id"),
+                    'link' => ("http://172.16.45.195:8000/cleaning_pdf/$cleaning->cleaning_id"),
+                ]);
             }
+
             $cleaningHistory = CleaningHistory::create([
                 'cleaning_id' => $request->cleaning_id,
                 'created_by' => Auth::user()->id,
@@ -153,26 +172,9 @@ class CleaningController extends Controller
                 'aktif' => true,
                 'pdf' => false,
             ]);
+
         } else {
             abort(403);
-        }
-
-        if ($lasthistoryC->role_to == 'head') {
-            $cleaning = Cleaning::find($request->cleaning_id);
-            foreach (['dco@balitower.co.id'] as $recipient) {
-                Mail::to($recipient)->send(new NotifFull($cleaning));
-            }
-            $cleaning = Cleaning::where('cleaning_id', $request->cleaning_id)->first();
-            $cleaningFull = CleaningFull::create([
-                'cleaning_id' => $cleaning->cleaning_id,
-                'cleaning_name' => $cleaning->cleaning_name,
-                'cleaning_name2' => $cleaning->cleaning_name2,
-                'cleaning_work' => $cleaning->cleaning_work,
-                'validity_from' => $cleaning->validity_from,
-                'cleaning_date' => $cleaning->created_at,
-                // 'link' => ("https://dcops.balifiber.id/cleaning_pdf/$cleaning->cleaning_id"),
-                'link' => ("http://172.16.45.195:8000/cleaning_pdf/$cleaning->cleaning_id"),
-            ]);
         }
 
         return $cleaningHistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
@@ -180,7 +182,7 @@ class CleaningController extends Controller
 
     public function reject_form_cleaning(Request $request)
     {
-        dd($request->all());
+        // dd($request->all());
         $lasthistoryC = CleaningHistory::where('cleaning_id', '=', $request->cleaning_id)->latest()->first();
         if (Gate::denies('isSecurity')) {
             if ($lasthistoryC->pdf == true) {
