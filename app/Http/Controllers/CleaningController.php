@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\LogCleaningExport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\{DB, Auth, Gate, Mail, Session, Storage};
 use Illuminate\Support\Str;
+use Maatwebsite\Excel\Facades\Excel;
 use Barryvdh\DomPDF\Facade as PDF;
 use App\Mail\{NotifEmail, NotifReject, NotifFull};
 use App\Models\{User, Role, MasterOb, PilihanWork};
@@ -340,6 +342,7 @@ class CleaningController extends Controller
                 'checkout_personil2' => $data['checkout_personil2'],
                 'photo_checkout_personil' => $imageName,
                 'photo_checkout_personil2' => $imageName2,
+                'status' => 'Full Approved',
             ]);
 
             return redirect('logall')->with('status', 'Checkout Berhasil!');
@@ -367,6 +370,7 @@ class CleaningController extends Controller
 
         $getFull->update([
             'note' => $request->note,
+            'status' => 'Rejected',
         ]);
 
         if(($getLog) && ($getFull)){
@@ -473,5 +477,13 @@ class CleaningController extends Controller
                 return $cleaning_log->validity_from ? with(new Carbon($cleaning_log->validity_from))->format('d/m/Y') : '';
             })
             ->make(true);
+    }
+
+
+
+    //Export Excel
+    public function export_excel()
+    {
+        return Excel::download(new LogCleaningExport, 'log.xlsx');
     }
 }
