@@ -6,10 +6,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{HomeController, CleaningController, AdminController};
 
 Route::get('/', function () {
-    return view('auth.register');
+    return view('auth.login');
 });
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/home', [HomeController::class, 'index']);
 
     //Detail History
