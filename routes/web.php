@@ -154,6 +154,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::put('/cleaning/checkout/{id}', [CleaningController::class, 'checkout_update_cleaning']);
     Route::put('/cleaning/reject/{id}', [CleaningController::class, 'reject_full_cleaning']);
 
+    // Other
+
+
     //Visitor All Base Super
     Route::get('new_permit', [HomeController::class, 'new_permit']);
 
