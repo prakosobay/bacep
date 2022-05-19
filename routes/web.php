@@ -7,9 +7,9 @@ use App\Http\Controllers\{HomeController, CleaningController, AdminController};
 
 Route::get('/', function () {
     return view('auth.login');
-});
+})->middleware('guest');
 
-Route::middleware(['auth', 'auth'])->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::get('/home', [HomeController::class, 'index']);
 
     //Detail History
@@ -144,7 +144,7 @@ Route::middleware(['auth', 'auth'])->group(function () {
     Route::get('/cleaning/action/checkin/{id}', [CleaningController::class, 'checkin_form_cleaning']);
     Route::get('/cleaning/action/checkout/{id}', [CleaningController::class, 'checkout_form_cleaning']);
     Route::get('/cleaning/action/show/{id}', [CleaningController::class, 'cetak_full_cleaning']);
-    Route::get('cleaning/action/export', [CleaningController::class, 'export_excel']);
+    Route::get('cleaning/action/export', [CleaningController::class, 'cetak_all_full_cleaning']);
     Route::get('/cleaning/reject/show', [CleaningController::class, 'show_reject_cleaning']);
     Route::post('/route_submit_cleaning', [CleaningController::class, 'submit_data_cleaning']);
     Route::post('/cleaning_reject', [CleaningController::class, 'reject_form_cleaning']);
@@ -155,7 +155,7 @@ Route::middleware(['auth', 'auth'])->group(function () {
     Route::put('/cleaning/reject/{id}', [CleaningController::class, 'reject_full_cleaning']);
 
     // Other
-
+    Route::get('bm/troubleshoot/show', [TroubleshootBmController::class, 'show']);
 
     //Visitor All Base Super
     Route::get('new_permit', [HomeController::class, 'new_permit']);

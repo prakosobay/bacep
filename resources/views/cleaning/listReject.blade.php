@@ -13,7 +13,6 @@
                 <a type="button" class="btn btn-sm btn-secondary mx-1 my-2" href="#"><b>Create Permit Other</b></a>
                 <a type="button" class="btn btn-sm btn-danger mx-1 my-2" href="{{url('cleaning/reject/show')}}"><b>List Permit Reject</b></a>
                 <a type="button" class="btn btn-sm btn-info mx-1 my-2" href="{{url('logall')}}"><b>Log Permit BM</b></a>
-                <a type="button" class="btn btn-sm btn-success mx-1 my-2" href="#"><b>Export Excel</b></a>
             </div>
 
             @if (session('status'))

@@ -30,7 +30,11 @@ class LogCleaningExport implements FromView, WithDrawings, ShouldAutoSize
     //         $rowNum++;
     //     }
     //     return $drawing;
+
     // }
+
+    // Set height for a single row
+
 
     public function view(): View
     {

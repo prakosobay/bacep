@@ -19,26 +19,6 @@
             margin-bottom: 0.3cm;
         }
 
-        /** Define the header rules **/
-        /* header {
-            position: fixed;
-            top: 0cm;
-            left: 0.5cm;
-            right: 0.5cm;
-            height: 3cm;
-            text-align: center;
-        } */
-
-        /** Define the footer rules **/
-        /* footer {
-            position: fixed;
-            bottom: 0.1cm;
-            height: 1cm;
-            left: 0.5cm;
-            right: 0.5cm;
-            text-align: center;
-        } */
-
         .table-bordered,
         .col_header {
             border-spacing: 0.5px;

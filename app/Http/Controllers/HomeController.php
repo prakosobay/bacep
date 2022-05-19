@@ -25,6 +25,7 @@ class HomeController extends Controller
 
     public function index()
     {
+
         $role_2 = Auth::user()->roles;
         // dd($role_2);
         $arrole = [];

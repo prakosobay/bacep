@@ -14,6 +14,7 @@ use App\Models\{Cleaning, CleaningHistory, CleaningFull};
 use phpDocumentor\Reflection\PseudoTypes\True_;
 use Yajra\Datatables\Datatables;
 use Carbon\Carbon;
+use Symfony\Component\CssSelector\Node\FunctionNode;
 
 class CleaningController extends Controller
 {
@@ -417,6 +418,14 @@ class CleaningController extends Controller
                 // dd($getLog);
         $pdf = PDF::loadview('cleaning.fullpdf', compact('getCleaning', 'getLastLog', 'getFull', 'getLog'))->setPaper('a4', 'portrait')->setWarnings(false);
         return $pdf->stream();
+    }
+
+    public function cetak_all_full_cleaning()
+    {
+        $getCleaning = CleaningFull::where('note', null)->get();
+            $pdf = PDF::loadview('cleaning.export_full_pdf', compact('getCleaning'))->setPaper('a4', 'landscape')->setWarnings(false);
+            return $pdf->stream();
+        // dd($getCleaning);
     }
 
 
