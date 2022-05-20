@@ -9,14 +9,12 @@
         </div>
         <div class="card-body">
             <div class="container-fluid">
-                <a type="button" class="btn btn-sm btn-primary mx-1 my-4" href="{{url('cleaning_form')}}">Permit Cleaning</a>
-                <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#troubleshoot">
-                    Permit Troubleshoot
-                  </button>
-                <a type="button" class="btn btn-sm btn-dark mx-1 my-4" href="#">Permit Maintenance</a>
-                <a type="button" class="btn btn-sm btn-danger mx-1 my-4" href="{{url('cleaning/reject/show')}}">List Permit Reject</a>
-                <a type="button" class="btn btn-sm btn-info mx-1 my-4" href="{{url('logall')}}">Log Permit BM</a>
-                <a type="button" class="btn btn-sm btn-success mx-1 my-4" href="{{ url('cleaning/action/export')}}">Export PDF</a>
+                <a type="button" class="btn btn-sm btn-primary mx-1 my-2" href="{{url('cleaning_form')}}">Permit Cleaning</a>
+                <button class="btn btn-secondary btn-sm mx-1 my-2" data-bs-toggle="modal" data-bs-target="#troubleshoot">Permit Troubleshoot</button>
+                <button class="btn btn-sm btn-dark mx-1 my-2" data-bs-toggle="modal" data-bs-target="#maintenance">Permit Maintenance</button>
+                <a type="button" class="btn btn-sm btn-danger mx-1 my-2" href="{{url('cleaning/reject/show')}}">List Permit Reject</a>
+                <a type="button" class="btn btn-sm btn-info mx-1 my-2" href="{{url('logall')}}">Log Permit BM</a>
+                <a type="button" class="btn btn-sm btn-success mx-1 my-2" href="{{ url('cleaning/action/export')}}">Export PDF</a>
             </div>
 
             {{-- Modal Troubleshoot --}}
@@ -24,14 +22,37 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Pilih Permit</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Pilih Permit Troubleshoot</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <div class="row align-item-center">
                                 <div class="col align-self-center">
-                                    <a type="button" href="{{ url('bm/troubleshoot/show')}}" class="btn btn-primary">New Permit</a>
-                                    <a type="button" href="{{ url('bm/troubleshoot/full/visitor')}}" class="btn btn-primary">Select Last Permit</a>
+                                    <a type="button" href="{{ url('other/troubleshoot/show')}}" class="btn btn-secondary">New Permit</a>
+                                    <a type="button" href="#" class="btn btn-secondary">Select Last Permit</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Modal Maintenance --}}
+            <div class="modal fade" id="maintenance" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Pilih Permit Maintenance</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row align-item-center">
+                                <div class="col align-self-center">
+                                    <a type="button" href="{{ url('other/maintenance/show')}}" class="btn btn-dark">New Permit</a>
+                                    <a type="button" href="#" class="btn btn-dark">Select Last Permit</a>
                                 </div>
                             </div>
                         </div>
@@ -84,15 +105,15 @@
 @push('scripts')
     <script>
 
-        $(function() {
-            $("#start_date").datepicker({
-                "dateFormat": "yy-mm-dd"
-            });
+        // $(function() {
+        //     $("#start_date").datepicker({
+        //         "dateFormat": "yy-mm-dd"
+        //     });
 
-            $("#end_date").datepicker({
-                "dateFormat": "yy-mm-dd"
-            });
-        });
+        //     $("#end_date").datepicker({
+        //         "dateFormat": "yy-mm-dd"
+        //     });
+        // });
 
         $(function() {
             $('#dataTable').DataTable({

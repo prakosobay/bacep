@@ -155,7 +155,8 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/cleaning/reject/{id}', [CleaningController::class, 'reject_full_cleaning']);
 
     // Other
-    Route::get('bm/troubleshoot/show', [TroubleshootBmController::class, 'show']);
+    Route::get('other/troubleshoot/show', [OtherController::class, 'show_troubleshoot_form']);
+    Route::get('other/maintenance/show', [OtherController::class, 'show_maintenance_form']);
 
     //Visitor All Base Super
     Route::get('new_permit', [HomeController::class, 'new_permit']);
