@@ -793,3 +793,7 @@ textarea.input100 {
 th {
     text-align: center;
 }
+
+.lebar-table{
+    width: 2000px;
+}

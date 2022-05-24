@@ -27,7 +27,7 @@
 
 	<div class="container-contact100">
 		<div class="wrap-contact100">
-			<form id="maintenance_form" class="contact100-form validate-form">
+			<form id="maintenance_form" class="contact100-form validate-form" method="POST" action="{{ url('other/maintenance/create')}}">
                 @csrf
 				<span class="contact100-form-title">
 					FORM MAINTENANCE
@@ -54,7 +54,6 @@
                 {{-- Entry Area --}}
                 <div class="col-3">
                     <div class="wrap-contact100-form-radio">
-                        <span class="label-input100">Authorized Entry Area</span>
                         <div class="contact100-form-radio m-t-15">
                             <input class="input-radio100" id="server" type="checkbox" name="server" value="1">
                             <label class="label-radio100" for="server">
@@ -79,7 +78,6 @@
                 </div>
                 <div class="col-3">
                     <div class="wrap-contact100-form-radio">
-                        <span class="label-input100">Authorized Entry Area</span>
                         <div class="contact100-form-radio m-t-15">
                             <input class="input-radio100" id="ups" type="checkbox" name="ups" value="1">
                             <label class="label-radio100" for="ups">
@@ -104,7 +102,6 @@
                 </div>
                 <div class="col-3">
                     <div class="wrap-contact100-form-radio">
-                        <span class="label-input100">Authorized Entry Area</span>
                         <div class="contact100-form-radio m-t-15">
                             <input class="input-radio100" id="genset" type="checkbox" name="genset" value="1">
                             <label class="label-radio100" for="genset">
@@ -129,7 +126,6 @@
                 </div>
                 <div class="col-3">
                     <div class="wrap-contact100-form-radio">
-                        <span class="label-input100">Authorized Entry Area</span>
                         <div class="contact100-form-radio m-t-15">
                             <input class="input-radio100" id="trafo" type="checkbox" name="trafo" value="1">
                             <label class="label-radio100" for="trafo">
@@ -152,7 +148,10 @@
                         </div>
                     </div>
                 </div>
-
+                <div class="wrap-input100 bg1">
+					<span class="label-input100">Other (Lokasi Lain) *</span>
+                    <input type="text" class="input100" id="other" name="other" value="{{ old('other')}}" placeholder="Lokasi lain">
+				</div>
 
                 {{-- Isian --}}
                 <div class="wrap-input100 validate-input bg1" data-validate="Isi Latar Belakang">
@@ -163,17 +162,17 @@
 					<span class="label-input100">Description of Scope of Work (Deskripsi Pekerjaan) *</span>
                     <textarea type="text" class="input100" name="describ" id="describ" placeholder="Description of Scope of Work" value="{{old('describ')}}"></textarea>
 				</div>
-                <div class="wrap-input100 validate-input bg1">
+                <div class="wrap-input100 bg1">
 					<span class="label-input100">Testing and Verification (Pengujian dan Verifikasi)</span>
 					<input type="text" class="input100" name="testing" id="testing" value="{{old('testing')}}" placeholder="Testing & Verification">
 				</div>
-                <div class="wrap-input100 validate-input bg1">
+                <div class="wrap-input100 bg1">
 					<span class="label-input100">Rollback Operation/Other Infomation (Operasi Pembatalan/Infomasi Lain)</span>
 					<input type="text" class="input100" name="rollback" id="rollback" value="{{old('rollback')}}" placeholder="Rollback Operation">
 				</div>
 
                 <!-- Detail Time Activity -->
-                <table class="table table-bordered">
+                {{-- <table class="table table-bordered bg1">
                     <thead>
                         <tr>
                             <th colspan="4">Detail Time Table of All Activity</th>
@@ -186,41 +185,175 @@
                     </thead>
                     <tbody>
                         <tr>
+                            <th><input type="time" class="input100 validate-input" name="time_start[]"></th>
+                            <th><input type="time" class="input100 validate-input" name="time_end[]"></th>
+                            <th><input type="text" class="input100 validate-input" name="activity[]" value="{{ old('activity[]')}}"></th>
+                            <th><input type="text" class="input100 validate-input" name="detail_service[]" value="{{ old('detail_service[]')}}"></th>
+                        </tr>
+                        <tr>
                             <th><input type="time" class="input100" name="time_start[]"></th>
                             <th><input type="time" class="input100" name="time_end[]"></th>
-                            <th><input type="text" class="input100" name="activity[]" id="activity_desc1" value="{{ old('activity[]')}}"></th>
-                            <th><input type="text" class="input100" name="detail_service[]" id="detail_service1" value="{{ old('detail_service[]')}}"></th>
+                            <th><input type="text" class="input100" name="activity[]" value="{{ old('activity[]')}}"></th>
+                            <th><input type="text" class="input100" name="detail_service[]" value="{{ old('detail_service[]')}}"></th>
+                        </tr>
+                        <tr>
+                            <th><input type="time" class="input100" name="time_start[]"></th>
+                            <th><input type="time" class="input100" name="time_end[]"></th>
+                            <th><input type="text" class="input100" name="activity[]" value="{{ old('activity[]')}}"></th>
+                            <th><input type="text" class="input100" name="detail_service[]" value="{{ old('detail_service[]')}}"></th>
+                        </tr>
+                        <tr>
+                            <th><input type="time" class="input100" name="time_start[]"></th>
+                            <th><input type="time" class="input100" name="time_end[]"></th>
+                            <th><input type="text" class="input100" name="activity[]" value="{{ old('activity[]')}}"></th>
+                            <th><input type="text" class="input100" name="detail_service[]" value="{{ old('detail_service[]')}}"></th>
                         </tr>
                     </tbody>
-                </table>
+                </table> --}}
 
-                <!-- Risk and Service Area Impact -->
-                <table class="table table-bordered bg1">
+                {{-- Detail Operation and Execution --}}
+                {{-- <table class="table table-bordered bg1">
                     <thead>
                         <tr>
-                            <th colspan="4">Risk and Service Area Impact</th>
+                            <th colspan="2">Detail Operation and Execution</th>
                         <tr>
-                            <th scope="col">Risk Description</th>
-                            <th scope="col">Possibility</th>
-                            <th scope="col">Impact</th>
-                            <th scope="col">Mitigation Plan</th>
+                            <th scope="col">Item</th>
+                            <th scope="col">Working Procedure</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <th>
-                                <select class="wrap-input100 validate-input bg0 js-select2" name="risk[]" id="risk">
-                                    <option value="">ampas</option>
-                                    <option value="">ampa2s</option>
-                                </select>
-                                <div class="dropDownSelect2"></div>
-                            </th>
-                            <th><input type="text" class="input100" name="possibility[]" id="possibility" value="" readonly></th>
-                            <th><input type="text" class="input100" name="impact[]" id="impact" value="" readonly></th>
-                            <th><input type="text" class="input100" name="mitigation[]" id="mitigation_plan" value="" readonly></th>
+                            <th><input type="text" class="input100 validate-input" name="item[]" id="item" value="{{ old('item[]')}}"></th>
+                            <th ><input type="text" class="input100 validate-input" name="procedure[]" value="{{ old('procedure[]')}}"></th>
+                        </tr>
+                        <tr>
+                            <th><input type="text" class="input100" name="item[]" id="item" value="{{ old('item[]')}}"></th>
+                            <th ><input type="text" class="input100" name="procedure[]" value="{{ old('procedure[]')}}"></th>
+                        </tr>
+                        <tr>
+                            <th><input type="text" class="input100" name="item[]" id="item" value="{{ old('item[]')}}"></th>
+                            <th ><input type="text" class="input100" name="procedure[]" value="{{ old('procedure[]')}}"></th>
+                        </tr>
+                        <tr>
+                            <th><input type="text" class="input100" name="item[]" id="item" value="{{ old('item[]')}}"></th>
+                            <th ><input type="text" class="input100" name="procedure[]" value="{{ old('procedure[]')}}"></th>
                         </tr>
                     </tbody>
-                </table>
+                </table> --}}
+
+                <!-- Risk and Service Area Impact -->
+                {{-- <table class="table table-bordered bg1 lebar-table">
+                    <tr>
+                        <th colspan="4">Risk and Service Area Impact</th>
+                    </tr>
+                    <tr>
+                        <th scope="col">Risk Description</th>
+                        <td>
+                            <select class="wrap-input100 validate-input bg0 js-select2" name="risk[]" id="risk">
+                                <option value=""></option>
+                                @foreach($getRisk as $p)
+                                <option value="{{ $p->id }}">{{ $p->risk }}</option>
+                                @endforeach
+                            </select>
+                            <div class="dropDownSelect2"></div>
+                        </td>
+                        <th scope="col">Impact</th>
+                        <td>
+                            <input type="text" class="input100" name="impact[]" id="impact" value="" readonly>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="col">Possibility</th>
+                        <td>
+                            <input type="text" class="input100" name="possibility[]" id="poss" value="" readonly>
+                        </td>
+                        <th scope="col">Mitigation Plan</th>
+                        <td>
+                            <input type="text" class="input100" name="mitigation[]" id="mitigation" value="" readonly>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th scope="col">Risk Description</th>
+                        <td>
+                            <select class="wrap-input100 validate-input bg0 js-select2" name="risk[]" id="risk2">
+                                <option value=""></option>
+                                @foreach($getRisk as $p)
+                                <option value="{{ $p->id }}">{{ $p->risk }}</option>
+                                @endforeach
+                            </select>
+                            <div class="dropDownSelect2"></div>
+                        </td>
+                        <th scope="col">Impact</th>
+                        <td>
+                            <input type="text" class="input100" name="impact[]" id="impact2" value="" readonly>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="col">Possibility</th>
+                        <td>
+                            <input type="text" class="input100" name="possibility[]" id="poss2" value="" readonly>
+                        </td>
+                        <th scope="col">Mitigation Plan</th>
+                        <td>
+                            <input type="text" class="input100" name="mitigation[]" id="mitigation2" value="" readonly>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th scope="col">Risk Description</th>
+                        <td>
+                            <select class="wrap-input100 validate-input bg0 js-select2" name="risk[]" id="risk3">
+                                <option value=""></option>
+                                @foreach($getRisk as $p)
+                                <option value="{{ $p->id }}">{{ $p->risk }}</option>
+                                @endforeach
+                            </select>
+                            <div class="dropDownSelect2"></div>
+                        </td>
+                        <th scope="col">Impact</th>
+                        <td>
+                            <input type="text" class="input100" name="impact[]" id="impact3" value="" readonly>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="col">Possibility</th>
+                        <td>
+                            <input type="text" class="input100" name="possibility[]" id="poss3" value="" readonly>
+                        </td>
+                        <th scope="col">Mitigation Plan</th>
+                        <td>
+                            <input type="text" class="input100" name="mitigation[]" id="mitigation3" value="" readonly>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th scope="col">Risk Description</th>
+                        <td>
+                            <select class="wrap-input100 validate-input bg0 js-select2" name="risk[]" id="risk4">
+                                <option value=""></option>
+                                @foreach($getRisk as $p)
+                                <option value="{{ $p->id }}">{{ $p->risk }}</option>
+                                @endforeach
+                            </select>
+                            <div class="dropDownSelect2"></div>
+                        </td>
+                        <th scope="col">Impact</th>
+                        <td>
+                            <input type="text" class="input100" name="impact[]" id="impact4" value="" readonly>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="col">Possibility</th>
+                        <td>
+                            <input type="text" class="input100" name="possibility[]" id="poss4" value="" readonly>
+                        </td>
+                        <th scope="col">Mitigation Plan</th>
+                        <td>
+                            <input type="text" class="input100" name="mitigation[]" id="mitigation4" value="" readonly>
+                        </td>
+                    </tr>
+                </table> --}}
 
 				<div class="container-contact100-form-btn">
 					<button type="submit" class="contact100-form-btn">
@@ -252,145 +385,75 @@
 			});
 		})
 
-    //     $('#pilihan1').change(function(){
-    //         let id = $(this).val();
-    //         $.ajax({
-    //             url: "{{url("/detail")}}"+'/'+id,
-    //             dataType:"json",
-    //             type: "get",
-    //             success: function(response){
-    //                 const {data} = response;
-    //                 console.log(data)
-    //             $('#phone_number').val(data.phone_number);
-    //             $('#id_number').val(data.id_number);
-    //             }
-    //         });
-    //     });
+        $('#risk').change(function(){
+            let id = $(this).val();
+            $.ajax({
+                url: "{{url("other/maintenance/risk")}}"+'/'+id,
+                dataType:"json",
+                type: "get",
+                success: function(response){
+                    const {risk} = response;
+                    console.log(risk)
+                    $('#impact').val(risk.impact);
+                    $('#mitigation').val(risk.mitigation);
+                    $('#poss').val(risk.poss);
+                }
+            });
+        });
 
-    //     $('#pilihan2').change(function(){
-    //         let id = $(this).val();
-    //         $.ajax({
-    //             url: "{{url("/detail")}}"+'/'+id,
-    //             dataType:"json",
-    //             type: "get",
-    //             success: function(response){
-    //                 const {data} = response;
-    //                 console.log(data)
-    //             $('#phone_number2').val(data.phone_number);
-    //             $('#id_number2').val(data.id_number);
-    //             }
-    //         });
-    //     });
+        $('#risk2').change(function(){
+            let id = $(this).val();
+            $.ajax({
+                url: "{{url("other/maintenance/risk")}}"+'/'+id,
+                dataType:"json",
+                type: "get",
+                success: function(response){
+                    const {risk} = response;
+                    console.log(risk)
+                    $('#impact2').val(risk.impact);
+                    $('#mitigation2').val(risk.mitigation);
+                    $('#poss2').val(risk.poss);
+                }
+            });
+        });
 
-    //     $('#working').change(function(){
-    //         let id = $(this).val();
-    //         $.ajax({
-    //             url: "{{url("/cleaning")}}"+'/'+id,
-    //             dataType:"json",
-    //             type: "get",
-    //             success: function(response){
-    //                 const {permit} = response;
-    //                 console.log(permit)
-    //             $('#activity_desciption_1').val(permit.activity_desciption_1);
-    //             $('#activity_desciption_2').val(permit.activity_desciption_2);
-    //             $('#activity_desciption_3').val(permit.activity_desciption_3);
-    //             $('#activity_desciption_4').val(permit.activity_desciption_4);
-    //             $('#activity_desciption_5').val(permit.activity_desciption_5);
-    //             $('#activity_desciption_6').val(permit.activity_desciption_6);
-    //             $('#detail_service_1').val(permit.detail_service_1);
-    //             $('#detail_service_2').val(permit.detail_service_2);
-    //             $('#detail_service_3').val(permit.detail_service_3);
-    //             $('#detail_service_4').val(permit.detail_service_4);
-    //             $('#detail_service_5').val(permit.detail_service_5);
-    //             $('#detail_service_6').val(permit.detail_service_6);
-    //             $('#item_1').val(permit.item_1);
-    //             $('#item_2').val(permit.item_2);
-    //             $('#item_3').val(permit.item_3);
-    //             $('#item_4').val(permit.item_4);
-    //             $('#item_5').val(permit.item_5);
-    //             $('#item_6').val(permit.item_6);
-    //             $('#working_procedure_1').val(permit.working_procedure_1);
-    //             $('#working_procedure_2').val(permit.working_procedure_2);
-    //             $('#working_procedure_3').val(permit.working_procedure_3);
-    //             $('#working_procedure_4').val(permit.working_procedure_4);
-    //             $('#working_procedure_5').val(permit.working_procedure_5);
-    //             $('#working_procedure_6').val(permit.working_procedure_6);
-    //             $('#risk_description_1').val(permit.risk_description_1);
-    //             $('#risk_description_2').val(permit.risk_description_2);
-    //             $('#risk_description_3').val(permit.risk_description_3);
-    //             $('#risk_description_4').val(permit.risk_description_4);
-    //             $('#risk_description_5').val(permit.risk_description_5);
-    //             $('#risk_description_6').val(permit.risk_description_6);
-    //             $('#possibility_1').val(permit.possibility_1);
-    //             $('#possibility_2').val(permit.possibility_2);
-    //             $('#possibility_3').val(permit.possibility_3);
-    //             $('#possibility_4').val(permit.possibility_4);
-    //             $('#possibility_5').val(permit.possibility_5);
-    //             $('#possibility_6').val(permit.possibility_6);
-    //             $('#impact_1').val(permit.impact_1);
-    //             $('#impact_2').val(permit.impact_2);
-    //             $('#impact_3').val(permit.impact_3);
-    //             $('#impact_4').val(permit.impact_4);
-    //             $('#impact_5').val(permit.impact_5);
-    //             $('#impact_6').val(permit.impact_6);
-    //             $('#mitigation_plan_1').val(permit.mitigation_plan_1);
-    //             $('#mitigation_plan_2').val(permit.mitigation_plan_2);
-    //             $('#mitigation_plan_3').val(permit.mitigation_plan_3);
-    //             $('#mitigation_plan_4').val(permit.mitigation_plan_4);
-    //             $('#mitigation_plan_5').val(permit.mitigation_plan_5);
-    //             $('#mitigation_plan_6').val(permit.mitigation_plan_6);
-    //             $('#background').val(permit.background);
-    //             $('#describ').val(permit.describ);
-    //             $('#testing').val(permit.testing);
-    //             $('#rollback').val(permit.rollback);
-    //             $('#loc1').val(permit.loc1);
-    //             $('#loc2').val(permit.loc2);
-    //             $('#loc3').val(permit.loc3);
-    //             $('#loc4').val(permit.loc4);
-    //             $('#loc5').val(permit.loc5);
-    //             $('#loc6').val(permit.loc6);
-    //             }
-    //         });
-    //     });
+        $('#risk3').change(function(){
+            let id = $(this).val();
+            $.ajax({
+                url: "{{url("other/maintenance/risk")}}"+'/'+id,
+                dataType:"json",
+                type: "get",
+                success: function(response){
+                    const {risk} = response;
+                    console.log(risk)
+                    $('#impact3').val(risk.impact);
+                    $('#mitigation3').val(risk.mitigation);
+                    $('#poss3').val(risk.poss);
+                }
+            });
+        });
 
-    //     $.ajaxSetup({
-    //     headers: {
-    //         'X-CSRF-TOKEN': $('input[name="_token"]').val()
-    //     }
-    // });
+        $('#risk4').change(function(){
+            let id = $(this).val();
+            $.ajax({
+                url: "{{url("other/maintenance/risk")}}"+'/'+id,
+                dataType:"json",
+                type: "get",
+                success: function(response){
+                    const {risk} = response;
+                    console.log(risk)
+                    $('#impact4').val(risk.impact);
+                    $('#mitigation4').val(risk.mitigation);
+                    $('#poss4').val(risk.poss);
+                }
+            });
+        });
 
-    // $(".contact100-form-btn").click(function(e){
-    //     e.preventDefault();
-    //     var datastring = $("#form_cleaning").serialize();
-    //     $.ajax({
-    //         type:'POST',
-    //         url:"{{url('route_submit_cleaning')}}",
-    //         data: datastring,
-    //         error: function (request, error) {
-    //             console.log(error)
-    //             alert(" Can't do because: " + error);
-    //         },
-    //         success:function(data){
-    //             console.log(data);
-    //             if(data.status == 'SUCCESS'){
-    //                 Swal.fire({
-    //                     title: "Success!",
-    //                     text: 'Data Saved',
-    //                     type: "success",
-    //                 }).then(function(){
-    //                     location.href = "{{url("/home")}}";
-    //                 });
-    //             }else if(data.status == 'FAILED'){
-    //                 Swal.fire({
-    //                     title: "Failed!",
-    //                     text: 'Saving Data Failed',
-    //                 }).then(function(){
-    //                     location.reload();
-    //                 });
-    //             }
-    //         }
-    //     });
-    // });
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('input[name="_token"]').val()
+            }
+        });
 
 	</script>
 <!--===============================================================================================-->

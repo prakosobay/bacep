@@ -154,9 +154,14 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/cleaning/checkout/{id}', [CleaningController::class, 'checkout_update_cleaning']);
     Route::put('/cleaning/reject/{id}', [CleaningController::class, 'reject_full_cleaning']);
 
-    // Other
+    // Troubleshoot
     Route::get('other/troubleshoot/show', [OtherController::class, 'show_troubleshoot_form']);
+
+
+    // Maintenance
     Route::get('other/maintenance/show', [OtherController::class, 'show_maintenance_form']);
+    Route::get('other/maintenance/risk/{id}', [OtherController::class, 'getRisk']);
+    Route::post('other/maintenance/create', [OtherController::class, 'create_maintenance']);
 
     //Visitor All Base Super
     Route::get('new_permit', [HomeController::class, 'new_permit']);
