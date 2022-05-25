@@ -62,7 +62,7 @@ return array(
     'App\\Models\\Genset' => $baseDir . '/app/Models/Genset.php',
     'App\\Models\\MasterOb' => $baseDir . '/app/Models/MasterOb.php',
     'App\\Models\\Other' => $baseDir . '/app/Models/Other.php',
-    'App\\Models\\OtherEntry' => $baseDir . '/app/Models/OtherEntry.php',
+    'App\\Models\\OtherPersonil' => $baseDir . '/app/Models/OtherPersonil.php',
     'App\\Models\\Personil' => $baseDir . '/app/Models/Personil.php',
     'App\\Models\\PilihanWork' => $baseDir . '/app/Models/PilihanWork.php',
     'App\\Models\\RiskBm' => $baseDir . '/app/Models/RiskBm.php',

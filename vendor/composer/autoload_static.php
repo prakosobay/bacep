@@ -688,7 +688,7 @@ class ComposerStaticInit582140f03abb5abd5ed2c14fd376fb64
         'App\\Models\\Genset' => __DIR__ . '/../..' . '/app/Models/Genset.php',
         'App\\Models\\MasterOb' => __DIR__ . '/../..' . '/app/Models/MasterOb.php',
         'App\\Models\\Other' => __DIR__ . '/../..' . '/app/Models/Other.php',
-        'App\\Models\\OtherEntry' => __DIR__ . '/../..' . '/app/Models/OtherEntry.php',
+        'App\\Models\\OtherPersonil' => __DIR__ . '/../..' . '/app/Models/OtherPersonil.php',
         'App\\Models\\Personil' => __DIR__ . '/../..' . '/app/Models/Personil.php',
         'App\\Models\\PilihanWork' => __DIR__ . '/../..' . '/app/Models/PilihanWork.php',
         'App\\Models\\RiskBm' => __DIR__ . '/../..' . '/app/Models/RiskBm.php',

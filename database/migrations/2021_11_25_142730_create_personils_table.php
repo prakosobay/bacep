@@ -21,9 +21,6 @@ class CreatePersonilsTable extends Migration
             $table->string('respon');
             $table->string('phone')->unique();
             $table->string('nik')->unique();
-            $table->string('ktp')->nullable();
-            $table->string('vaksin_1')->nullable();
-            $table->string('vaksin_2')->nullable();
             $table->timestamps();
         });
     }

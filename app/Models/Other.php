@@ -18,4 +18,9 @@ class Other extends Model
     {
         return $this->belongsTo(OtherEntry::class);
     }
+
+    public function personil()
+    {
+        return $this->hasMany(OtherPersonil::class);
+    }
 }

@@ -33,7 +33,13 @@ class OtherController extends Controller
     // Submit Form
     public function create_maintenance(Request $request)
     {
-        // dd($request->all());
+        // var_dump($request->all());
+
+        $validate = $request->validate([
+            'visit' => 'required',
+            'leave' => ['required', 'after_or_equal:visit'],
+        ]);
+
         $otherForm = Other::create([
             'work' => $request->work,
             'visit' => $request->visit,
@@ -44,11 +50,9 @@ class OtherController extends Controller
             // 'updated_at' => now()->toDateTimeString(),
         ]);
 
-        // dd($otherForm->id);
+        dd($otherForm);
 
-        if($otherForm->exist){
         $otherEntry = OtherEntry::create([
-            'other_id' => $otherForm->id,
             'server' => $request->server,
             'mmr1' => $request->mmr1,
             'mmr2' => $request->mmr2,
@@ -61,11 +65,11 @@ class OtherController extends Controller
             'generator' => $request->generator,
             'yard' => $request->yard,
             'parking' => $request->parking,
-            'other' => $request->other,
+            'other_id' => $otherForm->id,
+            'lain' => $request->lain,
             'option' => 'maintenance',
         ]);
 
-            return $otherEntry->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
-        }
+        return "sukses";
     }
 }
