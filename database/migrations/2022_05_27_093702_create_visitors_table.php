@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOtherPersonilsTable extends Migration
+class CreateVisitorsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,14 @@ class CreateOtherPersonilsTable extends Migration
      */
     public function up()
     {
-        Schema::create('other_personils', function (Blueprint $table) {
+        Schema::create('visitors', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('other_id');
-            $table->string('name');
-            $table->string('company');
-            $table->string('department');
-            $table->string('respon');
-            $table->string('phone');
-            $table->string('number');
+            $table->string('visit_nama');
+            $table->string('visit_company');
+            $table->string('visit_department');
+            $table->string('visit_respon');
+            $table->string('visit_phone')->unique();
+            $table->string('visit_nik')->unique();
             $table->softDeletes();
             $table->timestamps();
         });
@@ -34,6 +33,6 @@ class CreateOtherPersonilsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('other_personils');
+        Schema::dropIfExists('visitors');
     }
 }

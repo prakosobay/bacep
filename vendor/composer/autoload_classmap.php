@@ -73,6 +73,7 @@ return array(
     'App\\Models\\SurveyHistory' => $baseDir . '/app/Models/SurveyHistory.php',
     'App\\Models\\TroubleshootBm' => $baseDir . '/app/Models/TroubleshootBm.php',
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',
+    'App\\Models\\Visitor' => $baseDir . '/app/Models/Visitor.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
     'App\\Providers\\AuthServiceProvider' => $baseDir . '/app/Providers/AuthServiceProvider.php',
     'App\\Providers\\BroadcastServiceProvider' => $baseDir . '/app/Providers/BroadcastServiceProvider.php',

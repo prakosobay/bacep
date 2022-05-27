@@ -55,21 +55,21 @@
                 <div class="col-3">
                     <div class="wrap-contact100-form-radio">
                         <div class="contact100-form-radio m-t-15">
-                            <input class="input-radio100" id="server" type="checkbox" name="server" value="server">
+                            <input class="input-radio100" id="server" type="checkbox" name="server" value="1">
                             <label class="label-radio100" for="server">
                                 Server Room
                             </label>
                         </div>
 
                         <div class="contact100-form-radio">
-                            <input class="input-radio100" id="mmr1" type="checkbox" name="mmr1" value="mmr1">
+                            <input class="input-radio100" id="mmr1" type="checkbox" name="mmr1" value="1">
                             <label class="label-radio100" for="mmr1">
                                 MMR 1
                             </label>
                         </div>
 
                         <div class="contact100-form-radio">
-                            <input class="input-radio100" id="mmr2" type="checkbox" name="mmr2" value="mmr2">
+                            <input class="input-radio100" id="mmr2" type="checkbox" name="mmr2" value="1">
                             <label class="label-radio100" for="mmr2">
                                 MMR 2
                             </label>
@@ -79,21 +79,21 @@
                 <div class="col-3">
                     <div class="wrap-contact100-form-radio">
                         <div class="contact100-form-radio m-t-15">
-                            <input class="input-radio100" id="ups" type="checkbox" name="ups" value="ups">
+                            <input class="input-radio100" id="ups" type="checkbox" name="ups" value="1">
                             <label class="label-radio100" for="ups">
                                 UPS Room
                             </label>
                         </div>
 
                         <div class="contact100-form-radio">
-                            <input class="input-radio100" id="fss" type="checkbox" name="fss" value="fss">
+                            <input class="input-radio100" id="fss" type="checkbox" name="fss" value="1">
                             <label class="label-radio100" for="fss">
                                 FSS Room
                             </label>
                         </div>
 
                         <div class="contact100-form-radio">
-                            <input class="input-radio100" id="cctv" type="checkbox" name="cctv" value="cctv">
+                            <input class="input-radio100" id="cctv" type="checkbox" name="cctv" value="1">
                             <label class="label-radio100" for="cctv">
                                 CCTV Room
                             </label>
@@ -103,21 +103,21 @@
                 <div class="col-3">
                     <div class="wrap-contact100-form-radio">
                         <div class="contact100-form-radio m-t-15">
-                            <input class="input-radio100" id="genset" type="checkbox" name="genset" value="generator">
+                            <input class="input-radio100" id="genset" type="checkbox" name="generator" value="1">
                             <label class="label-radio100" for="genset">
                                 Generator Room
                             </label>
                         </div>
 
                         <div class="contact100-form-radio">
-                            <input class="input-radio100" id="panel" type="checkbox" name="panel" value="panel">
+                            <input class="input-radio100" id="panel" type="checkbox" name="panel" value="1">
                             <label class="label-radio100" for="panel">
                                 Panel Room
                             </label>
                         </div>
 
                         <div class="contact100-form-radio">
-                            <input class="input-radio100" id="batt" type="checkbox" name="batt" value="baterai">
+                            <input class="input-radio100" id="batt" type="checkbox" name="baterai" value="1">
                             <label class="label-radio100" for="batt">
                                 Battery Room
                             </label>
@@ -127,21 +127,21 @@
                 <div class="col-3">
                     <div class="wrap-contact100-form-radio">
                         <div class="contact100-form-radio m-t-15">
-                            <input class="input-radio100" id="trafo" type="checkbox" name="trafo" value="trafo">
+                            <input class="input-radio100" id="trafo" type="checkbox" name="trafo" value="1">
                             <label class="label-radio100" for="trafo">
                                 Trafo Room
                             </label>
                         </div>
 
                         <div class="contact100-form-radio">
-                            <input class="input-radio100" id="parking" type="checkbox" name="parking" value="parking">
+                            <input class="input-radio100" id="parking" type="checkbox" name="parking" value="1">
                             <label class="label-radio100" for="parking">
                                 Parking Lot
                             </label>
                         </div>
 
                         <div class="contact100-form-radio">
-                            <input class="input-radio100" id="yard" type="checkbox" name="yard" value="yard">
+                            <input class="input-radio100" id="yard" type="checkbox" name="yard" value="1">
                             <label class="label-radio100" for="yard">
                                 Yard
                             </label>
