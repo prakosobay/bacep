@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\{DB, Auth, Gate, Mail, Session, Storage};
-use App\Models\{RiskBm, Other, OtherEntry, OtherCr};
+use App\Models\{RiskBm, Other, OtherEntry, Rutin};
 
 class OtherController extends Controller
 {
@@ -17,17 +17,19 @@ class OtherController extends Controller
     public function show_maintenance_form()
     {
         $getRisk = RiskBm::all();
-        return view('other.maintenance_form', compact('getRisk'));
+        $pilihanwork = Rutin::all();
+        return view('other.maintenance_form', compact('getRisk', 'pilihanwork'));
     }
 
 
 
     // Retrieving Data From DB
-    public function getRisk($id) //Risk
+    public function getRutin($id) //Risk
     {
-        $risk = RiskBm::findOrFail($id);
-        return isset($risk) && !empty($risk) ? response()->json(['status' => 'SUCCESS', 'risk' => $risk]) : response(['status' => 'FAILED', 'risk' => []]);
+        $permit = Rutin::findOrFail($id);
+        return isset($permit) && !empty($permit) ? response()->json(['status' => 'SUCCESS', 'permit' => $permit]) : response(['status' => 'FAILED', 'permit' => []]);
     }
+
 
 
 

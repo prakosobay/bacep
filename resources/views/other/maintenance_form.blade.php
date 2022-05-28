@@ -34,9 +34,17 @@
 				</span>
 
                 {{-- Purpose of Work --}}
-				<div class="wrap-input100 validate-input bg1" data-validate="Isi Tujuan Pekerjaan">
+				<div class="wrap-input100 validate-input bg1" data-validate="Pilih Tujuan Pekerjaan">
 					<span class="label-input100">Purpose of Work (Tujuan Pekerjaan) *</span>
-                    <input type="text" class="input100" id="purpose_work" name="work" value="{{ old('work')}}" placeholder="Purpose of Work" autofocus>
+                    <div>
+                        <select class="js-select2" id="working" name="work">
+                            <option value=""></option>
+                            @foreach($pilihanwork as $p)
+                            <option value="{{ $p->id }}">{{ $p->work }}</option>
+                            @endforeach
+                        </select>
+                        <div class="dropDownSelect2"></div>
+                    </div>
 				</div>
 
                 {{-- Date of Visit --}}
@@ -54,96 +62,95 @@
                 {{-- Entry Area --}}
                 <div class="col-3">
                     <div class="wrap-contact100-form-radio">
-                        <div class="contact100-form-radio m-t-15">
-                            <input class="input-radio100" id="server" type="checkbox" name="server" value="1">
-                            <label class="label-radio100" for="server">
-                                Server Room
+                        <div class="contact100-form-radio">
+                            <label class="label-radio100">
+                                <input class="input100" id="loc1" name="loc1" value="" readonly>
                             </label>
                         </div>
 
                         <div class="contact100-form-radio">
-                            <input class="input-radio100" id="mmr1" type="checkbox" name="mmr1" value="1">
-                            <label class="label-radio100" for="mmr1">
-                                MMR 1
+                            <label class="label-radio100">
+                                <input class="input100" id="loc2" name="loc2" value="" readonly>
                             </label>
                         </div>
 
                         <div class="contact100-form-radio">
-                            <input class="input-radio100" id="mmr2" type="checkbox" name="mmr2" value="1">
-                            <label class="label-radio100" for="mmr2">
-                                MMR 2
+                            <label class="label-radio100">
+                                <input class="input100" id="loc3" name="loc3" value="" readonly>
+                            </label>
+                        </div>
+                        <div class="contact100-form-radio">
+                            <label class="label-radio100">
+                                <input class="input100" id="loc4" name="loc4" value="" readonly>
                             </label>
                         </div>
                     </div>
                 </div>
                 <div class="col-3">
                     <div class="wrap-contact100-form-radio">
-                        <div class="contact100-form-radio m-t-15">
-                            <input class="input-radio100" id="ups" type="checkbox" name="ups" value="1">
-                            <label class="label-radio100" for="ups">
-                                UPS Room
+                        <div class="contact100-form-radio">
+                            <label class="label-radio100">
+                                <input class="input100" id="loc5" name="loc5" value="" readonly>
                             </label>
                         </div>
 
                         <div class="contact100-form-radio">
-                            <input class="input-radio100" id="fss" type="checkbox" name="fss" value="1">
-                            <label class="label-radio100" for="fss">
-                                FSS Room
+                            <label class="label-radio100">
+                                <input class="input100" id="loc6" name="loc6" value="" readonly>
                             </label>
                         </div>
 
                         <div class="contact100-form-radio">
-                            <input class="input-radio100" id="cctv" type="checkbox" name="cctv" value="1">
-                            <label class="label-radio100" for="cctv">
-                                CCTV Room
+                            <label class="label-radio100">
+                                <input class="input100" id="loc7" name="loc7" value="" readonly>
+                            </label>
+                        </div>
+
+                        <div class="contact100-form-radio">
+                            <label class="label-radio100">
+                                <input class="input100" id="loc8" name="loc8" value="" readonly>
                             </label>
                         </div>
                     </div>
                 </div>
                 <div class="col-3">
                     <div class="wrap-contact100-form-radio">
-                        <div class="contact100-form-radio m-t-15">
-                            <input class="input-radio100" id="genset" type="checkbox" name="generator" value="1">
-                            <label class="label-radio100" for="genset">
-                                Generator Room
+                        <div class="contact100-form-radio">
+                            <label class="label-radio100">
+                                <input class="input100" id="loc9" name="loc9" value="" readonly>
                             </label>
                         </div>
 
                         <div class="contact100-form-radio">
-                            <input class="input-radio100" id="panel" type="checkbox" name="panel" value="1">
-                            <label class="label-radio100" for="panel">
-                                Panel Room
+                            <label class="label-radio100">
+                                <input class="input100" id="loc10" name="loc10" value="" readonly>
                             </label>
                         </div>
 
                         <div class="contact100-form-radio">
-                            <input class="input-radio100" id="batt" type="checkbox" name="baterai" value="1">
-                            <label class="label-radio100" for="batt">
-                                Battery Room
+                            <label class="label-radio100">
+                                <input class="input100" id="loc11" name="loc11" value="" readonly>
                             </label>
                         </div>
                     </div>
                 </div>
                 <div class="col-3">
                     <div class="wrap-contact100-form-radio">
-                        <div class="contact100-form-radio m-t-15">
-                            <input class="input-radio100" id="trafo" type="checkbox" name="trafo" value="1">
-                            <label class="label-radio100" for="trafo">
-                                Trafo Room
+                        <div class="contact100-form-radio">
+                            <label class="label-radio100">
+                                <input class="input100" id="loc12" name="loc12" value="" readonly>
                             </label>
                         </div>
 
                         <div class="contact100-form-radio">
-                            <input class="input-radio100" id="parking" type="checkbox" name="parking" value="1">
-                            <label class="label-radio100" for="parking">
-                                Parking Lot
+                            <label class="label-radio100">
+                                <input class="input100" id="loc13" name="loc13" value="" readonly>
                             </label>
                         </div>
 
                         <div class="contact100-form-radio">
-                            <input class="input-radio100" id="yard" type="checkbox" name="yard" value="1">
-                            <label class="label-radio100" for="yard">
-                                Yard
+                            <label class="label-radio100">
+                                <input class="input100" id="loc14" name="loc14" value="" readonly>
                             </label>
                         </div>
                     </div>
@@ -154,25 +161,25 @@
 				</div>
 
                 {{-- Isian --}}
-                <div class="wrap-input100 validate-input bg1" data-validate="Isi Latar Belakang">
+                <div class="wrap-input100 bg1 rs1-alert-validate">
 					<span class="label-input100">Background and Objective (Latar Belakang dan Tujuan) *</span>
-                    <textarea type="text" class="input100" name="background" id="background" placeholder="Background and Objective" value="{{old('background')}}"></textarea>
+					<input type="text" class="input100" name="background" id="background" value="" readonly>
 				</div>
-                <div class="wrap-input100 validate-input bg1" data-validate="Isi Latar Belakang">
-					<span class="label-input100">Description of Scope of Work (Deskripsi Pekerjaan) *</span>
-                    <textarea type="text" class="input100" name="describ" id="describ" placeholder="Description of Scope of Work" value="{{old('describ')}}"></textarea>
+                <div class="wrap-input100 bg1 rs1-alert-validate">
+					<span class="label-input100">Description of Scope of Work (Deskripsikan Lingkup Pekerjaan) *</span>
+					<input type="text" class="input100" name="describ" id="describ" value="" readonly>
 				</div>
                 <div class="wrap-input100 bg1">
 					<span class="label-input100">Testing and Verification (Pengujian dan Verifikasi)</span>
-					<input type="text" class="input100" name="testing" id="testing" value="{{old('testing')}}" placeholder="Testing & Verification">
+					<input type="text" class="input100" name="cleaning_testing" id="testing" value="" readonly>
 				</div>
                 <div class="wrap-input100 bg1">
 					<span class="label-input100">Rollback Operation/Other Infomation (Operasi Pembatalan/Infomasi Lain)</span>
-					<input type="text" class="input100" name="rollback" id="rollback" value="{{old('rollback')}}" placeholder="Rollback Operation">
+					<input type="text" class="input100" name="cleaning_rollback" id="rollback" value="" readonly>
 				</div>
 
                 <!-- Detail Time Activity -->
-                {{-- <table class="table table-bordered bg1">
+                <table class="table table-bordered">
                     <thead>
                         <tr>
                             <th colspan="4">Detail Time Table of All Activity</th>
@@ -185,34 +192,40 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <th><input type="time" class="input100 validate-input" name="time_start[]"></th>
-                            <th><input type="time" class="input100 validate-input" name="time_end[]"></th>
-                            <th><input type="text" class="input100 validate-input" name="activity[]" value="{{ old('activity[]')}}"></th>
-                            <th><input type="text" class="input100 validate-input" name="detail_service[]" value="{{ old('detail_service[]')}}"></th>
+                            <th><input type="time" name="cleaning_time_start"></th>
+                            <th><input type="time" name="cleaning_time_end"></th>
+                            <th><input type="text" class="input100" name="activity_1" id="activity_desciption_1" value="" readonly></th>
+                            <th><input type="text" class="input100" name="detail_1" id="detail_service_1" value="" readonly></th>
                         </tr>
                         <tr>
-                            <th><input type="time" class="input100" name="time_start[]"></th>
-                            <th><input type="time" class="input100" name="time_end[]"></th>
-                            <th><input type="text" class="input100" name="activity[]" value="{{ old('activity[]')}}"></th>
-                            <th><input type="text" class="input100" name="detail_service[]" value="{{ old('detail_service[]')}}"></th>
+                            <th><input type="time" name="cleaning_time_start2"></th>
+                            <th><input type="time" name="cleaning_time_end2"></th>
+                            <th><input type="text" class="input100" name="activity_2" id="activity_desciption_2" value="" readonly></th>
+                            <th><input type="text" class="input100" name="detail_2" id="detail_service_2" value="" readonly></th>
                         </tr>
                         <tr>
-                            <th><input type="time" class="input100" name="time_start[]"></th>
-                            <th><input type="time" class="input100" name="time_end[]"></th>
-                            <th><input type="text" class="input100" name="activity[]" value="{{ old('activity[]')}}"></th>
-                            <th><input type="text" class="input100" name="detail_service[]" value="{{ old('detail_service[]')}}"></th>
+                            <th><input type="time" name="cleaning_time_start3"></th>
+                            <th><input type="time" name="cleaning_time_end3"></th>
+                            <th><input type="text" class="input100" name="activity_3" id="activity_desciption_3" value="" readonly></th>
+                            <th><input type="text" class="input100" name="detail_3" id="detail_service_3" value="" readonly></th>
                         </tr>
                         <tr>
-                            <th><input type="time" class="input100" name="time_start[]"></th>
-                            <th><input type="time" class="input100" name="time_end[]"></th>
-                            <th><input type="text" class="input100" name="activity[]" value="{{ old('activity[]')}}"></th>
-                            <th><input type="text" class="input100" name="detail_service[]" value="{{ old('detail_service[]')}}"></th>
+                            <th><input type="time" name="cleaning_time_start4"></th>
+                            <th><input type="time" name="cleaning_time_end4"></th>
+                            <th><input type="text" class="input100" name="activity_4" id="activity_desciption_4" value="" readonly></th>
+                            <th><input type="text" class="input100" name="detail_4" id="detail_service_4" value="" readonly></th>
+                        </tr>
+                        <tr>
+                            <th><input type="time" name="cleaning_time_start5"></th>
+                            <th><input type="time" name="cleaning_time_end5"></th>
+                            <th><input type="text" class="input100" name="activity_5" id="activity_desciption_5" value="" readonly></th>
+                            <th><input type="text" class="input100" name="detail_5" id="detail_service_5" value="" readonly></th>
                         </tr>
                     </tbody>
-                </table> --}}
+                </table>
 
                 {{-- Detail Operation and Execution --}}
-                {{-- <table class="table table-bordered bg1">
+                <table class="table table-bordered">
                     <thead>
                         <tr>
                             <th colspan="2">Detail Operation and Execution</th>
@@ -223,137 +236,73 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <th><input type="text" class="input100 validate-input" name="item[]" id="item" value="{{ old('item[]')}}"></th>
-                            <th ><input type="text" class="input100 validate-input" name="procedure[]" value="{{ old('procedure[]')}}"></th>
+                            <th><input type="text" class="input100" name="item_1" id="item_1" value="" readonly></th>
+                            <th ><input type="text" class="input100" name="procedure_1" id="working_procedure_1" value="" readonly></th>
                         </tr>
                         <tr>
-                            <th><input type="text" class="input100" name="item[]" id="item" value="{{ old('item[]')}}"></th>
-                            <th ><input type="text" class="input100" name="procedure[]" value="{{ old('procedure[]')}}"></th>
+                            <th><input type="text" class="input100" name="item_2" id="item_2" value="" readonly></th>
+                            <th ><input type="text" class="input100" name="procedure_2" id="working_procedure_2" value="" readonly></th>
                         </tr>
                         <tr>
-                            <th><input type="text" class="input100" name="item[]" id="item" value="{{ old('item[]')}}"></th>
-                            <th ><input type="text" class="input100" name="procedure[]" value="{{ old('procedure[]')}}"></th>
+                            <th><input type="text" class="input100" name="item_3" id="item_3" value="" readonly></th>
+                            <th ><input type="text" class="input100" name="procedure_3" id="working_procedure_3" value="" readonly></th>
                         </tr>
                         <tr>
-                            <th><input type="text" class="input100" name="item[]" id="item" value="{{ old('item[]')}}"></th>
-                            <th ><input type="text" class="input100" name="procedure[]" value="{{ old('procedure[]')}}"></th>
+                            <th><input type="text" class="input100" name="item_4" id="item_4" value="" readonly></th>
+                            <th ><input type="text" class="input100" name="procedure_4" id="working_procedure_4" value="" readonly></th>
+                        </tr>
+                        <tr>
+                            <th><input type="text" class="input100" name="item_5" id="item_5" value="" readonly></th>
+                            <th ><input type="text" class="input100" name="procedure_5" id="working_procedure_5" value="" readonly></th>
                         </tr>
                     </tbody>
-                </table> --}}
+                </table>
 
                 <!-- Risk and Service Area Impact -->
-                {{-- <table class="table table-bordered bg1 lebar-table">
-                    <tr>
-                        <th colspan="4">Risk and Service Area Impact</th>
-                    </tr>
-                    <tr>
-                        <th scope="col">Risk Description</th>
-                        <td>
-                            <select class="wrap-input100 validate-input bg0 js-select2" name="risk[]" id="risk">
-                                <option value=""></option>
-                                @foreach($getRisk as $p)
-                                <option value="{{ $p->id }}">{{ $p->risk }}</option>
-                                @endforeach
-                            </select>
-                            <div class="dropDownSelect2"></div>
-                        </td>
-                        <th scope="col">Impact</th>
-                        <td>
-                            <input type="text" class="input100" name="impact[]" id="impact" value="" readonly>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="col">Possibility</th>
-                        <td>
-                            <input type="text" class="input100" name="possibility[]" id="poss" value="" readonly>
-                        </td>
-                        <th scope="col">Mitigation Plan</th>
-                        <td>
-                            <input type="text" class="input100" name="mitigation[]" id="mitigation" value="" readonly>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <th scope="col">Risk Description</th>
-                        <td>
-                            <select class="wrap-input100 validate-input bg0 js-select2" name="risk[]" id="risk2">
-                                <option value=""></option>
-                                @foreach($getRisk as $p)
-                                <option value="{{ $p->id }}">{{ $p->risk }}</option>
-                                @endforeach
-                            </select>
-                            <div class="dropDownSelect2"></div>
-                        </td>
-                        <th scope="col">Impact</th>
-                        <td>
-                            <input type="text" class="input100" name="impact[]" id="impact2" value="" readonly>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="col">Possibility</th>
-                        <td>
-                            <input type="text" class="input100" name="possibility[]" id="poss2" value="" readonly>
-                        </td>
-                        <th scope="col">Mitigation Plan</th>
-                        <td>
-                            <input type="text" class="input100" name="mitigation[]" id="mitigation2" value="" readonly>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <th scope="col">Risk Description</th>
-                        <td>
-                            <select class="wrap-input100 validate-input bg0 js-select2" name="risk[]" id="risk3">
-                                <option value=""></option>
-                                @foreach($getRisk as $p)
-                                <option value="{{ $p->id }}">{{ $p->risk }}</option>
-                                @endforeach
-                            </select>
-                            <div class="dropDownSelect2"></div>
-                        </td>
-                        <th scope="col">Impact</th>
-                        <td>
-                            <input type="text" class="input100" name="impact[]" id="impact3" value="" readonly>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="col">Possibility</th>
-                        <td>
-                            <input type="text" class="input100" name="possibility[]" id="poss3" value="" readonly>
-                        </td>
-                        <th scope="col">Mitigation Plan</th>
-                        <td>
-                            <input type="text" class="input100" name="mitigation[]" id="mitigation3" value="" readonly>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <th scope="col">Risk Description</th>
-                        <td>
-                            <select class="wrap-input100 validate-input bg0 js-select2" name="risk[]" id="risk4">
-                                <option value=""></option>
-                                @foreach($getRisk as $p)
-                                <option value="{{ $p->id }}">{{ $p->risk }}</option>
-                                @endforeach
-                            </select>
-                            <div class="dropDownSelect2"></div>
-                        </td>
-                        <th scope="col">Impact</th>
-                        <td>
-                            <input type="text" class="input100" name="impact[]" id="impact4" value="" readonly>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="col">Possibility</th>
-                        <td>
-                            <input type="text" class="input100" name="possibility[]" id="poss4" value="" readonly>
-                        </td>
-                        <th scope="col">Mitigation Plan</th>
-                        <td>
-                            <input type="text" class="input100" name="mitigation[]" id="mitigation4" value="" readonly>
-                        </td>
-                    </tr>
-                </table> --}}
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th colspan="4">Risk and Service Area Impact</th>
+                        <tr>
+                            <th scope="col">Risk Description</th>
+                            <th scope="col">Possibility</th>
+                            <th scope="col">Impact</th>
+                            <th scope="col">Mitigation Plan</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th><input type="text" class="input100" name="risk_1" id="risk_description_1" value="" readonly></th>
+                            <th><input type="text" class="input100" name="poss_1" id="possibility_1" value="" readonly></th>
+                            <th><input type="text" class="input100" name="impact_1" id="impact_1" value="" readonly></th>
+                            <th><input type="text" class="input100" name="mitigation_1" id="mitigation_plan_1" value="" readonly></th>
+                        </tr>
+                        <tr>
+                            <th><input type="text" class="input100" name="risk_2" id="risk_description_2" value="" readonly></th>
+                            <th><input type="text" class="input100" name="poss_2" id="possibility_2" value="" readonly></th>
+                            <th><input type="text" class="input100" name="impact_2" id="impact_2" value="" readonly></th>
+                            <th><input type="text" class="input100" name="mitigation_2" id="mitigation_plan_2" value="" readonly></th>
+                        </tr>
+                        <tr>
+                            <th><input type="text" class="input100" name="risk_3" id="risk_description_3" value="" readonly></th>
+                            <th><input type="text" class="input100" name="poss_3" id="possibility_3" value="" readonly></th>
+                            <th><input type="text" class="input100" name="impact_3" id="impact_3" value="" readonly></th>
+                            <th><input type="text" class="input100" name="mitigation_3" id="mitigation_plan_3" value="" readonly></th>
+                        </tr>
+                        <tr>
+                            <th><input type="text" class="input100" name="risk_4" id="risk_description_4" value="" readonly></th>
+                            <th><input type="text" class="input100" name="poss_4" id="possibility_4" value="" readonly></th>
+                            <th><input type="text" class="input100" name="impact_4" id="impact_4" value="" readonly></th>
+                            <th><input type="text" class="input100" name="mitigation_4" id="mitigation_plan_4" value="" readonly></th>
+                        </tr>
+                        <tr>
+                            <th><input type="text" class="input100" name="risk_5" id="risk_description_5" value="" readonly></th>
+                            <th><input type="text" class="input100" name="poss_5" id="possibility_5" value="" readonly></th>
+                            <th><input type="text" class="input100" name="impact_5" id="impact_5" value="" readonly></th>
+                            <th><input type="text" class="input100" name="mitigation_5" id="mitigation_plan_5" value="" readonly></th>
+                        </tr>
+                    </tbody>
+                </table>
 
 				<div class="container-contact100-form-btn">
 					<button type="submit" class="contact100-form-btn">
@@ -385,66 +334,79 @@
 			});
 		})
 
-        $('#risk').change(function(){
+        $('#working').change(function(){
             let id = $(this).val();
             $.ajax({
-                url: "{{url("other/maintenance/risk")}}"+'/'+id,
+                url: "{{url("/other/maintenance/rutin")}}"+'/'+id,
                 dataType:"json",
                 type: "get",
                 success: function(response){
-                    const {risk} = response;
-                    console.log(risk)
-                    $('#impact').val(risk.impact);
-                    $('#mitigation').val(risk.mitigation);
-                    $('#poss').val(risk.poss);
-                }
-            });
-        });
-
-        $('#risk2').change(function(){
-            let id = $(this).val();
-            $.ajax({
-                url: "{{url("other/maintenance/risk")}}"+'/'+id,
-                dataType:"json",
-                type: "get",
-                success: function(response){
-                    const {risk} = response;
-                    console.log(risk)
-                    $('#impact2').val(risk.impact);
-                    $('#mitigation2').val(risk.mitigation);
-                    $('#poss2').val(risk.poss);
-                }
-            });
-        });
-
-        $('#risk3').change(function(){
-            let id = $(this).val();
-            $.ajax({
-                url: "{{url("other/maintenance/risk")}}"+'/'+id,
-                dataType:"json",
-                type: "get",
-                success: function(response){
-                    const {risk} = response;
-                    console.log(risk)
-                    $('#impact3').val(risk.impact);
-                    $('#mitigation3').val(risk.mitigation);
-                    $('#poss3').val(risk.poss);
-                }
-            });
-        });
-
-        $('#risk4').change(function(){
-            let id = $(this).val();
-            $.ajax({
-                url: "{{url("other/maintenance/risk")}}"+'/'+id,
-                dataType:"json",
-                type: "get",
-                success: function(response){
-                    const {risk} = response;
-                    console.log(risk)
-                    $('#impact4').val(risk.impact);
-                    $('#mitigation4').val(risk.mitigation);
-                    $('#poss4').val(risk.poss);
+                    const {permit} = response;
+                    console.log(permit)
+                    $('#activity_desciption_1').val(permit.activity_1);
+                $('#activity_desciption_2').val(permit.activity_2);
+                $('#activity_desciption_3').val(permit.activity_3);
+                $('#activity_desciption_4').val(permit.activity_4);
+                $('#activity_desciption_5').val(permit.activity_5);
+                $('#detail_service_1').val(permit.detail_1);
+                $('#detail_service_2').val(permit.detail_2);
+                $('#detail_service_3').val(permit.detail_3);
+                $('#detail_service_4').val(permit.detail_4);
+                $('#detail_service_5').val(permit.detail_5);
+                $('#item_1').val(permit.item_1);
+                $('#item_2').val(permit.item_2);
+                $('#item_3').val(permit.item_3);
+                $('#item_4').val(permit.item_4);
+                $('#item_5').val(permit.item_5);
+                $('#item_6').val(permit.item_6);
+                $('#working_procedure_1').val(permit.procedure_1);
+                $('#working_procedure_2').val(permit.procedure_2);
+                $('#working_procedure_3').val(permit.procedure_3);
+                $('#working_procedure_4').val(permit.procedure_4);
+                $('#working_procedure_5').val(permit.procedure_5);
+                $('#working_procedure_6').val(permit.procedure_6);
+                $('#risk_description_1').val(permit.risk_1);
+                $('#risk_description_2').val(permit.risk_2);
+                $('#risk_description_3').val(permit.risk_3);
+                $('#risk_description_4').val(permit.risk_4);
+                $('#risk_description_5').val(permit.risk_5);
+                $('#risk_description_6').val(permit.risk_6);
+                $('#possibility_1').val(permit.poss_1);
+                $('#possibility_2').val(permit.poss_2);
+                $('#possibility_3').val(permit.poss_3);
+                $('#possibility_4').val(permit.poss_4);
+                $('#possibility_5').val(permit.poss_5);
+                $('#possibility_6').val(permit.poss_6);
+                $('#impact_1').val(permit.impact_1);
+                $('#impact_2').val(permit.impact_2);
+                $('#impact_3').val(permit.impact_3);
+                $('#impact_4').val(permit.impact_4);
+                $('#impact_5').val(permit.impact_5);
+                $('#impact_6').val(permit.impact_6);
+                $('#mitigation_plan_1').val(permit.mitigation_1);
+                $('#mitigation_plan_2').val(permit.mitigation_2);
+                $('#mitigation_plan_3').val(permit.mitigation_3);
+                $('#mitigation_plan_4').val(permit.mitigation_4);
+                $('#mitigation_plan_5').val(permit.mitigation_5);
+                $('#mitigation_plan_6').val(permit.mitigation_6);
+                $('#describ').val(permit.desc);
+                $('#background').val(permit.desc);
+                $('#testing').val(permit.testing);
+                $('#rollback').val(permit.rollback);
+                $('#loc1').val(permit.loc1);
+                $('#loc2').val(permit.loc2);
+                $('#loc3').val(permit.loc3);
+                $('#loc4').val(permit.loc4);
+                $('#loc5').val(permit.loc5);
+                $('#loc6').val(permit.loc6);
+                $('#loc7').val(permit.loc7);
+                $('#loc8').val(permit.loc8);
+                $('#loc9').val(permit.loc9);
+                $('#loc10').val(permit.loc10);
+                $('#loc11').val(permit.loc11);
+                $('#loc12').val(permit.loc12);
+                $('#loc13').val(permit.loc13);
+                $('#loc14').val(permit.loc14);
                 }
             });
         });

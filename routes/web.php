@@ -160,7 +160,7 @@ Route::middleware(['auth'])->group(function () {
 
     // Maintenance
     Route::get('other/maintenance/show', [OtherController::class, 'show_maintenance_form']);
-    Route::get('other/maintenance/risk/{id}', [OtherController::class, 'getRisk']);
+    Route::get('other/maintenance/rutin/{id}', [OtherController::class, 'getRutin']);
     Route::post('other/maintenance/create', [OtherController::class, 'create_maintenance']);
 
     //Visitor All Base Super

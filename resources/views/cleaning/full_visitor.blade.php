@@ -52,7 +52,6 @@
                             <div class="row align-item-center">
                                 <div class="col align-self-center">
                                     <a type="button" href="{{ url('other/maintenance/show')}}" class="btn btn-dark">New Permit</a>
-                                    <a type="button" href="#" class="btn btn-dark">Select Last Permit</a>
                                 </div>
                             </div>
                         </div>
