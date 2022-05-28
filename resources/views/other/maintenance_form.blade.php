@@ -179,7 +179,7 @@
 				</div>
 
                 <!-- Detail Time Activity -->
-                <table class="table table-bordered">
+                <table class="table table-bordered bg1">
                     <thead>
                         <tr>
                             <th colspan="4">Detail Time Table of All Activity</th>
@@ -192,32 +192,32 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <th><input type="time" name="cleaning_time_start"></th>
-                            <th><input type="time" name="cleaning_time_end"></th>
+                            <th><input class="bg1" type="time" name="time_start_1"></th>
+                            <th><input class="bg1" type="time" name="time_end_1"></th>
                             <th><input type="text" class="input100" name="activity_1" id="activity_desciption_1" value="" readonly></th>
                             <th><input type="text" class="input100" name="detail_1" id="detail_service_1" value="" readonly></th>
                         </tr>
                         <tr>
-                            <th><input type="time" name="cleaning_time_start2"></th>
-                            <th><input type="time" name="cleaning_time_end2"></th>
+                            <th><input class="bg1" type="time" name="time_start_2"></th>
+                            <th><input class="bg1" type="time" name="time_end_2"></th>
                             <th><input type="text" class="input100" name="activity_2" id="activity_desciption_2" value="" readonly></th>
                             <th><input type="text" class="input100" name="detail_2" id="detail_service_2" value="" readonly></th>
                         </tr>
                         <tr>
-                            <th><input type="time" name="cleaning_time_start3"></th>
-                            <th><input type="time" name="cleaning_time_end3"></th>
+                            <th><input class="bg1" type="time" name="time_start_3"></th>
+                            <th><input class="bg1" type="time" name="time_end_3"></th>
                             <th><input type="text" class="input100" name="activity_3" id="activity_desciption_3" value="" readonly></th>
                             <th><input type="text" class="input100" name="detail_3" id="detail_service_3" value="" readonly></th>
                         </tr>
                         <tr>
-                            <th><input type="time" name="cleaning_time_start4"></th>
-                            <th><input type="time" name="cleaning_time_end4"></th>
+                            <th><input class="bg1" type="time" name="time_start_4"></th>
+                            <th><input class="bg1" type="time" name="time_end_4"></th>
                             <th><input type="text" class="input100" name="activity_4" id="activity_desciption_4" value="" readonly></th>
                             <th><input type="text" class="input100" name="detail_4" id="detail_service_4" value="" readonly></th>
                         </tr>
                         <tr>
-                            <th><input type="time" name="cleaning_time_start5"></th>
-                            <th><input type="time" name="cleaning_time_end5"></th>
+                            <th><input class="bg1" type="time" name="time_start_5"></th>
+                            <th><input class="bg1" type="time" name="time_end_5"></th>
                             <th><input type="text" class="input100" name="activity_5" id="activity_desciption_5" value="" readonly></th>
                             <th><input type="text" class="input100" name="detail_5" id="detail_service_5" value="" readonly></th>
                         </tr>
@@ -225,7 +225,7 @@
                 </table>
 
                 {{-- Detail Operation and Execution --}}
-                <table class="table table-bordered">
+                <table class="table table-bordered bg1">
                     <thead>
                         <tr>
                             <th colspan="2">Detail Operation and Execution</th>
@@ -259,7 +259,7 @@
                 </table>
 
                 <!-- Risk and Service Area Impact -->
-                <table class="table table-bordered">
+                <table class="table table-bordered bg1">
                     <thead>
                         <tr>
                             <th colspan="4">Risk and Service Area Impact</th>
@@ -302,6 +302,219 @@
                             <th><input type="text" class="input100" name="mitigation_5" id="mitigation_plan_5" value="" readonly></th>
                         </tr>
                     </tbody>
+                </table>
+
+                {{-- PIC --}}
+                <table class="table table-bordered bg1">
+                    <tr>
+                        <th colspan="5"><b>Visitor</b></th>
+                    </tr>
+                    <tr>
+                        <th rowspan="4">PIC 1</th>
+                    </tr>
+
+
+                    {{-- PIC 1 --}}
+                    <tr>
+                        <th>Name </th>
+                        <td>
+                            <select class="js-select2" name="visit_nama[]" id="nama">
+                                <option value=""></option>
+                                @foreach ($personil as $p)
+                                    <option value="{{$p->id}}">{{$p->visit_nama}}</option>
+                                @endforeach
+                            </select>
+                            <div class="dropDownSelect2"></div>
+                        </td>
+                        <th>Company</th>
+                        <td>
+                            <input type="text" class="input100" name="visit_company[]" id="company" value="" readonly>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>ID Number </th>
+                        <td>
+                            <input type="text" class="input100" name="visit_nik[]" id="nik" value="" readonly>
+                        </td>
+                        <th>Department </th>
+                        <td>
+                            <input type="text" class="input100" name="visit_department[]" id="department" value="" readonly>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Phone Number</th>
+                        <td>
+                            <input type="text" class="input100" name="visit_phone[]" id="phone" value="" readonly>
+                        </td>
+                        <th>Responsibility </th>
+                        <td>
+                            <input type="text" class="input100" name="visit_respon[]" id="respon" value="" readonly>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th rowspan="4">PIC 2</th>
+                    </tr>
+
+                    {{-- PIC 2 --}}
+                    <tr>
+                        <th>Name </th>
+                        <td>
+                            <select class="js-select2" name="visit_nama[]" id="nama_2">
+                                <option value=""></option>
+                                @foreach ($personil as $p)
+                                    <option value="{{$p->id}}">{{$p->visit_nama}}</option>
+                                @endforeach
+                            </select>
+                            <div class="dropDownSelect2"></div>
+                        </td>
+                        <th>Company</th>
+                        <td>
+                            <input type="text" class="input100" name="visit_company[]" id="company_2" value="" readonly>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>ID Number </th>
+                        <td>
+                            <input type="text" class="input100" name="visit_nik[]" id="nik_2" value="" readonly>
+                        </td>
+                        <th>Department </th>
+                        <td>
+                            <input type="text" class="input100" name="visit_department[]" id="department_2" value="" readonly>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Phone Number</th>
+                        <td>
+                            <input type="text" class="input100" name="visit_phone[]" id="phone_2" value="" readonly>
+                        </td>
+                        <th>Responsibility </th>
+                        <td>
+                            <input type="text" class="input100" name="visit_respon[]" id="respon_2" value="" readonly>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th rowspan="4">PIC 3</th>
+                    </tr>
+
+                    {{-- PIC 3 --}}
+                    <tr>
+                        <th>Name </th>
+                        <td>
+                            <select class="js-select2" name="visit_nama[]" id="nama_3">
+                                <option value=""></option>
+                                @foreach ($personil as $p)
+                                    <option value="{{$p->id}}">{{$p->visit_nama}}</option>
+                                @endforeach
+                            </select>
+                            <div class="dropDownSelect2"></div>
+                        </td>
+                        <th>Company</th>
+                        <td>
+                            <input type="text" class="input100" name="visit_company[]" id="company_3" value="" readonly>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>ID Number </th>
+                        <td>
+                            <input type="text" class="input100" name="visit_nik[]" id="nik_3" value="" readonly>
+                        </td>
+                        <th>Department </th>
+                        <td>
+                            <input type="text" class="input100" name="visit_department[]" id="department_3" value="" readonly>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Phone Number</th>
+                        <td>
+                            <input type="text" class="input100" name="visit_phone[]" id="phone_3" value="" readonly>
+                        </td>
+                        <th>Responsibility </th>
+                        <td>
+                            <input type="text" class="input100" name="visit_respon[]" id="respon_3" value="" readonly>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th rowspan="4">PIC 4</th>
+                    </tr>
+
+                    {{-- PIC 4 --}}
+                    <tr>
+                        <th>Name </th>
+                        <td>
+                            <select class="js-select2" name="visit_nama[]" id="nama_4">
+                                <option value=""></option>
+                                @foreach ($personil as $p)
+                                    <option value="{{$p->id}}">{{$p->visit_nama}}</option>
+                                @endforeach
+                            </select>
+                            <div class="dropDownSelect2"></div>
+                        </td>
+                        <th>Company</th>
+                        <td>
+                            <input type="text" class="input100" name="visit_company[]" id="company_4" value="" readonly>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>ID Number </th>
+                        <td>
+                            <input type="text" class="input100" name="visit_nik[]" id="nik_4" value="" readonly>
+                        </td>
+                        <th>Department </th>
+                        <td>
+                            <input type="text" class="input100" name="visit_department[]" id="department_4" value="" readonly>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Phone Number</th>
+                        <td>
+                            <input type="text" class="input100" name="visit_phone[]" id="phone_4" value="" readonly>
+                        </td>
+                        <th>Responsibility </th>
+                        <td>
+                            <input type="text" class="input100" name="visit_respon[]" id="respon_4" value="" readonly>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th rowspan="4">PIC 5</th>
+                    </tr>
+
+                    {{-- PIC 5 --}}
+                    <tr>
+                        <th>Name </th>
+                        <td>
+                            <select class="js-select2" name="visit_nama[]" id="nama_5">
+                                <option value=""></option>
+                                @foreach ($personil as $p)
+                                    <option value="{{$p->id}}">{{$p->visit_nama}}</option>
+                                @endforeach
+                            </select>
+                            <div class="dropDownSelect2"></div>
+                        </td>
+                        <th>Company</th>
+                        <td>
+                            <input type="text" class="input100" name="visit_company[]" id="company_5" value="" readonly>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>ID Number </th>
+                        <td>
+                            <input type="text" class="input100" name="visit_nik[]" id="nik_5" value="" readonly>
+                        </td>
+                        <th>Department </th>
+                        <td>
+                            <input type="text" class="input100" name="visit_department[]" id="department_5" value="" readonly>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Phone Number</th>
+                        <td>
+                            <input type="text" class="input100" name="visit_phone[]" id="phone_5" value="" readonly>
+                        </td>
+                        <th>Responsibility </th>
+                        <td>
+                            <input type="text" class="input100" name="visit_respon[]" id="respon_5" value="" readonly>
+                        </td>
+                    </tr>
                 </table>
 
 				<div class="container-contact100-form-btn">
@@ -407,6 +620,96 @@
                 $('#loc12').val(permit.loc12);
                 $('#loc13').val(permit.loc13);
                 $('#loc14').val(permit.loc14);
+                }
+            });
+        });
+
+        $('#nama').change(function(){
+            let id = $(this).val();
+            $.ajax({
+                url: "{{url("/other/maintenance/visitor")}}"+'/'+id,
+                dataType:"json",
+                type: "get",
+                success: function(response){
+                    const {visitor} = response;
+                    console.log(visitor)
+                $('#company').val(visitor.visit_company);
+                $('#department').val(visitor.visit_department);
+                $('#phone').val(visitor.visit_phone);
+                $('#nik').val(visitor.visit_nik);
+                $('#respon').val(visitor.visit_respon);
+                }
+            });
+        });
+
+        $('#nama_2').change(function(){
+            let id = $(this).val();
+            $.ajax({
+                url: "{{url("/other/maintenance/visitor")}}"+'/'+id,
+                dataType:"json",
+                type: "get",
+                success: function(response){
+                    const {visitor} = response;
+                    console.log(visitor)
+                $('#company_2').val(visitor.visit_company);
+                $('#department_2').val(visitor.visit_department);
+                $('#phone_2').val(visitor.visit_phone);
+                $('#nik_2').val(visitor.visit_nik);
+                $('#respon_2').val(visitor.visit_respon);
+                }
+            });
+        });
+
+        $('#nama_3').change(function(){
+            let id = $(this).val();
+            $.ajax({
+                url: "{{url("/other/maintenance/visitor")}}"+'/'+id,
+                dataType:"json",
+                type: "get",
+                success: function(response){
+                    const {visitor} = response;
+                    console.log(visitor)
+                $('#company_3').val(visitor.visit_company);
+                $('#department_3').val(visitor.visit_department);
+                $('#phone_3').val(visitor.visit_phone);
+                $('#nik_3').val(visitor.visit_nik);
+                $('#respon_3').val(visitor.visit_respon);
+                }
+            });
+        });
+
+        $('#nama_4').change(function(){
+            let id = $(this).val();
+            $.ajax({
+                url: "{{url("/other/maintenance/visitor")}}"+'/'+id,
+                dataType:"json",
+                type: "get",
+                success: function(response){
+                    const {visitor} = response;
+                    console.log(visitor)
+                $('#company_4').val(visitor.visit_company);
+                $('#department_4').val(visitor.visit_department);
+                $('#phone_4').val(visitor.visit_phone);
+                $('#nik_4').val(visitor.visit_nik);
+                $('#respon_4').val(visitor.visit_respon);
+                }
+            });
+        });
+
+        $('#nama_5').change(function(){
+            let id = $(this).val();
+            $.ajax({
+                url: "{{url("/other/maintenance/visitor")}}"+'/'+id,
+                dataType:"json",
+                type: "get",
+                success: function(response){
+                    const {visitor} = response;
+                    console.log(visitor)
+                $('#company_5').val(visitor.visit_company);
+                $('#department_5').val(visitor.visit_department);
+                $('#phone_5').val(visitor.visit_phone);
+                $('#nik_5').val(visitor.visit_nik);
+                $('#respon_5').val(visitor.visit_respon);
                 }
             });
         });

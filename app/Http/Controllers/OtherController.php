@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\{DB, Auth, Gate, Mail, Session, Storage};
-use App\Models\{RiskBm, Other, OtherEntry, Rutin};
+use App\Models\{RiskBm, Other, OtherEntry, Rutin, Visitor};
+use Symfony\Component\HttpFoundation\Test\Constraint\ResponseFormatSame;
 
 class OtherController extends Controller
 {
@@ -16,18 +17,24 @@ class OtherController extends Controller
 
     public function show_maintenance_form()
     {
-        $getRisk = RiskBm::all();
+        $personil = Visitor::where('visit_company', 'PT Calmic')->orWhere('visit_company', 'PT TNN Indonesia')->orWhere('visit_company', 'PT DAIKIN')->orWhere('visit_company', 'PT KONE')->orWhere('visit_company', 'PT ENLULU')->get();
         $pilihanwork = Rutin::all();
-        return view('other.maintenance_form', compact('getRisk', 'pilihanwork'));
+        return view('other.maintenance_form', compact('personil', 'pilihanwork'));
     }
 
 
 
     // Retrieving Data From DB
-    public function getRutin($id) //Risk
+    public function getRutin($id) //Rutin
     {
         $permit = Rutin::findOrFail($id);
         return isset($permit) && !empty($permit) ? response()->json(['status' => 'SUCCESS', 'permit' => $permit]) : response(['status' => 'FAILED', 'permit' => []]);
+    }
+
+    public function getVisitor($id) //Visitor
+    {
+        $visitor = Visitor::findOrFail($id);
+        return isset($visitor) && !empty($visitor) ? Response()->json(['status' => 'SUCCESS', 'visitor' => $visitor]) : response(['status' => 'FAILED', 'visitor' => []]);
     }
 
 

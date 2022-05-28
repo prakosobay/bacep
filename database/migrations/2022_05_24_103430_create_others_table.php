@@ -30,6 +30,16 @@ class CreateOthersTable extends Migration
             $table->string('loc12', 20)->nullable();
             $table->string('loc13', 20)->nullable();
             $table->string('loc14', 20)->nullable();
+            $table->string('time_start_1');
+            $table->string('time_start_2')->nullable();
+            $table->string('time_start_3')->nullable();
+            $table->string('time_start_4')->nullable();
+            $table->string('time_start_5')->nullable();
+            $table->string('time_end_1');
+            $table->string('time_end_2')->nullable();
+            $table->string('time_end_3')->nullable();
+            $table->string('time_end_4')->nullable();
+            $table->string('time_end_5')->nullable();
             $table->string('activity_1');
             $table->string('activity_2')->nullable();
             $table->string('activity_3')->nullable();
