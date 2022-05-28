@@ -27,7 +27,7 @@
 
 	<div class="container-contact100">
 		<div class="wrap-contact100">
-			<form id="maintenance_form" class="contact100-form validate-form" method="POST" action="{{ url('other/maintenance/create')}}">
+			<form id="maintenance_form" class="contact100-form validate-form" method="POST">
                 @csrf
 				<span class="contact100-form-title">
 					FORM MAINTENANCE
@@ -171,11 +171,11 @@
 				</div>
                 <div class="wrap-input100 bg1">
 					<span class="label-input100">Testing and Verification (Pengujian dan Verifikasi)</span>
-					<input type="text" class="input100" name="cleaning_testing" id="testing" value="" readonly>
+					<input type="text" class="input100" name="testing" id="testing" value="" readonly>
 				</div>
                 <div class="wrap-input100 bg1">
 					<span class="label-input100">Rollback Operation/Other Infomation (Operasi Pembatalan/Infomasi Lain)</span>
-					<input type="text" class="input100" name="cleaning_rollback" id="rollback" value="" readonly>
+					<input type="text" class="input100" name="rollback" id="rollback" value="" readonly>
 				</div>
 
                 <!-- Detail Time Activity -->
@@ -718,6 +718,39 @@
             headers: {
                 'X-CSRF-TOKEN': $('input[name="_token"]').val()
             }
+        });
+
+        $(".contact100-form-btn").click(function(e){
+        e.preventDefault();
+        var datastring = $("#maintenance_form").serialize();
+            $.ajax({
+                type:'POST',
+                url:"{{url('other/maintenance/create')}}",
+                data: datastring,
+                error: function (request, error) {
+                    console.log(error)
+                    alert(" Can't do because: " + error);
+                },
+                success:function(data){
+                    console.log(data);
+                    if(data.status == 'SUCCESS'){
+                        Swal.fire({
+                            title: "Success!",
+                            text: 'Data Saved',
+                            type: "success",
+                        }).then(function(){
+                            location.href = "{{url("/logall")}}";
+                        });
+                    }else if(data.status == 'FAILED'){
+                        Swal.fire({
+                            title: "Failed!",
+                            text: 'Saving Data Failed',
+                        }).then(function(){
+                            location.reload();
+                        });
+                    }
+                }
+            });
         });
 
 	</script>

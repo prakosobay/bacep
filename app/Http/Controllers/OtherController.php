@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\{DB, Auth, Gate, Mail, Session, Storage};
-use App\Models\{RiskBm, Other, OtherEntry, Rutin, Visitor};
+use App\Models\{RiskBm, Other, OtherEntry, OtherPersonil, Rutin, Visitor};
 use Symfony\Component\HttpFoundation\Test\Constraint\ResponseFormatSame;
 
 class OtherController extends Controller
@@ -43,14 +43,20 @@ class OtherController extends Controller
     // Submit Form
     public function create_maintenance(Request $request)
     {
-        // dd($request->all());
+
+        $data = $request->all();
+        $data['work'] = Rutin::find($data['work'])->work;
+        foreach ($data['visit_nama'] as $p){
+            $p = Visitor::find($p)->visit_nama;
+            echo ($p);
+        }
 
         $validate = $request->validate([
             'visit' => 'required',
             'leave' => ['required', 'after_or_equal:visit'],
         ]);
 
-        $otherForm = Other::create($request->all()
+        // $otherForm = Other::create($data
             // 'work' => $request->work,
             // 'visit' => $request->visit,
             // 'leave' => $request->leave,
@@ -72,7 +78,9 @@ class OtherController extends Controller
             // 'option' => 'maintenance',
             // 'created_at' => now()->toDateTimeString(),
             // 'updated_at' => now()->toDateTimeString(),
-        );
+        // );
+
+
         return "sukses";
     }
 }
