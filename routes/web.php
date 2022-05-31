@@ -112,6 +112,11 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/ob.destroy/{id}', [RevisiController::class, 'destroy_ob']);
     Route::post('/ob.new', [RevisiController::class, 'store_ob']);
 
+    Route::get('/revisi/visitor/show', [RevisiController::class, 'show_visitor']);
+    Route::get('/revisi/visitor/yajra', [RevisiController::class, 'yajra_visitor']);
+    Route::get('/revisi/visitor/edit', [RevisiController::class, 'edit_visitor']);
+    Route::get('/revisi/visitor/edit/{id}', [RevisiController::class, 'edit_visitor']);
+
     //Perbaikan
     Route::get('/perbaikan', [RutinController::class, 'form_perbaikan']);
 

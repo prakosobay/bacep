@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cleaning;
-use App\Models\{User, Role};
+use App\Models\{User, Role, Visitor};
 use Illuminate\Http\Request;
 use GuzzleHttp\Promise\Create;
 use Illuminate\Validation\Rule;
@@ -17,6 +17,10 @@ class AdminController extends Controller
     {
         $this->middleware('auth');
     }
+
+
+
+    // Show Pages
 
     public function show_relasi()
     {

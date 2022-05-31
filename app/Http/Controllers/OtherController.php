@@ -44,7 +44,6 @@ class OtherController extends Controller
     public function create_maintenance(Request $request)
     {
         $data = $request->all();
-        // dd($data);
         $work = Rutin::find($data['work'])->work;
 
         $validate = $request->validate([
@@ -127,27 +126,16 @@ class OtherController extends Controller
             'mitigation_5' => $request->mitigation_5,
         ]);
 
-        $personil =[
-
-            [ 'name' => $request->visit_nama, 'company' => $request->visit_company, 'department' => $request->visit_department, 'number' => $request->nik, 'phone' => $request->phone,],
-            [ 'name' => $request->visit_nama, 'company' => $request->visit_company, 'department' => $request->visit_department, 'number' => $request->nik, 'phone' => $request->phone,],
-            [ 'name' => $request->visit_nama, 'company' => $request->visit_company, 'department' => $request->visit_department, 'number' => $request->nik, 'phone' => $request->phone,],
-            [ 'name' => $request->visit_nama, 'company' => $request->visit_company, 'department' => $request->visit_department, 'number' => $request->nik, 'phone' => $request->phone,],
-            [ 'name' => $request->visit_nama, 'company' => $request->visit_company, 'department' => $request->visit_department, 'number' => $request->nik, 'phone' => $request->phone,],
-
-        ];
-
-        // $otherPersonil = OtherPersonil::insert($personil);
-
         $p = [];
 
         foreach($data['visit_nama'] as $k => $v ){
             $data_dump = [];
-
+            $data_kosong = [];
             if(isset($data['visit_nama'][$k])){
+                $personil[] = Visitor::find($v)->visit_nama;
                 $data_dump = [
                     'other_id' => $otherForm->id,
-                    'name' => $data['visit_nama'][$k],
+                    'name' => $personil[$k],
                     'company' => $data['visit_company'][$k],
                     'department' => $data['visit_department'][$k],
                     'number' => $data['visit_nik'][$k],
@@ -156,65 +144,13 @@ class OtherController extends Controller
 
                 $p[] = $data_dump;
             }
-
         }
 
         $personil = OtherPersonil::insert($p);
-        dd($personil);
 
+        if($personil){
 
-        // foreach ($data['visit_nama'] as $name) {
-        //     // if(isset($name)){
-        //         $name = Visitor::find($name)->visit_nama;
-
-        //     foreach($data['visit_company'] as $company){
-        //         // if(isset($company)){
-        //             $company;
-        //         // }
-        //     }
-
-        //     foreach($data['visit_department'] as $department){
-        //         // if(isset($department)){
-        //             $department;
-        //         // }
-        //     }
-
-        //     foreach($data['visit_respon'] as $respon){
-        //         // if(isset($respon)){
-        //             $respon;
-        //         // }
-        //     }
-
-        //     foreach($data['visit_phone'] as $phone){
-        //         // if(isset($phone)){
-        //             $phone;
-        //         // }
-        //     }
-
-        //     foreach($data['visit_nik'] as $nik){
-        //         // if(isset($nik)){
-        //             $nik;
-        //         // }
-        //     }
-
-        //     dd($company);
-
-        //     if(isset($company)){
-        //         $otherPersonil = OtherPersonil::create([
-        //             'other_id' => $otherForm->id,
-        //             'name' => $name,
-        //             'company' => $company,
-        //             'department' => $department,
-        //             'respon' => $respon,
-        //             'phone' => $phone,
-        //             'number' => $nik,
-        //         ]);
-        //         return "sukses";
-        //     }
-        //     else{
-        //         return "gagal";
-        //     }
-        //     // return $otherPersonil->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
-        // }
+        }
+        return $personil ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
     }
 }

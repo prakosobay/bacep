@@ -20,7 +20,10 @@
     <!-- Custom styles for this template -->
     <link href="{{asset('css/sb-admin-2.min.css')}}" rel="stylesheet">
 
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    {{-- bootstrap datatable --}}
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.css"/>
+
+
 
     <!-- Custom styles for this page -->
     <link href="{{asset('vendor2/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
@@ -99,7 +102,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Option:</h6>
                         <a class="collapse-item" href="{{url('ob')}}">Personil OB</a>
-                        {{-- <a class="collapse-item" href="{{url('cheklist.load')}}">Actual Load</a> --}}
+                        <a class="collapse-item" href="{{url('revisi/visitor/show')}}">Visitor</a>
                     </div>
                 </div>
             </li>
@@ -231,7 +234,6 @@
     <!-- Bootstrap core JavaScript-->
     <script src="{{asset('vendor2/jquery/jquery.min.js')}}"></script>
     <script src="{{asset('vendor2/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajaxy/1.6.1/scripts/jquery.ajaxy.js"></script> --}}
 
     <!-- Core plugin JavaScript-->
     <script src="{{asset('vendor2/jquery-easing/jquery.easing.min.js')}}"></script>
@@ -245,6 +247,17 @@
 
     <!-- Page level custom scripts -->
     <script src="{{asset('js/demo/datatables-demo.js')}}"></script>
+
+    {{-- datatable --}}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.js"></script>
+
+    {{-- sweetalert --}}
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    @stack('scripts')
 
 </body>
 

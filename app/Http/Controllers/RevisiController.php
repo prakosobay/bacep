@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\MasterOb;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\{DB, Auth, Gate, Mail, Session, Storage};
+use Illuminate\Support\Str;
+use App\Models\{Visitor};
+use Yajra\Datatables\Datatables;
+use Carbon\Carbon;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class RevisiController extends Controller
@@ -19,6 +24,27 @@ class RevisiController extends Controller
         $ob = MasterOb::all();
         // dd($ob);
         return view('revisi.ob', compact('ob'));
+    }
+
+    public function show_visitor()
+    {
+        $visitor = Visitor::all();
+        return view('admin.showVisitor', compact('visitor'));
+    }
+
+    public function yajra_visitor()
+    {
+        $visitor = DB::table('visitors')
+            ->orderBy('id', 'asc');
+        return Datatables::of($visitor)
+            ->addColumn('action', 'admin.actionEdit')
+            ->make(true);
+    }
+
+    public function edit_visitor($id)
+    {
+        $visitor = Visitor::findOrFail($id);
+        return view('admin.editVisitor', compact('visitor'));
     }
 
     public function edit_ob($id)
