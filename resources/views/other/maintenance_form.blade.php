@@ -155,10 +155,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="wrap-input100 bg1">
+                {{-- <div class="wrap-input100 bg1">
 					<span class="label-input100">Other (Lokasi Lain) *</span>
                     <input type="text" class="input100" id="lain" name="lain" value="{{ old('lain')}}" placeholder="Lokasi lain">
-				</div>
+				</div> --}}
 
                 {{-- Isian --}}
                 <div class="wrap-input100 bg1 rs1-alert-validate">

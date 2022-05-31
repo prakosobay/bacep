@@ -16,6 +16,8 @@ class CreateOthersTable extends Migration
         Schema::create('others', function (Blueprint $table) {
             $table->id();
             $table->string('work');
+            $table->date('visit');
+            $table->date('leave');
             $table->string('loc1')->nullable();
             $table->string('loc2', 20)->nullable();
             $table->string('loc3', 20)->nullable();
