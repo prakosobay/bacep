@@ -150,7 +150,8 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Option :</h6>
                         <a class="collapse-item" href="{{ url('history/cleaning')}}">Cleaning</a>
-                        <a class="collapse-item" href="{{ url('history/other')}}">Other</a>
+                        <a class="collapse-item" href="{{ url('history/maintenance')}}">Maintenance</a>
+                        <a class="collapse-item" href="{{ url('history/troubleshoot')}}">Troubleshoot</a>
                     </div>
                 </div>
             </li>

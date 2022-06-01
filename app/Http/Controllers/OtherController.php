@@ -4,8 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\{DB, Auth, Gate, Mail, Session, Storage};
-use App\Models\{RiskBm, Other, OtherEntry, OtherHistory, OtherPersonil, Rutin, Visitor};
+use App\Models\{Other, OtherHistory, OtherPersonil, Rutin, Visitor};
 use Symfony\Component\HttpFoundation\Test\Constraint\ResponseFormatSame;
+use Yajra\Datatables\Datatables;
+use Carbon\Carbon;
+use Illuminate\Support\Str;
+use Maatwebsite\Excel\Facades\Excel;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class OtherController extends Controller
 {
@@ -31,13 +36,13 @@ class OtherController extends Controller
 
 
     // Retrieving Data From DB
-    public function getRutin($id) //Rutin
+    public function get_rutin($id) // Data Permit Rutin
     {
         $permit = Rutin::findOrFail($id);
         return isset($permit) && !empty($permit) ? response()->json(['status' => 'SUCCESS', 'permit' => $permit]) : response(['status' => 'FAILED', 'permit' => []]);
     }
 
-    public function getVisitor($id) //Visitor
+    public function get_visitor($id) // Data Visitor
     {
         $visitor = Visitor::findOrFail($id);
         return isset($visitor) && !empty($visitor) ? Response()->json(['status' => 'SUCCESS', 'visitor' => $visitor]) : response(['status' => 'FAILED', 'visitor' => []]);
@@ -134,10 +139,10 @@ class OtherController extends Controller
 
         $p = [];
 
-        foreach($data['visit_nama'] as $k => $v ){
+        foreach ($data['visit_nama'] as $k => $v) {
             $data_dump = [];
             $data_kosong = [];
-            if(isset($data['visit_nama'][$k])){
+            if (isset($data['visit_nama'][$k])) {
                 $personil[] = Visitor::find($v)->visit_nama;
                 $data_dump = [
                     'other_id' => $otherForm->id,
@@ -155,7 +160,7 @@ class OtherController extends Controller
 
         $personil = OtherPersonil::insert($p);
 
-        if($personil){
+        if ($personil) {
             $log = OtherHistory::insert([
                 'other_id' => $otherForm->id,
                 'created_by' => Auth::user()->name,
@@ -163,13 +168,33 @@ class OtherController extends Controller
                 'status' => 'requested',
                 'aktif' => true,
                 'pdf' => false,
+                'updated_at' => now(),
+                'created_at' => now(),
             ]);
             return $log ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
         }
     }
 
-    public function approve_maintenance (Request $request)
+    public function approve_maintenance(Request $request)
     {
+    }
 
+
+
+    // Yajra Datatables
+    public function yajra_history()
+    {
+        $history_maintenance = DB::table('other_histories')
+            ->join('others', 'others.id', '=', 'other_histories.other_id')
+            ->select('other_histories.*', 'others.visit')
+            ->orderBy('other_id', 'desc');
+        return Datatables::of($history_maintenance)
+            ->editColumn('updated_at', function ($history_maintenance) {
+                return $history_maintenance->updated_at ? with(new Carbon($history_maintenance->updated_at))->format('d/m/Y') : '';
+            })
+            ->editColumn('visit', function ($history_maintenance) {
+                return $history_maintenance->visit ? with(new Carbon($history_maintenance->visit))->format('d/m/Y') : '';
+            })
+            ->make(true);
     }
 }

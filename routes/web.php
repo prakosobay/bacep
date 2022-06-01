@@ -163,11 +163,11 @@ Route::middleware(['auth'])->group(function () {
     // Troubleshoot
     Route::get('other/troubleshoot/show', [OtherController::class, 'show_troubleshoot_form']);
 
-
     // Maintenance
     Route::get('other/maintenance/show', [OtherController::class, 'show_maintenance_form']);
-    Route::get('other/maintenance/rutin/{id}', [OtherController::class, 'getRutin']);
-    Route::get('other/maintenance/visitor/{id}', [OtherController::class, 'getVisitor']);
+    Route::get('other/maintenance/rutin/{id}', [OtherController::class, 'get_rutin']);
+    Route::get('other/maintenance/visitor/{id}', [OtherController::class, 'get_visitor']);
+    Route::get('other/maintenance/yajra', [OtherController::class, 'yajra_history']);
     Route::post('other/maintenance/create', [OtherController::class, 'create_maintenance']);
 
     //Visitor All Base Super
@@ -181,5 +181,4 @@ Route::middleware(['auth'])->group(function () {
     //Log
     Route::get('logall', [HomeController::class, 'log_all'])->name('logall');
     Route::get('datatables', [ItController::class, 'anydata']);
-
 });

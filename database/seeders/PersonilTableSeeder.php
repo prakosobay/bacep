@@ -141,9 +141,9 @@ class PersonilTableSeeder extends Seeder
                 //BTS
                 [
                     'visit_nama' => 'Badai Sino Jendrang',
-                    'visit_company' => 'PT Enlulu',
+                    'visit_company' => 'PT Bali Towerindo Sentra',
                     'visit_department' => 'Building Management',
-                    'visit_respon' => 'Building Management',
+                    'visit_respon' => 'Supervisor',
                     'visit_phone' => '0822-1028-2228',
                     'visit_nik' => '3329101805920002',
                 ],
@@ -152,7 +152,7 @@ class PersonilTableSeeder extends Seeder
                     'visit_nama' => 'Riyanto',
                     'visit_company' => 'PT Enlulu',
                     'visit_department' => 'Building Management',
-                    'visit_respon' => 'Building Management',
+                    'visit_respon' => 'Teknisi',
                     'visit_phone' => '0878-7019-1586',
                     'visit_nik' => '3171031611710008',
                 ]

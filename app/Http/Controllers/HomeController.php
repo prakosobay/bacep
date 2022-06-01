@@ -146,6 +146,8 @@ class HomeController extends Controller
                 return view('sales.history');
             } elseif ($type_view == 'cleaning') {
                 return view('cleaning.history');
+            } elseif ($type_view == 'maintenance') {
+                return view('other.maintenance_history');
             } else {
                 abort(403);
             }
@@ -193,8 +195,7 @@ class HomeController extends Controller
                     ->get();
                 dd($getMaintenance);
                 return view('other.maintenance_approval', compact('getMaintenance'));
-            }
-            else {
+            } else {
                 abort(403);
             }
         } else {
