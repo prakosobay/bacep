@@ -14,13 +14,10 @@ class Other extends Model
     protected $primaryKey = 'id';
     protected $guarded = [];
 
-    public function other_form()
-    {
-        return $this->belongsTo(OtherEntry::class);
-    }
+    // public function personil()
+    // {
+    //     return $this->hasMany(OtherPersonil::class);
+    // }
 
-    public function personil()
-    {
-        return $this->hasMany(OtherPersonil::class);
-    }
+
 }

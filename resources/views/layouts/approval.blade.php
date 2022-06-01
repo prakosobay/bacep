@@ -151,7 +151,8 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Option :</h6>
                         <a class="collapse-item" href="{{ url('approval/cleaning')}}">Cleaning</a>
-                        <a class="collapse-item" href="{{ url('approval/other')}}">Other</a>
+                        <a class="collapse-item" href="{{ url('approval/maintenance')}}">Maintenance</a>
+                        <a class="collapse-item" href="{{ url('approval/troubleshoot')}}">Troubleshoot</a>
                     </div>
                 </div>
             </li>

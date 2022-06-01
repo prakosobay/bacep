@@ -4,18 +4,21 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
-class OtherPersonil extends Model
+class OtherHistory extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
 
-    protected $table = 'other_personils';
+    protected $table = 'other_histories';
     protected $primaryKey = 'id';
     protected $guarded = [];
 
+    public function created_by()
+    {
+        return $this->belongsTo(User::class);
+    }
 
-    public function other_form()
+    public function other()
     {
         return $this->belongsTo(Other::class);
     }

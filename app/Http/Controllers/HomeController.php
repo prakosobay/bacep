@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{CleaningFull, MasterOb, Personil, PilihanWork, Rutin, Survey};
+use App\Models\{CleaningFull, MasterOb, OtherHistory, Personil, PilihanWork, Rutin, Survey};
 use Illuminate\Support\Facades\{DB, Auth, Gate, Session};
 
 class HomeController extends Controller
@@ -182,7 +182,19 @@ class HomeController extends Controller
                     ->orderBy('cleaning_id', 'desc')
                     ->get();
                 return view('cleaning.approval', compact('cleaning'));
-            } else {
+            } elseif ($type_approve == 'maintenance') {
+                $getMaintenance = DB::table('other_histories')
+                    ->join('others', 'others.id', '=', 'other_histories.other_id')
+                    ->join('others', 'others.id', '=', 'other_personils.other_id')
+                    ->where('other_histories.aktif', '=', 1)
+                    // ->whereColumn('other_histories.other_id', '=', 'other_personils.other_id')
+                    ->whereIn('other_histories.role_to', $role_1)
+                    ->select('others.*')
+                    ->get();
+                dd($getMaintenance);
+                return view('other.maintenance_approval', compact('getMaintenance'));
+            }
+            else {
                 abort(403);
             }
         } else {

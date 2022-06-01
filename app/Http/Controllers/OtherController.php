@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\{DB, Auth, Gate, Mail, Session, Storage};
-use App\Models\{RiskBm, Other, OtherEntry, OtherPersonil, Rutin, Visitor};
+use App\Models\{RiskBm, Other, OtherEntry, OtherHistory, OtherPersonil, Rutin, Visitor};
 use Symfony\Component\HttpFoundation\Test\Constraint\ResponseFormatSame;
 
 class OtherController extends Controller
@@ -17,7 +17,13 @@ class OtherController extends Controller
 
     public function show_maintenance_form()
     {
-        $personil = Visitor::where('visit_company', 'PT Calmic')->orWhere('visit_company', 'PT TNN Indonesia')->orWhere('visit_company', 'PT DAIKIN')->orWhere('visit_company', 'PT KONE')->orWhere('visit_company', 'PT ENLULU')->get();
+        $personil = Visitor::where('visit_company', 'PT Calmic')
+            ->orWhere('visit_company', 'PT TNN Indonesia')
+            ->orWhere('visit_company', 'PT DAIKIN')
+            ->orWhere('visit_company', 'PT KONE')
+            ->orWhere('visit_company', 'PT ENLULU')
+            ->orWhere('visit_company', 'PT Bali Towerindo Sentra')
+            ->get();
         $pilihanwork = Rutin::all();
         return view('other.maintenance_form', compact('personil', 'pilihanwork'));
     }
@@ -137,6 +143,7 @@ class OtherController extends Controller
                     'other_id' => $otherForm->id,
                     'name' => $personil[$k],
                     'company' => $data['visit_company'][$k],
+                    'respon' => $data['visit_respon'][$k],
                     'department' => $data['visit_department'][$k],
                     'number' => $data['visit_nik'][$k],
                     'phone' => $data['visit_phone'][$k],
@@ -149,8 +156,20 @@ class OtherController extends Controller
         $personil = OtherPersonil::insert($p);
 
         if($personil){
-
+            $log = OtherHistory::insert([
+                'other_id' => $otherForm->id,
+                'created_by' => Auth::user()->name,
+                'role_to' => 'review',
+                'status' => 'requested',
+                'aktif' => true,
+                'pdf' => false,
+            ]);
+            return $log ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
         }
-        return $personil ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
+    }
+
+    public function approve_maintenance (Request $request)
+    {
+
     }
 }
