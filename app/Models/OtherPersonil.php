@@ -15,7 +15,7 @@ class OtherPersonil extends Model
     protected $guarded = [];
 
 
-    public function other_form()
+    public function others()
     {
         return $this->belongsTo(Other::class);
     }

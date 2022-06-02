@@ -15,12 +15,12 @@ use Barryvdh\DomPDF\Facade as PDF;
 class OtherController extends Controller
 {
     // Show Pages
-    public function show_troubleshoot_form()
+    public function show_troubleshoot_form() // Menampilkan form troubleshoot
     {
         return view();
     }
 
-    public function show_maintenance_form()
+    public function show_maintenance_form() // Menampilkan form maintenance
     {
         $personil = Visitor::where('visit_company', 'PT Calmic')
             ->orWhere('visit_company', 'PT TNN Indonesia')
@@ -52,7 +52,7 @@ class OtherController extends Controller
 
 
     // Submit Form
-    public function create_maintenance(Request $request)
+    public function create_maintenance(Request $request) // Submit form maintenance
     {
         $data = $request->all();
         $work = Rutin::find($data['work'])->work;
@@ -175,14 +175,139 @@ class OtherController extends Controller
         }
     }
 
-    public function approve_maintenance(Request $request)
+    public function approve_maintenance(Request $request) // Flow Approval form maintenance
     {
+        // dd($request->all());
+        $lastupdate = OtherHistory::where('other_id', '=', $request->other_id)->first();
+        if ($lastupdate->pdf == true) {
+            $lastupdate->update(['aktif' => false]);
+
+            // Perubahan status tiap permit
+            $status = '';
+            if ($lastupdate->status == 'requested') {
+                $status = 'reviewed';
+            } elseif ($lastupdate->status == 'reviewed') {
+                $status = 'checked';
+            } elseif ($lastupdate->status == 'checked') {
+                $status = 'acknowledge';
+            } elseif ($lastupdate->status == 'acknowledge') {
+                $status = 'final';
+            } elseif ($lastupdate->status == 'final') {
+                $other = Other::find($request->other_id)->first();
+            }
+
+            // Pergantian role tiap permit & send email notif
+            $role_to = '';
+            if (($lastupdate->role_to == 'review')) {
+                // foreach ([
+                //     'aurellius.putra@balitower.co.id', 'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
+                //     'ilham.pangestu@balitower.co.id', 'irwan.trisna@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id',
+                // ] as $recipient) {
+                //     Mail::to($recipient)->send(new NotifEmail());
+                // }
+                $role_to = 'check';
+            } elseif (($lastupdate->role_to == 'check')) {
+                // foreach (['security.bacep@balitower.co.id'] as $recipient) {
+                //     Mail::to($recipient)->send(new NotifEmail());
+                // }
+                $role_to = 'security';
+            } elseif (($lastupdate->role_to == 'security')) {
+                // foreach (['bayu.prakoso@balitower.co.id'] as $recipient) {
+                //     Mail::to($recipient)->send(new NotifEmail());
+                // }
+                $role_to = 'head';
+            } elseif ($lastupdate->role_to == 'head') {
+                // $cleaning = Cleaning::find($request->cleaning_id);
+                // foreach (['dc@balitower.co.id'] as $recipient) {
+                //     Mail::to($recipient)->send(new NotifFull($cleaning));
+                // }
+                $role_to = 'all';
+
+                // $other = Other::where('other_id', $request->other_id)->first();
+
+                // Simpan permit yang sudah full approved ke table CleaningFull
+                // $cleaningFull = CleaningFull::create([
+                //     'cleaning_id' => $cleaning->cleaning_id,
+                //     'cleaning_name' => $cleaning->cleaning_name,
+                //     'cleaning_name2' => $cleaning->cleaning_name2,
+                //     'cleaning_work' => $cleaning->cleaning_work,
+                //     'validity_from' => $cleaning->validity_from,
+                //     'cleaning_date' => $cleaning->created_at,
+                //     'link' => ("https://dcops.balifiber.id/cleaning_pdf/$cleaning->cleaning_id"),
+                //     'link' => ("http://172.16.45.195:8000/cleaning_pdf/$cleaning->cleaning_id"),
+                // ]);
+            }
+
+            // Simpan tiap perubahan permit ke table CLeaningHistory
+            $otherHistory = OtherHistory::create([
+                'other_id' => $request->other_id,
+                'created_by' => Auth::user()->name,
+                'role_to' => $role_to,
+                'status' => $status,
+                'aktif' => true,
+                'pdf' => false,
+            ]);
+
+        } else {
+            abort(403);
+        }
+        return $otherHistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
+    }
+
+    public function reject_maintenance(Request $request)
+    {
+        // Get permit terbaru by ID Permit
+        $lastupdate = OtherHistory::where('other_id', '=', $request->other_id)->latest()->first();
+        dd($lastupdate);
+        if (Gate::denies('isSecurity')) {
+            if ($lastupdate->pdf == true) {
+                $lastupdate->update(['aktif' => false]);
+
+                // Simpan tiap perubahan permit ke table CleaningHistory
+                // $cleaningHistory = CleaningHistory::create([
+                //     'cleaning_id' => $request->cleaning_id,
+                //     'created_by' => Auth::user()->id,
+                //     'role_to' => 0,
+                //     'status' => 'rejected',
+                //     'aktif' => true,
+                //     'pdf' => false,
+                // ]);
+
+                // Get permit yang di reject & kirim notif email
+                // $cleaning = Cleaning::find($request->cleaning_id);
+                // foreach (['badai.sino@balitower.co.id'] as $recipient) {
+                //     Mail::to($recipient)->send(new NotifReject($cleaning));
+                // }
+                // return $cleaningHistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
+            } else {
+                abort(403);
+            }
+        }
+    }
+
+
+
+    // Convert pdf
+    public function pdf_maintenance($id) // Convert PDF permit maintenance
+    {
+        $getOther = Other::find($id);
+        $getLastOther = OtherHistory::where('other_id', $id)->where('aktif', 1)->first();
+        $getPersonil = OtherPersonil::where('other_id', $id)->get();
+        $getLastOther->update(['pdf' => true]);
+
+        $getHistory = DB::table('other_histories')
+            ->join('others', 'others.id', '=', 'other_histories.other_id')
+            ->where('other_histories.other_id', '=', $id)
+            ->select('other_histories.*')
+            ->get();
+            $pdf = PDF::loadview('other.maintenance_pdf', compact('getOther', 'getPersonil', 'getHistory', 'getLastOther'))->setPaper('a4', 'portrait')->setWarnings(false);
+            return $pdf->stream();
     }
 
 
 
     // Yajra Datatables
-    public function yajra_history()
+    public function yajra_history() // Get log permit maintenance by yajra
     {
         $history_maintenance = DB::table('other_histories')
             ->join('others', 'others.id', '=', 'other_histories.other_id')
@@ -197,4 +322,8 @@ class OtherController extends Controller
             })
             ->make(true);
     }
+
+
+
+
 }
