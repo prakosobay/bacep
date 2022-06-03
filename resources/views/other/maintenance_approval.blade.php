@@ -25,22 +25,22 @@
                     <tbody class="isi-table text-center">
                         @foreach($getMaintenance as $p)
                         <tr>
-                            <td>{{ $p->id }}</td>
+                            <td>{{ $p->other_id }}</td>
                             <td>{{ Carbon\Carbon::parse($p->created_at)->format('d-m-Y') }}</td>
                             <td>{{ Carbon\Carbon::parse($p->visit)->format('d-m-Y') }}</td>
                             <td>Nama</td>
                             <td>{{ $p->work }}</td>
                             <td>
                                 @can('isApproval')
-                                    <a href="javascript:void(0)" type="button" id="ok" class="approve btn btn-success btn-sm my-1 mx-1" data-other_id="{{$p->id}}">Approve</a>
-                                    <a href="javascript:void(0)" type="button" id="not" class="reject btn btn-danger btn-sm my-1 mx-1" data-other_id="{{$p->id}}">Reject</a>
+                                    <a href="javascript:void(0)" type="button" id="ok" class="approve btn btn-success btn-sm my-1 mx-1" data-other_id="{{$p->other_id}}">Approve</a>
+                                    <a href="javascript:void(0)" type="button" id="not" class="reject btn btn-danger btn-sm my-1 mx-1" data-other_id="{{$p->other_id}}">Reject</a>
                                 @elsecan('isHead')
-                                    <a href="javascript:void(0)" type="button" id="ok" class="approve btn btn-success btn-sm my-1 mx-1" data-other_id="{{$p->id}}">Approve</a>
-                                    <a href="javascript:void(0)" type="button" id="not" class="reject btn btn-danger btn-sm my-1 mx-1" data-other_id="{{$p->id}}">Reject</a>
+                                    <a href="javascript:void(0)" type="button" id="ok" class="approve btn btn-success btn-sm my-1 mx-1" data-other_id="{{$p->other_id}}">Approve</a>
+                                    <a href="javascript:void(0)" type="button" id="not" class="reject btn btn-danger btn-sm my-1 mx-1" data-other_id="{{$p->other_id}}">Reject</a>
                                 @elsecan('isSecurity')
-                                    <a href="javascript:void(0)" type="button" id="ok" class="approve btn btn-success btn-sm my-1 mx-1" data-other_id="{{$p->id}}">Approve</a>
+                                    <a href="javascript:void(0)" type="button" id="ok" class="approve btn btn-success btn-sm my-1 mx-1" data-other_id="{{$p->other_id}}">Approve</a>
                                 @endcan
-                                    <a href="/other/maintenance/pdf/{{$p->id}}" class="btn btn-primary btn-sm my-1 mx-1" target="_blank">File</a>
+                                    <a href="/other/maintenance/pdf/{{$p->other_id}}" class="btn btn-primary btn-sm my-1 mx-1" target="_blank">File</a>
                             </td>
                         </tr>
                         @endforeach

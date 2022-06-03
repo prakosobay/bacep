@@ -177,10 +177,44 @@ class OtherController extends Controller
 
     public function approve_maintenance(Request $request) // Flow Approval form maintenance
     {
-        // dd($request->all());
         $lastupdate = OtherHistory::where('other_id', '=', $request->other_id)->first();
         if ($lastupdate->pdf == true) {
             $lastupdate->update(['aktif' => false]);
+
+            // $status = '';
+            // switch ($status){
+            //     case('requested'):
+            //         $status = 'reviewed';
+            //         break;
+
+            //     case('reviewed'):
+            //         $status = 'checked';
+            //         break;
+
+            //     case('checked'):
+            //         $status = 'acknowledge';
+            //         break;
+
+            //     case('acknowledge'):
+            //         $status = 'final';
+            //         break;
+            // }
+
+            // $role_to = '';
+            // switch ($role_to){
+            //     case('review'):
+            //         $role_to = 'check';
+            //         break;
+
+            //     case('check'):
+            //         $role_to = 'security';
+            //         break;
+
+            //     case('security'):
+            //         $role_to = 'head';
+            //         break;
+            // }
+
 
             // Perubahan status tiap permit
             $status = '';
@@ -198,45 +232,16 @@ class OtherController extends Controller
 
             // Pergantian role tiap permit & send email notif
             $role_to = '';
-            if (($lastupdate->role_to == 'review')) {
-                // foreach ([
-                //     'aurellius.putra@balitower.co.id', 'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
-                //     'ilham.pangestu@balitower.co.id', 'irwan.trisna@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id',
-                // ] as $recipient) {
-                //     Mail::to($recipient)->send(new NotifEmail());
-                // }
+            if ($lastupdate->role_to == 'review') {
                 $role_to = 'check';
-            } elseif (($lastupdate->role_to == 'check')) {
-                // foreach (['security.bacep@balitower.co.id'] as $recipient) {
-                //     Mail::to($recipient)->send(new NotifEmail());
-                // }
+            } elseif ($lastupdate->role_to == 'check') {
                 $role_to = 'security';
-            } elseif (($lastupdate->role_to == 'security')) {
-                // foreach (['bayu.prakoso@balitower.co.id'] as $recipient) {
-                //     Mail::to($recipient)->send(new NotifEmail());
-                // }
+            } elseif ($lastupdate->role_to == 'security') {
                 $role_to = 'head';
             } elseif ($lastupdate->role_to == 'head') {
-                // $cleaning = Cleaning::find($request->cleaning_id);
-                // foreach (['dc@balitower.co.id'] as $recipient) {
-                //     Mail::to($recipient)->send(new NotifFull($cleaning));
-                // }
                 $role_to = 'all';
-
-                // $other = Other::where('other_id', $request->other_id)->first();
-
-                // Simpan permit yang sudah full approved ke table CleaningFull
-                // $cleaningFull = CleaningFull::create([
-                //     'cleaning_id' => $cleaning->cleaning_id,
-                //     'cleaning_name' => $cleaning->cleaning_name,
-                //     'cleaning_name2' => $cleaning->cleaning_name2,
-                //     'cleaning_work' => $cleaning->cleaning_work,
-                //     'validity_from' => $cleaning->validity_from,
-                //     'cleaning_date' => $cleaning->created_at,
-                //     'link' => ("https://dcops.balifiber.id/cleaning_pdf/$cleaning->cleaning_id"),
-                //     'link' => ("http://172.16.45.195:8000/cleaning_pdf/$cleaning->cleaning_id"),
-                // ]);
             }
+            dd($status);
 
             // Simpan tiap perubahan permit ke table CLeaningHistory
             $otherHistory = OtherHistory::create([
@@ -248,37 +253,38 @@ class OtherController extends Controller
                 'pdf' => false,
             ]);
 
+            // dd($otherHistory);
         } else {
             abort(403);
         }
-        return $otherHistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
+        // return $otherHistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
     }
 
     public function reject_maintenance(Request $request)
     {
         // Get permit terbaru by ID Permit
         $lastupdate = OtherHistory::where('other_id', '=', $request->other_id)->latest()->first();
-        dd($lastupdate);
+        // dd($lastupdate);
         if (Gate::denies('isSecurity')) {
             if ($lastupdate->pdf == true) {
                 $lastupdate->update(['aktif' => false]);
 
                 // Simpan tiap perubahan permit ke table CleaningHistory
-                // $cleaningHistory = CleaningHistory::create([
-                //     'cleaning_id' => $request->cleaning_id,
-                //     'created_by' => Auth::user()->id,
-                //     'role_to' => 0,
-                //     'status' => 'rejected',
-                //     'aktif' => true,
-                //     'pdf' => false,
-                // ]);
+                $history = OtherHistory::create([
+                    'other_id' => $request->other_id,
+                    'created_by' => Auth::user()->name,
+                    'role_to' => 0,
+                    'status' => 'rejected',
+                    'aktif' => true,
+                    'pdf' => false,
+                ]);
 
                 // Get permit yang di reject & kirim notif email
                 // $cleaning = Cleaning::find($request->cleaning_id);
                 // foreach (['badai.sino@balitower.co.id'] as $recipient) {
                 //     Mail::to($recipient)->send(new NotifReject($cleaning));
                 // }
-                // return $cleaningHistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
+                return $history->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
             } else {
                 abort(403);
             }

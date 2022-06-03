@@ -36,7 +36,7 @@
                 serverSide: true,
                 ajax: '{{ url('other/maintenance/yajra')}}',
                 columns: [
-                    { data: 'id', name: 'others.id' },
+                    { data: 'other_id', name: 'other_id' },
                     { data: 'visit', name: 'others.visit' },
                     { data: 'role_to', name: 'role_to' },
                     { data: 'status', name: 'status' },
