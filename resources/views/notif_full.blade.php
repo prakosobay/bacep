@@ -42,5 +42,6 @@
     </table>
         {{-- <p><a href="http://127.0.0.1:8000/cleaning_pdf/$cleaning['cleaning_id']">Klik tautan ini untuk melihat permit</a></p> --}}
         <p><a href="http://172.16.45.195:8000/full_approval/all">Klik tautan ini untuk melihat permit</a></p>
+        {{-- <p><a href="http://dcops.balifiber.id/full_approval/all">Klik tautan ini untuk melihat permit</a></p> --}}
 </body>
 </html>

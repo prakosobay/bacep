@@ -41,6 +41,7 @@
                 </tbody>
             </table> --}}
         <p>Silahkan Login di  <a href="http://172.16.45.195:8000/approval/all">sini</a></p>
+        {{-- <p>Silahkan Login di  <a href="http://dcops.balifiber.id/approval/all">sini</a></p> --}}
     </div>
 </body>
 </html>

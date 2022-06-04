@@ -33,11 +33,6 @@ class OtherController extends Controller
         return view('other.maintenance_form', compact('personil', 'pilihanwork'));
     }
 
-    public function show_maintenance_log() // Menampikan log maintenance
-    {
-        return view('other.maintenance_log');
-    }
-
 
 
     // Retrieving Data From DB
@@ -182,71 +177,35 @@ class OtherController extends Controller
 
     public function approve_maintenance(Request $request) // Flow Approval form maintenance
     {
-        $lastupdate = OtherHistory::where('other_id', '=', $request->other_id)->first();
+        $lastupdate = OtherHistory::where('other_id', '=', $request->other_id)->latest()->first();
         if ($lastupdate->pdf == true) {
             $lastupdate->update(['aktif' => false]);
-
-            // $status = '';
-            // switch ($status){
-            //     case('requested'):
-            //         $status = 'reviewed';
-            //         break;
-
-            //     case('reviewed'):
-            //         $status = 'checked';
-            //         break;
-
-            //     case('checked'):
-            //         $status = 'acknowledge';
-            //         break;
-
-            //     case('acknowledge'):
-            //         $status = 'final';
-            //         break;
-            // }
-
-            // $role_to = '';
-            // switch ($role_to){
-            //     case('review'):
-            //         $role_to = 'check';
-            //         break;
-
-            //     case('check'):
-            //         $role_to = 'security';
-            //         break;
-
-            //     case('security'):
-            //         $role_to = 'head';
-            //         break;
-            // }
-
 
             // Perubahan status tiap permit
             $status = '';
             if ($lastupdate->status == 'requested') {
                 $status = 'reviewed';
-            } elseif ($lastupdate->status == 'reviewed') {
+            } elseif ($lastupdate->status == 'reviewed'){
                 $status = 'checked';
-            } elseif ($lastupdate->status == 'checked') {
+            } elseif ($lastupdate->status == 'checked'){
                 $status = 'acknowledge';
-            } elseif ($lastupdate->status == 'acknowledge') {
+            } elseif ($lastupdate->status == 'acknowledge'){
                 $status = 'final';
-            } elseif ($lastupdate->status == 'final') {
-                $other = Other::find($request->other_id)->first();
+            } elseif ($lastupdate->status == 'final'){
+                $maintenance = Other::find($request->other_id)->first();
             }
 
-            // Pergantian role tiap permit & send email notif
+            // // Pergantian role tiap permit & send email notif
             $role_to = '';
             if ($lastupdate->role_to == 'review') {
                 $role_to = 'check';
-            } elseif ($lastupdate->role_to == 'check') {
+            } elseif ($lastupdate->role_to == 'check'){
                 $role_to = 'security';
-            } elseif ($lastupdate->role_to == 'security') {
+            } elseif ($lastupdate->role_to == 'security'){
                 $role_to = 'head';
-            } elseif ($lastupdate->role_to == 'head') {
+            } elseif($lastupdate->role_to = 'head'){
                 $role_to = 'all';
             }
-            dd($status);
 
             // Simpan tiap perubahan permit ke table CLeaningHistory
             $otherHistory = OtherHistory::create([
@@ -258,11 +217,10 @@ class OtherController extends Controller
                 'pdf' => false,
             ]);
 
-            // dd($otherHistory);
         } else {
             abort(403);
         }
-        // return $otherHistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
+        return $otherHistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
     }
 
     public function reject_maintenance(Request $request)

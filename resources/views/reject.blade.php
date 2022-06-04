@@ -42,5 +42,6 @@
         </tbody>
     </table>
         <p><a href="http://172.16.45.195:8000">Klik tautan ini untuk login</a></p>
+        {{-- <p><a href="http://dcops.balifiber.id">Klik tautan ini untuk login</a></p> --}}
 </body>
 </html>
