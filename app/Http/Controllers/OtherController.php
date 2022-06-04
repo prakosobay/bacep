@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\{DB, Auth, Gate, Mail, Session, Storage};
-use App\Models\{Other, OtherHistory, OtherPersonil, Rutin, Visitor};
+use App\Models\{Other, OtherFull, OtherHistory, OtherPersonil, Rutin, Visitor};
 use Symfony\Component\HttpFoundation\Test\Constraint\ResponseFormatSame;
 use Yajra\Datatables\Datatables;
 use Carbon\Carbon;
@@ -33,6 +33,11 @@ class OtherController extends Controller
         return view('other.maintenance_form', compact('personil', 'pilihanwork'));
     }
 
+    public function show_maintenance_full() // Menampilkan list permit full approved dari sisi visitor
+    {
+        return view('other.maintenance_full_visitor');
+    }
+
 
 
     // Retrieving Data From DB
@@ -47,7 +52,6 @@ class OtherController extends Controller
         $visitor = Visitor::findOrFail($id);
         return isset($visitor) && !empty($visitor) ? Response()->json(['status' => 'SUCCESS', 'visitor' => $visitor]) : response(['status' => 'FAILED', 'visitor' => []]);
     }
-
 
 
 
@@ -185,26 +189,40 @@ class OtherController extends Controller
             $status = '';
             if ($lastupdate->status == 'requested') {
                 $status = 'reviewed';
-            } elseif ($lastupdate->status == 'reviewed'){
+            } elseif ($lastupdate->status == 'reviewed') {
                 $status = 'checked';
-            } elseif ($lastupdate->status == 'checked'){
+            } elseif ($lastupdate->status == 'checked') {
                 $status = 'acknowledge';
-            } elseif ($lastupdate->status == 'acknowledge'){
+            } elseif ($lastupdate->status == 'acknowledge') {
                 $status = 'final';
-            } elseif ($lastupdate->status == 'final'){
-                $maintenance = Other::find($request->other_id)->first();
+            } elseif ($lastupdate->status == 'final') {
+                $full_maintenance = Other::find($request->other_id)->first();
             }
 
             // // Pergantian role tiap permit & send email notif
             $role_to = '';
             if ($lastupdate->role_to == 'review') {
                 $role_to = 'check';
-            } elseif ($lastupdate->role_to == 'check'){
+            } elseif ($lastupdate->role_to == 'check') {
                 $role_to = 'security';
-            } elseif ($lastupdate->role_to == 'security'){
+            } elseif ($lastupdate->role_to == 'security') {
                 $role_to = 'head';
-            } elseif($lastupdate->role_to = 'head'){
+            } elseif ($lastupdate->role_to = 'head') {
+                $full = Other::find($request->other_id);
                 $role_to = 'all';
+
+                $full_maintenance = Other::where('id', $request->other_id)->first();
+                // dd($full_maintenance);
+                $full_approve = OtherFull::create([
+                    'other_id' => $full_maintenance->id,
+                    'work' => $full_maintenance->work,
+                    'request' => $full_maintenance->created_at,
+                    'visit' => $full_maintenance->visit,
+                    'leave' => $full_maintenance->leave,
+                    'link' => ("https://dcops.balifiber.id/other/maintenance/pdf/$full_maintenance->id"),
+                    'note' => null,
+                    'status' => 'Full Approved',
+                ]);
             }
 
             // Simpan tiap perubahan permit ke table CLeaningHistory
@@ -216,7 +234,6 @@ class OtherController extends Controller
                 'aktif' => true,
                 'pdf' => false,
             ]);
-
         } else {
             abort(403);
         }
@@ -269,8 +286,8 @@ class OtherController extends Controller
             ->where('other_histories.other_id', '=', $id)
             ->select('other_histories.*')
             ->get();
-            $pdf = PDF::loadview('other.maintenance_pdf', compact('getOther', 'getPersonil', 'getHistory', 'getLastOther'))->setPaper('a4', 'portrait')->setWarnings(false);
-            return $pdf->stream();
+        $pdf = PDF::loadview('other.maintenance_pdf', compact('getOther', 'getPersonil', 'getHistory', 'getLastOther'))->setPaper('a4', 'portrait')->setWarnings(false);
+        return $pdf->stream();
     }
 
 
@@ -292,7 +309,20 @@ class OtherController extends Controller
             ->make(true);
     }
 
-
-
-
+    public function yajra_full_visitor()
+    {
+        $full_visitor = DB::table('other_fulls')
+            ->join('others', 'others.id', '=', 'other_fulls.other_id')
+            ->select('other_fulls.*')
+            ->orderBy('other_id', 'desc');
+        return Datatables::of($full_visitor)
+            ->editColumn('visit', function ($full_visitor) {
+                return $full_visitor->visit ? with(new Carbon($full_visitor->visit))->format('d/m/Y') : '';
+            })
+            ->editColumn('leave', function ($full_visitor) {
+                return $full_visitor->leave ? with(new Carbon($full_visitor->leave))->format('d/m/Y') : '';
+            })
+            ->addColumn('action', 'other.maintenanceActionEdit')
+            ->make(true);
+    }
 }

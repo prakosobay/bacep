@@ -166,9 +166,11 @@ Route::middleware(['auth'])->group(function () {
     // Maintenance
     Route::get('other/maintenance/show', [OtherController::class, 'show_maintenance_form']);
     Route::get('other/maintenance/log', [OtherController::class, 'show_maintenance_log']);
+    Route::get('other/maintenance/full', [OtherController::class, 'show_maintenance_full']);
     Route::get('other/maintenance/rutin/{id}', [OtherController::class, 'get_rutin']);
     Route::get('other/maintenance/visitor/{id}', [OtherController::class, 'get_visitor']);
     Route::get('other/maintenance/yajra', [OtherController::class, 'yajra_history']);
+    Route::get('/other/maintenance/yajra/full/visitor', [OtherController::class, 'yajra_full_visitor']);
     Route::get('/other/maintenance/pdf/{id}', [OtherController::class, 'pdf_maintenance']);
     Route::post('/other/maintenance/approve', [OtherController::class, 'approve_maintenance']);
     Route::post('/other/maintenance/reject', [OtherController::class, 'reject_maintenance']);
