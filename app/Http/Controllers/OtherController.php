@@ -33,6 +33,11 @@ class OtherController extends Controller
         return view('other.maintenance_form', compact('personil', 'pilihanwork'));
     }
 
+    public function show_maintenance_log() // Menampikan log maintenance
+    {
+        return view('other.maintenance_log');
+    }
+
 
 
     // Retrieving Data From DB

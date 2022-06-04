@@ -9,13 +9,20 @@
         </div>
         <div class="card-body">
             <div class="container-fluid">
-                <a type="button" class="btn btn-sm btn-primary mx-1 my-2" href="{{url('cleaning_form')}}">Permit Cleaning</a>
-                <button class="btn btn-secondary btn-sm mx-1 my-2" data-bs-toggle="modal" data-bs-target="#troubleshoot">Permit Troubleshoot</button>
-                <button class="btn btn-sm btn-dark mx-1 my-2" data-bs-toggle="modal" data-bs-target="#maintenance">Permit Maintenance</button>
-                <a type="button" class="btn btn-sm btn-danger mx-1 my-2" href="{{url('cleaning/reject/show')}}">List Permit Reject</a>
-                <a type="button" class="btn btn-sm btn-info mx-1 my-2" href="{{url('logall')}}">Log Permit BM</a>
+                <a type="button" class="btn btn-sm btn-primary mx-1 my-2" href="{{url('cleaning_form')}}">Create Permit Cleaning</a>
+                <a type="button" class="btn btn-sm btn-info mx-1 my-2" href="{{url('logall')}}">Log Permit Cleaning</a>
                 <a type="button" class="btn btn-sm btn-success mx-1 my-2" href="{{ url('cleaning/action/export')}}">Export PDF</a>
+                <a type="button" class="btn btn-sm btn-success mx-1 my-2" href="#">Export Excel</a>
             </div>
+            <div class="card-body">
+                <button class="btn btn-sm btn-dark mx-1 my-2" data-bs-toggle="modal" data-bs-target="#maintenance">Create Permit Maintenance</button>
+                <a type="button" class="btn btn-sm btn-info mx-1 my-2" href="{{url('other/maintenance/log')}}">Log Permit Maintenance</a>
+            </div>
+            <div>
+            <card-body>
+                <button class="btn btn-secondary btn-sm mx-1 my-2" data-bs-toggle="modal" data-bs-target="#troubleshoot"> Create Permit Troubleshoot</button>
+                <a type="button" class="btn btn-sm btn-info mx-1 my-2" href="{{url('logall')}}">Log Permit Troubleshoot</a>
+            </card-body>
 
             {{-- Modal Troubleshoot --}}
             <div class="modal fade" id="troubleshoot" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
