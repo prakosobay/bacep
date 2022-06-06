@@ -210,6 +210,8 @@ class HomeController extends Controller
                 return view('sales.full_approval');
             } elseif ($type_full == 'cleaning') {
                 return view('cleaning.full_approval');
+            } elseif ($type_full == 'maintenance') {
+                return view('other.maintenance_full_approval');
             } else {
                 abort(403);
             }

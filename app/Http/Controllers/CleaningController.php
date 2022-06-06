@@ -363,7 +363,6 @@ class CleaningController extends Controller
 
     public function reject_full_cleaning(Request $request, $id)
     {
-        // dd($request->all());
         $getLog = CleaningHistory::where('cleaning_id', $id)->where('aktif', 1)->first();
         $getFull = CleaningFull::where('cleaning_id', $id)->first();
 

@@ -295,6 +295,13 @@ class OtherController extends Controller
         }
     }
 
+    public function update_reject_maintenance(Request $request, $id)
+    {
+        dd($request->all());
+        $form = Other::findOrFail($id);
+        $update_reject = OtherHistory::where('other_id', $id)->latest()->first();
+    }
+
 
 
     // Convert pdf
@@ -333,7 +340,7 @@ class OtherController extends Controller
             ->make(true);
     }
 
-    public function yajra_full_visitor()
+    public function yajra_full_visitor_maintenance()
     {
         $full_visitor = DB::table('other_fulls')
             ->join('others', 'others.id', '=', 'other_fulls.other_id')
@@ -347,6 +354,20 @@ class OtherController extends Controller
                 return $full_visitor->leave ? with(new Carbon($full_visitor->leave))->format('d/m/Y') : '';
             })
             ->addColumn('action', 'other.maintenanceActionEdit')
+            ->make(true);
+    }
+
+    public function yajra_full_approval_maintenance()
+    {
+        $full_approval = DB::table('other_fulls')
+            ->join('others', 'others.id', '=', 'other_fulls.other_id')
+            ->select('other_fulls.*')
+            ->orderBy('other_id', 'desc');
+        return Datatables::of($full_approval)
+            ->editColumn('visit', function ($full_approval) {
+                return $full_approval->visit ? with(new Carbon($full_approval->visit))->format('d/m/Y') : '';
+            })
+            ->addColumn('action', 'other.maintenanceActionLink')
             ->make(true);
     }
 }

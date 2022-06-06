@@ -170,12 +170,14 @@ Route::middleware(['auth'])->group(function () {
     Route::get('other/maintenance/rutin/{id}', [OtherController::class, 'get_rutin']);
     Route::get('other/maintenance/visitor/{id}', [OtherController::class, 'get_visitor']);
     Route::get('other/maintenance/yajra', [OtherController::class, 'yajra_history']);
-    Route::get('/other/maintenance/yajra/full/visitor', [OtherController::class, 'yajra_full_visitor']);
+    Route::get('/other/maintenance/yajra/full/visitor', [OtherController::class, 'yajra_full_visitor_maintenance']);
+    Route::get('/other/maintenance/yajra/full/approval', [OtherController::class, 'yajra_full_approval_maintenance']);
     Route::get('/other/maintenance/pdf/{id}', [OtherController::class, 'pdf_maintenance']);
     Route::get('other/maintenance/action/checkin/{id}', [OtherController::class, 'show_maintenance_checkin']);
     Route::post('/other/maintenance/approve', [OtherController::class, 'approve_maintenance']);
     Route::post('/other/maintenance/reject', [OtherController::class, 'reject_maintenance']);
     Route::post('other/maintenance/create', [OtherController::class, 'create_maintenance']);
+    Route::post('other/maintenance/full/reject/{id}', [OtherController::class, 'update_reject_maintenance']);
 
     //Visitor All Base Super
     Route::get('new_permit', [HomeController::class, 'new_permit']);
