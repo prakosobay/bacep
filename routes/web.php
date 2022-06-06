@@ -172,6 +172,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('other/maintenance/yajra', [OtherController::class, 'yajra_history']);
     Route::get('/other/maintenance/yajra/full/visitor', [OtherController::class, 'yajra_full_visitor']);
     Route::get('/other/maintenance/pdf/{id}', [OtherController::class, 'pdf_maintenance']);
+    Route::get('other/maintenance/action/checkin/{id}', [OtherController::class, 'show_maintenance_checkin']);
     Route::post('/other/maintenance/approve', [OtherController::class, 'approve_maintenance']);
     Route::post('/other/maintenance/reject', [OtherController::class, 'reject_maintenance']);
     Route::post('other/maintenance/create', [OtherController::class, 'create_maintenance']);

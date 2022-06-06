@@ -38,6 +38,31 @@ class OtherController extends Controller
         return view('other.maintenance_full_visitor');
     }
 
+    public function show_maintenance_checkin($id) // Menampilkan form maintenance untuk view checkin
+    {
+        $form = Other::findOrFail($id);
+        $other_personil = OtherPersonil::where('other_id', $id)->get();
+        $personil = Visitor::all();
+
+        $pic = [];
+        foreach ($other_personil as $k => $nama) {
+            $data_nama = [];
+            if (isset($other_personil[$k])) {
+                $data_nama = [
+                    'name' => $nama['name'],
+                    'company' => $nama['company'],
+                    'department' => $nama['department'],
+                    'respon' => $nama['respon'],
+                    'phone' => $nama['phone'],
+                    'number' => $nama['number'],
+                ];
+                $pic[] = $data_nama;
+            }
+        }
+        // dd($pic);
+        return view('other.maintenance_checkin', compact('form', 'personil', 'pic'));
+    }
+
 
 
     // Retrieving Data From DB
@@ -145,7 +170,6 @@ class OtherController extends Controller
 
         foreach ($data['visit_nama'] as $k => $v) {
             $data_dump = [];
-            $data_kosong = [];
             if (isset($data['visit_nama'][$k])) {
                 $personil[] = Visitor::find($v)->visit_nama;
                 $data_dump = [
