@@ -295,7 +295,7 @@
                 </table>
 
                 {{-- PIC --}}
-                <table class="table table-bordered bg1">
+                {{-- <table class="table table-bordered bg1">
                     <tr>
                         <th colspan="5"><b>Visitor</b></th>
                     </tr>
@@ -345,90 +345,96 @@
                             <th rowspan="4">PIC {{$num}}</th>
                         </tr>
                     @endforeach
-                </table>
+                </table> --}}
 
 
                 {{-- contoh --}}
                 <div class="wrap-input100 validate-input bg1">
-                    <table class="table table-bordered bg1">
-                        <tr>
-                            <th colspan="5"><b>PIC 1</b></th>
-                        </tr>
-                        <tr>
-                            <th>Name </th>
-                            <td>
-                                <select class="js-select2" name="visit_nama[]" id="nama">
-                                    <option value="" selected></option>
-                                    @foreach ($personil as $p)
-                                        <option value="{{$p->id}}">{{$p->visit_nama}}</option>
-                                    @endforeach
-                                </select>
-                                <div class="dropDownSelect2"></div>
-                            </td>
-                            <th>Company</th>
-                            <td>
-                                <input type="text" class="input100" name="visit_company[]" id="company" value="" readonly>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>ID Number </th>
-                            <td>
-                                <input type="text" class="input100" name="visit_nik[]" id="nik" value="" readonly>
-                            </td>
-                            <th>Department </th>
-                            <td>
-                                <input type="text" class="input100" name="visit_department[]" id="department" value="" readonly>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>Phone Number</th>
-                            <td>
-                                <input type="text" class="input100" name="visit_phone[]" id="phone" value="" readonly>
-                            </td>
-                            <th>Responsibility </th>
-                            <td>
-                                <input type="text" class="input100" name="visit_respon[]" id="respon" value="" readonly>
-                            </td>
-                        </tr>
-                    </table>
-                    <div class="container-fluid">
-                        <div class="row justify-content-center">
-                            <div class="col-6">
-                                <span class="label-input100">Take a selfie</span>
+                    @foreach ($pic as $v)
+
+                        {{-- Data PIC --}}
+                        <table class="table table-bordered bg1">
+                            <tr>
+                                <th colspan="5"><b>PIC</b></th>
+                            </tr>
+                            <tr>
+                                <th>Name </th>
+                                <td>
+                                    <select class="js-select2" name="visit_nama[]" id="nama">
+                                        <option value="{{$v['name']}}" selected>{{$v['name']}}</option>
+                                        @foreach ($personil as $p)
+                                            <option value="{{$p->id}}">{{$p->visit_nama}}</option>
+                                        @endforeach
+                                    </select>
+                                    <div class="dropDownSelect2"></div>
+                                </td>
+                                <th>Company</th>
+                                <td>
+                                    <input type="text" class="input100" name="visit_company[]" id="company" value="{{$v['company']}}" readonly>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>ID Number </th>
+                                <td>
+                                    <input type="text" class="input100" name="visit_nik[]" id="nik" value="{{$v['number']}}" readonly>
+                                </td>
+                                <th>Department </th>
+                                <td>
+                                    <input type="text" class="input100" name="visit_department[]" id="department" value="{{$v['department']}}" readonly>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Phone Number</th>
+                                <td>
+                                    <input type="text" class="input100" name="visit_phone[]" id="phone" value="{{$v['phone']}}" readonly>
+                                </td>
+                                <th>Responsibility </th>
+                                <td>
+                                    <input type="text" class="input100" name="visit_respon[]" id="respon" value="{{$v['respon']}}" readonly>
+                                </td>
+                            </tr>
+                        </table>
+
+                        {{-- Take Selfie --}}
+                        <div class="container-fluid">
+                            <div class="row justify-content-center">
+                                <div class="col-6">
+                                    <span class="label-input100">Take a selfie</span>
+                                </div>
+                                <div class="col-6">
+                                    <span class="label-input100"><b>Your captured image will appear here...</b></span>
+                                </div>
                             </div>
-                            <div class="col-6">
-                                <span class="label-input100"><b>Your captured image will appear here...</b></span>
+                            <div class="row justify-content-center">
+                                <div class="col-6">
+                                    <div id="my_camera"></div>
+                                </div>
+                                <div class="col-6">
+                                    <div id="results"></div>
+                                </div>
+                            </div>
+                            <div class="row justify-content-center">
+                                <input type=button class="btn btn-primary btn-sm" value="Take Snapshot" onclick="take_snapshot()" required>
+                            </div>
+                            <div class="row justify-content-center">
+                                <input class="@error('photo_personil') is-invalid
+                                @enderror" required autocomplete="photo_personil" type="hidden" name="photo_personil[]" id="image">
+                                @error('photo_personil')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="row justify-content-center my-2">
+                                <input type="time" class="@error('checkin_personil')@enderror" name="checkin_personil[]" id="checkin_personil" value="" required autocomplete="checkin_personil" readonly>
+                                @error('checkin_personil')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
-                        <div class="row justify-content-center">
-                            <div class="col-6">
-                                <div id="my_camera"></div>
-                            </div>
-                            <div class="col-6">
-                                <div id="results"></div>
-                            </div>
-                        </div>
-                        <div class="row justify-content-center">
-                            <input type=button class="btn btn-primary btn-sm" value="Take Snapshot" onclick="take_snapshot()" required>
-                        </div>
-                        <div class="row justify-content-center">
-                            <input class="@error('photo_personil') is-invalid
-                            @enderror" required autocomplete="photo_personil" type="hidden" name="photo_personil" id="image">
-                            @error('photo_personil')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                        <div class="row justify-content-center my-2">
-                            <input type="time" class="@error('checkin_personil')@enderror" name="checkin_personil" id="checkin_personil" value="" required autocomplete="checkin_personil" readonly>
-                            @error('checkin_personil')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
 
 				<div class="container-contact100-form-btn">
@@ -604,6 +610,7 @@
                 $("#image").val(data_uri);
                 document.getElementById('results').innerHTML = '<img src="'+data_uri+'"/>';
             });
+
             var tanggal = new Date();
             var jam = tanggal.getHours();
             var menit = tanggal.getMinutes();
@@ -614,6 +621,10 @@
             var waktu = jam + ':' + menit + ':' + detik;
             $("#checkin_personil").val(waktu);
         }
+
+        // var cam = document.getElementById('#my_camera');
+
+        // Array.prototype.forEach.call(cam, function())
 
 	</script>
 <!--===============================================================================================-->
