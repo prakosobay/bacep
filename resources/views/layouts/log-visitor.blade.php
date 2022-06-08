@@ -48,6 +48,8 @@
         </div>
     </nav>
 
+
+
     {{-- YANG INI JANGAN DU HAPUS !!! --}}
     @yield('content')
     {{-- !!!!!!!!!!!! --}}

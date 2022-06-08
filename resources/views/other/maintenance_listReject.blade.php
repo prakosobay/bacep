@@ -10,10 +10,10 @@
         <div class="card-body">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
-                  <button class="nav-link active" id="Lcleaning-tab" data-bs-toggle="tab" data-bs-target="#Lcleaning" type="button" role="tab" aria-controls="Lcleaning" aria-selected="true">Cleaning</button>
+                  <button class="nav-link active" id="Lcleaning-tab" data-bs-toggle="tab" data-bs-target="#Lcleaning" type="button" role="tab" aria-controls="Lcleaning" aria-selected="false">Cleaning</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                  <button class="nav-link" id="Lmaintenance-tab" data-bs-toggle="tab" data-bs-target="#Lmaintenance" type="button" role="tab" aria-controls="Lmaintenance" aria-selected="false">Maintenance</button>
+                  <button class="nav-link" id="Lmaintenance-tab" data-bs-toggle="tab" data-bs-target="#Lmaintenance" type="button" role="tab" aria-controls="Lmaintenance" aria-selected="true">Maintenance</button>
                 </li>
                 <li class="nav-item" role="presentation">
                   <button class="nav-link" id="Ltroubleshoot-tab" data-bs-toggle="tab" data-bs-target="#Ltroubleshoot" type="button" role="tab" aria-controls="Ltroubleshoot" aria-selected="false">Troubleshoot</button>
@@ -43,17 +43,14 @@
                     {{-- Tabel Cleaning --}}
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-striped table-bordered" id="cleaning" width="100%" cellspacing="0">
+                            <table class="table table-striped table-bordered" id="cleaning_table" width="100%" cellspacing="0">
                                 <thead>
                                     <tr class="judul-table text-center">
                                         <th>No.</th>
                                         <th>Date of Visit</th>
                                         <th>Purpose of Work</th>
                                         <th>Visitor Name</th>
-                                        {{-- <th>Visitor Company</th> --}}
-                                        <th>Checkin</th>
-                                        <th>Checkout</th>
-                                        <th>Action</th>
+                                        <th>Note</th>
                                     </tr>
                                 </thead>
                                 <tbody class="isi-table text-center">
@@ -112,11 +109,9 @@
                                         <th>No.</th>
                                         <th>Purpose of Work</th>
                                         <th>Date of Visit</th>
-                                        <th>Date of Leave</th>
                                         {{-- <th>Visitor Company</th> --}}
-                                        {{-- <th>Checkin</th> --}}
-                                        {{-- <th>Checkout</th> --}}
-                                        <th>Action</th>
+                                        {{-- <th>Visitor Name</th> --}}
+                                        <th>Note</th>
                                     </tr>
                                 </thead>
                                 <tbody class="isi-table text-center">
@@ -170,7 +165,7 @@
                                         <th>No.</th>
                                         <th>Date of Visit</th>
                                         <th>Purpose of Work</th>
-                                        <th>Visitor Name</th>
+                                        {{-- <th>Visitor Name</th> --}}
                                         {{-- <th>Visitor Company</th> --}}
                                         <th>Checkin</th>
                                         <th>Checkout</th>
@@ -190,73 +185,19 @@
 
 @push('scripts')
     <script>
-
-        // $(function() {
-        //     $("#start_date").datepicker({
-        //         "dateFormat": "yy-mm-dd"
-        //     });
-
-        //     $("#end_date").datepicker({
-        //         "dateFormat": "yy-mm-dd"
-        //     });
-        // });
-
-        $(function() {
-            $('#cleaning').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: '{{ url('yajra_full_approve_cleaning_other')}}',
-                columns: [
-                    { data: 'cleaning_id', name: 'cleaning_id' },
-                    { data: 'validity_from', name: 'validity_from' },
-                    { data: 'cleaning_work', name: 'cleaning_work' },
-                    { data: 'cleaning_name', name: 'cleaning_name' },
-                    { data: 'checkin_personil', name: 'checkin_personil' },
-                    { data: 'checkout_personil', name: 'checkout_personil' },
-                    {data: 'action', name: 'action', orderable: false, searchable: false}
-                ]
-            });
-        });
-
         $(function() {
             $('#maintenance_table').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: '{{ url('other/maintenance/yajra/full/visitor')}}',
+                ajax: '{{ url('other/maintenance/yajra/full/reject')}}',
                 columns: [
                     { data: 'other_id', name: 'other_id' },
                     { data: 'work', name: 'work' },
                     { data: 'visit', name: 'visit' },
-                    { data: 'leave', name: 'leave' },
-                    // { data: 'checkin_personil', name: 'checkin_personil' },
-                    // { data: 'checkout_personil', name: 'checkout_personil' },
-                    {data: 'action', name: 'action', orderable: false, searchable: false}
+                    { data: 'note', name: 'note' },
                 ]
             });
         });
-
-
-        // Filter
-        // $(document).on("click", "#filter", function(e) {
-        //     e.preventDefault();
-        //     var start_date = $("#start_date").val();
-        //     var end_date = $("#end_date").val();
-        //     if (start_date == "" || end_date == "") {
-        //         alert("Both date required");
-        //     } else {
-        //         $('#records').DataTable().destroy();
-        //         fetch(start_date, end_date);
-        //     }
-        // });
-        // // Reset
-        // $(document).on("click", "#reset", function(e) {
-        //     e.preventDefault();
-        //     $("#start_date").val(''); // empty value
-        //     $("#end_date").val('');
-        //     $('#records').DataTable().destroy();
-        //     fetch();
-        // });
-
     </script>
 @endpush
 @endsection

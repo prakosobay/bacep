@@ -38,6 +38,11 @@ class OtherController extends Controller
         return view('other.maintenance_full_visitor');
     }
 
+    public function show_maintenance_reject() // Menampilkan list permit reject dari sisi visitor
+    {
+        return view('other.maintenance_listReject');
+    }
+
     public function show_maintenance_checkin($id) // Menampilkan form maintenance untuk view checkin
     {
         $form = Other::findOrFail($id);
@@ -297,9 +302,32 @@ class OtherController extends Controller
 
     public function update_reject_maintenance(Request $request, $id)
     {
-        dd($request->all());
-        $form = Other::findOrFail($id);
-        $update_reject = OtherHistory::where('other_id', $id)->latest()->first();
+        $maintenance_full = OtherFull::where('other_id', $id)->first();
+        $update_reject = OtherHistory::where('other_id', $id)->where('aktif', 1)->first();
+
+        $update_reject->update([
+            'aktif' => false,
+        ]);
+
+        $update_reject = OtherHistory::create([
+            'other_id' => $id,
+            'created_by' => Auth::user()->name,
+            'role_to' => 0,
+            'status' => 'Full Rejected',
+            'aktif' => true,
+            'pdf' => false,
+        ]);
+
+        $maintenance_full->update([
+            'status' => 'Full Rejected',
+            'note' => $request->note,
+        ]);
+
+        if (($update_reject) && ($maintenance_full)) {
+            return redirect('logall')->with('status', 'Berhasil di Reject!');
+        } else {
+            return redirect('logall')->with('status', 'gagal');
+        }
     }
 
 
@@ -344,6 +372,7 @@ class OtherController extends Controller
     {
         $full_visitor = DB::table('other_fulls')
             ->join('others', 'others.id', '=', 'other_fulls.other_id')
+            ->where('status', '!=', 'Full Rejected')
             ->select('other_fulls.*')
             ->orderBy('other_id', 'desc');
         return Datatables::of($full_visitor)
@@ -368,6 +397,19 @@ class OtherController extends Controller
                 return $full_approval->visit ? with(new Carbon($full_approval->visit))->format('d/m/Y') : '';
             })
             ->addColumn('action', 'other.maintenanceActionLink')
+            ->make(true);
+    }
+
+    public function yajra_full_reject_maintenance()
+    {
+        $getFull = DB::table('other_fulls')
+            ->select(['other_id', 'visit', 'note', 'work'])
+            ->where('note', '!=', null)
+            ->orderBy('other_id', 'desc');
+        return Datatables::of($getFull)
+            ->editColumn('visit', function ($getFull) {
+                return $getFull->visit ? with(new Carbon($getFull->visit))->format('d/m/Y') : '';
+            })
             ->make(true);
     }
 }
