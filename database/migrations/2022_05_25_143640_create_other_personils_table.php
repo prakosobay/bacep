@@ -22,6 +22,10 @@ class CreateOtherPersonilsTable extends Migration
             $table->string('respon');
             $table->string('phone');
             $table->string('number');
+            $table->time('checkin')->nullable();
+            $table->time('checkout')->nullable();
+            $table->string('photo_checkin')->nullable();
+            $table->string('photo_checkout')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

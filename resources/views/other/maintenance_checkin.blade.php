@@ -295,146 +295,137 @@
                 </table>
 
                 {{-- PIC --}}
-                {{-- <table class="table table-bordered bg1">
-                    <tr>
-                        <th colspan="5"><b>Visitor</b></th>
-                    </tr>
-                    <tr>
-                        <th rowspan="4">PIC 1</th>
-                    </tr>
-                    {{$num = 1}}
-                    @foreach($pic as $v)
-                    {{$num++}}
-                        <tr>
-                            <th>Name </th>
-                            <td>
-                                <select class="js-select2" name="visit_nama[]" id="nama">
-                                    <option value="{{$v['name']}}" selected>{{$v['name']}}</option>
-                                    @foreach ($personil as $p)
-                                        <option value="{{$p->id}}">{{$p->visit_nama}}</option>
-                                    @endforeach
-                                </select>
-                                <div class="dropDownSelect2"></div>
-                            </td>
-                            <th>Company</th>
-                            <td>
-                                <input type="text" class="input100" name="visit_company[]" id="company" value="{{$v['company']}}" readonly>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>ID Number </th>
-                            <td>
-                                <input type="text" class="input100" name="visit_nik[]" id="nik" value="{{$v['number']}}" readonly>
-                            </td>
-                            <th>Department </th>
-                            <td>
-                                <input type="text" class="input100" name="visit_department[]" id="department" value="{{$v['department']}}" readonly>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>Phone Number</th>
-                            <td>
-                                <input type="text" class="input100" name="visit_phone[]" id="phone" value="{{$v['phone']}}" readonly>
-                            </td>
-                            <th>Responsibility </th>
-                            <td>
-                                <input type="text" class="input100" name="visit_respon[]" id="respon" value="{{$v['respon']}}" readonly>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th rowspan="4">PIC {{$num}}</th>
-                        </tr>
-                    @endforeach
-                </table> --}}
-
-
-                {{-- contoh --}}
                 <div class="wrap-input100 validate-input bg1">
                     @foreach ($pic as $v)
-
                         {{-- Data PIC --}}
-                        <table class="table table-bordered bg1">
-                            <tr>
-                                <th colspan="5"><b>PIC</b></th>
-                            </tr>
-                            <tr>
-                                <th>Name </th>
-                                <td>
-                                    <select class="js-select2" name="visit_nama[]" id="nama">
-                                        <option value="{{$v['name']}}" selected>{{$v['name']}}</option>
-                                        @foreach ($personil as $p)
-                                            <option value="{{$p->id}}">{{$p->visit_nama}}</option>
-                                        @endforeach
-                                    </select>
-                                    <div class="dropDownSelect2"></div>
-                                </td>
-                                <th>Company</th>
-                                <td>
-                                    <input type="text" class="input100" name="visit_company[]" id="company" value="{{$v['company']}}" readonly>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>ID Number </th>
-                                <td>
-                                    <input type="text" class="input100" name="visit_nik[]" id="nik" value="{{$v['number']}}" readonly>
-                                </td>
-                                <th>Department </th>
-                                <td>
-                                    <input type="text" class="input100" name="visit_department[]" id="department" value="{{$v['department']}}" readonly>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>Phone Number</th>
-                                <td>
-                                    <input type="text" class="input100" name="visit_phone[]" id="phone" value="{{$v['phone']}}" readonly>
-                                </td>
-                                <th>Responsibility </th>
-                                <td>
-                                    <input type="text" class="input100" name="visit_respon[]" id="respon" value="{{$v['respon']}}" readonly>
-                                </td>
-                            </tr>
-                        </table>
-
-                        {{-- Take Selfie --}}
-                        <div class="container-fluid">
-                            <div class="row justify-content-center">
-                                <div class="col-6">
-                                    <span class="label-input100">Take a selfie</span>
-                                </div>
-                                <div class="col-6">
-                                    <span class="label-input100"><b>Your captured image will appear here...</b></span>
-                                </div>
-                            </div>
-                            <div class="row justify-content-center">
-                                <div class="col-6">
-                                    <div id="my_camera"></div>
-                                </div>
-                                <div class="col-6">
-                                    <div id="results"></div>
-                                </div>
-                            </div>
-                            <div class="row justify-content-center">
-                                <input type=button class="btn btn-primary btn-sm" value="Take Snapshot" onclick="take_snapshot()" required>
-                            </div>
-                            <div class="row justify-content-center">
-                                <input class="@error('photo_personil') is-invalid
-                                @enderror" required autocomplete="photo_personil" type="hidden" name="photo_personil[]" id="image">
-                                @error('photo_personil')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                            <div class="row justify-content-center my-2">
-                                <input type="time" class="@error('checkin_personil')@enderror" name="checkin_personil[]" id="checkin_personil" value="" required autocomplete="checkin_personil" readonly>
-                                @error('checkin_personil')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+                        <div id="pic">
+                            <table class="table table-bordered bg1">
+                                <tr>
+                                    <th colspan="5"><b>PIC</b></th>
+                                </tr>
+                                <tr>
+                                    <th>Name </th>
+                                    <td>
+                                        <select class="js-select2" name="visit_nama[]" id="nama">
+                                            <option value="{{$v['name']}}" selected>{{$v['name']}}</option>
+                                            @foreach ($personil as $p)
+                                                <option value="{{$p->id}}">{{$p->visit_nama}}</option>
+                                            @endforeach
+                                        </select>
+                                        <div class="dropDownSelect2"></div>
+                                    </td>
+                                    <th>Company</th>
+                                    <td>
+                                        <input type="text" class="input100" name="visit_company[]" id="company" value="{{$v['company']}}" readonly>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>ID Number </th>
+                                    <td>
+                                        <input type="text" class="input100" name="visit_nik[]" id="nik" value="{{$v['number']}}" readonly>
+                                    </td>
+                                    <th>Department </th>
+                                    <td>
+                                        <input type="text" class="input100" name="visit_department[]" id="department" value="{{$v['department']}}" readonly>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Phone Number</th>
+                                    <td>
+                                        <input type="text" class="input100" name="visit_phone[]" id="phone" value="{{$v['phone']}}" readonly>
+                                    </td>
+                                    <th>Responsibility </th>
+                                    <td>
+                                        <input type="text" class="input100" name="visit_respon[]" id="respon" value="{{$v['respon']}}" readonly>
+                                    </td>
+                                </tr>
+                            </table>
                         </div>
                     @endforeach
+                </div>
+
+                {{-- Take Selfie --}}
+                <div class="wrap-input100 bg1 rs1-alert-validate">
+
+                    {{-- 1 --}}
+                    <div class="container-fluid">
+                        <div class="row justify-content-center">
+                            <div class="col-6">
+                                <span class="label-input100">Take a selfie PIC</span>
+                            </div>
+                            <div class="col-6">
+                                <span class="label-input100"><b>Your captured image will appear here...</b></span>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-6">
+                                <div id="my_camera"></div>
+                            </div>
+                            <div class="col-6">
+                                <div id="results"></div>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <input type=button class="btn btn-primary btn-sm" value="Take Snapshot" onclick="take_snapshot()" required>
+                        </div>
+                        <div class="row justify-content-center">
+                            <input class="@error('photo_checkin') is-invalid
+                            @enderror" required autocomplete="photo_checkin" type="hidden" name="photo_checkin[]" id="image">
+                            @error('photo_checkin')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="row justify-content-center my-2">
+                            <input type="time" class="@error('checkin')@enderror" name="checkin[]" id="checkin" value="" required autocomplete="checkin" readonly>
+                            @error('checkin')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    {{-- 2 --}}
+                    <div class="container-fluid">
+                        <div class="row justify-content-center">
+                            <div class="col-6">
+                                <span class="label-input100">Take a selfie PIC</span>
+                            </div>
+                            <div class="col-6">
+                                <span class="label-input100"><b>Your captured image will appear here...</b></span>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-6">
+                                <div id="my_camera2"></div>
+                            </div>
+                            <div class="col-6">
+                                <div id="results2"></div>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <input type=button class="btn btn-primary btn-sm" value="Take Snapshot" onclick="take_snapshot2()" required>
+                        </div>
+                        <div class="row justify-content-center">
+                            <input class="@error('photo_checkin') is-invalid
+                            @enderror" required autocomplete="photo_checkin" type="hidden" name="photo_checkin[]" id="image2">
+                            @error('photo_checkin')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="row justify-content-center my-2">
+                            <input type="time" class="@error('checkin')@enderror" name="checkin[]" id="checkin2" value="" required autocomplete="checkin" readonly>
+                            @error('checkin')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
                 </div>
 
 				<div class="container-contact100-form-btn">
@@ -460,31 +451,63 @@
 	<script src="{{ asset('vendor/select2/select2.min.js')}}"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.25/webcam.min.js"></script>
+
 	<script type="text/javascript">
+
+    $(document).ready(function(){
+
+
 		$(".js-select2").each(function(){
 			$(this).select2({
 				minimumResultsForSearch: 20,
 				dropdownParent: $(this).next('.dropDownSelect2')
 			});
-		})
+		});
 
-        $('#nama').change(function(){
-            let id = $(this).val();
-            $.ajax({
-                url: "{{url("/other/maintenance/visitor")}}"+'/'+id,
-                dataType:"json",
-                type: "get",
-                success: function(response){
-                    const {visitor} = response;
-                    console.log(visitor)
-                $('#company').val(visitor.visit_company);
-                $('#department').val(visitor.visit_department);
-                $('#phone').val(visitor.visit_phone);
-                $('#nik').val(visitor.visit_nik);
-                $('#respon').val(visitor.visit_respon);
-                }
-            });
+        $('#pic').each(function(){
+            $('#nama').change(function(){
+                let id = $(this).val();
+                $.ajax({
+                    url: "{{url("/other/maintenance/visitor")}}"+'/'+id,
+                    dataType:"json",
+                    type: "get",
+                    success: function(response){
+                        const {visitor} = response;
+                        console.log(visitor)
+                    $('#company').val(visitor.visit_company);
+                    $('#department').val(visitor.visit_department);
+                    $('#phone').val(visitor.visit_phone);
+                    $('#nik').val(visitor.visit_nik);
+                    $('#respon').val(visitor.visit_respon);
+                    }
+                });
+            })
         });
+
+        // var nama = document.getElementById('nama')[];
+
+        // $('#nama')[].change(function(){
+        //     let id = $(this).val();
+        //     // var data = [];
+        //     $.ajax({
+        //         url: "{{url("/other/maintenance/visitor")}}"+'/'+id,
+        //         dataType:"json",
+        //         type: "get",
+        //         success: function(response){
+        //             // data[] = response;
+        //             const {visitor} = response;
+        //             console.log(visitor);
+        //             // var data_visitor = [];
+        //             // data_visitor[] = visitor;
+        //             // console.log(data_visitor['id']);
+        //         $('#company')[].val(visitor.visit_company);
+        //         $('#department')[].val(visitor.visit_department);
+        //         $('#phone')[].val(visitor.visit_phone);
+        //         $('#nik')[].val(visitor.visit_nik);
+        //         $('#respon')[].val(visitor.visit_respon);
+        //         }
+        //     });
+        // });
 
         $('#nama_2').change(function(){
             let id = $(this).val();
@@ -619,12 +642,27 @@
             menit = menit < 10 ? '0'+menit : menit;
             detik = detik < 10 ? '0'+detik : detik;
             var waktu = jam + ':' + menit + ':' + detik;
-            $("#checkin_personil").val(waktu);
+            $("#checkin").val(waktu);
         }
 
-        // var cam = document.getElementById('#my_camera');
+        Webcam.attach( '#my_camera2' );
+        function take_snapshot2() {
+            Webcam.snap( function(data_uri) {
+                $("#image2").val(data_uri);
+                document.getElementById('results2').innerHTML = '<img src="'+data_uri+'"/>';
+            });
+            var tanggal = new Date();
+            var jam = tanggal.getHours();
+            var menit = tanggal.getMinutes();
+            var detik = tanggal.getSeconds();
+            jam = jam < 10 ? '0' +jam : jam;
+            menit = menit < 10 ? '0'+menit : menit;
+            detik = detik < 10 ? '0'+detik : detik;
+            var waktu = jam + ':' + menit + ':' + detik;
 
-        // Array.prototype.forEach.call(cam, function())
+            $("#checkin2").val(waktu);
+        }
+    });
 
 	</script>
 <!--===============================================================================================-->

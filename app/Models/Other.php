@@ -14,10 +14,10 @@ class Other extends Model
     protected $primaryKey = 'id';
     protected $guarded = [];
 
-    public function other_personils()
-    {
-        return $this->hasMany(OtherPersonil::class);
-    }
+    // public function other_personils()
+    // {
+    //     return $this->hasMany(OtherPersonil::class);
+    // }
 
 
 }

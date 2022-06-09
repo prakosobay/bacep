@@ -187,11 +187,13 @@ class HomeController extends Controller
             } elseif ($type_approve == 'maintenance') {
                 $getMaintenance = DB::table('other_histories')
                     ->join('others', 'others.id', '=', 'other_histories.other_id')
+                    // ->join('other_personils', 'others.id', '=', 'other_personils.other_id')
                     ->whereIn('other_histories.role_to', $role_1)
                     ->where('other_histories.aktif', '=', 1)
                     ->select('others.*', 'other_histories.*')
                     ->orderBy('other_id', 'desc')
                     ->get();
+                    // dd($getMaintenance);
                 return view('other.maintenance_approval', compact('getMaintenance'));
             } else {
                 abort(403);

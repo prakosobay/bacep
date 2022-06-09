@@ -17,7 +17,6 @@
                             <th>ID Permit</th>
                             <th>Date of Request</th>
                             <th>Date of Visit</th>
-                            <th>Visitor</th>
                             <th>Purpose</th>
                             <th>Action</th>
                         </tr>
@@ -28,7 +27,6 @@
                             <td>{{ $p->other_id }}</td>
                             <td>{{ Carbon\Carbon::parse($p->created_at)->format('d-m-Y') }}</td>
                             <td>{{ Carbon\Carbon::parse($p->visit)->format('d-m-Y') }}</td>
-                            <td>Nama</td>
                             <td>{{ $p->work }}</td>
                             <td>
                                 @can('isApproval')
