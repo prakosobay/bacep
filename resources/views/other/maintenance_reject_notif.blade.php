@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Notifikasi Reject</title>
+    <title>Notifikasi Reject Permit Maintenance</title>
 
 <style>
 
@@ -29,15 +29,15 @@
                 <th>No. Permit</thead>
                 <th>Date of Request</th>
                 <th>Purpose of Work</th>
-                <th>Validity</th>
+                <th>Date of Visit</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td>{{ $data->cleaning_id }}</td>
+                <td>{{ $data->id }}</td>
                 <td>{{ Carbon\Carbon::parse($data->created_at)->format('d-m-Y')  }}</td>
-                <td>{{ $data->cleaning_work }}</td>
-                <td>{{ Carbon\Carbon::parse($data->validity_from)->format('d-m-Y') }}</td>
+                <td>{{ $data->work }}</td>
+                <td>{{ Carbon\Carbon::parse($data->visit)->format('d-m-Y') }}</td>
             </tr>
         </tbody>
     </table>

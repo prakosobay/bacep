@@ -7,32 +7,27 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class NotifReject extends Mailable
+class NotifMaintenanceForm extends Mailable
 {
     use Queueable, SerializesModels;
-    public $data;
 
     /**
-     * The order instance.
+     * Create a new message instance.
      *
-     * @var \App\Models\Cleaning
+     * @return void
      */
-
-    public function __construct($data)
+    public function __construct()
     {
-        $this->data = $data;
+        //
     }
 
     /**
      * Build the message.
      *
-     * @return void
+     * @return $this
      */
     public function build()
     {
-        return
-
-            $this->from('testing.dc@balitower.co.id')
-            ->view('reject');
+        return $this->view('view.name');
     }
 }

@@ -23,7 +23,7 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
 
-    public function index()
+    public function index() // Get role tiap user & masuk ke homepage
     {
 
         $role_2 = Auth::user()->roles;
@@ -42,7 +42,7 @@ class HomeController extends Controller
         // }
     }
 
-    public function dashboard()
+    public function dashboard() // Dashboard manajemen barang
     {
         if ((Gate::allows('isAdmin')) || (Gate::allows('isApproval')) || (Gate::allows('isHead'))) {
             return view('item.input');
@@ -51,93 +51,7 @@ class HomeController extends Controller
         }
     }
 
-    public function approval_view($type_view)
-    {
-        if ((Gate::denies('isAdmin') && (Gate::denies('isVisitor')))) {
-            $role_1 = Session::get('arrole');
-            if ($type_view == 'survey') {
-                $survey = DB::table('survey_histories')
-                    ->join('surveys', 'surveys.id', '=', 'survey_histories.survey_id')
-                    ->where('survey_histories.role_to', '=', $role_1)
-                    ->where('survey_histories.aktif', '=', 1)
-                    ->select('surveys.*')
-                    ->get();
-                dd($survey);
-                return view('sales.approva', compact('survey'));
-            } elseif ($type_view == 'cleaning') {
-                $cleaning = DB::table('cleaning_histories')
-                    ->join('cleanings', 'cleanings.cleaning_id', '=', 'cleaning_histories.cleaning_id')
-                    ->whereIn('cleaning_histories.role_to', $role_1)
-                    ->where('cleaning_histories.aktif', '=', 1)
-                    ->select('cleanings.*')
-                    ->get();
-                return view('hasil_cleanings', compact('cleaning'));
-            } else if ($type_view == 'other') {
-                $otherHistories = DB::table('other_histories')
-                    ->join('other', 'other.other_id', '=', 'other_histories.other_id')
-                    ->whereIn('other_histories.role_to', $role_1)
-                    ->where('other_histories.status', '!=', 'revisi')
-                    ->where('other_histories.aktif', '=', 1)
-                    ->select('other.*', 'other_histories.status', 'other_histories.pdf')
-                    ->get();
-                return view('other.show', compact('otherHistories'));
-            } else {
-                return view('all_approval');
-            }
-        } else {
-            abort(403);
-        }
-    }
-
-    public function revisi_view($type_view)
-    {
-        if ((Gate::denies('isSecurity'))) {
-            $role_1 = Session::get('arrole');
-            if ($type_view == 'other') {
-                $revisi = DB::table('other_histories')
-                    ->join('other', 'other.other_id', '=', 'other_histories.other_id')
-                    ->whereIn('other_histories.role_to', $role_1)
-                    ->where('other_histories.status', '=', 'revisi')
-                    ->where('other_histories.aktif', '=', 1)
-                    ->select('other.*')
-                    ->get();
-                // dd($revisi);
-                return view('other.revisi', compact('revisi'));
-            }
-        }
-    }
-
-    public function log_view($type_view)
-    {
-        if ($type_view == 'all') {
-
-            return view('log');
-        } elseif ($type_view == 'cleaning') {
-            $cleaningLog = DB::table('cleaning_histories')
-                ->join('cleanings', 'cleanings.cleaning_id', '=', 'cleaning_histories.cleaning_id')
-                ->select('cleaning_histories.*', 'cleanings.cleaning_work', 'cleanings.validity_from')
-                ->get();
-            return view('log_cleaning', ['cleaningLog' => $cleaningLog]);
-        } elseif ($type_view == 'other') {
-            $other_log = DB::table('other_histories')
-                ->join('other', 'other.other_id', '=', 'other_histories.other_id')
-                ->join('users', 'users.id', '=', 'other_histories.created_by')
-                ->select('other_histories.*', 'other.other_work', 'other.val_from', 'users.name')
-                ->get();
-            // dd($other_log);
-            return view('other.log', compact('other_log'));
-        } elseif ($type_view == 'survey') {
-            $survey_log = DB::table('survey_histories')
-                ->join('surveys', 'surveys.id', '=', 'survey_histories.survey_id')
-                ->join('users', 'users.id', '=', 'survey_histories.created_by')
-                ->select('survey_histories.*', 'surveys.visit', 'users.name')
-                ->get();
-            dd($survey_log);
-            return view('sales.history', compact('survey_log'));
-        }
-    }
-
-    public function history($type_view)
+    public function history($type_view) // Routingan log permit versi approval
     {
         if ((Gate::denies('isAdmin') && (Gate::denies('isVisitor')))) {
             if ($type_view == 'all') {
@@ -156,7 +70,7 @@ class HomeController extends Controller
         }
     }
 
-    public function approval($type_approve)
+    public function approval($type_approve) // Routingan untuk menampilkan permit yang akan di approve tiap rolenya
     {
         if ((Gate::denies('isAdmin') && (Gate::denies('isVisitor')))) {
             $role_1 = Session::get('arrole');
@@ -193,7 +107,6 @@ class HomeController extends Controller
                     ->select('others.*', 'other_histories.*')
                     ->orderBy('other_id', 'desc')
                     ->get();
-                    // dd($getMaintenance);
                 return view('other.maintenance_approval', compact('getMaintenance'));
             } else {
                 abort(403);
@@ -203,7 +116,7 @@ class HomeController extends Controller
         }
     }
 
-    public function full($type_full)
+    public function full($type_full) // Routingan untuk menampilkan permit yang sudah full approve versi approval
     {
         if ((Gate::allows('isApproval')) || (Gate::allows('isHead')) || (Gate::allows('isAdmin'))) {
             if ($type_full == 'all') {
@@ -263,7 +176,7 @@ class HomeController extends Controller
         }
     }
 
-    public function log_all()
+    public function log_all() // Routingan untuk menampilkan permit yang sudah full approve versi visitor
     {
         $email = Auth::user()->email;
         // dd($email);

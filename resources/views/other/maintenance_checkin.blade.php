@@ -464,122 +464,132 @@
 			});
 		});
 
-        $('#pic').each(function(){
-            $('#nama').change(function(){
-                let id = $(this).val();
-                $.ajax({
-                    url: "{{url("/other/maintenance/visitor")}}"+'/'+id,
-                    dataType:"json",
-                    type: "get",
-                    success: function(response){
-                        const {visitor} = response;
-                        console.log(visitor)
-                    $('#company').val(visitor.visit_company);
-                    $('#department').val(visitor.visit_department);
-                    $('#phone').val(visitor.visit_phone);
-                    $('#nik').val(visitor.visit_nik);
-                    $('#respon').val(visitor.visit_respon);
-                    }
-                });
-            })
-        });
+
+
+        // $('#pic').each(function(){
+        //     $('#nama').change(function(){
+        //         let id = $(this).val();
+        //         $.ajax({
+        //             url: "{{url("/other/maintenance/visitor")}}"+'/'+id,
+        //             dataType:"json",
+        //             type: "get",
+        //             success: function(response){
+        //                 const {visitor} = response;
+        //                 // console.log(visitor)
+        //                 var company = []
+        //                 var company = document.getElementById('#company')
+        //                 $(company).each(function(value, index){
+        //                     console.log(value)
+        //                     $(this).val(visitor.visit_company)
+        //                 })
+        //                 $('#department').forEach(function(){
+        //                     $(this).val(visitor.visit_department)
+        //                 })
+        //             $('#department').val(visitor.visit_department);
+        //             $('#phone').val(visitor.visit_phone);
+        //             $('#nik').val(visitor.visit_nik);
+        //             $('#respon').val(visitor.visit_respon);
+        //             }
+        //         });
+        //     })
+        // });
 
         // var nama = document.getElementById('nama')[];
 
-        // $('#nama')[].change(function(){
+        $('#nama').change(function(){
+            let id = $(this).val();
+            $.ajax({
+                url: "{{url("/other/maintenance/visitor")}}"+'/'+id,
+                dataType:"json",
+                type: "get",
+                success: function(response){
+                    const {visitor} = response;
+                    console.log(visitor);
+
+                    visitor.array.forEach($('#company') => {
+
+                    });
+                        $('#company').val(visitor.visit_company);
+                        $('#department').val(visitor.visit_department);
+                        $('#phone').val(visitor.visit_phone);
+                        $('#nik').val(visitor.visit_nik);
+                        $('#respon').val(visitor.visit_respon);
+
+                }
+            });
+        });
+
+        // $('#nama_2').change(function(){
         //     let id = $(this).val();
-        //     // var data = [];
         //     $.ajax({
         //         url: "{{url("/other/maintenance/visitor")}}"+'/'+id,
         //         dataType:"json",
         //         type: "get",
         //         success: function(response){
-        //             // data[] = response;
         //             const {visitor} = response;
-        //             console.log(visitor);
-        //             // var data_visitor = [];
-        //             // data_visitor[] = visitor;
-        //             // console.log(data_visitor['id']);
-        //         $('#company')[].val(visitor.visit_company);
-        //         $('#department')[].val(visitor.visit_department);
-        //         $('#phone')[].val(visitor.visit_phone);
-        //         $('#nik')[].val(visitor.visit_nik);
-        //         $('#respon')[].val(visitor.visit_respon);
+        //             console.log(visitor)
+        //         $('#company_2').val(visitor.visit_company);
+        //         $('#department_2').val(visitor.visit_department);
+        //         $('#phone_2').val(visitor.visit_phone);
+        //         $('#nik_2').val(visitor.visit_nik);
+        //         $('#respon_2').val(visitor.visit_respon);
         //         }
         //     });
         // });
 
-        $('#nama_2').change(function(){
-            let id = $(this).val();
-            $.ajax({
-                url: "{{url("/other/maintenance/visitor")}}"+'/'+id,
-                dataType:"json",
-                type: "get",
-                success: function(response){
-                    const {visitor} = response;
-                    console.log(visitor)
-                $('#company_2').val(visitor.visit_company);
-                $('#department_2').val(visitor.visit_department);
-                $('#phone_2').val(visitor.visit_phone);
-                $('#nik_2').val(visitor.visit_nik);
-                $('#respon_2').val(visitor.visit_respon);
-                }
-            });
-        });
+        // $('#nama_3').change(function(){
+        //     let id = $(this).val();
+        //     $.ajax({
+        //         url: "{{url("/other/maintenance/visitor")}}"+'/'+id,
+        //         dataType:"json",
+        //         type: "get",
+        //         success: function(response){
+        //             const {visitor} = response;
+        //             console.log(visitor)
+        //         $('#company_3').val(visitor.visit_company);
+        //         $('#department_3').val(visitor.visit_department);
+        //         $('#phone_3').val(visitor.visit_phone);
+        //         $('#nik_3').val(visitor.visit_nik);
+        //         $('#respon_3').val(visitor.visit_respon);
+        //         }
+        //     });
+        // });
 
-        $('#nama_3').change(function(){
-            let id = $(this).val();
-            $.ajax({
-                url: "{{url("/other/maintenance/visitor")}}"+'/'+id,
-                dataType:"json",
-                type: "get",
-                success: function(response){
-                    const {visitor} = response;
-                    console.log(visitor)
-                $('#company_3').val(visitor.visit_company);
-                $('#department_3').val(visitor.visit_department);
-                $('#phone_3').val(visitor.visit_phone);
-                $('#nik_3').val(visitor.visit_nik);
-                $('#respon_3').val(visitor.visit_respon);
-                }
-            });
-        });
+        // $('#nama_4').change(function(){
+        //     let id = $(this).val();
+        //     $.ajax({
+        //         url: "{{url("/other/maintenance/visitor")}}"+'/'+id,
+        //         dataType:"json",
+        //         type: "get",
+        //         success: function(response){
+        //             const {visitor} = response;
+        //             console.log(visitor)
+        //         $('#company_4').val(visitor.visit_company);
+        //         $('#department_4').val(visitor.visit_department);
+        //         $('#phone_4').val(visitor.visit_phone);
+        //         $('#nik_4').val(visitor.visit_nik);
+        //         $('#respon_4').val(visitor.visit_respon);
+        //         }
+        //     });
+        // });
 
-        $('#nama_4').change(function(){
-            let id = $(this).val();
-            $.ajax({
-                url: "{{url("/other/maintenance/visitor")}}"+'/'+id,
-                dataType:"json",
-                type: "get",
-                success: function(response){
-                    const {visitor} = response;
-                    console.log(visitor)
-                $('#company_4').val(visitor.visit_company);
-                $('#department_4').val(visitor.visit_department);
-                $('#phone_4').val(visitor.visit_phone);
-                $('#nik_4').val(visitor.visit_nik);
-                $('#respon_4').val(visitor.visit_respon);
-                }
-            });
-        });
-
-        $('#nama_5').change(function(){
-            let id = $(this).val();
-            $.ajax({
-                url: "{{url("/other/maintenance/visitor")}}"+'/'+id,
-                dataType:"json",
-                type: "get",
-                success: function(response){
-                    const {visitor} = response;
-                    console.log(visitor)
-                $('#company_5').val(visitor.visit_company);
-                $('#department_5').val(visitor.visit_department);
-                $('#phone_5').val(visitor.visit_phone);
-                $('#nik_5').val(visitor.visit_nik);
-                $('#respon_5').val(visitor.visit_respon);
-                }
-            });
-        });
+        // $('#nama_5').change(function(){
+        //     let id = $(this).val();
+        //     $.ajax({
+        //         url: "{{url("/other/maintenance/visitor")}}"+'/'+id,
+        //         dataType:"json",
+        //         type: "get",
+        //         success: function(response){
+        //             const {visitor} = response;
+        //             console.log(visitor)
+        //         $('#company_5').val(visitor.visit_company);
+        //         $('#department_5').val(visitor.visit_department);
+        //         $('#phone_5').val(visitor.visit_phone);
+        //         $('#nik_5').val(visitor.visit_nik);
+        //         $('#respon_5').val(visitor.visit_respon);
+        //         }
+        //     });
+        // });
 
         $.ajaxSetup({
             headers: {
@@ -620,48 +630,48 @@
             });
         });
 
-        Webcam.set({
-            width: 490,
-            height: 390,
-            image_format: 'jpeg',
-            jpeg_quality: 90
-        });
+        // Webcam.set({
+        //     width: 490,
+        //     height: 390,
+        //     image_format: 'jpeg',
+        //     jpeg_quality: 90
+        // });
 
-        Webcam.attach( '#my_camera' );
-        function take_snapshot() {
-            Webcam.snap( function(data_uri) {
-                $("#image").val(data_uri);
-                document.getElementById('results').innerHTML = '<img src="'+data_uri+'"/>';
-            });
+        // Webcam.attach( '#my_camera' );
+        // function take_snapshot() {
+        //     Webcam.snap( function(data_uri) {
+        //         $("#image").val(data_uri);
+        //         document.getElementById('results').innerHTML = '<img src="'+data_uri+'"/>';
+        //     });
 
-            var tanggal = new Date();
-            var jam = tanggal.getHours();
-            var menit = tanggal.getMinutes();
-            var detik = tanggal.getSeconds();
-            jam = jam < 10 ? '0' +jam : jam;
-            menit = menit < 10 ? '0'+menit : menit;
-            detik = detik < 10 ? '0'+detik : detik;
-            var waktu = jam + ':' + menit + ':' + detik;
-            $("#checkin").val(waktu);
-        }
+        //     var tanggal = new Date();
+        //     var jam = tanggal.getHours();
+        //     var menit = tanggal.getMinutes();
+        //     var detik = tanggal.getSeconds();
+        //     jam = jam < 10 ? '0' +jam : jam;
+        //     menit = menit < 10 ? '0'+menit : menit;
+        //     detik = detik < 10 ? '0'+detik : detik;
+        //     var waktu = jam + ':' + menit + ':' + detik;
+        //     $("#checkin").val(waktu);
+        // }
 
-        Webcam.attach( '#my_camera2' );
-        function take_snapshot2() {
-            Webcam.snap( function(data_uri) {
-                $("#image2").val(data_uri);
-                document.getElementById('results2').innerHTML = '<img src="'+data_uri+'"/>';
-            });
-            var tanggal = new Date();
-            var jam = tanggal.getHours();
-            var menit = tanggal.getMinutes();
-            var detik = tanggal.getSeconds();
-            jam = jam < 10 ? '0' +jam : jam;
-            menit = menit < 10 ? '0'+menit : menit;
-            detik = detik < 10 ? '0'+detik : detik;
-            var waktu = jam + ':' + menit + ':' + detik;
+        // Webcam.attach( '#my_camera2' );
+        // function take_snapshot2() {
+        //     Webcam.snap( function(data_uri) {
+        //         $("#image2").val(data_uri);
+        //         document.getElementById('results2').innerHTML = '<img src="'+data_uri+'"/>';
+        //     });
+        //     var tanggal = new Date();
+        //     var jam = tanggal.getHours();
+        //     var menit = tanggal.getMinutes();
+        //     var detik = tanggal.getSeconds();
+        //     jam = jam < 10 ? '0' +jam : jam;
+        //     menit = menit < 10 ? '0'+menit : menit;
+        //     detik = detik < 10 ? '0'+detik : detik;
+        //     var waktu = jam + ':' + menit + ':' + detik;
 
-            $("#checkin2").val(waktu);
-        }
+        //     $("#checkin2").val(waktu);
+        // }
     });
 
 	</script>

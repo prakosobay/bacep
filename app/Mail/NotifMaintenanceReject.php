@@ -7,15 +7,15 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class NotifReject extends Mailable
+class NotifMaintenanceReject extends Mailable
 {
     use Queueable, SerializesModels;
     public $data;
 
     /**
-     * The order instance.
+     * Create a new message instance.
      *
-     * @var \App\Models\Cleaning
+     * @var \App\Models\Other
      */
 
     public function __construct($data)
@@ -28,11 +28,9 @@ class NotifReject extends Mailable
      *
      * @return void
      */
+
     public function build()
     {
-        return
-
-            $this->from('testing.dc@balitower.co.id')
-            ->view('reject');
+        return $this->from('testing.dc@balitower.co.id')->view('other.maintenance_reject_notif');
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\{DB, Auth, Gate, Mail, Session, Storage};
 use App\Models\{Other, OtherFull, OtherHistory, OtherPersonil, Rutin, Visitor};
+use App\Mail\{NotifMaintenanceForm, NotifMaintenanceReject};
 use Symfony\Component\HttpFoundation\Test\Constraint\ResponseFormatSame;
 use Yajra\Datatables\Datatables;
 use Carbon\Carbon;
@@ -88,6 +89,7 @@ class OtherController extends Controller
     // Submit Form
     public function create_maintenance(Request $request) // Submit form maintenance
     {
+        // Get all data request
         $data = $request->all();
         $work = Rutin::find($data['work'])->work;
 
@@ -269,11 +271,10 @@ class OtherController extends Controller
         return $otherHistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
     }
 
-    public function reject_maintenance(Request $request)
+    public function reject_maintenance(Request $request) // Untuk reject permit
     {
         // Get permit terbaru by ID Permit
         $lastupdate = OtherHistory::where('other_id', '=', $request->other_id)->latest()->first();
-        // dd($lastupdate);
         if (Gate::denies('isSecurity')) {
             if ($lastupdate->pdf == true) {
                 $lastupdate->update(['aktif' => false]);
@@ -289,10 +290,10 @@ class OtherController extends Controller
                 ]);
 
                 // Get permit yang di reject & kirim notif email
-                // $cleaning = Cleaning::find($request->cleaning_id);
-                // foreach (['badai.sino@balitower.co.id'] as $recipient) {
-                //     Mail::to($recipient)->send(new NotifReject($cleaning));
-                // }
+                $maintenance_reject = Other::find($request->other_id);
+                foreach (['badai.sino@balitower.co.id'] as $recipient) {
+                    Mail::to($recipient)->send(new NotifMaintenanceReject($maintenance_reject));
+                }
                 return $history->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
             } else {
                 abort(403);
