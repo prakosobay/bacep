@@ -180,6 +180,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/other/maintenance/reject', [OtherController::class, 'reject_maintenance']);
     Route::post('other/maintenance/create', [OtherController::class, 'create_maintenance']);
     Route::post('/other/maintenance/full/reject/{id}', [OtherController::class, 'update_reject_maintenance']);
+    Route::post('/other/maintenance/form/checkin', [OtherController::class, 'update_checkin_maintenance']);
 
     //Visitor All Base Super
     Route::get('new_permit', [HomeController::class, 'new_permit']);

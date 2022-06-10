@@ -366,11 +366,11 @@
                             </div>
                         </div>
                         <div class="row justify-content-center">
-                            <input type=button class="btn btn-primary btn-sm" value="Take Snapshot" onclick="take_snapshot()" required>
+                            <input type=button class="btn btn-primary btn-sm" value="Take Snapshot" onclick="take_snapshot()">
                         </div>
                         <div class="row justify-content-center">
                             <input class="@error('photo_checkin') is-invalid
-                            @enderror" required autocomplete="photo_checkin" type="hidden" name="photo_checkin[]" id="image">
+                            @enderror" required autocomplete="photo_checkin" type="hidden" name="photo_checkin" id="image">
                             @error('photo_checkin')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -378,47 +378,7 @@
                             @enderror
                         </div>
                         <div class="row justify-content-center my-2">
-                            <input type="time" class="@error('checkin')@enderror" name="checkin[]" id="checkin" value="" required autocomplete="checkin" readonly>
-                            @error('checkin')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    {{-- 2 --}}
-                    <div class="container-fluid">
-                        <div class="row justify-content-center">
-                            <div class="col-6">
-                                <span class="label-input100">Take a selfie PIC</span>
-                            </div>
-                            <div class="col-6">
-                                <span class="label-input100"><b>Your captured image will appear here...</b></span>
-                            </div>
-                        </div>
-                        <div class="row justify-content-center">
-                            <div class="col-6">
-                                <div id="my_camera2"></div>
-                            </div>
-                            <div class="col-6">
-                                <div id="results2"></div>
-                            </div>
-                        </div>
-                        <div class="row justify-content-center">
-                            <input type=button class="btn btn-primary btn-sm" value="Take Snapshot" onclick="take_snapshot2()" required>
-                        </div>
-                        <div class="row justify-content-center">
-                            <input class="@error('photo_checkin') is-invalid
-                            @enderror" required autocomplete="photo_checkin" type="hidden" name="photo_checkin[]" id="image2">
-                            @error('photo_checkin')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                        <div class="row justify-content-center my-2">
-                            <input type="time" class="@error('checkin')@enderror" name="checkin[]" id="checkin2" value="" required autocomplete="checkin" readonly>
+                            <input type="time" class="@error('checkin')@enderror" name="checkin" id="checkin" value="" required autocomplete="checkin" readonly>
                             @error('checkin')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -464,6 +424,30 @@
 			});
 		});
 
+        Webcam.set({
+            width: 490,
+            height: 390,
+            image_format: 'jpeg',
+            jpeg_quality: 90
+        });
+
+        Webcam.attach( '#my_camera' );
+        function take_snapshot() {
+            Webcam.snap( function(data_uri) {
+                $("#image").val(data_uri);
+                document.getElementById('results').innerHTML = '<img src="'+data_uri+'"/>';
+            });
+            var tanggal = new Date();
+            var jam = tanggal.getHours();
+            var menit = tanggal.getMinutes();
+            var detik = tanggal.getSeconds();
+            jam = jam < 10 ? '0' +jam : jam;
+            menit = menit < 10 ? '0'+menit : menit;
+            detik = detik < 10 ? '0'+detik : detik;
+            var waktu = jam + ':' + menit + ':' + detik;
+            $("#checkin").val(waktu);
+        }
+
 
 
         // $('#pic').each(function(){
@@ -494,8 +478,6 @@
         //     })
         // });
 
-        // var nama = document.getElementById('nama')[];
-
         $('#nama').change(function(){
             let id = $(this).val();
             $.ajax({
@@ -506,9 +488,9 @@
                     const {visitor} = response;
                     console.log(visitor);
 
-                    visitor.array.forEach($('#company') => {
+                    // visitor.array.forEach($('#company') => {
 
-                    });
+                    // });
                         $('#company').val(visitor.visit_company);
                         $('#department').val(visitor.visit_department);
                         $('#phone').val(visitor.visit_phone);
@@ -518,78 +500,6 @@
                 }
             });
         });
-
-        // $('#nama_2').change(function(){
-        //     let id = $(this).val();
-        //     $.ajax({
-        //         url: "{{url("/other/maintenance/visitor")}}"+'/'+id,
-        //         dataType:"json",
-        //         type: "get",
-        //         success: function(response){
-        //             const {visitor} = response;
-        //             console.log(visitor)
-        //         $('#company_2').val(visitor.visit_company);
-        //         $('#department_2').val(visitor.visit_department);
-        //         $('#phone_2').val(visitor.visit_phone);
-        //         $('#nik_2').val(visitor.visit_nik);
-        //         $('#respon_2').val(visitor.visit_respon);
-        //         }
-        //     });
-        // });
-
-        // $('#nama_3').change(function(){
-        //     let id = $(this).val();
-        //     $.ajax({
-        //         url: "{{url("/other/maintenance/visitor")}}"+'/'+id,
-        //         dataType:"json",
-        //         type: "get",
-        //         success: function(response){
-        //             const {visitor} = response;
-        //             console.log(visitor)
-        //         $('#company_3').val(visitor.visit_company);
-        //         $('#department_3').val(visitor.visit_department);
-        //         $('#phone_3').val(visitor.visit_phone);
-        //         $('#nik_3').val(visitor.visit_nik);
-        //         $('#respon_3').val(visitor.visit_respon);
-        //         }
-        //     });
-        // });
-
-        // $('#nama_4').change(function(){
-        //     let id = $(this).val();
-        //     $.ajax({
-        //         url: "{{url("/other/maintenance/visitor")}}"+'/'+id,
-        //         dataType:"json",
-        //         type: "get",
-        //         success: function(response){
-        //             const {visitor} = response;
-        //             console.log(visitor)
-        //         $('#company_4').val(visitor.visit_company);
-        //         $('#department_4').val(visitor.visit_department);
-        //         $('#phone_4').val(visitor.visit_phone);
-        //         $('#nik_4').val(visitor.visit_nik);
-        //         $('#respon_4').val(visitor.visit_respon);
-        //         }
-        //     });
-        // });
-
-        // $('#nama_5').change(function(){
-        //     let id = $(this).val();
-        //     $.ajax({
-        //         url: "{{url("/other/maintenance/visitor")}}"+'/'+id,
-        //         dataType:"json",
-        //         type: "get",
-        //         success: function(response){
-        //             const {visitor} = response;
-        //             console.log(visitor)
-        //         $('#company_5').val(visitor.visit_company);
-        //         $('#department_5').val(visitor.visit_department);
-        //         $('#phone_5').val(visitor.visit_phone);
-        //         $('#nik_5').val(visitor.visit_nik);
-        //         $('#respon_5').val(visitor.visit_respon);
-        //         }
-        //     });
-        // });
 
         $.ajaxSetup({
             headers: {
@@ -629,49 +539,6 @@
                 }
             });
         });
-
-        // Webcam.set({
-        //     width: 490,
-        //     height: 390,
-        //     image_format: 'jpeg',
-        //     jpeg_quality: 90
-        // });
-
-        // Webcam.attach( '#my_camera' );
-        // function take_snapshot() {
-        //     Webcam.snap( function(data_uri) {
-        //         $("#image").val(data_uri);
-        //         document.getElementById('results').innerHTML = '<img src="'+data_uri+'"/>';
-        //     });
-
-        //     var tanggal = new Date();
-        //     var jam = tanggal.getHours();
-        //     var menit = tanggal.getMinutes();
-        //     var detik = tanggal.getSeconds();
-        //     jam = jam < 10 ? '0' +jam : jam;
-        //     menit = menit < 10 ? '0'+menit : menit;
-        //     detik = detik < 10 ? '0'+detik : detik;
-        //     var waktu = jam + ':' + menit + ':' + detik;
-        //     $("#checkin").val(waktu);
-        // }
-
-        // Webcam.attach( '#my_camera2' );
-        // function take_snapshot2() {
-        //     Webcam.snap( function(data_uri) {
-        //         $("#image2").val(data_uri);
-        //         document.getElementById('results2').innerHTML = '<img src="'+data_uri+'"/>';
-        //     });
-        //     var tanggal = new Date();
-        //     var jam = tanggal.getHours();
-        //     var menit = tanggal.getMinutes();
-        //     var detik = tanggal.getSeconds();
-        //     jam = jam < 10 ? '0' +jam : jam;
-        //     menit = menit < 10 ? '0'+menit : menit;
-        //     detik = detik < 10 ? '0'+detik : detik;
-        //     var waktu = jam + ':' + menit + ':' + detik;
-
-        //     $("#checkin2").val(waktu);
-        // }
     });
 
 	</script>

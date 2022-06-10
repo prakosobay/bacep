@@ -341,6 +341,15 @@ class OtherController extends Controller
         }
     }
 
+    public function update_checkin_maintenance(Request $request)
+    {
+        dd($request->all());
+        $validate = $request->validate([
+            'visit' => ['required'],
+            'leave' => ['required', 'after_or_equal:visit'],
+        ]);
+    }
+
 
 
     // Convert pdf
