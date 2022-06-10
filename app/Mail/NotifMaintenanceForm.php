@@ -10,24 +10,27 @@ use Illuminate\Queue\SerializesModels;
 class NotifMaintenanceForm extends Mailable
 {
     use Queueable, SerializesModels;
+    public $data;
 
     /**
      * Create a new message instance.
      *
-     * @return void
+     * @var \App\Models\Other
      */
-    public function __construct()
+
+    public function __construct($data)
     {
-        //
+        $this->data = $data;
     }
 
     /**
      * Build the message.
      *
-     * @return $this
+     * @return void
      */
+
     public function build()
     {
-        return $this->view('view.name');
+        return $this->from('testing.dc@balitower.co.id')->view('other.maintenance_form_notif');
     }
 }

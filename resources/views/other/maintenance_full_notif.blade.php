@@ -28,18 +28,18 @@
                 <th>No. Permit</th>
                 <th>Date of Request</th>
                 <th>Purpose of Work</th>
-                <th>Validity</th>
+                <th>Date of Visit</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td>{{ $data->cleaning_id }}</td>
+                <td>{{ $data->id }}</td>
                 <td>{{ Carbon\Carbon::parse($data->created_at)->format('d-m-Y')  }}</td>
-                <td>{{ $data->cleaning_work }}</td>
-                <td>{{ Carbon\Carbon::parse($data->validity_from)->format('d-m-Y') }}</td>
+                <td>{{ $data->work }}</td>
+                <td>{{ Carbon\Carbon::parse($data->visit)->format('d-m-Y') }}</td>
             </tr>
         </tbody>
     </table>
-    <p><a href="http://dcops.balifiber.id/full_approval/all">Klik tautan ini untuk melihat permit</a></p>
+        <p><a href="http://dcops.balifiber.id">Klik tautan ini untuk melihat permit</a></p>
 </body>
 </html>

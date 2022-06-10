@@ -195,6 +195,14 @@ class OtherController extends Controller
 
         $personil = OtherPersonil::insert($p);
 
+        $maintenance_form = Other::find($request->other_id);
+        // Send email notification
+        foreach ([
+            'aurellius.putra@balitower.co.id', 'irwan.trisna@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'eri.iskandar@balitower.co.id', 'ilham.pangestu@balitower.co.id', 'taufik.ismail@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'hendrik.andy@balitower.co.id', 'hilman.fariqi@balitower.co.id', 'khaidir.alamsyah@balitower.co.id', 'yoga.agus@balitower.co.id',
+        ] as $recipient) {
+            Mail::to($recipient)->send(new NotifMaintenanceForm($maintenance_form));
+        }
+
         if ($personil) {
             $log = OtherHistory::insert([
                 'other_id' => $otherForm->id,
@@ -301,7 +309,7 @@ class OtherController extends Controller
         }
     }
 
-    public function update_reject_maintenance(Request $request, $id)
+    public function update_reject_maintenance(Request $request, $id) // Untuk reject ketika sudah full approval versi visitor
     {
         $maintenance_full = OtherFull::where('other_id', $id)->first();
         $update_reject = OtherHistory::where('other_id', $id)->where('aktif', 1)->first();
@@ -310,6 +318,7 @@ class OtherController extends Controller
             'aktif' => false,
         ]);
 
+        // Simpan perubahan tiap permit ke table OtherHistory
         $update_reject = OtherHistory::create([
             'other_id' => $id,
             'created_by' => Auth::user()->name,
@@ -319,6 +328,7 @@ class OtherController extends Controller
             'pdf' => false,
         ]);
 
+        // Update alasan reject di colum note
         $maintenance_full->update([
             'status' => 'Full Rejected',
             'note' => $request->note,
@@ -369,7 +379,7 @@ class OtherController extends Controller
             ->make(true);
     }
 
-    public function yajra_full_visitor_maintenance()
+    public function yajra_full_visitor_maintenance() // Get data permit full approve versi visitor
     {
         $full_visitor = DB::table('other_fulls')
             ->join('others', 'others.id', '=', 'other_fulls.other_id')
@@ -387,7 +397,7 @@ class OtherController extends Controller
             ->make(true);
     }
 
-    public function yajra_full_approval_maintenance()
+    public function yajra_full_approval_maintenance() // Get data permit full approve versi approval
     {
         $full_approval = DB::table('other_fulls')
             ->join('others', 'others.id', '=', 'other_fulls.other_id')
@@ -401,7 +411,7 @@ class OtherController extends Controller
             ->make(true);
     }
 
-    public function yajra_full_reject_maintenance()
+    public function yajra_full_reject_maintenance() // Get data permit reject
     {
         $getFull = DB::table('other_fulls')
             ->select(['other_id', 'visit', 'note', 'work'])

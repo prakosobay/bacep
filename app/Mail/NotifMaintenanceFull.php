@@ -7,18 +7,20 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class NotifEmail extends Mailable
+class NotifMaintenanceFull extends Mailable
 {
     use Queueable, SerializesModels;
-    // public $data;
+    public $data;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+
+    public function __construct($data)
     {
-        // $this->data = $data;
+        $this->data = $data;
     }
 
     /**
@@ -26,9 +28,9 @@ class NotifEmail extends Mailable
      *
      * @return $this
      */
+
     public function build()
     {
-        return $this->from('testing.dc@balitower.co.id')
-            ->view('emailku');
+        return $this->from('testing.dc@balitower.co.id')->view('other.maintenance_full_notif');
     }
 }
