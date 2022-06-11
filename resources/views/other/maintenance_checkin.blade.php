@@ -348,44 +348,47 @@
                 <div class="wrap-input100 bg1 rs1-alert-validate">
 
                     {{-- 1 --}}
-                    <div class="container-fluid">
-                        <div class="row justify-content-center">
-                            <div class="col-6">
-                                <span class="label-input100">Take a selfie PIC</span>
+                    <div id="checkin">
+                        <div class="container-fluid" id="content">
+                            <div class="row justify-content-center">
+                                <div class="col-6">
+                                    <span class="label-input100">Take a selfie PIC 1</span>
+                                </div>
+                                <div class="col-6">
+                                    <span class="label-input100"><b>Your captured image will appear here...</b></span>
+                                </div>
                             </div>
-                            <div class="col-6">
-                                <span class="label-input100"><b>Your captured image will appear here...</b></span>
+                            <div class="row justify-content-center">
+                                <div class="col-6">
+                                    <div id="my_camera"></div>
+                                </div>
+                                <div class="col-6">
+                                    <div id="results"></div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row justify-content-center">
-                            <div class="col-6">
-                                <div id="my_camera"></div>
+                            <div class="row justify-content-center">
+                                <input type=button class="btn btn-primary btn-sm" value="Take Snapshot" onclick="take_snapshot()" required>
                             </div>
-                            <div class="col-6">
-                                <div id="results"></div>
+                            <div class="row justify-content-center">
+                                <input class="@error('photo_checkin') is-invalid
+                                @enderror" required autocomplete="photo_checkin" type="hidden" name="photo_checkin[]" id="image">
+                                @error('photo_checkin')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
-                        </div>
-                        <div class="row justify-content-center">
-                            <input type=button class="btn btn-primary btn-sm" value="Take Snapshot" onclick="take_snapshot()">
-                        </div>
-                        <div class="row justify-content-center">
-                            <input class="@error('photo_checkin') is-invalid
-                            @enderror" required autocomplete="photo_checkin" type="hidden" name="photo_checkin" id="image">
-                            @error('photo_checkin')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                        <div class="row justify-content-center my-2">
-                            <input type="time" class="@error('checkin')@enderror" name="checkin" id="checkin" value="" required autocomplete="checkin" readonly>
-                            @error('checkin')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                            <div class="row justify-content-center my-2">
+                                <input type="time" class="@error('checkin')@enderror" name="checkin[]" id="checkin" value="" required autocomplete="checkin" readonly>
+                                @error('checkin')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
                         </div>
                     </div>
+
                 </div>
 
 				<div class="container-contact100-form-btn">
@@ -412,10 +415,7 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.25/webcam.min.js"></script>
 
-	<script type="text/javascript">
-
-    $(document).ready(function(){
-
+	<script>
 
 		$(".js-select2").each(function(){
 			$(this).select2({
@@ -423,6 +423,12 @@
 				dropdownParent: $(this).next('.dropDownSelect2')
 			});
 		});
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('input[name="_token"]').val()
+            }
+        });
 
         Webcam.set({
             width: 490,
@@ -437,6 +443,9 @@
                 $("#image").val(data_uri);
                 document.getElementById('results').innerHTML = '<img src="'+data_uri+'"/>';
             });
+
+
+
             var tanggal = new Date();
             var jam = tanggal.getHours();
             var menit = tanggal.getMinutes();
@@ -445,6 +454,10 @@
             menit = menit < 10 ? '0'+menit : menit;
             detik = detik < 10 ? '0'+detik : detik;
             var waktu = jam + ':' + menit + ':' + detik;
+
+            for(let i = 1; i < 6; i++){
+                $('content').
+            }
             $("#checkin").val(waktu);
         }
 
@@ -501,11 +514,6 @@
             });
         });
 
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('input[name="_token"]').val()
-            }
-        });
 
         $(".contact100-form-btn").click(function(e){
         e.preventDefault();
@@ -539,7 +547,6 @@
                 }
             });
         });
-    });
 
 	</script>
 <!--===============================================================================================-->

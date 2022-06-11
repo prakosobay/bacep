@@ -65,7 +65,6 @@ class OtherController extends Controller
                 $pic[] = $data_nama;
             }
         }
-        // dd($pic);
         return view('other.maintenance_checkin', compact('form', 'personil', 'pic'));
     }
 

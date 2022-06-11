@@ -9,7 +9,7 @@ Route::get('/', function () {
     return view('auth.login');
 })->middleware('guest');
 
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::get('/home', [HomeController::class, 'index']);
 
     //Detail History
@@ -52,6 +52,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/role.destroy/{id}', [AdminController::class, 'delete_role']);
     Route::post('/relasi.destroy/{id}', [AdminController::class, 'delete_relasi']);
 
+    // Revisi
     Route::get('/revisi.cleaning', [AdminController::class, 'update_cleaning']);
     Route::get('/table_relasi', [AdminController::class, 'show_relasi']);
     Route::post('/role.new', [AdminController::class, 'store_role']);
