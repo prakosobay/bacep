@@ -21,7 +21,7 @@
 
 <body>
     <h2>Dear All,</h2>
-	<h3>Terlampir link permit cleaning yang sudah Full Approval</h3>
+	<h3>Terlampir link permit maintenance yang sudah Full Approval</h3>
     <table>
         <thead>
             <tr>

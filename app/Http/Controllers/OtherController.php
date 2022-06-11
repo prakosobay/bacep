@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\{DB, Auth, Gate, Mail, Session, Storage};
 use App\Models\{Other, OtherFull, OtherHistory, OtherPersonil, Rutin, Visitor};
-use App\Mail\{NotifMaintenanceForm, NotifMaintenanceReject};
+use App\Mail\{NotifEmail, NotifMaintenanceForm, NotifMaintenanceFull, NotifMaintenanceReject};
 use Symfony\Component\HttpFoundation\Test\Constraint\ResponseFormatSame;
 use Yajra\Datatables\Datatables;
 use Carbon\Carbon;
@@ -241,13 +241,28 @@ class OtherController extends Controller
             // // Pergantian role tiap permit & send email notif
             $role_to = '';
             if ($lastupdate->role_to == 'review') {
+                foreach([
+                    'aurellius.putra@balitower.co.id', 'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
+                    'ilham.pangestu@balitower.co.id', 'irwan.trisna@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id',
+                ] as $recipient) {
+                    Mail::to($recipient)->send(new NotifMaintenanceForm());
+                }
                 $role_to = 'check';
             } elseif ($lastupdate->role_to == 'check') {
+                foreach(['security.bacep@balitower.co.id'] as $recipient){
+                    Mail::to($recipient)->send(new NotifMaintenanceForm());
+                }
                 $role_to = 'security';
             } elseif ($lastupdate->role_to == 'security') {
+                foreach(['tofiq.hidayat@balitower.co.id', 'bayu.prakoso@balitower.co.id'] as $recipient){
+                    Mail::to($recipient)->send(new NotifMaintenanceForm());
+                }
                 $role_to = 'head';
             } elseif ($lastupdate->role_to = 'head') {
                 $full = Other::find($request->other_id);
+                foreach(['dc@balitower.co.id'] as $recipient){
+                    Mail::to($recipient)->send(new NotifMaintenanceFull($full));
+                }
                 $role_to = 'all';
 
                 $full_maintenance = Other::where('id', $request->other_id)->first();
@@ -299,7 +314,7 @@ class OtherController extends Controller
 
                 // Get permit yang di reject & kirim notif email
                 $maintenance_reject = Other::find($request->other_id);
-                foreach (['badai.sino@balitower.co.id'] as $recipient) {
+                foreach (['badai.sino@balitower.co.id', 'bayu.prakoso@balitower.co.id'] as $recipient) {
                     Mail::to($recipient)->send(new NotifMaintenanceReject($maintenance_reject));
                 }
                 return $history->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
