@@ -36,7 +36,7 @@ class OtherController extends Controller
 
     public function show_maintenance_full() // Menampilkan list permit full approved dari sisi visitor
     {
-        return view('other.maintenance_full_visitor');
+        return view('cleaning.full_visitor');
     }
 
     public function show_maintenance_reject() // Menampilkan list permit reject dari sisi visitor

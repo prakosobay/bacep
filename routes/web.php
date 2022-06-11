@@ -128,6 +128,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/personil/{id}', [RutinController::class, 'personil']);
 
     // Survey
+    Route::get('survey/form/show', [SurveyController::class, 'form_show']);
     Route::post('/survey', [SurveyController::class, 'store']);
     Route::get('jsona', [SurveyController::class, 'json']);
     Route::get('route_data_approval', [SurveyController::class, 'data_approval']);
@@ -137,6 +138,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('route_full_survey', [SurveyController::class, 'full']);
     Route::post('/approve_survey', [SurveyController::class, 'approve']);
     Route::post('/reject_survey', [SurveyController::class, 'reject']);
+    Route::get('/survey/yajra/show', [SurveyController::class, 'yajra_show']);
 
     // Cleaning
     Route::get('route_history_cleaning', [CleaningController::class, 'data_history']);

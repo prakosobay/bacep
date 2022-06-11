@@ -241,7 +241,7 @@
                 <div class="col-3">
                     <a href="#" class="" style="color: #EA8C00; text-decoration: none">
                         <img src="{{asset('gambar/home/Arrows.png')}}" alt="" class="img-fluid">
-                        See Our Location
+                        <a href="https://www.google.com/maps/place/PT.+Bali+Towerindo+Sentra,+Tbk./@-6.1622723,106.8206658,17z/data=!3m1!4b1!4m5!3m4!1s0x2e69f5ea2b8b1ba5:0xb4683bd0933b376a!8m2!3d-6.1623528!4d106.822869">See Our Location</a>
                     </a>
                 </div>
                 <div class="col-3"></div>

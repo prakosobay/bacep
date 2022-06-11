@@ -14,6 +14,13 @@ use Barryvdh\DomPDF\Facade as PDF;
 
 class SurveyController extends Controller
 {
+
+    // Show Pages
+    public function form_show() // Menampilkan form survey
+    {
+        return view('sales.form');
+    }
+
     public function store(Request $request)
     {
         // dd($request->all());

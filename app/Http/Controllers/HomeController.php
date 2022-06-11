@@ -78,17 +78,13 @@ class HomeController extends Controller
             if ($type_approve == 'all') {
                 return view('all_approval');
             } elseif ($type_approve == 'survey') {
-                // dd($role_1);
                 $survey = DB::table('survey_histories')
                     ->join('surveys', 'surveys.id', '=', 'survey_histories.survey_id')
                     ->whereIn('survey_histories.role_to', $role_1)
                     ->where('survey_histories.aktif', '=', 1)
                     ->select('surveys.*', 'survey_histories.pdf')
                     ->get();
-                // $pic = Survey::select('visit_name')->get();
-                $json = json_decode($survey, true);
-                // dd($survey);
-                return view('sales.approval', compact('survey', 'json'));
+                return view('sales.approval', compact('survey'));
             } elseif ($type_approve == 'cleaning') {
                 $cleaning = DB::table('cleaning_histories')
                     ->join('cleanings', 'cleanings.cleaning_id', '=', 'cleaning_histories.cleaning_id')
@@ -154,7 +150,7 @@ class HomeController extends Controller
     //     }
     // }
 
-    public function new_permit()
+    public function new_permit() // KAGA KEPAKE
     {
         $role = Session::get('arrole');
         $email = Auth::user()->email;
@@ -188,7 +184,7 @@ class HomeController extends Controller
         } elseif (($email == 'badai.sino@balitower.co.id') || ($email == 'data.center7@balitower.co.id')) {
             return view('cleaning.full_visitor');
         } elseif ($email == 'sales@mail.com') {
-            return view('sales.log');
+            return view('sales.full_visitor');
         } else {
             abort(403);
         }
