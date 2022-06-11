@@ -32,10 +32,10 @@
                         <a class="nav-link inter" aria-current="page" href="{{url('/home')}}">Home</a>
                     </li>
                     <li class="nav-item mx-5">
-                        <a class="nav-link inter" href="#about">About Us</a>
+                        <a class="nav-link inter" href="{{ url('home')}}">About Us</a>
                     </li>
                     <li class="nav-item mx-5">
-                        <a class="nav-link inter" href="#">Log Permit</a>
+                        <a class="nav-link inter" href="{{ url('logall')}}">Log Permit</a>
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">

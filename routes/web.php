@@ -15,15 +15,6 @@ Route::middleware(['auth'])->group(function () {
     //Detail History
     Route::get('/detail_cleaning/{id}', [CleaningController::class, 'detail_permit_cleaning']);
 
-    //Approve flow
-    Route::post('/approve_other', [RutinController::class, 'approve_other']);
-
-    //Reject
-    Route::post('other_reject', [RutinController::class, 'reject']);
-
-    //Submit
-    Route::post('/rutin.form', [RutinController::class, 'store_rutin']);
-
     //History
     Route::get('/detail_cleaning{id}', [CleaningController::class, 'approve_cleaning']);
 
@@ -38,8 +29,6 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/other_revisi', [RutinController::class, 'revisi']);
     Route::get('/rev/{id}', [RutinController::class, 'other_revisi']);
 
-    //PDF
-    Route::get('/other_pdf/{id}', [RutinController::class, 'other_pdf']);
 
     //Admin Panel
     Route::get('/table_user', [AdminController::class, 'show_user']);
@@ -52,6 +41,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/role.destroy/{id}', [AdminController::class, 'delete_role']);
     Route::post('/relasi.destroy/{id}', [AdminController::class, 'delete_relasi']);
 
+
     // Revisi
     Route::get('/revisi.cleaning', [AdminController::class, 'update_cleaning']);
     Route::get('/table_relasi', [AdminController::class, 'show_relasi']);
@@ -63,8 +53,10 @@ Route::middleware(['auth'])->group(function () {
     Route::put('u.edit/{id}', [AdminController::class, 'user_update']);
     Route::get('/u.hapus/{id}', [AdminController::class, 'delete']);
 
+
     //Dashboard Barang
     Route::get('/table_barang', [HomeController::class, 'dashboard'])->name('table_barang');
+
 
     //Barang Consume
     Route::post('/consum', [ConsumController::class, 'csv']);
@@ -80,6 +72,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/export.consum', [ConsumController::class, 'export_consum']);
     Route::get('/export.c.m', [ConsumController::class, 'export_consum_masuk']);
     Route::get('/export.c.k', [ConsumController::class, 'export_consum_keluar']);
+
 
     //Barang Asset
     Route::post('/asset', [AssetController::class, 'csv']);
@@ -99,12 +92,14 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/export.a.k', [AssetController::class, 'export_asset_keluar']);
     Route::get('/a.use', [AssetController::class, 'show_use']);
 
+
     //Checklist Genset
     Route::get('/checklist.warming', [GensetController::class, 'show_warming']);
     Route::get('/checklist.table', [GensetController::class, 'index']);
     Route::get('/c.show/{id}', [GensetController::class, 'show']);
     Route::get('/c.pdf/{id}', [GensetController::class, 'pdf']);
     Route::post('/checklist', [GensetController::class, 'store_warming']);
+
 
     //Revisi
     Route::get('/ob', [RevisiController::class, 'show_ob'])->name('ob');
@@ -113,19 +108,13 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/ob.destroy/{id}', [RevisiController::class, 'destroy_ob']);
     Route::post('/ob.new', [RevisiController::class, 'store_ob']);
 
+
     // Revisi Visitor
     Route::get('/revisi/visitor/show', [RevisiController::class, 'show_visitor']);
     Route::get('/revisi/visitor/yajra', [RevisiController::class, 'yajra_visitor']);
     Route::get('/revisi/visitor/edit', [RevisiController::class, 'edit_visitor']);
     Route::get('/revisi/visitor/edit/{id}', [RevisiController::class, 'edit_visitor']);
 
-    //Perbaikan
-    Route::get('/perbaikan', [RutinController::class, 'form_perbaikan']);
-
-    //Rutin
-    Route::get('rutin', [RutinController::class, 'index']);
-    Route::get('/rutins/{id}', [RutinController::class, 'rutin']);
-    Route::get('/personil/{id}', [RutinController::class, 'personil']);
 
     // Survey
     Route::get('survey/form/show', [SurveyController::class, 'form_show']);
@@ -139,6 +128,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/approve_survey', [SurveyController::class, 'approve']);
     Route::post('/reject_survey', [SurveyController::class, 'reject']);
     Route::get('/survey/yajra/show', [SurveyController::class, 'yajra_show']);
+
 
     // Cleaning
     Route::get('route_history_cleaning', [CleaningController::class, 'data_history']);
@@ -163,8 +153,10 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/cleaning/checkout/{id}', [CleaningController::class, 'checkout_update_cleaning']);
     Route::put('/cleaning/reject/{id}', [CleaningController::class, 'reject_full_cleaning']);
 
+
     // Troubleshoot
     Route::get('other/troubleshoot/show', [OtherController::class, 'show_troubleshoot_form']);
+
 
     // Maintenance
     Route::get('other/maintenance/show', [OtherController::class, 'show_maintenance_form']);
@@ -184,6 +176,13 @@ Route::middleware(['auth'])->group(function () {
     Route::post('other/maintenance/create', [OtherController::class, 'create_maintenance']);
     Route::post('/other/maintenance/full/reject/{id}', [OtherController::class, 'update_reject_maintenance']);
     Route::post('/other/maintenance/form/checkin', [OtherController::class, 'update_checkin_maintenance']);
+
+
+    // IT TEAM
+    Route::get('it/form/show', function () {
+        return view('it.form');
+    });
+
 
     //Visitor All Base Super
     Route::get('new_permit', [HomeController::class, 'new_permit']);

@@ -160,7 +160,7 @@
     </div>
 
     {{-- about  --}}
-    <div class="container py-5 px-5">
+    <div class="container py-5 px-5" id="about">
         <div class="row justify-content-center">
             <div class="col-4 text-center">
                 <h4 class="text-about">
@@ -264,13 +264,12 @@
                         Book a visit to our Data Center with <b>Permit</b>. Permit is a one-way access for our Data Center Building.
                     </p>
                     <p>
-                        <a href="{{ url('new_permit') }}" type="button" id="" class="new-btn-oren" data-cleaning_id="">Create New Permit</a>
+                        <a href="{{ url('logall') }}" type="button" id="" class="new-btn-oren" data-cleaning_id="">Create New Permit</a>
                     </p>
                 </div>
             </div>
         </div>
     </div>
-
 
 
     {{-- ------------------------------- Approval Section -------------------------------------- --}}

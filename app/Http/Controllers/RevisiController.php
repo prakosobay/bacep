@@ -19,20 +19,36 @@ class RevisiController extends Controller
         $this->middleware('auth');
     }
 
-    public function show_ob()
+
+    // Show Pages
+    public function show_ob() // Menampilkan seluruh data OB
     {
         $ob = MasterOb::all();
-        // dd($ob);
         return view('revisi.ob', compact('ob'));
     }
 
-    public function show_visitor()
+    public function show_visitor() // Menampilkan seluruh data visitor
     {
         $visitor = Visitor::all();
         return view('admin.showVisitor', compact('visitor'));
     }
 
-    public function yajra_visitor()
+    public function edit_visitor($id) // Menampilkan data visitor terpilih
+    {
+        $visitor = Visitor::findOrFail($id);
+        return view('admin.editVisitor', compact('visitor'));
+    }
+
+    public function edit_ob($id) // Menampilkan data ob terpilih
+    {
+        $ob = MasterOb::findOrFail($id);
+        return view('revisi.master', compact('ob'));
+    }
+
+
+
+    // Yajra Table
+    public function yajra_visitor() // Mengambil data visitor dengan datatable yajra
     {
         $visitor = DB::table('visitors')
             ->orderBy('id', 'asc');
@@ -41,21 +57,12 @@ class RevisiController extends Controller
             ->make(true);
     }
 
-    public function edit_visitor($id)
-    {
-        $visitor = Visitor::findOrFail($id);
-        return view('admin.editVisitor', compact('visitor'));
-    }
 
-    public function edit_ob($id)
-    {
-        $ob = MasterOb::findOrFail($id);
-        return view('revisi.master', compact('ob'));
-    }
 
-    public function update_ob(Request $request, $id)
+    // Submit data
+    public function update_ob(Request $request, $id) // Update data personil OB terpilih
     {
-        // dd($request->all());
+        // Validasi data dari request
         $request->validate([
             'nama' => ['required', 'string', 'max:255'],
             'id_number' => ['required', 'numeric'],
@@ -79,15 +86,14 @@ class RevisiController extends Controller
         return redirect('ob');
     }
 
-    public function destroy_ob($id)
+    public function destroy_ob($id) // Menghapus data personil OB terpilih
     {
-        // dd($id);
         MasterOb::findOrFail($id)->delete();
         Alert::success('Success', 'Personil has been deleted');
         return redirect('ob');
     }
 
-    public function store_ob(Request $request)
+    public function store_ob(Request $request) // Menambahkan personil OB terbaru
     {
         // dd($request->all());
         $request->validate([
