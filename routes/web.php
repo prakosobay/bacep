@@ -91,6 +91,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/export.a.m', [AssetController::class, 'export_asset_masuk']);
     Route::get('/export.a.k', [AssetController::class, 'export_asset_keluar']);
     Route::get('/a.use', [AssetController::class, 'show_use']);
+    Route::get('asset/all/yajra/show', [AssetController::class, 'yajra_all_asset']);
 
 
     //Checklist Genset

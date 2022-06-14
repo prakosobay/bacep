@@ -1,11 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    {{-- <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge"> --}}
     <title>Cleaning PDF</title>
-    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('css2/pdf.css') }}"> --}}
     <style>
         @page {
             margin: 0.5cm 0.5cm;
@@ -67,8 +63,6 @@
         }
 
         .table-borderless {
-            /* border: 1px solid black; */
-            /* border-collapse: collapse; */
             font-size: 10pt;
             width: 100%;
             margin-top: 10px;
@@ -458,7 +452,7 @@
 
                 <tr>
                     <td class="col_approval"><b>Requestor</b></td>
-                    <td class="col_approval"><b>Head of Data Center Operation</b></td>
+                    <td class="col_approval"><b>Data Center Operational Section Head</b></td>
                     <td class="col_approval"><b>Security</b></td>
                 </tr>
             </table>
@@ -824,7 +818,7 @@
                     <td class="col_approval">Requestor</td>
                     <td class="col_approval">Data Center Operation</td>
                     <td class="col_approval">Data Center Operation</td>
-                    <td class="col_approval">Head of Data Center Operation</td>
+                    <td class="col_approval">Data Center Operational Section Head</td>
                 </tr>
             </table>
 

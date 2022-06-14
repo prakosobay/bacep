@@ -10,23 +10,19 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            {{-- <button type="button" class="btn btn-primary mr-5" data-toggle="modal" data-target="#asset">
+            <button type="button" class="btn btn-primary mr-5" data-toggle="modal" data-target="#asset_modal">
                 IMPORT CSV
-            </button> --}}
+            </button>
 
             <a href="{{url('/a.new')}}" type="button" class="btn btn-primary mr-5" >
                 <strong>Tambahkan Barang Asset Baru</strong>
             </a>
 
-            <a href="{{url('/export.asset')}}" type="button" class="btn btn-success mr-5" >
-                <strong>Export Excel</strong>
-            </a>
-
             <!-- Import Excel -->
-            <div class="modal fade" id="asset" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="asset_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <form method="post" action="{{ url('/asset')}}" enctype="multipart/form-data">
-                        {{ csrf_field() }}
+                        @csrf
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalLabel">Import File CSV</h5>
@@ -48,7 +44,7 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-striped table-hover" id="dataTable" width="100%" cellspacing="0">
+                <table class="table table-striped table-hover" id="asset_table" width="100%" cellspacing="0">
                     <thead>
                         <tr>
                             <th>Kode Barang</th>
@@ -61,11 +57,11 @@
                             <th>Kondisi</th>
                             <th>Note</th>
                             <th>Lokasi Penyimpanan</th>
-                            <th>Update</th>
+                            {{-- <th>Update</th> --}}
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($asset as $c)
+                        {{-- @foreach ($asset as $c)
                             <tr>
                                 <td>{{$c->id}}</td>
                                 <td>{{$c->itemcode}}</td>
@@ -89,12 +85,36 @@
                                     </div>
                                 </td>
                             </tr>
-                        @endforeach
+                        @endforeach --}}
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 </div>
-<script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
+{{-- <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script> --}}
+@push('script')
+    <script>
+        $(function() {
+            $('#asset_table').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: '{{ url('asset/all/yajra/show')}}',
+                columns: [
+                    { data: 'id', name: 'id' },
+                    { data: 'itemcode', name: 'itemcode' },
+                    { data: 'nama_barang', name: 'nama_barang' },
+                    { data: 'jumlah', name: 'jumlah' },
+                    { data: 'digunakan', name: 'digunakan' },
+                    { data: 'sisa', name: 'sisa' },
+                    { data: 'satuan', name: 'satuan' },
+                    { data: 'kondisi', name: 'kondisi' },
+                    { data: 'note', name: 'note' },
+                    { data: 'lokasi', name: 'lokasi' },
+                    // {data: 'action', name: 'action', orderable: false, searchable: false}
+                ]
+            });
+        });
+    </script>
+@endpush
 @endsection

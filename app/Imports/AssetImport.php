@@ -19,24 +19,26 @@ class AssetImport implements ToCollection, WithStartRow
     {
         $this->asset = Asset::select('id')->get();
     }
-    public function collection(Collection $rows1)
-    {
-        // echo '<pre>';
-        // var_dump($rows1);
-        // die;
-        Asset::truncate();
-        foreach ($rows1 as $row) {
-            Asset::create([
-                'nama_barang' => $row[1],
-                'jumlah' => $row[5],
-                'digunakan' => $row[6],
-                'sisa' => $row[7],
-                'satuan' => $row[8],
-                'note' => $row[10],
-                'lokasi' => $row[11],
-            ]);
-        }
-    }
+
+    // public function collection(Collection $rows1)
+    // {
+    //     // echo '<pre>';
+    //     // var_dump($rows1);
+    //     // die;
+    //     Asset::truncate();
+    //     foreach ($rows1 as $row) {
+    //         Asset::create([
+    //             'id' => $row[0],
+    //             'nama_barang' => $row[1],
+    //             'jumlah' => $row[5],
+    //             'digunakan' => $row[6],
+    //             'sisa' => $row[7],
+    //             'satuan' => $row[8],
+    //             'note' => $row[10],
+    //             'lokasi' => $row[11],
+    //         ]);
+    //     }
+    // }
 
     // public function collection(Collection $rows3)
     // {
@@ -74,23 +76,23 @@ class AssetImport implements ToCollection, WithStartRow
     //     }
     // }
 
-    // public function collection(Collection $rows5)
-    // {
-    //     // echo '<pre>';
-    //     // var_dump($rows5);
-    //     // die;
-    //     AssetUse::truncate();
-    //     foreach ($rows5 as $row) {
-    //         AssetUse::create([
-    //             'tanggal' => $row[0],
-    //             'asset_id' => $row[1],
-    //             'nama_barang' => $row[2],
-    //             'jumlah' => $row[3],
-    //             'ket' => $row[4],
-    //             'pencatat' => $row[5],
-    //         ]);
-    //     }
-    // }
+    public function collection(Collection $rows5)
+    {
+        // echo '<pre>';
+        // var_dump($rows5);
+        // die;
+        AssetUse::truncate();
+        foreach ($rows5 as $row) {
+            AssetUse::create([
+                'tanggal' => $row[0],
+                'asset_id' => $row[1],
+                'nama_barang' => $row[2],
+                'jumlah' => $row[3],
+                'ket' => $row[4],
+                'pencatat' => $row[5],
+            ]);
+        }
+    }
 
     public function startRow(): int
     {

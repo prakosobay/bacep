@@ -7,6 +7,8 @@ use App\Imports\AssetImport;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Maatwebsite\Excel\Facades\Excel;
+use Yajra\Datatables\Datatables;
+use Carbon\Carbon;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Models\{Asset, AssetMasuk, AssetKeluar, AssetUse};
 use Illuminate\Support\Facades\{DB, Auth, Gate, Mail, Session};
@@ -18,37 +20,38 @@ class AssetController extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
+
+    // Show pages
+    public function index() // Menampilkan table barang asset
     {
         if (Gate::allows('isApproval') || (Gate::allows('isHead')) || (Gate::allows('isAdmin'))) {
-            $asset = Asset::all();
-            return view('asset.table', ['asset' => $asset]);
+            return view('asset.table');
         } else {
             abort(403);
         }
     }
 
-    public function show_in()
+    public function show_in() // Menampilkan table barang masuk asset
     {
         if (Gate::allows('isApproval') || (Gate::allows('isHead')) || (Gate::allows('isAdmin'))) {
             $in = AssetMasuk::all();
-            return view('asset.masuk', ['in' => $in]);
+            return view('asset.masuk', compact('in'));
         } else {
             abort(403);
         }
     }
 
-    public function show_out()
+    public function show_out() // Menampilkan table barang keluar asset
     {
         if (Gate::allows('isApproval') || (Gate::allows('isHead')) || (Gate::allows('isAdmin'))) {
             $out = AssetKeluar::all();
-            return view('asset.keluar', ['out' => $out]);
+            return view('asset.keluar', compact('out'));
         } else {
             abort(403);
         }
     }
 
-    public function show_use()
+    public function show_use() // Menampilkan table barang digunakan
     {
         if (Gate::allows('isApproval') || (Gate::allows('isHead')) || (Gate::allows('isAdmin'))){
             $use = AssetUse::all();
@@ -59,7 +62,7 @@ class AssetController extends Controller
         }
     }
 
-    public function show_new()
+    public function show_new() // Menampilkan form barang asset baru
     {
         if ((Gate::allows('isHead')) || (Gate::allows('isApproval')) || (Gate::allows('isAdmin'))) {
             return view('asset.new');
@@ -68,13 +71,7 @@ class AssetController extends Controller
         }
     }
 
-    public function csv(Request $request)
-    {
-        $i = Excel::import(new AssetImport, $request->file('file'));
-        return back()->with('success', 'Excel Data Imported successfully.');
-    }
-
-    public function edit_masuk($id)
+    public function edit_masuk($id) // Menampilkan data barang asset masuk berdasarkan kode barang
     {
         if ((Gate::allows('isApproval') || (Gate::allows('isHead')) || (Gate::allows('isAdmin')))) {
             $asset = Asset::find($id);
@@ -84,7 +81,7 @@ class AssetController extends Controller
         }
     }
 
-    public function edit_keluar($id)
+    public function edit_keluar($id) // Menampilkan data barang asset keluar berdasarkan kode barang
     {
         if ((Gate::allows('isApproval') || (Gate::allows('isHead')) || (Gate::allows('isAdmin')))) {
             $asset = Asset::find($id);
@@ -94,18 +91,21 @@ class AssetController extends Controller
         }
     }
 
-    public function edit_use($id)
+    public function edit_use($id) // Menampilkan data barang asset digunakan berdasarkan kode barang
     {
         if((Gate::allows('isApproval') || (Gate::allows('isHead')) || (Gate::allows('isAdmin')))){
             $use = Asset::find($id);
-            // dd($use);
             return view('asset.pakai', compact('use'));
         } else{
             abort(403);
         }
     }
 
-    public function update_masuk(Request $request, $id)
+
+
+
+    // Submit data
+    public function update_masuk(Request $request, $id) // Update data barang asset masuk
     {
         $this->validate($request, [
             'nama_barang' => ['required'],
@@ -143,7 +143,7 @@ class AssetController extends Controller
         return back();
     }
 
-    public function update_keluar(Request $request, $id)
+    public function update_keluar(Request $request, $id) // Update data barang asset keluar
     {
         // dd($request->all());
         $this->validate($request, [
@@ -176,7 +176,7 @@ class AssetController extends Controller
         return back();
     }
 
-    public function update_use(Request $request, $id)
+    public function update_use(Request $request, $id) // Update data barang asset digunakan
     {
         // dd($request->all());
         $this->validate($request, [
@@ -229,7 +229,7 @@ class AssetController extends Controller
         return back();
     }
 
-    public function store_asset(Request $request)
+    public function store_asset(Request $request) // Create data barang asset baru
     {
         // dd($request->all());
         $this->validate($request, [
@@ -264,6 +264,20 @@ class AssetController extends Controller
         return back();
     }
 
+
+
+
+    // Import csv to database
+    public function csv(Request $request)
+    {
+        Excel::import(new AssetImport, $request->file('file'));
+        return back()->with('success', 'Excel Data Imported successfully.');
+    }
+
+
+
+
+    // Export excel
     public function export_asset()
     {
         return Excel::download(new AssetExport, 'Asset.xlsx');
@@ -277,5 +291,18 @@ class AssetController extends Controller
     public function export_asset_keluar()
     {
         return Excel::download(new AssetkeluarExport, 'AssetKeluar.xlsx');
+    }
+
+
+
+
+    // Yajra Datatable
+    public function yajra_all_asset()
+    {
+        $asset = DB::table('assets')
+            ->select('assets.*')
+            ->orderBy('id', 'asc');
+            return Datatables::of($asset)
+            ->make(true);
     }
 }
