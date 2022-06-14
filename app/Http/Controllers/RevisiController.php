@@ -153,4 +153,31 @@ class RevisiController extends Controller
         // Alert::success('Success', 'Personil has been added');
         // return redirect('ob');
     }
+
+    public function store_visitor(Request $request) // Menambahkan visitor terbaru
+    {
+        // dd($request->all());
+        $request->validate([
+            'visit_nama' => ['required', 'string', 'max:255'],
+            'visit_company' => ['required'],
+            'visit_department' => ['required', 'string'],
+            'visit_respon' => ['required', 'string'],
+            'visit_phone' => ['required', 'string'],
+            'visit_nik' => ['required', 'numeric'],
+        ]);
+
+        $create = Visitor::create([
+            'visit_nama' => $request->visit_nama,
+            'visit_company' => $request->visit_company,
+            'visit_department' => $request->visit_department,
+            'visit_respon' => $request->visit_respon,
+            'visit_phone' => $request->visit_phone,
+            'visit_nik' => $request->visit_phone,
+        ]);
+
+        return $create->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
+        // Alert::success('Success', 'Personil has been added');
+        // return redirect('ob');
+    }
+
 }
