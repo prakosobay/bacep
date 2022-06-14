@@ -50,6 +50,7 @@ class RevisiController extends Controller
     public function yajra_visitor() // Mengambil data visitor dengan datatable yajra
     {
         $visitor = DB::table('visitors')
+            ->where('deleted_at', NULL)
             ->orderBy('id', 'asc');
         return Datatables::of($visitor)
             ->addColumn('action', 'admin.actionEdit')
@@ -117,6 +118,15 @@ class RevisiController extends Controller
         Alert::success('Success', 'Personil has been deleted');
         return redirect('ob');
     }
+
+    public function destroy_visitor($id) // Menghapus data visitor terpilih
+    {
+        //dd($id);
+        Visitor::findOrFail($id)->delete();
+        Alert::success('Success', 'Personil has been deleted');
+        return redirect('revisi/visitor/show');
+    }
+
 
     public function store_ob(Request $request) // Menambahkan personil OB terbaru
     {
