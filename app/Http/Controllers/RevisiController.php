@@ -33,6 +33,7 @@ class RevisiController extends Controller
         return view('admin.showVisitor', compact('visitor'));
     }
 
+    // Edit Pages
     public function edit_visitor($id) // Menampilkan data visitor terpilih
     {
         $visitor = Visitor::findOrFail($id);
@@ -45,18 +46,16 @@ class RevisiController extends Controller
         return view('revisi.master', compact('ob'));
     }
 
-
-
     // Yajra Table
     public function yajra_visitor() // Mengambil data visitor dengan datatable yajra
     {
         $visitor = DB::table('visitors')
+            ->where('deleted_at', NULL)
             ->orderBy('id', 'asc');
         return Datatables::of($visitor)
             ->addColumn('action', 'admin.actionEdit')
             ->make(true);
     }
-
 
 
     // Submit data
@@ -86,12 +85,48 @@ class RevisiController extends Controller
         return redirect('ob');
     }
 
+    public function update_visitor(Request $request, $id)
+    {
+        //dd($request->all());
+        $request->validate([
+            'visit_nama' => ['required', 'string', 'max:255'],
+            'visit_company' => ['required'],
+            'visit_department' => ['required', 'string'],
+            'visit_respon' => ['required', 'string'],
+            'visit_phone' => ['required', 'string'],
+            'visit_nik' => ['required', 'numeric'],
+        ]);
+
+        $update = Visitor::findOrFail($id);
+        $update->update([
+            'visit_nama' => $request->visit_nama,
+            'visit_company' => $request->visit_company,
+            'visit_department' => $request->visit_department,
+            'visit_respon' => $request->visit_respon,
+            'visit_phone' => $request->visit_phone,
+        ]);
+
+        Alert::success('Success', 'Personil has been edited');
+        return redirect('revisi/visitor/show');
+    }
+
+    //delete
+
     public function destroy_ob($id) // Menghapus data personil OB terpilih
     {
         MasterOb::findOrFail($id)->delete();
         Alert::success('Success', 'Personil has been deleted');
         return redirect('ob');
     }
+
+    public function destroy_visitor($id) // Menghapus data visitor terpilih
+    {
+        //dd($id);
+        Visitor::findOrFail($id)->delete();
+        Alert::success('Success', 'Personil has been deleted');
+        return redirect('revisi/visitor/show');
+    }
+
 
     public function store_ob(Request $request) // Menambahkan personil OB terbaru
     {
@@ -118,4 +153,31 @@ class RevisiController extends Controller
         // Alert::success('Success', 'Personil has been added');
         // return redirect('ob');
     }
+
+    public function store_visitor(Request $request) // Menambahkan visitor terbaru
+    {
+        // dd($request->all());
+        $request->validate([
+            'visit_nama' => ['required', 'string', 'max:255'],
+            'visit_company' => ['required'],
+            'visit_department' => ['required', 'string'],
+            'visit_respon' => ['required', 'string'],
+            'visit_phone' => ['required', 'string'],
+            'visit_nik' => ['required', 'numeric'],
+        ]);
+
+        $create = Visitor::create([
+            'visit_nama' => $request->visit_nama,
+            'visit_company' => $request->visit_company,
+            'visit_department' => $request->visit_department,
+            'visit_respon' => $request->visit_respon,
+            'visit_phone' => $request->visit_phone,
+            'visit_nik' => $request->visit_phone,
+        ]);
+
+        return $create->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
+        // Alert::success('Success', 'Personil has been added');
+        // return redirect('ob');
+    }
+
 }

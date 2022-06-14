@@ -115,6 +115,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/revisi/visitor/yajra', [RevisiController::class, 'yajra_visitor']);
     Route::get('/revisi/visitor/edit', [RevisiController::class, 'edit_visitor']);
     Route::get('/revisi/visitor/edit/{id}', [RevisiController::class, 'edit_visitor']);
+    Route::put('/revisi/visitor/edit/{id}', [RevisiController::class, 'update_visitor']);
+    Route::post('/revisi/visitor/destroy/{id}', [RevisiController::class, 'destroy_visitor']);
+    Route::post('/revisi/visitor/new', [RevisiController::class, 'store_visitor']);
 
 
     // Survey
