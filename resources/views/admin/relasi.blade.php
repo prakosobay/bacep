@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('judul_halaman', 'Tabel Relasi User Role')
-        {{ csrf_field() }}
+        @csrf
 
 @section('content')
 <div class="container-fluid">
@@ -16,10 +16,12 @@
             <button type="button" class="btn btn-primary mr-5" data-toggle="modal" data-target="#relasi">
                 Tambah Relasi Baru
             </button>
+
+            {{-- modal relasi --}}
             <div class="modal fade" id="relasi" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <form method="post" action="{{ url('/relasi.new')}}">
-                        {{ csrf_field() }}
+                        @csrf
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalLabel">Tambah Relasi Baru</h5>
@@ -45,7 +47,7 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-striped table-hover" id="dataTable" width="100%" cellspacing="0">
+                <table class="table table-striped table-hover" id="relasi_table" width="100%">
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -54,26 +56,28 @@
                             <th>Action</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        @foreach ($ru as $c)
-                            <tr>
-                                <td>{{$c->id}}</td>
-                                <td>{{$c->user_id}}</td>
-                                <td>{{$c->role_id}}</td>
-                                <td>
-                                    <form action="{{ url('relasi.destroy',$c->id) }}" method="POST" onsubmit="return confirm('Are You Sure Want to Delete This Relasi ?')">
-                                        @csrf
-                                        <button type="submit"class="btn btn-danger mr-2 col-xs-2 margin-bottom hapus">Hapus</button>
-                                    </form>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
                 </table>
             </div>
         </div>
     </div>
 </div>
+@push('scripts')
+<script>
+    $(function() {
+        $('#relasi_table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: '{{ url('admin/yajra/relasi/show')}}',
+            columns: [
+                { data: 'id', name: 'id' },
+                { data: 'user_id', name: 'user_id' },
+                { data: 'role_id', name: 'role_id' },
+                { data: 'action', name: 'action', orderable: false, searchable: false}
+            ]
+        });
+    });
+</script>
+@endpush
 @endsection
 
 

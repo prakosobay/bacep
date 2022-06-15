@@ -10,9 +10,9 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            {{-- <button type="button" class="btn btn-primary mr-5" data-toggle="modal" data-target="#importExcel">
+            <button type="button" class="btn btn-primary mr-5" data-toggle="modal" data-target="#importExcel">
                 IMPORT CSV
-            </button> --}}
+            </button>
 
             <a href="{{url('/c.new')}}" type="button" class="btn btn-primary mr-5" >
                 <strong>Tambahkan Barang Consumable Baru</strong>
@@ -25,7 +25,7 @@
             <div class="modal fade" id="importExcel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <form method="post" action="{{ url('/consum')}}" enctype="multipart/form-data">
-                        {{ csrf_field() }}
+                        @csrf
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalLabel">Import File CSV</h5>
@@ -48,7 +48,7 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-striped table-hover" id="dataTable" width="100%" cellspacing="0">
+                <table class="table table-striped table-hover" id="consum_table" width="100%">
                     <thead>
                         <tr>
                             <th>Kode Barang</th>
@@ -62,41 +62,33 @@
                             <th>Update</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        @foreach ($consum as $c)
-                            <tr>
-                                <td>{{$c->id}}</td>
-                                <td>{{$c->itemcode}}</td>
-                                <td>{{$c->nama_barang}}</td>
-                                <td>{{$c->jumlah}}</td>
-                                <td>{{$c->satuan}}</td>
-                                @if($c->jumlah <= 0)
-                                <td>Stok Habis</td>
-                                @elseif($c->jumlah > 0 && $c->jumlah <= 2)
-                                    <td>Stok Sedikit</td>
-                                @elseif($c->jumlah > 2 && $c->jumlah <= 5)
-                                    <td>Stok Cukup</td>
-                                @elseif($c->jumlah > 5)
-                                    <td>Stok Banyak</td>
-                                @endif
-                                <td>{{$c->note}}</td>
-                                <td>{{$c->lokasi}}</td>
-                                <td>
-                                    <div class="btn-toolbar">
-                                        <a href="{{url('/c.tambah', $c->id)}}" type="button" class="btn btn-success btn-sm col-xs-2 margin-bottom" id="in">Masuk</a>
-                                    </div>
-                                    <div class="btn-toolbar">
-                                        <a href="{{url('/c.kurang', $c->id)}}" type="button" class="btn btn-danger btn-sm" id="out">Keluar</a>
-                                    </div>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
                 </table>
             </div>
         </div>
     </div>
 </div>
 
-<script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
+{{-- <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script> --}}
+@push('script')
+<script>
+    $(function() {
+        $('#consum_table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: '{{ url('consum/all/yajra/show')}}',
+            columns: [
+                { data: 'id', name: 'id' },
+                { data: 'itemcode', name: 'itemcode' },
+                { data: 'nama_barang', name: 'nama_barang' },
+                { data: 'jumlah', name: 'jumlah' },
+                { data: 'satuan', name: 'satuan' },
+                { data: 'kondisi', name: 'kondisi' },
+                { data: 'note', name: 'note' },
+                { data: 'lokasi', name: 'lokasi' },
+                {data: 'action', name: 'action', orderable: false, searchable: false}
+            ]
+        });
+    });
+</script>
+@endpush
 @endsection

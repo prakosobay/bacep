@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Maatwebsite\Excel\Facades\Excel;
 use Yajra\Datatables\Datatables;
-use Carbon\Carbon;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Models\{Asset, AssetMasuk, AssetKeluar, AssetUse};
 use Illuminate\Support\Facades\{DB, Auth, Gate, Mail, Session};
@@ -268,7 +267,7 @@ class AssetController extends Controller
 
 
     // Import csv to database
-    public function csv(Request $request)
+    public function csv(Request $request) // Import data barang asset to databse
     {
         Excel::import(new AssetImport, $request->file('file'));
         return back()->with('success', 'Excel Data Imported successfully.');
@@ -278,17 +277,17 @@ class AssetController extends Controller
 
 
     // Export excel
-    public function export_asset()
+    public function export_asset() // Export data barang asset
     {
         return Excel::download(new AssetExport, 'Asset.xlsx');
     }
 
-    public function export_asset_masuk()
+    public function export_asset_masuk() // Export data barang masuk asset
     {
         return Excel::download(new AssetMasukExport, 'AssetMasuk.xlsx');
     }
 
-    public function export_asset_keluar()
+    public function export_asset_keluar() // Export data barang keluar asset
     {
         return Excel::download(new AssetkeluarExport, 'AssetKeluar.xlsx');
     }
@@ -297,12 +296,40 @@ class AssetController extends Controller
 
 
     // Yajra Datatable
-    public function yajra_all_asset()
+    public function yajra_all_asset() // Datatable dengan yajra barang asset
     {
         $asset = DB::table('assets')
             ->select('assets.*')
             ->orderBy('id', 'asc');
             return Datatables::of($asset)
+            ->addColumn('action', 'asset.update')
+            ->make(true);
+    }
+
+    public function yajra_masuk_asset() // Datatable dengan yajra barang asset masuk
+    {
+        $masuk = DB::table('asset_masuks')
+            ->select('asset_masuks.*')
+            ->orderBy('asset_id', 'asc');
+            return Datatables::of($masuk)
+            ->make(true);
+    }
+
+    public function yajra_keluar_asset() // Datatable dengan yajra barang asset keluar
+    {
+        $keluar = DB::table('asset_keluars')
+            ->select('asset_keluars.*')
+            ->orderBy('asset_id', 'asc');
+            return Datatables::of($keluar)
+            ->make(true);
+    }
+
+    public function yajra_digunakan_asset() // Datatable dengan yajra barang digunakan
+    {
+        $digunakan = DB::table('asset_uses')
+            ->select('asset_uses.*')
+            ->orderBy('asset_id', 'asc');
+            return Datatables::of($digunakan)
             ->make(true);
     }
 }

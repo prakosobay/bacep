@@ -7,9 +7,11 @@ use App\Http\Controllers\Controller;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Imports\ConsumImport;
 use Maatwebsite\Excel\Facades\Excel;
+use Yajra\Datatables\Datatables;
 use Illuminate\Support\Facades\{DB, Auth, Gate, Mail, Session};
 use App\Models\{ConsumMasuk, Consum, ConsumKeluar};
 use Illuminate\Http\Request;
+use Yajra\DataTables\Contracts\DataTable;
 
 class ConsumController extends Controller
 {
@@ -17,6 +19,8 @@ class ConsumController extends Controller
     {
         $this->middleware('auth');
     }
+
+
 
     public function index()
     {
@@ -87,7 +91,6 @@ class ConsumController extends Controller
             'jumlah' => ['numeric', 'required', 'min:1'],
             'ket' => 'required',
             'pencatat' => ['required', 'string'],
-            // 'itemcode' => ['required', 'numeric'],
         ]);
 
         $consum = Consum::find($id);
@@ -119,7 +122,6 @@ class ConsumController extends Controller
             'jumlah' => ['numeric', 'required', 'min:1'],
             'ket' => 'required',
             'pencatat' => ['required', 'string'],
-            // 'itemcode' => ['required', 'numeric'],
         ]);
 
         $consum = Consum::find($id);
@@ -201,5 +203,33 @@ class ConsumController extends Controller
     public function export_consum_keluar()
     {
         return Excel::download(new ConsumKeluarExport, 'ConsumKeluar.xlsx');
+    }
+
+    public function yajra_all_consum()
+    {
+        $consum = DB::table('consums')
+            ->select('consums.*')
+            ->orderBy('id', 'asc');
+            return DataTables::of($consum)
+            ->addColumn('action', 'consum.update')
+            ->make(true);
+    }
+
+    public function yajra_masuk_consum()
+    {
+        $masuk = DB::table('consum_masuks')
+            ->select('consum_masuks.*')
+            ->orderBy('consum_id', 'asc');
+            return Datatables::of($masuk)
+            ->make(true);
+    }
+
+    public function yajra_keluar_consum()
+    {
+        $keluar = DB::table('consum_keluars')
+            ->select('consum_keluars.*')
+            ->orderBy('consum_id', 'asc');
+            return Datatables::of($keluar)
+            ->make(true);
     }
 }
