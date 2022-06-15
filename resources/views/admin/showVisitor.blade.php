@@ -25,41 +25,29 @@
                                 <h5 class="modal-title" id="exampleModalLabel">Tambah Visitor Baru</h5>
                             </div>
                             <div class="modal-body">
-                                <label>Nama Lengkap:</label>
+                                <label>Nama Lengkap :</label>
                                 <div class="form-group">
-                                    <input id="new" type="text" class="form-control" name="name" required="required"  autofocus>
+                                    <input id="nama" type="text" class="form-control" name="visit_nama" required="required"  autofocus>
                                 </div>
-                                <label>Email :</label>
+                                <label>Perusahaan :</label>
                                 <div class="form-group">
-                                    <input id="email" type="email" class="form-control" name="email" required="required">
+                                    <input id="perusahaan" type="text" class="form-control" name="visit_company" required="required"  autofocus>
                                 </div>
-                                <label>Password :</label>
+                                <label>Department :</label>
                                 <div class="form-group">
-                                    <input type="password" class="form-control" name="password" required="required">
+                                    <input id="department" type="text" class="form-control" name="visit_department" required="required"  autofocus>
                                 </div>
-                                <label>Slug :</label>
+                                <label>Responsibilty :</label>
                                 <div class="form-group">
-                                    {{-- <input id="slug" type="text" class="form-control" name="slug"  required="required"> --}}
-                                    <select class="form-control" name="slug">
-                                        <option selected>Pilih 1 Slug</option>
-                                        <option value="approval">Approval</option>
-                                        <option value="bm">BM</option>
-                                        <option value="head">Head</option>
-                                        <option value="security">Security</option>
-                                        <option value="visitor">Visitor</option>
-                                    </select>
+                                    <input id="responsibilty" type="text" class="form-control" name="visit_respon" required="required"  autofocus>
                                 </div>
-                                <label>Dept :</label>
+                                <label>No HP :</label>
                                 <div class="form-group">
-                                    <input id="dept" type="text" class="form-control" name="department"  required="required">
+                                    <input id="hp" type="number" class="form-control" name="visit_phone" required="required"  autofocus>
                                 </div>
-                                <label>Company :</label>
+                                <label>No ID :</label>
                                 <div class="form-group">
-                                    <input id="company" type="text" class="form-control" name="company"  required="required">
-                                </div>
-                                <label>No. HP :</label>
-                                <div class="form-group">
-                                    <input id="hp" type="number" class="form-control" name="phone"  required="required">
+                                    <input id="no_id" type="text" class="form-control" name="visit_nik " required="required"  autofocus>
                                 </div>
                             </div>
                             <div class="modal-footer">
