@@ -5,8 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{HomeController, CleaningController, AdminController};
 
+// Route::get('/', function () {
+//     return view('auth.login');
+// })->middleware('guest');
+
 Route::get('/', function () {
-    return view('auth.login');
+    return view('other.troubleshoot_form');
 })->middleware('guest');
 
 Route::middleware(['auth'])->group(function () {
