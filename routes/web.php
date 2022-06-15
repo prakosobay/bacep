@@ -33,13 +33,17 @@ Route::middleware(['auth'])->group(function () {
     //Admin Panel
     Route::get('/table_user', [AdminController::class, 'show_user']);
     Route::get('/table_role', [AdminController::class, 'show_role']);
+    Route::get('admin/user/edit/{id}', [AdminController::class, 'user_edit']);
+    Route::put('u.edit/{id}', [AdminController::class, 'user_update']);
     Route::post('/role.new', [AdminController::class, 'store_role']);
     Route::post('/relasi.new', [AdminController::class, 'store_relasi']);
     Route::post('/user.new', [AdminController::class, 'store_user']);
-    Route::post('/user.destroy/{id}', [AdminController::class, 'delete_user']);
+    Route::post('admin/user/destroy/{id}', [AdminController::class, 'delete_user']);
     Route::post('/role.destroy/{id}', [AdminController::class, 'delete_role']);
     Route::post('/role.destroy/{id}', [AdminController::class, 'delete_role']);
     Route::post('/relasi.destroy/{id}', [AdminController::class, 'delete_relasi']);
+    Route::get('admin/yajra/user/show', [AdminController::class, 'yajra_show_user']);
+    Route::get('admin/yajra/relasi/show', [AdminController::class, 'yajra_show_relasi']);
 
 
     // Revisi
@@ -49,8 +53,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/edit.user/{id}', [AdminController::class, 'show_edit']);
     Route::get('/a.user', [AdminController::class, 'show_user']);
     Route::get('/a.role', [AdminController::class, 'show_role']);
-    Route::get('/u.edit/{id}', [AdminController::class, 'user_edit']);
-    Route::put('u.edit/{id}', [AdminController::class, 'user_update']);
     Route::get('/u.hapus/{id}', [AdminController::class, 'delete']);
 
 
@@ -67,11 +69,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/c.keluar', [ConsumController::class, 'show_out']);
     Route::get('/c.tambah/{id}', [ConsumController::class, 'edit_masuk']);
     Route::get('/c.kurang/{id}', [ConsumController::class, 'edit_keluar']);
-    Route::put('/consum_putin/{id}', [ConsumController::class, 'update_masuk']);
-    Route::put('/consum_putout/{id}', [ConsumController::class, 'update_keluar']);
+    Route::put('consum/edit/masuk/{id}', [ConsumController::class, 'update_masuk']);
+    Route::put('consum/edit/keluar/{id}', [ConsumController::class, 'update_keluar']);
     Route::get('/export.consum', [ConsumController::class, 'export_consum']);
     Route::get('/export.c.m', [ConsumController::class, 'export_consum_masuk']);
     Route::get('/export.c.k', [ConsumController::class, 'export_consum_keluar']);
+    Route::get('consum/all/yajra/show', [ConsumController::class, 'yajra_all_consum']);
 
 
     //Barang Asset
@@ -81,9 +84,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/asset_new', [AssetController::class, 'store_asset']);
     Route::get('/a.masuk', [AssetController::class, 'show_in']);
     Route::get('/a.keluar', [AssetController::class, 'show_out']);
-    Route::get('/a.tambah/{id}', [AssetController::class, 'edit_masuk']);
-    Route::get('/a.kurang/{id}', [AssetController::class, 'edit_keluar']);
-    Route::get('/a.uses/{id}', [AssetController::class, 'edit_use']);
+    Route::get('asset/edit/masuk/{id}', [AssetController::class, 'edit_masuk']);
+    Route::get('asset/edit/keluar/{id}', [AssetController::class, 'edit_keluar']);
+    Route::get('asset/edit/digunakan/{id}', [AssetController::class, 'edit_use']);
     Route::put('/asset_putin/{id}', [AssetController::class, 'update_masuk']);
     Route::put('/asset_putout/{id}', [AssetController::class, 'update_keluar']);
     Route::put('/asset_use/{id}', [AssetController::class, 'update_use']);
@@ -92,6 +95,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/export.a.k', [AssetController::class, 'export_asset_keluar']);
     Route::get('/a.use', [AssetController::class, 'show_use']);
     Route::get('asset/all/yajra/show', [AssetController::class, 'yajra_all_asset']);
+    Route::get('asset/masuk/yajra/show', [AssetController::class, 'yajra_masuk_asset']);
+    Route::get('asset/keluar/yajra/show', [AssetController::class, 'yajra_keluar_asset']);
+    Route::get('asset/digunakan/yajra/show', [AssetController::class, 'yajra_digunakan_asset']);
 
 
     //Checklist Genset

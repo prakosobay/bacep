@@ -44,7 +44,7 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-striped table-hover" id="asset_table" width="100%" cellspacing="0">
+                <table class="table table-striped table-hover" id="asset_table" width="100%">
                     <thead>
                         <tr>
                             <th>Kode Barang</th>
@@ -57,36 +57,9 @@
                             <th>Kondisi</th>
                             <th>Note</th>
                             <th>Lokasi Penyimpanan</th>
-                            {{-- <th>Update</th> --}}
+                            <th>Update</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        {{-- @foreach ($asset as $c)
-                            <tr>
-                                <td>{{$c->id}}</td>
-                                <td>{{$c->itemcode}}</td>
-                                <td>{{$c->nama_barang}}</td>
-                                <td>{{$c->jumlah}}</td>
-                                <td>{{$c->digunakan}}</td>
-                                <td>{{$c->sisa}}</td>
-                                <td>{{$c->satuan}}</td>
-                                <td>{{$c->sisa <= 0 ? 'Stok Habis' : 'Tersedia'}}</td>
-                                <td>{{$c->note}}</td>
-                                <td>{{$c->lokasi}}</td>
-                                <td>
-                                    <div class="btn-toolbar">
-                                        <a href="{{url('/a.tambah', $c->id)}}" type="button" class="btn btn-success btn-sm col-xs-2 margin-bottom" id="in">Masuk</a>
-                                    </div>
-                                    <div class="btn-toolbar">
-                                        <a href="{{url('/a.kurang', $c->id)}}" type="button" class="btn btn-danger btn-sm col-xs-2 margin-bottom" id="out">Keluar</a>
-                                    </div>
-                                    <div class="btn-toolbar">
-                                        <a href="{{url('/a.uses', $c->id)}}" type="button" class="btn btn-primary btn-sm" id="use">Digunakan</a>
-                                    </div>
-                                </td>
-                            </tr>
-                        @endforeach --}}
-                    </tbody>
                 </table>
             </div>
         </div>
@@ -111,7 +84,7 @@
                     { data: 'kondisi', name: 'kondisi' },
                     { data: 'note', name: 'note' },
                     { data: 'lokasi', name: 'lokasi' },
-                    // {data: 'action', name: 'action', orderable: false, searchable: false}
+                    {data: 'action', name: 'action', orderable: false, searchable: false}
                 ]
             });
         });

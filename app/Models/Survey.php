@@ -15,15 +15,15 @@ class Survey extends Model
     protected $table = 'surveys';
     protected $primaryKey = 'id';
     protected $guarded = [];
-    protected $casts = [
-        'visit_name' => AsArrayObject::class,
-        'visit_nik' => AsArrayObject::class,
-        'visit_company' => AsArrayObject::class,
-        'visit_dept' => AsArrayObject::class,
-        'visit_phone' => AsArrayObject::class,
-        // 'pic' => AsCollection::class,
-        // 'pic' => 'array',
-    ];
+    // protected $casts = [
+    //     'visit_name' => AsArrayObject::class,
+    //     'visit_nik' => AsArrayObject::class,
+    //     'visit_company' => AsArrayObject::class,
+    //     'visit_dept' => AsArrayObject::class,
+    //     'visit_phone' => AsArrayObject::class,
+    //     'pic' => AsCollection::class,
+    //     'pic' => 'array',
+    // ];
 
 
 

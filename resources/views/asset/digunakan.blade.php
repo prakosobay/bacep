@@ -16,7 +16,7 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-striped table-hover" id="dataTable" width="100%" cellspacing="0">
+                <table class="table table-striped table-hover" id="digunakan_table" width="100%">
                     <thead>
                         <tr>
                             <th>Kode Barang</th>
@@ -27,21 +27,28 @@
                             <th>Tanggal</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        @foreach ($use as $c)
-                            <tr>
-                                <td>{{$c->asset_id}}</td>
-                                <td>{{$c->nama_barang}}</td>
-                                <td>{{$c->jumlah}}</td>
-                                <td>{{$c->ket}}</td>
-                                <td>{{$c->pencatat}}</td>
-                                <td>{{$c->tanggal}}</td>
-                            </tr>
-                        @endforeach
-                    </tbody>
                 </table>
             </div>
         </div>
     </div>
 </div>
+@push('script')
+<script>
+    $(function() {
+        $('#digunakan_table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: '{{ url('asset/digunakan/yajra/show')}}',
+            columns: [
+                { data: 'asset_id', name: 'asset_id' },
+                { data: 'nama_barang', name: 'nama_barang' },
+                { data: 'jumlah', name: 'jumlah' },
+                { data: 'ket', name: 'ket' },
+                { data: 'pencatat', name: 'pencatat' },
+                { data: 'tanggal', name: 'tanggal' },
+            ]
+        });
+    });
+</script>
+@endpush
 @endsection

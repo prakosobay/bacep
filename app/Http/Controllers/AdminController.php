@@ -6,6 +6,7 @@ use App\Models\Cleaning;
 use App\Models\{User, Role, Visitor};
 use Illuminate\Http\Request;
 use GuzzleHttp\Promise\Create;
+use Yajra\DataTables\Datatables;
 use Illuminate\Validation\Rule;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\{DB, Auth, Gate, Validator, Hash};
@@ -23,8 +24,7 @@ class AdminController extends Controller
     public function show_relasi() // Menampilkan table relasi user dan role
     {
         if (Gate::allows('isAdmin')) {
-            $ru = DB::table('role_user')->get();
-            return view('admin.relasi', compact('ru'));
+            return view('admin.relasi');
         } else {
             abort(403);
         }
@@ -48,8 +48,7 @@ class AdminController extends Controller
     public function show_user() // Menampilkan table data user web permit
     {
         if (Gate::allows('isAdmin')) {
-            $user = User::all();
-            return view('admin.user', compact('user'));
+            return view('admin.user');
         } else {
             abort(403);
         }
@@ -179,6 +178,7 @@ class AdminController extends Controller
 
     public function delete_user($id) // Menghapus user SELAMANYA
     {
+        dd($id);
         //Prod = 15
         if ($id != 15) { // id ini punya admin, jadi jangan sampai TERHAPUS
             // Kondisi data user akan terhapus
@@ -212,5 +212,26 @@ class AdminController extends Controller
         DB::table('role_user')->where('id', $id)->delete();
         Alert::success('Success', 'Role has been deleted');
         return back();
+    }
+
+
+    public function yajra_show_user()
+    {
+        $users = DB::table('users')
+            ->select('users.*')
+            ->orderBy('id', 'asc');
+            return Datatables::of($users)
+            ->addColumn('action', 'admin.update')
+            ->make(true);
+    }
+
+    public function yajra_show_relasi()
+    {
+        $relasi = DB::table('role_user')
+            ->select('role_user.*')
+            ->orderBy('id', 'asc');
+            return Datatables::of($relasi)
+            ->addColumn('action', 'admin.actionRelasi')
+            ->make(true);
     }
 }

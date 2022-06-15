@@ -13,6 +13,8 @@
             <button type="button" class="btn btn-primary mr-5" data-toggle="modal" data-target="#user">
                 <strong>Tambahkan User Baru</strong>
             </button>
+
+            {{-- Modal New User --}}
             <div class="modal fade" id="user" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <form method="post" action="{{ url('/user.new')}}">
@@ -70,7 +72,7 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-striped table-hover" id="dataTable" width="100%" cellspacing="0">
+                <table class="table table-striped table-hover" id="user_table" width="100%">
                     <thead>
                         <tr>
                             <th>ID User</th>
@@ -83,121 +85,33 @@
                             <th>Action</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        @foreach ($user as $c)
-                            <tr>
-                                <td>{{$c->id}}</td>
-                                <td>{{$c->name}}</td>
-                                <td>{{$c->email}}</td>
-                                <td>{{$c->slug}}</td>
-                                <td>{{$c->department}}</td>
-                                <td>{{$c->company}}</td>
-                                <td>{{$c->phone}}</td>
-                                <td>
-                                    <a href="{{url('u.edit', $c->id)}}" type="button" class="btn btn-success mr-2 col-xs-2 margin-bottom">Edit</a>
-                                    <form action="{{ url('user.destroy',$c->id) }}" method="POST" onsubmit="return confirm('Are You Sure Want to Delete This User ?')">
-                                        @csrf
-                                        <button type="submit"class="btn btn-danger mr-2 col-xs-2 margin-bottom hapus">Hapus</button>
-                                    </form>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
                 </table>
             </div>
         </div>
     </div>
 </div>
-
-    <!-- Edit User -->
-    {{-- <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <form method="post" id="edit_form" action="{{ url('/user.edit')}}">
-                @csrf
-                @method('PUT')
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Edit Data User</h5>
-                    </div>
-                    <div class="modal-body">
-                        <input type="hidden" id="user_id" name="id" value="">
-                        <label>Name :</label>
-                        <div class="form-group">
-                            <input id="edit_name" type="text" name="name" class="form-control">
-                        </div>
-                        <label>Department "</label>
-                        <div class="form-group">
-                            <input id="edit_dept" type="text" name="dept" class="form-control">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <a type="button" class="btn btn-secondary" data-dismiss="modal">Close</a>
-                        <a type="submit" class="btn btn-primary edit">Edit</a>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div> --}}
-<script src="{{asset('vendor2/jquery/jquery.min.js')}}"></script>
-{{-- <script>
-    $(document).ready(function(){
-
-        $('body').on('click', '#edit', function (event) {
-
-
-
-        // event.preventDefault();
-        // var id = $(this).data('id');
-
-        // console.log(id)
-        // $.get('u.edit/' + id , function (data) {
-        //     // $('#userCrudModal').html("Edit category");
-        //     // $('#submit').val("Edit category");
-        //     // $('#edit').modal('show');
-        //     $('#user_id').val(data.id);
-        //     $('#edit_name').val(data.name);
-        // })
-        // });
-
-        // event.preventDefault();
-        // let id = $(this).val();
-        //     $.ajax({
-        //         url: "{{url("/u.edit")}}"+'/'+id,
-        //         dataType:"json",
-        //         type: "get",
-        //         success: function(response){
-        //             const {user} = response;
-        //             console.log(user)
-        //                 $('#user_id').val(user.id);
-        //                 $('#edit_name').val(user.name);
-        //         }
-        //     })
-        // })
-
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('input[name="_token"]').val()
-            }
+{{-- <script src="{{asset('vendor2/jquery/jquery.min.js')}}"></script> --}}
+@push('scripts')
+<script>
+    $(function() {
+        $('#user_table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: '{{ url('admin/yajra/user/show')}}',
+            columns: [
+                { data: 'id', name: 'id' },
+                { data: 'name', name: 'name' },
+                { data: 'email', name: 'email' },
+                { data: 'slug', name: 'slug' },
+                { data: 'department', name: 'department' },
+                { data: 'company', name: 'company' },
+                { data: 'phone', name: 'phone' },
+                {data: 'action', name: 'action', orderable: false, searchable: false}
+            ]
         });
-        // var table = $('#dataTable').DataTable();
-
-        // table.on('click', '.edit', function(){
-        //     $tr = $(this).closest('tr');
-        //     if($($tr).hasClass('child')){
-        //         $tr = $tr.prev('.parent');
-        //     }
-
-        //     var data = table.row($tr).data();
-        //     console.log(data);
-
-        //     $('#edit_name').val(data[1]);
-        // })
-        // })
-
-
-    })
-});
-</script> --}}
+    });
+</script>
+@endpush
 @endsection
 
 
