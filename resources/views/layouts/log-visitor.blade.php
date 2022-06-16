@@ -174,34 +174,11 @@
                     <div class="tab-pane fade" id="Ltroubleshoot" role="tabpanel" aria-labelledby="Ltroubleshoot-tab">
                         <div class="container-fluid">
                             <div class="card-body">
-                                <button class="btn btn-sm btn-dark mx-1 my-2" data-bs-toggle="modal" data-bs-target="#troubleshoot">Create Permit Troubleshoot</button>
+                                <a type="button" class="btn btn-sm btn-dark mx-1 my-2" href="{{ url('other/troubleshoot/show')}}">Create Permit Troubleshoot</a>
                                 <a type="button" class="btn btn-sm btn-info mx-1 my-2" href="{{url('other/maintenance/full')}}">Log Permit Troubleshoot</a>
                                 <a type="button" class="btn btn-sm btn-danger mx-1 my-2" href="#">Permit Reject</a>
                                 {{-- <a type="button" class="btn btn-sm btn-success mx-1 my-2" href="{{ url('cleaning/action/export')}}">Export PDF</a>
                                 <a type="button" class="btn btn-sm btn-success mx-1 my-2" href="#">Export Excel</a> --}}
-                            </div>
-                        </div>
-
-                        {{-- Modal Troubleshoot --}}
-                        <div class="modal fade" id="troubleshoot_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Pilih Permit Troubleshoot</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="row align-item-center">
-                                            <div class="col align-self-center">
-                                                <a type="button" href="{{ url('other/troubleshoot/show')}}" class="btn btn-secondary">New Permit</a>
-                                                <a type="button" href="#" class="btn btn-secondary">Select Last Permit</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    </div>
-                                </div>
                             </div>
                         </div>
 

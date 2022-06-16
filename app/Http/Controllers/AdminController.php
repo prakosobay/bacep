@@ -178,7 +178,7 @@ class AdminController extends Controller
 
     public function delete_user($id) // Menghapus user SELAMANYA
     {
-        dd($id);
+        // dd($id);
         //Prod = 15
         if ($id != 15) { // id ini punya admin, jadi jangan sampai TERHAPUS
             // Kondisi data user akan terhapus

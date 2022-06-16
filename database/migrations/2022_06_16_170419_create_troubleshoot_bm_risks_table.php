@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSurveyHistoriesTable extends Migration
+class CreateTroubleshootBmRisksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,13 @@ class CreateSurveyHistoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('survey_histories', function (Blueprint $table) {
+        Schema::create('troubleshoot_bm_risks', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('survey_id');
-            $table->integer('created_by');
-            $table->string('role_to', 50);
-            $table->string('status', 50);
-            $table->boolean('aktif', 1);
-            $table->boolean('pdf', 1);
+            $table->foreignId('troubleshoot_bm_id');
+            $table->string('risk');
+            $table->string('poss');
+            $table->string('impact');
+            $table->string('mitigation');
             $table->softDeletes();
             $table->timestamps();
         });
@@ -33,6 +32,6 @@ class CreateSurveyHistoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('survey_histories');
+        Schema::dropIfExists('troubleshoot_bm_risks');
     }
 }

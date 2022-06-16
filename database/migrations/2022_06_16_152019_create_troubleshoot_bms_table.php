@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSurveyFullsTable extends Migration
+class CreateTroubleshootBmsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,15 @@ class CreateSurveyFullsTable extends Migration
      */
     public function up()
     {
-        Schema::create('survey_fulls', function (Blueprint $table) {
+        Schema::create('troubleshoot_bms', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('survey_id');
+            $table->string('work');
             $table->date('visit');
             $table->date('leave');
-            $table->time('checkin')->nullable();
-            $table->time('checkout')->nullable();
-            $table->string('company');
-            $table->string('link');
+            $table->string('background');
+            $table->string('desc');
+            $table->string('testing')->nullable();
+            $table->string('rollback')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
@@ -34,6 +34,6 @@ class CreateSurveyFullsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('survey_fulls');
+        Schema::dropIfExists('troubleshoot_bms');
     }
 }

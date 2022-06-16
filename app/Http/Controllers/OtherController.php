@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\{DB, Auth, Gate, Mail, Session, Storage};
-use App\Models\{Other, OtherFull, OtherHistory, OtherPersonil, Rutin, Visitor};
+use App\Models\{Other, OtherFull, OtherHistory, OtherPersonil, RiskBm, Rutin, Visitor};
 use App\Mail\{NotifEmail, NotifMaintenanceForm, NotifMaintenanceFull, NotifMaintenanceReject};
 use Symfony\Component\HttpFoundation\Test\Constraint\ResponseFormatSame;
 use Yajra\Datatables\Datatables;
@@ -18,7 +18,8 @@ class OtherController extends Controller
     // Show Pages
     public function show_troubleshoot_form() // Menampilkan form troubleshoot
     {
-        return view();
+        $visitor = Visitor::all();
+        return view('other.troubleshoot_form', compact('visitor'));
     }
 
     public function show_maintenance_form() // Menampilkan form maintenance
@@ -217,6 +218,11 @@ class OtherController extends Controller
         }
     }
 
+    public function create_troubleshoot(Request $request)
+    {
+        dd($request->all());
+    }
+
     public function approve_maintenance(Request $request) // Flow Approval form maintenance
     {
         $lastupdate = OtherHistory::where('other_id', '=', $request->other_id)->latest()->first();
@@ -355,7 +361,7 @@ class OtherController extends Controller
         }
     }
 
-    public function update_checkin_maintenance(Request $request)
+    public function update_checkin_maintenance(Request $request) //
     {
         dd($request->all());
         $validate = $request->validate([

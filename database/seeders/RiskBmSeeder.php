@@ -84,7 +84,23 @@ class RiskBmSeeder extends Seeder
                 'poss' => 'Mual - mual',
                 'impact' => 'Low',
                 'mitigation' => 'Menggunakan masker',
-            ]
+            ],
+
+            [
+                'risk' => 'Bersenggolan dengan perangkat',
+                'poss' => 'Sistem perangkat menjadi terganggu',
+                'impact' => 'High',
+                'mitigation' => 'Menjaga jarak dengan perangkat critical',
+            ],
+
+            [
+                'risk' => 'Bersenggolan dengan panel alarm',
+                'poss' => 'Alarm 1 gedung dan gas discharge',
+                'impact' => 'High',
+                'mitigation' => 'Menjaga jarak dengan panel alarm',
+            ],
+
+
         ];
 
         RiskBm::insert($row);

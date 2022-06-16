@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<title>
-        Troubleshooting BM
+        Form Troubleshoot
     </title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,113 +23,165 @@
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/util.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/main.css')}}">
-    <link href="{{asset('css/new_approve.css')}}" rel="stylesheet">
-<!--===============================================================================================-->
-    <link href="{{asset('css/new_approve.css')}}" rel="stylesheet">
+    {{-- <link href="{{asset('css/new_approve.css')}}" rel="stylesheet"> --}}
 </head>
 <!--===============================================================================================-->
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<body>
-    <body id="body-pd">
-        <div class="semua">
-          <nav class="navbar navbar-expand-lg navbar-dark py-0 my-0 navbar-bg">
-              <div class="container">
-                  <a class="navbar-brand" href="#">
-                      <img src="{{asset('gambar/approval/logo_approve.png')}}" alt="" style="width: 170px; height:70px" class="img-fluid">
-                  </a>
-                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                  <span class="navbar-toggler-icon"></span>
-                  </button>
-                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                      <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-                          <li class="nav-item mx-5">
-                              <a class="nav-link" aria-current="page" href="{{url('/home')}}">Home</a>
-                          </li>
-                          <li class="nav-item mx-5">
-                              <a class="nav-link" href="#about">Approval</a>
-                          </li>
-                          <li class="nav-item mx-5">
-                              <a class="nav-link" href="#">Full Approval</a>
-                          </li>
-                          <li class="nav-item mx-5">
-                              <a class="nav-link" href="#">Inventory</a>
-                          </li>
-                          <li class="nav-item mx-5">
-                              <a class="nav-link" href="#">Log Permit</a>
-                          </li>
-                      </ul>
-                      <ul class="nav navbar-nav navbar-right">
-                          <li class="nav-item mx-3">
-                              <a href="#"><img src="{{asset('gambar/home/bell.svg')}}" alt=""></a>
-                          </li>
-                          <li class="nav-item mx-3">
-                              <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                  <img src="{{asset('gambar/home/box-arrow-right.svg')}}" alt="">
-                              </a>
-                              <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                  @csrf
-                              </form>
-                          </li>
-                      </ul>
-                  </div>
-              </div>
-          </nav>
-    <body>
 
+<body>
 	<div class="container-contact100">
 		<div class="wrap-contact100">
-			<form class="contact100-form validate-form">
+			<form class="contact100-form validate-form" id="troubleshoot_form" method="post">
+                @csrf
 				<span class="contact100-form-title">
-					Troubleshooting BM
+					TROUBLESHOOT FORM
 				</span>
+
                 {{-- Purpose of Work (Tujuan Pekerjaan)--}}
-				<div class="wrap-input100 validate-input bg1" >
+				<div class="wrap-input100 validate-input bg1" data-validate="Pilih Tujuan Pekerjaan">
 					<span class="label-input100">Purpose of Work (Tujuan Pekerjaan) *</span>
-					<input class="input100" type="text" name="name">
+					<input class="input100" type="text" name="work" required autofocus>
 				</div>
+
+                {{-- Validity --}}
+                <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate = "Pilih Tanggal Pekerjaan">
+					<span class="label-input100">Date of Visit (Tanggal Mulai Pekerjaan) *</span>
+                    <input class="input100" type="date" name="visit" id="visit" required>
+				</div>
+				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate = "Pilih Tanggal Pekerjaan">
+					<span class="label-input100">Date of Leave (Tanggal Selesai Pekerjaan) *</span>
+					<input class="input100" type="date" name="leave" id="leave" required>
+				</div>
+
                 {{-- Entry Area --}}
-                <div class="wrap-input100 validate-input">
-                    <span class="label-input100">Authorized Entry Area (Area yang Dimasuki)</span>
-                    <div class="contact100-form-radio">
-                        <label class="label-radio100">
-                            <input class="label-input100" id="loc1" name="loc1" value="UPS ROOM" readonly>
-                        </label>
-                    </div>
+                <div class="col-3">
+                    <div class="wrap-contact100-form-radio">
+                        <div class="contact100-form-radio">
+							<input class="input-radio100" id="server" type="checkbox" name="server" value="1">
+							<label class="label-radio100" for="server">
+								Server Room
+							</label>
+						</div>
 
-                    <div class="contact100-form-radio">
-                        <label class="label-radio100">
-                            <input class="label-input100" id="loc2" name="loc2" value="BATTERY ROOM" readonly>
-                        </label>
-                    </div>
+                        <div class="contact100-form-radio">
+							<input class="input-radio100" id="mmr1" type="checkbox" name="mmr1" value="1">
+							<label class="label-radio100" for="mmr1">
+								MMR 1
+							</label>
+						</div>
 
-                    <div class="contact100-form-radio">
-                        <label class="label-radio100">
-                            <input class="label-input100" id="loc3" name="loc3" value="GENERATOR ROOM" readonly>
-                        </label>
-                    </div>
+                        <div class="contact100-form-radio">
+							<input class="input-radio100" id="mmr2" type="checkbox" name="mmr2" value="1">
+							<label class="label-radio100" for="mmr2">
+								MMR 2
+							</label>
+						</div>
 
-                    <div class="contact100-form-radio">
-                        <label class="label-radio100">
-                            <input class="label-input100" id="loc4" name="loc4" value="SERVER ROOM">
-                        </label>
-                    </div>
-
-                    <div class="contact100-form-radio">
-                        <label class="label-radio100">
-                            <input class="label-input100" id="loc5" name="loc5" value="MMR 1" readonly>
-                        </label>
-                    </div>
-
-                    <div class="contact100-form-radio">
-                        <label class="label-radio100" > 
-                            <input class="label-input100" id="loc6" name="loc6" value="MMR 2" readonly>
-                        </label>
+                        <div class="contact100-form-radio">
+							<input class="input-radio100" id="ups" type="checkbox" name="ups" value="1">
+							<label class="label-radio100" for="ups">
+								UPS Room
+							</label>
+						</div>
                     </div>
                 </div>
-                
-                 <!-- Detail Time Activity -->
-                 <table class="table table-bordered" id="mytab1">
-                    <thead>
+                <div class="col-3">
+                    <div class="wrap-contact100-form-radio">
+                        <div class="contact100-form-radio">
+							<input class="input-radio100" id="fss" type="checkbox" name="fss" value="1">
+							<label class="label-radio100" for="fss">
+								FSS Room
+							</label>
+						</div>
+
+                        <div class="contact100-form-radio">
+							<input class="input-radio100" id="cctv" type="checkbox" name="cctv" value="1">
+							<label class="label-radio100" for="cctv">
+								CCTV Room
+							</label>
+						</div>
+
+                        <div class="contact100-form-radio">
+							<input class="input-radio100" id="genset" type="checkbox" name="genset" value="1">
+							<label class="label-radio100" for="genset">
+								Generator Room
+							</label>
+						</div>
+
+                        <div class="contact100-form-radio">
+							<input class="input-radio100" id="trafo" type="checkbox" name="trafo" value="1">
+							<label class="label-radio100" for="trafo">
+								Trafo Room
+							</label>
+						</div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="wrap-contact100-form-radio">
+                        <div class="contact100-form-radio">
+							<input class="input-radio100" id="baterai" type="checkbox" name="baterai" value="1">
+							<label class="label-radio100" for="baterai">
+								Baterai Room
+							</label>
+						</div>
+
+                        <div class="contact100-form-radio">
+							<input class="input-radio100" id="panel" type="checkbox" name="panel" value="1">
+							<label class="label-radio100" for="panel">
+								Panel Room
+							</label>
+						</div>
+
+                        <div class="contact100-form-radio">
+							<input class="input-radio100" id="yard" type="checkbox" name="yard" value="1">
+							<label class="label-radio100" for="yard">
+								Yard
+							</label>
+						</div>
+
+                        <div class="contact100-form-radio">
+							<input class="input-radio100" id="parking" type="checkbox" name="parking" value="1">
+							<label class="label-radio100" for="parking">
+								Parking Lot
+							</label>
+						</div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="wrap-contact100-form-radio">
+                        <div class="wrap-input100 bg1">
+                            <span class="label-input100">Other (Lokasi Lain) *</span>
+                            <input type="text" class="input100" id="lain" name="lain" value="{{ old('lain')}}" placeholder="Lokasi lain">
+                        </div>
+                    </div>
+                </div>
+
+                {{-- BACKGROUND AND OBJECTIVE (LATAR BELAKANG DAN TUJUAN) *--}}
+				<div class="wrap-input100 validate-input bg1 mt-3" data-validate="Belum di isi">
+					<span class="label-input100">BACKGROUND AND OBJECTIVE (LATAR BELAKANG DAN TUJUAN) *</span>
+                    <input class="input100" name="background" required>
+				</div>
+
+                {{-- DESCRIPTION OF SCOPE OF WORK (DESKRIPSIKAN LINGKUP PEKERJAAN)--}}
+				<div class="wrap-input100 validate-input bg1" data-validate="Belum di isi">
+					<span class="label-input100">DESCRIPTION OF SCOPE OF WORK (DESKRIPSIKAN LINGKUP PEKERJAAN)*</span>
+                    <input class="input100" name="desc" required>
+				</div>
+
+                {{--TESTING AND VERIFICATION (PENGUJIAN DAN VERIFIKASI)--}}
+				<div class="wrap-input100 validate-input bg1" data-validate="Belum di isi">
+					<span class="label-input100">TESTING AND VERIFICATION (PENGUJIAN DAN VERIFIKASI)*</span>
+                    <input class="input100" name="testing">
+				</div>
+
+                {{--ROLLBACK OPERATION/OTHER INFOMATION (OPERASI PEMBATALAN/INFOMASI LAIN)--}}
+				<div class="wrap-input100 validate-input bg1" data-validate="Belum di isi">
+					<span class="label-input100">ROLLBACK OPERATION/OTHER INFOMATION (OPERASI PEMBATALAN/INFOMASI LAIN)*</span>
+                    <input class="input100" name="rollback">
+				</div>
+
+                <!-- Detail Time Activity -->
+                <table class="table table-bordered mt-3" id="table_detail_time">
+                    <thead class="bg1">
                         <tr>
                             <th colspan="4">Detail Time Table of All Activity</th>
                         <tr>
@@ -139,41 +191,26 @@
                             <th scope="col">Detail Service Impact</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="bg1">
                         <tr>
-                            <th><input type="time" name="cleaning_time_start"></th>
-                            <th><input type="time" name="cleaning_time_end"></th>
-                            <th>
-                                <input class="input100" type="text" name="name">
-                            <th>
-                               <input class="input100" type="text" name="name" >
-                            </th>
+                            <td><input class="bg1" type="time" name="time_start[]" required></td>
+                            <td><input class="bg1" type="time" name="time_end[]" required></td>
+                            <td><input class="input100" type="text" name="activity[]" required></td>
+                            <td><input class="input100" type="text" name="detail[]" required></td>
                         </tr>
                         <tr>
-                            <th><input type="time" name="cleaning_time_start"></th>
-                            <th><input type="time" name="cleaning_time_end"></th>
-                            <th>
-                                <input class="input100" type="text" name="name" >
-                            <th>
-                               <input class="input100" type="text" name="name" >
-                            </th>
-                        </tr>
-                        <tr>
-                            <th><input type="time" name="cleaning_time_start"></th>
-                            <th><input type="time" name="cleaning_time_end"></th>
-                            <th>
-                                <input class="input100" type="text" name="name" >
-                            <th>
-                               <input class="input100" type="text" name="name" >
-                            </th>
+                            <td><input class="bg1" type="time" name="time_start[]"></td>
+                            <td><input class="bg1" type="time" name="time_end[]"></td>
+                            <td><input class="input100" type="text" name="activity[]" ></td>
+                            <td><input class="input100" type="text" name="detail[]" ></td>
                         </tr>
                     </tbody>
                 </table>
+                <button id="detail_time"><b>Add More Fields</b></button>
 
                 <!-- Detail Operation and Execution -->
-            
-                <table class="table table-bordered" id="input_fields_wrap">
-                    <thead>
+                <table class="table table-bordered mt-3" id="table_detail_operation">
+                    <thead class="bg1">
                         <tr>
                             <th colspan="2">Detail Operation and Execution</th>
                         <tr>
@@ -181,21 +218,18 @@
                             <th scope="col">Working Procedure</th>
                         </tr>
                     </thead>
-                  
-                        <tr id="input_fields_wrap">
-                            <td> <input  type="text" name="name" ></td>
-                            <td> <input  type="text" name="name" ></td>
-                        </tr>     
-                   
-                    
+                    <tbody class="bg1">
+                        <tr>
+                            <td> <input class="bg1 input100" type="text" name="item[]" required></td>
+                            <td> <input class="bg1 input100" type="text" name="procedure[]" required></td>
+                        </tr>
+                    </tbody>
                 </table>
-                <button class="add_field_button">Add More Fields</button>
-            
+                <button id="detail_operation"><b>Add More Fields</b></button>
 
-           
                 <!-- Risk and Service Area Impact -->
-                <table class="table table-bordered" id="input_fields_wrap1">
-                    <thead>
+                <table class="table table-bordered mt-3" id="table_risk">
+                    <thead class="bg1">
                         <tr>
                             <th colspan="4">Risk and Service Area Impact</th>
                         <tr>
@@ -205,80 +239,62 @@
                             <th scope="col">Mitigation Plan</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr id="input_fields_wrap1">
+                    <tbody class="bg1">
+                        <tr>
                             <th>
-                                <select class="form-control">
-                                <option>Risk Description</option>
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                              </select>
+                                <select class="js-select2" id="risk" name="risk[]">
+                                    <option value="Bersenggolan dengan panel">Bersenggolan dengan panel</option>
+                                    <option value="Bersenggolan dengan perangkat">Bersenggolan dengan perangkat</option>
+                                    <option value="Korsleting">Korsleting</option>
+                                    <option value="Menghirup debu">Menghirup debu</option>
+                                    <option value="Pekerjaan Tertunda">Pekerjaan tertunda</option>
+                                    <option value="Peralatan Rusak">Peralatan rusak</option>
+                                    <option value="Sampah berserakan">Sampah berserakan</option>
+                                    <option value="Sesak Nafas">Sesak nafas</option>
+                                    <option value="Terjatuh dari tangga">Jatuh dari tangga</option>
+                                    <option value="Terjepit">Terjepit</option>
+                                    <option value="Tersengat Listrik">Tersengat listrik</option>
+                                </select>
+                                <div class="dropDownSelect2"></div>
                             </th>
                             <th>
-                                <select class="form-control">
-                                <option>Possibility</option>
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
+                                <select class="js-select2" id="poss" name="poss[]">
+                                    <option value="Memar, patah tulang, terkilir">Memar, patah tulang, terkilir</option>
+                                    <option value="Kebakaran">Kebakaran</option>
+                                    <option value="Pernafasan terganggu">Pernafasan terganggu</option>
+                                    <option value="Mengalami luka bakar, pingsan, kematian">Mengalami luka bakar, pingsan, kematian</option>
+                                    <option value="Sistem kelistrikan menjadi lumpuh">Sistem kelistrikan menjadi lumpuh</option>
+                                    <option value="Mengalami luka bakar">Mengalami luka bakar</option>
                               </select>
+                              <div class="dropDownSelect2"></div>
                             </th>
                             <th>
-                                <select class="form-control">
-                                    <option>Impact</option>
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
+                                <select class="js-select2" id="impact" name="impact[]">
+                                    <option value="Low">Low</option>
+                                    <option value="Medium">Medium</option>
+                                    <option value="High">High</option>
                                </select>
+                               <div class="dropDownSelect2"></div>
                             </th>
                             <th>
-                                <select class="form-control">
-                                    <option>Impact</option>
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
+                                <select class="js-select2" id="mitigation" name="mitigation[]">
+                                    <option value="Memastikan aliran listrik untuk lift sudah dimatikan">Memastikan aliran listrik untuk lift sudah dimatikan</option>
+                                    <option value="Memastikan tidak ada kabel yang terkelupas">Memastikan tidak ada kabel yang terkelupas</option>
+                                    <option value="Pastikan pekerjaan yang dilakukan sesuai prosedur">Pastikan pekerjaan yang dilakukan sesuai prosedur</option>
+                                    <option value="Menggunakan Masker">Menggunakan Masker</option>
+                                    <option value="Pastikan tangga berada di lantai yang rata">Pastikan tangga berada di lantai yang rata</option>
+                                    <option value="Bekerja dengan hati hati">Bekerja dengan hati hati</option>
+                                    <option value="Menjaga jarak dari sumber listrik">Menjaga jarak dari sumber listrik</option>
+                                    <option value="Menjaga jarak dari perangkat critical">Menjaga jarak dari perangkat critical</option>
+                                    <option value="Menjaga jarak dengan panel alarm">Menjaga jarak dengan panel alarm</option>
+                                    <option value="Menggunakan APD">Menggunakan APD</option>
                               </select>
+                              <div class="dropDownSelect2"></div>
                             </th>
                         </tr>
-                        <tr>
                     </tbody>
-                    
                 </table>
-                <button class="add_field_button2">Add Risk and Service</button>
-
-                {{-- BACKGROUND AND OBJECTIVE (LATAR BELAKANG DAN TUJUAN) *--}}
-				<div class="wrap-input100 validate-input bg1" data-validate="Belum di isi">
-					<span class="label-input100">BACKGROUND AND OBJECTIVE (LATAR BELAKANG DAN TUJUAN) *</span>
-                    <textarea class="input100" id="exampleFormControlTextarea1" rows="3"></textarea>
-				</div>
-
-                {{-- DESCRIPTION OF SCOPE OF WORK (DESKRIPSIKAN LINGKUP PEKERJAAN)--}}
-				<div class="wrap-input100 validate-input bg1" data-validate="Belum di isi">
-					<span class="label-input100">DESCRIPTION OF SCOPE OF WORK (DESKRIPSIKAN LINGKUP PEKERJAAN)*</span>
-                    <textarea class="input100" id="exampleFormControlTextarea1" rows="3"></textarea>
-				</div>
-
-                {{--TESTING AND VERIFICATION (PENGUJIAN DAN VERIFIKASI)--}}
-				<div class="wrap-input100 validate-input bg1" data-validate="Belum di isi">
-					<span class="label-input100">TESTING AND VERIFICATION (PENGUJIAN DAN VERIFIKASI)*</span>
-                    <textarea class="input100" id="exampleFormControlTextarea1" rows="3"></textarea>
-				</div>
-                
-                {{--ROLLBACK OPERATION/OTHER INFOMATION (OPERASI PEMBATALAN/INFOMASI LAIN)--}}
-				<div class="wrap-input100 validate-input bg1" data-validate="Belum di isi">
-					<span class="label-input100">ROLLBACK OPERATION/OTHER INFOMATION (OPERASI PEMBATALAN/INFOMASI LAIN)*</span>
-                    <textarea class="input100" id="exampleFormControlTextarea1" rows="3"></textarea>
-				</div>
-
-                {{-- Validity --}}
-                <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate = "Pilih Tanggal Pekerjaan">
-					<span class="label-input100">Validity (Tanggal Mulai Pekerjaan) *</span>
-                    <input class="input100" type="date" name="validity_from" id="dateofbirth">
-				</div>
-				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate = "Pilih Tanggal Pekerjaan">
-					<span class="label-input100">Validity (Tanggal Selesai Pekerjaan) *</span>
-					<input class="input100" type="date" name="validity_to" id="dateofbirth">
-				</div>
+                <button id="risk_button"><b>Add More Fields</b></button>
 
 				<div class="container-contact100-form-btn">
 					<button class="contact100-form-btn">
@@ -292,82 +308,100 @@
 		</div>
 	</div>
 
-
-
+    {{-- <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script> --}}
 <!--===============================================================================================-->
-	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+    <script src="{{ asset('vendor/jquery/jquery-3.2.1.min.js')}}"></script>
 <!--===============================================================================================-->
-	<script src="vendor/animsition/js/animsition.min.js"></script>
+	<script src="{{ asset('vendor/animsition/js/animsition.min.js')}}"></script>
 <!--===============================================================================================-->
-	<script src="vendor/bootstrap/js/popper.js"></script>
-	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="{{ asset('vendor/bootstrap/js/popper.js')}}"></script>
+	<script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js')}}"></script>
 <!--===============================================================================================-->
-
-<!--===============================================================================================-->
-	<script src="vendor/daterangepicker/moment.min.js"></script>
-	<script src="vendor/daterangepicker/daterangepicker.js"></script>
-<!--===============================================================================================-->
-	<script src="vendor/countdowntime/countdowntime.js"></script>
-<!--===============================================================================================-->
-
-<!--===============================================================================================-->
+	<script src="{{ asset('vendor/select2/select2.min.js')}}"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 {{--add table--}}
 <script>
-	$(document).ready(function() {
-    var max_fields      = 5; //maximum input boxes allowed
-    var wrapper         = $("#input_fields_wrap"); //Fields wrapper
-    var add_button      = $(".add_field_button"); //Add button ID
-   
-    var x = 1; //initlal text box count
-	
-	
-   $(add_button).click(function(e){ //on add input button click
-        e.preventDefault();
-        if(x < max_fields){ //max input box allowed
-	
-		     //text box increment
-            $(wrapper).append('<tr id="input_fields_wrap"><td> <input  type="text" name="name" ></td><td> <input  type="text" name="name" ></td></tr>'); //add input box
-            x++; 
-	  }
+    $(document).ready(function(){
+        var max_row = 5;
+        var row = 1;
+        var detail_time = $('#detail_time');
+        var row_detail_time = $('#table_detail_time');
+        var detail_operation = $('#detail_operation');
+        var row_detail_operation = $('#table_detail_operation');
+        var risk = $('#risk_button');
+        var row_risk = $('#table_risk');
+
+        $(detail_time).click(function(e){
+            e.preventDefault();
+            if(row < max_row){
+                $(row_detail_time).append('<tr><td><input class="bg1" type="time" name="time_start[]"></td><td><input class="bg1" type="time" name="time_end[]"></td><td><input class="input100" type="text" name="activity[]" ></td><td><input class="input100" type="text" name="detail[]" ></td></tr>');
+                row++;
+            }
+        });
+
+        $(detail_operation).click(function(e){
+            e.preventDefault();
+            if(row < max_row){
+                $(row_detail_operation).append('<tr><td> <input class="bg1 input100" type="text" name="item" ></td><td> <input class="bg1 input100" type="text" name="procedure" ></td></tr>');
+                row++;
+            }
+        });
+
+        $(risk).click(function(e){
+            e.preventDefault();
+            if(row < max_row){
+                $(row_risk).append('<tr class="bg1"><td><select class="js-select2" id="risk" name="risk[]"><option value="Bersenggolan dengan panel">Bersenggolan dengan panel</option><option value="Bersenggolan dengan perangkat">Bersenggolan dengan perangkat</option><option value="Korsleting">Korsleting</option><option value="Menghirup debu">Menghirup debu</option><option value="Pekerjaan Tertunda">Pekerjaan tertunda</option><option value="Peralatan Rusak">Peralatan rusak</option><option value="Sampah berserakan">Sampah berserakan</option><option value="Sesak Nafas">Sesak nafas</option><option value="Terjatuh dari tangga">Jatuh dari tangga</option><option value="Terjepit">Terjepit</option><option value="Tersengat Listrik">Tersengat listrik</option></select><div class="dropDownSelect2"></div></td><td><select class="js-select2" id="poss" name="poss[]"><option value="Memar, patah tulang, terkilir">Memar, patah tulang, terkilir</option><option value="Kebakaran">Kebakaran</option><option value="Pernafasan terganggu">Pernafasan terganggu</option><option value="Mengalami luka bakar, pingsan, kematian">Mengalami luka bakar, pingsan, kematian</option><option value="Sistem kelistrikan menjadi lumpuh">Sistem kelistrikan menjadi lumpuh</option><option value="Mengalami luka bakar">Mengalami luka bakar</option></select><div class="dropDownSelect2"></div></td><td><select class="js-select2" id="impact" name="impact[]"><option value="Low">Low</option><option value="Medium">Medium</option><option value="High">High</option> </select> <div class="dropDownSelect2"></div></td><td><select class="js-select2" id="mitigation" name="mitigation[]"><option value="Memastikan aliran listrik untuk lift sudah dimatikan">Memastikan aliran listrik untuk lift sudah dimatikan</option><option value="Memastikan tidak ada kabel yang terkelupas">Memastikan tidak ada kabel yang terkelupas</option><option value="Pastikan pekerjaan yang dilakukan sesuai prosedur">Pastikan pekerjaan yang dilakukan sesuai prosedur</option><option value="Menggunakan Masker">Menggunakan Masker</option><option value="Pastikan tangga berada di lantai yang rata">Pastikan tangga berada di lantai yang rata</option><option value="Bekerja dengan hati hati">Bekerja dengan hati hati</option><option value="Menjaga jarak dari sumber listrik">Menjaga jarak dari sumber listrik</option><option value="Menjaga jarak dari perangkat critical">Menjaga jarak dari perangkat critical</option><option value="Menjaga jarak dengan panel alarm">Menjaga jarak dengan panel alarm</option><option value="Menggunakan APD">Menggunakan APD</option></select><div class="dropDownSelect2"></div></td></tr>');
+                row++
+            }
+        });
+
+        $(".js-select2").each(function(){
+			$(this).select2({
+				minimumResultsForSearch: 20,
+				dropdownParent: $(this).next('.dropDownSelect2')
+			});
+		});
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('input[name="_token"]').val()
+            }
+        });
+
+        // $(".contact100-form-btn").click(function(e){
+        // e.preventDefault();
+        // var datastring = $("#toubleshoot_form").serialize();
+        //     $.ajax({
+        //         type:'POST',
+        //         url:"{{url('other/troubleshoot/create')}}",
+        //         data: datastring,
+        //         error: function (request, error) {
+        //             console.log(error)
+        //             alert(" Can't do because: " + error);
+        //         },
+        //         success:function(data){
+        //             console.log(data);
+        //             if(data.status == 'SUCCESS'){
+        //                 Swal.fire({
+        //                     title: "Success!",
+        //                     text: 'Data Saved',
+        //                     type: "success",
+        //                 }).then(function(){
+        //                     location.href = "{{url("/logall")}}";
+        //                 });
+        //             }else if(data.status == 'FAILED'){
+        //                 Swal.fire({
+        //                     title: "Failed!",
+        //                     text: 'Saving Data Failed',
+        //                 }).then(function(){
+        //                     location.reload();
+        //                 });
+        //             }
+        //         }
+        //     });
+        // });
     });
-   
-    // $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
-       
-	// 	e.preventDefault(); 
-	// 	$(this).parent('div').remove(); 
-	// 	x--;
-    // })
-});
 </script>
-
-<script>
-	$(document).ready(function() {
-    var max_fields      = 10; //maximum input boxes allowed
-    var wrapper         = $("#input_fields_wrap1"); //Fields wrapper
-    var add_button1      = $(".add_field_button2"); //Add button ID
-   
-    var x = 1; //initlal text box count
-	
-	
-   $(add_button1).click(function(e){ //on add input button click
-        e.preventDefault();
-        if(x < max_fields){ //max input box allowed
-	
-		     //text box increment
-            $(wrapper).append('<tr><th><select class="form-control"><option>Risk Description</option><option>1</option><option>2</option><option>3</option></select></th><th><select class="form-control"><option>Possibility</option><option>1</option><option>2</option><option>3</option></select></th><th><select class="form-control"><option>Impact</option><option>1</option><option>2</option><option>3</option></select></th><th><select class="form-control"><option>Impact</option><option>1</option></select></th></tr><tr>');
-            x++; 
-	  }
-    });
-   
-    // $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
-       
-	// 	e.preventDefault(); 
-	// 	$(this).parent('div').remove(); 
-	// 	x--;
-    // })
-    });
-    </script>
-
 </body>
 </html>

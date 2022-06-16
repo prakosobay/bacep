@@ -5,13 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{HomeController, CleaningController, AdminController};
 
-// Route::get('/', function () {
-//     return view('auth.login');
-// })->middleware('guest');
-
 Route::get('/', function () {
-    return view('other.troubleshoot_form');
+    return view('auth.login');
 })->middleware('guest');
+
+// Route::get('/', function () {
+//     return view('other.troubleshoot_form');
+// })->middleware('guest');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', [HomeController::class, 'index']);
@@ -170,6 +170,7 @@ Route::middleware(['auth'])->group(function () {
 
     // Troubleshoot
     Route::get('other/troubleshoot/show', [OtherController::class, 'show_troubleshoot_form']);
+    Route::post('other/troubleshoot/create', [OtherController::class, 'create_troubleshoot']);
 
 
     // Maintenance

@@ -47,7 +47,7 @@
                         <select class="form-control" id="slug" name="slug" aria-label=".form-select-sm example">
                             <option value="{{$user->slug}}" selected>{{$user->slug}}</option>
                             <option value="approval">approval</option>
-                            <option value="bm">bm</option>
+                            <option value="visitor">visitor</option>
                             <option value="security">security</option>
                             <option value="admin">admin</option>
                             <option value="head">head</option>

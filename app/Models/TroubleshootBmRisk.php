@@ -6,11 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class TroubleshootBm extends Model
+class TroubleshootBmRisk extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $table = 'troubleshoot_bms';
+    protected $table = 'troubleshoot_bm_risks';
     protected $primaryKey = 'id';
-    protected $guarded = [];
+    protected $fillable = [
+        'troubleshoot_bm_id', 'risk', 'poss', 'impact', 'mitigation'
+    ];
 }
