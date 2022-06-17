@@ -16,6 +16,12 @@ class CreateTroubleshootBmDetailsTable extends Migration
         Schema::create('troubleshoot_bm_details', function (Blueprint $table) {
             $table->id();
             $table->foreignId('troubleshoot_bm_id');
+            $table->time('time_start');
+            $table->time('time_end');
+            $table->string('activity');
+            $table->string('service_impact');
+            $table->string('item');
+            $table->string('procedure');
             $table->timestamps();
         });
     }

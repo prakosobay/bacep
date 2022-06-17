@@ -73,6 +73,7 @@ return array(
     'App\\Models\\SurveyHistory' => $baseDir . '/app/Models/SurveyHistory.php',
     'App\\Models\\TroubleshootBm' => $baseDir . '/app/Models/TroubleshootBm.php',
     'App\\Models\\TroubleshootBmDetail' => $baseDir . '/app/Models/TroubleshootBmDetail.php',
+    'App\\Models\\TroubleshootBmEntry' => $baseDir . '/app/Models/TroubleshootBmEntry.php',
     'App\\Models\\TroubleshootBmHistory' => $baseDir . '/app/Models/TroubleshootBmHistory.php',
     'App\\Models\\TroubleshootBmPersonil' => $baseDir . '/app/Models/TroubleshootBmPersonil.php',
     'App\\Models\\TroubleshootBmRisk' => $baseDir . '/app/Models/TroubleshootBmRisk.php',

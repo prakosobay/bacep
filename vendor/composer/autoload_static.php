@@ -699,6 +699,7 @@ class ComposerStaticInit582140f03abb5abd5ed2c14fd376fb64
         'App\\Models\\SurveyHistory' => __DIR__ . '/../..' . '/app/Models/SurveyHistory.php',
         'App\\Models\\TroubleshootBm' => __DIR__ . '/../..' . '/app/Models/TroubleshootBm.php',
         'App\\Models\\TroubleshootBmDetail' => __DIR__ . '/../..' . '/app/Models/TroubleshootBmDetail.php',
+        'App\\Models\\TroubleshootBmEntry' => __DIR__ . '/../..' . '/app/Models/TroubleshootBmEntry.php',
         'App\\Models\\TroubleshootBmHistory' => __DIR__ . '/../..' . '/app/Models/TroubleshootBmHistory.php',
         'App\\Models\\TroubleshootBmPersonil' => __DIR__ . '/../..' . '/app/Models/TroubleshootBmPersonil.php',
         'App\\Models\\TroubleshootBmRisk' => __DIR__ . '/../..' . '/app/Models/TroubleshootBmRisk.php',

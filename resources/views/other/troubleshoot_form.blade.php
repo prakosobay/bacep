@@ -30,11 +30,21 @@
 <body>
 	<div class="container-contact100">
 		<div class="wrap-contact100">
-			<form class="contact100-form validate-form" id="troubleshoot_form" method="post">
+			<form class="contact100-form validate-form" id="troubleshoot_form" method="POST">
                 @csrf
 				<span class="contact100-form-title">
 					TROUBLESHOOT FORM
 				</span>
+
+                @if (count($errors) > 0)
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
 
                 {{-- Purpose of Work (Tujuan Pekerjaan)--}}
 				<div class="wrap-input100 validate-input bg1" data-validate="Pilih Tujuan Pekerjaan">
@@ -198,12 +208,6 @@
                             <td><input class="input100" type="text" name="activity[]" required></td>
                             <td><input class="input100" type="text" name="detail[]" required></td>
                         </tr>
-                        <tr>
-                            <td><input class="bg1" type="time" name="time_start[]"></td>
-                            <td><input class="bg1" type="time" name="time_end[]"></td>
-                            <td><input class="input100" type="text" name="activity[]" ></td>
-                            <td><input class="input100" type="text" name="detail[]" ></td>
-                        </tr>
                     </tbody>
                 </table>
                 <button id="detail_time"><b>Add More Fields</b></button>
@@ -296,8 +300,52 @@
                 </table>
                 <button id="risk_button"><b>Add More Fields</b></button>
 
+                {{-- Personil --}}
+                <table class="table table-bordered mt-3" id="table_personil">
+                    <tr>
+                        <th colspan="4"><b>Personil</b></th>
+                    </tr>
+                    <tr id="baris">
+                        <th>Name </th>
+                        <td>
+                            <select class="js-select2" name="visit_nama[]" id="nama">
+                                <option value=""></option>
+                                @foreach ($personil as $p)
+                                    <option value="{{$p->id}}">{{$p->visit_nama}}</option>
+                                @endforeach
+                            </select>
+                            <div class="dropDownSelect2"></div>
+                        </td>
+                        <th>Company</th>
+                        <td>
+                            <input type="text" class="input100" name="visit_company[]" id="company" value="" readonly>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>ID Number </th>
+                        <td>
+                            <input type="text" class="input100" name="visit_nik[]" id="nik" value="" readonly>
+                        </td>
+                        <th>Department </th>
+                        <td>
+                            <input type="text" class="input100" name="visit_department[]" id="department" value="" readonly>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Phone Number</th>
+                        <td>
+                            <input type="text" class="input100" name="visit_phone[]" id="phone" value="" readonly>
+                        </td>
+                        <th>Responsibility </th>
+                        <td>
+                            <input type="text" class="input100" name="visit_respon[]" id="respon" value="" readonly>
+                        </td>
+                    </tr>
+                </table>
+                <button id="button_personil"><b>Add More Fields</b></button>
+
 				<div class="container-contact100-form-btn">
-					<button class="contact100-form-btn">
+					<button class="contact100-form-btn" id="submit_form">
 						<span>
 							Submit
 							<i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
@@ -323,14 +371,18 @@
 {{--add table--}}
 <script>
     $(document).ready(function(){
-        var max_row = 5;
-        var row = 1;
-        var detail_time = $('#detail_time');
-        var row_detail_time = $('#table_detail_time');
-        var detail_operation = $('#detail_operation');
-        var row_detail_operation = $('#table_detail_operation');
-        var risk = $('#risk_button');
-        var row_risk = $('#table_risk');
+        let max_row = 6;
+        let row = 1;
+        let detail_time = $('#detail_time');
+        let row_detail_time = $('#table_detail_time');
+        let detail_operation = $('#detail_operation');
+        let row_detail_operation = $('#table_detail_operation');
+        let risk = $('#risk_button');
+        let row_risk = $('#table_risk');
+        let personil = $('#button_personil');
+        let row_personil = $('#table_personil');
+        let baris = $('#baris');
+        let array = $.makeArray(baris);
 
         $(detail_time).click(function(e){
             e.preventDefault();
@@ -343,7 +395,7 @@
         $(detail_operation).click(function(e){
             e.preventDefault();
             if(row < max_row){
-                $(row_detail_operation).append('<tr><td> <input class="bg1 input100" type="text" name="item" ></td><td> <input class="bg1 input100" type="text" name="procedure" ></td></tr>');
+                $(row_detail_operation).append('<tr><td> <input class="bg1 input100" type="text" name="item[]" ></td><td> <input class="bg1 input100" type="text" name="procedure[]" ></td></tr>');
                 row++;
             }
         });
@@ -356,6 +408,14 @@
             }
         });
 
+        $(personil).click(function(e){
+            e.preventDefault();
+            if(row < max_row){
+                $(row_personil).append('<tr id="baris"><th colspan="4"><b>Personil</b></th></tr><tr><th>Name </th><td>    <select class="js-select2" name="visit_nama[]" id="nama">        <option value=""></option>        @foreach ($personil as $p)            <option value="{{$p->id}}">{{$p->visit_nama}}</option>        @endforeach    </select>    <div class="dropDownSelect2"></div></td><th>Company</th><td>    <input type="text" class="input100" name="visit_company[]" id="company" value="" readonly></td></tr><tr><th>ID Number </th><td>    <input type="text" class="input100" name="visit_nik[]" id="nik" value="" readonly></td><th>Department </th><td>    <input type="text" class="input100" name="visit_department[]" id="department" value="" readonly></td></tr><tr><th>Phone Number</th><td>    <input type="text" class="input100" name="visit_phone[]" id="phone" value="" readonly></td><th>Responsibility </th><td>    <input type="text" class="input100" name="visit_respon[]" id="respon" value="" readonly></td></tr>');
+                row++;
+            }
+        });
+
         $(".js-select2").each(function(){
 			$(this).select2({
 				minimumResultsForSearch: 20,
@@ -363,44 +423,62 @@
 			});
 		});
 
+        $('#nama').change(function(){
+            let id = $(this).val();
+            $.ajax({
+                url: "{{url("/other/maintenance/visitor")}}"+'/'+id,
+                dataType:"json",
+                type: "get",
+                success: function(response){
+                    const {visitor} = response;
+                    console.log(visitor)
+                $('#company').val(visitor.visit_company);
+                $('#department').val(visitor.visit_department);
+                $('#phone').val(visitor.visit_phone);
+                $('#nik').val(visitor.visit_nik);
+                $('#respon').val(visitor.visit_respon);
+                }
+            });
+        });
+
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('input[name="_token"]').val()
             }
         });
 
-        // $(".contact100-form-btn").click(function(e){
-        // e.preventDefault();
-        // var datastring = $("#toubleshoot_form").serialize();
-        //     $.ajax({
-        //         type:'POST',
-        //         url:"{{url('other/troubleshoot/create')}}",
-        //         data: datastring,
-        //         error: function (request, error) {
-        //             console.log(error)
-        //             alert(" Can't do because: " + error);
-        //         },
-        //         success:function(data){
-        //             console.log(data);
-        //             if(data.status == 'SUCCESS'){
-        //                 Swal.fire({
-        //                     title: "Success!",
-        //                     text: 'Data Saved',
-        //                     type: "success",
-        //                 }).then(function(){
-        //                     location.href = "{{url("/logall")}}";
-        //                 });
-        //             }else if(data.status == 'FAILED'){
-        //                 Swal.fire({
-        //                     title: "Failed!",
-        //                     text: 'Saving Data Failed',
-        //                 }).then(function(){
-        //                     location.reload();
-        //                 });
-        //             }
-        //         }
-        //     });
-        // });
+        $("#submit_form").click(function(e){
+        e.preventDefault();
+        var datastring = $("#troubleshoot_form").serialize();
+            $.ajax({
+                type:'POST',
+                url:"{{url('other/troubleshoot/create')}}",
+                data: datastring,
+                // error: function (request, error) {
+                //     console.log(error)
+                //     alert(" Can't do because: " + error);
+                // },
+                success:function(data){
+                    console.log(data);
+                    if(data.status == 'SUCCESS'){
+                        Swal.fire({
+                            title: "Success!",
+                            text: 'Data Saved',
+                            type: "success",
+                        }).then(function(){
+                            location.href = "{{url("/logall")}}";
+                        });
+                    }else if(data.status == 'FAILED'){
+                        Swal.fire({
+                            title: "Failed!",
+                            text: 'Saving Data Failed',
+                        }).then(function(){
+                            location.reload();
+                        });
+                    }
+                }
+            });
+        });
     });
 </script>
 </body>

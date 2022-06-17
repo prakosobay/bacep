@@ -9,10 +9,6 @@ Route::get('/', function () {
     return view('auth.login');
 })->middleware('guest');
 
-// Route::get('/', function () {
-//     return view('other.troubleshoot_form');
-// })->middleware('guest');
-
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', [HomeController::class, 'index']);
 

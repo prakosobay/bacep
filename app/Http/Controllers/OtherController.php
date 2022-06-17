@@ -18,8 +18,8 @@ class OtherController extends Controller
     // Show Pages
     public function show_troubleshoot_form() // Menampilkan form troubleshoot
     {
-        $visitor = Visitor::all();
-        return view('other.troubleshoot_form', compact('visitor'));
+        $personil = Visitor::all();
+        return view('other.troubleshoot_form', compact('personil'));
     }
 
     public function show_maintenance_form() // Menampilkan form maintenance
@@ -221,6 +221,19 @@ class OtherController extends Controller
     public function create_troubleshoot(Request $request)
     {
         dd($request->all());
+
+        $data_request = $request->all();
+
+        // Validasi data dari request
+        $validate = $request->validate([
+            'work' => ['required'],
+            'visit' => ['required'],
+            'leave' => ['required', 'after_or_equal:visit'],
+            'background' => ['required'],
+            'desc' => ['required'],
+        ]);
+
+
     }
 
     public function approve_maintenance(Request $request) // Flow Approval form maintenance
