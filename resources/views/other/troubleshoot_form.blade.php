@@ -247,6 +247,7 @@
                         <tr>
                             <th>
                                 <select class="js-select2" id="risk" name="risk[]">
+                                    <option value=""></option>
                                     <option value="Bersenggolan dengan panel">Bersenggolan dengan panel</option>
                                     <option value="Bersenggolan dengan perangkat">Bersenggolan dengan perangkat</option>
                                     <option value="Korsleting">Korsleting</option>
@@ -263,6 +264,7 @@
                             </th>
                             <th>
                                 <select class="js-select2" id="poss" name="poss[]">
+                                    <option value=""></option>
                                     <option value="Memar, patah tulang, terkilir">Memar, patah tulang, terkilir</option>
                                     <option value="Kebakaran">Kebakaran</option>
                                     <option value="Pernafasan terganggu">Pernafasan terganggu</option>
@@ -274,6 +276,7 @@
                             </th>
                             <th>
                                 <select class="js-select2" id="impact" name="impact[]">
+                                    <option value=""></option>
                                     <option value="Low">Low</option>
                                     <option value="Medium">Medium</option>
                                     <option value="High">High</option>
@@ -282,6 +285,7 @@
                             </th>
                             <th>
                                 <select class="js-select2" id="mitigation" name="mitigation[]">
+                                    <option value=""></option>
                                     <option value="Memastikan aliran listrik untuk lift sudah dimatikan">Memastikan aliran listrik untuk lift sudah dimatikan</option>
                                     <option value="Memastikan tidak ada kabel yang terkelupas">Memastikan tidak ada kabel yang terkelupas</option>
                                     <option value="Pastikan pekerjaan yang dilakukan sesuai prosedur">Pastikan pekerjaan yang dilakukan sesuai prosedur</option>
@@ -300,15 +304,21 @@
                 </table>
                 <button id="risk_button"><b>Add More Fields</b></button>
 
-                {{-- Personil --}}
-                <table class="table table-bordered mt-3" id="table_personil">
+                {{-- PIC --}}
+                <table class="table table-bordered bg1 mt-3">
                     <tr>
-                        <th colspan="4"><b>Personil</b></th>
+                        <th colspan="5"><b>Visitor</b></th>
                     </tr>
-                    <tr id="baris">
+                    <tr>
+                        <th rowspan="4">PIC 1</th>
+                    </tr>
+
+
+                    {{-- PIC 1 --}}
+                    <tr>
                         <th>Name </th>
                         <td>
-                            <select class="js-select2" name="visit_nama[]" id="nama">
+                            <select class="js-select2" name="visit_nama[]" id="nama" required>
                                 <option value=""></option>
                                 @foreach ($personil as $p)
                                     <option value="{{$p->id}}">{{$p->visit_nama}}</option>
@@ -341,8 +351,171 @@
                             <input type="text" class="input100" name="visit_respon[]" id="respon" value="" readonly>
                         </td>
                     </tr>
+                    <tr>
+                        <th rowspan="4">PIC 2</th>
+                    </tr>
+
+                    {{-- PIC 2 --}}
+                    <tr>
+                        <th>Name </th>
+                        <td>
+                            <select class="js-select2" name="visit_nama[]" id="nama_2">
+                                <option value=""></option>
+                                @foreach ($personil as $p)
+                                    <option value="{{$p->id}}">{{$p->visit_nama}}</option>
+                                @endforeach
+                            </select>
+                            <div class="dropDownSelect2"></div>
+                        </td>
+                        <th>Company</th>
+                        <td>
+                            <input type="text" class="input100" name="visit_company[]" id="company_2" value="" readonly>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>ID Number </th>
+                        <td>
+                            <input type="text" class="input100" name="visit_nik[]" id="nik_2" value="" readonly>
+                        </td>
+                        <th>Department </th>
+                        <td>
+                            <input type="text" class="input100" name="visit_department[]" id="department_2" value="" readonly>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Phone Number</th>
+                        <td>
+                            <input type="text" class="input100" name="visit_phone[]" id="phone_2" value="" readonly>
+                        </td>
+                        <th>Responsibility </th>
+                        <td>
+                            <input type="text" class="input100" name="visit_respon[]" id="respon_2" value="" readonly>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th rowspan="4">PIC 3</th>
+                    </tr>
+
+                    {{-- PIC 3 --}}
+                    <tr>
+                        <th>Name </th>
+                        <td>
+                            <select class="js-select2" name="visit_nama[]" id="nama_3">
+                                <option value=""></option>
+                                @foreach ($personil as $p)
+                                    <option value="{{$p->id}}">{{$p->visit_nama}}</option>
+                                @endforeach
+                            </select>
+                            <div class="dropDownSelect2"></div>
+                        </td>
+                        <th>Company</th>
+                        <td>
+                            <input type="text" class="input100" name="visit_company[]" id="company_3" value="" readonly>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>ID Number </th>
+                        <td>
+                            <input type="text" class="input100" name="visit_nik[]" id="nik_3" value="" readonly>
+                        </td>
+                        <th>Department </th>
+                        <td>
+                            <input type="text" class="input100" name="visit_department[]" id="department_3" value="" readonly>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Phone Number</th>
+                        <td>
+                            <input type="text" class="input100" name="visit_phone[]" id="phone_3" value="" readonly>
+                        </td>
+                        <th>Responsibility </th>
+                        <td>
+                            <input type="text" class="input100" name="visit_respon[]" id="respon_3" value="" readonly>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th rowspan="4">PIC 4</th>
+                    </tr>
+
+                    {{-- PIC 4 --}}
+                    <tr>
+                        <th>Name </th>
+                        <td>
+                            <select class="js-select2" name="visit_nama[]" id="nama_4">
+                                <option value=""></option>
+                                @foreach ($personil as $p)
+                                    <option value="{{$p->id}}">{{$p->visit_nama}}</option>
+                                @endforeach
+                            </select>
+                            <div class="dropDownSelect2"></div>
+                        </td>
+                        <th>Company</th>
+                        <td>
+                            <input type="text" class="input100" name="visit_company[]" id="company_4" value="" readonly>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>ID Number </th>
+                        <td>
+                            <input type="text" class="input100" name="visit_nik[]" id="nik_4" value="" readonly>
+                        </td>
+                        <th>Department </th>
+                        <td>
+                            <input type="text" class="input100" name="visit_department[]" id="department_4" value="" readonly>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Phone Number</th>
+                        <td>
+                            <input type="text" class="input100" name="visit_phone[]" id="phone_4" value="" readonly>
+                        </td>
+                        <th>Responsibility </th>
+                        <td>
+                            <input type="text" class="input100" name="visit_respon[]" id="respon_4" value="" readonly>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th rowspan="4">PIC 5</th>
+                    </tr>
+
+                    {{-- PIC 5 --}}
+                    <tr>
+                        <th>Name </th>
+                        <td>
+                            <select class="js-select2" name="visit_nama[]" id="nama_5">
+                                <option value=""></option>
+                                @foreach ($personil as $p)
+                                    <option value="{{$p->id}}">{{$p->visit_nama}}</option>
+                                @endforeach
+                            </select>
+                            <div class="dropDownSelect2"></div>
+                        </td>
+                        <th>Company</th>
+                        <td>
+                            <input type="text" class="input100" name="visit_company[]" id="company_5" value="" readonly>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>ID Number </th>
+                        <td>
+                            <input type="text" class="input100" name="visit_nik[]" id="nik_5" value="" readonly>
+                        </td>
+                        <th>Department </th>
+                        <td>
+                            <input type="text" class="input100" name="visit_department[]" id="department_5" value="" readonly>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Phone Number</th>
+                        <td>
+                            <input type="text" class="input100" name="visit_phone[]" id="phone_5" value="" readonly>
+                        </td>
+                        <th>Responsibility </th>
+                        <td>
+                            <input type="text" class="input100" name="visit_respon[]" id="respon_5" value="" readonly>
+                        </td>
+                    </tr>
                 </table>
-                <button id="button_personil"><b>Add More Fields</b></button>
 
 				<div class="container-contact100-form-btn">
 					<button class="contact100-form-btn" id="submit_form">
@@ -381,8 +554,6 @@
         let row_risk = $('#table_risk');
         let personil = $('#button_personil');
         let row_personil = $('#table_personil');
-        let baris = $('#baris');
-        let array = $.makeArray(baris);
 
         $(detail_time).click(function(e){
             e.preventDefault();
@@ -403,7 +574,7 @@
         $(risk).click(function(e){
             e.preventDefault();
             if(row < max_row){
-                $(row_risk).append('<tr class="bg1"><td><select class="js-select2" id="risk" name="risk[]"><option value="Bersenggolan dengan panel">Bersenggolan dengan panel</option><option value="Bersenggolan dengan perangkat">Bersenggolan dengan perangkat</option><option value="Korsleting">Korsleting</option><option value="Menghirup debu">Menghirup debu</option><option value="Pekerjaan Tertunda">Pekerjaan tertunda</option><option value="Peralatan Rusak">Peralatan rusak</option><option value="Sampah berserakan">Sampah berserakan</option><option value="Sesak Nafas">Sesak nafas</option><option value="Terjatuh dari tangga">Jatuh dari tangga</option><option value="Terjepit">Terjepit</option><option value="Tersengat Listrik">Tersengat listrik</option></select><div class="dropDownSelect2"></div></td><td><select class="js-select2" id="poss" name="poss[]"><option value="Memar, patah tulang, terkilir">Memar, patah tulang, terkilir</option><option value="Kebakaran">Kebakaran</option><option value="Pernafasan terganggu">Pernafasan terganggu</option><option value="Mengalami luka bakar, pingsan, kematian">Mengalami luka bakar, pingsan, kematian</option><option value="Sistem kelistrikan menjadi lumpuh">Sistem kelistrikan menjadi lumpuh</option><option value="Mengalami luka bakar">Mengalami luka bakar</option></select><div class="dropDownSelect2"></div></td><td><select class="js-select2" id="impact" name="impact[]"><option value="Low">Low</option><option value="Medium">Medium</option><option value="High">High</option> </select> <div class="dropDownSelect2"></div></td><td><select class="js-select2" id="mitigation" name="mitigation[]"><option value="Memastikan aliran listrik untuk lift sudah dimatikan">Memastikan aliran listrik untuk lift sudah dimatikan</option><option value="Memastikan tidak ada kabel yang terkelupas">Memastikan tidak ada kabel yang terkelupas</option><option value="Pastikan pekerjaan yang dilakukan sesuai prosedur">Pastikan pekerjaan yang dilakukan sesuai prosedur</option><option value="Menggunakan Masker">Menggunakan Masker</option><option value="Pastikan tangga berada di lantai yang rata">Pastikan tangga berada di lantai yang rata</option><option value="Bekerja dengan hati hati">Bekerja dengan hati hati</option><option value="Menjaga jarak dari sumber listrik">Menjaga jarak dari sumber listrik</option><option value="Menjaga jarak dari perangkat critical">Menjaga jarak dari perangkat critical</option><option value="Menjaga jarak dengan panel alarm">Menjaga jarak dengan panel alarm</option><option value="Menggunakan APD">Menggunakan APD</option></select><div class="dropDownSelect2"></div></td></tr>');
+                $(row_risk).append('<tr><th><select class="js-select2" id="risk" name="risk[]">    <option value=""></option>    <option value="Bersenggolan dengan panel">Bersenggolan dengan panel</option>    <option value="Bersenggolan dengan perangkat">Bersenggolan dengan perangkat</option>    <option value="Korsleting">Korsleting</option>    <option value="Menghirup debu">Menghirup debu</option>    <option value="Pekerjaan Tertunda">Pekerjaan tertunda</option>    <option value="Peralatan Rusak">Peralatan rusak</option>    <option value="Sampah berserakan">Sampah berserakan</option>    <option value="Sesak Nafas">Sesak nafas</option>    <option value="Terjatuh dari tangga">Jatuh dari tangga</option>    <option value="Terjepit">Terjepit</option>    <option value="Tersengat Listrik">Tersengat listrik</option></select><div class="dropDownSelect2"></div></th><th><select class="js-select2" id="poss" name="poss[]">    <option value=""></option>    <option value="Memar, patah tulang, terkilir">Memar, patah tulang, terkilir</option>    <option value="Kebakaran">Kebakaran</option>    <option value="Pernafasan terganggu">Pernafasan terganggu</option>    <option value="Mengalami luka bakar, pingsan, kematian">Mengalami luka bakar, pingsan, kematian</option>    <option value="Sistem kelistrikan menjadi lumpuh">Sistem kelistrikan menjadi lumpuh</option>    <option value="Mengalami luka bakar">Mengalami luka bakar</option>  </select>  <div class="dropDownSelect2"></div></th><th><select class="js-select2" id="impact" name="impact[]">    <option value=""></option>    <option value="Low">Low</option>    <option value="Medium">Medium</option>    <option value="High">High</option>   </select>   <div class="dropDownSelect2"></div></th><th><select class="js-select2" id="mitigation" name="mitigation[]">    <option value=""></option>    <option value="Memastikan aliran listrik untuk lift sudah dimatikan">Memastikan aliran listrik untuk lift sudah dimatikan</option>    <option value="Memastikan tidak ada kabel yang terkelupas">Memastikan tidak ada kabel yang terkelupas</option>    <option value="Pastikan pekerjaan yang dilakukan sesuai prosedur">Pastikan pekerjaan yang dilakukan sesuai prosedur</option>    <option value="Menggunakan Masker">Menggunakan Masker</option>    <option value="Pastikan tangga berada di lantai yang rata">Pastikan tangga berada di lantai yang rata</option>    <option value="Bekerja dengan hati hati">Bekerja dengan hati hati</option>    <option value="Menjaga jarak dari sumber listrik">Menjaga jarak dari sumber listrik</option>    <option value="Menjaga jarak dari perangkat critical">Menjaga jarak dari perangkat critical</option>    <option value="Menjaga jarak dengan panel alarm">Menjaga jarak dengan panel alarm</option>    <option value="Menggunakan APD">Menggunakan APD</option>  </select>  <div class="dropDownSelect2"></div></th></tr>');
                 row++
             }
         });
@@ -423,6 +594,7 @@
 			});
 		});
 
+
         $('#nama').change(function(){
             let id = $(this).val();
             $.ajax({
@@ -440,6 +612,74 @@
                 }
             });
         });
+        $('#nama_2').change(function(){
+            let id = $(this).val();
+            $.ajax({
+                url: "{{url("/other/maintenance/visitor")}}"+'/'+id,
+                dataType:"json",
+                type: "get",
+                success: function(response){
+                    const {visitor} = response;
+                    console.log(visitor)
+                $('#company_2').val(visitor.visit_company);
+                $('#department_2').val(visitor.visit_department);
+                $('#phone_2').val(visitor.visit_phone);
+                $('#nik_2').val(visitor.visit_nik);
+                $('#respon_2').val(visitor.visit_respon);
+                }
+            });
+        });
+        $('#nama_3').change(function(){
+            let id = $(this).val();
+            $.ajax({
+                url: "{{url("/other/maintenance/visitor")}}"+'/'+id,
+                dataType:"json",
+                type: "get",
+                success: function(response){
+                    const {visitor} = response;
+                    console.log(visitor)
+                $('#company_3').val(visitor.visit_company);
+                $('#department_3').val(visitor.visit_department);
+                $('#phone_3').val(visitor.visit_phone);
+                $('#nik_3').val(visitor.visit_nik);
+                $('#respon_3').val(visitor.visit_respon);
+                }
+            });
+        });
+        $('#nama_4').change(function(){
+            let id = $(this).val();
+            $.ajax({
+                url: "{{url("/other/maintenance/visitor")}}"+'/'+id,
+                dataType:"json",
+                type: "get",
+                success: function(response){
+                    const {visitor} = response;
+                    console.log(visitor)
+                $('#company_4').val(visitor.visit_company);
+                $('#department_4').val(visitor.visit_department);
+                $('#phone_4').val(visitor.visit_phone);
+                $('#nik_4').val(visitor.visit_nik);
+                $('#respon_4').val(visitor.visit_respon);
+                }
+            });
+        });
+        $('#nama_5').change(function(){
+            let id = $(this).val();
+            $.ajax({
+                url: "{{url("/other/maintenance/visitor")}}"+'/'+id,
+                dataType:"json",
+                type: "get",
+                success: function(response){
+                    const {visitor} = response;
+                    console.log(visitor)
+                $('#company_5').val(visitor.visit_company);
+                $('#department_5').val(visitor.visit_department);
+                $('#phone_5').val(visitor.visit_phone);
+                $('#nik_5').val(visitor.visit_nik);
+                $('#respon_5').val(visitor.visit_respon);
+                }
+            });
+        });
 
         $.ajaxSetup({
             headers: {
@@ -454,10 +694,10 @@
                 type:'POST',
                 url:"{{url('other/troubleshoot/create')}}",
                 data: datastring,
-                // error: function (request, error) {
-                //     console.log(error)
-                //     alert(" Can't do because: " + error);
-                // },
+                error: function (request, errors) {
+                    console.log(errors)
+                    alert("ADA YANG BELOM KE ISI MBAA " + errors);
+                },
                 success:function(data){
                     console.log(data);
                     if(data.status == 'SUCCESS'){
