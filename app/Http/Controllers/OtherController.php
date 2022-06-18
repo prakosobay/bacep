@@ -218,7 +218,7 @@ class OtherController extends Controller
         }
     }
 
-    public function create_troubleshoot(Request $request)
+    public function create_troubleshoot(Request $request) // Submit form troubleshoot
     {
         dd($request->all());
 
@@ -374,7 +374,7 @@ class OtherController extends Controller
         }
     }
 
-    public function update_checkin_maintenance(Request $request) //
+    public function update_checkin_maintenance(Request $request) // Untuk update checkin personil form maintenance
     {
         dd($request->all());
         $validate = $request->validate([

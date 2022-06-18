@@ -22,17 +22,18 @@ class ConsumController extends Controller
 
 
 
-    public function index()
+    // Show Pages
+    public function index() // Menampilkan data barang consumable
     {
         if ((Gate::allows('isHead')) || (Gate::allows('isApproval')) || (Gate::allows('isAdmin'))) {
             $consum = Consum::all();
-            return view('consum.table', ['consum' => $consum]);
+            return view('consum.table', compact('consum'));
         } else {
             abort(403, 'Anda Tidak Punya Akses Ke Halaman Ini');
         }
     }
 
-    public function show_new()
+    public function show_new() // Tampilan untuk menginput barang consum baru
     {
         if ((Gate::allows('isAdmin')) || (Gate::allows('isApproval')) || (Gate::allows('isHead'))) {
             return view('consum.new');
@@ -41,27 +42,27 @@ class ConsumController extends Controller
         }
     }
 
-    public function show_in()
+    public function show_in() // Tampilan untuk data barang masuk
     {
         if (Gate::allows('isHead') || (Gate::allows('isApproval')) || (Gate::allows('isAdmin'))) {
             $in = ConsumMasuk::all();
-            return view('consum.masuk', ['in' => $in]);
+            return view('consum.masuk', compact('in'));
         } else {
             abort(403,  'Anda Tidak Punya Akses Ke Halaman Ini');
         }
     }
 
-    public function show_out()
+    public function show_out() // Tampilan untuk data barang keluar
     {
         if (Gate::allows('isHead') || (Gate::allows('isApproval')) || (Gate::allows('isAdmin'))) {
             $out = ConsumKeluar::all();
-            return view('consum.keluar', ['out' => $out]);
+            return view('consum.keluar', compact('out'));
         } else {
             abort(403,  'Anda Tidak Punya Akses Ke Halaman Ini');
         }
     }
 
-    public function edit_masuk($id)
+    public function edit_masuk($id) // Tampilan untuk update barang masuk
     {
         if (Gate::allows('isAdmin') || (Gate::allows('isApproval')) || (Gate::allows('isHead'))) {
             $consum = Consum::find($id);
@@ -71,7 +72,7 @@ class ConsumController extends Controller
         }
     }
 
-    public function edit_keluar($id)
+    public function edit_keluar($id) // Tampilan untuk update barang keluar
     {
         if (Gate::allows('isAdmin') || (Gate::allows('isApproval')) || (Gate::allows('isHead'))) {
             $consum = Consum::find($id);
@@ -82,9 +83,11 @@ class ConsumController extends Controller
         }
     }
 
-    public function update_masuk(Request $request, $id)
+
+
+    // Submit data
+    public function update_masuk(Request $request, $id) // Update barang masuk
     {
-        // dd($request->all());
         $this->validate($request, [
             'nama_barang' => ['required'],
             'consum_id' => ['required', 'numeric'],
@@ -113,7 +116,7 @@ class ConsumController extends Controller
         return back();
     }
 
-    public function update_keluar(Request $request, $id)
+    public function update_keluar(Request $request, $id) // Update barang keluar
     {
         // dd($request->all());
         $this->validate($request, [
@@ -148,7 +151,7 @@ class ConsumController extends Controller
         return back();
     }
 
-    public function store_consum(Request $request)
+    public function store_consum(Request $request) // Create barang baru
     {
         // dd($request->all());
         $this->validate($request, [
@@ -184,28 +187,34 @@ class ConsumController extends Controller
         return back();
     }
 
-    public function csv(Request $request)
+
+
+    // Excel
+    public function csv(Request $request) // Import csv to database barang consumable
     {
         $i = Excel::import(new ConsumImport, $request->file('file'));
         return back()->with('success', 'Excel Data Imported successfully.');
     }
 
-    public function export_consum()
+    public function export_consum() // Export data consumable to excel
     {
         return Excel::download(new ConsumExport, 'Consum.xlsx');
     }
 
-    public function export_consum_masuk()
+    public function export_consum_masuk() // Export data consum masuk to excel
     {
         return Excel::download(new ConsumMasukExport, 'ConsumMasuk.xlsx');
     }
 
-    public function export_consum_keluar()
+    public function export_consum_keluar() // Export data consum keluar to excel
     {
         return Excel::download(new ConsumKeluarExport, 'ConsumKeluar.xlsx');
     }
 
-    public function yajra_all_consum()
+
+
+    // Yajra Datatable
+    public function yajra_all_consum() // Get seluruh data consumable
     {
         $consum = DB::table('consums')
             ->select('consums.*')
@@ -215,7 +224,7 @@ class ConsumController extends Controller
             ->make(true);
     }
 
-    public function yajra_masuk_consum()
+    public function yajra_masuk_consum() // Get seluruh data barang masuk consumable
     {
         $masuk = DB::table('consum_masuks')
             ->select('consum_masuks.*')
@@ -224,7 +233,7 @@ class ConsumController extends Controller
             ->make(true);
     }
 
-    public function yajra_keluar_consum()
+    public function yajra_keluar_consum() // Get seluruh data barang keluar consumable
     {
         $keluar = DB::table('consum_keluars')
             ->select('consum_keluars.*')

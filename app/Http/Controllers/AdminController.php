@@ -20,6 +20,7 @@ class AdminController extends Controller
     }
 
 
+
     // Show Pages
     public function show_relasi() // Menampilkan table relasi user dan role
     {
@@ -64,7 +65,7 @@ class AdminController extends Controller
         }
     }
 
-    public function user_edit($id)
+    public function user_edit($id) // Menampilkan tampilan edit user
     {
         if (Gate::allows('isAdmin')) {
             $user = User::find($id);
@@ -215,7 +216,9 @@ class AdminController extends Controller
     }
 
 
-    public function yajra_show_user()
+
+    // Yajra Datatable
+    public function yajra_show_user() // Get seluruh data user
     {
         $users = DB::table('users')
             ->select('users.*')
@@ -225,7 +228,7 @@ class AdminController extends Controller
             ->make(true);
     }
 
-    public function yajra_show_relasi()
+    public function yajra_show_relasi() // Get seluruh data relasi
     {
         $relasi = DB::table('role_user')
             ->select('role_user.*')
