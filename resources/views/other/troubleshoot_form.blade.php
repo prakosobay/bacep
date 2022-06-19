@@ -66,28 +66,28 @@
                 <div class="col-3">
                     <div class="wrap-contact100-form-radio">
                         <div class="contact100-form-radio">
-							<input class="input-radio100" id="server" type="checkbox" name="server" value="1">
+							<input class="input-radio100" id="server" type="checkbox" name="server" value="">
 							<label class="label-radio100" for="server">
 								Server Room
 							</label>
 						</div>
 
                         <div class="contact100-form-radio">
-							<input class="input-radio100" id="mmr1" type="checkbox" name="mmr1" value="1">
+							<input class="input-radio100" id="mmr1" type="checkbox" name="mmr1" value="">
 							<label class="label-radio100" for="mmr1">
 								MMR 1
 							</label>
 						</div>
 
                         <div class="contact100-form-radio">
-							<input class="input-radio100" id="mmr2" type="checkbox" name="mmr2" value="1">
+							<input class="input-radio100" id="mmr2" type="checkbox" name="mmr2" value="">
 							<label class="label-radio100" for="mmr2">
 								MMR 2
 							</label>
 						</div>
 
                         <div class="contact100-form-radio">
-							<input class="input-radio100" id="ups" type="checkbox" name="ups" value="1">
+							<input class="input-radio100" id="ups" type="checkbox" name="ups" value="">
 							<label class="label-radio100" for="ups">
 								UPS Room
 							</label>
@@ -97,7 +97,7 @@
                 <div class="col-3">
                     <div class="wrap-contact100-form-radio">
                         <div class="contact100-form-radio">
-							<input class="input-radio100" id="fss" type="checkbox" name="fss" value="1">
+							<input class="input-radio100" id="fss" type="checkbox" name="fss" value="">
 							<label class="label-radio100" for="fss">
 								FSS Room
 							</label>
@@ -190,7 +190,7 @@
 				</div>
 
                 <!-- Detail Time Activity -->
-                <table class="table table-bordered mt-3" id="table_detail_time">
+                {{-- <table class="table table-bordered mt-3" id="table_detail_time">
                     <thead class="bg1">
                         <tr>
                             <th colspan="4">Detail Time Table of All Activity</th>
@@ -210,10 +210,10 @@
                         </tr>
                     </tbody>
                 </table>
-                <button id="detail_time"><b>Add More Fields</b></button>
+                <button id="detail_time"><b>Add More Fields</b></button> --}}
 
                 <!-- Detail Operation and Execution -->
-                <table class="table table-bordered mt-3" id="table_detail_operation">
+                {{-- <table class="table table-bordered mt-3" id="table_detail_operation">
                     <thead class="bg1">
                         <tr>
                             <th colspan="2">Detail Operation and Execution</th>
@@ -229,10 +229,10 @@
                         </tr>
                     </tbody>
                 </table>
-                <button id="detail_operation"><b>Add More Fields</b></button>
+                <button id="detail_operation"><b>Add More Fields</b></button> --}}
 
                 <!-- Risk and Service Area Impact -->
-                <table class="table table-bordered mt-3" id="table_risk">
+                {{-- <table class="table table-bordered mt-3" id="table_risk">
                     <thead class="bg1">
                         <tr>
                             <th colspan="4">Risk and Service Area Impact</th>
@@ -302,7 +302,7 @@
                         </tr>
                     </tbody>
                 </table>
-                <button id="risk_button"><b>Add More Fields</b></button>
+                <button id="risk_button"><b>Add More Fields</b></button> --}}
 
                 {{-- PIC --}}
                 <table class="table table-bordered bg1 mt-3">

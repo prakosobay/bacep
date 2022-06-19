@@ -220,7 +220,7 @@ class OtherController extends Controller
 
     public function create_troubleshoot(Request $request) // Submit form troubleshoot
     {
-        // dd($request->all());
+        // var_dump($request->all());
         // Validasi data dari request
         $validate = $request->validate([
             'work' => ['required'],
@@ -258,8 +258,8 @@ class OtherController extends Controller
             'lain' => $request->lain,
         ]);
 
-        foreach ($input['risk'] as $k => $v){
-            if(isset($input['risk'][$k])){
+        foreach ($input['risk'] as $k => $v) {
+            if (isset($input['risk'][$k])) {
                 $risk_array = [
                     'troubleshoot_bm_id' => $other_form->id,
                     'risk' => $input['risk'][$k],
@@ -271,12 +271,11 @@ class OtherController extends Controller
                 $insert_risk = [];
                 $insert_risk[] = $risk_array;
             }
-
         }
         $other_risk = TroubleshootBmRisk::insert($insert_risk);
 
-        foreach($input['item'] as $k => $v){
-            if(isset($input['item'][$k])){
+        foreach ($input['item'] as $k => $v) {
+            if (isset($input['item'][$k])) {
                 $detail_array = [
                     'troubleshoot_bm_id' => $other_form->id,
                     'item' => $input['item'][$k],
@@ -293,8 +292,8 @@ class OtherController extends Controller
         }
         $other_detail = TroubleshootBmDetail::insert($insert_detail);
 
-        foreach ($input['visit_nama'] as $k => $v){
-            if(isset($input['visit_nama'][$k])){
+        foreach ($input['visit_nama'] as $k => $v) {
+            if (isset($input['visit_nama'][$k])) {
                 $personil_array = [
                     'troubleshoot_bm_id' => $other_form->id,
                     'nama' => $input['visit_nama'][$k],
@@ -344,7 +343,7 @@ class OtherController extends Controller
             // // Pergantian role tiap permit & send email notif
             $role_to = '';
             if ($lastupdate->role_to == 'review') {
-                foreach([
+                foreach ([
                     'aurellius.putra@balitower.co.id', 'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
                     'ilham.pangestu@balitower.co.id', 'irwan.trisna@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id',
                 ] as $recipient) {
@@ -352,18 +351,18 @@ class OtherController extends Controller
                 }
                 $role_to = 'check';
             } elseif ($lastupdate->role_to == 'check') {
-                foreach(['security.bacep@balitower.co.id'] as $recipient){
+                foreach (['security.bacep@balitower.co.id'] as $recipient) {
                     Mail::to($recipient)->send(new NotifMaintenanceForm());
                 }
                 $role_to = 'security';
             } elseif ($lastupdate->role_to == 'security') {
-                foreach(['tofiq.hidayat@balitower.co.id', 'bayu.prakoso@balitower.co.id'] as $recipient){
+                foreach (['tofiq.hidayat@balitower.co.id', 'bayu.prakoso@balitower.co.id'] as $recipient) {
                     Mail::to($recipient)->send(new NotifMaintenanceForm());
                 }
                 $role_to = 'head';
             } elseif ($lastupdate->role_to = 'head') {
                 $full = Other::find($request->other_id);
-                foreach(['dc@balitower.co.id'] as $recipient){
+                foreach (['dc@balitower.co.id'] as $recipient) {
                     Mail::to($recipient)->send(new NotifMaintenanceFull($full));
                 }
                 $role_to = 'all';
