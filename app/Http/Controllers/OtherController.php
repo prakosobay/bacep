@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\{DB, Auth, Gate, Mail, Session, Storage};
 use App\Models\{Other, OtherFull, OtherHistory, OtherPersonil, Rutin, TroubleshootBm, TroubleshootBmDetail, TroubleshootBmEntry, TroubleshootBmPersonil, TroubleshootBmRisk, Visitor};
-use App\Mail\{NotifMaintenanceForm, NotifMaintenanceFull, NotifMaintenanceReject};
+use App\Mail\{NotifMaintenanceForm, NotifMaintenanceFull, NotifMaintenanceReject, NotifTroubleshootForm};
 use Symfony\Component\HttpFoundation\Test\Constraint\ResponseFormatSame;
 use Yajra\Datatables\Datatables;
 use Carbon\Carbon;
@@ -193,6 +193,7 @@ class OtherController extends Controller
             }
         }
 
+var_dump($p);
         $personil = OtherPersonil::insert($p);
 
         $maintenance_form = Other::find($request->other_id);
@@ -214,6 +215,7 @@ class OtherController extends Controller
                 'updated_at' => now(),
                 'created_at' => now(),
             ]);
+
             return $log ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
         }
     }
@@ -258,6 +260,26 @@ class OtherController extends Controller
             'lain' => $request->lain,
         ]);
 
+        $insert_detail = [];
+        foreach ($input['time_start'] as $k => $v) {
+            $detail_array = [];
+            if (isset($input['time_start'][$k])) {
+
+                $detail_array = [
+                    'troubleshoot_bm_id' => $other_form->id,
+                    'time_start' => $input['time_start'][$k],
+                    'time_end' => $input['time_end'][$k],
+                    'activity' => $input['activity'][$k],
+                    'service_impact' => $input['service_impact'][$k],
+                    'item' => $input['item'][$k],
+                    'procedure' => $input['procedure'][$k],
+                ];
+
+                $insert_detail[] = $detail_array;
+            }
+        }
+        $other_detail = TroubleshootBmDetail::insert($insert_detail);
+/*
         foreach ($input['risk'] as $k => $v) {
             if (isset($input['risk'][$k])) {
                 $risk_array = [
@@ -273,24 +295,6 @@ class OtherController extends Controller
             }
         }
         $other_risk = TroubleshootBmRisk::insert($insert_risk);
-
-        foreach ($input['item'] as $k => $v) {
-            if (isset($input['item'][$k])) {
-                $detail_array = [
-                    'troubleshoot_bm_id' => $other_form->id,
-                    'item' => $input['item'][$k],
-                    'procedure' => $input['procedure'][$k],
-                    'time_start' => $input['time_start'][$k],
-                    'time_end' => $input['time_end'][$k],
-                    'activity' => $input['activity'][$k],
-                    'service_impact' => $input['service_impact'][$k],
-                ];
-
-                $insert_detail = [];
-                $insert_detail[] = $detail_array;
-            }
-        }
-        $other_detail = TroubleshootBmDetail::insert($insert_detail);
 
         foreach ($input['visit_nama'] as $k => $v) {
             if (isset($input['visit_nama'][$k])) {
@@ -311,13 +315,12 @@ class OtherController extends Controller
         }
 
         $notif_troubleshoot = TroubleshootBm::find($other_form->id);
-        // dd($notif_troubleshoot);
         foreach ([
             'bayu.prakoso@balitower.co.id',
         ] as $recipient) {
-            Mail::to($recipient)->send(new NotifMaintenanceForm($notif_troubleshoot));
+            Mail::to($recipient)->send(new NotifTroubleshootForm($notif_troubleshoot));
         }
-
+*/
         return $other_form->id ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
     }
 

@@ -206,7 +206,7 @@
                             <td><input class="bg1" type="time" name="time_start[]" required></td>
                             <td><input class="bg1" type="time" name="time_end[]" required></td>
                             <td><input class="input100" type="text" name="activity[]" required></td>
-                            <td><input class="input100" type="text" name="detail[]" required></td>
+                            <td><input class="input100" type="text" name="service_impact[]" required></td>
                         </tr>
                     </tbody>
                 </table>
@@ -232,7 +232,7 @@
                 <button id="detail_operation"><b>Add More Fields</b></button>
 
                 <!-- Risk and Service Area Impact -->
-                <table class="table table-bordered mt-3" id="table_risk">
+                {{-- <table class="table table-bordered mt-3" id="table_risk">
                     <thead class="bg1">
                         <tr>
                             <th colspan="4">Risk and Service Area Impact</th>
@@ -302,7 +302,7 @@
                         </tr>
                     </tbody>
                 </table>
-                <button id="risk_button"><b>Add More Fields</b></button>
+                <button id="risk_button"><b>Add More Fields</b></button> --}}
 
                 {{-- PIC --}}
                 <table class="table table-bordered bg1 mt-3">
@@ -558,7 +558,7 @@
         $(detail_time).click(function(e){
             e.preventDefault();
             if(row < max_row){
-                $(row_detail_time).append('<tr><td><input class="bg1" type="time" name="time_start[]"></td><td><input class="bg1" type="time" name="time_end[]"></td><td><input class="input100" type="text" name="activity[]" ></td><td><input class="input100" type="text" name="detail[]" ></td></tr>');
+                $(row_detail_time).append('<tr><td><input class="bg1" type="time" name="time_start[]"></td><td><input class="bg1" type="time" name="time_end[]"></td><td><input class="input100" type="text" name="activity[]" ></td><td><input class="input100" type="text" name="service_impact[]" ></td></tr>');
                 row++;
             }
         });
