@@ -243,7 +243,7 @@ class OtherController extends Controller
 
         $other_entry = TroubleshootBmEntry::create([
             'troubleshoot_bm_id' => $other_form->id,
-            'server' => $request->server,
+            'dc' => $request->dc,
             'mmr1' => $request->mmr2,
             'mmr2' => $request->mmr2,
             'ups' => $request->ups,
@@ -310,7 +310,8 @@ class OtherController extends Controller
             $other_personil = TroubleshootBmPersonil::insert($insert_personil);
         }
 
-        $notif_troubleshoot = TroubleshootBm::find($other_entry->troubleshoot_bm_id);
+        $notif_troubleshoot = TroubleshootBm::find($other_form->id);
+        // dd($notif_troubleshoot);
         foreach ([
             'bayu.prakoso@balitower.co.id',
         ] as $recipient) {
