@@ -66,6 +66,26 @@ class SurveyController extends Controller
             'visit_dept' => $request->visitor_dept,
         ]);
 
+        $survey = [];
+        foreach ($input['visit_name'] as $m => $n) {
+            $survey_array = [];
+            if (isset($input['visit_name'][$m])) {
+
+                $survey_array = [
+                    'troubleshoot_bm_id' => $other_form->id,
+                    'time_start' => $input['time_start'][$m],
+                    'time_end' => $input['time_end'][$m],
+                    'activity' => $input['activity'][$m],
+                    'service_impact' => $input['service_impact'][$m],
+                    'item' => $input['item'][$m],
+                    'procedure' => $input['procedure'][$m],
+                ];
+
+                $survey_insert[] = $survey_array;
+            }
+        }
+        $survey_detail = TroubleshootBmDetail::insert($survey_insert);
+
         $log = SurveyHistory::create([
             'survey_id' => $survey->id,
             'created_by' => Auth::user()->id,
