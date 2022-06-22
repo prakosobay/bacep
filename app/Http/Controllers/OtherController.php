@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\{DB, Auth, Gate, Mail, Session, Storage};
-use App\Models\{Other, OtherFull, OtherHistory, OtherPersonil, Rutin, TroubleshootBm, TroubleshootBmDetail, TroubleshootBmEntry, TroubleshootBmPersonil, TroubleshootBmRisk, Visitor};
+use App\Models\{Other, OtherFull, OtherHistory, OtherPersonil, Rutin, TroubleshootBm, TroubleshootBmDetail, TroubleshootBmEntry, TroubleshootBmHistory, TroubleshootBmPersonil, TroubleshootBmRisk, Visitor};
 use App\Mail\{NotifMaintenanceForm, NotifMaintenanceFull, NotifMaintenanceReject, NotifTroubleshootForm};
 use Symfony\Component\HttpFoundation\Test\Constraint\ResponseFormatSame;
 use Yajra\Datatables\Datatables;
@@ -193,7 +193,7 @@ class OtherController extends Controller
             }
         }
 
-var_dump($p);
+
         $personil = OtherPersonil::insert($p);
 
         $maintenance_form = Other::find($request->other_id);
@@ -273,55 +273,77 @@ var_dump($p);
                     'service_impact' => $input['service_impact'][$k],
                     'item' => $input['item'][$k],
                     'procedure' => $input['procedure'][$k],
+                    'created_at' => now(),
+                    'updated_at' => now(),
                 ];
 
                 $insert_detail[] = $detail_array;
             }
         }
         $other_detail = TroubleshootBmDetail::insert($insert_detail);
-/*
+
+        $insert_risk = [];
         foreach ($input['risk'] as $k => $v) {
+            $risk_array = [];
             if (isset($input['risk'][$k])) {
+
                 $risk_array = [
                     'troubleshoot_bm_id' => $other_form->id,
                     'risk' => $input['risk'][$k],
                     'poss' => $input['poss'][$k],
                     'impact' => $input['impact'][$k],
                     'mitigation' => $input['mitigation'][$k],
+                    'created_at' => now(),
+                    'updated_at' => now(),
                 ];
 
-                $insert_risk = [];
                 $insert_risk[] = $risk_array;
             }
         }
         $other_risk = TroubleshootBmRisk::insert($insert_risk);
 
+        $insert_personil = [];
         foreach ($input['visit_nama'] as $k => $v) {
+            $personil_array = [];
             if (isset($input['visit_nama'][$k])) {
+                $personil[] = Visitor::find($v)->visit_nama;
                 $personil_array = [
                     'troubleshoot_bm_id' => $other_form->id,
-                    'nama' => $input['visit_nama'][$k],
+                    'nama' => $personil[$k],
                     'company' => $input['visit_company'][$k],
                     'department' => $input['visit_department'][$k],
                     'respon' => $input['visit_respon'][$k],
                     'phone' => $input['visit_phone'][$k],
                     'numberId' => $input['visit_nik'][$k],
+                    'created_at' => now(),
+                    'updated_at' => now(),
                 ];
 
-                $insert_personil = [];
                 $insert_personil[] = $personil_array;
             }
-            $other_personil = TroubleshootBmPersonil::insert($insert_personil);
         }
+        $other_personil = TroubleshootBmPersonil::insert($insert_personil);
 
         $notif_troubleshoot = TroubleshootBm::find($other_form->id);
         foreach ([
-            'bayu.prakoso@balitower.co.id',
+            'aurellius.putra@balitower.co.id', 'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
+            'ilham.pangestu@balitower.co.id', 'irwan.trisna@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id',
         ] as $recipient) {
             Mail::to($recipient)->send(new NotifTroubleshootForm($notif_troubleshoot));
         }
-*/
-        return $other_form->id ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
+
+        $log_troubleshoot = TroubleshootBmHistory::insert([
+            'troubleshoot_bm_id' => $other_form->id,
+            'created_by' => Auth::user()->name,
+            'role_to' => 'review',
+            'status' => 'requested',
+            'aktif' => true,
+            'pdf' => false,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        return $log_troubleshoot ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
     }
 
     public function approve_maintenance(Request $request) // Flow Approval form maintenance

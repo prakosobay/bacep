@@ -104,7 +104,16 @@ class HomeController extends Controller
                     ->orderBy('other_id', 'desc')
                     ->get();
                 return view('other.maintenance_approval', compact('getMaintenance'));
-            } else {
+            } elseif($type_approve == 'troubleshoot') {
+                $getTroubleshoot = DB::table('troubleshoot_bms')
+                    ->join('troubleshoot_bm_histories', 'troubleshoot_bms.id', '=', 'troubleshoot_bm_id')
+                    ->select('troubleshoot_bm_histories.*', 'troubleshoot_bms')
+                    ->whereIn('troubleshoot_bm_histories.role_to', $role_1)
+                    ->where('troubleshoot_bm_histories', '=', true)
+                    ->get();
+                    dd($getTroubleshoot);
+                return view('other.troubleshoot_approval', compact('getTroubleshoot'));
+            } else{
                 abort(403);
             }
         } else {

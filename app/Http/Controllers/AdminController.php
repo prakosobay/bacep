@@ -211,7 +211,7 @@ class AdminController extends Controller
     public function delete_relasi($id) // Menghapus data relasi
     {
         DB::table('role_user')->where('id', $id)->delete();
-        Alert::success('Success', 'Role has been deleted');
+        // Alert::success('Success', 'Role has been deleted');
         return back();
     }
 

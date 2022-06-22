@@ -20,8 +20,8 @@ class CreateTroubleshootBmPersonilsTable extends Migration
             $table->string('company');
             $table->string('department');
             $table->string('respon');
-            $table->string('phone')->unique();
-            $table->string('numberId')->unique();
+            $table->string('phone');
+            $table->string('numberId');
             $table->time('checkin')->nullable();
             $table->string('photo_checkin')->nullable();
             $table->time('checkout')->nullable();

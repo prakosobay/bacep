@@ -232,7 +232,7 @@
                 <button id="detail_operation"><b>Add More Fields</b></button>
 
                 <!-- Risk and Service Area Impact -->
-                {{-- <table class="table table-bordered mt-3" id="table_risk">
+                <table class="table table-bordered mt-3" id="table_risk">
                     <thead class="bg1">
                         <tr>
                             <th colspan="4">Risk and Service Area Impact</th>
@@ -302,7 +302,7 @@
                         </tr>
                     </tbody>
                 </table>
-                <button id="risk_button"><b>Add More Fields</b></button> --}}
+                <button id="risk_button"><b>Add More Fields</b></button>
 
                 {{-- PIC --}}
                 <table class="table table-bordered bg1 mt-3">
@@ -544,7 +544,7 @@
 {{--add table--}}
 <script>
     $(document).ready(function(){
-        let max_row = 6;
+        let max_row = 20;
         let row = 1;
         let detail_time = $('#detail_time');
         let row_detail_time = $('#table_detail_time');

@@ -22,6 +22,7 @@ class CreateTroubleshootBmDetailsTable extends Migration
             $table->string('service_impact');
             $table->string('item');
             $table->string('procedure');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

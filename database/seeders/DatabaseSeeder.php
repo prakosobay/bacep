@@ -15,10 +15,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(RutinSeeder::class);
-        $this->call(PersonilTableSeeder::class);
-        $this->call(ObSeeder::class);
-        $this->call(PilihanWorksTable::class);
-        // Survey::factory(10)->create();
+        $this->call([
+            PilihanWorksTable::class,
+            ObSeeder::class,
+            RutinSeeder::class,
+            PersonilTableSeeder::class,
+        ]);
     }
 }
