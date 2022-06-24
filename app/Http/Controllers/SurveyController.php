@@ -23,6 +23,9 @@ class SurveyController extends Controller
 
     public function store(Request $request)
     {
+         // Get all data request
+         $data = $request->all();
+ 
         // dd($request->all());
         $validated = $request->validate([
             'date_of_visit' => ['required', 'date', 'after:yesterday'],
@@ -30,11 +33,10 @@ class SurveyController extends Controller
             'nama_requestor' => ['required', 'string', 'max:100'],
             'dept_requestor' => ['required', 'string', 'max:200'],
             'phone_requestor' => ['required', 'regex:/^([0-9\s\-\+\(\)]*)$/', 'min:10'],
-            'visitor_name[]' => ['string', 'max:100'],
-            'visitor_nik[]' => [],
-            'visitor_phone[]' => ['regex:/^([0-9\s\-\+\(\)]*)$/', 'min:10'],
-            'visitor_company[]' => ['string', 'max:200'],
-            'visitor_dept[]' => ['string', 'max:200'],
+            'visitor_name' => ['max:100'],
+            'visitor_phone' => ['regex:/^([0-9\s\-\+\(\)]*)$/', 'min:10'],
+            'visitor_company' => ['string', 'max:200'],
+            'visitor_dept' => ['string', 'max:200'],
             // 'visitor_name2' => ['string', 'max:100', 'nullable'],
             // 'visitor_phone2' => ['regex:/^([0-9\s\-\+\(\)]*)$/', 'min:10', 'nullable'],
             // 'visitor_company2' => ['string', 'max:200', 'nullable'],
@@ -53,18 +55,24 @@ class SurveyController extends Controller
             // 'visitor_dept5' => ['string', 'max:200', 'nullable'],
         ]);
 
-        $survey = Survey::create([
-            'visit' => $request->date_of_visit,
-            'leave' => $request->date_of_leave,
-            'name_req' => $request->nama_requestor,
-            'dept_req' => $request->dept_requestor,
-            'phone_req' => $request->phone_requestor,
-            'visit_name' => $request->visitor_name,
-            'visit_nik' => $request->visitor_nik,
-            'visit_phone' => $request->visitor_phone,
-            'visit_company' => $request->visitor_company,
-            'visit_dept' => $request->visitor_dept,
+        
+        $input = $request->all();
+        $Survey_form = Survey::create([
+            'date_of_visit' => $input['date_of_visit'],
+            'date_of_leave' => $input['date_of_leave'],
+            'nama_requestor' => $input['nama_requestor'],
+            'dept_requestor' => $input['dept_requestor'],
+            'visitor_name' => $input['visitor_name'],
+            'visitor_phone'=> $input['visitor_phone'],
+            'visitor_company'=> $input['visitor_company'],
+            'visitor_dept'=> $input['visitor_dept'],
+            'testing' => $input['testing'],
+            'rollback' => $input['rollback'],
         ]);
+
+
+ 
+        $survey_detail = TroubleshootBmDetail::insert($survey_insert);
 
         $log = SurveyHistory::create([
             'survey_id' => $survey->id,

@@ -13,7 +13,7 @@
             <h4 class="margin-row text-center">Form Permit Survey</h4>
             <div class="margin-row">
                 <div class="table-responsive">
-                    <form class="validate-form" method="POST" action="{{ url('survey')}}">
+                    <form class="validate-form" method="POST" action="{{ url('survey/create')}}">
                         @csrf
                         @if (count($errors) > 0)
                             <div class="alert alert-danger">
@@ -77,252 +77,27 @@
                             {{-- Visitor --}}
                             <h5 class="margin-item">Visitors & Person in Charge Identity</h5>
 
-                            {{-- pic1 --}}
-                            <div class="form-group row mb-4">
-                                <div class="col-3">
-                                    <label for="visitor_name1">Visitor 1 Name</label>
-                                    <input type="text" class="form-control @error('visitor_name1') is-invalid @enderror" required autocomplete="visitor_name1" value="{{ old('visitor_name1')}}" id="visitor_name1" name="visitor_name[]" required>
-                                        @error('visitor_name1')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                </div>
-                                <div class="col-2">
-                                    <label for="visitor_nik1">ID Number</label>
-                                    <input type="text" class="form-control @error('visitor_nik1') is-invalid @enderror" required autocomplete="visitor_nik1" value="{{ old('visitor_nik1')}}" id="visitor_nik1" name="visitor_nik[]" required>
-                                        @error('visitor_nik1')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                </div>
-                                <div class="col-2">
-                                    <label for="visitor_phone1">Phone Number</label>
-                                    <input type="number" class="form-control @error('visitor_phone1') is-invalid @enderror" required autocomplete="visitor_phone1" value="{{ old('visitor_phone1')}}" id="visitor_phone1" name="visitor_phone[]" required>
-                                        @error('visitor_phone1')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                </div>
-                                <div class="col-3">
-                                    <label for="visitor_company1">Company</label>
-                                    <input type="text" class="form-control @error('visitor_company1') is-invalid @enderror" required autocomplete="visitor_company1" value="{{ old('visitor_company1')}}" id="visitor_company1" name="visitor_company[]" required>
-                                        @error('visitor_company1')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                </div>
-                                <div class="col-2">
-                                    <label for="visitor_dept1">Department</label>
-                                    <input type="text" class="form-control @error('visitor_dept1') is-invalid @enderror" required autocomplete="visitor_dept1" value="{{old('visitor_dept1')}}" id="visitor_dept1" name="visitor_dept[]" required>
-                                        @error('visitor_dept1')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                </div>
-                            </div>
-
-                            <a ></a>
-
-                            {{-- pic2 --}}
-                            <div class="form-group row mb-4">
-                                <div class="col-3">
-                                    <label for="visitor_name2">Visitor 2 Name</label>
-                                    <input type="text" class="form-control @error('visitor_name2') is-invalid @enderror"  value="{{ old('visitor_name2')}}" id="visitor_name2" name="visitor_name[]" >
-                                        @error('visitor_name2')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                </div>
-                                <div class="col-2">
-                                    <label for="visitor_nik2">ID Number</label>
-                                    <input type="text" class="form-control @error('visitor_nik2') is-invalid @enderror" value="{{ old('visitor_nik2')}}" id="visitor_nik2" name="visitor_nik[]">
-                                        @error('visitor_nik2')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                </div>
-                                <div class="col-2">
-                                    <label for="visitor_phone2">Phone Number</label>
-                                    <input type="number" class="form-control @error('visitor_phone2') is-invalid @enderror"  value="{{ old('visitor_phone2')}}" id="visitor_phone2" name="visitor_phone[]">
-                                        @error('visitor_phone2')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                </div>
-                                <div class="col-3">
-                                    <label for="visitor_company2">Company</label>
-                                    <input type="text" class="form-control @error('visitor_company2') is-invalid @enderror"  value="{{ old('visitor_company2')}}" id="visitor_company2" name="visitor_company[]">
-                                        @error('visitor_company2')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                </div>
-                                <div class="col-2">
-                                    <label for="visitor_dept2">Department</label>
-                                    <input type="text" class="form-control @error('visitor_dept2') is-invalid @enderror"  value="{{old('visitor_dept2')}}" id="visitor_dept2" name="visitor_dept[]">
-                                        @error('visitor_dept2')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                </div>
-                            </div>
-
-                            {{-- pic3 --}}
-                            <div class="form-group row mb-4">
-                                <div class="col-3">
-                                    <label for="visitor_name3">Visitor 3 Name</label>
-                                    <input type="text" class="form-control @error('visitor_name3') is-invalid @enderror"  value="{{ old('visitor_name3')}}" id="visitor_name3" name="visitor_name[]">
-                                        @error('visitor_name3')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                </div>
-                                <div class="col-2">
-                                    <label for="visitor_nik3">ID Number</label>
-                                    <input type="text" class="form-control @error('visitor_nik3') is-invalid @enderror"  value="{{ old('visitor_nik3')}}" id="visitor_nik3" name="visitor_nik[]">
-                                        @error('visitor_nik3')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                </div>
-                                <div class="col-2">
-                                    <label for="visitor_phone3">Phone Number</label>
-                                    <input type="number" class="form-control @error('visitor_phone3') is-invalid @enderror"  value="{{ old('visitor_phone3')}}" id="visitor_phone3" name="visitor_phone[]">
-                                        @error('visitor_phone3')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                </div>
-                                <div class="col-3">
-                                    <label for="visitor_company3">Company</label>
-                                    <input type="text" class="form-control @error('visitor_company3') is-invalid @enderror"  value="{{ old('visitor_company3')}}" id="visitor_company3" name="visitor_company[]">
-                                        @error('visitor_company3')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                </div>
-                                <div class="col-2">
-                                    <label for="visitor_dept3">Department</label>
-                                    <input type="text" class="form-control @error('visitor_dept3') is-invalid @enderror"  value="{{old('visitor_dept3')}}" id="visitor_dept3" name="visitor_dept[]">
-                                        @error('visitor_dept3')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                </div>
-                            </div>
-
-                            {{-- pic4 --}}
-                            <div class="form-group row mb-4">
-                                <div class="col-3">
-                                    <label for="visitor_name4">Visitor 4 Name</label>
-                                    <input type="text" class="form-control @error('visitor_name4') is-invalid @enderror"  value="{{ old('visitor_name4')}}" id="visitor_name4" name="visitor_name[]">
-                                        @error('visitor_name4')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                </div>
-                                <div class="col-2">
-                                    <label for="visitor_nik4">ID Number</label>
-                                    <input type="text" class="form-control @error('visitor_nik4') is-invalid @enderror"  value="{{ old('visitor_nik4')}}" id="visitor_nik4" name="visitor_nik[]">
-                                        @error('visitor_nik4')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                </div>
-                                <div class="col-2">
-                                    <label for="visitor_phone4">Phone Number</label>
-                                    <input type="number" class="form-control @error('visitor_phone4') is-invalid @enderror"  value="{{ old('visitor_phone4')}}" id="visitor_phone4" name="visitor_phone[]">
-                                        @error('visitor_phone4')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                </div>
-                                <div class="col-3">
-                                    <label for="visitor_company4">Company</label>
-                                    <input type="text" class="form-control @error('visitor_company4') is-invalid @enderror"  value="{{ old('visitor_company4')}}" id="visitor_company4" name="visitor_company[]">
-                                        @error('visitor_company4')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                </div>
-                                <div class="col-2">
-                                    <label for="visitor_dept4">Department</label>
-                                    <input type="text" class="form-control @error('visitor_dept4') is-invalid @enderror"  value="{{old('visitor_dept4')}}" id="visitor_dept4" name="visitor_dept[]">
-                                        @error('visitor_dept4')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                </div>
-                            </div>
-
-                            {{-- pic5 --}}
-                            <div class="form-group row mb-4">
-                                <div class="col-3">
-                                    <label for="visitor_name5">Visitor 5 Name</label>
-                                    <input type="text" class="form-control @error('visitor_name5') is-invalid @enderror" value="{{ old('visitor_name5')}}" id="visitor_name5" name="visitor_name[]">
-                                        @error('visitor_name5')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                </div>
-                                <div class="col-2">
-                                    <label for="visitor_nik5">ID Number</label>
-                                    <input type="text" class="form-control @error('visitor_nik5') is-invalid @enderror"  value="{{ old('visitor_nik5')}}" id="visitor_nik5" name="visitor_nik[]">
-                                        @error('visitor_nik5')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                </div>
-                                <div class="col-2">
-                                    <label for="visitor_phone5">Phone Number</label>
-                                    <input type="number" class="form-control @error('visitor_phone5') is-invalid @enderror"  value="{{ old('visitor_phone5')}}" id="visitor_phone5" name="visitor_phone[]">
-                                        @error('visitor_phone5')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                </div>
-                                <div class="col-3">
-                                    <label for="visitor_company5">Company</label>
-                                    <input type="text" class="form-control @error('visitor_company5') is-invalid @enderror"  value="{{ old('visitor_company5')}}" id="visitor_company5" name="visitor_company[]">
-                                        @error('visitor_company5')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                </div>
-                                <div class="col-2">
-                                    <label for="visitor_dept5">Department</label>
-                                    <input type="text" class="form-control @error('visitor_dept5') is-invalid @enderror"  value="{{old('visitor_dept5')}}" id="visitor_dept5" name="visitor_dept[]">
-                                        @error('visitor_dept5')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                </div>
-                            </div>
+                            <table class="table table-hover table-bordered" id="table_detail_visitor">
+                                <thead class="bg1">
+                                    <tr>
+                                        <th>Visitor Name</th>
+                                        <th>ID Number</th>
+                                        <th>Phone Number</th>
+                                        <th>Company</th>
+                                        <th>Departmen</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg1">
+                                    <tr>
+                                        <td><input class="input border" type="text" name="visitor_name[]" required></td>
+                                        <td><input class="input border" type="text" name="id_number[]" required></td>
+                                        <td><input class="input border" type="text" name="phone_number[]" required></td>
+                                        <td><input class="input border" type="text" name="company[]" required></td>
+                                        <td><input class="input border" type="text" name="department[]" required></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <button id="detail_visitor"><b>Add More Fields</b></button>
                         </div>
 
                         <div class="submit-container margin-item">
@@ -334,4 +109,33 @@
             </div>
         </div>
     </div>
+
+    <script src="{{ asset('vendor/jquery/jquery-3.2.1.min.js')}}"></script>
+<!--===============================================================================================-->
+	<script src="{{ asset('vendor/animsition/js/animsition.min.js')}}"></script>
+<!--===============================================================================================-->
+	<script src="{{ asset('vendor/bootstrap/js/popper.js')}}"></script>
+	<script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js')}}"></script>
+<!--===============================================================================================-->
+	<script src="{{ asset('vendor/select2/select2.min.js')}}"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+{{--add table--}}
+<script>
+    $(document).ready(function(){
+        let max_row = 5;
+        let row = 1;
+        let detail_visitor = $('#detail_visitor');
+        let row_detail_visitor = $('#table_detail_visitor');
+
+        $(detail_visitor).click(function(e){
+            e.preventDefault();
+            if(row < max_row){
+                $(row_detail_visitor).append('<tr><td><input class="input border" type="text" name="visitor_name[]" required></td><td><input class="input border" type="text" name="id_number[]" required></td><td><input class="input border" type="text" name="phone_number[]" required></td><td><input class="input border" type="text" name="company[]" required></td><td><input class="input border" type="text" name="department[]" required></td></tr>');
+                row++;
+            }
+        });
+    });
+</script>
+
 @endsection
