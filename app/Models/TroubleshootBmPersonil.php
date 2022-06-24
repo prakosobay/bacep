@@ -17,5 +17,10 @@ class TroubleshootBmPersonil extends Model
         'troubleshoot_bm_id', 'nama', 'company', 'department', 'respon', 'phone', 'numberId', 'checkin', 'photo_checkin', 'checkout', 'photo_checkout'
     ];
 
+    // public function troubleshoot_bm()
+    // {
+    //     return $this->belongsTo(TroubleshootBm::class);
+    // }
+
 
 }

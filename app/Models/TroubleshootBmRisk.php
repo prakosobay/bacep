@@ -15,4 +15,9 @@ class TroubleshootBmRisk extends Model
     protected $fillable = [
         'troubleshoot_bm_id', 'risk', 'poss', 'impact', 'mitigation'
     ];
+
+    public function troubleshoot_bm()
+    {
+        return $this->belongsTo(TroubleshootBm::class);
+    }
 }

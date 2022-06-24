@@ -14,8 +14,8 @@ class TroubleshootBm extends Model
     protected $primaryKey = 'id';
     protected $guarded = [];
 
-    // public function troubleshoot_bm_entry()
-    // {
-    //     return $this->hasOne(TroubleshootBmEntry::class);
-    // }
+    public function troubleshoot_bm_personil()
+    {
+        return $this->hasMany(TroubleshootBmPersonil::class);
+    }
 }

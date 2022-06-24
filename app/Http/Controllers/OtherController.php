@@ -187,6 +187,8 @@ class OtherController extends Controller
                     'department' => $data['visit_department'][$k],
                     'number' => $data['visit_nik'][$k],
                     'phone' => $data['visit_phone'][$k],
+                    'created_at' => now(),
+                    'updated_at' => now(),
                 ];
 
                 $p[] = $data_dump;
@@ -199,7 +201,7 @@ class OtherController extends Controller
         $maintenance_form = Other::find($request->other_id);
         // Send email notification
         foreach ([
-            'aurellius.putra@balitower.co.id', 'irwan.trisna@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'eri.iskandar@balitower.co.id', 'ilham.pangestu@balitower.co.id', 'taufik.ismail@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'hendrik.andy@balitower.co.id', 'hilman.fariqi@balitower.co.id', 'khaidir.alamsyah@balitower.co.id', 'yoga.agus@balitower.co.id',
+            'aurellius.putra@balitower.co.id', 'irwan.trisna@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'eri.iskandar@balitower.co.id', 'ilham.pangestu@balitower.co.id', 'taufik.ismail@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'hendrik.andy@balitower.co.id', 'hilman.fariqi@balitower.co.id', 'khaidir.alamsyah@balitower.co.id', 'yoga.agus@balitower.co.id', 'bayu.prakoso@balitower.co.id',
         ] as $recipient) {
             Mail::to($recipient)->send(new NotifMaintenanceForm($maintenance_form));
         }
@@ -326,8 +328,7 @@ class OtherController extends Controller
 
         $notif_troubleshoot = TroubleshootBm::find($other_form->id);
         foreach ([
-            'aurellius.putra@balitower.co.id', 'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
-            'ilham.pangestu@balitower.co.id', 'irwan.trisna@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id',
+             'bayu.prakoso@balitower.co.id',
         ] as $recipient) {
             Mail::to($recipient)->send(new NotifTroubleshootForm($notif_troubleshoot));
         }

@@ -149,7 +149,7 @@ class RevisiController extends Controller
             'department' => $request->department,
         ]);
 
-        return $create->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
+        return $create->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED'])->redirect('ob');
         // Alert::success('Success', 'Personil has been added');
         // return redirect('ob');
     }
@@ -175,7 +175,8 @@ class RevisiController extends Controller
             'visit_nik' => $request->visit_phone,
         ]);
 
-        return $create->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
+        return $create->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED'])->redirect('ob');
+
         // Alert::success('Success', 'Personil has been added');
         // return redirect('ob');
     }

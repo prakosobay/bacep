@@ -91,9 +91,9 @@ class CleaningController extends Controller
         foreach ([
             'aurellius.putra@balitower.co.id', 'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
             'ilham.pangestu@balitower.co.id', 'irwan.trisna@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id',
-            'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id',
+            'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id',
         ] as $recipient) {
-            Mail::to($recipient)->send(new NotifEmail());
+            Mail::to($recipient)->send(new NotifEmail($cleaning));
         }
 
         // Insert data log permit ke table CleaningHistory
@@ -131,28 +131,29 @@ class CleaningController extends Controller
                 $cleaning = Cleaning::find($request->cleaning_id)->first();
             }
 
+
+            $cleaning = Cleaning::find($request->cleaning_id);
             // Pergantian role tiap permit & send email notif
             $role_to = '';
             if (($lasthistoryC->role_to == 'review')) {
                 foreach ([
                     'aurellius.putra@balitower.co.id', 'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
-                    'ilham.pangestu@balitower.co.id', 'irwan.trisna@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id',
+                    'ilham.pangestu@balitower.co.id', 'irwan.trisna@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id',
                 ] as $recipient) {
-                    Mail::to($recipient)->send(new NotifEmail());
+                    Mail::to($recipient)->send(new NotifEmail($cleaning));
                 }
                 $role_to = 'check';
             } elseif (($lasthistoryC->role_to == 'check')) {
                 foreach (['security.bacep@balitower.co.id'] as $recipient) {
-                    Mail::to($recipient)->send(new NotifEmail());
+                    Mail::to($recipient)->send(new NotifEmail($cleaning));
                 }
                 $role_to = 'security';
             } elseif (($lasthistoryC->role_to == 'security')) {
                 foreach (['bayu.prakoso@balitower.co.id'] as $recipient) {
-                    Mail::to($recipient)->send(new NotifEmail());
+                    Mail::to($recipient)->send(new NotifEmail($cleaning));
                 }
                 $role_to = 'head';
             } elseif ($lasthistoryC->role_to == 'head') {
-                $cleaning = Cleaning::find($request->cleaning_id);
                 foreach (['dc@balitower.co.id'] as $recipient) {
                     Mail::to($recipient)->send(new NotifFull($cleaning));
                 }
@@ -361,7 +362,7 @@ class CleaningController extends Controller
         }
     }
 
-    public function reject_full_cleaning(Request $request, $id)
+    public function reject_full_cleaning(Request $request, $id) // Reject permit ketika sudah full approval
     {
         $getLog = CleaningHistory::where('cleaning_id', $id)->where('aktif', 1)->first();
         $getFull = CleaningFull::where('cleaning_id', $id)->first();
@@ -392,7 +393,7 @@ class CleaningController extends Controller
 
 
     // Convert PDF
-    public function cetak_cleaning_pdf($id)
+    public function cetak_cleaning_pdf($id) // convert to pdf
     {
         $cleaning = Cleaning::find($id);
         $lasthistoryC = CleaningHistory::where('cleaning_id', $id)->where('aktif', 1)->first();
@@ -498,7 +499,7 @@ class CleaningController extends Controller
 
 
     //Export Excel
-    public function export_excel()
+    public function export_excel() // export log to excel
     {
         return Excel::download(new LogCleaningExport, 'log.xlsx');
     }
