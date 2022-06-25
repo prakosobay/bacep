@@ -328,7 +328,7 @@ class OtherController extends Controller
 
         $notif_troubleshoot = TroubleshootBm::find($other_form->id);
         foreach ([
-             'bayu.prakoso@balitower.co.id',
+            'bayu.prakoso@balitower.co.id',
         ] as $recipient) {
             Mail::to($recipient)->send(new NotifTroubleshootForm($notif_troubleshoot));
         }
