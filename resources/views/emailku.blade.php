@@ -36,6 +36,7 @@
                         <td>{{ $data->cleaning_id }}</td>
                         <td>{{ Carbon\Carbon::parse($data->created_at)->format('d-m-Y')  }}</td>
                         <td>{{ $data->cleaning_work }}</td>
+                        <td>{{ Carbon\Carbon::parse($data->validity_from)->format('d-m-Y') }}</td>
                     </tr>
                 </tbody>
             </table>

@@ -22,7 +22,7 @@
         <h3 class="">Hallo, DC Team!</h3>
         <p>Mohon untuk review dan check permit dari team BM yang telah di submit.
             Link terlampir </p>
-            {{-- <table>
+            <table>
                 <thead>
                     <tr>
                         <th>No. Permit</th>
@@ -33,13 +33,13 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>{{ $data->id }}</td>
-                        <td>{{ Carbon\Carbon::parse($data->created_at)->format('d-m-Y')  }}</td>
-                        <td>{{ $data->work }}</td>
-                        <td>{{ Carbon\Carbon::parse($data->visit)->format('d-m-Y') }}</td>
+                        <td>{{ $content->id }}</td>
+                        <td>{{ Carbon\Carbon::parse($content->created_at)->format('d-m-Y')  }}</td>
+                        <td>{{ $content->work }}</td>
+                        <td>{{ Carbon\Carbon::parse($content->visit)->format('d-m-Y') }}</td>
                     </tr>
                 </tbody>
-            </table> --}}
+            </table>
         <p>Silahkan Login di  <a href="http://dcops.balifiber.id/approval/all">sini</a></p>
     </div>
 </body>

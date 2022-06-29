@@ -10,7 +10,7 @@ use Illuminate\Queue\SerializesModels;
 class NotifMaintenanceForm extends Mailable
 {
     use Queueable, SerializesModels;
-
+    public $content;
 
     /**
      * Create a new message instance.
@@ -18,9 +18,9 @@ class NotifMaintenanceForm extends Mailable
      * @var \App\Models\Other
      */
 
-    public function __construct()
+    public function __construct($content)
     {
-        // $this->data = ;
+        $this->content = $content;
     }
 
     /**
