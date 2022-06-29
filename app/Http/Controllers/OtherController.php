@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\{DB, Auth, Gate, Mail, Session, Storage};
 use App\Models\{Other, OtherFull, OtherHistory, OtherPersonil, Rutin, TroubleshootBm, TroubleshootBmDetail, TroubleshootBmEntry, TroubleshootBmHistory, TroubleshootBmPersonil, TroubleshootBmRisk, Visitor};
-use App\Mail\{NotifMaintenanceForm, NotifMaintenanceFull, NotifMaintenanceReject, NotifTroubleshootForm};
+use App\Mail\{NotifMaintenanceForm, NotifMaintenanceFull, NotifMaintenanceReject, NotifTroubleshootForm, NotifTroubleshootFull};
 use Symfony\Component\HttpFoundation\Test\Constraint\ResponseFormatSame;
 use Yajra\Datatables\Datatables;
 use Carbon\Carbon;
@@ -221,131 +221,6 @@ class OtherController extends Controller
         }
     }
 
-    public function create_troubleshoot(Request $request) // Submit form troubleshoot
-    {
-        // var_dump($request->all());
-        // Validasi data dari request
-        $validate = $request->validate([
-            'work' => ['required'],
-            'visit' => ['required'],
-            'leave' => ['required', 'after_or_equal:visit'],
-            'background' => ['required'],
-            'desc' => ['required'],
-        ]);
-
-        $input = $request->all();
-        $other_form = TroubleshootBm::create([
-            'work' => $input['work'],
-            'visit' => $input['visit'],
-            'leave' => $input['leave'],
-            'background' => $input['background'],
-            'desc' => $input['desc'],
-            'testing' => $input['testing'],
-            'rollback' => $input['rollback'],
-        ]);
-
-        $other_entry = TroubleshootBmEntry::create([
-            'troubleshoot_bm_id' => $other_form->id,
-            'dc' => $request->dc,
-            'mmr1' => $request->mmr2,
-            'mmr2' => $request->mmr2,
-            'ups' => $request->ups,
-            'fss' => $request->fss,
-            'cctv' => $request->cctv,
-            'trafo' => $request->trafo,
-            'panel' => $request->panel,
-            'baterai' => $request->baterai,
-            'generator' => $request->generator,
-            'yard' => $request->yard,
-            'parking' => $request->parking,
-            'lain' => $request->lain,
-        ]);
-
-        $insert_detail = [];
-        foreach ($input['time_start'] as $k => $v) {
-            $detail_array = [];
-            if (isset($input['time_start'][$k])) {
-
-                $detail_array = [
-                    'troubleshoot_bm_id' => $other_form->id,
-                    'time_start' => $input['time_start'][$k],
-                    'time_end' => $input['time_end'][$k],
-                    'activity' => $input['activity'][$k],
-                    'service_impact' => $input['service_impact'][$k],
-                    'item' => $input['item'][$k],
-                    'procedure' => $input['procedure'][$k],
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ];
-
-                $insert_detail[] = $detail_array;
-            }
-        }
-        $other_detail = TroubleshootBmDetail::insert($insert_detail);
-
-        $insert_risk = [];
-        foreach ($input['risk'] as $k => $v) {
-            $risk_array = [];
-            if (isset($input['risk'][$k])) {
-
-                $risk_array = [
-                    'troubleshoot_bm_id' => $other_form->id,
-                    'risk' => $input['risk'][$k],
-                    'poss' => $input['poss'][$k],
-                    'impact' => $input['impact'][$k],
-                    'mitigation' => $input['mitigation'][$k],
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ];
-
-                $insert_risk[] = $risk_array;
-            }
-        }
-        $other_risk = TroubleshootBmRisk::insert($insert_risk);
-
-        $insert_personil = [];
-        foreach ($input['visit_nama'] as $k => $v) {
-            $personil_array = [];
-            if (isset($input['visit_nama'][$k])) {
-                $personil[] = Visitor::find($v)->visit_nama;
-                $personil_array = [
-                    'troubleshoot_bm_id' => $other_form->id,
-                    'nama' => $personil[$k],
-                    'company' => $input['visit_company'][$k],
-                    'department' => $input['visit_department'][$k],
-                    'respon' => $input['visit_respon'][$k],
-                    'phone' => $input['visit_phone'][$k],
-                    'numberId' => $input['visit_nik'][$k],
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ];
-
-                $insert_personil[] = $personil_array;
-            }
-        }
-        $other_personil = TroubleshootBmPersonil::insert($insert_personil);
-
-        $notif_troubleshoot = TroubleshootBm::find($other_form->id);
-        foreach ([
-            'bayu.prakoso@balitower.co.id',
-        ] as $recipient) {
-            Mail::to($recipient)->send(new NotifTroubleshootForm($notif_troubleshoot));
-        }
-
-        $log_troubleshoot = TroubleshootBmHistory::insert([
-            'troubleshoot_bm_id' => $other_form->id,
-            'created_by' => Auth::user()->name,
-            'role_to' => 'review',
-            'status' => 'requested',
-            'aktif' => true,
-            'pdf' => false,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
-
-        return $log_troubleshoot ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
-    }
-
     public function approve_maintenance(Request $request) // Flow Approval form maintenance
     {
         $lastupdate = OtherHistory::where('other_id', '=', $request->other_id)->latest()->first();
@@ -495,6 +370,206 @@ class OtherController extends Controller
         ]);
     }
 
+    public function create_troubleshoot(Request $request) // Submit form troubleshoot
+    {
+        // Validasi data dari request
+        $validate = $request->validate([
+            'work' => ['required'],
+            'visit' => ['required'],
+            'leave' => ['required', 'after_or_equal:visit'],
+            'background' => ['required'],
+            'desc' => ['required'],
+        ]);
+
+        $input = $request->all();
+        $other_form = TroubleshootBm::create([
+            'work' => $input['work'],
+            'visit' => $input['visit'],
+            'leave' => $input['leave'],
+            'background' => $input['background'],
+            'desc' => $input['desc'],
+            'testing' => $input['testing'],
+            'rollback' => $input['rollback'],
+        ]);
+
+        $other_entry = TroubleshootBmEntry::create([
+            'troubleshoot_bm_id' => $other_form->id,
+            'dc' => $request->dc,
+            'mmr1' => $request->mmr2,
+            'mmr2' => $request->mmr2,
+            'ups' => $request->ups,
+            'fss' => $request->fss,
+            'cctv' => $request->cctv,
+            'trafo' => $request->trafo,
+            'panel' => $request->panel,
+            'baterai' => $request->baterai,
+            'generator' => $request->generator,
+            'yard' => $request->yard,
+            'parking' => $request->parking,
+            'lain' => $request->lain,
+        ]);
+
+        $insert_detail = [];
+        foreach ($input['time_start'] as $k => $v) {
+            $detail_array = [];
+            if (isset($input['time_start'][$k])) {
+
+                $detail_array = [
+                    'troubleshoot_bm_id' => $other_form->id,
+                    'time_start' => $input['time_start'][$k],
+                    'time_end' => $input['time_end'][$k],
+                    'activity' => $input['activity'][$k],
+                    'service_impact' => $input['service_impact'][$k],
+                    'item' => $input['item'][$k],
+                    'procedure' => $input['procedure'][$k],
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ];
+
+                $insert_detail[] = $detail_array;
+            }
+        }
+        $other_detail = TroubleshootBmDetail::insert($insert_detail);
+
+        $insert_risk = [];
+        foreach ($input['risk'] as $k => $v) {
+            $risk_array = [];
+            if (isset($input['risk'][$k])) {
+
+                $risk_array = [
+                    'troubleshoot_bm_id' => $other_form->id,
+                    'risk' => $input['risk'][$k],
+                    'poss' => $input['poss'][$k],
+                    'impact' => $input['impact'][$k],
+                    'mitigation' => $input['mitigation'][$k],
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ];
+
+                $insert_risk[] = $risk_array;
+            }
+        }
+        $other_risk = TroubleshootBmRisk::insert($insert_risk);
+
+        $insert_personil = [];
+        foreach ($input['visit_nama'] as $k => $v) {
+            $personil_array = [];
+            if (isset($input['visit_nama'][$k])) {
+                $personil[] = Visitor::find($v)->visit_nama;
+                $personil_array = [
+                    'troubleshoot_bm_id' => $other_form->id,
+                    'nama' => $personil[$k],
+                    'company' => $input['visit_company'][$k],
+                    'department' => $input['visit_department'][$k],
+                    'respon' => $input['visit_respon'][$k],
+                    'phone' => $input['visit_phone'][$k],
+                    'numberId' => $input['visit_nik'][$k],
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ];
+
+                $insert_personil[] = $personil_array;
+            }
+        }
+        $other_personil = TroubleshootBmPersonil::insert($insert_personil);
+
+        $notif_email = TroubleshootBm::find($other_form->id);
+        foreach ([
+            'bayu.prakoso@balitower.co.id', 'hilman.fariqi@balitower.co.id',
+        ] as $recipient) {
+            Mail::to($recipient)->send(new NotifTroubleshootForm($notif_email));
+        }
+
+        $log_troubleshoot = TroubleshootBmHistory::insert([
+            'troubleshoot_bm_id' => $other_form->id,
+            'created_by' => Auth::user()->name,
+            'role_to' => 'review',
+            'status' => 'requested',
+            'aktif' => true,
+            'pdf' => false,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        return $log_troubleshoot ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
+    }
+
+    public function approve_troubleshoot(Request $request) // Flow Approval form troubleshoot
+    {
+        $last_update = TroubleshootBmHistory::where('other_id', '=', $request->id)->latest()->first();
+        if ($last_update->pdf == true) {
+            // $last_update->update(['aktif' => false]);
+
+            // Perubahan status tiap permit
+            $status = '';
+            if ($last_update->status == 'requested') {
+                $status = 'reviewed';
+            } elseif ($last_update->status == 'reviewed') {
+                $status = 'checked';
+            } elseif ($last_update->status == 'checked') {
+                $status = 'acknowledge';
+            } elseif ($last_update->status == 'acknowledge') {
+                $status = 'final';
+            } elseif ($last_update->status == 'final') {
+                $full_troubleshoot = TroubleshootBm::find($request->id)->first();
+            }
+
+            $notif_email = TroubleshootBm::find($last_update->other_id);
+            dd($notif_email);
+            // // Pergantian  role tiap permit & send email notif
+            $role_to = '';
+            if ($last_update->role_to == 'review') {
+                foreach ([
+                    'khaidir.alamsyah@balitower.co.id', 'bayu.prakoso@balitower.co.id',
+                ] as $recipient) {
+                    Mail::to($recipient)->send(new NotifTroubleshootForm($notif_email));
+                }
+                $role_to = 'check';
+            } elseif ($last_update->role_to == 'check') {
+                foreach (['security.bacep@balitower.co.id'] as $recipient) {
+                    Mail::to($recipient)->send(new NotifTroubleshootForm($notif_email));
+                }
+                $role_to = 'security';
+            } elseif ($last_update->role_to == 'security') {
+                foreach (['tofiq.hidayat@balitower.co.id', 'bayu.prakoso@balitower.co.id'] as $recipient) {
+                    Mail::to($recipient)->send(new NotifTroubleshootForm($notif_email));
+                }
+                $role_to = 'head';
+            } elseif ($last_update->role_to = 'head') {
+                $full = TroubleshootBm::find($request->id);
+                foreach (['dc@balitower.co.id'] as $recipient) {
+                    Mail::to($recipient)->send(new NotifTroubleshootFull($full));
+                }
+                $role_to = 'all';
+
+                $full_troubleshoot = Other::where('id', $request->other_id)->first();
+                // dd($full_troubleshoot);
+                $full_approve = OtherFull::create([
+                    'other_id' => $full_troubleshoot->id,
+                    'work' => $full_troubleshoot->work,
+                    'request' => $full_troubleshoot->created_at,
+                    'visit' => $full_troubleshoot->visit,
+                    'leave' => $full_troubleshoot->leave,
+                    'link' => ("https://dcops.balifiber.id/other/maintenance/pdf/$full_troubleshoot->id"),
+                    'note' => null,
+                    'status' => 'Full Approved',
+                ]);
+            }
+
+            // Simpan tiap perubahan permit ke table CLeaningHistory
+            // $log = TroubleshootBmHistory::create([
+            //     'other_id' => $request->id,
+            //     'created_by' => Auth::user()->name,
+            //     'role_to' => $role_to,
+            //     'status' => $status,
+            //     'aktif' => true,
+            //     'pdf' => false,
+            // ]);
+        } else {
+            abort(403);
+        }
+    }
+
 
 
     // Convert pdf
@@ -511,6 +586,25 @@ class OtherController extends Controller
             ->select('other_histories.*')
             ->get();
         $pdf = PDF::loadview('other.maintenance_pdf', compact('getOther', 'getPersonil', 'getHistory', 'getLastOther'))->setPaper('a4', 'portrait')->setWarnings(false);
+        return $pdf->stream();
+    }
+
+    public function pdf_troubleshoot($id)
+    {
+        $getTroubleshoot = TroubleshootBm::find($id);
+        $getLastHistory = TroubleshootBmHistory::where('troubleshoot_bm_id', $id)->where('aktif', 1)->first();
+        $getPersonil = TroubleshootBmPersonil::where('troubleshoot_bm_id', $id)->get();
+        $getRisk = TroubleshootBmRisk::where('troubleshoot_bm_id', $id)->get();
+        $getDetail = TroubleshootBmDetail::where('troubleshoot_bm_id', $id)->get();
+        $getEntry = DB::table('troubleshoot_bm_entries')->where('troubleshoot_bm_id', $id)->first();
+
+        // dd($getEntry);
+        $getHistory = DB::table('troubleshoot_bm_histories')
+            ->join('troubleshoot_bms', 'troubleshoot_bms.id', '=', 'troubleshoot_bm_histories.troubleshoot_bm_id')
+            ->where('troubleshoot_bm_histories.troubleshoot_bm_id', '=', $id)
+            ->select('troubleshoot_bm_histories.*')
+            ->get();
+        $pdf = PDF::loadview('other.troubleshoot_pdf', compact('getTroubleshoot', 'getPersonil', 'getRisk', 'getDetail', 'getEntry', 'getLastHistory'))->setPaper('a4', 'portrait')->setWarnings(false);
         return $pdf->stream();
     }
 

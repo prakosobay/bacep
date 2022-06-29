@@ -166,7 +166,9 @@ Route::middleware(['auth'])->group(function () {
 
     // Troubleshoot
     Route::get('other/troubleshoot/show', [OtherController::class, 'show_troubleshoot_form']);
+    Route::get('other/troubleshoot/pdf/{id}', [OtherController::class, 'pdf_troubleshoot']);
     Route::post('other/troubleshoot/create', [OtherController::class, 'create_troubleshoot']);
+    Route::post('other/troubleshoot/approve', [OtherController::class, 'approve_troubleshoot']);
 
 
     // Maintenance

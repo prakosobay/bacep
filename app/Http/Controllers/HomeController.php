@@ -105,19 +105,13 @@ class HomeController extends Controller
                     ->get();
                 return view('other.maintenance_approval', compact('getMaintenance'));
             } elseif($type_approve == 'troubleshoot') {
-                // $getTroubleshoot = DB::table('troubleshoot_bms')
-                //     ->join('troubleshoot_bm_histories', 'troubleshoot_bms.id', '=', 'troubleshoot_bm_histories.troubleshoot_bm_id')
-                //     ->leftJoin('troubleshoot_bm_personils', 'troubleshoot_bms.id', '=', 'troubleshoot_bm_personils.')
-                //     ->whereIn('troubleshoot_bm_histories.role_to', $role_1)
-                //     ->where('troubleshoot_bm_histories.aktif', '=', true)
-                //     ->select('troubleshoot_bm_histories.*', 'troubleshoot_bms.*', 'troubleshoot_bm_personils.nama')
-                //     ->get();
-                $getTroubleshoot = TroubleshootBm::join('troubleshoot_bm_histories', 'troubleshoot_bms.id', '=', 'troubleshoot_bm_histories.troubleshoot_bm_id')
-                        ->whereIn('troubleshoot_bm_histories.role_to', $role_1)
-                        ->where('troubleshoot_bm_histories.aktif', true)
-                        ->select('troubleshoot_bm_histories.*', 'troubleshoot_bms.*')
-                        ->get();
-                    dd($getTroubleshoot);
+                $getTroubleshoot = DB::table('troubleshoot_bms')
+                    ->join('troubleshoot_bm_histories', 'troubleshoot_bms.id', '=', 'troubleshoot_bm_histories.troubleshoot_bm_id')
+                    ->whereIn('troubleshoot_bm_histories.role_to', $role_1)
+                    ->where('troubleshoot_bm_histories.aktif', '=', true)
+                    ->select('troubleshoot_bm_histories.*', 'troubleshoot_bms.*')
+                    ->get();
+                    // dd($getTroubleshoot);
                 return view('other.troubleshoot_approval', compact('getTroubleshoot'));
             } else{
                 abort(403);
