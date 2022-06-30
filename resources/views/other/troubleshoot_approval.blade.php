@@ -131,12 +131,12 @@
                         $('#not').click(function () {
                                 return false;
                             });
-                        let other_id = $(this).data('other_id');
-                        console.log(other_id);
+                        let id = $(this).data('id');
+                        console.log(id);
                         $.ajax({
                             type:'POST',
-                            url:"{{url('/other/maintenance/reject')}}",
-                            data: {other_id},
+                            url:"{{url('/other/troubleshoot/reject')}}",
+                            data: {id},
                             error: function (request, error) {
                                 alert(" Can't do because: " + error);
                             },

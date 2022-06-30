@@ -62,7 +62,9 @@ class HomeController extends Controller
                 return view('cleaning.history');
             } elseif ($type_view == 'maintenance') {
                 return view('other.maintenance_history');
-            } else {
+            } elseif($type_view == 'troubleshoot') {
+                return view('other.troubleshoot_history');
+            } else{
                 abort(403);
             }
         } else {
@@ -132,6 +134,8 @@ class HomeController extends Controller
                 return view('cleaning.full_approval');
             } elseif ($type_full == 'maintenance') {
                 return view('other.maintenance_full_approval');
+            } elseif($type_full == 'troubleshoot') {
+                return view('other.troubleshoot_full_approval');
             } else {
                 abort(403);
             }

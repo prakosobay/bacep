@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\{DB, Auth, Gate, Mail, Session, Storage};
 use App\Models\{Other, OtherFull, OtherHistory, OtherPersonil, Rutin, TroubleshootBm, TroubleshootBmDetail, TroubleshootBmEntry, TroubleshootBmHistory, TroubleshootBmPersonil, TroubleshootBmRisk, Visitor};
-use App\Mail\{NotifMaintenanceForm, NotifMaintenanceFull, NotifMaintenanceReject, NotifTroubleshootForm, NotifTroubleshootFull};
+use App\Mail\{NotifMaintenanceForm, NotifMaintenanceFull, NotifMaintenanceReject, NotifTroubleshootForm, NotifTroubleshootFull, NotifTroubleshootReject};
 use Symfony\Component\HttpFoundation\Test\Constraint\ResponseFormatSame;
 use Yajra\Datatables\Datatables;
 use Carbon\Carbon;
@@ -399,7 +399,6 @@ class OtherController extends Controller
             'mmr2' => $request->mmr2,
             'ups' => $request->ups,
             'fss' => $request->fss,
-            'cctv' => $request->cctv,
             'trafo' => $request->trafo,
             'panel' => $request->panel,
             'baterai' => $request->baterai,
@@ -496,7 +495,7 @@ class OtherController extends Controller
 
     public function approve_troubleshoot(Request $request) // Flow Approval form troubleshoot
     {
-        $last_update = TroubleshootBmHistory::where('other_id', '=', $request->id)->latest()->first();
+        $last_update = TroubleshootBmHistory::where('troubleshoot_bm_id', '=', $request->id)->latest()->first();
         if ($last_update->pdf == true) {
             // $last_update->update(['aktif' => false]);
 
@@ -514,8 +513,8 @@ class OtherController extends Controller
                 $full_troubleshoot = TroubleshootBm::find($request->id)->first();
             }
 
-            $notif_email = TroubleshootBm::find($last_update->other_id);
-            dd($notif_email);
+            $notif_email = TroubleshootBm::find($last_update->troubleshoot_bm_id);
+            // dd($notif_email);
             // // Pergantian  role tiap permit & send email notif
             $role_to = '';
             if ($last_update->role_to == 'review') {
@@ -545,7 +544,7 @@ class OtherController extends Controller
                 $full_troubleshoot = Other::where('id', $request->other_id)->first();
                 // dd($full_troubleshoot);
                 $full_approve = OtherFull::create([
-                    'other_id' => $full_troubleshoot->id,
+                    'troubleshoot_bm_id' => $full_troubleshoot->id,
                     'work' => $full_troubleshoot->work,
                     'request' => $full_troubleshoot->created_at,
                     'visit' => $full_troubleshoot->visit,
@@ -557,16 +556,45 @@ class OtherController extends Controller
             }
 
             // Simpan tiap perubahan permit ke table CLeaningHistory
-            // $log = TroubleshootBmHistory::create([
-            //     'other_id' => $request->id,
-            //     'created_by' => Auth::user()->name,
-            //     'role_to' => $role_to,
-            //     'status' => $status,
-            //     'aktif' => true,
-            //     'pdf' => false,
-            // ]);
+            $log = TroubleshootBmHistory::create([
+                'troubleshoot_bm_id' => $notif_email->id,
+                'created_by' => Auth::user()->name,
+                'role_to' => $role_to,
+                'status' => $status,
+                'aktif' => true,
+                'pdf' => false,
+            ]);
         } else {
             abort(403);
+        }
+    }
+
+    public function reject_troubleshoot(Request $request)
+    {
+        $lastupdate = TroubleshootBmHistory::where('troubleshoot_bm_id', '=', $request->id)->latest()->first();
+        if (Gate::denies('isSecurity')) {
+            if ($lastupdate->pdf == true) {
+                $lastupdate->update(['aktif' => false]);
+
+                // Simpan tiap perubahan permit ke table CleaningHistory
+                $history = TroubleshootBmHistory::create([
+                    'troubleshoot_bm_id' => $request->id,
+                    'created_by' => Auth::user()->name,
+                    'role_to' => 0,
+                    'status' => 'rejected',
+                    'aktif' => true,
+                    'pdf' => false,
+                ]);
+
+                // Get permit yang di reject & kirim notif email
+                $notif_email = TroubleshootBm::find($request->id);
+                foreach (['badai.sino@balitower.co.id', 'bayu.prakoso@balitower.co.id'] as $recipient) {
+                    Mail::to($recipient)->send(new NotifTroubleshootReject($notif_email));
+                }
+                return $history->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
+            } else {
+                abort(403);
+            }
         }
     }
 
@@ -597,6 +625,7 @@ class OtherController extends Controller
         $getRisk = TroubleshootBmRisk::where('troubleshoot_bm_id', $id)->get();
         $getDetail = TroubleshootBmDetail::where('troubleshoot_bm_id', $id)->get();
         $getEntry = DB::table('troubleshoot_bm_entries')->where('troubleshoot_bm_id', $id)->first();
+        $getLastHistory->update(['pdf' => true]);
 
         // dd($getEntry);
         $getHistory = DB::table('troubleshoot_bm_histories')
@@ -605,6 +634,7 @@ class OtherController extends Controller
             ->select('troubleshoot_bm_histories.*')
             ->get();
         $pdf = PDF::loadview('other.troubleshoot_pdf', compact('getTroubleshoot', 'getPersonil', 'getRisk', 'getDetail', 'getEntry', 'getLastHistory'))->setPaper('a4', 'portrait')->setWarnings(false);
+        // dd($pdf);
         return $pdf->stream();
     }
 
@@ -669,6 +699,36 @@ class OtherController extends Controller
             ->editColumn('visit', function ($getFull) {
                 return $getFull->visit ? with(new Carbon($getFull->visit))->format('d/m/Y') : '';
             })
+            ->make(true);
+    }
+
+    public function yajra_troubleshoot_history()
+    {
+        $log_troubleshoot = DB::table('troubleshoot_bm_histories')
+            ->join('troubleshoot_bms', 'troubleshoot_bms.id', 'troubleshoot_bm_histories.troubleshoot_bm_id')
+            ->select('troubleshoot_bm_histories.*', 'troubleshoot_bms.visit')
+            ->orderBy('troubleshoot_bm_id', 'desc');
+            return Datatables::of($log_troubleshoot)
+            ->editColumn('updated_at', function ($log_troubleshoot) {
+                return $log_troubleshoot->updated_at ? with(new Carbon($log_troubleshoot->updated_at))->format('d/m/Y') : '';
+            })
+            ->editColumn('visit', function ($log_troubleshoot) {
+                return $log_troubleshoot->visit ? with(new Carbon($log_troubleshoot->visit))->format('d/m/Y') : '';
+            })
+            ->make(true);
+    }
+
+    public function yajra_troubleshoot_full_approval()
+    {
+        $full_approval = DB::table('troubleshoot_bm_fulls')
+            ->join('troubleshoot_bms', 'troubleshoot_bms.id', '=', 'troubleshoot_bm_fulls.troubleshoot_bm_id')
+            ->select('troubleshoot_bm_fulls.*')
+            ->orderBy('troubleshoot_bm_id', 'desc');
+        return Datatables::of($full_approval)
+            ->editColumn('visit', function ($full_approval) {
+                return $full_approval->visit ? with(new Carbon($full_approval->visit))->format('d/m/Y') : '';
+            })
+            ->addColumn('action', 'other.troubleshootActionLink')
             ->make(true);
     }
 }

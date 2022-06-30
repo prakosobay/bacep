@@ -104,9 +104,9 @@
 						</div>
 
                         <div class="contact100-form-radio">
-							<input class="input-radio100" id="cctv" type="checkbox" name="cctv" value="1">
-							<label class="label-radio100" for="cctv">
-								CCTV Room
+							<input class="input-radio100" id="parking" type="checkbox" name="parking" value="1">
+							<label class="label-radio100" for="parking">
+								Parking Lot
 							</label>
 						</div>
 
@@ -145,13 +145,6 @@
 							<input class="input-radio100" id="yard" type="checkbox" name="yard" value="1">
 							<label class="label-radio100" for="yard">
 								Yard
-							</label>
-						</div>
-
-                        <div class="contact100-form-radio">
-							<input class="input-radio100" id="parking" type="checkbox" name="parking" value="1">
-							<label class="label-radio100" for="parking">
-								Parking Lot
 							</label>
 						</div>
                     </div>
