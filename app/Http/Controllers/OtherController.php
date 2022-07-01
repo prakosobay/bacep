@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\{DB, Auth, Gate, Mail, Session, Storage};
-use App\Models\{Other, OtherFull, OtherHistory, OtherPersonil, Rutin, TroubleshootBm, TroubleshootBmDetail, TroubleshootBmEntry, TroubleshootBmHistory, TroubleshootBmPersonil, TroubleshootBmRisk, Visitor};
+use App\Models\{Other, OtherFull, OtherHistory, OtherPersonil, Rutin, TroubleshootBm, TroubleshootBmDetail, TroubleshootBmEntry, TroubleshootBmFull, TroubleshootBmHistory, TroubleshootBmPersonil, TroubleshootBmRisk, Visitor};
 use App\Mail\{NotifMaintenanceForm, NotifMaintenanceFull, NotifMaintenanceReject, NotifTroubleshootForm, NotifTroubleshootFull, NotifTroubleshootReject};
 use Symfony\Component\HttpFoundation\Test\Constraint\ResponseFormatSame;
 use Yajra\Datatables\Datatables;
@@ -474,7 +474,7 @@ class OtherController extends Controller
 
         $notif_email = TroubleshootBm::find($other_form->id);
         foreach ([
-            'bayu.prakoso@balitower.co.id', 'hilman.fariqi@balitower.co.id',
+            'bayu.prakoso@balitower.co.id', 'aurellius.putra@balitower.co.id',
         ] as $recipient) {
             Mail::to($recipient)->send(new NotifTroubleshootForm($notif_email));
         }
@@ -497,7 +497,7 @@ class OtherController extends Controller
     {
         $last_update = TroubleshootBmHistory::where('troubleshoot_bm_id', '=', $request->id)->latest()->first();
         if ($last_update->pdf == true) {
-            // $last_update->update(['aktif' => false]);
+            $last_update->update(['aktif' => false]);
 
             // Perubahan status tiap permit
             $status = '';
@@ -514,36 +514,35 @@ class OtherController extends Controller
             }
 
             $notif_email = TroubleshootBm::find($last_update->troubleshoot_bm_id);
-            // dd($notif_email);
             // // Pergantian  role tiap permit & send email notif
             $role_to = '';
             if ($last_update->role_to == 'review') {
                 foreach ([
-                    'khaidir.alamsyah@balitower.co.id', 'bayu.prakoso@balitower.co.id',
+                    'aurellius.putra@balitower.co.id', 'bayu.prakoso@balitower.co.id',
                 ] as $recipient) {
                     Mail::to($recipient)->send(new NotifTroubleshootForm($notif_email));
                 }
                 $role_to = 'check';
             } elseif ($last_update->role_to == 'check') {
-                foreach (['security.bacep@balitower.co.id'] as $recipient) {
+                foreach (['bayu.prakoso@balitower.co.id', 'aurellius.putra@balitower.co.id'] as $recipient) {
                     Mail::to($recipient)->send(new NotifTroubleshootForm($notif_email));
                 }
                 $role_to = 'security';
             } elseif ($last_update->role_to == 'security') {
-                foreach (['tofiq.hidayat@balitower.co.id', 'bayu.prakoso@balitower.co.id'] as $recipient) {
+                foreach (['bayu.prakoso@balitower.co.id'] as $recipient) {
                     Mail::to($recipient)->send(new NotifTroubleshootForm($notif_email));
                 }
                 $role_to = 'head';
             } elseif ($last_update->role_to = 'head') {
                 $full = TroubleshootBm::find($request->id);
-                foreach (['dc@balitower.co.id'] as $recipient) {
+                foreach (['aurellius.putra@balitower.co.id', 'bayu.prakoso@balitower.co.id'] as $recipient) {
                     Mail::to($recipient)->send(new NotifTroubleshootFull($full));
                 }
                 $role_to = 'all';
 
-                $full_troubleshoot = Other::where('id', $request->other_id)->first();
+                $full_troubleshoot = TroubleshootBm::where('id', $request->id)->first();
                 // dd($full_troubleshoot);
-                $full_approve = OtherFull::create([
+                $full_approve = TroubleshootBmFull::create([
                     'troubleshoot_bm_id' => $full_troubleshoot->id,
                     'work' => $full_troubleshoot->work,
                     'request' => $full_troubleshoot->created_at,
@@ -557,7 +556,7 @@ class OtherController extends Controller
 
             // Simpan tiap perubahan permit ke table CLeaningHistory
             $log = TroubleshootBmHistory::create([
-                'troubleshoot_bm_id' => $notif_email->id,
+                'troubleshoot_bm_id' => $request->id,
                 'created_by' => Auth::user()->name,
                 'role_to' => $role_to,
                 'status' => $status,
@@ -567,6 +566,7 @@ class OtherController extends Controller
         } else {
             abort(403);
         }
+        return $log->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
     }
 
     public function reject_troubleshoot(Request $request)
@@ -588,7 +588,7 @@ class OtherController extends Controller
 
                 // Get permit yang di reject & kirim notif email
                 $notif_email = TroubleshootBm::find($request->id);
-                foreach (['badai.sino@balitower.co.id', 'bayu.prakoso@balitower.co.id'] as $recipient) {
+                foreach (['bayu.prakoso@balitower.co.id'] as $recipient) {
                     Mail::to($recipient)->send(new NotifTroubleshootReject($notif_email));
                 }
                 return $history->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
@@ -633,7 +633,7 @@ class OtherController extends Controller
             ->where('troubleshoot_bm_histories.troubleshoot_bm_id', '=', $id)
             ->select('troubleshoot_bm_histories.*')
             ->get();
-        $pdf = PDF::loadview('other.troubleshoot_pdf', compact('getTroubleshoot', 'getPersonil', 'getRisk', 'getDetail', 'getEntry', 'getLastHistory'))->setPaper('a4', 'portrait')->setWarnings(false);
+        $pdf = PDF::loadview('other.troubleshoot_pdf', compact('getTroubleshoot', 'getPersonil', 'getRisk', 'getDetail', 'getEntry', 'getLastHistory', 'getHistory'))->setPaper('a4', 'portrait')->setWarnings(false);
         // dd($pdf);
         return $pdf->stream();
     }

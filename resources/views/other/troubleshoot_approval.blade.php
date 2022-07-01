@@ -11,7 +11,7 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-striped table-bordered" id="approve_troubleshoot" width="100%">
+                <table class="table table-striped table-bordered" id="approve_troubleshoot" width="100%" cellspacing="0">
                     <thead>
                         <tr class="judul-table text-center">
                             <th>ID Permit</th>
@@ -50,7 +50,6 @@
 </div>
 
 @push('scripts')
-
     <script>
         $(document).ready( function () {
             $('#approve_troubleshoot').DataTable();
@@ -58,58 +57,58 @@
             // approve
             $(document).on('click', '.approve', function(event){
 
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('input[name="_token"]').val()
-                    }
-                });
-
-                Swal.fire({
-                    title: 'Are you sure?',
-                    text: "You won't be able to revert this!",
-                    type: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, approve it!'
-                })
-                .then((result) => {
-                    if (result.isConfirmed) {
-                            $('#ok').click(function () {
-                                return false;
-                            });
-                        let id = $(this).data('id');
-                        console.log(id);
-                        $.ajax({
-                            type:'POST',
-                            url:"{{url('/other/troubleshoot/approve')}}",
-                            data: {id},
-                            error: function (request, error) {
-                                alert(" Can't do because: " + error);
-                            },
-                            success:function(data){
-                                console.log(data);
-                                if(data.status == 'SUCCESS'){
-                                    Swal.fire(
-                                    'Approved!',
-                                    'The form has been approved.',
-                                    'success'
-                                    ).then(function(){
-                                        location.reload();
-                                    })
-                                }else if(data.status == 'FAILED'){
-                                    Swal.fire({
-                                        title: "Failed!",
-                                        text: 'Failed to Reject',
-                                    }).then(function(){
-                                        location.reload();
-                                    });
-                                }
-                            }
-                        });
-                    }
-                });
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('input[name="_token"]').val()
+                }
             });
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, approve it!'
+            })
+            .then((result) => {
+                if (result.isConfirmed) {
+                        $('#ok').click(function () {
+                            return false;
+                        });
+                    let id = $(this).data('id');
+                    console.log(id);
+                    $.ajax({
+                        type:'POST',
+                        url:"{{url('/other/troubleshoot/approve')}}",
+                        data: {id},
+                        error: function (request, error) {
+                            alert(" Can't do because: " + error);
+                        },
+                        success:function(data){
+                            console.log(data);
+                            if(data.status == 'SUCCESS'){
+                                Swal.fire(
+                                'Approved!',
+                                'The form has been approved.',
+                                'success'
+                                ).then(function(){
+                                    location.reload();
+                                })
+                            }else if(data.status == 'FAILED'){
+                                Swal.fire({
+                                    title: "Failed!",
+                                    text: 'Failed to Reject',
+                                }).then(function(){
+                                    location.reload();
+                                });
+                            }
+                        }
+                    });
+                }
+            });
+        });
 
             //reject
             $(document).on('click', '.reject', function(){
