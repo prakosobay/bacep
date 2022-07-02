@@ -169,6 +169,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('other/troubleshoot/pdf/{id}', [OtherController::class, 'pdf_troubleshoot']);
     Route::get('other/troubleshoot/yajra/history', [OtherController::class, 'yajra_troubleshoot_history']);
     Route::get('other/troubleshoot/yajra/full/approval', [OtherController::class, 'yajra_troubleshoot_full_approval']);
+    Route::get('other/troubleshoot/yajra/full/reject', [OtherController::class, 'yajra_full_reject_troubleshoot']);
     Route::post('other/troubleshoot/create', [OtherController::class, 'create_troubleshoot']);
     Route::post('other/troubleshoot/approve', [OtherController::class, 'approve_troubleshoot']);
     Route::post('other/troubleshoot/reject', [OtherController::class, 'reject_troubleshoot']);

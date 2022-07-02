@@ -142,28 +142,6 @@ class HomeController extends Controller
         }
     }
 
-    public function new_permit() // KAGA KEPAKE
-    {
-        $role = Session::get('arrole');
-        $email = Auth::user()->email;
-        // dd($email);
-        if ($email == 'it@mail.com') {
-            return view('it.form');
-        } elseif ($email == 'ipmedia@mail.com') {
-            return view('it.form');
-        } elseif ($email == 'ipcore@mail.com') {
-            return "ini role ipcore";
-        } elseif (($email == 'data.center7@balitower.co.id') || ($email == 'badai.sino@balitower.co.id')) {
-            return view('cleaning.full_visitor');
-        } elseif ($email == 'pac@mail.com') {
-            return "ini bm";
-        } elseif ($email == 'sales@mail.com') {
-            return view('sales.form');
-        } else {
-            abort(403);
-        }
-    }
-
     public function log_all() // Routingan untuk menampilkan permit yang sudah full approve versi visitor
     {
         $email = Auth::user()->email;

@@ -42,7 +42,7 @@ class OtherController extends Controller
 
     public function show_maintenance_reject() // Menampilkan list permit reject dari sisi visitor
     {
-        return view('other.maintenance_listReject');
+        return view('other.maintenance_list_reject');
     }
 
     public function show_maintenance_checkin($id) // Menampilkan form maintenance untuk view checkin
@@ -67,6 +67,11 @@ class OtherController extends Controller
             }
         }
         return view('other.maintenance_checkin', compact('form', 'personil', 'pic'));
+    }
+
+    public function show_troubleshoot_reject()
+    {
+        return view('other.troubleshoot_list_reject');
     }
 
 
@@ -299,7 +304,7 @@ class OtherController extends Controller
         return $otherHistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
     }
 
-    public function reject_maintenance(Request $request) // Untuk reject permit
+    public function reject_maintenance(Request $request) // Untuk reject permit maintenance
     {
         // Get permit terbaru by ID Permit
         $lastupdate = OtherHistory::where('other_id', '=', $request->other_id)->latest()->first();
@@ -474,7 +479,8 @@ class OtherController extends Controller
 
         $notif_email = TroubleshootBm::find($other_form->id);
         foreach ([
-            'bayu.prakoso@balitower.co.id', 'aurellius.putra@balitower.co.id',
+            'aurellius.putra@balitower.co.id', 'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
+            'ilham.pangestu@balitower.co.id', 'irwan.trisna@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id',
         ] as $recipient) {
             Mail::to($recipient)->send(new NotifTroubleshootForm($notif_email));
         }
@@ -518,24 +524,25 @@ class OtherController extends Controller
             $role_to = '';
             if ($last_update->role_to == 'review') {
                 foreach ([
-                    'aurellius.putra@balitower.co.id', 'bayu.prakoso@balitower.co.id',
+                    'aurellius.putra@balitower.co.id', 'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
+                    'ilham.pangestu@balitower.co.id', 'irwan.trisna@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id',
                 ] as $recipient) {
                     Mail::to($recipient)->send(new NotifTroubleshootForm($notif_email));
                 }
                 $role_to = 'check';
             } elseif ($last_update->role_to == 'check') {
-                foreach (['bayu.prakoso@balitower.co.id', 'aurellius.putra@balitower.co.id'] as $recipient) {
+                foreach (['security.bacep@balitower.co.id'] as $recipient) {
                     Mail::to($recipient)->send(new NotifTroubleshootForm($notif_email));
                 }
                 $role_to = 'security';
             } elseif ($last_update->role_to == 'security') {
-                foreach (['bayu.prakoso@balitower.co.id'] as $recipient) {
+                foreach (['tofiq.hidayat@balitower.co.id', 'bayu.prakoso@balitower.co.id'] as $recipient) {
                     Mail::to($recipient)->send(new NotifTroubleshootForm($notif_email));
                 }
                 $role_to = 'head';
             } elseif ($last_update->role_to = 'head') {
                 $full = TroubleshootBm::find($request->id);
-                foreach (['aurellius.putra@balitower.co.id', 'bayu.prakoso@balitower.co.id'] as $recipient) {
+                foreach (['dc@balitower.co.id'] as $recipient) {
                     Mail::to($recipient)->send(new NotifTroubleshootFull($full));
                 }
                 $role_to = 'all';
@@ -569,7 +576,7 @@ class OtherController extends Controller
         return $log->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
     }
 
-    public function reject_troubleshoot(Request $request)
+    public function reject_troubleshoot(Request $request) // Reject permit troubleshoot
     {
         $lastupdate = TroubleshootBmHistory::where('troubleshoot_bm_id', '=', $request->id)->latest()->first();
         if (Gate::denies('isSecurity')) {
@@ -588,7 +595,7 @@ class OtherController extends Controller
 
                 // Get permit yang di reject & kirim notif email
                 $notif_email = TroubleshootBm::find($request->id);
-                foreach (['bayu.prakoso@balitower.co.id'] as $recipient) {
+                foreach (['bayu.prakoso@balitower.co.id', 'badai.sino@balitower.co.id'] as $recipient) {
                     Mail::to($recipient)->send(new NotifTroubleshootReject($notif_email));
                 }
                 return $history->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
@@ -617,7 +624,7 @@ class OtherController extends Controller
         return $pdf->stream();
     }
 
-    public function pdf_troubleshoot($id)
+    public function pdf_troubleshoot($id) // Convert PDF permit troubleshoot
     {
         $getTroubleshoot = TroubleshootBm::find($id);
         $getLastHistory = TroubleshootBmHistory::where('troubleshoot_bm_id', $id)->where('aktif', 1)->first();
@@ -702,7 +709,7 @@ class OtherController extends Controller
             ->make(true);
     }
 
-    public function yajra_troubleshoot_history()
+    public function yajra_troubleshoot_history() // Get data log permit troubleshoot
     {
         $log_troubleshoot = DB::table('troubleshoot_bm_histories')
             ->join('troubleshoot_bms', 'troubleshoot_bms.id', 'troubleshoot_bm_histories.troubleshoot_bm_id')
@@ -718,7 +725,7 @@ class OtherController extends Controller
             ->make(true);
     }
 
-    public function yajra_troubleshoot_full_approval()
+    public function yajra_troubleshoot_full_approval() // Get data permit troubleshoot full approval
     {
         $full_approval = DB::table('troubleshoot_bm_fulls')
             ->join('troubleshoot_bms', 'troubleshoot_bms.id', '=', 'troubleshoot_bm_fulls.troubleshoot_bm_id')
@@ -729,6 +736,19 @@ class OtherController extends Controller
                 return $full_approval->visit ? with(new Carbon($full_approval->visit))->format('d/m/Y') : '';
             })
             ->addColumn('action', 'other.troubleshootActionLink')
+            ->make(true);
+    }
+
+    public function yajra_full_reject_troubleshoot()
+    {
+        $getFull = DB::table('troubleshoot_bm_fulls')
+            ->select(['troubleshoot_bm_id', 'visit', 'note', 'work'])
+            ->where('note', '!=', null)
+            ->orderBy('visit', 'desc');
+        return Datatables::of($getFull)
+            ->editColumn('visit', function ($getFull) {
+                return $getFull->visit ? with(new Carbon($getFull->visit))->format('d/m/Y') : '';
+            })
             ->make(true);
     }
 }
