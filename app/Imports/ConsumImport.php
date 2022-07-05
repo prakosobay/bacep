@@ -14,13 +14,12 @@ class ConsumImport implements ToCollection, WithStartRow
      * @return \Illuminate\Database\Eloquent\Model|null
      */
 
-
-    public function collection(Collection $rows1)
+    public function collection(Collection $rows)
     {
-        echo '<pre>';
-        var_dump($rows1);
-        die;
-        foreach ($rows1 as $row) {
+        // echo '<pre>';
+        // var_dump($rows);
+        // die;
+        foreach ($rows as $row) {
             Consum::create([
                 'id' => $row[0],
                 'nama_barang' => $row[1],
@@ -32,41 +31,6 @@ class ConsumImport implements ToCollection, WithStartRow
             ]);
         }
     }
-
-
-    // public function collection(Collection $rows3)
-    // {
-    //     // echo '<pre>';
-    //     // var_dump($rows3);
-    //     // die;
-    //     foreach ($rows3 as $row) {
-    //         ConsumMasuk::create([
-    //             'tanggal' => $row[0],
-    //             'consum_id' => $row[1],
-    //             'nama_barang' => $row[2],
-    //             'jumlah' => $row[3],
-    //             'ket' => $row[4],
-    //             'pencatat' => $row[5],
-    //         ]);
-    //     }
-    // }
-
-    // public function collection(Collection $rows2)
-    // {
-    //     // echo '<pre>';
-    //     // var_dump($rows2);
-    //     // die;
-    //     foreach ($rows2 as $row) {
-    //         ConsumKeluar::create([
-    //             'tanggal' => $row[0],
-    //             'consum_id' => $row[1],
-    //             'nama_barang' => $row[2],
-    //             'jumlah' => $row[3],
-    //             'ket' => $row[4],
-    //             'pencatat' => $row[5],
-    //         ]);
-    //     }
-    // }
 
     public function startRow(): int
     {

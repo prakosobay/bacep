@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Exports\{ConsumKeluarExport, ConsumExport, ConsumMasukExport};
 use App\Http\Controllers\Controller;
 use RealRashid\SweetAlert\Facades\Alert;
-use App\Imports\ConsumImport;
+use App\Imports\{ConsumImport, ConsumKeluarImport, ConsumMasukImport};
 use Maatwebsite\Excel\Facades\Excel;
 use Yajra\Datatables\Datatables;
 use Illuminate\Support\Facades\{DB, Auth, Gate, Mail, Session};
@@ -23,13 +23,12 @@ class ConsumController extends Controller
 
 
     // Show Pages
-    public function index() // Menampilkan data barang consumable
+    public function consum_show() // Menampilkan data barang consumable
     {
-        if ((Gate::allows('isHead')) || (Gate::allows('isApproval')) || (Gate::allows('isAdmin'))) {
-            $consum = Consum::all();
-            return view('consum.table', compact('consum'));
+        if ((Gate::allows('isHead')) || (Gate::allows('isApproval'))) {
+            return view('consum.table');
         } else {
-            abort(403, 'Anda Tidak Punya Akses Ke Halaman Ini');
+            abort(403);
         }
     }
 
@@ -42,11 +41,10 @@ class ConsumController extends Controller
         }
     }
 
-    public function show_in() // Tampilan untuk data barang masuk
+    public function consum_masuk_show() // Tampilan untuk data barang masuk
     {
         if (Gate::allows('isHead') || (Gate::allows('isApproval')) || (Gate::allows('isAdmin'))) {
-            $in = ConsumMasuk::all();
-            return view('consum.masuk', compact('in'));
+            return view('consum.masuk');
         } else {
             abort(403,  'Anda Tidak Punya Akses Ke Halaman Ini');
         }
@@ -192,8 +190,20 @@ class ConsumController extends Controller
     // Excel
     public function csv(Request $request) // Import csv to database barang consumable
     {
-        $i = Excel::import(new ConsumImport, $request->file('file'));
-        return back()->with('success', 'Excel Data Imported successfully.');
+        Excel::import(new ConsumImport, $request->file('file'));
+        return back()->with('success', 'Data Consum Berhasil di Import');
+    }
+
+    public function import_masuk(Request $request)
+    {
+        Excel::import(new ConsumMasukImport, $request->file('file'));
+        return back()->with('success', 'Consum Masuk Berhasil di Import');
+    }
+
+    public function import_keluar(Request $request)
+    {
+        Excel::import(new ConsumKeluarImport, $request->file('file'));
+        return back()->with('success', 'Consum Keluar Berhasil di Import');
     }
 
     public function export_consum() // Export data consumable to excel
@@ -214,7 +224,7 @@ class ConsumController extends Controller
 
 
     // Yajra Datatable
-    public function yajra_all_consum() // Get seluruh data consumable
+    public function consum_yajra_show() // Get seluruh data consumable
     {
         $consum = DB::table('consums')
             ->select('consums.*')
@@ -224,7 +234,7 @@ class ConsumController extends Controller
             ->make(true);
     }
 
-    public function yajra_masuk_consum() // Get seluruh data barang masuk consumable
+    public function consum_yajra_masuk() // Get seluruh data barang masuk consumable
     {
         $masuk = DB::table('consum_masuks')
             ->select('consum_masuks.*')
@@ -233,7 +243,7 @@ class ConsumController extends Controller
             ->make(true);
     }
 
-    public function yajra_keluar_consum() // Get seluruh data barang keluar consumable
+    public function consum_yajra_keluar() // Get seluruh data barang keluar consumable
     {
         $keluar = DB::table('consum_keluars')
             ->select('consum_keluars.*')

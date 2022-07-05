@@ -1,11 +1,11 @@
-@extends('layouts.dashboard')
+@extends('layouts.barang')
 
 @section('content')
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800 text-center">Data Barang Consumable</h1>
+    <h1 class="h3 my-3 text-gray-800 text-center">Data Barang Consumable</h1>
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
@@ -44,8 +44,8 @@
                     </form>
                 </div>
             </div>
-
         </div>
+
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-striped table-hover" id="consum_table" width="100%">
@@ -62,6 +62,7 @@
                             <th>Update</th>
                         </tr>
                     </thead>
+                    <tbody></tbody>
                 </table>
             </div>
         </div>
@@ -70,12 +71,12 @@
 
 {{-- <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script> --}}
 @push('script')
-<script>
+{{-- <script>
     $(function() {
         $('#consum_table').DataTable({
             processing: true,
             serverSide: true,
-            ajax: '{{ url('consum/all/yajra/show')}}',
+            ajax: '{{ url('consum/yajra/show')}}',
             columns: [
                 { data: 'id', name: 'id' },
                 { data: 'itemcode', name: 'itemcode' },
@@ -89,6 +90,6 @@
             ]
         });
     });
-</script>
+</script> --}}
 @endpush
 @endsection

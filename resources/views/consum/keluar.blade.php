@@ -1,4 +1,4 @@
-@extends('layouts.dashboard')
+@extends('layouts.barang')
 
 @section('content')
 <!-- Begin Page Content -->
@@ -14,6 +14,34 @@
             <a href="{{url('/export.c.k')}}" type="button" class="btn btn-success mr-5" >
                 <strong>Export Excel</strong>
             </a>
+
+            <button type="button" class="btn btn-primary mr-5" data-toggle="modal" data-target="#import_keluar">
+                IMPORT CSV
+            </button>
+
+            <!-- Import Excel -->
+            <div class="modal fade" id="import_keluar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <form method="post" action="{{ url('consum/import/keluar')}}" enctype="multipart/form-data">
+                        @csrf
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Import File CSV</h5>
+                            </div>
+                            <div class="modal-body">
+                                <label>Pilih file CSV</label>
+                                <div class="form-group">
+                                    <input type="file" name="file" required="required">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Import</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
         <div class="card-body">
             <div class="table-responsive">

@@ -267,7 +267,7 @@ class AssetController extends Controller
 
 
     // Import csv to database
-    public function csv(Request $request) // Import data barang asset to databse
+    public function csv(Request $request) // Import data barang asset to database
     {
         Excel::import(new AssetImport, $request->file('file'));
         return back()->with('success', 'Excel Data Imported successfully.');
