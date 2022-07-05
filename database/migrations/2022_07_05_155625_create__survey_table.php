@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMasterObsTable extends Migration
+class CreateSurveyTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class CreateMasterObsTable extends Migration
      */
     public function up()
     {
-        Schema::create('master_obs', function (Blueprint $table) {
-            $table->id('ob_id');
+        Schema::create('_survey', function (Blueprint $table) {
+            $table->id();
             $table->date('visit');
             $table->date('leave');
             $table->string('name_req');
@@ -31,6 +31,6 @@ class CreateMasterObsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('master_obs');
+        Schema::dropIfExists('_survey');
     }
 }
