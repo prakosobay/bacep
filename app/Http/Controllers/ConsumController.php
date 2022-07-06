@@ -26,7 +26,8 @@ class ConsumController extends Controller
     public function consum_show() // Menampilkan data barang consumable
     {
         if ((Gate::allows('isHead')) || (Gate::allows('isApproval'))) {
-            return view('consum.table');
+            $getAllConsum = Consum::all();
+            return view('consum.table', compact('getAllConsum'));
         } else {
             abort(403);
         }
@@ -44,13 +45,14 @@ class ConsumController extends Controller
     public function consum_masuk_show() // Tampilan untuk data barang masuk
     {
         if (Gate::allows('isHead') || (Gate::allows('isApproval')) || (Gate::allows('isAdmin'))) {
-            return view('consum.masuk');
+            $getConsumMasuk = ConsumMasuk::all();
+            return view('consum.masuk', compact('getConsumMasuk'));
         } else {
             abort(403,  'Anda Tidak Punya Akses Ke Halaman Ini');
         }
     }
 
-    public function show_out() // Tampilan untuk data barang keluar
+    public function consum_keluar_show() // Tampilan untuk data barang keluar
     {
         if (Gate::allows('isHead') || (Gate::allows('isApproval')) || (Gate::allows('isAdmin'))) {
             $out = ConsumKeluar::all();
@@ -228,7 +230,7 @@ class ConsumController extends Controller
     {
         $consum = DB::table('consums')
             ->select('consums.*')
-            ->orderBy('id', 'asc');
+            ->orderBy('id', 'desc');
             return DataTables::of($consum)
             ->addColumn('action', 'consum.update')
             ->make(true);
@@ -238,7 +240,7 @@ class ConsumController extends Controller
     {
         $masuk = DB::table('consum_masuks')
             ->select('consum_masuks.*')
-            ->orderBy('consum_id', 'asc');
+            ->orderBy('consum_id', 'desc');
             return Datatables::of($masuk)
             ->make(true);
     }
@@ -247,7 +249,7 @@ class ConsumController extends Controller
     {
         $keluar = DB::table('consum_keluars')
             ->select('consum_keluars.*')
-            ->orderBy('consum_id', 'asc');
+            ->orderBy('consum_id', 'desc');
             return Datatables::of($keluar)
             ->make(true);
     }

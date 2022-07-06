@@ -6,10 +6,16 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Manajemen Inventori</title>
 
+    {{-- sidebar --}}
+    <link rel="stylesheet" href="{{asset('css/sb-admin-2.min.css')}}" type="text/css">
+
+    {{-- navbar --}}
+    <link href="{{asset('css/new_approve.css')}}" rel="stylesheet">
+
     <!-- Load an icon library -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{asset('css/sb-admin-2.min.css')}}" type="text/css">
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
@@ -18,8 +24,6 @@
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
-
-    <link href="{{asset('css/new_approve.css')}}" rel="stylesheet">
 
 </head>
 <body id="body-pd">
@@ -134,7 +138,6 @@
                         <a class="collapse-item" href="{{ url('consum/show')}}">Consumable Table</a>
                         <a class="collapse-item" href="{{ url('consum/masuk/show')}}">Consumable Masuk</a>
                         <a class="collapse-item" href="{{ url('consum/keluar/show')}}">Consumable Keluar</a>
-                        <a class="collapse-item" href="{{ url('consum/digunakan/show')}}">Consumable Digunakan</a>
                     </div>
                 </div>
             </li>

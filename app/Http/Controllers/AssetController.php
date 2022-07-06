@@ -273,6 +273,18 @@ class AssetController extends Controller
         return back()->with('success', 'Excel Data Imported successfully.');
     }
 
+    public function asset_import_masuk(Request $request)
+    {
+        Excel::import(new AssetMasukImport, $request->file('file'));
+        return back();
+    }
+
+    public function asset_import_keluar(Request $request)
+    {
+        Excel::import(new AssetImportKeluar, $request->file('file'));
+        return back();
+    }
+
 
 
 

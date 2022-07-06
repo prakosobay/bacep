@@ -60,14 +60,15 @@ Route::middleware(['auth'])->group(function () {
     Route::get('table_barang', [HomeController::class, 'dashboard'])->name('table_barang');
 
     //Barang Consume
-    Route::post('/consum', [ConsumController::class, 'csv']);
+    Route::post('consum/import/table', [ConsumController::class, 'csv']);
     Route::post('consum/import/keluar', [ConsumController::class, 'import_keluar']);
     Route::post('consum/import/masuk', [ConsumController::class, 'import_masuk']);
     Route::get('consum/yajra/show', [ConsumController::class, 'consum_yajra_show']);
-    Route::get('consum/yajra/masuk', [ConsumController::class, 'consum_yajra_masuk']);
+    Route::get('/consum/yajra/masuk', [ConsumController::class, 'consum_yajra_masuk']);
     Route::get('consum/yajra/keluar', [ConsumController::class, 'consum_yajra_keluar']);
     Route::get('consum/show', [ConsumController::class, 'consum_show']);
     Route::get('consum/masuk/show', [ConsumController::class, 'consum_masuk_show']);
+    Route::get('consum/keluar/show', [ConsumController::class, 'consum_keluar_show']);
 
     Route::get('/c.table', [ConsumController::class, 'index']);
     Route::get('/c.new', [ConsumController::class, 'show_new']);

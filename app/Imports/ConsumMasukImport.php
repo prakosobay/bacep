@@ -19,6 +19,7 @@ class ConsumMasukImport implements ToCollection, WithStartRow
         // echo '<pre>';
         // var_dump($rows3);
         // die;
+
         foreach ($rows3 as $row) {
             ConsumMasuk::create([
                 'tanggal' => $row[0],

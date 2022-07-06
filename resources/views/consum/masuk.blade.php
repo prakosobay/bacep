@@ -1,27 +1,21 @@
 @extends('layouts.barang')
 
 @section('content')
-<!-- Begin Page Content -->
 <div class="container-fluid">
-
-    <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800 text-center">Data Barang Consumable</h1>
-
-    <!-- DataTales Example -->
+    <h1 class="h3 my-3 text-gray-800 text-center">Data Barang Masuk Consumable</h1>
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary text-center">Barang Masuk</h6>
-            <a href="{{url('/export.c.m')}}" type="button" class="btn btn-success mr-5" >
+            <a href="{{url('/export.consum')}}" type="button" class="btn btn-sm btn-success mx-2 my-2" >
                 <strong>Export Excel</strong>
             </a>
 
-            <button type="button" class="btn btn-primary mr-5" data-toggle="modal" data-target="#import_masuk">
-                IMPORT CSV
+            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Import CSV
             </button>
 
-            <!-- Import Excel -->
-            <div class="modal fade" id="import_masuk" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
                     <form method="post" action="{{ url('consum/import/masuk')}}" enctype="multipart/form-data">
                         @csrf
                         <div class="modal-content">
@@ -45,11 +39,10 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-striped table-bordered" id="consum_masuk" width="100%" cellspacing="0">
+                <table class="table table-striped table-hover" id="masuk" width="100%">
                     <thead>
-                        <tr>
+                        <tr class="judul-table text-center">
                             <th>Kode Barang</th>
-                            <th>Item Code</th>
                             <th>Nama Barang</th>
                             <th>Jumlah</th>
                             <th>Ket</th>
@@ -57,18 +50,7 @@
                             <th>Pencatat</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        {{-- @foreach ($in as $c)
-                            <tr>
-                                <td>{{$c->consum_id}}</td>
-                                <td>{{$c->itemcode}}</td>
-                                <td>{{$c->nama_barang}}</td>
-                                <td>{{$c->jumlah}}</td>
-                                <td>{{$c->ket}}</td>
-                                <td>{{$c->tanggal}}</td>
-                                <td>{{$c->pencatat}}</td>
-                            </tr>
-                        @endforeach --}}
+                    <tbody class="isi-table text-center">
                     </tbody>
                 </table>
             </div>
@@ -76,43 +58,23 @@
     </div>
 </div>
 
-@push('script')
+@push('scripts')
 <script>
-    // $(function() {
-    //     $('#consum_masuk').DataTable({
-    //         processing: true,
-    //         serverSide: true,
-    //         ajax: '{{ url('consum/yajra/masuk')}}',
-    //         columns: [
-    //             { data: 'consum_id', name: 'consum_id' },
-    //             { data: 'itemcode', name: 'itemcode' },
-    //             { data: 'nama_barang', name: 'nama_barang' },
-    //             { data: 'jumlah', name: 'jumlah' },
-    //             { data: 'note', name: 'note' },
-    //             { data: 'tanggal', name: 'tanggal' },
-    //             { data: 'pencatat', name: 'pencatat' },
-    //             {data: 'action', name: 'action', orderable: false, searchable: false}
-    //         ]
-    //     });
-    // });
-    $(document).ready( function () {
-        $('#consum_masuk').DataTable({
+    $(function() {
+        $('#masuk').DataTable({
             processing: true,
             serverSide: true,
-            ajax: '{{ url('consum/yajra/masuk')}}',
+            ajax: '{{ url('/consum/yajra/masuk')}}',
             columns: [
                 { data: 'consum_id', name: 'consum_id' },
-                { data: 'itemcode', name: 'itemcode' },
                 { data: 'nama_barang', name: 'nama_barang' },
                 { data: 'jumlah', name: 'jumlah' },
-                { data: 'note', name: 'note' },
+                { data: 'ket', name: 'ket' },
                 { data: 'tanggal', name: 'tanggal' },
                 { data: 'pencatat', name: 'pencatat' },
-                {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });
-    } );
+    });
 </script>
 @endpush
-
 @endsection
