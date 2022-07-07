@@ -118,7 +118,7 @@
                 <div id="asset_collapse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Option :</h6>
-                        <a class="collapse-item" href="{{ url('asset/show')}}">Asset Table</a>
+                        <a class="collapse-item" href="{{ url('asset/table/show')}}">Asset Table</a>
                         <a class="collapse-item" href="{{ url('asset/masuk/show')}}">Asset Masuk</a>
                         <a class="collapse-item" href="{{ url('asset/keluar/show')}}">Asset Keluar</a>
                         <a class="collapse-item" href="{{ url('asset/digunakan/show')}}">Asset Digunakan</a>

@@ -7,11 +7,11 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <a href="{{url('/export.c.k')}}" type="button" class="btn btn-success mr-5" >
+            <a href="{{url('/export.c.k')}}" type="button" class="btn btn-success mr-5 btn-sm" >
                 <strong>Export Excel</strong>
             </a>
 
-            <button type="button" class="btn btn-primary mr-5" data-toggle="modal" data-target="#import_keluar">
+            <button type="button" class="btn btn-primary btn-sm mr-5" data-toggle="modal" data-target="#import_keluar">
                 IMPORT CSV
             </button>
 

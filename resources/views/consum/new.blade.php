@@ -1,4 +1,4 @@
-@extends('layouts.dashboard')
+@extends('layouts.barang')
 
 @section('content')
 <!-- Begin Page Content -->

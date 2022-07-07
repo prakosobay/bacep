@@ -69,7 +69,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('consum/show', [ConsumController::class, 'consum_show']);
     Route::get('consum/masuk/show', [ConsumController::class, 'consum_masuk_show']);
     Route::get('consum/keluar/show', [ConsumController::class, 'consum_keluar_show']);
-
     Route::get('/c.table', [ConsumController::class, 'index']);
     Route::get('/c.new', [ConsumController::class, 'show_new']);
     Route::post('/consum_new', [ConsumController::class, 'store_consum']);
@@ -82,30 +81,35 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/export.consum', [ConsumController::class, 'export_consum']);
     Route::get('/export.c.m', [ConsumController::class, 'export_consum_masuk']);
     Route::get('/export.c.k', [ConsumController::class, 'export_consum_keluar']);
-    Route::get('consum/all/yajra/show', [ConsumController::class, 'yajra_all_consum']);
 
 
     //Barang Asset
-    Route::post('/asset', [AssetController::class, 'csv']);
-    Route::get('/a.table', [AssetController::class, 'index']);
-    Route::get('/a.new', [AssetController::class, 'show_new']);
-    Route::post('/asset_new', [AssetController::class, 'store_asset']);
+    Route::get('asset/table/show', [AssetController::class, 'index'])->name('assetTable');
+    Route::get('asset/masuk/show', [AssetController::class, 'asset_masuk_show']);
+    Route::get('asset/keluar/show', [AssetController::class, 'asset_keluar_show']);
+    Route::get('asset/digunakan/show', [AssetController::class, 'asset_uses_show']);
+    Route::get('asset/create/show', [AssetController::class, 'asset_create_show']);
+    Route::post('asset/create/store', [AssetController::class, 'asset_create_store']);
     Route::get('/a.masuk', [AssetController::class, 'show_in']);
     Route::get('/a.keluar', [AssetController::class, 'show_out']);
-    Route::get('asset/edit/masuk/{id}', [AssetController::class, 'edit_masuk']);
-    Route::get('asset/edit/keluar/{id}', [AssetController::class, 'edit_keluar']);
-    Route::get('asset/edit/digunakan/{id}', [AssetController::class, 'edit_use']);
-    Route::put('/asset_putin/{id}', [AssetController::class, 'update_masuk']);
-    Route::put('/asset_putout/{id}', [AssetController::class, 'update_keluar']);
-    Route::put('/asset_use/{id}', [AssetController::class, 'update_use']);
+    Route::get('asset/edit/show/{id}', [AssetController::class, 'asset_edit_show']);
+    Route::get('asset/edit/keluar/{id}', [AssetController::class, 'asset_edit_keluar']);
+    Route::get('asset/edit/digunakan/{id}', [AssetController::class, 'asset_edit_digunakan']);
+    Route::put('asset/update/masuk/{id}', [AssetController::class, 'asset_update_masuk']);
+    Route::put('asset/update/keluar/{id}', [AssetController::class, 'asset_update_keluar']);
+    Route::put('asset/update/digunakan/{id}', [AssetController::class, 'asset_update_digunakan']);
     Route::get('/export.asset', [AssetController::class, 'export_asset']);
     Route::get('/export.a.m', [AssetController::class, 'export_asset_masuk']);
     Route::get('/export.a.k', [AssetController::class, 'export_asset_keluar']);
     Route::get('/a.use', [AssetController::class, 'show_use']);
-    Route::get('asset/all/yajra/show', [AssetController::class, 'yajra_all_asset']);
-    Route::get('asset/masuk/yajra/show', [AssetController::class, 'yajra_masuk_asset']);
-    Route::get('asset/keluar/yajra/show', [AssetController::class, 'yajra_keluar_asset']);
-    Route::get('asset/digunakan/yajra/show', [AssetController::class, 'yajra_digunakan_asset']);
+    Route::get('asset/yajra/show', [AssetController::class, 'asset_yajra_show']);
+    Route::get('asset/yajra/masuk', [AssetController::class, 'asset_yajra_masuk']);
+    Route::get('asset/yajra/keluar', [AssetController::class, 'asset_yajra_keluar']);
+    Route::get('asset/yajra/uses', [AssetController::class, 'asset_yajra_uses']);
+    Route::post('asset/import/table', [AssetController::class, 'asset_import_table']);
+    Route::post('asset/import/masuk', [AssetController::class, 'asset_import_masuk']);
+    Route::post('asset/import/keluar', [AssetController::class, 'asset_import_keluar']);
+    Route::post('asset/import/uses', [AssetController::class, 'asset_import_uses']);
 
 
     //Checklist Genset

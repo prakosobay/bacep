@@ -9,6 +9,10 @@
                 Import CSV
             </button>
 
+            <a href="{{url('/c.new')}}" type="button" class="btn btn-success btn-sm mx-1" >
+                <strong>Tambahkan Barang Consumable Baru</strong>
+            </a>
+
             <!-- Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
