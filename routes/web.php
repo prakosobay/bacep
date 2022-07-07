@@ -60,7 +60,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('table_barang', [HomeController::class, 'dashboard'])->name('table_barang');
 
     //Barang Consume
-
     Route::get('consum/table/show', [ConsumController::class, 'consum_table_show'])->name('consumTable');
     Route::get('consum/create/show', [ConsumController::class, 'consum_create_show']);
     Route::get('consum/masuk/show', [ConsumController::class, 'consum_masuk_show']);
