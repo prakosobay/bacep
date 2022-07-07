@@ -10,8 +10,9 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-
-
+            <a type="button" class="btn btn-primary mr-5 sm" href="{{url('asset/table/show')}}">
+                Kembali
+            </a>
         </div>
         <div class="card-body">
             <div class="table-responsive">

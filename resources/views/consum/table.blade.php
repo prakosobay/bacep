@@ -4,14 +4,20 @@
 <div class="container-fluid">
     <h1 class="h3 my-3 text-gray-800 text-center">Data Barang Consumable</h1>
     <div class="card shadow mb-4">
-        <div class="card-header py-3">
+        <div class="card-header py-1">
             <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Import CSV
             </button>
 
-            <a href="{{url('/c.new')}}" type="button" class="btn btn-success btn-sm mx-1" >
+            <a href="{{url('consum/create/show')}}" type="button" class="btn btn-success btn-sm mx-1 my-1" >
                 <strong>Tambahkan Barang Consumable Baru</strong>
             </a>
+
+            @if (session('success'))
+                <div class="alert alert-success mt-1">
+                    {{ session('success') }}
+                </div>
+            @endif
 
             <!-- Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

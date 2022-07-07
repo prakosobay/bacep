@@ -19,6 +19,7 @@ class Consum extends Model
         'satuan',
         'kondisi',
         'note',
+        'id',
         'lokasi',
     ];
 }

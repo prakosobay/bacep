@@ -23,17 +23,16 @@ class ConsumController extends Controller
 
 
     // Show Pages
-    public function consum_show() // Menampilkan data barang consumable
+    public function consum_table_show() // Menampilkan data barang consumable
     {
         if ((Gate::allows('isHead')) || (Gate::allows('isApproval'))) {
-            $getAllConsum = Consum::all();
-            return view('consum.table', compact('getAllConsum'));
+            return view('consum.table');
         } else {
             abort(403);
         }
     }
 
-    public function show_new() // Tampilan untuk menginput barang consum baru
+    public function consum_create_show() // Tampilan untuk menginput barang consum baru
     {
         if ((Gate::allows('isAdmin')) || (Gate::allows('isApproval')) || (Gate::allows('isHead'))) {
             return view('consum.new');
@@ -45,8 +44,7 @@ class ConsumController extends Controller
     public function consum_masuk_show() // Tampilan untuk data barang masuk
     {
         if (Gate::allows('isHead') || (Gate::allows('isApproval')) || (Gate::allows('isAdmin'))) {
-            $getConsumMasuk = ConsumMasuk::all();
-            return view('consum.masuk', compact('getConsumMasuk'));
+            return view('consum.masuk');
         } else {
             abort(403,  'Anda Tidak Punya Akses Ke Halaman Ini');
         }
@@ -55,14 +53,13 @@ class ConsumController extends Controller
     public function consum_keluar_show() // Tampilan untuk data barang keluar
     {
         if (Gate::allows('isHead') || (Gate::allows('isApproval')) || (Gate::allows('isAdmin'))) {
-            $out = ConsumKeluar::all();
-            return view('consum.keluar', compact('out'));
+            return view('consum.keluar');
         } else {
             abort(403,  'Anda Tidak Punya Akses Ke Halaman Ini');
         }
     }
 
-    public function edit_masuk($id) // Tampilan untuk update barang masuk
+    public function consum_edit_masuk($id) // Tampilan untuk update barang masuk
     {
         if (Gate::allows('isAdmin') || (Gate::allows('isApproval')) || (Gate::allows('isHead'))) {
             $consum = Consum::find($id);
@@ -72,7 +69,7 @@ class ConsumController extends Controller
         }
     }
 
-    public function edit_keluar($id) // Tampilan untuk update barang keluar
+    public function consum_edit_keluar($id) // Tampilan untuk update barang keluar
     {
         if (Gate::allows('isAdmin') || (Gate::allows('isApproval')) || (Gate::allows('isHead'))) {
             $consum = Consum::find($id);
@@ -86,14 +83,11 @@ class ConsumController extends Controller
 
 
     // Submit data
-    public function update_masuk(Request $request, $id) // Update barang masuk
+    public function consum_update_masuk(Request $request, $id) // Update barang masuk
     {
         $this->validate($request, [
-            'nama_barang' => ['required'],
-            'consum_id' => ['required', 'numeric'],
             'jumlah' => ['numeric', 'required', 'min:1'],
             'ket' => 'required',
-            'pencatat' => ['required', 'string'],
         ]);
 
         $consum = Consum::find($id);
@@ -108,23 +102,18 @@ class ConsumController extends Controller
             'jumlah' => $request->jumlah,
             'ket' => $request->ket,
             'pencatat' => $request->pencatat,
-            // 'itemcode' => $request->itemcode,
             'tanggal' => date('d/m/Y'),
         ]);
 
-        Alert::success('Success', 'Data has been submited');
-        return back();
+        return redirect()->route('consumTable')->with('success', 'Barang Consum Berhasil di Tambah');
     }
 
-    public function update_keluar(Request $request, $id) // Update barang keluar
+    public function consum_update_keluar(Request $request, $id) // Update barang keluar
     {
         // dd($request->all());
         $this->validate($request, [
-            'nama_barang' => ['required'],
-            'consum_id' => ['required', 'numeric'],
             'jumlah' => ['numeric', 'required', 'min:1'],
             'ket' => 'required',
-            'pencatat' => ['required', 'string'],
         ]);
 
         $consum = Consum::find($id);
@@ -136,32 +125,28 @@ class ConsumController extends Controller
 
             $consumkeluar = ConsumKeluar::create([
                 'nama_barang' => $request->nama_barang,
-                'consum_id' => $request->consum_id,
+                'consum_id' => $request->id,
                 'jumlah' => $request->jumlah,
                 'ket' => $request->ket,
                 'pencatat' => $request->pencatat,
-                // 'itemcode' => $request->itemcode,
                 'tanggal' => date('d/m/Y'),
             ]);
 
-            Alert::success('Success', 'Data has been submited');
         } else {
-            Alert::error('Error', 'Stock Kosong/Kurang !');
+            return back()->with('Gagal', 'Stock Kosong/Kurang');
         }
-        return back();
+        return redirect()->route('consumTable')->with('success', 'Data Berhasil di Submit');
     }
 
-    public function store_consum(Request $request) // Create barang baru
+    public function consum_create_submit(Request $request) // Create barang baru
     {
-        // dd($request->all());
         $this->validate($request, [
             'nama_barang' => ['required', 'unique:consums', 'max:200'],
             'jumlah' => ['required', 'numeric', 'min:1'],
             'note' => ['max:255'],
             'lokasi' => 'required',
             'satuan' => ['required', 'string'],
-            'pencatat' => ['required', 'string'],
-            'itemcode' => ['required', 'numeric', 'digits:6'],
+            'itemcode' => ['numeric', 'digits:6'],
         ]);
 
         $consum = Consum::create([
@@ -179,12 +164,10 @@ class ConsumController extends Controller
             'jumlah' => $request->jumlah,
             'ket' => $request->note,
             'pencatat' => $request->pencatat,
-            'itemcode' => $request->itemcode,
             'tanggal' => date('d/m/Y'),
         ]);
 
-        Alert::success('Success', 'Data has been submited');
-        return back();
+        return redirect()->route('consumTable')->with('success', 'Barang Consum Berhasil di Tambah');
     }
 
 

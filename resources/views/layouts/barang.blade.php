@@ -135,7 +135,7 @@
                 <div id="consum_collapse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Option :</h6>
-                        <a class="collapse-item" href="{{ url('consum/show')}}">Consumable Table</a>
+                        <a class="collapse-item" href="{{ url('consum/table/show')}}">Consumable Table</a>
                         <a class="collapse-item" href="{{ url('consum/masuk/show')}}">Consumable Masuk</a>
                         <a class="collapse-item" href="{{ url('consum/keluar/show')}}">Consumable Keluar</a>
                     </div>
