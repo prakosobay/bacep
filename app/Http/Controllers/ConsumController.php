@@ -80,6 +80,16 @@ class ConsumController extends Controller
         }
     }
 
+    public function consum_edit_itemcode($id)
+    {
+        if (Gate::allows('isAdmin') || (Gate::allows('isApproval')) || (Gate::allows('isHead'))) {
+            $consum = Consum::find($id);
+            return view('consum.itemcode', compact('consum'));
+        } else {
+            abort(403,  'Anda Tidak Punya Akses Ke Halaman Ini');
+        }
+    }
+
 
 
     // Submit data
@@ -168,6 +178,24 @@ class ConsumController extends Controller
         ]);
 
         return redirect()->route('consumTable')->with('success', 'Barang Consum Berhasil di Tambah');
+    }
+
+    public function consum_update_itemcode(Request $request, $id)
+    {
+        $validate = $request->validate([
+            'itemcode' => ['required', 'numeric', 'digits:6'],
+        ]);
+
+        $getItemcode = Consum::findOrFail($id);
+        $getItemcode->update([
+            'itemcode' => $request->itemcode,
+        ]);
+
+        if($getItemcode){
+            return redirect()->route('consumTable')->with('success', 'Itemcode Berhasil di Update');
+        } else{
+            return back()->with('Gagal', 'Itemcode Gagal di Update');
+        }
     }
 
 

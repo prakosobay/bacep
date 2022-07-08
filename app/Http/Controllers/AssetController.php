@@ -97,6 +97,16 @@ class AssetController extends Controller
         }
     }
 
+    public function asset_edit_itemcode($id)
+    {
+        if((Gate::allows('isApproval') || (Gate::allows('isHead')) || (Gate::allows('isAdmin')))){
+            $getItemcode = Asset::find($id);
+            return view('asset.itemcode', compact('getItemcode'));
+        } else{
+            abort(403);
+        }
+    }
+
 
 
 
@@ -242,6 +252,24 @@ class AssetController extends Controller
             'itemcode' => $asset->itemcode,
         ]);
         return redirect()->route('assetTable')->with('success', 'Barang Asset Berhasil di Tambah');
+    }
+
+    public function asset_update_itemcode(Request $request, $id)
+    {
+        $validate = $request->validate([
+            'itemcode' => ['required', 'numeric', 'digits:6'],
+        ]);
+
+        $insertItemcode = Asset::findOrFail($id);
+        $insertItemcode->update([
+            'itemcode' => $request->itemcode,
+        ]);
+
+        if($insertItemcode){
+            return redirect()->route('assetTable')->with('success', 'Itemcode Berhasil di Update');
+        } else{
+            return back()->with('Gagal', 'Update Gagal');
+        }
     }
 
 

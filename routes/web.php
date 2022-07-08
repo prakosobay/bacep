@@ -66,8 +66,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('consum/keluar/show', [ConsumController::class, 'consum_keluar_show']);
     Route::get('consum/edit/masuk/{id}', [ConsumController::class, 'consum_edit_masuk']);
     Route::get('consum/edit/keluar/{id}', [ConsumController::class, 'consum_edit_keluar']);
+    Route::get('consum/edit/itemcode/{id}', [ConsumController::class, 'consum_edit_itemcode']);
     Route::put('consum/update/masuk/{id}', [ConsumController::class, 'consum_update_masuk']);
     Route::put('consum/update/keluar/{id}', [ConsumController::class, 'consum_update_keluar']);
+    Route::put('consum/update/itemcode/{id}', [ConsumController::class, 'consum_update_itemcode']);
     Route::get('/export.consum', [ConsumController::class, 'export_consum']);
     Route::get('/export.c.m', [ConsumController::class, 'export_consum_masuk']);
     Route::get('/export.c.k', [ConsumController::class, 'export_consum_keluar']);
@@ -78,6 +80,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('consum/import/table', [ConsumController::class, 'csv']);
     Route::post('consum/import/keluar', [ConsumController::class, 'import_keluar']);
     Route::post('consum/import/masuk', [ConsumController::class, 'import_masuk']);
+
+
 
 
     //Barang Asset
@@ -92,6 +96,7 @@ Route::middleware(['auth'])->group(function () {
     Route::put('asset/update/masuk/{id}', [AssetController::class, 'asset_update_masuk']);
     Route::put('asset/update/keluar/{id}', [AssetController::class, 'asset_update_keluar']);
     Route::put('asset/update/digunakan/{id}', [AssetController::class, 'asset_update_digunakan']);
+    Route::put('asset/update/itemcode/{id}', [AssetController::class, 'asset_update_itemcode']);
     Route::get('/export.asset', [AssetController::class, 'export_asset']);
     Route::get('/export.a.m', [AssetController::class, 'export_asset_masuk']);
     Route::get('/export.a.k', [AssetController::class, 'export_asset_keluar']);
@@ -99,11 +104,13 @@ Route::middleware(['auth'])->group(function () {
     Route::get('asset/yajra/masuk', [AssetController::class, 'asset_yajra_masuk']);
     Route::get('asset/yajra/keluar', [AssetController::class, 'asset_yajra_keluar']);
     Route::get('asset/yajra/uses', [AssetController::class, 'asset_yajra_uses']);
+    Route::get('asset/edit/itemcode/{id}', [AssetController::class, 'asset_edit_itemcode']);
     Route::post('asset/import/table', [AssetController::class, 'asset_import_table']);
     Route::post('asset/import/masuk', [AssetController::class, 'asset_import_masuk']);
     Route::post('asset/import/keluar', [AssetController::class, 'asset_import_keluar']);
     Route::post('asset/import/uses', [AssetController::class, 'asset_import_uses']);
     Route::post('asset/create/store', [AssetController::class, 'asset_create_store']);
+
 
 
     //Checklist Genset
@@ -114,12 +121,14 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/checklist', [GensetController::class, 'store_warming']);
 
 
+
     //Revisi
     Route::get('/ob', [RevisiController::class, 'show_ob'])->name('ob');
     Route::get('/ob.edit/{id}', [RevisiController::class, 'edit_ob']);
     Route::put('/ob.edit/{id}', [RevisiController::class, 'update_ob']);
     Route::post('/ob.destroy/{id}', [RevisiController::class, 'destroy_ob']);
     Route::post('/ob.new', [RevisiController::class, 'store_ob']);
+
 
 
     // Revisi Visitor
@@ -130,6 +139,7 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/revisi/visitor/edit/{id}', [RevisiController::class, 'update_visitor']);
     Route::post('/revisi/visitor/destroy/{id}', [RevisiController::class, 'destroy_visitor']);
     Route::post('/revisi/visitor/new', [RevisiController::class, 'store_visitor']);
+
 
 
     // Survey
@@ -144,6 +154,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/approve_survey', [SurveyController::class, 'approve']);
     Route::post('/reject_survey', [SurveyController::class, 'reject']);
     Route::get('/survey/yajra/show', [SurveyController::class, 'yajra_show']);
+
 
 
     // Cleaning
@@ -170,6 +181,7 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/cleaning/reject/{id}', [CleaningController::class, 'reject_full_cleaning']);
 
 
+
     // Troubleshoot
     Route::get('other/troubleshoot/show', [OtherController::class, 'show_troubleshoot_form']);
     Route::get('other/troubleshoot/pdf/{id}', [OtherController::class, 'pdf_troubleshoot']);
@@ -179,6 +191,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('other/troubleshoot/create', [OtherController::class, 'create_troubleshoot']);
     Route::post('other/troubleshoot/approve', [OtherController::class, 'approve_troubleshoot']);
     Route::post('other/troubleshoot/reject', [OtherController::class, 'reject_troubleshoot']);
+
 
 
     // Maintenance
