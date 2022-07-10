@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSurveyHistoryTable extends Migration
+class CreateSurveysTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,9 @@ class CreateSurveyHistoryTable extends Migration
      */
     public function up()
     {
-        Schema::create('survey_history', function (Blueprint $table) {
+        Schema::create('surveys', function (Blueprint $table) {
             $table->id();
-            $table->string('survey_id');
-            $table->string('created_by');
-            $table->string('role_to');
-            $table->string('status');
-            $table->string('aktif');
-            $table->string('pdf');
             $table->timestamps();
-
         });
     }
 
@@ -33,6 +26,6 @@ class CreateSurveyHistoryTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('survey_history');
+        Schema::dropIfExists('surveys');
     }
 }

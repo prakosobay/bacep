@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSurveyTable extends Migration
+class CreateSurveyFullsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,8 @@ class CreateSurveyTable extends Migration
      */
     public function up()
     {
-        Schema::create('_survey', function (Blueprint $table) {
+        Schema::create('survey_fulls', function (Blueprint $table) {
             $table->id();
-            $table->date('visit');
-            $table->date('leave');
-            $table->string('name_req');
-            $table->string('department_req');
-            $table->string('phone_req');
             $table->timestamps();
         });
     }
@@ -31,6 +26,6 @@ class CreateSurveyTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('_survey');
+        Schema::dropIfExists('survey_fulls');
     }
 }
