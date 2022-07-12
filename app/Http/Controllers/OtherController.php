@@ -423,8 +423,8 @@ class OtherController extends Controller
                     'time_end' => $input['time_end'][$k],
                     'activity' => $input['activity'][$k],
                     'service_impact' => $input['service_impact'][$k],
-                    'item' => $input['item'][$k],
-                    'procedure' => $input['procedure'][$k],
+                    // 'item' => $input['item'][$k],
+                    // 'procedure' => $input['procedure'][$k],
                     'created_at' => now(),
                     'updated_at' => now(),
                 ];
@@ -432,6 +432,23 @@ class OtherController extends Controller
                 $insert_detail[] = $detail_array;
             }
         }
+
+        $insert_item = [];
+        foreach ($input['item'] as $k => $v){
+            $item_array = [];
+            if (isset($input['item'][$k])){
+                $item_array = [
+                    'item' => $input['item'][$k],
+                    'procedure' => $input['procedure'][$k],
+                ];
+
+                $insert_item[] = $item_array;
+            }
+        }
+
+        // $merged = [];
+        $merged = array_push($insert_detail, $insert_item);
+        dd($merged);
         $other_detail = TroubleshootBmDetail::insert($insert_detail);
 
         $insert_risk = [];
@@ -478,8 +495,7 @@ class OtherController extends Controller
 
         $notif_email = TroubleshootBm::find($other_form->id);
         foreach ([
-            'aurellius.putra@balitower.co.id', 'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
-            'ilham.pangestu@balitower.co.id', 'irwan.trisna@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id',
+            'bayu.prakoso@balitower.co.id',
         ] as $recipient) {
             Mail::to($recipient)->send(new NotifTroubleshootForm($notif_email));
         }
@@ -523,14 +539,13 @@ class OtherController extends Controller
             $role_to = '';
             if ($last_update->role_to == 'review') {
                 foreach ([
-                    'aurellius.putra@balitower.co.id', 'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
-                    'ilham.pangestu@balitower.co.id', 'irwan.trisna@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id',
+                    'bayu.prakoso@balitower.co.id',
                 ] as $recipient) {
                     Mail::to($recipient)->send(new NotifTroubleshootForm($notif_email));
                 }
                 $role_to = 'check';
             } elseif ($last_update->role_to == 'check') {
-                foreach (['security.bacep@balitower.co.id'] as $recipient) {
+                foreach (['security.bacep@balitower.co.id', 'bayu.prakoso@balitower.co.id'] as $recipient) {
                     Mail::to($recipient)->send(new NotifTroubleshootForm($notif_email));
                 }
                 $role_to = 'security';
