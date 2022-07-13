@@ -14,7 +14,6 @@
 
 </head>
 <body>
-
     {{-- navbar --}}
     <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-0 my-0">
         <div class="container">

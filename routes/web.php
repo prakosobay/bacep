@@ -9,7 +9,7 @@ Route::get('/', function () {
     return view('auth.login');
 })->middleware('guest');
 
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::get('/home', [HomeController::class, 'index']);
 
     //Detail History
@@ -186,8 +186,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('other/troubleshoot/show', [OtherController::class, 'show_troubleshoot_form']);
     Route::get('other/troubleshoot/pdf/{id}', [OtherController::class, 'pdf_troubleshoot']);
     Route::get('other/troubleshoot/yajra/history', [OtherController::class, 'yajra_troubleshoot_history']);
-    Route::get('other/troubleshoot/yajra/full/approval', [OtherController::class, 'yajra_troubleshoot_full_approval']);
-    Route::get('other/troubleshoot/yajra/full/reject', [OtherController::class, 'yajra_full_reject_troubleshoot']);
+    Route::get('other/troubleshoot/yajra/full/approval', [OtherController::class, 'other_troubleshoot_yajra_full_approval']);
+    Route::get('other/troubleshoot/yajra/full/visitor', [OtherController::class, 'other_troubleshoot_yajra_full_visitor']);
+    Route::get('other/troubleshoot/yajra/full/reject', [OtherController::class, 'other_troubleshoot_yajra_full_reject']);
+    Route::get('other/troubleshoot/action/checkin/{id}', [OtherController::class, 'other_troubleshoot_action_checkin']);
     Route::post('other/troubleshoot/create', [OtherController::class, 'create_troubleshoot']);
     Route::post('other/troubleshoot/approve', [OtherController::class, 'approve_troubleshoot']);
     Route::post('other/troubleshoot/reject', [OtherController::class, 'reject_troubleshoot']);

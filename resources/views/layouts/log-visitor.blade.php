@@ -189,11 +189,9 @@
                                     <thead>
                                         <tr class="judul-table text-center">
                                             <th>No.</th>
-                                            <th>Date of Visit</th>
                                             <th>Purpose of Work</th>
-                                            <th>Visitor Name</th>
-                                            <th>Checkin</th>
-                                            <th>Checkout</th>
+                                            <th>Date of Visit</th>
+                                            <th>Date of Leave</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>

@@ -46,6 +46,21 @@
             });
         });
 
+        $(function() {
+            $('#troubleshoot_table').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: '{{ url('other/troubleshoot/yajra/full/visitor')}}',
+                columns: [
+                    { data: 'troubleshoot_bm_id', name: 'troubleshoot_bm_id' },
+                    { data: 'work', name: 'work' },
+                    { data: 'visit', name: 'visit' },
+                    { data: 'leave', name: 'leave' },
+                    {data: 'action', name: 'action', orderable: false, searchable: false}
+                ]
+            });
+        });
+
 
         // Filter
         // $(document).on("click", "#filter", function(e) {

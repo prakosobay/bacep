@@ -76,6 +76,20 @@ class OtherController extends Controller
 
 
 
+    //Checkin Pages
+    public function other_troubleshoot_action_checkin($id)
+    {
+        $getForms = TroubleshootBm::findOrFail($id);
+        $getPersonils = DB::table('troubleshoot_bm_personils')->where('troubleshoot_bm_id', $id)->get();
+        $getRisks = DB::table('troubleshoot_bm_risks')->where('troubleshoot_bm_id', $id)->get();
+        $getEntries = DB::table('troubleshoot_bm_entries')->where('troubleshoot_bm_id', $id)->get();
+        $getDetails = DB::table('troubleshoot_bm_details')->where('troubleshoot_bm_id', $id)->get();
+        // dd($getDetails);
+        return view('other.troubleshoot_checkin', compact('getForms', 'getPersonils', 'getEntries', 'getRisks', 'getDetails'));
+    }
+
+
+
     // Retrieving Data From DB
     public function get_rutin($id) // Data Permit Rutin
     {
@@ -725,7 +739,7 @@ class OtherController extends Controller
             ->make(true);
     }
 
-    public function yajra_troubleshoot_full_approval() // Get data permit troubleshoot full approval
+    public function other_troubleshoot_yajra_full_approval() // Get data permit troubleshoot full approval view untuk approval
     {
         $full_approval = DB::table('troubleshoot_bm_fulls')
             ->join('troubleshoot_bms', 'troubleshoot_bms.id', '=', 'troubleshoot_bm_fulls.troubleshoot_bm_id')
@@ -739,7 +753,7 @@ class OtherController extends Controller
             ->make(true);
     }
 
-    public function yajra_full_reject_troubleshoot()
+    public function other_troubleshoot_yajra_full_reject()
     {
         $getFull = DB::table('troubleshoot_bm_fulls')
             ->select(['troubleshoot_bm_id', 'visit', 'note', 'work'])
@@ -749,6 +763,20 @@ class OtherController extends Controller
             ->editColumn('visit', function ($getFull) {
                 return $getFull->visit ? with(new Carbon($getFull->visit))->format('d/m/Y') : '';
             })
+            ->make(true);
+    }
+
+    public function other_troubleshoot_yajra_full_visitor()
+    {
+        $full_approval = DB::table('troubleshoot_bm_fulls')
+            ->join('troubleshoot_bms', 'troubleshoot_bms.id', '=', 'troubleshoot_bm_fulls.troubleshoot_bm_id')
+            ->select('troubleshoot_bm_fulls.*')
+            ->orderBy('troubleshoot_bm_id', 'desc');
+        return Datatables::of($full_approval)
+            ->editColumn('visit', function ($full_approval) {
+                return $full_approval->visit ? with(new Carbon($full_approval->visit))->format('d/m/Y') : '';
+            })
+            ->addColumn('action', 'other.troubleshootActionEdit')
             ->make(true);
     }
 }
