@@ -66,7 +66,7 @@
                 <div class="col-3">
                     <div class="wrap-contact100-form-radio">
                         <div class="contact100-form-radio">
-							<input class="input-radio100" id="dc" type="checkbox" name="dc" value="1">
+							<input class="input-radio100" id="dc" type="checkbox" name="dc" value="{{$getEntries->dc}}" readonly>
 							<label class="label-radio100" for="dc">
 								Server Room
 							</label>
@@ -118,7 +118,7 @@
 						</div>
 
                         <div class="contact100-form-radio">
-							<input class="input-radio100" id="trafo" type="checkbox" name="trafo" value="1">
+							<input class="input-radio100" id="trafo" type="checkbox" name="trafo" value="{{$getEntries->trafo}}" aria-selected="true">
 							<label class="label-radio100" for="trafo">
 								Trafo Room
 							</label>
@@ -250,10 +250,77 @@
                     </tbody>
                 </table>
 
+                {{-- PIC --}}
+                <table class="table table-bordered bg1 mt-3" width="100%">
+                    <tr>
+                        <th colspan="5"><b>Visitor</b></th>
+                    </tr>
+                    @for($num = 1; $num < 6; $num++)
+                    <tr>
+                        <td rowspan="5"><b>PIC </b></td>
+                    </tr>
+                    @foreach($getPersonils as $personil)
+                        <tr>
+                            <th>Name </th>
+                            <td>
+                                <input type="text" class="bg1 input100" value="{{$personil->nama}}" readonly>
+                            </td>
+                            <th>Company</th>
+                            <td>
+                                <input type="text" class="bg1 input100" value="{{$personil->company}}" readonly>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>ID Number </th>
+                            <td>
+                                <input type="text" class="bg1 input100" value="{{$personil->numberId}}" readonly>
+                            </td>
+                            <th>Department </th>
+                            <td>
+                                <input type="text" class="bg1 input100" value="{{$personil->department}}" readonly>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Phone Number</th>
+                            <td>
+                                <input type="text" class="bg1 input100" value="{{$personil->phone}}" readonly>
+                            </td>
+                            <th>Responsibility </th>
+                            <td>
+                                <input type="text" class="bg1 input100" value="{{$personil->respon}}" readonly>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">
+                                <span>Take a selfie</span>
+                                <div id="my_camera"></div><br>
+                                <input type="button" value="Take Snapshot" class="btn btn-sm btn-primary" onclick="take_snapshot()" required>
+                            </th>
+                            <th colspan="2" class="py-5">
+                                <div id="results"></div><br>
+                                <input class="@error('photo_checkin') is-invalid
+                                @enderror" required autocomplete="photo_checkin" type="hidden" name="photo_checkin" id="image">
+                                @error('photo_checkin')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span><br>
+                                @enderror
+                                <input type="time" class="@error('checkin')@enderror" name="checkin" id="checkin" value="" required autocomplete="checkin" readonly>
+                                @error('checkin')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </th>
+                        </tr>
+                    @endforeach
+                    @endfor
+                </table>
+
 				<div class="container-contact100-form-btn">
 					<button class="contact100-form-btn" id="submit_form">
 						<span>
-							Submit
+							Checkin
 							<i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
 						</span>
 					</button>
@@ -274,9 +341,40 @@
 	<script src="{{ asset('vendor/select2/select2.min.js')}}"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    {{-- Webcam --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.25/webcam.min.js"></script>
+
 {{--add table--}}
 <script>
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('input[name="_token"]').val()
+        }
+    });
 
+    Webcam.set({
+        width: 450,
+        height: 400,
+        image_format: 'jpeg',
+        jpeg_quality: 90
+    });
+
+    Webcam.attach( '#my_camera' );
+        function take_snapshot() {
+            Webcam.snap( function(data_uri) {
+                $("#image").val(data_uri);
+                document.getElementById('results').innerHTML = '<img src="'+data_uri+'"/>';
+            });
+            var tanggal = new Date();
+            var jam = tanggal.getHours();
+            var menit = tanggal.getMinutes();
+            var detik = tanggal.getSeconds();
+            jam = jam < 10 ? '0' +jam : jam;
+            menit = menit < 10 ? '0'+menit : menit;
+            detik = detik < 10 ? '0'+detik : detik;
+            var waktu = jam + ':' + menit + ':' + detik;
+            $("#checkin").val(waktu);
+        }
 </script>
 </body>
 </html>

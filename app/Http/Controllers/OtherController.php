@@ -82,9 +82,9 @@ class OtherController extends Controller
         $getForms = TroubleshootBm::findOrFail($id);
         $getPersonils = DB::table('troubleshoot_bm_personils')->where('troubleshoot_bm_id', $id)->get();
         $getRisks = DB::table('troubleshoot_bm_risks')->where('troubleshoot_bm_id', $id)->get();
-        $getEntries = DB::table('troubleshoot_bm_entries')->where('troubleshoot_bm_id', $id)->get();
+        $getEntries = DB::table('troubleshoot_bm_entries')->where('troubleshoot_bm_id', $id)->first();
         $getDetails = DB::table('troubleshoot_bm_details')->where('troubleshoot_bm_id', $id)->get();
-        // dd($getDetails);
+        // dd($getEntries);
         return view('other.troubleshoot_checkin', compact('getForms', 'getPersonils', 'getEntries', 'getRisks', 'getDetails'));
     }
 
@@ -493,8 +493,7 @@ class OtherController extends Controller
 
         $notif_email = TroubleshootBm::find($other_form->id);
         foreach ([
-            'aurellius.putra@balitower.co.id', 'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
-            'ilham.pangestu@balitower.co.id', 'irwan.trisna@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'dyah.retno@balitower.co.id',
+            'bayu.prakoso@balitower.co.id',
         ] as $recipient) {
             Mail::to($recipient)->send(new NotifTroubleshootForm($notif_email));
         }
@@ -538,8 +537,7 @@ class OtherController extends Controller
             $role_to = '';
             if ($last_update->role_to == 'review') {
                 foreach ([
-                    'aurellius.putra@balitower.co.id', 'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
-                    'ilham.pangestu@balitower.co.id', 'irwan.trisna@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id',
+                    'bayu.prakoso@balitower.co.id',
                 ] as $recipient) {
                     Mail::to($recipient)->send(new NotifTroubleshootForm($notif_email));
                 }
@@ -550,7 +548,7 @@ class OtherController extends Controller
                 }
                 $role_to = 'security';
             } elseif ($last_update->role_to == 'security') {
-                foreach (['bayu.prakoso@balitower.co.id', 'tofiq.hidayat@balitower.co.id'] as $recipient) {
+                foreach (['bayu.prakoso@balitower.co.id'] as $recipient) {
                     Mail::to($recipient)->send(new NotifTroubleshootForm($notif_email));
                 }
                 $role_to = 'head';
@@ -729,7 +727,7 @@ class OtherController extends Controller
             ->join('troubleshoot_bms', 'troubleshoot_bms.id', 'troubleshoot_bm_histories.troubleshoot_bm_id')
             ->select('troubleshoot_bm_histories.*', 'troubleshoot_bms.visit')
             ->orderBy('troubleshoot_bm_id', 'desc');
-            return Datatables::of($log_troubleshoot)
+        return Datatables::of($log_troubleshoot)
             ->editColumn('updated_at', function ($log_troubleshoot) {
                 return $log_troubleshoot->updated_at ? with(new Carbon($log_troubleshoot->updated_at))->format('d/m/Y') : '';
             })
