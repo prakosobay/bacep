@@ -1,4 +1,4 @@
-<a href="{{url ('other/troubleshoot/action/checkin', $model->id)}}" class="btn btn-xs btn-primary btn-sm"><i class="glyphicon glyphicon-edit"></i>Checkin</a>
+<a href="{{url ('other/troubleshoot/action/checkin', $model->troubleshoot_bm_id)}}" class="btn btn-xs btn-primary btn-sm"><i class="glyphicon glyphicon-edit"></i>Checkin</a>
 <button type="button" class="btn btn-danger btn-sm mx-2 my-2" data-bs-toggle="modal" data-bs-target="#rejectTroubleshoot">
     Reject
 </button>

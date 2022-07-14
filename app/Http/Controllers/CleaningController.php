@@ -223,7 +223,7 @@ class CleaningController extends Controller
     public function checkin_update_cleaning(Request $request, $id) // Proses checkin
     {
         $data = ($request->all());
-
+        // return var_dump($data);
         $jumlah_char_pic1 = strlen($data['cleaning_name']);
         $jumlah_char_pic2 = strlen($data['cleaning_name2']);
 

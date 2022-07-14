@@ -30,7 +30,8 @@
 <body>
 	<div class="container-contact100">
 		<div class="wrap-contact100">
-			<form class="contact100-form validate-form" id="troubleshoot_form" method="POST">
+			<form class="contact100-form validate-form" id="troubleshoot_form" method="POST" action="{{ url('other/troubleshoot/update/checkin', $getForms->id)}}">
+                @method('PUT')
                 @csrf
 				<span class="contact100-form-title">
 					CHECKIN FORM TROUBLESHOOT
@@ -43,6 +44,12 @@
                             <li>{{ $error }}</li>
                             @endforeach
                         </ul>
+                    </div>
+                @endif
+
+                @if (session('gagal'))
+                    <div class="alert alert-warning my-2 mx-2">
+                        {{ session('gagal') }}
                     </div>
                 @endif
 
@@ -65,95 +72,196 @@
                 {{-- Entry Area --}}
                 <div class="col-3">
                     <div class="wrap-contact100-form-radio">
-                        <div class="contact100-form-radio">
-							<input class="input-radio100" id="dc" type="checkbox" name="dc" value="{{$getEntries->dc}}" readonly>
-							<label class="label-radio100" for="dc">
-								Server Room
-							</label>
-						</div>
+                        @if($getEntries->dc == true)
+                            <div class="contact100-form-radio">
+                                <input class="input-radio100" id="dc" type="radio" name="dc" value="1" checked disabled>
+                                <label class="label-radio100" for="dc">
+                                    Server Room
+                                </label>
+                            </div>
+                        @else
+                            <div class="contact100-form-radio">
+                                <input class="input-radio100" id="dc" type="radio" name="dc" value="1" disabled>
+                                <label class="label-radio100" for="dc">
+                                    Server Room
+                                </label>
+                            </div>
+                        @endif
 
-                        <div class="contact100-form-radio">
-							<input class="input-radio100" id="mmr1" type="checkbox" name="mmr1" value="1">
-							<label class="label-radio100" for="mmr1">
-								MMR 1
-							</label>
-						</div>
+                        @if($getEntries->mmr1 == true)
+                            <div class="contact100-form-radio">
+                                <input class="input-radio100" id="mmr1" type="radio" name="mmr1" value="1" checked disabled>
+                                <label class="label-radio100" for="mmr1">
+                                    MMR 1
+                                </label>
+                            </div>
+                        @else
+                            <div class="contact100-form-radio">
+                                <input class="input-radio100" id="mmr1" type="checkbox" name="mmr1" value="1" disabled>
+                                <label class="label-radio100" for="mmr1">
+                                    MMR 1
+                                </label>
+                            </div>
+                        @endif
 
-                        <div class="contact100-form-radio">
-							<input class="input-radio100" id="mmr2" type="checkbox" name="mmr2" value="1">
-							<label class="label-radio100" for="mmr2">
-								MMR 2
-							</label>
-						</div>
+                        @if($getEntries->mmr2 == true)
+                            <div class="contact100-form-radio">
+                                <input class="input-radio100" id="mmr2" type="checkbox" name="mmr2" value="1" checked disabled>
+                                <label class="label-radio100" for="mmr2">
+                                    MMR 2
+                                </label>
+                            </div>
+                        @else
+                            <div class="contact100-form-radio">
+                                <input class="input-radio100" id="mmr2" type="checkbox" name="mmr2" value="1" disabled>
+                                <label class="label-radio100" for="mmr2">
+                                    MMR 2
+                                </label>
+                            </div>
+                        @endif
 
-                        <div class="contact100-form-radio">
-							<input class="input-radio100" id="ups" type="checkbox" name="ups" value="1">
-							<label class="label-radio100" for="ups">
-								UPS Room
-							</label>
-						</div>
+                        @if ($getEntries->ups == true)
+                            <div class="contact100-form-radio">
+                                <input class="input-radio100" id="ups" type="checkbox" name="ups" value="1" checked disabled>
+                                <label class="label-radio100" for="ups">
+                                    UPS Room
+                                </label>
+                            </div>
+                        @else
+                            <div class="contact100-form-radio">
+                                <input class="input-radio100" id="ups" type="checkbox" name="ups" value="1" disabled>
+                                <label class="label-radio100" for="ups">
+                                    UPS Room
+                                </label>
+                            </div>
+                        @endif
+
                     </div>
                 </div>
                 <div class="col-3">
                     <div class="wrap-contact100-form-radio">
-                        <div class="contact100-form-radio">
-							<input class="input-radio100" id="fss" type="checkbox" name="fss" value="1">
-							<label class="label-radio100" for="fss">
-								FSS Room
-							</label>
-						</div>
+                        @if ($getEntries->fss == true)
+                            <div class="contact100-form-radio">
+                                <input class="input-radio100" id="fss" type="checkbox" name="fss" value="1" checked disabled>
+                                <label class="label-radio100" for="fss">
+                                    FSS Room
+                                </label>
+                            </div>
+                        @else
+                            <div class="contact100-form-radio">
+                                <input class="input-radio100" id="fss" type="checkbox" name="fss" value="1" disabled>
+                                <label class="label-radio100" for="fss">
+                                    FSS Room
+                                </label>
+                            </div>
+                        @endif
 
-                        <div class="contact100-form-radio">
-							<input class="input-radio100" id="parking" type="checkbox" name="parking" value="1">
-							<label class="label-radio100" for="parking">
-								Parking Lot
-							</label>
-						</div>
+                        @if($getEntries->parking == true)
+                            <div class="contact100-form-radio">
+                                <input class="input-radio100" id="parking" type="checkbox" name="parking" value="1" checked disabled>
+                                <label class="label-radio100" for="parking">
+                                    Parking Lot
+                                </label>
+                            </div>
+                        @else
+                            <div class="contact100-form-radio">
+                                <input class="input-radio100" id="parking" type="checkbox" name="parking" value="1" disabled>
+                                <label class="label-radio100" for="parking">
+                                    Parking Lot
+                                </label>
+                            </div>
+                        @endif
 
-                        <div class="contact100-form-radio">
-							<input class="input-radio100" id="genset" type="checkbox" name="genset" value="1">
-							<label class="label-radio100" for="genset">
-								Generator Room
-							</label>
-						</div>
+                        @if($getEntries->generator == true)
+                            <div class="contact100-form-radio">
+                                <input class="input-radio100" id="genset" type="checkbox" name="genset" value="1" checked disabled>
+                                <label class="label-radio100" for="genset">
+                                    Generator Room
+                                </label>
+                            </div>
+                        @else
+                            <div class="contact100-form-radio">
+                                <input class="input-radio100" id="genset" type="checkbox" name="genset" value="1" disabled>
+                                <label class="label-radio100" for="genset">
+                                    Generator Room
+                                </label>
+                            </div>
+                        @endif
 
-                        <div class="contact100-form-radio">
-							<input class="input-radio100" id="trafo" type="checkbox" name="trafo" value="{{$getEntries->trafo}}" aria-selected="true">
-							<label class="label-radio100" for="trafo">
-								Trafo Room
-							</label>
-						</div>
+                        @if($getEntries->trafo == true)
+                            <div class="contact100-form-radio">
+                                <input class="input-radio100" id="trafo" type="checkbox" name="trafo" value="1" checked disabled>
+                                <label class="label-radio100" for="trafo">
+                                    Trafo Room
+                                </label>
+                            </div>
+                        @else
+                            <div class="contact100-form-radio">
+                                <input class="input-radio100" id="trafo" type="checkbox" name="trafo" value="1" disabled>
+                                <label class="label-radio100" for="trafo">
+                                    Trafo Room
+                                </label>
+                            </div>
+                        @endif
+
                     </div>
                 </div>
                 <div class="col-3">
                     <div class="wrap-contact100-form-radio">
-                        <div class="contact100-form-radio">
-							<input class="input-radio100" id="baterai" type="checkbox" name="baterai" value="1">
-							<label class="label-radio100" for="baterai">
-								Baterai Room
-							</label>
-						</div>
+                        @if($getEntries->baterai == true)
+                            <div class="contact100-form-radio">
+                                <input class="input-radio100" id="baterai" type="checkbox" name="baterai" value="1" checked disabled>
+                                <label class="label-radio100" for="baterai">
+                                    Baterai Room
+                                </label>
+                            </div>
+                        @else
+                            <div class="contact100-form-radio">
+                                <input class="input-radio100" id="baterai" type="checkbox" name="baterai" value="1" disabled>
+                                <label class="label-radio100" for="baterai">
+                                    Baterai Room
+                                </label>
+                            </div>
+                        @endif
 
-                        <div class="contact100-form-radio">
-							<input class="input-radio100" id="panel" type="checkbox" name="panel" value="1">
-							<label class="label-radio100" for="panel">
-								Panel Room
-							</label>
-						</div>
+                        @if($getEntries->panel == true)
+                            <div class="contact100-form-radio">
+                                <input class="input-radio100" id="panel" type="checkbox" name="panel" value="1" checked disabled>
+                                <label class="label-radio100" for="panel">
+                                    Panel Room
+                                </label>
+                            </div>
+                        @else
+                            <div class="contact100-form-radio">
+                                <input class="input-radio100" id="panel" type="checkbox" name="panel" value="1" disabled>
+                                <label class="label-radio100" for="panel">
+                                    Panel Room
+                                </label>
+                            </div>
+                        @endif
 
-                        <div class="contact100-form-radio">
-							<input class="input-radio100" id="yard" type="checkbox" name="yard" value="1">
-							<label class="label-radio100" for="yard">
-								Yard
-							</label>
-						</div>
+                        @if($getEntries->yard == true)
+                            <div class="contact100-form-radio">
+                                <input class="input-radio100" id="yard" type="checkbox" name="yard" value="1" checked disabled>
+                                <label class="label-radio100" for="yard">
+                                    Yard
+                                </label>
+                            </div>
+                        @else
+                            <div class="contact100-form-radio">
+                                <input class="input-radio100" id="yard" type="checkbox" name="yard" value="1" disabled>
+                                <label class="label-radio100" for="yard">
+                                    Yard
+                                </label>
+                            </div>
+                        @endif
                     </div>
                 </div>
                 <div class="col-3">
                     <div class="wrap-contact100-form-radio">
                         <div class="wrap-input100 bg1">
                             <span class="label-input100">Other (Lokasi Lain) *</span>
-                            <input type="text" class="input100" id="lain" name="lain" value="{{ old('lain')}}" placeholder="Lokasi lain">
+                            <input type="text" class="input100" id="lain" name="lain" value="{{ $getEntries->lain}}">
                         </div>
                     </div>
                 </div>
@@ -250,14 +358,10 @@
                     </tbody>
                 </table>
 
-                {{-- PIC --}}
+                {{-- Visitor --}}
                 <table class="table table-bordered bg1 mt-3" width="100%">
                     <tr>
-                        <th colspan="5"><b>Visitor</b></th>
-                    </tr>
-                    @for($num = 1; $num < 6; $num++)
-                    <tr>
-                        <td rowspan="5"><b>PIC </b></td>
+                        <th colspan="4"><b>Visitor</b></th>
                     </tr>
                     @foreach($getPersonils as $personil)
                         <tr>
@@ -290,22 +394,24 @@
                                 <input type="text" class="bg1 input100" value="{{$personil->respon}}" readonly>
                             </td>
                         </tr>
+                    @endforeach
+
+                        {{-- Visitor 1 --}}
                         <tr>
                             <th colspan="2">
-                                <span>Take a selfie</span>
+                                <span>Take A Selfie Visitor 1</span>
                                 <div id="my_camera"></div><br>
                                 <input type="button" value="Take Snapshot" class="btn btn-sm btn-primary" onclick="take_snapshot()" required>
                             </th>
                             <th colspan="2" class="py-5">
                                 <div id="results"></div><br>
-                                <input class="@error('photo_checkin') is-invalid
-                                @enderror" required autocomplete="photo_checkin" type="hidden" name="photo_checkin" id="image">
+                                <input class="@error('photo_checkin') is-invalid @enderror" required autocomplete="photo_checkin" type="hidden" name="photo_checkin[]" id="image">
                                 @error('photo_checkin')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span><br>
                                 @enderror
-                                <input type="time" class="@error('checkin')@enderror" name="checkin" id="checkin" value="" required autocomplete="checkin" readonly>
+                                <input type="time" class="@error('checkin') is-invalid @enderror" name="checkin[]" id="checkin" value="" required autocomplete="checkin" readonly>
                                 @error('checkin')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -313,8 +419,102 @@
                                 @enderror
                             </th>
                         </tr>
-                    @endforeach
-                    @endfor
+
+                        {{-- Visitor 2 --}}
+                        <tr>
+                            <th colspan="2">
+                                <span>Take A Selfie Visitor 2</span>
+                                <div id="my_camera2"></div><br>
+                                <input type="button" class="btn btn-sm btn-primary" value="Take Snapshot2" onclick="take_snapshot2()">
+                            </th>
+                            <th colspan="2" class="py-5">
+                                <div id="results2"></div><br>
+                                <input type="hidden" class="@error('photo_checkin2') is-invalid @enderror" name="photo_checkin[]" id="image2">
+                                @error('photo_checkin2')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{$message}}</strong>
+                                    </span><br>
+                                @enderror
+                                <input type="time" class="@error('checkin2') is-invalid @enderror" name="checkin[]" id="checkin2" value="" readonly>
+                                @error('checkin2')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </th>
+                        </tr>
+
+                        {{-- Visitor 3 --}}
+                        <tr>
+                            <th colspan="2">
+                                <span>Take A Selfie Visitor 3</span>
+                                <div id="my_camera3"></div><br>
+                                <input type="button" class="btn btn-sm btn-primary" value="Take Snapshot3" onclick="take_snapshot3()">
+                            </th>
+                            <th colspan="2" class="py-5">
+                                <div id="results3"></div><br>
+                                <input type="hidden" class="@error('photo_checkin3') is-invalid @enderror" name="photo_checkin[]" id="image3">
+                                @error('photo_checkin3')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{$message}}</strong>
+                                    </span><br>
+                                @enderror
+                                <input type="time" class="@error('checkin3') is-invalid @enderror" name="checkin[]" id="checkin3" value="" readonly>
+                                @error('checkin3')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </th>
+                        </tr>
+
+                        {{-- Visitor 4 --}}
+                        <tr>
+                            <th colspan="2">
+                                <span>Take A Selfie Visitor 4</span>
+                                <div id="my_camera4"></div><br>
+                                <input type="button" class="btn btn-sm btn-primary" value="Take Snapshot4" onclick="take_snapshot4()">
+                            </th>
+                            <th colspan="2" class="py-5">
+                                <div id="results4"></div><br>
+                                <input type="hidden" class="@error('photo_checkin4') is-invalid @enderror" name="photo_checkin[]" id="image4">
+                                @error('photo_checkin4')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{$message}}</strong>
+                                    </span><br>
+                                @enderror
+                                <input type="time" class="@error('checkin4') is-invalid @enderror" name="checkin[]" id="checkin4" value="" readonly>
+                                @error('checkin4')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </th>
+                        </tr>
+
+                        {{-- Visitor 5 --}}
+                        <tr>
+                            <th colspan="2">
+                                <span>Take A Selfie Visitor 5</span>
+                                <div id="my_camera5"></div><br>
+                                <input type="button" class="btn btn-sm btn-primary" value="Take Snapshot5" onclick="take_snapshot5()" >
+                            </th>
+                            <th colspan="2" class="py-5">
+                                <div id="results5"></div><br>
+                                <input type="hidden" class="@error('photo_checkin5') is-invalid @enderror"   name="photo_checkin[]" id="image5">
+                                @error('photo_checkin5')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{$message}}</strong>
+                                    </span><br>
+                                @enderror
+                                <input type="time" class="@error('checkin5') is-invalid @enderror" name="checkin[]" id="checkin5" value=""  readonly>
+                                @error('checkin5')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </th>
+                        </tr>
                 </table>
 
 				<div class="container-contact100-form-btn">
@@ -374,6 +574,74 @@
             detik = detik < 10 ? '0'+detik : detik;
             var waktu = jam + ':' + menit + ':' + detik;
             $("#checkin").val(waktu);
+        }
+
+    Webcam.attach( '#my_camera2' );
+        function take_snapshot2() {
+            Webcam.snap( function(data_uri) {
+                $("#image2").val(data_uri);
+                document.getElementById('results2').innerHTML = '<img src="'+data_uri+'"/>';
+            });
+            var tanggal = new Date();
+            var jam = tanggal.getHours();
+            var menit = tanggal.getMinutes();
+            var detik = tanggal.getSeconds();
+            jam = jam < 10 ? '0' +jam : jam;
+            menit = menit < 10 ? '0'+menit : menit;
+            detik = detik < 10 ? '0'+detik : detik;
+            var waktu = jam + ':' + menit + ':' + detik;
+            $("#checkin2").val(waktu);
+        }
+
+    Webcam.attach( '#my_camera3' );
+        function take_snapshot3() {
+            Webcam.snap( function(data_uri) {
+                $("#image3").val(data_uri);
+                document.getElementById('results3').innerHTML = '<img src="'+data_uri+'"/>';
+            });
+            var tanggal = new Date();
+            var jam = tanggal.getHours();
+            var menit = tanggal.getMinutes();
+            var detik = tanggal.getSeconds();
+            jam = jam < 10 ? '0' +jam : jam;
+            menit = menit < 10 ? '0'+menit : menit;
+            detik = detik < 10 ? '0'+detik : detik;
+            var waktu = jam + ':' + menit + ':' + detik;
+            $("#checkin3").val(waktu);
+        }
+
+    Webcam.attach( '#my_camera4' );
+        function take_snapshot4() {
+            Webcam.snap( function(data_uri) {
+                $("#image4").val(data_uri);
+                document.getElementById('results4').innerHTML = '<img src="'+data_uri+'"/>';
+            });
+            var tanggal = new Date();
+            var jam = tanggal.getHours();
+            var menit = tanggal.getMinutes();
+            var detik = tanggal.getSeconds();
+            jam = jam < 10 ? '0' +jam : jam;
+            menit = menit < 10 ? '0'+menit : menit;
+            detik = detik < 10 ? '0'+detik : detik;
+            var waktu = jam + ':' + menit + ':' + detik;
+            $("#checkin4").val(waktu);
+        }
+
+    Webcam.attach( '#my_camera5' );
+        function take_snapshot5() {
+            Webcam.snap( function(data_uri) {
+                $("#image5").val(data_uri);
+                document.getElementById('results5').innerHTML = '<img src="'+data_uri+'"/>';
+            });
+            var tanggal = new Date();
+            var jam = tanggal.getHours();
+            var menit = tanggal.getMinutes();
+            var detik = tanggal.getSeconds();
+            jam = jam < 10 ? '0' +jam : jam;
+            menit = menit < 10 ? '0'+menit : menit;
+            detik = detik < 10 ? '0'+detik : detik;
+            var waktu = jam + ':' + menit + ':' + detik;
+            $("#checkin5").val(waktu);
         }
 </script>
 </body>

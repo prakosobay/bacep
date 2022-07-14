@@ -55,6 +55,11 @@
             <div class="card-header py-3">
                 <h4 class="judul text-center">Log Form Building Management</h4>
             </div>
+            @if (session('success'))
+                <div class="alert alert-success mt-1">
+                    {{ session('success') }}
+                </div>
+            @endif
             <div class="card-body">
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item" role="presentation">

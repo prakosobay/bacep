@@ -554,7 +554,7 @@ class OtherController extends Controller
                 $role_to = 'head';
             } elseif ($last_update->role_to = 'head') {
                 $full = TroubleshootBm::find($request->id);
-                foreach (['dc@balitower.co.id'] as $recipient) {
+                foreach (['bayu.prakoso@balitower.co.id'] as $recipient) {
                     Mail::to($recipient)->send(new NotifTroubleshootFull($full));
                 }
                 $role_to = 'all';
@@ -615,6 +615,70 @@ class OtherController extends Controller
                 abort(403);
             }
         }
+    }
+
+
+
+    // Update Checkin Troubleshoot
+    public function other_troubleshoot_update_checkin(Request $request, $id)
+    {
+        // dd($request->all());
+        $getCheckin = $request->all();
+        // return var_dump($getCheckin);
+        $photoArray = [];
+        foreach ($getCheckin['photo_checkin'] as $k => $v) {
+            if (isset($getCheckin['photo_checkin'][$k])) {
+
+                $extension = explode('/', explode(':', substr($v, 0, strpos($v, ';')))[1])[1];   // .jpg .png .pdf
+                $replace = substr($v, 0, strpos($v, ',') + 1);
+                $image = str_replace($replace, '', $v);
+                $image = str_replace(' ', '+', $image);
+                $imageName = Str::random(10) . '.' . $extension;
+
+                $photoArray[] = $imageName;
+            }
+        }
+
+        // $photo = $photoArray;
+
+        foreach($photoArray as $p){
+            $gambar = Storage::disk('public')->put($p, base64_decode($image));
+        }
+
+        $getPersonil = DB::table('troubleshoot_bm_personils')
+            ->where('troubleshoot_bm_id', $id)->get();
+
+        foreach($getCheckin as $checkin){
+            $getPersonil->update([
+                'checkin' => $checkin->checkin,
+            ]);
+            // var_dump($checkin);
+        }
+
+        // if($gambar) {
+        //     $getPersonil = DB::table('troubleshoot_bm_personils')
+        //     ->where('troubleshoot_bm_id', $id)
+        //     ->update([
+        //         'checkin' => $getCheckin['checkin'][$k],
+        //         'photo_checkin' => $p->photo_checkin,
+        //     ]);
+        // }
+
+
+
+        // if(isset($getPersonil['photo_checkin']) || ($getPersonil['checkin'])){
+            //     return redirect()->route('logall')->with('success', 'Checkin Berhasil !');
+            // } else {
+            //     return back()->with('gagal', "Gagal");
+            // }
+
+        // if($gambar){
+        //     dd($photo);
+
+        // } else {
+        //     return "gagal";
+        // }
+
     }
 
 

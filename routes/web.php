@@ -190,6 +190,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('other/troubleshoot/yajra/full/visitor', [OtherController::class, 'other_troubleshoot_yajra_full_visitor']);
     Route::get('other/troubleshoot/yajra/full/reject', [OtherController::class, 'other_troubleshoot_yajra_full_reject']);
     Route::get('other/troubleshoot/action/checkin/{id}', [OtherController::class, 'other_troubleshoot_action_checkin']);
+    Route::put('other/troubleshoot/update/checkin/{id}', [OtherController::class, 'other_troubleshoot_update_checkin']);
     Route::post('other/troubleshoot/create', [OtherController::class, 'create_troubleshoot']);
     Route::post('other/troubleshoot/approve', [OtherController::class, 'approve_troubleshoot']);
     Route::post('other/troubleshoot/reject', [OtherController::class, 'reject_troubleshoot']);
