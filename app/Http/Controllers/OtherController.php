@@ -426,7 +426,6 @@ class OtherController extends Controller
             'lain' => $request->lain,
         ]);
 
-
         $insert_detail = [];
         foreach ($input['time_start'] as $k => $v) {
             $detail_array = [];
@@ -491,12 +490,12 @@ class OtherController extends Controller
         }
         $other_personil = TroubleshootBmPersonil::insert($insert_personil);
 
-        $notif_email = TroubleshootBm::find($other_form->id);
-        foreach ([
-            'bayu.prakoso@balitower.co.id',
-        ] as $recipient) {
-            Mail::to($recipient)->send(new NotifTroubleshootForm($notif_email));
-        }
+        // $notif_email = TroubleshootBm::find($other_form->id);
+        // foreach ([
+        //     'bayu.prakoso@balitower.co.id',
+        // ] as $recipient) {
+        //     Mail::to($recipient)->send(new NotifTroubleshootForm($notif_email));
+        // }
 
         $log_troubleshoot = TroubleshootBmHistory::insert([
             'troubleshoot_bm_id' => $other_form->id,
@@ -624,9 +623,11 @@ class OtherController extends Controller
     {
         // dd($request->all());
         $getCheckin = $request->all();
-        // return var_dump($getCheckin);
+        // dd($getCheckin);
+        // return var_dump($request->checkin);
         $photoArray = [];
         foreach ($getCheckin['photo_checkin'] as $k => $v) {
+            $checkin = [];
             if (isset($getCheckin['photo_checkin'][$k])) {
 
                 $extension = explode('/', explode(':', substr($v, 0, strpos($v, ';')))[1])[1];   // .jpg .png .pdf
@@ -635,25 +636,56 @@ class OtherController extends Controller
                 $image = str_replace(' ', '+', $image);
                 $imageName = Str::random(10) . '.' . $extension;
 
-                $photoArray[] = $imageName;
+                $checkin = [
+                    'checkin' => $getCheckin['checkin'][$k],
+                    'photo_checkin' => $imageName,
+                ];
+
+                $photoArray[] = $checkin;
             }
         }
 
-        // $photo = $photoArray;
+        // dd($photoArray);
 
-        foreach($photoArray as $p){
-            $gambar = Storage::disk('public')->put($p, base64_decode($image));
-        }
+        // $getPersonil = DB::table('troubleshoot_bm_personils')
+        //     ->where('troubleshoot_bm_id', $id)
+        //     ->update(['checkin' => $request->checkin, 'checkin' => $photoArray]);
 
-        $getPersonil = DB::table('troubleshoot_bm_personils')
-            ->where('troubleshoot_bm_id', $id)->get();
+        // $insertPhoto = [];
+        // foreach($getCheckin['checkin'] as $k => $v){
+        //     foreach($photoArray as $p){
+        //         $insertPhoto[] = [
+        //             'checkin' => $getCheckin['checkin'][$k],
+        //             'photo_checkin' => $p,
+        //         ];
+        //         $gambar = Storage::disk('public')->put($p, base64_decode($image));
+        //     }
+        // }
 
-        foreach($getCheckin as $checkin){
-            $getPersonil->update([
-                'checkin' => $checkin->checkin,
-            ]);
-            // var_dump($checkin);
-        }
+        // dd($insertPhoto);
+
+        $updated = DB::table('troubleshoot_bm_personils')
+        ->where('troubleshoot_bm_id', $id)
+        ->get();
+
+        $after = DB::table('troubleshoot_bm_personils')
+        ->whereIn('id', $updated->modelKeys())->update($photoArray[$k]);
+
+        return $after;
+        // foreach($updated as $u){
+        //     $u->update([
+        //         'checkin' => $photoArray[$k]['checkin'],
+        //         'photo_checkin' => $photoArray[$k]['photo_checkin'],
+        //     ]);
+        // }
+        // return $updated;
+
+
+        // foreach($updated as $u){
+            // $u->checkin = $photoArray[$k]['checkin'];
+            // $u->photo_checkin = $photoArray[$k]['photo_checkin'];
+            // $u->save();
+        // }
 
         // if($gambar) {
         //     $getPersonil = DB::table('troubleshoot_bm_personils')
@@ -663,8 +695,6 @@ class OtherController extends Controller
         //         'photo_checkin' => $p->photo_checkin,
         //     ]);
         // }
-
-
 
         // if(isset($getPersonil['photo_checkin']) || ($getPersonil['checkin'])){
             //     return redirect()->route('logall')->with('success', 'Checkin Berhasil !');
