@@ -66,7 +66,7 @@ class OtherController extends Controller
                 $pic[] = $data_nama;
             }
         }
-        return view('other.maintenance_checkin', compact('form', 'personil', 'pic'));
+        return view('other.maintenance_checkin', compact('form', 'personil', 'pic', 'other_personil'));
     }
 
     public function show_troubleshoot_reject()
@@ -377,15 +377,6 @@ class OtherController extends Controller
         } else {
             return redirect('logall')->with('status', 'gagal');
         }
-    }
-
-    public function update_checkin_maintenance(Request $request) // Untuk update checkin personil form maintenance
-    {
-        dd($request->all());
-        $validate = $request->validate([
-            'visit' => ['required'],
-            'leave' => ['required', 'after_or_equal:visit'],
-        ]);
     }
 
     public function create_troubleshoot(Request $request) // Submit form troubleshoot
@@ -709,6 +700,60 @@ class OtherController extends Controller
         //     return "gagal";
         // }
 
+    }
+
+
+    // Update Checkin Maintenance
+    public function other_maintenance_update_checkin(Request $request, $id)
+    {
+        // dd($request->all());
+        $getCheckin = $request->all();
+        $validated = $request->validate([
+            'leave' => ['required', 'after_or_equal:visit'],
+        ]);
+
+        // dd($getCheckin);
+        if($validated){
+            $photoArray = [];
+            foreach($getCheckin['photo_checkin'] as $k => $v){
+                $checkin = [];
+                if(isset($getCheckin['photo_checkin'][$k])){
+                    $extension = explode('/', explode(':', substr($v, 0, strpos($v, ';')))[1])[1];   // .jpg .png .pdf
+                    $replace = substr($v, 0, strpos($v, ',') + 1);
+                    $image = str_replace($replace, '', $v);
+                    $image = str_replace(' ', '+', $image);
+                    $imageName = Str::random(10) . '.' . $extension;
+
+
+                    $checkin = [
+                        'checkin' => $getCheckin['checkin'][$k],
+                        'photo_checkin' => $imageName,
+                    ];
+
+                    $photoArray[] = $checkin;
+                }
+            }
+
+            // if(isset($photoArray[$k])){
+            //     OtherPersonil::whereIn('other_id', [$id])->update([
+            //         'checkin' => $photoArray[$k]['checkin'],
+            //         'photo_checkin' => $photoArray[$k]['photo_checkin'],
+            //     ]);
+            // }
+
+            // $collection = DB::table('other_personils')
+            // ->where('other_id', $id)
+            // ->get();
+
+            OtherPersonil::whereIn('other_id', $models->modelKeys())->update([
+                'checkin' => $photoArray[$k]['checkin'],
+            ]);
+            $models = OtherPersonil::findMany($models->modelKeys());
+
+
+            // dd($collection);
+            return back();
+        }
     }
 
 
