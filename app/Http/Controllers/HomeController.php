@@ -148,7 +148,7 @@ class HomeController extends Controller
         // dd($email);
 
         if ($email == 'it@mail.com') {
-            return view('it.full_visitor');
+            return view('it.log_visitor');
         } elseif ($email == 'ipcore@mail.com') {
             return view('ipcore.log');
         } elseif (($email == 'badai.sino@balitower.co.id') || ($email == 'data.center7@balitower.co.id')) {

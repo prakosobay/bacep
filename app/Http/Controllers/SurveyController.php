@@ -25,7 +25,7 @@ class SurveyController extends Controller
     {
          // Get all data request
          $data = $request->all();
- 
+
         // dd($request->all());
         $validated = $request->validate([
             'date_of_visit' => ['required', 'date', 'after:yesterday'],
@@ -37,6 +37,8 @@ class SurveyController extends Controller
             'visitor_phone' => ['regex:/^([0-9\s\-\+\(\)]*)$/', 'min:10'],
             'visitor_company' => ['string', 'max:200'],
             'visitor_dept' => ['string', 'max:200'],
+
+
             // 'visitor_name2' => ['string', 'max:100', 'nullable'],
             // 'visitor_phone2' => ['regex:/^([0-9\s\-\+\(\)]*)$/', 'min:10', 'nullable'],
             // 'visitor_company2' => ['string', 'max:200', 'nullable'],
@@ -55,7 +57,7 @@ class SurveyController extends Controller
             // 'visitor_dept5' => ['string', 'max:200', 'nullable'],
         ]);
 
-        
+
         $input = $request->all();
         $Survey_form = Survey::create([
             'date_of_visit' => $input['date_of_visit'],
@@ -71,7 +73,7 @@ class SurveyController extends Controller
         ]);
 
 
- 
+
         $survey_detail = TroubleshootBmDetail::insert($survey_insert);
 
         $log = SurveyHistory::create([
