@@ -15,6 +15,7 @@ use Barryvdh\DomPDF\Facade as PDF;
 
 class OtherController extends Controller
 {
+
     // Show Pages
     public function show_troubleshoot_form() // Menampilkan form troubleshoot
     {
@@ -481,12 +482,13 @@ class OtherController extends Controller
         }
         $other_personil = TroubleshootBmPersonil::insert($insert_personil);
 
-        // $notif_email = TroubleshootBm::find($other_form->id);
-        // foreach ([
-        //     'bayu.prakoso@balitower.co.id',
-        // ] as $recipient) {
-        //     Mail::to($recipient)->send(new NotifTroubleshootForm($notif_email));
-        // }
+        $notif_email = TroubleshootBm::find($other_form->id);
+        foreach ([
+            'aurellius.putra@balitower.co.id', 'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
+            'ilham.pangestu@balitower.co.id', 'irwan.trisna@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id',
+        ] as $recipient) {
+            Mail::to($recipient)->send(new NotifTroubleshootForm($notif_email));
+        }
 
         $log_troubleshoot = TroubleshootBmHistory::insert([
             'troubleshoot_bm_id' => $other_form->id,
@@ -527,24 +529,25 @@ class OtherController extends Controller
             $role_to = '';
             if ($last_update->role_to == 'review') {
                 foreach ([
-                    'bayu.prakoso@balitower.co.id',
+                    'aurellius.putra@balitower.co.id', 'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
+                    'ilham.pangestu@balitower.co.id', 'irwan.trisna@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id',
                 ] as $recipient) {
                     Mail::to($recipient)->send(new NotifTroubleshootForm($notif_email));
                 }
                 $role_to = 'check';
             } elseif ($last_update->role_to == 'check') {
-                foreach (['security.bacep@balitower.co.id', 'bayu.prakoso@balitower.co.id'] as $recipient) {
+                foreach (['security.bacep@balitower.co.id'] as $recipient) {
                     Mail::to($recipient)->send(new NotifTroubleshootForm($notif_email));
                 }
                 $role_to = 'security';
             } elseif ($last_update->role_to == 'security') {
-                foreach (['bayu.prakoso@balitower.co.id'] as $recipient) {
+                foreach (['bayu.prakoso@balitower.co.id', 'tofiq.hidayat@balitower.co.id'] as $recipient) {
                     Mail::to($recipient)->send(new NotifTroubleshootForm($notif_email));
                 }
                 $role_to = 'head';
             } elseif ($last_update->role_to = 'head') {
                 $full = TroubleshootBm::find($request->id);
-                foreach (['bayu.prakoso@balitower.co.id'] as $recipient) {
+                foreach (['dc@balitower.co.id'] as $recipient) {
                     Mail::to($recipient)->send(new NotifTroubleshootFull($full));
                 }
                 $role_to = 'all';
@@ -745,10 +748,10 @@ class OtherController extends Controller
             // ->where('other_id', $id)
             // ->get();
 
-            OtherPersonil::whereIn('other_id', $models->modelKeys())->update([
-                'checkin' => $photoArray[$k]['checkin'],
-            ]);
-            $models = OtherPersonil::findMany($models->modelKeys());
+            // OtherPersonil::whereIn('other_id', $models->modelKeys())->update([
+            //     'checkin' => $photoArray[$k]['checkin'],
+            // ]);
+            // $models = OtherPersonil::findMany($models->modelKeys());
 
 
             // dd($collection);
