@@ -421,7 +421,7 @@ class OtherController extends Controller
         $insert_detail = [];
         foreach ($input['time_start'] as $k => $v) {
             $detail_array = [];
-            if (isset($input['time_start'][$k]) || (isset($input['item'][$k]))) {
+            if (isset($input['time_start'][$k])) {
 
                 $detail_array = [
                     'troubleshoot_bm_id' => $other_form->id,
@@ -430,7 +430,6 @@ class OtherController extends Controller
                     'activity' => $input['activity'][$k],
                     'service_impact' => $input['service_impact'][$k],
                     'item' => $input['item'][$k],
-                    'procedure' => $input['procedure'][$k],
                     'created_at' => now(),
                     'updated_at' => now(),
                 ];
@@ -485,7 +484,7 @@ class OtherController extends Controller
         $notif_email = TroubleshootBm::find($other_form->id);
         foreach ([
             'aurellius.putra@balitower.co.id', 'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
-            'ilham.pangestu@balitower.co.id', 'irwan.trisna@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id',
+            'ilham.pangestu@balitower.co.id', 'irwan.trisna@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'dyah.retno@balitower.co.id'
         ] as $recipient) {
             Mail::to($recipient)->send(new NotifTroubleshootForm($notif_email));
         }

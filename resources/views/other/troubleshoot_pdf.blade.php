@@ -526,7 +526,7 @@
                         <td class="table-center">{{$detail->time_start}}</td>
                         <td class="table-center">{{$detail->time_end}}</td>
                         <td class="table-center">{{$detail->item}}</td>
-                        <td class="table-center">{{$detail->procedure}}</td>
+                        <td class="table-center">{{$detail->activity}}</td>
                     </tr>
                 @endforeach
             </table>
