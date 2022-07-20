@@ -33,6 +33,11 @@ class RevisiController extends Controller
         return view('admin.showVisitor', compact('visitor'));
     }
 
+    public function revisi_visitor_create()
+    {
+        return view('admin.newVisitor');
+    }
+
     // Edit Pages
     public function edit_visitor($id) // Menampilkan data visitor terpilih
     {
@@ -88,26 +93,28 @@ class RevisiController extends Controller
     public function update_visitor(Request $request, $id)
     {
         //dd($request->all());
-        $request->validate([
-            'visit_nama' => ['required', 'string', 'max:255'],
-            'visit_company' => ['required'],
-            'visit_department' => ['required', 'string'],
-            'visit_respon' => ['required', 'string'],
-            'visit_phone' => ['required', 'string'],
-            'visit_nik' => ['required', 'numeric'],
+        $validated = $request->validate([
+            'nama' => ['required'],
+            'company' => ['required'],
+            'dept' => ['required'],
+            'phone' => ['required'],
+            'nik' => ['required'],
+            'respon' => ['required'],
         ]);
 
-        $update = Visitor::findOrFail($id);
-        $update->update([
-            'visit_nama' => $request->visit_nama,
-            'visit_company' => $request->visit_company,
-            'visit_department' => $request->visit_department,
-            'visit_respon' => $request->visit_respon,
-            'visit_phone' => $request->visit_phone,
-        ]);
+        if($validated){
+            $update = Visitor::findOrFail($id);
+            $update->update([
+                'visit_nama' => $request->nama,
+                'visit_company' => $request->company,
+                'visit_department' => $request->department,
+                'visit_respon' => $request->respon,
+                'visit_phone' => $request->phone,
+                'visit_nik' => $request->nik,
+            ]);
 
-        Alert::success('Success', 'Personil has been edited');
-        return redirect('revisi/visitor/show');
+            return redirect()->route('show_visitor')->with('success', 'berhasil update yeayyy');
+        }
     }
 
     //delete
@@ -127,6 +134,7 @@ class RevisiController extends Controller
     }
 
 
+    // Store
     public function store_ob(Request $request) // Menambahkan personil OB terbaru
     {
         // dd($request->all());
@@ -155,29 +163,32 @@ class RevisiController extends Controller
 
     public function store_visitor(Request $request) // Menambahkan visitor terbaru
     {
-        // dd($request->all());
-        $request->validate([
-            'visit_nama' => ['required', 'string', 'max:255'],
-            'visit_company' => ['required'],
-            'visit_department' => ['required', 'string'],
-            'visit_respon' => ['required', 'string'],
-            'visit_phone' => ['required', 'string'],
-            'visit_nik' => ['required', 'numeric'],
+        $validated = $request->validate([
+            'nama' => ['required'],
+            'company' => ['required'],
+            'dept' => ['required'],
+            'phone' => ['required'],
+            'nik' => ['required'],
+            'respon' => ['required'],
         ]);
 
-        $create = Visitor::create([
-            'visit_nama' => $request->visit_nama,
-            'visit_company' => $request->visit_company,
-            'visit_department' => $request->visit_department,
-            'visit_respon' => $request->visit_respon,
-            'visit_phone' => $request->visit_phone,
-            'visit_nik' => $request->visit_phone,
-        ]);
+        if($validated){
+            $create = Visitor::insert([
+                'visit_nama' => $request->nama,
+                'visit_company' => $request->company,
+                'visit_department' => $request->dept,
+                'visit_respon' => $request->respon,
+                'visit_phone' => $request->phone,
+                'visit_nik' => $request->nik,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
 
-        return $create->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED'])->redirect('ob');
-
-        // Alert::success('Success', 'Personil has been added');
-        // return redirect('ob');
+            if($create){
+                return redirect()->route('show_visitor')->with('success', 'berhasil yeayyy');
+            }
+        } else {
+            return "gagal";
+        }
     }
-
 }
