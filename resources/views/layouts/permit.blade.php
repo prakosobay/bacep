@@ -14,6 +14,7 @@
 
 </head>
 <body>
+
     {{-- navbar --}}
     <nav class="navbar sticky-top navbar-expand-lg navbar-dark navbar-bg">
         <div class="container">
@@ -51,6 +52,7 @@
 
     @yield('content')
 
+    {{-- Modal --}}
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">

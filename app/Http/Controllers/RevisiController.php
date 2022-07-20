@@ -111,7 +111,6 @@ class RevisiController extends Controller
     }
 
     //delete
-
     public function destroy_ob($id) // Menghapus data personil OB terpilih
     {
         MasterOb::findOrFail($id)->delete();
@@ -156,7 +155,7 @@ class RevisiController extends Controller
 
     public function store_visitor(Request $request) // Menambahkan visitor terbaru
     {
-        dd($request->all());
+        // dd($request->all());
         $request->validate([
             'visit_nama' => ['required', 'string', 'max:255'],
             'visit_company' => ['required'],

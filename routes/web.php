@@ -9,7 +9,7 @@ Route::get('/', function () {
     return view('auth.login');
 })->middleware('guest');
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/home', [HomeController::class, 'index']);
 
     //Detail History
@@ -220,6 +220,7 @@ Route::middleware(['auth'])->group(function () {
 
     // IT TEAM
     Route::get('internal/it/form', [InternalController::class, 'internal_it_form']);
+    Route::post('internal/it/create', [InternalController::class, 'internal_it_create']);
 
 
     //Visitor All Base Super
