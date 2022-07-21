@@ -131,8 +131,7 @@
                         <h6 class="collapse-header">Option :</h6>
                         <a class="collapse-item" href="#">IP Media</a>
                         <a class="collapse-item" href="#">ERP</a>
-                        <a class="collapse-item" href="#">CCTV</a>
-                        <a class="collapse-item" href="#">IT</a>
+                        <a class="collapse-item" href="{{ url('approval/it')}}">IT</a>
                         <a class="collapse-item" href="#">Mining</a>
                         <a class="collapse-item" href="#">IP Core</a>
                         <a class="collapse-item" href="#">BSS</a>
