@@ -42,7 +42,7 @@
 
                     <div class="form-group">
                         <label for="company"><strong>Perusahaan :</strong></label>
-                        <input type="text" class="form-control @error('pt') is-invalid @enderror" id="company" name="company" value="{{$visitor->visit_company}}" required>
+                        <input type="text" class="form-control @error('company') is-invalid @enderror" id="company" name="company" value="{{$visitor->visit_company}}" required>
                         @error('company')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -62,7 +62,7 @@
 
                     <div class="form-group">
                         <label for="respon"><strong>Responsibility :</strong></label>
-                        <input type="text" class="form-control @error('Role') is-invalid @enderror" id="respon" name="respon" value="{{$visitor->visit_respon}}" required>
+                        <input type="text" class="form-control @error('respon') is-invalid @enderror" id="respon" name="respon" value="{{$visitor->visit_respon}}" required>
                         @error('respon')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -82,7 +82,7 @@
 
                     <div class="form-group">
                         <label for="nik"><strong>No ID Karyawan :</strong></label>
-                        <input type="text" class="form-control @error('NIK') is-invalid @enderror" id="nik" name="nik" value="{{$visitor->visit_nik}}" readonly>
+                        <input type="text" class="form-control @error('nik') is-invalid @enderror" id="nik" name="nik" value="{{$visitor->visit_nik}}" readonly>
                         @error('nik')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>

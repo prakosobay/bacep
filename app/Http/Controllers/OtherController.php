@@ -89,6 +89,11 @@ class OtherController extends Controller
         return view('other.troubleshoot_checkin', compact('getForms', 'getPersonils', 'getEntries', 'getRisks', 'getDetails'));
     }
 
+    public function other_troubleshoot_action_checkoit($id)
+    {
+
+    }
+
 
 
     // Retrieving Data From DB

@@ -69,8 +69,7 @@ class RevisiController extends Controller
         // Validasi data dari request
         $request->validate([
             'nama' => ['required', 'string', 'max:255'],
-            'id_number' => ['required', 'numeric'],
-            'phone_number' => ['required'],
+            'phone_number' => ['required', 'numeric'],
             'pt' => ['required', 'string'],
             'responsible' => ['required', 'string'],
             'department' => ['required', 'string'],
@@ -79,7 +78,6 @@ class RevisiController extends Controller
         $update = MasterOb::findOrFail($id);
         $update->update([
             'nama' => $request->nama,
-            'id_number' => $request->id_number,
             'phone_number' => $request->phone_number,
             'pt' => $request->pt,
             'responsible' => $request->responsible,
@@ -96,7 +94,7 @@ class RevisiController extends Controller
         $validated = $request->validate([
             'nama' => ['required'],
             'company' => ['required'],
-            'dept' => ['required'],
+            'department' => ['required'],
             'phone' => ['required'],
             'nik' => ['required'],
             'respon' => ['required'],
@@ -138,7 +136,7 @@ class RevisiController extends Controller
     public function store_ob(Request $request) // Menambahkan personil OB terbaru
     {
         // dd($request->all());
-        $request->validate([
+        $validated = $request->validate([
             'nama' => ['required', 'string', 'max:255'],
             'id_number' => ['required', 'numeric'],
             'phone_number' => ['required'],
@@ -147,18 +145,23 @@ class RevisiController extends Controller
             'department' => ['required', 'string'],
         ]);
 
-        $create = MasterOb::create([
-            'nama' => $request->nama,
-            'id_number' => $request->id_number,
-            'phone_number' => $request->phone_number,
-            'pt' => $request->pt,
-            'responsible' => $request->responsible,
-            'department' => $request->department,
-        ]);
+        if($validated){
+            $create = MasterOb::create([
+                'nama' => $request->nama,
+                'id_number' => $request->id_number,
+                'phone_number' => $request->phone_number,
+                'pt' => $request->pt,
+                'responsible' => $request->responsible,
+                'department' => $request->department,
+            ]);
 
-        return $create->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED'])->redirect('ob');
-        // Alert::success('Success', 'Personil has been added');
-        // return redirect('ob');
+            if($create){
+                return back()->with('success', 'berhasil yeayyy');
+            }
+        } else {
+            return back()->with('gagal', 'gagal');
+        }
+
     }
 
     public function store_visitor(Request $request) // Menambahkan visitor terbaru
@@ -188,7 +191,7 @@ class RevisiController extends Controller
                 return redirect()->route('show_visitor')->with('success', 'berhasil yeayyy');
             }
         } else {
-            return "gagal";
+            return back()->with('gagal', 'gagal');
         }
     }
 }
