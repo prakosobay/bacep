@@ -12,6 +12,9 @@
     {{-- bootstrap datatable --}}
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.css"/>
     <link rel="stylesheet" href="{{asset('css/log_visitor.css')}}" type="text/css">
+
+    {{-- Jquery --}}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 </head>
 <body>
     <nav class="navbar sticky-top navbar-expand-lg navbar-dark navbar-bg">
@@ -67,58 +70,58 @@
 
                     @if(Auth::user()->email == 'it@mail.com')
                     {{-- IT --}}
-                    <div class="tab-pane fade show active" id="Lcleaning" role="tabpanel" aria-labelledby="Lcleaning-tab">
-                        <div class="container-fluid">
-                            <div class="card-body">
-                                <button class="btn btn-primary btn-sm mx-1 my-2" data-bs-toggle="modal" data-bs-target="#itModal">Create Permit</button>
-                                <a type="button" class="btn btn-sm btn-info mx-1 my-2" href="{{url('logall')}}">Log Permit</a>
-                                <a type="button" class="btn btn-sm btn-danger mx-1 my-2" href="{{ url('/it/reject/show')}}">Permit Rejected</a>
-                            </div>
+                    <div class="container-fluid">
+                        <div class="card-body">
+                            <button class="btn btn-primary btn-sm mx-1 my-2" data-bs-toggle="modal" data-bs-target="#itModal">Create Permit</button>
+                            <a type="button" class="btn btn-sm btn-info mx-1 my-2" href="{{url('logall')}}">Log Permit</a>
+                            <a type="button" class="btn btn-sm btn-danger mx-1 my-2" href="{{ url('/it/reject/show')}}">Permit Rejected</a>
                         </div>
+                    </div>
 
-                        @if (session('status'))
-                            <div class="alert alert-success" role="alert">
-                                {{ session('status') }}
-                            </div>
-                        @endif
+                    @if (session('status'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('status') }}
+                        </div>
+                    @endif
 
-                        {{-- Modal IT--}}
-                        <div class="modal fade" id="itModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Pilih Permit</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <a class="btn btn-sm btn-primary mx-2 my-2" href="{{ url('internal/it/form')}}">New Permit</a>
-                                        <a class="btn btn-sm btn-success mx-2 my-2" href="{{ url('internal/it/last/form')}}">Last Permit</a>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary">Select</button>
-                                    </div>
+                    {{-- Modal IT--}}
+                    <div class="modal fade" id="itModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Pilih Permit</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <a class="btn btn-sm btn-primary mx-2 my-2" href="{{ url('internal/it/form')}}">New Permit</a>
+                                    <a class="btn btn-sm btn-success mx-2 my-2" href="{{ url('internal/it/last/form')}}">Last Permit</a>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary">Select</button>
                                 </div>
                             </div>
                         </div>
+                    </div>
 
-                        {{-- Tabel IT --}}
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-striped table-bordered" id="it_table" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr class="judul-table text-center">
-                                            <th>No.</th>
-                                            <th>Date of Visit</th>
-                                            <th>Date of Leave</th>
-                                            <th>Purpose of Work</th>
-                                            {{-- <th>Action</th> --}}
-                                        </tr>
-                                    </thead>
-                                    <tbody class="isi-table text-center">
-                                    </tbody>
-                                </table>
-                            </div>
+                    {{-- Tabel IT --}}
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered" id="it_table" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr class="judul-table text-center">
+                                        <th>No.</th>
+                                        <th>Purpose of Work</th>
+                                        <th>Date of Visit</th>
+                                        <th>Date of Leave</th>
+                                        <th>Checkin</th>
+                                        <th>Checkout</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="isi-table text-center">
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                     @endif

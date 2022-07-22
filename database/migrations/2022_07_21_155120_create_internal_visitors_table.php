@@ -23,6 +23,10 @@ class CreateInternalVisitorsTable extends Migration
             $table->string('respon');
             $table->string('numberId');
             $table->string('phone');
+            $table->time('checkin')->nullable();
+            $table->string('photo_checkin')->nullable();
+            $table->time('checkout')->nullable();
+            $table->string('photo_checkout')->nullable();
             $table->timestamps();
         });
     }

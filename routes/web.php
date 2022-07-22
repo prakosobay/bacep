@@ -218,10 +218,14 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/other/maintenance/form/checkin', [OtherController::class, 'update_checkin_maintenance']);
 
 
-    // IT TEAM
+    // Internal
     Route::get('internal/it/form', [InternalController::class, 'internal_it_form']);
-    Route::get('internal/it/pdf/{id}', [InternalController::class, 'internal_it_pdf']);
-    Route::post('internal/it/create', [InternalController::class, 'internal_it_create']);
+    Route::get('/internal/it/pdf/{id}', [InternalController::class, 'internal_it_pdf']);
+    Route::get('internal/yajra/history', [InternalController::class, 'internal_yajra_history']);
+    Route::get('internal/yajra/full/approval', [InternalController::class, 'internal_yajra_full_approval']);
+    Route::get('internal/it/yajra/full/visitor', [InternalController::class, 'internal_it_yajra_full_visitor']);
+    Route::post('internal/create', [InternalController::class, 'internal_create']);
+    Route::post('internal/approve/{id}', [InternalController::class, 'internal_approve']);
 
 
     //Visitor All Base Super

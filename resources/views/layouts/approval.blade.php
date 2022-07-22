@@ -25,6 +25,8 @@
 </head>
 <body id="body-pd">
 
+    @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
+
     {{-- navbar --}}
     <nav class="navbar navbar-expand-xl navbar-dark py-0 my-0 navbar-bg" >
         <div class="container">
@@ -129,13 +131,7 @@
                 <div id="collapseInternal" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Option :</h6>
-                        <a class="collapse-item" href="#">IP Media</a>
-                        <a class="collapse-item" href="#">ERP</a>
-                        <a class="collapse-item" href="{{ url('approval/it')}}">IT</a>
-                        <a class="collapse-item" href="#">Mining</a>
-                        <a class="collapse-item" href="#">IP Core</a>
-                        <a class="collapse-item" href="#">BSS</a>
-                        <a class="collapse-item" href="#">JDS</a>
+                        <a class="collapse-item" href="{{ url('approval/internal')}}">Internal Colo</a>
                     </div>
                 </div>
             </li>

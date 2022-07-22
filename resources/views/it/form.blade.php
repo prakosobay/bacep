@@ -3,7 +3,7 @@
 <div class="container my-5">
     <div class="card">
         <h1 class="text-center my-3 h1Permit">Fill Requestor Identity</h1>
-        <form action="{{ url('internal/it/create')}}" method="POST" class="validate-form">
+        <form action="{{ url('internal/create')}}" method="POST" class="validate-form">
             @csrf
             <div class="container form-container">
 

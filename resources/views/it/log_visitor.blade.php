@@ -10,10 +10,12 @@ $(function() {
         ajax: '{{ url('internal/it/yajra/full/visitor')}}',
         columns: [
             { data: 'id', name: 'id' },
+            { data: 'work', name: 'work' },
             { data: 'visit', name: 'visit' },
             { data: 'leave', name: 'leave' },
-            { data: 'work', name: 'work' },
-            // {data: 'action', name: 'action', orderable: false, searchable: false}
+            { data: 'checkin', name: 'checkin' },
+            { data: 'checkout', name: 'checkout' },
+            {data: 'action', name: 'action', orderable: false, searchable: false}
         ]
     });
 });

@@ -792,14 +792,12 @@ class OtherController extends Controller
         $getEntry = DB::table('troubleshoot_bm_entries')->where('troubleshoot_bm_id', $id)->first();
         $getLastHistory->update(['pdf' => true]);
 
-        // dd($getEntry);
         $getHistory = DB::table('troubleshoot_bm_histories')
             ->join('troubleshoot_bms', 'troubleshoot_bms.id', '=', 'troubleshoot_bm_histories.troubleshoot_bm_id')
             ->where('troubleshoot_bm_histories.troubleshoot_bm_id', '=', $id)
             ->select('troubleshoot_bm_histories.*')
             ->get();
         $pdf = PDF::loadview('other.troubleshoot_pdf', compact('getTroubleshoot', 'getPersonil', 'getRisk', 'getDetail', 'getEntry', 'getLastHistory', 'getHistory'))->setPaper('a4', 'portrait')->setWarnings(false);
-        // dd($pdf);
         return $pdf->stream();
     }
 

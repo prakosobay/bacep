@@ -9,8 +9,11 @@ use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 use Barryvdh\DomPDF\Facade as PDF;
+use RealRashid\SweetAlert\Facades\Alert;
 
 use App\Models\{Internal, InternalEntry, InternalDetail, InternalRisk, InternalHistory, InternalFull, InternalVisitor};
+use App\Mail\{NotifInternalForm, NotifInternalReject, NotifInternalFull};
+use Psy\Command\WhereamiCommand;
 
 class InternalController extends Controller
 {
@@ -24,7 +27,7 @@ class InternalController extends Controller
 
 
     // Submit
-    public function internal_it_create(Request $request)
+    public function internal_create(Request $request)
     {
         // dd($request->all());
         $getForm = $request->all();
@@ -130,10 +133,16 @@ class InternalController extends Controller
                     $arrayVisitor[] = $insertArray;
                 }
             }
-
             $insertVisitor = InternalVisitor::insert($arrayVisitor);
 
             if($insertVisitor ){
+
+                $notif_email = Internal::find($insertForm->id);
+                foreach ([
+                    'bayu.prakoso@balitower.co.id', 'eri.iskandar@balitower.co.id'
+                ] as $recipient) {
+                    Mail::to($recipient)->send(new NotifInternalForm($notif_email));
+                }
 
                 $history = InternalHistory::insert([
                     'internal_id' => $insertForm->id,
@@ -159,11 +168,176 @@ class InternalController extends Controller
     // pdf
     public function internal_it_pdf($id)
     {
-        dd($id);
+        // dd($id);
         $getForm = Internal::findOrFail($id);
+        $getLastHistory = InternalHistory::where('internal_id', $id)->where('aktif', 1)->first();
         $getEntries = InternalEntry::where('internal_id', $id)->first();
         $getDetails = InternalDetail::where('internal_id', $id)->get();
         $getRisks = InternalRisk::where('internal_id', $id)->get();
-        $getVisisor = InternalVisitor::where('internal_id', $id)->get();
+        $getVisitors = InternalVisitor::where('internal_id', $id)->get();
+        $getLastHistory->update(['pdf' => true]);
+
+        $getHistory = DB::table('internal_histories')
+                ->join('internals', 'internals.id', '=', 'internal_histories.internal_id')
+                ->where('internal_histories.internal_id', $id)
+                ->select('internal_histories.*')
+                ->get();
+
+        $pdf = PDF::loadview('internal.pdf', compact('getForm', 'getLastHistory', 'getEntries', 'getDetails', 'getRisks', 'getVisitors', 'getHistory'))->setPaper('a4', 'portrait')->setWarnings(false);
+        return $pdf->stream();
+    }
+
+
+
+    // Approve
+    public function internal_approve($id)
+    {
+        // dd($id);
+        $last_update = InternalHistory::where('internal_id', $id)->latest()->first();
+        // dd($last_update);
+        if ($last_update->pdf == true) {
+            $last_update->update(['aktif' => false]);
+
+            // Perubahan status tiap permit
+            $status = '';
+            if ($last_update->status == 'requested') {
+                $status = 'reviewed';
+            } elseif ($last_update->status == 'reviewed') {
+                $status = 'checked';
+            } elseif ($last_update->status == 'checked') {
+                $status = 'acknowledge';
+            } elseif ($last_update->status == 'acknowledge') {
+                $status = 'final';
+            } elseif ($last_update->status == 'final') {
+                $full_internal = Internal::find($id)->first();
+            }
+
+            $notif_email = DB::table('internals')
+                    ->join('internal_histories', 'internals.id', 'internal_histories.internal_id')
+                    ->where('internals.id', $id)
+                    ->where('internal_histories.internal_id', $id)
+                    ->select('internals.*', 'internal_histories.status', 'internal_histories.created_by')
+                    ->first();
+                    // dd($notif_email);
+
+
+                    // Pergantian  role tiap permit & send email notif
+            $role_to = '';
+            if ($last_update->role_to == 'review') {
+                foreach ([
+                    'bayu.prakoso@balitower.co.id',
+                ] as $recipient) {
+                    Mail::to($recipient)->send(new NotifInternalForm($notif_email));
+                }
+                $role_to = 'check';
+            } elseif ($last_update->role_to == 'check') {
+                foreach ([
+                    'bayu.prakoso@balitower.co.id'
+                ] as $recipient) {
+                    Mail::to($recipient)->send(new NotifInternalForm($notif_email));
+                }
+                $role_to = 'security';
+            } elseif ($last_update->role_to == 'security') {
+                foreach ([
+                    'bayu.prakoso@balitower.co.id'
+                ] as $recipient) {
+                    Mail::to($recipient)->send(new NotifInternalForm($notif_email));
+                }
+                $role_to = 'head';
+            } elseif ($last_update->role_to = 'head') {
+                $full = Internal::find($id);
+                foreach ([
+                    'bayu.prakoso@balitower.co.id'
+                ] as $recipient) {
+                    Mail::to($recipient)->send(new NotifInternalFull($full));
+                }
+                $role_to = 'all';
+
+                $full = Internal::findOrFail($id);
+                // dd($full);
+                $insertFull = InternalFull::create([
+                    'internal_id' => $full->id,
+                    'req_dept' => $full->req_dept,
+                    'work' => $full->work,
+                    'request' => $full->created_at,
+                    'visit' => $full->visit,
+                    'leave' => $full->leave,
+                    // 'link' => ("https://dcops.balifiber.id/internal/it/pdf/$full->id"),
+                    'link' => ("http://localhost:8000/internal/it/pdf/$full->id"),
+                    'note' => null,
+                    'status' => 'Full Approved',
+                ]);
+            }
+
+            // Simpan tiap perubahan permit ke table CLeaningHistory
+            $log = InternalHistory::insert([
+                'internal_id' => $id,
+                'req_dept' => $notif_email->req_dept,
+                'created_by' => Auth::user()->name,
+                'role_to' => $role_to,
+                'status' => $status,
+                'aktif' => true,
+                'pdf' => false,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+
+            if($log){
+                alert()->success('Approved', 'Permit has been approved!');
+                return back();
+            }
+        } else {
+            abort(403);
+        }
+    }
+
+
+
+    // Yajra
+    public function internal_yajra_history()
+    {
+        $history = DB::table('internal_histories')
+            ->join('internals', 'internals.id', '=', 'internal_histories.internal_id')
+            ->select('internal_histories.*', 'internals.visit')
+            ->orderBy('internal_id', 'desc');
+        return Datatables::of($history)
+            ->editColumn('updated_at', function ($history) {
+                return $history->updated_at ? with(new Carbon($history->updated_at))->format('d/m/Y') : '';
+            })
+            ->editColumn('visit', function ($history) {
+                return $history->visit ? with(new Carbon($history->visit))->format('d/m/Y') : '';
+            })
+            ->make(true);
+    }
+
+    public function internal_yajra_full_approval()
+    {
+        $full = DB::table('internal_fulls')
+            // ->join('internal_visitors', 'internal_fulls.req_dept', '=', 'internal_visitors.req_dept')
+            ->select('internal_fulls.*')
+            ->orderBy('internal_id', 'desc');
+        return Datatables::of($full)
+            ->editColumn('visit', function ($full) {
+                return $full->visit ? with(new Carbon($full->visit))->format('d/m/Y') : '';
+            })
+            ->addColumn('action', 'internal.actionLink')
+            ->make(true);
+    }
+
+    public function internal_it_yajra_full_visitor()
+    {
+        $full = DB::table('internal_visitors')
+                ->join('internals', 'internal_visitors.internal_id', 'internals.id')
+                // ->where('internal')
+                ->select('internals.*', 'internal_visitors.checkin', 'internal_visitors.checkout')
+                ->orderBy('internal_id', 'desc');
+                // dd($full);
+        return Datatables::of($full)
+                ->editColumn('visit', function($full){
+                    return $full->visit ? with(new Carbon($full->visit))->format('d/m/Y') : '';
+                })
+                ->addColumn('action', 'internal.actionEdit')
+                ->make(true);
+
     }
 }

@@ -64,8 +64,8 @@ class HomeController extends Controller
                 return view('other.maintenance_history');
             } elseif($type_view == 'troubleshoot') {
                 return view('other.troubleshoot_history');
-            } elseif($type_view == 'it'){
-                return view('it.history');
+            } elseif($type_view == 'internal'){
+                return view('internal.history');
             } else {
                 abort(403);
             }
@@ -116,16 +116,14 @@ class HomeController extends Controller
                     ->select('troubleshoot_bm_histories.*', 'troubleshoot_bms.*')
                     ->get();
                 return view('other.troubleshoot_approval', compact('getTroubleshoot'));
-            } elseif($type_approve == 'it'){
-                $getIt = DB::table('internals')
+            } elseif($type_approve == 'internal'){
+                $getInternal = DB::table('internals')
                     ->join('internal_histories', 'internals.id', '=', 'internal_histories.internal_id')
-                    ->where('internal_histories.req_dept', 'IT')
                     ->whereIn('internal_histories.role_to', $role_1)
                     ->where('internal_histories.aktif', true)
                     ->select('internal_histories.*', 'internals.req_name', 'internals.work', 'internals.visit', 'internals.leave', 'internals.created_at')
                     ->get();
-                    // dd($getIt);
-                return view('it.approval', compact('getIt'));
+                return view('internal.approval', compact('getInternal'));
             } else {
                 abort(403);
             }
@@ -147,8 +145,8 @@ class HomeController extends Controller
                 return view('other.maintenance_full_approval');
             } elseif($type_full == 'troubleshoot') {
                 return view('other.troubleshoot_full_approval');
-            } elseif($type_full == 'it') {
-                return view('it.full_approval');
+            } elseif($type_full == 'internal') {
+                return view('internal.fullApproval');
             } else {
                 abort(403);
             }
