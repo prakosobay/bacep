@@ -5,16 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Survey extends Model
+class Survey_personil extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $table = 'surveys';
+    protected $table = 'surveys_personils';
     protected $primaryKey = 'id';
-    protected $guarded = [];
+    protected $fillable =
+    [
+       
+    ];
 
-    public function survey()
-    {
-        return $this->hasMany(survey_personil::class);
-    }
 }

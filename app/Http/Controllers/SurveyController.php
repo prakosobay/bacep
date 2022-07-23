@@ -25,8 +25,6 @@ class SurveyController extends Controller
     {
          // Get all data request
          $data = $request->all();
-
-        // dd($request->all());
         $validated = $request->validate([
             'date_of_visit' => ['required', 'date', 'after:yesterday'],
             'date_of_leave' => ['required', 'date', 'after:yesterday', 'after_or_equal:date_of_visit'],
@@ -84,7 +82,7 @@ class SurveyController extends Controller
             'aktif' => '1',
             'pdf' => false
         ]);
-
+ 
         if($survey && $log){
             return view('homepage');
         }else{
