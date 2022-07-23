@@ -47,15 +47,30 @@
                 </div>
 
                 {{-- Purpose of Work --}}
-                <div class="form-group mb-5">
-                    <label for="work" class="form-label">Purpose of Work :</label>
-                    <input type="text" class="form-control @error('work') is-invalid @enderror" id="work" name="work" value="{{ old('work')}}" required>
-                    @error('work')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
+                <div class="row">
+                    <div class="col-8">
+                        <div class="form-group mb-5">
+                            <label for="work" class="form-label">Purpose of Work :</label>
+                            <input type="text" class="form-control @error('work') is-invalid @enderror" id="work" name="work" value="{{ old('work')}}" required>
+                            @error('work')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <label for="rack">Number of Rack :</label><br>
+                        <select class="js-example-basic-multiple" id="rack" name="rack[]" multiple="multiple">
+                            @for ($i = 1; $i <= 39; $i++)
+                            <option value="1">Rack</option>
+                            @endfor
+                        </select>
+                    </div>
                 </div>
+
+
+
 
                 {{-- Date of Visit & Leave --}}
                 <div class="row">
@@ -113,38 +128,47 @@
                     </div>
                 </div>
 
-                {{-- Background --}}
-                <div class="form-group mb-3">
-                    <label for="background" class="form-label">Background and Objectives</label>
-                    <input type="text" class="form-control @error('background') is-invalid @enderror" id="background" name="background" value="{{ old('background')}}" required>
-                    @error('backround')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
+                {{-- background & description --}}
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group mb-3">
+                            <label for="background" class="form-label">Background and Objectives</label>
+                            <input type="text" class="form-control @error('background') is-invalid @enderror" id="background" name="background" value="{{ old('background')}}" required>
+                            @error('backround')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group mb-3">
+                            <label for="desc" class="form-label">Work Description</label>
+                            <input type="text" class="form-control @error('desc') is-invalid @enderror" id="desc" name="desc" value="{{ old('desc')}}" required>
+                            @error('desc')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
                 </div>
 
-                {{-- Description --}}
-                <div class="form-group mb-3">
-                    <label for="desc" class="form-label">Work Description</label>
-                    <input type="text" class="form-control @error('desc') is-invalid @enderror" id="desc" name="desc" value="{{ old('desc')}}" required>
-                    @error('desc')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
+                {{-- testing & rollback --}}
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group mb-3">
+                            <label for="testing" class="form-label">Testing and Verification</label>
+                            <input type="text" class="form-control" id="testing" name="testing" value="{{ old('testing')}}">
+                        </div>
 
-                {{-- Testing --}}
-                <div class="form-group mb-3">
-                    <label for="testing" class="form-label">Testing and Verification</label>
-                    <input type="text" class="form-control" id="testing" name="testing" value="{{ old('testing')}}">
-                </div>
-
-                {{-- Rollback --}}
-                <div class="form-group mb-5">
-                    <label for="rollback" class="form-label">Rollback and Operation</label>
-                    <input type="text" class="form-control" id="rollback" name="rollback" value="{{ old('rollback')}}">
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group mb-5">
+                            <label for="rollback" class="form-label">Rollback and Operation</label>
+                            <input type="text" class="form-control" id="rollback" name="rollback" value="{{ old('rollback')}}">
+                        </div>
+                    </div>
                 </div>
 
                 {{-- Detail Time Activity --}}
@@ -317,6 +341,11 @@
 <script>
 $(document).ready(function(){
 
+    $('.js-example-basic-multiple').select2({
+        placeholder: 'Select an option'
+    });
+
+
     let max_row = 15;
     let row = 1;
     let button_detail = $('#button_detail');
@@ -349,6 +378,8 @@ $(document).ready(function(){
             row++;
         }
     });
+
+
 
 });
 </script>

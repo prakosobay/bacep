@@ -10,7 +10,6 @@ use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 use Barryvdh\DomPDF\Facade as PDF;
 use RealRashid\SweetAlert\Facades\Alert;
-
 use App\Models\{Internal, InternalEntry, InternalDetail, InternalRisk, InternalHistory, InternalFull, InternalVisitor};
 use App\Mail\{NotifInternalForm, NotifInternalReject, NotifInternalFull};
 use Psy\Command\WhereamiCommand;
@@ -41,6 +40,7 @@ class InternalController extends Controller
             'req_phone' => ['required', 'regex:/^([0-9\s\-\+\(\)]*)$/', 'min:11'],
             'background' => ['required'],
             'desc' => ['required'],
+            'rack' => ['required', ]
         ]);
 
         if($validated){
@@ -190,7 +190,7 @@ class InternalController extends Controller
 
 
     // Approve
-    public function internal_approve($id)
+    public function internal_approve($id) // Function flow approval
     {
         // dd($id);
         $last_update = InternalHistory::where('internal_id', $id)->latest()->first();
@@ -262,8 +262,8 @@ class InternalController extends Controller
                     'request' => $full->created_at,
                     'visit' => $full->visit,
                     'leave' => $full->leave,
-                    // 'link' => ("https://dcops.balifiber.id/internal/it/pdf/$full->id"),
-                    'link' => ("http://localhost:8000/internal/it/pdf/$full->id"),
+                    'link' => ("https://dcops.balifiber.id/internal/it/pdf/$full->id"),
+                    // 'link' => ("http://localhost:8000/internal/it/pdf/$full->id"),
                     'note' => null,
                     'status' => 'Full Approved',
                 ]);
