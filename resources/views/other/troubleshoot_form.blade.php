@@ -186,12 +186,13 @@
                 <table class="table table-bordered mt-3" id="table_detail_time">
                     <thead class="bg1">
                         <tr>
-                            <th colspan="4">Detail Time Table of All Activity</th>
+                            <th colspan="5">Detail Time Table of All Activity</th>
                         <tr>
                             <th scope="col">Time Start</th>
                             <th scope="col">Time End</th>
                             <th scope="col">Activity Description</th>
                             <th scope="col">Detail Service Impact</th>
+                            <th scope="col">Item</th>
                         </tr>
                     </thead>
                     <tbody class="bg1">
@@ -200,29 +201,11 @@
                             <td><input class="bg1" type="time" name="time_end[]" required></td>
                             <td><input class="input100" type="text" name="activity[]" required></td>
                             <td><input class="input100" type="text" name="service_impact[]" required></td>
+                            <td><input class="input100" type="text" name="item[]" required></td>
                         </tr>
                     </tbody>
                 </table>
                 <button id="detail_time"><b>Add More Fields</b></button>
-
-                <!-- Detail Operation and Execution -->
-                <table class="table table-bordered mt-3" id="table_detail_operation">
-                    <thead class="bg1">
-                        <tr>
-                            <th colspan="2">Detail Operation and Execution</th>
-                        <tr>
-                            <th scope="col">Item</th>
-                            <th scope="col">Working Procedure</th>
-                        </tr>
-                    </thead>
-                    <tbody class="bg1">
-                        <tr>
-                            <td> <input class="bg1 input100" type="text" name="item[]" required></td>
-                            <td> <input class="bg1 input100" type="text" name="procedure[]" required></td>
-                        </tr>
-                    </tbody>
-                </table>
-                <button id="detail_operation"><b>Add More Fields</b></button>
 
                 <!-- Risk and Service Area Impact -->
                 <table class="table table-bordered mt-3" id="table_risk">
@@ -551,7 +534,7 @@
         $(detail_time).click(function(e){
             e.preventDefault();
             if(row < max_row){
-                $(row_detail_time).append('<tr><td><input class="bg1" type="time" name="time_start[]"></td><td><input class="bg1" type="time" name="time_end[]"></td><td><input class="input100" type="text" name="activity[]" ></td><td><input class="input100" type="text" name="service_impact[]" ></td></tr>');
+                $(row_detail_time).append('<tr><td><input class="bg1" type="time" name="time_start[]"></td><td><input class="bg1" type="time" name="time_end[]"></td><td><input class="input100" type="text" name="activity[]" ></td><td><input class="input100" type="text" name="service_impact[]" ></td><td><input class="input100" type="text" name="item[]" required></td></tr>');
                 row++;
             }
         });

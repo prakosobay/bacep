@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Exports\{ConsumKeluarExport, ConsumExport, ConsumMasukExport};
 use App\Http\Controllers\Controller;
 use RealRashid\SweetAlert\Facades\Alert;
-use App\Imports\ConsumImport;
+use App\Imports\{ConsumImport, ConsumKeluarImport, ConsumMasukImport};
 use Maatwebsite\Excel\Facades\Excel;
 use Yajra\Datatables\Datatables;
 use Illuminate\Support\Facades\{DB, Auth, Gate, Mail, Session};
@@ -23,17 +23,16 @@ class ConsumController extends Controller
 
 
     // Show Pages
-    public function index() // Menampilkan data barang consumable
+    public function consum_table_show() // Menampilkan data barang consumable
     {
-        if ((Gate::allows('isHead')) || (Gate::allows('isApproval')) || (Gate::allows('isAdmin'))) {
-            $consum = Consum::all();
-            return view('consum.table', compact('consum'));
+        if ((Gate::allows('isHead')) || (Gate::allows('isApproval'))) {
+            return view('consum.table');
         } else {
-            abort(403, 'Anda Tidak Punya Akses Ke Halaman Ini');
+            abort(403);
         }
     }
 
-    public function show_new() // Tampilan untuk menginput barang consum baru
+    public function consum_create_show() // Tampilan untuk menginput barang consum baru
     {
         if ((Gate::allows('isAdmin')) || (Gate::allows('isApproval')) || (Gate::allows('isHead'))) {
             return view('consum.new');
@@ -42,27 +41,25 @@ class ConsumController extends Controller
         }
     }
 
-    public function show_in() // Tampilan untuk data barang masuk
+    public function consum_masuk_show() // Tampilan untuk data barang masuk
     {
         if (Gate::allows('isHead') || (Gate::allows('isApproval')) || (Gate::allows('isAdmin'))) {
-            $in = ConsumMasuk::all();
-            return view('consum.masuk', compact('in'));
+            return view('consum.masuk');
         } else {
             abort(403,  'Anda Tidak Punya Akses Ke Halaman Ini');
         }
     }
 
-    public function show_out() // Tampilan untuk data barang keluar
+    public function consum_keluar_show() // Tampilan untuk data barang keluar
     {
         if (Gate::allows('isHead') || (Gate::allows('isApproval')) || (Gate::allows('isAdmin'))) {
-            $out = ConsumKeluar::all();
-            return view('consum.keluar', compact('out'));
+            return view('consum.keluar');
         } else {
             abort(403,  'Anda Tidak Punya Akses Ke Halaman Ini');
         }
     }
 
-    public function edit_masuk($id) // Tampilan untuk update barang masuk
+    public function consum_edit_masuk($id) // Tampilan untuk update barang masuk
     {
         if (Gate::allows('isAdmin') || (Gate::allows('isApproval')) || (Gate::allows('isHead'))) {
             $consum = Consum::find($id);
@@ -72,7 +69,7 @@ class ConsumController extends Controller
         }
     }
 
-    public function edit_keluar($id) // Tampilan untuk update barang keluar
+    public function consum_edit_keluar($id) // Tampilan untuk update barang keluar
     {
         if (Gate::allows('isAdmin') || (Gate::allows('isApproval')) || (Gate::allows('isHead'))) {
             $consum = Consum::find($id);
@@ -83,17 +80,24 @@ class ConsumController extends Controller
         }
     }
 
+    public function consum_edit_itemcode($id)
+    {
+        if (Gate::allows('isAdmin') || (Gate::allows('isApproval')) || (Gate::allows('isHead'))) {
+            $consum = Consum::find($id);
+            return view('consum.itemcode', compact('consum'));
+        } else {
+            abort(403,  'Anda Tidak Punya Akses Ke Halaman Ini');
+        }
+    }
+
 
 
     // Submit data
-    public function update_masuk(Request $request, $id) // Update barang masuk
+    public function consum_update_masuk(Request $request, $id) // Update barang masuk
     {
         $this->validate($request, [
-            'nama_barang' => ['required'],
-            'consum_id' => ['required', 'numeric'],
             'jumlah' => ['numeric', 'required', 'min:1'],
             'ket' => 'required',
-            'pencatat' => ['required', 'string'],
         ]);
 
         $consum = Consum::find($id);
@@ -108,23 +112,18 @@ class ConsumController extends Controller
             'jumlah' => $request->jumlah,
             'ket' => $request->ket,
             'pencatat' => $request->pencatat,
-            // 'itemcode' => $request->itemcode,
             'tanggal' => date('d/m/Y'),
         ]);
 
-        Alert::success('Success', 'Data has been submited');
-        return back();
+        return redirect()->route('consumTable')->with('success', 'Barang Consum Berhasil di Tambah');
     }
 
-    public function update_keluar(Request $request, $id) // Update barang keluar
+    public function consum_update_keluar(Request $request, $id) // Update barang keluar
     {
         // dd($request->all());
         $this->validate($request, [
-            'nama_barang' => ['required'],
-            'consum_id' => ['required', 'numeric'],
             'jumlah' => ['numeric', 'required', 'min:1'],
             'ket' => 'required',
-            'pencatat' => ['required', 'string'],
         ]);
 
         $consum = Consum::find($id);
@@ -136,32 +135,28 @@ class ConsumController extends Controller
 
             $consumkeluar = ConsumKeluar::create([
                 'nama_barang' => $request->nama_barang,
-                'consum_id' => $request->consum_id,
+                'consum_id' => $request->id,
                 'jumlah' => $request->jumlah,
                 'ket' => $request->ket,
                 'pencatat' => $request->pencatat,
-                // 'itemcode' => $request->itemcode,
                 'tanggal' => date('d/m/Y'),
             ]);
 
-            Alert::success('Success', 'Data has been submited');
         } else {
-            Alert::error('Error', 'Stock Kosong/Kurang !');
+            return back()->with('Gagal', 'Stock Kosong/Kurang');
         }
-        return back();
+        return redirect()->route('consumTable')->with('success', 'Data Berhasil di Submit');
     }
 
-    public function store_consum(Request $request) // Create barang baru
+    public function consum_create_submit(Request $request) // Create barang baru
     {
-        // dd($request->all());
         $this->validate($request, [
             'nama_barang' => ['required', 'unique:consums', 'max:200'],
             'jumlah' => ['required', 'numeric', 'min:1'],
             'note' => ['max:255'],
             'lokasi' => 'required',
             'satuan' => ['required', 'string'],
-            'pencatat' => ['required', 'string'],
-            'itemcode' => ['required', 'numeric', 'digits:6'],
+            'itemcode' => ['numeric', 'digits:6'],
         ]);
 
         $consum = Consum::create([
@@ -179,12 +174,28 @@ class ConsumController extends Controller
             'jumlah' => $request->jumlah,
             'ket' => $request->note,
             'pencatat' => $request->pencatat,
-            'itemcode' => $request->itemcode,
             'tanggal' => date('d/m/Y'),
         ]);
 
-        Alert::success('Success', 'Data has been submited');
-        return back();
+        return redirect()->route('consumTable')->with('success', 'Barang Consum Berhasil di Tambah');
+    }
+
+    public function consum_update_itemcode(Request $request, $id)
+    {
+        $validate = $request->validate([
+            'itemcode' => ['required', 'numeric', 'digits:6'],
+        ]);
+
+        $getItemcode = Consum::findOrFail($id);
+        $getItemcode->update([
+            'itemcode' => $request->itemcode,
+        ]);
+
+        if($getItemcode){
+            return redirect()->route('consumTable')->with('success', 'Itemcode Berhasil di Update');
+        } else{
+            return back()->with('Gagal', 'Itemcode Gagal di Update');
+        }
     }
 
 
@@ -192,8 +203,20 @@ class ConsumController extends Controller
     // Excel
     public function csv(Request $request) // Import csv to database barang consumable
     {
-        $i = Excel::import(new ConsumImport, $request->file('file'));
-        return back()->with('success', 'Excel Data Imported successfully.');
+        Excel::import(new ConsumImport, $request->file('file'));
+        return back()->with('success', 'Data Consum Berhasil di Import');
+    }
+
+    public function import_masuk(Request $request)
+    {
+        Excel::import(new ConsumMasukImport, $request->file('file'));
+        return back()->with('success', 'Consum Masuk Berhasil di Import');
+    }
+
+    public function import_keluar(Request $request)
+    {
+        Excel::import(new ConsumKeluarImport, $request->file('file'));
+        return back()->with('success', 'Consum Keluar Berhasil di Import');
     }
 
     public function export_consum() // Export data consumable to excel
@@ -214,30 +237,30 @@ class ConsumController extends Controller
 
 
     // Yajra Datatable
-    public function yajra_all_consum() // Get seluruh data consumable
+    public function consum_yajra_show() // Get seluruh data consumable
     {
         $consum = DB::table('consums')
             ->select('consums.*')
-            ->orderBy('id', 'asc');
+            ->orderBy('id', 'desc');
             return DataTables::of($consum)
             ->addColumn('action', 'consum.update')
             ->make(true);
     }
 
-    public function yajra_masuk_consum() // Get seluruh data barang masuk consumable
+    public function consum_yajra_masuk() // Get seluruh data barang masuk consumable
     {
         $masuk = DB::table('consum_masuks')
             ->select('consum_masuks.*')
-            ->orderBy('consum_id', 'asc');
+            ->orderBy('consum_id', 'desc');
             return Datatables::of($masuk)
             ->make(true);
     }
 
-    public function yajra_keluar_consum() // Get seluruh data barang keluar consumable
+    public function consum_yajra_keluar() // Get seluruh data barang keluar consumable
     {
         $keluar = DB::table('consum_keluars')
             ->select('consum_keluars.*')
-            ->orderBy('consum_id', 'asc');
+            ->orderBy('consum_id', 'desc');
             return Datatables::of($keluar)
             ->make(true);
     }

@@ -17,8 +17,8 @@ class CreateAssetMasuksTable extends Migration
             $table->id();
             $table->foreignId('asset_id');
             $table->string('nama_barang');
-            $table->unsignedBigInteger('jumlah');
-            $table->text('ket')->nullable();
+            $table->unsignedInteger('jumlah');
+            $table->string('ket')->nullable();
             $table->string('pencatat');
             $table->string('tanggal');
             $table->timestamps();

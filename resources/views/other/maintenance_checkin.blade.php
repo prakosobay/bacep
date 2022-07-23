@@ -27,24 +27,31 @@
 
 	<div class="container-contact100">
 		<div class="wrap-contact100">
-			<form id="maintenance_form" class="contact100-form validate-form" method="POST">
+			<form id="maintenance_form" class="contact100-form validate-form" method="POST" action="{{ url('other/maintenance/update/checkin', $form->id)}}">
+                @method('PUT')
                 @csrf
 				<span class="contact100-form-title">
 					FORM MAINTENANCE
 				</span>
 
+                @if (session('gagal'))
+                    <div class="alert alert-warning my-2 mx-2">
+                        {{ session('gagal') }}
+                    </div>
+                @endif
+
                 {{-- Purpose of Work --}}
 				<div class="wrap-input100 validate-input bg1" data-validate="Pilih Tujuan Pekerjaan">
 					<span class="label-input100">Purpose of Work (Tujuan Pekerjaan) *</span>
                     <div>
-                        <input class="input100" type="text" name="work" id="work" value="{{$form->work}}" readonly>
+                        <input class="input100" type="text" id="work" value="{{$form->work}}" readonly>
                     </div>
 				</div>
 
                 {{-- Date of Visit --}}
                 <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate ="Pilih Tanggal Pekerjaan">
 					<span class="label-input100">Date of Visit (Tanggal Mulai Pekerjaan) *</span>
-                    <input class="input100" type="date" name="visit" id="visit" value="{{$form->visit}}">
+                    <input class="input100" type="date" id="visit" value="{{$form->visit}}" readonly>
 				</div>
 
                 {{-- Date of Leave --}}
@@ -58,24 +65,24 @@
                     <div class="wrap-contact100-form-radio">
                         <div class="contact100-form-radio">
                             <label class="label-radio100">
-                                <input class="input100" id="loc1" name="loc1" value="{{$form->loc1}}" readonly>
+                                <input class="input100" id="loc1"  value="{{$form->loc1}}" readonly>
                             </label>
                         </div>
 
                         <div class="contact100-form-radio">
                             <label class="label-radio100">
-                                <input class="input100" id="loc2" name="loc2" value="{{$form->loc2}}" readonly>
+                                <input class="input100" id="loc2"  value="{{$form->loc2}}" readonly>
                             </label>
                         </div>
 
                         <div class="contact100-form-radio">
                             <label class="label-radio100">
-                                <input class="input100" id="loc3" name="loc3" value="{{$form->loc3}}" readonly>
+                                <input class="input100" id="loc3"  value="{{$form->loc3}}" readonly>
                             </label>
                         </div>
                         <div class="contact100-form-radio">
                             <label class="label-radio100">
-                                <input class="input100" id="loc4" name="loc4" value="{{$form->loc4}}" readonly>
+                                <input class="input100" id="loc4"  value="{{$form->loc4}}" readonly>
                             </label>
                         </div>
                     </div>
@@ -84,25 +91,25 @@
                     <div class="wrap-contact100-form-radio">
                         <div class="contact100-form-radio">
                             <label class="label-radio100">
-                                <input class="input100" id="loc5" name="loc5" value="{{$form->loc5}}" readonly>
+                                <input class="input100" id="loc5"  value="{{$form->loc5}}" readonly>
                             </label>
                         </div>
 
                         <div class="contact100-form-radio">
                             <label class="label-radio100">
-                                <input class="input100" id="loc6" name="loc6" value="{{$form->loc6}}" readonly>
+                                <input class="input100" id="loc6"  value="{{$form->loc6}}" readonly>
                             </label>
                         </div>
 
                         <div class="contact100-form-radio">
                             <label class="label-radio100">
-                                <input class="input100" id="loc7" name="loc7" value="{{$form->loc7}}" readonly>
+                                <input class="input100" id="loc7"  value="{{$form->loc7}}" readonly>
                             </label>
                         </div>
 
                         <div class="contact100-form-radio">
                             <label class="label-radio100">
-                                <input class="input100" id="loc8" name="loc8" value="{{$form->loc8}}" readonly>
+                                <input class="input100" id="loc8"  value="{{$form->loc8}}" readonly>
                             </label>
                         </div>
                     </div>
@@ -111,19 +118,19 @@
                     <div class="wrap-contact100-form-radio">
                         <div class="contact100-form-radio">
                             <label class="label-radio100">
-                                <input class="input100" id="loc9" name="loc9" value="{{$form->loc9}}" readonly>
+                                <input class="input100" id="loc9"  value="{{$form->loc9}}" readonly>
                             </label>
                         </div>
 
                         <div class="contact100-form-radio">
                             <label class="label-radio100">
-                                <input class="input100" id="loc10" name="loc10" value="{{$form->loc10}}" readonly>
+                                <input class="input100" id="loc10"  value="{{$form->loc10}}" readonly>
                             </label>
                         </div>
 
                         <div class="contact100-form-radio">
                             <label class="label-radio100">
-                                <input class="input100" id="loc11" name="loc11" value="{{$form->loc11}}" readonly>
+                                <input class="input100" id="loc11"  value="{{$form->loc11}}" readonly>
                             </label>
                         </div>
                     </div>
@@ -132,19 +139,19 @@
                     <div class="wrap-contact100-form-radio">
                         <div class="contact100-form-radio">
                             <label class="label-radio100">
-                                <input class="input100" id="loc12" name="loc12" value="{{$form->loc12}}" readonly>
+                                <input class="input100" id="loc12"  value="{{$form->loc12}}" readonly>
                             </label>
                         </div>
 
                         <div class="contact100-form-radio">
                             <label class="label-radio100">
-                                <input class="input100" id="loc13" name="loc13" value="{{$form->loc13}}" readonly>
+                                <input class="input100" id="loc13"  value="{{$form->loc13}}" readonly>
                             </label>
                         </div>
 
                         <div class="contact100-form-radio">
                             <label class="label-radio100">
-                                <input class="input100" id="loc14" name="loc14" value="{{$form->loc14}}" readonly>
+                                <input class="input100" id="loc14"  value="{{$form->loc14}}" readonly>
                             </label>
                         </div>
                     </div>
@@ -153,19 +160,19 @@
                 {{-- Isian --}}
                 <div class="wrap-input100 bg1 rs1-alert-validate">
 					<span class="label-input100">Background and Objective (Latar Belakang dan Tujuan) *</span>
-					<input type="text" class="input100" name="background" id="background" value="{{$form->background}}" readonly>
+					<input type="text" class="input100"  id="background" value="{{$form->background}}" readonly>
 				</div>
                 <div class="wrap-input100 bg1 rs1-alert-validate">
 					<span class="label-input100">Description of Scope of Work (Deskripsikan Lingkup Pekerjaan) *</span>
-					<input type="text" class="input100" name="describ" id="describ" value="{{$form->desc}}" readonly>
+					<input type="text" class="input100" id="describ" value="{{$form->desc}}" readonly>
 				</div>
                 <div class="wrap-input100 bg1">
 					<span class="label-input100">Testing and Verification (Pengujian dan Verifikasi)</span>
-					<input type="text" class="input100" name="testing" id="testing" value="{{$form->testing}}" readonly>
+					<input type="text" class="input100" id="testing" value="{{$form->testing}}" readonly>
 				</div>
                 <div class="wrap-input100 bg1">
 					<span class="label-input100">Rollback Operation/Other Infomation (Operasi Pembatalan/Infomasi Lain)</span>
-					<input type="text" class="input100" name="rollback" id="rollback" value="{{$form->rollback}}" readonly>
+					<input type="text" class="input100" id="rollback" value="{{$form->rollback}}" readonly>
 				</div>
 
                 <!-- Detail Time Activity -->
@@ -182,34 +189,34 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <th><input class="bg1" type="time" name="time_start_1" value="{{$form->time_start_1}}"></th>
-                            <th><input class="bg1" type="time" name="time_end_1" value="{{$form->time_end_1}}"></th>
-                            <th><input type="text" class="input100" name="activity_1" id="activity_desciption_1" value="{{$form->activity_1}}" readonly></th>
-                            <th><input type="text" class="input100" name="detail_1" id="detail_service_1" value="{{$form->detail_1}}" readonly></th>
+                            <th><input class="bg1" type="time" value="{{$form->time_start_1}}" readonly></th>
+                            <th><input class="bg1" type="time" value="{{$form->time_end_1}}" readonly></th>
+                            <th><input type="text" class="input100" id="activity_desciption_1" value="{{$form->activity_1}}" readonly></th>
+                            <th><input type="text" class="input100" id="detail_service_1" value="{{$form->detail_1}}" readonly></th>
                         </tr>
                         <tr>
-                            <th><input class="bg1" type="time" name="time_start_2"  value="{{$form->time_start_2}}></th>
-                            <th><input class="bg1" type="time" name="time_end_2" value="{{$form->time_end_2}}"></th>
-                            <th><input type="text" class="input100" name="activity_2" id="activity_desciption_2" value="{{$form->activity_2}}" readonly></th>
-                            <th><input type="text" class="input100" name="detail_2" id="detail_service_2" value="{{$form->detail_2}}" readonly></th>
+                            <th><input class="bg1" type="time" value="{{$form->time_start_2}}" readonly></th>
+                            <th><input class="bg1" type="time" value="{{$form->time_end_2}}" readonly></th>
+                            <th><input type="text" class="input100" id="activity_desciption_2" value="{{$form->activity_2}}" readonly></th>
+                            <th><input type="text" class="input100" id="detail_service_2" value="{{$form->detail_2}}" readonly></th>
                         </tr>
                         <tr>
-                            <th><input class="bg1" type="time" name="time_start_3"  value="{{$form->time_start_3}}></th>
-                            <th><input class="bg1" type="time" name="time_end_3" value="{{$form->time_end_3}}"></th>
-                            <th><input type="text" class="input100" name="activity_3" id="activity_desciption_3" value="{{$form->activity_3}}" readonly></th>
-                            <th><input type="text" class="input100" name="detail_3" id="detail_service_3" value="{{$form->detail_3}}" readonly></th>
+                            <th><input class="bg1" type="time" value="{{$form->time_start_3}}" readonly></th>
+                            <th><input class="bg1" type="time" value="{{$form->time_end_3}}" readonly></th>
+                            <th><input type="text" class="input100" id="activity_desciption_3" value="{{$form->activity_3}}" readonly></th>
+                            <th><input type="text" class="input100" id="detail_service_3" value="{{$form->detail_3}}" readonly></th>
                         </tr>
                         <tr>
-                            <th><input class="bg1" type="time" name="time_start_4"  value="{{$form->time_start_4}}></th>
-                            <th><input class="bg1" type="time" name="time_end_4" value="{{$form->time_end_4}}"></th>
-                            <th><input type="text" class="input100" name="activity_4" id="activity_desciption_4" value="{{$form->activity_4}}" readonly></th>
-                            <th><input type="text" class="input100" name="detail_4" id="detail_service_4" value="{{$form->detail_4}}" readonly></th>
+                            <th><input class="bg1" type="time" value="{{$form->time_start_4}}" readonly></th>
+                            <th><input class="bg1" type="time" value="{{$form->time_end_4}}" readonly></th>
+                            <th><input type="text" class="input100" id="activity_desciption_4" value="{{$form->activity_4}}" readonly></th>
+                            <th><input type="text" class="input100" id="detail_service_4" value="{{$form->detail_4}}" readonly></th>
                         </tr>
                         <tr>
-                            <th><input class="bg1" type="time" name="time_start_5"  value="{{$form->time_start_5}}></th>
-                            <th><input class="bg1" type="time" name="time_end_5" value="{{$form->time_end_5}}"></th>
-                            <th><input type="text" class="input100" name="activity_5" id="activity_desciption_5" value="{{$form->activity_5}}" readonly></th>
-                            <th><input type="text" class="input100" name="detail_5" id="detail_service_5" value="{{$form->detail_5}}" readonly></th>
+                            <th><input class="bg1" type="time" value="{{$form->time_start_5}}" readonly></th>
+                            <th><input class="bg1" type="time" value="{{$form->time_end_5}}" readonly></th>
+                            <th><input type="text" class="input100" id="activity_desciption_5" value="{{$form->activity_5}}" readonly></th>
+                            <th><input type="text" class="input100" id="detail_service_5" value="{{$form->detail_5}}" readonly></th>
                         </tr>
                     </tbody>
                 </table>
@@ -226,24 +233,24 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <th><input type="text" class="input100" name="item_1" id="item_1" value="{{$form->item_1}}" readonly></th>
-                            <th ><input type="text" class="input100" name="procedure_1" id="working_procedure_1" value="{{$form->procedure_1}}" readonly></th>
+                            <th><input type="text" class="input100" id="item_1" value="{{$form->item_1}}" readonly></th>
+                            <th ><input type="text" class="input100" id="working_procedure_1" value="{{$form->procedure_1}}" readonly></th>
                         </tr>
                         <tr>
-                            <th><input type="text" class="input100" name="item_2" id="item_2" value="{{$form->item_2}}" readonly></th>
-                            <th ><input type="text" class="input100" name="procedure_2" id="working_procedure_2" value="{{$form->procedure_2}}" readonly></th>
+                            <th><input type="text" class="input100" id="item_2" value="{{$form->item_2}}" readonly></th>
+                            <th ><input type="text" class="input100" id="working_procedure_2" value="{{$form->procedure_2}}" readonly></th>
                         </tr>
                         <tr>
-                            <th><input type="text" class="input100" name="item_3" id="item_3" value="{{$form->item_3}}" readonly></th>
-                            <th ><input type="text" class="input100" name="procedure_3" id="working_procedure_3" value="{{$form->procedure_3}}" readonly></th>
+                            <th><input type="text" class="input100" id="item_3" value="{{$form->item_3}}" readonly></th>
+                            <th ><input type="text" class="input100" id="working_procedure_3" value="{{$form->procedure_3}}" readonly></th>
                         </tr>
                         <tr>
-                            <th><input type="text" class="input100" name="item_4" id="item_4" value="{{$form->item_4}}" readonly></th>
-                            <th ><input type="text" class="input100" name="procedure_4" id="working_procedure_4" value="{{$form->procedure_4}}" readonly></th>
+                            <th><input type="text" class="input100" id="item_4" value="{{$form->item_4}}" readonly></th>
+                            <th ><input type="text" class="input100" id="working_procedure_4" value="{{$form->procedure_4}}" readonly></th>
                         </tr>
                         <tr>
-                            <th><input type="text" class="input100" name="item_5" id="item_5" value="{{$form->item_5}}" readonly></th>
-                            <th ><input type="text" class="input100" name="procedure_5" id="working_procedure_5" value="{{$form->procedure_5}}" readonly></th>
+                            <th><input type="text" class="input100" id="item_5" value="{{$form->item_5}}" readonly></th>
+                            <th ><input type="text" class="input100" id="working_procedure_5" value="{{$form->procedure_5}}" readonly></th>
                         </tr>
                     </tbody>
                 </table>
@@ -262,134 +269,196 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <th><input type="text" class="input100" name="risk_1" id="risk_description_1" value="{{$form->risk_1}}" readonly></th>
-                            <th><input type="text" class="input100" name="poss_1" id="possibility_1" value="{{$form->poss_1}}" readonly></th>
-                            <th><input type="text" class="input100" name="impact_1" id="impact_1" value="{{$form->impact_1}}" readonly></th>
-                            <th><input type="text" class="input100" name="mitigation_1" id="mitigation_plan_1" value="{{$form->mitigation_1}}" readonly></th>
+                            <th><input type="text" class="input100" id="risk_description_1" value="{{$form->risk_1}}" readonly></th>
+                            <th><input type="text" class="input100" id="possibility_1" value="{{$form->poss_1}}" readonly></th>
+                            <th><input type="text" class="input100" id="impact_1" value="{{$form->impact_1}}" readonly></th>
+                            <th><input type="text" class="input100" id="mitigation_plan_1" value="{{$form->mitigation_1}}" readonly></th>
                         </tr>
                         <tr>
-                            <th><input type="text" class="input100" name="risk_2" id="risk_description_2" value="{{$form->risk_2}}" readonly></th>
-                            <th><input type="text" class="input100" name="poss_2" id="possibility_2" value="{{$form->risk_2}}" readonly></th>
-                            <th><input type="text" class="input100" name="impact_2" id="impact_2" value="{{$form->impact_2}}" readonly></th>
-                            <th><input type="text" class="input100" name="mitigation_2" id="mitigation_plan_2" value="{{$form->mitigation_2}}" readonly></th>
+                            <th><input type="text" class="input100" id="risk_description_2" value="{{$form->risk_2}}" readonly></th>
+                            <th><input type="text" class="input100" id="possibility_2" value="{{$form->risk_2}}" readonly></th>
+                            <th><input type="text" class="input100" id="impact_2" value="{{$form->impact_2}}" readonly></th>
+                            <th><input type="text" class="input100" id="mitigation_plan_2" value="{{$form->mitigation_2}}" readonly></th>
                         </tr>
                         <tr>
-                            <th><input type="text" class="input100" name="risk_3" id="risk_description_3" value="{{$form->risk_3}}" readonly></th>
-                            <th><input type="text" class="input100" name="poss_3" id="possibility_3" value="{{$form->risk_3}}" readonly></th>
-                            <th><input type="text" class="input100" name="impact_3" id="impact_3" value="{{$form->impact_3}}" readonly></th>
-                            <th><input type="text" class="input100" name="mitigation_3" id="mitigation_plan_3" value="{{$form->mitigation_3}}" readonly></th>
+                            <th><input type="text" class="input100" id="risk_description_3" value="{{$form->risk_3}}" readonly></th>
+                            <th><input type="text" class="input100" id="possibility_3" value="{{$form->risk_3}}" readonly></th>
+                            <th><input type="text" class="input100" id="impact_3" value="{{$form->impact_3}}" readonly></th>
+                            <th><input type="text" class="input100" id="mitigation_plan_3" value="{{$form->mitigation_3}}" readonly></th>
                         </tr>
                         <tr>
-                            <th><input type="text" class="input100" name="risk_4" id="risk_description_4" value="{{$form->risk_4}}" readonly></th>
-                            <th><input type="text" class="input100" name="poss_4" id="possibility_4" value="{{$form->risk_4}}" readonly></th>
-                            <th><input type="text" class="input100" name="impact_4" id="impact_4" value="{{$form->impact_4}}" readonly></th>
-                            <th><input type="text" class="input100" name="mitigation_4" id="mitigation_plan_4" value="{{$form->mitigation_4}}" readonly></th>
+                            <th><input type="text" class="input100" id="risk_description_4" value="{{$form->risk_4}}" readonly></th>
+                            <th><input type="text" class="input100" id="possibility_4" value="{{$form->risk_4}}" readonly></th>
+                            <th><input type="text" class="input100" id="impact_4" value="{{$form->impact_4}}" readonly></th>
+                            <th><input type="text" class="input100" id="mitigation_plan_4" value="{{$form->mitigation_4}}" readonly></th>
                         </tr>
                         <tr>
-                            <th><input type="text" class="input100" name="risk_5" id="risk_description_5" value="{{$form->risk_5}}" readonly></th>
-                            <th><input type="text" class="input100" name="poss_5" id="possibility_5" value="{{$form->risk_5}}" readonly></th>
-                            <th><input type="text" class="input100" name="impact_5" id="impact_5" value="{{$form->impact_5}}" readonly></th>
-                            <th><input type="text" class="input100" name="mitigation_5" id="mitigation_plan_5" value="{{$form->mitigation_4}}" readonly></th>
+                            <th><input type="text" class="input100" id="risk_description_5" value="{{$form->risk_5}}" readonly></th>
+                            <th><input type="text" class="input100" id="possibility_5" value="{{$form->risk_5}}" readonly></th>
+                            <th><input type="text" class="input100" id="impact_5" value="{{$form->impact_5}}" readonly></th>
+                            <th><input type="text" class="input100" id="mitigation_plan_5" value="{{$form->mitigation_4}}" readonly></th>
                         </tr>
                     </tbody>
                 </table>
 
-                {{-- PIC --}}
-                <div class="wrap-input100 validate-input bg1">
-                    @foreach ($pic as $v)
-                        {{-- Data PIC --}}
-                        <div id="pic">
-                            <table class="table table-bordered bg1">
-                                <tr>
-                                    <th colspan="5"><b>PIC</b></th>
-                                </tr>
-                                <tr>
-                                    <th>Name </th>
-                                    <td>
-                                        <select class="js-select2" name="visit_nama[]" id="nama">
-                                            <option value="{{$v['name']}}" selected>{{$v['name']}}</option>
-                                            @foreach ($personil as $p)
-                                                <option value="{{$p->id}}">{{$p->visit_nama}}</option>
-                                            @endforeach
-                                        </select>
-                                        <div class="dropDownSelect2"></div>
-                                    </td>
-                                    <th>Company</th>
-                                    <td>
-                                        <input type="text" class="input100" name="visit_company[]" id="company" value="{{$v['company']}}" readonly>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>ID Number </th>
-                                    <td>
-                                        <input type="text" class="input100" name="visit_nik[]" id="nik" value="{{$v['number']}}" readonly>
-                                    </td>
-                                    <th>Department </th>
-                                    <td>
-                                        <input type="text" class="input100" name="visit_department[]" id="department" value="{{$v['department']}}" readonly>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>Phone Number</th>
-                                    <td>
-                                        <input type="text" class="input100" name="visit_phone[]" id="phone" value="{{$v['phone']}}" readonly>
-                                    </td>
-                                    <th>Responsibility </th>
-                                    <td>
-                                        <input type="text" class="input100" name="visit_respon[]" id="respon" value="{{$v['respon']}}" readonly>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
+                {{-- Visitor --}}
+                <table class="table table-bordered bg1 mt-3" width="100%">
+                    <tr>
+                        <th colspan="4"><b>Visitor</b></th>
+                    </tr>
+                    @foreach($other_personil as $person)
+                        <tr>
+                            <th>Name </th>
+                            <td>
+                                <input type="text" class="bg1 input100" value="{{$person->name}}" readonly>
+                            </td>
+                            <th>Company</th>
+                            <td>
+                                <input type="text" class="bg1 input100" value="{{$person->company}}" readonly>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>ID Number </th>
+                            <td>
+                                <input type="text" class="bg1 input100" value="{{$person->number}}" readonly>
+                            </td>
+                            <th>Department </th>
+                            <td>
+                                <input type="text" class="bg1 input100" value="{{$person->department}}" readonly>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Phone Number</th>
+                            <td>
+                                <input type="text" class="bg1 input100" value="{{$person->phone}}" readonly>
+                            </td>
+                            <th>Responsibility </th>
+                            <td>
+                                <input type="text" class="bg1 input100" value="{{$person->respon}}" readonly>
+                            </td>
+                        </tr>
                     @endforeach
-                </div>
 
-                {{-- Take Selfie --}}
-                <div class="wrap-input100 bg1 rs1-alert-validate">
-
-                    {{-- 1 --}}
-                    <div id="checkin">
-                        <div class="container-fluid" id="content">
-                            <div class="row justify-content-center">
-                                <div class="col-6">
-                                    <span class="label-input100">Take a selfie PIC 1</span>
-                                </div>
-                                <div class="col-6">
-                                    <span class="label-input100"><b>Your captured image will appear here...</b></span>
-                                </div>
-                            </div>
-                            <div class="row justify-content-center">
-                                <div class="col-6">
-                                    <div id="my_camera"></div>
-                                </div>
-                                <div class="col-6">
-                                    <div id="results"></div>
-                                </div>
-                            </div>
-                            <div class="row justify-content-center">
-                                <input type=button class="btn btn-primary btn-sm" value="Take Snapshot" onclick="take_snapshot()" required>
-                            </div>
-                            <div class="row justify-content-center">
-                                <input class="@error('photo_checkin') is-invalid
-                                @enderror" required autocomplete="photo_checkin" type="hidden" name="photo_checkin[]" id="image">
+                        {{-- Visitor 1 --}}
+                        <tr>
+                            <th colspan="2">
+                                <span>Take A Selfie Visitor 1</span>
+                                <div id="my_camera"></div><br>
+                                <input type="button" value="Take Snapshot" class="btn btn-sm btn-primary" onclick="take_snapshot()" required>
+                            </th>
+                            <th colspan="2" class="py-5">
+                                <div id="results"></div><br>
+                                <input class="@error('photo_checkin') is-invalid @enderror" required autocomplete="photo_checkin" type="hidden" name="photo_checkin[]" id="image">
                                 @error('photo_checkin')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
-                                    </span>
+                                    </span><br>
                                 @enderror
-                            </div>
-                            <div class="row justify-content-center my-2">
-                                <input type="time" class="@error('checkin')@enderror" name="checkin[]" id="checkin" value="" required autocomplete="checkin" readonly>
+                                <input type="time" class="@error('checkin') is-invalid @enderror" name="checkin[]" id="checkin" value="" required autocomplete="checkin" readonly>
                                 @error('checkin')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                            </div>
-                        </div>
-                    </div>
+                            </th>
+                        </tr>
 
-                </div>
+                        {{-- Visitor 2 --}}
+                        <tr>
+                            <th colspan="2">
+                                <span>Take A Selfie Visitor 2</span>
+                                <div id="my_camera2"></div><br>
+                                <input type="button" class="btn btn-sm btn-primary" value="Take Snapshot2" onclick="take_snapshot2()">
+                            </th>
+                            <th colspan="2" class="py-5">
+                                <div id="results2"></div><br>
+                                <input type="hidden" class="@error('photo_checkin2') is-invalid @enderror" name="photo_checkin[]" id="image2">
+                                @error('photo_checkin2')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{$message}}</strong>
+                                    </span><br>
+                                @enderror
+                                <input type="time" class="@error('checkin2') is-invalid @enderror" name="checkin[]" id="checkin2" value="" readonly>
+                                @error('checkin2')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </th>
+                        </tr>
+
+                        {{-- Visitor 3 --}}
+                        <tr>
+                            <th colspan="2">
+                                <span>Take A Selfie Visitor 3</span>
+                                <div id="my_camera3"></div><br>
+                                <input type="button" class="btn btn-sm btn-primary" value="Take Snapshot3" onclick="take_snapshot3()">
+                            </th>
+                            <th colspan="2" class="py-5">
+                                <div id="results3"></div><br>
+                                <input type="hidden" class="@error('photo_checkin3') is-invalid @enderror" name="photo_checkin[]" id="image3">
+                                @error('photo_checkin3')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{$message}}</strong>
+                                    </span><br>
+                                @enderror
+                                <input type="time" class="@error('checkin3') is-invalid @enderror" name="checkin[]" id="checkin3" value="" readonly>
+                                @error('checkin3')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </th>
+                        </tr>
+
+                        {{-- Visitor 4 --}}
+                        <tr>
+                            <th colspan="2">
+                                <span>Take A Selfie Visitor 4</span>
+                                <div id="my_camera4"></div><br>
+                                <input type="button" class="btn btn-sm btn-primary" value="Take Snapshot4" onclick="take_snapshot4()">
+                            </th>
+                            <th colspan="2" class="py-5">
+                                <div id="results4"></div><br>
+                                <input type="hidden" class="@error('photo_checkin4') is-invalid @enderror" name="photo_checkin[]" id="image4">
+                                @error('photo_checkin4')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{$message}}</strong>
+                                    </span><br>
+                                @enderror
+                                <input type="time" class="@error('checkin4') is-invalid @enderror" name="checkin[]" id="checkin4" value="" readonly>
+                                @error('checkin4')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </th>
+                        </tr>
+
+                        {{-- Visitor 5 --}}
+                        <tr>
+                            <th colspan="2">
+                                <span>Take A Selfie Visitor 5</span>
+                                <div id="my_camera5"></div><br>
+                                <input type="button" class="btn btn-sm btn-primary" value="Take Snapshot5" onclick="take_snapshot5()" >
+                            </th>
+                            <th colspan="2" class="py-5">
+                                <div id="results5"></div><br>
+                                <input type="hidden" class="@error('photo_checkin5') is-invalid @enderror"   name="photo_checkin[]" id="image5">
+                                @error('photo_checkin5')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{$message}}</strong>
+                                    </span><br>
+                                @enderror
+                                <input type="time" class="@error('checkin5') is-invalid @enderror" name="checkin[]" id="checkin5" value=""  readonly>
+                                @error('checkin5')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </th>
+                        </tr>
+                </table>
 
 				<div class="container-contact100-form-btn">
 					<button type="submit" class="contact100-form-btn">
@@ -431,124 +500,99 @@
         });
 
         Webcam.set({
-            width: 490,
-            height: 390,
+            width: 450,
+            height: 400,
             image_format: 'jpeg',
             jpeg_quality: 90
         });
 
         Webcam.attach( '#my_camera' );
-        function take_snapshot() {
-            Webcam.snap( function(data_uri) {
-                $("#image").val(data_uri);
-                document.getElementById('results').innerHTML = '<img src="'+data_uri+'"/>';
-            });
-
-
-
-            var tanggal = new Date();
-            var jam = tanggal.getHours();
-            var menit = tanggal.getMinutes();
-            var detik = tanggal.getSeconds();
-            jam = jam < 10 ? '0' +jam : jam;
-            menit = menit < 10 ? '0'+menit : menit;
-            detik = detik < 10 ? '0'+detik : detik;
-            var waktu = jam + ':' + menit + ':' + detik;
-
-            for(let i = 1; i < 6; i++){
-                $('content').
+            function take_snapshot() {
+                Webcam.snap( function(data_uri) {
+                    $("#image").val(data_uri);
+                    document.getElementById('results').innerHTML = '<img src="'+data_uri+'"/>';
+                });
+                var tanggal = new Date();
+                var jam = tanggal.getHours();
+                var menit = tanggal.getMinutes();
+                var detik = tanggal.getSeconds();
+                jam = jam < 10 ? '0' +jam : jam;
+                menit = menit < 10 ? '0'+menit : menit;
+                detik = detik < 10 ? '0'+detik : detik;
+                var waktu = jam + ':' + menit + ':' + detik;
+                $("#checkin").val(waktu);
             }
-            $("#checkin").val(waktu);
-        }
+
+        Webcam.attach( '#my_camera2' );
+            function take_snapshot2() {
+                Webcam.snap( function(data_uri) {
+                    $("#image2").val(data_uri);
+                    document.getElementById('results2').innerHTML = '<img src="'+data_uri+'"/>';
+                });
+                var tanggal = new Date();
+                var jam = tanggal.getHours();
+                var menit = tanggal.getMinutes();
+                var detik = tanggal.getSeconds();
+                jam = jam < 10 ? '0' +jam : jam;
+                menit = menit < 10 ? '0'+menit : menit;
+                detik = detik < 10 ? '0'+detik : detik;
+                var waktu = jam + ':' + menit + ':' + detik;
+                $("#checkin2").val(waktu);
+            }
+
+        Webcam.attach( '#my_camera3' );
+            function take_snapshot3() {
+                Webcam.snap( function(data_uri) {
+                    $("#image3").val(data_uri);
+                    document.getElementById('results3').innerHTML = '<img src="'+data_uri+'"/>';
+                });
+                var tanggal = new Date();
+                var jam = tanggal.getHours();
+                var menit = tanggal.getMinutes();
+                var detik = tanggal.getSeconds();
+                jam = jam < 10 ? '0' +jam : jam;
+                menit = menit < 10 ? '0'+menit : menit;
+                detik = detik < 10 ? '0'+detik : detik;
+                var waktu = jam + ':' + menit + ':' + detik;
+                $("#checkin3").val(waktu);
+            }
+
+        Webcam.attach( '#my_camera4' );
+            function take_snapshot4() {
+                Webcam.snap( function(data_uri) {
+                    $("#image4").val(data_uri);
+                    document.getElementById('results4').innerHTML = '<img src="'+data_uri+'"/>';
+                });
+                var tanggal = new Date();
+                var jam = tanggal.getHours();
+                var menit = tanggal.getMinutes();
+                var detik = tanggal.getSeconds();
+                jam = jam < 10 ? '0' +jam : jam;
+                menit = menit < 10 ? '0'+menit : menit;
+                detik = detik < 10 ? '0'+detik : detik;
+                var waktu = jam + ':' + menit + ':' + detik;
+                $("#checkin4").val(waktu);
+            }
+
+        Webcam.attach( '#my_camera5' );
+            function take_snapshot5() {
+                Webcam.snap( function(data_uri) {
+                    $("#image5").val(data_uri);
+                    document.getElementById('results5').innerHTML = '<img src="'+data_uri+'"/>';
+                });
+                var tanggal = new Date();
+                var jam = tanggal.getHours();
+                var menit = tanggal.getMinutes();
+                var detik = tanggal.getSeconds();
+                jam = jam < 10 ? '0' +jam : jam;
+                menit = menit < 10 ? '0'+menit : menit;
+                detik = detik < 10 ? '0'+detik : detik;
+                var waktu = jam + ':' + menit + ':' + detik;
+                $("#checkin5").val(waktu);
+            }
 
 
-
-        // $('#pic').each(function(){
-        //     $('#nama').change(function(){
-        //         let id = $(this).val();
-        //         $.ajax({
-        //             url: "{{url("/other/maintenance/visitor")}}"+'/'+id,
-        //             dataType:"json",
-        //             type: "get",
-        //             success: function(response){
-        //                 const {visitor} = response;
-        //                 // console.log(visitor)
-        //                 var company = []
-        //                 var company = document.getElementById('#company')
-        //                 $(company).each(function(value, index){
-        //                     console.log(value)
-        //                     $(this).val(visitor.visit_company)
-        //                 })
-        //                 $('#department').forEach(function(){
-        //                     $(this).val(visitor.visit_department)
-        //                 })
-        //             $('#department').val(visitor.visit_department);
-        //             $('#phone').val(visitor.visit_phone);
-        //             $('#nik').val(visitor.visit_nik);
-        //             $('#respon').val(visitor.visit_respon);
-        //             }
-        //         });
-        //     })
-        // });
-
-        $('#nama').change(function(){
-            let id = $(this).val();
-            $.ajax({
-                url: "{{url("/other/maintenance/visitor")}}"+'/'+id,
-                dataType:"json",
-                type: "get",
-                success: function(response){
-                    const {visitor} = response;
-                    console.log(visitor);
-
-                    // visitor.array.forEach($('#company') => {
-
-                    // });
-                        $('#company').val(visitor.visit_company);
-                        $('#department').val(visitor.visit_department);
-                        $('#phone').val(visitor.visit_phone);
-                        $('#nik').val(visitor.visit_nik);
-                        $('#respon').val(visitor.visit_respon);
-
-                }
-            });
-        });
-
-
-        $(".contact100-form-btn").click(function(e){
-        e.preventDefault();
-        var datastring = $("#maintenance_form").serialize();
-            $.ajax({
-                type:'POST',
-                url:"{{url('other/maintenance/form/checkin')}}",
-                data: datastring,
-                error: function (request, error) {
-                    console.log(error)
-                    alert(" Can't do because: " + error);
-                },
-                success:function(data){
-                    console.log(data);
-                    if(data.status == 'SUCCESS'){
-                        Swal.fire({
-                            title: "Success!",
-                            text: 'Data Saved',
-                            type: "success",
-                        }).then(function(){
-                            location.href = "{{url("/logall")}}";
-                        });
-                    }else if(data.status == 'FAILED'){
-                        Swal.fire({
-                            title: "Failed!",
-                            text: 'Saving Data Failed',
-                        }).then(function(){
-                            location.reload();
-                        });
-                    }
-                }
-            });
-        });
-
-	</script>
+    </script>
 <!--===============================================================================================-->
 	<script src="{{ asset('vendor/countdowntime/countdowntime.js')}}"></script>
 <!--===============================================================================================-->

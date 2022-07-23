@@ -19,6 +19,7 @@
                 <form method="post" id="visitor" class="validate-form" action="{{url('revisi/visitor/edit', $visitor->id)}}">
                     @csrf
                     @method('PUT')
+
                     @if (count($errors) > 0)
                         <div class="alert alert-danger">
                             <ul>
@@ -28,55 +29,65 @@
                             </ul>
                         </div>
                     @endif
+
                     <div class="form-group">
-                        <label for="visit_nama"><strong>Nama Lengkap</strong></label>
-                        <input type="text" class="form-control @error('nama') is-invalid @enderror" required autocomplete="visit_nama" id="visit_nama" name="visit_nama" value="{{$visitor->visit_nama}}" autofocus><br>
-                            @error('nama')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
+                        <label for="nama"><strong>Nama Lengkap :</strong></label>
+                        <input type="text" class="form-control @error('nama') is-invalid @enderror" required id="nama" name="nama" value="{{$visitor->visit_nama}}" autofocus>
+                        @error('nama')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
 
-                        <label for="visit_company"><strong>Perusahaan</strong></label>
-                        <input type="text" class="form-control @error('pt') is-invalid @enderror" id="visit_company" name="visit_company" value="{{$visitor->visit_company}}" required autocomplete="visit_company"><br>
-                            @error('pt')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
+                    <div class="form-group">
+                        <label for="company"><strong>Perusahaan :</strong></label>
+                        <input type="text" class="form-control @error('company') is-invalid @enderror" id="company" name="company" value="{{$visitor->visit_company}}" required>
+                        @error('company')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
 
-                        <label for="visit_department"><strong>Department</strong></label>
-                        <input type="text" class="form-control @error('department') is-invalid @enderror" id="visit_department" name="visit_department" value="{{$visitor->visit_department}}" required autocomplete="visit_department"><br>
-                            @error('department')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        
-                        <label for="visit_respon"><strong>Role</strong></label>
-                        <input type="text" class="form-control @error('Role') is-invalid @enderror" id="visit_respon" name="visit_respon" value="{{$visitor->visit_respon}}" required autocomplete="visit_respon"><br>
-                            @error('department')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        
-                        <label for="visit_phone"><strong>No. HP</strong></label>
-                        <input type="text" id="visit_phone" name="visit_phone" class="form-control @error('phone') is-invalid @enderror" value="{{$visitor->visit_phone}}" required autocomplete="visit_phone"><br>
-                            @error('phone')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                    <div class="form-group">
+                        <label for="department"><strong>Department :</strong></label>
+                        <input type="text" class="form-control @error('department') is-invalid @enderror" id="department" name="department" value="{{$visitor->visit_department}}" required>
+                        @error('department')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
 
-                        <label for="visit_nik"><strong>No ID Karyawan</strong></label>
-                        <input type="text" class="form-control @error('NIK') is-invalid @enderror" id="visit_nik" name="visit_nik" value="{{$visitor->visit_nik}}" required autocomplete="visit_nik" readonly><br>
-                            @error('department')
+                    <div class="form-group">
+                        <label for="respon"><strong>Responsibility :</strong></label>
+                        <input type="text" class="form-control @error('respon') is-invalid @enderror" id="respon" name="respon" value="{{$visitor->visit_respon}}" required>
+                        @error('respon')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone"><strong>No. HP :</strong></label>
+                        <input type="text" id="phone" name="phone" class="form-control @error('phone') is-invalid @enderror" value="{{$visitor->visit_phone}}" required>
+                        @error('phone')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
-                            @enderror
+                        @enderror
+                    </div>
 
+                    <div class="form-group">
+                        <label for="nik"><strong>No ID Karyawan :</strong></label>
+                        <input type="text" class="form-control @error('nik') is-invalid @enderror" id="nik" name="nik" value="{{$visitor->visit_nik}}" readonly>
+                        @error('nik')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>

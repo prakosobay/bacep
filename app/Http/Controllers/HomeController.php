@@ -44,7 +44,7 @@ class HomeController extends Controller
 
     public function dashboard() // Dashboard manajemen barang
     {
-        if ((Gate::allows('isAdmin')) || (Gate::allows('isApproval')) || (Gate::allows('isHead'))) {
+        if ((Gate::allows('isApproval')) || (Gate::allows('isHead'))) {
             return view('item.input');
         } else {
             abort(404);
@@ -64,7 +64,9 @@ class HomeController extends Controller
                 return view('other.maintenance_history');
             } elseif($type_view == 'troubleshoot') {
                 return view('other.troubleshoot_history');
-            } else{
+            } elseif($type_view == 'internal'){
+                return view('internal.history');
+            } else {
                 abort(403);
             }
         } else {
@@ -113,9 +115,16 @@ class HomeController extends Controller
                     ->where('troubleshoot_bm_histories.aktif', '=', true)
                     ->select('troubleshoot_bm_histories.*', 'troubleshoot_bms.*')
                     ->get();
-                    // dd($getTroubleshoot);
                 return view('other.troubleshoot_approval', compact('getTroubleshoot'));
-            } else{
+            } elseif($type_approve == 'internal'){
+                $getInternal = DB::table('internals')
+                    ->join('internal_histories', 'internals.id', '=', 'internal_histories.internal_id')
+                    ->whereIn('internal_histories.role_to', $role_1)
+                    ->where('internal_histories.aktif', true)
+                    ->select('internal_histories.*', 'internals.req_name', 'internals.work', 'internals.visit', 'internals.leave', 'internals.created_at')
+                    ->get();
+                return view('internal.approval', compact('getInternal'));
+            } else {
                 abort(403);
             }
         } else {
@@ -136,6 +145,8 @@ class HomeController extends Controller
                 return view('other.maintenance_full_approval');
             } elseif($type_full == 'troubleshoot') {
                 return view('other.troubleshoot_full_approval');
+            } elseif($type_full == 'internal') {
+                return view('internal.fullApproval');
             } else {
                 abort(403);
             }
@@ -148,7 +159,7 @@ class HomeController extends Controller
         // dd($email);
 
         if ($email == 'it@mail.com') {
-            return view('it.full_visitor');
+            return view('it.log_visitor');
         } elseif ($email == 'ipcore@mail.com') {
             return view('ipcore.log');
         } elseif (($email == 'badai.sino@balitower.co.id') || ($email == 'data.center7@balitower.co.id')) {

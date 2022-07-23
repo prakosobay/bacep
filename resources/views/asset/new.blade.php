@@ -1,31 +1,23 @@
-@extends('layouts.dashboard')
+@extends('layouts.barang')
 
 @section('content')
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800 text-center"><strong>Tambah Barang Asset Baru</strong></h1>
+    <h1 class="h3 my-3 text-gray-800 text-center">Data Barang Asset</h1>
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-
-
+            <a type="button" class="btn btn-primary mr-5 sm" href="{{url('asset/table/show')}}">
+                Kembali
+            </a>
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <form method="post" action="{{url('asset_new')}}" class="validate-form">
+                <form method="post" action="{{url('asset/create/store')}}" class="validate-form">
                     @csrf
-                    @if (count($errors) > 0)
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
                     <div class="form-group">
                         <label for="nama_barang"><strong>Nama Barang</strong></label>
                         <input type="text" class="form-control @error('nama_barang') is-invalid @enderror"  value="{{ old('nama_barang') }}" name="nama_barang" required autocomplete="nama_barang" id="nama_barang" placeholder="Nama Barang" autofocus>
@@ -40,43 +32,40 @@
                         <label for="jumlah"><strong>Jumlah</strong></label>
                         <input type="number" class="form-control @error('jumlah') is-invalid @enderror"  value="{{ old('jumlah') }}" name="jumlah" required autocomplete="jumlah" id="jumlah" placeholder="Jumlah">
                         @error('jumlah')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
 
                     <div class="form-group">
                         <label for="itemcode"><strong>Item Code</strong></label>
                         <input type="text" class="form-control @error('itemcode') is-invalid @enderror"  value="{{ old('itemcode') }}" name="itemcode" required autocomplete="itemcode" id="itemcode" placeholder="itemcode">
                         @error('itemcode')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
 
                     <div class="form-group">
                         <label for="note"><strong>Note</strong></label>
                         <input type="text" class="form-control @error('note') is-invalid @enderror"  value="{{ old('note') }}" name="note" required autocomplete="note" id="note" placeholder="Note">
                         @error('note')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
 
                     <div class="form-group">
                         <label for="lokasi"><strong>Lokasi</strong></label>
-                        <select class="form-control" class="form-control @error('lokasi') is-invalid @enderror" name="lokasi" id="lokasi">
-                            <option>Office</option>
-                            <option>Gudang</option>
-                        </select>
+                        <input type="text" class="form-control @error('lokasi') is-invalid @enderror" value="{{ old('lokasi')}}" name="lokasi" required autocomplete="lokasi" id="lokasi">
                         @error('lokasi')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
 
                     <div class="form-group">
