@@ -59,18 +59,39 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="col-4">
+                    {{-- <div class="col-4">
                         <label for="rack">Number of Rack :</label><br>
                         <select class="js-example-basic-multiple" id="rack" name="rack[]" multiple="multiple">
+                            <optgroup label="Server Room">
                             @for ($i = 1; $i <= 39; $i++)
-                            <option value="1">Rack</option>
+                                <option value="A {{$i}}">Rack {{$i}}</option>
                             @endfor
+                            </optgroup>
+                            <optgroup label="MMR 1">
+                            @for ($i = 1; $i <= 5; $i++)
+                                <option value="B {{$i}}">Rack {{$i}}</option>
+                            @endfor
+                            </optgroup>
+                            <optgroup label="MMR 2">
+                                <option value="C 1">Rack 1</option>
+                            </optgroup>
+                            <optgroup label="CCTV Room">
+                                <option value="D 1">Rack 1</option>
+                            </optgroup>
                         </select>
+                    </div> --}}
+                    <div class="col-4">
+                        <div class="form-group mb-5">
+                            <label for="rack" class="form-label">Rack :</label>
+                            <input type="text" class="form-control @error('rack') is-invalid @enderror" id="rack" name="rack" value="{{ old('rack')}}" required>
+                            @error('rack')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message}}</strong>
+                                </span>
+                            @enderror
+                        </div>
                     </div>
                 </div>
-
-
-
 
                 {{-- Date of Visit & Leave --}}
                 <div class="row">
@@ -342,7 +363,9 @@
 $(document).ready(function(){
 
     $('.js-example-basic-multiple').select2({
-        placeholder: 'Select an option'
+        placeholder: 'Select an option',
+        allowClear : true,
+        tags : true,
     });
 
 
@@ -378,9 +401,6 @@ $(document).ready(function(){
             row++;
         }
     });
-
-
-
 });
 </script>
 @endsection

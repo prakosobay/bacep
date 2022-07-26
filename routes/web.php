@@ -226,6 +226,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('internal/it/yajra/full/visitor', [InternalController::class, 'internal_it_yajra_full_visitor']);
     Route::post('internal/create', [InternalController::class, 'internal_create']);
     Route::post('internal/approve/{id}', [InternalController::class, 'internal_approve']);
+    Route::post('internal/reject/{id}', [InternalController::class, 'internal_reject']);
 
 
     //Visitor All Base Super

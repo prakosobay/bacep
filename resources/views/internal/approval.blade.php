@@ -41,22 +41,27 @@
                             <td>{{ $p->work }}</td>
                             <td>
                                 @can('isApproval')
-                                <form action="{{ url('internal/approve', $p->internal_id)}}" method="post">
-                                    @csrf
-                                    <button id="ok" class="btn btn-success btn-sm my-1 mx-1">Approve</button>
-                                </form>
-                                    <a href="javascript:void(0)" type="button" id="not" class="reject btn btn-danger btn-sm my-1 mx-1" data-id="{{$p->id}}">Reject</a>
+                                    <form action="{{ url('internal/approve', $p->internal_id)}}" method="post">
+                                        @csrf
+                                        <button id="ok" class="btn btn-success btn-sm my-1 mx-1">Approve</button>
+                                    </form>
+
+                                    <button id="not" class="btn btn-danger btn-sm my-1 mx-1" data-bs-toggle="modal" data-bs-target="#exampleModal">Reject</button>
+
                                 @elsecan('isHead')
-                                <form action="{{ url('internal/approve', $p->internal_id)}}" method="post">
-                                    @csrf
-                                    <button id="ok" class="btn btn-success btn-sm my-1 mx-1">Approve</button>
-                                </form>
-                                    <a href="javascript:void(0)" type="button" id="not" class="reject btn btn-danger btn-sm my-1 mx-1" data-id="{{$p->id}}">Reject</a>
+                                    <form action="{{ url('internal/approve', $p->internal_id)}}" method="post">
+                                        @csrf
+                                        <button id="ok" class="btn btn-success btn-sm my-1 mx-1">Approve</button>
+                                    </form>
+
+                                    <button id="not" class="btn btn-danger btn-sm my-1 mx-1" data-bs-toggle="modal" data-bs-target="#exampleModal">Reject</button>
+
                                 @elsecan('isSecurity')
-                                <form action="{{ url('internal/approve', $p->internal_id)}}" method="post">
-                                    @csrf
-                                    <button id="ok" class="btn btn-success btn-sm my-1 mx-1">Approve</button>
-                                </form>
+                                    <form action="{{ url('internal/approve', $p->internal_id)}}" method="post">
+                                        @csrf
+                                        <button id="ok" class="btn btn-success btn-sm my-1 mx-1">Approve</button>
+                                    </form>
+
                                 @endcan
                                     <a href="/internal/it/pdf/{{$p->internal_id}}" class="btn btn-primary btn-sm my-1 mx-1" target="_blank">File</a>
                             </td>
@@ -65,6 +70,30 @@
                     </tbody>
                 </table>
             </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Alasan di Reject</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="{{ url('internal/reject', $p->internal_id )}}" method="post">
+                @csrf
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="note" class="form-label">Note :</label>
+                        <input type="text" class="form-control" name="note" id="note" value="" placeholder="Alasan di reject" required autofocus>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

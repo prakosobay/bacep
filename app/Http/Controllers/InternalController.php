@@ -40,10 +40,11 @@ class InternalController extends Controller
             'req_phone' => ['required', 'regex:/^([0-9\s\-\+\(\)]*)$/', 'min:11'],
             'background' => ['required'],
             'desc' => ['required'],
-            'rack' => ['required', ]
+            'rack' => ['required'],
         ]);
 
         if($validated){
+
             $insertForm = Internal::create([
                 'req_dept' => $getForm['req_dept'],
                 'req_name' => $getForm['req_name'],
@@ -55,6 +56,8 @@ class InternalController extends Controller
                 'desc' => $getForm['desc'],
                 'testing' => $getForm['testing'],
                 'rollback' => $getForm['rollback'],
+                'rack' => $getForm['rack'],
+                'req_email' => Auth::user()->email,
             ]);
 
             $insertEntries = InternalEntry::insert([
@@ -195,6 +198,13 @@ class InternalController extends Controller
         // dd($id);
         $last_update = InternalHistory::where('internal_id', $id)->latest()->first();
         // dd($last_update);
+        $notif_email = DB::table('internals')
+                    ->join('internal_histories', 'internals.id', 'internal_histories.internal_id')
+                    ->where('internals.id', $id)
+                    ->where('internal_histories.internal_id', $id)
+                    ->select('internals.*', 'internal_histories.status', 'internal_histories.created_by')
+                    ->first();
+
         if ($last_update->pdf == true) {
             $last_update->update(['aktif' => false]);
 
@@ -212,16 +222,7 @@ class InternalController extends Controller
                 $full_internal = Internal::find($id)->first();
             }
 
-            $notif_email = DB::table('internals')
-                    ->join('internal_histories', 'internals.id', 'internal_histories.internal_id')
-                    ->where('internals.id', $id)
-                    ->where('internal_histories.internal_id', $id)
-                    ->select('internals.*', 'internal_histories.status', 'internal_histories.created_by')
-                    ->first();
-                    // dd($notif_email);
-
-
-                    // Pergantian  role tiap permit & send email notif
+            // Pergantian  role tiap permit & send email notif
             $role_to = '';
             if ($last_update->role_to == 'review') {
                 foreach ([
@@ -286,6 +287,53 @@ class InternalController extends Controller
                 alert()->success('Approved', 'Permit has been approved!');
                 return back();
             }
+        } else {
+            abort(403);
+        }
+    }
+
+
+
+    // Reject
+    public function internal_reject(Request $request, $id)
+    {
+        $lastUpdate = InternalHistory::where('internal_id', $id)->latest()->first();
+        $getEmail = Auth::user();
+        $getForm = Internal::findOrFail($id);
+
+        // dd($getForm);
+        if ((Gate::denies('isSecurity')) && (Gate::denies('isVisitor'))) {
+
+            $request->validate([
+                'note' => ['required'],
+            ]);
+
+            if ($lastUpdate->pdf == true) {
+                $lastUpdate->update(['aktif' => false]);
+
+                $getForm->update([
+                    'reject_note' => $request->note,
+                ]);
+
+                // Simpan tiap perubahan permit ke table History
+                $history = InternalHistory::create([
+                    'internal_id' => $id,
+                    'req_dept' => $getForm->req_dept,
+                    'created_by' => Auth::user()->name,
+                    'role_to' => 0,
+                    'status' => 'rejected',
+                    'aktif' => true,
+                    'pdf' => false,
+                ]);
+
+                // Get permit yang di reject & kirim notif email
+                Mail::to($getEmail->email)->send(new NotifInternalReject($getForm));
+                alert()->success('Rejected', 'Permit has been rejected!');
+                return back();
+            } else {
+                abort(403);
+            }
+
         } else {
             abort(403);
         }

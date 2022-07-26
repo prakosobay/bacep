@@ -20,7 +20,7 @@
 <body>
     <div class="card">
         <h3 class="">Hallo, DC Team!</h3>
-        <p>Mohon untuk review dan check permit dari team BM yang telah di submit.
+        <p>Mohon untuk review dan check permit dari team {{$content->req_dept}} yang telah di submit.
             Link terlampir </p>
             <table>
                 <thead>

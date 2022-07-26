@@ -13,6 +13,19 @@ class Internal extends Model
     protected $table = 'internals';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'req_dept', 'req_name', 'req_phone', 'work', 'visit', 'leave', 'background', 'desc', 'testing', 'rollback'
+        'req_dept',
+        'req_name',
+        'req_phone',
+        'work',
+        'visit',
+        'leave',
+        'background',
+        'desc',
+        'testing',
+        'rollback',
+        'rack',
+        'card_number',
+        'reject_note',
+        'req_email',
     ];
 }

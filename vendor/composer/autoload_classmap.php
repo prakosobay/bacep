@@ -53,6 +53,7 @@ return array(
     'App\\Mail\\NotifFull' => $baseDir . '/app/Mail/NotifFull.php',
     'App\\Mail\\NotifInternalForm' => $baseDir . '/app/Mail/NotifInternalForm.php',
     'App\\Mail\\NotifInternalFull' => $baseDir . '/app/Mail/NotifInternalFull.php',
+    'App\\Mail\\NotifInternalReject' => $baseDir . '/app/Mail/NotifInternalReject.php',
     'App\\Mail\\NotifMaintenanceForm' => $baseDir . '/app/Mail/NotifMaintenanceForm.php',
     'App\\Mail\\NotifMaintenanceFull' => $baseDir . '/app/Mail/NotifMaintenanceFull.php',
     'App\\Mail\\NotifMaintenanceReject' => $baseDir . '/app/Mail/NotifMaintenanceReject.php',
