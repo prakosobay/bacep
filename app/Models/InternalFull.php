@@ -12,6 +12,11 @@ class InternalFull extends Model
     protected $table = 'internal_fulls';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'internal_id', 'req_dept', 'work', 'visit', 'leave', 'request', 'status', 'link', 'note'
+        'internal_id', 'req_dept', 'work', 'visit', 'leave', 'request', 'status', 'link', 'note',
     ];
+
+    public function internals()
+    {
+        return $this->belongsTo(Internal::class);
+    }
 }

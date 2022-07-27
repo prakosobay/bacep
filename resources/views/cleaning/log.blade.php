@@ -12,6 +12,9 @@
     {{-- bootstrap datatable --}}
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.css"/>
     <link rel="stylesheet" href="{{asset('css/log_visitor.css')}}" type="text/css">
+
+    {{-- Jquery --}}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 </head>
 <body>
     <nav class="navbar sticky-top navbar-expand-lg navbar-dark navbar-bg">
@@ -77,13 +80,6 @@
 
                     {{-- Cleaning --}}
                     <div class="tab-pane fade show active" id="Lcleaning" role="tabpanel" aria-labelledby="Lcleaning-tab">
-                        <div class="container-fluid">
-                            <div class="card-body">
-                                <a type="button" class="btn btn-sm btn-primary mx-1 my-2" href="{{url('cleaning_form')}}">Create Permit Cleaning</a>
-                                <a type="button" class="btn btn-sm btn-info mx-1 my-2" href="{{url('logall')}}">Full Approve Permit Cleaning</a>
-                                <a type="button" class="btn btn-sm btn-danger mx-1 my-2" href="{{ url('/cleaning/reject/show')}}">Permit Reject</a>
-                            </div>
-                        </div>
 
                         @if (session('status'))
                             <div class="alert alert-success" role="alert">
@@ -101,9 +97,7 @@
                                             <th>Date of Visit</th>
                                             <th>Purpose of Work</th>
                                             <th>Visitor Name</th>
-                                            <th>Checkin</th>
-                                            <th>Checkout</th>
-                                            <th>Action</th>
+                                            <th>Status</th>
                                         </tr>
                                     </thead>
                                     <tbody class="isi-table text-center">
@@ -115,15 +109,6 @@
 
                     {{-- Maintenance --}}
                     <div class="tab-pane fade" id="Lmaintenance" role="tabpanel" aria-labelledby="Lmaintenance-tab">
-                        <div class="container-fluid">
-                            <div class="card-body">
-                                <button class="btn btn-sm btn-dark mx-1 my-2" data-bs-toggle="modal" data-bs-target="#maintenance_modal">Create Permit Maintenance</button>
-                                <a type="button" class="btn btn-sm btn-info mx-1 my-2" href="{{url('other/maintenance/full')}}">Log Permit Maintenance</a>
-                                <a type="button" class="btn btn-sm btn-danger mx-1 my-2" href="{{ url('other/maintenance/full/reject')}}">Permit Reject</a>
-                                {{-- <a type="button" class="btn btn-sm btn-success mx-1 my-2" href="{{ url('cleaning/action/export')}}">Export PDF</a>
-                                <a type="button" class="btn btn-sm btn-success mx-1 my-2" href="#">Export Excel</a> --}}
-                            </div>
-                        </div>
 
                         @if (session('status'))
                             <div class="alert alert-success" role="alert">
@@ -175,15 +160,6 @@
 
                     {{-- Troubleshoot --}}
                     <div class="tab-pane fade" id="Ltroubleshoot" role="tabpanel" aria-labelledby="Ltroubleshoot-tab">
-                        <div class="container-fluid">
-                            <div class="card-body">
-                                <a type="button" class="btn btn-sm btn-dark mx-1 my-2" href="{{ url('other/troubleshoot/show')}}">Create Permit Troubleshoot</a>
-                                <a type="button" class="btn btn-sm btn-info mx-1 my-2" href="{{url('other/maintenance/full')}}">Log Permit Troubleshoot</a>
-                                <a type="button" class="btn btn-sm btn-danger mx-1 my-2" href="#">Permit Reject</a>
-                                {{-- <a type="button" class="btn btn-sm btn-success mx-1 my-2" href="{{ url('cleaning/action/export')}}">Export PDF</a>
-                                <a type="button" class="btn btn-sm btn-success mx-1 my-2" href="#">Export Excel</a> --}}
-                            </div>
-                        </div>
 
                         {{-- Table Troubleshoot --}}
                         <div class="card-body">
@@ -240,18 +216,30 @@
         </div>
     </div>
 
-    {{-- date picker --}}
-    {{-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> --}}
-
-    <!-- Momentjs -->
-    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script> --}}
-
     {{-- datatable --}}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.js"></script>
 
-    @stack('scripts')
+    <script>
+        $(document).ready(function(){
+
+        });
+        $(function() {
+            $('#cleaning_table').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: '{{ url('cleaning/yajra/log')}}',
+                columns: [
+                    { data: 'cleaning_id', name: 'cleaning_id' },
+                    { data: 'validity_from', name: 'validity_from' },
+                    { data: 'cleaning_work', name: 'cleaning_work' },
+                    { data: 'cleaning_name', name: 'cleaning_name' },
+                    { data: 'status', name: 'status' },
+                ]
+            });
+        });
+    </script>
 </body>
 </html>

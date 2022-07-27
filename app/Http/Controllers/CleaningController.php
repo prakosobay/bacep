@@ -496,6 +496,22 @@ class CleaningController extends Controller
             ->make(true);
     }
 
+    public function cleaning_yajra_log()
+    {
+        $cleaning_log = DB::table('cleanings')
+            // ->join('cleanings', 'cleanings.cleaning_id', '=', 'cleaning_histories.cleaning_id')
+            ->select('cleanings.validity_from', 'cleanings.cleaning_name', 'cleanings.cleaning_work')
+            ->orderBy('cleaning_id', 'desc');
+        return Datatables::of($cleaning_log)
+            ->editColumn('updated_at', function ($cleaning_log) {
+                return $cleaning_log->updated_at ? with(new Carbon($cleaning_log->updated_at))->format('d/m/Y') : '';
+            })
+            ->editColumn('validity_from', function ($cleaning_log) {
+                return $cleaning_log->validity_from ? with(new Carbon($cleaning_log->validity_from))->format('d/m/Y') : '';
+            })
+            ->make(true);
+    }
+
 
 
     //Export Excel

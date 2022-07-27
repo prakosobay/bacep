@@ -374,11 +374,16 @@ class InternalController extends Controller
 
     public function internal_it_yajra_full_visitor()
     {
+        // $full = DB::table('internals')
+        //         ->join('internal_visitors', 'internals.id', 'internal_visitors.internal_id')
+        //         ->where('internal_visitors.req_dept', 'IT')
+        //         ->select('internals.visit', 'internals.leave', 'internals.work', 'internal_visitors.*')
+        //         ->orderBy('internal_id', 'desc');
         $full = DB::table('internal_visitors')
-                ->join('internals', 'internal_visitors.internal_id', 'internals.id')
-                // ->where('internal')
-                ->select('internals.*', 'internal_visitors.checkin', 'internal_visitors.checkout')
-                ->orderBy('internal_id', 'desc');
+                ->join('internals', 'internal_visitors.internal_id', '=', 'internals.id')
+                ->where('internal_visitors.req_dept', 'IT')
+                ->select('internals.visit', 'internals.leave', 'internals.work', 'internals.id', 'internal_visitors.checkin', 'internal_visitors.checkout')
+                ->orderBy('id', 'desc');
                 // dd($full);
         return Datatables::of($full)
                 ->editColumn('visit', function($full){

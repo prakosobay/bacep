@@ -72,9 +72,9 @@
                     {{-- IT --}}
                     <div class="container-fluid">
                         <div class="card-body">
-                            <button class="btn btn-primary btn-sm mx-1 my-2" data-bs-toggle="modal" data-bs-target="#itModal">Create Permit</button>
-                            <a type="button" class="btn btn-sm btn-info mx-1 my-2" href="{{url('logall')}}">Log Permit</a>
-                            <a type="button" class="btn btn-sm btn-danger mx-1 my-2" href="{{ url('/it/reject/show')}}">Permit Rejected</a>
+                            <button class="btn btn-primary btn-sm mx-1 my-2" data-bs-toggle="modal" data-bs-target="#itModal">Create Form</button>
+                            <a type="button" class="btn btn-sm btn-info mx-1 my-2" href="{{url('logall')}}">Log Form</a>
+                            <a type="button" class="btn btn-sm btn-danger mx-1 my-2" href="{{ url('/it/reject/show')}}">Form Rejected</a>
                         </div>
                     </div>
 
@@ -89,12 +89,16 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Pilih Permit</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel">Pilih Form</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <a class="btn btn-sm btn-primary mx-2 my-2" href="{{ url('internal/it/form')}}">New Permit</a>
-                                    <a class="btn btn-sm btn-success mx-2 my-2" href="{{ url('internal/it/last/form')}}">Last Permit</a>
+                                    <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('internal/it/form')}}">AR CR Form</a>
+                                    <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('internal/it/consumable')}}">Consumable Form</a>
+                                    <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('internal/it/formBarang')}}">AR CR + Barang Form</a>
+                                    <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('internal/it/formConsumable')}}">AR CR + Consumable Form</a>
+                                    <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('internal/it/formConsumableBarang')}}">AR CR + Consumable + Barang Form</a>
+                                    <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('internal/it/last/form')}}">Last Form</a>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

@@ -153,6 +153,15 @@ class HomeController extends Controller
         }
     }
 
+    public function visitor_log($type_log)
+    {
+        if($type_log == 'cleaning'){
+            return view('cleaning.log');
+        } else {
+            abort(403);
+        }
+    }
+
     public function log_all() // Routingan untuk menampilkan permit yang sudah full approve versi visitor
     {
         $email = Auth::user()->email;

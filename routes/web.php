@@ -172,6 +172,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/cleaning/action/show/{id}', [CleaningController::class, 'cetak_full_cleaning']);
     Route::get('cleaning/action/export', [CleaningController::class, 'cetak_all_full_cleaning']);
     Route::get('/cleaning/reject/show', [CleaningController::class, 'show_reject_cleaning']);
+    Route::get('cleaning/yajra/log', [CleaningController::class, 'cleaning_yajra_log']);
     Route::post('/route_submit_cleaning', [CleaningController::class, 'submit_data_cleaning']);
     Route::post('/cleaning_reject', [CleaningController::class, 'reject_form_cleaning']);
     Route::post('/cleaning/full/reject/{id}', [CleaningController::class, 'reject_full_cleaning']);
@@ -236,6 +237,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('history/{type_view}', [HomeController::class, 'history']);
     Route::get('approval/{type_approve}', [HomeController::class, 'approval']);
     Route::get('full/{type_full}', [HomeController::class, 'full']);
+    Route::get('visitor/log/{type_log}', [HomeController::class, 'visitor_log']);
 
     //Log
     Route::get('logall', [HomeController::class, 'log_all'])->name('logall');

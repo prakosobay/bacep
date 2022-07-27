@@ -14,4 +14,9 @@ class InternalVisitor extends Model
     protected $fillabel = [
         'internal_id', 'req_dept', 'name', 'company', 'department', 'respon', 'numberId', 'phone',
     ];
+
+    public function internals()
+    {
+        return $this->belongsTo(Internal::class);
+    }
 }
