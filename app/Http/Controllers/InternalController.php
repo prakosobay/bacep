@@ -202,6 +202,7 @@ class InternalController extends Controller
                     ->join('internal_histories', 'internals.id', 'internal_histories.internal_id')
                     ->where('internals.id', $id)
                     ->where('internal_histories.internal_id', $id)
+                    ->where('aktif', 1)
                     ->select('internals.*', 'internal_histories.status', 'internal_histories.created_by')
                     ->first();
 
@@ -263,8 +264,8 @@ class InternalController extends Controller
                     'request' => $full->created_at,
                     'visit' => $full->visit,
                     'leave' => $full->leave,
-                    'link' => ("https://dcops.balifiber.id/internal/it/pdf/$full->id"),
-                    // 'link' => ("http://localhost:8000/internal/it/pdf/$full->id"),
+                    // 'link' => ("https://dcops.balifiber.id/internal/it/pdf/$full->id"),
+                    'link' => ("http://localhost:8000/internal/it/pdf/$full->id"),
                     'note' => null,
                     'status' => 'Full Approved',
                 ]);
@@ -298,7 +299,6 @@ class InternalController extends Controller
     public function internal_reject(Request $request, $id)
     {
         $lastUpdate = InternalHistory::where('internal_id', $id)->latest()->first();
-        $getEmail = Auth::user();
         $getForm = Internal::findOrFail($id);
 
         // dd($getForm);
@@ -327,7 +327,7 @@ class InternalController extends Controller
                 ]);
 
                 // Get permit yang di reject & kirim notif email
-                Mail::to($getEmail->email)->send(new NotifInternalReject($getForm));
+                Mail::to($getForm->req_email)->send(new NotifInternalReject($getForm));
                 alert()->success('Rejected', 'Permit has been rejected!');
                 return back();
             } else {

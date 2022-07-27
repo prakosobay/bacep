@@ -32,7 +32,6 @@
                 <th>Purpose of Work</th>
                 <th>Date of Visit</th>
                 <th>Date of Leave</th>
-                <th>Status</th>
             </tr>
         </thead>
         <tbody>
@@ -44,7 +43,6 @@
                 <td>{{ $content->work }}</td>
                 <td>{{ Carbon\Carbon::parse($content->visit)->format('d-m-Y') }}</td>
                 <td>{{ Carbon\Carbon::parse($content->leave)->format('d-m-Y') }}</td>
-                <td>{{ $content->status }} by {{ $content->created_by }}</td>
             </tr>
         </tbody>
     </table>
