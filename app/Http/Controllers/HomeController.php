@@ -44,7 +44,7 @@ class HomeController extends Controller
 
     public function dashboard() // Dashboard manajemen barang
     {
-        if ((Gate::allows('isAdmin')) || (Gate::allows('isApproval')) || (Gate::allows('isHead'))) {
+        if ((Gate::allows('isApproval')) || (Gate::allows('isHead'))) {
             return view('item.input');
         } else {
             abort(404);

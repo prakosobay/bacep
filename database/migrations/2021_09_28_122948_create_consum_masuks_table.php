@@ -18,9 +18,9 @@ class CreateConsumMasuksTable extends Migration
             $table->foreignId('consum_id');
             $table->string('nama_barang');
             $table->unsignedInteger('jumlah');
+            $table->string('ket')->nullable();
+            $table->string('pencatat');
             $table->string('tanggal');
-            $table->text('ket')->nullable();
-            $table->string('pencatat', 50);
             $table->timestamps();
         });
     }

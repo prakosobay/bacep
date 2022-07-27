@@ -247,7 +247,6 @@ class OtherController extends Controller
             }
 
             $notif_email = Other::find($lastupdate->other_id);
-            // dd($notif_email);
             // // Pergantian  role tiap permit & send email notif
             $role_to = '';
             if ($lastupdate->role_to == 'review') {

@@ -24,10 +24,8 @@
 
     <!-- Custom styles for this page -->
     <link href="{{asset('vendor2/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
-    {{-- Bootsrap Datatable --}}
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.css"/>
+    <link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
 
     <style>
         .margin-bottom{
@@ -277,35 +275,9 @@
         </div>
     </div>
 
-    <!-- Bootstrap core JavaScript-->
-    {{-- Jquery --}}
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-
-    {{-- <script src="{{asset('vendor2/jquery/jquery.min.js')}}"></script> --}}
-    <script src="{{asset('vendor2/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-
-    <!-- Core plugin JavaScript-->
-    {{-- <script src="{{asset('vendor2/jquery-easing/jquery.easing.min.js')}}"></script> --}}
-
-    <!-- Custom scripts for all pages-->
-    <script src="{{asset('js/sb-admin-2.min.js')}}"></script>
-
-    <!-- Page level plugins -->
-    {{-- <script src="{{asset('vendor2/datatables/jquery.dataTables.min.js')}}"></script>
-    <script src="{{asset('vendor2/datatables/dataTables.bootstrap4.min.js')}}"></script> --}}
-
-    <!-- Page level custom scripts -->
-    {{-- <script src="{{asset('js/demo/datatables-demo.js')}}"></script> --}}
-
-    {{-- Data table  --}}
-    <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.js"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
-
-
-    @stack('script')
+    {{-- <script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script> --}}
+    <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+@stack('script')
 
 </body>
-
 </html>

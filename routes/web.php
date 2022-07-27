@@ -57,47 +57,60 @@ Route::middleware(['auth'])->group(function () {
 
 
     //Dashboard Barang
-    Route::get('/table_barang', [HomeController::class, 'dashboard'])->name('table_barang');
-
+    Route::get('table_barang', [HomeController::class, 'dashboard'])->name('table_barang');
 
     //Barang Consume
-    Route::post('/consum', [ConsumController::class, 'csv']);
-    Route::get('/c.table', [ConsumController::class, 'index']);
-    Route::get('/c.new', [ConsumController::class, 'show_new']);
-    Route::post('/consum_new', [ConsumController::class, 'store_consum']);
-    Route::get('/c.masuk', [ConsumController::class, 'show_in']);
-    Route::get('/c.keluar', [ConsumController::class, 'show_out']);
-    Route::get('/c.tambah/{id}', [ConsumController::class, 'edit_masuk']);
-    Route::get('/c.kurang/{id}', [ConsumController::class, 'edit_keluar']);
-    Route::put('consum/edit/masuk/{id}', [ConsumController::class, 'update_masuk']);
-    Route::put('consum/edit/keluar/{id}', [ConsumController::class, 'update_keluar']);
+    Route::get('consum/table/show', [ConsumController::class, 'consum_table_show'])->name('consumTable');
+    Route::get('consum/create/show', [ConsumController::class, 'consum_create_show']);
+    Route::get('consum/masuk/show', [ConsumController::class, 'consum_masuk_show']);
+    Route::get('consum/keluar/show', [ConsumController::class, 'consum_keluar_show']);
+    Route::get('consum/edit/masuk/{id}', [ConsumController::class, 'consum_edit_masuk']);
+    Route::get('consum/edit/keluar/{id}', [ConsumController::class, 'consum_edit_keluar']);
+    Route::get('consum/edit/itemcode/{id}', [ConsumController::class, 'consum_edit_itemcode']);
+    Route::put('consum/update/masuk/{id}', [ConsumController::class, 'consum_update_masuk']);
+    Route::put('consum/update/keluar/{id}', [ConsumController::class, 'consum_update_keluar']);
+    Route::put('consum/update/itemcode/{id}', [ConsumController::class, 'consum_update_itemcode']);
     Route::get('/export.consum', [ConsumController::class, 'export_consum']);
     Route::get('/export.c.m', [ConsumController::class, 'export_consum_masuk']);
     Route::get('/export.c.k', [ConsumController::class, 'export_consum_keluar']);
-    Route::get('consum/all/yajra/show', [ConsumController::class, 'yajra_all_consum']);
+    Route::get('consum/yajra/show', [ConsumController::class, 'consum_yajra_show']);
+    Route::get('consum/yajra/masuk', [ConsumController::class, 'consum_yajra_masuk']);
+    Route::get('consum/yajra/keluar', [ConsumController::class, 'consum_yajra_keluar']);
+    Route::post('consum/create/submit', [ConsumController::class, 'consum_create_submit']);
+    Route::post('consum/import/table', [ConsumController::class, 'csv']);
+    Route::post('consum/import/keluar', [ConsumController::class, 'import_keluar']);
+    Route::post('consum/import/masuk', [ConsumController::class, 'import_masuk']);
+
+
 
 
     //Barang Asset
-    Route::post('/asset', [AssetController::class, 'csv']);
-    Route::get('/a.table', [AssetController::class, 'index']);
-    Route::get('/a.new', [AssetController::class, 'show_new']);
-    Route::post('/asset_new', [AssetController::class, 'store_asset']);
-    Route::get('/a.masuk', [AssetController::class, 'show_in']);
-    Route::get('/a.keluar', [AssetController::class, 'show_out']);
-    Route::get('asset/edit/masuk/{id}', [AssetController::class, 'edit_masuk']);
-    Route::get('asset/edit/keluar/{id}', [AssetController::class, 'edit_keluar']);
-    Route::get('asset/edit/digunakan/{id}', [AssetController::class, 'edit_use']);
-    Route::put('/asset_putin/{id}', [AssetController::class, 'update_masuk']);
-    Route::put('/asset_putout/{id}', [AssetController::class, 'update_keluar']);
-    Route::put('/asset_use/{id}', [AssetController::class, 'update_use']);
+    Route::get('asset/table/show', [AssetController::class, 'index'])->name('assetTable');
+    Route::get('asset/masuk/show', [AssetController::class, 'asset_masuk_show']);
+    Route::get('asset/keluar/show', [AssetController::class, 'asset_keluar_show']);
+    Route::get('asset/digunakan/show', [AssetController::class, 'asset_uses_show']);
+    Route::get('asset/create/show', [AssetController::class, 'asset_create_show']);
+    Route::get('asset/edit/show/{id}', [AssetController::class, 'asset_edit_show']);
+    Route::get('asset/edit/keluar/{id}', [AssetController::class, 'asset_edit_keluar']);
+    Route::get('asset/edit/digunakan/{id}', [AssetController::class, 'asset_edit_digunakan']);
+    Route::put('asset/update/masuk/{id}', [AssetController::class, 'asset_update_masuk']);
+    Route::put('asset/update/keluar/{id}', [AssetController::class, 'asset_update_keluar']);
+    Route::put('asset/update/digunakan/{id}', [AssetController::class, 'asset_update_digunakan']);
+    Route::put('asset/update/itemcode/{id}', [AssetController::class, 'asset_update_itemcode']);
     Route::get('/export.asset', [AssetController::class, 'export_asset']);
     Route::get('/export.a.m', [AssetController::class, 'export_asset_masuk']);
     Route::get('/export.a.k', [AssetController::class, 'export_asset_keluar']);
-    Route::get('/a.use', [AssetController::class, 'show_use']);
-    Route::get('asset/all/yajra/show', [AssetController::class, 'yajra_all_asset']);
-    Route::get('asset/masuk/yajra/show', [AssetController::class, 'yajra_masuk_asset']);
-    Route::get('asset/keluar/yajra/show', [AssetController::class, 'yajra_keluar_asset']);
-    Route::get('asset/digunakan/yajra/show', [AssetController::class, 'yajra_digunakan_asset']);
+    Route::get('asset/yajra/show', [AssetController::class, 'asset_yajra_show']);
+    Route::get('asset/yajra/masuk', [AssetController::class, 'asset_yajra_masuk']);
+    Route::get('asset/yajra/keluar', [AssetController::class, 'asset_yajra_keluar']);
+    Route::get('asset/yajra/uses', [AssetController::class, 'asset_yajra_uses']);
+    Route::get('asset/edit/itemcode/{id}', [AssetController::class, 'asset_edit_itemcode']);
+    Route::post('asset/import/table', [AssetController::class, 'asset_import_table']);
+    Route::post('asset/import/masuk', [AssetController::class, 'asset_import_masuk']);
+    Route::post('asset/import/keluar', [AssetController::class, 'asset_import_keluar']);
+    Route::post('asset/import/uses', [AssetController::class, 'asset_import_uses']);
+    Route::post('asset/create/store', [AssetController::class, 'asset_create_store']);
+
 
 
     //Checklist Genset
@@ -108,12 +121,14 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/checklist', [GensetController::class, 'store_warming']);
 
 
+
     //Revisi
     Route::get('/ob', [RevisiController::class, 'show_ob'])->name('ob');
     Route::get('/ob.edit/{id}', [RevisiController::class, 'edit_ob']);
     Route::put('/ob.edit/{id}', [RevisiController::class, 'update_ob']);
     Route::post('/ob.destroy/{id}', [RevisiController::class, 'destroy_ob']);
     Route::post('/ob.new', [RevisiController::class, 'store_ob']);
+
 
 
     // Revisi Visitor
@@ -124,6 +139,7 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/revisi/visitor/edit/{id}', [RevisiController::class, 'update_visitor']);
     Route::post('/revisi/visitor/destroy/{id}', [RevisiController::class, 'destroy_visitor']);
     Route::post('/revisi/visitor/new', [RevisiController::class, 'store_visitor']);
+
 
 
     // Survey
@@ -138,6 +154,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/approve_survey', [SurveyController::class, 'approve']);
     Route::post('/reject_survey', [SurveyController::class, 'reject']);
     Route::get('/survey/yajra/show', [SurveyController::class, 'yajra_show']);
+
 
 
     // Cleaning
@@ -164,6 +181,7 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/cleaning/reject/{id}', [CleaningController::class, 'reject_full_cleaning']);
 
 
+
     // Troubleshoot
     Route::get('other/troubleshoot/show', [OtherController::class, 'show_troubleshoot_form']);
     Route::get('other/troubleshoot/pdf/{id}', [OtherController::class, 'pdf_troubleshoot']);
@@ -173,6 +191,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('other/troubleshoot/create', [OtherController::class, 'create_troubleshoot']);
     Route::post('other/troubleshoot/approve', [OtherController::class, 'approve_troubleshoot']);
     Route::post('other/troubleshoot/reject', [OtherController::class, 'reject_troubleshoot']);
+
 
 
     // Maintenance

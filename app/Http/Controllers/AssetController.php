@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\{AssetExport, AssetMasukExport, AssetKeluarExport};
-use App\Imports\AssetImport;
+use App\Imports\{AssetImport, AssetKeluarImport, AssetMasukImport, AssetUseImport};
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Maatwebsite\Excel\Facades\Excel;
@@ -30,38 +30,35 @@ class AssetController extends Controller
         }
     }
 
-    public function show_in() // Menampilkan table barang masuk asset
+    public function asset_masuk_show() // Menampilkan table barang masuk asset
     {
         if (Gate::allows('isApproval') || (Gate::allows('isHead')) || (Gate::allows('isAdmin'))) {
-            $in = AssetMasuk::all();
-            return view('asset.masuk', compact('in'));
+            return view('asset.masuk');
         } else {
             abort(403);
         }
     }
 
-    public function show_out() // Menampilkan table barang keluar asset
+    public function asset_keluar_show() // Menampilkan table barang keluar asset
     {
         if (Gate::allows('isApproval') || (Gate::allows('isHead')) || (Gate::allows('isAdmin'))) {
-            $out = AssetKeluar::all();
-            return view('asset.keluar', compact('out'));
+            return view('asset.keluar');
         } else {
             abort(403);
         }
     }
 
-    public function show_use() // Menampilkan table barang digunakan
+    public function asset_uses_show() // Menampilkan table barang digunakan
     {
         if (Gate::allows('isApproval') || (Gate::allows('isHead')) || (Gate::allows('isAdmin'))){
-            $use = AssetUse::all();
-            return view('asset.digunakan', compact('use'));
+            return view('asset.digunakan');
         }
         else{
             abort(403);
         }
     }
 
-    public function show_new() // Menampilkan form barang asset baru
+    public function asset_create_show() // Menampilkan form barang asset baru
     {
         if ((Gate::allows('isHead')) || (Gate::allows('isApproval')) || (Gate::allows('isAdmin'))) {
             return view('asset.new');
@@ -70,17 +67,17 @@ class AssetController extends Controller
         }
     }
 
-    public function edit_masuk($id) // Menampilkan data barang asset masuk berdasarkan kode barang
+    public function asset_edit_show($id) // Menampilkan data barang asset masuk berdasarkan kode barang
     {
         if ((Gate::allows('isApproval') || (Gate::allows('isHead')) || (Gate::allows('isAdmin')))) {
-            $asset = Asset::find($id);
+            $asset = Asset::findOrFail($id);
             return view('asset.tambah', compact('asset'));
         } else {
             abort(403);
         }
     }
 
-    public function edit_keluar($id) // Menampilkan data barang asset keluar berdasarkan kode barang
+    public function asset_edit_keluar($id) // Menampilkan data barang asset keluar berdasarkan kode barang
     {
         if ((Gate::allows('isApproval') || (Gate::allows('isHead')) || (Gate::allows('isAdmin')))) {
             $asset = Asset::find($id);
@@ -90,7 +87,7 @@ class AssetController extends Controller
         }
     }
 
-    public function edit_use($id) // Menampilkan data barang asset digunakan berdasarkan kode barang
+    public function asset_edit_digunakan($id) // Menampilkan data barang asset digunakan berdasarkan kode barang
     {
         if((Gate::allows('isApproval') || (Gate::allows('isHead')) || (Gate::allows('isAdmin')))){
             $use = Asset::find($id);
@@ -100,18 +97,25 @@ class AssetController extends Controller
         }
     }
 
+    public function asset_edit_itemcode($id)
+    {
+        if((Gate::allows('isApproval') || (Gate::allows('isHead')) || (Gate::allows('isAdmin')))){
+            $getItemcode = Asset::find($id);
+            return view('asset.itemcode', compact('getItemcode'));
+        } else{
+            abort(403);
+        }
+    }
+
 
 
 
     // Submit data
-    public function update_masuk(Request $request, $id) // Update data barang asset masuk
+    public function asset_update_masuk(Request $request, $id) // Update data barang asset masuk
     {
         $this->validate($request, [
-            'nama_barang' => ['required'],
-            'asset_id' => ['required', 'numeric'],
             'jumlah' => ['numeric', 'required', 'min:1'],
             'ket' => 'required',
-            'pencatat' => ['required', 'string']
         ]);
 
         $asset = Asset::find($id);
@@ -138,19 +142,14 @@ class AssetController extends Controller
             'tanggal' => date('d/m/Y'),
         ]);
 
-        Alert::success('Success', 'Data has been submited');
-        return back();
+        return redirect()->route('assetTable')->with('success', 'Barang Asset Berhasil di Tambah');
     }
 
-    public function update_keluar(Request $request, $id) // Update data barang asset keluar
+    public function asset_update_keluar(Request $request, $id) // Update data barang asset keluar
     {
-        // dd($request->all());
         $this->validate($request, [
-            'nama_barang' => ['required'],
-            'asset_id' => ['required', 'numeric'],
             'jumlah' => ['numeric', 'required', 'min:1'],
             'ket' => 'required',
-            'pencatat' => ['required', 'string']
         ]);
 
         $asset = Asset::find($id);
@@ -168,33 +167,26 @@ class AssetController extends Controller
                 'tanggal' => date('d/m/Y'),
             ]);
 
-            Alert::success('Success', 'Data has been submited');
         } else {
-            Alert::error('Error', 'Stock Kosong/Kurang !');
+            return back()->with('Gagal', 'Stock Kosong/Kurang');
         }
-        return back();
+        return redirect()->route('assetTable')->with('success', 'Data Berhasil di Update');
     }
 
-    public function update_use(Request $request, $id) // Update data barang asset digunakan
+    public function asset_update_digunakan(Request $request, $id) // Update data barang asset digunakan
     {
         // dd($request->all());
         $this->validate($request, [
-            'nama_barang' => ['required'],
-            'asset_id' => ['required', 'numeric'],
-            'banyak' => ['numeric', 'required', 'min:1'],
+            'jumlah' => ['numeric', 'required', 'min:1'],
             'ket' => 'required',
-            'pencatat' => ['required', 'string']
         ]);
 
-
-
         $asset = Asset::find($id);
-        // dd($asset);
-        if ($asset->jumlah >= $request->banyak) {
+        if ($asset->jumlah >= $request->jumlah) {
 
             if($asset->digunakan < 1){
                 $asset->update([
-                    'digunakan' => $request->banyak,
+                    'digunakan' => $request->jumlah,
                 ]);
                 $sisa = $asset->jumlah - $asset->digunakan;
                 $asset->update([
@@ -203,7 +195,7 @@ class AssetController extends Controller
             }
             elseif($asset->digunakan >= 1){
                 $asset->update([
-                    'digunakan' => $asset->digunakan + $request->banyak,
+                    'digunakan' => $asset->digunakan + $request->jumlah,
                 ]);
                 $sisa = $asset->jumlah - $asset->digunakan;
                 $asset->update([
@@ -214,21 +206,19 @@ class AssetController extends Controller
             $assetuse = AssetUse::create([
                 'nama_barang' => $request->nama_barang,
                 'asset_id' => $request->asset_id,
-                'jumlah' => $request->banyak,
+                'jumlah' => $request->jumlah,
                 'ket' => $request->ket,
                 'pencatat' => $request->pencatat,
                 'tanggal' => date('d/m/Y'),
             ]);
 
-            Alert::success('Success', 'Data has been submited');
-
         } else {
-            Alert::error('Error', 'Stock Kosong/Kurang !');
+            return back()->with('Gagal', 'Stock Kosong/Kurang');
         }
-        return back();
+        return redirect()->route('assetTable')->with('success', 'Data telah di update');
     }
 
-    public function store_asset(Request $request) // Create data barang asset baru
+    public function asset_create_store(Request $request) // Create data barang asset baru
     {
         // dd($request->all());
         $this->validate($request, [
@@ -248,6 +238,8 @@ class AssetController extends Controller
             'lokasi' => $request->lokasi,
             'satuan' => $request->satuan,
             'itemcode' => $request->itemcode,
+            'digunakan' => 0,
+            'sisa' => 0,
         ]);
 
         $assetmasuk = AssetMasuk::create([
@@ -259,18 +251,53 @@ class AssetController extends Controller
             'tanggal' => date('d/m/Y'),
             'itemcode' => $asset->itemcode,
         ]);
-        Alert::success('Success', 'Data has been submited');
-        return back();
+        return redirect()->route('assetTable')->with('success', 'Barang Asset Berhasil di Tambah');
+    }
+
+    public function asset_update_itemcode(Request $request, $id)
+    {
+        $validate = $request->validate([
+            'itemcode' => ['required', 'numeric', 'digits:6'],
+        ]);
+
+        $insertItemcode = Asset::findOrFail($id);
+        $insertItemcode->update([
+            'itemcode' => $request->itemcode,
+        ]);
+
+        if($insertItemcode){
+            return redirect()->route('assetTable')->with('success', 'Itemcode Berhasil di Update');
+        } else{
+            return back()->with('Gagal', 'Update Gagal');
+        }
     }
 
 
 
 
     // Import csv to database
-    public function csv(Request $request) // Import data barang asset to databse
+    public function asset_import_table(Request $request) // Import data barang asset to database
     {
         Excel::import(new AssetImport, $request->file('file'));
         return back()->with('success', 'Excel Data Imported successfully.');
+    }
+
+    public function asset_import_masuk(Request $request)
+    {
+        Excel::import(new AssetMasukImport, $request->file('file'));
+        return back();
+    }
+
+    public function asset_import_keluar(Request $request)
+    {
+        Excel::import(new AssetKeluarImport, $request->file('file'));
+        return back();
+    }
+
+    public function asset_import_uses(Request $request)
+    {
+        Excel::import(new AssetUseImport, $request->file('file'));
+        return back();
     }
 
 
@@ -296,39 +323,39 @@ class AssetController extends Controller
 
 
     // Yajra Datatable
-    public function yajra_all_asset() // Datatable dengan yajra barang asset
+    public function asset_yajra_show() // Datatable dengan yajra barang asset
     {
         $asset = DB::table('assets')
             ->select('assets.*')
-            ->orderBy('id', 'asc');
+            ->orderBy('id', 'desc');
             return Datatables::of($asset)
             ->addColumn('action', 'asset.update')
             ->make(true);
     }
 
-    public function yajra_masuk_asset() // Datatable dengan yajra barang asset masuk
+    public function asset_yajra_masuk() // Datatable dengan yajra barang asset masuk
     {
         $masuk = DB::table('asset_masuks')
             ->select('asset_masuks.*')
-            ->orderBy('asset_id', 'asc');
+            ->orderBy('asset_id', 'desc');
             return Datatables::of($masuk)
             ->make(true);
     }
 
-    public function yajra_keluar_asset() // Datatable dengan yajra barang asset keluar
+    public function asset_yajra_keluar() // Datatable dengan yajra barang asset keluar
     {
         $keluar = DB::table('asset_keluars')
             ->select('asset_keluars.*')
-            ->orderBy('asset_id', 'asc');
+            ->orderBy('asset_id', 'desc');
             return Datatables::of($keluar)
             ->make(true);
     }
 
-    public function yajra_digunakan_asset() // Datatable dengan yajra barang digunakan
+    public function asset_yajra_uses() // Datatable dengan yajra barang digunakan
     {
         $digunakan = DB::table('asset_uses')
             ->select('asset_uses.*')
-            ->orderBy('asset_id', 'asc');
+            ->orderBy('asset_id', 'desc');
             return Datatables::of($digunakan)
             ->make(true);
     }

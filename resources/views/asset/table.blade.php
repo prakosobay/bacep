@@ -1,27 +1,28 @@
-@extends('layouts.dashboard')
+@extends('layouts.barang')
 
 @section('content')
-<!-- Begin Page Content -->
 <div class="container-fluid">
-
-    <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800 text-center">Data Barang Asset</h1>
-
-    <!-- DataTales Example -->
+    <h1 class="h3 my-3 text-gray-800 text-center">Data Barang Asset</h1>
     <div class="card shadow mb-4">
-        <div class="card-header py-3">
-            <button type="button" class="btn btn-primary mr-5" data-toggle="modal" data-target="#asset_modal">
-                IMPORT CSV
+        <div class="card-header my-1">
+            <button type="button" class="btn btn-primary btn-sm mx-1 my-1" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Import CSV
             </button>
 
-            <a href="{{url('/a.new')}}" type="button" class="btn btn-primary mr-5" >
+            <a href="{{url('asset/create/show')}}" type="button" class="btn btn-success btn-sm mx-1 my-1" >
                 <strong>Tambahkan Barang Asset Baru</strong>
             </a>
 
-            <!-- Import Excel -->
-            <div class="modal fade" id="asset_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <form method="post" action="{{ url('/asset')}}" enctype="multipart/form-data">
+            @if (session('success'))
+                <div class="alert alert-success mt-1">
+                    {{ session('success') }}
+                </div>
+            @endif
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <form method="post" action="{{ url('asset/import/table')}}" enctype="multipart/form-data">
                         @csrf
                         <div class="modal-content">
                             <div class="modal-header">
@@ -44,35 +45,36 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-striped table-hover" id="asset_table" width="100%">
+                <table class="table table-striped table-hover" id="assetAll" width="100%">
                     <thead>
-                        <tr>
+                        <tr class="judul-table text-center">
                             <th>Kode Barang</th>
                             <th>Item Code</th>
                             <th>Nama Barang</th>
-                            <th>Total</th>
-                            <th>Terpasang</th>
+                            <th>Jumlah</th>
+                            <th>Digunakan</th>
                             <th>Sisa</th>
                             <th>Satuan</th>
                             <th>Kondisi</th>
                             <th>Note</th>
-                            <th>Lokasi Penyimpanan</th>
-                            <th>Update</th>
+                            <th>Lokasi</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
+                    <tbody class="isi-table text-center">
+                    </tbody>
                 </table>
             </div>
         </div>
     </div>
 </div>
-{{-- <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script> --}}
-@push('script')
+@push('scripts')
     <script>
         $(function() {
-            $('#asset_table').DataTable({
+            $('#assetAll').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: '{{ url('asset/all/yajra/show')}}',
+                ajax: '{{ url('asset/yajra/show')}}',
                 columns: [
                     { data: 'id', name: 'id' },
                     { data: 'itemcode', name: 'itemcode' },
