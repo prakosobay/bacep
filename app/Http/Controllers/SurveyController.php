@@ -5,9 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use phpDocumentor\Reflection\Types\Nullable;
-use App\Models\{Survey, SurveyFull, SurveyHistory, User};
+use App\Models\{Survey, SurveyFull, SurveyHistory, SurveyVisitor};
 use Illuminate\Support\Facades\{DB, Auth, Gate, Session, Mail};
-use App\Mail\{NotifEmail, NotifReject, NotifFull};
 use Yajra\Datatables\Datatables;
 use Illuminate\Support\Carbon;
 use Barryvdh\DomPDF\Facade as PDF;
@@ -21,10 +20,13 @@ class SurveyController extends Controller
         return view('sales.form');
     }
 
-    public function store(Request $request)
+
+
+    // Submit
+    public function survey_create(Request $request)
     {
          // Get all data request
-         $data = $request->all();
+        $data = $request->all();
         $validated = $request->validate([
             'date_of_visit' => ['required', 'date', 'after:yesterday'],
             'date_of_leave' => ['required', 'date', 'after:yesterday', 'after_or_equal:date_of_visit'],
@@ -35,24 +37,6 @@ class SurveyController extends Controller
             'visitor_phone' => ['regex:/^([0-9\s\-\+\(\)]*)$/', 'min:10'],
             'visitor_company' => ['string', 'max:200'],
             'visitor_dept' => ['string', 'max:200'],
-
-
-            // 'visitor_name2' => ['string', 'max:100', 'nullable'],
-            // 'visitor_phone2' => ['regex:/^([0-9\s\-\+\(\)]*)$/', 'min:10', 'nullable'],
-            // 'visitor_company2' => ['string', 'max:200', 'nullable'],
-            // 'visitor_dept2' => ['string', 'max:200', 'nullable'],
-            // 'visitor_name3' => ['string', 'max:100', 'nullable'],
-            // 'visitor_phone3' => ['regex:/^([0-9\s\-\+\(\)]*)$/', 'min:10', 'nullable'],
-            // 'visitor_company3' => ['string', 'max:200', 'nullable'],
-            // 'visitor_dept3' => ['string', 'max:200', 'nullable'],
-            // 'visitor_name4' => ['string', 'max:100', 'nullable'],
-            // 'visitor_phone4' => ['regex:/^([0-9\s\-\+\(\)]*)$/', 'min:10', 'nullable'],
-            // 'visitor_company4' => ['string', 'max:200', 'nullable'],
-            // 'visitor_dept4' => ['string', 'max:200', 'nullable'],
-            // 'visitor_name5' => ['string', 'max:100', 'nullable'],
-            // 'visitor_phone5' => ['regex:/^([0-9\s\-\+\(\)]*)$/', 'min:10', 'nullable'],
-            // 'visitor_company5' => ['string', 'max:200', 'nullable'],
-            // 'visitor_dept5' => ['string', 'max:200', 'nullable'],
         ]);
 
 
@@ -82,7 +66,7 @@ class SurveyController extends Controller
             'aktif' => '1',
             'pdf' => false
         ]);
- 
+
         if($survey && $log){
             return view('homepage');
         }else{
@@ -203,12 +187,9 @@ class SurveyController extends Controller
             ->make(true);
     }
 
-    public function full()
-    {
-        $full = SurveyFull::all();
-        return view('sales.full_approval', compact('full'));
-    }
 
+
+    // Convert PDF
     public function pdf($id)
     {
         $survey = Survey::findOrFail($id);
@@ -224,6 +205,23 @@ class SurveyController extends Controller
             // dd($survey);
         $pdf = PDF::loadview('sales.pdf', compact('survey', 'log', 'join'));
         return $pdf->stream();
+    }
+
+
+
+    // Yajra Table
+    public function survey_yajra_full_visitor()
+    {
+
+        $full = DB::table('surveys')
+                ->join('survey_visitors', 'surveys.id', 'survey_visitors.survey_id')
+                ->select('surveys.*', 'survey_histories.*');
+        return Datatables::of($full)
+                ->editColumn('visit', function($full){
+                    return $full->visit ? with(new Carbon($full->visit))->format('d/m/Y') : '';
+                })
+                ->addColumn('action', 'sales.actionEdit')
+                ->make(true);
     }
 
     public function json()

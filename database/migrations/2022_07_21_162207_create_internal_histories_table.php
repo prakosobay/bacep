@@ -20,7 +20,6 @@ class CreateInternalHistoriesTable extends Migration
             $table->string('created_by');
             $table->string('role_to');
             $table->string('status');
-            $table->string('note')->nullable();
             $table->boolean('aktif');
             $table->boolean('pdf');
             $table->timestamps();

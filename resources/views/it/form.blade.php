@@ -368,7 +368,6 @@ $(document).ready(function(){
         tags : true,
     });
 
-
     let max_row = 15;
     let row = 1;
     let button_detail = $('#button_detail');

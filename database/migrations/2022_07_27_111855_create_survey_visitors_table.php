@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSurveyPersonilsTable extends Migration
+class CreateSurveyVisitorsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateSurveyPersonilsTable extends Migration
      */
     public function up()
     {
-        Schema::create('survey_personils', function (Blueprint $table) {
+        Schema::create('survey_visitors', function (Blueprint $table) {
             $table->id();
             $table->foreignId('survey_id');
             $table->string('name');
@@ -21,10 +21,10 @@ class CreateSurveyPersonilsTable extends Migration
             $table->string('department');
             $table->string('phone');
             $table->string('numberId');
-            $table->string('respon');
-            $table->date('checkin');
-            $table->string('photo_checkin');
-            $table->string('photo_checkout');
+            $table->time('checkin')->nullable();
+            $table->string('photo_checkin')->nullable();
+            $table->time('checkout')->nullable();
+            $table->string('photo_checkout')->nullable();
             $table->timestamps();
         });
     }
@@ -36,6 +36,6 @@ class CreateSurveyPersonilsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('survey_personils');
+        Schema::dropIfExists('survey_visitors');
     }
 }
