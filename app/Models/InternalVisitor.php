@@ -9,13 +9,18 @@ class InternalVisitor extends Model
 {
     use HasFactory;
 
-    protected $table = 'internal_visitors';
-    protected $primaryKey = 'id';
     protected $fillabel = [
-        'internal_id', 'req_dept', 'name', 'company', 'department', 'respon', 'numberId', 'phone',
+        'internal_id',
+        'req_dept',
+        'name',
+        'company',
+        'department',
+        'respon',
+        'numberId',
+        'phone',
     ];
 
-    public function internals()
+    public function internal()
     {
         return $this->belongsTo(Internal::class);
     }

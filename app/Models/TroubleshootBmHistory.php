@@ -10,10 +10,13 @@ class TroubleshootBmHistory extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $table = 'troubleshoot_bm_histories';
-    protected $primaryKey = 'id';
     protected $fillable = [
-        'troubleshoot_bm_id', 'created_by', 'role_to', 'status', 'aktif', 'pdf'
+        'troubleshoot_bm_id',
+        'created_by',
+        'role_to',
+        'status',
+        'aktif',
+        'pdf',
     ];
 
     public function createdBy()

@@ -643,7 +643,12 @@ class OtherController extends Controller
             }
         }
 
-        // dd($photoArray);
+        dd($photoArray);
+
+        foreach($photoArray as $p){
+
+        }
+
 
         // $getPersonil = DB::table('troubleshoot_bm_personils')
         //     ->where('troubleshoot_bm_id', $id)

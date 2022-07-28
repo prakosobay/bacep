@@ -9,12 +9,12 @@ $(function() {
         serverSide: true,
         ajax: '{{ url('internal/it/yajra/full/visitor')}}',
         columns: [
-            { data: 'id', name: 'id' },
-            { data: 'work', name: 'work' },
-            { data: 'visit', name: 'visit' },
-            { data: 'leave', name: 'leave' },
-            { data: 'checkin', name: 'checkin' },
-            { data: 'checkout', name: 'checkout' },
+            { data: 'id', name: 'internals.id' },
+            { data: 'work', name: 'internals.work' },
+            { data: 'visit', name: 'internals.visit' },
+            { data: 'leave', name: 'internals.leave' },
+            { data: 'name', name: 'internal_visitors.name' },
+            { data: 'company', name: 'internal_visitors.company' },
             {data: 'action', name: 'action', orderable: false, searchable: false}
         ]
     });

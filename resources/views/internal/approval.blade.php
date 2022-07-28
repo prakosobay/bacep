@@ -20,9 +20,8 @@
                     <thead>
                         <tr class="judul-table text-center">
                             <th>ID Permit</th>
-                            <th>Requestor Name</th>
-                            <th>Requestor Dept</th>
                             <th>Date of Request</th>
+                            <th>Requestor Dept</th>
                             <th>Date of Visit</th>
                             <th>Date of Leave</th>
                             <th>Purpose</th>
@@ -32,16 +31,15 @@
                     <tbody class="isi-table text-center">
                         @foreach($getInternal as $p)
                         <tr>
-                            <td>{{ $p->internal_id }}</td>
-                            <td>{{ $p->req_name }}</td>
-                            <td>{{ $p->req_dept }}</td>
-                            <td>{{ Carbon\Carbon::parse($p->created_at)->format('d-m-Y') }}</td>
-                            <td>{{ Carbon\Carbon::parse($p->visit)->format('d-m-Y') }}</td>
-                            <td>{{ Carbon\Carbon::parse($p->leave)->format('d-m-Y') }}</td>
-                            <td>{{ $p->work }}</td>
+                            <td>{{ $p->internal->id }}</td>
+                            <td>{{ Carbon\Carbon::parse($p->internal->created_at)->format('d-m-Y') }}</td>
+                            <td>{{ $p->internal->req_dept }}</td>
+                            <td>{{ Carbon\Carbon::parse($p->internal->visit)->format('d-m-Y') }}</td>
+                            <td>{{ Carbon\Carbon::parse($p->internal->leave)->format('d-m-Y') }}</td>
+                            <td>{{ $p->internal->work }}</td>
                             <td>
                                 @can('isApproval')
-                                    <form action="{{ url('internal/approve', $p->internal_id)}}" method="post">
+                                    <form action="{{ url('internal/approve', $p->internal->id)}}" method="post">
                                         @csrf
                                         <button id="ok" class="btn btn-success btn-sm my-1 mx-1">Approve</button>
                                     </form>
@@ -49,7 +47,7 @@
                                     <button id="not" class="btn btn-danger btn-sm my-1 mx-1" data-bs-toggle="modal" data-bs-target="#exampleModal">Reject</button>
 
                                 @elsecan('isHead')
-                                    <form action="{{ url('internal/approve', $p->internal_id)}}" method="post">
+                                    <form action="{{ url('internal/approve', $p->internal->id)}}" method="post">
                                         @csrf
                                         <button id="ok" class="btn btn-success btn-sm my-1 mx-1">Approve</button>
                                     </form>
@@ -57,13 +55,13 @@
                                     <button id="not" class="btn btn-danger btn-sm my-1 mx-1" data-bs-toggle="modal" data-bs-target="#exampleModal">Reject</button>
 
                                 @elsecan('isSecurity')
-                                    <form action="{{ url('internal/approve', $p->internal_id)}}" method="post">
+                                    <form action="{{ url('internal/approve', $p->internal->id)}}" method="post">
                                         @csrf
                                         <button id="ok" class="btn btn-success btn-sm my-1 mx-1">Approve</button>
                                     </form>
 
                                 @endcan
-                                    <a href="/internal/it/pdf/{{$p->internal_id}}" class="btn btn-primary btn-sm my-1 mx-1" target="_blank">File</a>
+                                    <a href="/internal/it/pdf/{{$p->internal->id}}" class="btn btn-primary btn-sm my-1 mx-1" target="_blank">File</a>
                             </td>
                         </tr>
                         @endforeach
@@ -81,7 +79,7 @@
                 <h5 class="modal-title" id="exampleModalLabel">Alasan di Reject</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="{{ url('internal/reject', $p->internal_id )}}" method="post">
+            <form action="{{ url('internal/reject', $p->internal->id )}}" method="post">
                 @csrf
                 <div class="modal-body">
                     <div class="form-group">

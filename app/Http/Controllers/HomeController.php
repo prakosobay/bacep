@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{CleaningFull, MasterOb, OtherHistory, OtherPersonil, Personil, PilihanWork, Rutin, Survey, TroubleshootBm};
+use App\Models\{CleaningFull, MasterOb, OtherHistory, OtherPersonil, Personil, PilihanWork, Rutin, Survey, TroubleshootBm, Internal, InternalHistory};
 use Illuminate\Support\Facades\{DB, Auth, Gate, Session};
 
 class HomeController extends Controller
@@ -101,7 +101,6 @@ class HomeController extends Controller
             } elseif ($type_approve == 'maintenance') {
                 $getMaintenance = DB::table('other_histories')
                     ->join('others', 'others.id', '=', 'other_histories.other_id')
-                    // ->join('other_personils', 'others.id', '=', 'other_personils.other_id')
                     ->whereIn('other_histories.role_to', $role_1)
                     ->where('other_histories.aktif', '=', 1)
                     ->select('others.*', 'other_histories.*')
@@ -117,12 +116,7 @@ class HomeController extends Controller
                     ->get();
                 return view('other.troubleshoot_approval', compact('getTroubleshoot'));
             } elseif($type_approve == 'internal'){
-                $getInternal = DB::table('internals')
-                    ->join('internal_histories', 'internals.id', '=', 'internal_histories.internal_id')
-                    ->whereIn('internal_histories.role_to', $role_1)
-                    ->where('internal_histories.aktif', true)
-                    ->select('internal_histories.*', 'internals.req_name', 'internals.work', 'internals.visit', 'internals.leave', 'internals.created_at')
-                    ->get();
+                $getInternal = InternalHistory::where('aktif', 1)->whereIn('role_to', $role_1)->get();
                 return view('internal.approval', compact('getInternal'));
             } else {
                 abort(403);

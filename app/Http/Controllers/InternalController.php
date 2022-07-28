@@ -142,7 +142,7 @@ class InternalController extends Controller
 
                 $notif_email = Internal::find($insertForm->id);
                 foreach ([
-                    'bayu.prakoso@balitower.co.id', 'eri.iskandar@balitower.co.id'
+                    'bayu.prakoso@balitower.co.id'
                 ] as $recipient) {
                     Mail::to($recipient)->send(new NotifInternalForm($notif_email));
                 }
@@ -374,23 +374,21 @@ class InternalController extends Controller
 
     public function internal_it_yajra_full_visitor()
     {
-        // $full = DB::table('internals')
-        //         ->join('internal_visitors', 'internals.id', 'internal_visitors.internal_id')
-        //         ->where('internal_visitors.req_dept', 'IT')
-        //         ->select('internals.visit', 'internals.leave', 'internals.work', 'internal_visitors.*')
-        //         ->orderBy('internal_id', 'desc');
-        $full = DB::table('internal_visitors')
-                ->join('internals', 'internal_visitors.internal_id', '=', 'internals.id')
-                ->where('internal_visitors.req_dept', 'IT')
-                ->select('internals.visit', 'internals.leave', 'internals.work', 'internals.id', 'internal_visitors.checkin', 'internal_visitors.checkout')
-                ->orderBy('id', 'desc');
-                // dd($full);
+        // SELECT DISTINCT (internals.work), internal_visitors.name, internal_visitors.company from internal_visitors inner join internals on internal_visitors.internal_id = internals.id group by internals.id;
+
+        $full = DB::table('internals')
+        ->join('internal_visitors', 'internals.id', '=', 'internal_visitors.internal_id')
+        ->select('internals.*', 'internal_visitors.name', 'internal_visitors.company', 'internal_visitors.checkin', 'internal_visitors.checkout')
+        ->groupBy('internals.id');
         return Datatables::of($full)
-                ->editColumn('visit', function($full){
-                    return $full->visit ? with(new Carbon($full->visit))->format('d/m/Y') : '';
-                })
-                ->addColumn('action', 'internal.actionEdit')
-                ->make(true);
+            ->editColumn('visit', function($full){
+                return $full->visit ? with(new Carbon($full->visit))->format('d/m/Y') : '';
+            })
+            ->editColumn('leave', function($full){
+                return $full->leave ? with(new Carbon($full->leave))->format('d/m/Y') : '';
+            })
+            ->addColumn('action', 'internal.actionEdit')
+            ->make(true);
 
     }
 }

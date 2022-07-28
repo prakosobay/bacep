@@ -10,9 +10,19 @@ class InternalEntry extends Model
 {
     use HasFactory;
 
-    protected $table = 'internal_entries';
-    protected $primaryKey = 'id';
     protected $fillable = [
-        'req_dept', 'dc', 'mmr1', 'mmr2', 'cctv', 'lain'
+        'req_dept',
+        'dc',
+        'mmr1',
+        'mmr2',
+        'cctv',
+        'lain'
     ];
+
+    public function internal()
+    {
+        return $this->belongsTo(Internal::class);
+    }
+
+
 }

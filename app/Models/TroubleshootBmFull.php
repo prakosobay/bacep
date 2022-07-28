@@ -10,13 +10,18 @@ class TroubleshootBmFull extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $table = 'troubleshoot_bm_fulls';
-    protected $primaryKey = 'id';
     protected $fillable = [
-        'work', 'request', 'leave', 'visit', 'link', 'note', 'status', 'troubleshoot_bm_id'
+        'work',
+        'request',
+        'leave',
+        'visit',
+        'link',
+        'note',
+        'status',
+        'troubleshoot_bm_id'
     ];
 
-    public function troubleshoot_bms()
+    public function troubleshoot_bm()
     {
         return $this->belongsTo(TroubleshootBm::class);
     }
