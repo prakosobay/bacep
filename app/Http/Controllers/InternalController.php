@@ -20,7 +20,23 @@ class InternalController extends Controller
     // Show Pages
     public function internal_it_form()
     {
-        return view('it.form');
+        return view('internal.it.form');
+    }
+
+    public function iternal_it_formbarang()
+    {
+        return view('internal.it.formbarang');
+    }
+
+    public function internal_action_checkin_form($id)
+    {
+        $getForm = Internal::findOrFail($id);
+        return view('internal.checkinForm', compact('getForm'));
+    }
+
+    public function internal_ipcore_form()
+    {
+        return view('internal.ipcore.form');
     }
 
 
@@ -295,6 +311,15 @@ class InternalController extends Controller
 
 
 
+
+    // Update Checkin
+    public function internal_update_checkin($id)
+    {
+
+    }
+
+
+
     // Reject
     public function internal_reject(Request $request, $id)
     {
@@ -346,12 +371,8 @@ class InternalController extends Controller
     {
         $history = DB::table('internal_histories')
             ->join('internals', 'internals.id', '=', 'internal_histories.internal_id')
-            ->select('internal_histories.*', 'internals.visit')
-            ->orderBy('internal_id', 'desc');
+            ->select('internal_histories.role_to', 'internal_histories.status', 'internal_histories.created_by', 'internal_histories.aktif', 'internals.visit', 'internals.id', 'internals.req_dept');
         return Datatables::of($history)
-            ->editColumn('updated_at', function ($history) {
-                return $history->updated_at ? with(new Carbon($history->updated_at))->format('d/m/Y') : '';
-            })
             ->editColumn('visit', function ($history) {
                 return $history->visit ? with(new Carbon($history->visit))->format('d/m/Y') : '';
             })
@@ -362,8 +383,7 @@ class InternalController extends Controller
     {
         $full = DB::table('internal_fulls')
             // ->join('internal_visitors', 'internal_fulls.req_dept', '=', 'internal_visitors.req_dept')
-            ->select('internal_fulls.*')
-            ->orderBy('internal_id', 'desc');
+            ->select('internal_fulls.*');
         return Datatables::of($full)
             ->editColumn('visit', function ($full) {
                 return $full->visit ? with(new Carbon($full->visit))->format('d/m/Y') : '';
@@ -378,6 +398,7 @@ class InternalController extends Controller
 
         $full = DB::table('internals')
         ->join('internal_visitors', 'internals.id', '=', 'internal_visitors.internal_id')
+        ->where('internals.req_dept', 'IT')
         ->select('internals.*', 'internal_visitors.name', 'internal_visitors.company', 'internal_visitors.checkin', 'internal_visitors.checkout')
         ->groupBy('internals.id');
         return Datatables::of($full)

@@ -161,9 +161,9 @@ class HomeController extends Controller
         $email = Auth::user()->email;
 
         if ($email == 'it@mail.com') {
-            return view('it.log_visitor');
+            return view('internal.it.log_visitor');
         } elseif ($email == 'ipcore@mail.com') {
-            return view('ipcore.log');
+            return view('internal.ipcore.log_visitor');
         } elseif (($email == 'badai.sino@balitower.co.id') || ($email == 'data.center7@balitower.co.id')) {
             return view('cleaning.full_visitor');
         } elseif ($email == 'sales@mail.com') {

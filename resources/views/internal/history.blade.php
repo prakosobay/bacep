@@ -18,7 +18,6 @@
                             <th>Role</th>
                             <th>Status</th>
                             <th>Created By</th>
-                            <th>Last Updated</th>
                             <th>Ket</th>
                         </tr>
                     </thead>
@@ -38,13 +37,12 @@
                 serverSide: true,
                 ajax: '{{ url('internal/yajra/history')}}',
                 columns: [
-                    { data: 'internal_id', name: 'internal_id' },
+                    { data: 'id', name: 'internals.id' },
                     { data: 'visit', name: 'internals.visit' },
-                    { data: 'req_dept', name: 'req_dept' },
+                    { data: 'req_dept', name: 'internals.req_dept' },
                     { data: 'role_to', name: 'role_to' },
                     { data: 'status', name: 'status' },
                     { data: 'created_by', name: 'created_by' },
-                    { data: 'updated_at', name: 'updated_at' },
                     { data: 'aktif', name: 'aktif' },
                 ]
             });

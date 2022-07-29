@@ -9,7 +9,7 @@ Route::get('/', function () {
     return view('auth.login');
 })->middleware('guest');
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/home', [HomeController::class, 'index']);
 
     //Detail History
@@ -221,6 +221,11 @@ Route::middleware(['auth'])->group(function () {
 
     // Internal
     Route::get('internal/it/form', [InternalController::class, 'internal_it_form']);
+    Route::get('internal/it/formBarang', [InternalController::class, 'iternal_it_formbarang']);
+    Route::get('internal/ipcore/form', [InternalController::class, 'internal_ipcore_form']);
+
+    Route::get('internal/action/checkin/form/{id}', [InternalController::class, 'internal_action_checkin_form']);
+
     Route::get('/internal/it/pdf/{id}', [InternalController::class, 'internal_it_pdf']);
     Route::get('internal/yajra/history', [InternalController::class, 'internal_yajra_history']);
     Route::get('internal/yajra/full/approval', [InternalController::class, 'internal_yajra_full_approval']);

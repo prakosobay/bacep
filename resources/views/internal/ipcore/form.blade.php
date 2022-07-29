@@ -2,7 +2,7 @@
 @section('content')
 <div class="container my-5">
     <div class="card">
-        <h1 class="text-center my-3 h1Permit">Fill Requestor Identity</h1>
+        <h1 class="text-center my-3 h1Permit">Access Request &  Change Request Form</h1>
         <form action="{{ url('internal/create')}}" method="POST" class="validate-form">
             @csrf
             <div class="container form-container">
@@ -18,7 +18,7 @@
                     <div class="col-4">
                         <div class="form-group mb-4">
                             <label for="req_dept" class="form-label">Requestor Department :</label>
-                            <input type="text" value="IT" id="req_dept" name="req_dept" class="form-control" readonly>
+                            <input type="text" value="IP Core" id="req_dept" name="req_dept" class="form-control" readonly>
                         </div>
                     </div>
                     <div class="col-4">
@@ -351,7 +351,6 @@
                     </div>
                 @endif
 
-                {{-- Submit --}}
                 <button type="submit" class="btn btn-lg btn-success mx-2">Submit</button>
                 <button type="reset" class="btn btn-lg btn-warning mx-2">Reset</button>
             </div>

@@ -224,7 +224,7 @@ class OtherController extends Controller
         // $notif_email = Other::find
         // Send email notification
         foreach ([
-            'aurellius.putra@balitower.co.id', 'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
+            'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
             'ilham.pangestu@balitower.co.id', 'irwan.trisna@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'dyah.retno@balitower.co.id'
         ] as $recipient) {
             Mail::to($recipient)->send(new NotifMaintenanceForm($otherForm));
@@ -271,7 +271,7 @@ class OtherController extends Controller
             $role_to = '';
             if ($lastupdate->role_to == 'review') {
                 foreach ([
-                    'aurellius.putra@balitower.co.id', 'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
+                    'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
                     'ilham.pangestu@balitower.co.id', 'irwan.trisna@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id',
                 ] as $recipient) {
                     Mail::to($recipient)->send(new NotifMaintenanceForm($notif_email));
@@ -488,7 +488,7 @@ class OtherController extends Controller
 
         $notif_email = TroubleshootBm::find($other_form->id);
         foreach ([
-            'aurellius.putra@balitower.co.id', 'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
+            'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
             'ilham.pangestu@balitower.co.id', 'irwan.trisna@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'dyah.retno@balitower.co.id'
         ] as $recipient) {
             Mail::to($recipient)->send(new NotifTroubleshootForm($notif_email));
@@ -533,7 +533,7 @@ class OtherController extends Controller
             $role_to = '';
             if ($last_update->role_to == 'review') {
                 foreach ([
-                    'aurellius.putra@balitower.co.id', 'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
+                    'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
                     'ilham.pangestu@balitower.co.id', 'irwan.trisna@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id',
                 ] as $recipient) {
                     Mail::to($recipient)->send(new NotifTroubleshootForm($notif_email));
@@ -813,12 +813,8 @@ class OtherController extends Controller
     {
         $history_maintenance = DB::table('other_histories')
             ->join('others', 'others.id', '=', 'other_histories.other_id')
-            ->select('other_histories.*', 'others.visit')
-            ->orderBy('other_id', 'desc');
+            ->select('other_histories.*', 'others.visit');
         return Datatables::of($history_maintenance)
-            ->editColumn('updated_at', function ($history_maintenance) {
-                return $history_maintenance->updated_at ? with(new Carbon($history_maintenance->updated_at))->format('d/m/Y') : '';
-            })
             ->editColumn('visit', function ($history_maintenance) {
                 return $history_maintenance->visit ? with(new Carbon($history_maintenance->visit))->format('d/m/Y') : '';
             })
@@ -830,8 +826,7 @@ class OtherController extends Controller
         $full_visitor = DB::table('other_fulls')
             ->join('others', 'others.id', '=', 'other_fulls.other_id')
             ->where('status', '!=', 'Full Rejected')
-            ->select('other_fulls.*')
-            ->orderBy('other_id', 'desc');
+            ->select('other_fulls.*');
         return Datatables::of($full_visitor)
             ->editColumn('visit', function ($full_visitor) {
                 return $full_visitor->visit ? with(new Carbon($full_visitor->visit))->format('d/m/Y') : '';
@@ -847,8 +842,7 @@ class OtherController extends Controller
     {
         $full_approval = DB::table('other_fulls')
             ->join('others', 'others.id', '=', 'other_fulls.other_id')
-            ->select('other_fulls.*')
-            ->orderBy('other_id', 'desc');
+            ->select('other_fulls.*');
         return Datatables::of($full_approval)
             ->editColumn('visit', function ($full_approval) {
                 return $full_approval->visit ? with(new Carbon($full_approval->visit))->format('d/m/Y') : '';

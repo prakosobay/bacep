@@ -68,66 +68,118 @@
             <div class="card-body">
                 <div class="tab-content" id="myTabContent">
 
-                    @if(Auth::user()->email == 'it@mail.com')
                     {{-- IT --}}
-                    <div class="container-fluid">
-                        <div class="card-body">
-                            <button class="btn btn-primary btn-sm mx-1 my-2" data-bs-toggle="modal" data-bs-target="#itModal">Create Form</button>
-                            <a type="button" class="btn btn-sm btn-info mx-1 my-2" href="{{url('logall')}}">Log Form</a>
-                            <a type="button" class="btn btn-sm btn-danger mx-1 my-2" href="{{ url('/it/reject/show')}}">Form Rejected</a>
-                        </div>
-                    </div>
+                    @if(Auth::user()->email == 'it@mail.com')
 
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
+                        <div class="container-fluid">
+                            <div class="card-body">
+                                <button class="btn btn-primary btn-sm mx-1 my-2" data-bs-toggle="modal" data-bs-target="#itModal">Create Form</button>
+                                <a type="button" class="btn btn-sm btn-info mx-1 my-2" href="{{url('logall')}}">Log Form</a>
+                                <a type="button" class="btn btn-sm btn-danger mx-1 my-2" href="{{ url('/it/reject/show')}}">Form Rejected</a>
+                            </div>
                         </div>
-                    @endif
-
-                    {{-- Modal IT--}}
-                    <div class="modal fade" id="itModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Pilih Form</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('internal/it/form')}}">AR CR Form</a>
-                                    <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('internal/it/consumable')}}">Consumable Form</a>
-                                    <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('internal/it/formBarang')}}">AR CR + Barang Form</a>
-                                    <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('internal/it/formConsumable')}}">AR CR + Consumable Form</a>
-                                    <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('internal/it/formConsumableBarang')}}">AR CR + Consumable + Barang Form</a>
-                                    <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('internal/it/last/form')}}">Last Form</a>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Select</button>
+                        @if (session('status'))
+                            <div class="alert alert-success" role="alert">
+                                {{ session('status') }}
+                            </div>
+                        @endif
+                        <div class="modal fade" id="itModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Pilih Form</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('internal/it/form')}}">AR CR Form</a>
+                                        <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('internal/it/consumable')}}">Consumable Form</a>
+                                        <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('internal/it/formBarang')}}">AR CR + Barang Form</a>
+                                        <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('internal/it/formConsumable')}}">AR CR + Consumable Form</a>
+                                        <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('internal/it/formConsumableBarang')}}">AR CR + Consumable + Barang Form</a>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Select</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    {{-- Tabel IT --}}
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-striped table-bordered" id="it_table" width="100%" cellspacing="0">
-                                <thead>
-                                    <tr class="judul-table text-center">
-                                        <th>No.</th>
-                                        <th>Purpose of Work</th>
-                                        <th>Date of Visit</th>
-                                        <th>Date of Leave</th>
-                                        <th>Name</th>
-                                        <th>Company</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="isi-table text-center">
-                                </tbody>
-                            </table>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered" id="it_table" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr class="judul-table text-center">
+                                            <th>No.</th>
+                                            <th>Purpose of Work</th>
+                                            <th>Date of Visit</th>
+                                            <th>Date of Leave</th>
+                                            <th>Name</th>
+                                            <th>Company</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="isi-table text-center">
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
-                    </div>
+
+                    {{-- IP Core --}}
+                    @elseif(Auth::User()->email == 'ipcore@mail.com')
+
+                        <div class="container-fluid">
+                            <div class="card-body">
+                                <button class="btn btn-primary btn-sm mx-1 my-2" data-bs-toggle="modal" data-bs-target="#ipcoreModal">Create Form</button>
+                                <a type="button" class="btn btn-sm btn-info mx-1 my-2" href="{{url('logall')}}">Log Form</a>
+                                <a type="button" class="btn btn-sm btn-danger mx-1 my-2" href="{{ url('/ipcore/reject/show')}}">Form Rejected</a>
+                            </div>
+                        </div>
+                        @if (session('status'))
+                            <div class="alert alert-success" role="alert">
+                                {{ session('status') }}
+                            </div>
+                        @endif
+                        <div class="modal fade" id="ipcoreModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Pilih Form</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('internal/ipcore/form')}}">AR CR Form</a>
+                                        <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('internal/ipcore/consumable')}}">Consumable Form</a>
+                                        <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('internal/ipcore/formBarang')}}">AR CR + Barang Form</a>
+                                        <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('internal/ipcore/formConsumable')}}">AR CR + Consumable Form</a>
+                                        <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('internal/ipcore/formConsumableBarang')}}">AR CR + Consumable + Barang Form</a>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Select</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered" id="it_table" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr class="judul-table text-center">
+                                            <th>No.</th>
+                                            <th>Purpose of Work</th>
+                                            <th>Date of Visit</th>
+                                            <th>Date of Leave</th>
+                                            <th>Name</th>
+                                            <th>Company</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="isi-table text-center">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
                     @endif
                 </div>
             </div>

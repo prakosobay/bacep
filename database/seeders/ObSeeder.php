@@ -27,16 +27,6 @@ class ObSeeder extends Seeder
                 'department' => 'Building Management',
             ],
 
-            // Rokhim
-            [
-                'nama' => 'Rokhim',
-                'id_number' => '3174050404891001',
-                'phone_number' => '0819-9253-9595',
-                'pt' => 'PT TSL',
-                'responsible' => 'Cleaner',
-                'department' => 'Building Management',
-            ],
-
             // Jejen
             [
                 'nama' => 'Jejen Jenudin',
@@ -62,6 +52,16 @@ class ObSeeder extends Seeder
                 'nama' => 'Anita Aryani',
                 'id_number' => '5206025203881010',
                 'phone_number' => '0812-9073-7216',
+                'pt' => 'PT TSL',
+                'responsible' => 'Cleaner',
+                'department' => 'Building Management',
+            ],
+
+            // Henry
+            [
+                'nama' => 'Henry Yolanda',
+                'id_number' => '3171062607990001',
+                'phone_number' => '0857-1949-6261',
                 'pt' => 'PT TSL',
                 'responsible' => 'Cleaner',
                 'department' => 'Building Management',

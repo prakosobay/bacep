@@ -13,8 +13,8 @@ $(function() {
             { data: 'work', name: 'internals.work' },
             { data: 'visit', name: 'internals.visit' },
             { data: 'leave', name: 'internals.leave' },
-            { data: 'name', name: 'internal_visitors.name' },
-            { data: 'company', name: 'internal_visitors.company' },
+            { data: 'checkin', name: 'internal_visitors.checkin' },
+            { data: 'checkout', name: 'internal_visitors.checkout' },
             {data: 'action', name: 'action', orderable: false, searchable: false}
         ]
     });
