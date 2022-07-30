@@ -313,8 +313,50 @@ class InternalController extends Controller
 
 
     // Update Checkin
-    public function internal_update_checkin($id)
+    public function internal_checkin_update(Request $request, $id)
     {
+        // dd($request->all());
+        $getCheckin = $request->all();
+
+        $checkinArray = [];
+        foreach($getCheckin['photo_checkin'] as $k => $v){
+            $insertCheckin = [];
+            if(isset($getCheckin['photo_checkin'][$k])){
+
+                $extension = explode('/', explode(':', substr($v, 0, strpos($v, ';')))[1])[1];   // .jpg .png .pdf
+                $replace = substr($v, 0, strpos($v, ',') + 1);
+                $image = str_replace($replace, '', $v);
+                $image = str_replace(' ', '+', $image);
+                $imageName = Str::random(10) . '.' . $extension;
+
+                $insertCheckin = [
+                    'internal_id' => $id,
+                    'checkin' => $getCheckin['checkin'][$k],
+                    'photo_checkin' => $imageName,
+                ];
+
+                $checkinArray [] = $insertCheckin;
+            }
+        }
+
+        // dd($checkinArray);
+        // $update = DB::table('internal_visitors')->where('internal_id', $id)->get();
+        // foreach($update as $o){
+        // echo '<li> Nama : ' . $p['checkin'] . ' <strpng>' . $p['photo_checkin'] . '</strpng></li>';
+
+        // foreach($checkinArray as $p){
+
+        //     if(isset($p[$k]['checkin'])){
+        //         InternalVisitor::where('internal_id', $id)
+        //                 ->update([
+        //                     'checkin' => $p[$k]['checkin'],
+        //                     'photo_checkin' => $p[$k]['photo_checkin'],
+        //                 ]);
+        //     }
+        // }
+
+        InternalVIsitor::upsert($checkinArray, ['internal_id'], ['checkin', 'photo_checkin']);
+        return redirect(route('logall'))->with('error', "gagal");
 
     }
 

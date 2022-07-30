@@ -233,6 +233,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('internal/create', [InternalController::class, 'internal_create']);
     Route::post('internal/approve/{id}', [InternalController::class, 'internal_approve']);
     Route::post('internal/reject/{id}', [InternalController::class, 'internal_reject']);
+    Route::put('internal/checkin/update/{id}', [InternalController::class, 'internal_checkin_update']);
 
 
     //Visitor All Base Super

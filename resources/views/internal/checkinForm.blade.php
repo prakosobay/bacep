@@ -3,7 +3,7 @@
 <div class="container my-5">
     <div class="card">
         <h1 class="text-center my-3 h1Permit">Access Request &  Change Request Form</h1>
-        <form action="{{ url('internal/update', $getForm->id)}}" method="POST" class="validate-form">
+        <form action="{{ url('internal/checkin/update', $getForm->id)}}" method="POST" class="validate-form">
             @method('put')
             @csrf
             <div class="container form-container">
@@ -78,13 +78,13 @@
                     <div class="col-6">
                         <div class="form-group mb-5">
                             <label for="visit" class="form-label">Date of Visit :</label>
-                            <input type="date" class="form-control" id="visit" name="visit" value="{{ $getForm->visit }}" readonly>
+                            <input type="date" class="form-control" id="visit" value="{{ $getForm->visit }}" readonly>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-group mb-5">
                             <label for="leave" class="form-label">Date of Leave</label>
-                            <input type="date" class="form-control" id="leave" name="leave" value="{{ $getForm->leave }}" readonly>
+                            <input type="date" class="form-control" id="leave" value="{{ $getForm->leave }}" readonly>
                         </div>
                     </div>
                 </div>
@@ -285,6 +285,120 @@
                                     <td><input type="text" class="form-control" value="{{ $p->respon }}" readonly></td>
                                 </tr>
                             @endforeach
+                                <tr>
+                                    <th colspan="2">
+                                        <span>Take A Selfie Visitor 1</span>
+                                        <div class="container" id="my_camera"></div>
+                                        <input type="button" value="Take Snapshot" class="btn btn-sm btn-primary" onclick="take_snapshot()" required>
+                                    </th>
+                                    <th colspan="2" class="py-5">
+                                        <div class="container" id="results"></div><br>
+                                        <input class="@error('photo_checkin') is-invalid @enderror" required autocomplete="photo_checkin" type="hidden" name="photo_checkin[]" id="image">
+                                        @error('photo_checkin')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span><br>
+                                        @enderror
+                                        <input type="time" class="@error('checkin') is-invalid @enderror" name="checkin[]" id="checkin" value="" required autocomplete="checkin" readonly>
+                                        @error('checkin')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </th>
+                                </tr>
+
+                                <tr>
+                                    <th colspan="2">
+                                        <span>Take A Selfie Visitor 2</span>
+                                        <div class="container" id="my_camera2"></div><br>
+                                        <input type="button" class="btn btn-sm btn-primary" value="Take Snapshot" onclick="take_snapshot2()">
+                                    </th>
+                                    <th colspan="2" class="py-5">
+                                        <div class="container" id="results2"></div><br>
+                                        <input type="hidden" class="@error('photo_checkin2') is-invalid @enderror" name="photo_checkin[]" id="image2">
+                                        @error('photo_checkin2')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{$message}}</strong>
+                                            </span><br>
+                                        @enderror
+                                        <input type="time" class="@error('checkin2') is-invalid @enderror" name="checkin[]" id="checkin2" value="" readonly>
+                                        @error('checkin2')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </th>
+                                </tr>
+
+                                <tr>
+                                    <th colspan="2">
+                                        <span>Take A Selfie Visitor 3</span>
+                                        <div class="container" id="my_camera3"></div><br>
+                                        <input type="button" class="btn btn-sm btn-primary" value="Take Snapshot" onclick="take_snapshot3()">
+                                    </th>
+                                    <th colspan="2" class="py-5">
+                                        <div class="container" id="results3"></div><br>
+                                        <input type="hidden" class="@error('photo_checkin3') is-invalid @enderror" name="photo_checkin[]" id="image3">
+                                        @error('photo_checkin3')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{$message}}</strong>
+                                            </span><br>
+                                        @enderror
+                                        <input type="time" class="@error('checkin3') is-invalid @enderror" name="checkin[]" id="checkin3" value="" readonly>
+                                        @error('checkin3')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </th>
+                                </tr>
+
+                                <tr>
+                                    <th colspan="2">
+                                        <span>Take A Selfie Visitor 4</span>
+                                        <div class="container" id="my_camera4"></div><br>
+                                        <input type="button" class="btn btn-sm btn-primary" value="Take Snapshot" onclick="take_snapshot4()">
+                                    </th>
+                                    <th colspan="2" class="py-5">
+                                        <div class="container" id="results4"></div><br>
+                                        <input type="hidden" class="@error('photo_checkin4') is-invalid @enderror" name="photo_checkin[]" id="image4">
+                                        @error('photo_checkin4')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{$message}}</strong>
+                                            </span><br>
+                                        @enderror
+                                        <input type="time" class="@error('checkin4') is-invalid @enderror" name="checkin[]" id="checkin4" value="" readonly>
+                                        @error('checkin4')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </th>
+                                </tr>
+
+                                <tr>
+                                    <th colspan="2">
+                                        <span>Take A Selfie Visitor 5</span>
+                                        <div class="container" id="my_camera5"></div><br>
+                                        <input type="button" class="btn btn-sm btn-primary" value="Take Snapshot" onclick="take_snapshot5()">
+                                    </th>
+                                    <th colspan="2" class="py-5">
+                                        <div class="container" id="results5"></div><br>
+                                        <input type="hidden" class="@error('photo_checkin5') is-invalid @enderror" name="photo_checkin[]" id="image5">
+                                        @error('photo_checkin5')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{$message}}</strong>
+                                            </span><br>
+                                        @enderror
+                                        <input type="time" class="@error('checkin5') is-invalid @enderror" name="checkin[]" id="checkin5" value="" readonly>
+                                        @error('checkin5')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </th>
+                                </tr>
                         </tbody>
                     </table>
                 </div>
@@ -305,14 +419,108 @@
     </div>
 </div>
 @stack('script')
-<script>
-$(document).ready(function(){
 
-    $('.js-example-basic-multiple').select2({
-        placeholder: 'Select an option',
-        allowClear : true,
-        tags : true,
+{{-- Webcam --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.25/webcam.min.js"></script>
+
+<script>
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('input[name="_token"]').val()
+        }
     });
-});
+
+    Webcam.set({
+        width: 450,
+        height: 400,
+        image_format: 'jpeg',
+        jpeg_quality: 90
+    });
+
+    Webcam.attach( '#my_camera' );
+        function take_snapshot() {
+            Webcam.snap( function(data_uri) {
+                $("#image").val(data_uri);
+                document.getElementById('results').innerHTML = '<img src="'+data_uri+'"/>';
+            });
+            var tanggal = new Date();
+            var jam = tanggal.getHours();
+            var menit = tanggal.getMinutes();
+            var detik = tanggal.getSeconds();
+            jam = jam < 10 ? '0' +jam : jam;
+            menit = menit < 10 ? '0'+menit : menit;
+            detik = detik < 10 ? '0'+detik : detik;
+            var waktu = jam + ':' + menit + ':' + detik;
+            $("#checkin").val(waktu);
+        }
+
+    Webcam.attach( '#my_camera2' );
+        function take_snapshot2() {
+            Webcam.snap( function(data_uri) {
+                $("#image2").val(data_uri);
+                document.getElementById('results2').innerHTML = '<img src="'+data_uri+'"/>';
+            });
+            var tanggal = new Date();
+            var jam = tanggal.getHours();
+            var menit = tanggal.getMinutes();
+            var detik = tanggal.getSeconds();
+            jam = jam < 10 ? '0' +jam : jam;
+            menit = menit < 10 ? '0'+menit : menit;
+            detik = detik < 10 ? '0'+detik : detik;
+            var waktu = jam + ':' + menit + ':' + detik;
+            $("#checkin2").val(waktu);
+        }
+
+    Webcam.attach( '#my_camera3' );
+        function take_snapshot3() {
+            Webcam.snap( function(data_uri) {
+                $("#image3").val(data_uri);
+                document.getElementById('results3').innerHTML = '<img src="'+data_uri+'"/>';
+            });
+            var tanggal = new Date();
+            var jam = tanggal.getHours();
+            var menit = tanggal.getMinutes();
+            var detik = tanggal.getSeconds();
+            jam = jam < 10 ? '0' +jam : jam;
+            menit = menit < 10 ? '0'+menit : menit;
+            detik = detik < 10 ? '0'+detik : detik;
+            var waktu = jam + ':' + menit + ':' + detik;
+            $("#checkin3").val(waktu);
+        }
+
+    Webcam.attach( '#my_camera4' );
+        function take_snapshot4() {
+            Webcam.snap( function(data_uri) {
+                $("#image4").val(data_uri);
+                document.getElementById('results4').innerHTML = '<img src="'+data_uri+'"/>';
+            });
+            var tanggal = new Date();
+            var jam = tanggal.getHours();
+            var menit = tanggal.getMinutes();
+            var detik = tanggal.getSeconds();
+            jam = jam < 10 ? '0' +jam : jam;
+            menit = menit < 10 ? '0'+menit : menit;
+            detik = detik < 10 ? '0'+detik : detik;
+            var waktu = jam + ':' + menit + ':' + detik;
+            $("#checkin4").val(waktu);
+        }
+
+    Webcam.attach( '#my_camera5' );
+        function take_snapshot5() {
+            Webcam.snap( function(data_uri) {
+                $("#image5").val(data_uri);
+                document.getElementById('results5').innerHTML = '<img src="'+data_uri+'"/>';
+            });
+            var tanggal = new Date();
+            var jam = tanggal.getHours();
+            var menit = tanggal.getMinutes();
+            var detik = tanggal.getSeconds();
+            jam = jam < 10 ? '0' +jam : jam;
+            menit = menit < 10 ? '0'+menit : menit;
+            detik = detik < 10 ? '0'+detik : detik;
+            var waktu = jam + ':' + menit + ':' + detik;
+            $("#checkin5").val(waktu);
+        }
+
 </script>
 @endsection
