@@ -146,6 +146,17 @@
             font-size: 8pt;
         }
 
+        .tengah-text{
+            text-align: center;
+        }
+
+        .table-loan{
+            text-align: left;
+            width: 100%;
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
         .page_break+.page_break {
             page-break-before: always;
         }
@@ -462,6 +473,7 @@
             </table>
 
         </div>
+        <div style="page-break-after: always;">
 
             {{-- Header CR --}}
             <table class="table table-bordered">
@@ -722,6 +734,47 @@
                     <td class="col_footer">Hal : 1/1</td>
                 </tr>
             </table>
+
+        </div>
+
+            {{-- Header CR --}}
+            {{-- <table class="table table-bordered">
+                <tr >
+                    <td class="col_header" rowspan="2" ><img src="{{ public_path("gambar/bts_logo.jpg") }}" class="img-fluid" alt="logo_bts"></td>
+                </tr>
+            </table>
+
+
+            <h2 class="tengah-text"><b>ACCESS CARD LOAN FORM</b></h2>
+            <h4 class="tengah-text">Nomor : DC/FORM/19/2019/Rev.0.0</h4>
+
+            <table class="table-loan">
+                <tr>
+                    <td colspan="4"><b>Customer/Tenant Detail</b></td>
+                </tr>
+                <tr>
+                    <td><b>Company</b></td>
+                    <td colspan="3"><b>:  PT Bali Towerindo Sentra, Tbk </b></td>
+                </tr>
+                <tr>
+                    <td><b>PIC Name</b></td>
+                    <td colspan="3"><b>: {{ $getForm->req_name }}</b></td>
+                </tr>
+                <tr>
+                    <td><b>Phone</b></td>
+                    <td colspan="3"><b>: {{ $getForm->req_phone }}</b></td>
+                </tr>
+                <tr>
+                    <td colspan="4"><b>Card & Room Detail</b></td>
+                </tr>
+                <tr>
+                    <td><b>Room</b></td>
+                    <td><b>:</b></td>
+                    <td><b>Rack No</b></td>
+                    <td><b>: </b></td>
+                </tr>
+            </table> --}}
+
     </main>
 </body>
 </html>

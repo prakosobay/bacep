@@ -91,11 +91,10 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('internal/it/form')}}">AR CR Form</a>
-                                        <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('internal/it/consumable')}}">Consumable Form</a>
-                                        <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('internal/it/formBarang')}}">AR CR + Barang Form</a>
-                                        <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('internal/it/formConsumable')}}">AR CR + Consumable Form</a>
-                                        <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('internal/it/formConsumableBarang')}}">AR CR + Consumable + Barang Form</a>
+                                        <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('internal/form')}}">AR CR Form</a>
+                                        <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('consumable/form')}}">Consumable Form</a>
+                                        <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('internal/formBarang')}}">AR CR + Barang Form</a>
+                                        <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('internal/formConsumableBarang')}}">AR CR + Consumable + Barang Form</a>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -147,11 +146,10 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('internal/ipcore/form')}}">AR CR Form</a>
-                                        <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('internal/ipcore/consumable')}}">Consumable Form</a>
-                                        <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('internal/ipcore/formBarang')}}">AR CR + Barang Form</a>
-                                        <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('internal/ipcore/formConsumable')}}">AR CR + Consumable Form</a>
-                                        <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('internal/ipcore/formConsumableBarang')}}">AR CR + Consumable + Barang Form</a>
+                                        <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('internal/form')}}">AR CR Form</a>
+                                        <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('consumable/form')}}">Consumable Form</a>
+                                        <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('internal/formBarang')}}">AR CR + Barang Form</a>
+                                        <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('internal/formConsumableBarang')}}">AR CR + Consumable + Barang Form</a>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

@@ -18,30 +18,19 @@
                     <div class="col-4">
                         <div class="form-group mb-4">
                             <label for="req_dept" class="form-label">Requestor Department :</label>
-                            <input type="text" value="IP Core" id="req_dept" name="req_dept" class="form-control" readonly>
+                            <input type="text" value="{{ auth()->user()->department }}" id="req_dept" name="req_dept" class="form-control" readonly>
                         </div>
                     </div>
                     <div class="col-4">
                         <div class="form-group mb-4">
                             <label for="req_name" class="form-label">Requestor Name :</label>
-                            <input type="text" class="form-control @error('req_name') is-invalid @enderror" id="req_name" name="req_name" value="{{ old('req_name')}}" required>
-                            @error('req_name')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                            <input type="text" class="form-control" id="req_name" name="req_name" value="{{ auth()->user()->name }}" readonly>
                         </div>
                     </div>
                     <div class="col-4">
                         <div class="form-group mb-4">
                             <label for="req_phone" class="form-label">Requestor Phone Number:</label>
-                            <input type="text" class="form-control @error('req_phone') is-invalid @enderror" id="req_phone" name="req_phone" value="{{ old('req_phone')}}" required>
-                            <div id="phoneHelp" class="form-text">Example : 08xx-xxxx-xxxx</div>
-                            @error('req_phone')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                            <input type="text" class="form-control" id="req_phone" name="req_phone" value="{{ auth()->user()->phone }}" readonly>
                         </div>
                     </div>
                 </div>
@@ -351,6 +340,7 @@
                     </div>
                 @endif
 
+                {{-- Submit --}}
                 <button type="submit" class="btn btn-lg btn-success mx-2">Submit</button>
                 <button type="reset" class="btn btn-lg btn-warning mx-2">Reset</button>
             </div>
@@ -361,11 +351,11 @@
 <script>
 $(document).ready(function(){
 
-    $('.js-example-basic-multiple').select2({
-        placeholder: 'Select an option',
-        allowClear : true,
-        tags : true,
-    });
+    // $('.js-example-basic-multiple').select2({
+    //     placeholder: 'Select an option',
+    //     allowClear : true,
+    //     tags : true,
+    // });
 
     let max_row = 15;
     let row = 1;

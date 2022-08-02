@@ -18,25 +18,15 @@ class InternalController extends Controller
 {
 
     // Show Pages
-    public function internal_it_form()
-    {
-        return view('internal.it.form');
-    }
-
-    public function iternal_it_formbarang()
-    {
-        return view('internal.it.formbarang');
-    }
-
     public function internal_action_checkin_form($id)
     {
         $getForm = Internal::findOrFail($id);
         return view('internal.checkinForm', compact('getForm'));
     }
 
-    public function internal_ipcore_form()
+    public function internal_form()
     {
-        return view('internal.ipcore.form');
+        return view('internal.form');
     }
 
 
@@ -52,8 +42,6 @@ class InternalController extends Controller
             'dc' => ['required_without_all:mmr1,mmr2,cctv,lain'],
             'visit' => ['required', 'after:yesterday'],
             'leave' => ['required', 'after_or_equal:visit'],
-            'req_name' => ['required', 'alpha'],
-            'req_phone' => ['required', 'regex:/^([0-9\s\-\+\(\)]*)$/', 'min:11'],
             'background' => ['required'],
             'desc' => ['required'],
             'rack' => ['required'],
@@ -185,7 +173,7 @@ class InternalController extends Controller
 
 
     // pdf
-    public function internal_it_pdf($id)
+    public function internal_pdf($id)
     {
         // dd($id);
         $getForm = Internal::findOrFail($id);

@@ -220,13 +220,9 @@ Route::middleware(['auth'])->group(function () {
 
 
     // Internal
-    Route::get('internal/it/form', [InternalController::class, 'internal_it_form']);
-    Route::get('internal/it/formBarang', [InternalController::class, 'iternal_it_formbarang']);
-    Route::get('internal/ipcore/form', [InternalController::class, 'internal_ipcore_form']);
-
+    Route::get('internal/form', [InternalController::class, 'internal_form']);
     Route::get('internal/action/checkin/form/{id}', [InternalController::class, 'internal_action_checkin_form']);
-
-    Route::get('/internal/it/pdf/{id}', [InternalController::class, 'internal_it_pdf']);
+    Route::get('/internal/pdf/{id}', [InternalController::class, 'internal_pdf']);
     Route::get('internal/yajra/history', [InternalController::class, 'internal_yajra_history']);
     Route::get('internal/yajra/full/approval', [InternalController::class, 'internal_yajra_full_approval']);
     Route::get('internal/it/yajra/full/visitor', [InternalController::class, 'internal_it_yajra_full_visitor']);
@@ -236,8 +232,9 @@ Route::middleware(['auth'])->group(function () {
     Route::put('internal/checkin/update/{id}', [InternalController::class, 'internal_checkin_update']);
 
 
-    //Visitor All Base Super
-    Route::get('new_permit', [HomeController::class, 'new_permit']);
+    // Consumable Form
+    Route::get('consumable/form', [ConsumableController::class, 'consumable_form']);
+    Route::post('consumable/store', [ConsumableController::class, 'consumable_store']);
 
     // ALL
     Route::get('history/{type_view}', [HomeController::class, 'history']);

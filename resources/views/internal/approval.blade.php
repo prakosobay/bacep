@@ -25,6 +25,7 @@
                             <th>Date of Visit</th>
                             <th>Date of Leave</th>
                             <th>Purpose</th>
+                            <th>No. Rack</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -37,6 +38,7 @@
                             <td>{{ Carbon\Carbon::parse($p->internal->visit)->format('d-m-Y') }}</td>
                             <td>{{ Carbon\Carbon::parse($p->internal->leave)->format('d-m-Y') }}</td>
                             <td>{{ $p->internal->work }}</td>
+                            <td>{{ $p->internal->rack }}</td>
                             <td>
                                 @can('isApproval')
                                     <form action="{{ url('internal/approve', $p->internal->id)}}" method="post">
@@ -61,7 +63,7 @@
                                     </form>
 
                                 @endcan
-                                    <a href="/internal/it/pdf/{{$p->internal->id}}" class="btn btn-primary btn-sm my-1 mx-1" target="_blank">File</a>
+                                    <a href="/internal/pdf/{{$p->internal->id}}" class="btn btn-primary btn-sm my-1 mx-1" target="_blank">File</a>
                             </td>
                         </tr>
                         @endforeach

@@ -18,7 +18,7 @@
                     <div class="col-4">
                         <div class="form-group mb-4">
                             <label for="req_dept" class="form-label">Requestor Department :</label>
-                            <input type="text" value="IT" id="req_dept" name="req_dept" class="form-control" readonly>
+                            <input type="text" value="{{auth()->user()->department}}" id="req_dept" name="req_dept" class="form-control" readonly>
                         </div>
                     </div>
                     <div class="col-4">
