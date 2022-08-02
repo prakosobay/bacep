@@ -330,33 +330,49 @@ class InternalController extends Controller
                 $imageName = Str::random(10) . '.' . $extension;
 
                 $insertCheckin = [
-                    'internal_id' => $id,
                     'checkin' => $getCheckin['checkin'][$k],
                     'photo_checkin' => $imageName,
                 ];
 
+                // dd($insertCheckin);
+
+                // DB::table('internal_visitors')->where('internal_id', $id)->update([
+                //     'checkin' => $insertCheckin['checkin'],
+                //     'photo_checkin' => $insertCheckin['photo_checkin']
+                // ]);
                 $checkinArray [] = $insertCheckin;
             }
         }
 
-        // dd($checkinArray);
+        dd($insertCheckin);
         // $update = DB::table('internal_visitors')->where('internal_id', $id)->get();
-        // foreach($update as $o){
-        // echo '<li> Nama : ' . $p['checkin'] . ' <strpng>' . $p['photo_checkin'] . '</strpng></li>';
+        // for($i = 0; $i <= count($checkinArray['checkin']); $i++){
+        //     // if(isset(''))
+        //     echo '<li> Nama : ' . 'checkin' . ' <strpng>' . 'photo_checkin' . '</strpng></li>';
+        // }
+
+        // foreach($checkinArray as $o){
+            // echo '<li> Nama : ' . $o['checkin'] . ' <strpng>' . $o['photo_checkin'] . '</strpng></li>';
+        // }
 
         // foreach($checkinArray as $p){
 
-        //     if(isset($p[$k]['checkin'])){
-        //         InternalVisitor::where('internal_id', $id)
-        //                 ->update([
-        //                     'checkin' => $p[$k]['checkin'],
-        //                     'photo_checkin' => $p[$k]['photo_checkin'],
-        //                 ]);
-        //     }
+            // if(isset($p[$k]['checkin'])){
+                // return  '<li> Nama : ' . $p['checkin'] . ' <strpng>' . $p['photo_checkin'] . '</strpng></li>';
+                // InternalVisitor::where('internal_id', $id)
+                //         ->update([
+                //             'checkin' => $p[$k]['checkin'],
+                //             'photo_checkin' => $p[$k]['photo_checkin'],
+                //         ]);
+            // }
         // }
 
-        InternalVIsitor::upsert($checkinArray, ['internal_id'], ['checkin', 'photo_checkin']);
-        return redirect(route('logall'))->with('error', "gagal");
+
+        // $getid = InternalVisitor::where('internal_id', $id)->get();
+
+        // InternalVIsitor::upsert($checkinArray, $id, ['checkin', 'photo_checkin']);
+        // DB::table('internal_visitors')->upsert($checkinArray, ['internal_id'], ['checkin', 'photo_checkin']);
+        // return redirect(route('logall'))->with('error', "gagal");
 
     }
 
