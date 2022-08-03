@@ -129,6 +129,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Option :</h6>
                         <a class="collapse-item" href="{{ url('history/internal')}}">Internal Colo</a>
+                        <a class="collapse-item" href="{{ url('order/internal')}}">Consumable Form</a>
                     </div>
                 </div>
             </li>

@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 
-class Consumable extends Model
+class Order extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $guarded = [];
+    protected $guarded = ['id'];
 
     protected static function boot()
     {
@@ -23,7 +23,12 @@ class Consumable extends Model
         });
     }
 
-    public $incrementing = false;
+    public $incrementing = 'false';
 
     protected $keyType = 'string';
+
+    public function orderitem()
+    {
+        return $this->hasMany(OrderItem::class);
+    }
 }

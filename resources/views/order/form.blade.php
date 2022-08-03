@@ -3,13 +3,13 @@
 <div class="container my-5">
     <div class="card">
         <h1 class="text-center my-3 h1Permit">Consumable Form</h1>
-        <form action="{{ url('consumable/store')}}" method="POST" class="validate-form">
+        <form action="{{ url('order/store')}}" method="POST" class="validate-form">
             @csrf
             <div class="container form-container">
 
-                @if (session('success'))
-                    <div class="alert alert-success mt-2">
-                        {{ session('success') }}
+                @if (session('gagal'))
+                    <div class="alert alert-warning mt-2">
+                        {{ session('gagal') }}
                     </div>
                 @endif
 
@@ -66,16 +66,16 @@
                                     <select name="item[]" id="item" class="form-select" required>
                                         <option value=""></option>
                                         <optgroup label="Patchcord Single Mode">
-                                            <option value="SC-LC">SC-LC</option>
-                                            <option value="LC-LC">LC-LC</option>
-                                            <option value="LC-FC">LC-FC</option>
+                                            <option value="Singlemode SC-LC">SC-LC</option>
+                                            <option value="Singlemode LC-LC">LC-LC</option>
+                                            <option value="Singlemode LC-FC">LC-FC</option>
                                         </optgroup>
                                         <optgroup label="Patchcord Multi Mode">
-                                            <option value="LC-LC">LC-LC</option>
-                                            <option value="LC-FC">LC-FC</option>
+                                            <option value="Multimode LC-LC">LC-LC</option>
+                                            <option value="Multimode LC-FC">LC-FC</option>
                                         </optgroup>
                                         <optgroup label="UTP">
-                                            <option value="utp">UTP</option>
+                                            <option value="UTP">UTP</option>
                                         </optgroup>
                                     </select>
                                 </td>
@@ -97,7 +97,7 @@
                                 <td>
                                     <select name="rack_from[]" id="rack_from" class="form-select" required>
                                         <option value=""></option>
-                                        <option value="0">Wallmount</option>
+                                        <option value="100">Wallmount</option>
                                         @for ($x = 1; $x < 40; $x++)
                                             <option value="{{$x}}">Rack {{$x}}</option>
                                         @endfor
@@ -119,7 +119,7 @@
                                 <td>
                                     <select name="rack_to[]" id="rack_to" class="form-select" required>
                                         <option value=""></option>
-                                        <option value="0">Wallmount</option>
+                                        <option value="100">Wallmount</option>
                                         @for ($x = 1; $x < 40; $x++)
                                             <option value="{{$x}}">Rack {{$x}}</option>
                                         @endfor
@@ -136,7 +136,7 @@
                     <button id="button_consumable"><b>Add More Fields</b></button>
                 </div>
 
-                @if (count($errors) > 0)
+                {{-- @if (count($errors) > 0)
                     <div class="alert alert-danger">
                         <ul>
                             @foreach ($errors->all() as $error)
@@ -144,7 +144,7 @@
                             @endforeach
                         </ul>
                     </div>
-                @endif
+                @endif --}}
 
                 {{-- Submit --}}
                 <button type="submit" class="btn btn-lg btn-success mx-2">Submit</button>
@@ -163,7 +163,7 @@ $(document).ready(function(){
     //     tags : true,
     // });
 
-    let max_row = 15;
+    let max_row = 6;
     let row = 1;
     let button_consumable = $('#button_consumable');
     let table_consumable = $('#table_consumable');
@@ -171,7 +171,7 @@ $(document).ready(function(){
     $(button_consumable).click(function(e){
         e.preventDefault();
         if(row < max_row){
-            $(table_consumable).append('<thead><tr><th colspan="4">Equipment</th></tr></thead><tbody><tr><th>Item Name</th><td><select name="item[]" id="item" class="form-select" ><option value=""></option><optgroup label="Patchcord Single Mode"><option value="SC-LC">SC-LC</option><option value="LC-LC">LC-LC</option><option value="LC-FC">LC-FC</option></optgroup><optgroup label="Patchcord Multi Mode"><option value="LC-LC">LC-LC</option><option value="LC-FC">LC-FC</option></optgroup><optgroup label="UTP"><option value="utp">UTP</option></optgroup></select></td><th>Quantity</th><td><input type="number" class="form-control" name="qty[]" value="{{ old('qty')}}" ></td></tr><tr><th>From</th><td><select name="from[]" id="from" class="form-select" ><option value=""></option><option value="mm1">MMR 1</option><option value="mm2">MMR 2</option><option value="dc">Data Center</option><option value="cctv">CCTV Room</option></select></td><th>Rack</th><td><select name="rack_from[]" id="rack_from" class="form-select" ><option value=""></option><option value="wallmount">Wallmount</option>@for ($x = 1; $x < 40; $x++)<option value="{{$x}}">Rack {{$x}}</option>@endfor</select></td></tr><tr><th>To</th><td><select name="to[]" id="to" class="form-select" ><option value=""></option><option value="mm1">MMR 1</option><option value="mm2">MMR 2</option><option value="dc">Data Center</option><option value="cctv">CCTV Room</option></select></td><th>Rack</th><td><select name="rack_to[]" id="rack_to" class="form-select" ><option value=""></option><option value="wallmount">Wallmount</option>@for ($x = 1; $x < 40; $x++)<option value="{{$x}}">Rack {{$x}}</option>@endfor</select></td></tr><tr><th>Note</th><td colspan="3"><input type="text" class="form-control" name="note[]" value="{{ old('note')}}"></td></tr></tbody>')
+            $(table_consumable).append('<thead><tr><th colspan="4">Equipment</th></tr></thead><tbody><tr><th>Item Name</th><td><select name="item[]" id="item" class="form-select" ><option value=""></option><optgroup label="Patchcord Single Mode"><option value="Singlemode SC-LC">SC-LC</option><option value="Singlemode LC-LC">LC-LC</option><option value="Singlemode LC-FC">LC-FC</option></optgroup><optgroup label="Patchcord Multi Mode"><option value="Multimode LC-LC">LC-LC</option><option value="Multimode LC-FC">LC-FC</option></optgroup><optgroup label="UTP"><option value="utp">UTP</option></optgroup></select></td><th>Quantity</th><td><input type="number" class="form-control" name="qty[]" value="{{ old('qty')}}" ></td></tr><tr><th>From</th><td><select name="from[]" id="from" class="form-select" ><option value=""></option><option value="mm1">MMR 1</option><option value="mm2">MMR 2</option><option value="dc">Data Center</option><option value="cctv">CCTV Room</option></select></td><th>Rack</th><td><select name="rack_from[]" id="rack_from" class="form-select" ><option value=""></option><option value="100">Wallmount</option>@for ($x = 1; $x < 40; $x++)<option value="{{$x}}">Rack {{$x}}</option>@endfor</select></td></tr><tr><th>To</th><td><select name="to[]" id="to" class="form-select" ><option value=""></option><option value="mm1">MMR 1</option><option value="mm2">MMR 2</option><option value="dc">Data Center</option><option value="cctv">CCTV Room</option></select></td><th>Rack</th><td><select name="rack_to[]" id="rack_to" class="form-select" ><option value=""></option><option value="100">Wallmount</option>@for ($x = 1; $x < 40; $x++)<option value="{{$x}}">Rack {{$x}}</option>@endfor</select></td></tr><tr><th>Note</th><td colspan="3"><input type="text" class="form-control" name="note[]" value="{{ old('note')}}"></td></tr></tbody>')
         }
     })
 });

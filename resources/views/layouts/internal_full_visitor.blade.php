@@ -59,11 +59,13 @@
                 <h4 class="judul text-center">Log Form Visitor</h4>
             </div>
 
-            @if (session('success'))
-                <div class="alert alert-success mt-1">
+            <div class="container">
+                @if (session('success'))
+                <div class="alert alert-success mx-2 my-2">
                     {{ session('success') }}
                 </div>
-            @endif
+                @endif
+            </div>
 
             <div class="card-body">
                 <div class="tab-content" id="myTabContent">
@@ -78,11 +80,6 @@
                                 <a type="button" class="btn btn-sm btn-danger mx-1 my-2" href="{{ url('/it/reject/show')}}">Form Rejected</a>
                             </div>
                         </div>
-                        @if (session('status'))
-                            <div class="alert alert-success" role="alert">
-                                {{ session('status') }}
-                            </div>
-                        @endif
                         <div class="modal fade" id="itModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -92,7 +89,7 @@
                                     </div>
                                     <div class="modal-body">
                                         <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('internal/form')}}">AR CR Form</a>
-                                        <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('consumable/form')}}">Consumable Form</a>
+                                        <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('order/form')}}">Consumable Form</a>
                                         <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('internal/formBarang')}}">AR CR + Barang Form</a>
                                         <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('internal/formConsumableBarang')}}">AR CR + Consumable + Barang Form</a>
                                     </div>
@@ -133,11 +130,6 @@
                                 <a type="button" class="btn btn-sm btn-danger mx-1 my-2" href="{{ url('/ipcore/reject/show')}}">Form Rejected</a>
                             </div>
                         </div>
-                        @if (session('status'))
-                            <div class="alert alert-success" role="alert">
-                                {{ session('status') }}
-                            </div>
-                        @endif
                         <div class="modal fade" id="ipcoreModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -147,7 +139,7 @@
                                     </div>
                                     <div class="modal-body">
                                         <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('internal/form')}}">AR CR Form</a>
-                                        <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('consumable/form')}}">Consumable Form</a>
+                                        <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('order/form')}}">Consumable Form</a>
                                         <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('internal/formBarang')}}">AR CR + Barang Form</a>
                                         <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('internal/formConsumableBarang')}}">AR CR + Consumable + Barang Form</a>
                                     </div>

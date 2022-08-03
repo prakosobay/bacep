@@ -232,9 +232,9 @@ Route::middleware(['auth'])->group(function () {
     Route::put('internal/checkin/update/{id}', [InternalController::class, 'internal_checkin_update']);
 
 
-    // Consumable Form
-    Route::get('consumable/form', [ConsumableController::class, 'consumable_form']);
-    Route::post('consumable/store', [ConsumableController::class, 'consumable_store']);
+    // Order Form
+    Route::get('order/form', [OrderController::class, 'order_form']);
+    Route::post('order/store', [OrderController::class, 'order_store']);
 
     // ALL
     Route::get('history/{type_view}', [HomeController::class, 'history']);

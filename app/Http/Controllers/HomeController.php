@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{CleaningFull, MasterOb, OtherHistory, OtherPersonil, Personil, PilihanWork, Rutin, Survey, TroubleshootBm, Internal, InternalHistory};
+use App\Models\{CleaningFull, MasterOb, OtherHistory, OtherPersonil, Personil, PilihanWork, Rutin, Survey, TroubleshootBm, Internal, InternalHistory, OrderHistory};
 use Illuminate\Support\Facades\{DB, Auth, Gate, Session};
 
 class HomeController extends Controller
@@ -118,6 +118,9 @@ class HomeController extends Controller
             } elseif($type_approve == 'internal'){
                 $getInternal = InternalHistory::where('aktif', 1)->whereIn('role_to', $role_1)->get();
                 return view('internal.approval', compact('getInternal'));
+            } elseif($type_approve == 'order') {
+                $getOrder = OrderHistory::where('aktif, 1')->whereIn('role_to', $role_1)->get();
+                return view('order.approval', compact('getOrder'));
             } else {
                 abort(403);
             }
