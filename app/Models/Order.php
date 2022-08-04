@@ -5,30 +5,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Str;
+use App\Traits\Uuid;
 
 class Order extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, Uuid;
 
-    protected $guarded = ['id'];
+    protected $guarded = [];
 
-    protected static function boot()
-    {
-        parent::boot();
-        static::creating(function ($model) {
-            if ($model->getKey() == null) {
-                $model->setAttribute($model->getKeyName(), Str::uuid());
-            }
-        });
-    }
-
-    public $incrementing = 'false';
-
-    protected $keyType = 'string';
 
     public function orderitem()
     {
-        return $this->hasMany(OrderItem::class);
+        return $this->hasMany(OrderItem::class, 'order_id');
+    }
+
+    public function orderhistory()
+    {
+        return $this->hasMany(OrderHistory::class, 'order_id');
     }
 }

@@ -4,27 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Str;
+use App\Traits\Uuid;
 
 class OrderHistory extends Model
 {
-    use HasFactory;
+    use HasFactory, Uuid;
 
-    protected $guarded = ['id'];
-
-    protected static function boot()
-    {
-        parent::boot();
-        static::creating(function ($model) {
-            if ($model->getKey() == null) {
-                $model->setAttribute($model->getKeyName(), Str::uuid());
-            }
-        });
-    }
-
-    public $incrementing = false;
-
-    protected $keyType = 'string';
+    protected $guarded = [];
+    protected $primaryKey = 'id';
 
     public function order()
     {

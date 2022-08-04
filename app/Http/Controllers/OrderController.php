@@ -2,8 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\{Order, OrderHistory, OrderItem};
+use Yajra\Datatables\Datatables;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\{DB, Auth, Gate, Mail, Session, Storage};
+use Maatwebsite\Excel\Facades\Excel;
+use Barryvdh\DomPDF\Facade as PDF;
+use App\Mail\{NotifConsumableFull, NotifConsumableReject, NotifConsumableForm};
 
 class OrderController extends Controller
 {
@@ -27,29 +34,20 @@ class OrderController extends Controller
             'note' => ['max::255', 'nullable'],
         ]);
 
-        // $createdOrder = Order::create([
-        //     'req_name' => $validated['req_name'],
-        //     'req_email' => $validated['req_email'],
-        //     'req_phone' => $validated['req_phone'],
-        //     'req_company' => $validated['req_company'],
-        //     'req_dept' => $validated['req_dept'],
-        // ]);
-
         $createdOrder = Order::create([
-            'req_name' => $orderItem['req_name'],
-            'req_email' => $orderItem['req_email'],
-            'req_phone' => $orderItem['req_phone'],
-            'req_company' => $orderItem['req_company'],
-            'req_dept' => $orderItem['req_dept'],
+            'req_name' => $validated['req_name'],
+            'req_email' => $validated['req_email'],
+            'req_phone' => $validated['req_phone'],
+            'req_company' => $validated['req_company'],
+            'req_dept' => $validated['req_dept'],
         ]);
-
-        dd($createdOrder);
 
         $orderArray = [];
         foreach($orderItem['item'] as $k => $v){
             $insertArray = [];
             if(isset($orderItem['item'][$k])){
                 $insertArray = [
+                    'id' =>  Str::uuid(),
                     'order_id' => $createdOrder->id,
                     'item' => $orderItem['item'][$k],
                     'qty' => $orderItem['qty'][$k],
@@ -66,11 +64,12 @@ class OrderController extends Controller
             }
         }
 
-        dd($orderArray);
+        // dd($orderArray);
 
-        OrderItem::insert($orderArray);
+        $insertItem = OrderItem::insert($orderArray);
 
         $insertHistory = OrderHistory::insert([
+            'id' => Str::uuid(),
             'order_id' => $createdOrder->id,
             'created_by' => auth()->user()->name,
             'status' => 'requested',
@@ -82,9 +81,16 @@ class OrderController extends Controller
         ]);
 
         if($insertHistory){
-            return redirect('logall')->with('success', 'Berhasil Submit Form Consumable');
+            $notif_email = Order::findOrFail($createdOrder->id);
+            foreach ([
+                'bayu.prakoso@balitower.co.id', 'hilman.fariqi@balitower.co.id'
+            ] as $recipient) {
+                Mail::to($recipient)->send(new NotifConsumableForm($notif_email));
+            }
+
+            return redirect('logall')->with('success', 'Form Has Been Submited');
         } else {
-            return back()->with('gagal', 'Gagal Submit Form');
+            return back()->with('gagal', 'Failed to Submit Form');
         }
     }
 }

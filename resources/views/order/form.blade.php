@@ -77,6 +77,11 @@
                                         <optgroup label="UTP">
                                             <option value="UTP">UTP</option>
                                         </optgroup>
+                                        <optgroup label="Power Cable">
+                                            <option value="C13 - C14">C13 to C14</option>
+                                            <option value="C13 - Europe">C13 to Europe</option>
+                                            <option value="C13 - UK">C13 to UK</option>
+                                        </optgroup>
                                     </select>
                                 </td>
                                 <th>Quantity</th>
@@ -126,7 +131,6 @@
                                     </select>
                                 </td>
                             </tr>
-
                             <tr>
                                 <th >Note</th>
                                 <td colspan="3"><input type="text" class="form-control" name="note[]" value="{{ old('note')}}"></td>
@@ -171,7 +175,8 @@ $(document).ready(function(){
     $(button_consumable).click(function(e){
         e.preventDefault();
         if(row < max_row){
-            $(table_consumable).append('<thead><tr><th colspan="4">Equipment</th></tr></thead><tbody><tr><th>Item Name</th><td><select name="item[]" id="item" class="form-select" ><option value=""></option><optgroup label="Patchcord Single Mode"><option value="Singlemode SC-LC">SC-LC</option><option value="Singlemode LC-LC">LC-LC</option><option value="Singlemode LC-FC">LC-FC</option></optgroup><optgroup label="Patchcord Multi Mode"><option value="Multimode LC-LC">LC-LC</option><option value="Multimode LC-FC">LC-FC</option></optgroup><optgroup label="UTP"><option value="utp">UTP</option></optgroup></select></td><th>Quantity</th><td><input type="number" class="form-control" name="qty[]" value="{{ old('qty')}}" ></td></tr><tr><th>From</th><td><select name="from[]" id="from" class="form-select" ><option value=""></option><option value="mm1">MMR 1</option><option value="mm2">MMR 2</option><option value="dc">Data Center</option><option value="cctv">CCTV Room</option></select></td><th>Rack</th><td><select name="rack_from[]" id="rack_from" class="form-select" ><option value=""></option><option value="100">Wallmount</option>@for ($x = 1; $x < 40; $x++)<option value="{{$x}}">Rack {{$x}}</option>@endfor</select></td></tr><tr><th>To</th><td><select name="to[]" id="to" class="form-select" ><option value=""></option><option value="mm1">MMR 1</option><option value="mm2">MMR 2</option><option value="dc">Data Center</option><option value="cctv">CCTV Room</option></select></td><th>Rack</th><td><select name="rack_to[]" id="rack_to" class="form-select" ><option value=""></option><option value="100">Wallmount</option>@for ($x = 1; $x < 40; $x++)<option value="{{$x}}">Rack {{$x}}</option>@endfor</select></td></tr><tr><th>Note</th><td colspan="3"><input type="text" class="form-control" name="note[]" value="{{ old('note')}}"></td></tr></tbody>')
+            $(table_consumable).append('<tbody><tr><th>Item Name</th><td><select name="item[]" id="item" class="form-select" required><option value=""></option><optgroup label="Patchcord Single Mode"><option value="Singlemode SC-LC">SC-LC</option><option value="Singlemode LC-LC">LC-LC</option><option value="Singlemode LC-FC">LC-FC</option></optgroup><optgroup label="Patchcord Multi Mode"><option value="Multimode LC-LC">LC-LC</option><option value="Multimode LC-FC">LC-FC</option></optgroup><optgroup label="UTP"><option value="UTP">UTP</option></optgroup><optgroup label="Power Cable"><option value="C13 - C14">C13 to C14</option><option value="C13 - Europe">C13 to Europe</option><option value="C13 - UK">C13 to UK</option></optgroup></select></td><th>Quantity</th><td><input type="number" class="form-control" name="qty[]" value="{{ old('qty')}}" required></td></tr><tr><th>From</th><td><select name="from[]" id="from" class="form-select" required><option value=""></option><option value="mm1">MMR 1</option><option value="mm2">MMR 2</option><option value="dc">Data Center</option><option value="cctv">CCTV Room</option></select></td><th>Rack</th><td><select name="rack_from[]" id="rack_from" class="form-select" required><option value=""></option><option value="100">Wallmount</option>@for ($x = 1; $x < 40; $x++)<option value="{{$x}}">Rack {{$x}}</option>@endfor</select></td></tr><tr><th>To</th><td><select name="to[]" id="to" class="form-select" required><option value=""></option><option value="mm1">MMR 1</option><option value="mm2">MMR 2</option><option value="dc">Data Center</option><option value="cctv">CCTV Room</option></select></td><th>Rack</th><td><select name="rack_to[]" id="rack_to" class="form-select" required><option value=""></option><option value="100">Wallmount</option>@for ($x = 1; $x < 40; $x++)<option value="{{$x}}">Rack {{$x}}</option>@endfor</select></td></tr><tr><th >Note</th><td colspan="3"><input type="text" class="form-control" name="note[]" value="{{ old('note')}}"></td></tr></tbody>');
+            row++;
         }
     })
 });
