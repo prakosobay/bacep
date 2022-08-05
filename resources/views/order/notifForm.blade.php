@@ -28,7 +28,7 @@
                         <th>Date of Request</th>
                         <th>Requestor Name</th>
                         <th>Requestor Dept</th>
-                        <th>Item</th>
+                        <th>Requestor Phone</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -36,7 +36,7 @@
                         <td>{{ Carbon\Carbon::parse($content->created_at)->format('d-m-Y')  }}</td>
                         <td>{{ $content->req_name  }}</td>
                         <td>{{ $content->req_dept  }}</td>
-                        <td>{{ $content->orderitem->item[0] }}</td>
+                        <td>{{ $content->req_phone  }}</td>
                     </tr>
                 </tbody>
             </table>

@@ -32,6 +32,8 @@ class OrderController extends Controller
             'req_company' => ['required'],
             'req_dept' => ['required'],
             'note' => ['max::255', 'nullable'],
+            'qty' => ['required'],
+            'item' => ['required'],
         ]);
 
         $createdOrder = Order::create([
@@ -64,8 +66,6 @@ class OrderController extends Controller
             }
         }
 
-        // dd($orderArray);
-
         $insertItem = OrderItem::insert($orderArray);
 
         $insertHistory = OrderHistory::insert([
@@ -82,8 +82,9 @@ class OrderController extends Controller
 
         if($insertHistory){
             $notif_email = Order::findOrFail($createdOrder->id);
+            // dd($notif_email);
             foreach ([
-                'bayu.prakoso@balitower.co.id', 'hilman.fariqi@balitower.co.id'
+                'bayu.prakoso@balitower.co.id', 'yoga.agus@balitower.co.id'
             ] as $recipient) {
                 Mail::to($recipient)->send(new NotifConsumableForm($notif_email));
             }
@@ -93,4 +94,6 @@ class OrderController extends Controller
             return back()->with('gagal', 'Failed to Submit Form');
         }
     }
+
+
 }

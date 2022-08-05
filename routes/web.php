@@ -247,6 +247,7 @@ Route::middleware(['auth'])->group(function () {
     // Order Form
     Route::controller(OrderController::class)->group(function(){
         Route::get('order/form', 'order_form');
+        Route::post('order/approve/{id}', 'order_approval');
         Route::post('order/store', 'order_store');
     });
 

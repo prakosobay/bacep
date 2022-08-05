@@ -171,6 +171,8 @@ class HomeController extends Controller
             return view('cleaning.full_visitor');
         } elseif ($email == 'sales@mail.com') {
             return view('sales.full_visitor');
+        } elseif($email == 'bss@mail.com') {
+            return view('internal.bss.log_visitor');
         } else {
             abort(403);
         }

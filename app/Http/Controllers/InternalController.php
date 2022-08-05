@@ -146,7 +146,7 @@ class InternalController extends Controller
 
                 $notif_email = Internal::find($insertForm->id);
                 foreach ([
-                    'bayu.prakoso@balitower.co.id'
+                    'bayu.prakoso@balitower.co.id', 'yoga.agus@balitower.co.id'
                 ] as $recipient) {
                     Mail::to($recipient)->send(new NotifInternalForm($notif_email));
                 }

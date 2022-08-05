@@ -10,15 +10,16 @@ use Illuminate\Queue\SerializesModels;
 class NotifConsumableFull extends Mailable
 {
     use Queueable, SerializesModels;
+    public $content;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($content)
     {
-        //
+        $this->content = $content;
     }
 
     /**
@@ -28,6 +29,6 @@ class NotifConsumableFull extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+        return $this->from('testing.dc@balitower.co.id')->view('order.notifFull');
     }
 }
