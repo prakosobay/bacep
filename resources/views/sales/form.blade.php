@@ -56,7 +56,7 @@
                                 </div>
                                 <div class="col-4">
                                     <label for="dept_requestor">Department</label>
-                                    <input type="text" class="form-control @error('dept_requestor') is-invalid @enderror" required autocomplete="dept_requestor" value="{{ old('dept_requestor')}}" id="dept_requestor" name="dept_requestor" required>
+                                    <input type="text" class="form-control @error('dept_requestor') is-invalid @enderror" required autocomplete="dept_requestor" value="SALES" id="dept_requestor" readonly>
                                         @error('dept_requestor')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -91,9 +91,9 @@
                                     <tr>
                                         <td><input class="input border" type="text" name="visitor_name[]" required></td>
                                         <td><input class="input border" type="text" name="id_number[]" required></td>
-                                        <td><input class="input border" type="text" name="phone_number[]" required></td>
-                                        <td><input class="input border" type="text" name="company[]" required></td>
-                                        <td><input class="input border" type="text" name="department[]" required></td>
+                                        <td><input class="input border" type="text" name="visitor_phone[]" required></td>
+                                        <td><input class="input border" type="text" name="visitor_company[]" required></td>
+                                        <td><input class="input border" type="text" name="visitor_dept[]" required></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -131,7 +131,7 @@
         $(detail_visitor).click(function(e){
             e.preventDefault();
             if(row < max_row){
-                $(row_detail_visitor).append('<tr><td><input class="input border" type="text" name="visitor_name[]" required></td><td><input class="input border" type="text" name="id_number[]" required></td><td><input class="input border" type="text" name="phone_number[]" required></td><td><input class="input border" type="text" name="company[]" required></td><td><input class="input border" type="text" name="department[]" required></td></tr>');
+                $(row_detail_visitor).append('<tr><td><input class="input border" type="text" name="visitor_name[]" required></td><td><input class="input border" type="text" name="id_number[]" required></td><td><input class="input border" type="text" name="visitor_phone[]" required></td><td><input class="input border" type="text" name="visitor_company[]" required></td><td><input class="input border" type="text" name="visitor_dept[]" required></td></tr>');
                 row++;
             }
         });

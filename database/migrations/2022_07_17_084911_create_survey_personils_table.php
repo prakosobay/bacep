@@ -19,11 +19,12 @@ class CreateSurveyPersonilsTable extends Migration
             $table->string('name');
             $table->string('company');
             $table->string('department');
-            $table->string('phone');
+            $table->integer('phone');
             $table->string('numberId');
             $table->string('respon');
             $table->date('checkin');
-            $table->string('photo_checkin');
+            $table->string('Photo_checkin');
+            $table->date('checkout');
             $table->string('photo_checkout');
             $table->timestamps();
         });

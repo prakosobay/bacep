@@ -15,6 +15,14 @@ class CreateSurveyFullsTable extends Migration
     {
         Schema::create('survey_fulls', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('survey_id');
+            $table->string('work');
+            $table->date('visit');
+            $table->date('leave');
+            $table->string('request');
+            $table->string('link');
+            $table->string('note');
+            $table->string('status');
             $table->timestamps();
         });
     }

@@ -8,11 +8,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class SurveyHistory extends Model
 {
-    use HasFactory, SoftDeletes;
-
+    use HasFactory,SoftDeletes;
     protected $table = 'survey_histories';
     protected $primaryKey = 'id';
-    protected $guarded = [];
+    protected $fillable = [
+        'survey_id', 'created_by', 'role_to', 'status', 'aktif', 'pdf',
+    ];
 
     public function createdBy()
     {

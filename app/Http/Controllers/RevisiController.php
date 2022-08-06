@@ -28,6 +28,7 @@ class RevisiController extends Controller
     }
 
     public function show_visitor() // Menampilkan seluruh data visitor
+
     {
         $visitor = Visitor::all();
         return view('admin.showVisitor', compact('visitor'));
@@ -175,7 +176,7 @@ class RevisiController extends Controller
             'visit_nik' => $request->visit_phone,
         ]);
 
-        return $create->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED'])->redirect('ob');
+        return $create->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED'])->redirect('survey/form/show');
 
         // Alert::success('Success', 'Personil has been added');
         // return redirect('ob');

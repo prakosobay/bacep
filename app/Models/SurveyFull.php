@@ -8,9 +8,17 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class SurveyFull extends Model
 {
-    use HasFactory, SoftDeletes;
-
+    
+    use HasFactory,SoftDeletes;
+    
     protected $table = 'survey_fulls';
     protected $primaryKey = 'id';
-    protected $guarded = [];
+    protected $fillable = [
+        'survey_id','work', 'visit', 'leave', 'request', 'link', 'note', 'status',
+    ];
+
+    public function surveys()
+    {
+        return $this->belongsTo(Survey::class);
+    }
 }
