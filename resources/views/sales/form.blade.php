@@ -89,11 +89,11 @@
                                 </thead>
                                 <tbody class="bg1">
                                     <tr>
-                                        <td><input class="input border" type="text" name="visitor_name[]" required></td>
-                                        <td><input class="input border" type="text" name="id_number[]" required></td>
-                                        <td><input class="input border" type="text" name="visitor_phone[]" required></td>
-                                        <td><input class="input border" type="text" name="visitor_company[]" required></td>
-                                        <td><input class="input border" type="text" name="visitor_dept[]" required></td>
+                                        <td><input class="input border" type="text" name="visitor_name" required></td>
+                                        <td><input class="input border" type="text" name="id_number" required></td>
+                                        <td><input class="input border" type="text" name="visitor_phone" required></td>
+                                        <td><input class="input border" type="text" name="visitor_company" required></td>
+                                        <td><input class="input border" type="text" name="visitor_dept" required></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -131,7 +131,7 @@
         $(detail_visitor).click(function(e){
             e.preventDefault();
             if(row < max_row){
-                $(row_detail_visitor).append('<tr><td><input class="input border" type="text" name="visitor_name[]" required></td><td><input class="input border" type="text" name="id_number[]" required></td><td><input class="input border" type="text" name="visitor_phone[]" required></td><td><input class="input border" type="text" name="visitor_company[]" required></td><td><input class="input border" type="text" name="visitor_dept[]" required></td></tr>');
+                $(row_detail_visitor).append('<tr><td><input class="input border" type="text" name="visitor_name" required></td><td><input class="input border" type="text" name="id_number" required></td><td><input class="input border" type="text" name="visitor_phone" required></td><td><input class="input border" type="text" name="visitor_company" required></td><td><input class="input border" type="text" name="visitor_dept" required></td></tr>');
                 row++;
             }
         });
