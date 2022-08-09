@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use validitor;
 use phpDocumentor\Reflection\Types\Nullable;
-use App\Models\{Survey, SurveyFull, SurveyHistory, SurveyVisitor};
+use App\Models\{Survey, SurveyFull, SurveyHistory, SurveyPersonil, User};
 use Illuminate\Support\Facades\{DB, Auth, Gate, Session, Mail};
+use App\Mail\{NotifEmail, NotifReject, NotifFull};
 use Yajra\Datatables\Datatables;
 use Illuminate\Support\Carbon;
 use Barryvdh\DomPDF\Facade as PDF;
@@ -14,84 +15,81 @@ use Barryvdh\DomPDF\Facade as PDF;
 class SurveyController extends Controller
 {
 
-    // Show Pages
-    public function form_show() // Menampilkan form survey
+
+    
+    public function form_show() // Menampilkan form troubleshoot
     {
         return view('sales.form');
     }
 
+    public function show_troubleshoot_reject()
+    {
+        return view('sales.list_reject');
+    }
 
-
-    // Submit
-    public function survey_create(Request $request)
+    public function store(Request $request)
     {
          // Get all data request
-        $data = $request->all();
+        
+        // dd($request->all());
         $validated = $request->validate([
             'date_of_visit' => ['required', 'date', 'after:yesterday'],
             'date_of_leave' => ['required', 'date', 'after:yesterday', 'after_or_equal:date_of_visit'],
-            'nama_requestor' => ['required', 'string', 'max:100'],
-            'dept_requestor' => ['required', 'string', 'max:200'],
+            'nama_requestor' => ['required', 'max:100'],
             'phone_requestor' => ['required', 'regex:/^([0-9\s\-\+\(\)]*)$/', 'min:10'],
-            'visitor_name' => ['max:100'],
-            'visitor_phone' => ['regex:/^([0-9\s\-\+\(\)]*)$/', 'min:10'],
-            'visitor_company' => ['string', 'max:200'],
-            'visitor_dept' => ['string', 'max:200'],
+            'visitor_name' => ['required','max:100'],
+            'id_number' => ['required'],
+            'visitor_phone' => ['required'],
+            'visitor_company' => [ 'required'],
+            'visitor_dept' => ['required'],
+            
+
         ]);
-
-
         $input = $request->all();
-        $Survey_form = Survey::create([
-            'date_of_visit' => $input['date_of_visit'],
-            'date_of_leave' => $input['date_of_leave'],
-            'nama_requestor' => $input['nama_requestor'],
-            'dept_requestor' => $input['dept_requestor'],
-            'visitor_name' => $input['visitor_name'],
-            'visitor_phone'=> $input['visitor_phone'],
-            'visitor_company'=> $input['visitor_company'],
-            'visitor_dept'=> $input['visitor_dept'],
-            'testing' => $input['testing'],
-            'rollback' => $input['rollback'],
+        $surveyreq = Survey::create([
+            'visit' => $request->date_of_visit,
+            'leave' => $request->date_of_leave,
+            'name_req' => $request->nama_requestor,
+            'phone_req' => $request->phone_requestor,
+
         ]);
-
-
-
-        $survey_detail = TroubleshootBmDetail::insert($survey_insert);
-
-        $log = SurveyHistory::create([
-            'survey_id' => $survey->id,
-            'created_by' => Auth::user()->id,
-            'role_to' => 'review',
+        $surveyvit = SurveyPersonil::create([
+            'survey_id' => $surveyreq->id,
+            'name'=>$request->visitor_name,
+            'company'=>$request->visitor_company,
+            'numberid'=>$request->id_number, 
+            'phone'=>$request->visitor_phone, 
+            'department'=>$request->visitor_dept,
+        ]);
+        $log_survey = SurveyHistory::insert([
+            'survey_id' => $surveyreq->id,
+            'created_by' => Auth::user()->name,
+            'role_to' => 'head',
             'status' => 'requested',
-            'aktif' => '1',
-            'pdf' => false
+            'aktif' => true,
+            'pdf' => false,
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
-
-        if($survey && $log){
-            return view('homepage');
-        }else{
-            return "gagal";
-        }
+        return back()->with('Sukses','Berhasil');
     }
-
-    public function approve(Request $request)
+    
+    public function approve(Request $request) // Flow Approval form troubleshoot
     {
-        // dd($request);
-        $logsurvey = SurveyHistory::where('survey_id', '=', $request->id)->latest()->first();
-        // dd($logsurvey);
+        $last_update = SurveyHistory::where('survey_id', '=', $request->id)->latest()->first();
+        if ($last_update->pdf == true) {
+            $last_update->update(['aktif' => false]);
 
-        if($logsurvey->pdf == true){
-            $logsurvey->update(['aktif' => false]);
-
+            // Perubahan status tiap permit
             $status = '';
-            if ($logsurvey->status == 'requested') {
+            if ($last_update->status == 'requested') {
                 $status = 'reviewed';
             } elseif ($logsurvey->status == 'reviewed') {
                 $status = 'acknowledge';
-            } elseif ($logsurvey->status == 'acknowledge') {
+            } elseif ($last_update->status == 'acknowledge') {
                 $status = 'final';
-            } elseif ($logsurvey->status == 'final') {
-                $survey = Survey::find($request->id)->first();
+            } elseif ($last_update->status == 'final') {
+                $full_survey = Survey::find($request->id)->first();
             }
 
             $role_to = '';
@@ -120,8 +118,7 @@ class SurveyController extends Controller
                 'aktif' => true,
                 'pdf' => false,
             ]);
-        }
-        else{
+        } else {
             abort(403);
         }
         return $history->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
@@ -144,151 +141,55 @@ class SurveyController extends Controller
                     'pdf' => false,
                 ]);
 
-                // $survey = Survey::find($request->id);
-                // foreach (['badai.sino@balitower.co.id', 'security.bacep@balitower.co.id'] as $recipient) {
-                //     Mail::to($recipient)->send(new NotifReject($cleaning));
-                // }
-                return $history->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
-            } else {
-                abort(403);
-            }
-        }
-    }
-
-    public function data_approval()
+      // dd($getEntry);
+      $getHistory = DB::table('survey_histories')
+          ->join('surveys', 'surveys.id', '=', 'survey_histories.survey_h_id')
+          ->where('survey_histories.survey_h_id', '=', $id)
+          ->select('survey_histories.*')
+          ->get();
+      $pdf = PDF::loadview('sales.survey_pdf', compact('getTroubleshoot', 'getPersonil', 'getEntry', 'getLastHistory', 'getHistory'))->setPaper('a4', 'portrait')->setWarnings(false);
+      // dd($pdf);
+      return $pdf->stream();
+  }
+  public function yajra_survey_history() // Get data log permit troubleshoot
     {
-
-        $survey = DB::table('surveys')->select(['id', 'created_at', 'visit', '']);
-        // $pic = $survey->pic;
-        // dd($pic);
-        return Datatables::of($survey)
-            ->editColumn('created_at', function ($survey) {
-                return $survey->created_at ? with(new Carbon($survey->created_at))->format('d/m/Y') : '';
+        $log_survey = DB::table('survey_histories')
+            ->join('surveys', 'surveys.id', 'survey_histories.survey__id')
+            ->select('survey_histories.*', 'surveys.visit')
+            ->orderBy('survey_id', 'desc');
+            return Datatables::of($log_survey)
+            ->editColumn('updated_at', function ($log_survey) {
+                return $log_survey->updated_at ? with(new Carbon($log_survey->updated_at))->format('d/m/Y') : '';
             })
-            ->editColumn('visit', function ($survey) {
-                return $survey->visit ? with(new Carbon($survey->visit))->format('d/m/Y') : '';;
-            })
-            ->make(true);
-    }
-
-    public function data_history()
-    {
-        $survey_log = DB::table('survey_histories')
-                ->join('surveys', 'surveys.id', '=', 'survey_histories.survey_id')
-                ->join('users', 'users.id', '=', 'survey_histories.created_by')
-                ->select('survey_histories.*', 'surveys.visit', 'users.name');
-        return Datatables::of($survey_log)
-            ->editColumn('updated_at', function ($survey_log) {
-                return $survey_log->updated_at ? with(new Carbon($survey_log->updated_at))->format('d/m/Y') : '';
-            })
-            ->editColumn('visit', function ($survey_log) {
-                return $survey_log->visit ? with(new Carbon($survey_log->visit))->format('d/m/Y') : '';;
+            ->editColumn('visit', function ($log_survey) {
+                return $log_survey->visit ? with(new Carbon($log_survey->visit))->format('d/m/Y') : '';
             })
             ->make(true);
     }
-
-
-
-    // Convert PDF
-    public function pdf($id)
+    public function yajra_survey_full_approval() // Get data permit troubleshoot full approval
     {
-        $survey = Survey::findOrFail($id);
-        $log = SurveyHistory::where('survey_id', $id)->where('aktif', 1)->first();
-        $log->update(['pdf' => true]);
-
-        $join = DB::table('survey_histories')
-            ->join('surveys', 'surveys.id', '=', 'survey_histories.survey_id')
-            ->join('users', 'users.id', '=', 'survey_histories.created_by')
-            ->where('survey_histories.survey_id', '=', $id)
-            ->select('survey_histories.*', 'users.name', 'created_by')
-            ->get();
-            // dd($survey);
-        $pdf = PDF::loadview('sales.pdf', compact('survey', 'log', 'join'));
-        return $pdf->stream();
+        $full_approval = DB::table('survey_fulls')
+            ->join('surveys', 'surveys.id', '=', 'survey_fulls.survey_id')
+            ->select('survey_fulls.*')
+            ->orderBy('survey_id', 'desc');
+        return Datatables::of($full_approval)
+            ->editColumn('visit', function ($full_approval) {
+                return $full_approval->visit ? with(new Carbon($full_approval->visit))->format('d/m/Y') : '';
+            })
+            ->addColumn('action', 'sales.surveyActionLink')
+            ->make(true);
     }
-
-
-
-    // Yajra Table
-    public function survey_yajra_full_visitor()
+    public function yajra_full_reject_survey()
     {
-
-        $full = DB::table('surveys')
-                ->join('survey_visitors', 'surveys.id', 'survey_visitors.survey_id')
-                ->select('surveys.*', 'survey_histories.*');
-        return Datatables::of($full)
-                ->editColumn('visit', function($full){
-                    return $full->visit ? with(new Carbon($full->visit))->format('d/m/Y') : '';
-                })
-                ->addColumn('action', 'sales.actionEdit')
-                ->make(true);
-    }
-
-    public function json()
-    {
-
-        // $survey = DB::table('surveys')->select(['pic', 'visit'])->get();
-        // $data = Survey::all();
-        // $user->pic['name'] = $value;
-        // dd ($value);
-        // $data = DB::table('surveys')
-            // ->whereJsonContains('pic->name', 'Sid Conroy')
-            // ->whereJsonContains('pic->nik', [])
-            // ->whereJsonContains('pic->company', [])
-            // ->whereJsonContains('pic->dept', [])
-            // ->get();
-
-
-        // echo $value[5];
-
-        // $string = Survey::find($id);
-        // $area = json_decode($string, true);
-
-        //     foreach($area['pic'] as $i => $v)
-        //     {
-        //         echo $v['pic'].'<br/>';
-        //     }
-
-            // foreach (json_decode($user) as $area)
-            // {
-            //     print($area);
-            //
-            //  [pic] => [
-            //     {
-            //         "name":"Mr. Isac Windler I",
-            //         "nik":[9],
-            //         "phone":"+1-724-607-2281",
-            //         "company":"Friesen PLC",
-            //         "dept":"Michele Russel Sr."
-            //     },
-            //     {
-            //         "name":"Wilhelmine West",
-            //         "nik":[4],
-            //         "phone":"907-856-3247",
-            //         "company":"Frami Inc",
-            //         "dept":"Ciara Zulauf"
-            //     },
-            //     {
-            //         "name":"Oswaldo Hackett",
-            //         "nik":[15],
-            //         "phone":"463.316.5400",
-            //         "company":"Smith-Nienow",
-            //         "dept":"Hudson Ernser"
-            //     },
-            //     {
-            //         "name":"Darien Mosciski",
-            //         "nik":[9],
-            //         "phone":"774.951.2350",
-            //         "company":"Stroman LLC",
-            //         "dept":"Alphonso Bashirian"
-            //     },
-            //     {
-            //         "name":"Christian Langworth",
-            //         "nik":[16],
-            //         "phone":"341.829.4589",
-            //         "company":"Bruen, Ortiz and Borer",
-            //         "dept":"Maryjane Cruickshank III"
-            //     }
-            // ];
+        $getFull = DB::table('survey_fulls')
+            ->select(['survey_id', 'visit', 'note', 'work'])
+            ->where('note', '!=', null)
+            ->orderBy('visit', 'desc');
+        return Datatables::of($getFull)
+            ->editColumn('visit', function ($getFull) {
+                return $getFull->visit ? with(new Carbon($getFull->visit))->format('d/m/Y') : '';
+            })
+            ->make(true);
     }
 }
+

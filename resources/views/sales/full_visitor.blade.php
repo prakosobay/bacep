@@ -63,9 +63,17 @@
             <div class="card-body">
                 <div class="container-fluid">
                     <div class="card-body">
+<<<<<<< HEAD
+                        <a type="button" class="btn btn-sm btn-primary mx-1 my-2" href="{{url('survey/form/show')}}">Create Permit Survey</a>
+                        <a type="button" class="btn btn-sm btn-info mx-1 my-2" href="{{url('history')}}">Log Permit Survey</a>
+                        <a type="button" class="btn btn-sm btn-danger mx-1 my-2" href="{{ url('')}}">Permit Reject</a>
+                        {{-- <a type="button" class="btn btn-sm btn-success mx-1 my-2" href="{{ url('cleaning/action/export')}}">Export PDF</a>
+                        <a type="button" class="btn btn-sm btn-success mx-1 my-2" href="#">Export Excel</a> --}}
+=======
                         <a type="button" class="btn btn-sm btn-primary mx-1 my-2" href="{{url('survey/form/show')}}">Create Form Survey</a>
                         <a type="button" class="btn btn-sm btn-info mx-1 my-2" href="{{url('logall')}}">Full Approved Form Survey</a>
                         <a type="button" class="btn btn-sm btn-danger mx-1 my-2" href="{{ url('')}}">Form Rejected</a>
+>>>>>>> 8e5a3ac6191483e2faf0aeb3f9b6ee86bf6d0098
                     </div>
                 </div>
 

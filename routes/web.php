@@ -151,6 +151,20 @@ Route::middleware(['auth'])->group(function () {
 
 
     // Survey
+<<<<<<< HEAD
+    Route::get('survey/form/show', [SurveyController::class, 'form_show']);
+    Route::post('/survey/create', [SurveyController::class, 'store']);
+    Route::get('jsona', [SurveyController::class, 'json']);
+    Route::get('route_data_approval', [SurveyController::class, 'approve_survey']);
+    Route::get('route_history_survey', [SurveyController::class, 'data_history']);
+    Route::get('history/{type_view}', [HomeController::class, 'log_survey']);
+    Route::get('/survey_pdf/{id}', [SurveyController::class, 'survey_pdf']);
+    Route::get('route_full_survey', [SurveyController::class, 'full']);
+    Route::post('/approve_survey', [SurveyController::class, 'approve']);
+    Route::post('/reject_survey', [SurveyController::class, 'reject']);
+    Route::get('/survey/yajra/show', [SurveyController::class, 'yajra_show']);
+    Route::post('/survey/approve', [SurveyController::class, 'approve_survey']);
+=======
     Route::controller(SurveyController::class)->group(function(){
         Route::get('survey/form/show', 'form_show');
         Route::get('jsona', 'json');
@@ -164,6 +178,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/approve_survey', 'approve');
         Route::post('/reject_survey', 'reject');
     });
+>>>>>>> 8e5a3ac6191483e2faf0aeb3f9b6ee86bf6d0098
 
 
 

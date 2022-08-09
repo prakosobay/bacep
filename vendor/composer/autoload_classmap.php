@@ -94,7 +94,11 @@ return array(
     'App\\Models\\Survey' => $baseDir . '/app/Models/Survey.php',
     'App\\Models\\SurveyFull' => $baseDir . '/app/Models/SurveyFull.php',
     'App\\Models\\SurveyHistory' => $baseDir . '/app/Models/SurveyHistory.php',
+<<<<<<< HEAD
+    'App\\Models\\SurveyPersonil' => $baseDir . '/app/Models/SurveyPersonil.php',
+=======
     'App\\Models\\SurveyVisitor' => $baseDir . '/app/Models/SurveyVisitor.php',
+>>>>>>> 8e5a3ac6191483e2faf0aeb3f9b6ee86bf6d0098
     'App\\Models\\TroubleshootBm' => $baseDir . '/app/Models/TroubleshootBm.php',
     'App\\Models\\TroubleshootBmDetail' => $baseDir . '/app/Models/TroubleshootBmDetail.php',
     'App\\Models\\TroubleshootBmEntry' => $baseDir . '/app/Models/TroubleshootBmEntry.php',

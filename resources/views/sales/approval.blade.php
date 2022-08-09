@@ -26,10 +26,10 @@
                                             <td>{{ $p->id }}</td>
                                             <td>{{ Carbon\Carbon::parse($p->created_at)->format('d-m-Y') }}</td>
                                             <td>{{ Carbon\Carbon::parse($p->visit)->format('d-m-Y') }}</td>
-                                            {{-- <td>{{ $p->visit_name[0] }}</td> --}}
-                                            {{-- @foreach ($json->visit_name[0] as $r)
+                                            <td>{{ $p->visit_name[0] }}</td> 
+                                            @foreach ($json->visit_name[0] as $r)
                                                 <td>{{ $r }}</td>
-                                            @endforeach --}}
+                                            @endforeach
                                             <td>Survey Facility</td>
                                             <td>
                                             @can('isApproval')
