@@ -15,6 +15,11 @@
                 <div class="table-responsive">
                     <form class="validate-form" method="POST" action="{{ url('survey/create')}}">
                         @csrf
+                        @if (session('Sukses'))
+                    <div class="alert alert-success mt-2">
+                        {{ session('Sukses') }}
+                    </div>
+                @endif
                         @if (count($errors) > 0)
                             <div class="alert alert-danger">
                                 <ul>

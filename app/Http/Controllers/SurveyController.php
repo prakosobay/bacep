@@ -71,10 +71,10 @@ class SurveyController extends Controller
             'created_at' => now(),
             'updated_at' => now(),
         ]);
-        return $log_survey ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
+        return back()->with('Sukses','Berhasil');
     }
     
-    public function approve_survey(Request $request) // Flow Approval form troubleshoot
+    public function approve(Request $request) // Flow Approval form troubleshoot
     {
         $last_update = SurveyHistory::where('survey_id', '=', $request->id)->latest()->first();
         if ($last_update->pdf == true) {
@@ -93,6 +93,49 @@ class SurveyController extends Controller
             } elseif ($last_update->status == 'final') {
                 $full_survey = Survey::find($request->id)->first();
             }
+
+            // $notif_email = TroubleshootBm::find($last_update->troubleshoot_bm_id);
+            // // // Pergantian  role tiap permit & send email notif
+            // $role_to = '';
+            // if ($last_update->role_to == 'review') {
+            //     foreach ([
+            //         'aurellius.putra@balitower.co.id', 'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
+            //         'ilham.pangestu@balitower.co.id', 'irwan.trisna@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id',
+            //     ] as $recipient) {
+            //         Mail::to($recipient)->send(new NotifTroubleshootForm($notif_email));
+            //     }
+            //     $role_to = 'check';
+            // } elseif ($last_update->role_to == 'check') {
+            //     foreach (['security.bacep@balitower.co.id'] as $recipient) {
+            //         Mail::to($recipient)->send(new NotifTroubleshootForm($notif_email));
+            //     }
+            //     $role_to = 'security';
+            // } elseif ($last_update->role_to == 'security') {
+            //     foreach (['tofiq.hidayat@balitower.co.id', 'bayu.prakoso@balitower.co.id'] as $recipient) {
+            //         Mail::to($recipient)->send(new NotifTroubleshootForm($notif_email));
+            //     }
+            //     $role_to = 'head';
+            // } elseif ($last_update->role_to = 'head') {
+            //     $full = TroubleshootBm::find($request->id);
+            //     foreach (['dc@balitower.co.id'] as $recipient) {
+            //         Mail::to($recipient)->send(new NotifTroubleshootFull($full));
+            //     }
+            //     $role_to = 'all';
+
+            //     $full_troubleshoot = TroubleshootBm::where('id', $request->id)->first();
+            //     // dd($full_troubleshoot);
+            //     $full_approve = TroubleshootBmFull::create([
+            //         'troubleshoot_bm_id' => $full_troubleshoot->id,
+            //         'work' => $full_troubleshoot->work,
+            //         'request' => $full_troubleshoot->created_at,
+            //         'visit' => $full_troubleshoot->visit,
+            //         'leave' => $full_troubleshoot->leave,
+            //         'link' => ("https://dcops.balifiber.id/other/maintenance/pdf/$full_troubleshoot->id"),
+            //         'note' => null,
+            //         'status' => 'Full Approved',
+            //     ]);
+            // }
+
             $log = SurveyHistory::create([
                 'troubleshoot_bm_id' => $request->id,
                 'created_by' => Auth::user()->name,
