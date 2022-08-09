@@ -2,6 +2,10 @@
     color: #1d1d1d;
 }
 
+body{
+    background-color: #F4F4F4;
+}
+
 .form-container{
     background-color: white;
     border-radius: 8px;
@@ -44,6 +48,16 @@
     margin: 20px 0px;
 }
 
+.h1Permit{
+    font-family: 'Lora';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 40px;
+    text-align: center;
+    color: #1D1D1D;
+}
+
 h4{
     font-family: 'Lora';
     font-style: normal;
@@ -57,7 +71,7 @@ h5{
     font-style: normal;
     font-weight: 700;
     font-size: 24px;
-    line-height: 32px; 
+    line-height: 32px;
 }
 
 
@@ -125,4 +139,24 @@ thead{
 }
 tbody{
     border-color: #BDBDBD;
+}
+
+.navbar-bg{
+    background-color: #09458F;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 32px 120px;
+    gap: 20px;
+
+}
+
+.nav-link{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -0.01em;
+    color: #FFFFFF;
 }

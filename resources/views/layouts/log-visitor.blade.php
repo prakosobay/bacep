@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="{{asset('css/log_visitor.css')}}" type="text/css">
 </head>
 <body>
+
+    {{-- navbar --}}
     <nav class="navbar sticky-top navbar-expand-lg navbar-dark navbar-bg">
         <div class="container">
             <a class="navbar-brand" href="#">
@@ -31,7 +33,7 @@
                         <a class="nav-link" href="#about">About Us</a>
                     </li>
                     <li class="nav-item mx-5">
-                        <a class="nav-link" href="{{ url('logall')}}">Log Permit</a>
+                        <a class="nav-link" href="{{ url('visitor/log/cleaning')}}">Log Permit</a>
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
@@ -55,6 +57,11 @@
             <div class="card-header py-3">
                 <h4 class="judul text-center">Log Form Building Management</h4>
             </div>
+            @if (session('success'))
+                <div class="alert alert-success mt-1">
+                    {{ session('success') }}
+                </div>
+            @endif
             <div class="card-body">
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item" role="presentation">
@@ -75,10 +82,8 @@
                         <div class="container-fluid">
                             <div class="card-body">
                                 <a type="button" class="btn btn-sm btn-primary mx-1 my-2" href="{{url('cleaning_form')}}">Create Permit Cleaning</a>
-                                <a type="button" class="btn btn-sm btn-info mx-1 my-2" href="{{url('logall')}}">Log Permit Cleaning</a>
+                                <a type="button" class="btn btn-sm btn-info mx-1 my-2" href="{{url('logall')}}">Full Approve Permit Cleaning</a>
                                 <a type="button" class="btn btn-sm btn-danger mx-1 my-2" href="{{ url('/cleaning/reject/show')}}">Permit Reject</a>
-                                {{-- <a type="button" class="btn btn-sm btn-success mx-1 my-2" href="{{ url('cleaning/action/export')}}">Export PDF</a>
-                                <a type="button" class="btn btn-sm btn-success mx-1 my-2" href="#">Export Excel</a> --}}
                             </div>
                         </div>
 
@@ -189,11 +194,9 @@
                                     <thead>
                                         <tr class="judul-table text-center">
                                             <th>No.</th>
-                                            <th>Date of Visit</th>
                                             <th>Purpose of Work</th>
-                                            <th>Visitor Name</th>
-                                            <th>Checkin</th>
-                                            <th>Checkout</th>
+                                            <th>Date of Visit</th>
+                                            <th>Date of Leave</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -238,12 +241,6 @@
             </div>
         </div>
     </div>
-
-    {{-- date picker --}}
-    {{-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> --}}
-
-    <!-- Momentjs -->
-    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script> --}}
 
     {{-- datatable --}}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>

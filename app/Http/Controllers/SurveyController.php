@@ -84,9 +84,7 @@ class SurveyController extends Controller
             $status = '';
             if ($last_update->status == 'requested') {
                 $status = 'reviewed';
-            } elseif ($last_update->status == 'reviewed') {
-                $status = 'checked';
-            } elseif ($last_update->status == 'checked') {
+            } elseif ($logsurvey->status == 'reviewed') {
                 $status = 'acknowledge';
             } elseif ($last_update->status == 'acknowledge') {
                 $status = 'final';
@@ -94,51 +92,27 @@ class SurveyController extends Controller
                 $full_survey = Survey::find($request->id)->first();
             }
 
-            // $notif_email = TroubleshootBm::find($last_update->troubleshoot_bm_id);
-            // // // Pergantian  role tiap permit & send email notif
-            // $role_to = '';
-            // if ($last_update->role_to == 'review') {
-            //     foreach ([
-            //         'aurellius.putra@balitower.co.id', 'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
-            //         'ilham.pangestu@balitower.co.id', 'irwan.trisna@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id',
-            //     ] as $recipient) {
-            //         Mail::to($recipient)->send(new NotifTroubleshootForm($notif_email));
-            //     }
-            //     $role_to = 'check';
-            // } elseif ($last_update->role_to == 'check') {
-            //     foreach (['security.bacep@balitower.co.id'] as $recipient) {
-            //         Mail::to($recipient)->send(new NotifTroubleshootForm($notif_email));
-            //     }
-            //     $role_to = 'security';
-            // } elseif ($last_update->role_to == 'security') {
-            //     foreach (['tofiq.hidayat@balitower.co.id', 'bayu.prakoso@balitower.co.id'] as $recipient) {
-            //         Mail::to($recipient)->send(new NotifTroubleshootForm($notif_email));
-            //     }
-            //     $role_to = 'head';
-            // } elseif ($last_update->role_to = 'head') {
-            //     $full = TroubleshootBm::find($request->id);
-            //     foreach (['dc@balitower.co.id'] as $recipient) {
-            //         Mail::to($recipient)->send(new NotifTroubleshootFull($full));
-            //     }
-            //     $role_to = 'all';
+            $role_to = '';
+            if (($logsurvey->role_to == 'review')) {
+                $role_to = 'security';
+            } elseif (($logsurvey->role_to == 'security')) {
+                $role_to = 'head';
+            } elseif ($logsurvey->role_to == 'head') {
+                $pick = Survey::where('id', $request->id)->first();
+                // dd($pick);
+                $full = SurveyFull::create([
+                    'survey_id' => $pick->id,
+                    'visit' => $pick->visit,
+                    'leave' => $pick->leave,
+                    'company' => $pick->visit_company[0],
+                    'link' => ("http://127.0.0.1:8000/survey_pdf/$pick->id"),
+                    // 'link' => ("http://172.16.45.195:8000/cleaning_pdf/$cleaning->cleaning_id"),
+                ]);
+            }
 
-            //     $full_troubleshoot = TroubleshootBm::where('id', $request->id)->first();
-            //     // dd($full_troubleshoot);
-            //     $full_approve = TroubleshootBmFull::create([
-            //         'troubleshoot_bm_id' => $full_troubleshoot->id,
-            //         'work' => $full_troubleshoot->work,
-            //         'request' => $full_troubleshoot->created_at,
-            //         'visit' => $full_troubleshoot->visit,
-            //         'leave' => $full_troubleshoot->leave,
-            //         'link' => ("https://dcops.balifiber.id/other/maintenance/pdf/$full_troubleshoot->id"),
-            //         'note' => null,
-            //         'status' => 'Full Approved',
-            //     ]);
-            // }
-
-            $log = SurveyHistory::create([
-                'troubleshoot_bm_id' => $request->id,
-                'created_by' => Auth::user()->name,
+            $history = SurveyHistory::create([
+                'survey_id' => $request->id,
+                'created_by' => Auth::user()->id,
                 'role_to' => $role_to,
                 'status' => $status,
                 'aktif' => true,
@@ -147,19 +121,25 @@ class SurveyController extends Controller
         } else {
             abort(403);
         }
-        return $log->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
+        return $history->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
+    }
 
-}
-  // Convert pdf
- 
+    public function reject(Request $request)
+    {
+        $logsurvey = SurveyHistory::where('survey_id', '=', $request->id)->latest()->first();
+        // dd($logsurvey);
+        if (Gate::denies('isSecurity')) {
+            if ($logsurvey->pdf == true) {
+                $logsurvey->update(['aktif' => false]);
 
-  public function pdf_survey($id) // Convert PDF permit troubleshoot
-  {
-      $getTroubleshoot = Survey::find($id);
-      $getLastHistory = SurveyHistory::where('survey_id', $id)->where('aktif', 1)->first();
-      $getPersonil = SurveyPersonil::where('survey_id', $id)->get();
-      $getEntry = DB::table('surveys')->where('id', $id)->first();
-      $getLastHistory->update(['pdf' => true]);
+                $history = SurveyHistory::create([
+                    'survey_id' => $request->id,
+                    'created_by' => Auth::user()->id,
+                    'role_to' => 0,
+                    'status' => 'rejected',
+                    'aktif' => true,
+                    'pdf' => false,
+                ]);
 
       // dd($getEntry);
       $getHistory = DB::table('survey_histories')

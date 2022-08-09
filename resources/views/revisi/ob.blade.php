@@ -13,6 +13,18 @@
             <button type="button" class="btn btn-primary mr-5" data-toggle="modal" data-target="#user">
                 <strong>Tambahkan Personil Baru</strong>
             </button>
+            @if (session('success'))
+                <div class="alert alert-success mt-2">
+                    {{ session('success') }}
+                </div>
+            @endif
+
+            @if (session('gagal'))
+                <div class="alert alert-warning mt-2">
+                    {{ session('gagal') }}
+                </div>
+            @endif
+
             <div class="modal fade" id="user" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <form method="post" action="{{ url('/ob.new')}}">
@@ -83,9 +95,9 @@
                                 <td>{{$c->department}}</td>
                                 <td>
                                     <a href="{{url('ob.edit', $c->ob_id)}}" type="button" class="btn btn-success mr-2 col-xs-2 margin-bottom">Edit</a>
-                                    <form action="{{ url('ob.destroy',$c->ob_id) }}" method="POST">
+                                    <form action="{{ url('ob.destroy',$c->ob_id) }}" method="POST" onsubmit="return confirm('Are You Sure Want to Delete This Relasi ?')">
                                         @csrf
-                                        <button type="submit"class="btn btn-danger mr-2 col-xs-2 margin-bottom hapus">Hapus</button>
+                                        <button type="submit"class="btn btn-danger mr-2 col-xs-2 margin-bottom hapus" >Hapus</button>
                                     </form>
                                 </td>
                             </tr>

@@ -11,53 +11,21 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h5 class="text-center"><strong>Data Visitor</strong></h5>
-            <button type="button" class="btn btn-primary mr-5" data-toggle="modal" data-target="#user">
+            <a type="button" class="btn btn-primary mr-5" href="{{ url('revisi/visitor/create')}}">
                 <strong>Tambahkan Visitor Baru</strong>
-            </button>
-            <div class="modal fade" id="user" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <form method="post" action="{{ url('revisi/visitor/new')}}">
-                        @csrf
+            </a>
 
-                        {{-- Modal --}}
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Tambah Visitor Baru</h5>
-                            </div>
-                            <div class="modal-body">
-                                <label>Nama Lengkap :</label>
-                                <div class="form-group">
-                                    <input id="nama" type="text" class="form-control" name="visit_nama" required="required"  autofocus>
-                                </div>
-                                <label>Perusahaan :</label>
-                                <div class="form-group">
-                                    <input id="perusahaan" type="text" class="form-control" name="visit_company" required="required"  autofocus>
-                                </div>
-                                <label>Department :</label>
-                                <div class="form-group">
-                                    <input id="department" type="text" class="form-control" name="visit_department" required="required"  autofocus>
-                                </div>
-                                <label>Responsibilty :</label>
-                                <div class="form-group">
-                                    <input id="responsibilty" type="text" class="form-control" name="visit_respon" required="required"  autofocus>
-                                </div>
-                                <label>No HP :</label>
-                                <div class="form-group">
-                                    <input id="hp" type="number" class="form-control" name="visit_phone" required="required"  autofocus>
-                                </div>
-                                <label>No ID :</label>
-                                <div class="form-group">
-                                    <input id="no_id" type="text" class="form-control" name="visit_nik " required="required"  autofocus>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </div>
-                        </div>
-                    </form>
+            @if (session('success'))
+                <div class="alert alert-success mt-1">
+                    {{ session('success') }}
                 </div>
-            </div>
+            @endif
+
+            @if (session('gagal'))
+                <div class="alert alert-warning mt-1">
+                    {{ session('gagal') }}
+                </div>
+            @endif
         </div>
         <div class="card-body">
             <div class="table-responsive">

@@ -16,7 +16,7 @@
                             <th>Validity</th>
                             <th>Role</th>
                             <th>Status</th>
-                            <th>Last Updated</th>
+                            <th>Created By</th>
                             <th>Ket</th>
                         </tr>
                     </thead>
@@ -40,7 +40,7 @@
                     { data: 'visit', name: 'others.visit' },
                     { data: 'role_to', name: 'role_to' },
                     { data: 'status', name: 'status' },
-                    { data: 'updated_at', name: 'updated_at' },
+                    { data: 'created_by', name: 'created_by' },
                     { data: 'aktif', name: 'aktif' },
                 ]
             });

@@ -10,14 +10,17 @@ class Other extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $table = 'others';
-    protected $primaryKey = 'id';
     protected $guarded = [];
 
-    // public function other_personils()
-    // {
-    //     return $this->hasMany(OtherPersonil::class);
-    // }
+    public function other_personils()
+    {
+        return $this->hasMany(OtherPersonil::class);
+    }
+
+    public function other_histories()
+    {
+        return $this->hasMany(OtherHistory::class);
+    }
 
 
 }

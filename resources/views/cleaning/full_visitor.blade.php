@@ -4,16 +4,6 @@
 @push('scripts')
     <script>
 
-        // $(function() {
-        //     $("#start_date").datepicker({
-        //         "dateFormat": "yy-mm-dd"
-        //     });
-
-        //     $("#end_date").datepicker({
-        //         "dateFormat": "yy-mm-dd"
-        //     });
-        // });
-
         $(function() {
             $('#cleaning_table').DataTable({
                 processing: true,
@@ -46,27 +36,20 @@
             });
         });
 
-
-        // Filter
-        // $(document).on("click", "#filter", function(e) {
-        //     e.preventDefault();
-        //     var start_date = $("#start_date").val();
-        //     var end_date = $("#end_date").val();
-        //     if (start_date == "" || end_date == "") {
-        //         alert("Both date required");
-        //     } else {
-        //         $('#records').DataTable().destroy();
-        //         fetch(start_date, end_date);
-        //     }
-        // });
-        // // Reset
-        // $(document).on("click", "#reset", function(e) {
-        //     e.preventDefault();
-        //     $("#start_date").val(''); // empty value
-        //     $("#end_date").val('');
-        //     $('#records').DataTable().destroy();
-        //     fetch();
-        // });
+        $(function() {
+            $('#troubleshoot_table').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: '{{ url('other/troubleshoot/yajra/full/visitor')}}',
+                columns: [
+                    { data: 'troubleshoot_bm_id', name: 'troubleshoot_bm_id' },
+                    { data: 'work', name: 'work' },
+                    { data: 'visit', name: 'visit' },
+                    { data: 'leave', name: 'leave' },
+                    {data: 'action', name: 'action', orderable: false, searchable: false}
+                ]
+            });
+        });
 
     </script>
 @endpush

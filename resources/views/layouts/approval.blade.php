@@ -25,6 +25,8 @@
 </head>
 <body id="body-pd">
 
+    @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
+
     {{-- navbar --}}
     <nav class="navbar navbar-expand-xl navbar-dark py-0 my-0 navbar-bg" >
         <div class="container">
@@ -121,10 +123,18 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="">
-                    <i class="fas fa-fw far fa-users"></i>
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseInternal"
+                    aria-expanded="true" aria-controls="collapseInternal">
+                    <i class="fas fa-fw fa-cog"></i>
                     <span>Permit Internal</span>
                 </a>
+                <div id="collapseInternal" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Option :</h6>
+                        <a class="collapse-item" href="{{ url('approval/internal')}}">Internal Colo</a>
+                        <a class="collapse-item" href="{{ url('order/internal')}}">Consumable Form</a>
+                    </div>
+                </div>
             </li>
 
             <li class="nav-item">
@@ -142,10 +152,21 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="">
-                    <i class="far fa-list-alt"></i>
-                    <span>Permit Vendor</span>
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseVendor"
+                    aria-expanded="true" aria-controls="collapseVendor">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Permit Vendor DC</span>
                 </a>
+                <div id="collapseVendor" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Option :</h6>
+                        <a class="collapse-item" href="#">PAC</a>
+                        <a class="collapse-item" href="#">FSS</a>
+                        <a class="collapse-item" href="#">Interactive</a>
+                        <a class="collapse-item" href="#">Vektor</a>
+                        <a class="collapse-item" href="#">Malika</a>
+                    </div>
+                </div>
             </li>
 
             <li class="nav-item">

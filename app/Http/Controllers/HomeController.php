@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{CleaningFull, MasterOb, OtherHistory, OtherPersonil, Personil, PilihanWork, Rutin, Survey, TroubleshootBm};
+use App\Models\{CleaningFull, MasterOb, OtherHistory, OtherPersonil, Personil, PilihanWork, Rutin, Survey, TroubleshootBm, Internal, InternalHistory, OrderHistory};
 use Illuminate\Support\Facades\{DB, Auth, Gate, Session};
 
 class HomeController extends Controller
@@ -64,7 +64,9 @@ class HomeController extends Controller
                 return view('other.maintenance_history');
             } elseif($type_view == 'troubleshoot') {
                 return view('other.troubleshoot_history');
-            } else{
+            } elseif($type_view == 'internal'){
+                return view('internal.history');
+            } else {
                 abort(403);
             }
         } else {
@@ -99,7 +101,6 @@ class HomeController extends Controller
             } elseif ($type_approve == 'maintenance') {
                 $getMaintenance = DB::table('other_histories')
                     ->join('others', 'others.id', '=', 'other_histories.other_id')
-                    // ->join('other_personils', 'others.id', '=', 'other_personils.other_id')
                     ->whereIn('other_histories.role_to', $role_1)
                     ->where('other_histories.aktif', '=', 1)
                     ->select('others.*', 'other_histories.*')
@@ -113,9 +114,14 @@ class HomeController extends Controller
                     ->where('troubleshoot_bm_histories.aktif', '=', true)
                     ->select('troubleshoot_bm_histories.*', 'troubleshoot_bms.*')
                     ->get();
-                    // dd($getTroubleshoot);
                 return view('other.troubleshoot_approval', compact('getTroubleshoot'));
-            } else{
+            } elseif($type_approve == 'internal'){
+                $getInternal = InternalHistory::where('aktif', 1)->whereIn('role_to', $role_1)->get();
+                return view('internal.approval', compact('getInternal'));
+            } elseif($type_approve == 'order') {
+                $getOrder = OrderHistory::where('aktif, 1')->whereIn('role_to', $role_1)->get();
+                return view('order.approval', compact('getOrder'));
+            } else {
                 abort(403);
             }
         } else {
@@ -125,7 +131,7 @@ class HomeController extends Controller
 
     public function full($type_full) // Routingan untuk menampilkan permit yang sudah full approve versi approval
     {
-        if ((Gate::allows('isApproval')) || (Gate::allows('isHead')) || (Gate::allows('isAdmin'))) {
+        if ((Gate::allows('isApproval')) || (Gate::allows('isHead'))) {
             if ($type_full == 'all') {
                 return view('all_full_approval');
             } elseif ($type_full == 'survey') {
@@ -136,25 +142,37 @@ class HomeController extends Controller
                 return view('other.maintenance_full_approval');
             } elseif($type_full == 'troubleshoot') {
                 return view('other.troubleshoot_full_approval');
+            } elseif($type_full == 'internal') {
+                return view('internal.fullApproval');
             } else {
                 abort(403);
             }
         }
     }
 
+    public function visitor_log($type_log)
+    {
+        if($type_log == 'cleaning'){
+            return view('cleaning.log');
+        } else {
+            abort(403);
+        }
+    }
+
     public function log_all() // Routingan untuk menampilkan permit yang sudah full approve versi visitor
     {
         $email = Auth::user()->email;
-        // dd($email);
 
         if ($email == 'it@mail.com') {
-            return view('it.full_visitor');
+            return view('internal.it.log_visitor');
         } elseif ($email == 'ipcore@mail.com') {
-            return view('ipcore.log');
+            return view('internal.ipcore.log_visitor');
         } elseif (($email == 'badai.sino@balitower.co.id') || ($email == 'data.center7@balitower.co.id')) {
             return view('cleaning.full_visitor');
         } elseif ($email == 'sales@mail.com') {
             return view('sales.full_visitor');
+        } elseif($email == 'bss@mail.com') {
+            return view('internal.bss.log_visitor');
         } else {
             abort(403);
         }

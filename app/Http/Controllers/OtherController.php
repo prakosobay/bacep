@@ -15,6 +15,7 @@ use Barryvdh\DomPDF\Facade as PDF;
 
 class OtherController extends Controller
 {
+
     // Show Pages
     public function show_troubleshoot_form() // Menampilkan form troubleshoot
     {
@@ -66,12 +67,31 @@ class OtherController extends Controller
                 $pic[] = $data_nama;
             }
         }
-        return view('other.maintenance_checkin', compact('form', 'personil', 'pic'));
+        return view('other.maintenance_checkin', compact('form', 'personil', 'pic', 'other_personil'));
     }
 
     public function show_troubleshoot_reject()
     {
         return view('other.troubleshoot_list_reject');
+    }
+
+
+
+    //Checkin Pages
+    public function other_troubleshoot_action_checkin($id)
+    {
+        $getForms = TroubleshootBm::findOrFail($id);
+        $getPersonils = DB::table('troubleshoot_bm_personils')->where('troubleshoot_bm_id', $id)->get();
+        $getRisks = DB::table('troubleshoot_bm_risks')->where('troubleshoot_bm_id', $id)->get();
+        $getEntries = DB::table('troubleshoot_bm_entries')->where('troubleshoot_bm_id', $id)->first();
+        $getDetails = DB::table('troubleshoot_bm_details')->where('troubleshoot_bm_id', $id)->get();
+        // dd($getEntries);
+        return view('other.troubleshoot_checkin', compact('getForms', 'getPersonils', 'getEntries', 'getRisks', 'getDetails'));
+    }
+
+    public function other_troubleshoot_action_checkout($id)
+    {
+
     }
 
 
@@ -204,8 +224,8 @@ class OtherController extends Controller
         // $notif_email = Other::find
         // Send email notification
         foreach ([
-            'aurellius.putra@balitower.co.id', 'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
-            'ilham.pangestu@balitower.co.id', 'irwan.trisna@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id',
+            'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
+            'ilham.pangestu@balitower.co.id', 'irwan.trisna@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'dyah.retno@balitower.co.id'
         ] as $recipient) {
             Mail::to($recipient)->send(new NotifMaintenanceForm($otherForm));
         }
@@ -251,7 +271,7 @@ class OtherController extends Controller
             $role_to = '';
             if ($lastupdate->role_to == 'review') {
                 foreach ([
-                    'aurellius.putra@balitower.co.id', 'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
+                    'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
                     'ilham.pangestu@balitower.co.id', 'irwan.trisna@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id',
                 ] as $recipient) {
                     Mail::to($recipient)->send(new NotifMaintenanceForm($notif_email));
@@ -365,15 +385,6 @@ class OtherController extends Controller
         }
     }
 
-    public function update_checkin_maintenance(Request $request) // Untuk update checkin personil form maintenance
-    {
-        dd($request->all());
-        $validate = $request->validate([
-            'visit' => ['required'],
-            'leave' => ['required', 'after_or_equal:visit'],
-        ]);
-    }
-
     public function create_troubleshoot(Request $request) // Submit form troubleshoot
     {
         // Validasi data dari request
@@ -424,7 +435,6 @@ class OtherController extends Controller
                     'activity' => $input['activity'][$k],
                     'service_impact' => $input['service_impact'][$k],
                     'item' => $input['item'][$k],
-                    'procedure' => $input['procedure'][$k],
                     'created_at' => now(),
                     'updated_at' => now(),
                 ];
@@ -478,8 +488,8 @@ class OtherController extends Controller
 
         $notif_email = TroubleshootBm::find($other_form->id);
         foreach ([
-            'aurellius.putra@balitower.co.id', 'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
-            'ilham.pangestu@balitower.co.id', 'irwan.trisna@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id',
+            'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
+            'ilham.pangestu@balitower.co.id', 'irwan.trisna@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'dyah.retno@balitower.co.id'
         ] as $recipient) {
             Mail::to($recipient)->send(new NotifTroubleshootForm($notif_email));
         }
@@ -523,7 +533,7 @@ class OtherController extends Controller
             $role_to = '';
             if ($last_update->role_to == 'review') {
                 foreach ([
-                    'aurellius.putra@balitower.co.id', 'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
+                    'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
                     'ilham.pangestu@balitower.co.id', 'irwan.trisna@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id',
                 ] as $recipient) {
                     Mail::to($recipient)->send(new NotifTroubleshootForm($notif_email));
@@ -535,7 +545,7 @@ class OtherController extends Controller
                 }
                 $role_to = 'security';
             } elseif ($last_update->role_to == 'security') {
-                foreach (['tofiq.hidayat@balitower.co.id', 'bayu.prakoso@balitower.co.id'] as $recipient) {
+                foreach (['bayu.prakoso@balitower.co.id', 'tofiq.hidayat@balitower.co.id'] as $recipient) {
                     Mail::to($recipient)->send(new NotifTroubleshootForm($notif_email));
                 }
                 $role_to = 'head';
@@ -606,6 +616,160 @@ class OtherController extends Controller
 
 
 
+    // Update Checkin Troubleshoot
+    public function other_troubleshoot_update_checkin(Request $request, $id)
+    {
+        // dd($request->all());
+        $getCheckin = $request->all();
+        // dd($getCheckin);
+        // return var_dump($request->checkin);
+        $photoArray = [];
+        foreach ($getCheckin['photo_checkin'] as $k => $v) {
+            $checkin = [];
+            if (isset($getCheckin['photo_checkin'][$k])) {
+
+                $extension = explode('/', explode(':', substr($v, 0, strpos($v, ';')))[1])[1];   // .jpg .png .pdf
+                $replace = substr($v, 0, strpos($v, ',') + 1);
+                $image = str_replace($replace, '', $v);
+                $image = str_replace(' ', '+', $image);
+                $imageName = Str::random(10) . '.' . $extension;
+
+                $checkin = [
+                    'checkin' => $getCheckin['checkin'][$k],
+                    'photo_checkin' => $imageName,
+                ];
+
+                $photoArray[] = $checkin;
+            }
+        }
+
+        dd($photoArray);
+
+        foreach($photoArray as $p){
+
+        }
+
+
+        // $getPersonil = DB::table('troubleshoot_bm_personils')
+        //     ->where('troubleshoot_bm_id', $id)
+        //     ->update(['checkin' => $request->checkin, 'checkin' => $photoArray]);
+
+        // $insertPhoto = [];
+        // foreach($getCheckin['checkin'] as $k => $v){
+        //     foreach($photoArray as $p){
+        //         $insertPhoto[] = [
+        //             'checkin' => $getCheckin['checkin'][$k],
+        //             'photo_checkin' => $p,
+        //         ];
+        //         $gambar = Storage::disk('public')->put($p, base64_decode($image));
+        //     }
+        // }
+
+        // dd($insertPhoto);
+
+        $updated = DB::table('troubleshoot_bm_personils')
+        ->where('troubleshoot_bm_id', $id)
+        ->get();
+
+        $after = DB::table('troubleshoot_bm_personils')
+        ->whereIn('id', $updated->modelKeys())->update($photoArray[$k]);
+
+        return $after;
+        // foreach($updated as $u){
+        //     $u->update([
+        //         'checkin' => $photoArray[$k]['checkin'],
+        //         'photo_checkin' => $photoArray[$k]['photo_checkin'],
+        //     ]);
+        // }
+        // return $updated;
+
+
+        // foreach($updated as $u){
+            // $u->checkin = $photoArray[$k]['checkin'];
+            // $u->photo_checkin = $photoArray[$k]['photo_checkin'];
+            // $u->save();
+        // }
+
+        // if($gambar) {
+        //     $getPersonil = DB::table('troubleshoot_bm_personils')
+        //     ->where('troubleshoot_bm_id', $id)
+        //     ->update([
+        //         'checkin' => $getCheckin['checkin'][$k],
+        //         'photo_checkin' => $p->photo_checkin,
+        //     ]);
+        // }
+
+        // if(isset($getPersonil['photo_checkin']) || ($getPersonil['checkin'])){
+            //     return redirect()->route('logall')->with('success', 'Checkin Berhasil !');
+            // } else {
+            //     return back()->with('gagal', "Gagal");
+            // }
+
+        // if($gambar){
+        //     dd($photo);
+
+        // } else {
+        //     return "gagal";
+        // }
+
+    }
+
+
+    // Update Checkin Maintenance
+    public function other_maintenance_update_checkin(Request $request, $id)
+    {
+        // dd($request->all());
+        $getCheckin = $request->all();
+        $validated = $request->validate([
+            'leave' => ['required', 'after_or_equal:visit'],
+        ]);
+
+        // dd($getCheckin);
+        if($validated){
+            $photoArray = [];
+            foreach($getCheckin['photo_checkin'] as $k => $v){
+                $checkin = [];
+                if(isset($getCheckin['photo_checkin'][$k])){
+                    $extension = explode('/', explode(':', substr($v, 0, strpos($v, ';')))[1])[1];   // .jpg .png .pdf
+                    $replace = substr($v, 0, strpos($v, ',') + 1);
+                    $image = str_replace($replace, '', $v);
+                    $image = str_replace(' ', '+', $image);
+                    $imageName = Str::random(10) . '.' . $extension;
+
+
+                    $checkin = [
+                        'checkin' => $getCheckin['checkin'][$k],
+                        'photo_checkin' => $imageName,
+                    ];
+
+                    $photoArray[] = $checkin;
+                }
+            }
+
+            // if(isset($photoArray[$k])){
+            //     OtherPersonil::whereIn('other_id', [$id])->update([
+            //         'checkin' => $photoArray[$k]['checkin'],
+            //         'photo_checkin' => $photoArray[$k]['photo_checkin'],
+            //     ]);
+            // }
+
+            // $collection = DB::table('other_personils')
+            // ->where('other_id', $id)
+            // ->get();
+
+            // OtherPersonil::whereIn('other_id', $models->modelKeys())->update([
+            //     'checkin' => $photoArray[$k]['checkin'],
+            // ]);
+            // $models = OtherPersonil::findMany($models->modelKeys());
+
+
+            // dd($collection);
+            return back();
+        }
+    }
+
+
+
     // Convert pdf
     public function pdf_maintenance($id) // Convert PDF permit maintenance
     {
@@ -633,14 +797,12 @@ class OtherController extends Controller
         $getEntry = DB::table('troubleshoot_bm_entries')->where('troubleshoot_bm_id', $id)->first();
         $getLastHistory->update(['pdf' => true]);
 
-        // dd($getEntry);
         $getHistory = DB::table('troubleshoot_bm_histories')
             ->join('troubleshoot_bms', 'troubleshoot_bms.id', '=', 'troubleshoot_bm_histories.troubleshoot_bm_id')
             ->where('troubleshoot_bm_histories.troubleshoot_bm_id', '=', $id)
             ->select('troubleshoot_bm_histories.*')
             ->get();
         $pdf = PDF::loadview('other.troubleshoot_pdf', compact('getTroubleshoot', 'getPersonil', 'getRisk', 'getDetail', 'getEntry', 'getLastHistory', 'getHistory'))->setPaper('a4', 'portrait')->setWarnings(false);
-        // dd($pdf);
         return $pdf->stream();
     }
 
@@ -651,12 +813,8 @@ class OtherController extends Controller
     {
         $history_maintenance = DB::table('other_histories')
             ->join('others', 'others.id', '=', 'other_histories.other_id')
-            ->select('other_histories.*', 'others.visit')
-            ->orderBy('other_id', 'desc');
+            ->select('other_histories.*', 'others.visit');
         return Datatables::of($history_maintenance)
-            ->editColumn('updated_at', function ($history_maintenance) {
-                return $history_maintenance->updated_at ? with(new Carbon($history_maintenance->updated_at))->format('d/m/Y') : '';
-            })
             ->editColumn('visit', function ($history_maintenance) {
                 return $history_maintenance->visit ? with(new Carbon($history_maintenance->visit))->format('d/m/Y') : '';
             })
@@ -668,8 +826,7 @@ class OtherController extends Controller
         $full_visitor = DB::table('other_fulls')
             ->join('others', 'others.id', '=', 'other_fulls.other_id')
             ->where('status', '!=', 'Full Rejected')
-            ->select('other_fulls.*')
-            ->orderBy('other_id', 'desc');
+            ->select('other_fulls.*');
         return Datatables::of($full_visitor)
             ->editColumn('visit', function ($full_visitor) {
                 return $full_visitor->visit ? with(new Carbon($full_visitor->visit))->format('d/m/Y') : '';
@@ -685,8 +842,7 @@ class OtherController extends Controller
     {
         $full_approval = DB::table('other_fulls')
             ->join('others', 'others.id', '=', 'other_fulls.other_id')
-            ->select('other_fulls.*')
-            ->orderBy('other_id', 'desc');
+            ->select('other_fulls.*');
         return Datatables::of($full_approval)
             ->editColumn('visit', function ($full_approval) {
                 return $full_approval->visit ? with(new Carbon($full_approval->visit))->format('d/m/Y') : '';
@@ -714,7 +870,7 @@ class OtherController extends Controller
             ->join('troubleshoot_bms', 'troubleshoot_bms.id', 'troubleshoot_bm_histories.troubleshoot_bm_id')
             ->select('troubleshoot_bm_histories.*', 'troubleshoot_bms.visit')
             ->orderBy('troubleshoot_bm_id', 'desc');
-            return Datatables::of($log_troubleshoot)
+        return Datatables::of($log_troubleshoot)
             ->editColumn('updated_at', function ($log_troubleshoot) {
                 return $log_troubleshoot->updated_at ? with(new Carbon($log_troubleshoot->updated_at))->format('d/m/Y') : '';
             })
@@ -724,7 +880,7 @@ class OtherController extends Controller
             ->make(true);
     }
 
-    public function yajra_troubleshoot_full_approval() // Get data permit troubleshoot full approval
+    public function other_troubleshoot_yajra_full_approval() // Get data permit troubleshoot full approval view untuk approval
     {
         $full_approval = DB::table('troubleshoot_bm_fulls')
             ->join('troubleshoot_bms', 'troubleshoot_bms.id', '=', 'troubleshoot_bm_fulls.troubleshoot_bm_id')
@@ -738,7 +894,7 @@ class OtherController extends Controller
             ->make(true);
     }
 
-    public function yajra_full_reject_troubleshoot()
+    public function other_troubleshoot_yajra_full_reject()
     {
         $getFull = DB::table('troubleshoot_bm_fulls')
             ->select(['troubleshoot_bm_id', 'visit', 'note', 'work'])
@@ -748,6 +904,20 @@ class OtherController extends Controller
             ->editColumn('visit', function ($getFull) {
                 return $getFull->visit ? with(new Carbon($getFull->visit))->format('d/m/Y') : '';
             })
+            ->make(true);
+    }
+
+    public function other_troubleshoot_yajra_full_visitor()
+    {
+        $full_approval = DB::table('troubleshoot_bm_fulls')
+            ->join('troubleshoot_bms', 'troubleshoot_bms.id', '=', 'troubleshoot_bm_fulls.troubleshoot_bm_id')
+            ->select('troubleshoot_bm_fulls.*')
+            ->orderBy('troubleshoot_bm_id', 'desc');
+        return Datatables::of($full_approval)
+            ->editColumn('visit', function ($full_approval) {
+                return $full_approval->visit ? with(new Carbon($full_approval->visit))->format('d/m/Y') : '';
+            })
+            ->addColumn('action', 'other.troubleshootActionEdit')
             ->make(true);
     }
 }

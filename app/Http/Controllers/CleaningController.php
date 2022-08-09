@@ -89,9 +89,9 @@ class CleaningController extends Controller
 
         // Send email notification
         foreach ([
-            'aurellius.putra@balitower.co.id', 'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
+            'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
             'ilham.pangestu@balitower.co.id', 'irwan.trisna@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id',
-            'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id',
+            'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'dyah.retno@balitower.co.id',
         ] as $recipient) {
             Mail::to($recipient)->send(new NotifEmail($cleaning));
         }
@@ -137,7 +137,7 @@ class CleaningController extends Controller
             $role_to = '';
             if (($lasthistoryC->role_to == 'review')) {
                 foreach ([
-                    'aurellius.putra@balitower.co.id', 'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
+                    'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
                     'ilham.pangestu@balitower.co.id', 'irwan.trisna@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id',
                 ] as $recipient) {
                     Mail::to($recipient)->send(new NotifEmail($cleaning));
@@ -210,7 +210,7 @@ class CleaningController extends Controller
 
                 // Get permit yang di reject & kirim notif email
                 $cleaning = Cleaning::find($request->cleaning_id);
-                foreach (['badai.sino@balitower.co.id'] as $recipient) {
+                foreach (['badai.sino@balitower.co.id', 'bayu.prakoso@balitower.co.id'] as $recipient) {
                     Mail::to($recipient)->send(new NotifReject($cleaning));
                 }
                 return $cleaningHistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
@@ -223,7 +223,7 @@ class CleaningController extends Controller
     public function checkin_update_cleaning(Request $request, $id) // Proses checkin
     {
         $data = ($request->all());
-
+        // return var_dump($data);
         $jumlah_char_pic1 = strlen($data['cleaning_name']);
         $jumlah_char_pic2 = strlen($data['cleaning_name2']);
 
@@ -485,6 +485,22 @@ class CleaningController extends Controller
         $cleaning_log = DB::table('cleaning_histories')
             ->join('cleanings', 'cleanings.cleaning_id', '=', 'cleaning_histories.cleaning_id')
             ->select('cleaning_histories.*', 'cleanings.validity_from')
+            ->orderBy('cleaning_id', 'desc');
+        return Datatables::of($cleaning_log)
+            ->editColumn('updated_at', function ($cleaning_log) {
+                return $cleaning_log->updated_at ? with(new Carbon($cleaning_log->updated_at))->format('d/m/Y') : '';
+            })
+            ->editColumn('validity_from', function ($cleaning_log) {
+                return $cleaning_log->validity_from ? with(new Carbon($cleaning_log->validity_from))->format('d/m/Y') : '';
+            })
+            ->make(true);
+    }
+
+    public function cleaning_yajra_log()
+    {
+        $cleaning_log = DB::table('cleanings')
+            // ->join('cleanings', 'cleanings.cleaning_id', '=', 'cleaning_histories.cleaning_id')
+            ->select('cleanings.validity_from', 'cleanings.cleaning_name', 'cleanings.cleaning_work')
             ->orderBy('cleaning_id', 'desc');
         return Datatables::of($cleaning_log)
             ->editColumn('updated_at', function ($cleaning_log) {
