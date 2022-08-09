@@ -77,7 +77,7 @@
                             <div class="card-body">
                                 <button class="btn btn-primary btn-sm mx-1 my-2" data-bs-toggle="modal" data-bs-target="#itModal">Create Form</button>
                                 <a type="button" class="btn btn-sm btn-info mx-1 my-2" href="{{url('logall')}}">Log Form</a>
-                                <a type="button" class="btn btn-sm btn-danger mx-1 my-2" href="{{ url('/it/reject/show')}}">Form Rejected</a>
+                                <a type="button" class="btn btn-sm btn-danger mx-1 my-2" href="{{ url('/it/cancel/show')}}">Canceled Form</a>
                             </div>
                         </div>
                         <div class="modal fade" id="itModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -127,7 +127,7 @@
                             <div class="card-body">
                                 <button class="btn btn-primary btn-sm mx-1 my-2" data-bs-toggle="modal" data-bs-target="#ipcoreModal">Create Form</button>
                                 <a type="button" class="btn btn-sm btn-info mx-1 my-2" href="{{url('logall')}}">Log Form</a>
-                                <a type="button" class="btn btn-sm btn-danger mx-1 my-2" href="{{ url('/ipcore/reject/show')}}">Form Rejected</a>
+                                <a type="button" class="btn btn-sm btn-danger mx-1 my-2" href="{{ url('/ipcore/cancel/show')}}">Canceled Form</a>
                             </div>
                         </div>
                         <div class="modal fade" id="ipcoreModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -152,15 +152,15 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-striped table-bordered" id="it_table" width="100%" cellspacing="0">
+                                <table class="table table-striped table-bordered" id="ipcore_table" width="100%" cellspacing="0">
                                     <thead>
                                         <tr class="judul-table text-center">
                                             <th>No.</th>
                                             <th>Purpose of Work</th>
                                             <th>Date of Visit</th>
                                             <th>Date of Leave</th>
-                                            <th>Name</th>
-                                            <th>Company</th>
+                                            <th>Checkin</th>
+                                            <th>Checkout</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -169,14 +169,61 @@
                                 </table>
                             </div>
                         </div>
-
+                    {{-- BSS --}}
+                    @elseif(Auth::user()->email == 'bss@mail.com')
+                        <div class="container-fluid">
+                            <div class="card-body">
+                                <button class="btn btn-primary btn-sm mx-1 my-2" data-bs-toggle="modal" data-bs-target="#bssmodal">Create Form</button>
+                                <a type="button" class="btn btn-sm btn-info mx-1 my-2" href="{{url('logall')}}">Log Form</a>
+                                <a type="button" class="btn btn-sm btn-danger mx-1 my-2" href="{{ url('/bss/cancel/show')}}">Canceled Form</a>
+                            </div>
+                        </div>
+                        <div class="modal fade" id="bssmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Pilih Form</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('internal/form')}}">AR CR Form</a>
+                                        <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('order/form')}}">Consumable Form</a>
+                                        <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('internal/formBarang')}}">AR CR + Barang Form</a>
+                                        <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('internal/formConsumableBarang')}}">AR CR + Consumable + Barang Form</a>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Select</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered" id="bss_table" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr class="judul-table text-center">
+                                            <th>No.</th>
+                                            <th>Purpose of Work</th>
+                                            <th>Date of Visit</th>
+                                            <th>Date of Leave</th>
+                                            <th>Checkin</th>
+                                            <th>Checkout</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="isi-table text-center">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     @endif
                 </div>
             </div>
         </div>
     </div>
 
-    {{-- YANG INI JANGAN DU HAPUS !!! --}}
+    {{-- YANG INI JANGAN DI HAPUS !!! --}}
     @yield('content')
     {{-- !!!!!!!!!!!! --}}
 

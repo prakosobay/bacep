@@ -29,6 +29,12 @@ class InternalController extends Controller
         return view('internal.form');
     }
 
+    public function internal_lastform($id)
+    {
+        $getLastForm = Internal::findOrFail($id);
+        return view('internal.lastform', compact('getLastForm'));
+    }
+
 
 
     // Submit
@@ -36,7 +42,7 @@ class InternalController extends Controller
     {
         // dd($request->all());
         $getForm = $request->all();
-        // dd($getForm);
+        // dd ($getForm);
         $validated = $request->validate([
             'work' => ['required'],
             'dc' => ['required_without_all:mmr1,mmr2,cctv,lain'],
@@ -47,125 +53,124 @@ class InternalController extends Controller
             'rack' => ['required'],
         ]);
 
-        if($validated){
+        $insertForm = Internal::create([
+            'req_dept' => $getForm['req_dept'],
+            'req_name' => $getForm['req_name'],
+            'req_phone' => $getForm['req_phone'],
+            'work' => $getForm['work'],
+            'visit' => $getForm['visit'],
+            'leave' => $getForm['leave'],
+            'background' => $getForm['background'],
+            'desc' => $getForm['desc'],
+            'testing' => $getForm['testing'],
+            'rollback' => $getForm['rollback'],
+            'rack' => $getForm['rack'],
+            'req_email' => Auth::user()->email,
+        ]);
 
-            $insertForm = Internal::create([
-                'req_dept' => $getForm['req_dept'],
-                'req_name' => $getForm['req_name'],
-                'req_phone' => $getForm['req_phone'],
-                'work' => $getForm['work'],
-                'visit' => $getForm['visit'],
-                'leave' => $getForm['leave'],
-                'background' => $getForm['background'],
-                'desc' => $getForm['desc'],
-                'testing' => $getForm['testing'],
-                'rollback' => $getForm['rollback'],
-                'rack' => $getForm['rack'],
-                'req_email' => Auth::user()->email,
-            ]);
+        $insertEntries = InternalEntry::insert([
+            'internal_id' => $insertForm->id,
+            'req_dept' => $insertForm->req_dept,
+            'dc' => $request->dc,
+            'mmr1' => $request->mmr1,
+            'mmr2' => $request->mmr2,
+            'cctv' => $request->cctv,
+            'lain' => $request->lain,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
 
-            $insertEntries = InternalEntry::insert([
+        $arrayDetail = [];
+        foreach($getForm['time_start'] as $k => $v){
+            $insertArray = [];
+            if(isset($getForm['time_start'][$k])){
+
+                $insertArray = [
+                    'internal_id' => $insertForm->id,
+                    'req_dept' => $insertForm->req_dept,
+                    'time_start' => $getForm['time_start'][$k],
+                    'time_end' => $getForm['time_end'][$k],
+                    'activity' => $getForm['activity'][$k],
+                    'service_impact' => $getForm['service_impact'][$k],
+                    'item' => $getForm['item'][$k],
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ];
+
+                $arrayDetail[] = $insertArray;
+            }
+        }
+        $insertDetail = InternalDetail::insert($arrayDetail);
+
+        $arrayRisk = [];
+        foreach($getForm['risk'] as $k => $v){
+            $insertArray = [];
+            if(isset($getForm['risk'][$k])){
+
+                $insertArray = [
+                    'internal_id' => $insertForm->id,
+                    'req_dept' => $insertForm->req_dept,
+                    'risk' => $getForm['risk'][$k],
+                    'poss' => $getForm['poss'][$k],
+                    'impact' => $getForm['impact'][$k],
+                    'mitigation' => $getForm['mitigation'][$k],
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ];
+
+                $arrayRisk[] = $insertArray;
+            }
+        }
+        $insertRisk = InternalRisk::insert($arrayRisk);
+
+        $arrayVisitor = [];
+        foreach($getForm['nama'] as $k => $v){
+            $insertArray = [];
+            if(isset($getForm['nama'][$k])){
+
+                $insertArray = [
+                    'internal_id' => $insertForm->id,
+                    'req_dept' => $insertForm->req_dept,
+                    'name' => $getForm['nama'][$k],
+                    'phone' => $getForm['phone'][$k],
+                    'numberId' => $getForm['numberId'][$k],
+                    'respon' => $getForm['respon'][$k],
+                    'department' => $getForm['department'][$k],
+                    'company' => $getForm['company'][$k],
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ];
+
+                $arrayVisitor[] = $insertArray;
+            }
+        }
+        $insertVisitor = InternalVisitor::insert($arrayVisitor);
+
+        if($insertVisitor ){
+
+            $notif_email = Internal::find($insertForm->id);
+            foreach ([
+                'bayu.prakoso@balitower.co.id', 'yoga.agus@balitower.co.id'
+            ] as $recipient) {
+                Mail::to($recipient)->send(new NotifInternalForm($notif_email));
+            }
+
+            $history = InternalHistory::insert([
                 'internal_id' => $insertForm->id,
                 'req_dept' => $insertForm->req_dept,
-                'dc' => $request->dc,
-                'mmr1' => $request->mmr1,
-                'mmr2' => $request->mmr2,
-                'cctv' => $request->cctv,
-                'lain' => $request->lain,
+                'created_by' => Auth::user()->name,
+                'role_to' => 'review',
+                'status' => 'requested',
+                'aktif' => true,
+                'pdf' => false,
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
 
-            $arrayDetail = [];
-            foreach($getForm['time_start'] as $k => $v){
-                $insertArray = [];
-                if(isset($getForm['time_start'][$k])){
-
-                    $insertArray = [
-                        'internal_id' => $insertForm->id,
-                        'req_dept' => $insertForm->req_dept,
-                        'time_start' => $getForm['time_start'][$k],
-                        'time_end' => $getForm['time_end'][$k],
-                        'activity' => $getForm['activity'][$k],
-                        'service_impact' => $getForm['service_impact'][$k],
-                        'item' => $getForm['item'][$k],
-                        'created_at' => now(),
-                        'updated_at' => now(),
-                    ];
-
-                    $arrayDetail[] = $insertArray;
-                }
-            }
-            $insertDetail = InternalDetail::insert($arrayDetail);
-
-            $arrayRisk = [];
-            foreach($getForm['risk'] as $k => $v){
-                $insertArray = [];
-                if(isset($getForm['risk'][$k])){
-
-                    $insertArray = [
-                        'internal_id' => $insertForm->id,
-                        'req_dept' => $insertForm->req_dept,
-                        'risk' => $getForm['risk'][$k],
-                        'poss' => $getForm['poss'][$k],
-                        'impact' => $getForm['impact'][$k],
-                        'mitigation' => $getForm['mitigation'][$k],
-                        'created_at' => now(),
-                        'updated_at' => now(),
-                    ];
-
-                    $arrayRisk[] = $insertArray;
-                }
-            }
-            $insertRisk = InternalRisk::insert($arrayRisk);
-
-            $arrayVisitor = [];
-            foreach($getForm['nama'] as $k => $v){
-                $insertArray = [];
-                if(isset($getForm['nama'][$k])){
-
-                    $insertArray = [
-                        'internal_id' => $insertForm->id,
-                        'req_dept' => $insertForm->req_dept,
-                        'name' => $getForm['nama'][$k],
-                        'phone' => $getForm['phone'][$k],
-                        'numberId' => $getForm['numberId'][$k],
-                        'respon' => $getForm['respon'][$k],
-                        'department' => $getForm['department'][$k],
-                        'company' => $getForm['company'][$k],
-                        'created_at' => now(),
-                        'updated_at' => now(),
-                    ];
-
-                    $arrayVisitor[] = $insertArray;
-                }
-            }
-            $insertVisitor = InternalVisitor::insert($arrayVisitor);
-
-            if($insertVisitor ){
-
-                $notif_email = Internal::find($insertForm->id);
-                foreach ([
-                    'bayu.prakoso@balitower.co.id', 'yoga.agus@balitower.co.id'
-                ] as $recipient) {
-                    Mail::to($recipient)->send(new NotifInternalForm($notif_email));
-                }
-
-                $history = InternalHistory::insert([
-                    'internal_id' => $insertForm->id,
-                    'req_dept' => $insertForm->req_dept,
-                    'created_by' => Auth::user()->name,
-                    'role_to' => 'review',
-                    'status' => 'requested',
-                    'aktif' => true,
-                    'pdf' => false,
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ]);
-
-                if($history){
-                    return back()->with('success', 'Berhasil yeeayy');
-                }
+            if($history){
+                return redirect('logall')->with('success', 'Berhasil yeeayy');
+            } else {
+                return back()->with('gagal', 'Gagal Submit Form');
             }
         }
     }
@@ -269,7 +274,7 @@ class InternalController extends Controller
                     'visit' => $full->visit,
                     'leave' => $full->leave,
                     // 'link' => ("https://dcops.balifiber.id/internal/it/pdf/$full->id"),
-                    'link' => ("http://localhost:8000/internal/it/pdf/$full->id"),
+                    'link' => ("http://localhost:8000/internal/pdf/$full->id"),
                     'note' => null,
                     'status' => 'Full Approved',
                 ]);
@@ -303,7 +308,7 @@ class InternalController extends Controller
     // Update Checkin
     public function internal_checkin_update(Request $request, $id)
     {
-        // dd($request->all());
+        dd($request->all());
         $getCheckin = $request->all();
 
         $checkinArray = [];
@@ -366,6 +371,7 @@ class InternalController extends Controller
 
 
 
+
     // Reject
     public function internal_reject(Request $request, $id)
     {
@@ -412,6 +418,7 @@ class InternalController extends Controller
 
 
 
+
     // Yajra
     public function internal_yajra_history()
     {
@@ -444,7 +451,9 @@ class InternalController extends Controller
 
         $full = DB::table('internals')
         ->join('internal_visitors', 'internals.id', '=', 'internal_visitors.internal_id')
+        ->join('internal_fulls', 'internals.id', 'internal_fulls.internal_id')
         ->where('internals.req_dept', 'IT')
+        ->where('internal_fulls.status', 'Full Approved')
         ->select('internals.*', 'internal_visitors.name', 'internal_visitors.company', 'internal_visitors.checkin', 'internal_visitors.checkout')
         ->groupBy('internals.id');
         return Datatables::of($full)
@@ -457,5 +466,45 @@ class InternalController extends Controller
             ->addColumn('action', 'internal.actionEdit')
             ->make(true);
 
+    }
+
+    public function internal_ipcore_yajra_full_visitor()
+    {
+        $full = DB::table('internals')
+        ->join('internal_visitors', 'internals.id', '=', 'internal_visitors.internal_id')
+        ->join('internal_fulls', 'internals.id', '=', 'internal_fulls.internal_id')
+        ->where('internals.req_dept', 'IP Core')
+        ->where('internal_fulls.status', 'Full Approved')
+        ->select('internals.*', 'internal_visitors.name', 'internal_visitors.company', 'internal_visitors.checkin', 'internal_visitors.checkout')
+        ->groupBy('internals.id');
+        return Datatables::of($full)
+            ->editColumn('visit', function($full){
+                return $full->visit ? with(new Carbon($full->visit))->format('d/m/Y') : '';
+            })
+            ->editColumn('leave', function($full){
+                return $full->leave ? with(new Carbon($full->leave))->format('d/m/Y') : '';
+            })
+            ->addColumn('action', 'internal.actionEdit')
+            ->make(true);
+    }
+
+    public function internal_bss_yajra_full_visitor()
+    {
+        $full = DB::table('internals')
+        ->join('internal_visitors', 'internals.id', '=', 'internal_visitors.internal_id')
+        ->join('internal_fulls', 'internals.id', '=', 'internal_fulls.internal_id')
+        ->where('internals.req_dept', 'BSS')
+        ->where('internal_fulls.status', 'Full Approved')
+        ->select('internals.*', 'internal_visitors.name', 'internal_visitors.company', 'internal_visitors.checkin', 'internal_visitors.checkout')
+        ->groupBy('internals.id');
+        return Datatables::of($full)
+            ->editColumn('visit', function($full){
+                return $full->visit ? with(new Carbon($full->visit))->format('d/m/Y') : '';
+            })
+            ->editColumn('leave', function($full){
+                return $full->leave ? with(new Carbon($full->leave))->format('d/m/Y') : '';
+            })
+            ->addColumn('action', 'internal.actionEdit')
+            ->make(true);
     }
 }

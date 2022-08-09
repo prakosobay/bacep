@@ -40,7 +40,7 @@
                     <div class="col-8">
                         <div class="form-group mb-5">
                             <label for="work" class="form-label">Purpose of Work :</label>
-                            <input type="text" class="form-control @error('work') is-invalid @enderror" id="work" name="work" value="{{ old('work')}}" required>
+                            <input type="text" class="form-control @error('work') is-invalid @enderror" id="work" name="work" value="{{ $getLastForm->work }}" required>
                             @error('work')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -72,7 +72,7 @@
                     <div class="col-4">
                         <div class="form-group mb-5">
                             <label for="rack" class="form-label">Rack :</label>
-                            <input type="text" class="form-control @error('rack') is-invalid @enderror" id="rack" name="rack" value="{{ old('rack')}}" required>
+                            <input type="text" class="form-control @error('rack') is-invalid @enderror" id="rack" name="rack" value="{{ $getLastForm->rack }}" required>
                             @error('rack')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message}}</strong>
@@ -143,7 +143,7 @@
                     <div class="col-6">
                         <div class="form-group mb-3">
                             <label for="background" class="form-label">Background and Objectives</label>
-                            <input type="text" class="form-control @error('background') is-invalid @enderror" id="background" name="background" value="{{ old('background')}}" required>
+                            <input type="text" class="form-control @error('background') is-invalid @enderror" id="background" name="background" value="{{ $getLastForm->background }}" required>
                             @error('backround')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -154,7 +154,7 @@
                     <div class="col-6">
                         <div class="form-group mb-3">
                             <label for="desc" class="form-label">Work Description</label>
-                            <input type="text" class="form-control @error('desc') is-invalid @enderror" id="desc" name="desc" value="{{ old('desc')}}" required>
+                            <input type="text" class="form-control @error('desc') is-invalid @enderror" id="desc" name="desc" value="{{ $getLastForm->desc }}" required>
                             @error('desc')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -169,14 +169,14 @@
                     <div class="col-6">
                         <div class="form-group mb-3">
                             <label for="testing" class="form-label">Testing and Verification</label>
-                            <input type="text" class="form-control" id="testing" name="testing" value="{{ old('testing')}}">
+                            <input type="text" class="form-control" id="testing" name="testing" value="{{ $getLastForm->testing }}">
                         </div>
 
                     </div>
                     <div class="col-6">
                         <div class="form-group mb-5">
                             <label for="rollback" class="form-label">Rollback and Operation</label>
-                            <input type="text" class="form-control" id="rollback" name="rollback" value="{{ old('rollback')}}">
+                            <input type="text" class="form-control" id="rollback" name="rollback" value="{{ $getLastForm->rollback }}">
                         </div>
                     </div>
                 </div>
@@ -197,9 +197,10 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($getLastForm->detail as $p)
                             <tr>
                                 <td>
-                                    <input type="time" class="form-control @error('time_start') is-invalid @enderror" id="time_start" name="time_start[]" value="{{ old('time_start')}}" required>
+                                    <input type="time" class="form-control @error('time_start') is-invalid @enderror" id="time_start" name="time_start[]" value="{{ old('time_start') }}" required>
                                     @error('time_start')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -207,7 +208,7 @@
                                     @enderror
                                 </td>
                                 <td>
-                                    <input type="time" class="form-control @error('time_end') is-invalid @enderror" id="time_end" name="time_end[]" value="{{ old('time_end')}}" required>
+                                    <input type="time" class="form-control @error('time_end') is-invalid @enderror" id="time_end" name="time_end[]" value="{{ old('time_end') }}" required>
                                     @error('time_end')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -215,7 +216,7 @@
                                     @enderror
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control @error('activity') is-invalid @enderror" id="activity" name="activity[]" value="{{ old('activity')}}" required>
+                                    <input type="text" class="form-control @error('activity') is-invalid @enderror" id="activity" name="activity[]" value="{{ $p->activity }}" required>
                                     @error('activity')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -223,7 +224,7 @@
                                     @enderror
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control @error('service_impact') is-invalid @enderror" id="service_impact" name="service_impact[]" value="{{ old('service_impact')}}" required>
+                                    <input type="text" class="form-control @error('service_impact') is-invalid @enderror" id="service_impact" name="service_impact[]" value="{{ $p->service_impact }}" required>
                                     @error('service_impact')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -231,7 +232,7 @@
                                     @enderror
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control @error('item') is-invalid @enderror" id="detailTime" name="item[]" value="{{ old('item')}}" required>
+                                    <input type="text" class="form-control @error('item') is-invalid @enderror" id="detailTime" name="item[]" value="{{ $p->item }}" required>
                                     @error('item')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -239,6 +240,7 @@
                                     @enderror
                                 </td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                     <button id="button_detail"><b>Add More Fields</b></button>
@@ -259,9 +261,10 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($getLastForm->risk as $r)
                             <tr>
                                 <td>
-                                    <input type="text" class="form-control @error('risk') is-invalid @enderror" name="risk[]" value="{{ old('risk')}}" required>
+                                    <input type="text" class="form-control @error('risk') is-invalid @enderror" name="risk[]" value="{{ $r->risk }}" required>
                                     @error('risk')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -269,7 +272,7 @@
                                     @enderror
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control @error('poss') is-invalid @enderror" name="poss[]" value="{{ old('poss')}}" required>
+                                    <input type="text" class="form-control @error('poss') is-invalid @enderror" name="poss[]" value="{{ $r->poss }}" required>
                                     @error('poss')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -277,12 +280,7 @@
                                     @enderror
                                 </td>
                                 <td>
-                                    <select name="impact[]" id="impact" class="form-select @error('impact') is-invalid @enderror" required>
-                                        <option value=""></option>
-                                        <option value="Low">Low</option>
-                                        <option value="Medium">Medium</option>
-                                        <option value="High">High</option>
-                                    </select>
+                                    <input type="text" class="form-control @error('impact') is-invalid @enderror" name="impact[]" value="{{ $r->impact}}" required>
                                     @error('impact')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -290,7 +288,7 @@
                                     @enderror
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control @error('mitigation') is-invalid @enderror" name="mitigation[]" value="{{ old('mitigation')}}" required>
+                                    <input type="text" class="form-control @error('mitigation') is-invalid @enderror" name="mitigation[]" value="{{ $r->mitigation }}" required>
                                     @error('mitigation')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -298,6 +296,7 @@
                                     @enderror
                                 </td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                     <button id="button_risk"><b>Add More Fields</b></button>
@@ -312,24 +311,26 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($getLastForm->visitor as $v)
                             <tr>
                                 <th>Name</th>
-                                <td><input type="text" class="form-control" name="nama[]" value="{{ old('nama')}}" required></td>
+                                <td><input type="text" class="form-control" name="nama[]" value="{{ $v->name }}" required></td>
                                 <th>Phone Number</th>
-                                <td><input type="text" class="form-control" name="phone[]" value="{{ old('phone')}}" required></td>
+                                <td><input type="text" class="form-control" name="phone[]" value="{{ $v->phone }}" required></td>
                             </tr>
                             <tr>
                                 <th>Number ID</th>
-                                <td><input type="text" class="form-control" name="numberId[]" value="{{ old('numberId')}}" required></td>
+                                <td><input type="text" class="form-control" name="numberId[]" value="{{ $v->numberId }}" required></td>
                                 <th>Company</th>
-                                <th><input type="text" class="form-control" name="company[]" value="{{ old('company')}}" required></th>
+                                <th><input type="text" class="form-control" name="company[]" value="{{ $v->company}}" required></th>
                             </tr>
                             <tr>
                                 <th>Department</th>
-                                <td><input type="text" class="form-control" name="department[]" value="{{ old('department')}}" required></td>
+                                <td><input type="text" class="form-control" name="department[]" value="{{ $v->department }}" required></td>
                                 <th>Responsibility</th>
-                                <td><input type="text" class="form-control" name="respon[]" value="{{ old('respon')}}" required></td>
+                                <td><input type="text" class="form-control" name="respon[]" value="{{ $v->respon }}" required></td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                     <button id="button_visitor"><b>Add More Fields</b></button>
@@ -382,7 +383,7 @@ $(document).ready(function(){
     $(button_risk).click(function(e){
         e.preventDefault();
         if(row < max_row){
-            $(table_risk).append('<tr><td><input type="text" class="form-control @error('risk') is-invalid @enderror" name="risk[]" value="{{ old('risk')}}">@error('risk')<span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>@enderror</td><td><input type="text" class="form-control @error('poss') is-invalid @enderror" name="poss[]" value="{{ old('poss')}}">@error('poss')<span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>@enderror</td><td><select name="impact[]" id="impact" class="form-select @error('impact') is-invalid @enderror"><option value=""></option><option value="Low">Low</option><option value="Medium">Medium</option><option value="High">High</option></select>@error('impact')<span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>@enderror</td><td><input type="text" class="form-control @error('mitigation') is-invalid @enderror" name="mitigation[]" value="{{ old('mitigation')}}">@error('mitigation')<span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>@enderror</td></tr>');
+            $(table_risk).append('<tr><td><input type="text" class="form-control" name="risk[]" value=""></td><td><input type="text" class="form-control" name="poss[]" value=""></td><td><input type="text" class="form-control" name="impact[]" value=""></td><td><input type="text" class="form-control" name="mitigation[]" value=""></td></tr>');
             row++;
         }
     });

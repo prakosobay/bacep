@@ -3,10 +3,10 @@
 @section('content')
 <script>
     $(function() {
-        $('#ipcore_table').DataTable({
+        $('#bss_table').DataTable({
             processing: true,
             serverSide: true,
-            ajax: '{{ url('internal/ipcore/yajra/full/visitor')}}',
+            ajax: '{{ url('internal/bss/yajra/full/visitor')}}',
             columns: [
                 { data: 'id', name: 'internals.id' },
                 { data: 'work', name: 'internals.work' },

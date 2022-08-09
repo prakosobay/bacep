@@ -1,21 +1,26 @@
-@if ($model->checkin == null)
+{{-- @if ($model->checkin == null)
     <a href="{{url ('internal/action/checkin/form', $model->id)}}" class="btn btn-xs btn-primary btn-sm"><i class="glyphicon glyphicon-edit"></i>Checkin</a>
-    <button type="button" class="btn btn-danger btn-sm mx-2 my-2" data-bs-toggle="modal" data-bs-target="#reject">
-        Reject
+    <button type="button" class="btn btn-danger btn-sm mx-2 my-2" data-bs-toggle="modal" data-bs-target="#cancel">
+        Cancel
     </button>
 
 @elseif(($model->checkin) && ($model->checkout == null))
     <a href="{{url ('internal/action/checkout', $model->id)}}" class="btn btn-xs btn-dark btn-sm"><i class="glyphicon glyphicon-checkout"></i>Checkout</a>
-    <button type="button" class="btn btn-danger btn-sm mx-2 my-2" data-bs-toggle="modal" data-bs-target="#reject">
-        Reject
+    <button type="button" class="btn btn-danger btn-sm mx-2 my-2" data-bs-toggle="modal" data-bs-target="#cancel">
+        Cancel
     </button>
 
 @elseif ($model->checkout)
     <a href="{{ url('internal/action/show', $model->id)}}" class="btn btn-xs btn-success btn-sm mx-2 my-2"><i class="glyphicon glyphicon-edit"></i>Show</a>
-@endif
+@endif --}}
 
-{{-- modal reject --}}
-<div class="modal fade" id="reject" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<a href="{{ url('internal/lastform', $model->id )}}" class="btn btn-primary btn-sm mx-1 my-1">Select Form</a>
+<button type="button" class="btn btn-danger btn-sm mx-1 my-1" data-bs-toggle="modal" data-bs-target="#cancel">
+    Cancel
+</button>
+
+{{-- modal cancel --}}
+<div class="modal fade" id="cancel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
