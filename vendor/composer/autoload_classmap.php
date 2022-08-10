@@ -50,6 +50,9 @@ return array(
     'App\\Imports\\ConsumImport' => $baseDir . '/app/Imports/ConsumImport.php',
     'App\\Imports\\ConsumKeluarImport' => $baseDir . '/app/Imports/ConsumKeluarImport.php',
     'App\\Imports\\ConsumMasukImport' => $baseDir . '/app/Imports/ConsumMasukImport.php',
+    'App\\Mail\\NotifConsumableForm' => $baseDir . '/app/Mail/NotifConsumableForm.php',
+    'App\\Mail\\NotifConsumableFull' => $baseDir . '/app/Mail/NotifConsumableFull.php',
+    'App\\Mail\\NotifConsumableReject' => $baseDir . '/app/Mail/NotifConsumableReject.php',
     'App\\Mail\\NotifEmail' => $baseDir . '/app/Mail/NotifEmail.php',
     'App\\Mail\\NotifFull' => $baseDir . '/app/Mail/NotifFull.php',
     'App\\Mail\\NotifInternalForm' => $baseDir . '/app/Mail/NotifInternalForm.php',
@@ -94,11 +97,8 @@ return array(
     'App\\Models\\Survey' => $baseDir . '/app/Models/Survey.php',
     'App\\Models\\SurveyFull' => $baseDir . '/app/Models/SurveyFull.php',
     'App\\Models\\SurveyHistory' => $baseDir . '/app/Models/SurveyHistory.php',
-<<<<<<< HEAD
     'App\\Models\\SurveyPersonil' => $baseDir . '/app/Models/SurveyPersonil.php',
-=======
     'App\\Models\\SurveyVisitor' => $baseDir . '/app/Models/SurveyVisitor.php',
->>>>>>> 8e5a3ac6191483e2faf0aeb3f9b6ee86bf6d0098
     'App\\Models\\TroubleshootBm' => $baseDir . '/app/Models/TroubleshootBm.php',
     'App\\Models\\TroubleshootBmDetail' => $baseDir . '/app/Models/TroubleshootBmDetail.php',
     'App\\Models\\TroubleshootBmEntry' => $baseDir . '/app/Models/TroubleshootBmEntry.php',
@@ -114,6 +114,7 @@ return array(
     'App\\Providers\\EventServiceProvider' => $baseDir . '/app/Providers/EventServiceProvider.php',
     'App\\Providers\\FortifyServiceProvider' => $baseDir . '/app/Providers/FortifyServiceProvider.php',
     'App\\Providers\\RouteServiceProvider' => $baseDir . '/app/Providers/RouteServiceProvider.php',
+    'App\\Traits\\Uuid' => $baseDir . '/app/Traits/Uuid.php',
     'Asm89\\Stack\\Cors' => $vendorDir . '/asm89/stack-cors/src/Cors.php',
     'Asm89\\Stack\\CorsService' => $vendorDir . '/asm89/stack-cors/src/CorsService.php',
     'Attribute' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',

@@ -9,10 +9,10 @@ $(function() {
         serverSide: true,
         ajax: '{{ url('internal/it/yajra/full/visitor')}}',
         columns: [
-            { data: 'id', name: 'internals.id' },
+            { data: 'id', name: 'internal_visitors.id' },
             { data: 'work', name: 'internals.work' },
             { data: 'visit', name: 'internals.visit' },
-            { data: 'leave', name: 'internals.leave' },
+            { data: 'name', name: 'internal_visitors.name' },
             { data: 'checkin', name: 'internal_visitors.checkin' },
             { data: 'checkout', name: 'internal_visitors.checkout' },
             {data: 'action', name: 'action', orderable: false, searchable: false}

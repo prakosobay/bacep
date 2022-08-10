@@ -18,12 +18,6 @@ class InternalController extends Controller
 {
 
     // Show Pages
-    public function internal_action_checkin_form($id)
-    {
-        $getForm = Internal::findOrFail($id);
-        return view('internal.checkinForm', compact('getForm'));
-    }
-
     public function internal_form()
     {
         return view('internal.form');
@@ -33,6 +27,35 @@ class InternalController extends Controller
     {
         $getLastForm = Internal::findOrFail($id);
         return view('internal.lastform', compact('getLastForm'));
+    }
+
+    public function internal_action_checkin_form($id)
+    {
+        $getVisitor = InternalVisitor::findOrFail($id);
+        return view('internal.checkinForm', compact('getVisitor'));
+    }
+
+    public function internal_action_checkout_form($id)
+    {
+        $getVisitor = InternalVisitor::findOrFail($id);
+        return view('internal.checkoutForm', compact('getVisitor'));
+    }
+
+    public function finished_show($dept)
+    {
+        switch ($dept)
+        {
+            case "ipcore":
+                $getPermit = InternalVisitor::where('done', true)->where('req_dept', 'IP Core')->get();
+                dd($getPermit);
+                return view('internal.ipcore.finished', compact('getPermit'));
+                break;
+
+            case "it":
+                $getPermit = InternalVisitor::where('done', true)->where('req_dept', 'IT')->get();
+                return view('internal.it.finished', compact('getPermit'));
+                break;
+        }
     }
 
 
@@ -308,65 +331,65 @@ class InternalController extends Controller
     // Update Checkin
     public function internal_checkin_update(Request $request, $id)
     {
-        dd($request->all());
-        $getCheckin = $request->all();
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'phone' => ['required', 'string', 'max:255'],
+            'numberId' => ['required', 'string', 'max:255'],
+            'department' => ['required', 'string', 'max:255'],
+            'company' => ['required', 'string', 'max:255'],
+            'respon' => ['required', 'string', 'max:255'],
+            'checkin' => ['required'],
+            'photo_checkin' => ['required'],
+        ]);
 
-        $checkinArray = [];
-        foreach($getCheckin['photo_checkin'] as $k => $v){
-            $insertCheckin = [];
-            if(isset($getCheckin['photo_checkin'][$k])){
+        $extension = explode('/', explode(':', substr($request->photo_checkin, 0, strpos($request->photo_checkin, ';')))[1])[1];   // .jpg .png .pdf
+        $replace = substr($request->photo_checkin, 0, strpos($request->photo_checkin, ',') + 1);
+        $image = str_replace($replace, '', $request->photo_checkin);
+        $image = str_replace(' ', '+', $image);
+        $imageName = Str::random(10) . '.' . $extension;
 
-                $extension = explode('/', explode(':', substr($v, 0, strpos($v, ';')))[1])[1];   // .jpg .png .pdf
-                $replace = substr($v, 0, strpos($v, ',') + 1);
-                $image = str_replace($replace, '', $v);
-                $image = str_replace(' ', '+', $image);
-                $imageName = Str::random(10) . '.' . $extension;
+        // simpan gambar
+        $gambar1 = Storage::disk('public')->put($imageName, base64_decode($image));
 
-                $insertCheckin = [
-                    'checkin' => $getCheckin['checkin'][$k],
-                    'photo_checkin' => $imageName,
-                ];
+        $getVisitor = InternalVisitor::findOrFail($id);
+        $getVisitor->update([
+            'name' => $request->name,
+            'phone' => $request->phone,
+            'numberId' => $request->numberId,
+            'department' => $request->department,
+            'company' => $request->company,
+            'respon' => $request->respon,
+            'checkin' => $request->checkin,
+            'photo_checkin' => $imageName,
+        ]);
 
-                // dd($insertCheckin);
-
-                // DB::table('internal_visitors')->where('internal_id', $id)->update([
-                //     'checkin' => $insertCheckin['checkin'],
-                //     'photo_checkin' => $insertCheckin['photo_checkin']
-                // ]);
-                $checkinArray [] = $insertCheckin;
-            }
-        }
-
-        dd($insertCheckin);
-        // $update = DB::table('internal_visitors')->where('internal_id', $id)->get();
-        // for($i = 0; $i <= count($checkinArray['checkin']); $i++){
-        //     // if(isset(''))
-        //     echo '<li> Nama : ' . 'checkin' . ' <strpng>' . 'photo_checkin' . '</strpng></li>';
-        // }
-
-        // foreach($checkinArray as $o){
-            // echo '<li> Nama : ' . $o['checkin'] . ' <strpng>' . $o['photo_checkin'] . '</strpng></li>';
-        // }
-
-        // foreach($checkinArray as $p){
-
-            // if(isset($p[$k]['checkin'])){
-                // return  '<li> Nama : ' . $p['checkin'] . ' <strpng>' . $p['photo_checkin'] . '</strpng></li>';
-                // InternalVisitor::where('internal_id', $id)
-                //         ->update([
-                //             'checkin' => $p[$k]['checkin'],
-                //             'photo_checkin' => $p[$k]['photo_checkin'],
-                //         ]);
-            // }
-        // }
+        return redirect('logall')->with('success', 'Checkin Success!');
+    }
 
 
-        // $getid = InternalVisitor::where('internal_id', $id)->get();
 
-        // InternalVIsitor::upsert($checkinArray, $id, ['checkin', 'photo_checkin']);
-        // DB::table('internal_visitors')->upsert($checkinArray, ['internal_id'], ['checkin', 'photo_checkin']);
-        // return redirect(route('logall'))->with('error', "gagal");
+    // Update Checkout
+    public function internal_checkout_update(Request $request, $id)
+    {
+        $request->validate([
+            'checkout' => ['required'],
+            'photo_checkout' => ['required'],
+        ]);
 
+        $extension = explode('/', explode(':', substr($request->photo_checkout, 0, strpos($request->photo_checkout, ';')))[1])[1];   // .jpg .png .pdf
+        $replace = substr($request->photo_checkout, 0, strpos($request->photo_checkout, ',') + 1);
+        $image = str_replace($replace, '', $request->photo_checkout);
+        $image = str_replace(' ', '+', $image);
+        $imageName = Str::random(10) . '.' . $extension;
+
+        $getVisitor = InternalVisitor::findOrFail($id);
+        $getVisitor->update([
+            'checkout' => $request->checkout,
+            'photo_checkout' => $imageName,
+            'done' => true,
+        ]);
+
+        return redirect('logall')->with('success', 'Checkout Success !');
     }
 
 
@@ -375,11 +398,12 @@ class InternalController extends Controller
     // Reject
     public function internal_reject(Request $request, $id)
     {
-        $lastUpdate = InternalHistory::where('internal_id', $id)->latest()->first();
-        $getForm = Internal::findOrFail($id);
+        if ((Gate::denies('isSecurity')) && (Gate::denies('isVisitor'))) {
+
+            $lastUpdate = InternalHistory::where('internal_id', $id)->latest()->first();
+            $getForm = Internal::findOrFail($id);
 
         // dd($getForm);
-        if ((Gate::denies('isSecurity')) && (Gate::denies('isVisitor'))) {
 
             $request->validate([
                 'note' => ['required'],
@@ -414,6 +438,16 @@ class InternalController extends Controller
         } else {
             abort(403);
         }
+    }
+
+
+
+
+    //Cancel Visitor
+    public function internal_action_cancel($id)
+    {
+        InternalVisitor::findOrFail($id)->delete();
+        return redirect('logall')->with('success', 'Success');
     }
 
 
@@ -454,14 +488,12 @@ class InternalController extends Controller
         ->join('internal_fulls', 'internals.id', 'internal_fulls.internal_id')
         ->where('internals.req_dept', 'IT')
         ->where('internal_fulls.status', 'Full Approved')
-        ->select('internals.*', 'internal_visitors.name', 'internal_visitors.company', 'internal_visitors.checkin', 'internal_visitors.checkout')
-        ->groupBy('internals.id');
+        ->where('internal_fulls.note', null)
+        ->select('internals.work', 'internals.visit', 'internal_visitors.name', 'internal_visitors.checkin', 'internal_visitors.checkout', 'internal_visitors.id');
+        // ->groupBy('internals.id');
         return Datatables::of($full)
             ->editColumn('visit', function($full){
                 return $full->visit ? with(new Carbon($full->visit))->format('d/m/Y') : '';
-            })
-            ->editColumn('leave', function($full){
-                return $full->leave ? with(new Carbon($full->leave))->format('d/m/Y') : '';
             })
             ->addColumn('action', 'internal.actionEdit')
             ->make(true);
@@ -473,10 +505,13 @@ class InternalController extends Controller
         $full = DB::table('internals')
         ->join('internal_visitors', 'internals.id', '=', 'internal_visitors.internal_id')
         ->join('internal_fulls', 'internals.id', '=', 'internal_fulls.internal_id')
-        ->where('internals.req_dept', 'IP Core')
-        ->where('internal_fulls.status', 'Full Approved')
-        ->select('internals.*', 'internal_visitors.name', 'internal_visitors.company', 'internal_visitors.checkin', 'internal_visitors.checkout')
-        ->groupBy('internals.id');
+        ->where([
+            ['internals.req_dept', 'IP Core'],
+            ['internal_fulls.status', 'Full Approved'],
+            ['internal_visitors.done', null]
+        ])
+        ->select('internals.work', 'internals.visit', 'internals.leave', 'internals.req_name', 'internal_visitors.name', 'internal_visitors.checkin', 'internal_visitors.checkout', 'internal_visitors.id');
+        // ->groupBy('internals.id');
         return Datatables::of($full)
             ->editColumn('visit', function($full){
                 return $full->visit ? with(new Carbon($full->visit))->format('d/m/Y') : '';

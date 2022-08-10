@@ -2,8 +2,8 @@
 @section('content')
 <div class="container my-5">
     <div class="card">
-        <h1 class="text-center my-3 h1Permit">CHECKIN VISITOR</h1>
-        <form action="{{ url('internal/checkin/update', $getVisitor->id)}}" method="POST" class="validate-form">
+        <h1 class="text-center my-3 h1Permit">CHECKOUT VISITOR</h1>
+        <form action="{{ url('internal/checkout/update', $getVisitor->id)}}" method="POST" class="validate-form">
             @method('put')
             @csrf
             <div class="container form-container">
@@ -37,38 +37,50 @@
                         <tbody>
                             <tr>
                                 <th>Name</th>
-                                <td><input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $getVisitor->name }}" required></td>
+                                <td><input type="text" class="form-control" value="{{ $getVisitor->name }}" readonly></td>
                                 <th>Phone Number</th>
-                                <td><input type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ $getVisitor->phone }}" required></td>
+                                <td><input type="text" class="form-control" value="{{ $getVisitor->phone }}" readonly></td>
                             </tr>
                             <tr>
                                 <th>Number ID</th>
-                                <td><input type="text" class="form-control @error('numberId') is-invalid @enderror" name="numberId" value="{{ $getVisitor->numberId }}" required></td>
+                                <td><input type="text" class="form-control" value="{{ $getVisitor->numberId }}" readonly></td>
                                 <th>Company</th>
-                                <th><input type="text" class="form-control @error('company') is-invalid @enderror" name="company" value="{{ $getVisitor->company }}" readonly></th>
+                                <th><input type="text" class="form-control" value="{{ $getVisitor->company }}" readonly></th>
                             </tr>
                             <tr>
                                 <th>Department</th>
-                                <td><input type="text" class="form-control @error('department') is-invalid @enderror" name="department" value="{{ $getVisitor->department }}" required></td>
+                                <td><input type="text" class="form-control" value="{{ $getVisitor->department }}" readonly></td>
                                 <th>Responsibility</th>
-                                <td><input type="text" class="form-control @error('respon') is-invalid @enderror" name="respon" value="{{ $getVisitor->respon }}" required></td>
+                                <td><input type="text" class="form-control" value="{{ $getVisitor->respon }}" readonly></td>
+                            </tr>
+                            <tr>
+                                <th colspan="4" class="py-5">
+                                    <div class="form-group">
+                                        <label for="photo_checkin" class="form-label">Checkin Photo </label><br>
+                                        <img src="{{ asset('storage/' . $getVisitor->photo_checkin) }}" alt="" width="400px">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="checkin" class="form-label">Checkin Time :</label>
+                                        <input type="time"  id="checkin" value="{{ $getVisitor->checkin }}" readonly>
+                                    </div>
+                                </th>
                             </tr>
                             <tr>
                                 <th colspan="2">
-                                    <span>Take A Selfie {{ $getVisitor->name }}</span>
+                                    <span>Take A Selfie, {{ $getVisitor->name }}</span>
                                     <div class="container" id="my_camera"></div>
                                     <input type="button" value="Take Snapshot" class="btn btn-sm btn-primary" onclick="take_snapshot()" required>
                                 </th>
                                 <th colspan="2" class="py-5">
                                     <div class="container" id="results"></div><br>
-                                    <input class="@error('photo_checkin') is-invalid @enderror" required autocomplete="photo_checkin" type="hidden" name="photo_checkin" id="image">
-                                    <input type="time" class="@error('checkin') is-invalid @enderror" name="checkin" id="checkin" value="" required autocomplete="checkin" readonly>
+                                    <input class="@error('photo_checkout') is-invalid @enderror" required autocomplete="photo_checkout" type="hidden" name="photo_checkout" id="image">
+                                    <input type="time" class="@error('checkout') is-invalid @enderror" name="checkout" id="checkout" value="" required autocomplete="checkout" readonly>
                                 </th>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                <button type="submit" class="btn btn-lg btn-success mx-2">Checkin</button>
+                <button type="submit" class="btn btn-lg btn-success mx-2">Checkout</button>
             </div>
         </form>
     </div>
@@ -106,7 +118,7 @@
             menit = menit < 10 ? '0'+menit : menit;
             detik = detik < 10 ? '0'+detik : detik;
             var waktu = jam + ':' + menit + ':' + detik;
-            $("#checkin").val(waktu);
+            $("#checkout").val(waktu);
         }
 </script>
 @endsection

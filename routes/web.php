@@ -151,20 +151,6 @@ Route::middleware(['auth'])->group(function () {
 
 
     // Survey
-<<<<<<< HEAD
-    Route::get('survey/form/show', [SurveyController::class, 'form_show']);
-    Route::post('/survey/create', [SurveyController::class, 'store']);
-    Route::get('jsona', [SurveyController::class, 'json']);
-    Route::get('route_data_approval', [SurveyController::class, 'approve_survey']);
-    Route::get('route_history_survey', [SurveyController::class, 'data_history']);
-    Route::get('history/{type_view}', [HomeController::class, 'log_survey']);
-    Route::get('/survey_pdf/{id}', [SurveyController::class, 'survey_pdf']);
-    Route::get('route_full_survey', [SurveyController::class, 'full']);
-    Route::post('/approve_survey', [SurveyController::class, 'approve']);
-    Route::post('/reject_survey', [SurveyController::class, 'reject']);
-    Route::get('/survey/yajra/show', [SurveyController::class, 'yajra_show']);
-    Route::post('/survey/approve', [SurveyController::class, 'approve_survey']);
-=======
     Route::controller(SurveyController::class)->group(function(){
         Route::get('survey/form/show', 'form_show');
         Route::get('jsona', 'json');
@@ -178,7 +164,6 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/approve_survey', 'approve');
         Route::post('/reject_survey', 'reject');
     });
->>>>>>> 8e5a3ac6191483e2faf0aeb3f9b6ee86bf6d0098
 
 
 
@@ -244,18 +229,26 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/other/maintenance/form/checkin', 'update_checkin_maintenance');
     });
 
+
     // Internal
     Route::controller(InternalController::class)->group(function(){
         Route::get('internal/form', 'internal_form');
         Route::get('internal/lastform/{id}', 'internal_lastform');
         Route::get('internal/action/checkin/form/{id}', 'internal_action_checkin_form');
+        Route::get('internal/action/checkout/form/{id}', 'internal_action_checkout_form');
         Route::get('/internal/pdf/{id}', 'internal_pdf');
         Route::get('internal/yajra/history', 'internal_yajra_history');
         Route::get('internal/yajra/full/approval', 'internal_yajra_full_approval');
+
         Route::get('internal/it/yajra/full/visitor', 'internal_it_yajra_full_visitor');
         Route::get('internal/ipcore/yajra/full/visitor', 'internal_ipcore_yajra_full_visitor');
         Route::get('internal/bss/yajra/full/visitor', 'internal_bss_yajra_full_visitor');
+
+        Route::get('finished/show/{dept}', 'finished_show');
+
         Route::put('internal/checkin/update/{id}', 'internal_checkin_update');
+        Route::put('internal/checkout/update/{id}', 'internal_checkout_update');
+        Route::put('internal/action/cancel/{id}', 'internal_action_cancel');
         Route::post('internal/create', 'internal_create');
         Route::post('internal/approve/{id}', 'internal_approve');
         Route::post('internal/reject/{id}', 'internal_reject');
@@ -269,11 +262,13 @@ Route::middleware(['auth'])->group(function () {
         Route::post('order/store', 'order_store');
     });
 
+
     // ALL
     Route::get('history/{type_view}', [HomeController::class, 'history']);
     Route::get('approval/{type_approve}', [HomeController::class, 'approval']);
     Route::get('full/{type_full}', [HomeController::class, 'full']);
     Route::get('visitor/log/{type_log}', [HomeController::class, 'visitor_log']);
+
 
     //Log
     Route::get('logall', [HomeController::class, 'log_all'])->name('logall');

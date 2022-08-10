@@ -59,9 +59,9 @@
                 <h4 class="judul text-center">Log Form Visitor</h4>
             </div>
 
-            <div class="container">
+            <div class="container-fluid">
                 @if (session('success'))
-                <div class="alert alert-success mx-2 my-2">
+                <div class="alert alert-success mx-2 my-2 text-center">
                     {{ session('success') }}
                 </div>
                 @endif
@@ -108,7 +108,7 @@
                                             <th>No.</th>
                                             <th>Purpose of Work</th>
                                             <th>Date of Visit</th>
-                                            <th>Date of Leave</th>
+                                            <th>Name</th>
                                             <th>Checkin</th>
                                             <th>Checkout</th>
                                             <th>Action</th>
@@ -127,7 +127,7 @@
                             <div class="card-body">
                                 <button class="btn btn-primary btn-sm mx-1 my-2" data-bs-toggle="modal" data-bs-target="#ipcoreModal">Create Form</button>
                                 <a type="button" class="btn btn-sm btn-info mx-1 my-2" href="{{url('logall')}}">Log Form</a>
-                                <a type="button" class="btn btn-sm btn-danger mx-1 my-2" href="{{ url('/ipcore/cancel/show')}}">Canceled Form</a>
+                                <a type="button" class="btn btn-sm btn-success mx-1 my-2" href="{{ url('finished/show/ipcore')}}">Finished Permit</a>
                             </div>
                         </div>
                         <div class="modal fade" id="ipcoreModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -155,10 +155,11 @@
                                 <table class="table table-striped table-bordered" id="ipcore_table" width="100%" cellspacing="0">
                                     <thead>
                                         <tr class="judul-table text-center">
-                                            <th>No.</th>
                                             <th>Purpose of Work</th>
+                                            <th>Requestor</th>
                                             <th>Date of Visit</th>
                                             <th>Date of Leave</th>
+                                            <th>Name</th>
                                             <th>Checkin</th>
                                             <th>Checkout</th>
                                             <th>Action</th>
@@ -207,6 +208,7 @@
                                             <th>Purpose of Work</th>
                                             <th>Date of Visit</th>
                                             <th>Date of Leave</th>
+                                            <th>Name</th>
                                             <th>Checkin</th>
                                             <th>Checkout</th>
                                             <th>Action</th>

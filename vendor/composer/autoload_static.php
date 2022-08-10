@@ -676,6 +676,9 @@ class ComposerStaticInit582140f03abb5abd5ed2c14fd376fb64
         'App\\Imports\\ConsumImport' => __DIR__ . '/../..' . '/app/Imports/ConsumImport.php',
         'App\\Imports\\ConsumKeluarImport' => __DIR__ . '/../..' . '/app/Imports/ConsumKeluarImport.php',
         'App\\Imports\\ConsumMasukImport' => __DIR__ . '/../..' . '/app/Imports/ConsumMasukImport.php',
+        'App\\Mail\\NotifConsumableForm' => __DIR__ . '/../..' . '/app/Mail/NotifConsumableForm.php',
+        'App\\Mail\\NotifConsumableFull' => __DIR__ . '/../..' . '/app/Mail/NotifConsumableFull.php',
+        'App\\Mail\\NotifConsumableReject' => __DIR__ . '/../..' . '/app/Mail/NotifConsumableReject.php',
         'App\\Mail\\NotifEmail' => __DIR__ . '/../..' . '/app/Mail/NotifEmail.php',
         'App\\Mail\\NotifFull' => __DIR__ . '/../..' . '/app/Mail/NotifFull.php',
         'App\\Mail\\NotifInternalForm' => __DIR__ . '/../..' . '/app/Mail/NotifInternalForm.php',
@@ -720,11 +723,8 @@ class ComposerStaticInit582140f03abb5abd5ed2c14fd376fb64
         'App\\Models\\Survey' => __DIR__ . '/../..' . '/app/Models/Survey.php',
         'App\\Models\\SurveyFull' => __DIR__ . '/../..' . '/app/Models/SurveyFull.php',
         'App\\Models\\SurveyHistory' => __DIR__ . '/../..' . '/app/Models/SurveyHistory.php',
-<<<<<<< HEAD
         'App\\Models\\SurveyPersonil' => __DIR__ . '/../..' . '/app/Models/SurveyPersonil.php',
-=======
         'App\\Models\\SurveyVisitor' => __DIR__ . '/../..' . '/app/Models/SurveyVisitor.php',
->>>>>>> 8e5a3ac6191483e2faf0aeb3f9b6ee86bf6d0098
         'App\\Models\\TroubleshootBm' => __DIR__ . '/../..' . '/app/Models/TroubleshootBm.php',
         'App\\Models\\TroubleshootBmDetail' => __DIR__ . '/../..' . '/app/Models/TroubleshootBmDetail.php',
         'App\\Models\\TroubleshootBmEntry' => __DIR__ . '/../..' . '/app/Models/TroubleshootBmEntry.php',
@@ -740,6 +740,7 @@ class ComposerStaticInit582140f03abb5abd5ed2c14fd376fb64
         'App\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/app/Providers/EventServiceProvider.php',
         'App\\Providers\\FortifyServiceProvider' => __DIR__ . '/../..' . '/app/Providers/FortifyServiceProvider.php',
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
+        'App\\Traits\\Uuid' => __DIR__ . '/../..' . '/app/Traits/Uuid.php',
         'Asm89\\Stack\\Cors' => __DIR__ . '/..' . '/asm89/stack-cors/src/Cors.php',
         'Asm89\\Stack\\CorsService' => __DIR__ . '/..' . '/asm89/stack-cors/src/CorsService.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',

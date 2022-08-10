@@ -9,16 +9,7 @@ class InternalVisitor extends Model
 {
     use HasFactory;
 
-    protected $fillabel = [
-        'internal_id',
-        'req_dept',
-        'name',
-        'company',
-        'department',
-        'respon',
-        'numberId',
-        'phone',
-    ];
+    protected $guarded = [];
 
     public function internal()
     {

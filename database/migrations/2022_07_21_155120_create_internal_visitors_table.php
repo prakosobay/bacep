@@ -27,6 +27,7 @@ class CreateInternalVisitorsTable extends Migration
             $table->string('photo_checkin')->nullable();
             $table->time('checkout')->nullable();
             $table->string('photo_checkout')->nullable();
+            $table->boolean('done');
             $table->timestamps();
         });
     }
