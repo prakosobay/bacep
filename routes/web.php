@@ -244,7 +244,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('internal/ipcore/yajra/full/visitor', 'internal_ipcore_yajra_full_visitor');
         Route::get('internal/bss/yajra/full/visitor', 'internal_bss_yajra_full_visitor');
 
-        Route::get('finished/show/{dept}', 'finished_show');
+        Route::get('finished/show', 'finished_show');
+        Route::get('internal/yajra/show', 'internal_yajra_show');
 
         Route::put('internal/checkin/update/{id}', 'internal_checkin_update');
         Route::put('internal/checkout/update/{id}', 'internal_checkout_update');

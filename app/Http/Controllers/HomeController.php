@@ -161,20 +161,27 @@ class HomeController extends Controller
 
     public function log_all() // Routingan untuk menampilkan permit yang sudah full approve versi visitor
     {
-        $email = Auth::user()->email;
+        $dept = Auth::user()->department;
+        switch($dept){
 
-        if ($email == 'it@mail.com') {
-            return view('internal.it.log_visitor');
-        } elseif ($email == 'ipcore@mail.com') {
-            return view('internal.ipcore.log_visitor');
-        } elseif (($email == 'badai.sino@balitower.co.id') || ($email == 'data.center7@balitower.co.id')) {
-            return view('cleaning.full_visitor');
-        } elseif ($email == 'sales@mail.com') {
-            return view('sales.full_visitor');
-        } elseif($email == 'bss@mail.com') {
-            return view('internal.bss.log_visitor');
-        } else {
-            abort(403);
+            case 'Building Management' :
+                return view('cleaning.full_visitor');
+                break;
+
+            case 'IP Core':
+                return view('internal.logVisitor');
+                break;
+
+            case 'IT':
+                return view('internal.logVisitor');
+                break;
+
+            case 'BSS':
+                return view('internal.logVisitor');
+                break;
+
+            default:
+            abort(401);
         }
     }
 }

@@ -8,9 +8,6 @@
 
 @elseif(($model->checkin) && ($model->checkout == null))
     <a href="{{url ('internal/action/checkout/form', $model->id)}}" class="btn btn-xs btn-dark btn-sm mx-1 my-1"><i class="glyphicon glyphicon-checkout"></i>Checkout</a>
-
-@elseif ($model->checkout)
-    <a href="{{ url('internal/action/show', $model->id)}}" class="btn btn-xs btn-success btn-sm mx-1 my-1"><i class="glyphicon glyphicon-edit"></i>Show</a>
 @endif
 
 {{-- <a href="{{ url('internal/lastform', $model->id )}}" class="btn btn-primary btn-sm mx-1 my-1">Select Form</a>

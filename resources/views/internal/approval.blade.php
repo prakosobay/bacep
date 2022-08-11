@@ -31,6 +31,34 @@
                     </thead>
                     <tbody class="isi-table text-center">
                         @foreach($getInternal as $p)
+                        {{-- modal --}}
+                        <div class="modal fade" id="reject{{ $p->internal->id }}" tabindex="-1" aria-labelledby="exampleModalLabel{{ $p->internal->id }}" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Alasan di Reject</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="{{ url('internal/reject', $p->internal->id )}}" method="post">
+                                            @csrf
+                                            <div class="form-group">
+                                                <label for="no" class="form-label">No ID :</label>
+                                                <input type="text" class="form-control" id="no" value="{{$p->internal->id}}" readonly>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="note" class="form-label">Note :</label>
+                                                <input type="text" class="form-control" name="note" id="note" value="" placeholder="Alasan di reject" required>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-primary">Save changes</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <tr>
                             <td>{{ $p->internal->id }}</td>
                             <td>{{ Carbon\Carbon::parse($p->internal->created_at)->format('d-m-Y') }}</td>
@@ -46,7 +74,7 @@
                                         <button id="ok" class="btn btn-success btn-sm my-1 mx-1">Approve</button>
                                     </form>
 
-                                    <button id="not" class="btn btn-danger btn-sm my-1 mx-1" data-bs-toggle="modal" data-bs-target="#exampleModal">Reject</button>
+                                    <button class="btn btn-danger btn-sm my-1 mx-1" data-bs-toggle="modal" data-bs-target="#reject{{ $p->internal->id }}" data-id="{{ $p->internal->id }}">Reject</button>
 
                                 @elsecan('isHead')
                                     <form action="{{ url('internal/approve', $p->internal->id)}}" method="post">
@@ -54,7 +82,7 @@
                                         <button id="ok" class="btn btn-success btn-sm my-1 mx-1">Approve</button>
                                     </form>
 
-                                    <button id="not" class="btn btn-danger btn-sm my-1 mx-1" data-bs-toggle="modal" data-bs-target="#exampleModal">Reject</button>
+                                    <button class="btn btn-danger btn-sm my-1 mx-1" data-bs-toggle="modal" data-bs-target="#reject{{ $p->internal->id }}" data-id="{{ $p->internal->id }}">Reject</button>
 
                                 @elsecan('isSecurity')
                                     <form action="{{ url('internal/approve', $p->internal->id)}}" method="post">
@@ -74,29 +102,8 @@
     </div>
 </div>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Alasan di Reject</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form action="{{ url('internal/reject', $p->internal->id )}}" method="post">
-                @csrf
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="note" class="form-label">Note :</label>
-                        <input type="text" class="form-control" name="note" id="note" value="" placeholder="Alasan di reject" required autofocus>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
+
+
 
 @push('scripts')
 <script>

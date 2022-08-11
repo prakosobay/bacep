@@ -41,21 +41,11 @@ class InternalController extends Controller
         return view('internal.checkoutForm', compact('getVisitor'));
     }
 
-    public function finished_show($dept)
+    public function finished_show()
     {
-        switch ($dept)
-        {
-            case "ipcore":
-                $getPermit = InternalVisitor::where('done', true)->where('req_dept', 'IP Core')->get();
-                dd($getPermit);
-                return view('internal.ipcore.finished', compact('getPermit'));
-                break;
-
-            case "it":
-                $getPermit = InternalVisitor::where('done', true)->where('req_dept', 'IT')->get();
-                return view('internal.it.finished', compact('getPermit'));
-                break;
-        }
+        $dept = Auth::user()->department;
+        $getPermit = InternalVisitor::where('done', true)->where('req_dept', $dept)->get();
+        return view('internal.finished', compact('getPermit'));
     }
 
 
@@ -403,7 +393,7 @@ class InternalController extends Controller
             $lastUpdate = InternalHistory::where('internal_id', $id)->latest()->first();
             $getForm = Internal::findOrFail($id);
 
-        // dd($getForm);
+            // dd($getForm);
 
             $request->validate([
                 'note' => ['required'],
@@ -436,7 +426,7 @@ class InternalController extends Controller
             }
 
         } else {
-            abort(403);
+            abort(401);
         }
     }
 
@@ -466,6 +456,29 @@ class InternalController extends Controller
             ->make(true);
     }
 
+    public function internal_yajra_show()
+    {
+        $dept = Auth::user()->department;
+        $full = DB::table('internals')
+        ->join('internal_visitors', 'internals.id', '=', 'internal_visitors.internal_id')
+        ->join('internal_fulls', 'internals.id', '=', 'internal_fulls.internal_id')
+        ->where([
+            ['internals.req_dept', $dept],
+            ['internal_fulls.status', 'Full Approved'],
+            ['internal_visitors.done', null]
+        ])
+        ->select('internals.work', 'internals.visit', 'internals.leave', 'internals.req_name', 'internal_visitors.name', 'internal_visitors.checkin', 'internal_visitors.checkout', 'internal_visitors.id');
+        return Datatables::of($full)
+            ->editColumn('visit', function($full){
+                return $full->visit ? with(new Carbon($full->visit))->format('d/m/Y') : '';
+            })
+            ->editColumn('leave', function($full){
+                return $full->leave ? with(new Carbon($full->leave))->format('d/m/Y') : '';
+            })
+            ->addColumn('action', 'internal.actionEdit')
+            ->make(true);
+    }
+
     public function internal_yajra_full_approval()
     {
         $full = DB::table('internal_fulls')
@@ -479,67 +492,82 @@ class InternalController extends Controller
             ->make(true);
     }
 
-    public function internal_it_yajra_full_visitor()
+    // public function internal_it_yajra_full_visitor()
+    // {
+    //     // SELECT DISTINCT (internals.work), internal_visitors.name, internal_visitors.company from internal_visitors inner join internals on internal_visitors.internal_id = internals.id group by internals.id;
+
+    //     $full = DB::table('internals')
+    //     ->join('internal_visitors', 'internals.id', '=', 'internal_visitors.internal_id')
+    //     ->join('internal_fulls', 'internals.id', 'internal_fulls.internal_id')
+    //     ->where('internals.req_dept', 'IT')
+    //     ->where('internal_fulls.status', 'Full Approved')
+    //     ->where('internal_fulls.note', null)
+    //     ->select('internals.work', 'internals.visit', 'internal_visitors.name', 'internal_visitors.checkin', 'internal_visitors.checkout', 'internal_visitors.id');
+    //     // ->groupBy('internals.id');
+    //     return Datatables::of($full)
+    //         ->editColumn('visit', function($full){
+    //             return $full->visit ? with(new Carbon($full->visit))->format('d/m/Y') : '';
+    //         })
+    //         ->addColumn('action', 'internal.actionEdit')
+    //         ->make(true);
+
+    // }
+
+    // public function internal_ipcore_yajra_full_visitor()
+    // {
+    //     $full = DB::table('internals')
+    //     ->join('internal_visitors', 'internals.id', '=', 'internal_visitors.internal_id')
+    //     ->join('internal_fulls', 'internals.id', '=', 'internal_fulls.internal_id')
+    //     ->where([
+    //         ['internals.req_dept', 'IP Core'],
+    //         ['internal_fulls.status', 'Full Approved'],
+    //         ['internal_visitors.done', null]
+    //     ])
+    //     ->select('internals.work', 'internals.visit', 'internals.leave', 'internals.req_name', 'internal_visitors.name', 'internal_visitors.checkin', 'internal_visitors.checkout', 'internal_visitors.id');
+    //     // ->groupBy('internals.id');
+    //     return Datatables::of($full)
+    //         ->editColumn('visit', function($full){
+    //             return $full->visit ? with(new Carbon($full->visit))->format('d/m/Y') : '';
+    //         })
+    //         ->editColumn('leave', function($full){
+    //             return $full->leave ? with(new Carbon($full->leave))->format('d/m/Y') : '';
+    //         })
+    //         ->addColumn('action', 'internal.actionEdit')
+    //         ->make(true);
+    // }
+
+    // public function internal_bss_yajra_full_visitor()
+    // {
+    //     $full = DB::table('internals')
+    //     ->join('internal_visitors', 'internals.id', '=', 'internal_visitors.internal_id')
+    //     ->join('internal_fulls', 'internals.id', '=', 'internal_fulls.internal_id')
+    //     ->where('internals.req_dept', 'BSS')
+    //     ->where('internal_fulls.status', 'Full Approved')
+    //     ->select('internals.*', 'internal_visitors.name', 'internal_visitors.company', 'internal_visitors.checkin', 'internal_visitors.checkout')
+    //     ->groupBy('internals.id');
+    //     return Datatables::of($full)
+    //         ->editColumn('visit', function($full){
+    //             return $full->visit ? with(new Carbon($full->visit))->format('d/m/Y') : '';
+    //         })
+    //         ->editColumn('leave', function($full){
+    //             return $full->leave ? with(new Carbon($full->leave))->format('d/m/Y') : '';
+    //         })
+    //         ->addColumn('action', 'internal.actionEdit')
+    //         ->make(true);
+    // }
+
+    public function internal_yajra_finished()
     {
-        // SELECT DISTINCT (internals.work), internal_visitors.name, internal_visitors.company from internal_visitors inner join internals on internal_visitors.internal_id = internals.id group by internals.id;
-
-        $full = DB::table('internals')
-        ->join('internal_visitors', 'internals.id', '=', 'internal_visitors.internal_id')
-        ->join('internal_fulls', 'internals.id', 'internal_fulls.internal_id')
-        ->where('internals.req_dept', 'IT')
-        ->where('internal_fulls.status', 'Full Approved')
-        ->where('internal_fulls.note', null)
-        ->select('internals.work', 'internals.visit', 'internal_visitors.name', 'internal_visitors.checkin', 'internal_visitors.checkout', 'internal_visitors.id');
-        // ->groupBy('internals.id');
-        return Datatables::of($full)
-            ->editColumn('visit', function($full){
-                return $full->visit ? with(new Carbon($full->visit))->format('d/m/Y') : '';
+        $dept = Auth::user()->department;
+        $getPermit = InternalVisitor::where('done', true)->where('req_dept', $dept);
+        return Datatables::of($getPermit)
+            ->editColumn('visit', function($getPermit){
+                return $getPermit->visit ? with(new Carbon($getPermit->visit))->format('d/m/Y') : '';
             })
-            ->addColumn('action', 'internal.actionEdit')
-            ->make(true);
-
-    }
-
-    public function internal_ipcore_yajra_full_visitor()
-    {
-        $full = DB::table('internals')
-        ->join('internal_visitors', 'internals.id', '=', 'internal_visitors.internal_id')
-        ->join('internal_fulls', 'internals.id', '=', 'internal_fulls.internal_id')
-        ->where([
-            ['internals.req_dept', 'IP Core'],
-            ['internal_fulls.status', 'Full Approved'],
-            ['internal_visitors.done', null]
-        ])
-        ->select('internals.work', 'internals.visit', 'internals.leave', 'internals.req_name', 'internal_visitors.name', 'internal_visitors.checkin', 'internal_visitors.checkout', 'internal_visitors.id');
-        // ->groupBy('internals.id');
-        return Datatables::of($full)
-            ->editColumn('visit', function($full){
-                return $full->visit ? with(new Carbon($full->visit))->format('d/m/Y') : '';
+            ->editColumn('leave', function($getPermit){
+                return $getPermit->leave ? with(new Carbon($getPermit->leave))->format('d/m/Y') : '';
             })
-            ->editColumn('leave', function($full){
-                return $full->leave ? with(new Carbon($full->leave))->format('d/m/Y') : '';
-            })
-            ->addColumn('action', 'internal.actionEdit')
-            ->make(true);
-    }
-
-    public function internal_bss_yajra_full_visitor()
-    {
-        $full = DB::table('internals')
-        ->join('internal_visitors', 'internals.id', '=', 'internal_visitors.internal_id')
-        ->join('internal_fulls', 'internals.id', '=', 'internal_fulls.internal_id')
-        ->where('internals.req_dept', 'BSS')
-        ->where('internal_fulls.status', 'Full Approved')
-        ->select('internals.*', 'internal_visitors.name', 'internal_visitors.company', 'internal_visitors.checkin', 'internal_visitors.checkout')
-        ->groupBy('internals.id');
-        return Datatables::of($full)
-            ->editColumn('visit', function($full){
-                return $full->visit ? with(new Carbon($full->visit))->format('d/m/Y') : '';
-            })
-            ->editColumn('leave', function($full){
-                return $full->leave ? with(new Carbon($full->leave))->format('d/m/Y') : '';
-            })
-            ->addColumn('action', 'internal.actionEdit')
+            // ->addColumn('action', 'internal.actionEdit')
             ->make(true);
     }
 }

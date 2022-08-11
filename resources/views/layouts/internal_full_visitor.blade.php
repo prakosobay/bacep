@@ -127,7 +127,7 @@
                             <div class="card-body">
                                 <button class="btn btn-primary btn-sm mx-1 my-2" data-bs-toggle="modal" data-bs-target="#ipcoreModal">Create Form</button>
                                 <a type="button" class="btn btn-sm btn-info mx-1 my-2" href="{{url('logall')}}">Log Form</a>
-                                <a type="button" class="btn btn-sm btn-success mx-1 my-2" href="{{ url('finished/show/ipcore')}}">Finished Permit</a>
+                                <a type="button" class="btn btn-sm btn-success mx-1 my-2" href="{{ url('finished/show')}}">Finished Permit</a>
                             </div>
                         </div>
                         <div class="modal fade" id="ipcoreModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
