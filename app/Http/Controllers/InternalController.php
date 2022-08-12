@@ -559,15 +559,16 @@ class InternalController extends Controller
     public function internal_yajra_finished()
     {
         $dept = Auth::user()->department;
-        $getPermit = InternalVisitor::where('done', true)->where('req_dept', $dept);
-        return Datatables::of($getPermit)
-            ->editColumn('visit', function($getPermit){
-                return $getPermit->visit ? with(new Carbon($getPermit->visit))->format('d/m/Y') : '';
-            })
-            ->editColumn('leave', function($getPermit){
-                return $getPermit->leave ? with(new Carbon($getPermit->leave))->format('d/m/Y') : '';
-            })
-            // ->addColumn('action', 'internal.actionEdit')
-            ->make(true);
+        // $getPermit = InternalVisitor::where('done', true)->where('req_dept', $dept);
+        // return Datatables::of($getPermit)
+        //     ->editColumn('visit', function($getPermit){
+        //         return $getPermit->visit ? with(new Carbon($getPermit->visit))->format('d/m/Y') : '';
+        //     })
+        //     ->editColumn('leave', function($getPermit){
+        //         return $getPermit->leave ? with(new Carbon($getPermit->leave))->format('d/m/Y') : '';
+        //     })
+        //     ->make(true);
+        $visitor = InternalVisitor::with('internal')->select('internal_visitors.*');
+        return Datatables::of($visitor)->make(true);
     }
 }

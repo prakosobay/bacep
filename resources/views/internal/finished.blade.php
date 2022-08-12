@@ -13,6 +13,9 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.css"/>
     <link rel="stylesheet" href="{{asset('css/new_approve.css')}}" type="text/css">
 
+    {{-- Jquery --}}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
 </head>
 <body>
 
@@ -101,7 +104,7 @@
                             <table class="table table-striped table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                     <tr class="judul-table text-center">
-                                        <th>No.</th>
+                                        {{-- <th>No.</th> --}}
                                         <th>Purpose of Work</th>
                                         <th>Requestor</th>
                                         <th>Date of Visit</th>
@@ -115,7 +118,7 @@
                                     <?php
                                     $i = 1;
                                     ?>
-                                    @foreach ($getPermit as $permit)
+                                    {{-- @foreach ($getPermit as $permit)
                                         <tr>
                                             <td>{{ $i++ }}</td>
                                             <td>{{ $permit->internal->work }}</td>
@@ -126,7 +129,7 @@
                                             <td>{{ $permit->checkin }}</td>
                                             <td>{{ $permit->checkout }}</td>
                                         </tr>
-                                    @endforeach
+                                    @endforeach --}}
                                 </tbody>
                             </table>
                         </div>
@@ -164,20 +167,18 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="{{asset('vendor2/jquery/jquery.min.js')}}"></script>
+    {{-- <script src="{{asset('vendor2/jquery/jquery.min.js')}}"></script>
     <script src="{{asset('vendor2/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="{{asset('vendor2/jquery-easing/jquery.easing.min.js')}}"></script>
+    <script src="{{asset('vendor2/jquery-easing/jquery.easing.min.js')}}"></script> --}}
 
     {{-- datatable --}}
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.js"></script>
 
-
-    {{-- <script>
+    <script>
         $(function() {
             $('#dataTable').DataTable({
                 processing: true,
@@ -185,22 +186,21 @@
                 ajax: '{{ url('internal/yajra/finished')}}',
                 columns: [
                     { data: 'work', name: 'internals.work' },
-                    { data: 'req_name', name: 'internals.req_name' },
-                    { data: 'visit', name: 'internals.visit' },
-                    { data: 'leave', name: 'internals.leave' },
+                    { data: 'internals.req_name', name: 'internals.req_name' },
+                    { data: 'internals.visit', name: 'internals.visit' },
+                    { data: 'internals.leave', name: 'internals.leave' },
                     { data: 'name', name: 'internal_visitors.name' },
                     { data: 'checkin', name: 'internal_visitors.checkin' },
                     { data: 'checkout', name: 'internal_visitors.checkout' },
-                    // {data: 'action', name: 'action', orderable: false, searchable: false}
                 ]
             });
         });
-    </script> --}}
+    </script>
 
-    <script>
+    {{-- <script>
         $(document).ready( function () {
             $('#dataTable').DataTable();
         });
-    </script>
+    </script> --}}
 </body>
 </html>

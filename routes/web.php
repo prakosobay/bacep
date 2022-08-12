@@ -246,6 +246,7 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('finished/show', 'finished_show');
         Route::get('internal/yajra/show', 'internal_yajra_show');
+        Route::get('internal/yajra/finished', 'internal_yajra_finished');
 
         Route::put('internal/checkin/update/{id}', 'internal_checkin_update');
         Route::put('internal/checkout/update/{id}', 'internal_checkout_update');
