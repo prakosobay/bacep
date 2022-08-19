@@ -17,6 +17,8 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 </head>
 <body>
+
+    {{-- Navbar --}}
     <nav class="navbar sticky-top navbar-expand-lg navbar-dark navbar-bg">
         <div class="container">
             <a class="navbar-brand" href="#">
@@ -85,9 +87,9 @@
                                 </div>
                                 <div class="modal-body">
                                     <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('internal/form')}}">AR CR Form</a>
-                                    <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('order/form')}}">Consumable Form</a>
+                                    {{-- <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('order/form')}}">Consumable Form</a>
                                     <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('internal/formBarang')}}">AR CR + Barang Form</a>
-                                    <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('internal/formConsumableBarang')}}">AR CR + Consumable + Barang Form</a>
+                                    <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('internal/formConsumableBarang')}}">AR CR + Consumable + Barang Form</a> --}}
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

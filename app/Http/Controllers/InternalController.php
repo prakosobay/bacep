@@ -465,7 +465,7 @@ class InternalController extends Controller
         ->where([
             ['internals.req_dept', $dept],
             ['internal_fulls.status', 'Full Approved'],
-            ['internal_visitors.done', null]
+            ['internal_visitors.checkout', null],
         ])
         ->select('internals.work', 'internals.visit', 'internals.leave', 'internals.req_name', 'internal_visitors.name', 'internal_visitors.checkin', 'internal_visitors.checkout', 'internal_visitors.id');
         return Datatables::of($full)
@@ -559,16 +559,18 @@ class InternalController extends Controller
     public function internal_yajra_finished()
     {
         $dept = Auth::user()->department;
-        // $getPermit = InternalVisitor::where('done', true)->where('req_dept', $dept);
-        // return Datatables::of($getPermit)
-        //     ->editColumn('visit', function($getPermit){
-        //         return $getPermit->visit ? with(new Carbon($getPermit->visit))->format('d/m/Y') : '';
-        //     })
-        //     ->editColumn('leave', function($getPermit){
-        //         return $getPermit->leave ? with(new Carbon($getPermit->leave))->format('d/m/Y') : '';
-        //     })
-        //     ->make(true);
-        $visitor = InternalVisitor::with('internal')->select('internal_visitors.*');
-        return Datatables::of($visitor)->make(true);
+        $getPermit = DB::table('internals')
+            ->join('internal_visitors', 'internals.id', '=', 'internal_visitors.internal_id')
+            ->where('internal_visitors.done', 1)
+            ->where('internal_visitors.req_dept', $dept)
+            ->select('internals.work', 'internals.visit', 'internals.leave', 'internals.req_name', 'internal_visitors.name', 'internal_visitors.checkin', 'internal_visitors.checkout');
+        return Datatables::of($getPermit)
+            ->editColumn('visit', function($getPermit){
+                return $getPermit->visit ? with(new Carbon($getPermit->visit))->format('d/m/Y') : '';
+            })
+            ->editColumn('leave', function($getPermit){
+                return $getPermit->leave ? with(new Carbon($getPermit->leave))->format('d/m/Y') : '';
+            })
+            ->make(true);
     }
 }
