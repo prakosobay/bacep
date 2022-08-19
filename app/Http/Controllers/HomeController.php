@@ -162,6 +162,7 @@ class HomeController extends Controller
     public function log_all() // Routingan untuk menampilkan permit yang sudah full approve versi visitor
     {
         $dept = Auth::user()->department;
+        // dd($dept);
         switch($dept){
 
             case 'Building Management' :

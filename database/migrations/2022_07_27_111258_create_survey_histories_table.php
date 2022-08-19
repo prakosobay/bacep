@@ -16,11 +16,12 @@ class CreateSurveyHistoriesTable extends Migration
         Schema::create('survey_histories', function (Blueprint $table) {
             $table->id();
             $table->foreignId('survey_id');
-            $table->string('created_by');
+            $table->foreignId('created_by');
             $table->string('role_to');
             $table->string('status');
             $table->boolean('aktif');
             $table->boolean('pdf');
+            $table->string('note')->nullable();
             $table->timestamps();
         });
     }

@@ -23,10 +23,10 @@ class InternalController extends Controller
         return view('internal.form');
     }
 
-    public function internal_lastform($id)
+    public function internal_last_form()
     {
-        $getLastForm = Internal::findOrFail($id);
-        return view('internal.lastform', compact('getLastForm'));
+        // $getLastForm = Internal::all();
+        return view('internal.lastFormTable');
     }
 
     public function internal_action_checkin_form($id)
@@ -492,70 +492,6 @@ class InternalController extends Controller
             ->make(true);
     }
 
-    // public function internal_it_yajra_full_visitor()
-    // {
-    //     // SELECT DISTINCT (internals.work), internal_visitors.name, internal_visitors.company from internal_visitors inner join internals on internal_visitors.internal_id = internals.id group by internals.id;
-
-    //     $full = DB::table('internals')
-    //     ->join('internal_visitors', 'internals.id', '=', 'internal_visitors.internal_id')
-    //     ->join('internal_fulls', 'internals.id', 'internal_fulls.internal_id')
-    //     ->where('internals.req_dept', 'IT')
-    //     ->where('internal_fulls.status', 'Full Approved')
-    //     ->where('internal_fulls.note', null)
-    //     ->select('internals.work', 'internals.visit', 'internal_visitors.name', 'internal_visitors.checkin', 'internal_visitors.checkout', 'internal_visitors.id');
-    //     // ->groupBy('internals.id');
-    //     return Datatables::of($full)
-    //         ->editColumn('visit', function($full){
-    //             return $full->visit ? with(new Carbon($full->visit))->format('d/m/Y') : '';
-    //         })
-    //         ->addColumn('action', 'internal.actionEdit')
-    //         ->make(true);
-
-    // }
-
-    // public function internal_ipcore_yajra_full_visitor()
-    // {
-    //     $full = DB::table('internals')
-    //     ->join('internal_visitors', 'internals.id', '=', 'internal_visitors.internal_id')
-    //     ->join('internal_fulls', 'internals.id', '=', 'internal_fulls.internal_id')
-    //     ->where([
-    //         ['internals.req_dept', 'IP Core'],
-    //         ['internal_fulls.status', 'Full Approved'],
-    //         ['internal_visitors.done', null]
-    //     ])
-    //     ->select('internals.work', 'internals.visit', 'internals.leave', 'internals.req_name', 'internal_visitors.name', 'internal_visitors.checkin', 'internal_visitors.checkout', 'internal_visitors.id');
-    //     // ->groupBy('internals.id');
-    //     return Datatables::of($full)
-    //         ->editColumn('visit', function($full){
-    //             return $full->visit ? with(new Carbon($full->visit))->format('d/m/Y') : '';
-    //         })
-    //         ->editColumn('leave', function($full){
-    //             return $full->leave ? with(new Carbon($full->leave))->format('d/m/Y') : '';
-    //         })
-    //         ->addColumn('action', 'internal.actionEdit')
-    //         ->make(true);
-    // }
-
-    // public function internal_bss_yajra_full_visitor()
-    // {
-    //     $full = DB::table('internals')
-    //     ->join('internal_visitors', 'internals.id', '=', 'internal_visitors.internal_id')
-    //     ->join('internal_fulls', 'internals.id', '=', 'internal_fulls.internal_id')
-    //     ->where('internals.req_dept', 'BSS')
-    //     ->where('internal_fulls.status', 'Full Approved')
-    //     ->select('internals.*', 'internal_visitors.name', 'internal_visitors.company', 'internal_visitors.checkin', 'internal_visitors.checkout')
-    //     ->groupBy('internals.id');
-    //     return Datatables::of($full)
-    //         ->editColumn('visit', function($full){
-    //             return $full->visit ? with(new Carbon($full->visit))->format('d/m/Y') : '';
-    //         })
-    //         ->editColumn('leave', function($full){
-    //             return $full->leave ? with(new Carbon($full->leave))->format('d/m/Y') : '';
-    //         })
-    //         ->addColumn('action', 'internal.actionEdit')
-    //         ->make(true);
-    // }
-
     public function internal_yajra_finished()
     {
         $dept = Auth::user()->department;
@@ -571,6 +507,29 @@ class InternalController extends Controller
             ->editColumn('leave', function($getPermit){
                 return $getPermit->leave ? with(new Carbon($getPermit->leave))->format('d/m/Y') : '';
             })
+            ->make(true);
+    }
+
+    public function internal_yajra_last_form()
+    {
+        $dept = Auth::user()->department;
+        $getLastForm = DB::table('internals')
+            ->join('internal_visitors', 'internals.id', '=', 'internal_visitors.internal_id')
+            ->join('internal_entries', 'internals.id', '=', 'internal_entries.internal_id')
+            ->join('internal_details', 'internals.id', '=', 'internal_details.internal_id')
+            ->join('internal_risks', 'internals.id', '=', 'internal_risks.internal_id')
+            ->select('internals.*', 'internal_visitors.*', 'internal_entries.*', 'internal_risks.*', 'internal_details.*')
+            ->where('internals.req_dept', $dept)
+            ->where('internal_visitors.done', 1)
+            ->groupBy('internals.id');
+        return Datatables::of($getLastForm)
+            ->editColumn('visit', function($getLastForm){
+                return $getLastForm->visit ? with(new Carbon($getLastForm->visit))->format('d/m/Y') : '';
+            })
+            ->editColumn('leave', function($getLastForm){
+                return $getLastForm->leave ? with(new Carbon($getLastForm->leave))->format('d/m/Y') : '';
+            })
+            ->addColumn('action', 'internal.extension')
             ->make(true);
     }
 }

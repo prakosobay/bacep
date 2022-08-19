@@ -74,7 +74,7 @@
                     Protecting Your Technology Investment
                 </p>
                 <p class="">
-                    <a href="{{ url('logall') }}" type="button" id="" class="new-btn inter-btn" data-cleaning_id="">Create New Form</a>
+                    <a href="{{ route('logall') }}" type="button" id="" class="new-btn inter-btn" data-cleaning_id="">Create New Form</a>
                 </p>
             </div>
         </div>

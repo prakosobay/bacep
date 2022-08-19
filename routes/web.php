@@ -233,20 +233,17 @@ Route::middleware(['auth'])->group(function () {
     // Internal
     Route::controller(InternalController::class)->group(function(){
         Route::get('internal/form', 'internal_form');
-        Route::get('internal/lastform/{id}', 'internal_lastform');
+        Route::get('internal/last/form', 'internal_last_form');
         Route::get('internal/action/checkin/form/{id}', 'internal_action_checkin_form');
         Route::get('internal/action/checkout/form/{id}', 'internal_action_checkout_form');
         Route::get('/internal/pdf/{id}', 'internal_pdf');
         Route::get('internal/yajra/history', 'internal_yajra_history');
         Route::get('internal/yajra/full/approval', 'internal_yajra_full_approval');
 
-        Route::get('internal/it/yajra/full/visitor', 'internal_it_yajra_full_visitor');
-        Route::get('internal/ipcore/yajra/full/visitor', 'internal_ipcore_yajra_full_visitor');
-        Route::get('internal/bss/yajra/full/visitor', 'internal_bss_yajra_full_visitor');
-
-        Route::get('finished/show', 'finished_show');
+        Route::get('internal/finished/show', 'finished_show');
         Route::get('internal/yajra/show', 'internal_yajra_show');
         Route::get('internal/yajra/finished', 'internal_yajra_finished');
+        Route::get('internal/yajra/last/form', 'internal_yajra_last_form');
 
         Route::put('internal/checkin/update/{id}', 'internal_checkin_update');
         Route::put('internal/checkout/update/{id}', 'internal_checkout_update');

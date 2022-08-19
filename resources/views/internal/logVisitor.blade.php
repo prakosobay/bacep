@@ -75,9 +75,12 @@
                         <div class="card-body">
                             <button class="btn btn-primary btn-sm mx-1 my-2" data-bs-toggle="modal" data-bs-target="#internalModal">Create Form</button>
                             <a type="button" class="btn btn-sm btn-info mx-1 my-2" href="{{url('logall')}}">Log Form</a>
-                            <a type="button" class="btn btn-sm btn-success mx-1 my-2" href="{{ url('finished/show')}}">Finished Permit</a>
+                            <a type="button" class="btn btn-sm btn-success mx-1 my-2" href="{{ url('internal/finished/show')}}">Finished Permit</a>
+                            {{-- <a type="button" class="btn btn-sm btn-secondary mx-1 my-2" href="{{ url('internal/last/form')}}">Last Requested Form</a> --}}
                         </div>
                     </div>
+
+                    {{-- Modal --}}
                     <div class="modal fade" id="internalModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
@@ -98,6 +101,8 @@
                             </div>
                         </div>
                     </div>
+
+                    {{-- Table --}}
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-striped table-bordered" id="dataTable" width="100%" cellspacing="0">

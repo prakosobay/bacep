@@ -8,27 +8,30 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Survey extends Model
 {
-    
+
     use HasFactory,SoftDeletes;
 
     protected $table = 'surveys';
     protected $primaryKey = 'id';
-    protected $fillable = [
-<<<<<<< HEAD
-    'visit', 'leave', 'name_req', 'dept_req', 'phone_req',
-    ];
-    public function survey_personils()
+    protected $guarded = [];
+
+    public function survey_visitors()
     {
-        return $this->hasMany(SurveyPersonil::class);
+        return $this->hasMany(SurveyVisitor::class);
     }
-=======
-        'visit',
-        'leave',
-        'req_name',
-        'req_dept',
-        'req_phone',
-        'req_email',
-        'reject_note',
-    ];
->>>>>>> 8e5a3ac6191483e2faf0aeb3f9b6ee86bf6d0098
+
+    public function survey_histories()
+    {
+        return $this->hasMany(SurveyHistory::class);
+    }
+
+    public function survey_fulls()
+    {
+        return $this->hasMany(SurveyFull::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

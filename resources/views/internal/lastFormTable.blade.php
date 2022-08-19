@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Log Permit</title>
+    <title>Last Requested Form</title>
 
     {{-- bootstrap 5 --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -77,7 +77,7 @@
                             <button class="btn btn-primary btn-sm mx-1 my-2" data-bs-toggle="modal" data-bs-target="#ipcoreModal">Create Form</button>
                             <a type="button" class="btn btn-sm btn-info mx-1 my-2" href="{{url('logall')}}">Log Form</a>
                             <a type="button" class="btn btn-sm btn-success mx-1 my-2" href="{{ url('internal/finished/show')}}">Finished Permit</a>
-                            {{-- <a type="button" class="btn btn-sm btn-secondary mx-1 my-2" href="{{ url('internal/last/form')}}">Last Requested Form</a> --}}
+                            <a type="button" class="btn btn-sm btn-secondary mx-1 my-2" href="{{ url('internal/last/form')}}">Last Requested Form</a>
                         </div>
                     </div>
 
@@ -115,8 +115,7 @@
                                         <th>Date of Visit</th>
                                         <th>Date of Leave</th>
                                         <th>Name</th>
-                                        <th>Checkin</th>
-                                        <th>Checkout</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody class="isi-table text-center">
@@ -181,15 +180,14 @@
             $('#dataTable').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: '{{ url('internal/yajra/finished')}}',
+                ajax: '{{ url('internal/yajra/last/form')}}',
                 columns: [
                     { data: 'work', name: 'work' },
                     { data: 'req_name', name: 'req_name' },
                     { data: 'visit', name: 'visit' },
                     { data: 'leave', name: 'leave' },
                     { data: 'name', name: 'internal_visitors.name' },
-                    { data: 'checkin', name: 'internal_visitors.checkin' },
-                    { data: 'checkout', name: 'internal_visitors.checkout' },
+                    {data: 'action', name: 'action', orderable: false, searchable: false}
                 ]
             });
         });
