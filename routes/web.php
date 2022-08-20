@@ -234,6 +234,7 @@ Route::middleware(['auth'])->group(function () {
     Route::controller(InternalController::class)->group(function(){
         Route::get('internal/form', 'internal_form');
         Route::get('internal/last/form', 'internal_last_form');
+        Route::get('last/selected/{id}', 'last_selected');
         Route::get('internal/action/checkin/form/{id}', 'internal_action_checkin_form');
         Route::get('internal/action/checkout/form/{id}', 'internal_action_checkout_form');
         Route::get('/internal/pdf/{id}', 'internal_pdf');

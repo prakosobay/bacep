@@ -109,7 +109,7 @@
                             <table class="table table-striped table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                     <tr class="judul-table text-center">
-                                        {{-- <th>No.</th> --}}
+                                        <th>No.</th>
                                         <th>Purpose of Work</th>
                                         <th>Requestor</th>
                                         <th>Date of Visit</th>
@@ -122,18 +122,19 @@
                                     <?php
                                     $i = 1;
                                     ?>
-                                    {{-- @foreach ($getPermit as $permit)
+                                    @foreach ($internals as $internal)
                                         <tr>
                                             <td>{{ $i++ }}</td>
-                                            <td>{{ $permit->internal->work }}</td>
-                                            <td>{{ $permit->internal->req_name }}</td>
-                                            <td>{{ Carbon\Carbon::parse($permit->internal->visit)->format('d-m-Y') }}</td>
-                                            <td>{{ Carbon\Carbon::parse($permit->internal->leave)->format('d-m-Y') }}</td>
-                                            <td>{{ $permit->name }}</td>
-                                            <td>{{ $permit->checkin }}</td>
-                                            <td>{{ $permit->checkout }}</td>
+                                            <td>{{ $internal->internal->work }}</td>
+                                            <td>{{ $internal->internal->req_name }}</td>
+                                            <td>{{ Carbon\Carbon::parse($internal->visit)->format('d-m-Y') }}</td>
+                                            <td>{{ Carbon\Carbon::parse($internal->leave)->format('d-m-Y') }}</td>
+                                            <td>{{ $internal->name }}</td>
+                                            <td>
+                                                <a type="button" class="btn btn-sm btn-success mx-1 my-1" href="{{ url('last/selected', $internal->id)}}">Select</a>
+                                            </td>
                                         </tr>
-                                    @endforeach --}}
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -175,7 +176,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.js"></script>
 
-    <script>
+    {{-- <script>
         $(function() {
             $('#dataTable').DataTable({
                 processing: true,
@@ -191,6 +192,6 @@
                 ]
             });
         });
-    </script>
+    </script> --}}
 </body>
 </html>

@@ -25,8 +25,15 @@ class InternalController extends Controller
 
     public function internal_last_form()
     {
-        // $getLastForm = Internal::all();
-        return view('internal.lastFormTable');
+        $dept = auth()->user()->department;
+        $internals = InternalVisitor::groupBy('internal_id')->where('req_dept', $dept)->where('done', true)->get();
+        return view('internal.lastFormTable', compact('internals'));
+    }
+
+    public function last_selected($id)
+    {
+        $getInternal = Internal::findOrFail($id);
+        return view('internal.lastSelected', compact('getInternal'));
     }
 
     public function internal_action_checkin_form($id)
@@ -507,29 +514,6 @@ class InternalController extends Controller
             ->editColumn('leave', function($getPermit){
                 return $getPermit->leave ? with(new Carbon($getPermit->leave))->format('d/m/Y') : '';
             })
-            ->make(true);
-    }
-
-    public function internal_yajra_last_form()
-    {
-        $dept = Auth::user()->department;
-        $getLastForm = DB::table('internals')
-            ->join('internal_visitors', 'internals.id', '=', 'internal_visitors.internal_id')
-            ->join('internal_entries', 'internals.id', '=', 'internal_entries.internal_id')
-            ->join('internal_details', 'internals.id', '=', 'internal_details.internal_id')
-            ->join('internal_risks', 'internals.id', '=', 'internal_risks.internal_id')
-            ->select('internals.*', 'internal_visitors.*', 'internal_entries.*', 'internal_risks.*', 'internal_details.*')
-            ->where('internals.req_dept', $dept)
-            ->where('internal_visitors.done', 1)
-            ->groupBy('internals.id');
-        return Datatables::of($getLastForm)
-            ->editColumn('visit', function($getLastForm){
-                return $getLastForm->visit ? with(new Carbon($getLastForm->visit))->format('d/m/Y') : '';
-            })
-            ->editColumn('leave', function($getLastForm){
-                return $getLastForm->leave ? with(new Carbon($getLastForm->leave))->format('d/m/Y') : '';
-            })
-            ->addColumn('action', 'internal.extension')
             ->make(true);
     }
 }
