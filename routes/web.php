@@ -152,7 +152,7 @@ Route::middleware(['auth'])->group(function () {
 
     // Survey
     Route::controller(SurveyController::class)->group(function(){
-        Route::get('survey/form/show', 'form_show');
+        Route::get('survey/form', 'form');
         Route::get('jsona', 'json');
         Route::get('route_data_approval', 'data_approval');
         Route::get('route_history_survey', 'data_history');
@@ -160,7 +160,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/survey_pdf/{id}', 'pdf');
         Route::get('route_full_survey', 'full');
         Route::get('survey/yajra/full/visitor', 'survey_yajra_full_visitor');
-        Route::post('survey/create', 'survey_create');
+        Route::post('survey/create', 'create');
         Route::post('/approve_survey', 'approve');
         Route::post('/reject_survey', 'reject');
     });
@@ -194,6 +194,7 @@ Route::middleware(['auth'])->group(function () {
     });
 
 
+    // Other
     Route::controller(OtherController::class)->group(function(){
         // Troubleshoot
         Route::get('other/troubleshoot/show', 'show_troubleshoot_form');
@@ -240,6 +241,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/internal/pdf/{id}', 'internal_pdf');
         Route::get('internal/yajra/history', 'internal_yajra_history');
         Route::get('internal/yajra/full/approval', 'internal_yajra_full_approval');
+        Route::get('internal/getVisitor/{id}', 'getVisitor');
 
         Route::get('internal/finished/show', 'finished_show');
         Route::get('internal/yajra/show', 'internal_yajra_show');

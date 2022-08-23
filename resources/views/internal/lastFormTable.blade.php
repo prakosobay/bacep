@@ -131,7 +131,7 @@
                                             <td>{{ Carbon\Carbon::parse($internal->leave)->format('d-m-Y') }}</td>
                                             <td>{{ $internal->name }}</td>
                                             <td>
-                                                <a type="button" class="btn btn-sm btn-success mx-1 my-1" href="{{ url('last/selected', $internal->id)}}">Select</a>
+                                                <a type="button" class="btn btn-sm btn-success mx-1 my-1" href="{{ url('last/selected', $internal->internal_id)}}">Select</a>
                                             </td>
                                         </tr>
                                     @endforeach

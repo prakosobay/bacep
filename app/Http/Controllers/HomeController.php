@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{CleaningFull, MasterOb, OtherHistory, OtherPersonil, Personil, PilihanWork, Rutin, Survey, TroubleshootBm, Internal, InternalHistory, OrderHistory};
+use App\Models\{CleaningFull, MasterOb, OtherHistory, OtherPersonil, Personil, PilihanWork, Rutin, Survey, TroubleshootBm, Internal, InternalHistory, OrderHistory, SurveyHistory};
 use Illuminate\Support\Facades\{DB, Auth, Gate, Session};
 
 class HomeController extends Controller
@@ -57,7 +57,7 @@ class HomeController extends Controller
             if ($type_view == 'all') {
                 return view('all_history');
             } elseif ($type_view == 'survey') {
-                return view('sales.history');
+                return view('survey.history');
             } elseif ($type_view == 'cleaning') {
                 return view('cleaning.history');
             } elseif ($type_view == 'maintenance') {
@@ -82,13 +82,8 @@ class HomeController extends Controller
             if ($type_approve == 'all') {
                 return view('all_approval');
             } elseif ($type_approve == 'survey') {
-                $survey = DB::table('survey_histories')
-                    ->join('surveys', 'surveys.id', '=', 'survey_histories.survey_id')
-                    ->whereIn('survey_histories.role_to', $role_1)
-                    ->where('survey_histories.aktif', '=', 1)
-                    ->select('surveys.*', 'survey_histories.pdf')
-                    ->get();
-                return view('sales.approval', compact('survey'));
+                $getSurvey = SurveyHistory::where('aktif', 1)->whereIn('role_to', $role_1)->get();
+                return view('survey.approval', compact('getSurvey'));
             } elseif ($type_approve == 'cleaning') {
                 $cleaning = DB::table('cleaning_histories')
                     ->join('cleanings', 'cleanings.cleaning_id', '=', 'cleaning_histories.cleaning_id')
@@ -135,7 +130,7 @@ class HomeController extends Controller
             if ($type_full == 'all') {
                 return view('all_full_approval');
             } elseif ($type_full == 'survey') {
-                return view('sales.full_approval');
+                return view('survey.full_approval');
             } elseif ($type_full == 'cleaning') {
                 return view('cleaning.full_approval');
             } elseif ($type_full == 'maintenance') {
@@ -150,19 +145,9 @@ class HomeController extends Controller
         }
     }
 
-    public function visitor_log($type_log)
-    {
-        if($type_log == 'cleaning'){
-            return view('cleaning.log');
-        } else {
-            abort(403);
-        }
-    }
-
     public function log_all() // Routingan untuk menampilkan permit yang sudah full approve versi visitor
     {
         $dept = Auth::user()->department;
-        // dd($dept);
         switch($dept){
 
             case 'Building Management' :
@@ -181,8 +166,12 @@ class HomeController extends Controller
                 return view('internal.logVisitor');
                 break;
 
+            case 'Enterprise Sales':
+                return view('survey.logSurvey');
+                break;
+
             default:
-            abort(401);
+            abort(403);
         }
     }
 }

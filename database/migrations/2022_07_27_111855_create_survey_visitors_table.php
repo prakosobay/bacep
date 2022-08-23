@@ -18,7 +18,7 @@ class CreateSurveyVisitorsTable extends Migration
             $table->foreignId('survey_id');
             $table->string('name');
             $table->string('phone');
-            $table->string('nik');
+            $table->string('numberId');
             $table->string('company');
             $table->string('department');
             $table->string('respon')->nullable();
@@ -26,6 +26,7 @@ class CreateSurveyVisitorsTable extends Migration
             $table->string('photo_checkin')->nullable();
             $table->date('checkout')->nullable();
             $table->string('photo_checkout')->nullable();
+            $table->boolean('done');
             $table->timestamps();
         });
     }

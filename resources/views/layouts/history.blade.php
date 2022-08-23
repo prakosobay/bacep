@@ -135,10 +135,17 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="">
-                    <i class="far fa-address-card"></i>
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSurvey"
+                    aria-expanded="true" aria-controls="collapseSurvey">
+                    <i class="fas fa-fw fa-cog"></i>
                     <span>Customer Survey</span>
                 </a>
+                <div id="collapseSurvey" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Option :</h6>
+                        <a class="collapse-item" href="{{ url('history/survey')}}">Customer Survey</a>
+                    </div>
+                </div>
             </li>
 
             <li class="nav-item">

@@ -20,7 +20,7 @@ class CreateMasterCompaniesTable extends Migration
             $table->string('name')->unique();
             $table->text('address');
             $table->string('phone')->unique();
-            $table->string('website');
+            $table->string('website')->unique();
             $table->softDeletes();
             $table->timestamps();
         });

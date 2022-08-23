@@ -19,9 +19,6 @@ class CreateSurveyFullsTable extends Migration
             $table->string('work');
             $table->date('visit');
             $table->date('leave');
-            $table->string('request');
-            $table->date('visit');
-            $table->date('leave');
             $table->date('request');
             $table->string('link');
             $table->string('note');

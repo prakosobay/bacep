@@ -14,9 +14,9 @@ class CreateOrderHistoriesTable extends Migration
     public function up()
     {
         Schema::create('order_histories', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->foreignUuid('order_id');
-            $table->string('created_by');
+            $table->id();
+            $table->foreignId('order_id');
+            $table->foreignId('created_by');
             $table->string('role_to');
             $table->string('status');
             $table->boolean('pdf', false);

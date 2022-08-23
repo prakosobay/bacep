@@ -26,7 +26,11 @@ class InternalController extends Controller
     public function internal_last_form()
     {
         $dept = auth()->user()->department;
-        $internals = InternalVisitor::groupBy('internal_id')->where('req_dept', $dept)->where('done', true)->get();
+        // $internals = InternalVisitor::groupBy('internal_id')->where('req_dept', $dept)->where('done', true)->get();
+        $internals = InternalVisitor::where('req_dept', $dept)
+                ->where('done', 1)
+                ->groupBy('internal_id')
+                ->get();
         return view('internal.lastFormTable', compact('internals'));
     }
 
@@ -54,6 +58,7 @@ class InternalController extends Controller
         $getPermit = InternalVisitor::where('done', true)->where('req_dept', $dept)->get();
         return view('internal.finished', compact('getPermit'));
     }
+
 
 
 
@@ -170,7 +175,8 @@ class InternalController extends Controller
 
             $notif_email = Internal::find($insertForm->id);
             foreach ([
-                'bayu.prakoso@balitower.co.id', 'yoga.agus@balitower.co.id'
+                'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
+                'ilham.pangestu@balitower.co.id', 'irwan.trisna@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id',
             ] as $recipient) {
                 Mail::to($recipient)->send(new NotifInternalForm($notif_email));
             }
@@ -224,7 +230,6 @@ class InternalController extends Controller
     // Approve
     public function internal_approve($id) // Function flow approval
     {
-        // dd($id);
         $last_update = InternalHistory::where('internal_id', $id)->latest()->first();
         // dd($last_update);
         $notif_email = DB::table('internals')
@@ -256,21 +261,22 @@ class InternalController extends Controller
             $role_to = '';
             if ($last_update->role_to == 'review') {
                 foreach ([
-                    'bayu.prakoso@balitower.co.id',
+                    'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
+                    'ilham.pangestu@balitower.co.id', 'irwan.trisna@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id',
                 ] as $recipient) {
                     Mail::to($recipient)->send(new NotifInternalForm($notif_email));
                 }
                 $role_to = 'check';
             } elseif ($last_update->role_to == 'check') {
                 foreach ([
-                    'bayu.prakoso@balitower.co.id'
+                    'security.bacep@balitower.co.id',
                 ] as $recipient) {
                     Mail::to($recipient)->send(new NotifInternalForm($notif_email));
                 }
                 $role_to = 'security';
             } elseif ($last_update->role_to == 'security') {
                 foreach ([
-                    'bayu.prakoso@balitower.co.id'
+                    'bayu.prakoso@balitower.co.id', 'tofiq.hidayat@balitower.co.id',
                 ] as $recipient) {
                     Mail::to($recipient)->send(new NotifInternalForm($notif_email));
                 }
@@ -278,7 +284,7 @@ class InternalController extends Controller
             } elseif ($last_update->role_to = 'head') {
                 $full = Internal::find($id);
                 foreach ([
-                    'bayu.prakoso@balitower.co.id'
+                    'dc@balitower.co.id',
                 ] as $recipient) {
                     Mail::to($recipient)->send(new NotifInternalFull($full));
                 }

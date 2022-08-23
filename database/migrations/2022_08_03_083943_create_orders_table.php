@@ -14,12 +14,8 @@ class CreateOrdersTable extends Migration
     public function up()
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->string('req_name');
-            $table->string('req_email');
-            $table->string('req_phone');
-            $table->string('req_dept');
-            $table->string('req_company');
+            $table->id();
+            $table->foreignId('user_id');
             $table->softDeletes();
             $table->timestamps();
         });

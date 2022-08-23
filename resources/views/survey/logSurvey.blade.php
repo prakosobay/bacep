@@ -73,32 +73,10 @@
                 <div class="tab-content" id="myTabContent">
                     <div class="container-fluid">
                         <div class="card-body">
-                            <button class="btn btn-primary btn-sm mx-1 my-2" data-bs-toggle="modal" data-bs-target="#internalModal">Create Form</button>
+                            <a type="button" class="btn btn-primary btn-sm mx-1 my-2" href="{{ url('survey/form') }}">Create Form</a>
                             <a type="button" class="btn btn-sm btn-info mx-1 my-2" href="{{url('logall')}}">Log Form</a>
-                            <a type="button" class="btn btn-sm btn-success mx-1 my-2" href="{{ url('internal/finished/show')}}">Finished Permit</a>
-                            <a type="button" class="btn btn-sm btn-secondary mx-1 my-2" href="{{ url('internal/last/form')}}">Last Requested Form</a>
-                        </div>
-                    </div>
-
-                    {{-- Modal --}}
-                    <div class="modal fade" id="internalModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Pilih Form</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('internal/form')}}">AR CR Form</a>
-                                    {{-- <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('order/form')}}">Consumable Form</a>
-                                    <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('internal/formBarang')}}">AR CR + Barang Form</a>
-                                    <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('internal/formConsumableBarang')}}">AR CR + Consumable + Barang Form</a> --}}
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Select</button>
-                                </div>
-                            </div>
+                            <a type="button" class="btn btn-sm btn-success mx-1 my-2" href="{{ url('survey/finished/show')}}">Finished Permit</a>
+                            <a type="button" class="btn btn-sm btn-secondary mx-1 my-2" href="{{ url('survey/last/form')}}">Last Requested Form</a>
                         </div>
                     </div>
 
@@ -161,12 +139,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.js"></script>
 
-    <script>
+    {{-- <script>
         $(function() {
             $('#dataTable').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: '{{ url('internal/yajra/show')}}',
+                ajax: '{{ url('survey/yajra/show')}}',
                 columns: [
                     { data: 'work', name: 'internals.work' },
                     { data: 'req_name', name: 'internals.req_name' },
@@ -179,6 +157,6 @@
                 ]
             });
         });
-    </script>
+    </script> --}}
 </body>
 </html>

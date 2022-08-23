@@ -72,7 +72,7 @@
                     <div class="col-4">
                         <div class="form-group mb-5">
                             <label for="rack" class="form-label">Rack :</label>
-                            <input type="text" class="form-control @error('rack') is-invalid @enderror" id="rack" name="rack" value="{{ old('rack')}}" required>
+                            <input type="text" class="form-control @error('rack') is-invalid @enderror" id="rack" name="rack" value="{{ $getInternal->rack }}" required>
                             @error('rack')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message}}</strong>
@@ -197,9 +197,10 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($getInternal->detail as $p)
                             <tr>
                                 <td>
-                                    <input type="time" class="form-control @error('time_start') is-invalid @enderror" id="time_start" name="time_start[]" value="{{ old('time_start')}}" required>
+                                    <input type="time" class="form-control @error('time_start') is-invalid @enderror" id="time_start" name="time_start[]" value="{{ $p->time_start }}" required>
                                     @error('time_start')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -207,7 +208,7 @@
                                     @enderror
                                 </td>
                                 <td>
-                                    <input type="time" class="form-control @error('time_end') is-invalid @enderror" id="time_end" name="time_end[]" value="{{ old('time_end')}}" required>
+                                    <input type="time" class="form-control @error('time_end') is-invalid @enderror" id="time_end" name="time_end[]" value="{{ $p->time_end}}" required>
                                     @error('time_end')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -215,7 +216,7 @@
                                     @enderror
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control @error('activity') is-invalid @enderror" id="activity" name="activity[]" value="{{ old('activity')}}" required>
+                                    <input type="text" class="form-control @error('activity') is-invalid @enderror" id="activity" name="activity[]" value="{{ $p->activity }}" required>
                                     @error('activity')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -223,7 +224,7 @@
                                     @enderror
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control @error('service_impact') is-invalid @enderror" id="service_impact" name="service_impact[]" value="{{ old('service_impact')}}" required>
+                                    <input type="text" class="form-control @error('service_impact') is-invalid @enderror" id="service_impact" name="service_impact[]" value="{{ $p->service_impact }}" required>
                                     @error('service_impact')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -231,7 +232,7 @@
                                     @enderror
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control @error('item') is-invalid @enderror" id="detailTime" name="item[]" value="{{ old('item')}}" required>
+                                    <input type="text" class="form-control @error('item') is-invalid @enderror" id="detailTime" name="item[]" value="{{ $p->item }}" required>
                                     @error('item')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -239,6 +240,7 @@
                                     @enderror
                                 </td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                     <button id="button_detail"><b>Add More Fields</b></button>
@@ -259,9 +261,10 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($getInternal->risk as $p)
                             <tr>
                                 <td>
-                                    <input type="text" class="form-control @error('risk') is-invalid @enderror" name="risk[]" value="{{ old('risk')}}" required>
+                                    <input type="text" class="form-control @error('risk') is-invalid @enderror" name="risk[]" value="{{ $p->risk }}" required>
                                     @error('risk')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -269,7 +272,7 @@
                                     @enderror
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control @error('poss') is-invalid @enderror" name="poss[]" value="{{ old('poss')}}" required>
+                                    <input type="text" class="form-control @error('poss') is-invalid @enderror" name="poss[]" value="{{ $p->poss }}" required>
                                     @error('poss')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -290,7 +293,7 @@
                                     @enderror
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control @error('mitigation') is-invalid @enderror" name="mitigation[]" value="{{ old('mitigation')}}" required>
+                                    <input type="text" class="form-control @error('mitigation') is-invalid @enderror" name="mitigation[]" value="{{ $p->mitigation }}" required>
                                     @error('mitigation')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -298,6 +301,7 @@
                                     @enderror
                                 </td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                     <button id="button_risk"><b>Add More Fields</b></button>
@@ -312,27 +316,29 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($getInternal->visitor as $p)
                             <tr>
                                 <th>Name</th>
-                                <td><input type="text" class="form-control" name="nama[]" value="{{ old('nama')}}" required></td>
+                                <td><input type="text" class="form-control" name="nama[]" id="name_id" value="{{ $p->name }}"></td>
                                 <th>Phone Number</th>
-                                <td><input type="text" class="form-control" name="phone[]" value="{{ old('phone')}}" required></td>
+                                <td><input type="text" class="form-control" name="phone[]" id="phone_id" value="{{ $p->phone }}"></td>
                             </tr>
                             <tr>
                                 <th>Number ID</th>
-                                <td><input type="text" class="form-control" name="numberId[]" value="{{ old('numberId')}}" required></td>
+                                <td><input type="text" class="form-control" name="numberId[]" id="number_id" value="{{ $p->numberId }}"></td>
                                 <th>Company</th>
-                                <th><input type="text" class="form-control" name="company[]" value="{{ old('company')}}" required></th>
+                                <th><input type="text" class="form-control" name="company[]" id="company_id" value="{{ $p->company }}"></th>
                             </tr>
                             <tr>
                                 <th>Department</th>
-                                <td><input type="text" class="form-control" name="department[]" value="{{ old('department')}}" required></td>
+                                <td><input type="text" class="form-control" name="department[]" id="department_id" value="{{ $p->department }}"></td>
                                 <th>Responsibility</th>
-                                <td><input type="text" class="form-control" name="respon[]" value="{{ old('respon')}}" required></td>
+                                <td><input type="text" class="form-control" name="respon[]" id="respon_id" value="{{ $p->respon }}"></td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
-                    <button id="button_visitor"><b>Add More Fields</b></button>
+                    <button class="mx-3" id="button_visitor"><b>Add More Fields</b></button>
                 </div>
 
                 @if (count($errors) > 0)
@@ -353,47 +359,74 @@
     </div>
 </div>
 @stack('script')
+<script src="{{ asset('vendor/jquery/jquery-3.2.1.min.js')}}"></script>
 <script>
-$(document).ready(function(){
+    $(document).ready(function(){
 
-    // $('.js-example-basic-multiple').select2({
-    //     placeholder: 'Select an option',
-    //     allowClear : true,
-    //     tags : true,
-    // });
+        // $('.js-example-basic-multiple').select2({
+        //     placeholder: 'Select an option',
+        //     allowClear : true,
+        //     tags : true,
+        // });
 
-    let max_row = 15;
-    let row = 1;
-    let button_detail = $('#button_detail');
-    let table_detail = $('#table_detail');
-    let button_risk = $('#button_risk');
-    let table_risk = $('#table_risk');
-    let button_visitor = $('#button_visitor');
-    let table_visitor = $('#table_visitor');
+        let max_row = 15;
+        let row = 1;
+        let button_detail = $('#button_detail');
+        let table_detail = $('#table_detail');
+        let button_risk = $('#button_risk');
+        let table_risk = $('#table_risk');
+        let button_visitor = $('#button_visitor');
+        let table_visitor = $('#table_visitor');
 
-    $(button_detail).click(function(e){
-        e.preventDefault();
-        if(row < max_row){
-            $(table_detail).append('<tr><td><input type="time" class="form-control" id="time_start" name="time_start[]" value=""></td><td><input type="time" class="form-control" id="time_end" name="time_end[]"></td><td><input type="text" class="form-control" id="activity" name="activity[]"></td><td> <input type="text" class="form-control" id="service_impact" name="service_impact[]" value=""></td><td><input type="text" class="form-control" id="detailTime" name="item[]" value=""></td></tr>');
-            row++;
-        }
-    });
+        $(button_detail).click(function(e){
+            e.preventDefault();
+            if(row < max_row){
+                $(table_detail).append('<tr><td><input type="time" class="form-control" id="time_start" name="time_start[]" value=""></td><td><input type="time" class="form-control" id="time_end" name="time_end[]"></td><td><input type="text" class="form-control" id="activity" name="activity[]"></td><td> <input type="text" class="form-control" id="service_impact" name="service_impact[]" value=""></td><td><input type="text" class="form-control" id="detailTime" name="item[]" value=""></td></tr>');
+                row++;
+            }
+        });
 
-    $(button_risk).click(function(e){
-        e.preventDefault();
-        if(row < max_row){
-            $(table_risk).append('<tr><td><input type="text" class="form-control @error('risk') is-invalid @enderror" name="risk[]" value="{{ old('risk')}}">@error('risk')<span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>@enderror</td><td><input type="text" class="form-control @error('poss') is-invalid @enderror" name="poss[]" value="{{ old('poss')}}">@error('poss')<span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>@enderror</td><td><select name="impact[]" id="impact" class="form-select @error('impact') is-invalid @enderror"><option value=""></option><option value="Low">Low</option><option value="Medium">Medium</option><option value="High">High</option></select>@error('impact')<span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>@enderror</td><td><input type="text" class="form-control @error('mitigation') is-invalid @enderror" name="mitigation[]" value="{{ old('mitigation')}}">@error('mitigation')<span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>@enderror</td></tr>');
-            row++;
-        }
-    });
+        $(button_risk).click(function(e){
+            e.preventDefault();
+            if(row < max_row){
+                $(table_risk).append('<tr><td><input type="text" class="form-control @error('risk') is-invalid @enderror" name="risk[]" value="{{ old('risk')}}">@error('risk')<span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>@enderror</td><td><input type="text" class="form-control @error('poss') is-invalid @enderror" name="poss[]" value="{{ old('poss')}}">@error('poss')<span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>@enderror</td><td><select name="impact[]" id="impact" class="form-select @error('impact') is-invalid @enderror"><option value=""></option><option value="Low">Low</option><option value="Medium">Medium</option><option value="High">High</option></select>@error('impact')<span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>@enderror</td><td><input type="text" class="form-control @error('mitigation') is-invalid @enderror" name="mitigation[]" value="{{ old('mitigation')}}">@error('mitigation')<span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>@enderror</td></tr>');
+                row++;
+            }
+        });
 
-    $(button_visitor).click(function(e){
+        $(button_visitor).click(function(e){
         e.preventDefault();
         if(row < max_row){
             $(table_visitor).append('<tr><th>Name</th><td><input type="text" class="form-control" name="nama[]" value=""></td><th>Phone Number</th><td><input type="text" class="form-control" name="phone[]" value=""></td></tr><tr><th>Number ID</th><td><input type="text" class="form-control" name="numberId[]" value=""></td><th>Company</th><th><input type="text" class="form-control" name="company[]" value=""></th></tr><tr><th>Department</th><td><input type="text" class="form-control" name="department[]" value=""></td><th>Responsibility</th><td><input type="text" class="form-control" name="respon[]" value=""></td></tr>');
             row++;
         }
     });
-});
+
+        // $(button_visitor).click(function(e){
+        //     e.preventDefault();
+        //     if(row < max_row){
+        //         $(table_visitor).append();
+        //         row++;
+        //     }
+        // });
+
+        // $('#pilihan1').change(function(){
+        //     let id = $(this).val();
+        //     $.ajax({
+        //         url: "{{url("internal/getVisitor")}}"+'/'+id,
+        //         dataType:"json",
+        //         type: "get",
+        //         success: function(response){
+        //             const {data} = response;
+        //             console.log(data)
+        //         $('#phone_id').val(data.phone);
+        //         $('#number_id').val(data.numberId);
+        //         $('#company_id').val(data.company);
+        //         $('#department_id').val(data.department);
+        //         $('#respon_id').val(data.respon);
+        //         }
+        //     });
+        // });
+    });
 </script>
 @endsection
