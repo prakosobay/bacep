@@ -17,16 +17,7 @@
                                 {{ session('Sukses') }}
                             </div>
                         @endif
-                        {{--
-                        @if (count($errors) > 0)
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif --}}
+
 
                         {{-- Requestor --}}
                         <div class="row my-4">
@@ -87,51 +78,38 @@
                             <tbody class="bg1">
                                 <tr>
                                     <td>
-                                        <input class="form-input @error('name') is-invalid @enderror" value="{{ old('name') }}" type="text" name="name[]" id="name_id" required>
-                                        @error('name')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
+                                        <input type="text" class="form-control @error('name') is-invalid @enderror" name="name[]" value="{{ old('name')}}" required>
                                     </td>
                                     <td>
-                                        <input class="form-input @error('number') is-invalid @enderror" value="{{ old('number') }}" type="text" name="number[]" id="number_id" required>
-                                        @error('number')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
+                                        <input type="text" class="form-control @error('number') is-invalid @enderror" name="number[]" value="{{ old('number')}}" required>
                                     </td>
                                     <td>
-                                        <input class="form-input @error('phone') is-invalid @enderror" value="{{ old('phone') }}" type="text" name="phone[]" id="phone_id" required>
-                                        @error('phone')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
+                                        <input type="text" class="form-control @error('phone') is-invalid @enderror" name="phone[]" value="{{ old('phone')}}" required>
                                     </td>
                                     <td>
-                                        <input class="form-input @error('company') is-invalid @enderror" value="{{ old('company') }}" type="text" name="company[]" id="company_id" required>
-                                        @error('company')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
+                                        <input type="text" class="form-control @error('company') is-invalid @enderror" name="company[]" value="{{ old('company')}}" required>
                                     </td>
                                     <td>
-                                        <input class="form-input @error('department') is-invalid @enderror" value="{{ old('department') }}" type="text" name="department[]" id="department_id" required>
-                                        @error('department')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
+                                        <input type="text" class="form-control @error('department') is-invalid @enderror" name="department[]" value="{{ old('department')}}" required>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
+
                         <div class="container my-3 mx-2">
-                            <button id="button_visitor"><b>Add More Fields</b></button>
+                            <button class="mx-2" id="button_visitor"><b>Add More Fields</b></button>
+                            {{-- <button class="mx-2" id="button_remove"><b>Remove Fields</b></button> --}}
                         </div>
+
+                        @if (count($errors) > 0)
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
 
                         {{-- Submit --}}
                         <div class="container my-2">
@@ -149,16 +127,22 @@
         let max_row = 6;
         let row = 1;
         let button_visitor = $('#button_visitor');
+        let button_remove = $('#button_remove');
         let table_visitor = $('#table_visitor');
 
         $(button_visitor).click(function(e){
             e.preventDefault();
             if(row < max_row){
-                $(table_visitor).append('<tr><td><input class="form-input @error('name') is-invalid @enderror" value="{{ old('name') }}" type="text" name="name[]" id="name_id" required>@error('name')<span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>@enderror</td><td><input class="form-input @error('number') is-invalid @enderror" value="{{ old('number') }}" type="text" name="number[]" id="number_id" required>@error('number')<span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>@enderror</td><td><input class="form-input @error('phone') is-invalid @enderror" value="{{ old('phone') }}" type="text" name="phone[]" id="phone_id" required>@error('phone')<span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>@enderror</td><td><input class="form-input @error('company') is-invalid @enderror" value="{{ old('company') }}" type="text" name="company[]" id="company_id" required>@error('company')<span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>@enderror</td><td><input class="form-input @error('department') is-invalid @enderror" value="{{ old('department') }}" type="text" name="department[]" id="department_id" required>@error('department')<span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>@enderror</td></tr>');
+                $(table_visitor).append('<tr><td><input type="text" class="form-control @error('name') is-invalid @enderror" name="name[]" value="{{ old('name')}}" ></td><td><input type="text" class="form-control @error('number') is-invalid @enderror" name="number[]" value="{{ old('number')}}" ></td><td><input type="text" class="form-control @error('phone') is-invalid @enderror" name="phone[]" value="{{ old('phone')}}" ></td><td><input type="text" class="form-control @error('company') is-invalid @enderror" name="company[]" value="{{ old('company')}}" ></td><td><input type="text" class="form-control @error('department') is-invalid @enderror" name="department[]" value="{{ old('department')}}" ></td></tr>');
                 row++;
             }
         });
+
+        // $(table_visitor).on("click","#button_remove", function(e){ //user click on remove text
+        //     e.preventDefault();
+        //     $(this).parent('tr').remove();
+        //     x--;
+        // });
     });
 </script>
-
 @endsection

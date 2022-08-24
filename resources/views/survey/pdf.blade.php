@@ -195,11 +195,11 @@
             <table cellpadding="3" class="table table-hover">
                 <tr >
                     <td width="150px">Date of Request</td>
-                    <td >: {{Carbon\Carbon::parse($survey->created_at)->format('d-m-Y H:i')}}</td>
+                    <td >: {{Carbon\Carbon::parse($getSurvey->created_at)->format('d-m-Y H:i')}}</td>
                 </tr>
                 <tr >
                     <td width="150px">Change Request Number: </td>
-                    <td >: {{$survey->id}}</td>
+                    <td >: {{$getSurvey->id}}</td>
                 </tr>
                 <tr >
                     <td width="150px">Purpose of Work</td>
@@ -213,15 +213,15 @@
                 </tr>
                 <tr >
                     <td width="150px">Name</td>
-                    <td >: {{$survey->name_req}}</td>
+                    <td >: {{$getSurvey->user->name}}</td>
                 </tr>
                 <tr >
                     <td width="150px">Department</td>
-                    <td >: {{$survey->dept_req}}</td>
+                    <td >: {{$getSurvey->user->department}}</td>
                 </tr>
                 <tr >
                     <td width="150px">Phone Number</td>
-                    <td >: {{$survey->phone_req}}</td>
+                    <td >: {{$getSurvey->user->phone}}</td>
                 </tr>
             </table>
 
@@ -236,41 +236,15 @@
                     <td class="table-grey"><b>Company</b></td>
                     <td class="table-grey"><b>Department</b></td>
                 </tr>
-                <tr >
-                    <td class="table-white">1. {{$survey->visit_name[0]}}</td>
-                    <td class="table-center">{{$survey->visit_nik[0]}}</td>
-                    <td class="table-center">{{$survey->visit_phone[0]}}</td>
-                    <td class="table-center">{{$survey->visit_company[0]}}</td>
-                    <td class="table-center">{{$survey->visit_dept[0]}}</td>
-                </tr>
-                <tr >
-                    <td class="table-white">2. {{$survey->visit_name[1]}}</td>
-                    <td class="table-center">{{$survey->visit_nik[1]}}</td>
-                    <td class="table-center">{{$survey->visit_phone[1]}}</td>
-                    <td class="table-center">{{$survey->visit_company[1]}}</td>
-                    <td class="table-center">{{$survey->visit_dept[1]}}</td>
-                </tr>
-                <tr >
-                    <td class="table-white">3. {{$survey->visit_name[2]}}</td>
-                    <td class="table-center">{{$survey->visit_nik[2]}}</td>
-                    <td class="table-center">{{$survey->visit_phone[2]}}</td>
-                    <td class="table-center">{{$survey->visit_company[2]}}</td>
-                    <td class="table-center">{{$survey->visit_dept[2]}}</td>
-                </tr>
-                <tr >
-                    <td class="table-white">4. {{$survey->visit_name[3]}}</td>
-                    <td class="table-center">{{$survey->visit_nik[3]}}</td>
-                    <td class="table-center">{{$survey->visit_phone[3]}}</td>
-                    <td class="table-center">{{$survey->visit_company[3]}}</td>
-                    <td class="table-center">{{$survey->visit_dept[3]}}</td>
-                </tr>
-                <tr >
-                    <td class="table-white">5. {{$survey->visit_name[4]}}</td>
-                    <td class="table-center">{{$survey->visit_nik[4]}}</td>
-                    <td class="table-center">{{$survey->visit_phone[4]}}</td>
-                    <td class="table-center">{{$survey->visit_company[4]}}</td>
-                    <td class="table-center">{{$survey->visit_dept[4]}}</td>
-                </tr>
+                @foreach ($getSurvey->visitors as $visitor)
+                    <tr >
+                        <td class="table-white">{{$visitor->name}}</td>
+                        <td class="table-center">{{$visitor->numberId}}</td>
+                        <td class="table-center">{{$visitor->phone}}</td>
+                        <td class="table-center">{{$visitor->company}}</td>
+                        <td class="table-center">{{$visitor->department}}</td>
+                    </tr>
+                @endforeach
             </table>
 
             {{-- Entry Area --}}
@@ -338,12 +312,12 @@
                         <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   Parking Lot
                     </td>
 
-                    <td class="table-white">{{Carbon\Carbon::parse($survey->visit)->format('d-m-Y')}}</td>
-                    <td class="table-white">{{Carbon\Carbon::parse($survey->leave)->format('d-m-Y')}}</td>
+                    <td class="table-white">{{Carbon\Carbon::parse($getSurvey->visit)->format('d-m-Y')}}</td>
+                    <td class="table-white">{{Carbon\Carbon::parse($getSurvey->leave)->format('d-m-Y')}}</td>
                 </tr>
             </table>
 
-            <table cellpadding="5" class="table-approval">
+            {{-- <table cellpadding="5" class="table-approval">
                 <tr >
                     <th class="col_approval">**Prepared by</th>
                     <th class="col_approval">**Approved by</th>
@@ -353,7 +327,7 @@
                     @switch($log->status)
                         @case('requested')
                             <td class="col_approval"><img src="{{ public_path("gambar/Requested.png") }}" alt="" style="width: 80px; height: 40px;">
-                                <p class="cr">Nama    : {{$survey->name_req}}</p>
+                                <p class="cr">Nama    : {{$getHistory->createdBy->name}}</p>
                                 <p class="cr">Tanggal : {{Carbon\Carbon::parse($survey->created_at)->format('d-m-Y H:i')}}</p>
                             </td>
                             <td class="col_approval">
@@ -368,7 +342,7 @@
 
                         @case('reviewed')
                         <td class="col_approval"><img src="{{ public_path("gambar/Requested.png") }}" alt="" style="width: 80px; height: 40px;">
-                            <p class="cr">Nama    : {{$survey->name_req}}</p>
+                            <p class="cr">Nama    : {{$$getHistory->createdBy->name}}</p>
                             <p class="cr">Tanggal : {{Carbon\Carbon::parse($survey->created_at)->format('d-m-Y H:i')}}</p>
                         </td>
                         <td class="col_approval">
@@ -383,7 +357,7 @@
 
                         @case('acknowledge')
                             <td class="col_approval"><img src="{{ public_path("gambar/Requested.png") }}" alt="" style="width: 80px; height: 40px;">
-                                <p class="cr">Nama    : {{$survey->name_req}}</p>
+                                <p class="cr">Nama    : {{$getHistory->createdBy->name}}</p>
                                 <p class="cr">Tanggal : {{Carbon\Carbon::parse($survey->created_at)->format('d-m-Y H:i')}}</p>
                             </td>
                             <td class="col_approval">
@@ -418,7 +392,7 @@
                     <td class="col_approval"><b>Data Center Operational Section Head</b></td>
                     <td class="col_approval"><b>Security</b></td>
                 </tr>
-            </table>
+            </table> --}}
 
             <p >** On public holiday signatory will be handled by appointed Data Center Operation Shift Engineer on duty</p>
             <p>(Pada hari libur Nasional tanda tangan akan diwakilkan kepetugas operasional yang ditunjuk)</p>

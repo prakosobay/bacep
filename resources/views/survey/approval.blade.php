@@ -16,7 +16,7 @@
         @endif
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-striped table-bordered" id="approve_internal" width="100%" cellspacing="0">
+                <table class="table table-striped table-bordered" id="approve_survey" width="100%" cellspacing="0">
                     <thead>
                         <tr class="judul-table text-center">
                             <th>ID Permit</th>

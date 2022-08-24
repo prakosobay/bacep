@@ -16,6 +16,8 @@
                             <th>Requestor Dept</th>
                             <th>Date of Visit</th>
                             <th>Purpose of Work</th>
+                            <th>Name</th>
+                            <th>Checkin</th>
                             <th>Link</th>
                         </tr>
                     </thead>
@@ -39,7 +41,9 @@
                     { data: 'req_dept', name: 'req_dept' },
                     { data: 'visit', name: 'visit' },
                     { data: 'work', name: 'work' },
-                    {data: 'action', name: 'action', orderable: false, searchable: false}
+                    { data: 'name', name: 'internal_visitors.name' },
+                    { data: 'checkin', name: 'internal_visitors.checkin' },
+                    { data: 'action', name: 'action', orderable: false, searchable: false }
                 ]
             });
         });

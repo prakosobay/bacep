@@ -16,34 +16,32 @@ class SurveyController extends Controller
         return view('survey.form');
     }
 
-    public function show_troubleshoot_reject()
-    {
-        return view('sales.list_reject');
-    }
-
     public function create(Request $request)
     {
-        // dd($request->all());
         $request->validate([
-            'visit' => ['required', 'date', 'after:yesterday'],
-            'leave' => ['required', 'date', 'after:yesterday', 'after_or_equal:visit'],
-            'name' => ['required', 'alpha', 'max:255'],
-            'phone' => ['required', 'regex:/^([0-9\s\-\+\(\)]*)$/', 'min:10'],
-            'number' => ['required', 'string', 'max:255'],
-            'company' => [ 'required', 'string', 'max:255'],
-            'department' => ['required', 'string', 'max:255'],
+            'visit' => ['required', 'after:yesterday'],
+            'leave' => ['required', 'after_or_equal:visit'],
+            'name[]' => ['string', 'max:255'],
+            'number[]' => ['string', 'max:255'],
+            'phone[]' => ['max:255'],
+            'company[]' => ['string', 'max:255'],
+            'department[]' => ['string', 'max:255'],
         ]);
+
+        $input = $request->all();
+        dd($input);
 
         DB::beginTransaction();
 
         try {
-            $input = $request->all();
+
             $insertSurvey = Survey::create([
-                'visit' => $request->visit,
-                'leave' => $request->leave,
+                'user_id' => auth()->user()->id,
+                'visit' => $input['visit'],
+                'leave' => $input['leave'],
             ]);
 
-            $arrayDetail = [];
+            $arrayVisitor = [];
             foreach($input['name'] as $k => $v){
                 $insertArray = [];
                 if(isset($input['name'][$k])){
@@ -52,17 +50,17 @@ class SurveyController extends Controller
                         'survey_id' => $insertSurvey->id,
                         'name' => $input['name'][$k],
                         'phone' => $input['phone'][$k],
-                        'numberId' => $input['numberId'][$k],
-                        'company' => $input['company'][$k],
+                        'numberId' => $input['number'][$k],
                         'department' => $input['department'][$k],
+                        'company' => $input['company'][$k],
                         'created_at' => now(),
                         'updated_at' => now(),
                     ];
 
-                    $arrayDetail[] = $insertArray;
+                    $arrayVisitor[] = $insertArray;
                 }
             }
-            $insertSurvey = SurveyVisitor::insert($arrayDetail);
+            $insertVisitor = SurveyVisitor::insert($arrayVisitor);
 
             $insertLog = SurveyHistory::insert([
                 'survey_id' => $insertSurvey->id,
@@ -81,6 +79,16 @@ class SurveyController extends Controller
             DB::rollBack();
             throw $e;
         }
+    }
+
+    public function pdf($id)
+    {
+        $getLastHistory = SurveyHistory::where('survey_id', $id)->where('aktif', 1)->first();
+        $getLastHistory->update(['pdf' => true]);
+        $getSurvey = Survey::findOrFail($id);
+
+        $pdf = PDF::loadview('survey.pdf', compact('getLastHistory', 'getSurvey'))->setPaper('a4', 'portrait')->setWarnings(false);
+        return $pdf->stream();
     }
 }
 

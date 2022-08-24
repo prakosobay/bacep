@@ -149,22 +149,20 @@ Route::middleware(['auth'])->group(function () {
     });
 
 
-
     // Survey
     Route::controller(SurveyController::class)->group(function(){
         Route::get('survey/form', 'form');
+        Route::get('/survey/pdf/{id}', 'pdf');
         Route::get('jsona', 'json');
         Route::get('route_data_approval', 'data_approval');
         Route::get('route_history_survey', 'data_history');
         Route::get('history/{type_view}', 'log_view');
-        Route::get('/survey_pdf/{id}', 'pdf');
         Route::get('route_full_survey', 'full');
         Route::get('survey/yajra/full/visitor', 'survey_yajra_full_visitor');
         Route::post('survey/create', 'create');
         Route::post('/approve_survey', 'approve');
         Route::post('/reject_survey', 'reject');
     });
-
 
 
     // Cleaning
