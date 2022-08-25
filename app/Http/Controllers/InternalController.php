@@ -494,9 +494,6 @@ class InternalController extends Controller
 
     public function internal_yajra_full_approval()
     {
-        // $full = DB::table('internal_fulls')
-        //     ->join('internal_visitors', 'internal_fulls.req_dept', '=', 'internal_visitors.req_dept')
-        //     ->select('internal_fulls.*');
         $full = DB::table('internals')
                 ->join('internal_visitors', 'internals.id', 'internal_visitors.internal_id')
                 ->join('internal_fulls', 'internals.id', 'internal_fulls.internal_id')

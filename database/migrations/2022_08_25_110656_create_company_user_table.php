@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddCardToInternalFullsTable extends Migration
+class CreateCompanyUserTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class AddCardToInternalFullsTable extends Migration
      */
     public function up()
     {
-        Schema::table('internal_fulls', function (Blueprint $table) {
-            $table->integer('card')->nullable()->after('link');
+        Schema::create('company_user', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('company_id');
+            $table->foreignId('user_id');
+            $table->timestamps();
         });
     }
 
@@ -25,8 +28,6 @@ class AddCardToInternalFullsTable extends Migration
      */
     public function down()
     {
-        Schema::table('internal_fulls', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('company_user');
     }
 }

@@ -33,7 +33,7 @@ class HomeController extends Controller
             $arrole[] = $rolee->name;
         }
         Session::put('arrole', $arrole);
-        // dd($arrole);
+        // dd($arrole[0]);
         // return view('home');
         // if($arrole){
         return view('homepage');

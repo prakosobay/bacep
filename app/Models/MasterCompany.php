@@ -14,18 +14,18 @@ class MasterCompany extends Model
     protected $primaryKey = 'id';
     protected $guarded = [];
 
-    public function departments()
-    {
-        return $this->hasMany(MasterDepartment::class);
-    }
-
     public function racks()
     {
         return $this->hasMany(MasterRack::class);
     }
 
-    public function createdBy()
+    public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
     }
 }

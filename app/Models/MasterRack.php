@@ -19,7 +19,7 @@ class MasterRack extends Model
         return $this->belongsTo(MasterRoom::class);
     }
 
-    public function createdBy()
+    public function user()
     {
         return $this->belongsTo(User::class);
     }
@@ -27,5 +27,10 @@ class MasterRack extends Model
     public function company()
     {
         return $this->belongsTo(MasterCompany::class);
+    }
+
+    public function colos()
+    {
+        return $this->hasMany(Colo::class);
     }
 }

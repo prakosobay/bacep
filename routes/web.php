@@ -12,6 +12,7 @@ Route::get('/', function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', [HomeController::class, 'index']);
 
+
     //Detail History
     Route::get('/detail_cleaning/{id}', [CleaningController::class, 'detail_permit_cleaning']);
 
@@ -54,6 +55,32 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/a.user', 'show_user');
         Route::get('/a.role', 'show_role');
         Route::get('/u.hapus/{id}', 'delete');
+    });
+
+
+    Route::controller(MasterRoomController::class)->group(function(){
+        Route::get('room/table', 'table')->name('room');
+        Route::get('room/yajra', 'yajra');
+        Route::post('room/store', 'store');
+        Route::post('room/update', 'update');
+        Route::post('room/delete/{id}', 'delete');
+    });
+
+    Route::controller(MasterCompanyController::class)->group(function(){
+        Route::get('company/table', 'table')->name('company');
+        Route::get('company/yajra', 'yajra');
+        Route::post('company/store', 'store');
+        Route::post('company/update', 'update');
+        Route::post('company/delete/{id}', 'delete');
+    });
+
+    Route::controller(MasterRackController::class)->group(function(){
+        Route::get('rack/table', 'table')->name('rack');
+        Route::get('rack/yajra', 'yajra');
+        Route::get('rack/create', 'create');
+        Route::post('rack/store', 'store');
+        Route::post('rack/update', 'update');
+        Route::post('rack/delete/{id}', 'delete');
     });
 
 
@@ -253,6 +280,19 @@ Route::middleware(['auth'])->group(function () {
         Route::post('internal/approve/{id}', 'internal_approve');
         Route::post('internal/reject/{id}', 'internal_reject');
     });
+
+
+
+
+    Route::controller(ColoController::class)->group(function(){
+        Route::get('isVisitor/{company}/{dept}', 'isVisitor')->name('isVisitor');
+        Route::get('colo/form', 'form');
+        Route::get('finished/{company}/{department}', 'finished');
+        Route::get('last/form/{company}/{department}', 'last_form');
+
+        Route::post('colo/store', 'store');
+    });
+
 
 
     // Order Form

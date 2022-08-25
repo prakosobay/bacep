@@ -4,19 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
-class MasterRoom extends Model
+class ColoHistory extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
 
-    protected $table = 'm_rooms';
-    protected $primaryKey = 'id';
     protected $guarded = [];
 
-    public function racks()
+    public function colo()
     {
-        return $this->hasMany(Rack::class);
+        return $this->belongsTo(Colo::class);
     }
 
     public function user()

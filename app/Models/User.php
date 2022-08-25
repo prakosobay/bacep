@@ -55,4 +55,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Survey::class);
     }
+
+    public function companies()
+    {
+        return $this->belongsToMany(MasterCompany::class);
+    }
 }

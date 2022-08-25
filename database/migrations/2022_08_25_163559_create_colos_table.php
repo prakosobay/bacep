@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateInternalsTable extends Migration
+class CreateColosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,17 @@ class CreateInternalsTable extends Migration
      */
     public function up()
     {
-        Schema::create('internals', function (Blueprint $table) {
+        Schema::create('colos', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('requestor_id');
+            $table->string('rack');
             $table->string('work');
             $table->date('visit');
             $table->date('leave');
-            $table->string('rack');
             $table->string('background');
             $table->string('desc');
-            $table->string('rollback')->nullable();
             $table->string('testing')->nullable();
+            $table->string('rollback')->nullable();
             $table->string('reject_note')->nullable();
             $table->softDeletes();
             $table->timestamps();
@@ -36,6 +37,6 @@ class CreateInternalsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('internals');
+        Schema::dropIfExists('colos');
     }
 }
