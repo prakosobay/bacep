@@ -9,19 +9,10 @@ class InternalRisk extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'internal_id',
-        'req_dept',
-        'risk',
-        'poss',
-        'impact',
-        'mitigation',
-    ];
+    protected $guarded = [];
 
     public function internal()
     {
         return $this->belongsTo(Internal::class);
     }
-
-
 }

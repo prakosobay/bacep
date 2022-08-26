@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Log Permit</title>
+    <title>Log Permit Internal</title>
 
     {{-- bootstrap 5 --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -36,7 +36,7 @@
                         <a class="nav-link" href="#about">About Us</a>
                     </li>
                     <li class="nav-item mx-5">
-                        <a class="nav-link" href="{{ url('logall')}}">Log Permit</a>
+                        <a class="nav-link" href="{{ route('dashboardInternal', auth()->user()->department )}}">Log Permit</a>
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
@@ -58,10 +58,10 @@
         <!-- DataTales Example -->
         <div class="card shadow mb-1">
             <div class="card-header py-3">
-                <h4 class="judul text-center">{{Auth::user()->department}} Log Form Visitor</h4>
+                <h4 class="judul text-center">{{ Auth::user()->department }} Log Permit</h4>
             </div>
 
-            <div class="container-fluid">
+            <div class="container">
                 @if (session('success'))
                     <div class="alert alert-success mx-2 my-2 text-center">
                         {{ session('success') }}
@@ -74,7 +74,7 @@
                     <div class="container-fluid">
                         <div class="card-body">
                             <button class="btn btn-primary btn-sm mx-1 my-2" data-bs-toggle="modal" data-bs-target="#internalModal">Create Form</button>
-                            <a type="button" class="btn btn-sm btn-info mx-1 my-2" href="{{url('logall')}}">Log Form</a>
+                            <a type="button" class="btn btn-sm btn-info mx-1 my-2" href="{{ route('dashboardInternal', auth()->user()->department )}}">Log Form</a>
                             <a type="button" class="btn btn-sm btn-success mx-1 my-2" href="{{ url('internal/finished/show')}}">Finished Permit</a>
                             <a type="button" class="btn btn-sm btn-secondary mx-1 my-2" href="{{ url('internal/last/form')}}">Last Requested Form</a>
                         </div>

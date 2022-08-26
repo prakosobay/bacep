@@ -16,7 +16,6 @@ class CreateInternalDetailsTable extends Migration
         Schema::create('internal_details', function (Blueprint $table) {
             $table->id();
             $table->foreignId('internal_id');
-            $table->string('req_dept');
             $table->time('time_start');
             $table->time('time_end');
             $table->string('activity');

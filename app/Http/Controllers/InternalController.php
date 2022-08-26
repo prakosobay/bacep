@@ -18,6 +18,11 @@ class InternalController extends Controller
 {
 
     // Show Pages
+    public function dashboard($dept)
+    {
+        return view('internal.dashboard');
+    }
+
     public function internal_form()
     {
         return view('internal.form');
@@ -28,9 +33,9 @@ class InternalController extends Controller
         $dept = auth()->user()->department;
         // $internals = InternalVisitor::groupBy('internal_id')->where('req_dept', $dept)->where('done', true)->get();
         $internals = InternalVisitor::where('req_dept', $dept)
-                ->where('done', 1)
-                ->groupBy('internal_id')
-                ->get();
+            ->where('done', 1)
+            ->groupBy('internal_id')
+            ->get();
         return view('internal.lastFormTable', compact('internals'));
     }
 
@@ -106,9 +111,9 @@ class InternalController extends Controller
         ]);
 
         $arrayDetail = [];
-        foreach($getForm['time_start'] as $k => $v){
+        foreach ($getForm['time_start'] as $k => $v) {
             $insertArray = [];
-            if(isset($getForm['time_start'][$k])){
+            if (isset($getForm['time_start'][$k])) {
 
                 $insertArray = [
                     'internal_id' => $insertForm->id,
@@ -128,9 +133,9 @@ class InternalController extends Controller
         $insertDetail = InternalDetail::insert($arrayDetail);
 
         $arrayRisk = [];
-        foreach($getForm['risk'] as $k => $v){
+        foreach ($getForm['risk'] as $k => $v) {
             $insertArray = [];
-            if(isset($getForm['risk'][$k])){
+            if (isset($getForm['risk'][$k])) {
 
                 $insertArray = [
                     'internal_id' => $insertForm->id,
@@ -149,9 +154,9 @@ class InternalController extends Controller
         $insertRisk = InternalRisk::insert($arrayRisk);
 
         $arrayVisitor = [];
-        foreach($getForm['nama'] as $k => $v){
+        foreach ($getForm['nama'] as $k => $v) {
             $insertArray = [];
-            if(isset($getForm['nama'][$k])){
+            if (isset($getForm['nama'][$k])) {
 
                 $insertArray = [
                     'internal_id' => $insertForm->id,
@@ -171,7 +176,7 @@ class InternalController extends Controller
         }
         $insertVisitor = InternalVisitor::insert($arrayVisitor);
 
-        if($insertVisitor ){
+        if ($insertVisitor) {
 
             $notif_email = Internal::find($insertForm->id);
             foreach ([
@@ -193,7 +198,7 @@ class InternalController extends Controller
                 'updated_at' => now(),
             ]);
 
-            if($history){
+            if ($history) {
                 return redirect('logall')->with('success', 'Berhasil yeeayy');
             } else {
                 return back()->with('gagal', 'Gagal Submit Form');
@@ -216,10 +221,10 @@ class InternalController extends Controller
         $getLastHistory->update(['pdf' => true]);
 
         $getHistory = DB::table('internal_histories')
-                ->join('internals', 'internals.id', '=', 'internal_histories.internal_id')
-                ->where('internal_histories.internal_id', $id)
-                ->select('internal_histories.*')
-                ->get();
+            ->join('internals', 'internals.id', '=', 'internal_histories.internal_id')
+            ->where('internal_histories.internal_id', $id)
+            ->select('internal_histories.*')
+            ->get();
 
         $pdf = PDF::loadview('internal.pdf', compact('getForm', 'getLastHistory', 'getEntries', 'getDetails', 'getRisks', 'getVisitors', 'getHistory'))->setPaper('a4', 'portrait')->setWarnings(false);
         return $pdf->stream();
@@ -233,12 +238,12 @@ class InternalController extends Controller
         $last_update = InternalHistory::where('internal_id', $id)->latest()->first();
         // dd($last_update);
         $notif_email = DB::table('internals')
-                    ->join('internal_histories', 'internals.id', 'internal_histories.internal_id')
-                    ->where('internals.id', $id)
-                    ->where('internal_histories.internal_id', $id)
-                    ->where('aktif', 1)
-                    ->select('internals.*', 'internal_histories.status', 'internal_histories.created_by')
-                    ->first();
+            ->join('internal_histories', 'internals.id', 'internal_histories.internal_id')
+            ->where('internals.id', $id)
+            ->where('internal_histories.internal_id', $id)
+            ->where('aktif', 1)
+            ->select('internals.*', 'internal_histories.status', 'internal_histories.created_by')
+            ->first();
 
         if ($last_update->pdf == true) {
             $last_update->update(['aktif' => false]);
@@ -319,7 +324,7 @@ class InternalController extends Controller
                 'updated_at' => now(),
             ]);
 
-            if($log){
+            if ($log) {
                 alert()->success('Approved', 'Permit has been approved!');
                 return back();
             }
@@ -437,7 +442,6 @@ class InternalController extends Controller
             } else {
                 abort(403);
             }
-
         } else {
             abort(401);
         }
@@ -473,19 +477,19 @@ class InternalController extends Controller
     {
         $dept = Auth::user()->department;
         $full = DB::table('internals')
-        ->join('internal_visitors', 'internals.id', '=', 'internal_visitors.internal_id')
-        ->join('internal_fulls', 'internals.id', '=', 'internal_fulls.internal_id')
-        ->where([
-            ['internals.req_dept', $dept],
-            ['internal_fulls.status', 'Full Approved'],
-            ['internal_visitors.checkout', null],
-        ])
-        ->select('internals.work', 'internals.visit', 'internals.leave', 'internals.req_name', 'internal_visitors.name', 'internal_visitors.checkin', 'internal_visitors.checkout', 'internal_visitors.id');
+            ->join('internal_visitors', 'internals.id', '=', 'internal_visitors.internal_id')
+            ->join('internal_fulls', 'internals.id', '=', 'internal_fulls.internal_id')
+            ->where([
+                ['internals.req_dept', $dept],
+                ['internal_fulls.status', 'Full Approved'],
+                ['internal_visitors.checkout', null],
+            ])
+            ->select('internals.work', 'internals.visit', 'internals.leave', 'internals.req_name', 'internal_visitors.name', 'internal_visitors.checkin', 'internal_visitors.checkout', 'internal_visitors.id');
         return Datatables::of($full)
-            ->editColumn('visit', function($full){
+            ->editColumn('visit', function ($full) {
                 return $full->visit ? with(new Carbon($full->visit))->format('d/m/Y') : '';
             })
-            ->editColumn('leave', function($full){
+            ->editColumn('leave', function ($full) {
                 return $full->leave ? with(new Carbon($full->leave))->format('d/m/Y') : '';
             })
             ->addColumn('action', 'internal.actionEdit')
@@ -495,10 +499,10 @@ class InternalController extends Controller
     public function internal_yajra_full_approval()
     {
         $full = DB::table('internals')
-                ->join('internal_visitors', 'internals.id', 'internal_visitors.internal_id')
-                ->join('internal_fulls', 'internals.id', 'internal_fulls.internal_id')
-                ->select('internal_fulls.*', 'internal_visitors.name', 'internal_visitors.checkin')
-                ->groupBy('internal_id');
+            ->join('internal_visitors', 'internals.id', 'internal_visitors.internal_id')
+            ->join('internal_fulls', 'internals.id', 'internal_fulls.internal_id')
+            ->select('internal_fulls.*', 'internal_visitors.name', 'internal_visitors.checkin')
+            ->groupBy('internal_id');
         return Datatables::of($full)
             ->editColumn('visit', function ($full) {
                 return $full->visit ? with(new Carbon($full->visit))->format('d/m/Y') : '';
@@ -516,10 +520,10 @@ class InternalController extends Controller
             ->where('internal_visitors.req_dept', $dept)
             ->select('internals.work', 'internals.visit', 'internals.leave', 'internals.req_name', 'internal_visitors.name', 'internal_visitors.checkin', 'internal_visitors.checkout');
         return Datatables::of($getPermit)
-            ->editColumn('visit', function($getPermit){
+            ->editColumn('visit', function ($getPermit) {
                 return $getPermit->visit ? with(new Carbon($getPermit->visit))->format('d/m/Y') : '';
             })
-            ->editColumn('leave', function($getPermit){
+            ->editColumn('leave', function ($getPermit) {
                 return $getPermit->leave ? with(new Carbon($getPermit->leave))->format('d/m/Y') : '';
             })
             ->make(true);

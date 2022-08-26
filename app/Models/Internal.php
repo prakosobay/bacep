@@ -10,39 +10,34 @@ class Internal extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = [
-        'req_dept',
-        'req_name',
-        'req_phone',
-        'work',
-        'visit',
-        'leave',
-        'background',
-        'desc',
-        'testing',
-        'rollback',
-        'rack',
-        'card_number',
-        'reject_note',
-        'req_email',
-    ];
+    protected $guarded = [];
 
-    public function visitor()
+    public function requestor()
+    {
+        return $this->belongsTo(User::class, 'requestor_id');
+    }
+
+    public function card()
+    {
+        return $this->belongsTo(MasterCard::class, 'm_card_id');
+    }
+
+    public function visitors()
     {
         return $this->hasMany(InternalVisitor::class);
     }
 
-    public function history()
+    public function histories()
     {
         return $this->hasMany(InternalHistory::class);
     }
 
-    public function risk()
+    public function risks()
     {
         return $this->hasMany(InternalRisk::class);
     }
 
-    public function detail()
+    public function details()
     {
         return $this->hasMany(InternalDetail::class);
     }

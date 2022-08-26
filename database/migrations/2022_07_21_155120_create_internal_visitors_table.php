@@ -16,18 +16,17 @@ class CreateInternalVisitorsTable extends Migration
         Schema::create('internal_visitors', function (Blueprint $table) {
             $table->id();
             $table->foreignId('internal_id');
-            $table->string('req_dept');
             $table->string('name');
             $table->string('company');
             $table->string('department');
             $table->string('respon');
-            $table->string('numberId');
+            $table->string('nik');
             $table->string('phone');
             $table->time('checkin')->nullable();
             $table->string('photo_checkin')->nullable();
             $table->time('checkout')->nullable();
             $table->string('photo_checkout')->nullable();
-            $table->boolean('done');
+            $table->boolean('done', false);
             $table->timestamps();
         });
     }

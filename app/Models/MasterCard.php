@@ -5,15 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class InternalHistory extends Model
+class MasterCard extends Model
 {
     use HasFactory;
 
     protected $guarded = [];
+    protected $table = 'm_cards';
 
-    public function internal()
+    public function internals()
     {
-        return $this->belongsTo(Internal::class);
+        return $this->hasMany(Internal::class);
     }
 
     public function createdBy()

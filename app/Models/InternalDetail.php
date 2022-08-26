@@ -9,15 +9,7 @@ class InternalDetail extends Model
 {
     use HasFactory;
 
-    protected $fillabel = [
-        'internal_id',
-        'req_dept',
-        'time_start',
-        'time_end',
-        'activity',
-        'item',
-        'service_impact',
-    ];
+    protected $guarded = [];
 
     public function internal()
     {

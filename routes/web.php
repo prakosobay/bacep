@@ -31,7 +31,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/rev/{id}', [RutinController::class, 'other_revisi']);
 
 
-    Route::controller(AdminController::class)->group(function(){
+    Route::controller(AdminController::class)->group(function () {
         //Admin Panel
         Route::get('/table_user', 'show_user');
         Route::get('/table_role', 'show_role');
@@ -58,7 +58,7 @@ Route::middleware(['auth'])->group(function () {
     });
 
 
-    Route::controller(MasterRoomController::class)->group(function(){
+    Route::controller(MasterRoomController::class)->group(function () {
         Route::get('room/table', 'table')->name('room');
         Route::get('room/yajra', 'yajra');
         Route::post('room/store', 'store');
@@ -66,7 +66,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('room/delete/{id}', 'delete');
     });
 
-    Route::controller(MasterCompanyController::class)->group(function(){
+    Route::controller(MasterCompanyController::class)->group(function () {
         Route::get('company/table', 'table')->name('company');
         Route::get('company/yajra', 'yajra');
         Route::post('company/store', 'store');
@@ -74,7 +74,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('company/delete/{id}', 'delete');
     });
 
-    Route::controller(MasterRackController::class)->group(function(){
+    Route::controller(MasterRackController::class)->group(function () {
         Route::get('rack/table', 'table')->name('rack');
         Route::get('rack/yajra', 'yajra');
         Route::get('rack/create', 'create');
@@ -91,7 +91,7 @@ Route::middleware(['auth'])->group(function () {
 
 
     //Barang Consume
-    Route::controller(ConsumController::class)->group(function(){
+    Route::controller(ConsumController::class)->group(function () {
         Route::get('consum/table/show', 'consum_table_show')->name('consumTable');
         Route::get('consum/create/show', 'consum_create_show');
         Route::get('consum/masuk/show', 'consum_masuk_show');
@@ -118,7 +118,7 @@ Route::middleware(['auth'])->group(function () {
 
 
     //Barang Asset
-    Route::controller(AssetController::class)->group(function(){
+    Route::controller(AssetController::class)->group(function () {
         Route::get('asset/table/show', 'index')->name('assetTable');
         Route::get('asset/masuk/show', 'asset_masuk_show');
         Route::get('asset/keluar/show', 'asset_keluar_show');
@@ -157,7 +157,7 @@ Route::middleware(['auth'])->group(function () {
 
 
 
-    Route::controller(RevisiController::class)->group(function(){
+    Route::controller(RevisiController::class)->group(function () {
         //Revisi OB
         Route::get('/ob', 'show_ob')->name('ob');
         Route::get('/ob.edit/{id}', 'edit_ob');
@@ -177,7 +177,8 @@ Route::middleware(['auth'])->group(function () {
 
 
     // Survey
-    Route::controller(SurveyController::class)->group(function(){
+    Route::controller(SurveyController::class)->group(function () {
+        Route::get('survey/dashboard', 'dashboard')->name('dashboardSurvey');
         Route::get('survey/form', 'form');
         Route::get('/survey/pdf/{id}', 'pdf');
         Route::get('jsona', 'json');
@@ -193,7 +194,7 @@ Route::middleware(['auth'])->group(function () {
 
 
     // Cleaning
-    Route::controller(CleaningController::class)->group(function(){
+    Route::controller(CleaningController::class)->group(function () {
         Route::get('route_history_cleaning', 'data_history');
         Route::get('yajra_full_approve_cleaning', 'data_full_approve_cleaning');
         Route::get('yajra_full_approve_cleaning_other', 'data_log_full');
@@ -220,7 +221,7 @@ Route::middleware(['auth'])->group(function () {
 
 
     // Other
-    Route::controller(OtherController::class)->group(function(){
+    Route::controller(OtherController::class)->group(function () {
         // Troubleshoot
         Route::get('other/troubleshoot/show', 'show_troubleshoot_form');
         Route::get('other/troubleshoot/pdf/{id}', 'pdf_troubleshoot');
@@ -256,8 +257,20 @@ Route::middleware(['auth'])->group(function () {
     });
 
 
+    // Card
+    Route::controller(MasterCardController::class)->group(function () {
+        Route::post('card/store', 'store');
+        Route::post('card/update', 'update');
+
+        Route::get('card/form', 'form');
+        Route::get('card/yajra', 'yajra');
+    });
+
+
     // Internal
-    Route::controller(InternalController::class)->group(function(){
+    Route::controller(InternalController::class)->group(function () {
+        Route::get('internal/dashboard/{dept}', 'dashboard')->name('dashboardInternal');
+
         Route::get('internal/form', 'internal_form');
         Route::get('internal/last/form', 'internal_last_form');
         Route::get('last/selected/{id}', 'last_selected');
@@ -281,10 +294,10 @@ Route::middleware(['auth'])->group(function () {
         Route::post('internal/reject/{id}', 'internal_reject');
     });
 
+    // Route::controller(EksternalController::)
 
 
-
-    Route::controller(ColoController::class)->group(function(){
+    Route::controller(ColoController::class)->group(function () {
         Route::get('isVisitor/{company}/{dept}', 'isVisitor')->name('isVisitor');
         Route::get('colo/form', 'form');
         Route::get('finished/{company}/{department}', 'finished');
@@ -301,7 +314,7 @@ Route::middleware(['auth'])->group(function () {
 
 
     // Order Form
-    Route::controller(OrderController::class)->group(function(){
+    Route::controller(OrderController::class)->group(function () {
         Route::get('order/form', 'order_form');
         Route::post('order/approve/{id}', 'order_approval');
         Route::post('order/store', 'order_store');

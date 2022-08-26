@@ -7,11 +7,13 @@
             @csrf
             <div class="container form-container">
 
-                @if (session('success'))
-                    <div class="alert alert-success mt-2">
-                        {{ session('success') }}
-                    </div>
-                @endif
+                <div class="container">
+                    @if (session('success'))
+                        <div class="alert alert-success mt-2">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+                </div>
 
                 {{-- Requestor --}}
                 <div class="row">
@@ -192,7 +194,7 @@
                                 <th>Time Start</th>
                                 <th>Time End</th>
                                 <th>Activity</th>
-                                <th>Detail Service Impact</th>
+                                <th>Service Impact</th>
                                 <th>Item</th>
                             </tr>
                         </thead>
@@ -231,7 +233,7 @@
                                     @enderror
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control @error('item') is-invalid @enderror" id="detailTime" name="item[]" value="{{ old('item')}}" required>
+                                    <input type="text" class="form-control @error('item') is-invalid @enderror" id="detailItem" name="item[]" value="{{ old('item')}}" required>
                                     @error('item')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -314,13 +316,13 @@
                         <tbody>
                             <tr>
                                 <th>Name</th>
-                                <td><input type="text" class="form-control" name="nama[]" value="{{ old('nama')}}" required></td>
+                                <td><input type="text" class="form-control" name="name[]" value="{{ old('name')}}" required></td>
                                 <th>Phone Number</th>
                                 <td><input type="text" class="form-control" name="phone[]" value="{{ old('phone')}}" required></td>
                             </tr>
                             <tr>
                                 <th>Number ID</th>
-                                <td><input type="text" class="form-control" name="numberId[]" value="{{ old('numberId')}}" required></td>
+                                <td><input type="text" class="form-control" name="nik[]" value="{{ old('nik')}}" required></td>
                                 <th>Company</th>
                                 <th><input type="text" class="form-control" name="company[]" value="{{ old('company')}}" required></th>
                             </tr>
@@ -390,7 +392,7 @@ $(document).ready(function(){
     $(button_visitor).click(function(e){
         e.preventDefault();
         if(row < max_row){
-            $(table_visitor).append('<tr><th>Name</th><td><input type="text" class="form-control" name="nama[]" value=""></td><th>Phone Number</th><td><input type="text" class="form-control" name="phone[]" value=""></td></tr><tr><th>Number ID</th><td><input type="text" class="form-control" name="numberId[]" value=""></td><th>Company</th><th><input type="text" class="form-control" name="company[]" value=""></th></tr><tr><th>Department</th><td><input type="text" class="form-control" name="department[]" value=""></td><th>Responsibility</th><td><input type="text" class="form-control" name="respon[]" value=""></td></tr>');
+            $(table_visitor).append('<tr><th>Name</th><td><input type="text" class="form-control" name="name[]" value=""></td><th>Phone Number</th><td><input type="text" class="form-control" name="phone[]" value=""></td></tr><tr><th>Number ID</th><td><input type="text" class="form-control" name="nik[]" value=""></td><th>Company</th><th><input type="text" class="form-control" name="company[]" value=""></th></tr><tr><th>Department</th><td><input type="text" class="form-control" name="department[]" value=""></td><th>Responsibility</th><td><input type="text" class="form-control" name="respon[]" value=""></td></tr>');
             row++;
         }
     });

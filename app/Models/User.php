@@ -51,23 +51,23 @@ class User extends Authenticatable
         return $this->belongsToMany(Role::class);
     }
 
-    public function survey()
+    public function surveys()
     {
         return $this->hasMany(Survey::class);
     }
 
-    public function companies()
+    public function cards()
     {
-        return $this->belongsToMany(MasterCompany::class);
+        return $this->hasMany(MasterCard::class);
     }
 
-    public function colos()
+    public function internals()
     {
-        return $this->hasMany(Colo::class);
+        return $this->hasMany(Internal::class);
     }
 
-    public function colo_histories()
+    public function internalHistories()
     {
-        return $this->hasMany(ColoHistory::class);
+        return $this->hasMany(internalHistories::class);
     }
 }

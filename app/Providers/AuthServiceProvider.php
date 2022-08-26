@@ -43,12 +43,21 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('isVisitor', function ($user) {
             return $user->slug == 'visitor';
         });
-        // Gate::define('isColo', function($user){
-        //     $arrole = [];
-        //     foreach ($user->roles as $rolee) {
-        //         $arrole[] = $rolee->name;
-        //     }
-        //     return $arrole[0] == 'createForm';
-        // });
+
+        Gate::define('isEksternal', function ($user) {
+            $arrole = [];
+            foreach ($user->roles as $rolee) {
+                $arrole[] = $rolee->name;
+            }
+            return $arrole[0] == 'eksternal';
+        });
+
+        Gate::define('isInternal', function ($user) {
+            $arrole = [];
+            foreach ($user->roles as $rolee) {
+                $arrole[] = $rolee->name;
+            }
+            return $arrole[0] == 'internal';
+        });
     }
 }

@@ -16,7 +16,6 @@ class CreateInternalRisksTable extends Migration
         Schema::create('internal_risks', function (Blueprint $table) {
             $table->id();
             $table->foreignId('internal_id');
-            $table->string('req_dept');
             $table->string('risk');
             $table->string('poss');
             $table->string('impact');

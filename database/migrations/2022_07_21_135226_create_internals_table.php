@@ -15,6 +15,8 @@ class CreateInternalsTable extends Migration
     {
         Schema::create('internals', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('requestor_id');
+            $table->foreignId('m_card_id')->nullable();
             $table->string('work');
             $table->date('visit');
             $table->date('leave');

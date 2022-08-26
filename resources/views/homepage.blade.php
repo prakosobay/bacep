@@ -54,31 +54,85 @@
         </div>
     </nav>
 
-    {{-- background image --}}
-    <div class="container-fluid" id="banner">
-        <div class="container banner-content">
-            <div >
-                <p class="fs-5 inter-600-oren">
-                    DATA CENTER BALITOWER
-                </p>
-                <p class="fs-5 lora-700">
-                    Hi, {{Auth::user()->name}}
-                </p>
-                <h3 class="lora-800">
-                    Welcome to
-                </h3>
-                <h3 class="lora-800">
-                    Bali Tower
-                </h3>
-                <p class="inter-400-putih">
-                    Protecting Your Technology Investment
-                </p>
-                <p class="">
-                    <a href="{{ route('isVisitor', [auth()->user()->company, auth()->user()->department]) }}" type="button" class="new-btn inter-btn">Create New Form</a>
-                </p>
+        @can('isInternal')
+            <div class="container-fluid" id="banner">
+                <div class="container banner-content">
+                    <div >
+                        <p class="fs-5 inter-600-oren">
+                            DATA CENTER BALITOWER
+                        </p>
+                        <p class="fs-5 lora-700">
+                            Hi, {{Auth::user()->name}}
+                        </p>
+                        <h3 class="lora-800">
+                            Welcome to
+                        </h3>
+                        <h3 class="lora-800">
+                            Bali Tower
+                        </h3>
+                        <p class="inter-400-putih">
+                            Protecting Your Technology Investment
+                        </p>
+                        <p class="">
+                            <a href="{{ route('dashboardInternal', auth()->user()->department ) }}" type="button" class="new-btn inter-btn">Create New Form</a>
+                        </p>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
+
+        {{-- @elsecan('isEksternal')
+            <div class="container-fluid" id="banner">
+                <div class="container banner-content">
+                    <div >
+                        <p class="fs-5 inter-600-oren">
+                            DATA CENTER BALITOWER
+                        </p>
+                        <p class="fs-5 lora-700">
+                            Hi, {{Auth::user()->name}}
+                        </p>
+                        <h3 class="lora-800">
+                            Welcome to
+                        </h3>
+                        <h3 class="lora-800">
+                            Bali Tower
+                        </h3>
+                        <p class="inter-400-putih">
+                            Protecting Your Technology Investment
+                        </p>
+                        <p class="">
+                            <a href="{{ route('dashboardEksternal') }}" type="button" class="new-btn inter-btn">Create New Form</a>
+                        </p>
+                    </div>
+                </div>
+            </div> --}}
+
+
+        @elsecan('isSurvey')
+            <div class="container-fluid" id="banner">
+                <div class="container banner-content">
+                    <div >
+                        <p class="fs-5 inter-600-oren">
+                            DATA CENTER BALITOWER
+                        </p>
+                        <p class="fs-5 lora-700">
+                            Hi, {{Auth::user()->name}}
+                        </p>
+                        <h3 class="lora-800">
+                            Welcome to
+                        </h3>
+                        <h3 class="lora-800">
+                            Bali Tower
+                        </h3>
+                        <p class="inter-400-putih">
+                            Protecting Your Technology Investment
+                        </p>
+                        <p class="">
+                            <a href="{{ route('dashboardSurvey') }}" type="button" class="new-btn inter-btn">Create New Form</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        @endcan
 
     {{-- carousel --}}
     <div class="container-fluid py-5 bg-carousel">

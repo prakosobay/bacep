@@ -25,7 +25,6 @@ class ColoController extends Controller
     {
         // dd($company);
         return view('colo.log');
-
     }
 
 
@@ -50,11 +49,11 @@ class ColoController extends Controller
         $getForm = Colo::findOrFail($id);
         $getLastHistory = ColoHistory::where('colo_id', $id)->where('aktif', 1)->first();
         $getJoin = DB::table('colos')
-                ->join('colo_details', 'colos.id', 'colo_details.colo_id')
-                ->join('colo_risks', 'colos.id', 'colo_risks.colo_id')
-                ->select('colo_risks.risk', 'colo_details.*')
-                ->where('colo_details.colo_id', $id)
-                ->get();
+            ->join('colo_details', 'colos.id', 'colo_details.colo_id')
+            ->join('colo_risks', 'colos.id', 'colo_risks.colo_id')
+            ->select('colo_risks.risk', 'colo_details.*')
+            ->where('colo_details.colo_id', $id)
+            ->get();
         // dd($getJoin);
         $getLastHistory->update(['pdf' => true]);
 
@@ -67,7 +66,6 @@ class ColoController extends Controller
         $pdf = PDF::loadview('colo.pdf', compact('getForm', 'getLastHistory', 'getJoin'))->setPaper('a4', 'portrait')->setWarnings(false);
         return $pdf->stream();
     }
-
 
 
 
@@ -112,9 +110,9 @@ class ColoController extends Controller
             ]);
 
             $arrayDetail = [];
-            foreach($getForm['time_start'] as $k => $v){
+            foreach ($getForm['time_start'] as $k => $v) {
                 $insertArray = [];
-                if(isset($getForm['time_start'][$k])){
+                if (isset($getForm['time_start'][$k])) {
 
                     $insertArray = [
                         'colo_id' => $insertForm->id,
@@ -132,9 +130,9 @@ class ColoController extends Controller
             $insertDetail = ColoDetail::insert($arrayDetail);
 
             $arrayRisk = [];
-            foreach($getForm['risk'] as $k => $v){
+            foreach ($getForm['risk'] as $k => $v) {
                 $insertArray = [];
-                if(isset($getForm['risk'][$k])){
+                if (isset($getForm['risk'][$k])) {
 
                     $insertArray = [
                         'colo_id' => $insertForm->id,
@@ -152,9 +150,9 @@ class ColoController extends Controller
             $insertRisk = ColoRisk::insert($arrayRisk);
 
             $arrayVisitor = [];
-            foreach($getForm['name'] as $k => $v){
+            foreach ($getForm['name'] as $k => $v) {
                 $insertArray = [];
-                if(isset($getForm['name'][$k])){
+                if (isset($getForm['name'][$k])) {
 
                     $insertArray = [
                         'colo_id' => $insertForm->id,
@@ -194,7 +192,6 @@ class ColoController extends Controller
             DB::commit();
 
             return back()->with('success', 'Form Has Been Submited');
-
         } catch (\Exception $e) {
             DB::rollBack();
             throw $e;
@@ -304,8 +301,6 @@ class ColoController extends Controller
             $lastUpdate = ColoHistory::where('colo_id', $id)->latest()->first();
             $getForm = Colo::findOrFail($id);
 
-            // dd($getForm);
-
             $request->validate([
                 'note' => ['required'],
             ]);
@@ -334,12 +329,10 @@ class ColoController extends Controller
             } else {
                 abort(403);
             }
-
         } else {
             abort(401);
         }
     }
-
 
 
 
@@ -352,6 +345,36 @@ class ColoController extends Controller
         return Datatables::of($history)
             ->editColumn('visit', function ($history) {
                 return $history->visit ? with(new Carbon($history->visit))->format('d/m/Y') : '';
+            })
+            ->make(true);
+    }
+
+    public function yajra_full()
+    {
+        $full = DB::table('colos')
+            ->join('colo_fulls', 'colos.id', '=', 'colo_fulls.colo_id')
+            ->join('colo_visitors', 'colos.id', '=', 'colo_visitors.colo_id')
+            ->select('colo_fulls.*', 'colo_visitors.name', 'colo_visitors.checkin', 'colos.rack')
+            ->groupBy('colo_id');
+        Datatables::of($full)
+            ->addColumn('action', 'colo.actionLink')
+            ->make(true);
+    }
+
+    public function yajra_finished($company, $dept)
+    {
+        $getPermit = DB::table('colos')
+            ->join('colo_visitors', 'colos.id', '=', 'colo_visitors.colo_id')
+            ->join('users', 'colos.requestor_id', '=', 'users')
+            ->where('colo_visitors.done', 1)
+            ->where('colo_visitors.req_dept', $dept)
+            ->select('colos.work', 'colos.visit', 'colos.leave', 'colos.req_name', 'colo_visitors.name', 'colo_visitors.checkin', 'colo_visitors.checkout');
+        return Datatables::of($getPermit)
+            ->editColumn('visit', function ($getPermit) {
+                return $getPermit->visit ? with(new Carbon($getPermit->visit))->format('d/m/Y') : '';
+            })
+            ->editColumn('leave', function ($getPermit) {
+                return $getPermit->leave ? with(new Carbon($getPermit->leave))->format('d/m/Y') : '';
             })
             ->make(true);
     }
