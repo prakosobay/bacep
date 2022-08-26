@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Notifikasi Web Permit</title>
+    <title>Notifikasi Full Approval</title>
 
 <style>
     table, th, td {
@@ -20,30 +20,32 @@
 </head>
 
 <body>
-    <h2>Dear Tim {{ $content->req_dept }},</h2>
-	<h3>Mohon maaf permit yang anda ajukan tidak dapat kami proses, mohon untuk mengajukan permit baru pada tautan di bawah ini.</h3>
+    <h2>Dear All,</h2>
+	<h3>Terlampir link permit dari {{$content->requestor->name}} yang sudah Full Approval</h3>
     <table>
         <thead>
             <tr>
-                <th>No. Permit</thead>
+                <th>No. Permit</th>
                 <th>Date of Request</th>
-                <th>Requestor Dept.</th>
+                <th>Requestor Company</th>
+                <th>Requestor Dept</th>
                 <th>Purpose of Work</th>
                 <th>Date of Visit</th>
-                <th>Note</th>
+                <th>Date of Leave</th>
             </tr>
         </thead>
         <tbody>
             <tr>
                 <td>{{ $content->id }}</td>
                 <td>{{ Carbon\Carbon::parse($content->created_at)->format('d-m-Y')  }}</td>
-                <td>{{ $content->req_dept }}</td>
+                <td>{{ $content->requestor->company  }}</td>
+                <td>{{ $content->requestor->department  }}</td>
                 <td>{{ $content->work }}</td>
                 <td>{{ Carbon\Carbon::parse($content->visit)->format('d-m-Y') }}</td>
-                <td>{{ $content->reject_note }}</td>
+                <td>{{ Carbon\Carbon::parse($content->leave)->format('d-m-Y') }}</td>
             </tr>
         </tbody>
     </table>
-    <p><a href="http://dcops.balifiber.id">Klik tautan ini untuk login</a></p>
+        <p><a href="http://dcops.balifiber.id">Klik tautan ini untuk melihat permit</a></p>
 </body>
 </html>

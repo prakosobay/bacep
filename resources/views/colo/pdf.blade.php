@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Maintenance PDF</title>
+    <title>Colocation PDF</title>
     <style>
         @page {
             margin: 0.5cm 0.5cm;
@@ -205,15 +205,15 @@
                 </tr>
                 <tr >
                     <td width="150px">Name</td>
-                    <td >: {{$getForm->req_name}}</td>
+                    <td >: {{$getForm->requestor->name}}</td>
                 </tr>
                 <tr >
                     <td width="150px">Department</td>
-                    <td >: {{$getForm->req_dept}}</td>
+                    <td >: {{$getForm->requestor->department}}</td>
                 </tr>
                 <tr >
                     <td width="150px">Phone Number</td>
-                    <td >: {{$getForm->req_phone}}</td>
+                    <td >: {{$getForm->requestor->phone}}</td>
                 </tr>
             </table>
 
@@ -229,13 +229,13 @@
                     <td class="table-grey"><b>Company</b></td>
                     <td class="table-grey"><b>Department</b></td>
                 </tr>
-                @foreach ($getVisitors as $personil)
+                @foreach ($getForm->visitors as $visitor)
                 <tr >
-                    <td class="table-white">{{$personil->name}}</td>
-                    <td class="table-center">{{$personil->numberId}}</td>
-                    <td class="table-center">{{$personil->phone}}</td>
-                    <td class="table-center">{{$personil->company}}</td>
-                    <td class="table-center">{{$personil->department}}</td>
+                    <td class="table-white">{{$visitor->name}}</td>
+                    <td class="table-center">{{$visitor->nik}}</td>
+                    <td class="table-center">{{$visitor->phone}}</td>
+                    <td class="table-center">{{$visitor->company}}</td>
+                    <td class="table-center">{{$visitor->department}}</td>
                 </tr>
                 @endforeach
             </table>
@@ -248,14 +248,14 @@
                 </tr>
                 <tr>
                     <td>
-                        @if(($getEntries->dc == true) )
+                        @if(($getForm->entry->dc == true) )
                             <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   Server Room
                         @else
                             <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   Server Room
                         @endif
                     </td>
                     <td >
-                        @if(($getEntries->generator == true) )
+                        @if(($getForm->entry->generator == true) )
                             <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   Generator Room
                         @else
                             <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   Generator Room
@@ -266,14 +266,14 @@
                 </tr>
                 <tr>
                     <td >
-                        @if(($getEntries->mmr1 == true))
+                        @if(($getForm->entry->mmr1 == true))
                             <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   MMR 1
                         @else
                             <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   MMR 1
                         @endif
                     </td>
                     <td >
-                        @if(($getEntries->panel == true))
+                        @if(($getForm->entry->panel == true))
                             <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   Panel Room
                         @else
                             <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   Panel Room
@@ -284,14 +284,14 @@
                 </tr>
                 <tr>
                     <td >
-                        @if(($getEntries->mmr2 == true))
+                        @if(($getForm->entry->mmr2 == true))
                             <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   MMR 2
                         @else
                             <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   MMR 2
                         @endif
                     </td>
                     <td >
-                        @if(($getEntries->baterai == true))
+                        @if(($getForm->entry->baterai == true))
                             <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   Battery Room
                         @else
                             <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   Battery Room
@@ -302,14 +302,14 @@
                 </tr>
                 <tr>
                     <td >
-                        @if(($getEntries->ups == true))
+                        @if(($getForm->entry->ups == true))
                             <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   UPS Room
                         @else
                             <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   UPS Room
                         @endif
                     </td>
                     <td >
-                        @if(($getEntries->fss == true))
+                        @if(($getForm->entry->fss == true))
                             <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   FSS Room
                         @else
                             <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   FSS Room
@@ -328,14 +328,14 @@
                 </tr>
                 <tr>
                     <td >
-                        @if(($getEntries->trafo == true))
+                        @if(($getForm->entry->trafo == true))
                             <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   Trafo Room
                         @else
                             <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   Trafo Room
                         @endif
                     </td>
                     <td >
-                        @if($getEntries->yard == true)
+                        @if($getForm->entry->yard == true)
                             <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   Yard
                         @else
                             <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   Yard
@@ -345,16 +345,16 @@
                 </tr>
                 <tr>
                     <td >
-                        @if($getEntries->cctv == true)
+                        @if($getForm->entry->cctv == true)
                             <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   Others : CCTV Room
-                        @elseif($getEntries->lain == null)
+                        @elseif($getForm->entry->lain == null)
                             <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   Others :
                         @else
-                            <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   Others :{{$getEntries->lain}}
+                            <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   Others :{{$getForm->entry->lain}}
                         @endif
                     </td>
                     <td >
-                        @if($getEntries->parking == true)
+                        @if($getForm->entry->parking == true)
                             <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   Parking Lot
                         @else
                             <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   Parking Lot
@@ -377,7 +377,7 @@
                     @switch($getLastHistory->status)
                         @case('requested')
                             <td class="col_approval"><img src="{{ public_path("gambar/Requested.png") }}" alt="" style="width: 80px; height: 40px;">
-                                <p class="cr">Nama    : {{$getForm->req_name}}</p>
+                                <p class="cr">Nama    : {{$getForm->requestor->name}}</p>
                                 <p class="cr">Tanggal : {{Carbon\Carbon::parse($getForm->created_at)->format('d-m-Y H:i')}}</p>
                             </td>
                             <td class="col_approval">
@@ -392,7 +392,7 @@
 
                         @case('reviewed')
                         <td class="col_approval"><img src="{{ public_path("gambar/Requested.png") }}" alt="" style="width: 80px; height: 40px;">
-                            <p class="cr">Nama    : {{$getForm->req_name}}</p>
+                            <p class="cr">Nama    : {{$getForm->requestor->name}}</p>
                             <p class="cr">Tanggal : {{Carbon\Carbon::parse($getForm->created_at)->format('d-m-Y H:i')}}</p>
                         </td>
                         <td class="col_approval">
@@ -407,7 +407,7 @@
 
                         @case('checked')
                             <td class="col_approval"><img src="{{ public_path("gambar/Requested.png") }}" alt="" style="width: 80px; height: 40px;">
-                                <p class="cr">Nama    : {{$getForm->req_name}}</p>
+                                <p class="cr">Nama    : {{$getForm->requestor->name}}</p>
                                 <p class="cr">Tanggal : {{Carbon\Carbon::parse($getForm->created_at)->format('d-m-Y H:i')}}</p>
                             </td>
                             <td class="col_approval">
@@ -422,7 +422,7 @@
 
                         @case('acknowledge')
                             <td class="col_approval"><img src="{{ public_path("gambar/Requested.png") }}" alt="" style="width: 80px; height: 40px;">
-                                <p class="cr">Nama    : {{$getForm->req_name}}</p>
+                                <p class="cr">Nama    : {{$getForm->requestor->name}}</p>
                                 <p class="cr">Tanggal : {{Carbon\Carbon::parse($getForm->created_at)->format('d-m-Y H:i')}}</p>
                             </td>
                             <td class="col_approval">
@@ -430,22 +430,22 @@
                                 <p class="cr">Tanggal :</p>
                             </td>
                             <td class="col_approval"><img src="{{ public_path("gambar/Checked.png") }}" alt="" style="width: 80px; height: 40px;">
-                                <p class="cr">Nama    :{{$getHistory[3]->created_by}}</p>
+                                <p class="cr">Nama    :{{$getHistory[3]->createdBy->name}}</p>
                                 <p class="cr">Tanggal :{{Carbon\Carbon::parse($getHistory[3]->created_at)->format('d-m-Y H:i')}}</p>
                             </td>
                             @break
 
                         @case('final')
                             <td class="col_approval"><img src="{{ public_path("gambar/Requested.png") }}" alt="" style="width: 80px; height: 40px;">
-                                <p class="cr">Nama    : {{$getForm->req_name}}</p>
+                                <p class="cr">Nama    : {{$getForm->requestor->name}}</p>
                                 <p class="cr">Tanggal : {{Carbon\Carbon::parse($getForm->created_at)->format('d-m-Y H:i')}}</p>
                             </td>
                             <td class="col_approval"><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 80px; height: 40px;">
-                                <p class="cr">Nama    :{{$getHistory[4]->created_by}}</p>
+                                <p class="cr">Nama    :{{$getHistory[4]->createdBy->name}}</p>
                                 <p class="cr">Tanggal :{{ Carbon\Carbon::parse($getHistory[4]->created_at)->format('d-m-Y H:i') }}</p>
                             </td>
                             <td class="col_approval"><img src="{{ public_path("gambar/Checked.png") }}" alt="" style="width: 80px; height: 40px;">
-                                <p class="cr">Nama    :{{$getHistory[3]->created_by}}</p>
+                                <p class="cr">Nama    :{{$getHistory[3]->createdBy->name}}</p>
                                 <p class="cr">Tanggal :{{ Carbon\Carbon::parse($getHistory[3]->created_at)->format('d-m-Y H:i') }}</p>
                             </td>
                             @break
@@ -514,13 +514,13 @@
                     <td class="table-grey"><b>Activity Description</b></td>
                     <td class="table-grey"><b>Detail Service Impact</b></td>
                 </tr>
-                @foreach ($getDetails as $detail)
+                @foreach ($getJoin as $detail)
                 <tr >
                     <td height="10px" class="table-center">{{Carbon\Carbon::parse($getForm->visit)->format('d-m-Y')}}</td>
                     <td height="10px" class="table-center">{{$detail->time_start}}</td>
                     <td height="10px" class="table-center">{{$detail->time_end}}</td>
                     <td height="10px" class="table-center">{{$detail->activity}}</td>
-                    <td height="10px" class="table-center">{{$detail->service_impact}}</td>
+                    <td height="10px" class="table-center">{{$detail->risk}}</td>
                 </tr>
                 @endforeach
             </table>
@@ -536,7 +536,7 @@
                     <td class="table-grey"><b>Item</b></td>
                     <td class="table-grey"><b>Working Procedure</b></td>
                 </tr>
-                @foreach ($getDetails as $detail)
+                @foreach ($getForm->details as $detail)
                 <tr >
                     <td height="10px" class="table-center">{{$detail->time_start}}</td>
                     <td height="10px" class="table-center">{{$detail->time_end}}</td>
@@ -557,7 +557,7 @@
                     <td class="table-grey"><b>Impact</b></td>
                     <td class="table-grey"><b>Mitigation Plan</b></td>
                 </tr>
-                @foreach ($getRisks as $risk)
+                @foreach ($getForm->risks as $risk)
                 <tr >
                     <td class="table-center">{{$risk->risk}}</td>
                     <td class="table-center">{{$risk->poss}}</td>
@@ -590,7 +590,7 @@
                     <td class="table-grey"><b>Responsibility</b></td>
                     <td class="table-grey"><b>Mobile Phone</b></td>
                 </tr>
-                @foreach ($getVisitors as $visitor)
+                @foreach ($getForm->visitors as $visitor)
                 <tr >
                     <td class="table-center">{{$visitor->name}}</td>
                     <td class="table-center">{{$visitor->company}}</td>
@@ -622,7 +622,7 @@
                     @switch($getLastHistory->status)
                         @case('requested')
                             <td class="col_approval"><img src="{{ public_path("gambar/Requested.png") }}" alt="" style="width: 80px; height: 30px;">
-                                <p class="cr">Nama    : {{$getForm->req_name}}</p>
+                                <p class="cr">Nama    : {{$getForm->requestor->name}}</p>
                                 <p class="cr">Tanggal : {{Carbon\Carbon::parse($getForm->created_at)->format('d-m-Y H:i')}}</p>
                             </td>
                             <td class="col_approval">
@@ -641,11 +641,11 @@
 
                         @case('reviewed')
                             <td class="col_approval"><img src="{{ public_path("gambar/Requested.png") }}" alt="" style="width: 80px; height: 30px;">
-                                <p class="cr">Nama: {{$getForm->req_name}}</p>
+                                <p class="cr">Nama: {{$getForm->requestor->name}}</p>
                                 <p class="cr">Tanggal : {{Carbon\Carbon::parse($getForm->created_at)->format('d-m-Y H:i')}}</p>
                             </td>
                             <td class="col_approval"><img src="{{ public_path("gambar/Reviewed.png") }}" alt="" style="width: 80px; height: 30px;">
-                                <p class="cr">Nama    :{{$getHistory[1]->created_by}}</p>
+                                <p class="cr">Nama    :{{$getHistory[1]->createdBy->name}}</p>
                                 <p class="cr">Tanggal :{{Carbon\Carbon::parse($getHistory[1]->created_at)->format('d-m-Y H:i')}}</p>
                             </td>
                             <td class="col_approval">
@@ -660,15 +660,15 @@
 
                         @case('checked')
                             <td class="col_approval"><img src="{{ public_path("gambar/Requested.png") }}" alt="" style="width: 80px; height: 30px;">
-                                <p class="cr">Nama    : {{$getForm->req_name}}</p>
+                                <p class="cr">Nama    : {{$getForm->requestor->name}}</p>
                                 <p class="cr">Tanggal :{{Carbon\Carbon::parse($getForm->created_at)->format('d-m-Y H:i')}}</p>
                             </td>
                             <td class="col_approval"><img src="{{ public_path("gambar/Reviewed.png") }}" alt="" style="width: 80px; height: 30px;">
-                                <p class="cr">Nama    :{{$getHistory[1]->created_by}}</p>
+                                <p class="cr">Nama    :{{$getHistory[1]->createdBy->name}}</p>
                                 <p class="cr">Tanggal :{{Carbon\Carbon::parse($getHistory[1]->created_at)->format('d-m-Y H:i')}}</p>
                             </td>
                             <td class="col_approval"><img src="{{ public_path("gambar/Checked.png") }}" alt="" style="width: 80px; height: 30px;">
-                                <p class="cr">Nama    :{{$getHistory[2]->created_by}}</p>
+                                <p class="cr">Nama    :{{$getHistory[2]->createdBy->name}}</p>
                                 <p class="cr">Tanggal :{{Carbon\Carbon::parse($getHistory[2]->created_at)->format('d-m-Y H:i')}}</p>
                             </td>
                             <td class="col_approval">
@@ -679,15 +679,15 @@
 
                         @case('acknowledge')
                             <td class="col_approval"><img src="{{ public_path("gambar/Requested.png") }}" alt="" style="width: 80px; height: 30px;">
-                                <p class="cr">Nama    : {{$getForm->req_name}}</p>
+                                <p class="cr">Nama    : {{$getForm->requestor->name}}</p>
                                 <p class="cr">Tanggal : {{Carbon\Carbon::parse($getForm->created_at)->format('d-m-Y H:i')}}</p>
                             </td>
                             <td class="col_approval"><img src="{{ public_path("gambar/Reviewed.png") }}" alt="" style="width: 80px; height: 30px;">
-                                <p class="cr">Nama    :{{$getHistory[1]->created_by}}</p>
+                                <p class="cr">Nama    :{{$getHistory[1]->createdBy->name}}</p>
                                 <p class="cr">Tanggal :{{Carbon\Carbon::parse($getHistory[1]->created_at)->format('d-m-Y H:i')}}</p>
                             </td>
                             <td class="col_approval"><img src="{{ public_path("gambar/Checked.png") }}" alt="" style="width: 80px; height: 30px;">
-                                <p class="cr">Nama    :{{$getHistory[2]->created_by}}</p>
+                                <p class="cr">Nama    :{{$getHistory[2]->createdBy->name}}</p>
                                 <p class="cr">Tanggal :{{Carbon\Carbon::parse($getHistory[2]->created_at)->format('d-m-Y H:i')}}</p>
                             </td>
                             <td class="col_approval">
@@ -698,19 +698,19 @@
 
                         @case('final')
                             <td class="col_approval"><img src="{{ public_path("gambar/Requested.png") }}" alt="" style="width: 80px; height: 30px;">
-                                <p class="cr">Nama    : {{$getForm->req_name}}</p>
+                                <p class="cr">Nama    : {{$getForm->requestor->name}}</p>
                                 <p class="cr">Tanggal : {{Carbon\Carbon::parse($getForm->created_at)->format('d-m-Y H:i')}}</p>
                             </td>
                             <td class="col_approval"><img src="{{ public_path("gambar/Reviewed.png") }}" alt="" style="width: 80px; height: 30px;">
-                                <p class="cr">Nama    :{{$getHistory[1]->created_by}}</p>
+                                <p class="cr">Nama    :{{$getHistory[1]->createdBy->name}}</p>
                                 <p class="cr">Tanggal :{{ Carbon\Carbon::parse($getHistory[1]->created_at)->format('d-m-Y H:i') }}</p>
                             </td>
                             <td class="col_approval"><img src="{{ public_path("gambar/Checked.png") }}" alt="" style="width: 80px; height: 30px;">
-                                <p class="cr">Nama    :{{$getHistory[2]->created_by}}</p>
+                                <p class="cr">Nama    :{{$getHistory[2]->createdBy->name}}</p>
                                 <p class="cr">Tanggal :{{ Carbon\Carbon::parse($getHistory[2]->created_at)->format('d-m-Y H:i') }}</p>
                             </td>
                             <td class="col_approval"><img src="{{ public_path("gambar/approved.png") }}" alt="" style="width: 80px; height: 30px;">
-                                <p class="cr">Nama    :{{$getHistory[4]->created_by}}</p>
+                                <p class="cr">Nama    :{{$getHistory[4]->createdBy->name}}</p>
                                 <p class="cr">Tanggal :{{ Carbon\Carbon::parse($getHistory[4]->created_at)->format('d-m-Y H:i') }}</p>
                             </td>
                             @break

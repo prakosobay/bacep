@@ -704,6 +704,8 @@ class ComposerStaticInit582140f03abb5abd5ed2c14fd376fb64
         'App\\Models\\CleaningHistory' => __DIR__ . '/../..' . '/app/Models/CleaningHistory.php',
         'App\\Models\\Colo' => __DIR__ . '/../..' . '/app/Models/Colo.php',
         'App\\Models\\ColoDetail' => __DIR__ . '/../..' . '/app/Models/ColoDetail.php',
+        'App\\Models\\ColoEntry' => __DIR__ . '/../..' . '/app/Models/ColoEntry.php',
+        'App\\Models\\ColoFull' => __DIR__ . '/../..' . '/app/Models/ColoFull.php',
         'App\\Models\\ColoHistory' => __DIR__ . '/../..' . '/app/Models/ColoHistory.php',
         'App\\Models\\ColoRisk' => __DIR__ . '/../..' . '/app/Models/ColoRisk.php',
         'App\\Models\\ColoVisitor' => __DIR__ . '/../..' . '/app/Models/ColoVisitor.php',

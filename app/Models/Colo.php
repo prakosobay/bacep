@@ -12,43 +12,44 @@ class Colo extends Model
 
     protected $table = 'colos';
     protected $guarded = [];
+    protected $primaryKey = 'id';
 
-    public function user()
+    public function requestor()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'requestor_id');
     }
 
-    public function coloDetail()
+    public function details()
     {
         return $this->hasMany(ColoDetail::class);
     }
 
-    public function coloRisk()
+    public function risks()
     {
         return $this->hasMany(ColoRisk::class);
     }
 
-    public function coloVisitor()
+    public function visitors()
     {
         return $this->hasMany(ColoVisitor::class);
     }
 
-    public function coloHistory()
+    public function history()
     {
         return $this->hasMany(ColoHistory::class);
     }
 
-    public function coloCard()
+    public function card()
     {
         return $this->hasOne(MasterCard::class);
     }
 
-    public function coloEntry()
+    public function entry()
     {
         return $this->hasOne(ColoEntry::class);
     }
 
-    public function coloFull()
+    public function full()
     {
         return $this->hasOne(ColoFull::class);
     }

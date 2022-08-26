@@ -113,23 +113,15 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="">
-                    <i class="far fa-comment"></i>
-                    <span>Custumer Colo</span>
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseInternal"
-                    aria-expanded="true" aria-controls="collapseInternal">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseColo"
+                    aria-expanded="true" aria-controls="collapseColo">
                     <i class="fas fa-fw fa-cog"></i>
-                    <span>Permit Internal</span>
+                    <span>Colocation</span>
                 </a>
-                <div id="collapseInternal" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div id="collapseColo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Option :</h6>
-                        <a class="collapse-item" href="{{ url('full/internal')}}">Internal Colo</a>
-                        <a class="collapse-item" href="{{ url('order/internal')}}">Consumable Form</a>
+                        <a class="collapse-item" href="{{ url('full/colo')}}">Colocation</a>
                     </div>
                 </div>
             </li>

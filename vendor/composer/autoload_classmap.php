@@ -78,6 +78,8 @@ return array(
     'App\\Models\\CleaningHistory' => $baseDir . '/app/Models/CleaningHistory.php',
     'App\\Models\\Colo' => $baseDir . '/app/Models/Colo.php',
     'App\\Models\\ColoDetail' => $baseDir . '/app/Models/ColoDetail.php',
+    'App\\Models\\ColoEntry' => $baseDir . '/app/Models/ColoEntry.php',
+    'App\\Models\\ColoFull' => $baseDir . '/app/Models/ColoFull.php',
     'App\\Models\\ColoHistory' => $baseDir . '/app/Models/ColoHistory.php',
     'App\\Models\\ColoRisk' => $baseDir . '/app/Models/ColoRisk.php',
     'App\\Models\\ColoVisitor' => $baseDir . '/app/Models/ColoVisitor.php',

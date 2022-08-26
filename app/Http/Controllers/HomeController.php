@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{CleaningFull, MasterOb, OtherHistory, OtherPersonil, Personil, PilihanWork, Rutin, Survey, TroubleshootBm, Internal, InternalHistory, OrderHistory, SurveyHistory};
+use App\Models\{CleaningFull, ColoHistory, MasterOb, OtherHistory, OtherPersonil, Personil, PilihanWork, Rutin, Survey, TroubleshootBm, Internal, InternalHistory, OrderHistory, SurveyHistory, Colo};
 use Illuminate\Support\Facades\{DB, Auth, Gate, Session};
 
 class HomeController extends Controller
@@ -66,6 +66,8 @@ class HomeController extends Controller
                 return view('other.troubleshoot_history');
             } elseif($type_view == 'internal'){
                 return view('internal.history');
+            } elseif($type_view == 'colo') {
+                return view('colo.history');
             } else {
                 abort(403);
             }
@@ -116,6 +118,16 @@ class HomeController extends Controller
             } elseif($type_approve == 'order') {
                 $getOrder = OrderHistory::where('aktif, 1')->whereIn('role_to', $role_1)->get();
                 return view('order.approval', compact('getOrder'));
+            } elseif($type_approve == 'colo'){
+                // $getColo = ColoHistory::where('aktif', 1)->whereIn('role_to', $role_1)->get();
+                // dd($getColo);
+                $getColo = DB::table('colos')
+                        ->join('colo_histories', 'colos.id', 'colo_histories.colo_id')
+                        ->select('colo_histories.*', 'colos.*')
+                        ->where('aktif', 1)
+                        ->whereIn('role_to', $role_1)
+                        ->get();
+                return view('colo.approval', compact('getColo'));
             } else {
                 abort(403);
             }
@@ -139,6 +151,8 @@ class HomeController extends Controller
                 return view('other.troubleshoot_full_approval');
             } elseif($type_full == 'internal') {
                 return view('internal.fullApproval');
+            } elseif($type_full == 'colo') {
+                return view('colo.fullApproval');
             } else {
                 abort(403);
             }

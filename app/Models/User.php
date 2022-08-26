@@ -60,4 +60,14 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(MasterCompany::class);
     }
+
+    public function colos()
+    {
+        return $this->hasMany(Colo::class);
+    }
+
+    public function colo_histories()
+    {
+        return $this->hasMany(ColoHistory::class);
+    }
 }

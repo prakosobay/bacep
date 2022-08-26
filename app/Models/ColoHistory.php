@@ -10,14 +10,16 @@ class ColoHistory extends Model
     use HasFactory;
 
     protected $guarded = [];
+    protected $primaryKey = 'id';
+    protected $table = 'colo_histories';
 
     public function colo()
     {
-        return $this->belongsTo(Colo::class);
+        return $this->belongsTo(Colo::class, 'colo_id');
     }
 
-    public function user()
+    public function createdBy()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'created_by');
     }
 }

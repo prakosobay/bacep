@@ -7,11 +7,21 @@
             @csrf
             <div class="container form-container">
 
-                @if (session('success'))
-                    <div class="alert alert-success mt-2">
-                        {{ session('success') }}
-                    </div>
-                @endif
+                <div class="container my-1">
+                    @if (session('success'))
+                        <div class="alert alert-success mt-2">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+                </div>
+
+                <div class="container my-1">
+                    @if (session('gagal'))
+                        <div class="alert alert-warning mt-2">
+                            {{ session('gagal') }}
+                        </div>
+                    @endif
+                </div>
 
                 <input type="text" name="requestor_id" value="{{ auth()->user()->id }}" hidden>
 
@@ -194,13 +204,12 @@
                     <table class="table table-bordered table-hover" id="table_detail">
                         <thead>
                             <tr>
-                                <th colspan="5">Detail Time Activity</th>
+                                <th colspan="4">Detail Time Activity</th>
                             </tr>
                             <tr>
                                 <th>Time Start</th>
                                 <th>Time End</th>
                                 <th>Activity</th>
-                                <th>Detail Service Impact</th>
                                 <th>Item</th>
                             </tr>
                         </thead>
@@ -225,14 +234,6 @@
                                 <td>
                                     <input type="text" class="form-control @error('activity') is-invalid @enderror" id="activity" name="activity[]" value="{{ old('activity')}}" required>
                                     @error('activity')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </td>
-                                <td>
-                                    <input type="text" class="form-control @error('service_impact') is-invalid @enderror" id="service_impact" name="service_impact[]" value="{{ old('service_impact')}}" required>
-                                    @error('service_impact')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -322,13 +323,13 @@
                         <tbody>
                             <tr>
                                 <th>Name</th>
-                                <td><input type="text" class="form-control" name="nama[]" value="{{ old('nama')}}" required></td>
+                                <td><input type="text" class="form-control" name="name[]" value="{{ old('name')}}" required></td>
                                 <th>Phone Number</th>
                                 <td><input type="text" class="form-control" name="phone[]" value="{{ old('phone')}}" required></td>
                             </tr>
                             <tr>
                                 <th>Number ID</th>
-                                <td><input type="text" class="form-control" name="numberId[]" value="{{ old('numberId')}}" required></td>
+                                <td><input type="text" class="form-control" name="nik[]" value="{{ old('nik')}}" required></td>
                                 <th>Company</th>
                                 <th><input type="text" class="form-control" name="company[]" value="{{ old('company')}}" required></th>
                             </tr>
@@ -382,7 +383,7 @@ $(document).ready(function(){
     $(button_detail).click(function(e){
         e.preventDefault();
         if(row < max_row){
-            $(table_detail).append('<tr><td><input type="time" class="form-control" id="time_start" name="time_start[]" value=""></td><td><input type="time" class="form-control" id="time_end" name="time_end[]"></td><td><input type="text" class="form-control" id="activity" name="activity[]"></td><td> <input type="text" class="form-control" id="service_impact" name="service_impact[]" value=""></td><td><input type="text" class="form-control" id="detailTime" name="item[]" value=""></td></tr>');
+            $(table_detail).append('<tr><td><input type="time" class="form-control" id="time_start" name="time_start[]" value=""></td><td><input type="time" class="form-control" id="time_end" name="time_end[]"></td><td><input type="text" class="form-control" id="activity" name="activity[]"></td><td><input type="text" class="form-control" id="detailTime" name="item[]" value=""></td></tr>');
             row++;
         }
     });
@@ -398,7 +399,7 @@ $(document).ready(function(){
     $(button_visitor).click(function(e){
         e.preventDefault();
         if(row < max_row){
-            $(table_visitor).append('<tr><th>Name</th><td><input type="text" class="form-control" name="nama[]" value=""></td><th>Phone Number</th><td><input type="text" class="form-control" name="phone[]" value=""></td></tr><tr><th>Number ID</th><td><input type="text" class="form-control" name="numberId[]" value=""></td><th>Company</th><th><input type="text" class="form-control" name="company[]" value=""></th></tr><tr><th>Department</th><td><input type="text" class="form-control" name="department[]" value=""></td><th>Responsibility</th><td><input type="text" class="form-control" name="respon[]" value=""></td></tr>');
+            $(table_visitor).append('<tr><th>Name</th><td><input type="text" class="form-control" name="name[]" value=""></td><th>Phone Number</th><td><input type="text" class="form-control" name="phone[]" value=""></td></tr><tr><th>Number ID</th><td><input type="text" class="form-control" name="nik[]" value=""></td><th>Company</th><th><input type="text" class="form-control" name="company[]" value=""></th></tr><tr><th>Department</th><td><input type="text" class="form-control" name="department[]" value=""></td><th>Responsibility</th><td><input type="text" class="form-control" name="respon[]" value=""></td></tr>');
             row++;
         }
     });

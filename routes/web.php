@@ -289,8 +289,13 @@ Route::middleware(['auth'])->group(function () {
         Route::get('colo/form', 'form');
         Route::get('finished/{company}/{department}', 'finished');
         Route::get('last/form/{company}/{department}', 'last_form');
+        Route::get('colo/pdf/{id}', 'pdf');
+
+        Route::get('colo/yajra/history', 'yajra_history');
 
         Route::post('colo/store', 'store');
+        Route::post('colo/approve', 'approve');
+        Route::post('colo/reject', 'reject');
     });
 
 
