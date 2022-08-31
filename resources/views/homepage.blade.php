@@ -80,7 +80,7 @@
                 </div>
             </div>
 
-        {{-- @elsecan('isEksternal')
+        @elsecan('isEksternal')
             <div class="container-fluid" id="banner">
                 <div class="container banner-content">
                     <div >
@@ -104,7 +104,7 @@
                         </p>
                     </div>
                 </div>
-            </div> --}}
+            </div>
 
 
         @elsecan('isSurvey')

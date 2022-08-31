@@ -121,7 +121,8 @@
                 <div id="collapseColo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Option :</h6>
-                        <a class="collapse-item" href="{{ url('full/colo')}}">Colocation</a>
+                        <a class="collapse-item" href="{{ url('full/internal')}}">Internal</a>
+                        <a class="collapse-item" href="{{ url('full/eksternal')}}">Eksternal</a>
                     </div>
                 </div>
             </li>

@@ -118,16 +118,6 @@ class HomeController extends Controller
             } elseif($type_approve == 'order') {
                 $getOrder = OrderHistory::where('aktif, 1')->whereIn('role_to', $role_1)->get();
                 return view('order.approval', compact('getOrder'));
-            } elseif($type_approve == 'colo'){
-                // $getColo = ColoHistory::where('aktif', 1)->whereIn('role_to', $role_1)->get();
-                // dd($getColo);
-                $getColo = DB::table('colos')
-                        ->join('colo_histories', 'colos.id', 'colo_histories.colo_id')
-                        ->select('colo_histories.*', 'colos.*')
-                        ->where('aktif', 1)
-                        ->whereIn('role_to', $role_1)
-                        ->get();
-                return view('colo.approval', compact('getColo'));
             } else {
                 abort(403);
             }

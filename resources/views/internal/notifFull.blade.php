@@ -21,14 +21,13 @@
 
 <body>
     <h2>Dear All,</h2>
-	<h3>Terlampir link permit dari tim {{ $content->requestor->department }} yang sudah Full Approval</h3>
+	<h3>Terlampir link permit dari tim {{ $content->req_dept}} yang sudah Full Approval</h3>
     <table>
         <thead>
             <tr>
                 <th>No. Permit</th>
                 <th>Date of Request</th>
                 <th>Requestor Name</th>
-                <th>Requestor Dept</th>
                 <th>Purpose of Work</th>
                 <th>Date of Visit</th>
                 <th>Date of Leave</th>
@@ -38,8 +37,7 @@
             <tr>
                 <td>{{ $content->id }}</td>
                 <td>{{ Carbon\Carbon::parse($content->created_at)->format('d-m-Y')  }}</td>
-                <td>{{ $content->requestor->name  }}</td>
-                <td>{{ $content->requestor->department  }}</td>
+                <td>{{ $content->req_name  }}</td>
                 <td>{{ $content->work }}</td>
                 <td>{{ Carbon\Carbon::parse($content->visit)->format('d-m-Y') }}</td>
                 <td>{{ Carbon\Carbon::parse($content->leave)->format('d-m-Y') }}</td>

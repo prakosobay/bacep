@@ -37,7 +37,7 @@
                         <a class="nav-link" href="#about">About Us</a>
                     </li>
                     <li class="nav-item mx-5">
-                        <a class="nav-link" href="{{ url('logall')}}">Log Permit</a>
+                        <a class="nav-link" href="{{ route('dashboardInternal', auth()->user()->department )}}">Log Permit</a>
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
@@ -75,9 +75,9 @@
                     <div class="container-fluid">
                         <div class="card-body">
                             <button class="btn btn-primary btn-sm mx-1 my-2" data-bs-toggle="modal" data-bs-target="#ipcoreModal">Create Form</button>
-                            <a type="button" class="btn btn-sm btn-info mx-1 my-2" href="{{url('logall')}}">Log Form</a>
-                            <a type="button" class="btn btn-sm btn-success mx-1 my-2" href="{{ url('internal/finished/show')}}">Finished Permit</a>
-                            <a type="button" class="btn btn-sm btn-secondary mx-1 my-2" href="{{ url('internal/last/form')}}">Last Requested Form</a>
+                            <a type="button" class="btn btn-sm btn-info mx-1 my-2" href="{{ route('dashboardInternal', auth()->user()->department )}}">Log Form</a>
+                            <a type="button" class="btn btn-sm btn-success mx-1 my-2" href="{{ route('finishedInternal', auth()->user()->department)}}">Finished Permit</a>
+                            <a type="button" class="btn btn-sm btn-secondary mx-1 my-2" href="{{ route('lastInternal', auth()->user()->department )}}">Last Requested Form</a>
                         </div>
                     </div>
 
@@ -117,6 +117,7 @@
                                         <th>Name</th>
                                         <th>Checkin</th>
                                         <th>Checkout</th>
+                                        <th>Card Number</th>
                                     </tr>
                                 </thead>
                                 <tbody class="isi-table text-center">
@@ -181,7 +182,7 @@
             $('#dataTable').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: '{{ url('internal/yajra/finished')}}',
+                ajax: "{{ url('internal/yajra/finished')}}"+'/'+ "{{auth()->user()->department}}",
                 columns: [
                     { data: 'work', name: 'work' },
                     { data: 'req_name', name: 'req_name' },
@@ -190,6 +191,7 @@
                     { data: 'name', name: 'internal_visitors.name' },
                     { data: 'checkin', name: 'internal_visitors.checkin' },
                     { data: 'checkout', name: 'internal_visitors.checkout' },
+                    { data: 'card_number', name: 'card_number' },
                 ]
             });
         });

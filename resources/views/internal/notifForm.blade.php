@@ -20,7 +20,7 @@
 <body>
     <div class="card">
         <h3 class="">Hallo, DC Team!</h3>
-        <p>Mohon untuk review dan check permit dari team {{$content->requestor->department}} yang telah di submit.
+        <p>Mohon untuk review dan check permit dari team {{$content->req_dept}} yang telah di submit.
             Link terlampir </p>
             <table>
                 <thead>
@@ -28,7 +28,6 @@
                         <th>No. Permit</th>
                         <th>Date of Request</th>
                         <th>Requestor Name</th>
-                        <th>Requestor Dept</th>
                         <th>Purpose of Work</th>
                         <th>Date of Visit</th>
                     </tr>
@@ -37,8 +36,7 @@
                     <tr>
                         <td>{{ $content->id }}</td>
                         <td>{{ Carbon\Carbon::parse($content->created_at)->format('d-m-Y')  }}</td>
-                        <td>{{ $content->requestor->name  }}</td>
-                        <td>{{ $content->requestor->department  }}</td>
+                        <td>{{ $content->req_name  }}</td>
                         <td>{{ $content->work }}</td>
                         <td>{{ Carbon\Carbon::parse($content->visit)->format('d-m-Y') }}</td>
                     </tr>

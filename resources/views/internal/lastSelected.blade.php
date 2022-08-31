@@ -40,7 +40,7 @@
                     <div class="col-8">
                         <div class="form-group mb-5">
                             <label for="work" class="form-label">Purpose of Work :</label>
-                            <input type="text" class="form-control @error('work') is-invalid @enderror" id="work" name="work" value="{{ $getInternal->work }}" readonly>
+                            <input type="text" class="form-control @error('work') is-invalid @enderror" id="work" name="work" value="{{ $getInternal->work }}" required>
                             @error('work')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -197,7 +197,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($getInternal->detail as $p)
+                            @foreach ($getInternal->details as $p)
                             <tr>
                                 <td>
                                     <input type="time" class="form-control @error('time_start') is-invalid @enderror" id="time_start" name="time_start[]" value="{{ $p->time_start }}" required>
@@ -261,7 +261,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($getInternal->risk as $p)
+                            @foreach ($getInternal->risks as $p)
                             <tr>
                                 <td>
                                     <input type="text" class="form-control @error('risk') is-invalid @enderror" name="risk[]" value="{{ $p->risk }}" required>
@@ -316,16 +316,16 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($getInternal->visitor as $p)
+                            @foreach ($getInternal->visitors as $p)
                             <tr>
                                 <th>Name</th>
-                                <td><input type="text" class="form-control" name="nama[]" id="name_id" value="{{ $p->name }}"></td>
+                                <td><input type="text" class="form-control" name="name[]" id="name_id" value="{{ $p->name }}"></td>
                                 <th>Phone Number</th>
                                 <td><input type="text" class="form-control" name="phone[]" id="phone_id" value="{{ $p->phone }}"></td>
                             </tr>
                             <tr>
                                 <th>Number ID</th>
-                                <td><input type="text" class="form-control" name="numberId[]" id="number_id" value="{{ $p->numberId }}"></td>
+                                <td><input type="text" class="form-control" name="number[]" id="number_id" value="{{ $p->number }}"></td>
                                 <th>Company</th>
                                 <th><input type="text" class="form-control" name="company[]" id="company_id" value="{{ $p->company }}"></th>
                             </tr>
@@ -338,7 +338,10 @@
                             @endforeach
                         </tbody>
                     </table>
-                    <button class="mx-3" id="button_visitor"><b>Add More Fields</b></button>
+                    <div class="container mr-3 my-3">
+                        <button class="mx-3" id="button_visitor"><b>Add More Fields</b></button>
+                        <button type="button" class="mx-3" onclick="myFunction()"><b>Remove Field</b></button>
+                    </div>
                 </div>
 
                 @if (count($errors) > 0)
@@ -361,7 +364,7 @@
 @stack('script')
 <script src="{{ asset('vendor/jquery/jquery-3.2.1.min.js')}}"></script>
 <script>
-    $(document).ready(function(){
+    // $(document).ready(function(){
 
         // $('.js-example-basic-multiple').select2({
         //     placeholder: 'Select an option',
@@ -377,6 +380,12 @@
         let table_risk = $('#table_risk');
         let button_visitor = $('#button_visitor');
         let table_visitor = $('#table_visitor');
+        let remove_visitor = $('#remove_visitor');
+
+
+        function myFunction() {
+            document.getElementById("table_visitor").deleteRow(0);
+        }
 
         $(button_detail).click(function(e){
             e.preventDefault();
@@ -397,18 +406,12 @@
         $(button_visitor).click(function(e){
         e.preventDefault();
         if(row < max_row){
-            $(table_visitor).append('<tr><th>Name</th><td><input type="text" class="form-control" name="nama[]" value=""></td><th>Phone Number</th><td><input type="text" class="form-control" name="phone[]" value=""></td></tr><tr><th>Number ID</th><td><input type="text" class="form-control" name="numberId[]" value=""></td><th>Company</th><th><input type="text" class="form-control" name="company[]" value=""></th></tr><tr><th>Department</th><td><input type="text" class="form-control" name="department[]" value=""></td><th>Responsibility</th><td><input type="text" class="form-control" name="respon[]" value=""></td></tr>');
+            $(table_visitor).append('<tr><th>Name</th><td><input type="text" class="form-control" name="name[]" value=""></td><th>Phone Number</th><td><input type="text" class="form-control" name="phone[]" value=""></td></tr><tr><th>Number ID</th><td><input type="text" class="form-control" name="number[]" value=""></td><th>Company</th><th><input type="text" class="form-control" name="company[]" value=""></th></tr><tr><th>Department</th><td><input type="text" class="form-control" name="department[]" value=""></td><th>Responsibility</th><td><input type="text" class="form-control" name="respon[]" value=""></td></tr>');
             row++;
         }
     });
 
-        // $(button_visitor).click(function(e){
-        //     e.preventDefault();
-        //     if(row < max_row){
-        //         $(table_visitor).append();
-        //         row++;
-        //     }
-        // });
+
 
         // $('#pilihan1').change(function(){
         //     let id = $(this).val();
@@ -427,6 +430,6 @@
         //         }
         //     });
         // });
-    });
+    // });
 </script>
 @endsection

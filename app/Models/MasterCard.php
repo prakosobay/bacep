@@ -16,9 +16,4 @@ class MasterCard extends Model
     {
         return $this->hasMany(Internal::class);
     }
-
-    public function createdBy()
-    {
-        return $this->belongsTo(User::class, 'created_by');
-    }
 }

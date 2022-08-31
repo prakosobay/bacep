@@ -3,7 +3,7 @@
 <div class="container my-5">
     <div class="card">
         <h1 class="text-center my-3 h1Permit">CHECKIN VISITOR</h1>
-        <form action="{{ url('internal/checkin/update', $getVisitor->id)}}" method="POST" class="validate-form">
+        <form action="{{ route('internalCheckinUpdate', Crypt::encrypt($getVisitor->id))}}" method="POST" class="validate-form">
             @method('put')
             @csrf
             <div class="container form-container">
@@ -52,6 +52,17 @@
                                 <td><input type="text" class="form-control @error('department') is-invalid @enderror" name="department" value="{{ $getVisitor->department }}" required></td>
                                 <th>Responsibility</th>
                                 <td><input type="text" class="form-control @error('respon') is-invalid @enderror" name="respon" value="{{ $getVisitor->respon }}" required></td>
+                            </tr>
+                            <tr>
+                                <th>Card Number :</th>
+                                <td>
+                                    <select name="card" id="card" class="form-select">
+                                            <option value=""></option>
+                                        @for($i = 101; $i <= 110; $i++)
+                                            <option value="{{ $i }}">{{ $i }}</option>
+                                        @endfor
+                                    </select>
+                                </td>
                             </tr>
                             <tr>
                                 <th colspan="2">

@@ -12,16 +12,6 @@ class Internal extends Model
 
     protected $guarded = [];
 
-    public function requestor()
-    {
-        return $this->belongsTo(User::class, 'requestor_id');
-    }
-
-    public function card()
-    {
-        return $this->belongsTo(MasterCard::class, 'm_card_id');
-    }
-
     public function visitors()
     {
         return $this->hasMany(InternalVisitor::class);

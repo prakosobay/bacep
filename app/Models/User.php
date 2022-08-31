@@ -56,11 +56,6 @@ class User extends Authenticatable
         return $this->hasMany(Survey::class);
     }
 
-    public function cards()
-    {
-        return $this->hasMany(MasterCard::class);
-    }
-
     public function internals()
     {
         return $this->hasMany(Internal::class);

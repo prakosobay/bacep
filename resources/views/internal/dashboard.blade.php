@@ -75,8 +75,8 @@
                         <div class="card-body">
                             <button class="btn btn-primary btn-sm mx-1 my-2" data-bs-toggle="modal" data-bs-target="#internalModal">Create Form</button>
                             <a type="button" class="btn btn-sm btn-info mx-1 my-2" href="{{ route('dashboardInternal', auth()->user()->department )}}">Log Form</a>
-                            <a type="button" class="btn btn-sm btn-success mx-1 my-2" href="{{ url('internal/finished/show')}}">Finished Permit</a>
-                            <a type="button" class="btn btn-sm btn-secondary mx-1 my-2" href="{{ url('internal/last/form')}}">Last Requested Form</a>
+                            <a type="button" class="btn btn-sm btn-success mx-1 my-2" href="{{ route('finishedInternal', auth()->user()->department)}}">Finished Permit</a>
+                            <a type="button" class="btn btn-sm btn-secondary mx-1 my-2" href="{{ route('lastInternal', auth()->user()->department )}}">Last Requested Form</a>
                         </div>
                     </div>
 
@@ -115,6 +115,7 @@
                                         <th>Name</th>
                                         <th>Checkin</th>
                                         <th>Checkout</th>
+                                        <th>Card Number</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -166,7 +167,7 @@
             $('#dataTable').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: '{{ url('internal/yajra/show')}}',
+                ajax: "{{ url('internal/yajra/show')}}"+'/'+ "{{auth()->user()->department}}",
                 columns: [
                     { data: 'work', name: 'internals.work' },
                     { data: 'req_name', name: 'internals.req_name' },
@@ -175,7 +176,8 @@
                     { data: 'name', name: 'internal_visitors.name' },
                     { data: 'checkin', name: 'internal_visitors.checkin' },
                     { data: 'checkout', name: 'internal_visitors.checkout' },
-                    {data: 'action', name: 'action', orderable: false, searchable: false}
+                    { data: 'card_number', name: 'internals.card_number' },
+                    { data: 'action', name: 'action', orderable: false, searchable: false }
                 ]
             });
         });

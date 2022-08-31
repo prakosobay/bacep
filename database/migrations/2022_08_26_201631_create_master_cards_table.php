@@ -15,9 +15,8 @@ class CreateMasterCardsTable extends Migration
     {
         Schema::create('m_cards', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('created_by');
-            $table->foreignId('updated_by');
             $table->integer('number');
+            $table->string('type');
             $table->timestamps();
         });
     }

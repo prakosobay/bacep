@@ -3,7 +3,7 @@
 <div class="container my-5">
     <div class="card">
         <h1 class="text-center my-3 h1Permit">CHECKOUT VISITOR</h1>
-        <form action="{{ url('internal/checkout/update', $getVisitor->id)}}" method="POST" class="validate-form">
+        <form action="{{ route('internalCheckoutUpdate', Crypt::encrypt($getVisitor->id))}}" method="POST" class="validate-form">
             @method('put')
             @csrf
             <div class="container form-container">

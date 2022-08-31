@@ -37,7 +37,7 @@
                         <a class="nav-link" href="#about">About Us</a>
                     </li>
                     <li class="nav-item mx-5">
-                        <a class="nav-link" href="{{ url('logall')}}">Log Permit</a>
+                        <a class="nav-link" href="{{ route('dashboardInternal', auth()->user()->department )}}">Log Permit</a>
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
@@ -75,9 +75,9 @@
                     <div class="container-fluid">
                         <div class="card-body">
                             <button class="btn btn-primary btn-sm mx-1 my-2" data-bs-toggle="modal" data-bs-target="#ipcoreModal">Create Form</button>
-                            <a type="button" class="btn btn-sm btn-info mx-1 my-2" href="{{url('logall')}}">Log Form</a>
-                            <a type="button" class="btn btn-sm btn-success mx-1 my-2" href="{{ url('internal/finished/show')}}">Finished Permit</a>
-                            <a type="button" class="btn btn-sm btn-secondary mx-1 my-2" href="{{ url('internal/last/form')}}">Last Requested Form</a>
+                            <a type="button" class="btn btn-sm btn-info mx-1 my-2" href="{{ route('dashboardInternal', auth()->user()->department )}}">Log Form</a>
+                            <a type="button" class="btn btn-sm btn-success mx-1 my-2" href="{{ route('finishedInternal', auth()->user()->department)}}">Finished Permit</a>
+                            <a type="button" class="btn btn-sm btn-secondary mx-1 my-2" href="{{ route('lastInternal', auth()->user()->department )}}">Last Requested Form</a>
                         </div>
                     </div>
 
@@ -109,12 +109,12 @@
                             <table class="table table-striped table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                     <tr class="judul-table text-center">
-                                        <th>No.</th>
+                                        {{-- <th>No.</th> --}}
                                         <th>Purpose of Work</th>
                                         <th>Requestor</th>
                                         <th>Date of Visit</th>
                                         <th>Date of Leave</th>
-                                        <th>Name</th>
+                                        <th>Visitor Name</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -122,7 +122,7 @@
                                     <?php
                                     $i = 1;
                                     ?>
-                                    @foreach ($internals as $internal)
+                                    {{-- @foreach ($internals as $internal)
                                         <tr>
                                             <td>{{ $i++ }}</td>
                                             <td>{{ $internal->internal->work }}</td>
@@ -134,7 +134,7 @@
                                                 <a type="button" class="btn btn-sm btn-success mx-1 my-1" href="{{ url('last/selected', $internal->internal_id)}}">Select</a>
                                             </td>
                                         </tr>
-                                    @endforeach
+                                    @endforeach --}}
                                 </tbody>
                             </table>
                         </div>
@@ -176,22 +176,22 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.js"></script>
 
-    {{-- <script>
+    <script>
         $(function() {
             $('#dataTable').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: '{{ url('internal/yajra/last/form')}}',
+                ajax: "{{ url('internal/yajra/last/form')}}"+'/'+"{{auth()->user()->department}}",
                 columns: [
                     { data: 'work', name: 'work' },
                     { data: 'req_name', name: 'req_name' },
                     { data: 'visit', name: 'visit' },
                     { data: 'leave', name: 'leave' },
                     { data: 'name', name: 'internal_visitors.name' },
-                    {data: 'action', name: 'action', orderable: false, searchable: false}
+                    { data: 'action', name: 'action', orderable: false, searchable: false}
                 ]
             });
         });
-    </script> --}}
+    </script>
 </body>
 </html>

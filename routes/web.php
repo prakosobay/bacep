@@ -89,7 +89,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('table_barang', [HomeController::class, 'dashboard'])->name('table_barang');
 
 
-
     //Barang Consume
     Route::controller(ConsumController::class)->group(function () {
         Route::get('consum/table/show', 'consum_table_show')->name('consumTable');
@@ -113,8 +112,6 @@ Route::middleware(['auth'])->group(function () {
         Route::post('consum/import/keluar', 'import_keluar');
         Route::post('consum/import/masuk', 'import_masuk');
     });
-
-
 
 
     //Barang Asset
@@ -269,32 +266,33 @@ Route::middleware(['auth'])->group(function () {
 
     // Internal
     Route::controller(InternalController::class)->group(function () {
-        Route::get('internal/dashboard/{dept}', 'dashboard')->name('dashboardInternal');
-
+        Route::get('internal-dashboard/{dept}', 'dashboard')->name('dashboardInternal');
+        Route::get('internal-finished/show/{dept}', 'finished_show')->name('finishedInternal');
+        Route::get('internal-last-form/{dept}', 'internal_last_form')->name('lastInternal');
+        Route::get('last-selected/{id}', 'last_selected')->name('lastSelected');
         Route::get('internal/form', 'internal_form');
-        Route::get('internal/last/form', 'internal_last_form');
-        Route::get('last/selected/{id}', 'last_selected');
-        Route::get('internal/action/checkin/form/{id}', 'internal_action_checkin_form');
-        Route::get('internal/action/checkout/form/{id}', 'internal_action_checkout_form');
+
+
+        Route::get('internal-action-checkin-form/{id}', 'internal_action_checkin_form')->name('checkinInternal');
+        Route::get('internal-action-checkout-form/{id}', 'internal_action_checkout_form')->name('checkoutInternal');
+        Route::put('internal-action-cancel/{id}', 'internal_action_cancel')->name('cancelCheckinInternal');
+        Route::put('internal-checkin-update/{id}', 'internal_checkin_update')->name('internalCheckinUpdate');
+        Route::put('internal-checkout-update/{id}', 'internal_checkout_update')->name('internalCheckoutUpdate');
+
         Route::get('/internal/pdf/{id}', 'internal_pdf');
         Route::get('internal/yajra/history', 'internal_yajra_history');
         Route::get('internal/yajra/full/approval', 'internal_yajra_full_approval');
         Route::get('internal/getVisitor/{id}', 'getVisitor');
 
-        Route::get('internal/finished/show', 'finished_show');
-        Route::get('internal/yajra/show', 'internal_yajra_show');
-        Route::get('internal/yajra/finished', 'internal_yajra_finished');
-        Route::get('internal/yajra/last/form', 'internal_yajra_last_form');
+        Route::get('internal/yajra/show/{dept}', 'internal_yajra_show');
+        Route::get('internal/yajra/finished/{dept}', 'internal_yajra_finished');
+        Route::get('internal/yajra/last/form/{dept}', 'internal_yajra_last_form');
 
-        Route::put('internal/checkin/update/{id}', 'internal_checkin_update');
-        Route::put('internal/checkout/update/{id}', 'internal_checkout_update');
-        Route::put('internal/action/cancel/{id}', 'internal_action_cancel');
         Route::post('internal/create', 'internal_create');
         Route::post('internal/approve/{id}', 'internal_approve');
         Route::post('internal/reject/{id}', 'internal_reject');
     });
 
-    // Route::controller(EksternalController::)
 
 
     Route::controller(ColoController::class)->group(function () {

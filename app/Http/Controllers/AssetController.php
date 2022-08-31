@@ -118,9 +118,10 @@ class AssetController extends Controller
             'ket' => 'required',
         ]);
 
-        $asset = Asset::find($id);
+        $asset = Asset::findOrFail($id);
         $asset->update([
             'jumlah' => $asset->jumlah + $request->jumlah,
+            'sisa' => $asset->sisa + $request->jumlah,
         ]);
 
         if ($asset->jumlah >= 1) {
@@ -133,7 +134,7 @@ class AssetController extends Controller
             ]);
         }
 
-        $assetmasuk = AssetMasuk::create([
+        AssetMasuk::create([
             'nama_barang' => $request->nama_barang,
             'asset_id' => $request->asset_id,
             'jumlah' => $request->jumlah,
@@ -152,13 +153,15 @@ class AssetController extends Controller
             'ket' => 'required',
         ]);
 
-        $asset = Asset::find($id);
+        $asset = Asset::findOrFail($id);
         if ($asset->jumlah >= $request->jumlah) {
-            $asset->update([
-                'jumlah' => $asset->jumlah - $request->jumlah,
-            ]);
+            if($asset){
+                $asset->update([
+                    'jumlah' => $asset->jumlah - $request->jumlah,
+                ]);
+            }
 
-            $assetkeluar = AssetKeluar::create([
+            AssetKeluar::create([
                 'nama_barang' => $request->nama_barang,
                 'asset_id' => $request->asset_id,
                 'jumlah' => $request->jumlah,

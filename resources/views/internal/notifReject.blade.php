@@ -20,14 +20,14 @@
 </head>
 
 <body>
-    <h2>Dear Team{{ $content->requestor->department }},</h2>
+    <h2>Dear Team{{ $content->req_dept }},</h2>
 	<h3>Mohon maaf permit yang anda ajukan tidak dapat kami proses, mohon untuk mengajukan permit baru pada tautan di bawah ini.</h3>
     <table>
         <thead>
             <tr>
                 <th>No. Permit</thead>
                 <th>Date of Request</th>
-                <th>Requestor Dept</th>
+                <th>Requestor Name</th>
                 <th>Purpose of Work</th>
                 <th>Date of Visit</th>
                 <th>Note</th>
@@ -37,7 +37,7 @@
             <tr>
                 <td>{{ $content->id }}</td>
                 <td>{{ Carbon\Carbon::parse($content->created_at)->format('d-m-Y')  }}</td>
-                <td>{{ $content->requestor->department }}</td>
+                <td>{{ $content->req_name }}</td>
                 <td>{{ $content->work }}</td>
                 <td>{{ Carbon\Carbon::parse($content->visit)->format('d-m-Y') }}</td>
                 <td>{{ $content->reject_note }}</td>
