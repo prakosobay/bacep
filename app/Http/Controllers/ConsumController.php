@@ -23,7 +23,7 @@ class ConsumController extends Controller
 
 
     // Show Pages
-    public function consum_table_show() // Menampilkan data barang consumable
+    public function table_show() // Menampilkan data barang consumable
     {
         if ((Gate::allows('isHead')) || (Gate::allows('isApproval'))) {
             return view('consum.table');
@@ -32,7 +32,7 @@ class ConsumController extends Controller
         }
     }
 
-    public function consum_create_show() // Tampilan untuk menginput barang consum baru
+    public function create_show() // Tampilan untuk menginput barang consum baru
     {
         if ((Gate::allows('isAdmin')) || (Gate::allows('isApproval')) || (Gate::allows('isHead'))) {
             return view('consum.new');
@@ -41,7 +41,7 @@ class ConsumController extends Controller
         }
     }
 
-    public function consum_masuk_show() // Tampilan untuk data barang masuk
+    public function masuk_show() // Tampilan untuk data barang masuk
     {
         if (Gate::allows('isHead') || (Gate::allows('isApproval')) || (Gate::allows('isAdmin'))) {
             return view('consum.masuk');
@@ -50,7 +50,7 @@ class ConsumController extends Controller
         }
     }
 
-    public function consum_keluar_show() // Tampilan untuk data barang keluar
+    public function keluar_show() // Tampilan untuk data barang keluar
     {
         if (Gate::allows('isHead') || (Gate::allows('isApproval')) || (Gate::allows('isAdmin'))) {
             return view('consum.keluar');
@@ -93,7 +93,7 @@ class ConsumController extends Controller
 
 
     // Submit data
-    public function consum_update_masuk(Request $request, $id) // Update barang masuk
+    public function update_masuk(Request $request, $id) // Update barang masuk
     {
         $this->validate($request, [
             'jumlah' => ['numeric', 'required', 'min:1'],
@@ -118,89 +118,196 @@ class ConsumController extends Controller
         return redirect()->route('consumTable')->with('success', 'Barang Consum Berhasil di Tambah');
     }
 
-    public function consum_update_keluar(Request $request, $id) // Update barang keluar
+    public function update_keluar(Request $request, $id) // Update barang keluar
     {
         // dd($request->all());
         $this->validate($request, [
             'jumlah' => ['numeric', 'required', 'min:1'],
-            'ket' => 'required',
+            'ket' => ['required', 'nullable'],
         ]);
 
-        $consum = Consum::find($id);
-        if ($consum->jumlah >= $request->jumlah) {
-            $consum->update([
-                'nama_barang' => $consum->nama_barang,
-                'jumlah' => $consum->jumlah - $request->jumlah,
+        DB::beginTransaction();
+
+        try {
+
+            $consum = Consum::find($id);
+
+            if ($consum->jumlah >= $request->jumlah) {
+
+                $consum->update([
+                    'nama_barang' => $consum->nama_barang,
+                    'jumlah' => $consum->jumlah - $request->jumlah,
+                ]);
+
+                ConsumKeluar::create([
+                    'nama_barang' => $request->nama_barang,
+                    'consum_id' => $request->id,
+                    'jumlah' => $request->jumlah,
+                    'ket' => $request->ket,
+                    'pencatat' => $request->pencatat,
+                    'tanggal' => date('d/m/Y'),
+                ]);
+
+            } else {
+                return back()->with('gagal', 'Failed');
+            }
+
+            $kondisi = $consum->jumlah;
+
+            if($kondisi == 0) {
+
+                $consum->update([
+                    'kondisi' => 'Stock Habis',
+                ]);
+
+            } elseif(($kondisi > 0) && ($kondisi <= 5)){
+
+                $consum->update([
+                    'kondisi' => 'Stock Sedikit',
+                ]);
+
+            } elseif($kondisi > 5) {
+
+                $consum->update([
+                    'kondisi' => 'Stock Ada',
+                ]);
+
+            }
+
+            DB::commit();
+            return redirect()->route('consumTable')->with('success', 'Data Berhasil di Submit');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            throw $e;
+        }
+    }
+
+    public function store(Request $request) // Create barang baru
+    {
+        $request->validate([
+            'nama_barang' => ['required', 'unique:consums', 'max:200'],
+            'jumlah' => ['required', 'numeric', 'min:1'],
+            'note' => ['max:255', 'nullable', 'string'],
+            'lokasi' => ['required', 'string', 'max:255'],
+            'satuan' => ['required', 'string', 'max:255'],
+            'itemcode' => ['numeric', 'digits:6', 'required'],
+            'pencatat' => ['required', 'string', 'max:255'],
+        ]);
+
+        DB::beginTransaction();
+
+        try {
+
+            $consum = Consum::create([
+                'nama_barang' => $request->nama_barang,
+                'jumlah' => $request->jumlah,
+                'note' => $request->note,
+                'satuan' => $request->satuan,
+                'lokasi' => $request->lokasi,
+                'itemcode' => $request->itemcode,
             ]);
 
-            $consumkeluar = ConsumKeluar::create([
+            ConsumMasuk::create([
                 'nama_barang' => $request->nama_barang,
-                'consum_id' => $request->id,
+                'consum_id' => $consum->id,
                 'jumlah' => $request->jumlah,
-                'ket' => $request->ket,
+                'ket' => $request->note,
                 'pencatat' => $request->pencatat,
                 'tanggal' => date('d/m/Y'),
             ]);
 
-        } else {
-            return back()->with('Gagal', 'Stock Kosong/Kurang');
+            $kondisi = $consum->jumlah;
+            if($kondisi == 0) {
+                $consum->update([
+                    'kondisi' => 'Stock Habis',
+                ]);
+
+            } elseif(($kondisi <= 5) && ($kondisi > 0)) {
+
+                $consum->update([
+                    'kondisi' => "Stock Sedikit"
+                ]);
+
+            } elseif($kondisi > 5) {
+
+                $consum->update([
+                    'kondisi' => "Stock Ada"
+                ]);
+            }
+
+            DB::commit();
+
+            return redirect()->route('consumTable')->with('success', 'Barang Consum Berhasil di Tambah');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            throw $e;
         }
-        return redirect()->route('consumTable')->with('success', 'Data Berhasil di Submit');
+
+
     }
 
-    public function consum_create_submit(Request $request) // Create barang baru
+    public function update_itemcode(Request $request, $id)
     {
-        $this->validate($request, [
-            'nama_barang' => ['required', 'unique:consums', 'max:200'],
-            'jumlah' => ['required', 'numeric', 'min:1'],
-            'note' => ['max:255'],
-            'lokasi' => 'required',
-            'satuan' => ['required', 'string'],
-            'itemcode' => ['numeric', 'digits:6'],
-        ]);
-
-        $consum = Consum::create([
-            'nama_barang' => $request->nama_barang,
-            'jumlah' => $request->jumlah,
-            'note' => $request->note,
-            'satuan' => $request->satuan,
-            'lokasi' => $request->lokasi,
-            'itemcode' => $request->itemcode,
-        ]);
-
-        $consummasuk = ConsumMasuk::create([
-            'nama_barang' => $request->nama_barang,
-            'consum_id' => $consum->id,
-            'jumlah' => $request->jumlah,
-            'ket' => $request->note,
-            'pencatat' => $request->pencatat,
-            'tanggal' => date('d/m/Y'),
-        ]);
-
-        return redirect()->route('consumTable')->with('success', 'Barang Consum Berhasil di Tambah');
-    }
-
-    public function consum_update_itemcode(Request $request, $id)
-    {
-        $validate = $request->validate([
+        $request->validate([
             'itemcode' => ['required', 'numeric', 'digits:6'],
+            'satuan' => ['required', 'string', 'max:255'],
+            'consum_id' => ['required', 'numeric'],
+            'nama_barang' => ['required', 'string', 'max:255'],
+            'lokasi' => ['required', 'string', 'max:255'],
         ]);
 
-        $getItemcode = Consum::findOrFail($id);
-        $getItemcode->update([
-            'itemcode' => $request->itemcode,
-        ]);
+        DB::beginTransaction();
 
-        if($getItemcode){
-            return redirect()->route('consumTable')->with('success', 'Itemcode Berhasil di Update');
-        } else{
-            return back()->with('Gagal', 'Itemcode Gagal di Update');
+        try {
+
+            $getItemcode = Consum::findOrFail($id);
+            $kondisi = $getItemcode->jumlah;
+            if($kondisi == 0){
+
+                $getItemcode->update([
+                    'itemcode' => $request->itemcode,
+                    'satuan' => $request->satuan,
+                    'consum_id' => $request->consum_id,
+                    'nama_barang' => $request->nama_barang,
+                    'lokasi' => $request->lokasi,
+                    'kondisi' => "Stock Habis"
+                ]);
+
+            } elseif(($kondisi < 5) && ($kondisi > 0)) {
+
+                $getItemcode->update([
+                    'itemcode' => $request->itemcode,
+                    'satuan' => $request->satuan,
+                    'consum_id' => $request->consum_id,
+                    'nama_barang' => $request->nama_barang,
+                    'lokasi' => $request->lokasi,
+                    'kondisi' => "Stock Sedikit"
+                ]);
+
+            } elseif($kondisi >= 5) {
+
+                $getItemcode->update([
+                    'itemcode' => $request->itemcode,
+                    'satuan' => $request->satuan,
+                    'consum_id' => $request->consum_id,
+                    'nama_barang' => $request->nama_barang,
+                    'lokasi' => $request->lokasi,
+                    'kondisi' => "Stock Ada"
+                ]);
+            }
+
+            DB::commit();
+
+            return redirect()->route('consumTable')->with('success', 'Data Berhasil di Update');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            throw $e;
         }
     }
 
 
 
-    // Excel
+    // Import From Excel
     public function csv(Request $request) // Import csv to database barang consumable
     {
         Excel::import(new ConsumImport, $request->file('file'));
@@ -219,17 +326,20 @@ class ConsumController extends Controller
         return back()->with('success', 'Consum Keluar Berhasil di Import');
     }
 
-    public function export_consum() // Export data consumable to excel
+
+
+    // Export From Excel
+    public function export_table() // Export data consumable to excel
     {
-        return Excel::download(new ConsumExport, 'Consum.xlsx');
+        return Excel::download(new ConsumExport, 'Consumable.xlsx');
     }
 
-    public function export_consum_masuk() // Export data consum masuk to excel
+    public function export_masuk() // Export data consum masuk to excel
     {
         return Excel::download(new ConsumMasukExport, 'ConsumMasuk.xlsx');
     }
 
-    public function export_consum_keluar() // Export data consum keluar to excel
+    public function export_keluar() // Export data consum keluar to excel
     {
         return Excel::download(new ConsumKeluarExport, 'ConsumKeluar.xlsx');
     }
@@ -240,8 +350,7 @@ class ConsumController extends Controller
     public function consum_yajra_show() // Get seluruh data consumable
     {
         $consum = DB::table('consums')
-            ->select('consums.*')
-            ->orderBy('id', 'desc');
+            ->select('consums.*');
             return DataTables::of($consum)
             ->addColumn('action', 'consum.update')
             ->make(true);
@@ -250,8 +359,7 @@ class ConsumController extends Controller
     public function consum_yajra_masuk() // Get seluruh data barang masuk consumable
     {
         $masuk = DB::table('consum_masuks')
-            ->select('consum_masuks.*')
-            ->orderBy('consum_id', 'desc');
+            ->select('consum_masuks.*');
             return Datatables::of($masuk)
             ->make(true);
     }
@@ -259,8 +367,7 @@ class ConsumController extends Controller
     public function consum_yajra_keluar() // Get seluruh data barang keluar consumable
     {
         $keluar = DB::table('consum_keluars')
-            ->select('consum_keluars.*')
-            ->orderBy('consum_id', 'desc');
+            ->select('consum_keluars.*');
             return Datatables::of($keluar)
             ->make(true);
     }

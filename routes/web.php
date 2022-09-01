@@ -91,23 +91,28 @@ Route::middleware(['auth'])->group(function () {
 
     //Barang Consume
     Route::controller(ConsumController::class)->group(function () {
-        Route::get('consum/table/show', 'consum_table_show')->name('consumTable');
-        Route::get('consum/create/show', 'consum_create_show');
-        Route::get('consum/masuk/show', 'consum_masuk_show');
-        Route::get('consum/keluar/show', 'consum_keluar_show');
-        Route::get('consum/edit/masuk/{id}', 'consum_edit_masuk');
-        Route::get('consum/edit/keluar/{id}', 'consum_edit_keluar');
-        Route::get('consum/edit/itemcode/{id}', 'consum_edit_itemcode');
-        Route::put('consum/update/masuk/{id}', 'consum_update_masuk');
-        Route::put('consum/update/keluar/{id}', 'consum_update_keluar');
-        Route::put('consum/update/itemcode/{id}', 'consum_update_itemcode');
-        Route::get('/export.consum', 'export_consum');
-        Route::get('/export.c.m', 'export_consum_masuk');
-        Route::get('/export.c.k', 'export_consum_keluar');
+        Route::get('consum-table-show', 'table_show')->name('consumTable');
+        Route::get('consum-create-show', 'create_show')->name('consumCreateShow');
+        Route::get('consum-masuk-show', 'masuk_show')->name('consumMasukShow');
+        Route::get('consum-keluar-show', 'keluar_show')->name('consumKeluarShow');
+
+        Route::get('consum-edit-masuk/{id}', 'consum_edit_masuk')->name('consumEditMasuk');
+        Route::get('consum-edit-keluar/{id}', 'consum_edit_keluar')->name('consumEditKeluar');
+        Route::get('consum-edit-itemcode/{id}', 'consum_edit_itemcode')->name('consumEditItemcode');
+
+        Route::put('consum-update-masuk/{id}', 'update_masuk')->name('consumUpdateMasuk');
+        Route::put('consum-update-keluar/{id}', 'update_keluar')->name('consumUpdateKeluar');
+        Route::put('consum-update-itemcode/{id}', 'update_itemcode')->name('consumUpdateItemcode');
+
+        Route::get('consum-export-table', 'export_table')->name('consumExportTable');
+        Route::get('consum-export-masuk', 'export_masuk')->name('consumExportMasuk');
+        Route::get('consum-export-keluar', 'export_keluar')->name('consumExportKeluar');
+
         Route::get('consum/yajra/show', 'consum_yajra_show');
         Route::get('consum/yajra/masuk', 'consum_yajra_masuk');
         Route::get('consum/yajra/keluar', 'consum_yajra_keluar');
-        Route::post('consum/create/submit', 'consum_create_submit');
+
+        Route::post('consum-create-submit', 'store')->name('consumStore');
         Route::post('consum/import/table', 'csv');
         Route::post('consum/import/keluar', 'import_keluar');
         Route::post('consum/import/masuk', 'import_masuk');

@@ -149,7 +149,7 @@ class CleaningController extends Controller
                 }
                 $role_to = 'security';
             } elseif (($lasthistoryC->role_to == 'security')) {
-                foreach (['bayu.prakoso@balitower.co.id'] as $recipient) {
+                foreach (['bayu.prakoso@balitower.co.id', 'tofiq.hidyat@balitower.co.id'] as $recipient) {
                     Mail::to($recipient)->send(new NotifEmail($cleaning));
                 }
                 $role_to = 'head';
@@ -162,7 +162,7 @@ class CleaningController extends Controller
                 $cleaning = Cleaning::where('cleaning_id', $request->cleaning_id)->first();
 
                 // Simpan permit yang sudah full approved ke table CleaningFull
-                $cleaningFull = CleaningFull::create([
+                CleaningFull::create([
                     'cleaning_id' => $cleaning->cleaning_id,
                     'cleaning_name' => $cleaning->cleaning_name,
                     'cleaning_name2' => $cleaning->cleaning_name2,

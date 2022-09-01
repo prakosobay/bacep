@@ -5,13 +5,13 @@
     <h1 class="h3 my-3 text-gray-800 text-center">Data Barang Masuk Consumable</h1>
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <a href="{{url('/export.consum')}}" type="button" class="btn btn-sm btn-success mx-2 my-2" >
-                <strong>Export Excel</strong>
+            <a href="{{ route('consumExportMasuk') }}" type="button" class="btn btn-sm btn-secondary mx-2 my-2" >
+                <strong>Export</strong>
             </a>
 
-            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            {{-- <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Import CSV
-            </button>
+            </button> --}}
 
             <!-- Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

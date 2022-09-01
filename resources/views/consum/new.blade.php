@@ -10,13 +10,13 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <a type="button" class="btn btn-primary mr-5 sm" href="{{url('consum/table/show')}}">
+            <a type="button" class="btn btn-primary mr-5 sm" href="{{ route('consumTable') }}">
                 Kembali
             </a>
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <form method="post" action="{{url('consum/create/submit')}}" class="validate-form">
+                <form method="post" action="{{ route('consumStore') }}" class="validate-form">
                     @csrf
                     <div class="form-group">
                         <label for="nama_barang"><strong>Nama Barang</strong></label>
@@ -71,13 +71,14 @@
                     <div class="form-group">
                         <label for="satuan"><strong>Satuan</strong></label>
                         <select class="form-control" name="satuan" id="satuan">
-                            <option>Unit</option>
-                            <option>Roll</option>
-                            <option>Set</option>
-                            <option>Pasang</option>
-                            <option>Box</option>
-                            <option>Pack</option>
-                            <option>Rim</option>
+                            <option value="unit">Unit</option>
+                            <option value="roll">Roll</option>
+                            <option value="set">Set</option>
+                            <option value="pasang">Pasang</option>
+                            <option value="box">Box</option>
+                            <option value="pack">Pack</option>
+                            <option value="rim">Rim</option>
+                            <option value="meter">Meter</option>
                         </select>
                     </div>
 

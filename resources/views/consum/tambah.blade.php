@@ -10,13 +10,13 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-1">
-            <a type="button" class="btn btn-primary mr-5 sm" href="{{url('consum/table/show')}}">
+            <a type="button" class="btn btn-primary mr-5 sm" href="{{ route('consumTable') }}">
                 Kembali
             </a>
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <form method="post" id="consum" class="validate-form" action="{{url('consum/update/masuk', $consum->id)}}">
+                <form method="post" id="consum" class="validate-form" action="{{ route('consumUpdateMasuk', $consum->id) }}">
                     @method('PUT')
                     @csrf
                     <div class="form-group">

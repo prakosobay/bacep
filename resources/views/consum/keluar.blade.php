@@ -7,13 +7,13 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <a href="{{url('/export.c.k')}}" type="button" class="btn btn-success mr-5 btn-sm" >
-                <strong>Export Excel</strong>
+            <a href="{{ route('consumExportKeluar') }}" type="button" class="btn btn-secondary mr-5 btn-sm" >
+                <strong>Export</strong>
             </a>
-
+{{--
             <button type="button" class="btn btn-primary btn-sm mr-5" data-toggle="modal" data-target="#import_keluar">
                 IMPORT CSV
-            </button>
+            </button> --}}
 
             <!-- Import Excel -->
             <div class="modal fade" id="import_keluar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

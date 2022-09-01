@@ -5,11 +5,15 @@
     <h1 class="h3 my-3 text-gray-800 text-center">Data Barang Consumable</h1>
     <div class="card shadow mb-4">
         <div class="card-header py-1">
-            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            {{-- <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Import CSV
-            </button>
+            </button> --}}
 
-            <a href="{{url('consum/create/show')}}" type="button" class="btn btn-success btn-sm mx-1 my-1" >
+            <a href="{{ route('consumExportTable') }}" type="button" class="btn btn-secondary btn-sm mx-1 my-1">
+                Export
+            </a>
+
+            <a href="{{ route('consumCreateShow') }}" type="button" class="btn btn-success btn-sm mx-1 my-1" >
                 <strong>Tambahkan Barang Consumable Baru</strong>
             </a>
 
@@ -19,7 +23,7 @@
                 </div>
             @endif
 
-            <!-- Modal -->
+            <!-- Modal Import-->
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <form method="post" action="{{ url('consum/import/table')}}" enctype="multipart/form-data">
@@ -43,6 +47,7 @@
                 </div>
             </div>
         </div>
+
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-striped table-hover" id="consumAll" width="100%">
