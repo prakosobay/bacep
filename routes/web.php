@@ -121,31 +121,38 @@ Route::middleware(['auth'])->group(function () {
 
     //Barang Asset
     Route::controller(AssetController::class)->group(function () {
-        Route::get('asset/table/show', 'index')->name('assetTable');
-        Route::get('asset/masuk/show', 'asset_masuk_show');
-        Route::get('asset/keluar/show', 'asset_keluar_show');
-        Route::get('asset/digunakan/show', 'asset_uses_show');
-        Route::get('asset/create/show', 'asset_create_show');
-        Route::get('asset/edit/show/{id}', 'asset_edit_show');
-        Route::get('asset/edit/keluar/{id}', 'asset_edit_keluar');
-        Route::get('asset/edit/digunakan/{id}', 'asset_edit_digunakan');
-        Route::get('/export.asset', 'export_asset');
-        Route::get('/export.a.m', 'export_asset_masuk');
-        Route::get('/export.a.k', 'export_asset_keluar');
+        Route::get('asset-table-show', 'index')->name('assetTable');
+        Route::get('asset-masuk-show', 'masuk_show')->name('assetMasukShow');
+        Route::get('asset-keluar-show', 'keluar_show')->name('assetKeluarShow');
+        Route::get('asset-digunakan-show', 'uses_show')->name('assetDigunakanShow');
+        Route::get('asset-create-show', 'create_show')->name('assetCreateShow');
+
+        Route::get('asset-edit-show/{id}', 'edit_show')->name('assetEditShow');
+        Route::get('asset-edit-keluar/{id}', 'edit_keluar')->name('assetEditKeluar');
+        Route::get('asset-edit-digunakan/{id}', 'edit_digunakan')->name('assetEditDigunakan');
+        Route::get('asset-edit-itemcode/{id}', 'edit_itemcode')->name('assetEditItemcode');
+
+        Route::get('asset-export-table', 'export_asset')->name('assetExportTable');
+        Route::get('asset-export-masuk', 'export_asset_masuk')->name('assetExportMasuk');
+        Route::get('asset-export-keluar', 'export_asset_keluar')->name('assetExportKeluar');
+        Route::get('asset-export-digunakan', 'export_asset_digunakan')->name('assetExportDigunakan');
+
         Route::get('asset/yajra/show', 'asset_yajra_show');
         Route::get('asset/yajra/masuk', 'asset_yajra_masuk');
         Route::get('asset/yajra/keluar', 'asset_yajra_keluar');
         Route::get('asset/yajra/uses', 'asset_yajra_uses');
-        Route::get('asset/edit/itemcode/{id}', 'asset_edit_itemcode');
-        Route::put('asset/update/masuk/{id}', 'asset_update_masuk');
-        Route::put('asset/update/keluar/{id}', 'asset_update_keluar');
-        Route::put('asset/update/digunakan/{id}', 'asset_update_digunakan');
-        Route::put('asset/update/itemcode/{id}', 'asset_update_itemcode');
+
+        Route::put('asset-update-masuk/{id}', 'update_masuk')->name('assetUpdateMasuk');
+        Route::put('asset-update-keluar/{id}', 'update_keluar')->name('assetUpdateKeluar');
+        Route::put('asset-update-digunakan/{id}', 'update_digunakan')->name('assetUpdateDigunakan');
+        Route::put('asset-update-itemcode/{id}', 'update_itemcode')->name('assetUpdateItemcode');
+
         Route::post('asset/import/table', 'asset_import_table');
         Route::post('asset/import/masuk', 'asset_import_masuk');
         Route::post('asset/import/keluar', 'asset_import_keluar');
         Route::post('asset/import/uses', 'asset_import_uses');
-        Route::post('asset/create/store', 'asset_create_store');
+
+        Route::post('asset-create-store', 'create_store')->name('assetCreateStore');
     });
 
 

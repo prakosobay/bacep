@@ -30,7 +30,7 @@ class AssetController extends Controller
         }
     }
 
-    public function asset_masuk_show() // Menampilkan table barang masuk asset
+    public function masuk_show() // Menampilkan table barang masuk asset
     {
         if (Gate::allows('isApproval') || (Gate::allows('isHead')) || (Gate::allows('isAdmin'))) {
             return view('asset.masuk');
@@ -39,7 +39,7 @@ class AssetController extends Controller
         }
     }
 
-    public function asset_keluar_show() // Menampilkan table barang keluar asset
+    public function keluar_show() // Menampilkan table barang keluar asset
     {
         if (Gate::allows('isApproval') || (Gate::allows('isHead')) || (Gate::allows('isAdmin'))) {
             return view('asset.keluar');
@@ -48,7 +48,7 @@ class AssetController extends Controller
         }
     }
 
-    public function asset_uses_show() // Menampilkan table barang digunakan
+    public function uses_show() // Menampilkan table barang digunakan
     {
         if (Gate::allows('isApproval') || (Gate::allows('isHead')) || (Gate::allows('isAdmin'))){
             return view('asset.digunakan');
@@ -58,7 +58,7 @@ class AssetController extends Controller
         }
     }
 
-    public function asset_create_show() // Menampilkan form barang asset baru
+    public function create_show() // Menampilkan form barang asset baru
     {
         if ((Gate::allows('isHead')) || (Gate::allows('isApproval')) || (Gate::allows('isAdmin'))) {
             return view('asset.new');
@@ -67,7 +67,8 @@ class AssetController extends Controller
         }
     }
 
-    public function asset_edit_show($id) // Menampilkan data barang asset masuk berdasarkan kode barang
+
+    public function edit_show($id) // Menampilkan data barang asset masuk berdasarkan kode barang
     {
         if ((Gate::allows('isApproval') || (Gate::allows('isHead')) || (Gate::allows('isAdmin')))) {
             $asset = Asset::findOrFail($id);
@@ -77,7 +78,7 @@ class AssetController extends Controller
         }
     }
 
-    public function asset_edit_keluar($id) // Menampilkan data barang asset keluar berdasarkan kode barang
+    public function edit_keluar($id) // Menampilkan data barang asset keluar berdasarkan kode barang
     {
         if ((Gate::allows('isApproval') || (Gate::allows('isHead')) || (Gate::allows('isAdmin')))) {
             $asset = Asset::find($id);
@@ -87,7 +88,7 @@ class AssetController extends Controller
         }
     }
 
-    public function asset_edit_digunakan($id) // Menampilkan data barang asset digunakan berdasarkan kode barang
+    public function edit_digunakan($id) // Menampilkan data barang asset digunakan berdasarkan kode barang
     {
         if((Gate::allows('isApproval') || (Gate::allows('isHead')) || (Gate::allows('isAdmin')))){
             $use = Asset::find($id);
@@ -97,7 +98,7 @@ class AssetController extends Controller
         }
     }
 
-    public function asset_edit_itemcode($id)
+    public function edit_itemcode($id)
     {
         if((Gate::allows('isApproval') || (Gate::allows('isHead')) || (Gate::allows('isAdmin')))){
             $getItemcode = Asset::find($id);
@@ -111,42 +112,66 @@ class AssetController extends Controller
 
 
     // Submit data
-    public function asset_update_masuk(Request $request, $id) // Update data barang asset masuk
+    public function update_masuk(Request $request, $id) // Update data barang asset masuk
     {
         $this->validate($request, [
             'jumlah' => ['numeric', 'required', 'min:1'],
-            'ket' => 'required',
+            'ket' => ['required', 'nullable'],
         ]);
 
-        $asset = Asset::findOrFail($id);
-        $asset->update([
-            'jumlah' => $asset->jumlah + $request->jumlah,
-            'sisa' => $asset->sisa + $request->jumlah,
-        ]);
+        DB::commit();
 
-        if ($asset->jumlah >= 1) {
+        try {
+
+            $asset = Asset::findOrFail($id);
             $asset->update([
-                'kondisi' => 'Tersedia',
+                'jumlah' => $asset->jumlah + $request->jumlah,
+                'sisa' => $asset->sisa + $request->jumlah,
             ]);
-        } elseif ($asset->jumlah == 0) {
-            $asset->update([
-                'kondisi' => 'Stock Habis',
+
+            AssetMasuk::create([
+                'nama_barang' => $request->nama_barang,
+                'asset_id' => $asset->id,
+                'jumlah' => $request->jumlah,
+                'ket' => $request->ket,
+                'pencatat' => $request->pencatat,
+                'tanggal' => date('d/m/Y'),
             ]);
+
+            $kondisi = $asset->jumlah;
+
+            if($kondisi == 0) {
+
+                $asset->update([
+                    'kondisi' => 'Stock Habis',
+                ]);
+
+            } elseif(($kondisi > 0) && ($kondisi <= 5)){
+
+                $asset->update([
+                    'kondisi' => 'Stock Sedikit',
+                ]);
+
+            } elseif($kondisi > 5) {
+
+                $asset->update([
+                    'kondisi' => 'Stock Banyak',
+                ]);
+
+            }
+
+            DB::commit();
+
+            return redirect()->route('assetTable')->with('success', 'Barang Asset Berhasil di Tambah');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            throw $e;
         }
 
-        AssetMasuk::create([
-            'nama_barang' => $request->nama_barang,
-            'asset_id' => $request->asset_id,
-            'jumlah' => $request->jumlah,
-            'ket' => $request->ket,
-            'pencatat' => $request->pencatat,
-            'tanggal' => date('d/m/Y'),
-        ]);
 
-        return redirect()->route('assetTable')->with('success', 'Barang Asset Berhasil di Tambah');
     }
 
-    public function asset_update_keluar(Request $request, $id) // Update data barang asset keluar
+    public function update_keluar(Request $request, $id) // Update data barang asset keluar
     {
         $this->validate($request, [
             'jumlah' => ['numeric', 'required', 'min:1'],
@@ -176,7 +201,7 @@ class AssetController extends Controller
         return redirect()->route('assetTable')->with('success', 'Data Berhasil di Update');
     }
 
-    public function asset_update_digunakan(Request $request, $id) // Update data barang asset digunakan
+    public function update_digunakan(Request $request, $id) // Update data barang asset digunakan
     {
         // dd($request->all());
         $this->validate($request, [
@@ -221,43 +246,74 @@ class AssetController extends Controller
         return redirect()->route('assetTable')->with('success', 'Data telah di update');
     }
 
-    public function asset_create_store(Request $request) // Create data barang asset baru
+    public function create_store(Request $request) // Create data barang asset baru
     {
-        // dd($request->all());
         $this->validate($request, [
             'nama_barang' => ['required', 'unique:assets', 'max:200'],
             'jumlah' => ['required', 'numeric', 'min:1'],
-            'note' => ['max:255'],
-            'lokasi' => 'required',
+            'note' => ['max:255', 'nullable'],
+            'lokasi' => ['required', 'string', 'max:255'],
             'satuan' => ['required', 'string'],
             'pencatat' => ['required', 'string'],
-            'itemcode' => ['required', 'numeric', 'digits:6']
+            'itemcode' => ['required', 'numeric', 'digits:6'],
         ]);
 
-        $asset = Asset::create([
-            'nama_barang' => $request->nama_barang,
-            'jumlah' => $request->jumlah,
-            'note' => $request->note,
-            'lokasi' => $request->lokasi,
-            'satuan' => $request->satuan,
-            'itemcode' => $request->itemcode,
-            'digunakan' => 0,
-            'sisa' => 0,
-        ]);
+        DB::beginTransaction();
 
-        $assetmasuk = AssetMasuk::create([
-            'nama_barang' => $request->nama_barang,
-            'asset_id' => $asset->id,
-            'jumlah' => $request->jumlah,
-            'ket' => $request->note,
-            'pencatat' => $request->pencatat,
-            'tanggal' => date('d/m/Y'),
-            'itemcode' => $asset->itemcode,
-        ]);
-        return redirect()->route('assetTable')->with('success', 'Barang Asset Berhasil di Tambah');
+        try {
+
+            $asset = Asset::create([
+                'nama_barang' => $request->nama_barang,
+                'jumlah' => $request->jumlah,
+                'note' => $request->note,
+                'lokasi' => $request->lokasi,
+                'satuan' => $request->satuan,
+                'itemcode' => $request->itemcode,
+                'digunakan' => 0,
+                'sisa' => $request->jumlah,
+            ]);
+
+            AssetMasuk::create([
+                'nama_barang' => $request->nama_barang,
+                'asset_id' => $asset->id,
+                'jumlah' => $request->jumlah,
+                'ket' => $request->note,
+                'pencatat' => $request->pencatat,
+                'tanggal' => date('d/m/Y'),
+            ]);
+
+            $kondisi = $asset->jumlah;
+
+            if($kondisi == 0) {
+
+                $asset->update([
+                    'kondisi' => 'Stock Habis',
+                ]);
+
+            } elseif(($kondisi > 0) && ($kondisi <= 5)){
+
+                $asset->update([
+                    'kondisi' => 'Stock Sedikit',
+                ]);
+
+            } elseif($kondisi > 5) {
+
+                $asset->update([
+                    'kondisi' => 'Stock Banyak',
+                ]);
+
+            }
+
+            DB::commit();
+
+            return redirect()->route('assetTable')->with('success', 'Barang Asset Berhasil di Tambah');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            throw $e;
+        }
     }
 
-    public function asset_update_itemcode(Request $request, $id)
+    public function update_itemcode(Request $request, $id)
     {
         $validate = $request->validate([
             'itemcode' => ['required', 'numeric', 'digits:6'],
@@ -329,8 +385,7 @@ class AssetController extends Controller
     public function asset_yajra_show() // Datatable dengan yajra barang asset
     {
         $asset = DB::table('assets')
-            ->select('assets.*')
-            ->orderBy('id', 'desc');
+            ->select('assets.*');
             return Datatables::of($asset)
             ->addColumn('action', 'asset.update')
             ->make(true);
@@ -339,8 +394,7 @@ class AssetController extends Controller
     public function asset_yajra_masuk() // Datatable dengan yajra barang asset masuk
     {
         $masuk = DB::table('asset_masuks')
-            ->select('asset_masuks.*')
-            ->orderBy('asset_id', 'desc');
+            ->select('asset_masuks.*');
             return Datatables::of($masuk)
             ->make(true);
     }
@@ -348,8 +402,7 @@ class AssetController extends Controller
     public function asset_yajra_keluar() // Datatable dengan yajra barang asset keluar
     {
         $keluar = DB::table('asset_keluars')
-            ->select('asset_keluars.*')
-            ->orderBy('asset_id', 'desc');
+            ->select('asset_keluars.*');
             return Datatables::of($keluar)
             ->make(true);
     }
@@ -357,8 +410,7 @@ class AssetController extends Controller
     public function asset_yajra_uses() // Datatable dengan yajra barang digunakan
     {
         $digunakan = DB::table('asset_uses')
-            ->select('asset_uses.*')
-            ->orderBy('asset_id', 'desc');
+            ->select('asset_uses.*');
             return Datatables::of($digunakan)
             ->make(true);
     }

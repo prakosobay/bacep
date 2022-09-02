@@ -12,25 +12,21 @@ class Asset extends Model
 
     protected $table = 'assets';
     protected $primaryKey = 'id';
-    protected $fillable = [
-        'nama_barang',
-        'itemcode',
-        'jumlah',
-        'digunakan',
-        'sisa',
-        'satuan',
-        'kondisi',
-        'note',
-        'lokasi'
+    protected $guarded = [
     ];
 
-    public function asset_id()
+    public function keluars()
     {
         return $this->hasMany(AssetKeluar::class);
     }
 
-    public function asset_id2()
+    public function masuks()
     {
         return $this->hasMany(AssetMasuk::class);
+    }
+
+    public function terpakais()
+    {
+        return $this->hasMany(AssetTerpakai::class);
     }
 }

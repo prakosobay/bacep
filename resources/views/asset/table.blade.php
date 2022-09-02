@@ -5,11 +5,12 @@
     <h1 class="h3 my-3 text-gray-800 text-center">Data Barang Asset</h1>
     <div class="card shadow mb-4">
         <div class="card-header my-1">
-            <button type="button" class="btn btn-primary btn-sm mx-1 my-1" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            {{-- <button type="button" class="btn btn-primary btn-sm mx-1 my-1" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Import CSV
-            </button>
+            </button> --}}
+            <a href="{{ route('assetExportTable') }}" type="button" class="btn btn-success btn-sm mx-1 my-1"><b>Export</b></a>
 
-            <a href="{{url('asset/create/show')}}" type="button" class="btn btn-success btn-sm mx-1 my-1" >
+            <a href="{{ route('assetCreateShow') }}" type="button" class="btn btn-primary btn-sm mx-1 my-1" >
                 <strong>Tambahkan Barang Asset Baru</strong>
             </a>
 

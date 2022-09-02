@@ -97,25 +97,59 @@ class ConsumController extends Controller
     {
         $this->validate($request, [
             'jumlah' => ['numeric', 'required', 'min:1'],
-            'ket' => 'required',
+            'ket' => ['required', 'nullable'],
         ]);
 
-        $consum = Consum::find($id);
-        $consum->update([
-            'nama_barang' => $consum->nama_barang,
-            'jumlah' => $consum->jumlah + $request->jumlah,
-        ]);
+        DB::beginTransaction();
 
-        $consummasuk = ConsumMasuk::create([
-            'nama_barang' => $request->nama_barang,
-            'consum_id' => $request->consum_id,
-            'jumlah' => $request->jumlah,
-            'ket' => $request->ket,
-            'pencatat' => $request->pencatat,
-            'tanggal' => date('d/m/Y'),
-        ]);
+        try {
 
-        return redirect()->route('consumTable')->with('success', 'Barang Consum Berhasil di Tambah');
+            $consum = Consum::findOrFail($id);
+            $consum->update([
+                'nama_barang' => $consum->nama_barang,
+                'jumlah' => $consum->jumlah + $request->jumlah,
+            ]);
+
+            ConsumMasuk::create([
+                'nama_barang' => $request->nama_barang,
+                'consum_id' => $request->consum_id,
+                'jumlah' => $request->jumlah,
+                'ket' => $request->ket,
+                'pencatat' => $request->pencatat,
+                'tanggal' => date('d/m/Y'),
+            ]);
+
+            $kondisi = $consum->jumlah;
+
+            if($kondisi == 0) {
+
+                $consum->update([
+                    'kondisi' => 'Stock Habis',
+                ]);
+
+            } elseif(($kondisi > 0) && ($kondisi <= 5)){
+
+                $consum->update([
+                    'kondisi' => 'Stock Sedikit',
+                ]);
+
+            } elseif($kondisi > 5) {
+
+                $consum->update([
+                    'kondisi' => 'Stock Banyak',
+                ]);
+
+            }
+
+            DB::commit();
+
+            return redirect()->route('consumTable')->with('success', 'Barang Consum Berhasil di Tambah');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            throw $e;
+        }
+
+
     }
 
     public function update_keluar(Request $request, $id) // Update barang keluar
@@ -169,7 +203,7 @@ class ConsumController extends Controller
             } elseif($kondisi > 5) {
 
                 $consum->update([
-                    'kondisi' => 'Stock Ada',
+                    'kondisi' => 'Stock Banyak',
                 ]);
 
             }
@@ -217,7 +251,9 @@ class ConsumController extends Controller
             ]);
 
             $kondisi = $consum->jumlah;
+
             if($kondisi == 0) {
+
                 $consum->update([
                     'kondisi' => 'Stock Habis',
                 ]);
@@ -231,7 +267,7 @@ class ConsumController extends Controller
             } elseif($kondisi > 5) {
 
                 $consum->update([
-                    'kondisi' => "Stock Ada"
+                    'kondisi' => "Stock Banyak"
                 ]);
             }
 
@@ -262,6 +298,7 @@ class ConsumController extends Controller
 
             $getItemcode = Consum::findOrFail($id);
             $kondisi = $getItemcode->jumlah;
+
             if($kondisi == 0){
 
                 $getItemcode->update([
@@ -273,7 +310,7 @@ class ConsumController extends Controller
                     'kondisi' => "Stock Habis"
                 ]);
 
-            } elseif(($kondisi < 5) && ($kondisi > 0)) {
+            } elseif(($kondisi <= 5) && ($kondisi > 0)) {
 
                 $getItemcode->update([
                     'itemcode' => $request->itemcode,
@@ -284,7 +321,7 @@ class ConsumController extends Controller
                     'kondisi' => "Stock Sedikit"
                 ]);
 
-            } elseif($kondisi >= 5) {
+            } elseif($kondisi > 5) {
 
                 $getItemcode->update([
                     'itemcode' => $request->itemcode,
@@ -292,7 +329,7 @@ class ConsumController extends Controller
                     'consum_id' => $request->consum_id,
                     'nama_barang' => $request->nama_barang,
                     'lokasi' => $request->lokasi,
-                    'kondisi' => "Stock Ada"
+                    'kondisi' => "Stock Banyak"
                 ]);
             }
 
