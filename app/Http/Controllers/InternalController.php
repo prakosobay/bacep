@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\InternalExport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\{DB, Auth, Gate, Mail, Session, Storage, Crypt};
 use Yajra\Datatables\Datatables;
@@ -276,14 +277,14 @@ class InternalController extends Controller
                 $role_to = 'check';
             } elseif ($last_update->role_to == 'check') {
                 foreach ([
-                    'security.bacep@balitower.co.id', 'bayu.prakoso@balitower.co.id',
+                    'bayu.prakoso@balitower.co.id',
                 ] as $recipient) {
                     Mail::to($recipient)->send(new NotifInternalForm($notif_email));
                 }
                 $role_to = 'security';
             } elseif ($last_update->role_to == 'security') {
                 foreach ([
-                    'bayu.prakoso@balitower.co.id', 'tofiq.hidayat@balitower.co.id',
+                    'bayu.prakoso@balitower.co.id',
                 ] as $recipient) {
                     Mail::to($recipient)->send(new NotifInternalForm($notif_email));
                 }
@@ -291,7 +292,7 @@ class InternalController extends Controller
             } elseif ($last_update->role_to = 'head') {
                 $full = Internal::find($id);
                 foreach ([
-                    'bayu.prakoso@balitower.co.id', 'dc@balitower.co.id',
+                    'bayu.prakoso@balitower.co.id',
                 ] as $recipient) {
                     Mail::to($recipient)->send(new NotifInternalFull($full));
                 }
@@ -339,6 +340,7 @@ class InternalController extends Controller
     // Update Checkin
     public function internal_checkin_update(Request $request, $id)
     {
+        dd($request->all());
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'phone' => ['required', 'string', 'max:255'],
@@ -377,6 +379,8 @@ class InternalController extends Controller
             $updateCard = Internal::findOrFail($getInternalID);
 
             if($updateCard->card_number == null){
+
+                $getcard = MasterCard::findOrFail($request->card)->first();
                 $updateCard->update([
                     'card_number' => $request->card,
                 ]);
@@ -499,6 +503,15 @@ class InternalController extends Controller
 
 
 
+    // Export
+    public function export_full_approve()
+    {
+        return Excel::download(new InternalExport, 'Full Approve Internal.xlsx');
+    }
+
+
+
+
     // Yajra
     public function internal_yajra_history()
     {
@@ -518,7 +531,7 @@ class InternalController extends Controller
         $full = DB::table('internals')
             ->join('internal_visitors', 'internals.id', 'internal_visitors.internal_id')
             ->join('internal_fulls', 'internals.id', 'internal_fulls.internal_id')
-            ->select('internal_fulls.*', 'internal_visitors.name', 'internal_visitors.checkin')
+            ->select('internal_fulls.*', 'internal_visitors.name', 'internal_visitors.checkin', 'internals.card_number')
             ->groupBy('internal_id');
         return Datatables::of($full)
             ->editColumn('visit', function ($full) {

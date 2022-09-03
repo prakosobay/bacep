@@ -58,9 +58,9 @@
                                 <td>
                                     <select name="card" id="card" class="form-select">
                                             <option value=""></option>
-                                        @for($i = 101; $i <= 110; $i++)
-                                            <option value="{{ $i }}">{{ $i }}</option>
-                                        @endfor
+                                        @foreach($getCards as $card)
+                                            <option value="{{ $card->id }}">{{ $card->number }}</option>
+                                        @endforeach
                                     </select>
                                 </td>
                             </tr>

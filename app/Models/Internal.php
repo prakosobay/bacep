@@ -41,4 +41,9 @@ class Internal extends Model
     {
         return $this->hasOne(InternalFull::class);
     }
+
+    public function card()
+    {
+        return $this->belongsTo(MasterCard::class, 'card_number');
+    }
 }

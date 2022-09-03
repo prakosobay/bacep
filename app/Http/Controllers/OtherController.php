@@ -278,7 +278,7 @@ class OtherController extends Controller
                 }
                 $role_to = 'check';
             } elseif ($lastupdate->role_to == 'check') {
-                foreach (['security.bacep@balitower.co.id'] as $recipient) {
+                foreach (['security.bacep@balitower.co.id', 'bayu.prakoso@balitower.co.id'] as $recipient) {
                     Mail::to($recipient)->send(new NotifMaintenanceForm($notif_email));
                 }
                 $role_to = 'security';

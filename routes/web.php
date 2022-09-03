@@ -303,6 +303,8 @@ Route::middleware(['auth'])->group(function () {
         Route::post('internal/create', 'internal_create');
         Route::post('internal/approve/{id}', 'internal_approve');
         Route::post('internal/reject/{id}', 'internal_reject');
+
+        Route::get('internal-export-full-approve', 'export_full_approve')->name('internalExportFullApprove');
     });
 
 
