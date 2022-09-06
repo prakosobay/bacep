@@ -308,7 +308,6 @@ Route::middleware(['auth'])->group(function () {
     });
 
 
-
     Route::controller(ColoController::class)->group(function () {
         Route::get('isVisitor/{company}/{dept}', 'isVisitor')->name('isVisitor');
         Route::get('colo/form', 'form');
@@ -322,7 +321,6 @@ Route::middleware(['auth'])->group(function () {
         Route::post('colo/approve', 'approve');
         Route::post('colo/reject', 'reject');
     });
-
 
 
     // Order Form
@@ -342,5 +340,4 @@ Route::middleware(['auth'])->group(function () {
 
     //Log
     Route::get('logall', [HomeController::class, 'log_all'])->name('logall');
-    Route::get('datatables', [ItController::class, 'anydata']);
 });
