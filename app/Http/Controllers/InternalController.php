@@ -340,7 +340,7 @@ class InternalController extends Controller
     // Update Checkin
     public function internal_checkin_update(Request $request, $id)
     {
-        dd($request->all());
+        // dd($request->all());
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'phone' => ['required', 'string', 'max:255'],
@@ -356,9 +356,10 @@ class InternalController extends Controller
         $replace = substr($request->photo_checkin, 0, strpos($request->photo_checkin, ',') + 1);
         $image = str_replace($replace, '', $request->photo_checkin);
         $image = str_replace(' ', '+', $image);
-        $imageName = Str::random(10) . '.' . $extension;
+        $imageName = Str::random(200) .  '.' . $extension;
+        // dd($imageName);
 
-        Storage::disk('public')->put($imageName, base64_decode($image));
+        Storage::disk('internalCheckin')->put($imageName, base64_decode($image));
 
         DB::beginTransaction();
 
@@ -377,12 +378,13 @@ class InternalController extends Controller
 
             $getInternalID = $getVisitor->internal->id;
             $updateCard = Internal::findOrFail($getInternalID);
+            $getcard = MasterCard::findOrFail($request->card);
+            // dd($getcard);
 
             if($updateCard->card_number == null){
 
-                $getcard = MasterCard::findOrFail($request->card)->first();
                 $updateCard->update([
-                    'card_number' => $request->card,
+                    'card_number' => $getcard->number,
                 ]);
             }
 
@@ -409,9 +411,9 @@ class InternalController extends Controller
         $replace = substr($request->photo_checkout, 0, strpos($request->photo_checkout, ',') + 1);
         $image = str_replace($replace, '', $request->photo_checkout);
         $image = str_replace(' ', '+', $image);
-        $imageName = Str::random(10) . '.' . $extension;
+        $imageName = Str::random(200) . '.' . $extension;
 
-        Storage::disk('public')->put($imageName, base64_decode($image));
+        Storage::disk('internalCheckout')->put($imageName, base64_decode($image));
 
         DB::beginTransaction();
 
@@ -546,6 +548,7 @@ class InternalController extends Controller
         $full = DB::table('internals')
             ->join('internal_visitors', 'internals.id', '=', 'internal_visitors.internal_id')
             ->join('internal_fulls', 'internals.id', '=', 'internal_fulls.internal_id')
+            // ->join('m_cards', 'm_cards.id', '=', 'internals.card_number')
             ->where([
                 ['internals.req_dept', $dept],
                 ['internal_fulls.status', 'Full Approved'],

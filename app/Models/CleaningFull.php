@@ -19,4 +19,9 @@ class CleaningFull extends Model
      */
 
     protected $guarded = [];
+
+    public function cleaning()
+    {
+        return $this->belongsTo(Cleaning::class, 'cleaning_id');
+    }
 }

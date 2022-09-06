@@ -115,10 +115,7 @@ class HomeController extends Controller
             } elseif($type_approve == 'internal'){
                 $getInternal = InternalHistory::where('aktif', 1)->whereIn('role_to', $role_1)->get();
                 return view('internal.approval', compact('getInternal'));
-            } elseif($type_approve == 'order') {
-                $getOrder = OrderHistory::where('aktif, 1')->whereIn('role_to', $role_1)->get();
-                return view('order.approval', compact('getOrder'));
-            } else {
+            }  else {
                 abort(403);
             }
         } else {
@@ -149,29 +146,13 @@ class HomeController extends Controller
         }
     }
 
-    public function log_all() // Routingan untuk menampilkan permit yang sudah full approve versi visitor
+    public function log_all() // Routingan untuk menampilkan permit yang sudah full approve versi BM
     {
         $dept = Auth::user()->department;
         switch($dept){
 
             case 'Building Management' :
                 return view('cleaning.full_visitor');
-                break;
-
-            case 'IP Core':
-                return view('internal.logVisitor');
-                break;
-
-            case 'IT':
-                return view('internal.logVisitor');
-                break;
-
-            case 'BSS':
-                return view('internal.logVisitor');
-                break;
-
-            case 'Enterprise Sales':
-                return view('survey.logSurvey');
                 break;
 
             default:

@@ -57,7 +57,7 @@
                                 <th colspan="4" class="py-5">
                                     <div class="form-group">
                                         <label for="photo_checkin" class="form-label">Checkin Photo </label><br>
-                                        <img src="{{ asset('storage/' . $getVisitor->photo_checkin) }}" alt="" width="400px">
+                                        <img src="{{ url('storage/internal/checkin/'.$getVisitor->photo_checkin) }}" alt="" width="400px">
                                     </div>
                                     <div class="form-group">
                                         <label for="checkin" class="form-label">Checkin Time :</label>

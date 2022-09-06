@@ -205,20 +205,26 @@ Route::middleware(['auth'])->group(function () {
     // Cleaning
     Route::controller(CleaningController::class)->group(function () {
         Route::get('route_history_cleaning', 'data_history');
-        Route::get('yajra_full_approve_cleaning', 'data_full_approve_cleaning');
-        Route::get('yajra_full_approve_cleaning_other', 'data_log_full');
+        Route::get('yajra_full_approve_cleaning', 'yajra_full_approval');
+
+        Route::get('cleaning-form', 'show_form')->name('cleaningForm');
+
         Route::get('/cleaning/yajra/full/reject', 'data_reject_cleaning');
         Route::get('log_cleaning', 'log_carbon');
         Route::get('/cleaning_pdf/{id}', 'cetak_cleaning_pdf');
         Route::get('/cleaning/{id}', 'pilihan_work');
         Route::get('/detail/{id}', 'detail_ob');
-        Route::get('cleaning_form', 'show_form');
         Route::get('/cleaning/action/checkin/{id}', 'checkin_form_cleaning');
         Route::get('/cleaning/action/checkout/{id}', 'checkout_form_cleaning');
         Route::get('/cleaning/action/show/{id}', 'cetak_full_cleaning');
         Route::get('cleaning/action/export', 'cetak_all_full_cleaning');
         Route::get('/cleaning/reject/show', 'show_reject_cleaning');
         Route::get('cleaning/yajra/log', 'cleaning_yajra_log');
+
+        Route::get('yajra_full_approve_cleaning_other', 'yajra_log');
+
+        Route::get('cleaning-export-full-approval', 'export_full_approval')->name('cleaningExportFullApproval');
+
         Route::put('/cleaning/checkin/{id}', 'checkin_update_cleaning');
         Route::put('/cleaning/checkout/{id}', 'checkout_update_cleaning');
         Route::put('/cleaning/reject/{id}', 'reject_full_cleaning');
@@ -226,13 +232,17 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/cleaning_reject', 'reject_form_cleaning');
         Route::post('/cleaning/full/reject/{id}', 'reject_full_cleaning');
         Route::post('/approve_cleaning', 'approve_cleaning');
+
+        Route::post('cleaning-checkin-cancel', 'checkin_cancel')->name('cleaningCheckinCancel');
     });
 
 
     // Other
     Route::controller(OtherController::class)->group(function () {
         // Troubleshoot
-        Route::get('other/troubleshoot/show', 'show_troubleshoot_form');
+        Route::get('other-troubleshoot-show', 'show_troubleshoot_form')->name('troubleshootForm');
+        Route::get('other-troubleshoot-finished-show', 'troubleshoot_finished_show')->name('troubleshootFinishedShow');
+
         Route::get('other/troubleshoot/pdf/{id}', 'pdf_troubleshoot');
         Route::get('other/troubleshoot/yajra/history', 'yajra_troubleshoot_history');
         Route::get('other/troubleshoot/yajra/full/approval', 'other_troubleshoot_yajra_full_approval');
@@ -245,7 +255,9 @@ Route::middleware(['auth'])->group(function () {
         Route::post('other/troubleshoot/reject', 'reject_troubleshoot');
 
         // Maintenance
-        Route::get('other/maintenance/show', 'show_maintenance_form');
+        Route::get('other-maintenance-show', 'show_maintenance_form')->name('maintenanceForm');
+        Route::get('other-maintenance-finished-show', 'maintenance_finished_show')->name('maintenanceFinishedShow');
+
         Route::get('other/maintenance/log', 'show_maintenance_log');
         Route::get('other/maintenance/full', 'show_maintenance_full');
         Route::get('other/maintenance/full/reject', 'show_maintenance_reject');

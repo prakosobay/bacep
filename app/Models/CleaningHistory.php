@@ -29,11 +29,11 @@ class CleaningHistory extends Model
 
     public function createdBy()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'created_by');
     }
 
     public function cleaning()
     {
-        return $this->belongsTo(Cleaning::class);
+        return $this->belongsTo(Cleaning::class, 'cleaning_id');
     }
 }

@@ -16,7 +16,7 @@
                     { data: 'cleaning_name', name: 'cleaning_name' },
                     { data: 'checkin_personil', name: 'checkin_personil' },
                     { data: 'checkout_personil', name: 'checkout_personil' },
-                    {data: 'action', name: 'action', orderable: false, searchable: false}
+                    { data: 'action', name: 'action', orderable: false, searchable: false }
                 ]
             });
         });

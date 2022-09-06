@@ -4,31 +4,11 @@
 <div class="container-fluid">
     <!-- DataTales Example -->
     <div class="card shadow mb-1">
-        <div class="card-header py-3">
+        <div class="card-header">
             <h4 class="judul text-center">Full Approval Form Cleaning</h4>
-            <!-- Import Excel -->
-            <div class="modal fade" id="asset" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <form method="post" action="{{ url('/asset')}}" enctype="multipart/form-data">
-                        {{ csrf_field() }}
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Import File CSV</h5>
-                            </div>
-                            <div class="modal-body">
-                                <label>Pilih file CSV</label>
-                                <div class="form-group">
-                                    <input type="file" name="file" required="required">
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Import</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
+        </div>
+        <div class="card-header">
+            <a href="{{ route('cleaningExportFullApproval') }}" class="btn btn-sm btn-success mx-1 my-1">Export</a>
         </div>
         <div class="card-body">
             <div class="table-responsive">

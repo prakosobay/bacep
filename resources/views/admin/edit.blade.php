@@ -51,6 +51,7 @@
                             <option value="security">security</option>
                             <option value="admin">admin</option>
                             <option value="head">head</option>
+                            <option value="bm">bm</option>
                           </select>
 
                         <label class="mt-3" for="department"><strong>Department</strong></label>

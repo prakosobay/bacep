@@ -33,7 +33,7 @@
                         <a class="nav-link" href="#about">About Us</a>
                     </li>
                     <li class="nav-item mx-5">
-                        <a class="nav-link" href="{{ url('visitor/log/cleaning')}}">Log Permit</a>
+                        <a class="nav-link" href="{{ route('logall')}}">Log Permit</a>
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
@@ -81,9 +81,8 @@
                     <div class="tab-pane fade show active" id="Lcleaning" role="tabpanel" aria-labelledby="Lcleaning-tab">
                         <div class="container-fluid">
                             <div class="card-body">
-                                <a type="button" class="btn btn-sm btn-primary mx-1 my-2" href="{{url('cleaning_form')}}">Create Permit Cleaning</a>
-                                <a type="button" class="btn btn-sm btn-info mx-1 my-2" href="{{url('logall')}}">Full Approve Permit Cleaning</a>
-                                <a type="button" class="btn btn-sm btn-danger mx-1 my-2" href="{{ url('/cleaning/reject/show')}}">Permit Reject</a>
+                                <a type="button" class="btn btn-sm btn-primary mx-1 my-2" href="{{ route('cleaningForm') }}">Create Form Cleaning</a>
+                                <a type="button" class="btn btn-sm btn-info mx-1 my-2" href="{{ route('logall') }}">Log Form Cleaning</a>
                             </div>
                         </div>
 
@@ -119,11 +118,9 @@
                     <div class="tab-pane fade" id="Lmaintenance" role="tabpanel" aria-labelledby="Lmaintenance-tab">
                         <div class="container-fluid">
                             <div class="card-body">
-                                <button class="btn btn-sm btn-dark mx-1 my-2" data-bs-toggle="modal" data-bs-target="#maintenance_modal">Create Permit Maintenance</button>
-                                <a type="button" class="btn btn-sm btn-info mx-1 my-2" href="{{url('other/maintenance/full')}}">Log Permit Maintenance</a>
-                                <a type="button" class="btn btn-sm btn-danger mx-1 my-2" href="{{ url('other/maintenance/full/reject')}}">Permit Reject</a>
-                                {{-- <a type="button" class="btn btn-sm btn-success mx-1 my-2" href="{{ url('cleaning/action/export')}}">Export PDF</a>
-                                <a type="button" class="btn btn-sm btn-success mx-1 my-2" href="#">Export Excel</a> --}}
+                                <a type="button" class="btn btn-sm btn-dark mx-1 my-2" href="{{ route('maintenanceForm') }}">Create Form Maintenance</a>
+                                <a type="button" class="btn btn-sm btn-info mx-1 my-2" href="{{ route('logall') }}">Log Form Maintenance</a>
+                                <a type="button" class="btn btn-sm btn-danger mx-1 my-2" href="{{ route('maintenanceFinishedShow') }}">Finished Permit</a>
                             </div>
                         </div>
 
@@ -132,28 +129,6 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-
-                        {{-- Modal Maintenance --}}
-                        <div class="modal fade" id="maintenance_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Pilih Permit Maintenance</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="row align-item-center">
-                                            <div class="col align-self-center">
-                                                <a type="button" href="{{ url('other/maintenance/show')}}" class="btn btn-dark">New Permit</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
                         {{-- Table Maintenance --}}
                         <div class="card-body">
@@ -179,11 +154,9 @@
                     <div class="tab-pane fade" id="Ltroubleshoot" role="tabpanel" aria-labelledby="Ltroubleshoot-tab">
                         <div class="container-fluid">
                             <div class="card-body">
-                                <a type="button" class="btn btn-sm btn-dark mx-1 my-2" href="{{ url('other/troubleshoot/show')}}">Create Permit Troubleshoot</a>
-                                <a type="button" class="btn btn-sm btn-info mx-1 my-2" href="{{url('other/maintenance/full')}}">Log Permit Troubleshoot</a>
-                                <a type="button" class="btn btn-sm btn-danger mx-1 my-2" href="#">Permit Reject</a>
-                                {{-- <a type="button" class="btn btn-sm btn-success mx-1 my-2" href="{{ url('cleaning/action/export')}}">Export PDF</a>
-                                <a type="button" class="btn btn-sm btn-success mx-1 my-2" href="#">Export Excel</a> --}}
+                                <a type="button" class="btn btn-sm btn-dark mx-1 my-2" href="{{ route('troubleshootForm') }}">Create Form Troubleshoot</a>
+                                <a type="button" class="btn btn-sm btn-info mx-1 my-2" href="{{ route('logall') }}">Log Form Troubleshoot</a>
+                                <a type="button" class="btn btn-sm btn-danger mx-1 my-2" href="{{ route('troubleshootFinishedShow') }}">Finished Permit</a>
                             </div>
                         </div>
 

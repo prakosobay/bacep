@@ -1,21 +1,15 @@
 @if ($model->checkin_personil == null)
     <a href="{{url ('cleaning/action/checkin', $model->cleaning_id)}}" class="btn btn-xs btn-primary btn-sm"><i class="glyphicon glyphicon-edit"></i>Checkin</a>
-    {{-- <a href="#" class="btn btn-xs btn-danger btn-sm mx-2 my-2"><i class="glyphicon glyphicon-edit"></i>Reject</a> --}}
-    <button type="button" class="btn btn-danger btn-sm mx-2 my-2" data-bs-toggle="modal" data-bs-target="#reject">
-        Reject
-    </button>
+    <form action="{{ route ('cleaningCheckinCancel', $model->cleaning_id) }}" method="POST" onsubmit="return confirm('Are You Sure Want to Cancel ?')">
+        @method('put')
+        @csrf
+        <button type="submit" class="btn btn-xs btn-danger btn-sm mx-1 my-1"><i class="glyphicon glyphicon-edit"></i>Cancel</button>
+    </form>
 
 @elseif(($model->checkin_personil) && ($model->checkout_personil == null))
     <a href="{{url ('cleaning/action/checkout', $model->cleaning_id)}}" class="btn btn-xs btn-dark btn-sm"><i class="glyphicon glyphicon-checkout"></i>Checkout</a>
-    {{-- <a href="#" class="btn btn-xs btn-danger btn-sm mx-2 my-2"><i class="glyphicon glyphicon-edit"></i>Reject</a> --}}
-    <button type="button" class="btn btn-danger btn-sm mx-2 my-2" data-bs-toggle="modal" data-bs-target="#reject">
-        Reject
-    </button>
 
-@elseif ($model->checkout_personil)
-    <a href="{{ url('cleaning/action/show', $model->cleaning_id)}}" class="btn btn-xs btn-success btn-sm mx-2 my-2"><i class="glyphicon glyphicon-edit"></i>Show</a>
 @endif
-
 {{-- modal reject --}}
 <div class="modal fade" id="reject" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">

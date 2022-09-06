@@ -37,7 +37,63 @@ return [
 
         'public' => [
             'driver' => 'local',
-            'root' => storage_path('app/public'),
+            'root' => storage_path('app/public/'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+        ],
+
+        'internalCheckin' => [
+            'driver' => 'local',
+            'root' => storage_path('app\public\internal\checkin'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+        ],
+
+        'internalCheckout' => [
+            'driver' => 'local',
+            'root' => storage_path('app\public\internal\checkout'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+        ],
+
+        'cleaningCheckin' => [
+            'driver' => 'local',
+            'root' => storage_path('app\public\bm\cleaning\checkin'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+        ],
+
+        'cleaningCheckout' => [
+            'driver' => 'local',
+            'root' => storage_path('app\public\bm\cleaning\checkout'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+        ],
+
+        'maintenanceCheckin' => [
+            'driver' => 'local',
+            'root' => storage_path('app\public\bm\maintenance\checkin'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+        ],
+
+        'mainteananceCheckout' => [
+            'driver' => 'local',
+            'root' => storage_path('app\public\bm\maintenance\checkout'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+        ],
+
+        'troubleshootCheckin' => [
+            'driver' => 'local',
+            'root' => storage_path('app\public\bm\troubleshoot\checkin'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+        ],
+
+        'troubleshootCheckout' => [
+            'driver' => 'local',
+            'root' => storage_path('app\public\bm\troubleshoot\checkout'),
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
         ],

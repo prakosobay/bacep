@@ -100,4 +100,19 @@ class Cleaning extends Model
         'cleaning_nik',
         'cleaning_nik_2',
     ];
+
+    public function histories()
+    {
+        return $this->hasMany(CleaningHistory::class);
+    }
+
+    public function visitors()
+    {
+        return $this->hasMany(CleaningVisitor::class);
+    }
+
+    public function full()
+    {
+        return $this->hasOne(CleaningFull::class);
+    }
 }
