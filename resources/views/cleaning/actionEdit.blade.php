@@ -1,7 +1,6 @@
 @if ($model->checkin_personil == null)
     <a href="{{url ('cleaning/action/checkin', $model->cleaning_id)}}" class="btn btn-xs btn-primary btn-sm"><i class="glyphicon glyphicon-edit"></i>Checkin</a>
     <form action="{{ route ('cleaningCheckinCancel', $model->cleaning_id) }}" method="POST" onsubmit="return confirm('Are You Sure Want to Cancel ?')">
-        @method('put')
         @csrf
         <button type="submit" class="btn btn-xs btn-danger btn-sm mx-1 my-1"><i class="glyphicon glyphicon-edit"></i>Cancel</button>
     </form>

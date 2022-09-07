@@ -18,7 +18,6 @@ use Symfony\Component\CssSelector\Node\FunctionNode;
 class CleaningController extends Controller
 {
 
-
     // Show Pages
     public function show_form() // Tampilan form cleaning
     {
@@ -250,6 +249,8 @@ class CleaningController extends Controller
         $getStatus->update([
             'status' => 'Cancel',
         ]);
+
+        return redirect()->route('logall')->with('success', 'Canceled');
     }
 
 
@@ -488,7 +489,8 @@ class CleaningController extends Controller
     public function yajra_log() //versi visitor
     {
         $full = DB::table('cleaning_fulls')
-            ->select(['cleaning_id', 'validity_from', 'cleaning_name', 'cleaning_work', 'checkin_personil', 'checkout_personil']);
+            ->select(['cleaning_id', 'validity_from', 'cleaning_name', 'cleaning_work', 'checkin_personil', 'checkout_personil'])
+            ->where('cleaning_fulls.status', '!=', 'Cancel');
         return Datatables::of($full)
             ->editColumn('validity_from', function ($full) {
                 return $full->validity_from ? with(new Carbon($full->validity_from))->format('d/m/Y') : '';
