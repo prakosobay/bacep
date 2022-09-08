@@ -12,15 +12,18 @@ class Other extends Model
 
     protected $guarded = [];
 
-    public function other_personils()
+    public function personils()
     {
         return $this->hasMany(OtherPersonil::class);
     }
 
-    public function other_histories()
+    public function histories()
     {
         return $this->hasMany(OtherHistory::class);
     }
 
-
+    public function full()
+    {
+        return $this->hasOne(OtherFull::class);
+    }
 }

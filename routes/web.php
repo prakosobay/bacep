@@ -205,7 +205,6 @@ Route::middleware(['auth'])->group(function () {
     // Cleaning
     Route::controller(CleaningController::class)->group(function () {
         Route::get('route_history_cleaning', 'data_history');
-        Route::get('yajra_full_approve_cleaning', 'yajra_full_approval');
 
         Route::get('cleaning-form', 'show_form')->name('cleaningForm');
 
@@ -219,9 +218,10 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/cleaning/action/show/{id}', 'cetak_full_cleaning');
         Route::get('cleaning/action/export', 'cetak_all_full_cleaning');
         Route::get('/cleaning/reject/show', 'show_reject_cleaning');
-        Route::get('cleaning/yajra/log', 'cleaning_yajra_log');
 
+        Route::get('cleaning/yajra/log', 'cleaning_yajra_log');
         Route::get('yajra_full_approve_cleaning_other', 'yajra_log');
+        Route::get('yajra_full_approve_cleaning', 'yajra_full_approval');
 
         Route::get('cleaning-export-full-approval', 'export_full_approval')->name('cleaningExportFullApproval');
 
@@ -255,26 +255,34 @@ Route::middleware(['auth'])->group(function () {
         Route::post('other/troubleshoot/reject', 'reject_troubleshoot');
 
         // Maintenance
-        Route::get('other-maintenance-show', 'show_maintenance_form')->name('maintenanceForm');
-        Route::get('other-maintenance-finished-show', 'maintenance_finished_show')->name('maintenanceFinishedShow');
+        Route::get('maintenance-show', 'show_maintenance_form')->name('maintenanceForm');
+        Route::get('maintenance-pdf/{id}', 'maintenance_pdf')->name('maintenancePDF');
 
-        Route::get('other/maintenance/log', 'show_maintenance_log');
         Route::get('other/maintenance/full', 'show_maintenance_full');
         Route::get('other/maintenance/full/reject', 'show_maintenance_reject');
         Route::get('other/maintenance/rutin/{id}', 'get_rutin');
         Route::get('other/maintenance/visitor/{id}', 'get_visitor');
-        Route::get('other/maintenance/yajra', 'yajra_history');
-        Route::get('/other/maintenance/yajra/full/visitor', 'yajra_full_visitor_maintenance');
-        Route::get('/other/maintenance/yajra/full/approval', 'yajra_full_approval_maintenance');
-        Route::get('/other/maintenance/yajra/full/reject', 'yajra_full_reject_maintenance');
-        Route::get('/other/maintenance/pdf/{id}', 'pdf_maintenance');
-        Route::get('other/maintenance/action/checkin/{id}', 'show_maintenance_checkin');
-        Route::put('other/maintenance/update/checkin/{id}', 'other_maintenance_update_checkin');
-        Route::post('/other/maintenance/approve', 'approve_maintenance');
-        Route::post('/other/maintenance/reject', 'reject_maintenance');
-        Route::post('other/maintenance/create', 'create_maintenance');
+
+        Route::get('maintenance-yajra-history', 'maintenance_yajra_history')->name('maintenanceYajraHistory');
+        Route::get('maintenance-yajra-full-approval', 'maintenance_yajra_full_approval')->name('maintenanceYajraFullApproval');
+        Route::get('maintenance-yajra-full-visitor', 'maintenance_yajra_full_visitor')->name('maintenanceYajraFullVisitor');
+
+        Route::get('maintenance-export-full-approval', 'maintenance_export_full_approval')->name('maintenanceExportFullApproval');
+
+        Route::get('maintenance-checkin-show/{id}', 'maintenance_checkin_show')->name('maintenanceCheckinShow');
+        Route::get('maintenance-checkout-show/{id}', 'maintenance_checkout_show')->name('maintenanceCheckoutShow');
+        Route::put('maintenance-checkin-update/{id}', 'maintenance_checkin_update')->name('maintenanceCheckinUpdate');
+        Route::put('maintenance-checkout-update/{id}', 'maintenance_checkout_update')->name('maintenanceCheckoutUpdate');
+        Route::put('maintenance-checkin-cancel/{id}', 'maintenance_checkin_cancel')->name('maintenanceCheckinCancel');
+
+        Route::post('maintenance-store', 'maintenance_store')->name('maintenanceStore');
+        Route::post('maintenance-approve', 'maintenance_approve')->name('maintenanceApprove');
+        Route::post('maintenance-reject', 'maintenance_reject')->name('maintenanceReject');
+
         Route::post('/other/maintenance/full/reject/{id}', 'update_reject_maintenance');
         Route::post('/other/maintenance/form/checkin', 'update_checkin_maintenance');
+
+        Route::get('/other/maintenance/yajra/full/reject', 'yajra_full_reject_maintenance');
     });
 
 
@@ -295,7 +303,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('internal-last-form/{dept}', 'internal_last_form')->name('lastInternal');
         Route::get('last-selected/{id}', 'last_selected')->name('lastSelected');
         Route::get('internal/form', 'internal_form');
-
 
         Route::get('internal-action-checkin-form/{id}', 'internal_action_checkin_form')->name('checkinInternal');
         Route::get('internal-action-checkout-form/{id}', 'internal_action_checkout_form')->name('checkoutInternal');

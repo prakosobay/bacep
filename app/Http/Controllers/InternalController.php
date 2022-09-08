@@ -527,7 +527,6 @@ class InternalController extends Controller
             ->make(true);
     }
 
-
     public function internal_yajra_full_approval()
     {
         $full = DB::table('internals')

@@ -14,9 +14,8 @@ class OtherPersonil extends Model
     protected $primaryKey = 'id';
     protected $guarded = [];
 
-
     public function other()
     {
-        return $this->belongsTo(Other::class);
+        return $this->belongsTo(Other::class, 'other_id');
     }
 }

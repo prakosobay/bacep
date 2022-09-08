@@ -2,44 +2,40 @@
 
 namespace App\Exports;
 
-use App\Models\{Internal, InternalVisitor};
-use Maatwebsite\Excel\Concerns\Exportable;
+use App\Models\OtherPersonil;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
-use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithStyles;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class InternalExport implements FromCollection, WithHeadings, WithStyles
+class MaintenanceExport implements FromCollection, WithStyles, WithHeadings
 {
     /**
     * @return \Illuminate\Support\Collection
     */
-
     public function collection()
     {
-        return InternalVisitor::all();
+        return OtherPersonil::all();
     }
 
     public function headings(): array
     {
         return [
-            'No.',
-            'Internal_id',
-            'Requestor Dept',
-            'Visitor Name',
-            'Visitor Company',
-            'Visitor Department',
-            'Visitor Responsibility',
-            'Visitor Number ID',
-            'Visitor Phone',
-            'Visitor Checkin',
+            'id',
+            'other_id',
+            'Name',
+            'Company',
+            'Department',
+            'Responsibility',
+            'Phone',
+            'NIK',
+            'Checkin',
+            'Checkout',
             'Photo Checkin',
-            'Visitor Checkout',
             'Photo Checkout',
-            'done',
-            'created_at',
-            'updated_at',
+            'Deleted_at',
+            'Created_at',
+            'Updated_at',
         ];
     }
 

@@ -13,4 +13,9 @@ class OtherFull extends Model
     protected $table = 'other_fulls';
     protected $primaryKey = 'id';
     protected $guarded = [];
+
+    public function other()
+    {
+        return $this->belongsTo(OtherFull::class, 'other_id');
+    }
 }

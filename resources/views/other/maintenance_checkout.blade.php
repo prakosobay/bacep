@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Checkin Visitor</title>
+	<title>Checkout Visitor</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
@@ -27,11 +27,11 @@
 
 	<div class="container-contact100">
 		<div class="wrap-contact100">
-			<form id="maintenance_form" class="contact100-form validate-form" method="POST" action="{{ route('maintenanceCheckinUpdate', $getVisitor->id)}}">
+			<form id="maintenance_form" class="contact100-form validate-form" method="POST" action="{{ route('maintenanceCheckoutUpdate', $getVisitor->id)}}">
                 @method('PUT')
                 @csrf
 				<span class="contact100-form-title">
-					Checkin Visitor
+					Checkout Visitor
 				</span>
 
                 @if (session('gagal'))
@@ -63,20 +63,19 @@
                 {{-- Visitor --}}
                 <table class="table table-bordered bg1">
                     <tr>
-                        <th colspan="4"><b>Visitor</b></th>
+                        <th colspan="2"><b>Visitor</b></th>
+                        <th colspan="2"><b>Checkin</b></th>
                     </tr>
                     <tr>
                         <th>Name </th>
                         <td>
-                            <input type="text" class="input100" name="name" value="{{ $getVisitor->name }}" required>
-                            {{-- <select class="js-select2" name="name" id="nama">
-                                <option selected value="{{ $getVisitor->name }}">{{ $getVisitor->name }}</option>
-                                @foreach($personil as $p)
-                                    <option value="{{ $p->id }}">{{ $p->visit_nama }}</option>
-                                @endforeach
-                            </select>
-                            <div class="dropDownSelect2"></div> --}}
+                            <input type="text" class="input100" name="name" value="{{ $getVisitor->name }}" readonly>
                         </td>
+                        <td colspan="2" rowspan="6">
+                            <img src="{{ url('storage/bm/maintenance/checkin/'.$getVisitor->photo_checkin)}}" alt="">
+                        </td>
+                    </tr>
+                    <tr>
                         <th>Company</th>
                         <td>
                             <input type="text" class="input100" name="company" value="{{ $getVisitor->company }}" readonly>
@@ -85,21 +84,25 @@
                     <tr>
                         <th>ID Number </th>
                         <td>
-                            <input type="text" class="input100" name="number" value="{{ $getVisitor->number }}" required>
+                            <input type="text" class="input100" name="number" value="{{ $getVisitor->number }}" readonly>
                         </td>
+                    </tr>
+                    <tr>
                         <th>Department </th>
                         <td>
-                            <input type="text" class="input100" name="department" value="{{ $getVisitor->department }}" required>
+                            <input type="text" class="input100" name="department" value="{{ $getVisitor->department }}" readonly>
                         </td>
                     </tr>
                     <tr>
                         <th>Phone Number</th>
                         <td>
-                            <input type="text" class="input100" name="phone" value="{{ $getVisitor->phone }}" required>
+                            <input type="text" class="input100" name="phone" value="{{ $getVisitor->phone }}" readonly>
                         </td>
+                    </tr>
+                    <tr>
                         <th>Responsibility </th>
                         <td>
-                            <input type="text" class="input100" name="respon" value="{{ $getVisitor->respon }}" required>
+                            <input type="text" class="input100" name="respon" value="{{ $getVisitor->respon }}" readonly>
                         </td>
                     </tr>
                     <tr>
@@ -110,14 +113,14 @@
                         </th>
                         <th colspan="2" class="py-5">
                             <div class="container" id="results"></div><br>
-                            <input class="@error('photo_checkin') is-invalid @enderror" type="hidden" name="photo_checkin" id="image" required>
-                            @error('photo_checkin')
+                            <input class="@error('photo_checkout') is-invalid @enderror" type="hidden" name="photo_checkout" id="image" required>
+                            @error('photo_checkout')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span><br>
                             @enderror
-                            <input type="time" class="@error('checkin') is-invalid @enderror" name="checkin" id="checkin" value="" readonly required>
-                            @error('checkin')
+                            <input type="time" class="@error('checkout') is-invalid @enderror" name="checkout" id="checkout" value="" readonly required>
+                            @error('checkout')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -126,10 +129,11 @@
                     </tr>
                 </table>
 
+
 				<div class="container-contact100-form-btn">
 					<button type="submit" class="contact100-form-btn">
 						<span>
-							Checkin
+							Checkout
 							<i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
 						</span>
 					</button>
@@ -186,7 +190,7 @@
                 menit = menit < 10 ? '0'+menit : menit;
                 detik = detik < 10 ? '0'+detik : detik;
                 var waktu = jam + ':' + menit + ':' + detik;
-                $("#checkin").val(waktu);
+                $("#checkout").val(waktu);
             }
 
     </script>

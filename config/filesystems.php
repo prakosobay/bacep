@@ -77,7 +77,7 @@ return [
             'visibility' => 'public',
         ],
 
-        'mainteananceCheckout' => [
+        'maintenanceCheckout' => [
             'driver' => 'local',
             'root' => storage_path('app\public\bm\maintenance\checkout'),
             'url' => env('APP_URL').'/storage',

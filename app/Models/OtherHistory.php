@@ -13,13 +13,13 @@ class OtherHistory extends Model
     protected $primaryKey = 'id';
     protected $guarded = [];
 
-    public function created_by()
+    public function createdBy()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'created_by');
     }
 
     public function other()
     {
-        return $this->belongsTo(Other::class);
+        return $this->belongsTo(Other::class, 'other_id');
     }
 }

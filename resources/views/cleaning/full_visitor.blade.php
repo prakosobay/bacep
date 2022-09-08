@@ -25,13 +25,16 @@
             $('#maintenance_table').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: '{{ url('other/maintenance/yajra/full/visitor')}}',
+                ajax: '{{ route('maintenanceYajraFullVisitor') }}',
                 columns: [
-                    { data: 'other_id', name: 'other_id' },
-                    { data: 'work', name: 'work' },
-                    { data: 'visit', name: 'visit' },
-                    { data: 'leave', name: 'leave' },
-                    {data: 'action', name: 'action', orderable: false, searchable: false}
+                    { data: 'id', name: 'other_personils.id' },
+                    { data: 'work', name: 'other_fulls.work' },
+                    { data: 'visit', name: 'other_fulls.visit' },
+                    { data: 'leave', name: 'other_fulls.leave' },
+                    { data: 'name', name: 'other_personils.name' },
+                    { data: 'checkin', name: 'other_personils.checkin' },
+                    { data: 'checkout', name: 'other_personils.checkout' },
+                    { data: 'action', name: 'action', orderable: false, searchable: false }
                 ]
             });
         });

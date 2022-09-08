@@ -34,7 +34,7 @@
             $('#history').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: '{{ url('other/maintenance/yajra')}}',
+                ajax: '{{ route('maintenanceYajraHistory')}}',
                 columns: [
                     { data: 'other_id', name: 'other_id' },
                     { data: 'visit', name: 'others.visit' },
