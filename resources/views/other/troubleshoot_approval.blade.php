@@ -38,7 +38,7 @@
                                 @elsecan('isSecurity')
                                     <a href="javascript:void(0)" type="button" id="ok" class="approve btn btn-success btn-sm my-1 mx-1" data-id="{{$p->id}}">Approve</a>
                                 @endcan
-                                    <a href="/other/troubleshoot/pdf/{{$p->id}}" class="btn btn-primary btn-sm my-1 mx-1" target="_blank">File</a>
+                                    <a href="{{ route('troubleshootPDF', $p->id)}}" class="btn btn-primary btn-sm my-1 mx-1" target="_blank">File</a>
                             </td>
                         </tr>
                         @endforeach
@@ -80,7 +80,7 @@
                         console.log(id);
                         $.ajax({
                             type:'POST',
-                            url:"{{url('/other/troubleshoot/approve')}}",
+                            url:"{{ route('troubleshootApprove') }}",
                             data: {id},
                             error: function (request, error) {
                                 alert(" Can't do because: " + error);
@@ -133,7 +133,7 @@
                         console.log(id);
                         $.ajax({
                             type:'POST',
-                            url:"{{url('/other/troubleshoot/reject')}}",
+                            url:"{{ route('troubleshootReject') }}",
                             data: {id},
                             error: function (request, error) {
                                 alert(" Can't do because: " + error);

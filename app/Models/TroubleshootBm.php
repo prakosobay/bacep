@@ -12,32 +12,32 @@ class TroubleshootBm extends Model
 
     protected $guarded = [];
 
-    public function troubleshoot_bm_personil()
+    public function personils()
     {
         return $this->hasMany(TroubleshootBmPersonil::class);
     }
 
-    public function troubleshoot_bm_detail()
+    public function details()
     {
-        return $this->hasMany(TroubleshootBmDetails::class);
+        return $this->hasMany(TroubleshootBmDetail::class);
     }
 
-    public function troubleshoot_bm_history()
+    public function histories()
     {
         return $this->hasMany(TroubleshootBmHistory::class);
     }
 
-    public function troubleshoot_bm_risk()
+    public function risks()
     {
         return $this->hasMany(TroubleshootBmRisk::class);
     }
 
-    public function troubleshoot_bm_fulls()
+    public function full()
     {
         return $this->hasOne(TroubleshootBmFull::class);
     }
 
-    public function troubleshoot_bm_entries()
+    public function entry()
     {
         return $this->hasOne(TroubleshootBmEntry::class);
     }

@@ -20,8 +20,8 @@ class TroubleshootBmDetail extends Model
         'procedure',
     ];
 
-    public function troubleshoot_bm()
+    public function troubleshoot()
     {
-        return $this->belongsTo(TroubleshootBm::class);
+        return $this->belongsTo(TroubleshootBm::class, 'troubleshoot_bm_id');
     }
 }

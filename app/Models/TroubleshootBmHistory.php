@@ -21,11 +21,11 @@ class TroubleshootBmHistory extends Model
 
     public function createdBy()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'created_by');
     }
 
-    public function troubleshoot_bm()
+    public function troubleshoot()
     {
-        return $this->belongsTo(TroubleshootBm::class);
+        return $this->belongsTo(TroubleshootBm::class, 'troubleshoot_bm_id');
     }
 }

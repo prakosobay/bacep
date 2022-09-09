@@ -173,6 +173,9 @@
                                             <th>Purpose of Work</th>
                                             <th>Date of Visit</th>
                                             <th>Date of Leave</th>
+                                            <th>Name</th>
+                                            <th>Checkin</th>
+                                            <th>Checkout</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>

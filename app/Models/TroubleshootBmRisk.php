@@ -10,16 +10,11 @@ class TroubleshootBmRisk extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = [
-        'troubleshoot_bm_id',
-        'risk',
-        'poss',
-        'impact',
-        'mitigation',
+    protected $guarded = [
     ];
 
-    public function troubleshoot_bm()
+    public function troubleshoot()
     {
-        return $this->belongsTo(TroubleshootBm::class);
+        return $this->belongsTo(TroubleshootBm::class, 'troubleshoot_bm_id');
     }
 }

@@ -43,13 +43,16 @@
             $('#troubleshoot_table').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: '{{ url('other/troubleshoot/yajra/full/visitor')}}',
+                ajax: '{{ route('troubleshootYajraFullVisitor')}}',
                 columns: [
-                    { data: 'troubleshoot_bm_id', name: 'troubleshoot_bm_id' },
-                    { data: 'work', name: 'work' },
-                    { data: 'visit', name: 'visit' },
-                    { data: 'leave', name: 'leave' },
-                    {data: 'action', name: 'action', orderable: false, searchable: false}
+                    { data: 'id', name: 'troubleshoot_bm_personils.id' },
+                    { data: 'work', name: 'troubleshoot_bm_fulls.work' },
+                    { data: 'visit', name: 'troubleshoot_bm_fulls.visit' },
+                    { data: 'leave', name: 'troubleshoot_bm_fulls.leave' },
+                    { data: 'nama', name: 'troubleshoot_bm_personils.nama' },
+                    { data: 'checkin', name: 'troubleshoot_bm_personils.checkin' },
+                    { data: 'checkout', name: 'troubleshoot_bm_personils.checkout' },
+                    { data: 'action', name: 'action', orderable: false, searchable: false }
                 ]
             });
         });

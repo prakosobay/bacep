@@ -240,21 +240,30 @@ Route::middleware(['auth'])->group(function () {
     // Other
     Route::controller(OtherController::class)->group(function () {
         // Troubleshoot
-        Route::get('other-troubleshoot-show', 'show_troubleshoot_form')->name('troubleshootForm');
-        Route::get('other-troubleshoot-finished-show', 'troubleshoot_finished_show')->name('troubleshootFinishedShow');
+        Route::get('troubleshoot-show', 'troubleshoot_form')->name('troubleshootForm');
+        Route::get('troubleshoot-finished-show', 'troubleshoot_finished_show')->name('troubleshootFinishedShow');
 
-        Route::get('other/troubleshoot/pdf/{id}', 'pdf_troubleshoot');
+        Route::get('troubleshoot-pdf/{id}', 'troubleshoot_pdf')->name('troubleshootPDF');
         Route::get('other/troubleshoot/yajra/history', 'yajra_troubleshoot_history');
-        Route::get('other/troubleshoot/yajra/full/approval', 'other_troubleshoot_yajra_full_approval');
-        Route::get('other/troubleshoot/yajra/full/visitor', 'other_troubleshoot_yajra_full_visitor');
-        Route::get('other/troubleshoot/yajra/full/reject', 'other_troubleshoot_yajra_full_reject');
-        Route::get('other/troubleshoot/action/checkin/{id}', 'other_troubleshoot_action_checkin');
-        Route::put('other/troubleshoot/update/checkin/{id}', 'other_troubleshoot_update_checkin');
-        Route::post('other/troubleshoot/create', 'create_troubleshoot');
-        Route::post('other/troubleshoot/approve', 'approve_troubleshoot');
-        Route::post('other/troubleshoot/reject', 'reject_troubleshoot');
 
-        // Maintenance
+        Route::get('other/troubleshoot/yajra/full/approval', 'other_troubleshoot_yajra_full_approval');
+        Route::get('troubleshoot-yajra-full-visitor', 'troubleshoot_yajra_full_visitor')->name('troubleshootYajraFullVisitor');
+        Route::get('other/troubleshoot/yajra/full/reject', 'other_troubleshoot_yajra_full_reject');
+
+        Route::get('other/troubleshoot/action/checkin/{id}', 'other_troubleshoot_action_checkin');
+
+        Route::get('troubleshoot-checkin-show/{id}', 'troubleshoot_checkin_show')->name('troubleshootCheckinShow');
+        Route::get('troubleshoot-checkout-show/{id}', 'troubleshoot_checkout_show')->name('troubleshootCheckoutShow');
+        Route::put('troubleshoot-checkin-update/{id}', 'troubleshoot_checkin_update')->name('troubleshootCheckinUpdate');
+        Route::put('troubleshoot-checkout-update/{id}', 'troubleshoot_checkout_update')->name('troubleshootCheckoutUpdate');
+        Route::post('troubleshoot-checkin-cancel/{id}', 'troubleshoot_checkin_cancel')->name('troubleshootCheckinCancel');
+
+        Route::post('troubleshoot-store', 'troubleshoot_store')->name('troubleshootStore');
+        Route::post('troubleshoot-approve', 'troubleshoot_approve')->name('troubleshootApprove');
+        Route::post('troubleshoot-reject', 'troubleshoot_reject')->name('troubleshootReject');
+
+
+        // --------------------------------------------------------- MAINTENANCE -------------------------------------------------------
         Route::get('maintenance-show', 'show_maintenance_form')->name('maintenanceForm');
         Route::get('maintenance-pdf/{id}', 'maintenance_pdf')->name('maintenancePDF');
 
@@ -278,11 +287,6 @@ Route::middleware(['auth'])->group(function () {
         Route::post('maintenance-store', 'maintenance_store')->name('maintenanceStore');
         Route::post('maintenance-approve', 'maintenance_approve')->name('maintenanceApprove');
         Route::post('maintenance-reject', 'maintenance_reject')->name('maintenanceReject');
-
-        Route::post('/other/maintenance/full/reject/{id}', 'update_reject_maintenance');
-        Route::post('/other/maintenance/form/checkin', 'update_checkin_maintenance');
-
-        Route::get('/other/maintenance/yajra/full/reject', 'yajra_full_reject_maintenance');
     });
 
 

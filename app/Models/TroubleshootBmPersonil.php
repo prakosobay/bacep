@@ -12,15 +12,15 @@ class TroubleshootBmPersonil extends Model
 
     protected $table = 'troubleshoot_bm_personils';
     protected $primaryKey = 'id';
-    protected $fillable =
+    protected $guarded =
     [
-        'troubleshoot_bm_id', 'nama', 'company', 'department', 'respon', 'phone', 'numberId', 'checkin', 'photo_checkin', 'checkout', 'photo_checkout'
+
     ];
 
-    // public function troubleshoot_bm()
-    // {
-    //     return $this->belongsTo(TroubleshootBm::class);
-    // }
+    public function troubleshoot()
+    {
+        return $this->belongsTo(TroubleshootBm::class, 'troubleshoot_bm_id');
+    }
 
 
 }

@@ -31,6 +31,6 @@ class TroubleshootBmEntry extends Model
 
     public function troubleshoot_bm()
     {
-        return $this->belongsTo(TroubleshootBm::class);
+        return $this->belongsTo(TroubleshootBm::class, 'troubleshoot_bm_id');
     }
 }

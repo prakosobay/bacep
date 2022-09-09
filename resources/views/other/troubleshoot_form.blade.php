@@ -669,7 +669,7 @@
         var datastring = $("#troubleshoot_form").serialize();
             $.ajax({
                 type:'POST',
-                url:"{{url('other/troubleshoot/create')}}",
+                url:"{{ route('troubleshootStore') }}",
                 data: datastring,
                 error: function (request, errors) {
                     console.log(errors)
@@ -683,7 +683,7 @@
                             text: 'Data Saved',
                             type: "success",
                         }).then(function(){
-                            location.href = "{{url("/logall")}}";
+                            location.href = "{{ route("/logall") }}";
                         });
                     }else if(data.status == 'FAILED'){
                         Swal.fire({
