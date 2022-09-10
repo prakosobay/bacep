@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>
-        Checkin Form Troubleshoot
-    </title>
+	<title>Checkout Visitor</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
@@ -23,29 +21,18 @@
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/util.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/main.css')}}">
-    {{-- <link href="{{asset('css/new_approve.css')}}" rel="stylesheet"> --}}
-</head>
 <!--===============================================================================================-->
-
+</head>
 <body>
+
 	<div class="container-contact100">
 		<div class="wrap-contact100">
-			<form class="contact100-form validate-form" id="troubleshoot_form" method="POST" action="{{ route('troubleshootCheckinUpdate', $getVisitor->id)}}">
+			<form id="maintenance_form" class="contact100-form validate-form" method="POST" action="{{ route('troubleshootCheckoutUpdate', $getVisitor->id)}}">
                 @method('PUT')
                 @csrf
 				<span class="contact100-form-title">
-					CHECKIN FORM TROUBLESHOOT
+					Checkout Visitor
 				</span>
-
-                @if (count($errors) > 0)
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
 
                 @if (session('gagal'))
                     <div class="alert alert-warning my-2 mx-2">
@@ -53,62 +40,69 @@
                     </div>
                 @endif
 
-                {{-- Purpose of Work (Tujuan Pekerjaan)--}}
-				<div class="wrap-input100 validate-input bg1" data-validate="Pilih Tujuan Pekerjaan">
+                {{-- Purpose of Work --}}
+				<div class="wrap-input100 validate-input bg1">
 					<span class="label-input100">Purpose of Work (Tujuan Pekerjaan) *</span>
-					<input class="input100" type="text" value="{{ $getVisitor->troubleshoot->work }}" readonly>
+                    <div>
+					    <input type="text" class="input100" value="{{ $getVisitor->troubleshoot->work }}" readonly>
+                    </div>
 				</div>
 
-                {{-- Validity --}}
-                <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate = "Pilih Tanggal Pekerjaan">
-					<span class="label-input100">Date of Visit (Tanggal Mulai Pekerjaan) *</span>
+                {{-- Visit --}}
+                <div class="wrap-input100 validate-input bg1 rs1-wrap-input100">
+					<span class="label-input100">Date of Visit (Tanggal Mulai Pekerjaan)</span>
                     <input class="input100" type="date" value="{{ $getVisitor->troubleshoot->visit }}" readonly>
 				</div>
-				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate = "Pilih Tanggal Pekerjaan">
-					<span class="label-input100">Date of Leave (Tanggal Selesai Pekerjaan) *</span>
-					<input class="input100" type="date" value="{{ $getVisitor->troubleshoot->leave }}" readonly>
+
+                {{-- Leave --}}
+                <div class="wrap-input100 validate-input bg1 rs1-wrap-input100">
+					<span class="label-input100">Date of Leave (Tanggal Selesai Pekerjaan)</span>
+                    <input class="input100" type="date" value="{{ $getVisitor->troubleshoot->leave }}" readonly>
 				</div>
 
                 {{-- Visitor --}}
                 <table class="table table-bordered bg1">
                     <tr>
-                        <th colspan="4"><b>Visitor</b></th>
+                        <th colspan="2"><b>Visitor</b></th>
+                        <th colspan="2"><b>Checkin</b></th>
                     </tr>
                     <tr>
                         <th>Name </th>
                         <td>
-                            <input type="text" class="input100" name="name" value="{{ $getVisitor->nama }}" required>
-                            {{-- <select class="js-select2" name="name" id="nama">
-                                <option selected value="{{ $getVisitor->name }}">{{ $getVisitor->name }}</option>
-                                @foreach($personil as $p)
-                                    <option value="{{ $p->id }}">{{ $p->visit_nama }}</option>
-                                @endforeach
-                            </select>
-                            <div class="dropDownSelect2"></div> --}}
+                            <input type="text" class="input100" value="{{ $getVisitor->nama }}" readonly>
                         </td>
+                        <td colspan="2" rowspan="6">
+                            <img src="{{ url('storage/bm/troubleshoot/checkin/'.$getVisitor->photo_checkin)}}" alt="">
+                        </td>
+                    </tr>
+                    <tr>
                         <th>Company</th>
                         <td>
-                            <input type="text" class="input100" name="company" value="{{ $getVisitor->company }}" readonly>
+                            <input type="text" class="input100" value="{{ $getVisitor->company }}" readonly>
                         </td>
                     </tr>
                     <tr>
                         <th>ID Number </th>
                         <td>
-                            <input type="text" class="input100" name="number" value="{{ $getVisitor->numberId }}" required>
+                            <input type="text" class="input100" value="{{ $getVisitor->numberId }}" readonly>
                         </td>
+                    </tr>
+                    <tr>
                         <th>Department </th>
                         <td>
-                            <input type="text" class="input100" name="department" value="{{ $getVisitor->department }}" required>
+                            <input type="text" class="input100" value="{{ $getVisitor->department }}" readonly>
                         </td>
                     </tr>
                     <tr>
                         <th>Phone Number</th>
                         <td>
-                            <input type="text" class="input100" name="phone" value="{{ $getVisitor->phone }}" required>
+                            <input type="text" class="input100" value="{{ $getVisitor->phone }}" readonly>
                         </td>
+                    </tr>
+                    <tr>
                         <th>Responsibility </th>
                         <td>
-                            <input type="text" class="input100" name="respon" value="{{ $getVisitor->respon }}" required>
+                            <input type="text" class="input100" value="{{ $getVisitor->respon }}" readonly>
                         </td>
                     </tr>
                     <tr>
@@ -119,14 +113,14 @@
                         </th>
                         <th colspan="2" class="py-5">
                             <div class="container" id="results"></div><br>
-                            <input class="@error('photo_checkin') is-invalid @enderror" type="hidden" name="photo_checkin" id="image" required>
-                            @error('photo_checkin')
+                            <input class="@error('photo_checkout') is-invalid @enderror" type="hidden" name="photo_checkout" id="image" required>
+                            @error('photo_checkout')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span><br>
                             @enderror
-                            <input type="time" class="@error('checkin') is-invalid @enderror" name="checkin" id="checkin" value="" readonly required>
-                            @error('checkin')
+                            <input type="time" class="@error('checkout') is-invalid @enderror" name="checkout" id="checkout" value="" readonly required>
+                            @error('checkout')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -135,10 +129,11 @@
                     </tr>
                 </table>
 
+
 				<div class="container-contact100-form-btn">
-					<button class="contact100-form-btn" id="submit_form">
+					<button type="submit" class="contact100-form-btn">
 						<span>
-							Checkin
+							Checkout
 							<i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
 						</span>
 					</button>
@@ -147,9 +142,8 @@
 		</div>
 	</div>
 
-    {{-- <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script> --}}
 <!--===============================================================================================-->
-    <script src="{{ asset('vendor/jquery/jquery-3.2.1.min.js')}}"></script>
+	<script src="{{ asset('vendor/jquery/jquery-3.2.1.min.js')}}"></script>
 <!--===============================================================================================-->
 	<script src="{{ asset('vendor/animsition/js/animsition.min.js')}}"></script>
 <!--===============================================================================================-->
@@ -158,41 +152,63 @@
 <!--===============================================================================================-->
 	<script src="{{ asset('vendor/select2/select2.min.js')}}"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-    {{-- Webcam --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.25/webcam.min.js"></script>
 
-{{--add table--}}
+	<script>
+
+		$(".js-select2").each(function(){
+			$(this).select2({
+				minimumResultsForSearch: 20,
+				dropdownParent: $(this).next('.dropDownSelect2')
+			});
+		});
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('input[name="_token"]').val()
+            }
+        });
+
+        Webcam.set({
+            width: 450,
+            height: 400,
+            image_format: 'jpeg',
+            jpeg_quality: 90
+        });
+
+        Webcam.attach( '#my_camera' );
+            function take_snapshot() {
+                Webcam.snap( function(data_uri) {
+                    $("#image").val(data_uri);
+                    document.getElementById('results').innerHTML = '<img src="'+data_uri+'"/>';
+                });
+                var tanggal = new Date();
+                var jam = tanggal.getHours();
+                var menit = tanggal.getMinutes();
+                var detik = tanggal.getSeconds();
+                jam = jam < 10 ? '0' +jam : jam;
+                menit = menit < 10 ? '0'+menit : menit;
+                detik = detik < 10 ? '0'+detik : detik;
+                var waktu = jam + ':' + menit + ':' + detik;
+                $("#checkout").val(waktu);
+            }
+
+    </script>
+<!--===============================================================================================-->
+	<script src="{{ asset('vendor/countdowntime/countdowntime.js')}}"></script>
+<!--===============================================================================================-->
+	<script src="{{ asset('js/main.js')}}"></script>
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
 <script>
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('input[name="_token"]').val()
-        }
-    });
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-    Webcam.set({
-        width: 450,
-        height: 400,
-        image_format: 'jpeg',
-        jpeg_quality: 90
-    });
-
-    Webcam.attach( '#my_camera' );
-        function take_snapshot() {
-            Webcam.snap( function(data_uri) {
-                $("#image").val(data_uri);
-                document.getElementById('results').innerHTML = '<img src="'+data_uri+'"/>';
-            });
-            var tanggal = new Date();
-            var jam = tanggal.getHours();
-            var menit = tanggal.getMinutes();
-            var detik = tanggal.getSeconds();
-            jam = jam < 10 ? '0' +jam : jam;
-            menit = menit < 10 ? '0'+menit : menit;
-            detik = detik < 10 ? '0'+detik : detik;
-            var waktu = jam + ':' + menit + ':' + detik;
-            $("#checkin").val(waktu);
-        }
+    gtag('config', 'UA-23581568-13');
 </script>
+
 </body>
 </html>

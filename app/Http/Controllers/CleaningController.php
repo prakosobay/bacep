@@ -476,8 +476,8 @@ class CleaningController extends Controller
     public function yajra_full_approval() //versi approval
     {
         $getFull = DB::table('cleaning_fulls')
-            ->select(['cleaning_id', 'validity_from', 'cleaning_name', 'checkin_personil', 'checkout_personil', 'cleaning_work', 'link'])
-            ->where('note', null);
+            ->where('note', null)
+            ->select(['cleaning_id', 'validity_from', 'cleaning_name', 'checkin_personil', 'checkout_personil', 'cleaning_work', 'link']);
         return Datatables::of($getFull)
             ->editColumn('validity_from', function ($full) {
                 return $full->validity_from ? with(new Carbon($full->validity_from))->format('d/m/Y') : '';

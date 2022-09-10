@@ -14,10 +14,11 @@
                         <tr class="judul-table text-center">
                             <th>ID Permit</th>
                             <th>Date of Visit</th>
+                            <th>Date of Leave</th>
                             <th>Purpose of Work</th>
-                            {{-- <th>Visitor Name</th> --}}
-                            {{-- <th>Checkin</th>
-                            <th>Checkout</th> --}}
+                            <th>Visitor Name</th>
+                            <th>Checkin</th>
+                            <th>Checkout</th>
                             <th>Link</th>
                         </tr>
                     </thead>
@@ -37,13 +38,14 @@
                 serverSide: true,
                 ajax: '{{ url('/other/troubleshoot/yajra/full/approval')}}',
                 columns: [
-                    { data: 'troubleshoot_bm_id', name: 'troubleshoot_bm_id' },
-                    { data: 'visit', name: 'visit' },
-                    { data: 'work', name: 'work' },
-                    // { data: 'cleaning_name', name: 'cleaning_name' },
-                    // { data: 'checkin_personil', name: 'checkin_personil' },
-                    // { data: 'checkout_personil', name: 'checkout_personil' },
-                    {data: 'action', name: 'action', orderable: false, searchable: false}
+                    { data: 'id', name: 'troubleshoot_bm_personils.id' },
+                    { data: 'visit', name: 'troubleshoot_bm_fulls.visit' },
+                    { data: 'leave', name: 'troubleshoot_bm_fulls.leave' },
+                    { data: 'work', name: 'troubleshoot_bm_fulls.work' },
+                    { data: 'nama', name: 'troubleshoot_bm_personils.nama' },
+                    { data: 'checkin', name: 'troubleshoot_bm_personils.checkin' },
+                    { data: 'checkout', name: 'troubleshoot_bm_personils.checkout' },
+                    { data: 'action', name: 'action', orderable: false, searchable: false }
                 ]
             });
         });

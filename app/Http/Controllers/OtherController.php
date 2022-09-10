@@ -510,6 +510,7 @@ class OtherController extends Controller
             ->join('other_personils', 'others.id', '=', 'other_personils.other_id')
             ->join('other_fulls', 'others.id', '=', 'other_fulls.other_id')
             ->where('other_fulls.status', 'Full Approved')
+            ->where('other_personils.deleted_at', null)
             ->select('other_fulls.*', 'other_personils.checkin', 'other_personils.checkout', 'other_personils.name');
         return Datatables::of($full_approval)
             ->editColumn('visit', function ($full_approval) {
@@ -848,14 +849,14 @@ class OtherController extends Controller
     // Update Checkin Checkout Troubleshoot
     public function troubleshoot_checkin_update(Request $request, $id)
     {
-        dd($request->all());
+        // dd($request->all());
 
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'company' => ['required', 'string', 'max:255'],
             'department' => ['required', 'string', 'max:255'],
             'phone' => ['required', 'regex:/^([0-9\s\-\+\(\)]*)$/'],
-            'nik' => ['required', 'string', 'max:255'],
+            'number' => ['required', 'string', 'max:255'],
             'respon' => ['required', 'string', 'max:255'],
             'checkin' => ['required'],
             'photo_checkin' => ['required'],
@@ -866,7 +867,7 @@ class OtherController extends Controller
         $image = str_replace($replace, '', $request->photo_checkin);
         $image = str_replace(' ', '+', $image);
         $imageName = Str::random(200) .  '.' . $extension;
-        dd($imageName);
+        // dd($imageName);
 
         Storage::disk('troubleshootCheckin')->put($imageName, base64_decode($image));
 
@@ -881,18 +882,18 @@ class OtherController extends Controller
                 'department' => $request->department,
                 'respon' => $request->respon,
                 'phone' => $request->phone,
-                'numberId' => $request->nik,
+                'numberId' => $request->number,
                 'checkin' => $request->checkin,
                 'photo_checkin' => $imageName,
             ]);
 
             Visitor::firstOrCreate([
-                'visit_nama' => $request->nama,
+                'visit_nama' => $request->name,
                 'visit_company' => $request->company,
                 'visit_department' => $request->department,
                 'visit_respon' => $request->respon,
                 'visit_phone' => $request->phone,
-                'visit_nik' => $request->nik,
+                'visit_nik' => $request->number,
             ]);
 
             DB::commit();
@@ -903,9 +904,45 @@ class OtherController extends Controller
         }
     }
 
+    public function troubleshoot_checkout_update(Request $request, $id)
+    {
+        // dd($request->all());
+
+        $request->validate([
+            'checkout' => ['required'],
+            'photo_checkout' => ['required'],
+        ]);
+
+        $extension = explode('/', explode(':', substr($request->photo_checkout, 0, strpos($request->photo_checkout, ';')))[1])[1];   // .jpg .png .pdf
+        $replace = substr($request->photo_checkout, 0, strpos($request->photo_checkout, ',') + 1);
+        $image = str_replace($replace, '', $request->photo_checkout);
+        $image = str_replace(' ', '+', $image);
+        $imageName = Str::random(200) .  '.' . $extension;
+        // dd($imageName);
+
+        Storage::disk('troubleshootCheckout')->put($imageName, base64_decode($image));
+
+        DB::beginTransaction();
+
+        try {
+
+            $update = TroubleshootBmPersonil::findOrFail($id);
+            $update->update([
+                'checkout' => $request->checkout,
+                'photo_checkout' => $imageName,
+            ]);
+
+            DB::commit();
+            return redirect()->route('logall')->with('success', 'Checkout Successful');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            throw $e;
+        }
+    }
+
     public function troubleshoot_checkin_cancel($id)
     {
-        dd($id);
+        // dd($id);
 
         DB::beginTransaction();
 
@@ -960,30 +997,22 @@ class OtherController extends Controller
             ->make(true);
     }
 
-    public function other_troubleshoot_yajra_full_approval() // Get data permit troubleshoot full approval view untuk approval
+    public function troubleshoot_yajra_full_approval() // Get data permit troubleshoot full approval view untuk approval
     {
-        $full_approval = DB::table('troubleshoot_bm_fulls')
-            ->join('troubleshoot_bms', 'troubleshoot_bms.id', '=', 'troubleshoot_bm_fulls.troubleshoot_bm_id')
-            ->select('troubleshoot_bm_fulls.*')
-            ->orderBy('troubleshoot_bm_id', 'desc');
-        return Datatables::of($full_approval)
-            ->editColumn('visit', function ($full_approval) {
-                return $full_approval->visit ? with(new Carbon($full_approval->visit))->format('d/m/Y') : '';
+        // $full_approval = DB::table('troubleshoot_bm_fulls')
+        //     ->join('troubleshoot_bms', 'troubleshoot_bms.id', '=', 'troubleshoot_bm_fulls.troubleshoot_bm_id')
+        //     ->select('troubleshoot_bm_fulls.*')
+        //     ->orderBy('troubleshoot_bm_id', 'desc');
+        $full = DB::table('troubleshoot_bms')
+                ->join('troubleshoot_bm_personils', 'troubleshoot_bms.id', '=', 'troubleshoot_bm_personils.troubleshoot_bm_id')
+                ->join('troubleshoot_bm_fulls', 'troubleshoot_bms.id', '=', 'troubleshoot_bm_fulls.troubleshoot_bm_id')
+                ->where('troubleshoot_bm_personils.deleted_at', null)
+                ->select('troubleshoot_bm_personils.*', 'troubleshoot_bm_fulls.visit', 'troubleshoot_bm_fulls.leave', 'troubleshoot_bm_fulls.link', 'troubleshoot_bm_fulls.work');
+        return Datatables::of($full)
+            ->editColumn('visit', function ($full) {
+                return $full->visit ? with(new Carbon($full->visit))->format('d/m/Y') : '';
             })
             ->addColumn('action', 'other.troubleshootActionLink')
-            ->make(true);
-    }
-
-    public function other_troubleshoot_yajra_full_reject()
-    {
-        $getFull = DB::table('troubleshoot_bm_fulls')
-            ->select(['troubleshoot_bm_id', 'visit', 'note', 'work'])
-            ->where('note', '!=', null)
-            ->orderBy('visit', 'desc');
-        return Datatables::of($getFull)
-            ->editColumn('visit', function ($getFull) {
-                return $getFull->visit ? with(new Carbon($getFull->visit))->format('d/m/Y') : '';
-            })
             ->make(true);
     }
 
@@ -994,6 +1023,7 @@ class OtherController extends Controller
                 ->join('troubleshoot_bm_fulls', 'troubleshoot_bms.id', '=', 'troubleshoot_bm_fulls.troubleshoot_bm_id')
                 ->where('troubleshoot_bm_personils.checkout', null)
                 ->where('troubleshoot_bm_fulls.status', 'Full Approved')
+                ->where('troubleshoot_bm_personils.deleted_at', null)
                 ->select(
                     'troubleshoot_bm_fulls.visit',
                     'troubleshoot_bm_fulls.leave',

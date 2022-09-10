@@ -27,7 +27,7 @@ Route::middleware(['auth'])->group(function () {
 
     //Revisi personil ob
     Route::get('revisi/{type_view}', [HomeController::class, 'revisi_view']);
-    Route::post('/other_revisi', [RutinController::class, 'revisi']);
+    Route::post('/trevisi', [RutinController::class, 'revisi']);
     Route::get('/rev/{id}', [RutinController::class, 'other_revisi']);
 
 
@@ -246,7 +246,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('troubleshoot-pdf/{id}', 'troubleshoot_pdf')->name('troubleshootPDF');
         Route::get('other/troubleshoot/yajra/history', 'yajra_troubleshoot_history');
 
-        Route::get('other/troubleshoot/yajra/full/approval', 'other_troubleshoot_yajra_full_approval');
+        Route::get('other/troubleshoot/yajra/full/approval', 'troubleshoot_yajra_full_approval');
         Route::get('troubleshoot-yajra-full-visitor', 'troubleshoot_yajra_full_visitor')->name('troubleshootYajraFullVisitor');
         Route::get('other/troubleshoot/yajra/full/reject', 'other_troubleshoot_yajra_full_reject');
 
