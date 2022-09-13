@@ -8,7 +8,7 @@ use App\Models\{Other, OtherFull, OtherHistory, OtherPersonil, Rutin, Troublesho
 use App\Mail\{NotifMaintenanceForm, NotifMaintenanceFull, NotifMaintenanceReject, NotifTroubleshootForm, NotifTroubleshootFull, NotifTroubleshootReject};
 use Symfony\Component\HttpFoundation\Test\Constraint\ResponseFormatSame;
 use Yajra\Datatables\Datatables;
-use App\Exports\MaintenanceExport;
+use App\Exports\{MaintenanceExport, TroubleshootExport};
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
@@ -976,6 +976,14 @@ class OtherController extends Controller
             ->get();
         $pdf = PDF::loadview('other.troubleshoot_pdf', compact('getForm', 'getLastHistory', 'getHistory'))->setPaper('a4', 'portrait')->setWarnings(false);
         return $pdf->stream();
+    }
+
+
+
+
+    public function troubleshoot_export_full_approval()
+    {
+        return Excel::download(new TroubleshootExport, 'Troubleshoot Full Approval.xlsx');
     }
 
 

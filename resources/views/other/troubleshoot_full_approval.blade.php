@@ -5,7 +5,10 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-1">
         <div class="card-header py-3">
-            <h4 class="judul text-center">Full Approval Form Maintenance</h4>
+            <h4 class="judul text-center">Full Approval Form Troubleshoot</h4>
+        </div>
+        <div class="card-header py-3">
+            <a href="{{ route('troubleshootExportFullApproval')}}" type="button" class="btn btn-sm btn-success mx-1 my-1">Export</a>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -36,7 +39,7 @@
             $('#full_troubleshoot').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: '{{ url('/other/troubleshoot/yajra/full/approval')}}',
+                ajax: '{{ route('troubleshootYajraFullApproval')}}',
                 columns: [
                     { data: 'id', name: 'troubleshoot_bm_personils.id' },
                     { data: 'visit', name: 'troubleshoot_bm_fulls.visit' },
