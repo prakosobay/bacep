@@ -113,15 +113,29 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseColo"
-                    aria-expanded="true" aria-controls="collapseColo">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseInternal"
+                    aria-expanded="true" aria-controls="collapseInternal">
                     <i class="fas fa-fw fa-cog"></i>
-                    <span>Colocation</span>
+                    <span>Internal</span>
                 </a>
-                <div id="collapseColo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div id="collapseInternal" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Option :</h6>
                         <a class="collapse-item" href="{{ url('full/internal')}}">Internal</a>
+                        <a class="collapse-item" href="{{ url('#')}}">Consumable</a>
+                    </div>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsEksternal"
+                    aria-expanded="true" aria-controls="collapsEksternal">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Eksternal</span>
+                </a>
+                <div id="collapsEksternal" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Option :</h6>
                         <a class="collapse-item" href="{{ url('full/eksternal')}}">Eksternal</a>
                     </div>
                 </div>

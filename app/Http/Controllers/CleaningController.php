@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 use Barryvdh\DomPDF\Facade as PDF;
 use App\Mail\{NotifEmail, NotifReject, NotifFull};
-use App\Models\{User, Role, MasterOb, PilihanWork, Cleaning, CleaningHistory, CleaningFull, CleaningVisitor};
+use App\Models\{User, Role, MasterOb, PilihanWork, Cleaning, CleaningHistory, CleaningFull, CleaningVisitor, Penomoran};
 use phpDocumentor\Reflection\PseudoTypes\True_;
 use Yajra\Datatables\Datatables;
 use Carbon\Carbon;
@@ -83,19 +83,35 @@ class CleaningController extends Controller
         $data['cleaning_name2'] = MasterOb::find($data['cleaning_name2'])->nama;
         $data['cleaning_work'] = PilihanWork::find($data['cleaning_work'])->work;
 
+        $get = Penomoran::select('number')->latest()->first();
+        $i = $get + 1;
+        // dd($i);
+
         DB::beginTransaction();
 
         try {
+            // $ar = Penomoran::firstOrCreate([
+            //     'id' => Str::uuid(),
+            //     'kode' => 'AR',
+            //     'number' => $i,
+            //     'monthly' => date('m'),
+            //     'yearly' => date('Y'),
+            // ]);
+
+            // dd($ar);
 
             // Insert data yang diterima ke table Cleaning
             $cleaning = Cleaning::create($data);
+            // $getEmail = User::where('slug', 'approval')->get();
 
             // Send email notification
-            foreach ([
-                'bayu.prakoso@balitower.co.id'
-            ] as $recipient) {
-                Mail::to($recipient)->send(new NotifEmail($cleaning));
-            }
+            // foreach ([
+            //     'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
+            //     'ilham.pangestu@balitower.co.id', 'irwan.trisna@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id',
+            //     'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'dyah.retno@balitower.co.id',
+            // ] as $recipient) {
+            //     Mail::to($recipient)->send(new NotifEmail($cleaning));
+            // }
 
             $cleaningHistory = CleaningHistory::create([
                 'cleaning_id' => $cleaning->cleaning_id,
@@ -113,7 +129,6 @@ class CleaningController extends Controller
             DB::rollBack();
             throw $e;
         }
-
     }
 
     public function approve_cleaning(Request $request) // Flow Approval Permit Cleaning
@@ -149,25 +164,27 @@ class CleaningController extends Controller
                 $role_to = '';
                 if (($lasthistoryC->role_to == 'review')) {
                     foreach ([
-                        'bayu.prakoso@balitower.co.id',
+                        'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
+                        'ilham.pangestu@balitower.co.id', 'irwan.trisna@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id',
+                        'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id',
                     ] as $recipient) {
                         Mail::to($recipient)->send(new NotifEmail($cleaning));
                     }
                     $role_to = 'check';
                 } elseif (($lasthistoryC->role_to == 'check')) {
                     foreach ([
-                        'bayu.prakoso@balitower.co.id'
+                        'security.bacep@balitower.co.id',
                     ] as $recipient) {
                     Mail::to($recipient)->send(new NotifEmail($cleaning));
                     }
                     $role_to = 'security';
                 } elseif (($lasthistoryC->role_to == 'security')) {
-                    foreach (['bayu.prakoso@balitower.co.id'] as $recipient) {
+                    foreach (['bayu.prakoso@balitower.co.id', 'tofiq.hidayat@balitower.co.id'] as $recipient) {
                         Mail::to($recipient)->send(new NotifEmail($cleaning));
                     }
                     $role_to = 'head';
                 } elseif ($lasthistoryC->role_to == 'head') {
-                    foreach (['bayu.prakoso@balitower.co.id'] as $recipient) {
+                    foreach (['dc@balitower.co.id'] as $recipient) {
                         Mail::to($recipient)->send(new NotifFull($cleaning));
                     }
                     $role_to = 'all';
@@ -232,7 +249,7 @@ class CleaningController extends Controller
 
                 // Get permit yang di reject & kirim notif email
                 $cleaning = Cleaning::find($request->cleaning_id);
-                foreach (['bayu.prakoso@balitower.co.id'] as $recipient) {
+                foreach (['bayu.prakoso@balitower.co.id', 'badai.sino@balitower.co.id'] as $recipient) {
                     Mail::to($recipient)->send(new NotifReject($cleaning));
                 }
                 return $cleaningHistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);

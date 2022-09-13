@@ -116,16 +116,33 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseColo"
-                    aria-expanded="true" aria-controls="collapseColo">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseInternal"
+                    aria-expanded="true" aria-controls="collapseInternal">
                     <i class="fas fa-fw fa-cog"></i>
-                    <span>Colocation</span>
+                    <span>Internal</span>
                 </a>
-                <div id="collapseColo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div id="collapseInternal" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Option :</h6>
-                        <a class="collapse-item" href="{{ url('approval/internal')}}">Internal</a>
-                        <a class="collapse-item" href="{{ url('approval/eksternal')}}">Eksternal</a>
+                        <a class="collapse-item" href="{{ url('approval/internal')}}">AR CR Form</a>
+                        <a class="collapse-item" href="{{ url('#')}}">Consumable</a>
+                        <a class="collapse-item" href="{{ url('#')}}">Barang Masuk</a>
+                    </div>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEksternal"
+                    aria-expanded="true" aria-controls="collapseEksternal">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Eksternal</span>
+                </a>
+                <div id="collapseEksternal" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Option :</h6>
+                        <a class="collapse-item" href="{{ url('approval/eksternal')}}">AR CR Form</a>
+                        <a class="collapse-item" href="{{ url('#')}}">Consumable</a>
+                        <a class="collapse-item" href="{{ url('#')}}">Barang Masuk</a>
                     </div>
                 </div>
             </li>

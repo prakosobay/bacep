@@ -375,7 +375,7 @@ class AssetController extends Controller
 
     public function export_asset_keluar() // Export data barang keluar asset
     {
-        return Excel::download(new AssetkeluarExport, 'AssetKeluar.xlsx');
+        return Excel::download(new AssetKeluarExport, 'AssetKeluar.xlsx');
     }
 
 

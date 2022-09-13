@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{HomeController, CleaningController, AdminController};
 
+
+// v.1.2.0
 Route::get('/', function () {
     return view('auth.login');
 })->middleware('guest');
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/home', [HomeController::class, 'index']);
 
 

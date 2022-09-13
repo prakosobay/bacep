@@ -179,7 +179,7 @@
                 </tr>
                 <tr >
                     <td width="150px">Change Request Number: </td>
-                    <td >: {{$getOther->id}}</td>
+                    <td >: AR/{{ $getOther->penomoranAR->number }}/{{ $getOther->penomoranAR->monthly }}/{{ $getOther->penomoranAR->yearly }}</td>
                 </tr>
                 <tr >
                     <td width="150px">Purpose of Work</td>

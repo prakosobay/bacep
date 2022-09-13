@@ -113,34 +113,33 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseColo"
-                    aria-expanded="true" aria-controls="collapseColo">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Colocation</span>
-                </a>
-                <div id="collapseColo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Option :</h6>
-                        <a class="collapse-item" href="{{ url('history/internal')}}">Internal</a>
-                        <a class="collapse-item" href="{{ url('history/eksternal')}}">Eksternal</a>
-                    </div>
-                </div>
-            </li>
-
-            {{-- <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseInternal"
                     aria-expanded="true" aria-controls="collapseInternal">
                     <i class="fas fa-fw fa-cog"></i>
-                    <span>Permit Internal</span>
+                    <span>Internal</span>
                 </a>
                 <div id="collapseInternal" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Option :</h6>
-                        <a class="collapse-item" href="{{ url('history/internal')}}">Internal Colo</a>
-                        <a class="collapse-item" href="{{ url('order/internal')}}">Consumable Form</a>
+                        <a class="collapse-item" href="{{ url('history/internal')}}">AR CR Form</a>
+                        <a class="collapse-item" href="{{ url('#')}}">Consumable</a>
                     </div>
                 </div>
-            </li> --}}
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEksternal"
+                    aria-expanded="true" aria-controls="collapseEksternal">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Eksternal</span>
+                </a>
+                <div id="collapseEksternal" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Option :</h6>
+                        <a class="collapse-item" href="{{ url('history/eksternal')}}">Eksternal</a>
+                    </div>
+                </div>
+            </li>
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSurvey"
