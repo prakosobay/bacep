@@ -12,7 +12,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use Barryvdh\DomPDF\Facade as PDF;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Contracts\Encryption;
-use App\Models\{Internal, InternalEntry, InternalDetail, InternalRisk, InternalHistory, InternalFull, InternalVisitor, MasterCard};
+use App\Models\{Internal, InternalEntry, InternalDetail, InternalRisk, InternalHistory, InternalFull, InternalVisitor, MasterCard, PenomoranAR, PenomoranCR};
 use App\Mail\{NotifInternalForm, NotifInternalReject, NotifInternalFull};
 use Psy\Command\WhereamiCommand;
 
@@ -74,10 +74,8 @@ class InternalController extends Controller
     // Submit
     public function internal_create(Request $request)
     {
-        // dd($request->all());
         $getForm = $request->all();
-        // dd ($getForm);
-        $validated = $request->validate([
+        $request->validate([
             'work' => ['required'],
             'dc' => ['required_without_all:mmr1,mmr2,cctv,lain'],
             'visit' => ['required', 'after:yesterday'],
@@ -87,14 +85,55 @@ class InternalController extends Controller
             'rack' => ['required'],
         ]);
 
+        $ar = PenomoranAR::latest()->first();
+        $cr = PenomoranCR::latest()->first();
+
+        if((!$ar) && (!$cr)){
+
+            $i = 1;
+            $m = 1;
+        } elseif(($ar->number) && ($cr->number)){
+
+            $i = $ar->number + 1;
+            $m = $cr->number + 1;
+        }
+
+        if(isset($ar)){
+            // dd($i);
+            $lastYearAR = $ar->yearly;
+            $lastYearCR = $cr->yearly;
+            $currrentYear = date('Y');
+
+            if (( $currrentYear != $lastYearAR ) && ( $currrentYear != $lastYearCR )){
+                $i = 1;
+                $m = 1;
+            }
+        }
+
+        // dd($i);
+
         DB::beginTransaction();
 
         try {
 
+            $ar = PenomoranAR::create([
+                'id' => Str::uuid(),
+                'number' => $i,
+                'monthly' => date('m'),
+                'yearly' => date('Y'),
+            ]);
+
+            $cr = PenomoranCR::create([
+                'id' => Str::uuid(),
+                'number' => $m,
+                'monthly' => date('m'),
+                'yearly' => date('Y'),
+            ]);
+
             $insertForm = Internal::create([
-                'req_dept' => $getForm['req_dept'],
-                'req_name' => $getForm['req_name'],
-                'req_phone' => $getForm['req_phone'],
+                'requestor_id' => auth()->user()->id,
+                'penomoranar_id' => $ar->id,
+                'penomorancr_id' => $cr->id,
                 'work' => $getForm['work'],
                 'visit' => $getForm['visit'],
                 'leave' => $getForm['leave'],
@@ -103,12 +142,10 @@ class InternalController extends Controller
                 'testing' => $getForm['testing'],
                 'rollback' => $getForm['rollback'],
                 'rack' => $getForm['rack'],
-                'req_email' => Auth::user()->email,
             ]);
 
             InternalEntry::insert([
                 'internal_id' => $insertForm->id,
-                'req_dept' => $insertForm->req_dept,
                 'dc' => $request->dc,
                 'mmr1' => $request->mmr1,
                 'mmr2' => $request->mmr2,
@@ -125,7 +162,6 @@ class InternalController extends Controller
 
                     $insertArray = [
                         'internal_id' => $insertForm->id,
-                        'req_dept' => $insertForm->req_dept,
                         'time_start' => $getForm['time_start'][$k],
                         'time_end' => $getForm['time_end'][$k],
                         'activity' => $getForm['activity'][$k],
@@ -147,7 +183,6 @@ class InternalController extends Controller
 
                     $insertArray = [
                         'internal_id' => $insertForm->id,
-                        'req_dept' => $insertForm->req_dept,
                         'risk' => $getForm['risk'][$k],
                         'poss' => $getForm['poss'][$k],
                         'impact' => $getForm['impact'][$k],
@@ -168,10 +203,9 @@ class InternalController extends Controller
 
                     $insertArray = [
                         'internal_id' => $insertForm->id,
-                        'req_dept' => $insertForm->req_dept,
                         'name' => $getForm['name'][$k],
                         'phone' => $getForm['phone'][$k],
-                        'numberId' => $getForm['number'][$k],
+                        'nik' => $getForm['number'][$k],
                         'respon' => $getForm['respon'][$k],
                         'department' => $getForm['department'][$k],
                         'company' => $getForm['company'][$k],
@@ -184,18 +218,17 @@ class InternalController extends Controller
             }
             InternalVisitor::insert($arrayVisitor);
 
-            $notif_email = Internal::find($insertForm->id);
-            foreach ([
-                'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
-                'ilham.pangestu@balitower.co.id', 'irwan.trisna@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id',
-            ] as $recipient) {
-                Mail::to($recipient)->send(new NotifInternalForm($notif_email));
-            }
+            // $notif_email = Internal::find($insertForm->id);
+            // foreach ([
+            //     'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
+            //     'ilham.pangestu@balitower.co.id', 'irwan.trisna@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id',
+            // ] as $recipient) {
+            //     Mail::to($recipient)->send(new NotifInternalForm($notif_email));
+            // }
 
             InternalHistory::insert([
                 'internal_id' => $insertForm->id,
-                'req_dept' => $insertForm->req_dept,
-                'created_by' => Auth::user()->name,
+                'created_by' => Auth::user()->id,
                 'role_to' => 'review',
                 'status' => 'requested',
                 'aktif' => true,
@@ -223,13 +256,10 @@ class InternalController extends Controller
         $getLastHistory = InternalHistory::where('internal_id', $id)->where('aktif', 1)->first();
         $getLastHistory->update(['pdf' => true]);
 
-        // $getHistory = DB::table('internal_histories')
-        //     ->join('internals', 'internals.id', '=', 'internal_histories.internal_id')
-        //     ->where('internal_histories.internal_id', $id)
-        //     ->select('internal_histories.*')
-        //     ->get();
-
-        $getHistory = InternalHistory::where('internal_id', $id)->select('internal_histories.*')->get();
+        $getHistory = InternalHistory::where('internal_id', $id)
+                ->join('users', 'users.id', '=', 'internal_histories.created_by')
+                ->select('internal_histories.*', 'users.name')
+                ->get();
 
         $pdf = PDF::loadview('internal.pdf', compact('getForm', 'getLastHistory', 'getHistory'))->setPaper('a4', 'portrait')->setWarnings(false);
         return $pdf->stream();
@@ -519,7 +549,8 @@ class InternalController extends Controller
     {
         $history = DB::table('internal_histories')
             ->join('internals', 'internals.id', '=', 'internal_histories.internal_id')
-            ->select('internal_histories.role_to', 'internal_histories.status', 'internal_histories.created_by', 'internal_histories.aktif', 'internals.visit', 'internals.id', 'internals.req_dept');
+            ->join('users', 'users.id', '=', 'internal_histories.created_by')
+            ->select('internal_histories.*','internals.visit', 'users.name');
         return Datatables::of($history)
             ->editColumn('visit', function ($history) {
                 return $history->visit ? with(new Carbon($history->visit))->format('d/m/Y') : '';
@@ -547,13 +578,13 @@ class InternalController extends Controller
         $full = DB::table('internals')
             ->join('internal_visitors', 'internals.id', '=', 'internal_visitors.internal_id')
             ->join('internal_fulls', 'internals.id', '=', 'internal_fulls.internal_id')
-            // ->join('m_cards', 'm_cards.id', '=', 'internals.card_number')
+            ->join('m_cards', 'internals.card_id', '=', 'internals.card_id')
+            ->join('users', 'users.id', '=', 'internals.requestor_id')
             ->where([
-                ['internals.req_dept', $dept],
                 ['internal_fulls.status', 'Full Approved'],
                 ['internal_visitors.checkout', null],
             ])
-            ->select('internals.work', 'internals.visit', 'internals.leave', 'internals.req_name', 'internal_visitors.name', 'internal_visitors.checkin', 'internal_visitors.checkout', 'internal_visitors.id', 'internals.card_number');
+            ->select('internals.work', 'internals.visit', 'internals.leave', 'internal_visitors.name', 'internal_visitors.checkin', 'internal_visitors.checkout', 'internal_visitors.id', 'm_cards.number');
         return Datatables::of($full)
             ->editColumn('visit', function ($full) {
                 return $full->visit ? with(new Carbon($full->visit))->format('d/m/Y') : '';

@@ -16,7 +16,6 @@ class CreateInternalEntriesTable extends Migration
         Schema::create('internal_entries', function (Blueprint $table) {
             $table->id();
             $table->foreignId('internal_id');
-            $table->string('req_dept');
             $table->boolean('dc', false)->nullable();
             $table->boolean('mmr1', false)->nullable();
             $table->boolean('mmr2', false)->nullable();

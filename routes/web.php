@@ -11,7 +11,7 @@ Route::get('/', function () {
     return view('auth.login');
 })->middleware('guest');
 
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::get('/home', [HomeController::class, 'index']);
 
     //Detail History
@@ -321,6 +321,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('internal/getVisitor/{id}', 'getVisitor');
 
         Route::get('internal/yajra/show/{dept}', 'internal_yajra_show');
+        Route::get('internal-yajra-history', 'internal_yajra_history')->name('internalYajraHistory');
         Route::get('internal/yajra/finished/{dept}', 'internal_yajra_finished');
         Route::get('internal/yajra/last/form/{dept}', 'internal_yajra_last_form');
 

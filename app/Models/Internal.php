@@ -44,6 +44,21 @@ class Internal extends Model
 
     public function card()
     {
-        return $this->belongsTo(MasterCard::class, 'card_number');
+        return $this->belongsTo(MasterCard::class, 'card_id');
+    }
+
+    public function requestor()
+    {
+        return $this->belongsTo(User::class, 'requestor_id');
+    }
+
+    public function penomoranAR()
+    {
+        return $this->belongsTo(PenomoranAR::class, 'penomoranar_id');
+    }
+
+    public function penomoranCR()
+    {
+        return $this->belongsTo(PenomoranCR::class, 'penomorancr_id');
     }
 }

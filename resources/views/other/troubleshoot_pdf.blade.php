@@ -179,7 +179,7 @@
                 </tr>
                 <tr >
                     <td width="150px">Change Request Number: </td>
-                    <td >: {{$getForm->id}}</td>
+                    <td >: AR/{{ $getForm->penomoranAR->number }}/{{ $getForm->penomoranAR->monthly }}/{{ $getForm->penomoranAR->yearly }}</td>
                 </tr>
                 <tr >
                     <td width="150px">Purpose of Work</td>
@@ -473,7 +473,7 @@
                 </tr>
             </table>
 
-            <p class="cr">Change Request Number : </p>
+            <p class="cr">Change Request Number : CR/{{ $getForm->penomoranCR->number }}/{{ $getForm->penomoranCR->monthly }}/{{ $getForm->penomoranCR->yearly }}</p>
 
             {{-- Background & Description --}}
             <table cellpadding="2" class="table table-background">

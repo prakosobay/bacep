@@ -176,7 +176,7 @@
                     { data: 'name', name: 'internal_visitors.name' },
                     { data: 'checkin', name: 'internal_visitors.checkin' },
                     { data: 'checkout', name: 'internal_visitors.checkout' },
-                    { data: 'card_number', name: 'internals.card_number' },
+                    { data: 'card_id', name: 'internals.card_id' },
                     { data: 'action', name: 'action', orderable: false, searchable: false }
                 ]
             });

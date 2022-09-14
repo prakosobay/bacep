@@ -19,8 +19,8 @@ class CreateInternalDetailsTable extends Migration
             $table->time('time_start');
             $table->time('time_end');
             $table->string('activity');
-            $table->string('service_impact');
             $table->string('item');
+            $table->string('service_impact');
             $table->timestamps();
         });
     }

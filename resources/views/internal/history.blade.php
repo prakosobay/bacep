@@ -5,7 +5,7 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h4 class="judul text-center">Log Form Colocation</h4>
+            <h4 class="judul text-center">Log Form Internal</h4>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -13,10 +13,12 @@
                     <thead>
                         <tr class="judul-table text-center">
                             <th>ID Permit</th>
-                            <th>Validity</th>
-                            <th>Role</th>
+                            <th>Date of Visit</th>
                             <th>Status</th>
+                            <th>By</th>
+                            <th>Updated</th>
                             <th>Ket</th>
+                            <th>Role</th>
                         </tr>
                     </thead>
                     <tbody class="isi-table text-center">
@@ -33,13 +35,15 @@
             $('#history').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: '{{ url('colo/yajra/history')}}',
+                ajax: '{{ route('internalYajraHistory')}}',
                 columns: [
-                    { data: 'id', name: 'id' },
-                    { data: 'visit', name: 'colos.visit' },
-                    { data: 'role_to', name: 'role_to' },
+                    { data: 'id', name: 'internal_histories.id' },
+                    { data: 'visit', name: 'internals.visit' },
                     { data: 'status', name: 'status' },
+                    { data: 'name', name: 'users.name' },
+                    { data: 'updated_at', name: 'updated_at' },
                     { data: 'aktif', name: 'aktif' },
+                    { data: 'role_to', name: 'role_to' },
                 ]
             });
         });

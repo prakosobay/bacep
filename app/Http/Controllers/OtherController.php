@@ -896,7 +896,7 @@ class OtherController extends Controller
 
     public function troubleshoot_reject(Request $request) // Reject permit troubleshoot
     {
-        dd($request->all());
+        // dd($request->all());
         $lastupdate = TroubleshootBmHistory::where('troubleshoot_bm_id', '=', $request->id)->latest()->first();
         if ($lastupdate->pdf == false) {
             return back()->with('failed', 'Failed');

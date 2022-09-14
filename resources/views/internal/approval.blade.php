@@ -62,7 +62,7 @@
                         <tr>
                             <td>{{ $p->internal->id }}</td>
                             <td>{{ Carbon\Carbon::parse($p->internal->created_at)->format('d-m-Y') }}</td>
-                            <td>{{ $p->internal->req_dept }}</td>
+                            <td>{{ $p->createdBy->department }}</td>
                             <td>{{ Carbon\Carbon::parse($p->internal->visit)->format('d-m-Y') }}</td>
                             <td>{{ Carbon\Carbon::parse($p->internal->leave)->format('d-m-Y') }}</td>
                             <td>{{ $p->internal->work }}</td>

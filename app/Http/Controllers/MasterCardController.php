@@ -22,19 +22,53 @@ class MasterCardController extends Controller
         if (Gate::allows('isAdmin')) {
             $request->validate([
                 'number' => ['required', 'numeric'],
+                'type' => ['required', 'string', 'max:255'],
             ]);
 
             DB::beginTransaction();
 
             try {
+
                 MasterCard::create([
                     'number' => $request->number,
-                    'created_by' => auth()->user()->id,
-                    'updated_by' => auth()->user()->id,
+                    'type' => $request->type,
+                    // 'created_by' => auth()->user()->id,
+                    // 'updated_by' => auth()->user()->id,
                 ]);
 
                 DB::commit();
                 return back()->with('success', 'Successfully');
+            } catch (\Exception $e) {
+                DB::rollBack();
+                throw $e;
+            }
+        } else {
+            abort(403);
+        }
+    }
+
+    public function update(Request $request, $id)
+    {
+        if(Gate::allows('isAdmin')) {
+
+            $request->validate([
+                'number' => ['required', 'numeric'],
+                'type' => ['required', 'string', 'max:255'],
+            ]);
+
+            DB::beginTransaction();
+
+            try {
+
+                $getCard = MasterCard::findOrFail($id);
+                $getCard->update([
+                    'number' => $request->number,
+                    'type' => $request->type,
+                ]);
+
+                DB::commit();
+
+                return back()->with('success', 'Success');
             } catch (\Exception $e) {
                 DB::rollBack();
                 throw $e;
