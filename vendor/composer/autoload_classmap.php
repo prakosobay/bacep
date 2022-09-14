@@ -99,7 +99,6 @@ return array(
     'App\\Models\\OtherFull' => $baseDir . '/app/Models/OtherFull.php',
     'App\\Models\\OtherHistory' => $baseDir . '/app/Models/OtherHistory.php',
     'App\\Models\\OtherPersonil' => $baseDir . '/app/Models/OtherPersonil.php',
-    'App\\Models\\Penomoran' => $baseDir . '/app/Models/Penomoran.php',
     'App\\Models\\PenomoranAR' => $baseDir . '/app/Models/PenomoranAR.php',
     'App\\Models\\PenomoranCR' => $baseDir . '/app/Models/PenomoranCR.php',
     'App\\Models\\PilihanWork' => $baseDir . '/app/Models/PilihanWork.php',

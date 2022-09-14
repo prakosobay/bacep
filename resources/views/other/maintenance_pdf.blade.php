@@ -486,7 +486,7 @@
                 </tr>
             </table>
 
-            <p class="cr">Change Request Number : </p>
+            <p class="cr">Change Request Number : CR/{{ $getOther->penomoranCR->number }}/{{ $getOther->penomoranCR->monthly }}/{{ $getOther->penomoranCR->yearly }} </p>
 
             {{-- Background & Description --}}
             <table cellpadding="2" class="table table-background">

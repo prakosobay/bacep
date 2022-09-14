@@ -20,6 +20,8 @@ class Cleaning extends Model
 
     protected $fillable = [
         'cleaning_id',
+        'penomoranar_id',
+        'penomorancr_id',
         'cleaning_work',
         'loc1',
         'loc2',
@@ -114,5 +116,15 @@ class Cleaning extends Model
     public function full()
     {
         return $this->hasOne(CleaningFull::class);
+    }
+
+    public function penomoranAR()
+    {
+        return $this->belongsTo(PenomoranAR::class, 'penomoranar_id');
+    }
+
+    public function penomoranCR()
+    {
+        return $this->belongsTo(PenomoranCR::class, 'penomorancr_id');
     }
 }

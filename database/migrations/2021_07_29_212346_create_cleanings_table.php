@@ -15,6 +15,8 @@ class CreateCleaningsTable extends Migration
     {
         Schema::create('cleanings', function (Blueprint $table) {
             $table->bigIncrements('cleaning_id')->unique();
+            $table->foreignUuid('penomoranar_id');
+            $table->foreignUuid('penomorancr_id');
             $table->string('cleaning_work');
             $table->string('loc1', 50);
             $table->string('loc2', 50)->nullable();

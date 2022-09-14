@@ -15,6 +15,8 @@ class CreateOthersTable extends Migration
     {
         Schema::create('others', function (Blueprint $table) {
             $table->id();
+            $table->foreignUuid('penomoranar_id');
+            $table->foreignUuid('penomorancr_id');
             $table->string('work');
             $table->date('visit');
             $table->date('leave');

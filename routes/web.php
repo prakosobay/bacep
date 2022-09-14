@@ -14,7 +14,6 @@ Route::get('/', function () {
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/home', [HomeController::class, 'index']);
 
-
     //Detail History
     Route::get('/detail_cleaning/{id}', [CleaningController::class, 'detail_permit_cleaning']);
 

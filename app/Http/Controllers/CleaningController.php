@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 use Barryvdh\DomPDF\Facade as PDF;
 use App\Mail\{NotifEmail, NotifReject, NotifFull};
-use App\Models\{User, Role, MasterOb, PilihanWork, Cleaning, CleaningHistory, CleaningFull, CleaningVisitor, Penomoran};
+use App\Models\{User, Role, MasterOb, PilihanWork, Cleaning, CleaningHistory, CleaningFull, PenomoranAR, PenomoranCR};
 use phpDocumentor\Reflection\PseudoTypes\True_;
 use Yajra\Datatables\Datatables;
 use Carbon\Carbon;
@@ -77,31 +77,82 @@ class CleaningController extends Controller
     public function submit_data_cleaning(Request $request) // Submit form cleaning
     {
         $data = $request->all();
+        // dd($data);
 
         // Convert id work & id nama
         $data['cleaning_name'] = MasterOb::find($data['cleaning_name'])->nama;
         $data['cleaning_name2'] = MasterOb::find($data['cleaning_name2'])->nama;
         $data['cleaning_work'] = PilihanWork::find($data['cleaning_work'])->work;
 
-        $get = Penomoran::select('number')->latest()->first();
-        $i = $get + 1;
+        $ar = PenomoranAR::latest()->first();
+        $cr = PenomoranCR::latest()->first();
+        // dd($ar->yearly);
+
+        if((!$ar) && (!$cr)){
+
+            $i = 1;
+            $k = 1;
+        } elseif(($ar->number) && ($cr->number)){
+
+            $i = $ar->number + 1;
+            $k = $cr->number + 1;
+        }
+
+        if(isset($ar)){
+            // dd($i);
+            $lastYearAR = $ar->yearly;
+            $lastYearCR = $cr->yearly;
+            $currrentYear = date('Y');
+
+            if (( $currrentYear != $lastYearAR ) && ( $currrentYear != $lastYearCR )){
+                $i = 1;
+                $k = 1;
+            }
+        }
+
         // dd($i);
 
         DB::beginTransaction();
 
         try {
-            // $ar = Penomoran::firstOrCreate([
-            //     'id' => Str::uuid(),
-            //     'kode' => 'AR',
-            //     'number' => $i,
-            //     'monthly' => date('m'),
-            //     'yearly' => date('Y'),
-            // ]);
 
-            // dd($ar);
+            $ar = PenomoranAR::create([
+                'id' => Str::uuid(),
+                'number' => $i,
+                'monthly' => date('m'),
+                'yearly' => date('Y'),
+            ]);
+
+            $cr = PenomoranCR::create([
+                'id' => Str::uuid(),
+                'number' => $k,
+                'monthly' => date('m'),
+                'yearly' => date('Y'),
+            ]);
 
             // Insert data yang diterima ke table Cleaning
             $cleaning = Cleaning::create($data);
+
+            $updated = Cleaning::findOrFail($cleaning->cleaning_id);
+            // dd($updated);
+            $updated->update([
+                'penomoranar_id' => $ar->id,
+                'penomorancr_id' => $cr->id,
+            ]);
+
+            // $cleaning = Cleaning::create([
+            //     'penomoranar_id' => $i,
+            //     'penomorancr_id' => $k,
+            //     'cleaning_work' => $data['cleaning_work'],
+            //     'loc1' => $data['loc1'],
+            //     'loc2' => $data['loc2'],
+            //     'loc3' => $data['loc3'],
+            //     'loc4' => $data['loc4'],
+            //     'loc5' => $data['loc5'],
+            //     'loc6' => $data['loc6'],
+            //     'cleaning_time_start'
+            // ]);
+
             // $getEmail = User::where('slug', 'approval')->get();
 
             // Send email notification

@@ -69,8 +69,8 @@ class OtherController extends Controller
             'time_end_1' => ['required'],
         ]);
 
-        $ar = PenomoranAR::select('number')->latest()->first();
-        $cr = PenomoranCR::select('number')->latest()->first();
+        $ar = PenomoranAR::latest()->first();
+        $cr = PenomoranCR::latest()->first();
 
         if((!$ar) && (!$cr)){
 
@@ -82,18 +82,30 @@ class OtherController extends Controller
             $k = $cr->number + 1;
         }
 
+        if(isset($ar)){
+            // dd($i);
+            $lastYearAR = $ar->yearly;
+            $lastYearCR = $cr->yearly;
+            $currrentYear = date('Y');
+
+            if (( $currrentYear != $lastYearAR ) && ( $currrentYear != $lastYearCR )){
+                $i = 1;
+                $k = 1;
+            }
+        }
+
         DB::beginTransaction();
 
         try {
 
-            $ar = PenomoranAR::firstOrCreate([
+            $ar = PenomoranAR::create([
                 'id' => Str::uuid(),
                 'number' => $i,
                 'monthly' => date('m'),
                 'yearly' => date('Y'),
             ]);
 
-            $cr = PenomoranCR::firstOrCreate([
+            $cr = PenomoranCR::create([
                 'id' => Str::uuid(),
                 'number' => $k,
                 'monthly' => date('m'),
@@ -221,7 +233,6 @@ class OtherController extends Controller
             DB::commit();
 
             return $log ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
-
         } catch (\Exception $e) {
             DB::rollBack();
             throw $e;
@@ -628,12 +639,54 @@ class OtherController extends Controller
             'rollback' => ['nullable', 'max:255'],
         ]);
 
+        $ar = PenomoranAR::latest()->first();
+        $cr = PenomoranCR::latest()->first();
+        // dd($ar->yearly);
+
+        if((!$ar) && (!$cr)){
+
+            $i = 1;
+            $l= 1;
+        } elseif(($ar->number) && ($cr->number)){
+
+            $i = $ar->number + 1;
+            $l= $cr->number + 1;
+        }
+
+        if(isset($ar)){
+            // dd($i);
+            $lastYearAR = $ar->yearly;
+            $lastYearCR = $cr->yearly;
+            $currrentYear = date('Y');
+
+            if (( $currrentYear != $lastYearAR ) && ( $currrentYear != $lastYearCR )){
+                $i = 1;
+                $l= 1;
+            }
+        }
+
         DB::beginTransaction();
 
         try {
 
+            $ar = PenomoranAR::create([
+                'id' => Str::uuid(),
+                'number' => $i,
+                'monthly' => date('m'),
+                'yearly' => date('Y'),
+            ]);
+
+            $cr = PenomoranCR::create([
+                'id' => Str::uuid(),
+                'number' => $l,
+                'monthly' => date('m'),
+                'yearly' => date('Y'),
+            ]);
+
             $input = $request->all();
             $other_form = TroubleshootBm::create([
+                'penomoranar_id' => $ar->id,
+                'penomorancr_id' => $cr->id,
                 'work' => $input['work'],
                 'visit' => $input['visit'],
                 'leave' => $input['leave'],

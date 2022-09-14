@@ -24,4 +24,19 @@ class PenomoranAR extends Model
     {
         return $this->hasOne(Other::class, 'penomoranar_id');
     }
+
+    public function troubleshoot()
+    {
+        return $this->hasOne(TroubleshootBm::class, 'penomoranar_id');
+    }
+
+    public function internal()
+    {
+        return $this->hasOne(Internal::class, 'penomoranar_id');
+    }
+
+    public function survey()
+    {
+        return $this->hasOne(Survey::class, 'penomoranar_id');
+    }
 }

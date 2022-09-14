@@ -41,4 +41,14 @@ class TroubleshootBm extends Model
     {
         return $this->hasOne(TroubleshootBmEntry::class);
     }
+
+    public function penomoranAR()
+    {
+        return $this->belongsTo(PenomoranAR::class, 'penomoranar_id');
+    }
+
+    public function penomoranCR()
+    {
+        return $this->belongsTo(PenomoranCR::class, 'penomorancr_id');
+    }
 }

@@ -177,7 +177,7 @@
                 </tr>
                 <tr >
                     <td width="150px">Change Request Number: </td>
-                    <td >: {{$cleaning->cleaning_id}}</td>
+                    <td >: AR/{{ $cleaning->penomoranAR->number }}/{{ $cleaning->penomoranAR->monthly }}/{{ $cleaning->penomoranAR->yearly }}</td>
                 </tr>
                 <tr >
                     <td width="150px">Purpose of Work</td>
@@ -483,7 +483,7 @@
                 </tr>
             </table>
 
-            <p class="cr">Change Request Number : </p>
+            <p class="cr">Change Request Number : CR/{{ $cleaning->penomoranCR->number }}/{{ $cleaning->penomoranCR->monthly }}/{{ $cleaning->penomoranCR->yearly }}</p>
 
             <table cellpadding="2" class="table table-background">
                 <tr >

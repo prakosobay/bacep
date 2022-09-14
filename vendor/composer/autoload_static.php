@@ -725,7 +725,6 @@ class ComposerStaticInit582140f03abb5abd5ed2c14fd376fb64
         'App\\Models\\OtherFull' => __DIR__ . '/../..' . '/app/Models/OtherFull.php',
         'App\\Models\\OtherHistory' => __DIR__ . '/../..' . '/app/Models/OtherHistory.php',
         'App\\Models\\OtherPersonil' => __DIR__ . '/../..' . '/app/Models/OtherPersonil.php',
-        'App\\Models\\Penomoran' => __DIR__ . '/../..' . '/app/Models/Penomoran.php',
         'App\\Models\\PenomoranAR' => __DIR__ . '/../..' . '/app/Models/PenomoranAR.php',
         'App\\Models\\PenomoranCR' => __DIR__ . '/../..' . '/app/Models/PenomoranCR.php',
         'App\\Models\\PilihanWork' => __DIR__ . '/../..' . '/app/Models/PilihanWork.php',
