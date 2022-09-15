@@ -299,33 +299,33 @@ class InternalController extends Controller
             // Pergantian  role tiap permit & send email notif
             $role_to = '';
             if ($last_update->role_to == 'review') {
-                foreach ([
-                    'bayu.prakoso@balitower.co.id',
-                ] as $recipient) {
-                    Mail::to($recipient)->send(new NotifInternalForm($notif_email));
-                }
+                // foreach ([
+                //     'bayu.prakoso@balitower.co.id',
+                // ] as $recipient) {
+                //     Mail::to($recipient)->send(new NotifInternalForm($notif_email));
+                // }
                 $role_to = 'check';
             } elseif ($last_update->role_to == 'check') {
-                foreach ([
-                    'bayu.prakoso@balitower.co.id',
-                ] as $recipient) {
-                    Mail::to($recipient)->send(new NotifInternalForm($notif_email));
-                }
+                // foreach ([
+                //     'bayu.prakoso@balitower.co.id',
+                // ] as $recipient) {
+                //     Mail::to($recipient)->send(new NotifInternalForm($notif_email));
+                // }
                 $role_to = 'security';
             } elseif ($last_update->role_to == 'security') {
-                foreach ([
-                    'bayu.prakoso@balitower.co.id',
-                ] as $recipient) {
-                    Mail::to($recipient)->send(new NotifInternalForm($notif_email));
-                }
+                // foreach ([
+                //     'bayu.prakoso@balitower.co.id',
+                // ] as $recipient) {
+                //     Mail::to($recipient)->send(new NotifInternalForm($notif_email));
+                // }
                 $role_to = 'head';
             } elseif ($last_update->role_to = 'head') {
                 $full = Internal::find($id);
-                foreach ([
-                    'bayu.prakoso@balitower.co.id',
-                ] as $recipient) {
-                    Mail::to($recipient)->send(new NotifInternalFull($full));
-                }
+                // foreach ([
+                //     'bayu.prakoso@balitower.co.id',
+                // ] as $recipient) {
+                //     Mail::to($recipient)->send(new NotifInternalFull($full));
+                // }
                 $role_to = 'all';
 
                 $full = Internal::findOrFail($id);
@@ -477,7 +477,6 @@ class InternalController extends Controller
 
 
 
-
     // Reject
     public function internal_reject(Request $request, $id)
     {
@@ -488,8 +487,6 @@ class InternalController extends Controller
             try {
                 $lastUpdate = InternalHistory::where('internal_id', $id)->latest()->first();
                 $getForm = Internal::findOrFail($id);
-
-                // dd($getForm);
 
                 $request->validate([
                     'note' => ['required'],
@@ -514,7 +511,7 @@ class InternalController extends Controller
                     ]);
 
                     // Get permit yang di reject & kirim notif email
-                    Mail::to($getForm->req_email)->send(new NotifInternalReject($getForm));
+                    // Mail::to($getForm->req_email)->send(new NotifInternalReject($getForm));
 
                     DB::commit();
 
@@ -534,13 +531,11 @@ class InternalController extends Controller
 
 
 
-
     // Export
     public function export_full_approve()
     {
         return Excel::download(new InternalExport, 'Full Approve Internal.xlsx');
     }
-
 
 
 

@@ -21,8 +21,8 @@ class ConsumMasuk extends Model
         'pencatat'
     ];
 
-    public function masuk()
+    public function consum()
     {
-        return $this->belongsTo(Consum::class);
+        return $this->belongsTo(Consum::class, 'consum_id');
     }
 }

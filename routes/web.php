@@ -61,8 +61,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::controller(MasterRoomController::class)->group(function () {
         Route::get('room/table', 'table')->name('room');
-        Route::get('room/yajra', 'yajra');
-        Route::post('room/store', 'store');
+        Route::get('room-yajra', 'yajra')->name('roomYajra');
+
+        Route::post('room-store', 'store')->name('roomStore');
         Route::post('room/update', 'update');
         Route::post('room/delete/{id}', 'delete');
     });
@@ -330,6 +331,17 @@ Route::middleware(['auth'])->group(function () {
         Route::post('internal/reject/{id}', 'internal_reject');
 
         Route::get('internal-export-full-approve', 'export_full_approve')->name('internalExportFullApprove');
+    });
+
+
+
+    //Eksternal
+    Route::controller(EksternalController::class)->group(function(){
+        Route::get('dashboard-eksternal', 'dashboard')->name('dashboardEksternal');
+        Route::get('eksternal-show-form', 'show_form')->name('eksternalShowForm');
+
+
+        Route::post('eksternal-store', 'store')->name('eksternalStore');
     });
 
 

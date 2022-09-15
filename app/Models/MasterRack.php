@@ -16,17 +16,22 @@ class MasterRack extends Model
 
     public function room()
     {
-        return $this->belongsTo(MasterRoom::class);
+        return $this->belongsTo(MasterRoom::class, 'm_room_id');
     }
 
-    public function user()
+    public function createdBy()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'created_by');
+    }
+
+    public function updatedBy()
+    {
+        return $this->belongsTo(User::class, 'updated_at');
     }
 
     public function company()
     {
-        return $this->belongsTo(MasterCompany::class);
+        return $this->belongsTo(MasterCompany::class, 'm_company_id');
     }
 
     public function colos()

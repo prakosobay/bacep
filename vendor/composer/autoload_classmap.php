@@ -82,6 +82,7 @@ return array(
     'App\\Models\\Consum' => $baseDir . '/app/Models/Consum.php',
     'App\\Models\\ConsumKeluar' => $baseDir . '/app/Models/ConsumKeluar.php',
     'App\\Models\\ConsumMasuk' => $baseDir . '/app/Models/ConsumMasuk.php',
+    'App\\Models\\Eksternal' => $baseDir . '/app/Models/Eksternal.php',
     'App\\Models\\Genset' => $baseDir . '/app/Models/Genset.php',
     'App\\Models\\Internal' => $baseDir . '/app/Models/Internal.php',
     'App\\Models\\InternalDetail' => $baseDir . '/app/Models/InternalDetail.php',

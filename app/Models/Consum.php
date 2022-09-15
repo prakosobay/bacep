@@ -22,4 +22,15 @@ class Consum extends Model
         'id',
         'lokasi',
     ];
+
+    public function consumKeluars()
+    {
+        return $this->hasMany(ConsumKeluar::class);
+    }
+
+    public function consumMasuks()
+    {
+        return $this->hasMany(ConsumMasuk::class);
+    }
+
 }

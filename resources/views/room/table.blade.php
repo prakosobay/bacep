@@ -24,7 +24,7 @@
             {{-- Modal New User --}}
             <div class="modal fade" id="user" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
-                    <form method="post" action="{{ url('room/store')}}">
+                    <form method="post" action="{{ route('roomStore')}}">
                         @csrf
                         <div class="modal-content">
                             <div class="modal-header">
@@ -34,10 +34,6 @@
                                 <label><b>Name :</b></label>
                                 <div class="form-group">
                                     <input id="new" type="text" class="form-control" name="name" required autofocus>
-                                </div>
-                                <label><b>Created By :</b></label>
-                                <div class="form-group">
-                                    <input id="created" type="text" class="form-control" name="created_by" value="{{auth()->user()->name}}" required readonly>
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -57,7 +53,7 @@
                             <th>ID Room</th>
                             <th>Name</th>
                             <th>Created By</th>
-                            <th>Updated By</th>
+                            {{-- <th>Updated By</th> --}}
                             <th>Created At</th>
                             <th>Updated At</th>
                             {{-- <th>Action</th> --}}
@@ -74,12 +70,12 @@
         $('#roomTable').DataTable({
             processing: true,
             serverSide: true,
-            ajax: '{{ url('room/yajra')}}',
+            ajax: '{{ route('roomYajra')}}',
             columns: [
                 { data: 'id', name: 'id' },
-                { data: 'name', name: 'name' },
-                { data: 'created_by', name: 'created_by' },
-                { data: 'updated_by', name: 'updated_by' },
+                { data: 'name', name: 'm_rooms.name' },
+                { data: 'name', name: 'users.name' },
+                // { data: 'updated_by', name: 'users.name' },
                 { data: 'created_at', name: 'created_at' },
                 { data: 'updated_at', name: 'updated_at' },
                 // {data: 'action', name: 'action', orderable: false, searchable: false}

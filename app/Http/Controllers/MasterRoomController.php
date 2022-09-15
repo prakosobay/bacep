@@ -12,21 +12,17 @@ class MasterRoomController extends Controller
 {
     public function store(Request $request)
     {
-
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'created_by' => ['required'],
         ]);
-
-        $getUser = User::where('name', $request->created_by)->first();
 
         DB::beginTransaction();
 
         try {
             MasterRoom::create([
                 'name' => $request->name,
-                'created_by' => $getUser->id,
-                'updated_by' => $getUser->id,
+                'created_by' => auth()->user()->id,
+                'updated_by' => auth()->user()->id,
             ]);
 
             DB::commit();
@@ -39,10 +35,8 @@ class MasterRoomController extends Controller
 
     public function update(Request $request, $id)
     {
-        dd($id);
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'updated_by' => ['required'],
         ]);
 
         DB::beginTransaction();
@@ -51,7 +45,7 @@ class MasterRoomController extends Controller
             $updateRoom = MasterRoom::findOrFail($id);
             $updateRoom->update([
                 'name' => $request->name,
-                'updated_by' => $request->updated_by,
+                'updated_by' => auth()->user()->id,
             ]);
 
             DB::commit();
@@ -88,16 +82,18 @@ class MasterRoomController extends Controller
     public function yajra()
     {
         $getRooms = DB::table('m_rooms')
-                ->select('m_rooms.id', 'm_rooms.name', 'm_rooms.created_by', 'm_rooms.updated_by', 'm_rooms.created_at', 'm_rooms.updated_at');
-                return Datatables::of($getRooms)
-                ->editColumn('created_at', function ($getRooms) {
-                    return $getRooms->created_at ? with(new Carbon($getRooms->created_at))->format('d/m/Y') : '';
-                })
-                ->editColumn('updated_at', function ($getRooms) {
-                    return $getRooms->updated_at ? with(new Carbon($getRooms->updated_at))->format('d/m/Y') : '';
-                })
-                // ->addColumn('room.actionEdit')
-                ->make(true);
+            ->join('users', 'users.id', '=', 'm_rooms.created_by')
+            // ->join('users', 'users.id', '=', 'm_rooms.updated_by')
+            ->select('m_rooms.id', 'm_rooms.name', 'users.name', 'm_rooms.created_at', 'm_rooms.updated_at');
+        return Datatables::of($getRooms)
+            ->editColumn('created_at', function ($getRooms) {
+                return $getRooms->created_at ? with(new Carbon($getRooms->created_at))->format('d/m/Y') : '';
+            })
+            ->editColumn('updated_at', function ($getRooms) {
+                return $getRooms->updated_at ? with(new Carbon($getRooms->updated_at))->format('d/m/Y') : '';
+            })
+            // ->addColumn('room.actionEdit')
+            ->make(true);
 
     }
 }

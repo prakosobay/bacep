@@ -57,7 +57,6 @@ class OtherController extends Controller
     public function maintenance_store(Request $request) // Submit form maintenance
     {
         // Get all data request
-        // dd($request->all());
         $data = $request->all();
         $work = Rutin::find($data['work'])->work;
 
@@ -269,29 +268,29 @@ class OtherController extends Controller
                 // // Pergantian  role tiap permit & send email notif
                 $role_to = '';
                 if ($lastupdate->role_to == 'review') {
-                    foreach ([
-                        'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
-                        'ilham.pangestu@balitower.co.id', 'irwan.trisna@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id',
-                        'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id',
-                    ] as $recipient) {
-                        Mail::to($recipient)->send(new NotifMaintenanceForm($notif_email));
-                    }
+                    // foreach ([
+                    //     'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
+                    //     'ilham.pangestu@balitower.co.id', 'irwan.trisna@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id',
+                    //     'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id',
+                    // ] as $recipient) {
+                    //     Mail::to($recipient)->send(new NotifMaintenanceForm($notif_email));
+                    // }
                     $role_to = 'check';
                 } elseif ($lastupdate->role_to == 'check') {
-                    foreach (['security.bacep@balitower.co.id'] as $recipient) {
-                        Mail::to($recipient)->send(new NotifMaintenanceForm($notif_email));
-                    }
+                    // foreach (['security.bacep@balitower.co.id'] as $recipient) {
+                    //     Mail::to($recipient)->send(new NotifMaintenanceForm($notif_email));
+                    // }
                     $role_to = 'security';
                 } elseif ($lastupdate->role_to == 'security') {
-                    foreach (['bayu.prakoso@balitower.co.id', 'tofiq.hidayat@balitower.co.id'] as $recipient) {
-                        Mail::to($recipient)->send(new NotifMaintenanceForm($notif_email));
-                    }
+                    // foreach (['bayu.prakoso@balitower.co.id', 'tofiq.hidayat@balitower.co.id'] as $recipient) {
+                    //     Mail::to($recipient)->send(new NotifMaintenanceForm($notif_email));
+                    // }
                     $role_to = 'head';
                 } elseif ($lastupdate->role_to = 'head') {
                     $full = Other::find($request->other_id);
-                    foreach (['dc@balitower.co.id'] as $recipient) {
-                        Mail::to($recipient)->send(new NotifMaintenanceFull($full));
-                    }
+                    // foreach (['dc@balitower.co.id'] as $recipient) {
+                    //     Mail::to($recipient)->send(new NotifMaintenanceFull($full));
+                    // }
                     $role_to = 'all';
 
                     $full_maintenance = Other::where('id', $request->other_id)->first();
@@ -353,9 +352,9 @@ class OtherController extends Controller
 
                 // Get permit yang di reject & kirim notif email
                 $maintenance_reject = Other::find($request->other_id);
-                foreach (['badai.sino@balitower.co.id', 'bayu.prakoso@balitower.co.id'] as $recipient) {
-                    Mail::to($recipient)->send(new NotifMaintenanceReject($maintenance_reject));
-                }
+                // foreach (['badai.sino@balitower.co.id', 'bayu.prakoso@balitower.co.id'] as $recipient) {
+                //     Mail::to($recipient)->send(new NotifMaintenanceReject($maintenance_reject));
+                // }
 
                 DB::commit();
 
@@ -389,7 +388,6 @@ class OtherController extends Controller
         $image = str_replace($replace, '', $request->photo_checkin);
         $image = str_replace(' ', '+', $image);
         $imageName = Str::random(200) .  '.' . $extension;
-        // dd($imageName);
 
         Storage::disk('maintenanceCheckin')->put($imageName, base64_decode($image));
 
@@ -836,29 +834,29 @@ class OtherController extends Controller
             // // Pergantian  role tiap permit & send email notif
             $role_to = '';
             if ($last_update->role_to == 'review') {
-                foreach ([
-                    'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
-                    'ilham.pangestu@balitower.co.id', 'irwan.trisna@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id',
-                    'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id',
-                ] as $recipient) {
-                    Mail::to($recipient)->send(new NotifTroubleshootForm($notif_email));
-                }
+                // foreach ([
+                //     'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
+                //     'ilham.pangestu@balitower.co.id', 'irwan.trisna@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id',
+                //     'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id',
+                // ] as $recipient) {
+                //     Mail::to($recipient)->send(new NotifTroubleshootForm($notif_email));
+                // }
                 $role_to = 'check';
             } elseif ($last_update->role_to == 'check') {
-                foreach (['security.bacep@balitower.co.id'] as $recipient) {
-                    Mail::to($recipient)->send(new NotifTroubleshootForm($notif_email));
-                }
+                // foreach (['security.bacep@balitower.co.id'] as $recipient) {
+                //     Mail::to($recipient)->send(new NotifTroubleshootForm($notif_email));
+                // }
                 $role_to = 'security';
             } elseif ($last_update->role_to == 'security') {
-                foreach (['bayu.prakoso@balitower.co.id', 'tofiq.hidayat@balitower.co.id'] as $recipient) {
-                    Mail::to($recipient)->send(new NotifTroubleshootForm($notif_email));
-                }
+                // foreach (['bayu.prakoso@balitower.co.id', 'tofiq.hidayat@balitower.co.id'] as $recipient) {
+                //     Mail::to($recipient)->send(new NotifTroubleshootForm($notif_email));
+                // }
                 $role_to = 'head';
             } elseif ($last_update->role_to = 'head') {
                 $full = TroubleshootBm::find($request->id);
-                foreach (['dc@balitower.co.id'] as $recipient) {
-                    Mail::to($recipient)->send(new NotifTroubleshootFull($full));
-                }
+                // foreach (['dc@balitower.co.id'] as $recipient) {
+                //     Mail::to($recipient)->send(new NotifTroubleshootFull($full));
+                // }
                 $role_to = 'all';
 
                 $full_troubleshoot = TroubleshootBm::where('id', $request->id)->first();
@@ -920,9 +918,9 @@ class OtherController extends Controller
 
             // Get permit yang di reject & kirim notif email
             $notif_email = TroubleshootBm::find($request->id);
-            foreach (['bayu.prakoso@balitower.co.id', 'badai.sino@balitower.co.id'] as $recipient) {
-                Mail::to($recipient)->send(new NotifTroubleshootReject($notif_email));
-            }
+            // foreach (['bayu.prakoso@balitower.co.id', 'badai.sino@balitower.co.id'] as $recipient) {
+            //     Mail::to($recipient)->send(new NotifTroubleshootReject($notif_email));
+            // }
 
             DB::commit();
             return $history->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);

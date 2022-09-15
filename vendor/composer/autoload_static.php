@@ -708,6 +708,7 @@ class ComposerStaticInit582140f03abb5abd5ed2c14fd376fb64
         'App\\Models\\Consum' => __DIR__ . '/../..' . '/app/Models/Consum.php',
         'App\\Models\\ConsumKeluar' => __DIR__ . '/../..' . '/app/Models/ConsumKeluar.php',
         'App\\Models\\ConsumMasuk' => __DIR__ . '/../..' . '/app/Models/ConsumMasuk.php',
+        'App\\Models\\Eksternal' => __DIR__ . '/../..' . '/app/Models/Eksternal.php',
         'App\\Models\\Genset' => __DIR__ . '/../..' . '/app/Models/Genset.php',
         'App\\Models\\Internal' => __DIR__ . '/../..' . '/app/Models/Internal.php',
         'App\\Models\\InternalDetail' => __DIR__ . '/../..' . '/app/Models/InternalDetail.php',
