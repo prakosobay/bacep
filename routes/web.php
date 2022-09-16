@@ -64,8 +64,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('room-yajra', 'yajra')->name('roomYajra');
 
         Route::post('room-store', 'store')->name('roomStore');
-        Route::post('room/update', 'update');
-        Route::post('room/delete/{id}', 'delete');
+        Route::post('room-update/{id}', 'update')->name('roomUpdate');
+        Route::post('room-delete/{id}', 'delete')->name('roomDelete');
     });
 
     Route::controller(MasterCompanyController::class)->group(function () {

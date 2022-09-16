@@ -15,7 +15,7 @@ class CreateMasterRoomsTable extends Migration
     {
         Schema::create('m_rooms', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
+            $table->string('name');
             $table->foreignId('created_by');
             $table->foreignId('updated_by');
             $table->softDeletes();

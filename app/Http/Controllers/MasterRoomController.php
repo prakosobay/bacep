@@ -19,7 +19,7 @@ class MasterRoomController extends Controller
         DB::beginTransaction();
 
         try {
-            MasterRoom::create([
+            MasterRoom::firstOrCreate([
                 'name' => $request->name,
                 'created_by' => auth()->user()->id,
                 'updated_by' => auth()->user()->id,
@@ -35,6 +35,7 @@ class MasterRoomController extends Controller
 
     public function update(Request $request, $id)
     {
+        // dd($request->all());
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
         ]);
@@ -42,6 +43,7 @@ class MasterRoomController extends Controller
         DB::beginTransaction();
 
         try {
+
             $updateRoom = MasterRoom::findOrFail($id);
             $updateRoom->update([
                 'name' => $request->name,
@@ -49,7 +51,7 @@ class MasterRoomController extends Controller
             ]);
 
             DB::commit();
-            return redirect('room')->with('success', 'Data Has Been Updated');
+            return redirect()->route('room')->with('success', 'Data Has Been Updated');
         } catch (\Exception $e) {
             DB::rollBack();
             throw $e;
@@ -58,7 +60,6 @@ class MasterRoomController extends Controller
 
     public function delete($id)
     {
-        dd($id);
         DB::beginTransaction();
 
         try {
@@ -83,17 +84,16 @@ class MasterRoomController extends Controller
     {
         $getRooms = DB::table('m_rooms')
             ->join('users', 'users.id', '=', 'm_rooms.created_by')
-            // ->join('users', 'users.id', '=', 'm_rooms.updated_by')
-            ->select('m_rooms.id', 'm_rooms.name', 'users.name', 'm_rooms.created_at', 'm_rooms.updated_at');
+            ->where('m_rooms.deleted_at', null)
+            ->select('m_rooms.*', 'users.name as createdby');
         return Datatables::of($getRooms)
-            ->editColumn('created_at', function ($getRooms) {
-                return $getRooms->created_at ? with(new Carbon($getRooms->created_at))->format('d/m/Y') : '';
-            })
-            ->editColumn('updated_at', function ($getRooms) {
-                return $getRooms->updated_at ? with(new Carbon($getRooms->updated_at))->format('d/m/Y') : '';
-            })
-            // ->addColumn('room.actionEdit')
+            // ->editColumn('created_at', function ($getRooms) {
+            //     return $getRooms->created_at ? with(new Carbon($getRooms->created_at))->format('d/m/Y') : '';
+            // })
+            // ->editColumn('updated_at', function ($getRooms) {
+            //     return $getRooms->updated_at ? with(new Carbon($getRooms->updated_at))->format('d/m/Y') : '';
+            // })
+            ->addColumn('action', 'room.actionEdit')
             ->make(true);
-
     }
 }

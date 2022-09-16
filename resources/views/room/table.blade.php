@@ -53,10 +53,9 @@
                             <th>ID Room</th>
                             <th>Name</th>
                             <th>Created By</th>
-                            {{-- <th>Updated By</th> --}}
                             <th>Created At</th>
                             <th>Updated At</th>
-                            {{-- <th>Action</th> --}}
+                            <th>Action</th>
                         </tr>
                     </thead>
                 </table>
@@ -73,12 +72,11 @@
             ajax: '{{ route('roomYajra')}}',
             columns: [
                 { data: 'id', name: 'id' },
-                { data: 'name', name: 'm_rooms.name' },
-                { data: 'name', name: 'users.name' },
-                // { data: 'updated_by', name: 'users.name' },
+                { data: 'name', name: 'name' },
+                { data: 'createdby', name: 'createdby' },
                 { data: 'created_at', name: 'created_at' },
                 { data: 'updated_at', name: 'updated_at' },
-                // {data: 'action', name: 'action', orderable: false, searchable: false}
+                { data: 'action', name: 'action', orderable: false, searchable: false }
             ]
         });
     });
