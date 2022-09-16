@@ -24,41 +24,43 @@
                                 <h5 class="modal-title" id="exampleModalLabel">Tambah User Baru</h5>
                             </div>
                             <div class="modal-body">
-                                <label>Nama Lengkap:</label>
                                 <div class="form-group">
-                                    <input id="new" type="text" class="form-control" name="name" required="required"  autofocus>
+                                    <label for="new" class="form-label"><b>Nama Lengkap:</b></label>
+                                    <input id="new" type="text" class="form-control" name="name" required  autofocus>
                                 </div>
-                                <label>Email :</label>
                                 <div class="form-group">
-                                    <input id="email" type="email" class="form-control" name="email" required="required">
+                                    <label for="email" class="form-label"><b>Email :</b></label>
+                                    <input id="email" type="email" class="form-control" name="email" required>
                                 </div>
-                                <label>Password :</label>
                                 <div class="form-group">
-                                    <input type="password" class="form-control" name="password" required="required">
+                                    <label for="password" class="form-label"><b>Password :</b></label>
+                                    <input type="password" class="form-control" name="password" required>
                                 </div>
-                                <label>Slug :</label>
                                 <div class="form-group">
-                                    {{-- <input id="slug" type="text" class="form-control" name="slug"  required="required"> --}}
-                                    <select class="form-control" name="slug">
+                                    <label for="slug" class="form-label"><b>Slug :</b></label>
+                                    <select class="form-control" name="slug" id="slug" required>
                                         <option selected>Pilih 1 Slug</option>
-                                        <option value="approval">Approval</option>
-                                        <option value="bm">BM</option>
-                                        <option value="head">Head</option>
-                                        <option value="security">Security</option>
-                                        <option value="visitor">Visitor</option>
+                                        @foreach ($getSlugs as $slug)
+                                            <option value="{{ $slug->id }}">{{ $slug->name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
-                                <label>Dept :</label>
                                 <div class="form-group">
-                                    <input id="dept" type="text" class="form-control" name="department"  required="required">
+                                    <label for="dept" class="form-label"><b>Dept :</b></label>
+                                    <input id="dept" type="text" class="form-control" name="department"  required>
                                 </div>
-                                <label>Company :</label>
                                 <div class="form-group">
-                                    <input id="company" type="text" class="form-control" name="company"  required="required">
+                                    <label for="company" class="form-label"><b>Company :</b></label>
+                                    <select name="company" id="company" class="form-control" required>
+                                        <option selected>Pilih 1 Company</option>
+                                        @foreach ($getCompanies as $company)
+                                            <option value="{{ $company->id }}">{{ $company->name }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
-                                <label>No. HP :</label>
                                 <div class="form-group">
-                                    <input id="hp" type="number" class="form-control" name="phone"  required="required">
+                                    <label for="hp" class="form-label"><b>No. HP :</b></label>
+                                    <input id="hp" type="number" class="form-control" name="phone"  required>
                                 </div>
                             </div>
                             <div class="modal-footer">

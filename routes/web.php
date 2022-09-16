@@ -79,11 +79,20 @@ Route::middleware(['auth'])->group(function () {
 
     Route::controller(MasterRackController::class)->group(function () {
         Route::get('rack-table', 'table')->name('rack');
-        Route::get('rack/yajra', 'yajra');
+        Route::get('rack-yajra', 'yajra')->name('rackYajra');
 
-        Route::post('rack/store', 'store');
-        Route::post('rack/update', 'update');
-        Route::post('rack/delete/{id}', 'delete');
+        Route::post('rack-store', 'store')->name('rackStore');
+        Route::post('rack-update/{id}', 'update')->name('rackUpdate');
+        Route::post('rack-delete/{id}', 'delete')->name('rackDelete');
+    });
+
+    Route::controller(MasterSlugController::class)->group(function(){
+        Route::get('slug-table', 'table')->name('slug');
+        Route::get('slug-yajra', 'yajra')->name('slugYajra');
+
+        Route::post('slug-store', 'store')->name('slugStore');
+        Route::post('slug-update/{id}', 'update')->name('slugUpdate');
+        Route::post('slug-delete/{id}', 'delete')->name('slugDelete');
     });
 
 

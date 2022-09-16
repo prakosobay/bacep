@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{User, Role, Visitor};
+use App\Models\{MasterCompany, User, Role, Visitor, MasterSlug};
 use Illuminate\Http\Request;
 use GuzzleHttp\Promise\Create;
 use Yajra\DataTables\Datatables;
@@ -48,7 +48,9 @@ class AdminController extends Controller
     public function show_user() // Menampilkan table data user web permit
     {
         if (Gate::allows('isAdmin')) {
-            return view('admin.user');
+            $getCompanies = MasterCompany::all();
+            $getSlugs = MasterSlug::all();
+            return view('admin.user', compact('getCompanies', 'getSlugs'));
         } else {
             abort(403);
         }
@@ -85,7 +87,7 @@ class AdminController extends Controller
         ]);
 
         // Save to table Role
-        $role = Role::create([
+        Role::create([
             'name' => $request->name,
         ]);
         Alert::success('Success', 'Role has been submited');
