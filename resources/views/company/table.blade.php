@@ -24,32 +24,32 @@
             {{-- Modal New User --}}
             <div class="modal fade" id="user" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
-                    <form method="post" action="{{ url('company/store')}}">
+                    <form method="post" action="{{ route('companyStore')}}">
                         @csrf
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalLabel"><b>Create New Company</b></h5>
                             </div>
                             <div class="modal-body">
-                                <label><b>Name :</b></label>
                                 <div class="form-group">
-                                    <input id="new" type="text" class="form-control" name="name" required>
+                                    <label for="name" class="form-label"><b>Name :</b></label>
+                                    <input id="name" type="text" class="form-control" name="name" required>
                                 </div>
-                                <label><b>Address :</b></label>
                                 <div class="form-group">
+                                    <label for="address" class="form-label"><b>Address :</b></label>
                                     <input id="address" type="text" class="form-control" name="address" required>
                                 </div>
-                                <label><b>Phone :</b></label>
                                 <div class="form-group">
+                                    <label for="phone" class="form-label"><b>Phone :</b></label>
                                     <input id="phone" type="text" class="form-control" name="phone" required>
                                 </div>
-                                <label><b>Website :</b></label>
                                 <div class="form-group">
-                                    <input id="web" type="text" class="form-control" name="website" required>
+                                    <label for="website" class="form-label"><b>Website :</b></label>
+                                    <input id="website" type="text" class="form-control" name="website" required>
                                 </div>
-                                <label><b>Created By :</b></label>
                                 <div class="form-group">
-                                    <input id="created" type="text" class="form-control" name="created_by" value="{{auth()->user()->name}}" required readonly>
+                                    <label for="email" class="form-label"><b>Email :</b></label>
+                                    <input id="email" type="text" class="form-control" name="email" required>
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -66,12 +66,13 @@
                 <table class="table table-striped table-hover" id="companyTable" width="100%">
                     <thead>
                         <tr>
-                            <th>ID Company</th>
+                            <th>ID</th>
                             <th>Name</th>
                             <th>Address</th>
                             <th>Phone</th>
                             <th>Website</th>
-                            {{-- <th>Action</th> --}}
+                            <th>Email</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                 </table>
@@ -85,14 +86,15 @@
         $('#companyTable').DataTable({
             processing: true,
             serverSide: true,
-            ajax: '{{ url('company/yajra')}}',
+            ajax: '{{ route('companyYajra')}}',
             columns: [
                 { data: 'id', name: 'id' },
                 { data: 'name', name: 'name' },
                 { data: 'address', name: 'address' },
                 { data: 'phone', name: 'phone' },
                 { data: 'website', name: 'website' },
-                // {data: 'action', name: 'action', orderable: false, searchable: false}
+                { data: 'email', name: 'email' },
+                { data: 'action', name: 'action', orderable: false, searchable: false }
             ]
         });
     });

@@ -125,7 +125,7 @@
                 <div id="Room" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Option:</h6>
-                        <a class="collapse-item" href="{{url('room/table')}}">Show Table</a>
+                        <a class="collapse-item" href="{{ route('room') }}">Show Table</a>
                     </div>
                 </div>
             </li>
@@ -171,7 +171,7 @@
                 <div id="Company" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Option:</h6>
-                        <a class="collapse-item" href="{{url('company/table')}}">Show Table</a>
+                        <a class="collapse-item" href="{{ route('company') }}">Show Table</a>
                     </div>
                 </div>
             </li>

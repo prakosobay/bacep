@@ -23,7 +23,7 @@ class MasterRackController extends Controller
         DB::beginTransaction();
 
         try {
-            MasterRack::create([
+            MasterRack::firstOrCreate([
                 'number' => $request->number,
                 'm_company_id' => $request->m_company_id,
                 'm_room_id' => $request->m_room_id,

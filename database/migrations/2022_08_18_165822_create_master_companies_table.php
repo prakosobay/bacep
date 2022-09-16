@@ -17,10 +17,11 @@ class CreateMasterCompaniesTable extends Migration
             $table->id();
             $table->foreignId('created_by');
             $table->foreignId('updated_by');
-            $table->string('name')->unique();
+            $table->string('name');
             $table->text('address');
-            $table->string('phone')->unique();
-            $table->string('website')->unique();
+            $table->string('phone');
+            $table->string('website');
+            $table->string('email');
             $table->softDeletes();
             $table->timestamps();
         });

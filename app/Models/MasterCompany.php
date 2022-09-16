@@ -19,13 +19,13 @@ class MasterCompany extends Model
         return $this->hasMany(MasterRack::class);
     }
 
-    public function user()
+    public function createdBy()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'created_by');
     }
 
-    public function users()
+    public function updatedBy()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsTo(User::class, 'updated_by');
     }
 }

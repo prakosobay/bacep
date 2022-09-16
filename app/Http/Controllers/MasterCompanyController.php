@@ -12,32 +12,83 @@ class MasterCompanyController extends Controller
 {
     public function store(Request $request)
     {
-
+        // dd($request->all());
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'address' => ['required', 'string'],
             'website' => ['required', 'url', 'max:255'],
             'phone' => ['required'],
-            'created_by' => ['required'],
+            'email' => ['required', 'email', 'max:255'],
         ]);
-
-        $getUser = User::where('name', $request->created_by)->first();
 
         DB::beginTransaction();
 
         try {
-            MasterCompany::create([
+            MasterCompany::firstOrCreate([
                 'name' => $request->name,
                 'address' => $request->address,
                 'website' => $request->website,
                 'phone' => $request->phone,
-                'created_by' => $getUser->id,
-                'updated_by' => $getUser->id,
+                'email' => $request->email,
+                'created_by' => auth()->user()->id,
+                'updated_by' => auth()->user()->id,
             ]);
 
             DB::commit();
             return redirect()->route('company')->with('success', 'Data Has Been Submited');
         } catch (\Exception $e) {
+            DB::rollBack();
+            throw $e;
+        }
+    }
+
+    public function update(Request $request, $id)
+    {
+        // dd($request->all());
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'address' => ['required', 'string'],
+            'website' => ['required', 'url', 'max:255'],
+            'phone' => ['required'],
+            'email' => ['required', 'email', 'max:255'],
+        ]);
+
+        DB::beginTransaction();
+
+        try {
+
+            $getCompany = MasterCompany::findOrFail($id);
+            $getCompany->update([
+                'name' => $request->name,
+                'address' => $request->address,
+                'website' => $request->website,
+                'phone' => $request->phone,
+                'email' => $request->email,
+                'updated_by' => auth()->user()->id,
+            ]);
+
+            DB::commit();
+
+            return redirect()->route('company')->with('success', 'Data Has Been Updated');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            throw $e;
+        }
+    }
+
+    public function delete($id)
+    {
+        DB::beginTransaction();
+
+        try {
+
+            $getCompany = MasterCompany::findOrFail($id);
+            $getCompany->delete();
+
+            DB::commit();
+
+            return redirect()->route('company')->with('success', 'Deleted');
+        } catch (\Exception $e){
             DB::rollBack();
             throw $e;
         }
@@ -50,10 +101,12 @@ class MasterCompanyController extends Controller
 
     public function yajra()
     {
-        $getRooms = DB::table('m_companies')->select('m_companies.*');
-
+        $getRooms = DB::table('m_companies')
+            ->join('users', 'users.id', '=', 'm_companies.created_by')
+            ->select('m_companies.*', 'users.name as createdby')
+            ->where('m_companies.deleted_at', null);
         return Datatables::of($getRooms)
-        // ->addColumn('room.actionEdit')
+        ->addColumn('action', 'company.actionEdit')
         ->make(true);
 
     }

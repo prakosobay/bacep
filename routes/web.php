@@ -60,7 +60,7 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::controller(MasterRoomController::class)->group(function () {
-        Route::get('room/table', 'table')->name('room');
+        Route::get('room-table', 'table')->name('room');
         Route::get('room-yajra', 'yajra')->name('roomYajra');
 
         Route::post('room-store', 'store')->name('roomStore');
@@ -69,17 +69,18 @@ Route::middleware(['auth'])->group(function () {
     });
 
     Route::controller(MasterCompanyController::class)->group(function () {
-        Route::get('company/table', 'table')->name('company');
-        Route::get('company/yajra', 'yajra');
-        Route::post('company/store', 'store');
-        Route::post('company/update', 'update');
-        Route::post('company/delete/{id}', 'delete');
+        Route::get('company-table', 'table')->name('company');
+        Route::get('company-yajra', 'yajra')->name('companyYajra');
+
+        Route::post('company-store', 'store')->name('companyStore');
+        Route::post('company-update/{id}', 'update')->name('companyUpdate');
+        Route::post('company-delete/{id}', 'delete')->name('companyDelete');
     });
 
     Route::controller(MasterRackController::class)->group(function () {
-        Route::get('rack/table', 'table')->name('rack');
+        Route::get('rack-table', 'table')->name('rack');
         Route::get('rack/yajra', 'yajra');
-        Route::get('rack/create', 'create');
+
         Route::post('rack/store', 'store');
         Route::post('rack/update', 'update');
         Route::post('rack/delete/{id}', 'delete');
