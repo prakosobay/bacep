@@ -120,7 +120,6 @@
                             <div class="card-body">
                                 <a type="button" class="btn btn-sm btn-dark mx-1 my-2" href="{{ route('maintenanceForm') }}">Create Form Maintenance</a>
                                 <a type="button" class="btn btn-sm btn-info mx-1 my-2" href="{{ route('logall') }}">Log Form Maintenance</a>
-                                {{-- <a type="button" class="btn btn-sm btn-danger mx-1 my-2" href="{{ route('maintenanceFinishedShow') }}">Finished Permit</a> --}}
                             </div>
                         </div>
 
@@ -159,7 +158,6 @@
                             <div class="card-body">
                                 <a type="button" class="btn btn-sm btn-dark mx-1 my-2" href="{{ route('troubleshootForm') }}">Create Form Troubleshoot</a>
                                 <a type="button" class="btn btn-sm btn-info mx-1 my-2" href="{{ route('logall') }}">Log Form Troubleshoot</a>
-                                {{-- <a type="button" class="btn btn-sm btn-danger mx-1 my-2" href="{{ route('troubleshootFinishedShow') }}">Finished Permit</a> --}}
                             </div>
                         </div>
 

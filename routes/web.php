@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{HomeController, CleaningController, AdminController};
-
+use App\Models\MasterCardType;
 
 // v.1.2.0
 Route::get('/', function () {
@@ -304,11 +304,23 @@ Route::middleware(['auth'])->group(function () {
 
     // Card
     Route::controller(MasterCardController::class)->group(function () {
-        Route::post('card/store', 'store');
-        Route::post('card/update', 'update');
+        Route::post('card/store', 'store')->name('cardStore');
+        Route::post('card/update', 'update')->name('cardUpdate');
 
         Route::get('card/form', 'form');
+        Route::get('card/show', 'show')->name('card');
         Route::get('card/yajra', 'yajra');
+    });
+
+
+    //Card Type
+    Route::controller(MasterCardType::class)->group(function(){
+        Route::get('card-type/show', 'show')->name('cardType');
+        Route::get('card-type/yajra', 'yajra')->name('cardTypeYajra');
+
+        Route::post('card-type/store', 'store')->name('cardTypeStore');
+        Route::post('card-type/update/{id}', 'update')->name('cardTypeUpdate');
+        Route::post('card-type/delete/{id}', 'delete')->name('cardTypeDelete');
     });
 
 

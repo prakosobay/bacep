@@ -44,14 +44,11 @@
                         <input type="number" class="form-control" id="id" name="user_id" value="{{$user->id}}" readonly>
 
                         <label class="mt-3" for="slug"><strong>Slug</strong></label>
-                        <select class="form-control" id="slug" name="slug" aria-label=".form-select-sm example">
-                            <option value="{{$user->slug}}" selected>{{$user->slug}}</option>
-                            <option value="approval">approval</option>
-                            <option value="visitor">visitor</option>
-                            <option value="security">security</option>
-                            <option value="admin">admin</option>
-                            <option value="head">head</option>
-                            <option value="bm">bm</option>
+                        <select class="form-control" id="slug" name="slug">
+                            <option value="{{ $user->slug }}" selected>{{ $user->slug }}</option>
+                            @foreach ($slugs as $slug)
+                                <option value="{{ $slug->id }}">{{ $slug->name }}</option>
+                            @endforeach
                           </select>
 
                         <label class="mt-3" for="department"><strong>Department</strong></label>
@@ -63,12 +60,12 @@
                             @enderror
 
                         <label class="mt-3" for="company"><strong>Company</strong></label>
-                        <input type="text" id="company" name="company" class="form-control @error('company') is-invalid @enderror" value="{{$user->company}}" required autocomplete="company">
-                            @error('company')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                        <select name="company" id="company" class="form-control">
+                            <option value="{{ $user->company }}">{{ $user->company }}</option>
+                            @foreach ( $companies as $company )
+                                <option value="{{ $company->id }}">{{ $company->name }}</option>
+                            @endforeach
+                        </select>
 
                         <label class="mt-3" for="phone"><strong>Nomer HP</strong></label>
                         <input type="text" class="form-control @error('phone') is-invalid @enderror" id="phone" name="phone" value="{{$user->phone}}" required autocomplete="phone">

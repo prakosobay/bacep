@@ -68,9 +68,12 @@ class AdminController extends Controller
 
     public function user_edit($id) // Menampilkan tampilan edit user
     {
+        // dd($id);
         if (Gate::allows('isAdmin')) {
-            $user = User::find($id);
-            return view('admin.edit', compact('user'));
+            $user = User::findOrFail($id);
+            $companies = MasterCompany::all();
+            $slugs = MasterSlug::all();
+            return view('admin.edit', compact('user', 'companies', 'slugs'));
         } else {
             abort(403);
         }
@@ -97,6 +100,7 @@ class AdminController extends Controller
     public function store_user(Request $request) // Membuat user baru
     {
         // Validasi data dari request
+        // dd($request->all());
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => [
@@ -113,14 +117,18 @@ class AdminController extends Controller
             'password' => ['required'],
         ]);
 
+        $company = MasterCompany::findOrFail($request->company);
+        $slug = MasterSlug::findOrFail($request->slug);
+        // dd($slug->name);
+
         // Save to table user
-        $user = User::create([
+        User::create([
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
             'department' => $request->department,
-            'company' => $request->company,
-            'slug' => $request->slug,
+            'company' => $company->name,
+            'slug' => $slug->name,
             'password' => Hash::make($request['password']),
         ]);
         Alert::success('Success', 'User has been submited');
@@ -162,15 +170,19 @@ class AdminController extends Controller
             'phone' => ['required', 'numeric'],
         ]);
 
+        $slug = MasterSlug::findOrFail($request->slug);
+        $company = MasterCompany::findOrFail($request->company);
+        // dd($company->name);
+
         // Cari id dari user yang akan di update
         $user = User::find($id);
 
         // Update data user yang terpilih berdasarkan idnya
         $user->update([
             'name' => $request->name,
-            'slug' => $request->slug,
+            'slug' => $slug->name,
             'department' => $request->department,
-            'company' => $request->company,
+            'company' => $company->name,
             'phone' => $request->phone,
         ]);
 
@@ -222,8 +234,7 @@ class AdminController extends Controller
     public function yajra_show_user() // Get seluruh data user
     {
         $users = DB::table('users')
-            ->select('users.*')
-            ->orderBy('id', 'asc');
+            ->select('users.*');
             return Datatables::of($users)
             ->addColumn('action', 'admin.update')
             ->make(true);

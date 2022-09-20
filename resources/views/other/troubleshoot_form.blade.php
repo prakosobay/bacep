@@ -683,7 +683,7 @@
                             text: 'Data Saved',
                             type: "success",
                         }).then(function(){
-                            location.href = "{{ route("logall") }}";
+                            location.href = "{{ url("logall") }}";
                         });
                     }else if(data.status == 'FAILED'){
                         Swal.fire({

@@ -6,26 +6,17 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class MasterCard extends Model
+class MasterCardType extends Model
 {
     use HasFactory, SoftDeletes;
 
     protected $guarded = [];
-    protected $table = 'm_cards';
+    protected $table = 'm_card_types';
+    protected $primaryKey = 'id';
 
-    public function internals()
+    public function card()
     {
-        return $this->hasMany(Internal::class);
-    }
-
-    public function eksternal()
-    {
-        return $this->hasMany(Eksternal::class);
-    }
-
-    public function cardType()
-    {
-        return $this->belongsTo(MasterCardType::class, 'card_type_id');
+        return $this->hasMany(MasterCard::class);
     }
 
     public function createdBy()
