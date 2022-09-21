@@ -314,7 +314,7 @@ Route::middleware(['auth'])->group(function () {
 
 
     //Card Type
-    Route::controller(MasterCardType::class)->group(function(){
+    Route::controller(MasterCardTypeController::class)->group(function(){
         Route::get('card-type/show', 'show')->name('cardType');
         Route::get('card-type/yajra', 'yajra')->name('cardTypeYajra');
 

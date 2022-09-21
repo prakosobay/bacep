@@ -130,6 +130,7 @@
                         <a class="collapse-item" href="{{ route('company') }}">Company</a>
                         <a class="collapse-item" href="{{ route('slug') }}">Slug</a>
                         <a class="collapse-item" href="{{ route('card') }}">Card</a>
+                        <a class="collapse-item" href="{{ route('cardType') }}">Card Type</a>
                     </div>
                 </div>
             </li>
