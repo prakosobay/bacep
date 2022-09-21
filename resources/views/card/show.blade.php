@@ -4,12 +4,11 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800 text-center"><strong>Master Data Kartu Visitor</strong></h1>
+    <h1 class="h3 mb-2 text-gray-800 text-center"><strong>Data Kartu Visitor</strong></h1>
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h5 class="text-center"><strong>Cards</strong></h5>
             <button type="button" class="btn btn-primary mr-5" data-toggle="modal" data-target="#card">
                 <strong>Tambahkan Kartu Baru</strong>
             </button>
@@ -26,41 +25,16 @@
                             <div class="modal-body">
                                 <div class="form-group">
                                     <label for="new" class="form-label"><b>Nomor Kartu:</b></label>
-                                    <input id="new" type="text" class="form-control" name="number" required  autofocus>
+                                    <input id="new" type="text" class="form-control" name="number" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="tipe" class="form-label"><b>Tipe :</b></label>
-                                    <input id="tipe" type="text" class="form-control" name="tipe" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="password" class="form-label"><b>Password :</b></label>
-                                    <input type="password" class="form-control" name="password" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="slug" class="form-label"><b>Slug :</b></label>
-                                    <select class="form-control" name="slug" id="slug" required>
-                                        <option selected>Pilih 1 Slug</option>
-                                        @foreach ($getSlugs as $slug)
-                                            <option value="{{ $slug->id }}">{{ $slug->name }}</option>
+                                    <select name="card_type_id" id="tipe" class="form-control">
+                                        <option selected>Pilih 1</option>
+                                        @foreach ( $getTypes as $type )
+                                            <option value="{{ $type->id }}">{{ $type->name }}</option>
                                         @endforeach
                                     </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="dept" class="form-label"><b>Dept :</b></label>
-                                    <input id="dept" type="text" class="form-control" name="department"  required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="company" class="form-label"><b>Company :</b></label>
-                                    <select name="company" id="company" class="form-control" required>
-                                        <option selected>Pilih 1 Company</option>
-                                        @foreach ($getCompanies as $company)
-                                            <option value="{{ $company->id }}">{{ $company->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="hp" class="form-label"><b>No. HP :</b></label>
-                                    <input id="hp" type="number" class="form-control" name="phone"  required>
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -79,11 +53,11 @@
                         <tr>
                             <th>No.</th>
                             <th>Type</th>
-                            <th>Created By</th>
+                            {{-- <th>Created By</th> --}}
                             <th>Updated By</th>
                             <th>Created At</th>
                             <th>Updated At</th>
-                            {{-- <th>Action</th> --}}
+                            <th>Action</th>
                         </tr>
                     </thead>
                 </table>
@@ -98,15 +72,15 @@
         $('#card_table').DataTable({
             processing: true,
             serverSide: true,
-            ajax: '{{ url('admin/yajra/user/show')}}',
+            ajax: '{{ route('cardYajra')}}',
             columns: [
                 { data: 'number', name: 'number' },
                 { data: 'type_name', name: 'type_name' },
-                { data: 'createdBy', name: 'createdBy' },
+                // { data: 'createdBy', name: 'createdBy' },
                 { data: 'updatedBy', name: 'updatedBy' },
                 { data: 'created_at', name: 'created_at' },
                 { data: 'updated_at', name: 'updated_at' },
-                // { data: 'action', name: 'action', orderable: false, searchable: false }
+                { data: 'action', name: 'action', orderable: false, searchable: false }
             ]
         });
     });

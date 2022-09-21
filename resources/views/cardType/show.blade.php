@@ -9,7 +9,6 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            {{-- <h5 class="text-center"><strong>Kartu Visitor</strong></h5> --}}
             <button type="button" class="btn btn-primary mr-5" data-toggle="modal" data-target="#card">
                 <strong>Tambahkan Tipe Kartu</strong>
             </button>

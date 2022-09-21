@@ -305,11 +305,12 @@ Route::middleware(['auth'])->group(function () {
     // Card
     Route::controller(MasterCardController::class)->group(function () {
         Route::post('card/store', 'store')->name('cardStore');
-        Route::post('card/update', 'update')->name('cardUpdate');
+        Route::post('card/update/{id}', 'update')->name('cardUpdate');
+        Route::post('card/delete/{id}', 'delete')->name('cardDelete');
 
-        Route::get('card/form', 'form');
         Route::get('card/show', 'show')->name('card');
-        Route::get('card/yajra', 'yajra');
+        Route::get('card/yajra', 'yajra')->name('cardYajra');
+        Route::get('card/edit/{id}', 'edit')->name('cardEdit');
     });
 
 
