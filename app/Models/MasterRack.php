@@ -33,9 +33,4 @@ class MasterRack extends Model
     {
         return $this->belongsTo(MasterCompany::class, 'm_company_id');
     }
-
-    public function colos()
-    {
-        return $this->hasMany(Colo::class);
-    }
 }

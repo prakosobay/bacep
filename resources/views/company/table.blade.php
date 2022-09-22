@@ -33,7 +33,7 @@
                             <div class="modal-body">
                                 <div class="form-group">
                                     <label for="name" class="form-label"><b>Name :</b></label>
-                                    <input id="name" type="text" class="form-control" name="name" required>
+                                    <input id="name" type="text" class="form-control" name="company" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="address" class="form-label"><b>Address :</b></label>

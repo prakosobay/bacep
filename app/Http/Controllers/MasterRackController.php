@@ -15,53 +15,77 @@ class MasterRackController extends Controller
         // dd($request->all());
         $request->validate([
             'number' => ['required', 'numeric'],
-            'created_by' => ['required'],
-            'm_company_id' => ['required', 'numeric'],
-            'm_room_id' => ['required', 'numeric'],
+            'company_id' => ['required', 'numeric'],
+            'room_id' => ['required', 'numeric'],
         ]);
 
         DB::beginTransaction();
 
         try {
+
             MasterRack::firstOrCreate([
                 'number' => $request->number,
-                'm_company_id' => $request->m_company_id,
-                'm_room_id' => $request->m_room_id,
-                'created_by' => $request->created_by,
-                'updated_by' => $request->created_by,
+                'm_company_id' => $request->company_id,
+                'm_room_id' => $request->room_id,
+                'created_by' => auth()->user()->id,
+                'updated_by' => auth()->user()->id,
             ]);
 
             DB::commit();
             return redirect()->route('rack')->with('success', 'Data Has Been Submited');
         } catch (\Exception $e) {
             DB::rollBack();
-            throw $e;
+            return back()->with('failed', $e->getMessage());
         }
     }
 
-    public function create()
+    public function update(Request $request, $id)
     {
-        $getCompanies = MasterCompany::all();
-        $getRooms = MasterRoom::all();
-        return view('rack.create', compact('getCompanies', 'getRooms'));
+        dd($request->all());
+        $request->validate([
+            'number' => ['required', 'numeric'],
+            'company_id' => ['required', 'numeric'],
+            'room_id' => ['required', 'numeric'],
+        ]);
+
+        DB::beginTransaction();
+
+        try {
+
+            $updateRack = MasterRack::findOrFail($id);
+            $updateRack->update([
+                'number' => $request->number,
+                'm_company_id' => $request->company_id,
+                'm_room_id' => $request->room_id,
+            ]);
+
+            DB::commit();
+
+            return redirect()->route('rack')->with('success', 'Data Has Been Submited');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->with('failed', $e->getMessage());
+        }
     }
 
     public function table()
     {
-        // $getRacks = DB::table('m_racks')
-        //         ->join('m_rooms', 'm_rooms.id', '=', 'm_racks.m_room_id')
-        //         ->join('m_companies', 'm_companies.id', 'm_racks.m_company_id')
-        //         ->select('m_rooms.*', 'm_racks.*', 'm_companies.*')
-        //         ->get();
-        $getRacks = MasterRack::all();
-        // dd($getRacks);
-        return view('rack.table', compact('getRacks'));
+        $getRooms = MasterRoom::all();
+        $getCompanies = MasterCompany::all();
+        return view('rack.table', compact('getCompanies', 'getRooms'));
     }
 
     public function yajra()
     {
-        $getRacks = DB::table('m_racks')->select('m_racks.*');
+        $getRacks = DB::table('m_racks')
+            ->join('m_companies', 'm_racks.m_company_id', '=', 'm_companies.id')
+            ->join('m_rooms', 'm_racks.m_room_id', '=', 'm_rooms.id')
+            ->join('users', 'm_racks.updated_by', '=', 'users.id')
+            ->select('m_racks.*', 'm_companies.name AS company_name', 'm_rooms.name AS room_name', 'users.name AS updatedBy');
+            // ->where('m_racks.deleted_at', null);
 
-        return Datatables::of($getRacks)->make(true);
+        return Datatables::of($getRacks)
+            ->addColumn('action', 'rack.actionEdit')
+            ->make(true);
     }
 }

@@ -14,7 +14,7 @@ class MasterCompanyController extends Controller
     {
         // dd($request->all());
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
+            'company' => ['required', 'string', 'max:255'],
             'address' => ['required', 'string'],
             'website' => ['required', 'url', 'max:255'],
             'phone' => ['required'],
@@ -25,7 +25,7 @@ class MasterCompanyController extends Controller
 
         try {
             MasterCompany::firstOrCreate([
-                'name' => $request->name,
+                'name' => $request->company,
                 'address' => $request->address,
                 'website' => $request->website,
                 'phone' => $request->phone,
