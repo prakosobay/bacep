@@ -257,32 +257,26 @@ class AssetController extends Controller
         // dd($request->all());
         $this->validate($request, [
             'jumlah' => ['numeric', 'required', 'min:1'],
-            'ket' => 'required',
+            'ket' => ['required'],
         ]);
 
-        $asset = Asset::find($id);
-        if ($asset->jumlah >= $request->jumlah) {
+        DB::beginTransaction();
 
-            if($asset->digunakan < 1){
-                $asset->update([
-                    'digunakan' => $request->jumlah,
-                ]);
-                $sisa = $asset->jumlah - $asset->digunakan;
-                $asset->update([
-                    'sisa' => $sisa,
-                ]);
-            }
-            elseif($asset->digunakan >= 1){
+        try {
+
+            $asset = Asset::findOrFail($id);
+
+            if($asset->sisa >= $request->jumlah) {
+                $sisa = $asset->sisa - $request->jumlah;
+
                 $asset->update([
                     'digunakan' => $asset->digunakan + $request->jumlah,
-                ]);
-                $sisa = $asset->jumlah - $asset->digunakan;
-                $asset->update([
                     'sisa' => $sisa,
+                    'note' => $request->ket,
                 ]);
             }
 
-            $assetuse = AssetUse::create([
+            AssetUse::create([
                 'nama_barang' => $request->nama_barang,
                 'asset_id' => $request->asset_id,
                 'jumlah' => $request->jumlah,
@@ -291,10 +285,12 @@ class AssetController extends Controller
                 'tanggal' => date('d/m/Y'),
             ]);
 
-        } else {
-            return back()->with('Gagal', 'Stock Kosong/Kurang');
+            DB::commit();
+            return redirect()->route('assetTable')->with('success', 'Data Berhasil di Update');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->with('failed', $e->getMessage());
         }
-        return redirect()->route('assetTable')->with('success', 'Data telah di update');
     }
 
     public function create_store(Request $request) // Create data barang asset baru
