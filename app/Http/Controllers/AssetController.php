@@ -68,6 +68,7 @@ class AssetController extends Controller
     }
 
 
+
     public function edit_show($id) // Menampilkan data barang asset masuk berdasarkan kode barang
     {
         if ((Gate::allows('isApproval') || (Gate::allows('isHead')) || (Gate::allows('isAdmin')))) {
@@ -165,7 +166,7 @@ class AssetController extends Controller
             return redirect()->route('assetTable')->with('success', 'Barang Asset Berhasil di Tambah');
         } catch (\Exception $e) {
             DB::rollBack();
-            throw $e;
+            return back()->with('failed', $e->getMessage());
         }
 
 
@@ -174,31 +175,81 @@ class AssetController extends Controller
     public function update_keluar(Request $request, $id) // Update data barang asset keluar
     {
         $this->validate($request, [
-            'jumlah' => ['numeric', 'required', 'min:1'],
-            'ket' => 'required',
+            'jumlah_sisa' => ['numeric', 'required'],
+            'jumlah_digunakan' => ['numeric', 'required'],
+            'ket' => ['required'],
         ]);
 
-        $asset = Asset::findOrFail($id);
-        if ($asset->jumlah >= $request->jumlah) {
-            if($asset){
+        DB::beginTransaction();
+
+        try {
+
+            $asset = Asset::findOrFail($id);
+
+            if($asset->digunakan >= $request->jumlah_digunakan) {
+                $digunakan = $asset->digunakan - $request->jumlah_digunakan;
+            }
+
+            if($asset->sisa >= $request->jumlah_sisa) {
+                $sisa = $asset->sisa - $request->jumlah_sisa;
+            }
+
+            if($asset->sisa > $asset->digunakan) {
                 $asset->update([
-                    'jumlah' => $asset->jumlah - $request->jumlah,
+                    'sisa' => $sisa,
+                    'digunakan' => $digunakan,
+                    'jumlah' => $sisa - $digunakan,
+                    'note' => $request->ket,
+                ]);
+
+            } elseif($asset->digunakan > $asset->sisa) {
+                $asset->update([
+                    'sisa' => $sisa,
+                    'digunakan' => $digunakan,
+                    'jumlah' => $digunakan - $sisa,
+                    'note' => $request->ket,
                 ]);
             }
+
+            $kondisi = $asset->jumlah;
+
+            if($kondisi == 0) {
+
+                $asset->update([
+                    'kondisi' => 'Stock Habis',
+                ]);
+
+            } elseif(($kondisi > 0) && ($kondisi <= 5)){
+
+                $asset->update([
+                    'kondisi' => 'Stock Sedikit',
+                ]);
+
+            } elseif($kondisi > 5) {
+
+                $asset->update([
+                    'kondisi' => 'Stock Banyak',
+                ]);
+            }
+
+            $his = $request->jumlah_sisa + $request->jumlah_digunakan;
 
             AssetKeluar::create([
                 'nama_barang' => $request->nama_barang,
                 'asset_id' => $request->asset_id,
-                'jumlah' => $request->jumlah,
+                'jumlah' => $his,
                 'ket' => $request->ket,
                 'pencatat' => $request->pencatat,
                 'tanggal' => date('d/m/Y'),
             ]);
 
-        } else {
-            return back()->with('Gagal', 'Stock Kosong/Kurang');
+            DB::commit();
+
+            return redirect()->route('assetTable')->with('success', 'Data Berhasil Di Update');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->with('failed', $e->getMessage());
         }
-        return redirect()->route('assetTable')->with('success', 'Data Berhasil di Update');
     }
 
     public function update_digunakan(Request $request, $id) // Update data barang asset digunakan

@@ -13,9 +13,9 @@
                 Kembali
             </a>
 
-            @if (session('Gagal'))
+            @if (session('failed'))
                 <div class="alert alert-danger mt-1">
-                    {{ session('Gagal') }}
+                    {{ session('failed') }}
                 </div>
             @endif
         </div>
@@ -28,44 +28,44 @@
                     <div class="row">
                         <div class="col-4">
                             <div class="form-group">
-                                <label for="nama_barang"><strong>Nama Barang</strong></label>
+                                <label class="form-label" for="nama_barang"><strong>Nama Barang</strong></label>
                                 <input type="text" class="form-control" id="nama_barang" name="nama_barang" value="{{$asset->nama_barang}}" readonly>
                             </div>
 
                             <div class="form-group">
-                                <label for="id"><strong>Kode Barang</strong></label>
+                                <label class="form-label" for="id"><strong>Kode Barang</strong></label>
                                 <input type="number" class="form-control" id="id" name="asset_id" value="{{$asset->id}}" readonly>
                             </div>
 
                             <div class="form-group">
-                                <label for="stok"><strong>Stock Total</strong></label>
+                                <label class="form-label" for="stok"><strong>Stock Total</strong></label>
                                 <input type="number" class="form-control" id="stok" value="{{$asset->jumlah}}" readonly>
                             </div>
                         </div>
 
                         <div class="col-4">
                             <div class="form-group">
-                                <label for="use"><strong>Stock Digunakan</strong></label>
-                                <input type="number" class="form-control" id="use" value="{{$asset->digunakan}}" readonly>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="sisa"><strong>Stock Sisa</strong></label>
+                                <label class="form-label" for="sisa"><strong>Stock Sisa</strong></label>
                                 <input type="number" class="form-control" id="sisa" value="{{$asset->sisa}}" readonly>
                             </div>
 
                             <div class="form-group">
-                                <label for="satuan"><strong>Satuan</strong></label>
+                                <label class="form-label" for="use"><strong>Stock Digunakan</strong></label>
+                                <input type="number" class="form-control" id="use" value="{{$asset->digunakan}}" readonly>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="satuan"><strong>Satuan</strong></label>
                                 <input type="text" class="form-control" id="satuan" value="{{$asset->satuan}}" readonly>
                             </div>
                         </div>
 
                         <div class="col-4">
                             <div class="form-group">
-                                <label for="jumlah"><strong>Jumlah</strong></label>
-                                <input type="number" class="form-control @error('jumlah') is-invalid @enderror" required autocomplete="jumlah"
-                                id="jumlah" name="jumlah" value="{{old('jumlah')}}" autofocus>
-                                @error('jumlah')
+                                <label class="form-label" for="jumlah_sisa"><strong>Jumlah Barang Keluar dari Stok Sisa</strong></label>
+                                <input type="number" class="form-control @error('jumlah_sisa') is-invalid @enderror"
+                                id="jumlah_sisa" name="jumlah_sisa" value="{{ old('jumlah_sisa') }}" autofocus>
+                                @error('jumlah_sisa')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -73,19 +73,29 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="ket"><strong>Keterangan</strong></label>
-                                <input type="text" id="ket" name="ket" class="form-control @error('ket') is-invalid @enderror" required autocomplete="ket" >
+                                <label class="form-label" for="jumlah_digunakan"><strong>Jumlah Barang Keluar dari Stok Digunakan</strong></label>
+                                <input type="number" class="form-control @error('jumlah_digunakan') is-invalid @enderror"
+                                id="jumlah_digunakan" name="jumlah_digunakan" value="{{ old('jumlah_digunakan') }}">
+                                @error('jumlah_digunakan')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="ket"><strong>Keterangan</strong></label>
+                                <input type="text" id="ket" name="ket" class="form-control @error('ket') is-invalid @enderror" required value="{{ old('ket') }}">
                                 @error('ket')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
                             </div>
-
-                            <div class="form-group">
-                                <label for="pencatat"><strong>Nama Pencatat</strong></label>
-                                <input type="text" class="form-control" id="pencatat" name="pencatat" value="{{Auth::user()->name}}" readonly>
-                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="pencatat"><strong>Nama Pencatat</strong></label>
+                            <input type="text" class="form-control" id="pencatat" name="pencatat" value="{{Auth::user()->name}}" readonly>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
