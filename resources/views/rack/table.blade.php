@@ -98,8 +98,8 @@
             ajax: '{{ route('rackYajra')}}',
             columns: [
                 { data: 'number', name: 'number' },
-                { data: 'room_name', name: 'room_name' },
-                { data: 'company_name', name: 'company_name' },
+                { data: 'room', name: 'room' },
+                { data: 'company', name: 'company' },
                 { data: 'updatedBy', name: 'updatedBy' },
                 { data: 'updated_at', name: 'updated_at' },
                 { data: 'action', name: 'action', orderable: false, searchable: false }
