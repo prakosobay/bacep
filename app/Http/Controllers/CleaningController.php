@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 use Barryvdh\DomPDF\Facade as PDF;
 use App\Mail\{NotifEmail, NotifReject, NotifFull};
-use App\Models\{User, Role, MasterOb, PilihanWork, Cleaning, CleaningHistory, CleaningFull, PenomoranAR, PenomoranCR};
+use App\Models\{User, Role, MasterOb, PilihanWork, Cleaning, CleaningHistory, CleaningFull, PenomoranAR, PenomoranCleaning, PenomoranCR};
 use phpDocumentor\Reflection\PseudoTypes\True_;
 use Yajra\Datatables\Datatables;
 use Carbon\Carbon;
@@ -84,31 +84,30 @@ class CleaningController extends Controller
         $data['cleaning_name2'] = MasterOb::find($data['cleaning_name2'])->nama;
         $data['cleaning_work'] = PilihanWork::find($data['cleaning_work'])->work;
 
-        $ar = PenomoranAR::latest()->first();
-        $cr = PenomoranCR::latest()->first();
-        // dd($ar->yearly);
+        // $ar = PenomoranAR::latest()->first();
+        // $cr = PenomoranCR::latest()->first();
 
-        if((!$ar) && (!$cr)){
+        // if((!$ar) && (!$cr)){
 
-            $i = 1;
-            $k = 1;
-        } elseif(($ar->number) && ($cr->number)){
+        //     $i = 1;
+        //     $k = 1;
+        // } elseif(($ar->number) && ($cr->number)){
 
-            $i = $ar->number + 1;
-            $k = $cr->number + 1;
-        }
+        //     $i = $ar->number + 1;
+        //     $k = $cr->number + 1;
+        // }
 
-        if(isset($ar)){
-            // dd($i);
-            $lastYearAR = $ar->yearly;
-            $lastYearCR = $cr->yearly;
-            $currrentYear = date('Y');
+        // if(isset($ar)){
+        //     // dd($i);
+        //     $lastYearAR = $ar->yearly;
+        //     $lastYearCR = $cr->yearly;
+        //     $currrentYear = date('Y');
 
-            if (( $currrentYear != $lastYearAR ) && ( $currrentYear != $lastYearCR )){
-                $i = 1;
-                $k = 1;
-            }
-        }
+        //     if (( $currrentYear != $lastYearAR ) && ( $currrentYear != $lastYearCR )){
+        //         $i = 1;
+        //         $k = 1;
+        //     }
+        // }
 
         // dd($i);
 
@@ -116,41 +115,28 @@ class CleaningController extends Controller
 
         try {
 
-            $ar = PenomoranAR::create([
-                'id' => Str::uuid(),
-                'number' => $i,
-                'monthly' => date('m'),
-                'yearly' => date('Y'),
-            ]);
+            // $ar = PenomoranAR::create([
+            //     'id' => Str::uuid(),
+            //     'number' => $i,
+            //     'monthly' => date('m'),
+            //     'yearly' => date('Y'),
+            // ]);
 
-            $cr = PenomoranCR::create([
-                'id' => Str::uuid(),
-                'number' => $k,
-                'monthly' => date('m'),
-                'yearly' => date('Y'),
-            ]);
+            // $cr = PenomoranCR::create([
+            //     'id' => Str::uuid(),
+            //     'number' => $k,
+            //     'monthly' => date('m'),
+            //     'yearly' => date('Y'),
+            // ]);
 
             // Insert data yang diterima ke table Cleaning
             $cleaning = Cleaning::create($data);
 
-            $updated = Cleaning::findOrFail($cleaning->cleaning_id);
+            // $updated = Cleaning::findOrFail($cleaning->cleaning_id);
             // dd($updated);
-            $updated->update([
-                'penomoranar_id' => $ar->id,
-                'penomorancr_id' => $cr->id,
-            ]);
-
-            // $cleaning = Cleaning::create([
-            //     'penomoranar_id' => $i,
-            //     'penomorancr_id' => $k,
-            //     'cleaning_work' => $data['cleaning_work'],
-            //     'loc1' => $data['loc1'],
-            //     'loc2' => $data['loc2'],
-            //     'loc3' => $data['loc3'],
-            //     'loc4' => $data['loc4'],
-            //     'loc5' => $data['loc5'],
-            //     'loc6' => $data['loc6'],
-            //     'cleaning_time_start'
+            // $updated->update([
+            //     'penomoranar_id' => $ar->id,
+            //     'penomorancr_id' => $cr->id,
             // ]);
 
             // $getEmail = User::where('slug', 'approval')->get();
@@ -287,7 +273,7 @@ class CleaningController extends Controller
 
             if ($lasthistoryC->pdf == true) {
                 $lasthistoryC->update(['aktif' => false]);
-
+                // dd($lasthistoryC);
                 // Simpan tiap perubahan permit ke table CleaningHistory
                 $cleaningHistory = CleaningHistory::create([
                     'cleaning_id' => $request->cleaning_id,
@@ -298,8 +284,10 @@ class CleaningController extends Controller
                     'pdf' => false,
                 ]);
 
+                DB::commit();
+
                 // Get permit yang di reject & kirim notif email
-                $cleaning = Cleaning::find($request->cleaning_id);
+                // $cleaning = Cleaning::find($request->cleaning_id);
                 // foreach (['bayu.prakoso@balitower.co.id', 'badai.sino@balitower.co.id'] as $recipient) {
                 //     Mail::to($recipient)->send(new NotifReject($cleaning));
                 // }
@@ -438,10 +426,32 @@ class CleaningController extends Controller
         $imageName2 = Str::random(200) . '.' . $extension2;
 
         // simpan gambar
-       Storage::disk('cleaningCheckout')->put($imageName, base64_decode($image));
-       Storage::disk('cleaningCheckout')->put($imageName2, base64_decode($image2));
+        Storage::disk('cleaningCheckout')->put($imageName, base64_decode($image));
+        Storage::disk('cleaningCheckout')->put($imageName2, base64_decode($image2));
 
         $getFullCheckout = CleaningFull::where('cleaning_id', $id)->first();
+
+        $penomoran = PenomoranCleaning::latest()->first();
+
+        if((!$penomoran)){
+
+            $ar = 1;
+            $cr = 1;
+
+        } elseif($penomoran->number_ar){
+
+            $ar = $penomoran->number_ar + 1;
+            $cr = $penomoran->number_cr + 1;
+        }
+
+        $lastyearAR = $penomoran->year_ar;
+        $lastyearCR = $penomoran->year_cr;
+        $currrentYear = date('Y');
+
+        if ( ($currrentYear != $lastyearAR) && ( $currrentYear != $lastyearCR ) ){
+            $ar = 1;
+            $cr = 1;
+        }
 
         DB::beginTransaction();
 
@@ -454,6 +464,20 @@ class CleaningController extends Controller
                 'photo_checkout_personil2' => $imageName2,
                 'status' => 'Full Approved',
             ]);
+
+            $o = PenomoranCleaning::firstOrCreate([
+                'number_ar' => $ar,
+                'month_ar' => date('m'),
+                'year_ar' => date('Y'),
+                'number_cr' => $cr,
+                'month_cr' => date('m'),
+                'year_cr' => date('Y'),
+                'cleaning_id' => $getFullCheckout->cleaning_id,
+                'other_id' => '',
+                'troubleshoot_bm_id' => '',
+            ]);
+
+            dd($o);
 
             DB::commit();
 
@@ -508,7 +532,11 @@ class CleaningController extends Controller
             ->where('cleaning_histories.status', '!=', 'visitor')
             ->select('cleaning_histories.*', 'users.name', 'created_by')
             ->get();
-        $pdf = PDF::loadview('cleaning_pdf', compact('cleaning', 'cleaningHistory', 'lasthistoryC'))->setPaper('a4', 'portrait')->setWarnings(false);
+
+        // $penomoran = CleaningFull::where('checkout_personil', '!=', null)->first();
+        $penomoran = PenomoranCleaning::where('cleaning_id', $id)->first();
+        // dd($penomoran);
+        $pdf = PDF::loadview('cleaning_pdf', compact('cleaning', 'cleaningHistory', 'lasthistoryC', 'penomoran'))->setPaper('a4', 'portrait')->setWarnings(false);
         return $pdf->stream();
     }
 

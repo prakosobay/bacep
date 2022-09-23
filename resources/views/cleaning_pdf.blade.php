@@ -175,10 +175,17 @@
                     <td width="150px">Date of Request</td>
                     <td >: {{Carbon\Carbon::parse($cleaning->created_at)->format('d-m-Y H:i')}}</td>
                 </tr>
-                <tr >
-                    <td width="150px">Change Request Number: </td>
-                    <td >: AR/{{ $cleaning->penomoranAR->number }}/{{ $cleaning->penomoranAR->monthly }}/{{ $cleaning->penomoranAR->yearly }}</td>
-                </tr>
+                @if($penomoran)
+                    <tr >
+                        <td width="150px">Access Request Number: </td>
+                        <td >: AR/BM/{{ $penomoran->number_ar }}/{{ $penomoran->month_ar }}/{{ $penomoran->year_ar}} </td>
+                    </tr>
+                @else
+                    <tr >
+                        <td width="150px">Access Request Number: </td>
+                        <td >: {{ $cleaning->cleaning_id }} AR/BM/</td>
+                    </tr>
+                @endif
                 <tr >
                     <td width="150px">Purpose of Work</td>
                     <td >: {{$cleaning->cleaning_work}}</td>
@@ -483,7 +490,11 @@
                 </tr>
             </table>
 
-            <p class="cr">Change Request Number : CR/{{ $cleaning->penomoranCR->number }}/{{ $cleaning->penomoranCR->monthly }}/{{ $cleaning->penomoranCR->yearly }}</p>
+            @if($penomoran)
+                <p class="cr">Change Request Number : CR/BM/{{ $penomoran->number_cr }}/{{ $penomoran->month_cr }}/{{ $penomoran->year_cr}}</p>
+            @else
+                <p class="cr">Change Request Number : CR/BM/</p>
+            @endif
 
             <table cellpadding="2" class="table table-background">
                 <tr >

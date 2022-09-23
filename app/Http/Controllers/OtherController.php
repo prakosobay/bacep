@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\{DB, Auth, Gate, Mail, Session, Storage};
-use App\Models\{Other, OtherFull, OtherHistory, OtherPersonil, Rutin, TroubleshootBm, TroubleshootBmDetail, TroubleshootBmEntry, TroubleshootBmFull, TroubleshootBmHistory, TroubleshootBmPersonil, TroubleshootBmRisk, Visitor, PenomoranAR, PenomoranCR};
+use App\Models\{Other, OtherFull, OtherHistory, OtherPersonil, Rutin, TroubleshootBm, TroubleshootBmDetail, TroubleshootBmEntry, TroubleshootBmFull, TroubleshootBmHistory, TroubleshootBmPersonil, TroubleshootBmRisk, Visitor, PenomoranCleaning};
 use App\Mail\{NotifMaintenanceForm, NotifMaintenanceFull, NotifMaintenanceReject, NotifTroubleshootForm, NotifTroubleshootFull, NotifTroubleshootReject};
 use Symfony\Component\HttpFoundation\Test\Constraint\ResponseFormatSame;
 use Yajra\Datatables\Datatables;
@@ -68,52 +68,11 @@ class OtherController extends Controller
             'time_end_1' => ['required'],
         ]);
 
-        $ar = PenomoranAR::latest()->first();
-        $cr = PenomoranCR::latest()->first();
-
-        if((!$ar) && (!$cr)){
-
-            $i = 1;
-            $k = 1;
-        } elseif(($ar->number) && ($cr->number)){
-
-            $i = $ar->number + 1;
-            $k = $cr->number + 1;
-        }
-
-        if(isset($ar)){
-            // dd($i);
-            $lastYearAR = $ar->yearly;
-            $lastYearCR = $cr->yearly;
-            $currrentYear = date('Y');
-
-            if (( $currrentYear != $lastYearAR ) && ( $currrentYear != $lastYearCR )){
-                $i = 1;
-                $k = 1;
-            }
-        }
-
         DB::beginTransaction();
 
         try {
 
-            $ar = PenomoranAR::create([
-                'id' => Str::uuid(),
-                'number' => $i,
-                'monthly' => date('m'),
-                'yearly' => date('Y'),
-            ]);
-
-            $cr = PenomoranCR::create([
-                'id' => Str::uuid(),
-                'number' => $k,
-                'monthly' => date('m'),
-                'yearly' => date('Y'),
-            ]);
-
             $otherForm = Other::create([
-                'penomoranar_id' => $ar->id,
-                'penomorancr_id' => $cr->id,
                 'work' => $work,
                 'visit' => $request->visit,
                 'leave' => $request->leave,
@@ -300,8 +259,8 @@ class OtherController extends Controller
                         'request' => $full_maintenance->created_at,
                         'visit' => $full_maintenance->visit,
                         'leave' => $full_maintenance->leave,
-                        'link' => ("https://dcops.balifiber.id/maintenance-pdf/$full_maintenance->id"),
-                        // 'link' => ("http://localhost:8000/maintenance-pdf/$full_maintenance->id"),
+                        // 'link' => ("https://dcops.balifiber.id/maintenance-pdf/$full_maintenance->id"),
+                        'link' => ("http://localhost:8000/maintenance-pdf/$full_maintenance->id"),
                         'note' => null,
                         'status' => 'Full Approved',
                     ]);
@@ -498,7 +457,9 @@ class OtherController extends Controller
             ->where('other_histories.other_id', '=', $id)
             ->select('other_histories.*')
             ->get();
-        $pdf = PDF::loadview('other.maintenance_pdf', compact('getOther', 'getPersonil', 'getHistory', 'getLastOther'))->setPaper('a4', 'portrait')->setWarnings(false);
+
+        $penomoran = PenomoranCleaning::where('other_id', $id)->first();
+        $pdf = PDF::loadview('other.maintenance_pdf', compact('getOther', 'getPersonil', 'getHistory', 'getLastOther', 'penomoran'))->setPaper('a4', 'portrait')->setWarnings(false);
         return $pdf->stream();
     }
 
@@ -637,54 +598,12 @@ class OtherController extends Controller
             'rollback' => ['nullable', 'max:255'],
         ]);
 
-        $ar = PenomoranAR::latest()->first();
-        $cr = PenomoranCR::latest()->first();
-        // dd($ar->yearly);
-
-        if((!$ar) && (!$cr)){
-
-            $i = 1;
-            $l= 1;
-        } elseif(($ar->number) && ($cr->number)){
-
-            $i = $ar->number + 1;
-            $l= $cr->number + 1;
-        }
-
-        if(isset($ar)){
-            // dd($i);
-            $lastYearAR = $ar->yearly;
-            $lastYearCR = $cr->yearly;
-            $currrentYear = date('Y');
-
-            if (( $currrentYear != $lastYearAR ) && ( $currrentYear != $lastYearCR )){
-                $i = 1;
-                $l= 1;
-            }
-        }
-
         DB::beginTransaction();
 
         try {
 
-            $ar = PenomoranAR::create([
-                'id' => Str::uuid(),
-                'number' => $i,
-                'monthly' => date('m'),
-                'yearly' => date('Y'),
-            ]);
-
-            $cr = PenomoranCR::create([
-                'id' => Str::uuid(),
-                'number' => $l,
-                'monthly' => date('m'),
-                'yearly' => date('Y'),
-            ]);
-
             $input = $request->all();
             $other_form = TroubleshootBm::create([
-                'penomoranar_id' => $ar->id,
-                'penomorancr_id' => $cr->id,
                 'work' => $input['work'],
                 'visit' => $input['visit'],
                 'leave' => $input['leave'],
@@ -1060,7 +979,9 @@ class OtherController extends Controller
             ->where('troubleshoot_bm_histories.troubleshoot_bm_id', '=', $id)
             ->select('troubleshoot_bm_histories.*')
             ->get();
-        $pdf = PDF::loadview('other.troubleshoot_pdf', compact('getForm', 'getLastHistory', 'getHistory'))->setPaper('a4', 'portrait')->setWarnings(false);
+
+        $penomoran = PenomoranCleaning::where('troubleshoot_bm_id', $id)->first();
+        $pdf = PDF::loadview('other.troubleshoot_pdf', compact('getForm', 'getLastHistory', 'getHistory', 'penomoran'))->setPaper('a4', 'portrait')->setWarnings(false);
         return $pdf->stream();
     }
 
