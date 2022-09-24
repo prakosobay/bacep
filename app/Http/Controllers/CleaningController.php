@@ -477,8 +477,6 @@ class CleaningController extends Controller
                 'troubleshoot_bm_id' => '',
             ]);
 
-            dd($o);
-
             DB::commit();
 
             return redirect()->route('logall')->with('status', 'Checkout Berhasil!');

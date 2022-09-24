@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{HomeController, CleaningController, AdminController};
-use App\Models\MasterCardType;
 
 // v.1.2.0
 Route::get('/', function () {

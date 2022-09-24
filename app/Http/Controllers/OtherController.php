@@ -398,9 +398,33 @@ class OtherController extends Controller
         $image = str_replace($replace, '', $request->photo_checkout);
         $image = str_replace(' ', '+', $image);
         $imageName = Str::random(200) .  '.' . $extension;
-        // dd($imageName);
 
         Storage::disk('maintenanceCheckout')->put($imageName, base64_decode($image));
+
+        $get = OtherPersonil::findOrFail($id);
+        $pic = $get->other_id;
+
+        $penomoran = PenomoranCleaning::latest()->first();
+
+        if((!$penomoran)){
+
+            $ar = 1;
+            $cr = 1;
+
+        } elseif($penomoran->number_ar){
+
+            $ar = $penomoran->number_ar + 1;
+            $cr = $penomoran->number_cr + 1;
+        }
+
+        $lastyearAR = $penomoran->year_ar;
+        $lastyearCR = $penomoran->year_cr;
+        $currrentYear = date('Y');
+
+        if ( ($currrentYear != $lastyearAR) && ( $currrentYear != $lastyearCR ) ){
+            $ar = 1;
+            $cr = 1;
+        }
 
         DB::beginTransaction();
 
@@ -410,6 +434,18 @@ class OtherController extends Controller
             $updatePersonil->update([
                 'checkout' => $request->checkout,
                 'photo_checkout' => $imageName,
+            ]);
+
+            $o = PenomoranCleaning::firstOrCreate([
+                'number_ar' => $ar,
+                'month_ar' => date('m'),
+                'year_ar' => date('Y'),
+                'number_cr' => $cr,
+                'month_cr' => date('m'),
+                'year_cr' => date('Y'),
+                'cleaning_id' => '',
+                'other_id' => $pic,
+                'troubleshoot_bm_id' => '',
             ]);
 
             DB::commit();
