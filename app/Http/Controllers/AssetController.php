@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Exports\{AssetExport, AssetMasukExport, AssetKeluarExport};
+use App\Exports\{AssetExport, AssetMasukExport, AssetKeluarExport, AssetDigunakanExport};
 use App\Imports\{AssetImport, AssetKeluarImport, AssetMasukImport, AssetUseImport};
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -423,6 +423,11 @@ class AssetController extends Controller
     public function export_asset_keluar() // Export data barang keluar asset
     {
         return Excel::download(new AssetKeluarExport, 'AssetKeluar.xlsx');
+    }
+
+    public function export_asset_digunakan()
+    {
+        return Excel::download(new AssetDigunakanExport, 'AssetDigunakan.xlsx');
     }
 
 

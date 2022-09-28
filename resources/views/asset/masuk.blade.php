@@ -17,7 +17,7 @@
             <!-- Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
-                    <form method="post" action="{{ url('asset/import/masuk')}}" enctype="multipart/form-data">
+                    <form method="post" action="{{ url('asset/import/masuk') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="modal-content">
                             <div class="modal-header">

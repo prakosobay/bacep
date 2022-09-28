@@ -7,7 +7,7 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <a href="{{ url('assetExportKeluar') }}" type="button" class="btn btn-success mr-5 btn-sm" >
+            <a href="{{ route('assetExportKeluar') }}" type="button" class="btn btn-success mr-5 btn-sm" >
                 <strong>Export Excel</strong>
             </a>
 
@@ -71,8 +71,8 @@
                 { data: 'nama_barang', name: 'nama_barang' },
                 { data: 'jumlah', name: 'jumlah' },
                 { data: 'ket', name: 'ket' },
-                { data: 'pencatat', name: 'pencatat' },
                 { data: 'tanggal', name: 'tanggal' },
+                { data: 'pencatat', name: 'pencatat' },
             ]
         });
     });
