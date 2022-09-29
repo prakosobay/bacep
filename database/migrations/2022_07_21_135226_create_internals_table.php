@@ -16,15 +16,15 @@ class CreateInternalsTable extends Migration
         Schema::create('internals', function (Blueprint $table) {
             $table->id();
             $table->foreignId('requestor_id');
-            $table->foreignId('card_id')->nullable();
-            $table->foreignUuid('penomoranar_id');
-            $table->foreignUuid('penomorancr_id');
+            $table->foreignId('m_card_id')->nullable();
+            $table->foreignId('m_risk_id')->nullable();
             $table->string('work');
             $table->date('visit');
             $table->date('leave');
-            $table->string('rack');
-            $table->string('background');
-            $table->string('desc');
+            $table->boolean('isColo');
+            $table->boolean('isSurvey');
+            $table->string('background')->nullable();
+            $table->string('desc')->nullable();
             $table->string('rollback')->nullable();
             $table->string('testing')->nullable();
             $table->string('reject_note')->nullable();

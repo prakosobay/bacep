@@ -19,6 +19,7 @@ class CreateInternalFullsTable extends Migration
             $table->string('link');
             $table->string('status');
             $table->string('note')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

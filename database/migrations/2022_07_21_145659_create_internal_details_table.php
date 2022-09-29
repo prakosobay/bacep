@@ -21,6 +21,7 @@ class CreateInternalDetailsTable extends Migration
             $table->string('activity');
             $table->string('item');
             $table->string('service_impact');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

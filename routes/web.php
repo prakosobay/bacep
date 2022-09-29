@@ -358,7 +358,6 @@ Route::middleware(['auth'])->group(function () {
     });
 
 
-
     //Eksternal
     Route::controller(EksternalController::class)->group(function(){
         Route::get('dashboard-eksternal', 'dashboard')->name('dashboardEksternal');

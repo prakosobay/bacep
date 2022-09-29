@@ -6,15 +6,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class InternalDetail extends Model
+class ChangeRequestInternal extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $table = 'change_request_internals';
     protected $guarded = [];
-    protected $table = 'internal_details';
 
     public function internal()
     {
-        return $this->belongsTo(Internal::class);
+        return $this->belongsTo(Internal::class, 'internal_id');
     }
 }

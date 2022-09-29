@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateInternalEntriesTable extends Migration
+class CreateChangeRequestInternalsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateInternalEntriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('internal_entries', function (Blueprint $table) {
+        Schema::create('change_request_internals', function (Blueprint $table) {
             $table->id();
             $table->foreignId('internal_id');
-            $table->foreignId('m_room_id');
-            $table->foreignId('m_rack_id')->nullable();
+            $table->unsignedInteger('number');
+            $table->unsignedTinyInteger('month');
+            $table->unsignedSmallInteger('year');
             $table->softDeletes();
             $table->timestamps();
         });
@@ -30,6 +31,6 @@ class CreateInternalEntriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('internal_entries');
+        Schema::dropIfExists('change_request_internals');
     }
 }
