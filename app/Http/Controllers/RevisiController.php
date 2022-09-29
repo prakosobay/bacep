@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\{DB, Auth, Gate, Mail, Session, Storage};
 use Illuminate\Support\Str;
-use App\Models\{Visitor};
+use App\Models\{MasterCompany, Visitor};
 use Yajra\Datatables\Datatables;
 use Carbon\Carbon;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -35,14 +35,16 @@ class RevisiController extends Controller
 
     public function revisi_visitor_create()
     {
-        return view('admin.newVisitor');
+        $companies = MasterCompany::select('id', 'name')->get();
+        return view('admin.newVisitor', compact('companies'));
     }
 
     // Edit Pages
     public function edit_visitor($id) // Menampilkan data visitor terpilih
     {
         $visitor = Visitor::findOrFail($id);
-        return view('admin.editVisitor', compact('visitor'));
+        $companies = MasterCompany::select('id', 'name')->get();
+        return view('admin.editVisitor', compact('visitor', 'companies'));
     }
 
     public function edit_ob($id) // Menampilkan data ob terpilih
@@ -91,27 +93,36 @@ class RevisiController extends Controller
     public function update_visitor(Request $request, $id)
     {
         //dd($request->all());
-        $validated = $request->validate([
-            'nama' => ['required'],
-            'company' => ['required'],
-            'department' => ['required'],
-            'phone' => ['required'],
+        $request->validate([
+            'nama' => ['required', 'string', 'max:255'],
+            'company' => ['required', 'string', 'max:255'],
+            'department' => ['required', 'string', 'max:255'],
+            'phone' => ['required', 'string', 'max:255'],
             'nik' => ['required'],
-            'respon' => ['required'],
+            'respon' => ['required', 'string', 'max:255'],
         ]);
 
-        if($validated){
+        DB::beginTransaction();
+
+        try {
+
+            $company = MasterCompany::where('id', $request->company)->select('name')->first();
+
             $update = Visitor::findOrFail($id);
             $update->update([
                 'visit_nama' => $request->nama,
-                'visit_company' => $request->company,
+                'visit_company' => $company->name,
                 'visit_department' => $request->department,
                 'visit_respon' => $request->respon,
                 'visit_phone' => $request->phone,
                 'visit_nik' => $request->nik,
             ]);
 
+            DB::commit();
             return redirect()->route('show_visitor')->with('success', 'berhasil update yeayyy');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->with('failed', $e->getMessage());
         }
     }
 
@@ -166,32 +177,34 @@ class RevisiController extends Controller
 
     public function store_visitor(Request $request) // Menambahkan visitor terbaru
     {
-        $validated = $request->validate([
-            'nama' => ['required'],
-            'company' => ['required'],
-            'dept' => ['required'],
-            'phone' => ['required'],
-            'nik' => ['required'],
-            'respon' => ['required'],
+        $request->validate([
+            'nama' => ['required', 'string', 'max:255'],
+            'company' => ['required', 'string', 'max:255'],
+            'dept' => ['required', 'string', 'max:255'],
+            'phone' => ['required', 'string', 'max:255'],
+            'nik' => ['required', 'string', 'max:255'],
+            'respon' => ['required', 'string', 'max:255'],
         ]);
 
-        if($validated){
-            $create = Visitor::insert([
+        DB::beginTransaction();
+
+        try {
+
+            $company = MasterCompany::where('id', $request->company)->select('name')->first();
+            Visitor::firstOrCreate([
                 'visit_nama' => $request->nama,
-                'visit_company' => $request->company,
+                'visit_company' => $company->name,
                 'visit_department' => $request->dept,
                 'visit_respon' => $request->respon,
                 'visit_phone' => $request->phone,
                 'visit_nik' => $request->nik,
-                'created_at' => now(),
-                'updated_at' => now(),
             ]);
 
-            if($create){
-                return redirect()->route('show_visitor')->with('success', 'berhasil yeayyy');
-            }
-        } else {
-            return back()->with('gagal', 'gagal');
+            DB::commit();
+            return back()->with('success', 'Saved');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->with('failed', $e->getMessage());
         }
     }
 }

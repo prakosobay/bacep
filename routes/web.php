@@ -36,7 +36,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/table_user', 'show_user');
         Route::get('/table_role', 'show_role');
         Route::get('admin/user/edit/{id}', 'user_edit');
-        Route::put('u.edit/{id}', 'user_update');
+
+        Route::put('user/update/{id}', 'user_update')->name('userUpdate');
         Route::post('/role.new', 'store_role');
         Route::post('/relasi.new', 'store_relasi');
         Route::post('/user.new', 'store_user');
@@ -59,21 +60,21 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::controller(MasterRoomController::class)->group(function () {
-        Route::get('room-table', 'table')->name('room');
-        Route::get('room-yajra', 'yajra')->name('roomYajra');
+        Route::get('room/table', 'table')->name('room');
+        Route::get('room/yajra', 'yajra')->name('roomYajra');
 
-        Route::post('room-store', 'store')->name('roomStore');
-        Route::post('room-update/{id}', 'update')->name('roomUpdate');
-        Route::post('room-delete/{id}', 'delete')->name('roomDelete');
+        Route::post('room/store', 'store')->name('roomStore');
+        Route::post('room/update/{id}', 'update')->name('roomUpdate');
+        Route::post('room/delete/{id}', 'delete')->name('roomDelete');
     });
 
     Route::controller(MasterCompanyController::class)->group(function () {
-        Route::get('company-table', 'table')->name('company');
-        Route::get('company-yajra', 'yajra')->name('companyYajra');
+        Route::get('company/table', 'table')->name('company');
+        Route::get('company/yajra', 'yajra')->name('companyYajra');
 
-        Route::post('company-store', 'store')->name('companyStore');
-        Route::post('company-update/{id}', 'update')->name('companyUpdate');
-        Route::post('company-delete/{id}', 'delete')->name('companyDelete');
+        Route::post('company/store', 'store')->name('companyStore');
+        Route::post('company/update/{id}', 'update')->name('companyUpdate');
+        Route::post('company/delete/{id}', 'delete')->name('companyDelete');
     });
 
     Route::controller(MasterRackController::class)->group(function () {
@@ -191,7 +192,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('revisi/visitor/create', 'revisi_visitor_create');
         Route::get('/revisi/visitor/yajra', 'yajra_visitor');
         Route::get('/revisi/visitor/edit/{id}', 'edit_visitor');
-        Route::put('/revisi/visitor/edit/{id}', 'update_visitor');
+        Route::put('revisi/visitor/update/{id}', 'update_visitor')->name('revisiVisitorUpdate');
         Route::post('/revisi/visitor/destroy/{id}', 'destroy_visitor');
         Route::post('revisi/visitor/create', 'store_visitor');
     });

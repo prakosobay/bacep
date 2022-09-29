@@ -63,7 +63,7 @@
                 { data: 'visit_respon', name: 'visit_respon' },
                 { data: 'visit_phone', name: 'visit_phone' },
                 { data: 'visit_nik', name: 'visit_nik' },
-                {data: 'action', name: 'action', orderable: false, searchable: false}
+                { data: 'action', name: 'action', orderable: false, searchable: false }
             ]
         });
     });

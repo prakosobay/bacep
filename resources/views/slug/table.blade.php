@@ -8,11 +8,21 @@
 
     <div class="container mx-3 my-3">
         @if (session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+    </div>
+
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
         </div>
     @endif
-    </div>
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">

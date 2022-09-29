@@ -39,10 +39,10 @@
                                 <td>{{$c->hp}}</td>
                                 <td>
                                     <div class="btn-toolbar">
-                                        <a href="{{url('/edit.user', $c->id)}}" type="button" class="btn btn-success btn-sm col-xs-2 margin-bottom" id="in">Edit</a>
+                                        <a href="{{url('/edit.user', $c->id)}}" type="button" class="btn btn-success btn-sm mx-1 my-1" id="in">Edit</a>
                                     </div>
                                     <div class="btn-toolbar">
-                                        <a href="{{url('/delete.user', $c->id)}}" type="button" class="btn btn-danger btn-sm" id="out">Hapus</a>
+                                        <a href="{{url('/delete.user', $c->id)}}" type="button" class="btn btn-danger btn-sm mx-1 my-1" id="out">Hapus</a>
                                     </div>
                                 </td>
                             </tr>

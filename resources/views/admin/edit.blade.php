@@ -1,8 +1,5 @@
 @extends('layouts.admin')
 
-@section('judul_halaman', 'Tabel User Web Permit')
-        {{ csrf_field() }}
-
 @section('content')
 <!-- Begin Page Content -->
 <div class="container-fluid">
@@ -13,67 +10,85 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <a type="button" class="btn btn-primary mr-5 sm" href="{{url('table_user')}}">
+            <a type="button" class="btn btn-primary mr-5 sm" href="{{ url('table_user') }}">
                 Kembali
             </a>
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <form method="post" id="user" class="validate-form" action="{{url('u.edit', $user->id)}}">
+                <form method="post" id="user" class="validate-form" action="{{ route('userUpdate', $user->id) }}">
                     @csrf
                     @method('PUT')
-                    @if (count($errors) > 0)
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
+
+                    <div class="container mx-3 my-3">
+                        @if (session('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+                    </div>
+
+                    <div class="container mx-3 my-3">
+                        @if (session('failed'))
+                            <div class="alert alert-danger">
+                                {{ session('failed') }}
+                            </div>
+                        @endif
+                    </div>
+
                     <div class="form-group">
-                        <label for="name"><strong>Nama Lengkap</strong></label>
-                        <input type="text" class="form-control @error('name') is-invalid @enderror" required autocomplete="name" id="name" name="name" value="{{$user->name}}" autofocus>
-                            @error('name')
+                        <label for="name" class="form-label"><strong>Nama Lengkap</strong></label>
+                        <input type="text" class="form-control @error('name') is-invalid @enderror" required id="name" name="name" value="{{$user->name}}" autofocus>
+                        @error('name')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
-                            @enderror
+                        @enderror
+                    </div>
 
-                        <label class="mt-3" for="id"><strong>ID User</strong></label>
-                        <input type="number" class="form-control" id="id" name="user_id" value="{{$user->id}}" readonly>
+                    <div class="form-group">
+                        <label class="form-label" for="user_id"><strong>ID User</strong></label>
+                        <input type="number" class="form-control" id="user_id" name="user_id" value="{{$user->id}}" readonly>
+                    </div>
 
-                        <label class="mt-3" for="slug"><strong>Slug</strong></label>
-                        <select class="form-control" id="slug" name="slug">
+                    <div class="form-group">
+                        <label class="form-label" for="slug"><strong>Slug</strong></label>
+                        <select class="form-control" id="slug" name="slug" required>
                             <option value="{{ $user->slug }}" selected>{{ $user->slug }}</option>
                             @foreach ($slugs as $slug)
                                 <option value="{{ $slug->id }}">{{ $slug->name }}</option>
                             @endforeach
-                          </select>
+                        </select>
+                    </div>
 
-                        <label class="mt-3" for="department"><strong>Department</strong></label>
-                        <input type="text" id="department" name="department" class="form-control @error('department') is-invalid @enderror" value="{{$user->department}}" required autocomplete="department">
-                            @error('department')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                    <div class="form-group">
+                        <label class="form-label" for="department"><strong>Department</strong></label>
+                        <input type="text" id="department" name="department" class="form-control @error('department') is-invalid @enderror" value="{{$user->department}}" required>
+                        @error('department')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
 
-                        <label class="mt-3" for="company"><strong>Company</strong></label>
-                        <select name="company" id="company" class="form-control">
+                    <div class="form-group">
+                        <label class="form-label" for="company"><strong>Company</strong></label>
+                        <select name="company" id="company" class="form-control" required>
                             <option value="{{ $user->company }}">{{ $user->company }}</option>
                             @foreach ( $companies as $company )
                                 <option value="{{ $company->id }}">{{ $company->name }}</option>
                             @endforeach
                         </select>
+                    </div>
 
-                        <label class="mt-3" for="phone"><strong>Nomer HP</strong></label>
-                        <input type="text" class="form-control @error('phone') is-invalid @enderror" id="phone" name="phone" value="{{$user->phone}}" required autocomplete="phone">
-                            @error('phone')
+                    <div class="form-group">
+                        <label class="form-label" for="phone"><strong>Nomer HP</strong></label>
+                        <input type="text" class="form-control @error('phone') is-invalid @enderror" id="phone" name="phone" value="{{$user->phone}}" required>
+                        @error('phone')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
-                            @enderror
+                        @enderror
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>

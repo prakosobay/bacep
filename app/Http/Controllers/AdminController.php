@@ -4,12 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\{MasterCompany, User, Role, Visitor, MasterSlug};
 use Illuminate\Http\Request;
-use GuzzleHttp\Promise\Create;
 use Yajra\DataTables\Datatables;
 use Illuminate\Validation\Rule;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\{DB, Auth, Gate, Validator, Hash};
-use Laravel\Fortify\Contracts\CreatesNewUsers;
 
 class AdminController extends Controller
 {
@@ -167,27 +165,38 @@ class AdminController extends Controller
             'slug' => ['required', 'string', 'max:255'],
             'department' => ['required', 'string', 'max:255'],
             'company' => ['required', 'string'],
-            'phone' => ['required', 'numeric'],
+            'phone' => ['required', 'string'],
         ]);
 
-        $slug = MasterSlug::findOrFail($request->slug);
-        $company = MasterCompany::findOrFail($request->company);
-        // dd($company->name);
+        DB::beginTransaction();
 
-        // Cari id dari user yang akan di update
-        $user = User::find($id);
+        try {
 
-        // Update data user yang terpilih berdasarkan idnya
-        $user->update([
-            'name' => $request->name,
-            'slug' => $slug->name,
-            'department' => $request->department,
-            'company' => $company->name,
-            'phone' => $request->phone,
-        ]);
+            $slug = MasterSlug::findOrFail($request->slug);
+            $company = MasterCompany::findOrFail($request->company);
 
-        Alert::success('Success', 'Data has been updated');
-        return back();
+            // Cari id dari user yang akan di update
+            $user = User::find($id);
+
+            // Update data user yang terpilih berdasarkan idnya
+            $user->update([
+                'name' => $request->name,
+                'slug' => $slug->name,
+                'department' => $request->department,
+                'company' => $company->name,
+                'phone' => $request->phone,
+            ]);
+
+            DB::commit();
+            return back()->with('success', 'Updated');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->with('failed', $e->getMessage());
+        }
+
+
+
+
     }
 
     public function delete_user($id) // Menghapus user SELAMANYA
