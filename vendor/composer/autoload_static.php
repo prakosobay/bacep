@@ -727,6 +727,7 @@ class ComposerStaticInit582140f03abb5abd5ed2c14fd376fb64
         'App\\Models\\MasterCompany' => __DIR__ . '/../..' . '/app/Models/MasterCompany.php',
         'App\\Models\\MasterOb' => __DIR__ . '/../..' . '/app/Models/MasterOb.php',
         'App\\Models\\MasterRack' => __DIR__ . '/../..' . '/app/Models/MasterRack.php',
+        'App\\Models\\MasterRisks' => __DIR__ . '/../..' . '/app/Models/MasterRisks.php',
         'App\\Models\\MasterRoom' => __DIR__ . '/../..' . '/app/Models/MasterRoom.php',
         'App\\Models\\MasterSlug' => __DIR__ . '/../..' . '/app/Models/MasterSlug.php',
         'App\\Models\\Other' => __DIR__ . '/../..' . '/app/Models/Other.php',

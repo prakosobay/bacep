@@ -96,6 +96,34 @@ Route::middleware(['auth'])->group(function () {
         Route::post('slug/delete/{id}', 'delete')->name('slugDelete');
     });
 
+    Route::controller(MasterCardController::class)->group(function () {
+        Route::post('card/store', 'store')->name('cardStore');
+        Route::post('card/update/{id}', 'update')->name('cardUpdate');
+        Route::post('card/delete/{id}', 'delete')->name('cardDelete');
+
+        Route::get('card/show', 'show')->name('card');
+        Route::get('card/yajra', 'yajra')->name('cardYajra');
+        Route::get('card/edit/{id}', 'edit')->name('cardEdit');
+    });
+
+    Route::controller(MasterCardTypeController::class)->group(function(){
+        Route::get('card-type/show', 'show')->name('cardType');
+        Route::get('card-type/yajra', 'yajra')->name('cardTypeYajra');
+
+        Route::post('card-type/store', 'store')->name('cardTypeStore');
+        Route::post('card-type/update/{id}', 'update')->name('cardTypeUpdate');
+        Route::post('card-type/delete/{id}', 'delete')->name('cardTypeDelete');
+    });
+
+    Route::controller(MasterRiskController::class)->group(function(){
+        Route::get('risk/table', 'table')->name('risk');
+        Route::get('risk/yajra', 'yajra')->name('riskYajra');
+
+        Route::post('risk/store', 'store')->name('riskStore');
+        Route::post('risk/update/{id}', 'update')->name('riskUpdate');
+        Route::post('risk/delete/{id}', 'delete')->name('riskDelete');
+    });
+
 
 
     //Dashboard Barang
@@ -169,7 +197,6 @@ Route::middleware(['auth'])->group(function () {
     });
 
 
-
     //Checklist Genset
     Route::get('/checklist.warming', [GensetController::class, 'show_warming']);
     Route::get('/checklist.table', [GensetController::class, 'index']);
@@ -178,7 +205,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/checklist', [GensetController::class, 'store_warming']);
 
 
-
+    // Revisi
     Route::controller(RevisiController::class)->group(function () {
         //Revisi OB
         Route::get('/ob', 'show_ob')->name('ob');
@@ -303,29 +330,6 @@ Route::middleware(['auth'])->group(function () {
     });
 
 
-    // Card
-    Route::controller(MasterCardController::class)->group(function () {
-        Route::post('card/store', 'store')->name('cardStore');
-        Route::post('card/update/{id}', 'update')->name('cardUpdate');
-        Route::post('card/delete/{id}', 'delete')->name('cardDelete');
-
-        Route::get('card/show', 'show')->name('card');
-        Route::get('card/yajra', 'yajra')->name('cardYajra');
-        Route::get('card/edit/{id}', 'edit')->name('cardEdit');
-    });
-
-
-    //Card Type
-    Route::controller(MasterCardTypeController::class)->group(function(){
-        Route::get('card-type/show', 'show')->name('cardType');
-        Route::get('card-type/yajra', 'yajra')->name('cardTypeYajra');
-
-        Route::post('card-type/store', 'store')->name('cardTypeStore');
-        Route::post('card-type/update/{id}', 'update')->name('cardTypeUpdate');
-        Route::post('card-type/delete/{id}', 'delete')->name('cardTypeDelete');
-    });
-
-
     // Internal
     Route::controller(InternalController::class)->group(function () {
         Route::get('internal-dashboard/{dept}', 'dashboard')->name('dashboardInternal');
@@ -333,6 +337,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('internal-last-form/{dept}', 'internal_last_form')->name('lastInternal');
         Route::get('last-selected/{id}', 'last_selected')->name('lastSelected');
         Route::get('internal/form', 'internal_form');
+        Route::get('internal/get/risk/{id}', 'get_risk');
 
         Route::get('internal-action-checkin-form/{id}', 'internal_action_checkin_form')->name('checkinInternal');
         Route::get('internal-action-checkout-form/{id}', 'internal_action_checkout_form')->name('checkoutInternal');
@@ -365,21 +370,6 @@ Route::middleware(['auth'])->group(function () {
 
 
         Route::post('eksternal-store', 'store')->name('eksternalStore');
-    });
-
-
-    Route::controller(ColoController::class)->group(function () {
-        Route::get('isVisitor/{company}/{dept}', 'isVisitor')->name('isVisitor');
-        Route::get('colo/form', 'form');
-        Route::get('finished/{company}/{department}', 'finished');
-        Route::get('last/form/{company}/{department}', 'last_form');
-        Route::get('colo/pdf/{id}', 'pdf');
-
-        Route::get('colo/yajra/history', 'yajra_history');
-
-        Route::post('colo/store', 'store');
-        Route::post('colo/approve', 'approve');
-        Route::post('colo/reject', 'reject');
     });
 
 

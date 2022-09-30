@@ -101,6 +101,7 @@ return array(
     'App\\Models\\MasterCompany' => $baseDir . '/app/Models/MasterCompany.php',
     'App\\Models\\MasterOb' => $baseDir . '/app/Models/MasterOb.php',
     'App\\Models\\MasterRack' => $baseDir . '/app/Models/MasterRack.php',
+    'App\\Models\\MasterRisks' => $baseDir . '/app/Models/MasterRisks.php',
     'App\\Models\\MasterRoom' => $baseDir . '/app/Models/MasterRoom.php',
     'App\\Models\\MasterSlug' => $baseDir . '/app/Models/MasterSlug.php',
     'App\\Models\\Other' => $baseDir . '/app/Models/Other.php',

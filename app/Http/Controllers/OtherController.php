@@ -728,14 +728,14 @@ class OtherController extends Controller
             }
             $other_personil = TroubleshootBmPersonil::insert($insert_personil);
 
-            $notif_email = TroubleshootBm::find($other_form->id);
-            foreach ([
-                'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
-                'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id',
-                'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'dyah.retno@balitower.co.id',
-            ] as $recipient) {
-                Mail::to($recipient)->send(new NotifTroubleshootForm($notif_email));
-            }
+            // $notif_email = TroubleshootBm::find($other_form->id);
+            // foreach ([
+            //     'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
+            //     'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id',
+            //     'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'dyah.retno@balitower.co.id',
+            // ] as $recipient) {
+            //     Mail::to($recipient)->send(new NotifTroubleshootForm($notif_email));
+            // }
 
             $log_troubleshoot = TroubleshootBmHistory::insert([
                 'troubleshoot_bm_id' => $other_form->id,
@@ -789,29 +789,29 @@ class OtherController extends Controller
             // // Pergantian  role tiap permit & send email notif
             $role_to = '';
             if ($last_update->role_to == 'review') {
-                foreach ([
-                    'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
-                    'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id',
-                    'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id',
-                ] as $recipient) {
-                    Mail::to($recipient)->send(new NotifTroubleshootForm($notif_email));
-                }
+                // foreach ([
+                //     'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
+                //     'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id',
+                //     'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id',
+                // ] as $recipient) {
+                //     Mail::to($recipient)->send(new NotifTroubleshootForm($notif_email));
+                // }
                 $role_to = 'check';
             } elseif ($last_update->role_to == 'check') {
-                foreach (['security.bacep@balitower.co.id'] as $recipient) {
-                    Mail::to($recipient)->send(new NotifTroubleshootForm($notif_email));
-                }
+                // foreach (['security.bacep@balitower.co.id'] as $recipient) {
+                //     Mail::to($recipient)->send(new NotifTroubleshootForm($notif_email));
+                // }
                 $role_to = 'security';
             } elseif ($last_update->role_to == 'security') {
-                foreach (['bayu.prakoso@balitower.co.id', 'tofiq.hidayat@balitower.co.id'] as $recipient) {
-                    Mail::to($recipient)->send(new NotifTroubleshootForm($notif_email));
-                }
+                // foreach (['bayu.prakoso@balitower.co.id', 'tofiq.hidayat@balitower.co.id'] as $recipient) {
+                //     Mail::to($recipient)->send(new NotifTroubleshootForm($notif_email));
+                // }
                 $role_to = 'head';
             } elseif ($last_update->role_to = 'head') {
                 $full = TroubleshootBm::find($request->id);
-                foreach (['dc@balitower.co.id'] as $recipient) {
-                    Mail::to($recipient)->send(new NotifTroubleshootFull($full));
-                }
+                // foreach (['dc@balitower.co.id'] as $recipient) {
+                //     Mail::to($recipient)->send(new NotifTroubleshootFull($full));
+                // }
                 $role_to = 'all';
 
                 $full_troubleshoot = TroubleshootBm::where('id', $request->id)->first();
@@ -963,6 +963,31 @@ class OtherController extends Controller
 
         Storage::disk('troubleshootCheckout')->put($imageName, base64_decode($image));
 
+        $get = TroubleshootBmPersonil::findOrFail($id);
+        $pic = $get->troubleshoot_bm_id;
+
+        $penomoran = PenomoranCleaning::latest()->first();
+
+        if((!$penomoran)){
+
+            $ar = 1;
+            $cr = 1;
+
+        } elseif($penomoran->number_ar){
+
+            $ar = $penomoran->number_ar + 1;
+            $cr = $penomoran->number_cr + 1;
+        }
+
+        $lastyearAR = $penomoran->year_ar;
+        $lastyearCR = $penomoran->year_cr;
+        $currrentYear = date('Y');
+
+        if ( ($currrentYear != $lastyearAR) && ( $currrentYear != $lastyearCR ) ){
+            $ar = 1;
+            $cr = 1;
+        }
+
         DB::beginTransaction();
 
         try {
@@ -972,6 +997,20 @@ class OtherController extends Controller
                 'checkout' => $request->checkout,
                 'photo_checkout' => $imageName,
             ]);
+
+            $o = PenomoranCleaning::firstOrCreate([
+                'number_ar' => $ar,
+                'month_ar' => date('m'),
+                'year_ar' => date('Y'),
+                'number_cr' => $cr,
+                'month_cr' => date('m'),
+                'year_cr' => date('Y'),
+                'cleaning_id' => '',
+                'other_id' => '',
+                'troubleshoot_bm_id' => $pic,
+            ]);
+
+            // dd($o);
 
             DB::commit();
             return redirect()->route('logall')->with('success', 'Checkout Successful');
@@ -1012,8 +1051,9 @@ class OtherController extends Controller
 
         $getHistory = DB::table('troubleshoot_bm_histories')
             ->join('troubleshoot_bms', 'troubleshoot_bms.id', '=', 'troubleshoot_bm_histories.troubleshoot_bm_id')
+            ->join('users', 'troubleshoot_bm_histories.created_by', '=', 'users.id')
             ->where('troubleshoot_bm_histories.troubleshoot_bm_id', '=', $id)
-            ->select('troubleshoot_bm_histories.*')
+            ->select('troubleshoot_bm_histories.*', 'users.name as createdby')
             ->get();
 
         $penomoran = PenomoranCleaning::where('troubleshoot_bm_id', $id)->first();

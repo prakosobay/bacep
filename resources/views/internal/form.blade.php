@@ -15,6 +15,14 @@
                     @endif
                 </div>
 
+                <div class="container">
+                    @if (session('failed'))
+                        <div class="alert alert-danger mt-2">
+                            {{ session('failed') }}
+                        </div>
+                    @endif
+                </div>
+
                 {{-- Requestor --}}
                 <div class="row">
                     <div class="col-4">
@@ -26,23 +34,23 @@
                     <div class="col-4">
                         <div class="form-group mb-4">
                             <label for="req_name" class="form-label">Requestor Name :</label>
-                            <input type="text" class="form-control" id="req_name" name="req_name" value="{{ auth()->user()->name }}" readonly>
+                            <input type="text" class="form-control" id="req_name" value="{{ auth()->user()->name }}" readonly>
                         </div>
                     </div>
                     <div class="col-4">
                         <div class="form-group mb-4">
                             <label for="req_phone" class="form-label">Requestor Phone Number:</label>
-                            <input type="text" class="form-control" id="req_phone" name="req_phone" value="{{ auth()->user()->phone }}" readonly>
+                            <input type="text" class="form-control" id="req_phone" value="{{ auth()->user()->phone }}" readonly>
                         </div>
                     </div>
                 </div>
 
                 {{-- Purpose of Work --}}
                 <div class="row">
-                    <div class="col-8">
+                    <div class="col-12">
                         <div class="form-group mb-5">
                             <label for="work" class="form-label">Purpose of Work :</label>
-                            <input type="text" class="form-control @error('work') is-invalid @enderror" id="work" name="work" value="{{ old('work')}}" required>
+                            <input type="text" class="form-control @error('work') is-invalid @enderror" id="work" name="work" value="{{ old('work') }}" required>
                             @error('work')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -71,7 +79,7 @@
                             </optgroup>
                         </select>
                     </div> --}}
-                    <div class="col-4">
+                    {{-- <div class="col-4">
                         <div class="form-group mb-5">
                             <label for="rack" class="form-label">Rack :</label>
                             <input type="text" class="form-control @error('rack') is-invalid @enderror" id="rack" name="rack" value="{{ old('rack')}}" required>
@@ -81,7 +89,7 @@
                                 </span>
                             @enderror
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
 
                 {{-- Date of Visit & Leave --}}
@@ -111,7 +119,7 @@
                 </div>
 
                 {{-- Entry Area --}}
-                <div class="row">
+                {{-- <div class="row">
                     <div class="col-4 mt-2">
                         <div class="form-check mb-3">
                             <label for="dc" class="form-check-label">Server Room</label>
@@ -138,7 +146,7 @@
                             <input type="text" class="form-control" id="lain" name="lain" value="{{ old('lain')}}" placeholder="Tempat Lainnya">
                         </div>
                     </div>
-                </div>
+                </div> --}}
 
                 {{-- background & description --}}
                 <div class="row">
@@ -263,46 +271,64 @@
                         <tbody>
                             <tr>
                                 <td>
-                                    <input type="text" class="form-control @error('risk') is-invalid @enderror" name="risk[]" value="{{ old('risk')}}" required>
-                                    @error('risk')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </td>
-                                <td>
-                                    <input type="text" class="form-control @error('poss') is-invalid @enderror" name="poss[]" value="{{ old('poss')}}" required>
-                                    @error('poss')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </td>
-                                <td>
-                                    <select name="impact[]" id="impact" class="form-select @error('impact') is-invalid @enderror" required>
-                                        <option value=""></option>
-                                        <option value="Low">Low</option>
-                                        <option value="Medium">Medium</option>
-                                        <option value="High">High</option>
+                                    <select name="risk" class="form-control" id="risk" required>
+                                        <option selected>Choose 1</option>
+                                        @foreach ( $risks as $risk )
+                                            <option value="{{ $risk->id }}">{{ $risk->risk }}</option>
+                                        @endforeach
                                     </select>
-                                    @error('impact')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control @error('mitigation') is-invalid @enderror" name="mitigation[]" value="{{ old('mitigation')}}" required>
-                                    @error('mitigation')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
+                                    <input type="text" class="form-control" name="poss[]" value="" id="poss" readonly>
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" name="impact[]" value="" id="impact" readonly>
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" name="mitigation[]" value="" id="mitigation" readonly>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <select name="risk" class="form-control" id="risk2" required>
+                                        <option selected>Choose 1</option>
+                                        @foreach ( $risks as $risk )
+                                            <option value="{{ $risk->id }}">{{ $risk->risk }}</option>
+                                        @endforeach
+                                    </select>
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" name="poss[]" value="" id="poss2" readonly>
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" name="impact[]" value="" id="impact2" readonly>
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" name="mitigation[]" value="" id="mitigation2" readonly>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <select name="risk" class="form-control" id="risk3" required>
+                                        <option selected>Choose 1</option>
+                                        @foreach ( $risks as $risk )
+                                            <option value="{{ $risk->id }}">{{ $risk->risk }}</option>
+                                        @endforeach
+                                    </select>
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" name="poss[]" value="" id="poss3" readonly>
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" name="impact[]" value="" id="impact3" readonly>
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" name="mitigation[]" value="" id="mitigation3" readonly>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
-                    <button id="button_risk"><b>Add More Fields</b></button>
+                    {{-- <button id="button_risk"><b>Add More Fields</b></button> --}}
                 </div>
 
                 {{-- Visitor --}}
@@ -364,6 +390,54 @@ $(document).ready(function(){
     //     tags : true,
     // });
 
+    $('#risk').change(function(){
+        let id = $(this).val();
+        $.ajax({
+            url: "{{ url("internal/get/risk") }}"+'/'+id,
+            dataType:"json",
+            type: "get",
+            success: function(response){
+                const {risk} = response;
+                console.log(risk)
+            $('#poss').val(risk.poss);
+            $('#impact').val(risk.impact);
+            $('#mitigation').val(risk.mitigation);
+            }
+        });
+    });
+
+    $('#risk2').change(function(){
+        let id = $(this).val();
+        $.ajax({
+            url: "{{ url("internal/get/risk") }}"+'/'+id,
+            dataType:"json",
+            type: "get",
+            success: function(response){
+                const {risk} = response;
+                console.log(risk)
+            $('#poss2').val(risk.poss);
+            $('#impact2').val(risk.impact);
+            $('#mitigation2').val(risk.mitigation);
+            }
+        });
+    });
+
+    $('#risk3').change(function(){
+        let id = $(this).val();
+        $.ajax({
+            url: "{{ url("internal/get/risk") }}"+'/'+id,
+            dataType:"json",
+            type: "get",
+            success: function(response){
+                const {risk} = response;
+                console.log(risk)
+            $('#poss3').val(risk.poss);
+            $('#impact3').val(risk.impact);
+            $('#mitigation3').val(risk.mitigation);
+            }
+        });
+    });
+
     let max_row = 15;
     let row = 1;
     let button_detail = $('#button_detail');
@@ -384,7 +458,7 @@ $(document).ready(function(){
     $(button_risk).click(function(e){
         e.preventDefault();
         if(row < max_row){
-            $(table_risk).append('<tr><td><input type="text" class="form-control @error('risk') is-invalid @enderror" name="risk[]" value="{{ old('risk')}}">@error('risk')<span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>@enderror</td><td><input type="text" class="form-control @error('poss') is-invalid @enderror" name="poss[]" value="{{ old('poss')}}">@error('poss')<span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>@enderror</td><td><select name="impact[]" id="impact" class="form-select @error('impact') is-invalid @enderror"><option value=""></option><option value="Low">Low</option><option value="Medium">Medium</option><option value="High">High</option></select>@error('impact')<span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>@enderror</td><td><input type="text" class="form-control @error('mitigation') is-invalid @enderror" name="mitigation[]" value="{{ old('mitigation')}}">@error('mitigation')<span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>@enderror</td></tr>');
+            $(table_risk).append('<tr><td><select name="risk" class="form-control" id="risk" required><option selected>Choose 1</option>@foreach ( $risks as $risk )<option value="{{ $risk->id }}">{{ $risk->risk }}</option>@endforeach</select></td><td><input type="text" class="form-control" name="poss[]" value="" id="poss" readonly></td><td><input type="text" class="form-control" name="impact[]" value="" id="impact" readonly></td><td><input type="text" class="form-control" name="mitigation[]" value="" id="mitigation" readonly></td></tr>');
             row++;
         }
     });

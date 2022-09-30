@@ -10,9 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 use Barryvdh\DomPDF\Facade as PDF;
-use RealRashid\SweetAlert\Facades\Alert;
-use Illuminate\Contracts\Encryption;
-use App\Models\{Internal, InternalEntry, InternalDetail, InternalRisk, InternalHistory, InternalFull, InternalVisitor, MasterCard, PenomoranAR, PenomoranCR};
+use App\Models\{Internal, InternalEntry, InternalDetail, InternalRisk, InternalHistory, InternalFull, InternalVisitor, MasterCard, MasterRisks};
 use App\Mail\{NotifInternalForm, NotifInternalReject, NotifInternalFull};
 use Psy\Command\WhereamiCommand;
 
@@ -22,7 +20,8 @@ class InternalController extends Controller
     // Show Pages
     public function internal_form()
     {
-        return view('internal.form');
+        $risks = MasterRisks::all();
+        return view('internal.form', compact('risks'));
     }
 
     public function dashboard()
@@ -67,6 +66,14 @@ class InternalController extends Controller
     {
         $getVisitor = InternalVisitor::findOrFail(Crypt::decrypt($id));
         return view('internal.checkoutForm', compact('getVisitor'));
+    }
+
+
+    //Ajax
+    public function get_risk($id)
+    {
+        $risk = MasterRisks::findOrFail($id);
+        return isset($risk) && !empty($risk) ? Response()->json(['status' => 'SUCCESS', 'risk' => $risk]) : response(['status' => 'FAILED', 'risk' => []]);
     }
 
 
