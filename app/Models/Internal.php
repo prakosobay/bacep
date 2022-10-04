@@ -22,11 +22,6 @@ class Internal extends Model
         return $this->hasMany(InternalHistory::class);
     }
 
-    public function risks()
-    {
-        return $this->hasMany(InternalRisk::class);
-    }
-
     public function details()
     {
         return $this->hasMany(InternalDetail::class);
@@ -34,7 +29,7 @@ class Internal extends Model
 
     public function entry()
     {
-        return $this->hasOne(InternalEntry::class);
+        return $this->hasMany(InternalEntry::class);
     }
 
     public function full()
@@ -44,7 +39,7 @@ class Internal extends Model
 
     public function card()
     {
-        return $this->belongsTo(MasterCard::class, 'card_id');
+        return $this->belongsTo(MasterCard::class, 'm_card_id');
     }
 
     public function requestor()
@@ -52,13 +47,13 @@ class Internal extends Model
         return $this->belongsTo(User::class, 'requestor_id');
     }
 
-    public function penomoranAR()
+    public function ar_internal()
     {
-        return $this->belongsTo(PenomoranAR::class, 'penomoranar_id');
+        return $this->hasOne(AccessRequestInternal::class);
     }
 
-    public function penomoranCR()
+    public function cr_internal()
     {
-        return $this->belongsTo(PenomoranCR::class, 'penomorancr_id');
+        return $this->hasOne(ChangeRequestInternal::class);
     }
 }

@@ -15,9 +15,11 @@ class CreateAccessRequestInternalsTable extends Migration
     {
         Schema::create('access_request_internals', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('internal_id');
             $table->unsignedInteger('number');
             $table->unsignedTinyInteger('month');
             $table->unsignedSmallInteger('year');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

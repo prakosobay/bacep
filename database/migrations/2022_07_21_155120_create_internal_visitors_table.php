@@ -17,16 +17,17 @@ class CreateInternalVisitorsTable extends Migration
             $table->id();
             $table->foreignId('internal_id');
             $table->string('name');
-            $table->string('company');
-            $table->string('department');
-            $table->string('respon');
-            $table->string('nik');
             $table->string('phone');
+            $table->string('nik');
+            $table->string('department');
+            $table->string('company');
+            $table->string('respon');
             $table->time('checkin')->nullable();
             $table->string('photo_checkin')->nullable();
             $table->time('checkout')->nullable();
             $table->string('photo_checkout')->nullable();
-            $table->boolean('isDone', false);
+            $table->boolean('is_done', false);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

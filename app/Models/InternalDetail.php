@@ -15,6 +15,6 @@ class InternalDetail extends Model
 
     public function internal()
     {
-        return $this->belongsTo(Internal::class);
+        return $this->belongsTo(Internal::class, 'internal_id');
     }
 }

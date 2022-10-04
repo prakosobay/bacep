@@ -3,7 +3,7 @@
 <div class="container my-5">
     <div class="card">
         <h1 class="text-center my-3 h1Permit">Access Request &  Change Request Form</h1>
-        <form action="{{ url('internal/create')}}" method="POST" class="validate-form">
+        <form action="{{ route('internalStore')}}" method="POST" class="validate-form">
             @csrf
             <div class="container form-container">
 
@@ -26,19 +26,19 @@
                 {{-- Requestor --}}
                 <div class="row">
                     <div class="col-4">
-                        <div class="form-group mb-4">
+                        <div class="form-group my-2">
                             <label for="req_dept" class="form-label">Requestor Department :</label>
                             <input type="text" value="{{ auth()->user()->department }}" id="req_dept" name="req_dept" class="form-control" readonly>
                         </div>
                     </div>
                     <div class="col-4">
-                        <div class="form-group mb-4">
+                        <div class="form-group my-2">
                             <label for="req_name" class="form-label">Requestor Name :</label>
                             <input type="text" class="form-control" id="req_name" value="{{ auth()->user()->name }}" readonly>
                         </div>
                     </div>
                     <div class="col-4">
-                        <div class="form-group mb-4">
+                        <div class="form-group my-2">
                             <label for="req_phone" class="form-label">Requestor Phone Number:</label>
                             <input type="text" class="form-control" id="req_phone" value="{{ auth()->user()->phone }}" readonly>
                         </div>
@@ -47,8 +47,8 @@
 
                 {{-- Purpose of Work --}}
                 <div class="row">
-                    <div class="col-12">
-                        <div class="form-group mb-5">
+                    <div class="col-6">
+                        <div class="form-group my-2">
                             <label for="work" class="form-label">Purpose of Work :</label>
                             <input type="text" class="form-control @error('work') is-invalid @enderror" id="work" name="work" value="{{ old('work') }}" required>
                             @error('work')
@@ -56,6 +56,16 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group my-3">
+                            <label for="rack" class="form-label">Entry Area</label>
+                            <select name="rack[]" class="js-example-basic-multiple form-control" id="rack" multiple="multiple" style="width: 50%" required>
+                                @foreach ( $getRacks as $rack )
+                                    <option value="{{ $rack->id }}">{{ $rack->room_name }}, Rack: {{ $rack->number }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                     {{-- <div class="col-4">
@@ -233,7 +243,7 @@
                                     @enderror
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control @error('service_impact') is-invalid @enderror" id="service_impact" name="service_impact[]" value="{{ old('service_impact')}}" required>
+                                    <input type="text" class="form-control @error('service_impact') is-invalid @enderror" id="service_impact" name="service_impact[]" value="{{ old('service_impact')}}">
                                     @error('service_impact')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -241,7 +251,7 @@
                                     @enderror
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control @error('item') is-invalid @enderror" id="detailItem" name="item[]" value="{{ old('item')}}" required>
+                                    <input type="text" class="form-control @error('item') is-invalid @enderror" id="detailItem" name="item[]" value="{{ old('item')}}">
                                     @error('item')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -271,7 +281,7 @@
                         <tbody>
                             <tr>
                                 <td>
-                                    <select name="risk" class="form-control" id="risk" required>
+                                    <select name="risk[]" class="form-control" id="risk" required>
                                         <option selected>Choose 1</option>
                                         @foreach ( $risks as $risk )
                                             <option value="{{ $risk->id }}">{{ $risk->risk }}</option>
@@ -290,7 +300,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <select name="risk" class="form-control" id="risk2" required>
+                                    <select name="risk[]" class="form-control" id="risk2" required>
                                         <option selected>Choose 1</option>
                                         @foreach ( $risks as $risk )
                                             <option value="{{ $risk->id }}">{{ $risk->risk }}</option>
@@ -309,7 +319,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <select name="risk" class="form-control" id="risk3" required>
+                                    <select name="risk[]" class="form-control" id="risk3" required>
                                         <option selected>Choose 1</option>
                                         @foreach ( $risks as $risk )
                                             <option value="{{ $risk->id }}">{{ $risk->risk }}</option>
@@ -356,7 +366,7 @@
                                 <th>Department</th>
                                 <td><input type="text" class="form-control" name="department[]" value="{{ old('department')}}" required></td>
                                 <th>Responsibility</th>
-                                <td><input type="text" class="form-control" name="respon[]" value="{{ old('respon')}}" required></td>
+                                <td><input type="text" class="form-control" name="respon[]" value="{{ old('respon')}}"></td>
                             </tr>
                         </tbody>
                     </table>
@@ -384,11 +394,13 @@
 <script>
 $(document).ready(function(){
 
-    // $('.js-example-basic-multiple').select2({
-    //     placeholder: 'Select an option',
-    //     allowClear : true,
-    //     tags : true,
-    // });
+    $('.js-example-basic-multiple').select2({
+        placeholder: 'Select an option',
+        allowClear : true,
+        tags : true,
+        theme : 'classic',
+        // width: 'resolve',
+    });
 
     $('#risk').change(function(){
         let id = $(this).val();

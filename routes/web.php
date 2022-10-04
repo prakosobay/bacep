@@ -355,7 +355,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('internal/yajra/finished/{dept}', 'internal_yajra_finished');
         Route::get('internal/yajra/last/form/{dept}', 'internal_yajra_last_form');
 
-        Route::post('internal/create', 'internal_create');
+        Route::post('internal/create', 'internal_create')->name('internalStore');
         Route::post('internal/approve/{id}', 'internal_approve');
         Route::post('internal/reject/{id}', 'internal_reject');
 

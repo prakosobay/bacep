@@ -10,6 +10,7 @@ class InternalHistory extends Model
     use HasFactory;
 
     protected $guarded = [];
+    protected $table = 'internal_histories';
 
     public function internal()
     {

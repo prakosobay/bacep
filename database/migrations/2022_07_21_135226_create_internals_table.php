@@ -17,7 +17,6 @@ class CreateInternalsTable extends Migration
             $table->id();
             $table->foreignId('requestor_id');
             $table->foreignId('m_card_id')->nullable();
-            $table->foreignId('m_risk_id')->nullable();
             $table->string('work');
             $table->date('visit');
             $table->date('leave');
