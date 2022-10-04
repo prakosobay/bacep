@@ -27,12 +27,14 @@ class AssetMasukImport implements ToCollection, WithStartRow
         // die;
         foreach ($rows as $row) {
             AssetMasuk::create([
-                'tanggal' => $row[0],
+                'id' => $row[0],
                 'asset_id' => $row[1],
+                'tanggal' => $row[2],
                 'nama_barang' => $row[2],
                 'jumlah' => $row[3],
                 'ket' => $row[4],
                 'pencatat' => $row[5],
+                'tanggal' => $row[6],
             ]);
         }
     }

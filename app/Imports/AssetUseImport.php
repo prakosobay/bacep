@@ -27,18 +27,19 @@ class AssetUseImport implements ToCollection, WithStartRow
         // die;
         foreach ($rows as $row) {
             AssetUse::create([
-                'tanggal' => $row[0],
+                'id' => $row[0],
                 'asset_id' => $row[1],
                 'nama_barang' => $row[2],
                 'jumlah' => $row[3],
                 'ket' => $row[4],
                 'pencatat' => $row[5],
+                'tanggal' => $row[6],
             ]);
         }
     }
 
     public function startRow(): int
     {
-        return 2;
+        return 1;
     }
 }

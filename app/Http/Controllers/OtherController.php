@@ -966,7 +966,7 @@ class OtherController extends Controller
         $get = TroubleshootBmPersonil::findOrFail($id);
         $pic = $get->troubleshoot_bm_id;
 
-        $penomoran = PenomoranCleaning::latest()->first();
+        $penomoran = PenomoranCleaning::where('troubleshoot_bm_id', $pic)->latest()->first();
 
         if((!$penomoran)){
 
@@ -977,16 +977,18 @@ class OtherController extends Controller
 
             $ar = $penomoran->number_ar + 1;
             $cr = $penomoran->number_cr + 1;
+
+            $lastyearAR = $penomoran->year_ar;
+            $lastyearCR = $penomoran->year_cr;
+            $currrentYear = date('Y');
+
+            if ( ($currrentYear != $lastyearAR) && ( $currrentYear != $lastyearCR ) ){
+                $ar = 1;
+                $cr = 1;
+            }
         }
 
-        $lastyearAR = $penomoran->year_ar;
-        $lastyearCR = $penomoran->year_cr;
-        $currrentYear = date('Y');
-
-        if ( ($currrentYear != $lastyearAR) && ( $currrentYear != $lastyearCR ) ){
-            $ar = 1;
-            $cr = 1;
-        }
+        dd($ar);
 
         DB::beginTransaction();
 
@@ -998,7 +1000,7 @@ class OtherController extends Controller
                 'photo_checkout' => $imageName,
             ]);
 
-            $o = PenomoranCleaning::firstOrCreate([
+            $o = PenomoranCleaning::create([
                 'number_ar' => $ar,
                 'month_ar' => date('m'),
                 'year_ar' => date('Y'),

@@ -29,12 +29,14 @@ class AssetImport implements ToCollection, WithStartRow
             Asset::create([
                 'id' => $row[0],
                 'nama_barang' => $row[1],
-                'jumlah' => $row[5],
-                'digunakan' => $row[6],
-                'sisa' => $row[7],
-                'satuan' => $row[8],
-                'note' => $row[10],
-                'lokasi' => $row[11],
+                'itemcode' => $row[2],
+                'jumlah' => $row[3],
+                'digunakan' => $row[4],
+                'sisa' => $row[5],
+                'satuan' => $row[6],
+                'kondisi' => $row[7],
+                'note' => $row[8],
+                'lokasi' => $row[9],
             ]);
         }
     }

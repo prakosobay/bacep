@@ -11,9 +11,9 @@
                 <strong>Export Excel</strong>
             </a>
 
-            {{-- <button type="button" class="btn btn-primary btn-sm mx-2" data-toggle="modal" data-target="#import_keluar">
+            <button type="button" class="btn btn-secondary btn-sm mx-2" data-toggle="modal" data-target="#import_keluar">
                 IMPORT CSV
-            </button> --}}
+            </button>
 
             <!-- Import Excel -->
             <div class="modal fade" id="import_keluar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

@@ -276,6 +276,27 @@ class AssetController extends Controller
                 ]);
             }
 
+            $kondisi = $asset->jumlah;
+
+            if($kondisi == 0) {
+
+                $asset->update([
+                    'kondisi' => 'Stock Habis',
+                ]);
+
+            } elseif(($kondisi > 0) && ($kondisi <= 5)){
+
+                $asset->update([
+                    'kondisi' => 'Stock Sedikit',
+                ]);
+
+            } elseif($kondisi > 5) {
+
+                $asset->update([
+                    'kondisi' => 'Stock Banyak',
+                ]);
+            }
+
             AssetUse::create([
                 'nama_barang' => $request->nama_barang,
                 'asset_id' => $request->asset_id,
