@@ -188,10 +188,17 @@
                     <td width="150px">Date of Request</td>
                     <td >: {{Carbon\Carbon::parse($getForm->created_at)->format('d-m-Y H:i')}}</td>
                 </tr>
-                <tr >
-                    <td width="150px">Change Request Number: </td>
-                    <td >: AR/{{ $getForm->penomoranAR->number }}/{{ $getForm->penomoranAR->monthly }}/{{ $getForm->penomoranAR->yearly }}</td>
-                </tr>
+                @if($nomorAR)
+                    <tr >
+                        <td width="150px">Access Request Number: </td>
+                        <td >: AR/IC/{{ $nomorAR->number }}/{{ $nomorAR->month }}/{{ $nomorAR->year}} </td>
+                    </tr>
+                @else
+                    <tr >
+                        <td width="150px">Access Request Number: </td>
+                        <td >: {{ $getForm->id }} AR/BM/</td>
+                    </tr>
+                @endif
                 <tr >
                     <td width="150px">Purpose of Work</td>
                     <td >: {{$getForm->work}}</td>
@@ -248,72 +255,52 @@
                 </tr>
                 <tr>
                     <td>
-                        @if(($getForm->entry->dc == true) )
+                        @if(($insertRack[] == 'Server Room') )
                             <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   Server Room
                         @else
                             <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   Server Room
                         @endif
                     </td>
                     <td >
-                        @if(($getForm->entry->generator == true) )
-                            <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   Generator Room
-                        @else
-                            <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   Generator Room
-                        @endif
+                        <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   Generator Room
                     </td>
                     <td><img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;"></td>
                     <td>General Access</td>
                 </tr>
                 <tr>
                     <td >
-                        @if(($getForm->entry->mmr1 == true))
+                        @if(($insertRack[] == 'MMR 1'))
                             <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   MMR 1
                         @else
                             <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   MMR 1
                         @endif
                     </td>
                     <td >
-                        @if(($getForm->entry->panel == true))
-                            <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   Panel Room
-                        @else
-                            <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   Panel Room
-                        @endif
+                        <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   Panel Room
                     </td>
                     <td><img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;"></td>
                     <td>Limited Access</td>
                 </tr>
                 <tr>
                     <td >
-                        @if(($getForm->entry->mmr2 == true))
+                        @if(($insertRack[] == 'MMR 2'))
                             <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   MMR 2
                         @else
                             <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   MMR 2
                         @endif
                     </td>
                     <td >
-                        @if(($getForm->entry->baterai == true))
-                            <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   Battery Room
-                        @else
-                            <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   Battery Room
-                        @endif
+                        <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   Battery Room
                     </td>
                     <td><img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;"></td>
                     <td>Escorted Access</td>
                 </tr>
                 <tr>
                     <td >
-                        @if(($getForm->entry->ups == true))
-                            <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   UPS Room
-                        @else
-                            <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   UPS Room
-                        @endif
+                        <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   UPS Room
                     </td>
                     <td >
-                        @if(($getForm->entry->fss == true))
-                            <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   FSS Room
-                        @else
-                            <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   FSS Room
-                        @endif
+                        <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   FSS Room
                     </td>
                     <td colspan="2">  </td>
                 </tr>
@@ -328,37 +315,23 @@
                 </tr>
                 <tr>
                     <td >
-                        @if(($getForm->entry->trafo == true))
-                            <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   Trafo Room
-                        @else
-                            <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   Trafo Room
-                        @endif
+                        <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   Trafo Room
                     </td>
                     <td >
-                        @if($getForm->entry->yard == true)
-                            <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   Yard
-                        @else
-                            <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   Yard
-                        @endif
+                        <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   Yard
                     </td>
                     <td class="table-grey" colspan="2"><b>Validity</b></td>
                 </tr>
                 <tr>
                     <td >
-                        @if($getForm->entry->cctv == true)
-                            <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   Others : CCTV Room
-                        @elseif($getForm->entry->lain == null)
-                            <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   Others :
+                        @if($insertRack[] == 'CCTV Room')
+                        <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   Others : CCTV Room
                         @else
-                            <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   Others :{{$getForm->entry->lain}}
+                        <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   Others :
                         @endif
                     </td>
                     <td >
-                        @if($getForm->entry->parking == true)
-                            <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   Parking Lot
-                        @else
-                            <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   Parking Lot
-                        @endif
+                        <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   Parking Lot
                     </td>
 
                     <td class="table-white">{{Carbon\Carbon::parse($getForm->visit)->format('d-m-Y')}}</td>
@@ -488,7 +461,11 @@
                 </tr>
             </table>
 
-            <p class="cr">Change Request Number : CR/{{ $getForm->penomoranCR->number }}/{{ $getForm->penomoranCR->monthly }}/{{ $getForm->penomoranCR->yearly }}</p>
+            @if($nomorCR)
+                <p class="cr">Change Request Number : CR/IC/{{ $nomorCR->number }}/{{ $nomorCR->month }}/{{ $nomorCR->year}}</p>
+            @else
+                <p class="cr">Change Request Number : CR/IC/</p>
+            @endif
 
             {{-- Background & Description --}}
             <table cellpadding="2" class="table table-background">
@@ -520,7 +497,7 @@
                     <td height="10px" class="table-center">{{$detail->time_start}}</td>
                     <td height="10px" class="table-center">{{$detail->time_end}}</td>
                     <td height="10px" class="table-center">{{$detail->activity}}</td>
-                    <td height="10px" class="table-center">{{$detail->risk}}</td>
+                    <td height="10px" class="table-center">{{$getDetailRisk->risk}}</td>
                 </tr>
                 @endforeach
             </table>
@@ -557,7 +534,7 @@
                     <td class="table-grey"><b>Impact</b></td>
                     <td class="table-grey"><b>Mitigation Plan</b></td>
                 </tr>
-                @foreach ($getForm->risks as $risk)
+                @foreach ($getRisks as $risk)
                 <tr >
                     <td class="table-center">{{$risk->risk}}</td>
                     <td class="table-center">{{$risk->poss}}</td>

@@ -21,7 +21,7 @@
 
 <body>
     <h2>Dear All,</h2>
-	<h3>Terlampir link permit dari tim {{ $content->req_dept}} yang sudah Full Approval</h3>
+	<h3>Terlampir link permit dari tim {{ $content->requestor}} yang sudah Full Approval</h3>
     <table>
         <thead>
             <tr>
@@ -36,8 +36,8 @@
         <tbody>
             <tr>
                 <td>{{ $content->id }}</td>
-                <td>{{ Carbon\Carbon::parse($content->created_at)->format('d-m-Y')  }}</td>
-                <td>{{ $content->req_name  }}</td>
+                <td>{{ Carbon\Carbon::parse($content->created)->format('d-m-Y')  }}</td>
+                <td>{{ $content->requestor }}</td>
                 <td>{{ $content->work }}</td>
                 <td>{{ Carbon\Carbon::parse($content->visit)->format('d-m-Y') }}</td>
                 <td>{{ Carbon\Carbon::parse($content->leave)->format('d-m-Y') }}</td>

@@ -21,7 +21,6 @@
                         <tr class="judul-table text-center">
                             <th>ID Permit</th>
                             <th>Date of Request</th>
-                            <th>Requestor Dept</th>
                             <th>Date of Visit</th>
                             <th>Date of Leave</th>
                             <th>Purpose</th>
@@ -62,7 +61,6 @@
                         <tr>
                             <td>{{ $p->internal->id }}</td>
                             <td>{{ Carbon\Carbon::parse($p->internal->created_at)->format('d-m-Y') }}</td>
-                            <td>{{ $p->createdBy->department }}</td>
                             <td>{{ Carbon\Carbon::parse($p->internal->visit)->format('d-m-Y') }}</td>
                             <td>{{ Carbon\Carbon::parse($p->internal->leave)->format('d-m-Y') }}</td>
                             <td>{{ $p->internal->work }}</td>
@@ -101,9 +99,6 @@
         </div>
     </div>
 </div>
-
-
-
 
 @push('scripts')
 <script>

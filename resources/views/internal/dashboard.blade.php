@@ -169,13 +169,13 @@
                 serverSide: true,
                 ajax: "{{ url('internal/yajra/show')}}"+'/'+ "{{auth()->user()->department}}",
                 columns: [
-                    { data: 'work', name: 'internals.work' },
-                    { data: 'req_name', name: 'internals.req_name' },
-                    { data: 'visit', name: 'internals.visit' },
-                    { data: 'leave', name: 'internals.leave' },
-                    { data: 'name', name: 'internal_visitors.name' },
-                    { data: 'checkin', name: 'internal_visitors.checkin' },
-                    { data: 'checkout', name: 'internal_visitors.checkout' },
+                    { data: 'work', name: 'work' },
+                    { data: 'requestor', name: 'requestor' },
+                    { data: 'visit', name: 'visit' },
+                    { data: 'leave', name: 'leave' },
+                    { data: 'visitor', name: 'visitor' },
+                    { data: 'checkin', name: 'checkin' },
+                    { data: 'checkout', name: 'checkout' },
                     { data: 'card_number', name: 'card_number' },
                     { data: 'action', name: 'action', orderable: false, searchable: false }
                 ]

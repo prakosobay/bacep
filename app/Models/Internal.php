@@ -32,6 +32,11 @@ class Internal extends Model
         return $this->hasMany(InternalEntry::class);
     }
 
+    public function risks()
+    {
+        return $this->hasMany(InternalRisk::class);
+    }
+
     public function full()
     {
         return $this->hasOne(InternalFull::class);

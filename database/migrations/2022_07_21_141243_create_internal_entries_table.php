@@ -16,7 +16,7 @@ class CreateInternalEntriesTable extends Migration
         Schema::create('internal_entries', function (Blueprint $table) {
             $table->id();
             $table->foreignId('internal_id');
-            $table->foreignId('m_room_id')->nullable();
+            $table->foreignId('m_room_id');
             $table->foreignId('m_rack_id')->nullable();
             $table->softDeletes();
             $table->timestamps();

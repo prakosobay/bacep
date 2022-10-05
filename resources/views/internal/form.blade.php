@@ -47,8 +47,8 @@
 
                 {{-- Purpose of Work --}}
                 <div class="row">
-                    <div class="col-6">
-                        <div class="form-group my-2">
+                    <div class="col-4">
+                        <div class="form-group my-3">
                             <label for="work" class="form-label">Purpose of Work :</label>
                             <input type="text" class="form-control @error('work') is-invalid @enderror" id="work" name="work" value="{{ old('work') }}" required>
                             @error('work')
@@ -58,12 +58,22 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="col-6">
-                        <div class="form-group my-3">
-                            <label for="rack" class="form-label">Entry Area</label>
-                            <select name="rack[]" class="js-example-basic-multiple form-control" id="rack" multiple="multiple" style="width: 50%" required>
+                    <div class="col-4">
+                        <div class="form-group mt-5">
+                            <label for="room">Entry Area</label>
+                            <select name="room[]" class="js-example-responsive-theme-multiple form-control" id="room" multiple="multiple" required>
+                                @foreach ( $getRooms as $room )
+                                    <option value="{{ $room->id }}">{{ $room->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group mt-5">
+                            <label for="rack">Rack</label>
+                            <select name="rack[]" class="js-example-responsive-theme-multiple form-control" id="rack" multiple="multiple" required>
                                 @foreach ( $getRacks as $rack )
-                                    <option value="{{ $rack->id }}">{{ $rack->room_name }}, Rack: {{ $rack->number }}</option>
+                                    <option value="{{ $rack->id }}">{{ $rack->room_name }} / {{ $rack->number }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -394,12 +404,12 @@
 <script>
 $(document).ready(function(){
 
-    $('.js-example-basic-multiple').select2({
+    $('.js-example-responsive-theme-multiple').select2({
         placeholder: 'Select an option',
         allowClear : true,
         tags : true,
         theme : 'classic',
-        // width: 'resolve',
+        width: 'resolve',
     });
 
     $('#risk').change(function(){

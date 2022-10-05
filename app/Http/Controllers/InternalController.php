@@ -10,7 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 use Barryvdh\DomPDF\Facade as PDF;
-use App\Models\{Internal, InternalEntry, InternalDetail, InternalRisk, InternalHistory, InternalFull, InternalVisitor, MasterCard, MasterCompany, MasterRack, MasterRisks, MasterRoom};
+use App\Models\{AccessRequestInternal, ChangeRequestInternal, Internal, InternalEntry, InternalDetail, InternalRisk, InternalHistory, InternalFull, InternalVisitor, MasterCard, MasterCompany, MasterRack, MasterRisks, MasterRoom};
 use App\Mail\{NotifInternalForm, NotifInternalReject, NotifInternalFull};
 use Psy\Command\WhereamiCommand;
 
@@ -30,7 +30,7 @@ class InternalController extends Controller
                 ->join('m_companies', 'm_racks.m_company_id', '=', 'm_companies.id')
                 ->join('m_rooms', 'm_racks.m_room_id', '=', 'm_rooms.id')
                 ->where('m_racks.m_company_id', $getID->id)
-                ->select('m_racks.*', 'm_companies.name as company_name', 'm_rooms.name as room_name')
+                ->select('m_racks.*', 'm_companies.name as company_name', 'm_rooms.name as room_name', 'm_rooms.name as room_name')
                 ->get();
         return view('internal.form', compact('risks', 'getRooms', 'getRacks'));
     }
@@ -123,12 +123,13 @@ class InternalController extends Controller
             ]);
 
             $arrayEntry = [];
-            foreach($getForm['rack'] as $k => $v) {
+            foreach($getForm['room'] as $k => $v) {
                 $insertArray = [];
-                if (isset($getForm['rack'][$k])) {
+                if (isset($getForm['room'][$k])) {
 
                     $insertArray = [
                         'internal_id' => $insertForm->id,
+                        'm_room_id' => $getForm['room'][$k],
                         'm_rack_id' => $getForm['rack'][$k],
                         'created_at' => now(),
                         'updated_at' => now(),
@@ -199,13 +200,17 @@ class InternalController extends Controller
             }
             InternalVisitor::insert($arrayVisitor);
 
-            // $notif_email = Internal::find($insertForm->id);
-            // foreach ([
-            //     'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
-            //     'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id',
-            // ] as $recipient) {
-            //     Mail::to($recipient)->send(new NotifInternalForm($notif_email));
-            // }
+            $notif_email = DB::table('internals')
+                // ->join('internal_histories', 'internals.id', '=', 'internal_histories.internal_id')
+                ->join('users', 'internals.requestor_id', '=', 'users.id')
+                ->select('users.name as requestor', 'internals.id', 'internals.visit', 'internals.created_at as created', 'internals.work', 'internals.leave')
+                ->where('internals.id', $insertForm->id)
+                ->first();
+            foreach ([
+                'bayu.prakoso@balitower.co.id',
+            ] as $recipient) {
+                Mail::to($recipient)->send(new NotifInternalForm($notif_email));
+            }
 
             InternalHistory::create([
                 'internal_id' => $insertForm->id,
@@ -230,17 +235,43 @@ class InternalController extends Controller
     // pdf
     public function internal_pdf($id)
     {
-        // dd($id);
         $getForm = Internal::findOrFail($id);
         $getLastHistory = InternalHistory::where('internal_id', $id)->where('aktif', 1)->first();
         $getLastHistory->update(['pdf' => true]);
+
+        $getRack = DB::table('internal_entries')
+                ->join('m_rooms', 'internal_entries.m_room_id', '=', 'm_rooms.id')
+                ->join('m_racks', 'internal_entries.m_rack_id', '=', 'm_racks.id')
+                ->where('internal_id', $id)
+                ->select('internal_entries.*', 'm_racks.number as rack_number', 'm_rooms.name as room_name')
+                ->get();
+
+        $insertRack = [];
+            foreach( $getRack as $rack){
+                $insertRack[] = $rack;
+            }
+            // dd($insertRack);
+
+        $getRisks = DB::table('internal_risks')
+                ->join('m_risks', 'internal_risks.m_risk_id', '=', 'm_risks.id')
+                ->where('internal_id', $id)
+                ->select('internal_risks.*', 'm_risks.risk', 'm_risks.poss', 'm_risks.impact', 'm_risks.mitigation')
+                ->get();
+
+        $getDetailRisk = DB::table('internal_risks')
+                ->join('m_risks', 'internal_risks.m_risk_id', '=', 'm_risks.id')
+                ->where('internal_id', $id)
+                ->select('internal_risks.*', 'm_risks.risk')
+                ->first();
 
         $getHistory = InternalHistory::where('internal_id', $id)
                 ->join('users', 'users.id', '=', 'internal_histories.created_by')
                 ->select('internal_histories.*', 'users.name')
                 ->get();
 
-        $pdf = PDF::loadview('internal.pdf', compact('getForm', 'getLastHistory', 'getHistory'))->setPaper('a4', 'portrait')->setWarnings(false);
+        $nomorAR = AccessRequestInternal::where('internal_id', $id)->first();
+        $nomorCR = ChangeRequestInternal::where('internal_id', $id)->first();
+        $pdf = PDF::loadview('internal.pdf', compact('getForm', 'getLastHistory', 'getHistory', 'nomorAR', 'nomorCR', 'insertRack', 'getRisks', 'getDetailRisk'))->setPaper('a4', 'portrait')->setWarnings(false);
         return $pdf->stream();
     }
 
@@ -250,97 +281,97 @@ class InternalController extends Controller
     public function internal_approve($id) // Function flow approval
     {
         $last_update = InternalHistory::where('internal_id', $id)->latest()->first();
+
         $notif_email = DB::table('internals')
-            ->join('internal_histories', 'internals.id', 'internal_histories.internal_id')
-            ->where('internals.id', $id)
-            ->where('internal_histories.internal_id', $id)
-            ->where('aktif', 1)
-            ->select('internals.*', 'internal_histories.status', 'internal_histories.created_by')
-            ->first();
+                ->join('internal_histories', 'internals.id', '=', 'internal_histories.internal_id')
+                ->join('users', 'internals.requestor_id', '=', 'users.id')
+                ->select('users.name as requestor', 'internal_histories.aktif', 'internals.id', 'internals.visit', 'internals.created_at as created', 'internals.work', 'internals.leave')
+                ->where('internals.id', $id)
+                ->where('aktif', 1)
+                ->first();
 
-        if ($last_update->pdf == true) {
-            $last_update->update(['aktif' => false]);
+        // dd($notif_email);
+        DB::beginTransaction();
 
-            // Perubahan status tiap permit
-            $status = '';
-            if ($last_update->status == 'requested') {
-                $status = 'reviewed';
-            } elseif ($last_update->status == 'reviewed') {
-                $status = 'checked';
-            } elseif ($last_update->status == 'checked') {
-                $status = 'acknowledge';
-            } elseif ($last_update->status == 'acknowledge') {
-                $status = 'final';
-            } elseif ($last_update->status == 'final') {
-                $full_internal = Internal::find($id)->first();
-            }
+        try {
 
-            // Pergantian  role tiap permit & send email notif
-            $role_to = '';
-            if ($last_update->role_to == 'review') {
-                // foreach ([
-                //     'bayu.prakoso@balitower.co.id',
-                // ] as $recipient) {
-                //     Mail::to($recipient)->send(new NotifInternalForm($notif_email));
-                // }
-                $role_to = 'check';
-            } elseif ($last_update->role_to == 'check') {
-                // foreach ([
-                //     'bayu.prakoso@balitower.co.id',
-                // ] as $recipient) {
-                //     Mail::to($recipient)->send(new NotifInternalForm($notif_email));
-                // }
-                $role_to = 'security';
-            } elseif ($last_update->role_to == 'security') {
-                // foreach ([
-                //     'bayu.prakoso@balitower.co.id',
-                // ] as $recipient) {
-                //     Mail::to($recipient)->send(new NotifInternalForm($notif_email));
-                // }
-                $role_to = 'head';
-            } elseif ($last_update->role_to = 'head') {
-                $full = Internal::find($id);
-                // foreach ([
-                //     'bayu.prakoso@balitower.co.id',
-                // ] as $recipient) {
-                //     Mail::to($recipient)->send(new NotifInternalFull($full));
-                // }
-                $role_to = 'all';
+            if ($last_update->pdf == true) {
+                $last_update->update(['aktif' => false]);
 
-                $full = Internal::findOrFail($id);
-                InternalFull::create([
-                    'internal_id' => $full->id,
-                    'req_dept' => $full->req_dept,
-                    'work' => $full->work,
-                    'request' => $full->created_at,
-                    'visit' => $full->visit,
-                    'leave' => $full->leave,
-                    // 'link' => ("https://dcops.balifiber.id/internal/pdf/$full->id"),
-                    'link' => ("http://localhost:8000/internal/pdf/$full->id"),
-                    'note' => null,
-                    'status' => 'Full Approved',
+                // Perubahan status tiap permit
+                $status = '';
+                if ($last_update->status == 'requested') {
+                    $status = 'reviewed';
+                } elseif ($last_update->status == 'reviewed') {
+                    $status = 'checked';
+                } elseif ($last_update->status == 'checked') {
+                    $status = 'acknowledge';
+                } elseif ($last_update->status == 'acknowledge') {
+                    $status = 'final';
+                } elseif ($last_update->status == 'final') {
+                    $full_internal = Internal::find($id)->first();
+                }
+
+                // Pergantian  role tiap permit & send email notif
+                $role_to = '';
+                if ($last_update->role_to == 'review') {
+                    foreach ([
+                        'bayu.prakoso@balitower.co.id',
+                    ] as $recipient) {
+                        Mail::to($recipient)->send(new NotifInternalForm($notif_email));
+                    }
+                    $role_to = 'check';
+                } elseif ($last_update->role_to == 'check') {
+                    foreach ([
+                        'bayu.prakoso@balitower.co.id',
+                    ] as $recipient) {
+                        Mail::to($recipient)->send(new NotifInternalForm($notif_email));
+                    }
+                    $role_to = 'security';
+                } elseif ($last_update->role_to == 'security') {
+                    foreach ([
+                        'bayu.prakoso@balitower.co.id',
+                    ] as $recipient) {
+                        Mail::to($recipient)->send(new NotifInternalForm($notif_email));
+                    }
+                    $role_to = 'head';
+                } elseif ($last_update->role_to = 'head') {
+                    $full = Internal::find($id);
+                    foreach ([
+                        'bayu.prakoso@balitower.co.id',
+                    ] as $recipient) {
+                        Mail::to($recipient)->send(new NotifInternalFull($notif_email));
+                    }
+                    $role_to = 'all';
+
+                    $full = Internal::findOrFail($id);
+                    InternalFull::create([
+                        'internal_id' => $full->id,
+                        // 'link' => ("https://dcops.balifiber.id/internal/pdf/$full->id"),
+                        'link' => ("http://localhost:8000/internal/pdf/$full->id"),
+                        'note' => null,
+                        'status' => 'Full Approved',
+                    ]);
+                }
+
+                // Simpan tiap perubahan permit ke table CLeaningHistory
+                InternalHistory::create([
+                    'internal_id' => $id,
+                    'created_by' => Auth::user()->id,
+                    'role_to' => $role_to,
+                    'status' => $status,
+                    'aktif' => true,
+                    'pdf' => false,
                 ]);
-            }
 
-            // Simpan tiap perubahan permit ke table CLeaningHistory
-            $log = InternalHistory::insert([
-                'internal_id' => $id,
-                'req_dept' => $notif_email->req_dept,
-                'created_by' => Auth::user()->name,
-                'role_to' => $role_to,
-                'status' => $status,
-                'aktif' => true,
-                'pdf' => false,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]);
+                DB::commit();
 
-            if ($log) {
                 alert()->success('Approved', 'Permit has been approved!');
                 return back();
             }
-        } else {
-            abort(403);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->with('failed', $e->getMessage());
         }
     }
 
@@ -524,7 +555,7 @@ class InternalController extends Controller
         $history = DB::table('internal_histories')
             ->join('internals', 'internals.id', '=', 'internal_histories.internal_id')
             ->join('users', 'users.id', '=', 'internal_histories.created_by')
-            ->select('internal_histories.*','internals.visit', 'users.name');
+            ->select('internal_histories.*','internals.visit', 'users.name', 'internals.id as internal');
         return Datatables::of($history)
             ->editColumn('visit', function ($history) {
                 return $history->visit ? with(new Carbon($history->visit))->format('d/m/Y') : '';
@@ -535,10 +566,13 @@ class InternalController extends Controller
     public function internal_yajra_full_approval()
     {
         $full = DB::table('internals')
-            ->join('internal_visitors', 'internals.id', 'internal_visitors.internal_id')
-            ->join('internal_fulls', 'internals.id', 'internal_fulls.internal_id')
-            ->select('internal_fulls.*', 'internal_visitors.name', 'internal_visitors.checkin', 'internals.card_number')
-            ->groupBy('internal_id');
+            ->join('internal_visitors', 'internals.id', '=', 'internal_visitors.internal_id')
+            ->join('internal_fulls', 'internals.id', '=', 'internal_fulls.internal_id')
+            // ->join('internal_histories', 'internals.id', '=', 'internal_histories.internal_id')
+            ->select('internal_fulls.link', 'internal_visitors.name as visitor', 'internal_visitors.checkin', 'internal_visitors.checkout', 'internals.work', 'internals.id', 'internals.visit', 'internal_fulls.status')
+            ->where('internal_visitors.deleted_at', null)
+            ->where('internal_fulls.status', 'Full Approved');
+            // ->groupBy('internal_id');
         return Datatables::of($full)
             ->editColumn('visit', function ($full) {
                 return $full->visit ? with(new Carbon($full->visit))->format('d/m/Y') : '';
@@ -552,13 +586,15 @@ class InternalController extends Controller
         $full = DB::table('internals')
             ->join('internal_visitors', 'internals.id', '=', 'internal_visitors.internal_id')
             ->join('internal_fulls', 'internals.id', '=', 'internal_fulls.internal_id')
-            ->join('m_cards', 'internals.m_card_id', '=', 'm_cards.id')
-            ->join('users', 'users.id', '=', 'internals.requestor_id')
-            ->where([
-                ['internal_fulls.status', 'Full Approved'],
-                ['internal_visitors.checkout', null],
-            ])
-            ->select('internals.work', 'internals.visit', 'internals.leave', 'internal_visitors.name', 'internal_visitors.checkin', 'internal_visitors.checkout', 'internal_visitors.id', 'm_cards.number as card_number');
+            ->join('users', 'internals.requestor_id', '=', 'users.id')
+            ->leftJoin('m_cards', 'internals.m_card_id', '=', 'm_cards.id')
+            ->select('internal_fulls.link', 'internal_visitors.name as visitor', 'internal_visitors.checkin', 'internal_visitors.checkout', 'internals.work', 'internals.leave', 'internals.id', 'internals.visit', 'internal_fulls.status', 'users.name as requestor', 'm_cards.number as card_number')
+            ->where('internal_visitors.deleted_at', null)
+            ->where('users.department', $dept)
+            // ->orWhere('m_cards.number', null)
+            // ->orWhere('card_number', null)
+            ->where('internal_fulls.status', 'Full Approved');
+
         return Datatables::of($full)
             ->editColumn('visit', function ($full) {
                 return $full->visit ? with(new Carbon($full->visit))->format('d/m/Y') : '';
