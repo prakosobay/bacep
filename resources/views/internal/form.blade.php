@@ -47,7 +47,7 @@
 
                 {{-- Purpose of Work --}}
                 <div class="row">
-                    <div class="col-4">
+                    <div class="col-12">
                         <div class="form-group my-3">
                             <label for="work" class="form-label">Purpose of Work :</label>
                             <input type="text" class="form-control @error('work') is-invalid @enderror" id="work" name="work" value="{{ old('work') }}" required>
@@ -58,7 +58,7 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="col-4">
+                    {{-- <div class="col-4">
                         <div class="form-group mt-5">
                             <label for="room">Entry Area</label>
                             <select name="room[]" class="js-example-responsive-theme-multiple form-control" id="room" multiple="multiple" required>
@@ -67,49 +67,59 @@
                                 @endforeach
                             </select>
                         </div>
+                    </div> --}}
+                </div>
+
+                <div class="row">
+                    <div class="col-4 my-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="1" id="dc" name="dc">
+                            <label for="dc" class="form-check-label">Server Room</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="1" id="mmr1" name="mmr1">
+                            <label for="mmr1" class="form-check-label">MMR 1</label>
+                        </div>
                     </div>
+
+                    <div class="col-4 my-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="1" id="mmr2" name="mmr2">
+                            <label for="mmr2" class="form-check-label">MMR 2</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="1" id="cctv" name="cctv">
+                            <label for="cctv" class="form-check-label">CCTV Room</label>
+                        </div>
+                    </div>
+
                     <div class="col-4">
                         <div class="form-group mt-5">
                             <label for="rack">Rack</label>
                             <select name="rack[]" class="js-example-responsive-theme-multiple form-control" id="rack" multiple="multiple" required>
-                                @foreach ( $getRacks as $rack )
-                                    <option value="{{ $rack->id }}">{{ $rack->room_name }} / {{ $rack->number }}</option>
-                                @endforeach
+                                <optgroup label="Server Room">
+                                    @foreach ( $getDC as $rack )
+                                        <option value="{{ $rack->id }}">{{ $rack->number }}</option>
+                                    @endforeach
+                                </optgroup>
+                                <optgroup label="MMR 1">
+                                    @foreach ( $getMMR1 as $rack )
+                                        <option value="{{ $rack->id }}">{{ $rack->number }}</option>
+                                    @endforeach
+                                </optgroup>
+                                <optgroup label="MMR 2">
+                                    @foreach ( $getMMR2 as $rack )
+                                        <option value="{{ $rack->id }}">{{ $rack->number }}</option>
+                                    @endforeach
+                                </optgroup>
+                                <optgroup label="CCTV Room">
+                                    @foreach ( $getCCTV as $rack )
+                                        <option value="{{ $rack->id }}">{{ $rack->number }}</option>
+                                    @endforeach
+                                </optgroup>
                             </select>
                         </div>
                     </div>
-                    {{-- <div class="col-4">
-                        <label for="rack">Number of Rack :</label><br>
-                        <select class="js-example-basic-multiple" id="rack" name="rack[]" multiple="multiple">
-                            <optgroup label="Server Room">
-                            @for ($i = 1; $i <= 39; $i++)
-                                <option value="A {{$i}}">Rack {{$i}}</option>
-                            @endfor
-                            </optgroup>
-                            <optgroup label="MMR 1">
-                            @for ($i = 1; $i <= 5; $i++)
-                                <option value="B {{$i}}">Rack {{$i}}</option>
-                            @endfor
-                            </optgroup>
-                            <optgroup label="MMR 2">
-                                <option value="C 1">Rack 1</option>
-                            </optgroup>
-                            <optgroup label="CCTV Room">
-                                <option value="D 1">Rack 1</option>
-                            </optgroup>
-                        </select>
-                    </div> --}}
-                    {{-- <div class="col-4">
-                        <div class="form-group mb-5">
-                            <label for="rack" class="form-label">Rack :</label>
-                            <input type="text" class="form-control @error('rack') is-invalid @enderror" id="rack" name="rack" value="{{ old('rack')}}" required>
-                            @error('rack')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message}}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    </div> --}}
                 </div>
 
                 {{-- Date of Visit & Leave --}}

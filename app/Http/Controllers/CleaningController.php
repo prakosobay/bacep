@@ -84,71 +84,29 @@ class CleaningController extends Controller
         $data['cleaning_name2'] = MasterOb::find($data['cleaning_name2'])->nama;
         $data['cleaning_work'] = PilihanWork::find($data['cleaning_work'])->work;
 
-        // $ar = PenomoranAR::latest()->first();
-        // $cr = PenomoranCR::latest()->first();
-
-        // if((!$ar) && (!$cr)){
-
-        //     $i = 1;
-        //     $k = 1;
-        // } elseif(($ar->number) && ($cr->number)){
-
-        //     $i = $ar->number + 1;
-        //     $k = $cr->number + 1;
-        // }
-
-        // if(isset($ar)){
-        //     // dd($i);
-        //     $lastYearAR = $ar->yearly;
-        //     $lastYearCR = $cr->yearly;
-        //     $currrentYear = date('Y');
-
-        //     if (( $currrentYear != $lastYearAR ) && ( $currrentYear != $lastYearCR )){
-        //         $i = 1;
-        //         $k = 1;
-        //     }
-        // }
-
-        // dd($i);
-
         DB::beginTransaction();
 
         try {
 
-            // $ar = PenomoranAR::create([
-            //     'id' => Str::uuid(),
-            //     'number' => $i,
-            //     'monthly' => date('m'),
-            //     'yearly' => date('Y'),
-            // ]);
-
-            // $cr = PenomoranCR::create([
-            //     'id' => Str::uuid(),
-            //     'number' => $k,
-            //     'monthly' => date('m'),
-            //     'yearly' => date('Y'),
-            // ]);
-
             // Insert data yang diterima ke table Cleaning
             $cleaning = Cleaning::create($data);
-
-            // $updated = Cleaning::findOrFail($cleaning->cleaning_id);
-            // dd($updated);
-            // $updated->update([
-            //     'penomoranar_id' => $ar->id,
-            //     'penomorancr_id' => $cr->id,
-            // ]);
 
             // $getEmail = User::where('slug', 'approval')->get();
 
             // Send email notification
+            // foreach ([
+            //     'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
+            //     'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id',
+            //     'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'dyah.retno@balitower.co.id',
+            // ] as $recipient) {
+            //     Mail::to($recipient)->send(new NotifEmail($cleaning));
+            // }
+
             foreach ([
-                'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
-                'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id',
-                'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'dyah.retno@balitower.co.id',
-            ] as $recipient) {
-                Mail::to($recipient)->send(new NotifEmail($cleaning));
-            }
+                    'bayu.prakoso@balitower.co.id',
+                ] as $recipient) {
+                    Mail::to($recipient)->send(new NotifEmail($cleaning));
+                }
 
             $cleaningHistory = CleaningHistory::create([
                 'cleaning_id' => $cleaning->cleaning_id,
@@ -201,27 +159,25 @@ class CleaningController extends Controller
                 $role_to = '';
                 if (($lasthistoryC->role_to == 'review')) {
                     foreach ([
-                        'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
-                        'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id',
-                        'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id',
+                        'bayu.prakoso@balitower.co.id',
                     ] as $recipient) {
                         Mail::to($recipient)->send(new NotifEmail($cleaning));
                     }
                     $role_to = 'check';
                 } elseif (($lasthistoryC->role_to == 'check')) {
                     foreach ([
-                        'security.bacep@balitower.co.id',
+                        'bayu.prakoso@balitower.co.id',
                     ] as $recipient) {
                     Mail::to($recipient)->send(new NotifEmail($cleaning));
                     }
                     $role_to = 'security';
                 } elseif (($lasthistoryC->role_to == 'security')) {
-                    foreach (['bayu.prakoso@balitower.co.id', 'tofiq.hidayat@balitower.co.id'] as $recipient) {
+                    foreach (['bayu.prakoso@balitower.co.id'] as $recipient) {
                         Mail::to($recipient)->send(new NotifEmail($cleaning));
                     }
                     $role_to = 'head';
                 } elseif ($lasthistoryC->role_to == 'head') {
-                    foreach (['dc@balitower.co.id'] as $recipient) {
+                    foreach (['bayu.prakoso@balitower.co.id'] as $recipient) {
                         Mail::to($recipient)->send(new NotifFull($cleaning));
                     }
                     $role_to = 'all';
@@ -237,8 +193,8 @@ class CleaningController extends Controller
                         'validity_from' => $cleaning->validity_from,
                         'date_of_leave' => $cleaning->date_of_leave,
                         'cleaning_date' => $cleaning->created_at,
-                        'link' => ("https://dcops.balifiber.id/cleaning_pdf/$cleaning->cleaning_id"),
-                        // 'link' => ("http://172.16.45.195:8000/cleaning_pdf/$cleaning->cleaning_id"),
+                        // 'link' => ("https://dcops.balifiber.id/cleaning_pdf/$cleaning->cleaning_id"),
+                        'link' => ("http://172.16.45.195:8000/cleaning_pdf/$cleaning->cleaning_id"),
                     ]);
                 }
 
@@ -309,6 +265,13 @@ class CleaningController extends Controller
         return redirect()->route('logall')->with('success', 'Canceled');
     }
 
+
+    // penomoran
+    public function penomoran()
+    {
+        $getNomor = PenomoranCleaning::all();
+        return view('cleaning.penomoran', compact('getNomor'));
+    }
 
 
     // Checkin Checkout
@@ -430,6 +393,7 @@ class CleaningController extends Controller
         Storage::disk('cleaningCheckout')->put($imageName2, base64_decode($image2));
 
         $getFullCheckout = CleaningFull::where('cleaning_id', $id)->first();
+        $pic = $getFullCheckout->cleaning_id;
 
         $penomoran = PenomoranCleaning::latest()->first();
 
@@ -440,17 +404,25 @@ class CleaningController extends Controller
 
         } elseif($penomoran->number_ar){
 
-            $ar = $penomoran->number_ar + 1;
-            $cr = $penomoran->number_cr + 1;
-        }
+            $p = $penomoran->cleaning_id;
+            // dd($pic);
+            if($pic != $p){
 
-        $lastyearAR = $penomoran->year_ar;
-        $lastyearCR = $penomoran->year_cr;
-        $currrentYear = date('Y');
+                $ar = $penomoran->number_ar + 1;
+                $cr = $penomoran->number_cr + 1;
 
-        if ( ($currrentYear != $lastyearAR) && ( $currrentYear != $lastyearCR ) ){
-            $ar = 1;
-            $cr = 1;
+                $lastyearAR = $penomoran->year_ar;
+                $lastyearCR = $penomoran->year_cr;
+                $currrentYear = date('Y');
+
+                if ( ($currrentYear != $lastyearAR) && ( $currrentYear != $lastyearCR ) ){
+                    $ar = 1;
+                    $cr = 1;
+                }
+            } else {
+                $ar = $penomoran->number_ar;
+                $cr = $penomoran->number_cr;
+            }
         }
 
         DB::beginTransaction();
@@ -464,8 +436,8 @@ class CleaningController extends Controller
                 'photo_checkout_personil2' => $imageName2,
                 'status' => 'Full Approved',
             ]);
-
-            $o = PenomoranCleaning::firstOrCreate([
+// dd($ar);
+            PenomoranCleaning::firstOrCreate([
                 'number_ar' => $ar,
                 'month_ar' => date('m'),
                 'year_ar' => date('Y'),

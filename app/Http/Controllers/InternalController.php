@@ -23,16 +23,32 @@ class InternalController extends Controller
 
         $getCompany = auth()->user()->company;
         $getID = MasterCompany::where('name', $getCompany)->first();
-        // dd($getID->id);
         $risks = MasterRisks::all();
-        $getRooms = MasterRoom::select('id', 'name')->get();
-        $getRacks = DB::table('m_racks')
-                ->join('m_companies', 'm_racks.m_company_id', '=', 'm_companies.id')
-                ->join('m_rooms', 'm_racks.m_room_id', '=', 'm_rooms.id')
-                ->where('m_racks.m_company_id', $getID->id)
-                ->select('m_racks.*', 'm_companies.name as company_name', 'm_rooms.name as room_name', 'm_rooms.name as room_name')
-                ->get();
-        return view('internal.form', compact('risks', 'getRooms', 'getRacks'));
+        $getDC = DB::table('m_racks')
+            ->join('m_rooms', 'm_racks.m_room_id', '=', 'm_rooms.id')
+            ->select('m_racks.*', 'm_rooms.name as room_name')
+            ->where('m_rooms.name', 'Server Room')
+            ->get();
+
+        $getMMR1 = DB::table('m_racks')
+            ->join('m_rooms', 'm_racks.m_room_id', '=', 'm_rooms.id')
+            ->select('m_racks.*', 'm_rooms.name as room_name')
+            ->where('m_rooms.name', 'MMR 1')
+            ->get();
+
+        $getMMR2 = DB::table('m_racks')
+            ->join('m_rooms', 'm_racks.m_room_id', '=', 'm_rooms.id')
+            ->select('m_racks.*', 'm_rooms.name as room_name')
+            ->where('m_rooms.name', 'MMR 2')
+            ->get();
+
+        $getCCTV = DB::table('m_racks')
+            ->join('m_rooms', 'm_racks.m_room_id', '=', 'm_rooms.id')
+            ->select('m_racks.*', 'm_rooms.name as room_name')
+            ->where('m_rooms.name', 'CCTV Room')
+            ->get();
+
+        return view('internal.form', compact('risks', 'getDC', 'getMMR1', 'getMMR2', 'getCCTV'));
     }
 
     public function dashboard()

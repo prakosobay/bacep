@@ -273,6 +273,8 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/cleaning/full/reject/{id}', 'reject_full_cleaning');
         Route::post('/approve_cleaning', 'approve_cleaning');
 
+        Route::get('penomoran', 'penomoran');
+
         Route::post('cleaning-checkin-cancel/{id}', 'checkin_cancel')->name('cleaningCheckinCancel');
     });
 
