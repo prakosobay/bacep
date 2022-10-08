@@ -395,9 +395,11 @@ class CleaningController extends Controller
         $getFullCheckout = CleaningFull::where('cleaning_id', $id)->first();
         $pic = $getFullCheckout->cleaning_id;
 
-        $penomoran = PenomoranCleaning::latest()->first();
+        $penomoran = DB::table('penomoran_cleanings')->latest()->first();
+        $new = DB::table('penomoran_cleanings')->where('cleaning_id', $pic)->latest()->first();
+            // dd($new);
 
-        if((!$penomoran)){
+        if(($penomoran == null)){
 
             $ar = 1;
             $cr = 1;
@@ -405,8 +407,14 @@ class CleaningController extends Controller
         } elseif($penomoran->number_ar){
 
             $p = $penomoran->cleaning_id;
-            // dd($pic);
+            $q = $new;
+            dd($q);
             if($pic != $p){
+
+                if($q == $p){
+                    $ar = $penomoran->number_ar;
+                    $cr = $penomoran->number_cr;
+                }
 
                 $ar = $penomoran->number_ar + 1;
                 $cr = $penomoran->number_cr + 1;
@@ -419,6 +427,7 @@ class CleaningController extends Controller
                     $ar = 1;
                     $cr = 1;
                 }
+
             } else {
                 $ar = $penomoran->number_ar;
                 $cr = $penomoran->number_cr;
