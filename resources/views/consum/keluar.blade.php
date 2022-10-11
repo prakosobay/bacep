@@ -10,15 +10,15 @@
             <a href="{{ route('consumExportKeluar') }}" type="button" class="btn btn-secondary mr-5 btn-sm" >
                 <strong>Export</strong>
             </a>
-{{--
+
             <button type="button" class="btn btn-primary btn-sm mr-5" data-toggle="modal" data-target="#import_keluar">
                 IMPORT CSV
-            </button> --}}
+            </button>
 
             <!-- Import Excel -->
             <div class="modal fade" id="import_keluar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
-                    <form method="post" action="{{ url('consum/import/keluar')}}" enctype="multipart/form-data">
+                    <form method="post" action="{{ route('consumImportKeluar')}}" enctype="multipart/form-data">
                         @csrf
                         <div class="modal-content">
                             <div class="modal-header">

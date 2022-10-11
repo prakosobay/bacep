@@ -154,9 +154,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('consum/yajra/keluar', 'consum_yajra_keluar');
 
         Route::post('consum-create-submit', 'store')->name('consumStore');
-        Route::post('consum/import/table', 'csv');
-        Route::post('consum/import/keluar', 'import_keluar');
-        Route::post('consum/import/masuk', 'import_masuk');
+        Route::post('consum/import/table', 'csv')->name('consumImportTable');
+        Route::post('consum/import/keluar', 'import_keluar')->name('consumImportKeluar');
+        Route::post('consum/import/masuk', 'import_masuk')->name('consumImportMasuk');
     });
 
 

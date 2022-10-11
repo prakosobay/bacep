@@ -19,14 +19,16 @@ class ConsumKeluarImport implements ToCollection, WithStartRow
         // echo '<pre>';
         // var_dump($rows2);
         // die;
+        // ConsumKeluar::truncate();
         foreach ($rows2 as $row) {
             ConsumKeluar::create([
-                'tanggal' => $row[0],
+                'id' => $row[0],
                 'consum_id' => $row[1],
                 'nama_barang' => $row[2],
                 'jumlah' => $row[3],
                 'ket' => $row[4],
                 'pencatat' => $row[5],
+                'tanggal' => $row[6],
             ]);
         }
     }

@@ -9,14 +9,14 @@
                 <strong>Export</strong>
             </a>
 
-            {{-- <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Import CSV
-            </button> --}}
+            </button>
 
             <!-- Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
-                    <form method="post" action="{{ url('consum/import/masuk')}}" enctype="multipart/form-data">
+                    <form method="post" action="{{ route('consumImportMasuk')}}" enctype="multipart/form-data">
                         @csrf
                         <div class="modal-content">
                             <div class="modal-header">

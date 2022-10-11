@@ -5,9 +5,9 @@
     <h1 class="h3 my-3 text-gray-800 text-center">Data Barang Consumable</h1>
     <div class="card shadow mb-4">
         <div class="card-header py-1">
-            {{-- <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Import CSV
-            </button> --}}
+            </button>
 
             <a href="{{ route('consumExportTable') }}" type="button" class="btn btn-secondary btn-sm mx-1 my-1">
                 Export
@@ -26,7 +26,7 @@
             <!-- Modal Import-->
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
-                    <form method="post" action="{{ url('consum/import/table')}}" enctype="multipart/form-data">
+                    <form method="post" action="{{ route('consumImportTable')}}" enctype="multipart/form-data">
                         @csrf
                         <div class="modal-content">
                             <div class="modal-header">
