@@ -19,17 +19,12 @@ class Internal extends Model
 
     public function histories()
     {
-        return $this->hasMany(InternalHistory::class);
+        return $this->hasMany(InternalHistory::class, 'internal_id');
     }
 
     public function details()
     {
         return $this->hasMany(InternalDetail::class);
-    }
-
-    public function entry()
-    {
-        return $this->hasMany(InternalEntry::class);
     }
 
     public function risks()
@@ -60,5 +55,15 @@ class Internal extends Model
     public function cr_internal()
     {
         return $this->hasOne(ChangeRequestInternal::class);
+    }
+
+    public function entry()
+    {
+        return $this->hasOne(Entry::class, 'internal_id');
+    }
+
+    public function racks()
+    {
+        return $this->hasMany(EntryRack::class, 'internal_id');
     }
 }

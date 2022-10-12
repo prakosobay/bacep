@@ -43,7 +43,7 @@
                             </tr>
                             <tr>
                                 <th>Number ID</th>
-                                <td><input type="text" class="form-control @error('numberId') is-invalid @enderror" name="numberId" value="{{ $getVisitor->numberId }}" required></td>
+                                <td><input type="text" class="form-control @error('nik') is-invalid @enderror" name="nik" value="{{ $getVisitor->nik }}" required></td>
                                 <th>Company</th>
                                 <th><input type="text" class="form-control @error('company') is-invalid @enderror" name="company" value="{{ $getVisitor->company }}" readonly></th>
                             </tr>

@@ -94,13 +94,13 @@ class CleaningController extends Controller
             // $getEmail = User::where('slug', 'approval')->get();
 
             // Send email notification
-            // foreach ([
-            //     'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
-            //     'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id',
-            //     'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'dyah.retno@balitower.co.id',
-            // ] as $recipient) {
-            //     Mail::to($recipient)->send(new NotifEmail($cleaning));
-            // }
+            foreach ([
+                'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
+                'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id',
+                'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'dyah.retno@balitower.co.id',
+            ] as $recipient) {
+                Mail::to($recipient)->send(new NotifEmail($cleaning));
+            }
 
             foreach ([
                     'bayu.prakoso@balitower.co.id',
@@ -159,25 +159,27 @@ class CleaningController extends Controller
                 $role_to = '';
                 if (($lasthistoryC->role_to == 'review')) {
                     foreach ([
-                        'bayu.prakoso@balitower.co.id',
+                        'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
+                        'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id',
+                        'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id',
                     ] as $recipient) {
                         Mail::to($recipient)->send(new NotifEmail($cleaning));
                     }
                     $role_to = 'check';
                 } elseif (($lasthistoryC->role_to == 'check')) {
                     foreach ([
-                        'bayu.prakoso@balitower.co.id',
+                        'security.bacep@balitower.co.id',
                     ] as $recipient) {
                     Mail::to($recipient)->send(new NotifEmail($cleaning));
                     }
                     $role_to = 'security';
                 } elseif (($lasthistoryC->role_to == 'security')) {
-                    foreach (['bayu.prakoso@balitower.co.id'] as $recipient) {
+                    foreach (['bayu.prakoso@balitower.co.id', 'tofiq.hidayat@balitower.co.id'] as $recipient) {
                         Mail::to($recipient)->send(new NotifEmail($cleaning));
                     }
                     $role_to = 'head';
                 } elseif ($lasthistoryC->role_to == 'head') {
-                    foreach (['bayu.prakoso@balitower.co.id'] as $recipient) {
+                    foreach (['dc@balitower.co.id'] as $recipient) {
                         Mail::to($recipient)->send(new NotifFull($cleaning));
                     }
                     $role_to = 'all';
@@ -193,8 +195,8 @@ class CleaningController extends Controller
                         'validity_from' => $cleaning->validity_from,
                         'date_of_leave' => $cleaning->date_of_leave,
                         'cleaning_date' => $cleaning->created_at,
-                        // 'link' => ("https://dcops.balifiber.id/cleaning_pdf/$cleaning->cleaning_id"),
-                        'link' => ("http://172.16.45.195:8000/cleaning_pdf/$cleaning->cleaning_id"),
+                        'link' => ("https://dcops.balifiber.id/cleaning_pdf/$cleaning->cleaning_id"),
+                        // 'link' => ("http://172.16.45.195:8000/cleaning_pdf/$cleaning->cleaning_id"),
                     ]);
                 }
 
@@ -445,7 +447,7 @@ class CleaningController extends Controller
                 'photo_checkout_personil2' => $imageName2,
                 'status' => 'Full Approved',
             ]);
-// dd($ar);
+
             PenomoranCleaning::firstOrCreate([
                 'number_ar' => $ar,
                 'month_ar' => date('m'),

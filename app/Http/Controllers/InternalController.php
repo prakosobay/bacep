@@ -10,7 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 use Barryvdh\DomPDF\Facade as PDF;
-use App\Models\{AccessRequestInternal, ChangeRequestInternal, Internal, InternalEntry, InternalDetail, InternalRisk, InternalHistory, InternalFull, InternalVisitor, MasterCard, MasterCompany, MasterRack, MasterRisks, MasterRoom};
+use App\Models\{AccessRequestInternal, ChangeRequestInternal, Internal, InternalEntry, InternalDetail, InternalRisk, InternalHistory, InternalFull, InternalVisitor, MasterCard, MasterCompany, MasterRack, MasterRisks, MasterRoom, Entry, EntryRack, MasterCardType};
 use App\Mail\{NotifInternalForm, NotifInternalReject, NotifInternalFull};
 use Psy\Command\WhereamiCommand;
 
@@ -28,6 +28,7 @@ class InternalController extends Controller
             ->join('m_rooms', 'm_racks.m_room_id', '=', 'm_rooms.id')
             ->select('m_racks.*', 'm_rooms.name as room_name')
             ->where('m_rooms.name', 'Server Room')
+            ->orderBy('id', 'asc' )
             ->get();
 
         $getMMR1 = DB::table('m_racks')
@@ -78,21 +79,25 @@ class InternalController extends Controller
 
     public function internal_action_checkin_form($id)
     {
-        try {
-            $decrypt = Crypt::decrypt($id);
-            $getVisitor = InternalVisitor::findOrFail($decrypt);
-            $getCards = MasterCard::where('type', 'internal')->get();
+        $decrypt = Crypt::decrypt($id);
+        $getVisitor = InternalVisitor::findOrFail($decrypt);
+        $getType = MasterCardType::select('id')->where('name', 'Internal')->first();
+        $getCards = MasterCard::where('card_type_id', $getType->id)->select('id', 'number', 'card_type_id')->get();
+        // dd($getCards);
 
-            return view('internal.checkinForm', compact('getVisitor', 'getCards'));
-        } catch (\Exception $e) {
-            throw $e;
-        }
+        return view('internal.checkinForm', compact('getVisitor', 'getCards'));
     }
 
     public function internal_action_checkout_form($id)
     {
         $getVisitor = InternalVisitor::findOrFail(Crypt::decrypt($id));
-        return view('internal.checkoutForm', compact('getVisitor'));
+        $getCard = DB::table('internals')
+                ->join('m_cards', 'internals.m_card_id', '=', 'm_cards.id')
+                ->where('internals.id', $getVisitor->internal_id)
+                ->select('m_cards.number as card_number')
+                ->first();
+                // dd($getCard);
+        return view('internal.checkoutForm', compact('getVisitor', 'getCard'));
     }
 
 
@@ -108,8 +113,8 @@ class InternalController extends Controller
     // Submit
     public function internal_create(Request $request)
     {
-        // dd($request->all());
         $getForm = $request->all();
+        // dd($getForm);
         $request->validate([
             'work' => ['required', 'string', 'max:255'],
             'visit' => ['required', 'after:yesterday'],
@@ -138,23 +143,41 @@ class InternalController extends Controller
                 'rollback' => $getForm['rollback'],
             ]);
 
-            $arrayEntry = [];
-            foreach($getForm['room'] as $k => $v) {
+            Entry::create([
+                'internal_id' => $insertForm->id,
+                'eksternal_id' => '',
+                'dc' => $request->dc,
+                'mmr1' => $request->mmr1,
+                'mmr2' => $request->mmr2,
+                'cctv' => $request->cctv,
+                'genset' => null,
+                'panel' => null,
+                'baterai' => null,
+                'trafo' => null,
+                'office1' => null,
+                'fss' => null,
+                'ups' => null,
+                'yard' => null,
+                'parking' => null,
+                'lain' => null,
+            ]);
+
+            $arrayRacks = [];
+            foreach($getForm['rack'] as $k => $v) {
                 $insertArray = [];
-                if (isset($getForm['room'][$k])) {
+                if (isset($getForm['rack'][$k])) {
 
                     $insertArray = [
                         'internal_id' => $insertForm->id,
-                        'm_room_id' => $getForm['room'][$k],
                         'm_rack_id' => $getForm['rack'][$k],
                         'created_at' => now(),
                         'updated_at' => now(),
                     ];
 
-                    $arrayEntry[] = $insertArray;
+                    $arrayRacks[] = $insertArray;
                 }
             }
-            InternalEntry::insert($arrayEntry);
+            EntryRack::insert($arrayRacks);
 
             $arrayDetail = [];
             foreach ($getForm['time_start'] as $k => $v) {
@@ -242,7 +265,8 @@ class InternalController extends Controller
             return redirect()->route('dashboardInternal', auth()->user()->department)->with('success', 'Form Has Been Submited');
         } catch (\Exception $e) {
             DB::rollBack();
-            return back()->with('failed', $e->getMessage());
+            // return back()->with('failed', $e->getMessage());
+            throw $e->getMessage();
         }
     }
 
@@ -254,19 +278,6 @@ class InternalController extends Controller
         $getForm = Internal::findOrFail($id);
         $getLastHistory = InternalHistory::where('internal_id', $id)->where('aktif', 1)->first();
         $getLastHistory->update(['pdf' => true]);
-
-        $getRack = DB::table('internal_entries')
-                ->join('m_rooms', 'internal_entries.m_room_id', '=', 'm_rooms.id')
-                ->join('m_racks', 'internal_entries.m_rack_id', '=', 'm_racks.id')
-                ->where('internal_id', $id)
-                ->select('internal_entries.*', 'm_racks.number as rack_number', 'm_rooms.name as room_name')
-                ->get();
-
-        $insertRack = [];
-            foreach( $getRack as $rack){
-                $insertRack[] = $rack;
-            }
-            // dd($insertRack);
 
         $getRisks = DB::table('internal_risks')
                 ->join('m_risks', 'internal_risks.m_risk_id', '=', 'm_risks.id')
@@ -287,7 +298,7 @@ class InternalController extends Controller
 
         $nomorAR = AccessRequestInternal::where('internal_id', $id)->first();
         $nomorCR = ChangeRequestInternal::where('internal_id', $id)->first();
-        $pdf = PDF::loadview('internal.pdf', compact('getForm', 'getLastHistory', 'getHistory', 'nomorAR', 'nomorCR', 'insertRack', 'getRisks', 'getDetailRisk'))->setPaper('a4', 'portrait')->setWarnings(false);
+        $pdf = PDF::loadview('internal.pdf', compact('getForm', 'getLastHistory', 'getHistory', 'nomorAR', 'nomorCR', 'getRisks', 'getDetailRisk'))->setPaper('a4', 'portrait')->setWarnings(false);
         return $pdf->stream();
     }
 
@@ -400,10 +411,11 @@ class InternalController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'phone' => ['required', 'string', 'max:255'],
-            'numberId' => ['required', 'string', 'max:255'],
+            'nik' => ['required', 'string', 'max:255'],
             'department' => ['required', 'string', 'max:255'],
             'company' => ['required', 'string', 'max:255'],
             'respon' => ['required', 'string', 'max:255'],
+            'card' => ['required', 'numeric'],
             'checkin' => ['required'],
             'photo_checkin' => ['required'],
         ]);
@@ -424,7 +436,7 @@ class InternalController extends Controller
             $getVisitor->update([
                 'name' => $request->name,
                 'phone' => $request->phone,
-                'numberId' => $request->numberId,
+                'nik' => $request->nik,
                 'department' => $request->department,
                 'company' => $request->company,
                 'respon' => $request->respon,
@@ -434,15 +446,16 @@ class InternalController extends Controller
 
             $getInternalID = $getVisitor->internal->id;
             $updateCard = Internal::findOrFail($getInternalID);
-            $getcard = MasterCard::findOrFail($request->card);
+            // $getcard = MasterCard::findOrFail($request->card);
             // dd($getcard);
 
-            if($updateCard->card_number == null){
+            if($updateCard->m_card_id == null){
 
                 $updateCard->update([
-                    'card_number' => $getcard->number,
+                    'm_card_id' => $request->card,
                 ]);
             }
+            // dd($updateCard);
 
             DB::commit();
 
@@ -478,7 +491,7 @@ class InternalController extends Controller
             $getVisitor->update([
                 'checkout' => $request->checkout,
                 'photo_checkout' => $imageName,
-                'done' => true,
+                'is_done' => true,
             ]);
 
         DB::commit();
@@ -607,6 +620,7 @@ class InternalController extends Controller
             ->select('internal_fulls.link', 'internal_visitors.name as visitor', 'internal_visitors.checkin', 'internal_visitors.checkout', 'internals.work', 'internals.leave', 'internals.id', 'internals.visit', 'internal_fulls.status', 'users.name as requestor', 'm_cards.number as card_number')
             ->where('internal_visitors.deleted_at', null)
             ->where('users.department', $dept)
+            ->where('internal_visitors.checkout', null)
             // ->orWhere('m_cards.number', null)
             // ->orWhere('card_number', null)
             ->where('internal_fulls.status', 'Full Approved');
@@ -626,9 +640,11 @@ class InternalController extends Controller
     {
         $getPermit = DB::table('internals')
             ->join('internal_visitors', 'internals.id', '=', 'internal_visitors.internal_id')
-            ->where('internal_visitors.done', 1)
-            ->where('internal_visitors.req_dept', $dept)
-            ->select('internals.work', 'internals.visit', 'internals.leave', 'internals.req_name', 'internals.card_number', 'internal_visitors.name', 'internal_visitors.checkin', 'internal_visitors.checkout');
+            ->join('users', 'internals.requestor_id', '=', 'users.id')
+            ->leftJoin('m_cards', 'internals.m_card_id', '=', 'm_cards.id')
+            ->where('internal_visitors.is_done', true)
+            ->where('users.department', $dept)
+            ->select('internals.work', 'internals.visit', 'internals.leave', 'users.name as requestor', 'm_cards.number as card_number', 'internal_visitors.name', 'internal_visitors.checkin', 'internal_visitors.checkout');
         return Datatables::of($getPermit)
             ->editColumn('visit', function ($getPermit) {
                 return $getPermit->visit ? with(new Carbon($getPermit->visit))->format('d/m/Y') : '';

@@ -15,6 +15,8 @@ class CreateEntriesTable extends Migration
     {
         Schema::create('entries', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('internal_id')->nullable();
+            $table->foreignId('eksternal_id')->nullable();
             $table->boolean('dc')->nullable();
             $table->boolean('mmr1')->nullable();
             $table->boolean('mmr2')->nullable();
@@ -29,6 +31,7 @@ class CreateEntriesTable extends Migration
             $table->boolean('yard')->nullable();
             $table->boolean('parking')->nullable();
             $table->string('lain')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

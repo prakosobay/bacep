@@ -21,7 +21,7 @@ class CreateInternalVisitorsTable extends Migration
             $table->string('nik');
             $table->string('department');
             $table->string('company');
-            $table->string('respon');
+            $table->string('respon')->nullable();
             $table->time('checkin')->nullable();
             $table->string('photo_checkin')->nullable();
             $table->time('checkout')->nullable();

@@ -196,7 +196,7 @@
                 @else
                     <tr >
                         <td width="150px">Access Request Number: </td>
-                        <td >: {{ $getForm->id }} AR/BM/</td>
+                        <td >: {{ $getForm->id }} AR/IC/</td>
                     </tr>
                 @endif
                 <tr >
@@ -255,7 +255,7 @@
                 </tr>
                 <tr>
                     <td>
-                        @if(($insertRack[] == 'Server Room') )
+                        @if($getForm->entry->dc == true)
                             <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   Server Room
                         @else
                             <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   Server Room
@@ -269,7 +269,7 @@
                 </tr>
                 <tr>
                     <td >
-                        @if(($insertRack[] == 'MMR 1'))
+                        @if($getForm->entry->mmr1 == true)
                             <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   MMR 1
                         @else
                             <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   MMR 1
@@ -283,7 +283,7 @@
                 </tr>
                 <tr>
                     <td >
-                        @if(($insertRack[] == 'MMR 2'))
+                        @if($getForm->entry->mmr2 == true)
                             <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   MMR 2
                         @else
                             <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   MMR 2
@@ -324,7 +324,7 @@
                 </tr>
                 <tr>
                     <td >
-                        @if($insertRack[] == 'CCTV Room')
+                        @if($getForm->entry->cctv == true)
                         <img src="{{ public_path("gambar/checkbox.png") }}" alt="" style="width: 25px; height: 15px;">   Others : CCTV Room
                         @else
                         <img src="{{ public_path("gambar/uncheckbox.png") }}" alt="" style="width: 25px; height: 15px;">   Others :

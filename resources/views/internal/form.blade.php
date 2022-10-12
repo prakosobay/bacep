@@ -239,44 +239,19 @@
                         <tbody>
                             <tr>
                                 <td>
-                                    <input type="time" class="form-control @error('time_start') is-invalid @enderror" id="time_start" name="time_start[]" value="{{ old('time_start')}}" required>
-                                    @error('time_start')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
+                                    <input type="time" class="form-control" id="time_start" name="time_start[]" value="{{ old('time_start')}}" required>
                                 </td>
                                 <td>
-                                    <input type="time" class="form-control @error('time_end') is-invalid @enderror" id="time_end" name="time_end[]" value="{{ old('time_end')}}" required>
-                                    @error('time_end')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
+                                    <input type="time" class="form-control" id="time_end" name="time_end[]" value="{{ old('time_end')}}" required>
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control @error('activity') is-invalid @enderror" id="activity" name="activity[]" value="{{ old('activity')}}" required>
-                                    @error('activity')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
+                                    <input type="text" class="form-control" id="activity" name="activity[]" value="{{ old('activity')}}" required>
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control @error('service_impact') is-invalid @enderror" id="service_impact" name="service_impact[]" value="{{ old('service_impact')}}">
-                                    @error('service_impact')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
+                                    <input type="text" class="form-control" id="service_impact" name="service_impact[]" value="{{ old('service_impact')}}" required>
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control @error('item') is-invalid @enderror" id="detailItem" name="item[]" value="{{ old('item')}}">
-                                    @error('item')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
+                                    <input type="text" class="form-control" id="item" name="item[]" value="{{ old('item')}}" required>
                                 </td>
                             </tr>
                         </tbody>
@@ -482,7 +457,7 @@ $(document).ready(function(){
     $(button_detail).click(function(e){
         e.preventDefault();
         if(row < max_row){
-            $(table_detail).append('<tr><td><input type="time" class="form-control" id="time_start" name="time_start[]" value=""></td><td><input type="time" class="form-control" id="time_end" name="time_end[]"></td><td><input type="text" class="form-control" id="activity" name="activity[]"></td><td> <input type="text" class="form-control" id="service_impact" name="service_impact[]" value=""></td><td><input type="text" class="form-control" id="detailTime" name="item[]" value=""></td></tr>');
+            $(table_detail).append('<tr><td><input type="time" class="form-control" id="time_start" name="time_start[]"></td><td><input type="time" class="form-control" id="time_end" name="time_end[]"></td><td><input type="text" class="form-control" id="activity" name="activity[]"></td><td><input type="text" class="form-control" id="service_impact" name="service_impact[]"></td><td><input type="text" class="form-control" id="item" name="item[]"></td></tr>');
             row++;
         }
     });

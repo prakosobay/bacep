@@ -19,7 +19,8 @@
                 <table class="table table-striped table-bordered" id="approve_internal" width="100%" cellspacing="0">
                     <thead>
                         <tr class="judul-table text-center">
-                            <th>ID Permit</th>
+                            <th>ID</th>
+                            <th>Requestor</th>
                             <th>Date of Request</th>
                             <th>Date of Visit</th>
                             <th>Date of Leave</th>
@@ -31,7 +32,7 @@
                     <tbody class="isi-table text-center">
                         @foreach($getInternal as $p)
                         {{-- modal --}}
-                        <div class="modal fade" id="reject{{ $p->internal->id }}" tabindex="-1" aria-labelledby="exampleModalLabel{{ $p->internal->id }}" aria-hidden="true">
+                        <div class="modal fade" id="reject{{ $p->id }}" tabindex="-1" aria-labelledby="exampleModalLabel{{ $p->id }}" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -39,11 +40,11 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <form action="{{ url('internal/reject', $p->internal->id )}}" method="post">
+                                        <form action="{{ url('internal/reject', $p->id )}}" method="post">
                                             @csrf
                                             <div class="form-group">
                                                 <label for="no" class="form-label">No ID :</label>
-                                                <input type="text" class="form-control" id="no" value="{{$p->internal->id}}" readonly>
+                                                <input type="text" class="form-control" id="no" value="{{$p->id}}" readonly>
                                             </div>
                                             <div class="form-group">
                                                 <label for="note" class="form-label">Note :</label>
@@ -59,37 +60,42 @@
                             </div>
                         </div>
                         <tr>
-                            <td>{{ $p->internal->id }}</td>
-                            <td>{{ Carbon\Carbon::parse($p->internal->created_at)->format('d-m-Y') }}</td>
-                            <td>{{ Carbon\Carbon::parse($p->internal->visit)->format('d-m-Y') }}</td>
-                            <td>{{ Carbon\Carbon::parse($p->internal->leave)->format('d-m-Y') }}</td>
-                            <td>{{ $p->internal->work }}</td>
-                            <td>{{ $p->internal->rack }}</td>
+                            <td>{{ $p->id }}</td>
+                            <td>{{ $p->req_name }}</td>
+                            <td>{{ Carbon\Carbon::parse($p->created_at)->format('d-m-Y') }}</td>
+                            <td>{{ Carbon\Carbon::parse($p->visit)->format('d-m-Y') }}</td>
+                            <td>{{ Carbon\Carbon::parse($p->leave)->format('d-m-Y') }}</td>
+                            <td>{{ $p->work }}</td>
+                            <td>
+                                {{-- @foreach( $p->racks as $e )
+                                    ->{{$e->rack->number}}</br>
+                                @endforeach --}}as
+                            </td>
                             <td>
                                 @can('isApproval')
-                                    <form action="{{ url('internal/approve', $p->internal->id)}}" method="post">
+                                    <form action="{{ url('internal/approve', $p->id)}}" method="post">
                                         @csrf
                                         <button id="ok" class="btn btn-success btn-sm my-1 mx-1">Approve</button>
                                     </form>
 
-                                    <button class="btn btn-danger btn-sm my-1 mx-1" data-bs-toggle="modal" data-bs-target="#reject{{ $p->internal->id }}" data-id="{{ $p->internal->id }}">Reject</button>
+                                    <button class="btn btn-danger btn-sm my-1 mx-1" data-bs-toggle="modal" data-bs-target="#reject{{ $p->id }}" data-id="{{ $p->id }}">Reject</button>
 
                                 @elsecan('isHead')
-                                    <form action="{{ url('internal/approve', $p->internal->id)}}" method="post">
+                                    <form action="{{ url('internal/approve', $p->id)}}" method="post">
                                         @csrf
                                         <button id="ok" class="btn btn-success btn-sm my-1 mx-1">Approve</button>
                                     </form>
 
-                                    <button class="btn btn-danger btn-sm my-1 mx-1" data-bs-toggle="modal" data-bs-target="#reject{{ $p->internal->id }}" data-id="{{ $p->internal->id }}">Reject</button>
+                                    <button class="btn btn-danger btn-sm my-1 mx-1" data-bs-toggle="modal" data-bs-target="#reject{{ $p->id }}" data-id="{{ $p->id }}">Reject</button>
 
                                 @elsecan('isSecurity')
-                                    <form action="{{ url('internal/approve', $p->internal->id)}}" method="post">
+                                    <form action="{{ url('internal/approve', $p->id)}}" method="post">
                                         @csrf
                                         <button id="ok" class="btn btn-success btn-sm my-1 mx-1">Approve</button>
                                     </form>
 
                                 @endcan
-                                    <a href="/internal/pdf/{{$p->internal->id}}" class="btn btn-primary btn-sm my-1 mx-1" target="_blank">File</a>
+                                    <a href="/internal/pdf/{{$p->id}}" class="btn btn-primary btn-sm my-1 mx-1" target="_blank">File</a>
                             </td>
                         </tr>
                         @endforeach

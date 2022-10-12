@@ -43,7 +43,7 @@
                             </tr>
                             <tr>
                                 <th>Number ID</th>
-                                <td><input type="text" class="form-control" value="{{ $getVisitor->numberId }}" readonly></td>
+                                <td><input type="text" class="form-control" value="{{ $getVisitor->nik }}" readonly></td>
                                 <th>Company</th>
                                 <th><input type="text" class="form-control" value="{{ $getVisitor->company }}" readonly></th>
                             </tr>
@@ -52,6 +52,10 @@
                                 <td><input type="text" class="form-control" value="{{ $getVisitor->department }}" readonly></td>
                                 <th>Responsibility</th>
                                 <td><input type="text" class="form-control" value="{{ $getVisitor->respon }}" readonly></td>
+                            </tr>
+                            <tr>
+                                <th>Card Number</th>
+                                <td><input type="text" class="form-control" value="{{ $getCard->card_number }}" readonly></td>
                             </tr>
                             <tr>
                                 <th colspan="4" class="py-5">

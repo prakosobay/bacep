@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{CleaningFull, ColoHistory, MasterOb, OtherHistory, OtherPersonil, Personil, PilihanWork, Rutin, Survey, TroubleshootBm, Internal, InternalHistory, OrderHistory, SurveyHistory, Colo};
+use App\Models\{Internal, InternalHistory, SurveyHistory};
 use Illuminate\Support\Facades\{DB, Auth, Gate, Session};
 
 class HomeController extends Controller
@@ -80,6 +80,7 @@ class HomeController extends Controller
     {
         if ((Gate::denies('isAdmin') && (Gate::denies('isVisitor')))) {
             $role_1 = Session::get('arrole');
+            // dd($role_1);
             $val = [];
             if ($type_approve == 'all') {
                 return view('all_approval');
@@ -113,7 +114,16 @@ class HomeController extends Controller
                     ->get();
                 return view('other.troubleshoot_approval', compact('getTroubleshoot'));
             } elseif($type_approve == 'internal'){
-                $getInternal = InternalHistory::where('aktif', 1)->whereIn('role_to', $role_1)->get();
+                $getInternal = DB::table('internals')
+                        ->join('internal_histories', 'internals.id', '=', 'internal_histories.internal_id')
+                        ->join('users', 'internals.requestor_id', '=', 'users.id')
+                        ->join('entry_racks', 'internals.id', '=', 'entry_racks.internal_id')
+                        ->select('users.name as req_name', 'internals.*', 'internal_histories.aktif', 'internal_histories.role_to')
+                        ->whereIn('internal_histories.role_to', $role_1)
+                        ->where('internal_histories.aktif', '=', 1)
+                        ->groupBy('entry_racks.internal_id' )
+                        ->get();
+                        // dd($getInternal);
                 return view('internal.approval', compact('getInternal'));
             }  else {
                 abort(403);
