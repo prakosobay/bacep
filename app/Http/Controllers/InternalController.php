@@ -657,13 +657,20 @@ class InternalController extends Controller
 
     public function internal_yajra_last_form($dept)
     {
-        $getForm = DB::table('internals')
-                ->join('internal_visitors', 'internals.id', '=', 'internal_visitors.internal_id')
-                ->where('internal_visitors.done', 1)
-                ->where('internal_visitors.req_dept', $dept)
-                ->select('internals.*', 'internal_visitors.name', 'internal_visitors.internal_id')
-                ->groupBy('internal_visitors.internal_id');
-
-        return Datatables::of($getForm)->addColumn('action', 'internal.actionSelect')->make(true);
+        $getPermit = DB::table('internals')
+            ->join('internal_visitors', 'internals.id', '=', 'internal_visitors.internal_id')
+            ->join('users', 'internals.requestor_id', '=', 'users.id')
+            ->leftJoin('m_cards', 'internals.m_card_id', '=', 'm_cards.id')
+            ->where('internal_visitors.is_done', true)
+            ->where('users.department', $dept)
+            ->select('internals.work', 'internals.visit', 'internals.leave', 'users.name as requestor', 'm_cards.number as card_number', 'internal_visitors.name', 'internal_visitors.checkin', 'internal_visitors.checkout');
+        return Datatables::of($getPermit)
+            ->editColumn('visit', function ($getPermit) {
+                return $getPermit->visit ? with(new Carbon($getPermit->visit))->format('d/m/Y') : '';
+            })
+            ->editColumn('leave', function ($getPermit) {
+                return $getPermit->leave ? with(new Carbon($getPermit->leave))->format('d/m/Y') : '';
+            })
+            ->make(true);
     }
 }

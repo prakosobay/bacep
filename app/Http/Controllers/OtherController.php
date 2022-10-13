@@ -403,8 +403,8 @@ class OtherController extends Controller
         $get = OtherPersonil::findOrFail($id);
         $pic = $get->other_id;
 
-        $penomoran = DB::table('penomoran_cleanings')->latest()->first();
-        $new = DB::table('penomoran_cleanings')->where('other_id', $pic)->latest()->first();
+        $penomoran = DB::table('penomoran_cleanings')->where('permit_id', $pic)->latest()->first();
+        // $new = DB::table('penomoran_cleanings')->where('other_id', $pic)->latest()->first();
 
         if(($penomoran == null)){
             // dd(25);
@@ -413,15 +413,15 @@ class OtherController extends Controller
 
         } elseif($penomoran->number_ar){
 
-            $p = $penomoran->other_id;
+            // $p = $penomoran->other_id;
             // $q = $new->other_id;
-        dd($new);
-            if($pic != $p){
+        // dd($new);
+            // if($pic != $p){
 
-                if($p == $new->other_id){
-                    $ar = $penomoran->number_ar;
-                    $cr = $penomoran->number_cr;
-                }
+                // if($p == $new->other_id){
+                //     $ar = $penomoran->number_ar;
+                //     $cr = $penomoran->number_cr;
+                // }
                 // } else {
 
                 // }
@@ -445,10 +445,10 @@ class OtherController extends Controller
                     $cr = 1;
                 }
 
-            } else {
-                $ar = $penomoran->number_ar;
-                $cr = $penomoran->number_cr;
-            }
+            // } else {
+            //     $ar = $penomoran->number_ar;
+            //     $cr = $penomoran->number_cr;
+            // }
         }
 
         DB::beginTransaction();
@@ -997,8 +997,8 @@ class OtherController extends Controller
         $get = TroubleshootBmPersonil::findOrFail($id);
         $pic = $get->troubleshoot_bm_id;
 
-        $penomoran = DB::table('penomoran_cleanings')->latest()->first();
-        $new = DB::table('penomoran_cleanings')->where('troubleshoot_bm_id', $pic)->latest()->first();
+        $penomoran = DB::table('penomoran_cleanings')->where('permit_id', $pic)->latest()->first();
+        // $new = DB::table('penomoran_cleanings')->where('troubleshoot_bm_id', $pic)->latest()->first();
         // dd($new);
         if(($penomoran == null)){
 
@@ -1007,15 +1007,15 @@ class OtherController extends Controller
 
         } elseif($penomoran->number_ar){
 
-            $p = $penomoran->troubleshoot_bm_id;
-            $q = $new->troubleshoot_bm_id;
-            dd($q);
-            if($pic != $p){
+            // $p = $penomoran->troubleshoot_bm_id;
+            // $q = $new->troubleshoot_bm_id;
+            // dd($q);
+            // if($pic != $p){
 
-                if($q == $p){
-                    $ar = $penomoran->number_ar;
-                    $cr = $penomoran->number_cr;
-                }
+                // if($q == $p){
+                //     $ar = $penomoran->number_ar;
+                //     $cr = $penomoran->number_cr;
+                // }
 
                 $ar = $penomoran->number_ar + 1;
                 $cr = $penomoran->number_cr + 1;
@@ -1029,10 +1029,10 @@ class OtherController extends Controller
                     $cr = 1;
                 }
 
-            } else {
-                $ar = $penomoran->number_ar;
-                $cr = $penomoran->number_cr;
-            }
+            // } else {
+            //     $ar = $penomoran->number_ar;
+            //     $cr = $penomoran->number_cr;
+            // }
         }
 
         DB::beginTransaction();

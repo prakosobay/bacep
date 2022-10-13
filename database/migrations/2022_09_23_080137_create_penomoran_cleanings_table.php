@@ -15,9 +15,8 @@ class CreatePenomoranCleaningsTable extends Migration
     {
         Schema::create('penomoran_cleanings', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('cleaning_id');
-            $table->foreignId('other_id');
-            $table->foreignId('troubleshoot_bm_id');
+            $table->unsignedInteger('permit_id');
+            $table->string('type');
             $table->unsignedInteger('number_ar');
             $table->unsignedTinyInteger('month_ar');
             $table->unsignedSmallInteger('year_ar');

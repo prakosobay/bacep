@@ -13,18 +13,5 @@ class PenomoranCleaning extends Model
     protected $table = 'penomoran_cleanings';
     protected $guarded = [];
 
-    public function cleaning()
-    {
-        return $this->belongsTo(Clenaning::class, 'cleaning_id');
-    }
 
-    public function troubleshoot()
-    {
-        return $this->belongsTo(TroubleshootBm::class, 'troubleshoot_bm_id');
-    }
-
-    public function maintenance()
-    {
-        return $this->belongsTo(Other::class, 'other_id');
-    }
 }

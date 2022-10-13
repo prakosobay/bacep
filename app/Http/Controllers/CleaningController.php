@@ -397,9 +397,8 @@ class CleaningController extends Controller
         $getFullCheckout = CleaningFull::where('cleaning_id', $id)->first();
         $pic = $getFullCheckout->cleaning_id;
 
-        $penomoran = DB::table('penomoran_cleanings')->latest()->first();
-        $new = DB::table('penomoran_cleanings')->where('cleaning_id', $pic)->latest()->first();
-            // dd($new);
+        $penomoran = DB::table('penomoran_cleanings')->where('permit_id', $pic)->latest()->first();
+        // $new = DB::table('penomoran_cleanings')->where('cleaning_id', $pic)->latest()->first();
 
         if(($penomoran == null)){
 
@@ -408,15 +407,15 @@ class CleaningController extends Controller
 
         } elseif($penomoran->number_ar){
 
-            $p = $penomoran->cleaning_id;
-            $q = $new;
-            dd($q);
-            if($pic != $p){
+        //     $p = $penomoran->cleaning_id;
+        //     $q = $new;
+        //     dd($q);
+        //     if($pic != $p){
 
-                if($q == $p){
-                    $ar = $penomoran->number_ar;
-                    $cr = $penomoran->number_cr;
-                }
+        //         if($q == $p){
+        //             $ar = $penomoran->number_ar;
+        //             $cr = $penomoran->number_cr;
+        //         }
 
                 $ar = $penomoran->number_ar + 1;
                 $cr = $penomoran->number_cr + 1;
@@ -430,10 +429,10 @@ class CleaningController extends Controller
                     $cr = 1;
                 }
 
-            } else {
-                $ar = $penomoran->number_ar;
-                $cr = $penomoran->number_cr;
-            }
+        //     } else {
+        //         $ar = $penomoran->number_ar;
+        //         $cr = $penomoran->number_cr;
+        //     }
         }
 
         DB::beginTransaction();
