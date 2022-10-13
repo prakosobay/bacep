@@ -4,6 +4,26 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Changed
+- Cast empty headings to indexed integer
+- Adds `isEmptyWhen` to customize is row empty logic.
+
+### Fixed
+
+- Fix temporary local files not being cleaned up when setting force_resync_remote config to true (#3623)
+- Fix testing for multiple stored files by regex matching (#3631).
+- Allow `required_unless` rule (#3660)
+
+## [3.1.40] - 2022-05-02
+
+- Fix testing for multiple stored files by regex matching (#3631).
+
+### Changed
+
+- Adds `WithDefaultStyles` concern to allow configuring the workbook default styles.
+- Adds `WithBackgroundColor` concern to allow configuring the workbook default background color.
+- Expose the ability to set custom response headers when exporting collections via Exportable
+
 ## [3.1.39] - 2022-04-23
 
 ### Fixed
@@ -223,7 +243,8 @@ All notable changes to this project will be documented in this file.
 - Raw() method now also available on Exportable.
 - Fix for breaking changes in PhpSpreadsheet with empty enclosures.
 
-[Unreleased]: https://github.com/Maatwebsite/Laravel-Excel/compare/3.1.39...HEAD
+[Unreleased]: https://github.com/Maatwebsite/Laravel-Excel/compare/3.1.40...HEAD
+[3.1.40]: https://github.com/Maatwebsite/Laravel-Excel/compare/3.1.39...3.1.40
 [3.1.39]: https://github.com/Maatwebsite/Laravel-Excel/compare/3.1.38...3.1.39
 [3.1.38]: https://github.com/Maatwebsite/Laravel-Excel/compare/3.1.37...3.1.38
 [3.1.37]: https://github.com/Maatwebsite/Laravel-Excel/compare/3.1.36...3.1.37
