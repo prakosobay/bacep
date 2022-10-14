@@ -22,6 +22,7 @@
         "realrashid/sweet-alert": "^4.0",
         "yajra/laravel-datatables-oracle": "~9.0"
     },
+
     "require-dev": {
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",

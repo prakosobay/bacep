@@ -41,7 +41,7 @@
                 serverSide: true,
                 ajax: '{{ route('troubleshootYajraFullApproval')}}',
                 columns: [
-                    { data: 'id', name: 'troubleshoot_bm_personils.id' },
+                    { data: 'permit_id', name: 'permit_id' },
                     { data: 'visit', name: 'troubleshoot_bm_fulls.visit' },
                     { data: 'leave', name: 'troubleshoot_bm_fulls.leave' },
                     { data: 'work', name: 'troubleshoot_bm_fulls.work' },

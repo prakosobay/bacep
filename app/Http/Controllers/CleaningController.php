@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 use Barryvdh\DomPDF\Facade as PDF;
 use App\Mail\{NotifEmail, NotifReject, NotifFull};
-use App\Models\{User, Role, MasterOb, PilihanWork, Cleaning, CleaningHistory, CleaningFull, PenomoranAR, PenomoranCleaning, PenomoranCR};
+use App\Models\{User, Role, MasterOb, PilihanWork, Cleaning, CleaningHistory, CleaningFull, PenomoranCleaning, PenomoranCR};
 use phpDocumentor\Reflection\PseudoTypes\True_;
 use Yajra\Datatables\Datatables;
 use Carbon\Carbon;
@@ -397,43 +397,9 @@ class CleaningController extends Controller
         $getFullCheckout = CleaningFull::where('cleaning_id', $id)->first();
         $pic = $getFullCheckout->cleaning_id;
 
-        $penomoran = DB::table('penomoran_cleanings')->where('permit_id', $pic)->latest()->first();
-        // $new = DB::table('penomoran_cleanings')->where('cleaning_id', $pic)->latest()->first();
-
-        if(($penomoran == null)){
-
-            $ar = 1;
-            $cr = 1;
-
-        } elseif($penomoran->number_ar){
-
-        //     $p = $penomoran->cleaning_id;
-        //     $q = $new;
-        //     dd($q);
-        //     if($pic != $p){
-
-        //         if($q == $p){
-        //             $ar = $penomoran->number_ar;
-        //             $cr = $penomoran->number_cr;
-        //         }
-
-                $ar = $penomoran->number_ar + 1;
-                $cr = $penomoran->number_cr + 1;
-
-                $lastyearAR = $penomoran->year_ar;
-                $lastyearCR = $penomoran->year_cr;
-                $currrentYear = date('Y');
-
-                if ( ($currrentYear != $lastyearAR) && ( $currrentYear != $lastyearCR ) ){
-                    $ar = 1;
-                    $cr = 1;
-                }
-
-        //     } else {
-        //         $ar = $penomoran->number_ar;
-        //         $cr = $penomoran->number_cr;
-        //     }
-        }
+        $last = DB::table('penomoran_cleanings')->latest()->first();
+        $penomoran = DB::table('penomoran_cleanings')->where('type', 'cleaning')->latest()->first();
+        $nomer = DB::table('penomoran_cleanings')->where('type', 'cleaning')->where('permit_id', $pic)->latest()->first();
 
         DB::beginTransaction();
 
@@ -447,6 +413,37 @@ class CleaningController extends Controller
                 'status' => 'Full Approved',
             ]);
 
+            if($last == null){
+
+                $ar = 1;
+                $cr = 1;
+
+            } elseif($last->number_ar) {
+
+                $ar = $last->number_ar;
+                $cr = $last->number_cr;
+
+                if($nomer == null) {
+                    // dd(1);
+                    $ar = $last->number_ar + 1;
+                    $cr = $last->number_cr + 1;
+
+                } elseif($penomoran->permit_id != $nomer->permit_id) {
+
+                    $ar = $last->number_ar + 1;
+                    $cr = $last->number_cr + 1;
+
+                    $lastyearAR = $last->year_ar;
+                    $lastyearCR = $last->year_cr;
+                    $currrentYear = date('Y');
+
+                    if ( ($currrentYear != $lastyearAR) && ( $currrentYear != $lastyearCR ) ){
+                        $ar = 1;
+                        $cr = 1;
+                    }
+                }
+            }
+            // dd($ar);
             PenomoranCleaning::firstOrCreate([
                 'number_ar' => $ar,
                 'month_ar' => date('m'),
@@ -454,9 +451,8 @@ class CleaningController extends Controller
                 'number_cr' => $cr,
                 'month_cr' => date('m'),
                 'year_cr' => date('Y'),
-                'cleaning_id' => $getFullCheckout->cleaning_id,
-                'other_id' => '',
-                'troubleshoot_bm_id' => '',
+                'type' => 'cleaning',
+                'permit_id' => $pic,
             ]);
 
             DB::commit();
@@ -513,8 +509,7 @@ class CleaningController extends Controller
             ->select('cleaning_histories.*', 'users.name', 'created_by')
             ->get();
 
-        // $penomoran = CleaningFull::where('checkout_personil', '!=', null)->first();
-        $penomoran = PenomoranCleaning::where('cleaning_id', $id)->first();
+        $penomoran = PenomoranCleaning::where('permit_id', $id)->where('type', 'cleaning')->first();
         // dd($penomoran);
         $pdf = PDF::loadview('cleaning_pdf', compact('cleaning', 'cleaningHistory', 'lasthistoryC', 'penomoran'))->setPaper('a4', 'portrait')->setWarnings(false);
         return $pdf->stream();

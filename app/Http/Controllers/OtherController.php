@@ -403,53 +403,9 @@ class OtherController extends Controller
         $get = OtherPersonil::findOrFail($id);
         $pic = $get->other_id;
 
-        $penomoran = DB::table('penomoran_cleanings')->where('permit_id', $pic)->latest()->first();
-        // $new = DB::table('penomoran_cleanings')->where('other_id', $pic)->latest()->first();
-
-        if(($penomoran == null)){
-            // dd(25);
-            $ar = 1;
-            $cr = 1;
-
-        } elseif($penomoran->number_ar){
-
-            // $p = $penomoran->other_id;
-            // $q = $new->other_id;
-        // dd($new);
-            // if($pic != $p){
-
-                // if($p == $new->other_id){
-                //     $ar = $penomoran->number_ar;
-                //     $cr = $penomoran->number_cr;
-                // }
-                // } else {
-
-                // }
-
-                // if($new->other_id == null){
-                //     $ar = $penomoran->number_ar + 1;
-                //     $cr = $penomoran->number_cr + 1;
-                // } else{
-
-                // }
-
-                $ar = $penomoran->number_ar + 1;
-                $cr = $penomoran->number_cr + 1;
-
-                $lastyearAR = $penomoran->year_ar;
-                $lastyearCR = $penomoran->year_cr;
-                $currrentYear = date('Y');
-
-                if ( ($currrentYear != $lastyearAR) && ( $currrentYear != $lastyearCR ) ){
-                    $ar = 1;
-                    $cr = 1;
-                }
-
-            // } else {
-            //     $ar = $penomoran->number_ar;
-            //     $cr = $penomoran->number_cr;
-            // }
-        }
+        $last = DB::table('penomoran_cleanings')->latest()->first();
+        $penomoran = DB::table('penomoran_cleanings')->where('type', 'maintenance')->latest()->first();
+        $nomer = DB::table('penomoran_cleanings')->where('type', 'maintenance')->where('permit_id', $pic)->latest()->first();
 
         DB::beginTransaction();
 
@@ -460,6 +416,40 @@ class OtherController extends Controller
                 'checkout' => $request->checkout,
                 'photo_checkout' => $imageName,
             ]);
+
+            if($last == null){
+
+                $ar = 1;
+                $cr = 1;
+
+            } elseif($last->number_ar) {
+
+                if($nomer == null) {
+
+                    $ar = $last->number_ar + 1;
+                    $cr = $last->number_cr + 1;
+
+                } elseif($nomer->number_ar){
+
+                    $ar = $nomer->number_ar;
+                    $cr = $nomer->number_cr;
+
+                    if($penomoran->permit_id != $nomer->permit_id) {
+
+                        $ar = $last->number_ar + 1;
+                        $cr = $last->number_cr + 1;
+
+                        $lastyearAR = $last->year_ar;
+                        $lastyearCR = $last->year_cr;
+                        $currrentYear = date('Y');
+
+                        if ( ($currrentYear != $lastyearAR) && ( $currrentYear != $lastyearCR ) ){
+                            $ar = 1;
+                            $cr = 1;
+                        }
+                    }
+                }
+            }
             // dd($ar);
             PenomoranCleaning::firstOrCreate([
                 'number_ar' => $ar,
@@ -468,9 +458,8 @@ class OtherController extends Controller
                 'number_cr' => $cr,
                 'month_cr' => date('m'),
                 'year_cr' => date('Y'),
-                'cleaning_id' => '',
-                'other_id' => $pic,
-                'troubleshoot_bm_id' => '',
+                'permit_id' => $pic,
+                'type' => 'maintenance',
             ]);
 
             DB::commit();
@@ -519,7 +508,7 @@ class OtherController extends Controller
             ->select('other_histories.*')
             ->get();
 
-        $penomoran = PenomoranCleaning::where('other_id', $id)->first();
+        $penomoran = PenomoranCleaning::where('type', 'maintenance')->where('permit_id', $id)->first();
         $pdf = PDF::loadview('other.maintenance_pdf', compact('getOther', 'getPersonil', 'getHistory', 'getLastOther', 'penomoran'))->setPaper('a4', 'portrait')->setWarnings(false);
         return $pdf->stream();
     }
@@ -978,8 +967,6 @@ class OtherController extends Controller
 
     public function troubleshoot_checkout_update(Request $request, $id)
     {
-        // dd($request->all());
-
         $request->validate([
             'checkout' => ['required'],
             'photo_checkout' => ['required'],
@@ -990,50 +977,15 @@ class OtherController extends Controller
         $image = str_replace($replace, '', $request->photo_checkout);
         $image = str_replace(' ', '+', $image);
         $imageName = Str::random(200) .  '.' . $extension;
-        // dd($imageName);
 
         Storage::disk('troubleshootCheckout')->put($imageName, base64_decode($image));
 
         $get = TroubleshootBmPersonil::findOrFail($id);
         $pic = $get->troubleshoot_bm_id;
 
-        $penomoran = DB::table('penomoran_cleanings')->where('permit_id', $pic)->latest()->first();
-        // $new = DB::table('penomoran_cleanings')->where('troubleshoot_bm_id', $pic)->latest()->first();
-        // dd($new);
-        if(($penomoran == null)){
-
-            $ar = 1;
-            $cr = 1;
-
-        } elseif($penomoran->number_ar){
-
-            // $p = $penomoran->troubleshoot_bm_id;
-            // $q = $new->troubleshoot_bm_id;
-            // dd($q);
-            // if($pic != $p){
-
-                // if($q == $p){
-                //     $ar = $penomoran->number_ar;
-                //     $cr = $penomoran->number_cr;
-                // }
-
-                $ar = $penomoran->number_ar + 1;
-                $cr = $penomoran->number_cr + 1;
-
-                $lastyearAR = $penomoran->year_ar;
-                $lastyearCR = $penomoran->year_cr;
-                $currrentYear = date('Y');
-
-                if ( ($currrentYear != $lastyearAR) && ( $currrentYear != $lastyearCR ) ){
-                    $ar = 1;
-                    $cr = 1;
-                }
-
-            // } else {
-            //     $ar = $penomoran->number_ar;
-            //     $cr = $penomoran->number_cr;
-            // }
-        }
+        $last = DB::table('penomoran_cleanings')->latest()->first();
+        $penomoran = DB::table('penomoran_cleanings')->where('type', 'troubleshoot')->latest()->first();
+        $nomer = DB::table('penomoran_cleanings')->where('type', 'troubleshoot')->where('permit_id', $pic)->latest()->first();
 
         DB::beginTransaction();
 
@@ -1045,6 +997,40 @@ class OtherController extends Controller
                 'photo_checkout' => $imageName,
             ]);
 
+            $lastyearAR = $last->year_ar;
+            $lastyearCR = $last->year_cr;
+            $currrentYear = date('Y');
+
+            if($last == null){
+
+                $ar = 1;
+                $cr = 1;
+
+            } elseif($last->number_ar) {
+
+                if($nomer == null) {
+
+                    $ar = $last->number_ar + 1;
+                    $cr = $last->number_cr + 1;
+
+                } elseif($nomer->number_ar){
+
+                    $ar = $nomer->number_ar;
+                    $cr = $nomer->number_cr;
+
+                    if($penomoran->permit_id != $nomer->permit_id) {
+
+                        $ar = $last->number_ar + 1;
+                        $cr = $last->number_cr + 1;
+                    }
+                }
+            }
+
+            if ( ($currrentYear != $lastyearAR) && ( $currrentYear != $lastyearCR ) ){
+                $ar = 1;
+                $cr = 1;
+            }
+            dd($ar);
             PenomoranCleaning::firstOrCreate([
                 'number_ar' => $ar,
                 'month_ar' => date('m'),
@@ -1052,9 +1038,8 @@ class OtherController extends Controller
                 'number_cr' => $cr,
                 'month_cr' => date('m'),
                 'year_cr' => date('Y'),
-                'cleaning_id' => '',
-                'other_id' => '',
-                'troubleshoot_bm_id' => $pic,
+                'type' => 'troubleshoot',
+                'permit_id' => $pic,
             ]);
 
             DB::commit();
@@ -1101,11 +1086,10 @@ class OtherController extends Controller
             ->select('troubleshoot_bm_histories.*', 'users.name as createdby')
             ->get();
 
-        $penomoran = PenomoranCleaning::where('troubleshoot_bm_id', $id)->first();
+        $penomoran = PenomoranCleaning::where('permit_id', $id)->where('type', 'troubleshoot')->first();
         $pdf = PDF::loadview('other.troubleshoot_pdf', compact('getForm', 'getLastHistory', 'getHistory', 'penomoran'))->setPaper('a4', 'portrait')->setWarnings(false);
         return $pdf->stream();
     }
-
 
 
 
@@ -1135,15 +1119,11 @@ class OtherController extends Controller
 
     public function troubleshoot_yajra_full_approval() // Get data permit troubleshoot full approval view untuk approval
     {
-        // $full_approval = DB::table('troubleshoot_bm_fulls')
-        //     ->join('troubleshoot_bms', 'troubleshoot_bms.id', '=', 'troubleshoot_bm_fulls.troubleshoot_bm_id')
-        //     ->select('troubleshoot_bm_fulls.*')
-        //     ->orderBy('troubleshoot_bm_id', 'desc');
         $full = DB::table('troubleshoot_bms')
                 ->join('troubleshoot_bm_personils', 'troubleshoot_bms.id', '=', 'troubleshoot_bm_personils.troubleshoot_bm_id')
                 ->join('troubleshoot_bm_fulls', 'troubleshoot_bms.id', '=', 'troubleshoot_bm_fulls.troubleshoot_bm_id')
                 ->where('troubleshoot_bm_personils.deleted_at', null)
-                ->select('troubleshoot_bm_personils.*', 'troubleshoot_bm_fulls.visit', 'troubleshoot_bm_fulls.leave', 'troubleshoot_bm_fulls.link', 'troubleshoot_bm_fulls.work');
+                ->select('troubleshoot_bm_personils.*', 'troubleshoot_bm_fulls.visit', 'troubleshoot_bm_fulls.leave', 'troubleshoot_bm_fulls.link', 'troubleshoot_bm_fulls.work', 'troubleshoot_bms.id as permit_id');
         return Datatables::of($full)
             ->editColumn('visit', function ($full) {
                 return $full->visit ? with(new Carbon($full->visit))->format('d/m/Y') : '';
