@@ -508,7 +508,7 @@ class OtherController extends Controller
             ->where('other_histories.other_id', '=', $id)
             ->select('other_histories.*', 'users.name as createdby')
             ->get();
-        dd($getHistory);
+        // dd($getHistory);
         $penomoran = PenomoranCleaning::where('type', 'maintenance')->where('permit_id', $id)->first();
         $pdf = PDF::loadview('other.maintenance_pdf', compact('getOther', 'getPersonil', 'getHistory', 'getLastOther', 'penomoran'))->setPaper('a4', 'portrait')->setWarnings(false);
         return $pdf->stream();
