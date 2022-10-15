@@ -504,10 +504,11 @@ class OtherController extends Controller
 
         $getHistory = DB::table('other_histories')
             ->join('others', 'others.id', '=', 'other_histories.other_id')
+            ->join('users', 'other_histories.created_by', '=', 'users.id')
             ->where('other_histories.other_id', '=', $id)
-            ->select('other_histories.*')
+            ->select('other_histories.*', 'users.name as createdby')
             ->get();
-
+        dd($getHistory);
         $penomoran = PenomoranCleaning::where('type', 'maintenance')->where('permit_id', $id)->first();
         $pdf = PDF::loadview('other.maintenance_pdf', compact('getOther', 'getPersonil', 'getHistory', 'getLastOther', 'penomoran'))->setPaper('a4', 'portrait')->setWarnings(false);
         return $pdf->stream();
