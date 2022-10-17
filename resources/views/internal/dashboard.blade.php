@@ -80,27 +80,51 @@
                         </div>
                     </div>
 
-                    {{-- Modal --}}
-                    <div class="modal fade" id="internalModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Pilih Form</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('internal/form')}}">AR CR Form</a>
-                                    {{-- <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('order/form')}}">Consumable Form</a>
-                                    <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('internal/formBarang')}}">AR CR + Barang Form</a>
-                                    <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('internal/formConsumableBarang')}}">AR CR + Consumable + Barang Form</a> --}}
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Select</button>
+                    @if($type == 'Enterprise Sales')
+                        {{-- Modal --}}
+                        <div class="modal fade" id="internalModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Pilih Form</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <a class="btn btn-sm btn-success mx-1 my-1" href="{{ route('salesForm')}}">Access Request Form</a>
+                                        {{-- <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('order/form')}}">Consumable Form</a>
+                                        <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('internal/formBarang')}}">AR CR + Barang Form</a>
+                                        <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('internal/formConsumableBarang')}}">AR CR + Consumable + Barang Form</a> --}}
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Select</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    @else
+                        {{-- Modal --}}
+                        <div class="modal fade" id="internalModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Pilih Form</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('internal/form')}}">AR CR Form</a>
+                                        {{-- <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('order/form')}}">Consumable Form</a>
+                                        <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('internal/formBarang')}}">AR CR + Barang Form</a>
+                                        <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('internal/formConsumableBarang')}}">AR CR + Consumable + Barang Form</a> --}}
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Select</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
 
                     {{-- Table --}}
                     <div class="card-body">

@@ -91,7 +91,7 @@
     <footer class="sticky-footer py-2" style="background-color: #072249; height:auto">
         <div class="container my-auto">
             <div class="copyright text-center text-footer my-auto py-auto">
-                <span>PT Bali Tower Data Center - 2022</span>
+                <span>Data Center - 2022</span>
             </div>
         </div>
     </footer>

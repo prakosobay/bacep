@@ -95,7 +95,11 @@
                                     </form>
 
                                 @endcan
+                                @if($p->dept == 'Enterprise Sales')
+                                    <a href="/sales/pdf/{{$p->id}}" class="btn btn-primary btn-sm my-1 mx-1" target="_blank">File</a>
+                                @else
                                     <a href="/internal/pdf/{{$p->id}}" class="btn btn-primary btn-sm my-1 mx-1" target="_blank">File</a>
+                                @endif
                             </td>
                         </tr>
                         @endforeach

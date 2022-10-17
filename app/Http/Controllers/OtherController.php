@@ -439,16 +439,18 @@ class OtherController extends Controller
                         $ar = $last->number_ar + 1;
                         $cr = $last->number_cr + 1;
 
-                        $lastyearAR = $last->year_ar;
-                        $lastyearCR = $last->year_cr;
-                        $currrentYear = date('Y');
 
-                        if ( ($currrentYear != $lastyearAR) && ( $currrentYear != $lastyearCR ) ){
-                            $ar = 1;
-                            $cr = 1;
-                        }
                     }
                 }
+            }
+
+            $lastyearAR = $last->year_ar;
+            $lastyearCR = $last->year_cr;
+            $currrentYear = date('Y');
+
+            if ( ($currrentYear != $lastyearAR) && ( $currrentYear != $lastyearCR ) ){
+                $ar = 1;
+                $cr = 1;
             }
             // dd($ar);
             PenomoranCleaning::firstOrCreate([
@@ -1027,11 +1029,15 @@ class OtherController extends Controller
                 }
             }
 
+            $lastyearAR = $last->year_ar;
+            $lastyearCR = $last->year_cr;
+            $currrentYear = date('Y');
+
             if ( ($currrentYear != $lastyearAR) && ( $currrentYear != $lastyearCR ) ){
                 $ar = 1;
                 $cr = 1;
             }
-            dd($ar);
+            // dd($ar);
             PenomoranCleaning::firstOrCreate([
                 'number_ar' => $ar,
                 'month_ar' => date('m'),

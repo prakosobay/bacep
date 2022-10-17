@@ -54,7 +54,8 @@ class InternalController extends Controller
 
     public function dashboard()
     {
-        return view('internal.dashboard');
+        $type = auth()->user()->department;
+        return view('internal.dashboard', compact('type'));
     }
 
     public function finished_show()

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{HomeController, CleaningController, AdminController};
+use FontLib\Table\Type\name;
 
 // v.1.2.0
 Route::get('/', function () {
@@ -226,20 +227,23 @@ Route::middleware(['auth'])->group(function () {
 
 
     // Survey
-    Route::controller(SurveyController::class)->group(function () {
-        Route::get('survey/dashboard', 'dashboard')->name('dashboardSurvey');
-        Route::get('survey/form', 'form');
-        Route::get('/survey/pdf/{id}', 'pdf');
-        Route::get('jsona', 'json');
-        Route::get('route_data_approval', 'data_approval');
-        Route::get('route_history_survey', 'data_history');
-        Route::get('history/{type_view}', 'log_view');
-        Route::get('route_full_survey', 'full');
-        Route::get('survey/yajra/full/visitor', 'survey_yajra_full_visitor');
-        Route::post('survey/create', 'create');
-        Route::post('/approve_survey', 'approve');
-        Route::post('/reject_survey', 'reject');
-    });
+    // Route::controller(SurveyController::class)->group(function () {
+    //     Route::get('survey/dashboard', 'dashboard')->name('dashboardSurvey');
+    //     Route::get('survey/form', 'form');
+    //     Route::get('/survey/pdf/{id}', 'pdf');
+    //     Route::get('jsona', 'json');
+    //     Route::get('route_data_approval', 'data_approval');
+    //     Route::get('route_history_survey', 'data_history');
+    //     Route::get('history/{type_view}', 'log_view');
+    //     Route::get('route_full_survey', 'full');
+    //     Route::get('survey/yajra/full/visitor', 'survey_yajra_full_visitor');
+    //     Route::post('survey/create', 'create');
+    //     Route::post('/approve_survey', 'approve');
+    //     Route::post('/reject_survey', 'reject');
+
+
+    // });
+
 
 
     // Cleaning
@@ -362,6 +366,15 @@ Route::middleware(['auth'])->group(function () {
         Route::post('internal/reject/{id}', 'internal_reject');
 
         Route::get('internal-export-full-approve', 'export_full_approve')->name('internalExportFullApprove');
+    });
+
+
+    //  Sales
+    Route::controller(SalesController::class)->group(function(){
+        Route::get('sales/form', 'form')->name('salesForm');
+        Route::get('sales/pdf/{id}', 'pdf');
+
+        Route::post('sales/store', 'store')->name('salesStore');
     });
 
 
