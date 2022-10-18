@@ -175,9 +175,9 @@ class AssetController extends Controller
     public function update_keluar(Request $request, $id) // Update data barang asset keluar
     {
         $this->validate($request, [
-            'jumlah_sisa' => ['numeric', 'required'],
-            'jumlah_digunakan' => ['numeric', 'required'],
-            'ket' => ['required'],
+            'jumlah_sisa' => ['numeric', 'nullable'],
+            'jumlah_digunakan' => ['numeric', 'nullable'],
+            'ket' => ['required', 'string', 'max:255'],
         ]);
 
         DB::beginTransaction();

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\NotifSalesForm;
 use App\Models\{AccessRequestInternal, ChangeRequestInternal, Internal, InternalFull, InternalHistory, InternalVisitor};
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\{DB, Mail, Storage};
@@ -23,12 +24,12 @@ class SalesController extends Controller
         $request->validate([
             'visit' => ['required', 'date'],
             'leave' => ['required', 'date', 'after_or_equal:visit'],
-            'name' => ['nullable', 'string', 'max:255'],
-            'number' => ['nullable', 'string', 'max:255'],
-            'company' => ['nullable', 'string', 'max:255'],
-            'department' => ['nullable', 'string', 'max:255'],
-            'respon' => ['nullable', 'string', 'max:255'],
-            'phone' => ['nullable', 'string', 'max:14'],
+            'name' => ['nullable', 'max:255'],
+            'number' => ['nullable', 'max:255'],
+            'company' => ['nullable', 'max:255'],
+            'department' => ['nullable', 'max:255'],
+            'respon' => ['nullable', 'max:255'],
+            'phone' => ['nullable', 'max:14'],
         ]);
 
         $getForm = $request->all();
@@ -68,16 +69,16 @@ class SalesController extends Controller
             }
             InternalVisitor::insert($arrayVisitor);
 
-            // $notif_email = DB::table('internals')
-            //     ->join('users', 'internals.requestor_id', '=', 'users.id')
-            //     ->select('users.name as requestor', 'internals.id', 'internals.visit', 'internals.created_at as created', 'internals.work', 'internals.leave')
-            //     ->where('internals.id', $insertForm->id)
-            //     ->first();
-            // foreach ([
-            //     'bayu.prakoso@balitower.co.id',
-            // ] as $recipient) {
-            //     Mail::to($recipient)->send(new NotifSalesForm($notif_email));
-            // }
+            $notif_email = DB::table('internals')
+                ->join('users', 'internals.requestor_id', '=', 'users.id')
+                ->select('users.name as requestor', 'internals.id', 'internals.visit', 'internals.created_at as created', 'internals.work', 'internals.leave')
+                ->where('internals.id', $insertForm->id)
+                ->first();
+            foreach ([
+                'bayu.prakoso@balitower.co.id',
+            ] as $recipient) {
+                Mail::to($recipient)->send(new NotifSalesForm($notif_email));
+            }
 
             InternalHistory::create([
                 'internal_id' => $insertForm->id,
@@ -104,7 +105,7 @@ class SalesController extends Controller
 
         $getHistory = InternalHistory::where('internal_id', $id)
                 ->join('users', 'users.id', '=', 'internal_histories.created_by')
-                ->select('internal_histories.*', 'users.name')
+                ->select('internal_histories.*', 'users.name as createdby')
                 ->get();
 
         $nomorAR = AccessRequestInternal::where('internal_id', $id)->first();

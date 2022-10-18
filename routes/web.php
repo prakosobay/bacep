@@ -245,7 +245,6 @@ Route::middleware(['auth'])->group(function () {
     // });
 
 
-
     // Cleaning
     Route::controller(CleaningController::class)->group(function () {
         Route::get('route_history_cleaning', 'data_history');
@@ -373,6 +372,9 @@ Route::middleware(['auth'])->group(function () {
     Route::controller(SalesController::class)->group(function(){
         Route::get('sales/form', 'form')->name('salesForm');
         Route::get('sales/pdf/{id}', 'pdf');
+        Route::get('sales/yajra/full/approval', 'yajra_full_approval')->name('salesYajraFullApproval');
+        Route::get('sales/yajra/history', 'yajra_history')->name('salesYajraHistory');
+
 
         Route::post('sales/store', 'store')->name('salesStore');
     });

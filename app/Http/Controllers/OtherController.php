@@ -170,7 +170,7 @@ class OtherController extends Controller
 
             foreach ([
                 'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
-                'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id',
+                'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'mufli.gonibala@balitower.co.id',
                 'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'dyah.retno@balitower.co.id',
             ] as $recipient) {
                 Mail::to($recipient)->send(new NotifMaintenanceForm($otherForm));
@@ -226,29 +226,29 @@ class OtherController extends Controller
                 // // Pergantian  role tiap permit & send email notif
                 $role_to = '';
                 if ($lastupdate->role_to == 'review') {
-                    foreach ([
-                        'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
-                        'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id',
-                        'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id',
-                    ] as $recipient) {
-                        Mail::to($recipient)->send(new NotifMaintenanceForm($notif_email));
-                    }
+                    // foreach ([
+                    //     'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
+                    //     'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id',
+                    //     'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'mufli.gonibala@balitower.co.id',
+                    // ] as $recipient) {
+                    //     Mail::to($recipient)->send(new NotifMaintenanceForm($notif_email));
+                    // }
                     $role_to = 'check';
                 } elseif ($lastupdate->role_to == 'check') {
-                    foreach (['security.bacep@balitower.co.id'] as $recipient) {
-                        Mail::to($recipient)->send(new NotifMaintenanceForm($notif_email));
-                    }
+                    // foreach (['security.bacep@balitower.co.id'] as $recipient) {
+                    //     Mail::to($recipient)->send(new NotifMaintenanceForm($notif_email));
+                    // }
                     $role_to = 'security';
                 } elseif ($lastupdate->role_to == 'security') {
-                    foreach (['bayu.prakoso@balitower.co.id', 'tofiq.hidayat@balitower.co.id'] as $recipient) {
-                        Mail::to($recipient)->send(new NotifMaintenanceForm($notif_email));
-                    }
+                    // foreach (['bayu.prakoso@balitower.co.id', 'tofiq.hidayat@balitower.co.id'] as $recipient) {
+                    //     Mail::to($recipient)->send(new NotifMaintenanceForm($notif_email));
+                    // }
                     $role_to = 'head';
                 } elseif ($lastupdate->role_to = 'head') {
                     $full = Other::find($request->other_id);
-                    foreach (['dc@balitower.co.id'] as $recipient) {
-                        Mail::to($recipient)->send(new NotifMaintenanceFull($full));
-                    }
+                    // foreach (['dc@balitower.co.id'] as $recipient) {
+                    //     Mail::to($recipient)->send(new NotifMaintenanceFull($full));
+                    // }
                     $role_to = 'all';
 
                     $full_maintenance = Other::where('id', $request->other_id)->first();
@@ -268,7 +268,7 @@ class OtherController extends Controller
                 // Simpan tiap perubahan permit ke table CLeaningHistory
                 $otherHistory = OtherHistory::create([
                     'other_id' => $request->other_id,
-                    'created_by' => Auth::user()->id,
+                    'created_by' => Auth::user()->name,
                     'role_to' => $role_to,
                     'status' => $status,
                     'aktif' => true,
@@ -392,6 +392,11 @@ class OtherController extends Controller
             'photo_checkout' => ['required'],
         ]);
 
+        $visitorID = OtherPersonil::findOrFail($id);
+        $pic = $visitorID->other_id;
+        $visitors = OtherPersonil::where('other_id', $pic)->select('id')->get();
+        dd($visitors);
+
         $extension = explode('/', explode(':', substr($request->photo_checkout, 0, strpos($request->photo_checkout, ';')))[1])[1];   // .jpg .png .pdf
         $replace = substr($request->photo_checkout, 0, strpos($request->photo_checkout, ',') + 1);
         $image = str_replace($replace, '', $request->photo_checkout);
@@ -399,9 +404,6 @@ class OtherController extends Controller
         $imageName = Str::random(200) .  '.' . $extension;
 
         Storage::disk('maintenanceCheckout')->put($imageName, base64_decode($image));
-
-        $get = OtherPersonil::findOrFail($id);
-        $pic = $get->other_id;
 
         $last = DB::table('penomoran_cleanings')->latest()->first();
         $penomoran = DB::table('penomoran_cleanings')->where('type', 'maintenance')->latest()->first();
@@ -424,6 +426,9 @@ class OtherController extends Controller
 
             } elseif($last->number_ar) {
 
+                $ar = $last->number_ar;
+                $cr = $last->number_cr;
+
                 if($nomer == null) {
 
                     $ar = $last->number_ar + 1;
@@ -438,19 +443,17 @@ class OtherController extends Controller
 
                         $ar = $last->number_ar + 1;
                         $cr = $last->number_cr + 1;
-
-
                     }
                 }
-            }
 
-            $lastyearAR = $last->year_ar;
-            $lastyearCR = $last->year_cr;
-            $currrentYear = date('Y');
+                $lastyearAR = $last->year_ar;
+                $lastyearCR = $last->year_cr;
+                $currrentYear = date('Y');
 
-            if ( ($currrentYear != $lastyearAR) && ( $currrentYear != $lastyearCR ) ){
-                $ar = 1;
-                $cr = 1;
+                if ( ($currrentYear != $lastyearAR) && ( $currrentYear != $lastyearCR ) ){
+                    $ar = 1;
+                    $cr = 1;
+                }
             }
             // dd($ar);
             PenomoranCleaning::firstOrCreate([
@@ -506,9 +509,9 @@ class OtherController extends Controller
 
         $getHistory = DB::table('other_histories')
             ->join('others', 'others.id', '=', 'other_histories.other_id')
-            ->join('users', 'other_histories.created_by', '=', 'users.id')
+            // ->join('users', 'other_histories.created_by', '=', 'users.id')
             ->where('other_histories.other_id', '=', $id)
-            ->select('other_histories.*', 'users.name as createdby')
+            ->select('other_histories.*')
             ->get();
         // dd($getHistory);
         $penomoran = PenomoranCleaning::where('type', 'maintenance')->where('permit_id', $id)->first();
@@ -666,7 +669,7 @@ class OtherController extends Controller
                 'rollback' => $input['rollback'],
             ]);
 
-            $other_entry = TroubleshootBmEntry::create([
+            TroubleshootBmEntry::create([
                 'troubleshoot_bm_id' => $other_form->id,
                 'dc' => $request->dc,
                 'mmr1' => $request->mmr2,
@@ -701,7 +704,7 @@ class OtherController extends Controller
                     $insert_detail[] = $detail_array;
                 }
             }
-            $other_detail = TroubleshootBmDetail::insert($insert_detail);
+            TroubleshootBmDetail::insert($insert_detail);
 
             $insert_risk = [];
             foreach ($input['risk'] as $k => $v) {
@@ -721,7 +724,7 @@ class OtherController extends Controller
                     $insert_risk[] = $risk_array;
                 }
             }
-            $other_risk = TroubleshootBmRisk::insert($insert_risk);
+            TroubleshootBmRisk::insert($insert_risk);
 
             $insert_personil = [];
             foreach ($input['visit_nama'] as $k => $v) {
@@ -743,12 +746,12 @@ class OtherController extends Controller
                     $insert_personil[] = $personil_array;
                 }
             }
-            $other_personil = TroubleshootBmPersonil::insert($insert_personil);
+            TroubleshootBmPersonil::insert($insert_personil);
 
             $notif_email = TroubleshootBm::find($other_form->id);
             foreach ([
                 'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
-                'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id',
+                'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'mufli.gonibala@balitower.co.id',
                 'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'dyah.retno@balitower.co.id',
             ] as $recipient) {
                 Mail::to($recipient)->send(new NotifTroubleshootForm($notif_email));
@@ -815,7 +818,7 @@ class OtherController extends Controller
                 foreach ([
                     'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
                     'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id',
-                    'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id',
+                    'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'mufli.gonibala@balitower.co.id',
                 ] as $recipient) {
                     Mail::to($recipient)->send(new NotifTroubleshootForm($notif_email));
                 }
@@ -1000,16 +1003,15 @@ class OtherController extends Controller
                 'photo_checkout' => $imageName,
             ]);
 
-            $lastyearAR = $last->year_ar;
-            $lastyearCR = $last->year_cr;
-            $currrentYear = date('Y');
-
             if($last == null){
 
                 $ar = 1;
                 $cr = 1;
 
             } elseif($last->number_ar) {
+
+                $ar = $last->number_ar;
+                $cr = $last->number_cr;
 
                 if($nomer == null) {
 
@@ -1027,15 +1029,15 @@ class OtherController extends Controller
                         $cr = $last->number_cr + 1;
                     }
                 }
-            }
 
-            $lastyearAR = $last->year_ar;
-            $lastyearCR = $last->year_cr;
-            $currrentYear = date('Y');
+                $lastyearAR = $last->year_ar;
+                $lastyearCR = $last->year_cr;
+                $currrentYear = date('Y');
 
-            if ( ($currrentYear != $lastyearAR) && ( $currrentYear != $lastyearCR ) ){
-                $ar = 1;
-                $cr = 1;
+                if ( ($currrentYear != $lastyearAR) && ( $currrentYear != $lastyearCR ) ){
+                    $ar = 1;
+                    $cr = 1;
+                }
             }
             // dd($ar);
             PenomoranCleaning::firstOrCreate([

@@ -150,7 +150,7 @@
                 <div id="collapseSurvey" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Option :</h6>
-                        <a class="collapse-item" href="{{ url('full/survey')}}">Customer Survey</a>
+                        <a class="collapse-item" href="{{ url('full/sales')}}">Customer Survey</a>
                     </div>
                 </div>
             </li>

@@ -113,17 +113,28 @@ class HomeController extends Controller
             } elseif($type_approve == 'internal'){
                 // $getDept = auth()->user()->department;
                 $getInternal = DB::table('internals')
-                        ->join('internal_histories', 'internals.id', '=', 'internal_histories.internal_id')
-                        ->join('users', 'internals.requestor_id', '=', 'users.id')
-                        ->leftJoin('entry_racks', 'internals.id', '=', 'entry_racks.internal_id')
-                        ->select('users.name as req_name', 'internals.*', 'internal_histories.aktif', 'internal_histories.role_to', 'users.department as dept')
-                        ->whereIn('internal_histories.role_to', $role_1)
-                        ->where('internal_histories.aktif', '=', 1)
-                        ->groupBy('entry_racks.internal_id' )
-                        ->get();
+                    ->join('internal_histories', 'internals.id', '=', 'internal_histories.internal_id')
+                    ->join('users', 'internals.requestor_id', '=', 'users.id')
+                    ->leftJoin('entry_racks', 'internals.id', '=', 'entry_racks.internal_id')
+                    ->select('users.name as req_name', 'internals.*', 'internal_histories.aktif', 'internal_histories.role_to')
+                    ->whereIn('internal_histories.role_to', $role_1)
+                    ->where('internal_histories.aktif', '=', 1)
+                    ->where('internals.isColo', true)
+                    ->groupBy('entry_racks.internal_id' )
+                    ->get();
                         // dd($getInternal);
                 return view('internal.approval', compact('getInternal'));
-            }  else {
+            }  elseif($type_approve == 'survey') {
+                $getSurvey = DB::table('internals')
+                    ->join('internal_histories', 'internals.id', '=', 'internal_histories.internal_id')
+                    ->leftJoin('users', 'internals.requestor_id', '=', 'users.id')
+                    ->select('internals.*', 'internal_histories.aktif', 'internal_histories.role_to', 'users.name as req_name')
+                    ->where('internal_histories.aktif', '=', 1)
+                    ->whereIn('internal_histories.role_to', $role_1)
+                    ->where('internals.isSurvey', true)
+                    ->get();
+                return view('sales.approval', compact('getSurvey'));
+            } else {
                 abort(403);
             }
         } else {
@@ -136,8 +147,8 @@ class HomeController extends Controller
         if ((Gate::allows('isApproval')) || (Gate::allows('isHead'))) {
             if ($type_full == 'all') {
                 return view('all_full_approval');
-            } elseif ($type_full == 'survey') {
-                return view('survey.full_approval');
+            } elseif ($type_full == 'sales') {
+                return view('sales.fullApproval');
             } elseif ($type_full == 'cleaning') {
                 return view('cleaning.full_approval');
             } elseif ($type_full == 'maintenance') {

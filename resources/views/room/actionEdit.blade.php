@@ -1,6 +1,6 @@
-<button class="btn btn-sm btn-primary mx-1 my-1" type="button" data-bs-toggle="modal" data-bs-target="#roomModal{{ $model->id }}" data-id="{{ $model->id }}">Update</button>
+{{-- <button class="btn btn-sm btn-primary mx-1 my-1" type="button" data-bs-toggle="modal" data-bs-target="#roomModal{{ $model->id }}" data-id="{{ $model->id }}">Update</button> --}}
 
-<div class="modal fade" id="roomModal{{ $model->id }}" tabindex="-1" aria-labelledby="exampleModalLabel{{ $model->id }}" aria-hidden="true">
+{{-- <div class="modal fade" id="roomModal{{ $model->id }}" tabindex="-1" aria-labelledby="exampleModalLabel{{ $model->id }}" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -22,7 +22,7 @@
             </form>
         </div>
     </div>
-</div>
+</div> --}}
 
 <form action="{{ route('roomDelete',$model->id) }}" method="POST" onsubmit="return confirm('Are You Sure Want to Delete This Relasi ?')" >
     @csrf

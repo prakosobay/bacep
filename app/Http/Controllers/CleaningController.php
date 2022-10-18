@@ -96,17 +96,17 @@ class CleaningController extends Controller
             // Send email notification
             foreach ([
                 'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
-                'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id',
+                'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'mufli.gonibala@balitower.co.id',
                 'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'dyah.retno@balitower.co.id',
             ] as $recipient) {
                 Mail::to($recipient)->send(new NotifEmail($cleaning));
             }
 
-            foreach ([
-                    'bayu.prakoso@balitower.co.id',
-                ] as $recipient) {
-                    Mail::to($recipient)->send(new NotifEmail($cleaning));
-                }
+            // foreach ([
+            //         'bayu.prakoso@balitower.co.id',
+            //     ] as $recipient) {
+            //         Mail::to($recipient)->send(new NotifEmail($cleaning));
+            //     }
 
             $cleaningHistory = CleaningHistory::create([
                 'cleaning_id' => $cleaning->cleaning_id,
@@ -161,7 +161,7 @@ class CleaningController extends Controller
                     foreach ([
                         'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
                         'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id',
-                        'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id',
+                        'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'mufli.gonibala@balitower.co.id',
                     ] as $recipient) {
                         Mail::to($recipient)->send(new NotifEmail($cleaning));
                     }
@@ -231,7 +231,6 @@ class CleaningController extends Controller
 
             if ($lasthistoryC->pdf == true) {
                 $lasthistoryC->update(['aktif' => false]);
-                // dd($lasthistoryC);
                 // Simpan tiap perubahan permit ke table CleaningHistory
                 $cleaningHistory = CleaningHistory::create([
                     'cleaning_id' => $request->cleaning_id,
@@ -432,17 +431,16 @@ class CleaningController extends Controller
 
                     $ar = $last->number_ar + 1;
                     $cr = $last->number_cr + 1;
-
                 }
-            }
 
-            $lastyearAR = $last->year_ar;
-            $lastyearCR = $last->year_cr;
-            $currrentYear = date('Y');
+                $lastyearAR = $last->year_ar;
+                $lastyearCR = $last->year_cr;
+                $currrentYear = date('Y');
 
-            if ( ($currrentYear != $lastyearAR) && ( $currrentYear != $lastyearCR ) ){
-                $ar = 1;
-                $cr = 1;
+                if ( ($currrentYear != $lastyearAR) && ( $currrentYear != $lastyearCR ) ){
+                    $ar = 1;
+                    $cr = 1;
+                }
             }
             // dd($ar);
             PenomoranCleaning::firstOrCreate([

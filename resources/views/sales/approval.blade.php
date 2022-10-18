@@ -7,7 +7,7 @@
     {{-- datatable --}}
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h1 class="h3 mb-2 text-gray-800 text-center">Approval Permit Internal</h1>
+            <h1 class="h3 mb-2 text-gray-800 text-center">Approval Permit Sales</h1>
         </div>
         @if (session('success'))
             <div class="alert alert-success mx-5 my-2">
@@ -16,7 +16,7 @@
         @endif
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-striped table-bordered" id="approve_internal" width="100%" cellspacing="0">
+                <table class="table table-striped table-bordered" id="approve_survey" width="100%" cellspacing="0">
                     <thead>
                         <tr class="judul-table text-center">
                             <th>ID</th>
@@ -25,12 +25,11 @@
                             <th>Date of Visit</th>
                             <th>Date of Leave</th>
                             <th>Purpose</th>
-                            <th>No. Rack</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody class="isi-table text-center">
-                        @foreach($getInternal as $p)
+                        @foreach($getSurvey as $p)
                         {{-- modal --}}
                         <div class="modal fade" id="reject{{ $p->id }}" tabindex="-1" aria-labelledby="exampleModalLabel{{ $p->id }}" aria-hidden="true">
                             <div class="modal-dialog">
@@ -40,7 +39,7 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <form action="{{ url('internal/reject', $p->id )}}" method="post">
+                                        <form action="{{ url('sales/reject', $p->id )}}" method="post">
                                             @csrf
                                             <div class="form-group">
                                                 <label for="no" class="form-label">No ID :</label>
@@ -67,13 +66,8 @@
                             <td>{{ Carbon\Carbon::parse($p->leave)->format('d-m-Y') }}</td>
                             <td>{{ $p->work }}</td>
                             <td>
-                                {{-- @foreach( $p->racks as $e )
-                                    ->{{$e->rack->number}}</br>
-                                @endforeach --}}as
-                            </td>
-                            <td>
                                 @can('isApproval')
-                                    <form action="{{ url('internal/approve', $p->id)}}" method="post">
+                                    <form action="{{ url('sales/approve', $p->id)}}" method="post">
                                         @csrf
                                         <button id="ok" class="btn btn-success btn-sm my-1 mx-1">Approve</button>
                                     </form>
@@ -81,7 +75,7 @@
                                     <button class="btn btn-danger btn-sm my-1 mx-1" data-bs-toggle="modal" data-bs-target="#reject{{ $p->id }}" data-id="{{ $p->id }}">Reject</button>
 
                                 @elsecan('isHead')
-                                    <form action="{{ url('internal/approve', $p->id)}}" method="post">
+                                    <form action="{{ url('sales/approve', $p->id)}}" method="post">
                                         @csrf
                                         <button id="ok" class="btn btn-success btn-sm my-1 mx-1">Approve</button>
                                     </form>
@@ -89,13 +83,13 @@
                                     <button class="btn btn-danger btn-sm my-1 mx-1" data-bs-toggle="modal" data-bs-target="#reject{{ $p->id }}" data-id="{{ $p->id }}">Reject</button>
 
                                 @elsecan('isSecurity')
-                                    <form action="{{ url('internal/approve', $p->id)}}" method="post">
+                                    <form action="{{ url('sales/approve', $p->id)}}" method="post">
                                         @csrf
                                         <button id="ok" class="btn btn-success btn-sm my-1 mx-1">Approve</button>
                                     </form>
 
                                 @endcan
-                                    <a href="/internal/pdf/{{$p->id}}" class="btn btn-primary btn-sm my-1 mx-1" target="_blank">File</a>
+                                    <a href="/sales/pdf/{{$p->id}}" class="btn btn-primary btn-sm my-1 mx-1" target="_blank">File</a>
                             </td>
                         </tr>
                         @endforeach
@@ -109,7 +103,7 @@
 @push('scripts')
 <script>
     $(document).ready( function () {
-        $('#approve_internal').DataTable();
+        $('#approve_survey').DataTable();
     });
 </script>
 @endpush

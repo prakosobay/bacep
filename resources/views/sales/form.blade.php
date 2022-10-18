@@ -82,21 +82,21 @@
                         <tbody>
                             <tr>
                                 <th>Name</th>
-                                <td><input type="text" class="form-control" name="name[]" value="{{ old('name')}}" required></td>
+                                <td><input type="text" class="form-control" name="name[]"  required></td>
                                 <th>Phone Number</th>
-                                <td><input type="text" class="form-control" name="phone[]" value="{{ old('phone')}}" required></td>
+                                <td><input type="text" class="form-control" name="phone[]" required></td>
                             </tr>
                             <tr>
                                 <th>Number ID</th>
-                                <td><input type="text" class="form-control" name="number[]" value="{{ old('number')}}" required></td>
+                                <td><input type="text" class="form-control" name="number[]" required></td>
                                 <th>Company</th>
-                                <th><input type="text" class="form-control" name="company[]" value="{{ old('company')}}" required></th>
+                                <th><input type="text" class="form-control" name="company[]" required></th>
                             </tr>
                             <tr>
                                 <th>Department</th>
-                                <td><input type="text" class="form-control" name="department[]" value="{{ old('department')}}" required></td>
+                                <td><input type="text" class="form-control" name="department[]" required></td>
                                 <th>Responsibility</th>
-                                <td><input type="text" class="form-control" name="respon[]" value="{{ old('respon')}}"></td>
+                                <td><input type="text" class="form-control" name="respon[]"></td>
                             </tr>
                         </tbody>
                     </table>
