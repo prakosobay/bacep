@@ -65,7 +65,7 @@
         $('#dataTable').DataTable({
             processing: true,
             serverSide: true,
-            ajax: '{{url('route_history_survey')}}',
+            ajax: '{{ route('salesYajraHistory')}}'+'/'+ "{{auth()->user()->department}}",
             columns: [
                 { data: 'survey_id', name: 'survey_id' },
                 { data: 'role_to', name: 'role_to' },

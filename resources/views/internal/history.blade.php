@@ -35,12 +35,12 @@
             $('#history').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: '{{ route('internalYajraHistory')}}',
+                ajax: "{{ route('internalYajraHistory')}}",
                 columns: [
                     { data: 'internal', name: 'internal' },
-                    { data: 'visit', name: 'internals.visit' },
+                    { data: 'visit', name: 'visit' },
                     { data: 'status', name: 'status' },
-                    { data: 'name', name: 'users.name' },
+                    { data: 'updatedby', name: 'updatedby' },
                     { data: 'updated_at', name: 'updated_at' },
                     { data: 'aktif', name: 'aktif' },
                     { data: 'role_to', name: 'role_to' },

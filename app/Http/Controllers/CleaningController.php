@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 use Barryvdh\DomPDF\Facade as PDF;
 use App\Mail\{NotifEmail, NotifReject, NotifFull};
-use App\Models\{User, Role, MasterOb, PilihanWork, Cleaning, CleaningHistory, CleaningFull, PenomoranCleaning, PenomoranCR};
+use App\Models\{User, Role, MasterOb, PilihanWork, Cleaning, CleaningHistory, CleaningFull, PenomoranCleaning};
 use phpDocumentor\Reflection\PseudoTypes\True_;
 use Yajra\Datatables\Datatables;
 use Carbon\Carbon;
@@ -102,11 +102,11 @@ class CleaningController extends Controller
                 Mail::to($recipient)->send(new NotifEmail($cleaning));
             }
 
-            // foreach ([
-            //         'bayu.prakoso@balitower.co.id',
-            //     ] as $recipient) {
-            //         Mail::to($recipient)->send(new NotifEmail($cleaning));
-            //     }
+            foreach ([
+                'bayu.prakoso@balitower.co.id',
+            ] as $recipient) {
+                Mail::to($recipient)->send(new NotifEmail($cleaning));
+            }
 
             $cleaningHistory = CleaningHistory::create([
                 'cleaning_id' => $cleaning->cleaning_id,
@@ -135,8 +135,7 @@ class CleaningController extends Controller
 
         try {
 
-            if ($lasthistoryC->pdf == true) {
-
+            if($lasthistoryC->pdf == true){
                 $lasthistoryC->update(['aktif' => false]);
 
                 // Perubahan status tiap permit
@@ -157,7 +156,7 @@ class CleaningController extends Controller
                 $cleaning = Cleaning::find($request->cleaning_id);
                 // Pergantian role tiap permit & send email notif
                 $role_to = '';
-                if (($lasthistoryC->role_to == 'review')) {
+                if ($lasthistoryC->role_to == 'review') {
                     foreach ([
                         'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
                         'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id',
@@ -166,14 +165,14 @@ class CleaningController extends Controller
                         Mail::to($recipient)->send(new NotifEmail($cleaning));
                     }
                     $role_to = 'check';
-                } elseif (($lasthistoryC->role_to == 'check')) {
+                } elseif ($lasthistoryC->role_to == 'check') {
                     foreach ([
                         'security.bacep@balitower.co.id',
                     ] as $recipient) {
                     Mail::to($recipient)->send(new NotifEmail($cleaning));
                     }
                     $role_to = 'security';
-                } elseif (($lasthistoryC->role_to == 'security')) {
+                } elseif ($lasthistoryC->role_to == 'security') {
                     foreach (['bayu.prakoso@balitower.co.id', 'tofiq.hidayat@balitower.co.id'] as $recipient) {
                         Mail::to($recipient)->send(new NotifEmail($cleaning));
                     }
@@ -209,11 +208,11 @@ class CleaningController extends Controller
                     'aktif' => true,
                     'pdf' => false,
                 ]);
-
-                DB::commit();
-
-                return $cleaningHistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
             }
+
+            DB::commit();
+
+            return $cleaningHistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
         } catch (\Exception $e) {
             DB::rollBack();
             throw $e;
@@ -398,7 +397,7 @@ class CleaningController extends Controller
 
         $last = DB::table('penomoran_cleanings')->latest()->first();
         $penomoran = DB::table('penomoran_cleanings')->where('type', 'cleaning')->latest()->first();
-        $nomer = DB::table('penomoran_cleanings')->where('type', 'cleaning')->where('permit_id', $pic)->latest()->first();
+        // $nomer = DB::table('penomoran_cleanings')->where('type', 'cleaning')->where('permit_id', $pic)->latest()->first();
 
         DB::beginTransaction();
 
@@ -417,21 +416,10 @@ class CleaningController extends Controller
                 $ar = 1;
                 $cr = 1;
 
-            } elseif($last->number_ar) {
+            } elseif($last) {
 
                 $ar = $last->number_ar;
                 $cr = $last->number_cr;
-
-                if($nomer == null) {
-                    // dd(1);
-                    $ar = $last->number_ar + 1;
-                    $cr = $last->number_cr + 1;
-
-                } elseif($penomoran->permit_id != $nomer->permit_id) {
-
-                    $ar = $last->number_ar + 1;
-                    $cr = $last->number_cr + 1;
-                }
 
                 $lastyearAR = $last->year_ar;
                 $lastyearCR = $last->year_cr;
@@ -442,7 +430,7 @@ class CleaningController extends Controller
                     $cr = 1;
                 }
             }
-            // dd($ar);
+            dd($ar);
             PenomoranCleaning::firstOrCreate([
                 'number_ar' => $ar,
                 'month_ar' => date('m'),

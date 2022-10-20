@@ -118,4 +118,18 @@ class SalesController extends Controller
     {
 
     }
+
+
+    public function yajra_history($dept)
+    {
+        $history = DB::table('internal_histories')
+            ->join('internals', 'internals.id', '=', 'internal_histories.internal_id')
+            ->join('users', 'users.id', '=', 'internal_histories.created_by')
+            ->select('internal_histories.*','internals.visit', 'users.name', 'internals.id as survey_id');
+        return Datatables::of($history)
+            ->editColumn('visit', function ($history) {
+                return $history->visit ? with(new Carbon($history->visit))->format('d/m/Y') : '';
+            })
+            ->make(true);
+    }
 }

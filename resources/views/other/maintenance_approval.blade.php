@@ -85,7 +85,7 @@
                             url:"{{ route('maintenanceApprove')}}",
                             data: {other_id},
                             error: function (request, error) {
-                                alert(" Can't do because: " + error);
+                                alert("Cek PDF Terlebih Dahulu!");
                             },
                             success:function(data){
                                 console.log(data);

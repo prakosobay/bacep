@@ -83,7 +83,7 @@
                             url:"{{ route('troubleshootApprove') }}",
                             data: {id},
                             error: function (request, error) {
-                                alert(" Can't do because: " + error);
+                                alert("Cek PDF Dahulu!" + error);
                             },
                             success:function(data){
                                 console.log(data);

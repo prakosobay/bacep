@@ -226,25 +226,6 @@ Route::middleware(['auth'])->group(function () {
     });
 
 
-    // Survey
-    // Route::controller(SurveyController::class)->group(function () {
-    //     Route::get('survey/dashboard', 'dashboard')->name('dashboardSurvey');
-    //     Route::get('survey/form', 'form');
-    //     Route::get('/survey/pdf/{id}', 'pdf');
-    //     Route::get('jsona', 'json');
-    //     Route::get('route_data_approval', 'data_approval');
-    //     Route::get('route_history_survey', 'data_history');
-    //     Route::get('history/{type_view}', 'log_view');
-    //     Route::get('route_full_survey', 'full');
-    //     Route::get('survey/yajra/full/visitor', 'survey_yajra_full_visitor');
-    //     Route::post('survey/create', 'create');
-    //     Route::post('/approve_survey', 'approve');
-    //     Route::post('/reject_survey', 'reject');
-
-
-    // });
-
-
     // Cleaning
     Route::controller(CleaningController::class)->group(function () {
         Route::get('route_history_cleaning', 'data_history');
@@ -351,12 +332,11 @@ Route::middleware(['auth'])->group(function () {
         Route::put('internal-checkout-update/{id}', 'internal_checkout_update')->name('internalCheckoutUpdate');
 
         Route::get('/internal/pdf/{id}', 'internal_pdf');
-        Route::get('internal/yajra/history', 'internal_yajra_history');
         Route::get('internal/yajra/full/approval', 'internal_yajra_full_approval');
         Route::get('internal/getVisitor/{id}', 'getVisitor');
 
         Route::get('internal/yajra/show/{dept}', 'internal_yajra_show');
-        Route::get('internal-yajra-history', 'internal_yajra_history')->name('internalYajraHistory');
+        Route::get('internal/yajra/history', 'internal_yajra_history')->name('internalYajraHistory');
         Route::get('internal/yajra/finished/{dept}', 'internal_yajra_finished');
         Route::get('internal/yajra/last/form/{dept}', 'internal_yajra_last_form');
 
@@ -372,11 +352,14 @@ Route::middleware(['auth'])->group(function () {
     Route::controller(SalesController::class)->group(function(){
         Route::get('sales/form', 'form')->name('salesForm');
         Route::get('sales/pdf/{id}', 'pdf');
-        Route::get('sales/yajra/full/approval', 'yajra_full_approval')->name('salesYajraFullApproval');
-        Route::get('sales/yajra/history', 'yajra_history')->name('salesYajraHistory');
 
+        Route::get('sales/yajra/history', 'yajra_history')->name('salesYajraHistory');
+        Route::get('sales/yajra/full/approval', 'yajra_full_approval')->name('salesYajraFullApproval');
+        Route::get('sales/yajra/full/visitor', 'yajra_full_visitor')->name('salesYajraFullVisitor');
 
         Route::post('sales/store', 'store')->name('salesStore');
+        Route::post('sales/approve/{id}', 'approve')->name('salesApprove');
+        Route::post('sales/reject/{id}', 'reject')->name('salesReject');
     });
 
 

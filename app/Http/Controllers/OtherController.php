@@ -205,7 +205,8 @@ class OtherController extends Controller
 
         try {
 
-            if ($lastupdate->pdf == true) {
+            if($lastupdate->pdf == true){
+
                 $lastupdate->update(['aktif' => false]);
 
                 // Perubahan status tiap permit
@@ -226,29 +227,29 @@ class OtherController extends Controller
                 // // Pergantian  role tiap permit & send email notif
                 $role_to = '';
                 if ($lastupdate->role_to == 'review') {
-                    // foreach ([
-                    //     'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
-                    //     'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id',
-                    //     'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'mufli.gonibala@balitower.co.id',
-                    // ] as $recipient) {
-                    //     Mail::to($recipient)->send(new NotifMaintenanceForm($notif_email));
-                    // }
+                    foreach ([
+                        'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
+                        'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id',
+                        'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'mufli.gonibala@balitower.co.id',
+                    ] as $recipient) {
+                        Mail::to($recipient)->send(new NotifMaintenanceForm($notif_email));
+                    }
                     $role_to = 'check';
                 } elseif ($lastupdate->role_to == 'check') {
-                    // foreach (['security.bacep@balitower.co.id'] as $recipient) {
-                    //     Mail::to($recipient)->send(new NotifMaintenanceForm($notif_email));
-                    // }
+                    foreach (['security.bacep@balitower.co.id'] as $recipient) {
+                        Mail::to($recipient)->send(new NotifMaintenanceForm($notif_email));
+                    }
                     $role_to = 'security';
                 } elseif ($lastupdate->role_to == 'security') {
-                    // foreach (['bayu.prakoso@balitower.co.id', 'tofiq.hidayat@balitower.co.id'] as $recipient) {
-                    //     Mail::to($recipient)->send(new NotifMaintenanceForm($notif_email));
-                    // }
+                    foreach (['bayu.prakoso@balitower.co.id', 'tofiq.hidayat@balitower.co.id'] as $recipient) {
+                        Mail::to($recipient)->send(new NotifMaintenanceForm($notif_email));
+                    }
                     $role_to = 'head';
                 } elseif ($lastupdate->role_to = 'head') {
                     $full = Other::find($request->other_id);
-                    // foreach (['dc@balitower.co.id'] as $recipient) {
-                    //     Mail::to($recipient)->send(new NotifMaintenanceFull($full));
-                    // }
+                    foreach (['dc@balitower.co.id'] as $recipient) {
+                        Mail::to($recipient)->send(new NotifMaintenanceFull($full));
+                    }
                     $role_to = 'all';
 
                     $full_maintenance = Other::where('id', $request->other_id)->first();
@@ -277,7 +278,6 @@ class OtherController extends Controller
 
                 DB::commit();
             }
-
             return $otherHistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
         } catch (\Exception $e) {
             DB::rollBack();
@@ -394,9 +394,8 @@ class OtherController extends Controller
 
         $visitorID = OtherPersonil::findOrFail($id);
         $pic = $visitorID->other_id;
-        $visitors = OtherPersonil::where('other_id', $pic)->select('id')->get();
-        dd($visitors);
-
+        $jumlah = OtherPersonil::where('other_id', $pic)->where('checkout', null)->select('id')->count();
+        // dd($jumlah);
         $extension = explode('/', explode(':', substr($request->photo_checkout, 0, strpos($request->photo_checkout, ';')))[1])[1];   // .jpg .png .pdf
         $replace = substr($request->photo_checkout, 0, strpos($request->photo_checkout, ',') + 1);
         $image = str_replace($replace, '', $request->photo_checkout);
@@ -406,8 +405,8 @@ class OtherController extends Controller
         Storage::disk('maintenanceCheckout')->put($imageName, base64_decode($image));
 
         $last = DB::table('penomoran_cleanings')->latest()->first();
-        $penomoran = DB::table('penomoran_cleanings')->where('type', 'maintenance')->latest()->first();
-        $nomer = DB::table('penomoran_cleanings')->where('type', 'maintenance')->where('permit_id', $pic)->latest()->first();
+        // $penomoran = DB::table('penomoran_cleanings')->where('type', 'maintenance')->latest()->first();
+        // $nomer = DB::table('penomoran_cleanings')->where('type', 'maintenance')->where('permit_id', $pic)->latest()->first();
 
         DB::beginTransaction();
 
@@ -419,53 +418,77 @@ class OtherController extends Controller
                 'photo_checkout' => $imageName,
             ]);
 
-            if($last == null){
+            if($jumlah == 1) {
 
-                $ar = 1;
-                $cr = 1;
+                if($last == null) {
 
-            } elseif($last->number_ar) {
+                    $ar = 1;
+                    $cr = 1;
 
-                $ar = $last->number_ar;
-                $cr = $last->number_cr;
-
-                if($nomer == null) {
+                } else {
 
                     $ar = $last->number_ar + 1;
                     $cr = $last->number_cr + 1;
 
-                } elseif($nomer->number_ar){
+                    $lastyearAR = $last->year_ar;
+                    $lastyearCR = $last->year_cr;
+                    $currrentYear = date('Y');
 
-                    $ar = $nomer->number_ar;
-                    $cr = $nomer->number_cr;
-
-                    if($penomoran->permit_id != $nomer->permit_id) {
-
-                        $ar = $last->number_ar + 1;
-                        $cr = $last->number_cr + 1;
+                    if ( ($currrentYear != $lastyearAR) && ( $currrentYear != $lastyearCR ) ){
+                        $ar = 1;
+                        $cr = 1;
                     }
                 }
-
-                $lastyearAR = $last->year_ar;
-                $lastyearCR = $last->year_cr;
-                $currrentYear = date('Y');
-
-                if ( ($currrentYear != $lastyearAR) && ( $currrentYear != $lastyearCR ) ){
-                    $ar = 1;
-                    $cr = 1;
-                }
+                dd($ar);
+                PenomoranCleaning::firstOrCreate([
+                    'number_ar' => $ar,
+                    'month_ar' => date('m'),
+                    'year_ar' => date('Y'),
+                    'number_cr' => $cr,
+                    'month_cr' => date('m'),
+                    'year_cr' => date('Y'),
+                    'permit_id' => $pic,
+                    'type' => 'maintenance',
+                ]);
             }
+
+            // if($last == null){
+
+            //     $ar = 1;
+            //     $cr = 1;
+
+            // } elseif($last->number_ar) {
+
+            //     $ar = $last->number_ar;
+            //     $cr = $last->number_cr;
+
+            //     if($nomer == null) {
+
+            //         $ar = $last->number_ar + 1;
+            //         $cr = $last->number_cr + 1;
+
+            //     } elseif($nomer->number_ar){
+
+            //         $ar = $nomer->number_ar;
+            //         $cr = $nomer->number_cr;
+
+            //         if($penomoran->permit_id != $nomer->permit_id) {
+
+            //             $ar = $last->number_ar + 1;
+            //             $cr = $last->number_cr + 1;
+            //         }
+            //     }
+
+            //     $lastyearAR = $last->year_ar;
+            //     $lastyearCR = $last->year_cr;
+            //     $currrentYear = date('Y');
+
+            //     if ( ($currrentYear != $lastyearAR) && ( $currrentYear != $lastyearCR ) ){
+            //         $ar = 1;
+            //         $cr = 1;
+            //     }
+            // }
             // dd($ar);
-            PenomoranCleaning::firstOrCreate([
-                'number_ar' => $ar,
-                'month_ar' => date('m'),
-                'year_ar' => date('Y'),
-                'number_cr' => $cr,
-                'month_cr' => date('m'),
-                'year_cr' => date('Y'),
-                'permit_id' => $pic,
-                'type' => 'maintenance',
-            ]);
 
             DB::commit();
 
@@ -515,6 +538,7 @@ class OtherController extends Controller
             ->get();
         // dd($getHistory);
         $penomoran = PenomoranCleaning::where('type', 'maintenance')->where('permit_id', $id)->first();
+        // dd($penomoran);
         $pdf = PDF::loadview('other.maintenance_pdf', compact('getOther', 'getPersonil', 'getHistory', 'getLastOther', 'penomoran'))->setPaper('a4', 'portrait')->setWarnings(false);
         return $pdf->stream();
     }
@@ -788,7 +812,7 @@ class OtherController extends Controller
         $last_update = TroubleshootBmHistory::where('troubleshoot_bm_id', '=', $request->id)->latest()->first();
 
         if($last_update->pdf == false) {
-            return back()->with('failed', 'failed');
+            return back()->with('failed', 'Cek PDF Dahulu');
         }
 
         DB::beginTransaction();
@@ -978,6 +1002,11 @@ class OtherController extends Controller
             'photo_checkout' => ['required'],
         ]);
 
+        $visitorID = TroubleshootBmPersonil::findOrFail($id);
+        $pic = $visitorID->troubleshoot_bm_id;
+        $jumlah = TroubleshootBmPersonil::where('troubleshoot_bm_id', $pic)->where('checkout', null)->select('id')->count();
+        // dd($jumlah);
+
         $extension = explode('/', explode(':', substr($request->photo_checkout, 0, strpos($request->photo_checkout, ';')))[1])[1];   // .jpg .png .pdf
         $replace = substr($request->photo_checkout, 0, strpos($request->photo_checkout, ',') + 1);
         $image = str_replace($replace, '', $request->photo_checkout);
@@ -990,8 +1019,8 @@ class OtherController extends Controller
         $pic = $get->troubleshoot_bm_id;
 
         $last = DB::table('penomoran_cleanings')->latest()->first();
-        $penomoran = DB::table('penomoran_cleanings')->where('type', 'troubleshoot')->latest()->first();
-        $nomer = DB::table('penomoran_cleanings')->where('type', 'troubleshoot')->where('permit_id', $pic)->latest()->first();
+        // $penomoran = DB::table('penomoran_cleanings')->where('type', 'troubleshoot')->latest()->first();
+        // $nomer = DB::table('penomoran_cleanings')->where('type', 'troubleshoot')->where('permit_id', $pic)->latest()->first();
 
         DB::beginTransaction();
 
@@ -1003,53 +1032,77 @@ class OtherController extends Controller
                 'photo_checkout' => $imageName,
             ]);
 
-            if($last == null){
+            if($jumlah == 1){
 
-                $ar = 1;
-                $cr = 1;
+                if($last == null) {
 
-            } elseif($last->number_ar) {
+                    $ar = 1;
+                    $cr = 1;
 
-                $ar = $last->number_ar;
-                $cr = $last->number_cr;
-
-                if($nomer == null) {
+                } else {
 
                     $ar = $last->number_ar + 1;
                     $cr = $last->number_cr + 1;
 
-                } elseif($nomer->number_ar){
+                    $lastyearAR = $last->year_ar;
+                    $lastyearCR = $last->year_cr;
+                    $currrentYear = date('Y');
 
-                    $ar = $nomer->number_ar;
-                    $cr = $nomer->number_cr;
-
-                    if($penomoran->permit_id != $nomer->permit_id) {
-
-                        $ar = $last->number_ar + 1;
-                        $cr = $last->number_cr + 1;
+                    if ( ($currrentYear != $lastyearAR) && ( $currrentYear != $lastyearCR ) ){
+                        $ar = 1;
+                        $cr = 1;
                     }
                 }
-
-                $lastyearAR = $last->year_ar;
-                $lastyearCR = $last->year_cr;
-                $currrentYear = date('Y');
-
-                if ( ($currrentYear != $lastyearAR) && ( $currrentYear != $lastyearCR ) ){
-                    $ar = 1;
-                    $cr = 1;
-                }
+                dd($ar);
+                PenomoranCleaning::firstOrCreate([
+                    'number_ar' => $ar,
+                    'month_ar' => date('m'),
+                    'year_ar' => date('Y'),
+                    'number_cr' => $cr,
+                    'month_cr' => date('m'),
+                    'year_cr' => date('Y'),
+                    'type' => 'troubleshoot',
+                    'permit_id' => $pic,
+                ]);
             }
+
+            // if($last == null){
+
+            //     $ar = 1;
+            //     $cr = 1;
+
+            // } elseif($last->number_ar) {
+
+            //     $ar = $last->number_ar;
+            //     $cr = $last->number_cr;
+
+            //     if($nomer == null) {
+
+            //         $ar = $last->number_ar + 1;
+            //         $cr = $last->number_cr + 1;
+
+            //     } elseif($nomer->number_ar){
+
+            //         $ar = $nomer->number_ar;
+            //         $cr = $nomer->number_cr;
+
+            //         if($penomoran->permit_id != $nomer->permit_id) {
+
+            //             $ar = $last->number_ar + 1;
+            //             $cr = $last->number_cr + 1;
+            //         }
+            //     }
+
+            //     $lastyearAR = $last->year_ar;
+            //     $lastyearCR = $last->year_cr;
+            //     $currrentYear = date('Y');
+
+            //     if ( ($currrentYear != $lastyearAR) && ( $currrentYear != $lastyearCR ) ){
+            //         $ar = 1;
+            //         $cr = 1;
+            //     }
+            // }
             // dd($ar);
-            PenomoranCleaning::firstOrCreate([
-                'number_ar' => $ar,
-                'month_ar' => date('m'),
-                'year_ar' => date('Y'),
-                'number_cr' => $cr,
-                'month_cr' => date('m'),
-                'year_cr' => date('Y'),
-                'type' => 'troubleshoot',
-                'permit_id' => $pic,
-            ]);
 
             DB::commit();
             return redirect()->route('logall')->with('success', 'Checkout Successful');

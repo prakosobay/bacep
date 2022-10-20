@@ -582,10 +582,11 @@ class InternalController extends Controller
     // Yajra
     public function internal_yajra_history()
     {
+        // dd($dept);
         $history = DB::table('internal_histories')
-            ->join('internals', 'internals.id', '=', 'internal_histories.internal_id')
-            ->join('users', 'users.id', '=', 'internal_histories.created_by')
-            ->select('internal_histories.*','internals.visit', 'users.name', 'internals.id as internal');
+            ->leftJoin('internals', 'internal_histories.internal_id', '=', 'internals.id')
+            ->leftJoin('users', 'internal_histories.created_by', '=', 'users.id')
+            ->select('internal_histories.*','internals.visit', 'users.name as updatedby', 'internals.id as internal');
         return Datatables::of($history)
             ->editColumn('visit', function ($history) {
                 return $history->visit ? with(new Carbon($history->visit))->format('d/m/Y') : '';
