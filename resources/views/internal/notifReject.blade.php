@@ -20,7 +20,7 @@
 </head>
 
 <body>
-    <h2>Dear Team{{ $content->req_dept }},</h2>
+    <h2>Dear {{ $content->requestor->name }},</h2>
 	<h3>Mohon maaf permit yang anda ajukan tidak dapat kami proses, mohon untuk mengajukan permit baru pada tautan di bawah ini.</h3>
     <table>
         <thead>
@@ -37,13 +37,13 @@
             <tr>
                 <td>{{ $content->id }}</td>
                 <td>{{ Carbon\Carbon::parse($content->created_at)->format('d-m-Y')  }}</td>
-                <td>{{ $content->req_name }}</td>
+                <td>{{ $content->requestor->name }}</td>
                 <td>{{ $content->work }}</td>
                 <td>{{ Carbon\Carbon::parse($content->visit)->format('d-m-Y') }}</td>
                 <td>{{ $content->reject_note }}</td>
             </tr>
         </tbody>
     </table>
-    <p><a href="http://dcops.balifiber.id">Klik tautan ini untuk login</a></p>
+    <p><a href="https://dcops.balifiber.id">Klik tautan ini untuk login</a></p>
 </body>
 </html>

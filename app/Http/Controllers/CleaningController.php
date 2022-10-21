@@ -418,8 +418,8 @@ class CleaningController extends Controller
 
             } elseif($last) {
 
-                $ar = $last->number_ar;
-                $cr = $last->number_cr;
+                $ar = $last->number_ar + 1;
+                $cr = $last->number_cr + 1;
 
                 $lastyearAR = $last->year_ar;
                 $lastyearCR = $last->year_cr;
@@ -430,7 +430,7 @@ class CleaningController extends Controller
                     $cr = 1;
                 }
             }
-            dd($ar);
+            // dd($ar);
             PenomoranCleaning::firstOrCreate([
                 'number_ar' => $ar,
                 'month_ar' => date('m'),

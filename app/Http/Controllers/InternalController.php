@@ -395,7 +395,10 @@ class InternalController extends Controller
                 DB::commit();
 
                 alert()->success('Approved', 'Permit has been approved!');
-                return back();
+                return back()->with('success', 'Approved!');
+            } else {
+
+                return back()->with('failed', 'Cek PDF Dahulu!');
             }
         } catch (\Exception $e) {
             DB::rollBack();
@@ -524,26 +527,27 @@ class InternalController extends Controller
 
             DB::beginTransaction();
 
-            try {
-                $lastUpdate = InternalHistory::where('internal_id', $id)->latest()->first();
-                $getForm = Internal::findOrFail($id);
+            $request->validate([
+                'note' => ['required'],
+            ]);
 
-                $request->validate([
-                    'note' => ['required'],
-                ]);
+            $lastUpdate = InternalHistory::where('internal_id', $id)->latest()->first();
+            $getForm = Internal::findOrFail($id);
+            $getRequestor = $getForm->requestor->email;
+            // dd($getRequestor);
+            try {
 
                 if ($lastUpdate->pdf == true) {
-                    $lastUpdate->update(['aktif' => false]);
 
+                    $lastUpdate->update(['aktif' => false]);
                     $getForm->update([
                         'reject_note' => $request->note,
                     ]);
 
                     // Simpan tiap perubahan permit ke table History
-                    $history = InternalHistory::create([
+                    InternalHistory::create([
                         'internal_id' => $id,
-                        'req_dept' => $getForm->req_dept,
-                        'created_by' => Auth::user()->name,
+                        'created_by' => Auth::user()->id,
                         'role_to' => 0,
                         'status' => 'rejected',
                         'aktif' => true,
@@ -551,14 +555,15 @@ class InternalController extends Controller
                     ]);
 
                     // Get permit yang di reject & kirim notif email
-                    // Mail::to($getForm->req_email)->send(new NotifInternalReject($getForm));
+                    Mail::to($getRequestor)->send(new NotifInternalReject($getForm));
 
                     DB::commit();
 
                     alert()->success('Rejected', 'Permit has been rejected!');
-                    return back();
+                    return back()->with('success', 'Rejected!');
                 } else {
-                    abort(404);
+
+                    return back()->with('failed', 'Cek PDF Dahulu!');
                 }
             } catch (\Exception $e) {
                 DB::rollBack();
@@ -586,7 +591,8 @@ class InternalController extends Controller
         $history = DB::table('internal_histories')
             ->leftJoin('internals', 'internal_histories.internal_id', '=', 'internals.id')
             ->leftJoin('users', 'internal_histories.created_by', '=', 'users.id')
-            ->select('internal_histories.*','internals.visit', 'users.name as updatedby', 'internals.id as internal');
+            ->where('internals.isColo', true)
+            ->select('internal_histories.status', 'internal_histories.role_to', 'internal_histories.aktif', 'internal_histories.updated_at', 'internals.visit', 'users.name as updatedby', 'internals.id as id');
         return Datatables::of($history)
             ->editColumn('visit', function ($history) {
                 return $history->visit ? with(new Carbon($history->visit))->format('d/m/Y') : '';
@@ -599,7 +605,6 @@ class InternalController extends Controller
         $full = DB::table('internals')
             ->join('internal_visitors', 'internals.id', '=', 'internal_visitors.internal_id')
             ->join('internal_fulls', 'internals.id', '=', 'internal_fulls.internal_id')
-            // ->join('internal_histories', 'internals.id', '=', 'internal_histories.internal_id')
             ->select('internal_fulls.link', 'internal_visitors.name as visitor', 'internal_visitors.checkin', 'internal_visitors.checkout', 'internals.work', 'internals.id', 'internals.visit', 'internal_fulls.status')
             ->where('internal_visitors.deleted_at', null)
             ->where('internal_fulls.status', 'Full Approved');
@@ -619,7 +624,7 @@ class InternalController extends Controller
             ->join('internal_fulls', 'internals.id', '=', 'internal_fulls.internal_id')
             ->join('users', 'internals.requestor_id', '=', 'users.id')
             ->leftJoin('m_cards', 'internals.m_card_id', '=', 'm_cards.id')
-            ->select('internal_fulls.link', 'internal_visitors.name as visitor', 'internal_visitors.checkin', 'internal_visitors.checkout', 'internals.work', 'internals.leave', 'internals.id', 'internals.visit', 'internal_fulls.status', 'users.name as requestor', 'm_cards.number as card_number')
+            ->select('internal_fulls.link', 'internal_visitors.name as visitor', 'internal_visitors.checkin', 'internal_visitors.checkout', 'internals.work', 'internals.leave', 'internal_visitors.id', 'internals.visit', 'internal_fulls.status', 'users.name as requestor', 'm_cards.number as card_number')
             ->where('internal_visitors.deleted_at', null)
             ->where('users.department', $dept)
             ->where('internal_visitors.checkout', null)

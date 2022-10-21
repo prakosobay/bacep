@@ -51,7 +51,7 @@
                                 <th>Department</th>
                                 <td><input type="text" class="form-control @error('department') is-invalid @enderror" name="department" value="{{ $getVisitor->department }}" required></td>
                                 <th>Responsibility</th>
-                                <td><input type="text" class="form-control @error('respon') is-invalid @enderror" name="respon" value="{{ $getVisitor->respon }}" required></td>
+                                <td><input type="text" class="form-control @error('respon') is-invalid @enderror" name="respon" value="{{ $getVisitor->respon }}"></td>
                             </tr>
                             <tr>
                                 <th>Card Number :</th>

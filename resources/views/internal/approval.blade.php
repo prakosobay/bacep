@@ -10,8 +10,13 @@
             <h1 class="h3 mb-2 text-gray-800 text-center">Approval Permit Internal</h1>
         </div>
         @if (session('success'))
-            <div class="alert alert-success mx-5 my-2">
+            <div class="alert alert-success mx-2 my-1">
                 <b>{{ session('success') }}</b>
+            </div>
+        @endif
+        @if (session('failed'))
+            <div class="alert alert-warning mx-2 my-1">
+                <b>{{ session('failed') }}</b>
             </div>
         @endif
         <div class="card-body">
@@ -67,9 +72,7 @@
                             <td>{{ Carbon\Carbon::parse($p->leave)->format('d-m-Y') }}</td>
                             <td>{{ $p->work }}</td>
                             <td>
-                                {{-- @foreach( $p->racks as $e )
-                                    ->{{$e->rack->number}}</br>
-                                @endforeach --}}as
+                                {{ $p->rack_number }}
                             </td>
                             <td>
                                 @can('isApproval')

@@ -332,11 +332,11 @@ Route::middleware(['auth'])->group(function () {
         Route::put('internal-checkout-update/{id}', 'internal_checkout_update')->name('internalCheckoutUpdate');
 
         Route::get('/internal/pdf/{id}', 'internal_pdf');
-        Route::get('internal/yajra/full/approval', 'internal_yajra_full_approval');
         Route::get('internal/getVisitor/{id}', 'getVisitor');
 
         Route::get('internal/yajra/show/{dept}', 'internal_yajra_show');
         Route::get('internal/yajra/history', 'internal_yajra_history')->name('internalYajraHistory');
+        Route::get('internal/yajra/full/approval', 'internal_yajra_full_approval')->name('internalYajraFullApproval');
         Route::get('internal/yajra/finished/{dept}', 'internal_yajra_finished');
         Route::get('internal/yajra/last/form/{dept}', 'internal_yajra_last_form');
 

@@ -439,7 +439,7 @@ class OtherController extends Controller
                         $cr = 1;
                     }
                 }
-                dd($ar);
+                // dd($ar);
                 PenomoranCleaning::firstOrCreate([
                     'number_ar' => $ar,
                     'month_ar' => date('m'),
@@ -1053,7 +1053,7 @@ class OtherController extends Controller
                         $cr = 1;
                     }
                 }
-                dd($ar);
+                // dd($ar);
                 PenomoranCleaning::firstOrCreate([
                     'number_ar' => $ar,
                     'month_ar' => date('m'),

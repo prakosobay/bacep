@@ -37,10 +37,10 @@
                 serverSide: true,
                 ajax: "{{ route('internalYajraHistory')}}",
                 columns: [
-                    { data: 'internal', name: 'internal' },
-                    { data: 'visit', name: 'visit' },
+                    { data: 'id', name: 'internals.id' },
+                    { data: 'visit', name: 'internals.visit' },
                     { data: 'status', name: 'status' },
-                    { data: 'updatedby', name: 'updatedby' },
+                    { data: 'updatedby', name: 'internal_histories.created_by' },
                     { data: 'updated_at', name: 'updated_at' },
                     { data: 'aktif', name: 'aktif' },
                     { data: 'role_to', name: 'role_to' },

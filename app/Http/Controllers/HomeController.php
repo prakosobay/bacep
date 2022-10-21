@@ -116,11 +116,12 @@ class HomeController extends Controller
                     ->join('internal_histories', 'internals.id', '=', 'internal_histories.internal_id')
                     ->join('users', 'internals.requestor_id', '=', 'users.id')
                     ->leftJoin('entry_racks', 'internals.id', '=', 'entry_racks.internal_id')
-                    ->select('users.name as req_name', 'internals.*', 'internal_histories.aktif', 'internal_histories.role_to')
+                    ->join('m_racks', 'entry_racks.m_rack_id', '=', 'm_racks.id')
+                    ->select('users.name as req_name', 'internals.*', 'internal_histories.aktif', 'internal_histories.role_to', 'm_racks.number as rack_number')
                     ->whereIn('internal_histories.role_to', $role_1)
                     ->where('internal_histories.aktif', '=', 1)
                     ->where('internals.isColo', true)
-                    ->groupBy('entry_racks.internal_id' )
+                    ->groupBy('internals.id' )
                     ->get();
                         // dd($getInternal);
                 return view('internal.approval', compact('getInternal'));
