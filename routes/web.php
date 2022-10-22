@@ -327,7 +327,7 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('internal-action-checkin-form/{id}', 'internal_action_checkin_form')->name('checkinInternal');
         Route::get('internal-action-checkout-form/{id}', 'internal_action_checkout_form')->name('checkoutInternal');
-        Route::put('internal-action-cancel/{id}', 'internal_action_cancel')->name('cancelCheckinInternal');
+        Route::put('internal/action/cancel/{id}', 'internal_action_cancel')->name('cancelCheckinInternal');
         Route::put('internal-checkin-update/{id}', 'internal_checkin_update')->name('internalCheckinUpdate');
         Route::put('internal-checkout-update/{id}', 'internal_checkout_update')->name('internalCheckoutUpdate');
 
@@ -356,6 +356,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('sales/yajra/history', 'yajra_history')->name('salesYajraHistory');
         Route::get('sales/yajra/full/approval', 'yajra_full_approval')->name('salesYajraFullApproval');
         Route::get('sales/yajra/full/visitor', 'yajra_full_visitor')->name('salesYajraFullVisitor');
+
+        Route::get('sales/export/full/approval', 'export_full_approval')->name('surveyExportFullApprove');
 
         Route::post('sales/store', 'store')->name('salesStore');
         Route::post('sales/approve/{id}', 'approve')->name('salesApprove');

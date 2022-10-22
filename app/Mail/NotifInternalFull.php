@@ -29,6 +29,6 @@ class NotifInternalFull extends Mailable
      */
     public function build()
     {
-        return $this->from('testing.dc@balitower.co.id')->view('internal.notifFull');
+        return $this->from('permit.dc@balitower.co.id')->view('internal.notifFull');
     }
 }

@@ -29,6 +29,6 @@ class NotifInternalReject extends Mailable
      */
     public function build()
     {
-        return $this->from('testing.dc@balitower.co.id')->view('internal.notifReject');
+        return $this->from('permit.dc@balitower.co.id')->view('internal.notifReject');
     }
 }

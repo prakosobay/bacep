@@ -32,7 +32,7 @@ class NotifReject extends Mailable
     {
         return
 
-            $this->from('testing.dc@balitower.co.id')
+            $this->from('permit.dc@balitower.co.id')
             ->view('reject');
     }
 }

@@ -56,7 +56,7 @@
                             <tr>
                                 <th>Card Number :</th>
                                 <td>
-                                    <select name="card" id="card" class="form-select">
+                                    <select name="card" id="card" class="form-select" required>
                                             <option value=""></option>
                                         @foreach($getCards as $card)
                                             <option value="{{ $card->id }}">{{ $card->number }}</option>

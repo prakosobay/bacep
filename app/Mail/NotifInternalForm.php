@@ -31,6 +31,6 @@ class NotifInternalForm extends Mailable
 
     public function build()
     {
-        return $this->from('testing.dc@balitower.co.id')->view('internal.notifForm');
+        return $this->from('permit.dc@balitower.co.id')->view('internal.notifForm');
     }
 }

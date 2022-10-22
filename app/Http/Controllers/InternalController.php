@@ -101,15 +101,12 @@ class InternalController extends Controller
         return view('internal.checkoutForm', compact('getVisitor', 'getCard'));
     }
 
-
-    //Ajax
+    //Ajax RISK
     public function get_risk($id)
     {
         $risk = MasterRisks::findOrFail($id);
         return isset($risk) && !empty($risk) ? Response()->json(['status' => 'SUCCESS', 'risk' => $risk]) : response(['status' => 'FAILED', 'risk' => []]);
     }
-
-
 
     // Submit
     public function internal_create(Request $request)
@@ -246,11 +243,11 @@ class InternalController extends Controller
                 ->select('users.name as requestor', 'internals.id', 'internals.visit', 'internals.created_at as created', 'internals.work', 'internals.leave')
                 ->where('internals.id', $insertForm->id)
                 ->first();
-            foreach ([
-                'bayu.prakoso@balitower.co.id',
-            ] as $recipient) {
-                Mail::to($recipient)->send(new NotifInternalForm($notif_email));
-            }
+            // foreach ([
+            //     'bayu.prakoso@balitower.co.id',
+            // ] as $recipient) {
+            //     Mail::to($recipient)->send(new NotifInternalForm($notif_email));
+            // }
 
             InternalHistory::create([
                 'internal_id' => $insertForm->id,
@@ -266,12 +263,9 @@ class InternalController extends Controller
             return redirect()->route('dashboardInternal', auth()->user()->department)->with('success', 'Form Has Been Submited');
         } catch (\Exception $e) {
             DB::rollBack();
-            // return back()->with('failed', $e->getMessage());
             throw $e->getMessage();
         }
     }
-
-
 
     // pdf
     public function internal_pdf($id)
@@ -302,8 +296,6 @@ class InternalController extends Controller
         $pdf = PDF::loadview('internal.pdf', compact('getForm', 'getLastHistory', 'getHistory', 'nomorAR', 'nomorCR', 'getRisks', 'getDetailRisk'))->setPaper('a4', 'portrait')->setWarnings(false);
         return $pdf->stream();
     }
-
-
 
     // Approve
     public function internal_approve($id) // Function flow approval
@@ -343,33 +335,33 @@ class InternalController extends Controller
                 // Pergantian  role tiap permit & send email notif
                 $role_to = '';
                 if ($last_update->role_to == 'review') {
-                    foreach ([
-                        'bayu.prakoso@balitower.co.id',
-                    ] as $recipient) {
-                        Mail::to($recipient)->send(new NotifInternalForm($notif_email));
-                    }
+                    // foreach ([
+                    //     'bayu.prakoso@balitower.co.id',
+                    // ] as $recipient) {
+                    //     Mail::to($recipient)->send(new NotifInternalForm($notif_email));
+                    // }
                     $role_to = 'check';
                 } elseif ($last_update->role_to == 'check') {
-                    foreach ([
-                        'bayu.prakoso@balitower.co.id',
-                    ] as $recipient) {
-                        Mail::to($recipient)->send(new NotifInternalForm($notif_email));
-                    }
+                    // foreach ([
+                    //     'bayu.prakoso@balitower.co.id',
+                    // ] as $recipient) {
+                    //     Mail::to($recipient)->send(new NotifInternalForm($notif_email));
+                    // }
                     $role_to = 'security';
                 } elseif ($last_update->role_to == 'security') {
-                    foreach ([
-                        'bayu.prakoso@balitower.co.id',
-                    ] as $recipient) {
-                        Mail::to($recipient)->send(new NotifInternalForm($notif_email));
-                    }
+                    // foreach ([
+                    //     'bayu.prakoso@balitower.co.id',
+                    // ] as $recipient) {
+                    //     Mail::to($recipient)->send(new NotifInternalForm($notif_email));
+                    // }
                     $role_to = 'head';
                 } elseif ($last_update->role_to = 'head') {
                     $full = Internal::find($id);
-                    foreach ([
-                        'bayu.prakoso@balitower.co.id',
-                    ] as $recipient) {
-                        Mail::to($recipient)->send(new NotifInternalFull($notif_email));
-                    }
+                    // foreach ([
+                    //     'bayu.prakoso@balitower.co.id',
+                    // ] as $recipient) {
+                    //     Mail::to($recipient)->send(new NotifInternalFull($notif_email));
+                    // }
                     $role_to = 'all';
 
                     $full = Internal::findOrFail($id);
@@ -406,7 +398,59 @@ class InternalController extends Controller
         }
     }
 
+    // Reject
+    public function internal_reject(Request $request, $id)
+    {
+        if ((Gate::denies('isSecurity')) && (Gate::denies('isVisitor'))) {
 
+            $request->validate([
+                'note' => ['required', 'string', 'max:255'],
+            ]);
+
+            $lastUpdate = InternalHistory::where('internal_id', $id)->latest()->first();
+            $getForm = Internal::findOrFail($id);
+            $getRequestor = $getForm->requestor->email;
+
+            DB::beginTransaction();
+
+            try {
+
+                if ($lastUpdate->pdf == true) {
+
+                    $lastUpdate->update(['aktif' => false]);
+                    $getForm->update([
+                        'reject_note' => $request->note,
+                    ]);
+
+                    // Simpan tiap perubahan permit ke table History
+                    InternalHistory::create([
+                        'internal_id' => $id,
+                        'created_by' => Auth::user()->id,
+                        'role_to' => 0,
+                        'status' => 'rejected',
+                        'aktif' => true,
+                        'pdf' => false,
+                    ]);
+
+                    // Get permit yang di reject & kirim notif email
+                    // Mail::to($getRequestor)->send(new NotifInternalReject($getForm));
+
+                    DB::commit();
+
+                    alert()->success('Rejected', 'Permit has been rejected!');
+                    return back()->with('success', 'Rejected!');
+                } else {
+
+                    return back()->with('failed', 'Cek PDF Dahulu!');
+                }
+            } catch (\Exception $e) {
+                DB::rollBack();
+                throw $e;
+            }
+        } else {
+            abort(403);
+        }
+    }
 
     // Update Checkin
     public function internal_checkin_update(Request $request, $id)
@@ -418,7 +462,7 @@ class InternalController extends Controller
             'nik' => ['required', 'string', 'max:255'],
             'department' => ['required', 'string', 'max:255'],
             'company' => ['required', 'string', 'max:255'],
-            'respon' => ['required', 'string', 'max:255'],
+            'respon' => ['nullable', 'string', 'max:255'],
             'card' => ['required', 'numeric'],
             'checkin' => ['required'],
             'photo_checkin' => ['required'],
@@ -428,14 +472,14 @@ class InternalController extends Controller
         $replace = substr($request->photo_checkin, 0, strpos($request->photo_checkin, ',') + 1);
         $image = str_replace($replace, '', $request->photo_checkin);
         $image = str_replace(' ', '+', $image);
-        $imageName = Str::random(200) .  '.' . $extension;
-        // dd($imageName);
+        $imageName = time() .  '.' . $extension;
 
         Storage::disk('internalCheckin')->put($imageName, base64_decode($image));
 
         DB::beginTransaction();
 
         try {
+
             $getVisitor = InternalVisitor::findOrFail(Crypt::decrypt($id));
             $getVisitor->update([
                 'name' => $request->name,
@@ -450,8 +494,6 @@ class InternalController extends Controller
 
             $getInternalID = $getVisitor->internal->id;
             $updateCard = Internal::findOrFail($getInternalID);
-            // $getcard = MasterCard::findOrFail($request->card);
-            // dd($getcard);
 
             if($updateCard->m_card_id == null){
 
@@ -459,7 +501,6 @@ class InternalController extends Controller
                     'm_card_id' => $request->card,
                 ]);
             }
-            // dd($updateCard);
 
             DB::commit();
 
@@ -469,8 +510,6 @@ class InternalController extends Controller
             throw $e;
         }
     }
-
-
 
     // Update Checkout
     public function internal_checkout_update(Request $request, $id)
@@ -484,7 +523,7 @@ class InternalController extends Controller
         $replace = substr($request->photo_checkout, 0, strpos($request->photo_checkout, ',') + 1);
         $image = str_replace($replace, '', $request->photo_checkout);
         $image = str_replace(' ', '+', $image);
-        $imageName = Str::random(200) . '.' . $extension;
+        $imageName = time() . '.' . $extension;
 
         Storage::disk('internalCheckout')->put($imageName, base64_decode($image));
 
@@ -509,72 +548,12 @@ class InternalController extends Controller
 
     }
 
-
-
     //Cancel Visitor
     public function internal_action_cancel($id)
     {
         InternalVisitor::findOrFail(Crypt::decrypt($id))->delete();
-        return redirect()->route('dashboardInternal', auth()->user()->department)->with('success', 'Success');
+        return redirect()->route('dashboardInternal', auth()->user()->department)->with('success', 'Cancelled');
     }
-
-
-
-    // Reject
-    public function internal_reject(Request $request, $id)
-    {
-        if ((Gate::denies('isSecurity')) && (Gate::denies('isVisitor'))) {
-
-            DB::beginTransaction();
-
-            $request->validate([
-                'note' => ['required'],
-            ]);
-
-            $lastUpdate = InternalHistory::where('internal_id', $id)->latest()->first();
-            $getForm = Internal::findOrFail($id);
-            $getRequestor = $getForm->requestor->email;
-            // dd($getRequestor);
-            try {
-
-                if ($lastUpdate->pdf == true) {
-
-                    $lastUpdate->update(['aktif' => false]);
-                    $getForm->update([
-                        'reject_note' => $request->note,
-                    ]);
-
-                    // Simpan tiap perubahan permit ke table History
-                    InternalHistory::create([
-                        'internal_id' => $id,
-                        'created_by' => Auth::user()->id,
-                        'role_to' => 0,
-                        'status' => 'rejected',
-                        'aktif' => true,
-                        'pdf' => false,
-                    ]);
-
-                    // Get permit yang di reject & kirim notif email
-                    Mail::to($getRequestor)->send(new NotifInternalReject($getForm));
-
-                    DB::commit();
-
-                    alert()->success('Rejected', 'Permit has been rejected!');
-                    return back()->with('success', 'Rejected!');
-                } else {
-
-                    return back()->with('failed', 'Cek PDF Dahulu!');
-                }
-            } catch (\Exception $e) {
-                DB::rollBack();
-                throw $e;
-            }
-        } else {
-            abort(403);
-        }
-    }
-
-
 
     // Export
     public function export_full_approve()
@@ -582,12 +561,9 @@ class InternalController extends Controller
         return Excel::download(new InternalExport, 'Full Approve Internal.xlsx');
     }
 
-
-
     // Yajra
     public function internal_yajra_history()
     {
-        // dd($dept);
         $history = DB::table('internal_histories')
             ->leftJoin('internals', 'internal_histories.internal_id', '=', 'internals.id')
             ->leftJoin('users', 'internal_histories.created_by', '=', 'users.id')
@@ -607,6 +583,7 @@ class InternalController extends Controller
             ->join('internal_fulls', 'internals.id', '=', 'internal_fulls.internal_id')
             ->select('internal_fulls.link', 'internal_visitors.name as visitor', 'internal_visitors.checkin', 'internal_visitors.checkout', 'internals.work', 'internals.id', 'internals.visit', 'internal_fulls.status')
             ->where('internal_visitors.deleted_at', null)
+            ->where('internals.isColo', true)
             ->where('internal_fulls.status', 'Full Approved');
             // ->groupBy('internal_id');
         return Datatables::of($full)

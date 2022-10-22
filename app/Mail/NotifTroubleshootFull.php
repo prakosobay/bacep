@@ -29,6 +29,6 @@ class NotifTroubleshootFull extends Mailable
      */
     public function build()
     {
-        return $this->from('testing.dc@balitower.co.id')->view('other.troubleshoot_notif_full');
+        return $this->from('permit.dc@balitower.co.id')->view('other.troubleshoot_notif_full');
     }
 }

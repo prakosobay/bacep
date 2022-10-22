@@ -31,6 +31,6 @@ class NotifMaintenanceForm extends Mailable
 
     public function build()
     {
-        return $this->from('testing.dc@balitower.co.id')->view('other.maintenance_form_notif');
+        return $this->from('permit.dc@balitower.co.id')->view('other.maintenance_form_notif');
     }
 }

@@ -13,7 +13,7 @@ class MasterRackController extends Controller
     {
         // dd($request->all());
         $request->validate([
-            'number' => ['required', 'numeric'],
+            'number' => ['required', 'string'],
             'company_id' => ['required', 'numeric'],
             'room_id' => ['required', 'numeric'],
         ]);
@@ -42,7 +42,7 @@ class MasterRackController extends Controller
     {
         // dd($request->all());
         $request->validate([
-            'number' => ['required', 'numeric'],
+            'number' => ['required', 'string'],
             'company_id' => ['required', 'numeric'],
             'room_id' => ['required', 'numeric'],
         ]);

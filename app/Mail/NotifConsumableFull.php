@@ -29,6 +29,6 @@ class NotifConsumableFull extends Mailable
      */
     public function build()
     {
-        return $this->from('testing.dc@balitower.co.id')->view('order.notifFull');
+        return $this->from('permit.dc@balitower.co.id')->view('order.notifFull');
     }
 }

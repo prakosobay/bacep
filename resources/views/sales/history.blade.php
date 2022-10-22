@@ -5,7 +5,7 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h4 class="judul text-center">Log Form Sales</h4>
+            <h4 class="judul text-center">Log Form Survey</h4>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -37,10 +37,10 @@
                 serverSide: true,
                 ajax: '{{ route('salesYajraHistory')}}',
                 columns: [
-                    { data: 'internal', name: 'internal' },
+                    { data: 'id', name: 'internals.id' },
                     { data: 'visit', name: 'internals.visit' },
                     { data: 'status', name: 'status' },
-                    { data: 'name', name: 'users.name' },
+                    { data: 'updatedby', name: 'internal_histories.created_by' },
                     { data: 'updated_at', name: 'updated_at' },
                     { data: 'aktif', name: 'aktif' },
                     { data: 'role_to', name: 'role_to' },

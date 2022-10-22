@@ -77,9 +77,9 @@
                     { data: 'id', name: 'id' },
                     { data: 'visit', name: 'visit' },
                     { data: 'work', name: 'work' },
-                    { data: 'visitor', name: 'visitor' },
-                    { data: 'checkin', name: 'checkin' },
-                    { data: 'checkout', name: 'checkout' },
+                    { data: 'visitor', name: 'internal_visitors.name' },
+                    { data: 'checkin', name: 'internal_visitors.checkin' },
+                    { data: 'checkout', name: 'internal_visitors.checkout' },
                     { data: 'action', name: 'action', orderable: false, searchable: false }
                 ]
             });

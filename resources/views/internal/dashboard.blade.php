@@ -61,10 +61,16 @@
                 <h4 class="judul text-center">{{ Auth::user()->department }} Log Permit</h4>
             </div>
 
-            <div class="container">
+            <div class="container-fluid">
                 @if (session('success'))
                     <div class="alert alert-success mx-2 my-2 text-center">
                         {{ session('success') }}
+                    </div>
+                @endif
+
+                @if (session('failed'))
+                    <div class="alert alert-danger mx-2 my-2 text-center">
+                        {{ session('failed') }}
                     </div>
                 @endif
             </div>

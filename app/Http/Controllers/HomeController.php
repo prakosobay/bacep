@@ -27,19 +27,12 @@ class HomeController extends Controller
     {
 
         $role_2 = Auth::user()->roles;
-        // dd($role_2);
         $arrole = [];
         foreach ($role_2 as $rolee) {
             $arrole[] = $rolee->name;
         }
         Session::put('arrole', $arrole);
-        // dd($arrole[0]);
-        // return view('home');
-        // if($arrole){
         return view('homepage');
-        // } else{
-        //     abort(403);
-        // }
     }
 
     public function dashboard() // Dashboard manajemen barang
@@ -57,7 +50,7 @@ class HomeController extends Controller
             if ($type_view == 'all') {
                 return view('all_history');
             } elseif ($type_view == 'survey') {
-                return view('survey.history');
+                return view('sales.history');
             } elseif ($type_view == 'cleaning') {
                 return view('cleaning.history');
             } elseif ($type_view == 'maintenance') {

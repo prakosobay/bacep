@@ -29,6 +29,6 @@ class NotifConsumableForm extends Mailable
      */
     public function build()
     {
-        return $this->from('testing.dc@balitower.co.id')->view('order.notifForm');
+        return $this->from('permit.dc@balitower.co.id')->view('order.notifForm');
     }
 }
