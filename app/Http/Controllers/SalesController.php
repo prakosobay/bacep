@@ -19,6 +19,56 @@ class SalesController extends Controller
         return view('sales.form');
     }
 
+    public function checkin_show($id)
+    {
+        $checkin = InternalVisitor::findOrFail($id);
+        return view('sales.checkinForm', compact('checkin'));
+    }
+
+    public function checkout_show($id)
+    {
+        $checkout = InternalVisitor::findOrFail($id);
+        return view('sales.checkoutForm', compact('checkout'));
+    }
+
+    public function checkin_update(Request $request, $id)
+    {
+        $request->validate([
+            'checkin' => ['required'],
+            'photo_checkin' => ['required'],
+        ]);
+
+        DB::beginTransaction();
+
+        try {
+
+            DB::commit();
+            return redirect()->route('dashboardInternal', auth()->user()->department);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            throw $e;
+        }
+    }
+
+    public function checkout_update(Request $request, $id)
+    {
+        $request->validate([
+            'checkout' => ['required'],
+            'photo_checkout' => ['required'],
+        ]);
+
+        DB::beginTransaction();
+
+        try {
+
+            DB::commit();
+            return redirect()->route('dashboardInternal', auth()->user()->department);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            throw $e;
+        }
+    }
+
     public function store(Request $request)
     {
         $request->validate([
@@ -121,12 +171,11 @@ class SalesController extends Controller
         $notif_email = DB::table('internals')
                 ->join('internal_histories', 'internals.id', '=', 'internal_histories.internal_id')
                 ->join('users', 'internals.requestor_id', '=', 'users.id')
-                ->select('users.name as requestor', 'internal_histories.aktif', 'internals.id', 'internals.visit', 'internals.created_at as created', 'internals.work', 'internals.leave')
+                ->select('users.name as requestor', 'internal_histories.aktif', 'internals.id', 'internals.visit', 'internals.created_at as created', 'internals.work', 'internals.leave', 'internal_histories.status')
                 ->where('internals.id', $id)
                 ->where('aktif', 1)
                 ->first();
 
-        // dd($notif_email);
         DB::beginTransaction();
 
         try {

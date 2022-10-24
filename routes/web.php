@@ -359,6 +359,11 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('sales/export/full/approval', 'export_full_approval')->name('surveyExportFullApprove');
 
+        Route::get('sales/checkin/show/{id}', 'checkin_show')->name('salesCheckinShow');
+        Route::get('sales/checkout/show/{id}', 'checkout_show')->name('salesCheckoutShow');
+        Route::post('sales/checkin/update/{id}', 'checkin_update')->name('salesCheckinUpdate');
+        Route::post('sales/checkout/update/{id}', 'checkout_update')->name('salesCheckoutUpdate');
+
         Route::post('sales/store', 'store')->name('salesStore');
         Route::post('sales/approve/{id}', 'approve')->name('salesApprove');
         Route::post('sales/reject/{id}', 'reject')->name('salesReject');

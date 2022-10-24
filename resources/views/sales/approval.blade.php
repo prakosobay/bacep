@@ -9,11 +9,19 @@
         <div class="card-header py-3">
             <h1 class="h3 mb-2 text-gray-800 text-center">Approval Permit Sales</h1>
         </div>
+
         @if (session('success'))
-            <div class="alert alert-success mx-5 my-2">
+            <div class="alert alert-success mx-2 my-2">
                 <b>{{ session('success') }}</b>
             </div>
         @endif
+
+        @if (session('failed'))
+            <div class="alert alert-danger mx-2 my-2">
+                <b>{{ session('failed') }}</b>
+            </div>
+        @endif
+
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-striped table-bordered" id="approve_survey" width="100%" cellspacing="0">
@@ -67,7 +75,7 @@
                             <td>{{ $p->work }}</td>
                             <td>
                                 @can('isApproval')
-                                    <form action="{{ url('sales/approve', $p->id)}}" method="post">
+                                    <form action="{{ route('salesApprove', $p->id)}}" method="post">
                                         @csrf
                                         <button id="ok" class="btn btn-success btn-sm my-1 mx-1">Approve</button>
                                     </form>
@@ -75,7 +83,7 @@
                                     <button class="btn btn-danger btn-sm my-1 mx-1" data-bs-toggle="modal" data-bs-target="#reject{{ $p->id }}" data-id="{{ $p->id }}">Reject</button>
 
                                 @elsecan('isHead')
-                                    <form action="{{ url('sales/approve', $p->id)}}" method="post">
+                                    <form action="{{ route('salesApprove', $p->id)}}" method="post">
                                         @csrf
                                         <button id="ok" class="btn btn-success btn-sm my-1 mx-1">Approve</button>
                                     </form>
@@ -83,7 +91,7 @@
                                     <button class="btn btn-danger btn-sm my-1 mx-1" data-bs-toggle="modal" data-bs-target="#reject{{ $p->id }}" data-id="{{ $p->id }}">Reject</button>
 
                                 @elsecan('isSecurity')
-                                    <form action="{{ url('sales/approve', $p->id)}}" method="post">
+                                    <form action="{{ route('salesApprove', $p->id)}}" method="post">
                                         @csrf
                                         <button id="ok" class="btn btn-success btn-sm my-1 mx-1">Approve</button>
                                     </form>
