@@ -44,6 +44,6 @@
             </tr>
         </tbody>
     </table>
-        <p><a href="http://dcops.balifiber.id">Klik tautan ini untuk melihat permit</a></p>
+        <p><a href="https://dcops.balifiber.id">Klik tautan ini untuk melihat permit</a></p>
 </body>
 </html>

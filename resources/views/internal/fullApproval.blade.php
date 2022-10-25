@@ -50,6 +50,7 @@
                     <thead>
                         <tr class="judul-table text-center">
                             <th>ID Permit</th>
+                            <th>Requestor</th>
                             <th>Date of Visit</th>
                             <th>Purpose of Work</th>
                             <th>Name</th>
@@ -75,6 +76,7 @@
                 ajax: '{{ route('internalYajraFullApproval')}}',
                 columns: [
                     { data: 'id', name: 'id' },
+                    { data: 'requestor', name: 'users.name' },
                     { data: 'visit', name: 'visit' },
                     { data: 'work', name: 'work' },
                     { data: 'visitor', name: 'internal_visitors.name' },

@@ -395,7 +395,7 @@ class OtherController extends Controller
         $visitorID = OtherPersonil::findOrFail($id);
         $pic = $visitorID->other_id;
         $jumlah = OtherPersonil::where('other_id', $pic)->where('checkout', null)->select('id')->count();
-        // dd($jumlah);
+
         $extension = explode('/', explode(':', substr($request->photo_checkout, 0, strpos($request->photo_checkout, ';')))[1])[1];   // .jpg .png .pdf
         $replace = substr($request->photo_checkout, 0, strpos($request->photo_checkout, ',') + 1);
         $image = str_replace($replace, '', $request->photo_checkout);
@@ -451,44 +451,6 @@ class OtherController extends Controller
                     'type' => 'maintenance',
                 ]);
             }
-
-            // if($last == null){
-
-            //     $ar = 1;
-            //     $cr = 1;
-
-            // } elseif($last->number_ar) {
-
-            //     $ar = $last->number_ar;
-            //     $cr = $last->number_cr;
-
-            //     if($nomer == null) {
-
-            //         $ar = $last->number_ar + 1;
-            //         $cr = $last->number_cr + 1;
-
-            //     } elseif($nomer->number_ar){
-
-            //         $ar = $nomer->number_ar;
-            //         $cr = $nomer->number_cr;
-
-            //         if($penomoran->permit_id != $nomer->permit_id) {
-
-            //             $ar = $last->number_ar + 1;
-            //             $cr = $last->number_cr + 1;
-            //         }
-            //     }
-
-            //     $lastyearAR = $last->year_ar;
-            //     $lastyearCR = $last->year_cr;
-            //     $currrentYear = date('Y');
-
-            //     if ( ($currrentYear != $lastyearAR) && ( $currrentYear != $lastyearCR ) ){
-            //         $ar = 1;
-            //         $cr = 1;
-            //     }
-            // }
-            // dd($ar);
 
             DB::commit();
 

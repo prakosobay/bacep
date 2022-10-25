@@ -184,7 +184,7 @@
                 ajax: "{{ url('internal/yajra/last/form')}}"+'/'+"{{auth()->user()->department}}",
                 columns: [
                     { data: 'work', name: 'work' },
-                    { data: 'req_name', name: 'req_name' },
+                    { data: 'requestor', name: 'users.name' },
                     { data: 'visit', name: 'visit' },
                     { data: 'leave', name: 'leave' },
                     { data: 'name', name: 'internal_visitors.name' },

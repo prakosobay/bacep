@@ -345,6 +345,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('internal/reject/{id}', 'internal_reject');
 
         Route::get('internal-export-full-approve', 'export_full_approve')->name('internalExportFullApprove');
+        Route::get('internal_penomoran', 'penomoran');
     });
 
 

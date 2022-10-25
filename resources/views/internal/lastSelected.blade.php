@@ -8,10 +8,18 @@
             <div class="container form-container">
 
                 @if (session('success'))
-                    <div class="alert alert-success mt-2">
+                    <div class="alert alert-success mx-2 my-2">
                         {{ session('success') }}
                     </div>
                 @endif
+
+                <div class="container">
+                    @if (session('failed'))
+                        <div class="alert alert-danger mx-2 my-2">
+                            {{ session('failed') }}
+                        </div>
+                    @endif
+                </div>
 
                 {{-- Requestor --}}
                 <div class="row">
@@ -37,45 +45,13 @@
 
                 {{-- Purpose of Work --}}
                 <div class="row">
-                    <div class="col-8">
+                    <div class="col-12">
                         <div class="form-group mb-5">
                             <label for="work" class="form-label">Purpose of Work :</label>
                             <input type="text" class="form-control @error('work') is-invalid @enderror" id="work" name="work" value="{{ $getInternal->work }}" required>
                             @error('work')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
-                    {{-- <div class="col-4">
-                        <label for="rack">Number of Rack :</label><br>
-                        <select class="js-example-basic-multiple" id="rack" name="rack[]" multiple="multiple">
-                            <optgroup label="Server Room">
-                            @for ($i = 1; $i <= 39; $i++)
-                                <option value="A {{$i}}">Rack {{$i}}</option>
-                            @endfor
-                            </optgroup>
-                            <optgroup label="MMR 1">
-                            @for ($i = 1; $i <= 5; $i++)
-                                <option value="B {{$i}}">Rack {{$i}}</option>
-                            @endfor
-                            </optgroup>
-                            <optgroup label="MMR 2">
-                                <option value="C 1">Rack 1</option>
-                            </optgroup>
-                            <optgroup label="CCTV Room">
-                                <option value="D 1">Rack 1</option>
-                            </optgroup>
-                        </select>
-                    </div> --}}
-                    <div class="col-4">
-                        <div class="form-group mb-5">
-                            <label for="rack" class="form-label">Rack :</label>
-                            <input type="text" class="form-control @error('rack') is-invalid @enderror" id="rack" name="rack" value="{{ $getInternal->rack }}" required>
-                            @error('rack')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message}}</strong>
                                 </span>
                             @enderror
                         </div>
@@ -131,9 +107,30 @@
                         </div>
                     </div>
                     <div class="col-4 mt-2">
-                        <div class="form-check mb-3">
-                            <label for="lain" class="form-label">Other :</label>
-                            <input type="text" class="form-control" id="lain" name="lain" value="{{ old('lain')}}" placeholder="Tempat Lainnya">
+                        <div class="form-group mt-5">
+                            <label for="rack">Rack</label>
+                            <select name="rack[]" class="js-example-responsive-theme-multiple form-control" id="rack" multiple="multiple" required>
+                                <optgroup label="Server Room">
+                                    @foreach ( $getDC as $rack )
+                                        <option value="{{ $rack->id }}">{{ $rack->number }}</option>
+                                    @endforeach
+                                </optgroup>
+                                <optgroup label="MMR 1">
+                                    @foreach ( $getMMR1 as $rack )
+                                        <option value="{{ $rack->id }}">{{ $rack->number }}</option>
+                                    @endforeach
+                                </optgroup>
+                                <optgroup label="MMR 2">
+                                    @foreach ( $getMMR2 as $rack )
+                                        <option value="{{ $rack->id }}">{{ $rack->number }}</option>
+                                    @endforeach
+                                </optgroup>
+                                <optgroup label="CCTV Room">
+                                    @foreach ( $getCCTV as $rack )
+                                        <option value="{{ $rack->id }}">{{ $rack->number }}</option>
+                                    @endforeach
+                                </optgroup>
+                            </select>
                         </div>
                     </div>
                 </div>

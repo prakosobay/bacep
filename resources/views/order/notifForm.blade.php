@@ -40,7 +40,7 @@
                     </tr>
                 </tbody>
             </table>
-        <p>Silahkan Login di  <a href="http://dcops.balifiber.id/approval/all">sini</a></p>
+        <p>Silahkan Login di  <a href="https://dcops.balifiber.id/approval/all">sini</a></p>
     </div>
 </body>
 </html>

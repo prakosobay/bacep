@@ -101,6 +101,13 @@ class InternalController extends Controller
         return view('internal.checkoutForm', compact('getVisitor', 'getCard'));
     }
 
+    public function penomoran()
+    {
+        $ar = AccessRequestInternal::all();
+        $cr = ChangeRequestInternal::all();
+        return view('internal.penomoran', compact('ar', 'cr'));
+    }
+
     //Ajax RISK
     public function get_risk($id)
     {
@@ -519,6 +526,9 @@ class InternalController extends Controller
             'photo_checkout' => ['required'],
         ]);
 
+        $getID = InternalVisitor::where('id', Crypt::decrypt($id))->select('internal_id')->first();
+        $permit = InternalVisitor::where('internal_id', $getID->internal_id)->where('checkout', null)->select('id')->count();
+        // dd($permit);
         $extension = explode('/', explode(':', substr($request->photo_checkout, 0, strpos($request->photo_checkout, ';')))[1])[1];   // .jpg .png .pdf
         $replace = substr($request->photo_checkout, 0, strpos($request->photo_checkout, ',') + 1);
         $image = str_replace($replace, '', $request->photo_checkout);
@@ -527,15 +537,56 @@ class InternalController extends Controller
 
         Storage::disk('internalCheckout')->put($imageName, base64_decode($image));
 
+        $lastAR = DB::table('access_request_internal')->latest()->first();
+        $lastCR = DB::table('change_request_internal')->latest()->first();
+        $internal_id = $getID->internal_id;
+
         DB::beginTransaction();
 
         try {
+
             $getVisitor = InternalVisitor::findOrFail(Crypt::decrypt($id));
             $getVisitor->update([
                 'checkout' => $request->checkout,
                 'photo_checkout' => $imageName,
                 'is_done' => true,
             ]);
+
+            if($permit == 1) {
+
+                if($lastAR == null) {
+
+                    $ar = 1;
+
+                } else {
+
+                    $ar = $lastAR->number + 1;
+
+                    $lastyearAR = $lastAR->year;
+                    $lastyearCR = $lastCR->year;
+                    $currrentYear = date('Y');
+
+                    if ( ($currrentYear != $lastyearAR) && ( $currrentYear != $lastyearCR ) ){
+
+                        $ar = 1;
+                        $cr = 1;
+                    }
+                }
+                // dd($ar);
+                AccessRequestInternal::firstOrCreate([
+                    'number' => $ar,
+                    'month' => date('m'),
+                    'year' => date('Y'),
+                    'internal_id' => $internal_id,
+                ]);
+
+                ChangeRequestInternal::firstOrCreate([
+                    'number' => $cr,
+                    'month' => date('m'),
+                    'year' => date('Y'),
+                    'internal_id' => $internal_id,
+                ]);
+            }
 
         DB::commit();
 
@@ -544,8 +595,6 @@ class InternalController extends Controller
             DB::rollBack();
             throw $e;
         }
-
-
     }
 
     //Cancel Visitor
@@ -581,7 +630,8 @@ class InternalController extends Controller
         $full = DB::table('internals')
             ->join('internal_visitors', 'internals.id', '=', 'internal_visitors.internal_id')
             ->join('internal_fulls', 'internals.id', '=', 'internal_fulls.internal_id')
-            ->select('internal_fulls.link', 'internal_visitors.name as visitor', 'internal_visitors.checkin', 'internal_visitors.checkout', 'internals.work', 'internals.id', 'internals.visit', 'internal_fulls.status')
+            ->leftJoin('users', 'internals.requestor_id', '=', 'users.id')
+            ->select('internal_fulls.link', 'internal_visitors.name as visitor', 'internal_visitors.checkin', 'internal_visitors.checkout', 'internals.work', 'internals.id', 'internals.visit', 'internal_fulls.status', 'users.name as requestor')
             ->where('internal_visitors.deleted_at', null)
             ->where('internals.isColo', true)
             ->where('internal_fulls.status', 'Full Approved');
@@ -647,7 +697,7 @@ class InternalController extends Controller
             ->leftJoin('m_cards', 'internals.m_card_id', '=', 'm_cards.id')
             ->where('internal_visitors.is_done', true)
             ->where('users.department', $dept)
-            ->select('internals.work', 'internals.visit', 'internals.leave', 'users.name as requestor', 'm_cards.number as card_number', 'internal_visitors.name', 'internal_visitors.checkin', 'internal_visitors.checkout');
+            ->select('internals.work', 'internals.visit', 'internals.leave', 'users.name as requestor', 'm_cards.number as card_number', 'internal_visitors.name', 'internal_visitors.checkin', 'internal_visitors.checkout', 'internals.id');
         return Datatables::of($getPermit)
             ->editColumn('visit', function ($getPermit) {
                 return $getPermit->visit ? with(new Carbon($getPermit->visit))->format('d/m/Y') : '';
@@ -655,6 +705,7 @@ class InternalController extends Controller
             ->editColumn('leave', function ($getPermit) {
                 return $getPermit->leave ? with(new Carbon($getPermit->leave))->format('d/m/Y') : '';
             })
+            ->addColumn('action', 'internal.actionSelect')
             ->make(true);
     }
 }

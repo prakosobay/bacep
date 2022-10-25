@@ -40,6 +40,6 @@
             </tr>
         </tbody>
     </table>
-    <p><a href="http://dcops.balifiber.id">Klik tautan ini untuk login</a></p>
+    <p><a href="https://dcops.balifiber.id">Klik tautan ini untuk login</a></p>
 </body>
 </html>

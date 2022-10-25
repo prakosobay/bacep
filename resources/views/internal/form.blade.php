@@ -148,36 +148,6 @@
                     </div>
                 </div>
 
-                {{-- Entry Area --}}
-                {{-- <div class="row">
-                    <div class="col-4 mt-2">
-                        <div class="form-check mb-3">
-                            <label for="dc" class="form-check-label">Server Room</label>
-                            <input type="checkbox" class="form-check-input" id="dc" name="dc" value="1" >
-                        </div>
-                        <div class="form-check mb-5">
-                            <label for="mmr1" class="form-check-label">MMR 1</label>
-                            <input type="checkbox" class="form-check-input" id="mmr1" name="mmr1" value="1">
-                        </div>
-                    </div>
-                    <div class="col-4 mt-2">
-                        <div class="form-check mb-3">
-                            <label for="mmr2" class="form-check-label">MMR 2</label>
-                            <input type="checkbox" class="form-check-input" id="mmr2" name="mmr2" value="1">
-                        </div>
-                        <div class="form-check mb-5">
-                            <label for="cctv" class="form-check-label">CCTV Room</label>
-                            <input type="checkbox" class="form-check-input" id="cctv" name="cctv" value="1">
-                        </div>
-                    </div>
-                    <div class="col-4 mt-2">
-                        <div class="form-check mb-3">
-                            <label for="lain" class="form-label">Other :</label>
-                            <input type="text" class="form-control" id="lain" name="lain" value="{{ old('lain')}}" placeholder="Tempat Lainnya">
-                        </div>
-                    </div>
-                </div> --}}
-
                 {{-- background & description --}}
                 <div class="row">
                     <div class="col-6">
