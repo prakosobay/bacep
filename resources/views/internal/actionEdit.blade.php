@@ -7,7 +7,11 @@
     </form>
 
 @elseif(($model->checkin) && ($model->checkout == null))
+    @if($model->isSurvey == true)
+    <a href="{{route('salesCheckoutShow', Crypt::encrypt($model->id))}}" class="btn btn-xs btn-dark btn-sm mx-1 my-1">Checkout</a>
+    @else
     <a href="{{route ('checkoutInternal', Crypt::encrypt($model->id))}}" class="btn btn-xs btn-dark btn-sm mx-1 my-1"><i class="glyphicon glyphicon-checkout"></i>Checkout</a>
+    @endif
 @endif
 
 

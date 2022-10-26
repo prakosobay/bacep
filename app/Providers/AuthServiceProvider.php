@@ -55,8 +55,6 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('isInternal', function ($user) {
 
-            // dd($user->roles);
-            // return $user->roles == 'internal';
             foreach ($user->roles as $rolee) {
                 $arrole[] = $rolee->name;
             }

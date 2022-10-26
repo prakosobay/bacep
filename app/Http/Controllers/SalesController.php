@@ -3,12 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Mail\NotifSalesForm;
-use App\Models\{AccessRequestInternal, ChangeRequestInternal, Internal, InternalFull, InternalHistory, InternalVisitor};
+use App\Models\{AccessRequestInternal, ChangeRequestInternal, Internal, InternalFull, InternalHistory, InternalVisitor, MasterCard};
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\{DB, Mail, Storage, Gate};
+use Illuminate\Support\Facades\{Crypt, DB, Mail, Storage, Gate};
 use Yajra\Datatables\Datatables;
 use Carbon\Carbon;
-use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 use Barryvdh\DomPDF\Facade as PDF;
 
@@ -19,35 +18,20 @@ class SalesController extends Controller
         return view('sales.form');
     }
 
-    public function checkin_show($id)
+    public function guest_form()
     {
-        $checkin = InternalVisitor::findOrFail($id);
-        return view('sales.checkinForm', compact('checkin'));
+        return view('sales.guestForm');
     }
 
     public function checkout_show($id)
     {
-        $checkout = InternalVisitor::findOrFail($id);
-        return view('sales.checkoutForm', compact('checkout'));
-    }
-
-    public function checkin_update(Request $request, $id)
-    {
-        $request->validate([
-            'checkin' => ['required'],
-            'photo_checkin' => ['required'],
-        ]);
-
-        DB::beginTransaction();
-
-        try {
-
-            DB::commit();
-            return redirect()->route('dashboardInternal', auth()->user()->department);
-        } catch (\Exception $e) {
-            DB::rollBack();
-            throw $e;
-        }
+        $getVisitor = InternalVisitor::findOrFail(Crypt::decrypt($id));
+        $getCard = DB::table('internals')
+                ->join('m_cards', 'internals.m_card_id', '=', 'm_cards.id')
+                ->where('internals.id', $getVisitor->internal_id)
+                ->select('m_cards.number as card_number')
+                ->first();
+        return view('sales.checkoutForm', compact('getVisitor', 'getCard'));
     }
 
     public function checkout_update(Request $request, $id)
@@ -57,12 +41,59 @@ class SalesController extends Controller
             'photo_checkout' => ['required'],
         ]);
 
+        $getID = InternalVisitor::where('id', Crypt::decrypt($id))->select('internal_id')->first();
+        $permit = InternalVisitor::where('internal_id', $getID->internal_id)->where('checkout', null)->select('id')->count();
+        dd($permit);
+        $extension = explode('/', explode(':', substr($request->photo_checkout, 0, strpos($request->photo_checkout, ';')))[1])[1];   // .jpg .png .pdf
+        $replace = substr($request->photo_checkout, 0, strpos($request->photo_checkout, ',') + 1);
+        $image = str_replace($replace, '', $request->photo_checkout);
+        $image = str_replace(' ', '+', $image);
+        $imageName = time() . '.' . $extension;
+
+        Storage::disk('internalCheckout')->put($imageName, base64_decode($image));
+
+        $lastAR = DB::table('access_request_internal')->latest()->first();
+        $internal_id = $getID->internal_id;
+
         DB::beginTransaction();
 
         try {
 
+            $getVisitor = InternalVisitor::findOrFail(Crypt::decrypt($id));
+            $getVisitor->update([
+                'checkout' => $request->checkout,
+                'photo_checkout' => $imageName,
+                'is_done' => true,
+            ]);
+
+            if($permit == 1) {
+
+                if($lastAR == null) {
+
+                    $ar = 1;
+
+                } else {
+
+                    $ar = $lastAR->number + 1;
+
+                    $lastyearAR = $lastAR->year;
+                    $currrentYear = date('Y');
+
+                    if ( $currrentYear != $lastyearAR ){
+
+                        $ar = 1;
+                    }
+                }
+                // dd($ar);
+                AccessRequestInternal::firstOrCreate([
+                    'number' => $ar,
+                    'month' => date('m'),
+                    'year' => date('Y'),
+                    'internal_id' => $internal_id,
+                ]);
+            }
             DB::commit();
-            return redirect()->route('dashboardInternal', auth()->user()->department);
+            return redirect()->route('dashboardInternal', auth()->user()->department)->with('success', 'Checkout Successful !');
         } catch (\Exception $e) {
             DB::rollBack();
             throw $e;
@@ -164,7 +195,7 @@ class SalesController extends Controller
         return $pdf->stream();
     }
 
-    public function approve(Request $request, $id)
+    public function approve($id)
     {
         $last_update = InternalHistory::where('internal_id', $id)->latest()->first();
 

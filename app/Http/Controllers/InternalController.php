@@ -651,12 +651,10 @@ class InternalController extends Controller
             ->join('internal_fulls', 'internals.id', '=', 'internal_fulls.internal_id')
             ->join('users', 'internals.requestor_id', '=', 'users.id')
             ->leftJoin('m_cards', 'internals.m_card_id', '=', 'm_cards.id')
-            ->select('internal_fulls.link', 'internal_visitors.name as visitor', 'internal_visitors.checkin', 'internal_visitors.checkout', 'internals.work', 'internals.leave', 'internal_visitors.id', 'internals.visit', 'internal_fulls.status', 'users.name as requestor', 'm_cards.number as card_number')
+            ->select('internal_fulls.link', 'internal_visitors.name as visitor', 'internal_visitors.checkin', 'internal_visitors.checkout', 'internals.work', 'internals.leave', 'internal_visitors.id', 'internals.visit', 'internal_fulls.status', 'users.name as requestor', 'm_cards.number as card_number', 'internals.isSurvey')
             ->where('internal_visitors.deleted_at', null)
             ->where('users.department', $dept)
             ->where('internal_visitors.checkout', null)
-            // ->orWhere('m_cards.number', null)
-            // ->orWhere('card_number', null)
             ->where('internal_fulls.status', 'Full Approved');
 
         return Datatables::of($full)

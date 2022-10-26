@@ -352,6 +352,7 @@ Route::middleware(['auth'])->group(function () {
     //  Sales
     Route::controller(SalesController::class)->group(function(){
         Route::get('sales/form', 'form')->name('salesForm');
+        Route::get('internal/guest/form', 'guest_form')->name('internalGuestForm');
         Route::get('sales/pdf/{id}', 'pdf');
 
         Route::get('sales/yajra/history', 'yajra_history')->name('salesYajraHistory');
@@ -360,9 +361,9 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('sales/export/full/approval', 'export_full_approval')->name('surveyExportFullApprove');
 
-        Route::get('sales/checkin/show/{id}', 'checkin_show')->name('salesCheckinShow');
+        // Route::get('sales/checkin/show/{id}', 'checkin_show')->name('salesCheckinShow');
         Route::get('sales/checkout/show/{id}', 'checkout_show')->name('salesCheckoutShow');
-        Route::post('sales/checkin/update/{id}', 'checkin_update')->name('salesCheckinUpdate');
+        // Route::post('sales/checkin/update/{id}', 'checkin_update')->name('salesCheckinUpdate');
         Route::post('sales/checkout/update/{id}', 'checkout_update')->name('salesCheckoutUpdate');
 
         Route::post('sales/store', 'store')->name('salesStore');
