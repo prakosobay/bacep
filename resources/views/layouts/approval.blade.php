@@ -125,8 +125,9 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Option :</h6>
                         <a class="collapse-item" href="{{ url('approval/internal')}}">AR CR Form</a>
-                        <a class="collapse-item" href="{{ url('#')}}">Consumable</a>
-                        <a class="collapse-item" href="{{ url('#')}}">Barang Masuk</a>
+                        <a class="collapse-item" href="{{ url('penomoran/internal')}}">Penomoran</a>
+                        {{-- <a class="collapse-item" href="{{ url('#')}}">Consumable</a>
+                        <a class="collapse-item" href="{{ url('#')}}">Barang Masuk</a> --}}
                     </div>
                 </div>
             </li>
@@ -191,6 +192,7 @@
                         <a class="collapse-item" href="{{ url('approval/cleaning')}}">Cleaning</a>
                         <a class="collapse-item" href="{{ url('approval/maintenance')}}">Maintenance</a>
                         <a class="collapse-item" href="{{ url('approval/troubleshoot')}}">Troubleshoot</a>
+                        <a class="collapse-item" href="{{ url('penomoran/bm')}}">Penomoran</a>
                     </div>
                 </div>
             </li>

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{Internal, InternalHistory, SurveyHistory};
+use App\Models\{AccessRequestInternal, ChangeRequestInternal, Internal, InternalHistory, PenomoranCleaning, SurveyHistory};
 use Illuminate\Support\Facades\{DB, Auth, Gate, Session};
 
 class HomeController extends Controller
@@ -156,6 +156,21 @@ class HomeController extends Controller
             } else {
                 abort(403);
             }
+        }
+    }
+
+    public function penomoran($type_nomor)
+    {
+        if($type_nomor == 'bm') {
+
+            $getNomor = PenomoranCleaning::all();
+            return view('cleaning.penomoran', compact('getNomor'));
+
+        } elseif($type_nomor == 'internal') {
+
+            $ar = AccessRequestInternal::all();
+            $cr = ChangeRequestInternal::all();
+            return view('internal.penomoran', compact('ar', 'cr'));
         }
     }
 

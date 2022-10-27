@@ -15,18 +15,22 @@
                     <thead>
                         <tr class="judul-table text-center">
                             <th>AR</th>
+                            <th>Updated</th>
                             <th>CR</th>
+                            <th>Updated</th>
                         </tr>
                     </thead>
                     <tbody class="isi-table text-center">
                         @foreach($ar as $p)
                         <tr>
                             <td>{{ $p->number }}/{{ $p->month }}/{{ $p->year }}</td>
+                            <td>{{ $p->updated_at }}</td>
                         </tr>
                         @endforeach
                         @foreach ( $cr as $o )
                             <tr>
                                 <td>{{ $o->number }}/{{ $o->month }}/{{ $o->year }}</td>
+                                <td>{{ $o->updated_at }}</td>
                             </tr>
                         @endforeach
                     </tbody>

@@ -17,6 +17,7 @@ class CreateEntriesTable extends Migration
             $table->id();
             $table->foreignId('internal_id')->nullable();
             $table->foreignId('eksternal_id')->nullable();
+            $table->foreignId('vendor_id')->nullable();
             $table->boolean('dc')->nullable();
             $table->boolean('mmr1')->nullable();
             $table->boolean('mmr2')->nullable();

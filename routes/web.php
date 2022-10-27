@@ -59,7 +59,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/u.hapus/{id}', 'delete');
     });
 
-
     Route::controller(MasterRoomController::class)->group(function () {
         Route::get('room/table', 'table')->name('room');
         Route::get('room/yajra', 'yajra')->name('roomYajra');
@@ -160,7 +159,6 @@ Route::middleware(['auth'])->group(function () {
         Route::post('consum/import/masuk', 'import_masuk')->name('consumImportMasuk');
     });
 
-
     //Barang Asset
     Route::controller(AssetController::class)->group(function () {
         Route::get('asset-table-show', 'index')->name('assetTable');
@@ -225,7 +223,6 @@ Route::middleware(['auth'])->group(function () {
         Route::post('revisi/visitor/create', 'store_visitor');
     });
 
-
     // Cleaning
     Route::controller(CleaningController::class)->group(function () {
         Route::get('route_history_cleaning', 'data_history');
@@ -261,7 +258,6 @@ Route::middleware(['auth'])->group(function () {
 
         Route::post('cleaning-checkin-cancel/{id}', 'checkin_cancel')->name('cleaningCheckinCancel');
     });
-
 
     // Other
     Route::controller(OtherController::class)->group(function () {
@@ -315,7 +311,6 @@ Route::middleware(['auth'])->group(function () {
         Route::post('maintenance-reject', 'maintenance_reject')->name('maintenanceReject');
     });
 
-
     // Internal
     Route::controller(InternalController::class)->group(function () {
         Route::get('internal-dashboard/{dept}', 'dashboard')->name('dashboardInternal');
@@ -348,7 +343,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('internal_penomoran', 'penomoran');
     });
 
-
     //  Sales
     Route::controller(SalesController::class)->group(function(){
         Route::get('sales/form', 'form')->name('salesForm');
@@ -360,17 +354,13 @@ Route::middleware(['auth'])->group(function () {
         Route::get('sales/yajra/full/visitor', 'yajra_full_visitor')->name('salesYajraFullVisitor');
 
         Route::get('sales/export/full/approval', 'export_full_approval')->name('surveyExportFullApprove');
-
-        // Route::get('sales/checkin/show/{id}', 'checkin_show')->name('salesCheckinShow');
         Route::get('sales/checkout/show/{id}', 'checkout_show')->name('salesCheckoutShow');
-        // Route::post('sales/checkin/update/{id}', 'checkin_update')->name('salesCheckinUpdate');
         Route::post('sales/checkout/update/{id}', 'checkout_update')->name('salesCheckoutUpdate');
 
         Route::post('sales/store', 'store')->name('salesStore');
         Route::post('sales/approve/{id}', 'approve')->name('salesApprove');
         Route::post('sales/reject/{id}', 'reject')->name('salesReject');
     });
-
 
     //Eksternal
     Route::controller(EksternalController::class)->group(function(){
@@ -381,7 +371,6 @@ Route::middleware(['auth'])->group(function () {
         Route::post('eksternal-store', 'store')->name('eksternalStore');
     });
 
-
     // Order Form
     Route::controller(OrderController::class)->group(function () {
         Route::get('order/form', 'order_form');
@@ -389,13 +378,12 @@ Route::middleware(['auth'])->group(function () {
         Route::post('order/store', 'order_store');
     });
 
-
     // ALL
     Route::get('history/{type_view}', [HomeController::class, 'history']);
     Route::get('approval/{type_approve}', [HomeController::class, 'approval']);
     Route::get('full/{type_full}', [HomeController::class, 'full']);
+    Route::get('penomoran/{type_nomor}', [HomeController::class, 'penomoran']);
     Route::get('visitor/log/{type_log}', [HomeController::class, 'visitor_log']);
-
 
     //Log
     Route::get('logall', [HomeController::class, 'log_all'])->name('logall');

@@ -21,6 +21,7 @@
                         <tr class="judul-table text-center">
                             <th>AR</th>
                             <th>CR</th>
+                            <th>Updated</th>
                         </tr>
                     </thead>
                     <tbody class="isi-table text-center">
@@ -28,6 +29,7 @@
                         <tr>
                             <td>AR/{{ $p->number_ar }}/{{ $p->month_ar }}/{{ $p->year_ar }}</td>
                             <td>CR/{{ $p->number_cr }}/{{ $p->month_cr }}/{{ $p->year_cr }}</td>
+                            <td>{{ $p->updated_at }}</td>
                         </tr>
                         @endforeach
                     </tbody>
