@@ -105,6 +105,12 @@ class InternalController extends Controller
     {
         $ar = AccessRequestInternal::all();
         $cr = ChangeRequestInternal::all();
+        // $join = DB::table('internals')
+        // ->leftJoin('access_request_internals', 'internals.id', '=', 'access_request_internals.internal_id')
+        // ->rightJoin('change_request_internals', 'internals.id', '=', 'change_request_internals.internal_id')
+        // ->select('internals.id', 'access_request_internals.*', 'change_request_internals.*')
+        // ->get();
+        // dd($join);
         return view('internal.penomoran', compact('ar', 'cr'));
     }
 
@@ -537,8 +543,8 @@ class InternalController extends Controller
 
         Storage::disk('internalCheckout')->put($imageName, base64_decode($image));
 
-        $lastAR = DB::table('access_request_internal')->latest()->first();
-        $lastCR = DB::table('change_request_internal')->latest()->first();
+        $lastAR = DB::table('access_request_internals')->latest()->first();
+        $lastCR = DB::table('change_request_internals')->latest()->first();
         $internal_id = $getID->internal_id;
 
         DB::beginTransaction();
@@ -557,10 +563,12 @@ class InternalController extends Controller
                 if($lastAR == null) {
 
                     $ar = 1;
+                    $cr = 1;
 
                 } else {
 
                     $ar = $lastAR->number + 1;
+                    $cr = $lastCR->number + 1;
 
                     $lastyearAR = $lastAR->year;
                     $lastyearCR = $lastCR->year;

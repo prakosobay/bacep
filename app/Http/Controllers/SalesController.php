@@ -43,7 +43,7 @@ class SalesController extends Controller
 
         $getID = InternalVisitor::where('id', Crypt::decrypt($id))->select('internal_id')->first();
         $permit = InternalVisitor::where('internal_id', $getID->internal_id)->where('checkout', null)->select('id')->count();
-        dd($permit);
+        // dd($permit);
         $extension = explode('/', explode(':', substr($request->photo_checkout, 0, strpos($request->photo_checkout, ';')))[1])[1];   // .jpg .png .pdf
         $replace = substr($request->photo_checkout, 0, strpos($request->photo_checkout, ',') + 1);
         $image = str_replace($replace, '', $request->photo_checkout);
@@ -52,8 +52,8 @@ class SalesController extends Controller
 
         Storage::disk('internalCheckout')->put($imageName, base64_decode($image));
 
-        $lastAR = DB::table('access_request_internal')->latest()->first();
         $internal_id = $getID->internal_id;
+        $lastAR = DB::table('access_request_internals')->latest()->first();
 
         DB::beginTransaction();
 
