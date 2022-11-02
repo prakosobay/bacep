@@ -256,11 +256,11 @@ class InternalController extends Controller
                 ->select('users.name as requestor', 'internals.id', 'internals.visit', 'internals.created_at as created', 'internals.work', 'internals.leave')
                 ->where('internals.id', $insertForm->id)
                 ->first();
-            // foreach ([
-            //     'bayu.prakoso@balitower.co.id',
-            // ] as $recipient) {
-            //     Mail::to($recipient)->send(new NotifInternalForm($notif_email));
-            // }
+            foreach ([
+                'bayu.prakoso@balitower.co.id',
+            ] as $recipient) {
+                Mail::to($recipient)->send(new NotifInternalForm($notif_email));
+            }
 
             InternalHistory::create([
                 'internal_id' => $insertForm->id,

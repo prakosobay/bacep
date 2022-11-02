@@ -432,18 +432,10 @@ $(document).ready(function(){
         }
     });
 
-    $(button_risk).click(function(e){
-        e.preventDefault();
-        if(row < max_row){
-            $(table_risk).append('<tr><td><select name="risk" class="form-control" id="risk" required><option selected>Choose 1</option>@foreach ( $risks as $risk )<option value="{{ $risk->id }}">{{ $risk->risk }}</option>@endforeach</select></td><td><input type="text" class="form-control" name="poss[]" value="" id="poss" readonly></td><td><input type="text" class="form-control" name="impact[]" value="" id="impact" readonly></td><td><input type="text" class="form-control" name="mitigation[]" value="" id="mitigation" readonly></td></tr>');
-            row++;
-        }
-    });
-
     $(button_visitor).click(function(e){
         e.preventDefault();
         if(row < max_row){
-            $(table_visitor).append('<tr><th>Name</th><td><input type="text" class="form-control" name="name[]" value=""></td><th>Phone Number</th><td><input type="text" class="form-control" name="phone[]" value=""></td></tr><tr><th>Number ID</th><td><input type="text" class="form-control" name="number[]" value=""></td><th>Company</th><th><input type="text" class="form-control" name="company[]" value=""></th></tr><tr><th>Department</th><td><input type="text" class="form-control" name="department[]" value=""></td><th>Responsibility</th><td><input type="text" class="form-control" name="respon[]" value=""></td></tr>');
+            $(table_visitor).append('<tr><th>Name</th><td><input type="text" class="form-control" name="name[]" ></td><th>Phone Number</th><td><input type="text" class="form-control" name="phone[]" ></td></tr><tr><th>Number ID</th><td><input type="text" class="form-control" name="number[]" ></td><th>Company</th><th><input type="text" class="form-control" name="company[]" ></th></tr><tr><th>Department</th><td><input type="text" class="form-control" name="department[]" ></td><th>Responsibility</th><td><input type="text" class="form-control" name="respon[]" ></td></tr>');
             row++;
         }
     });

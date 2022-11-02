@@ -58,7 +58,7 @@
         <!-- DataTales Example -->
         <div class="card shadow mb-1">
             <div class="card-header py-3">
-                <h4 class="judul text-center">{{ Auth::user()->company }} Log Permit</h4>
+                <h4 class="judul text-center">{{ $company }} Log Permit</h4>
             </div>
 
             <div class="container">
@@ -74,7 +74,7 @@
                     <div class="container-fluid">
                         <div class="card-body">
                             <button class="btn btn-primary btn-sm mx-1 my-2" data-bs-toggle="modal" data-bs-target="#eksternalModal">Create Form</button>
-                            <a type="button" class="btn btn-sm btn-info mx-1 my-2" href="{{ route('dashboardEksternal', auth()->user()->company )}}">Log Form</a>
+                            <a type="button" class="btn btn-sm btn-info mx-1 my-2" href="{{ route('dashboardEksternal', $company )}}">Log Form</a>
                             {{-- <a type="button" class="btn btn-sm btn-success mx-1 my-2" href="{{ route('finishedEksternal', auth()->user()->company)}}">Finished Permit</a>
                             <a type="button" class="btn btn-sm btn-secondary mx-1 my-2" href="{{ route('lastEksternal', auth()->user()->company )}}">Last Requested Form</a> --}}
                         </div>

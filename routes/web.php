@@ -43,6 +43,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/relasi.new', 'store_relasi');
         Route::post('/user.new', 'store_user');
         Route::post('admin/user/destroy/{id}', 'delete_user');
+        Route::post('admin/relasi/destroy/{id}', 'relasi_destroy')->name('adminRelasiDestroy');
         Route::post('/role.destroy/{id}', 'delete_role');
         Route::post('/role.destroy/{id}', 'delete_role');
         Route::post('/relasi.destroy/{id}', 'delete_relasi');
@@ -364,11 +365,15 @@ Route::middleware(['auth'])->group(function () {
 
     //Eksternal
     Route::controller(EksternalController::class)->group(function(){
-        Route::get('dashboard-eksternal', 'dashboard')->name('dashboardEksternal');
-        Route::get('eksternal-show-form', 'show_form')->name('eksternalShowForm');
+        Route::get('dashboard/eksternal', 'dashboard')->name('dashboardEksternal');
+        Route::get('eksternal/show/form', 'show_form')->name('eksternalShowForm');
 
+        Route::get('eksternal/yajra/history', 'yajra_history')->name('eksternalYajraHistory');
+        Route::get('eksternal/yajra/full/approval', 'yajra_full_approval')->name('eksternalYajraFullApproval');
+        Route::get('eksternal/yarja/full/visitor', 'yajra_full_visitor')->name('eksternalYajraFullVisitor');
+        Route::get('eksternal/yajra/finished', 'yajra_finished')->name('yajraEksternalFinished');
 
-        Route::post('eksternal-store', 'store')->name('eksternalStore');
+        Route::post('eksternal/store', 'store')->name('eksternalStore');
     });
 
     // Order Form

@@ -13,6 +13,17 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h5 class="text-center"><strong>Data Relasi</strong></h5>
+            @if (session('success'))
+                <div class="alert alert-success mx-2 my-2">
+                    <b>{{ session('success') }}</b>
+                </div>
+            @endif
+
+            @if (session('failed'))
+                <div class="alert alert-danger mx-2 my-2">
+                    <b>{{ session('failed') }}</b>
+                </div>
+            @endif
             <button type="button" class="btn btn-primary mr-5" data-toggle="modal" data-target="#relasi">
                 Tambah Relasi Baru
             </button>
@@ -70,8 +81,8 @@
             ajax: '{{ url('admin/yajra/relasi/show')}}',
             columns: [
                 { data: 'id', name: 'id' },
-                { data: 'user_id', name: 'user_id' },
-                { data: 'role_id', name: 'role_id' },
+                { data: 'user_name', name: 'users.name' },
+                { data: 'role_name', name: 'roles.name' },
                 { data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });

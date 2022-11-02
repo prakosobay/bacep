@@ -15,6 +15,7 @@
                     <thead>
                         <tr class="judul-table text-center">
                             <th>ID Permit</th>
+                            <th>Requestor</th>
                             <th>Date of Request</th>
                             <th>Date of Visit</th>
                             <th>Purpose</th>
@@ -25,6 +26,7 @@
                         @foreach($getMaintenance as $p)
                         <tr>
                             <td>{{ $p->other_id }}</td>
+                            <td>{{ $p->created_by }}</td>
                             <td>{{ Carbon\Carbon::parse($p->created_at)->format('d-m-Y') }}</td>
                             <td>{{ Carbon\Carbon::parse($p->visit)->format('d-m-Y') }}</td>
                             <td>{{ $p->work }}</td>

@@ -230,11 +230,21 @@ class AdminController extends Controller
         }
     }
 
-    public function delete_relasi($id) // Menghapus data relasi
+    public function relasi_destroy($id) // Menghapus data relasi
     {
-        DB::table('role_user')->where('id', $id)->delete();
-        // Alert::success('Success', 'Role has been deleted');
-        return back();
+        DB::beginTransaction();
+
+        try {
+
+            DB::table('role_user')->where('id', $id)->delete();
+
+            DB::commit();
+            return back()->with('success', 'Deleted');
+        } catch(\Exception $e) {
+
+            DB::rollBack();
+            return back()->with('failed', $e->getMessage());
+        }
     }
 
 
@@ -252,7 +262,9 @@ class AdminController extends Controller
     public function yajra_show_relasi() // Get seluruh data relasi
     {
         $relasi = DB::table('role_user')
-            ->select('role_user.*')
+            ->leftJoin('users', 'role_user.user_id', '=', 'users.id')
+            ->leftJoin('roles', 'role_user.role_id', '=', 'roles.id')
+            ->select('role_user.*', 'users.name as user_name', 'roles.name as role_name')
             ->orderBy('id', 'asc');
             return Datatables::of($relasi)
             ->addColumn('action', 'admin.actionRelasi')

@@ -59,8 +59,8 @@ class HomeController extends Controller
                 return view('other.troubleshoot_history');
             } elseif($type_view == 'internal'){
                 return view('internal.history');
-            } elseif($type_view == 'colo') {
-                return view('colo.history');
+            } elseif($type_view == 'eksternal') {
+                return view('eksternal.history');
             } else {
                 abort(403);
             }
@@ -80,9 +80,10 @@ class HomeController extends Controller
             } elseif ($type_approve == 'cleaning') {
                 $cleaning = DB::table('cleaning_histories')
                     ->join('cleanings', 'cleanings.cleaning_id', '=', 'cleaning_histories.cleaning_id')
+                    ->leftJoin('users', 'cleaning_histories.created_by', '=', 'users.id')
                     ->whereIn('cleaning_histories.role_to', $role_1)
                     ->where('cleaning_histories.aktif', '=', 1)
-                    ->select('cleanings.*')
+                    ->select('cleanings.*', 'users.name as createdby')
                     ->orderBy('cleaning_id', 'desc')
                     ->get();
                 return view('cleaning.approval', compact('cleaning'));
@@ -98,13 +99,13 @@ class HomeController extends Controller
             } elseif($type_approve == 'troubleshoot') {
                 $getTroubleshoot = DB::table('troubleshoot_bms')
                     ->join('troubleshoot_bm_histories', 'troubleshoot_bms.id', '=', 'troubleshoot_bm_histories.troubleshoot_bm_id')
+                    ->leftJoin('users', 'troubleshoot_bm_histories.created_by', '=', 'users.id')
                     ->whereIn('troubleshoot_bm_histories.role_to', $role_1)
                     ->where('troubleshoot_bm_histories.aktif', '=', true)
-                    ->select('troubleshoot_bm_histories.*', 'troubleshoot_bms.*')
+                    ->select('troubleshoot_bm_histories.*', 'troubleshoot_bms.*', 'users.name as createdby')
                     ->get();
                 return view('other.troubleshoot_approval', compact('getTroubleshoot'));
             } elseif($type_approve == 'internal'){
-                // $getDept = auth()->user()->department;
                 $getInternal = DB::table('internals')
                     ->join('internal_histories', 'internals.id', '=', 'internal_histories.internal_id')
                     ->join('users', 'internals.requestor_id', '=', 'users.id')
@@ -116,7 +117,6 @@ class HomeController extends Controller
                     ->where('internals.isColo', true)
                     ->groupBy('internals.id' )
                     ->get();
-                        // dd($getInternal);
                 return view('internal.approval', compact('getInternal'));
             }  elseif($type_approve == 'survey') {
                 $getSurvey = DB::table('internals')
@@ -126,8 +126,22 @@ class HomeController extends Controller
                     ->where('internal_histories.aktif', '=', 1)
                     ->whereIn('internal_histories.role_to', $role_1)
                     ->where('internals.isSurvey', true)
+                    ->groupBy('internals.id')
                     ->get();
                 return view('sales.approval', compact('getSurvey'));
+            } elseif($type_approve == 'eksternal') {
+                $getEksternal = DB::table('eksternals')
+                    ->leftJoin('eksternal_histories', 'eksternals.id', '=', 'eksternal_histories.eksternal_id')
+                    ->leftJoin('users', 'eksternals.requestor_id', '=', 'users.id')
+                    ->leftJoin('entry_racks', 'eksternals.id', '=', 'entry_racks.eksternal_id')
+                    ->join('m_racks', 'entry_racks.m_rack_id', '=', 'm_racks.id')
+                    ->select('eksternals.*', 'eksternal_histories.aktif', 'eksternal_histories.role_to', 'users.name as req_name', 'm_racks.number as rack_number')
+                    ->where('eksternal_histories.aktif', '=', 1)
+                    ->whereIn('eksternal_histories.role_to', $role_1)
+                    ->groupBy('eksternals.id')
+                    ->get();
+                    // dd($getEksternal)
+                return view('eksternal.approval', compact('getEksternal'));
             } else {
                 abort(403);
             }
@@ -151,8 +165,8 @@ class HomeController extends Controller
                 return view('other.troubleshoot_full_approval');
             } elseif($type_full == 'internal') {
                 return view('internal.fullApproval');
-            } elseif($type_full == 'colo') {
-                return view('colo.fullApproval');
+            } elseif($type_full == 'eksternal') {
+                return view('eksternal.fullApproval');
             } else {
                 abort(403);
             }

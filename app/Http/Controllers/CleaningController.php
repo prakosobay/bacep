@@ -102,11 +102,11 @@ class CleaningController extends Controller
             //     Mail::to($recipient)->send(new NotifEmail($cleaning));
             // }
 
-            // foreach ([
-            //     'bayu.prakoso@balitower.co.id',
-            // ] as $recipient) {
-            //     Mail::to($recipient)->send(new NotifEmail($cleaning));
-            // }
+            foreach ([
+                'bayu.prakoso@balitower.co.id', 'taufik.ismail@balitower.co.id',
+            ] as $recipient) {
+                Mail::to($recipient)->send(new NotifEmail($cleaning));
+            }
 
             $cleaningHistory = CleaningHistory::create([
                 'cleaning_id' => $cleaning->cleaning_id,
@@ -577,9 +577,9 @@ class CleaningController extends Controller
             ->select('cleaning_histories.*', 'cleanings.validity_from')
             ->orderBy('cleaning_id', 'desc');
         return Datatables::of($cleaning_log)
-            ->editColumn('updated_at', function ($cleaning_log) {
-                return $cleaning_log->updated_at ? with(new Carbon($cleaning_log->updated_at))->format('d/m/Y') : '';
-            })
+            // ->editColumn('updated_at', function ($cleaning_log) {
+            //     return $cleaning_log->updated_at ? with(new Carbon($cleaning_log->updated_at))->format('d/m/Y') : '';
+            // })
             ->editColumn('validity_from', function ($cleaning_log) {
                 return $cleaning_log->validity_from ? with(new Carbon($cleaning_log->validity_from))->format('d/m/Y') : '';
             })

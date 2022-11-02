@@ -15,6 +15,11 @@ class MasterRisks extends Model
 
     public function internals()
     {
-        return $this->hasMany(Internal::class);
+        return $this->hasMany(InternalRisk::class, 'm_risk_id');
+    }
+
+    public function eksternals()
+    {
+        return $this->hasMany(EksternalRisk::class, 'm_risk_id');
     }
 }
