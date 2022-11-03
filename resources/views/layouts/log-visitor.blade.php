@@ -156,10 +156,13 @@
                     <div class="tab-pane fade" id="Ltroubleshoot" role="tabpanel" aria-labelledby="Ltroubleshoot-tab">
                         <div class="container-fluid">
                             <div class="card-body">
-                                <a type="button" class="btn btn-sm btn-dark mx-1 my-2" href="{{ route('troubleshootForm') }}">Create Form Troubleshoot</a>
+                                <a type="button" class="btn btn-sm btn-primary mx-1 my-2" href="{{ route('troubleshootForm') }}">Create Form Troubleshoot</a>
+                                <a type="button" class="btn btn-sm btn-info mx-1 my-2" href="{{ route('troubleshootAR') }}">Create Form Access Request</a>
                                 <a type="button" class="btn btn-sm btn-info mx-1 my-2" href="{{ route('logall') }}">Log Form Troubleshoot</a>
                             </div>
                         </div>
+
+
 
                         {{-- Table Troubleshoot --}}
                         <div class="card-body">

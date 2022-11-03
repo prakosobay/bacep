@@ -9,7 +9,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 use Barryvdh\DomPDF\Facade as PDF;
-use App\Models\{Eksternal, EksternalVisitor, EksternalHistory, EksternalFull, EksternalDetail, EksternalRisk, MasterCard, MasterCompany, MasterRack, MasterRisks, MasterRoom, Entry, EntryRack, MasterCardType};
+use App\Models\{AccessRequestEksternal, AccessRequestInternal, ChangeRequestEksternal, ChangeRequestInternal, Eksternal, EksternalVisitor, EksternalHistory, EksternalFull, EksternalDetail, EksternalRisk, MasterCard, MasterCompany, MasterRack, MasterRisks, MasterRoom, Entry, EntryRack, MasterCardType};
 use App\Mail\{NotifEksternalForm, NotifInternalForm, NotifInternalReject, NotifInternalFull};
 
 class EksternalController extends Controller
@@ -212,4 +212,66 @@ class EksternalController extends Controller
     }
 
 
+    //PDF
+    public function pdf($id)
+    {
+        $getForm = Eksternal::findOrFail($id);
+        $getLastHistory = EksternalHistory::where('eksternal_id', $id)->where('aktif', 1)->first();
+        $getLastHistory->update(['pdf' => true]);
+
+        $getRisks = DB::table('eksternal_risks')
+                ->join('m_risks', 'eksternal_risks.m_risk_id', '=', 'm_risks.id')
+                ->where('eksternal_id', $id)
+                ->select('eksternal_risks.*', 'm_risks.risk', 'm_risks.poss', 'm_risks.impact', 'm_risks.mitigation')
+                ->get();
+
+        $getDetailRisk = DB::table('eksternal_risks')
+                ->join('m_risks', 'eksternal_risks.m_risk_id', '=', 'm_risks.id')
+                ->where('eksternal_id', $id)
+                ->select('eksternal_risks.*', 'm_risks.risk')
+                ->first();
+
+        $getHistory = EksternalHistory::where('eksternal_id', $id)
+                ->join('users', 'users.id', '=', 'eksternal_histories.created_by')
+                ->select('eksternal_histories.*', 'users.name')
+                ->get();
+
+        $nomorAR = AccessRequestEksternal::where('eksternal_id', $id)->first();
+        $nomorCR = ChangeRequestEksternal::where('eksternal_id', $id)->first();
+        $pdf = PDF::loadview('eksternal.pdf', compact('getForm', 'getLastHistory', 'getHistory', 'getRisks', 'getDetailRisk', 'nomorAR', 'nomorCR'))->setPaper('a4', 'portrait')->setWarnings(false);
+        return $pdf->stream();
+    }
+
+
+    // Yajra
+    public function yajra_history()
+    {
+        $history = DB::table('eksternal_histories')
+            ->leftJoin('eksternals', 'eksternal_histories.eksternal_id', '=', 'eksternals.id')
+            ->leftJoin('users', 'eksternal_histories.created_by', '=', 'users.id')
+            ->select('eksternal_histories.status', 'eksternal_histories.role_to', 'eksternal_histories.aktif', 'eksternal_histories.updated_at', 'eksternals.visit', 'users.name as updatedby', 'eksternals.id as id');
+        return Datatables::of($history)
+            ->editColumn('visit', function ($history) {
+                return $history->visit ? with(new Carbon($history->visit))->format('d/m/Y') : '';
+            })
+            ->make(true);
+    }
+
+    public function yajra_full_approval()
+    {
+        $full = DB::table('eksternals')
+            ->join('eksternal_visitors', 'eksternals.id', '=', 'eksternal_visitors.eksternal_id')
+            ->join('eksternal_fulls', 'eksternals.id', '=', 'eksternal_fulls.eksternal_id')
+            ->leftJoin('users', 'eksternals.requestor_id', '=', 'users.id')
+            ->select('eksternal_fulls.link', 'eksternal_visitors.name as visitor', 'eksternal_visitors.checkin', 'eksternal_visitors.checkout', 'eksternals.work', 'eksternals.id', 'eksternals.visit', 'eksternal_fulls.status', 'users.name as requestor')
+            ->where('eksternal_visitors.deleted_at', null)
+            ->where('eksternal_fulls.status', 'Full Approved');
+            // ->groupBy('eksternal_id');
+        return Datatables::of($full)
+            ->editColumn('visit', function ($full) {
+                return $full->visit ? with(new Carbon($full->visit))->format('d/m/Y') : '';
+            })
+            ->addColumn('action', 'internal.actionLink')
+            ->make(true);
+    }
 }

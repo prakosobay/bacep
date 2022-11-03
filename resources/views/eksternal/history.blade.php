@@ -32,20 +32,20 @@
 @push('scripts')
     <script>
         $(function() {
-            // $('#history').DataTable({
-            //     processing: true,
-            //     serverSide: true,
-            //     ajax: "{{ route('eksternalYajraHistory')}}",
-            //     columns: [
-            //         { data: 'id', name: 'eksternals.id' },
-            //         { data: 'visit', name: 'eksternals.visit' },
-            //         { data: 'status', name: 'status' },
-            //         { data: 'updatedby', name: 'eksternal_histories.created_by' },
-            //         { data: 'updated_at', name: 'updated_at' },
-            //         { data: 'aktif', name: 'aktif' },
-            //         { data: 'role_to', name: 'role_to' },
-            //     ]
-            // });
+            $('#history').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: "{{ route('eksternalYajraHistory')}}",
+                columns: [
+                    { data: 'id', name: 'eksternals.id' },
+                    { data: 'visit', name: 'eksternals.visit' },
+                    { data: 'status', name: 'status' },
+                    { data: 'updatedby', name: 'eksternal_histories.created_by' },
+                    { data: 'updated_at', name: 'updated_at' },
+                    { data: 'aktif', name: 'aktif' },
+                    { data: 'role_to', name: 'role_to' },
+                ]
+            });
         });
     </script>
 @endpush

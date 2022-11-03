@@ -598,6 +598,12 @@ class OtherController extends Controller
         return view('other.troubleshoot_form', compact('personil'));
     }
 
+    public function troubleshoot_form_ar()
+    {
+        $personil = Visitor::all();
+        return view('other.formAR', compact('personil'));
+    }
+
     public function show_troubleshoot_reject()
     {
         return view('other.troubleshoot_list_reject');
@@ -772,6 +778,100 @@ class OtherController extends Controller
         } catch (\Exception $e) {
             DB::rollBack();
             throw $e;
+        }
+    }
+
+    public function ar_store(Request $request)
+    {
+        $request->validate([
+            'work' => ['required', 'string', 'max:255'],
+            'visit' => ['required', 'date', 'after:yesterday'],
+            'leave' => ['required', 'date', 'after_or_equal:visit'],
+        ]);
+
+        $input = $request->all();
+
+        DB::beginTransaction();
+
+        try {
+
+            $insert = TroubleshootBm::create([
+                'work' => $request->work,
+                'visit' => $request->visit,
+                'leave' => $request->leave,
+                'background' => '',
+                'desc' => '',
+                'testing' => '',
+                'rollback' => '',
+            ]);
+
+            TroubleshootBmEntry::create([
+                'troubleshoot_bm_id' => $insert->id,
+                'dc' => $request->dc,
+                'mmr1' => $request->mmr2,
+                'mmr2' => $request->mmr2,
+                'ups' => $request->ups,
+                'fss' => $request->fss,
+                'trafo' => $request->trafo,
+                'panel' => $request->panel,
+                'baterai' => $request->baterai,
+                'generator' => $request->generator,
+                'yard' => $request->yard,
+                'parking' => $request->parking,
+                'lain' => $request->lain,
+            ]);
+
+            $insert_personil = [];
+            foreach ($input['visit_nama'] as $k => $v) {
+                $personil_array = [];
+                if (isset($input['visit_nama'][$k])) {
+                    $personil[] = Visitor::find($v)->visit_nama;
+                    $personil_array = [
+                        'troubleshoot_bm_id' => $insert->id,
+                        'nama' => $personil[$k],
+                        'company' => $input['visit_company'][$k],
+                        'department' => $input['visit_department'][$k],
+                        'respon' => $input['visit_respon'][$k],
+                        'phone' => $input['visit_phone'][$k],
+                        'numberId' => $input['visit_nik'][$k],
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ];
+
+                    $insert_personil[] = $personil_array;
+                }
+            }
+            TroubleshootBmPersonil::insert($insert_personil);
+
+            $notif_email = TroubleshootBm::find($insert->id);
+            // foreach ([
+            //     'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id', 'syukril@balitower.co.id',
+            //     'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'mufli.gonibala@balitower.co.id',
+            //     'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'dyah.retno@balitower.co.id',
+            // ] as $recipient) {
+            //     Mail::to($recipient)->send(new NotifTroubleshootForm($notif_email));
+            // }
+
+            // foreach ([
+            //     'bayu.prakoso@balitower.co.id', 'syukril@balitower.co.id',
+            // ] as $recipient) {
+            //     Mail::to($recipient)->send(new NotifTroubleshootForm($notif_email));
+            // }
+
+            $p = TroubleshootBmHistory::create([
+                'troubleshoot_bm_id' => $insert->id,
+                'created_by' => Auth::user()->id,
+                'role_to' => 'review',
+                'status' => 'requested',
+                'aktif' => true,
+                'pdf' => false,
+            ]);
+            // dd($p);
+            DB::commit();
+            return redirect()->route('logall')->with('success', 'Submited');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->route('logall')->with('failed', $e->getMessage());
         }
     }
 

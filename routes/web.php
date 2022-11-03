@@ -264,6 +264,7 @@ Route::middleware(['auth'])->group(function () {
     Route::controller(OtherController::class)->group(function () {
         // Troubleshoot
         Route::get('troubleshoot-show', 'troubleshoot_form')->name('troubleshootForm');
+        Route::get('troubleshoot/show/ar', 'troubleshoot_form_ar')->name('troubleshootAR');
         Route::get('troubleshoot-finished-show', 'troubleshoot_finished_show')->name('troubleshootFinishedShow');
 
         Route::get('troubleshoot-pdf/{id}', 'troubleshoot_pdf')->name('troubleshootPDF');
@@ -282,6 +283,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('troubleshoot-export-full-approval', 'troubleshoot_export_full_approval')->name('troubleshootExportFullApproval');
 
         Route::post('troubleshoot-store', 'troubleshoot_store')->name('troubleshootStore');
+        Route::post('troubleshoot/ar/store', 'ar_store')->name('troubleshootStoreAR');
         Route::post('troubleshoot-approve', 'troubleshoot_approve')->name('troubleshootApprove');
         Route::post('troubleshoot-reject', 'troubleshoot_reject')->name('troubleshootReject');
 
@@ -372,6 +374,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('eksternal/yajra/full/approval', 'yajra_full_approval')->name('eksternalYajraFullApproval');
         Route::get('eksternal/yarja/full/visitor', 'yajra_full_visitor')->name('eksternalYajraFullVisitor');
         Route::get('eksternal/yajra/finished', 'yajra_finished')->name('yajraEksternalFinished');
+
+        Route::get('eksternal/pdf/{id}', 'pdf');
+        Route::get('eksternal/eksport/full/approve', 'export_full_approve')->name('eksternalExportFullApprove');
 
         Route::post('eksternal/store', 'store')->name('eksternalStore');
     });

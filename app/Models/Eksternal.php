@@ -15,7 +15,7 @@ class Eksternal extends Model
     protected $table = 'eksternals';
     protected $guarded = [];
 
-    public function user()
+    public function requestor()
     {
         return $this->belongsTo(User::class, 'requestor_id');
     }
