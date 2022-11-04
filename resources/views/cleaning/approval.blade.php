@@ -15,7 +15,6 @@
                     <thead>
                         <tr class="judul-table text-center">
                             <th>ID Permit</th>
-                            <th>Requestor</th>
                             <th>Date of Request</th>
                             <th>Date of Visit</th>
                             <th>Visitor</th>
@@ -27,7 +26,6 @@
                         @foreach($cleaning as $p)
                         <tr>
                             <td>{{ $p->cleaning_id }}</td>
-                            <td>{{ $p->createdby }}</td>
                             <td>{{ Carbon\Carbon::parse($p->created_at)->format('d-m-Y') }}</td>
                             <td>{{ Carbon\Carbon::parse($p->validity_from)->format('d-m-Y') }}</td>
                             <td>{{ $p->cleaning_name}}</td>

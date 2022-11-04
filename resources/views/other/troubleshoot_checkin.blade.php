@@ -34,7 +34,7 @@
                 @method('PUT')
                 @csrf
 				<span class="contact100-form-title">
-					CHECKIN FORM TROUBLESHOOT
+					Checkin Visitor
 				</span>
 
                 @if (count($errors) > 0)

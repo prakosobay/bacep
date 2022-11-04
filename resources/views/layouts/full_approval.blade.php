@@ -49,7 +49,7 @@
                             <a class="nav-link inter" href="{{ url('/table_barang')}}">Inventory</a>
                         </li>
                         <li class="nav-item mx-5">
-                            <a class="nav-link inter" href="{{ url('history/all')}}">Log Permit</a>
+                            <a class="nav-link inter" href="{{ url('history/all')}}">History Permit</a>
                         </li>
                     </ul>
                 @elsecan('isHead')
@@ -67,7 +67,7 @@
                         <a class="nav-link inter" href="{{ url('/table_barang')}}">Inventory</a>
                     </li>
                     <li class="nav-item mx-5">
-                        <a class="nav-link inter" href="{{ url('history/all')}}">Log Permit</a>
+                        <a class="nav-link inter" href="{{ url('history/all')}}">History Permit</a>
                     </li>
                 </ul>
                 @elsecan('isSecurity')
@@ -79,7 +79,7 @@
                             <a class="nav-link inter" href="{{ url('approval/all')}}">Approval</a>
                         </li>
                         <li class="nav-item mx-5">
-                            <a class="nav-link inter" href="{{ url('history/all')}}">Log Permit</a>
+                            <a class="nav-link inter" href="{{ url('history/all')}}">History Permit</a>
                         </li>
                     </ul>
                 @endcan
@@ -122,7 +122,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Option :</h6>
                         <a class="collapse-item" href="{{ url('full/internal')}}">Internal</a>
-                        <a class="collapse-item" href="{{ url('#')}}">Consumable</a>
+                        {{-- <a class="collapse-item" href="{{ url('#')}}">Consumable</a> --}}
                     </div>
                 </div>
             </li>

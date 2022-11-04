@@ -126,7 +126,6 @@ Route::middleware(['auth'])->group(function () {
     });
 
 
-
     //Dashboard Barang
     Route::get('table_barang', [HomeController::class, 'dashboard'])->name('table_barang');
 
@@ -342,7 +341,6 @@ Route::middleware(['auth'])->group(function () {
         Route::post('internal/approve/{id}', 'internal_approve');
         Route::post('internal/reject/{id}', 'internal_reject');
 
-        Route::get('internal-export-full-approve', 'export_full_approve')->name('internalExportFullApprove');
         Route::get('internal_penomoran', 'penomoran');
     });
 
@@ -386,6 +384,11 @@ Route::middleware(['auth'])->group(function () {
         Route::get('order/form', 'order_form');
         Route::post('order/approve/{id}', 'order_approval');
         Route::post('order/store', 'order_store');
+    });
+
+    //LogBook
+    Route::controller(LogBookConttroller::class)->group(function(){
+        Route::post('internal/export', 'internal_export')->name('internalExport');
     });
 
     // ALL

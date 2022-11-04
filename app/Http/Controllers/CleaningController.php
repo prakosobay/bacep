@@ -589,7 +589,6 @@ class CleaningController extends Controller
     public function cleaning_yajra_log()
     {
         $cleaning_log = DB::table('cleanings')
-            // ->join('cleanings', 'cleanings.cleaning_id', '=', 'cleaning_histories.cleaning_id')
             ->select('cleanings.validity_from', 'cleanings.cleaning_name', 'cleanings.cleaning_work')
             ->orderBy('cleaning_id', 'desc');
         return Datatables::of($cleaning_log)

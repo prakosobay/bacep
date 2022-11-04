@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{AccessRequestInternal, ChangeRequestInternal, Internal, InternalHistory, PenomoranCleaning, SurveyHistory};
+use App\Models\{AccessRequestInternal, ChangeRequestInternal, Internal, InternalHistory, PenomoranCleaning, User};
 use Illuminate\Support\Facades\{DB, Auth, Gate, Session};
 
 class HomeController extends Controller
@@ -80,10 +80,9 @@ class HomeController extends Controller
             } elseif ($type_approve == 'cleaning') {
                 $cleaning = DB::table('cleaning_histories')
                     ->join('cleanings', 'cleanings.cleaning_id', '=', 'cleaning_histories.cleaning_id')
-                    ->leftJoin('users', 'cleaning_histories.created_by', '=', 'users.id')
                     ->whereIn('cleaning_histories.role_to', $role_1)
                     ->where('cleaning_histories.aktif', '=', 1)
-                    ->select('cleanings.*', 'users.name as createdby')
+                    ->select('cleanings.*')
                     ->orderBy('cleaning_id', 'desc')
                     ->get();
                 return view('cleaning.approval', compact('cleaning'));
@@ -99,10 +98,9 @@ class HomeController extends Controller
             } elseif($type_approve == 'troubleshoot') {
                 $getTroubleshoot = DB::table('troubleshoot_bms')
                     ->join('troubleshoot_bm_histories', 'troubleshoot_bms.id', '=', 'troubleshoot_bm_histories.troubleshoot_bm_id')
-                    ->leftJoin('users', 'troubleshoot_bm_histories.created_by', '=', 'users.id')
                     ->whereIn('troubleshoot_bm_histories.role_to', $role_1)
                     ->where('troubleshoot_bm_histories.aktif', '=', true)
-                    ->select('troubleshoot_bm_histories.*', 'troubleshoot_bms.*', 'users.name as createdby')
+                    ->select('troubleshoot_bm_histories.*', 'troubleshoot_bms.*')
                     ->get();
                 return view('other.troubleshoot_approval', compact('getTroubleshoot'));
             } elseif($type_approve == 'internal'){
@@ -164,7 +162,8 @@ class HomeController extends Controller
             } elseif($type_full == 'troubleshoot') {
                 return view('other.troubleshoot_full_approval');
             } elseif($type_full == 'internal') {
-                return view('internal.fullApproval');
+                $users = User::where('slug', 'visitor')->get();
+                return view('internal.fullApproval', compact('users'));
             } elseif($type_full == 'eksternal') {
                 return view('eksternal.fullApproval');
             } else {
