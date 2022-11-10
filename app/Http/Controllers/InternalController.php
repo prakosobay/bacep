@@ -613,10 +613,10 @@ class InternalController extends Controller
     }
 
     // Export
-    public function export_full_approve()
-    {
-        return Excel::download(new InternalExport, 'Full Approve Internal.xlsx');
-    }
+    // public function export_full_approve()
+    // {
+    //     return Excel::download(new InternalExport, 'Full Approve Internal.xlsx');
+    // }
 
     // Yajra
     public function internal_yajra_history()

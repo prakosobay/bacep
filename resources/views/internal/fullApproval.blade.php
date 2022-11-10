@@ -6,39 +6,61 @@
     <div class="card shadow py-3">
         <h4 class="judul text-center">Full Approval Permit Internal</h4>
         <div class="card-header py-2">
-            {{-- <a type="button" class="btn btn-success mx-1 my-1" href="{{ route('internalExportFullApprove')}}">
-                Export Excel
-            </a> --}}
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Export PDF
+            </button>
+            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#excelModal">
                 Export Excel
             </button>
         </div>
 
-        <!-- Modal Export-->
+        <!-- Modal Export PDF-->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exportModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exportModalLabel">Choose Department</h5>
+                        <h5 class="modal-title" id="exportModalLabel">Select Date</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form action="{{ route('internalExport')}}" method="post">
+                    <form action="{{ route('internalLogBookPDF')}}" method="post">
                         @csrf
                         <div class="modal-body">
                             <div class="form-group">
-                                <label for="requestor" class="form-label">Choose Requestor</label>
-                                <select name="requestor" id="requestor" class="form-select">
-                                    @foreach ( $users as $user )
-                                        <option value="{{ $user->id }}">{{ $user->name }}</option>
-                                    @endforeach
-                                    {{-- <option value="bss">BSS</option>
-                                    <option value="erp">ERP</option>
-                                    <option value="ipcore">IP Core</option>
-                                    <option value="ipmedia">IP Media</option>
-                                    <option value="it">IT</option>
-                                    <option value="jds">JDS</option>
-                                    <option value="owen">Pak Owen</option> --}}
-                                </select>
+                                <label for="from" class="form-label">From :</label>
+                                <input type="date" class="form-control" name="from">
+                            </div>
+                            <div>
+                                <label for="to" class="form-label">To :</label>
+                                <input type="date" class="form-control" name="to">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        {{-- Modal Export Excel --}}
+        <div class="modal fade 2" id="excelModal" tabindex="-1" aria-labelledby="excelLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="excelLabel">Select Date</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="{{ route('internalLogbookExcel')}}" method="post">
+                        @csrf
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="from" class="form-label">From :</label>
+                                <input type="date" class="form-control" name="from">
+                            </div>
+                            <div>
+                                <label for="to" class="form-label">To :</label>
+                                <input type="date" class="form-control" name="to">
                             </div>
                         </div>
                         <div class="modal-footer">

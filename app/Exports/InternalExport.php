@@ -3,45 +3,57 @@
 namespace App\Exports;
 
 use App\Models\{Internal, InternalVisitor};
-use Maatwebsite\Excel\Concerns\Exportable;
-use Maatwebsite\Excel\Concerns\FromCollection;
-use Maatwebsite\Excel\Concerns\WithHeadings;
-use Maatwebsite\Excel\Concerns\WithMapping;
-use Maatwebsite\Excel\Concerns\WithStyles;
+use Illuminate\Contracts\View\View;
+use Maatwebsite\Excel\Concerns\{FromQuery, Exportable, FromView, WithStyles};
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class InternalExport implements FromCollection, WithHeadings, WithStyles
+class InternalExport implements FromView, WithStyles
 {
     /**
     * @return \Illuminate\Support\Collection
     */
 
-    public function collection()
+    use Exportable;
+
+    public function __construct(string $start, string $end)
     {
-        return InternalVisitor::all();
+        $this->start = $start;
+        $this->end = $end;
     }
 
-    public function headings(): array
+    // public function query()
+    // {
+    //     return InternalVisitor::query()->whereBetween('created_at', [$this->start, $this->end]);
+    // }
+
+    public function view(): View
     {
-        return [
-            'No.',
-            'Internal_id',
-            'Requestor Dept',
-            'Visitor Name',
-            'Visitor Company',
-            'Visitor Department',
-            'Visitor Responsibility',
-            'Visitor Number ID',
-            'Visitor Phone',
-            'Visitor Checkin',
-            'Photo Checkin',
-            'Visitor Checkout',
-            'Photo Checkout',
-            'done',
-            'created_at',
-            'updated_at',
-        ];
+        return view('exports.internal', [
+            'internals' => InternalVisitor::with('internal')->whereBetween('created_at', [$this->start, $this->end])->where('is_done', 1)->get()
+        ]);
     }
+
+    // public function headings(): array
+    // {
+    //     return [
+    //         'No.',
+    //         'Internal_id',
+    //         'Requestor Dept',
+    //         'Visitor Name',
+    //         'Visitor Company',
+    //         'Visitor Department',
+    //         'Visitor Responsibility',
+    //         'Visitor Number ID',
+    //         'Visitor Phone',
+    //         'Visitor Checkin',
+    //         'Photo Checkin',
+    //         'Visitor Checkout',
+    //         'Photo Checkout',
+    //         'done',
+    //         'created_at',
+    //         'updated_at',
+    //     ];
+    // }
 
     public function styles(Worksheet $sheet)
     {

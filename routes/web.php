@@ -387,8 +387,10 @@ Route::middleware(['auth'])->group(function () {
     });
 
     //LogBook
-    Route::controller(LogBookConttroller::class)->group(function(){
+    Route::controller(LogBookController::class)->group(function(){
         Route::post('internal/export', 'internal_export')->name('internalExport');
+        Route::post('logbook/internal/pdf', 'internal_pdf')->name('internalLogBookPDF');
+        Route::post('logbook/internal/excel', 'internal_excel')->name('internalLogbookExcel');
     });
 
     // ALL

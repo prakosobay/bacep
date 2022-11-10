@@ -14,7 +14,7 @@ class Internal extends Model
 
     public function visitors()
     {
-        return $this->hasMany(InternalVisitor::class);
+        return $this->hasMany(InternalVisitor::class, 'internal_id');
     }
 
     public function histories()
@@ -24,17 +24,17 @@ class Internal extends Model
 
     public function details()
     {
-        return $this->hasMany(InternalDetail::class);
+        return $this->hasMany(InternalDetail::class, 'internal_id');
     }
 
     public function risks()
     {
-        return $this->hasMany(InternalRisk::class);
+        return $this->hasMany(InternalRisk::class, 'internal_id');
     }
 
     public function full()
     {
-        return $this->hasOne(InternalFull::class);
+        return $this->hasOne(InternalFull::class, 'internal_id');
     }
 
     public function card()
