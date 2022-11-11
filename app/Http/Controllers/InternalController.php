@@ -103,8 +103,8 @@ class InternalController extends Controller
 
     public function penomoran()
     {
-        $ar = AccessRequestInternal::all();
-        $cr = ChangeRequestInternal::all();
+        $ar = AccessRequestInternal::with('internal')->get();
+        $cr = ChangeRequestInternal::with('internal')->get();
         // $join = DB::table('internals')
         // ->leftJoin('access_request_internals', 'internals.id', '=', 'access_request_internals.internal_id')
         // ->rightJoin('change_request_internals', 'internals.id', '=', 'change_request_internals.internal_id')
@@ -560,12 +560,18 @@ class InternalController extends Controller
 
             if($permit == 1) {
 
-                if($lastAR == null) {
+                if(($lastAR == null) && ($lastCR == null)) {
 
                     $ar = 1;
                     $cr = 1;
 
-                } else {
+                } elseif($lastCR == null){
+
+                    $ar = $lastAR->number + 1;
+                    $cr = 1;
+
+                }
+                else {
 
                     $ar = $lastAR->number + 1;
                     $cr = $lastCR->number + 1;

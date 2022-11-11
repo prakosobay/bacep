@@ -16,17 +16,19 @@
                         <table class="table table-striped table-bordered" id="ar" width="100%" cellspacing="0">
                             <thead>
                                 <tr class="judul-table text-center">
+                                    <th>Work</th>
+                                    <th>Requestor</th>
                                     <th>AR</th>
                                     <th>Updated</th>
-                                    <th>Requestor</th>
                                 </tr>
                             </thead>
                             <tbody class="isi-table text-center">
                                 @foreach($ar as $p)
                                     <tr>
+                                        <td>{{ $p->internal->work }}</td>
+                                        <td>{{ $p->internal->requestor->name }}</td>
                                         <td>{{ $p->number }}/{{ $p->month }}/{{ $p->year }}</td>
                                         <td>{{ $p->updated_at }}</td>
-                                        <td>{{ $p->internal->requestor->name }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -41,17 +43,19 @@
                         <table class="table table-striped table-bordered" id="cr" width="100%" cellspacing="0">
                             <thead>
                                 <tr class="judul-table text-center">
+                                    <th>Work</th>
+                                    <th>Requestor</th>
                                     <th>CR</th>
                                     <th>Updated</th>
-                                    <th>Requestor</th>
                                 </tr>
                             </thead>
                             <tbody class="isi-table text-center">
                                 @foreach($cr as $o)
                                     <tr>
+                                        <td>{{ $o->internal->work }}</td>
+                                        <td>{{ $p->internal->requestor->name }}</td>
                                         <td>{{ $o->number }}/{{ $o->month }}/{{ $o->year }}</td>
                                         <td>{{ $o->updated_at }}</td>
-                                        <td>{{ $p->internal->requestor->name }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>

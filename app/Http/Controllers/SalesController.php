@@ -84,7 +84,7 @@ class SalesController extends Controller
                         $ar = 1;
                     }
                 }
-                // dd($ar);
+
                 AccessRequestInternal::firstOrCreate([
                     'number' => $ar,
                     'month' => date('m'),

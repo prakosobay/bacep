@@ -37,7 +37,13 @@
                     <a class="nav-link inter" href="#about">About Us</a>
                 </li>
                 <li class="nav-item mx-5">
-                    <a class="nav-link inter" href="{{url('logall')}}">Log Permit</a>
+                    @can('isInternal')
+                        <a class="nav-link inter" href="{{ route('dashboardInternal', auth()->user()->department) }}">Log Permit</a>
+                    @elsecan('isEksternal')
+                        <a class="nav-link inter" href="{{ route('dashboardEksternal', auth()->user()->company) }}">Log Permit</a>
+                    @elsecan('isSurvey')
+                        <a class="nav-link inter" href="{{ route('dashboardInternal', auth()->user()->department) }}">Log Permit</a>
+                    @endcan
                 </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
@@ -105,7 +111,6 @@
                     </div>
                 </div>
             </div>
-
 
         @elsecan('isSurvey')
             <div class="container-fluid" id="banner">
