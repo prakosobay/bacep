@@ -103,14 +103,12 @@ class InternalController extends Controller
 
     public function penomoran()
     {
-        $ar = AccessRequestInternal::with('internal')->get();
-        $cr = ChangeRequestInternal::with('internal')->get();
-        // $join = DB::table('internals')
-        // ->leftJoin('access_request_internals', 'internals.id', '=', 'access_request_internals.internal_id')
-        // ->rightJoin('change_request_internals', 'internals.id', '=', 'change_request_internals.internal_id')
-        // ->select('internals.id', 'access_request_internals.*', 'change_request_internals.*')
-        // ->get();
-        // dd($join);
+        $ar = AccessRequestInternal::with(['internal' => function($query){
+            $query->orderBy('updated_at', 'asc');
+        }])->get();
+        $cr = ChangeRequestInternal::with(['internal' => function($query){
+            $query->orderBy('updated_at', 'asc');
+        }])->get();
         return view('internal.penomoran', compact('ar', 'cr'));
     }
 
@@ -283,7 +281,7 @@ class InternalController extends Controller
     // pdf
     public function internal_pdf($id)
     {
-        $getForm = Internal::findOrFail($id);
+        $getForm = Internal::with('entry')->where('id', $id)->first();
         $getLastHistory = InternalHistory::where('internal_id', $id)->where('aktif', 1)->first();
         $getLastHistory->update(['pdf' => true]);
 
@@ -446,7 +444,7 @@ class InternalController extends Controller
                     ]);
 
                     // Get permit yang di reject & kirim notif email
-                    // Mail::to($getRequestor)->send(new NotifInternalReject($getForm));
+                    Mail::to($getRequestor)->send(new NotifInternalReject($getForm));
 
                     DB::commit();
 

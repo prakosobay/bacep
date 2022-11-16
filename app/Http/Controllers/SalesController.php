@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\NotifSalesForm;
-use App\Models\{AccessRequestInternal, ChangeRequestInternal, Internal, InternalFull, InternalHistory, InternalVisitor, MasterCard};
+use App\Mail\{NotifSalesForm, NotifInternalFull, NotifInternalReject};
+use App\Models\{AccessRequestInternal, ChangeRequestInternal, EntryRack, Internal, InternalFull, InternalHistory, InternalVisitor, MasterCard, Entry};
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\{Crypt, DB, Mail, Storage, Gate};
 use Yajra\Datatables\Datatables;
@@ -128,6 +128,25 @@ class SalesController extends Controller
                 'isSurvey' => true,
             ]);
 
+            Entry::create([
+                'internal_id' => $insertForm->id,
+                'eksternal_id' => '',
+                'dc' => true,
+                'mmr1' => true,
+                'mmr2' => true,
+                'cctv' => true,
+                'genset' => true,
+                'panel' => true,
+                'baterai' => true,
+                'trafo' => true,
+                'office1' => true,
+                'fss' => true,
+                'ups' => true,
+                'yard' => true,
+                'parking' => true,
+                'lain' => true,
+            ]);
+
             $arrayVisitor = [];
             foreach ($getForm['name'] as $k => $v) {
                 $insertArray = [];
@@ -155,11 +174,11 @@ class SalesController extends Controller
                 ->select('users.name as requestor', 'internals.id', 'internals.visit', 'internals.created_at as created', 'internals.work', 'internals.leave')
                 ->where('internals.id', $insertForm->id)
                 ->first();
-            // foreach ([
-            //     'bayu.prakoso@balitower.co.id',
-            // ] as $recipient) {
-            //     Mail::to($recipient)->send(new NotifSalesForm($notif_email));
-            // }
+            foreach ([
+                'bayu.prakoso@balitower.co.id',
+            ] as $recipient) {
+                Mail::to($recipient)->send(new NotifSalesForm($notif_email));
+            }
 
             InternalHistory::create([
                 'internal_id' => $insertForm->id,
@@ -190,8 +209,7 @@ class SalesController extends Controller
                 ->get();
 
         $nomorAR = AccessRequestInternal::where('internal_id', $id)->first();
-        $nomorCR = ChangeRequestInternal::where('internal_id', $id)->first();
-        $pdf = PDF::loadview('sales.pdf', compact('getForm', 'getLastHistory', 'getHistory', 'nomorAR', 'nomorCR'))->setPaper('a4', 'portrait')->setWarnings(false);
+        $pdf = PDF::loadview('sales.pdf', compact('getForm', 'getLastHistory', 'getHistory', 'nomorAR'))->setPaper('a4', 'portrait')->setWarnings(false);
         return $pdf->stream();
     }
 
@@ -227,33 +245,33 @@ class SalesController extends Controller
                 // Pergantian  role tiap permit & send email notif
                 $role_to = '';
                 if ($last_update->role_to == 'review') {
-                    // foreach ([
-                    //     'bayu.prakoso@balitower.co.id',
-                    // ] as $recipient) {
-                    //     Mail::to($recipient)->send(new NotifInternalForm($notif_email));
-                    // }
+                    foreach ([
+                        'bayu.prakoso@balitower.co.id',
+                    ] as $recipient) {
+                        Mail::to($recipient)->send(new NotifSalesForm($notif_email));
+                    }
                     $role_to = 'security';
                 } elseif ($last_update->role_to == 'security') {
-                    // foreach ([
-                    //     'bayu.prakoso@balitower.co.id',
-                    // ] as $recipient) {
-                    //     Mail::to($recipient)->send(new NotifInternalForm($notif_email));
-                    // }
+                    foreach ([
+                        'bayu.prakoso@balitower.co.id',
+                    ] as $recipient) {
+                        Mail::to($recipient)->send(new NotifSalesForm($notif_email));
+                    }
                     $role_to = 'head';
                 } elseif ($last_update->role_to = 'head') {
                     $full = Internal::find($id);
-                    // foreach ([
-                    //     'bayu.prakoso@balitower.co.id',
-                    // ] as $recipient) {
-                    //     Mail::to($recipient)->send(new NotifInternalFull($notif_email));
-                    // }
+                    foreach ([
+                        'bayu.prakoso@balitower.co.id',
+                    ] as $recipient) {
+                        Mail::to($recipient)->send(new NotifInternalFull($notif_email));
+                    }
                     $role_to = 'all';
 
                     $full = Internal::findOrFail($id);
                     InternalFull::create([
                         'internal_id' => $full->id,
                         // 'link' => ("https://dcops.balifiber.id/internal/pdf/$full->id"),
-                        'link' => ("http://localhost:8000/internal/pdf/$full->id"),
+                        'link' => ("http://localhost:8000/sales/pdf/$full->id"),
                         'note' => null,
                         'status' => 'Full Approved',
                     ]);
@@ -316,10 +334,10 @@ class SalesController extends Controller
                         'pdf' => false,
                     ]);
 
-                    // Get permit yang di reject & kirim notif email
-                    // Mail::to($getRequestor)->send(new NotifInternalReject($getForm));
-
                     DB::commit();
+
+                    // Get permit yang di reject & kirim notif email
+                    Mail::to($getRequestor)->send(new NotifInternalReject($getForm));
 
                     alert()->success('Rejected', 'Permit has been rejected!');
                     return back()->with('success', 'Rejected!');
@@ -363,7 +381,7 @@ class SalesController extends Controller
             ->editColumn('visit', function ($full) {
                 return $full->visit ? with(new Carbon($full->visit))->format('d/m/Y') : '';
             })
-            ->addColumn('action', 'internal.actionLink')
+            ->addColumn('action', 'sales.actionLink')
             ->make(true);
     }
 

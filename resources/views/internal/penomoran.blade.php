@@ -53,7 +53,7 @@
                                 @foreach($cr as $o)
                                     <tr>
                                         <td>{{ $o->internal->work }}</td>
-                                        <td>{{ $p->internal->requestor->name }}</td>
+                                        <td>{{ $o->internal->requestor->name }}</td>
                                         <td>{{ $o->number }}/{{ $o->month }}/{{ $o->year }}</td>
                                         <td>{{ $o->updated_at }}</td>
                                     </tr>
