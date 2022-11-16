@@ -14,6 +14,8 @@ class InternalExport implements FromView, WithStyles
     */
 
     use Exportable;
+    public $start;
+    public $end;
 
     public function __construct(string $start, string $end)
     {
@@ -29,7 +31,7 @@ class InternalExport implements FromView, WithStyles
     public function view(): View
     {
         return view('exports.internal', [
-            'internals' => InternalVisitor::with('internal')->whereBetween('created_at', [$this->start, $this->end])->where('is_done', 1)->get()
+            'internals' => InternalVisitor::with('internal')->whereBetween('updated_at', [$this->start, $this->end])->where('is_done', true)->get()
         ]);
     }
 

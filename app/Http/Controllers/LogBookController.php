@@ -23,11 +23,9 @@ class LogBookController extends Controller
         $start = Carbon::parse($date['from'])->toDateTimeString();
         $end = Carbon::parse($date['to'])->toDateTimeString();
 
-        $internals = InternalVisitor::with('internal')->whereBetween('created_at', [$start, $end])->where('is_done', true)->get();
-        // return view('internal.logbook', compact('internals'));
+        $internals = InternalVisitor::with('internal')->whereBetween('updated_at', [$start, $end])->where('is_done', true)->get();
         $pdf = PDF::loadview('internal.logbook', compact('internals'))->setPaper('a4', 'landscape')->setWarnings(false);
         return $pdf->stream();
-        // dd($internals);
     }
 
     public function internal_excel(Request $request)
@@ -37,9 +35,8 @@ class LogBookController extends Controller
             'to' => ['required', 'date'],
         ]);
 
-        $date = $request->all();
-        $start = Carbon::parse($date['from'])->toDateTimeString();
-        $end = Carbon::parse($date['to'])->toDateTimeString();
+        $start = Carbon::parse($request->from)->toDateTimeString();
+        $end = Carbon::parse($request->to)->toDateTimeString();
 
         return (new InternalExport($start, $end))->download('Internal Finished.xlsx');
     }
