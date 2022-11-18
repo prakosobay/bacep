@@ -367,16 +367,27 @@ Route::middleware(['auth'])->group(function () {
     Route::controller(EksternalController::class)->group(function(){
         Route::get('dashboard/eksternal', 'dashboard')->name('dashboardEksternal');
         Route::get('eksternal/show/form', 'show_form')->name('eksternalShowForm');
+        Route::get('eksternal/finished/show', 'finished_show')->name('eksternalFinishedShow');
 
         Route::get('eksternal/yajra/history', 'yajra_history')->name('eksternalYajraHistory');
         Route::get('eksternal/yajra/full/approval', 'yajra_full_approval')->name('eksternalYajraFullApproval');
-        Route::get('eksternal/yarja/full/visitor', 'yajra_full_visitor')->name('eksternalYajraFullVisitor');
-        Route::get('eksternal/yajra/finished', 'yajra_finished')->name('yajraEksternalFinished');
+        Route::get('eksternal/yajra/full/visitor/{company}', 'yajra_full_visitor')->name('eksternalYajraFullVisitor');
+        Route::get('eksternal/yajra/finished/{company}', 'yajra_full_finished');
 
         Route::get('eksternal/pdf/{id}', 'pdf');
         Route::get('eksternal/eksport/full/approve', 'export_full_approve')->name('eksternalExportFullApprove');
 
+        Route::get('eksternal/checkin/form/{id}', 'checkin_form')->name('checkinEksternal');
+        Route::get('eksternal/checkout/form/{id}', 'checkout_form')->name('checkoutEksternal');
+        Route::put('eksternal/cancel/{id}', 'cancel_update')->name('cancelCheckinEksternal');
+        Route::put('eksternal/checkin/update/{id}', 'checkin_update')->name('eksternalCheckinUpdate');
+        Route::put('eksternal/checkout/update/{id}', 'checkout_update')->name('eksternalCheckoutUpdate');
+
         Route::post('eksternal/store', 'store')->name('eksternalStore');
+        Route::post('eksternal/reject/{id}', 'reject')->name('eksternalReject');
+        Route::post('eksternal/approve/{id}', 'approve')->name('eksternalApprove');
+
+        Route::get('eksternal_penomoran', 'penomoran_eksternal');
     });
 
     // Order Form
@@ -391,6 +402,8 @@ Route::middleware(['auth'])->group(function () {
         Route::post('internal/export', 'internal_export')->name('internalExport');
         Route::post('logbook/internal/pdf', 'internal_pdf')->name('internalLogBookPDF');
         Route::post('logbook/internal/excel', 'internal_excel')->name('internalLogbookExcel');
+        Route::post('logbook/eksternal/pdf', 'eksternal_pdf')->name('eksternalLogBookPDF');
+        Route::post('logbook/eksternal/excel', 'eksternal_excel')->name('eksternalLogBookExcel');
     });
 
     // ALL

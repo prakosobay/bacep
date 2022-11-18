@@ -45,7 +45,7 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <form action="{{ url('eksternal/reject', $p->id )}}" method="post">
+                                        <form action="{{ route('eksternalReject', $p->id )}}" method="post">
                                             @csrf
                                             <div class="form-group">
                                                 <label for="no" class="form-label">No ID :</label>
@@ -76,7 +76,7 @@
                             </td>
                             <td>
                                 @can('isApproval')
-                                    <form action="{{ url('eksternal/approve', $p->id)}}" method="post">
+                                    <form action="{{ route('eksternalApprove', $p->id)}}" method="post">
                                         @csrf
                                         <button id="ok" class="btn btn-success btn-sm my-1 mx-1">Approve</button>
                                     </form>
@@ -84,7 +84,7 @@
                                     <button class="btn btn-danger btn-sm my-1 mx-1" data-bs-toggle="modal" data-bs-target="#reject{{ $p->id }}" data-id="{{ $p->id }}">Reject</button>
 
                                 @elsecan('isHead')
-                                    <form action="{{ url('eksternal/approve', $p->id)}}" method="post">
+                                    <form action="{{ route('eksternalApprove', $p->id)}}" method="post">
                                         @csrf
                                         <button id="ok" class="btn btn-success btn-sm my-1 mx-1">Approve</button>
                                     </form>
@@ -92,7 +92,7 @@
                                     <button class="btn btn-danger btn-sm my-1 mx-1" data-bs-toggle="modal" data-bs-target="#reject{{ $p->id }}" data-id="{{ $p->id }}">Reject</button>
 
                                 @elsecan('isSecurity')
-                                    <form action="{{ url('eksternal/approve', $p->id)}}" method="post">
+                                    <form action="{{ route('eksternalApprove', $p->id)}}" method="post">
                                         @csrf
                                         <button id="ok" class="btn btn-success btn-sm my-1 mx-1">Approve</button>
                                     </form>

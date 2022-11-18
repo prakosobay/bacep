@@ -98,6 +98,20 @@ return [
             'visibility' => 'public',
         ],
 
+        'eksternalCheckin' => [
+            'driver' => 'local',
+            'root' => storage_path('app\public\eksternal\checkin'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+        ],
+
+        'eksternalCheckout' => [
+            'driver' => 'local',
+            'root' => storage_path('app\public\eksternal\checkout'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),

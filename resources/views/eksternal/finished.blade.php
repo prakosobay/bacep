@@ -4,21 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Log Permit Eksternal</title>
+    <title>Log Permit</title>
 
     {{-- bootstrap 5 --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
     {{-- bootstrap datatable --}}
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.css"/>
-    <link rel="stylesheet" href="{{asset('css/log_visitor.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('css/new_approve.css')}}" type="text/css">
 
     {{-- Jquery --}}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
 </head>
 <body>
 
-    {{-- Navbar --}}
+    {{-- navbar --}}
     <nav class="navbar sticky-top navbar-expand-lg navbar-dark navbar-bg">
         <div class="container">
             <a class="navbar-brand" href="#">
@@ -58,20 +59,14 @@
         <!-- DataTales Example -->
         <div class="card shadow mb-1">
             <div class="card-header py-3">
-                <h4 class="judul text-center">{{ $company }} Log Permit</h4>
+                <h4 class="judul text-center">{{$company}} Finished Permit </h4>
             </div>
 
             <div class="container-fluid">
                 @if (session('success'))
-                    <div class="alert alert-success mx-2 my-2 text-center">
-                        {{ session('success') }}
-                    </div>
-                @endif
-
-                @if (session('failed'))
-                    <div class="alert alert-danger mx-2 my-2 text-center">
-                        {{ session('failed') }}
-                    </div>
+                <div class="alert alert-success mx-2 my-2 text-center">
+                    {{ session('success') }}
+                </div>
                 @endif
             </div>
 
@@ -79,15 +74,15 @@
                 <div class="tab-content" id="myTabContent">
                     <div class="container-fluid">
                         <div class="card-body">
-                            <button class="btn btn-primary btn-sm mx-1 my-2" data-bs-toggle="modal" data-bs-target="#eksternalModal">Create Form</button>
+                            <button class="btn btn-primary btn-sm mx-1 my-2" data-bs-toggle="modal" data-bs-target="#ipcoreModal">Create Form</button>
                             <a type="button" class="btn btn-sm btn-info mx-1 my-2" href="{{ route('dashboardEksternal', $company )}}">Log Form</a>
                             <a type="button" class="btn btn-sm btn-success mx-1 my-2" href="{{ route('eksternalFinishedShow', $company)}}">Finished Permit</a>
                             {{-- <a type="button" class="btn btn-sm btn-secondary mx-1 my-2" href="{{ route('lastInternal', $company )}}">Last Requested Form</a> --}}
                         </div>
                     </div>
 
-                    {{-- Modal --}}
-                    <div class="modal fade" id="eksternalModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    {{-- modal --}}
+                    <div class="modal fade" id="ipcoreModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -108,12 +103,13 @@
                         </div>
                     </div>
 
-                    {{-- Table --}}
+                    {{-- table --}}
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-striped table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                     <tr class="judul-table text-center">
+                                        {{-- <th>No.</th> --}}
                                         <th>Purpose of Work</th>
                                         <th>Requestor</th>
                                         <th>Date of Visit</th>
@@ -122,10 +118,21 @@
                                         <th>Checkin</th>
                                         <th>Checkout</th>
                                         <th>Card Number</th>
-                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody class="isi-table text-center">
+                                    {{-- @foreach ($getPermit as $permit)
+                                        <tr>
+                                            <td>{{ $i++ }}</td>
+                                            <td>{{ $permit->internal->work }}</td>
+                                            <td>{{ $permit->internal->req_name }}</td>
+                                            <td>{{ Carbon\Carbon::parse($permit->internal->visit)->format('d-m-Y') }}</td>
+                                            <td>{{ Carbon\Carbon::parse($permit->internal->leave)->format('d-m-Y') }}</td>
+                                            <td>{{ $permit->name }}</td>
+                                            <td>{{ $permit->checkin }}</td>
+                                            <td>{{ $permit->checkout }}</td>
+                                        </tr>
+                                    @endforeach --}}
                                 </tbody>
                             </table>
                         </div>
@@ -163,7 +170,6 @@
     </div>
 
     {{-- datatable --}}
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.js"></script>
@@ -173,17 +179,16 @@
             $('#dataTable').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "{{ url('eksternal/yajra/full/visitor')}}"+'/'+ "{{auth()->user()->company}}",
+                ajax: "{{ url('eksternal/yajra/finished')}}"+'/'+ "{{auth()->user()->company}}",
                 columns: [
                     { data: 'work', name: 'work' },
                     { data: 'requestor', name: 'requestor' },
                     { data: 'visit', name: 'visit' },
                     { data: 'leave', name: 'leave' },
-                    { data: 'visitor', name: 'visitor' },
-                    { data: 'checkin', name: 'checkin' },
-                    { data: 'checkout', name: 'checkout' },
+                    { data: 'name', name: 'internal_visitors.name' },
+                    { data: 'checkin', name: 'internal_visitors.checkin' },
+                    { data: 'checkout', name: 'internal_visitors.checkout' },
                     { data: 'card_number', name: 'card_number' },
-                    { data: 'action', name: 'action', orderable: false, searchable: false }
                 ]
             });
         });

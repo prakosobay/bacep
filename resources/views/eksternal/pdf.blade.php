@@ -191,12 +191,12 @@
                 @if($nomorAR)
                     <tr >
                         <td width="150px">Access Request Number: </td>
-                        <td >: AR/IC/{{ $nomorAR->number }}/{{ $nomorAR->month }}/{{ $nomorAR->year}} </td>
+                        <td >: AR/EC/{{ $nomorAR->number }}/{{ $nomorAR->month }}/{{ $nomorAR->year}} </td>
                     </tr>
                 @else
                     <tr >
                         <td width="150px">Access Request Number: </td>
-                        <td >: {{ $getForm->id }} AR/IC/</td>
+                        <td >: {{ $getForm->id }} AR/EC/</td>
                     </tr>
                 @endif
                 <tr >
@@ -462,9 +462,9 @@
             </table>
 
             @if($nomorCR)
-                <p class="cr">Change Request Number : CR/IC/{{ $nomorCR->number }}/{{ $nomorCR->month }}/{{ $nomorCR->year}}</p>
+                <p class="cr">Change Request Number : CR/EC/{{ $nomorCR->number }}/{{ $nomorCR->month }}/{{ $nomorCR->year}}</p>
             @else
-                <p class="cr">Change Request Number : CR/IC/</p>
+                <p class="cr">Change Request Number : CR/EC/</p>
             @endif
 
             {{-- Background & Description --}}

@@ -97,7 +97,6 @@ class InternalController extends Controller
                 ->where('internals.id', $getVisitor->internal_id)
                 ->select('m_cards.number as card_number')
                 ->first();
-                // dd($getCard);
         return view('internal.checkoutForm', compact('getVisitor', 'getCard'));
     }
 
@@ -466,7 +465,6 @@ class InternalController extends Controller
     // Update Checkin
     public function internal_checkin_update(Request $request, $id)
     {
-        // dd($request->all());
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'phone' => ['required', 'string', 'max:255'],
@@ -615,12 +613,6 @@ class InternalController extends Controller
         InternalVisitor::findOrFail(Crypt::decrypt($id))->delete();
         return redirect()->route('dashboardInternal', auth()->user()->department)->with('success', 'Cancelled');
     }
-
-    // Export
-    // public function export_full_approve()
-    // {
-    //     return Excel::download(new InternalExport, 'Full Approve Internal.xlsx');
-    // }
 
     // Yajra
     public function internal_yajra_history()

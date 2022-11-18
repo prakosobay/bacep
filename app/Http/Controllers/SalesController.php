@@ -259,7 +259,6 @@ class SalesController extends Controller
                     }
                     $role_to = 'head';
                 } elseif ($last_update->role_to = 'head') {
-                    $full = Internal::find($id);
                     foreach ([
                         'bayu.prakoso@balitower.co.id',
                     ] as $recipient) {
@@ -267,11 +266,10 @@ class SalesController extends Controller
                     }
                     $role_to = 'all';
 
-                    $full = Internal::findOrFail($id);
                     InternalFull::create([
-                        'internal_id' => $full->id,
-                        // 'link' => ("https://dcops.balifiber.id/internal/pdf/$full->id"),
-                        'link' => ("http://localhost:8000/sales/pdf/$full->id"),
+                        'internal_id' => $id,
+                        // 'link' => ("https://dcops.balifiber.id/sales/pdf/$id"),
+                        'link' => ("http://localhost:8000/sales/pdf/$id"),
                         'note' => null,
                         'status' => 'Full Approved',
                     ]);

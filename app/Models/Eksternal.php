@@ -59,4 +59,14 @@ class Eksternal extends Model
     {
         return $this->hasOne(Entry::class, 'eksternal_id');
     }
+
+    public function ar_eksternal()
+    {
+        return $this->hasOne(AccessRequestEksternal::class, 'eksternal_id');
+    }
+
+    public function cr_eksternal()
+    {
+        return $this->hasOne(ChangeRequestEksternal::class, 'eksternal_id');
+    }
 }
