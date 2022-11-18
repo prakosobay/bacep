@@ -7,5 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class VendorFull extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
+
+    protected $table = 'vendor_fulls';
+    protected $primaryKey = 'id';
+    protected $guarded = [];
 }
