@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\InternalExport;
+use App\Http\Requests\StoreInternalRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\{DB, Auth, Gate, Mail, Session, Storage, Crypt};
 use Yajra\Datatables\Datatables;
@@ -20,7 +21,6 @@ class InternalController extends Controller
     // Show Pages
     public function internal_form()
     {
-
         $getCompany = auth()->user()->company;
         $getID = MasterCompany::where('name', $getCompany)->first();
         $risks = MasterRisks::all();
@@ -119,20 +119,9 @@ class InternalController extends Controller
     }
 
     // Submit
-    public function internal_create(Request $request)
+    public function internal_create(StoreInternalRequest $request)
     {
         $getForm = $request->all();
-        // dd($getForm);
-        $request->validate([
-            'work' => ['required', 'string', 'max:255'],
-            'visit' => ['required', 'after:yesterday'],
-            'leave' => ['required', 'after_or_equal:visit'],
-            'background' => ['required', 'string', 'max:255'],
-            'desc' => ['required', 'string', 'max:255'],
-            'rollback' => ['nullable', 'string', 'max:255'],
-            'testing' => ['nullable', 'string', 'max:255'],
-            'rack' => ['required'],
-        ]);
 
         DB::beginTransaction();
 

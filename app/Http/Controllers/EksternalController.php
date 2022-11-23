@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreInternalRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\{DB, Auth, Gate, Mail, Session, Storage, Crypt};
 use Yajra\Datatables\Datatables;
@@ -78,20 +79,8 @@ class EksternalController extends Controller
 
 
     //store data
-    public function store(Request $request)
+    public function store(StoreInternalRequest $request)
     {
-        $request->validate([
-            'work' => ['required', 'string', 'max:255'],
-            'visit' => ['required', 'date'],
-            'leave' => ['required', 'date', 'after_or_equal:visit'],
-            'background' => ['required', 'string', 'max:255'],
-            'desc' => ['required', 'string'],
-            'testing' => ['nullable', 'string', 'max:255'],
-            'rollback' => ['nullable', 'string', 'max:255'],
-            'reject_note' => ['nullable',  'string', 'max:255'],
-            'rack' => ['required'],
-        ]);
-
         $getForm = $request->all();
         $company = auth()->user()->company;
         // dd($getForm);
