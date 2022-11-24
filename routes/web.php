@@ -132,6 +132,16 @@ Route::middleware(['auth'])->group(function () {
     Route::get('table_barang', [HomeController::class, 'dashboard'])->name('table_barang');
 
 
+    // Dashboard Access Card
+    Route::controller(MasterDepartmentCardController::class)->group(function() {
+        Route::get('department/card/show', 'show')->name('departmentCardShow');
+        Route::get('department/card/yajra', 'yajra');
+        Route::post('department/card/store', 'store')->name('departmentCardStore');
+        Route::put('department/card/update/{id}', 'update')->name('departmentCardUpdate');
+        Route::post('department/card/delete/{id}', 'delete')->name('departmentCardDelete');
+    });
+
+
     //Barang Consume
     Route::controller(ConsumController::class)->group(function () {
         Route::get('consum-table-show', 'table_show')->name('consumTable');
