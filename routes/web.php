@@ -133,12 +133,21 @@ Route::middleware(['auth'])->group(function () {
 
 
     // Dashboard Access Card
-    Route::controller(MasterDepartmentCardController::class)->group(function() {
-        Route::get('department/card/show', 'show')->name('departmentCardShow');
-        Route::get('department/card/yajra', 'yajra');
-        Route::post('department/card/store', 'store')->name('departmentCardStore');
-        Route::put('department/card/update/{id}', 'update')->name('departmentCardUpdate');
-        Route::post('department/card/delete/{id}', 'delete')->name('departmentCardDelete');
+    Route::middleware(['access'])->group(function(){
+
+        Route::controller(MasterDepartmentCardController::class)->group(function() {
+            Route::get('department/card/show', 'show')->name('departmentCardShow');
+            Route::get('department/card/yajra', 'yajra');
+            Route::post('department/card/store', 'store')->name('departmentCardStore');
+            Route::put('department/card/update/{id}', 'update')->name('departmentCardUpdate');
+            Route::post('department/card/delete/{id}', 'delete')->name('departmentCardDelete');
+        });
+
+        Route::controller(MasterEmployeeController::class)->group(function(){
+            Route::get('employee/show', 'show')->name('employeeShow');
+            Route::get('employee/yajra', 'yajra');
+            Route::post('employee/store', 'store')->name('employeeStore');
+        });
     });
 
 

@@ -15,10 +15,7 @@ class EmployeeCard extends Model
         'number_card',
         'department_card_id',
         'deleted_card',
-        'is_employee',
         'is_intern',
-        'created_by',
-        'updated_by',
     ];
 
     protected $table = 'employee_cards';

@@ -45,6 +45,15 @@ class AuthServiceProvider extends ServiceProvider
             return $user->slug == 'visitor';
         });
 
+        // Gate::define('isAccess', function ($user) {
+        //     $access = [];
+        //     $acess = ['access_card'];
+        //     foreach($user->roles as $rolee) {
+        //         $arrole[] = $rolee->name;
+        //     }
+
+        // });
+
         Gate::define('isEksternal', function ($user) {
 
             foreach ($user->roles as $rolee) {

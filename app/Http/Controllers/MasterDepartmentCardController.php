@@ -20,8 +20,6 @@ class MasterDepartmentCardController extends Controller
 
     public function store(StoreMasterDepartmentCardRequest $request)
     {
-        // $request->validated();
-
         DB::beginTransaction();
 
         try {
@@ -42,8 +40,6 @@ class MasterDepartmentCardController extends Controller
 
     public function update(StoreMasterDepartmentCardRequest $request, $id)
     {
-        $request->validated();
-
         DB::beginTransaction();
 
         try {
@@ -64,8 +60,13 @@ class MasterDepartmentCardController extends Controller
 
     public function yajra()
     {
-        $getData = DepartmentCard::with('updatedBy:id,name')->get();
+        $getData = DepartmentCard::with('updatedby:id,name')->select('department_cards.*');
 
-        return Datatables::of($getData)->make();
+        return Datatables::of($getData)
+            ->editColumn('updated_at', function ($getData) {
+                return $getData->updated_at ? with(new Carbon($getData->updated_at))->format('d/m/Y - H:i:s') : '';
+            })
+            // ->addColumn('action', 'access_card.actionEdit')
+            ->make();
     }
 }

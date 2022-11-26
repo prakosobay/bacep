@@ -28,7 +28,7 @@ class DepartmentCard extends Model
         return $this->belongsTo(User::class, 'created_by');
     }
 
-    public function updatedBy()
+    public function updatedby()
     {
         return $this->belongsTo(User::class, 'updated_by');
     }

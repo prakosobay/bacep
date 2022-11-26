@@ -152,7 +152,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Option :</h6>
                         <a class="collapse-item" href="{{ route('departmentCardShow') }}">Departments</a>
-                        <a class="collapse-item" href="#">New Employees</a>
+                        <a class="collapse-item" href="{{ route('employeeShow') }}">New Employees</a>
                         <a class="collapse-item" href="">Resign</a>
                     </div>
                 </div>
