@@ -82,7 +82,7 @@
                             <th>Card Number</th>
                             <th>Created At</th>
                             <th>Created By</th>
-                            <th>Action</th>
+                            {{-- <th>Action</th> --}}
                         </tr>
                     </thead>
                     <tbody class="isi-table text-center">
@@ -95,20 +95,22 @@
 
 @push('scripts')
 <script>
-    // $(function() {
-    //     $('#department').DataTable({
-    //         processing: true,
-    //         serverSide: true,
-    //         ajax: "{{ url('employee/yajra')}}",
-    //         columns: [
-    //             {data: 'id', name: 'department_cards.id'},
-    //             {data: 'name', name: 'department_cards.name'},
-    //             {data: 'updatedby.name', name: 'updatedby.name'},
-    //             {data: 'updated_at', name: 'department_cards.updated_at'},
-    //             { data: 'action', name: 'action', orderable: false, searchable: false }
-    //         ]
-    //     });
-    // });
+    $(function() {
+        $('#department').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{ url('employee/yajra')}}",
+            columns: [
+                {data: 'id', name: 'employee_cards.id'},
+                {data: 'name', name: 'employee_cards.name'},
+                {data: 'departmentcardid.name', name: 'departmentcardid.name'},
+                {data: 'number_card', name: 'employee_cards.number_card'},
+                {data: 'updated_at', name: 'employee_cards.updated_at'},
+                {data: 'updatedby.name', name: 'updatedby.name'},
+                // { data: 'action', name: 'action', orderable: false, searchable: false }
+            ]
+        });
+    });
 </script>
 @endpush
 @endsection

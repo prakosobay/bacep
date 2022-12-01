@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreMasterEmployeeRequest;
-use App\Models\DepartmentCard;
-use App\Models\EmployeeCard;
+use App\Models\{DepartmentCard, EmployeeCard};
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Yajra\Datatables\Datatables;
+use Carbon\Carbon;
 
 class MasterEmployeeController extends Controller
 {
@@ -17,14 +18,13 @@ class MasterEmployeeController extends Controller
         return view('access_card.employee.table', compact('getDepts'));
     }
 
-    public function store(StoreMasterEmployeeRequest $request)
+    public function store(Request $request)
     {
-        dd($request->all());
         DB::beginTransaction();
 
         try {
 
-            EmployeeCard::firstOrCreate([
+            EmployeeCard::create([
                 'name' => $request->name,
                 'number_card' => $request->number_card,
                 'is_intern' => $request->is_intern,
@@ -41,13 +41,37 @@ class MasterEmployeeController extends Controller
         }
     }
 
-    public function update(StoreMasterEmployeeRequest $request)
+    public function update(StoreMasterEmployeeRequest $request, $id)
     {
         DB::beginTransaction();
+
+        try {
+
+            $get = EmployeeCard::findOrFail($id);
+            $get->update([
+                'name' => $request->name,
+                'number_card' => $request->number_card,
+                'is_intern' => $request->is_intern,
+                'dept_card' => $request->dept,
+                'updated_by' => auth()->user()->id,
+            ]);
+            DB::commit();
+            return redirect()->route('employeeShow')->with('success', 'yeyy');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back();
+        }
     }
 
-    // public function yajra()
-    // {
-    //     $employees = EmployeeCard
-    // }
+    public function yajra()
+    {
+        $employees = EmployeeCard::with('departmentcardid', 'updatedby:id,name')->select('employee_cards.*', 'department_cards.*')->where('deleted_card', null);
+
+        return Datatables::of($employees)
+            ->editColumn('updated_at', function ($employees) {
+                return $employees->updated_at ? with(new Carbon($employees->updated_at))->format('d/m/Y - H:i:s') : '';
+            })
+            // ->addColumn('action', 'access_card.actionEdit')
+            ->make();
+    }
 }
