@@ -12,6 +12,35 @@
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Create New
             </button>
+
+            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#import">
+                Import Excel
+            </button>
+        </div>
+
+        {{-- modal import --}}
+        <div class="modal fade" id="import" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Import Excel</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="{{ route('employeeImport')}}" method="post" enctype="multipart/form-data">
+                        @csrf
+                        <div class="modal-body">
+                            <label>Pilih file CSV</label>
+                            <div class="form-group">
+                                <input type="file" name="file" required="required">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
 
         <!-- Modal -->
@@ -34,12 +63,8 @@
                                 <input type="number" id="number_card" class="form-control" name="number_card" required>
                             </div>
                             <div class="form-group">
-                                <label for="dept" class="form-label">Department :</label>
-                                <select name="dept" id="dept" class="form-control">
-                                    @foreach ( $getDepts as $dept)
-                                        <option value="{{ $dept->id }}">{{ $dept->name }}</option>
-                                    @endforeach
-                                </select>
+                                <label for="dept_card" class="form-label">Department :</label>
+                                <input type="number" id="dept_card" class="form-control" name="dept_card" required>
                             </div>
                             <div class="form-group">
                                 <div class="form-check">
@@ -103,7 +128,7 @@
             columns: [
                 {data: 'id', name: 'employee_cards.id'},
                 {data: 'name', name: 'employee_cards.name'},
-                {data: 'departmentcardid.name', name: 'departmentcardid.name'},
+                {data: 'name', name: 'name'},
                 {data: 'number_card', name: 'employee_cards.number_card'},
                 {data: 'updated_at', name: 'employee_cards.updated_at'},
                 {data: 'updatedby.name', name: 'updatedby.name'},

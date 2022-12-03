@@ -17,7 +17,7 @@ class CreateEmployeeCardsTable extends Migration
             $table->id();
             $table->foreignId('created_by')->constrained('users')->onUpdate('cascade');
             $table->foreignId('updated_by')->constrained('users')->onUpdate('cascade');
-            $table->foreignId('dept_card')->constrained('department_cards')->onUpdate('cascade');
+            $table->string('dept_card');
             $table->date('deleted_card');
             $table->boolean('is_intern')->default(false)->nullable();
             $table->string('name');

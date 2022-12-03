@@ -27,7 +27,7 @@ class StoreMasterEmployeeRequest extends FormRequest
             'name' => ['required', 'string', 'max:255'],
             'number_card' => ['required', 'numeric', 'max:255'],
             'is_intern' => ['nullable', 'boolean'],
-            'dept_card' => ['required'],
+            'dept' => ['required', 'string', 'max:255'],
         ];
     }
 }

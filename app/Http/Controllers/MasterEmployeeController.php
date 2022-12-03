@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\Datatables\Datatables;
 use Carbon\Carbon;
+use App\Imports\EmployeeCardImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class MasterEmployeeController extends Controller
 {
@@ -18,7 +20,7 @@ class MasterEmployeeController extends Controller
         return view('access_card.employee.table', compact('getDepts'));
     }
 
-    public function store(Request $request)
+    public function store(StoreMasterEmployeeRequest $request)
     {
         DB::beginTransaction();
 
@@ -63,9 +65,15 @@ class MasterEmployeeController extends Controller
         }
     }
 
+    public function import(Request $request)
+    {
+        Excel::import(new EmployeeCardImport, $request->file('file'));
+        return back()->with('success', 'Excel Data Imported successfully.');
+    }
+
     public function yajra()
     {
-        $employees = EmployeeCard::with('departmentcardid', 'updatedby:id,name')->select('employee_cards.*', 'department_cards.*')->where('deleted_card', null);
+        $employees = EmployeeCard::with('updatedby:id,name')->select('employee_cards.*')->where('deleted_card', null);
 
         return Datatables::of($employees)
             ->editColumn('updated_at', function ($employees) {
