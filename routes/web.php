@@ -133,7 +133,7 @@ Route::middleware(['auth'])->group(function () {
 
 
     // Dashboard Access Card
-    Route::middleware(['access'])->group(function(){
+    // Route::middleware(['access'])->group(function(){
 
         Route::controller(MasterDepartmentCardController::class)->group(function() {
             Route::get('department/card/show', 'show')->name('departmentCardShow');
@@ -146,9 +146,10 @@ Route::middleware(['auth'])->group(function () {
         Route::controller(MasterEmployeeController::class)->group(function(){
             Route::get('employee/show', 'show')->name('employeeShow');
             Route::get('employee/yajra', 'yajra');
+            Route::post('employee/import', 'import')->name('employeeImport');
             Route::post('employee/store', 'store')->name('employeeStore');
         });
-    });
+    // });
 
 
     //Barang Consume
