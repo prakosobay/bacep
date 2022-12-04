@@ -50,7 +50,7 @@
                             <a class="nav-link inter" href="{{ url('full/all')}}">Full Approval</a>
                         </li>
                         <li class="nav-item mx-5">
-                            <a class="nav-link inter" href="{{ url('/table_barang')}}">Inventory</a>
+                            <a class="nav-link inter" href="{{ url('/table_barang')}}">General</a>
                         </li>
                         <li class="nav-item mx-5">
                             <a class="nav-link inter" href="{{ url('history/all')}}">Log Permit</a>
@@ -68,7 +68,7 @@
                         <a class="nav-link inter" href="{{ url('full/all')}}">Full Approval</a>
                     </li>
                     <li class="nav-item mx-5">
-                        <a class="nav-link inter" href="{{ url('/table_barang')}}">Inventory</a>
+                        <a class="nav-link inter" href="{{ url('/table_barang')}}">General</a>
                     </li>
                     <li class="nav-item mx-5">
                         <a class="nav-link inter" href="{{ url('history/all')}}">Log Permit</a>
@@ -138,6 +138,22 @@
                         <a class="collapse-item" href="{{ route('consumTable')}}">Consumable Table</a>
                         <a class="collapse-item" href="{{ route('consumMasukShow')}}">Consumable Masuk</a>
                         <a class="collapse-item" href="{{ route('consumKeluarShow')}}">Consumable Keluar</a>
+                    </div>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#access_card"
+                    aria-expanded="true" aria-controls="access_card">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Access Card</span>
+                </a>
+                <div id="access_card" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Option :</h6>
+                        <a class="collapse-item" href="{{ route('departmentCardShow') }}">Departments</a>
+                        <a class="collapse-item" href="{{ route('employeeShow') }}">New Employees</a>
+                        <a class="collapse-item" href="">Resign</a>
                     </div>
                 </div>
             </li>
