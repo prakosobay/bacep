@@ -15,13 +15,13 @@ class CreateEmployeeCardsTable extends Migration
     {
         Schema::create('employee_cards', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('created_by')->constrained('users')->onUpdate('cascade');
-            $table->foreignId('updated_by')->constrained('users')->onUpdate('cascade');
-            $table->string('dept_card');
-            $table->date('deleted_card');
-            $table->boolean('is_intern')->default(false)->nullable();
             $table->string('name');
-            $table->string('number_card');
+            $table->string('dept_card');
+            $table->boolean('status');
+            $table->string('number_card')->unique(['name', 'number_card'], 'name_number_card_unique');
+            $table->date('deleted_card')->nullable();
+            $table->foreignId('created_by')->nullable();
+            $table->foreignId('updated_by')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

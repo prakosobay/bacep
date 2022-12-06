@@ -23,11 +23,6 @@ class InternalExport implements FromView, WithStyles
         $this->end = $end;
     }
 
-    // public function query()
-    // {
-    //     return InternalVisitor::query()->whereBetween('created_at', [$this->start, $this->end]);
-    // }
-
     public function view(): View
     {
         return view('exports.internal', [

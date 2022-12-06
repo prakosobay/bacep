@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\EmployeeCardExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreMasterEmployeeRequest;
 use App\Models\{DepartmentCard, EmployeeCard};
@@ -16,8 +17,12 @@ class MasterEmployeeController extends Controller
 {
     public function show()
     {
-        $getDepts = DepartmentCard::select('id', 'name')->get();
-        return view('access_card.employee.table', compact('getDepts'));
+        return view('access_card.employee.table');
+    }
+
+    public function resign()
+    {
+        return view('access_card.employee.resign');
     }
 
     public function store(StoreMasterEmployeeRequest $request)
@@ -29,10 +34,11 @@ class MasterEmployeeController extends Controller
             EmployeeCard::create([
                 'name' => $request->name,
                 'number_card' => $request->number_card,
-                'is_intern' => $request->is_intern,
-                'dept_card' => $request->dept,
+                'dept_card' => $request->dept_card,
+                'status' => $request->status,
                 'updated_by' => auth()->user()->id,
                 'created_by' => auth()->user()->id,
+                'deleted_card' => $request->deleted,
             ]);
 
             DB::commit();
@@ -53,16 +59,24 @@ class MasterEmployeeController extends Controller
             $get->update([
                 'name' => $request->name,
                 'number_card' => $request->number_card,
-                'is_intern' => $request->is_intern,
-                'dept_card' => $request->dept,
+                'status' => $request->status,
+                'dept_card' => $request->dept_card,
                 'updated_by' => auth()->user()->id,
+                'deleted_card' => $request->deleted,
             ]);
+
             DB::commit();
             return redirect()->route('employeeShow')->with('success', 'yeyy');
         } catch (\Exception $e) {
             DB::rollBack();
-            return back();
+            return back()->with('failed', $e->getMessage());
         }
+    }
+
+    public function edit($id)
+    {
+        $get = EmployeeCard::find($id);
+        return view('access_card.employee.edit', compact('get'));
     }
 
     public function import(Request $request)
@@ -71,15 +85,42 @@ class MasterEmployeeController extends Controller
         return back()->with('success', 'Excel Data Imported successfully.');
     }
 
+    public function export()
+    {
+        return Excel::download(new EmployeeCardExport, 'Employee Card.xlsx');
+    }
+
     public function yajra()
     {
-        $employees = EmployeeCard::with('updatedby:id,name')->select('employee_cards.*')->where('deleted_card', null);
+        // $employees = EmployeeCard::with('updatedBy:id,name')->where('deleted_card', null);
+        $employees = DB::table('employee_cards')
+            ->leftJoin('users', 'employee_cards.updated_by', '=', 'users.id')
+            ->where('status', '!=', 'Resign')
+            ->select('employee_cards.*', 'users.name as updatedby');
 
         return Datatables::of($employees)
             ->editColumn('updated_at', function ($employees) {
-                return $employees->updated_at ? with(new Carbon($employees->updated_at))->format('d/m/Y - H:i:s') : '';
+                return $employees->updated_at ? with(new Carbon($employees->updated_at))->format('d/m/Y') : '';
             })
-            // ->addColumn('action', 'access_card.actionEdit')
+            ->addColumn('action', 'access_card.employee.actionEdit')
             ->make();
+    }
+
+    public function yajra_resign()
+    {
+        $get = DB::table('employee_cards')
+            ->leftJoin('users', 'employee_cards.updated_by', '=', 'users.id')
+            ->where('status', 'Resign')
+            ->select('employee_cards.*', 'users.name as updatedby');
+
+        return Datatables::of($get)
+        ->editColumn('updated_at', function ($get) {
+            return $get->updated_at ? with(new Carbon($get->updated_at))->format('d/m/Y') : '';
+        })
+        ->editColumn('deleted_card', function ($employees) {
+            return $employees->deleted_card ? with(new Carbon($employees->deleted_card))->format('d/m/Y') : '';
+        })
+        ->addColumn('action', 'access_card.employee.actionEdit')
+        ->make();
     }
 }

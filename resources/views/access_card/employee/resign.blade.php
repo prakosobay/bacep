@@ -6,23 +6,20 @@
 
     <div class="card shadow mb-4">
         <div class="card-header">
-            <h1 class="h3 mb-2 text-gray-800 text-center">Master Employees</h1>
+            <h1 class="h3 mb-2 text-gray-800 text-center">Resign</h1>
         </div>
-
-        <div class="card-header py-3">
-            <button type="button" class="btn mx-1 btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        {{-- <div class="card-header py-3">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Create New
             </button>
 
-            <button type="button" class="btn mx-1 btn-success" data-bs-toggle="modal" data-bs-target="#import">
+            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#import">
                 Import Excel
             </button>
-
-            <a href="{{ route('employeeExport') }}" class="btn mx-1 btn-secondary" type="submit">Export Excel</a>
-        </div>
+        </div> --}}
 
         {{-- modal import --}}
-        <div class="modal fade" id="import" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        {{-- <div class="modal fade" id="import" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -44,10 +41,10 @@
                     </form>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
         <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exportModalLabel" aria-hidden="true">
+        {{-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exportModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -63,23 +60,19 @@
                             </div>
                             <div class="form-group">
                                 <label for="number_card" class="form-label">Card Number :</label>
-                                <input type="text" id="number_card" class="form-control" name="number_card" required>
+                                <input type="number" id="number_card" class="form-control" name="number_card" required>
                             </div>
                             <div class="form-group">
                                 <label for="dept_card" class="form-label">Department :</label>
                                 <input type="text" id="dept_card" class="form-control" name="dept_card" required>
                             </div>
                             <div class="form-group">
-                                <label for="status" class="form-label">Status :</label>
-                                <select name="status" class="form-control" id="status" required>
-                                    <option value="Employee">Employee</option>
-                                    <option value="Intern">Intern</option>
-                                    <option value="Resign">Resign</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="deleted" class="form-label">Deleted At :</label>
-                                <input type="date" id="deleted" class="form-control" name="deleted">
+                                <div class="form-check">
+                                    <input class="form-check-input" name="is_intern" type="checkbox" value="1" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        Magang
+                                    </label>
+                                </div>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -89,7 +82,7 @@
                     </form>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
         @if (session('success'))
             <div class="alert alert-success mx-2 my-2">
@@ -111,9 +104,8 @@
                             <th>No</th>
                             <th>Name</th>
                             <th>Department</th>
-                            <th>Card Number</th>
-                            <th>Status</th>
-                            <th>Created At</th>
+                            <th>Updated At</th>
+                            <th>Deleted At</th>
                             <th>Updated By</th>
                             <th>Action</th>
                         </tr>
@@ -132,14 +124,13 @@
         $('#department').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ url('employee/yajra')}}",
+            ajax: "{{ url('employee/resign/yajra')}}",
             columns: [
                 {data: 'id', name: 'id'},
                 {data: 'name', name: 'employee_cards.name'},
                 {data: 'dept_card', name: 'dept_card'},
-                {data: 'number_card', name: 'number_card'},
-                {data: 'status', name: 'status'},
                 {data: 'updated_at', name: 'updated_at'},
+                {data: 'deleted_card', name: 'deleted_card'},
                 {data: 'updatedby', name: 'users.name'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]

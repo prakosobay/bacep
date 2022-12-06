@@ -22,7 +22,10 @@ class EmployeeCardImport implements ToCollection
                 'name' => $row[1],
                 'number_card' => $row[2],
                 'dept_card' => $row[3],
-                'created_at' => $row[4],
+                'status' => $row[4],
+                'updated_at' => $row[5],
+                'created_by' => $row[6],
+                'updated_by' => $row[7],
             ]);
         }
     }
@@ -41,8 +44,8 @@ class EmployeeCardImport implements ToCollection
     //     ]);
     // }
 
-    public function startRow(): int
-    {
-        return 3;
-    }
+    // public function startRow(): int
+    // {
+    //     return 3;
+    // }
 }

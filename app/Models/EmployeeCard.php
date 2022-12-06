@@ -22,7 +22,7 @@ class EmployeeCard extends Model
 
     protected $table = 'employee_cards';
 
-    public function updatedby()
+    public function updatedBy()
     {
         return $this->belongsTo(User::class, 'updated_by');
     }
