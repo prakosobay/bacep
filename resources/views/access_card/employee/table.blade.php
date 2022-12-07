@@ -75,6 +75,7 @@
                                     <option value="Employee">Employee</option>
                                     <option value="Intern">Intern</option>
                                     <option value="Resign">Resign</option>
+                                    <option value="Missing">Missing</option>
                                 </select>
                             </div>
                             <div class="form-group">

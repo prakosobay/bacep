@@ -17,11 +17,12 @@ class CreateEmployeeCardsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('dept_card');
-            $table->boolean('status');
-            $table->string('number_card')->unique(['name', 'number_card'], 'name_number_card_unique');
+            $table->string('status');
+            $table->string('number_card');
             $table->date('deleted_card')->nullable();
             $table->foreignId('created_by')->nullable();
             $table->foreignId('updated_by')->nullable();
+            $table->unique(['name', 'number_card'], 'name_number_card_unique');
             $table->softDeletes();
             $table->timestamps();
         });

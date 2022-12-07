@@ -152,7 +152,6 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Option :</h6>
                         <a class="collapse-item" href="{{ route('employeeShow') }}">Master Employees</a>
-                        <a href="{{ route('employeeIntern') }}" class="collapse-item">Intern</a>
                         <a href="{{ route('employeeResign') }}" class="collapse-item">Resign</a>
                     </div>
                 </div>
