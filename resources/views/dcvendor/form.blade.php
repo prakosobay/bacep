@@ -19,19 +19,19 @@
                     <div class="col-4">
                         <div class="form-group mb-4">
                             <label for="req_company" class="form-label">Requestor Company :</label>
-                            <input type="text" value="" id="req_company" name="req_company" class="form-control" readonly>
+                            <input type="text" value="" id="req_company" name="req_company" class="form-control" >
                         </div>
                     </div>
                     <div class="col-4">
                         <div class="form-group mb-4">
                             <label for="req_name" class="form-label">Requestor Name :</label>
-                            <input type="text" class="form-control" id="req_name" name="req_name" value="" readonly>
+                            <input type="text" class="form-control" id="req_name" name="req_name" value="" >
                         </div>
                     </div>
                     <div class="col-4">
                         <div class="form-group mb-4">
                             <label for="req_phone" class="form-label">Requestor Phone Number:</label>
-                            <input type="text" class="form-control" id="req_phone" name="req_phone" value="" readonly>
+                            <input type="text" class="form-control" id="req_phone" name="req_phone" value="">
                         </div>
                     </div>
                 </div>
@@ -116,6 +116,10 @@
                         <div class="form-check mb-2">
                             <label for="panel" class="form-check-label">Panel</label>
                             <input type="checkbox" class="form-check-input" id="panel" name="panel" value="1">
+                        </div>
+                        <div class="form-check mb-2">
+                            <label for="fss" class="form-check-label">FSS</label>
+                            <input type="checkbox" class="form-check-input" id="fss" name="fss" value="1">
                         </div>
                     </div>
                 </div>

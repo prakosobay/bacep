@@ -15,6 +15,13 @@ class CreateVendorHistoriesTable extends Migration
     {
         Schema::create('vendor_histories', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('vendor_id');
+            $table->foreignId('created_by');
+            $table->string('status');
+            $table->string('role_to');
+            $table->boolean('aktif');
+            $table->boolean('pdf');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

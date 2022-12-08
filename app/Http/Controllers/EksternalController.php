@@ -219,7 +219,7 @@ class EksternalController extends Controller
 
             DB::commit();
             return redirect()->route('dashboardEksternal', $company)->with('success', 'Submited');
-        } catch (\Exception $e) {
+    }    catch (\Exception $e) {
             DB::rollBack();
             throw $e;
         }

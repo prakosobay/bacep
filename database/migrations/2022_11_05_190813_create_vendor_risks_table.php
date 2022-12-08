@@ -15,6 +15,9 @@ class CreateVendorRisksTable extends Migration
     {
         Schema::create('vendor_risks', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('vendor_id');
+            $table->foreignId('m_risk_id');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

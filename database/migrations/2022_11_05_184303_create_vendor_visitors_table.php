@@ -15,6 +15,19 @@ class CreateVendorVisitorsTable extends Migration
     {
         Schema::create('vendor_visitors', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('vendor_id');
+            $table->string('name');
+            $table->string('nik');
+            $table->string('phone');
+            $table->string('department');
+            $table->string('company');
+            $table->string('respon');
+            $table->time('checkin');
+            $table->string('photo_checkin');
+            $table->time('checkout');
+            $table->string('photo_checkout');
+            $table->boolean('is_done');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

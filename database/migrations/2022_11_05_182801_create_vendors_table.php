@@ -15,6 +15,16 @@ class CreateVendorsTable extends Migration
     {
         Schema::create('vendors', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('requestor_id');
+            $table->string('work');
+            $table->date('visit');
+            $table->date('leave');
+            $table->string('background');
+            $table->string('decs');
+            $table->string('testing');
+            $table->string('roolback');
+            $table->string('reject_note');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
