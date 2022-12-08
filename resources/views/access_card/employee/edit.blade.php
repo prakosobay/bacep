@@ -98,6 +98,7 @@
                                     <option value="Resign">Resign</option>
                                 </select>
                             </div>
+                            <button class="btn btn-primary btn-lg" type="submit">Submit</button>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
@@ -109,7 +110,11 @@
                                 <input type="date" class="form-control" id="deleted" name="deleted">
                             </div>
                             <div class="form-group">
-                                <button class="btn btn-primary btn-lg" type="submit">Submit</button>
+                                <label for="is_missing" class="form-label">Is Missing :</label>
+                                <select name="is_missing" id="is_missing" class="form-control" required>
+                                    <option value="0">No</option>
+                                    <option value="1">Yes</option>
+                                </select>
                             </div>
                         </div>
                     </div>

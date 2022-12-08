@@ -75,12 +75,7 @@
                                     <option value="Employee">Employee</option>
                                     <option value="Intern">Intern</option>
                                     <option value="Resign">Resign</option>
-                                    <option value="Missing">Missing</option>
                                 </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="deleted" class="form-label">Deleted At :</label>
-                                <input type="date" id="deleted" class="form-control" name="deleted">
                             </div>
                         </div>
                         <div class="modal-footer">

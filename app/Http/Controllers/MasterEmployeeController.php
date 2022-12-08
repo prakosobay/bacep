@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Exports\EmployeeCardExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreMasterEmployeeRequest;
-use App\Models\{DepartmentCard, EmployeeCard};
+use App\Models\{DepartmentCard, EmployeeCard, EmployeeHistory};
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\Datatables\Datatables;
@@ -25,20 +25,31 @@ class MasterEmployeeController extends Controller
         return view('access_card.employee.resign');
     }
 
+    public function logs()
+    {
+        return view('access_card.employee.logs');
+    }
+
     public function store(StoreMasterEmployeeRequest $request)
     {
         DB::beginTransaction();
 
         try {
 
-            EmployeeCard::create([
+            $create = EmployeeCard::create([
                 'name' => $request->name,
                 'number_card' => $request->number_card,
                 'dept_card' => $request->dept_card,
                 'status' => $request->status,
                 'updated_by' => auth()->user()->id,
                 'created_by' => auth()->user()->id,
-                'deleted_card' => $request->deleted,
+            ]);
+
+            EmployeeHistory::create([
+                'name' => $request->name,
+                'last_card' => $request->number_card,
+                'employee_card_id' => $create->id,
+                'is_missing' => false,
             ]);
 
             DB::commit();
@@ -64,6 +75,31 @@ class MasterEmployeeController extends Controller
                 'updated_by' => auth()->user()->id,
                 'deleted_card' => $request->deleted,
             ]);
+
+            $log = EmployeeHistory::where('employee_card_id', $id)->latest()->first();
+            $log->update([
+                'is_missing' => $request->is_missing,
+                'deleted' => $request->deleted,
+                'last_card' => $request->number_card,
+            ]);
+            // dd($log);
+            // if($request->status == 'Resign') {
+
+            //     EmployeeHistory::create([
+            //         'name' => $request->name,
+            //         'last_card' => $request->number_card,
+            //         'employee_card_id' => $get->id,
+            //         'is_missing' => false,
+            //     ]);
+            // } else {
+
+                EmployeeHistory::create([
+                    'name' => $request->name,
+                    'last_card' => $request->number_card,
+                    'employee_card_id' => $get->id,
+                    'is_missing' => false,
+                ]);
+            // }
 
             DB::commit();
             return redirect()->route('employeeShow')->with('success', 'yeyy');
@@ -122,5 +158,17 @@ class MasterEmployeeController extends Controller
         })
         ->addColumn('action', 'access_card.employee.actionEdit')
         ->make();
+    }
+
+    public function yajra_logs()
+    {
+        $get = DB::table('employee_histories')
+            ->leftJoin('employee_cards', 'employee_histories.employee_card_id', '=', 'employee_cards.id')
+            ->select('employee_histories.*', 'employee_cards.dept_card as dept');
+            return Datatables::of($get)
+            // ->editColumn('updated_at', function ($get) {
+            //     return $get->updated_at ? with(new Carbon($get->updated_at))->format('d/m/Y') : '';
+            // })
+            ->make();
     }
 }

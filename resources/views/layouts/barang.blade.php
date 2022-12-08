@@ -153,6 +153,7 @@
                         <h6 class="collapse-header">Option :</h6>
                         <a class="collapse-item" href="{{ route('employeeShow') }}">Master Employees</a>
                         <a href="{{ route('employeeResign') }}" class="collapse-item">Resign</a>
+                        <a href="{{ route('employeeLogs') }}" class="collapse-item">Log</a>
                     </div>
                 </div>
             </li>

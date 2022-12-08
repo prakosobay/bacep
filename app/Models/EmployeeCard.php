@@ -31,4 +31,9 @@ class EmployeeCard extends Model
     {
         return $this->belongsTo(User::class, 'created_by');
     }
+
+    public function employeeHistories()
+    {
+        return $this->hasMany(EmployeeHistory::class, 'employee_card_id');
+    }
 }

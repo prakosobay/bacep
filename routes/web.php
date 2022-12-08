@@ -145,14 +145,18 @@ Route::middleware(['auth'])->group(function () {
 
         Route::controller(MasterEmployeeController::class)->group(function(){
             Route::get('employee/show', 'show')->name('employeeShow');
+            Route::get('employee/logs', 'logs')->name('employeeLogs');
+            Route::get('employee/edit/{id}', 'edit')->name('employeeEdit');
             Route::get('employee/intern', 'intern')->name('employeeIntern');
             Route::get('employee/resign', 'resign')->name('employeeResign');
             Route::get('employee/export', 'export')->name('employeeExport');
+
             Route::get('employee/resign/yajra', 'yajra_resign');
             Route::get('employee/yajra', 'yajra');
+            Route::get('employee/yajra/logs', 'yajra_logs');
+
             Route::post('employee/import', 'import')->name('employeeImport');
             Route::post('employee/store', 'store')->name('employeeStore');
-            Route::get('employee/edit/{id}', 'edit')->name('employeeEdit');
             Route::post('employee/update/{id}', 'update')->name('employeeUpdate');
         });
     // });
