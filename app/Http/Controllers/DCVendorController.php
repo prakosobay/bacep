@@ -54,11 +54,9 @@ class DCVendorController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store(StoreInternalRequest $request)
     {
         $getForm = $request->all();
-        // $company = auth()->user()->company;
-        dd($getForm);
 
         DB::beginTransaction();
         try {
@@ -84,12 +82,8 @@ class DCVendorController extends Controller
                 'panel' => null,
                 'baterai' => null,
                 'trafo' => null,
-                'office1' => null,
                 'fss' => null,
                 'ups' => null,
-                'yard' => null,
-                'parking' => null,
-                'lain' => null,
             ]);
 
             $arrayDetail = [];

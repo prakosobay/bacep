@@ -8,10 +8,11 @@ use FontLib\Table\Type\name;
 
 // v.1.2.0
 Route::controller(DCVendorController::class)->group(function(){
-Route::get('dashboard/dcvendor', 'dashboard')->name('dashboardDCVendor');
-Route::get('dcvendor/show/form', 'show_form')->name('vendorShowForm');
-Route::get('dcvendor/finished/show', 'finished_show')->name('vendorFinishedShow');
-Route::post('dcvendor/form/store', 'store')->name('vendorStore');
+Route::get('dashboard/dcvendor', 'dashboard');
+Route::get('dcvendor/show/form', 'show_form');
+Route::get('dcvendor/finished/show', 'finished_show');
+Route::post('dcvendor/store', 'store');
+Route::post('dcvendor/create', 'create');
 });
 //     //Detail History
 //     Route::get('/detail_cleaning/{id}', [CleaningController::class, 'detail_permit_cleaning']);

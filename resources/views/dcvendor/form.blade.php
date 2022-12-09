@@ -3,7 +3,8 @@
 <div class="container my-5">
     <div class="card">
         <h1 class="text-center my-3 h1Permit">Access Request &  Change Request Form</h1>
-        <form action="" method="POST" class="validate-form">
+        <form action="{{url('dcvendor/store')}}" method="POST" class="validate-form">
+        @csrf
             <div class="container form-container">
 
                 <div class="container">
@@ -185,7 +186,7 @@
                         <tbody>
                             <tr>
                                 <td>
-                                    <input type="time" class="form-control @error('time_start') is-invalid @enderror" id="time_start" name="time_start[]" value="{{ old('time_start')}}" required>
+                                    <input type="time" class="form-control @error('time_start') is-invalid @enderror" id="time_start" name="time_start" value="{{ old('time_start')}}" required>
                                     @error('time_start')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -193,7 +194,7 @@
                                     @enderror
                                 </td>
                                 <td>
-                                    <input type="time" class="form-control @error('time_end') is-invalid @enderror" id="time_end" name="time_end[]" value="{{ old('time_end')}}" required>
+                                    <input type="time" class="form-control @error('time_end') is-invalid @enderror" id="time_end" name="time_end" value="{{ old('time_end')}}" required>
                                     @error('time_end')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -201,7 +202,7 @@
                                     @enderror
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control @error('activity') is-invalid @enderror" id="activity" name="activity[]" value="{{ old('activity')}}" required>
+                                    <input type="text" class="form-control @error('activity') is-invalid @enderror" id="activity" name="activity" value="{{ old('activity')}}" required>
                                     @error('activity')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -209,7 +210,7 @@
                                     @enderror
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control @error('service_impact') is-invalid @enderror" id="service_impact" name="service_impact[]" value="{{ old('service_impact')}}" required>
+                                    <input type="text" class="form-control @error('service_impact') is-invalid @enderror" id="service_impact" name="service_impact" value="{{ old('service_impact')}}" required>
                                     @error('service_impact')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -217,7 +218,7 @@
                                     @enderror
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control @error('item') is-invalid @enderror" id="detailItem" name="item[]" value="{{ old('item')}}" required>
+                                    <input type="text" class="form-control @error('item') is-invalid @enderror" id="detailItem" name="item" value="{{ old('item')}}" required>
                                     @error('item')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -247,7 +248,7 @@
                         <tbody>
                             <tr>
                                 <td>
-                                    <select name="risk[]" class="form-control" id="risk" required>
+                                    <select name="risk" class="form-control" id="risk" required>
                                         <option selected>Choose 1</option>
                                      
                                             <option value=""></option>
@@ -255,18 +256,19 @@
                                     </select>
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control" name="poss[]" value="" id="poss" readonly>
+                                    <input type="text" class="form-control" name="poss" value="" id="poss" >
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control" name="impact[]" value="" id="impact" readonly>
+                                    <input type="text" class="form-control" name="impact" value="" id="impact" >
                                 </td>
+
                                 <td>
-                                    <input type="text" class="form-control" name="mitigation[]" value="" id="mitigation" readonly>
+                                    <input type="text" class="form-control" name="mitigation" value="" id="mitigation" >
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <select name="risk[]" class="form-control" id="risk2" required>
+                                    <select name="risk" class="form-control" id="risk2" required>
                                         <option selected>Choose 1</option>
                                       
                                         
@@ -276,31 +278,31 @@
                                     </select>
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control" name="poss[]" value="" id="poss2" readonly>
+                                    <input type="text" class="form-control" name="poss" value="" id="poss2" >
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control" name="impact[]" value="" id="impact2" readonly>
+                                    <input type="text" class="form-control" name="impact" value="" id="impact2" >
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control" name="mitigation[]" value="" id="mitigation2" readonly>
+                                    <input type="text" class="form-control" name="mitigation" value="" id="mitigation2">
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <select name="risk[]" class="form-control" id="risk3" required>
+                                    <select name="risk" class="form-control" id="risk3" required>
                                         <option selected>Choose 1</option>
                                             <option value=""></option>
                                     
                                     </select>
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control" name="poss[]" value="" id="poss3" readonly>
+                                    <input type="text" class="form-control" name="poss" value="" id="poss3" >
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control" name="impact[]" value="" id="impact3" readonly>
+                                    <input type="text" class="form-control" name="impact" value="" id="impact3" >
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control" name="mitigation[]" value="" id="mitigation3" readonly>
+                                    <input type="text" class="form-control" name="mitigation" value="" id="mitigation3" >
                                 </td>
                             </tr>
                         </tbody>
@@ -319,21 +321,21 @@
                         <tbody>
                             <tr>
                                 <th>Name</th>
-                                <td><input type="text" class="form-control" name="name[]" value="{{ old('name')}}" required></td>
+                                <td><input type="text" class="form-control" name="name" value="{{ old('name')}}" required></td>
                                 <th>Phone Number</th>
-                                <td><input type="text" class="form-control" name="phone[]" value="{{ old('phone')}}" required></td>
+                                <td><input type="text" class="form-control" name="phone" value="{{ old('phone')}}" required></td>
                             </tr>
                             <tr>
                                 <th>Number ID</th>
-                                <td><input type="text" class="form-control" name="number[]" value="{{ old('number')}}" required></td>
+                                <td><input type="text" class="form-control" name="number" value="{{ old('number')}}" required></td>
                                 <th>Company</th>
-                                <th><input type="text" class="form-control" name="company[]" value="{{ old('company')}}" required></th>
+                                <th><input type="text" class="form-control" name="company" value="{{ old('company')}}" required></th>
                             </tr>
                             <tr>
                                 <th>Department</th>
-                                <td><input type="text" class="form-control" name="department[]" value="{{ old('department')}}" required></td>
+                                <td><input type="text" class="form-control" name="department" value="{{ old('department')}}" required></td>
                                 <th>Responsibility</th>
-                                <td><input type="text" class="form-control" name="respon[]" value="{{ old('respon')}}" required></td>
+                                <td><input type="text" class="form-control" name="respon" value="{{ old('respon')}}" required></td>
                             </tr>
                         </tbody>
                     </table>
