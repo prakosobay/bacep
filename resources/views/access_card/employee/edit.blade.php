@@ -13,47 +13,6 @@
             <a type="button" class="btn btn-primary" href="{{ route('employeeShow') }}">Back</a>
         </div>
 
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exportModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exportModalLabel">Fill Form</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <form action="{{ route('employeeStore')}}" method="post">
-                        @csrf
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <label for="name" class="form-label">Name :</label>
-                                <input type="text" id="name" class="form-control" name="name" required autofocus>
-                            </div>
-                            <div class="form-group">
-                                <label for="number_card" class="form-label">Card Number :</label>
-                                <input type="number" id="number_card" class="form-control" name="number_card" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="dept_card" class="form-label">Department :</label>
-                                <input type="text" id="dept_card" class="form-control" name="dept_card" required>
-                            </div>
-                            <div class="form-group">
-                                <div class="form-check">
-                                    <input class="form-check-input" name="is_intern" type="checkbox" value="1" id="flexCheckDefault">
-                                    <label class="form-check-label" for="flexCheckDefault">
-                                        Magang
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save changes</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
         @if (session('success'))
             <div class="alert alert-success mx-2 my-2">
                 <b>{{ session('success') }}</b>
@@ -91,7 +50,7 @@
                                 <input type="text" class="form-control" id="number_card" name="number_card" value="{{ $get->number_card}}">
                             </div>
                             <div class="form-group">
-                                <label for="status" class="form-label">Status :</label>
+                                <label for="status" class="form-label">Status Employee :</label>
                                 <select name="status" id="status" class="form-control" required>
                                     <option value="Employee">Employee</option>
                                     <option value="Intern">Intern</option>
@@ -106,14 +65,12 @@
                                 <input type="text" class="form-control" id="dept_card" name="dept_card" value="{{ $get->dept_card }}" required>
                             </div>
                             <div class="form-group">
-                                <label for="deleted" class="form-label">Deleted Card :</label>
-                                <input type="date" class="form-control" id="deleted" name="deleted">
-                            </div>
-                            <div class="form-group">
-                                <label for="is_missing" class="form-label">Is Missing :</label>
-                                <select name="is_missing" id="is_missing" class="form-control" required>
-                                    <option value="0">No</option>
-                                    <option value="1">Yes</option>
+                                <label for="status_card" class="form-label">Status Card :</label>
+                                <select name="status_card" id="status_card" class="form-control" required>
+                                    <option value="Deleted">Deleted</option>
+                                    <option value="Changed">Changed</option>
+                                    <option value="Lost">Lost</option>
+                                    <option value="Registered">Registered</option>
                                 </select>
                             </div>
                         </div>

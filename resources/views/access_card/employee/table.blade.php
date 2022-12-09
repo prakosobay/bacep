@@ -134,7 +134,7 @@
                 {data: 'name', name: 'employee_cards.name'},
                 {data: 'dept_card', name: 'dept_card'},
                 {data: 'number_card', name: 'number_card'},
-                {data: 'status', name: 'status'},
+                {data: 'status_employee', name: 'status_employee'},
                 {data: 'updated_at', name: 'updated_at'},
                 {data: 'updatedby', name: 'users.name'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}

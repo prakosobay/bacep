@@ -18,7 +18,7 @@ class CreateEmployeeHistoriesTable extends Migration
             $table->foreignId('employee_card_id');
             $table->string('name');
             $table->string('last_card');
-            $table->boolean('is_missing');
+            $table->string('status');
             $table->softDeletes();
             $table->timestamps();
         });

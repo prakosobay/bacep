@@ -22,7 +22,7 @@ class EmployeeCardImport implements ToCollection
                 'name' => $row[1],
                 'number_card' => $row[2],
                 'dept_card' => $row[3],
-                'status' => $row[4],
+                'status_employee' => $row[4],
                 'updated_at' => $row[5],
                 'created_by' => $row[6],
                 'updated_by' => $row[7],

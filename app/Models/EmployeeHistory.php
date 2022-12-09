@@ -15,8 +15,7 @@ class EmployeeHistory extends Model
         'last_card',
         'employee_card_id',
         'name',
-        'deleted',
-        'is_missing',
+        'status',
     ];
     protected $primaryKey = 'id';
 

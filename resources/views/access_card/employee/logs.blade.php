@@ -18,9 +18,8 @@
                             <th>Name</th>
                             <th>Department</th>
                             <th>Card Number</th>
-                            <th>Missing</th>
-                            <th>Deleted At</th>
-                            <th>Created At</th>
+                            <th>Status Card</th>
+                            <th>Updated At</th>
                         </tr>
                     </thead>
                     <tbody class="isi-table text-center">
@@ -43,8 +42,7 @@
                 {data: 'name', name: 'name'},
                 {data: 'dept', name: 'dept'},
                 {data: 'last_card', name: 'last_card'},
-                {data: 'is_missing', name: 'is_missing'},
-                {data: 'deleted', name: 'deleted'},
+                {data: 'status', name: 'status'},
                 {data: 'updated_at', name: 'updated_at'},
             ]
         });

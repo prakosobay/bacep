@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Exports\EmployeeCardExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreMasterEmployeeRequest;
-use App\Models\{DepartmentCard, EmployeeCard, EmployeeHistory};
+use App\Models\{EmployeeCard, EmployeeHistory};
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\Datatables\Datatables;
@@ -40,16 +40,16 @@ class MasterEmployeeController extends Controller
                 'name' => $request->name,
                 'number_card' => $request->number_card,
                 'dept_card' => $request->dept_card,
-                'status' => $request->status,
+                'status_employee' => $request->status,
                 'updated_by' => auth()->user()->id,
                 'created_by' => auth()->user()->id,
             ]);
 
             EmployeeHistory::create([
                 'name' => $request->name,
-                'last_card' => $request->number_card,
                 'employee_card_id' => $create->id,
-                'is_missing' => false,
+                'last_card' => $request->number_card,
+                'status' => 'Registered',
             ]);
 
             DB::commit();
@@ -62,6 +62,7 @@ class MasterEmployeeController extends Controller
 
     public function update(StoreMasterEmployeeRequest $request, $id)
     {
+        $ak = EmployeeCard::find($id);
         DB::beginTransaction();
 
         try {
@@ -70,36 +71,46 @@ class MasterEmployeeController extends Controller
             $get->update([
                 'name' => $request->name,
                 'number_card' => $request->number_card,
-                'status' => $request->status,
+                'status_employee' => $request->status,
                 'dept_card' => $request->dept_card,
                 'updated_by' => auth()->user()->id,
-                'deleted_card' => $request->deleted,
             ]);
 
-            $log = EmployeeHistory::where('employee_card_id', $id)->latest()->first();
-            $log->update([
-                'is_missing' => $request->is_missing,
-                'deleted' => $request->deleted,
-                'last_card' => $request->number_card,
-            ]);
-            // dd($log);
-            // if($request->status == 'Resign') {
-
-            //     EmployeeHistory::create([
-            //         'name' => $request->name,
-            //         'last_card' => $request->number_card,
-            //         'employee_card_id' => $get->id,
-            //         'is_missing' => false,
-            //     ]);
-            // } else {
+            if($request->status == 'Resign') {
 
                 EmployeeHistory::create([
                     'name' => $request->name,
-                    'last_card' => $request->number_card,
                     'employee_card_id' => $get->id,
-                    'is_missing' => false,
+                    'last_card' => $ak->number_card,
+                    'status' => $request->status_card,
                 ]);
-            // }
+            } else {
+
+                if($request->status_card == 'Lost') {
+
+                    EmployeeHistory::create([
+                        'name' => $request->name,
+                        'employee_card_id' => $get->id,
+                        'last_card' => $ak->number_card,
+                        'status' => $request->status_card,
+                    ]);
+
+                    EmployeeHistory::create([
+                        'name' => $request->name,
+                        'employee_card_id' => $get->id,
+                        'last_card' => $request->number_card,
+                        'status' => 'Registered',
+                    ]);
+                } else {
+
+                    EmployeeHistory::create([
+                        'name' => $request->name,
+                        'employee_card_id' => $get->id,
+                        'last_card' => $request->number_card,
+                        'status' => $request->status_card,
+                    ]);
+                }
+            }
 
             DB::commit();
             return redirect()->route('employeeShow')->with('success', 'yeyy');
@@ -131,12 +142,12 @@ class MasterEmployeeController extends Controller
         // $employees = EmployeeCard::with('updatedBy:id,name')->where('deleted_card', null);
         $employees = DB::table('employee_cards')
             ->leftJoin('users', 'employee_cards.updated_by', '=', 'users.id')
-            ->where('status', '!=', 'Resign')
+            ->where('status_employee', '!=', 'Resign')
             ->select('employee_cards.*', 'users.name as updatedby');
 
         return Datatables::of($employees)
             ->editColumn('updated_at', function ($employees) {
-                return $employees->updated_at ? with(new Carbon($employees->updated_at))->format('d/m/Y') : '';
+                return $employees->updated_at ? with(new Carbon($employees->updated_at))->format('d/m/Y - H:i:s') : '';
             })
             ->addColumn('action', 'access_card.employee.actionEdit')
             ->make();
@@ -146,15 +157,12 @@ class MasterEmployeeController extends Controller
     {
         $get = DB::table('employee_cards')
             ->leftJoin('users', 'employee_cards.updated_by', '=', 'users.id')
-            ->where('status', 'Resign')
+            ->where('status_employee', 'Resign')
             ->select('employee_cards.*', 'users.name as updatedby');
 
         return Datatables::of($get)
         ->editColumn('updated_at', function ($get) {
-            return $get->updated_at ? with(new Carbon($get->updated_at))->format('d/m/Y') : '';
-        })
-        ->editColumn('deleted_card', function ($employees) {
-            return $employees->deleted_card ? with(new Carbon($employees->deleted_card))->format('d/m/Y') : '';
+            return $get->updated_at ? with(new Carbon($get->updated_at))->format('d/m/Y - H:i:s') : '';
         })
         ->addColumn('action', 'access_card.employee.actionEdit')
         ->make();
@@ -163,7 +171,7 @@ class MasterEmployeeController extends Controller
     public function yajra_logs()
     {
         $get = DB::table('employee_histories')
-            ->leftJoin('employee_cards', 'employee_histories.employee_card_id', '=', 'employee_cards.id')
+            ->join('employee_cards', 'employee_histories.employee_card_id', '=', 'employee_cards.id')
             ->select('employee_histories.*', 'employee_cards.dept_card as dept');
             return Datatables::of($get)
             // ->editColumn('updated_at', function ($get) {
