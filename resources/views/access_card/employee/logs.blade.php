@@ -40,7 +40,7 @@
             columns: [
                 {data: 'id', name: 'id'},
                 {data: 'name', name: 'name'},
-                {data: 'dept', name: 'dept'},
+                {data: 'dept_card', name: 'employee_cards.dept_card'},
                 {data: 'last_card', name: 'last_card'},
                 {data: 'status', name: 'status'},
                 {data: 'updated_at', name: 'updated_at'},

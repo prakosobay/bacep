@@ -139,7 +139,6 @@ class MasterEmployeeController extends Controller
 
     public function yajra()
     {
-        // $employees = EmployeeCard::with('updatedBy:id,name')->where('deleted_card', null);
         $employees = DB::table('employee_cards')
             ->leftJoin('users', 'employee_cards.updated_by', '=', 'users.id')
             ->where('status_employee', '!=', 'Resign')
@@ -172,11 +171,8 @@ class MasterEmployeeController extends Controller
     {
         $get = DB::table('employee_histories')
             ->join('employee_cards', 'employee_histories.employee_card_id', '=', 'employee_cards.id')
-            ->select('employee_histories.*', 'employee_cards.dept_card as dept');
+            ->select('employee_histories.id', 'employee_histories.name', 'employee_histories.last_card', 'employee_histories.status', 'employee_histories.updated_at', 'employee_cards.dept_card');
             return Datatables::of($get)
-            // ->editColumn('updated_at', function ($get) {
-            //     return $get->updated_at ? with(new Carbon($get->updated_at))->format('d/m/Y') : '';
-            // })
             ->make();
     }
 }
