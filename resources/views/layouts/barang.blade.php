@@ -151,9 +151,9 @@
                 <div id="access_card" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Option :</h6>
-                        <a class="collapse-item" href="{{ route('departmentCardShow') }}">Departments</a>
-                        <a class="collapse-item" href="{{ route('employeeShow') }}">New Employees</a>
-                        <a class="collapse-item" href="">Resign</a>
+                        <a class="collapse-item" href="{{ route('employeeShow') }}">Master Employees</a>
+                        <a href="{{ route('employeeResign') }}" class="collapse-item">Resign</a>
+                        <a href="{{ route('employeeLogs') }}" class="collapse-item">Log</a>
                     </div>
                 </div>
             </li>

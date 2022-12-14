@@ -6,16 +6,19 @@
 
     <div class="card shadow mb-4">
         <div class="card-header">
-            <h1 class="h3 mb-2 text-gray-800 text-center">New Employee</h1>
+            <h1 class="h3 mb-2 text-gray-800 text-center">Master Employees</h1>
         </div>
+
         <div class="card-header py-3">
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <button type="button" class="btn mx-1 btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Create New
             </button>
 
-            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#import">
+            <button type="button" class="btn mx-1 btn-success" data-bs-toggle="modal" data-bs-target="#import">
                 Import Excel
             </button>
+
+            <a href="{{ route('employeeExport') }}" class="btn mx-1 btn-secondary" type="submit">Export Excel</a>
         </div>
 
         {{-- modal import --}}
@@ -60,19 +63,19 @@
                             </div>
                             <div class="form-group">
                                 <label for="number_card" class="form-label">Card Number :</label>
-                                <input type="number" id="number_card" class="form-control" name="number_card" required>
+                                <input type="text" id="number_card" class="form-control" name="number_card" required>
                             </div>
                             <div class="form-group">
                                 <label for="dept_card" class="form-label">Department :</label>
-                                <input type="number" id="dept_card" class="form-control" name="dept_card" required>
+                                <input type="text" id="dept_card" class="form-control" name="dept_card" required>
                             </div>
                             <div class="form-group">
-                                <div class="form-check">
-                                    <input class="form-check-input" name="is_intern" type="checkbox" value="1" id="flexCheckDefault">
-                                    <label class="form-check-label" for="flexCheckDefault">
-                                        Magang
-                                    </label>
-                                </div>
+                                <label for="status" class="form-label">Status :</label>
+                                <select name="status" class="form-control" id="status" required>
+                                    <option value="Employee">Employee</option>
+                                    <option value="Intern">Intern</option>
+                                    <option value="Resign">Resign</option>
+                                </select>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -101,13 +104,14 @@
                 <table class="table table-striped table-bordered" id="department" width="100%" cellspacing="0">
                     <thead>
                         <tr class="judul-table text-center">
-                            <th>ID</th>
+                            <th>No</th>
                             <th>Name</th>
                             <th>Department</th>
                             <th>Card Number</th>
+                            <th>Status</th>
                             <th>Created At</th>
-                            <th>Created By</th>
-                            {{-- <th>Action</th> --}}
+                            <th>Updated By</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody class="isi-table text-center">
@@ -126,13 +130,14 @@
             serverSide: true,
             ajax: "{{ url('employee/yajra')}}",
             columns: [
-                {data: 'id', name: 'employee_cards.id'},
+                {data: 'id', name: 'id'},
                 {data: 'name', name: 'employee_cards.name'},
-                {data: 'name', name: 'name'},
-                {data: 'number_card', name: 'employee_cards.number_card'},
-                {data: 'updated_at', name: 'employee_cards.updated_at'},
-                {data: 'updatedby.name', name: 'updatedby.name'},
-                // { data: 'action', name: 'action', orderable: false, searchable: false }
+                {data: 'dept_card', name: 'dept_card'},
+                {data: 'number_card', name: 'number_card'},
+                {data: 'status_employee', name: 'status_employee'},
+                {data: 'updated_at', name: 'updated_at'},
+                {data: 'updatedby', name: 'users.name'},
+                {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });
     });

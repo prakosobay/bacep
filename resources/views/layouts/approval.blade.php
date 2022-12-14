@@ -49,7 +49,7 @@
                         <a class="nav-link inter" href="{{ url('full/all')}}">Full Approval</a>
                     </li>
                     <li class="nav-item mx-5">
-                        <a class="nav-link inter" href="{{ url('/table_barang')}}">Inventory</a>
+                        <a class="nav-link inter" href="{{ url('/table_barang')}}">General</a>
                     </li>
                     <li class="nav-item mx-5">
                         <a class="nav-link inter" href="{{ url('history/all')}}">History Permit</a>
@@ -67,7 +67,7 @@
                         <a class="nav-link inter" href="{{ url('full/all')}}">Full Approval</a>
                     </li>
                     <li class="nav-item mx-5">
-                        <a class="nav-link inter" href="{{ url('/table_barang')}}">Inventory</a>
+                        <a class="nav-link inter" href="{{ url('/table_barang')}}">General</a>
                     </li>
                     <li class="nav-item mx-5">
                         <a class="nav-link inter" href="{{ url('history/all')}}">History Permit</a>

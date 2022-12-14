@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDepartmentCardsTable extends Migration
+class CreateEmployeeHistoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateDepartmentCardsTable extends Migration
      */
     public function up()
     {
-        Schema::create('department_cards', function (Blueprint $table) {
+        Schema::create('employee_histories', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('created_by')->constrained('users')->onUpdate('cascade');
-            $table->foreignId('updated_by')->constrained('users')->onUpdate('cascade');
+            $table->foreignId('employee_card_id');
             $table->string('name');
+            $table->string('last_card');
+            $table->string('status');
             $table->softDeletes();
             $table->timestamps();
         });
@@ -30,6 +31,6 @@ class CreateDepartmentCardsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('department_cards');
+        Schema::dropIfExists('employee_histories');
     }
 }

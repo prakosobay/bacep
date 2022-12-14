@@ -22,7 +22,7 @@ class EmployeeCard extends Model
 
     protected $table = 'employee_cards';
 
-    public function updatedby()
+    public function updatedBy()
     {
         return $this->belongsTo(User::class, 'updated_by');
     }
@@ -30,5 +30,10 @@ class EmployeeCard extends Model
     public function createdBy()
     {
         return $this->belongsTo(User::class, 'created_by');
+    }
+
+    public function employeeHistories()
+    {
+        return $this->hasMany(EmployeeHistory::class, 'employee_card_id');
     }
 }
