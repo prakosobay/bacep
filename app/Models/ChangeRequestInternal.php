@@ -11,7 +11,13 @@ class ChangeRequestInternal extends Model
     use HasFactory, SoftDeletes;
 
     protected $table = 'change_request_internals';
-    protected $guarded = [];
+    protected $fillable = [
+        'internal_id',
+        'number',
+        'month',
+        'year',
+    ];
+    protected $primaryKey = 'id';
 
     public function internal()
     {

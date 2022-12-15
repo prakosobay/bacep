@@ -91,19 +91,11 @@ class CleaningController extends Controller
             // Insert data yang diterima ke table Cleaning
             $cleaning = Cleaning::create($data);
 
-            // $getEmail = User::where('slug', 'approval')->get();
-
             // Send email notification
-            // foreach ([
-            //     'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id', 'syukril@balitower.co.id',
-            //     'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'mufli.gonibala@balitower.co.id',
-            //     'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'dyah.retno@balitower.co.id',
-            // ] as $recipient) {
-            //     Mail::to($recipient)->send(new NotifEmail($cleaning));
-            // }
-
             foreach ([
-                'bayu.prakoso@balitower.co.id', 'taufik.ismail@balitower.co.id',
+                'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id', 'syukril@balitower.co.id', 'taufik.ismail@balitower.co.id',
+                'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'mufli.gonibala@balitower.co.id',
+                'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'dyah.retno@balitower.co.id',
             ] as $recipient) {
                 Mail::to($recipient)->send(new NotifEmail($cleaning));
             }
@@ -157,30 +149,30 @@ class CleaningController extends Controller
                 // Pergantian role tiap permit & send email notif
                 $role_to = '';
                 if ($lasthistoryC->role_to == 'review') {
-                    // foreach ([
-                    //     'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
-                    //     'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'syukril@balitower.co.id',
-                    //     'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'mufli.gonibala@balitower.co.id',
-                    // ] as $recipient) {
-                    //     Mail::to($recipient)->send(new NotifEmail($cleaning));
-                    // }
+                    foreach ([
+                        'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
+                        'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'syukril@balitower.co.id',
+                        'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'mufli.gonibala@balitower.co.id',
+                    ] as $recipient) {
+                        Mail::to($recipient)->send(new NotifEmail($cleaning));
+                    }
                     $role_to = 'check';
                 } elseif ($lasthistoryC->role_to == 'check') {
-                    // foreach ([
-                    //     'security.bacep@balitower.co.id',
-                    // ] as $recipient) {
-                    // Mail::to($recipient)->send(new NotifEmail($cleaning));
-                    // }
+                    foreach ([
+                        'security.bacep@balitower.co.id',
+                    ] as $recipient) {
+                    Mail::to($recipient)->send(new NotifEmail($cleaning));
+                    }
                     $role_to = 'security';
                 } elseif ($lasthistoryC->role_to == 'security') {
-                    // foreach (['bayu.prakoso@balitower.co.id', 'tofiq.hidayat@balitower.co.id'] as $recipient) {
-                    //     Mail::to($recipient)->send(new NotifEmail($cleaning));
-                    // }
+                    foreach (['bayu.prakoso@balitower.co.id', 'tofiq.hidayat@balitower.co.id'] as $recipient) {
+                        Mail::to($recipient)->send(new NotifEmail($cleaning));
+                    }
                     $role_to = 'head';
                 } elseif ($lasthistoryC->role_to == 'head') {
-                    // foreach (['dc@balitower.co.id'] as $recipient) {
-                    //     Mail::to($recipient)->send(new NotifFull($cleaning));
-                    // }
+                    foreach (['dc@balitower.co.id'] as $recipient) {
+                        Mail::to($recipient)->send(new NotifFull($cleaning));
+                    }
                     $role_to = 'all';
 
                     $cleaning = Cleaning::where('cleaning_id', $request->cleaning_id)->first();
@@ -244,9 +236,9 @@ class CleaningController extends Controller
 
                 // Get permit yang di reject & kirim notif email
                 $cleaning = Cleaning::find($request->cleaning_id);
-                // foreach (['bayu.prakoso@balitower.co.id', 'badai.sino@balitower.co.id'] as $recipient) {
-                //     Mail::to($recipient)->send(new NotifReject($cleaning));
-                // }
+                foreach (['badai.sino@balitower.co.id'] as $recipient) {
+                    Mail::to($recipient)->send(new NotifReject($cleaning));
+                }
                 return $cleaningHistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
             }
         } catch (\Exception $e) {
@@ -278,7 +270,6 @@ class CleaningController extends Controller
     public function checkin_update_cleaning(Request $request, $id) // Proses checkin
     {
         $data = ($request->all());
-        // return var_dump($data);
         $jumlah_char_pic1 = strlen($data['cleaning_name']);
         $jumlah_char_pic2 = strlen($data['cleaning_name2']);
 
@@ -397,7 +388,6 @@ class CleaningController extends Controller
 
         $last = DB::table('penomoran_cleanings')->latest()->first();
         $penomoran = DB::table('penomoran_cleanings')->where('type', 'cleaning')->latest()->first();
-        // $nomer = DB::table('penomoran_cleanings')->where('type', 'cleaning')->where('permit_id', $pic)->latest()->first();
 
         DB::beginTransaction();
 
@@ -430,7 +420,7 @@ class CleaningController extends Controller
                     $cr = 1;
                 }
             }
-            // dd($ar);
+
             PenomoranCleaning::firstOrCreate([
                 'number_ar' => $ar,
                 'month_ar' => date('m'),
@@ -497,7 +487,6 @@ class CleaningController extends Controller
             ->get();
 
         $penomoran = PenomoranCleaning::where('permit_id', $id)->where('type', 'cleaning')->first();
-        // dd($penomoran);
         $pdf = PDF::loadview('cleaning_pdf', compact('cleaning', 'cleaningHistory', 'lasthistoryC', 'penomoran'))->setPaper('a4', 'portrait')->setWarnings(false);
         return $pdf->stream();
     }
@@ -515,7 +504,6 @@ class CleaningController extends Controller
             ->select('cleaning_histories.*', 'users.name', 'created_by')
             ->get();
 
-        // dd($getLog);
         $pdf = PDF::loadview('cleaning.fullpdf', compact('getCleaning', 'getLastLog', 'getFull', 'getLog'))->setPaper('a4', 'portrait')->setWarnings(false);
         return $pdf->stream();
     }
@@ -525,7 +513,6 @@ class CleaningController extends Controller
         $getCleaning = CleaningFull::where('note', null)->get();
         $pdf = PDF::loadview('cleaning.export_full_pdf', compact('getCleaning'))->setPaper('a4', 'landscape')->setWarnings(false);
         return $pdf->stream();
-        // dd($getCleaning);
     }
 
 
@@ -577,9 +564,6 @@ class CleaningController extends Controller
             ->select('cleaning_histories.*', 'cleanings.validity_from')
             ->orderBy('cleaning_id', 'desc');
         return Datatables::of($cleaning_log)
-            // ->editColumn('updated_at', function ($cleaning_log) {
-            //     return $cleaning_log->updated_at ? with(new Carbon($cleaning_log->updated_at))->format('d/m/Y') : '';
-            // })
             ->editColumn('validity_from', function ($cleaning_log) {
                 return $cleaning_log->validity_from ? with(new Carbon($cleaning_log->validity_from))->format('d/m/Y') : '';
             })

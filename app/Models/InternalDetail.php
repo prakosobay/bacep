@@ -10,7 +10,15 @@ class InternalDetail extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'internal_id',
+        'time_start',
+        'time_end',
+        'activity',
+        'item',
+        'service_impact',
+    ];
+    protected $primaryKey = 'id';
     protected $table = 'internal_details';
 
     public function internal()

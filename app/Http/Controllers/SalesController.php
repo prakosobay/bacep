@@ -175,7 +175,9 @@ class SalesController extends Controller
                 ->where('internals.id', $insertForm->id)
                 ->first();
             foreach ([
-                'bayu.prakoso@balitower.co.id',
+                'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
+                'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'syukril@balitower.co.id',
+                'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'mufli.gonibala@balitower.co.id',
             ] as $recipient) {
                 Mail::to($recipient)->send(new NotifSalesForm($notif_email));
             }
@@ -246,21 +248,23 @@ class SalesController extends Controller
                 $role_to = '';
                 if ($last_update->role_to == 'review') {
                     foreach ([
-                        'bayu.prakoso@balitower.co.id',
+                        'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
+                        'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'syukril@balitower.co.id',
+                        'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'mufli.gonibala@balitower.co.id',
                     ] as $recipient) {
                         Mail::to($recipient)->send(new NotifSalesForm($notif_email));
                     }
                     $role_to = 'security';
                 } elseif ($last_update->role_to == 'security') {
                     foreach ([
-                        'bayu.prakoso@balitower.co.id',
+                        'bayu.prakoso@balitower.co.id', 'tofiq.hidayat@balitower.co.id',
                     ] as $recipient) {
                         Mail::to($recipient)->send(new NotifSalesForm($notif_email));
                     }
                     $role_to = 'head';
                 } elseif ($last_update->role_to = 'head') {
                     foreach ([
-                        'bayu.prakoso@balitower.co.id',
+                        'dc@balitower.co.id',
                     ] as $recipient) {
                         Mail::to($recipient)->send(new NotifInternalFull($notif_email));
                     }
@@ -268,8 +272,8 @@ class SalesController extends Controller
 
                     InternalFull::create([
                         'internal_id' => $id,
-                        // 'link' => ("https://dcops.balifiber.id/sales/pdf/$id"),
-                        'link' => ("http://localhost:8000/sales/pdf/$id"),
+                        'link' => ("https://dcops.balifiber.id/sales/pdf/$id"),
+                        // 'link' => ("http://localhost:8000/sales/pdf/$id"),
                         'note' => null,
                         'status' => 'Full Approved',
                     ]);

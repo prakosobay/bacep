@@ -10,7 +10,11 @@ class InternalRisk extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'internal_id',
+        'm_risk_id',
+    ];
+    protected $primaryKey = 'id';
     protected $table = 'internal_risks';
 
     public function internal()

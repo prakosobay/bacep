@@ -10,7 +10,22 @@ class Internal extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $guarded = [];
+    protected $table = 'internals';
+    protected $fillable = [
+        'requestor_id',
+        'm_card_id',
+        'work',
+        'visit',
+        'leave',
+        'isColo',
+        'isSurvey',
+        'background',
+        'desc',
+        'rollback',
+        'testing',
+        'reject_note',
+    ];
+    protected $primaryKey = 'id';
 
     public function visitors()
     {

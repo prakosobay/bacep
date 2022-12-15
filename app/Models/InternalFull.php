@@ -10,7 +10,13 @@ class InternalFull extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'internal_id',
+        'link',
+        'status',
+        'note',
+    ];
+    protected $primaryKey = 'id';
     protected $table = 'internal_fulls';
 
     public function internal()

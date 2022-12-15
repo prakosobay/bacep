@@ -10,7 +10,20 @@ class EksternalVisitor extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'eksternal_id',
+        'name',
+        'phone',
+        'nik',
+        'department',
+        'company',
+        'respon',
+        'checkin',
+        'photo_checkin',
+        'checkout',
+        'photo_checkout',
+    ];
+    protected $primaryKey = 'id';
     protected $table = 'eksternal_visitors';
 
     public function eksternal()

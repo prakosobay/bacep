@@ -10,8 +10,16 @@ class EksternalDetail extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'eksternal_id',
+        'time_start',
+        'time_end',
+        'activity',
+        'item',
+        'service_impact',
+    ];
     protected $table = 'eksternal_details';
+    protected $primaryKey = 'id';
 
     public function eksternal()
     {

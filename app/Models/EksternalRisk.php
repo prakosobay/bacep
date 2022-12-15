@@ -10,7 +10,11 @@ class EksternalRisk extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'eksternal_id',
+        'm_risk_id',
+    ];
+    protected $primaryKey = 'id';
     protected $table = 'eksternal_risks';
 
     public function eksternal()

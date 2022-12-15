@@ -243,7 +243,9 @@ class InternalController extends Controller
                 ->where('internals.id', $insertForm->id)
                 ->first();
             foreach ([
-                'bayu.prakoso@balitower.co.id',
+                'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
+                'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'syukril@balitower.co.id',
+                'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'mufli.gonibala@balitower.co.id',
             ] as $recipient) {
                 Mail::to($recipient)->send(new NotifInternalForm($notif_email));
             }
@@ -334,40 +336,42 @@ class InternalController extends Controller
                 // Pergantian  role tiap permit & send email notif
                 $role_to = '';
                 if ($last_update->role_to == 'review') {
-                    // foreach ([
-                    //     'bayu.prakoso@balitower.co.id',
-                    // ] as $recipient) {
-                    //     Mail::to($recipient)->send(new NotifInternalForm($notif_email));
-                    // }
+                    foreach ([
+                        'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
+                        'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'syukril@balitower.co.id',
+                        'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'mufli.gonibala@balitower.co.id',
+                    ] as $recipient) {
+                        Mail::to($recipient)->send(new NotifInternalForm($notif_email));
+                    }
                     $role_to = 'check';
                 } elseif ($last_update->role_to == 'check') {
-                    // foreach ([
-                    //     'bayu.prakoso@balitower.co.id',
-                    // ] as $recipient) {
-                    //     Mail::to($recipient)->send(new NotifInternalForm($notif_email));
-                    // }
+                    foreach ([
+                        'security.bacep@balitower.co.id',
+                    ] as $recipient) {
+                        Mail::to($recipient)->send(new NotifInternalForm($notif_email));
+                    }
                     $role_to = 'security';
                 } elseif ($last_update->role_to == 'security') {
-                    // foreach ([
-                    //     'bayu.prakoso@balitower.co.id',
-                    // ] as $recipient) {
-                    //     Mail::to($recipient)->send(new NotifInternalForm($notif_email));
-                    // }
+                    foreach ([
+                        'bayu.prakoso@balitower.co.id', 'tofiq.hidayat@balitower.co.id',
+                    ] as $recipient) {
+                        Mail::to($recipient)->send(new NotifInternalForm($notif_email));
+                    }
                     $role_to = 'head';
                 } elseif ($last_update->role_to = 'head') {
                     $full = Internal::find($id);
-                    // foreach ([
-                    //     'bayu.prakoso@balitower.co.id',
-                    // ] as $recipient) {
-                    //     Mail::to($recipient)->send(new NotifInternalFull($notif_email));
-                    // }
+                    foreach ([
+                        'dc@balitower.co.id',
+                    ] as $recipient) {
+                        Mail::to($recipient)->send(new NotifInternalFull($notif_email));
+                    }
                     $role_to = 'all';
 
                     $full = Internal::findOrFail($id);
                     InternalFull::create([
                         'internal_id' => $full->id,
-                        // 'link' => ("https://dcops.balifiber.id/internal/pdf/$full->id"),
-                        'link' => ("http://localhost:8000/internal/pdf/$full->id"),
+                        'link' => ("https://dcops.balifiber.id/internal/pdf/$full->id"),
+                        // 'link' => ("http://localhost:8000/internal/pdf/$full->id"),
                         'note' => null,
                         'status' => 'Full Approved',
                     ]);

@@ -38,13 +38,23 @@
                                 <h5 class="modal-title" id="exampleModalLabel">Tambah Relasi Baru</h5>
                             </div>
                             <div class="modal-body">
-                                <label>ID Role :</label>
                                 <div class="form-group">
-                                    <input type="number" name="role_id" required="required" autofocus>
+                                    <label for="user" class="form-label">User :</label>
+                                    <select name="user_id" id="user" class="form-control">
+                                        <option value=""></option>
+                                        @foreach ( $users as $user )
+                                            <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
-                                <label>ID User :</label>
                                 <div class="form-group">
-                                    <input type="number" name="user_id" required="required">
+                                    <label for="role" class="form-label">Role :</label>
+                                    <select name="role_id" id="role" class="form-control">
+                                        <option value=""></option>
+                                        @foreach ( $roles as $role )
+                                            <option value="{{ $role->id }}">{{ $role->name }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                             <div class="modal-footer">

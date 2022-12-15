@@ -22,7 +22,9 @@ class AdminController extends Controller
     public function show_relasi() // Menampilkan table relasi user dan role
     {
         if (Gate::allows('isAdmin')) {
-            return view('admin.relasi');
+            $roles = Role::all();
+            $users = User::all();
+            return view('admin.relasi', compact('roles', 'users'));
         } else {
             abort(403);
         }
@@ -201,9 +203,8 @@ class AdminController extends Controller
 
     public function delete_user($id) // Menghapus user SELAMANYA
     {
-        // dd($id);
-        //Prod = 15
-        if ($id != 15) { // id ini punya admin, jadi jangan sampai TERHAPUS
+        //Prod = 1
+        if ($id != 1) { // id ini punya admin, jadi jangan sampai TERHAPUS
             // Kondisi data user akan terhapus
             User::find($id)->delete();
             Alert::success('Success', 'User has been deleted');

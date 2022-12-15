@@ -13,7 +13,18 @@ class Eksternal extends Model
 
     protected $primaryKey = 'id';
     protected $table = 'eksternals';
-    protected $guarded = [];
+    protected $fillable = [
+        'requestor_id',
+        'm_card_id',
+        'work',
+        'visit',
+        'leave',
+        'background',
+        'desc',
+        'testing',
+        'rollback',
+        'reject_note',
+    ];
 
     public function requestor()
     {

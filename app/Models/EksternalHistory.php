@@ -9,7 +9,15 @@ class EksternalHistory extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'created_by',
+        'eksternal_id',
+        'role_to',
+        'status',
+        'aktif',
+        'pdf',
+    ];
+    protected $primaryKey = 'id';
     protected $table = 'eksternal_histories';
 
     public function eksternal()

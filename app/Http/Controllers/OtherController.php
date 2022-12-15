@@ -168,19 +168,13 @@ class OtherController extends Controller
             }
             $personil = OtherPersonil::insert($p);
 
-            // foreach ([
-            //     'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id', 'syukril@balitower.co.id',
-            //     'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'mufli.gonibala@balitower.co.id',
-            //     'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'dyah.retno@balitower.co.id',
-            // ] as $recipient) {
-            //     Mail::to($recipient)->send(new NotifMaintenanceForm($otherForm));
-            // }
-
-            // foreach ([
-            //     'bayu.prakoso@balitower.co.id',
-            // ] as $recipient) {
-            //     Mail::to($recipient)->send(new NotifMaintenanceForm($otherForm));
-            // }
+            foreach ([
+                'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id', 'syukril@balitower.co.id',
+                'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'mufli.gonibala@balitower.co.id',
+                'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'dyah.retno@balitower.co.id',
+            ] as $recipient) {
+                Mail::to($recipient)->send(new NotifMaintenanceForm($otherForm));
+            }
 
             $log = OtherHistory::insert([
                 'other_id' => $otherForm->id,
@@ -233,29 +227,29 @@ class OtherController extends Controller
                 // // Pergantian  role tiap permit & send email notif
                 $role_to = '';
                 if ($lastupdate->role_to == 'review') {
-                    // foreach ([
-                    //     'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
-                    //     'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'syukril@balitower.co.id',
-                    //     'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'mufli.gonibala@balitower.co.id',
-                    // ] as $recipient) {
-                    //     Mail::to($recipient)->send(new NotifMaintenanceForm($notif_email));
-                    // }
+                    foreach ([
+                        'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
+                        'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'syukril@balitower.co.id',
+                        'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'mufli.gonibala@balitower.co.id',
+                    ] as $recipient) {
+                        Mail::to($recipient)->send(new NotifMaintenanceForm($notif_email));
+                    }
                     $role_to = 'check';
                 } elseif ($lastupdate->role_to == 'check') {
-                    // foreach (['security.bacep@balitower.co.id'] as $recipient) {
-                    //     Mail::to($recipient)->send(new NotifMaintenanceForm($notif_email));
-                    // }
+                    foreach (['security.bacep@balitower.co.id'] as $recipient) {
+                        Mail::to($recipient)->send(new NotifMaintenanceForm($notif_email));
+                    }
                     $role_to = 'security';
                 } elseif ($lastupdate->role_to == 'security') {
-                    // foreach (['bayu.prakoso@balitower.co.id', 'tofiq.hidayat@balitower.co.id'] as $recipient) {
-                    //     Mail::to($recipient)->send(new NotifMaintenanceForm($notif_email));
-                    // }
+                    foreach (['bayu.prakoso@balitower.co.id', 'tofiq.hidayat@balitower.co.id'] as $recipient) {
+                        Mail::to($recipient)->send(new NotifMaintenanceForm($notif_email));
+                    }
                     $role_to = 'head';
                 } elseif ($lastupdate->role_to = 'head') {
                     $full = Other::find($request->other_id);
-                    // foreach (['dc@balitower.co.id'] as $recipient) {
-                    //     Mail::to($recipient)->send(new NotifMaintenanceFull($full));
-                    // }
+                    foreach (['dc@balitower.co.id'] as $recipient) {
+                        Mail::to($recipient)->send(new NotifMaintenanceFull($full));
+                    }
                     $role_to = 'all';
 
                     $full_maintenance = Other::where('id', $request->other_id)->first();
@@ -316,9 +310,9 @@ class OtherController extends Controller
 
                 // Get permit yang di reject & kirim notif email
                 $maintenance_reject = Other::find($request->other_id);
-                // foreach (['badai.sino@balitower.co.id', 'bayu.prakoso@balitower.co.id'] as $recipient) {
-                //     Mail::to($recipient)->send(new NotifMaintenanceReject($maintenance_reject));
-                // }
+                foreach (['badai.sino@balitower.co.id'] as $recipient) {
+                    Mail::to($recipient)->send(new NotifMaintenanceReject($maintenance_reject));
+                }
 
                 DB::commit();
 
@@ -411,8 +405,6 @@ class OtherController extends Controller
         Storage::disk('maintenanceCheckout')->put($imageName, base64_decode($image));
 
         $last = DB::table('penomoran_cleanings')->latest()->first();
-        // $penomoran = DB::table('penomoran_cleanings')->where('type', 'maintenance')->latest()->first();
-        // $nomer = DB::table('penomoran_cleanings')->where('type', 'maintenance')->where('permit_id', $pic)->latest()->first();
 
         DB::beginTransaction();
 
@@ -445,7 +437,7 @@ class OtherController extends Controller
                         $cr = 1;
                     }
                 }
-                // dd($ar);
+
                 PenomoranCleaning::firstOrCreate([
                     'number_ar' => $ar,
                     'month_ar' => date('m'),
@@ -469,7 +461,6 @@ class OtherController extends Controller
 
     public function maintenance_checkin_cancel($id)
     {
-        // dd($id);
         DB::beginTransaction();
 
         try {
@@ -506,7 +497,6 @@ class OtherController extends Controller
             ->get();
         // dd($getHistory);
         $penomoran = PenomoranCleaning::where('type', 'maintenance')->where('permit_id', $id)->first();
-        // dd($penomoran);
         $pdf = PDF::loadview('other.maintenance_pdf', compact('getOther', 'getPersonil', 'getHistory', 'getLastOther', 'penomoran'))->setPaper('a4', 'portrait')->setWarnings(false);
         return $pdf->stream();
     }
@@ -747,19 +737,13 @@ class OtherController extends Controller
             TroubleshootBmPersonil::insert($insert_personil);
 
             $notif_email = TroubleshootBm::find($other_form->id);
-            // foreach ([
-            //     'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id', 'syukril@balitower.co.id',
-            //     'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'mufli.gonibala@balitower.co.id',
-            //     'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'dyah.retno@balitower.co.id',
-            // ] as $recipient) {
-            //     Mail::to($recipient)->send(new NotifTroubleshootForm($notif_email));
-            // }
-
-            // foreach ([
-            //         'bayu.prakoso@balitower.co.id',
-            //     ] as $recipient) {
-            //         Mail::to($recipient)->send(new NotifTroubleshootForm($notif_email));
-            //     }
+            foreach ([
+                'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id', 'syukril@balitower.co.id',
+                'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'mufli.gonibala@balitower.co.id',
+                'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'dyah.retno@balitower.co.id',
+            ] as $recipient) {
+                Mail::to($recipient)->send(new NotifTroubleshootForm($notif_email));
+            }
 
             $log_troubleshoot = TroubleshootBmHistory::insert([
                 'troubleshoot_bm_id' => $other_form->id,
@@ -844,21 +828,15 @@ class OtherController extends Controller
             TroubleshootBmPersonil::insert($insert_personil);
 
             $notif_email = TroubleshootBm::find($insert->id);
-            // foreach ([
-            //     'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id', 'syukril@balitower.co.id',
-            //     'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'mufli.gonibala@balitower.co.id',
-            //     'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'dyah.retno@balitower.co.id',
-            // ] as $recipient) {
-            //     Mail::to($recipient)->send(new NotifTroubleshootForm($notif_email));
-            // }
+            foreach ([
+                'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id', 'syukril@balitower.co.id',
+                'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'mufli.gonibala@balitower.co.id',
+                'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'dyah.retno@balitower.co.id',
+            ] as $recipient) {
+                Mail::to($recipient)->send(new NotifTroubleshootForm($notif_email));
+            }
 
-            // foreach ([
-            //     'bayu.prakoso@balitower.co.id', 'syukril@balitower.co.id',
-            // ] as $recipient) {
-            //     Mail::to($recipient)->send(new NotifTroubleshootForm($notif_email));
-            // }
-
-            $p = TroubleshootBmHistory::create([
+            TroubleshootBmHistory::create([
                 'troubleshoot_bm_id' => $insert->id,
                 'created_by' => Auth::user()->id,
                 'role_to' => 'review',
@@ -907,33 +885,32 @@ class OtherController extends Controller
             // // Pergantian  role tiap permit & send email notif
             $role_to = '';
             if ($last_update->role_to == 'review') {
-                // foreach ([
-                //     'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
-                //     'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'syukril@balitower.co.id',
-                //     'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'mufli.gonibala@balitower.co.id',
-                // ] as $recipient) {
-                //     Mail::to($recipient)->send(new NotifTroubleshootForm($notif_email));
-                // }
+                foreach ([
+                    'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
+                    'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'syukril@balitower.co.id',
+                    'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'mufli.gonibala@balitower.co.id',
+                ] as $recipient) {
+                    Mail::to($recipient)->send(new NotifTroubleshootForm($notif_email));
+                }
                 $role_to = 'check';
             } elseif ($last_update->role_to == 'check') {
-                // foreach (['security.bacep@balitower.co.id'] as $recipient) {
-                //     Mail::to($recipient)->send(new NotifTroubleshootForm($notif_email));
-                // }
+                foreach (['security.bacep@balitower.co.id'] as $recipient) {
+                    Mail::to($recipient)->send(new NotifTroubleshootForm($notif_email));
+                }
                 $role_to = 'security';
             } elseif ($last_update->role_to == 'security') {
-                // foreach (['bayu.prakoso@balitower.co.id', 'tofiq.hidayat@balitower.co.id'] as $recipient) {
-                //     Mail::to($recipient)->send(new NotifTroubleshootForm($notif_email));
-                // }
+                foreach (['bayu.prakoso@balitower.co.id', 'tofiq.hidayat@balitower.co.id'] as $recipient) {
+                    Mail::to($recipient)->send(new NotifTroubleshootForm($notif_email));
+                }
                 $role_to = 'head';
             } elseif ($last_update->role_to = 'head') {
                 $full = TroubleshootBm::find($request->id);
-                // foreach (['dc@balitower.co.id'] as $recipient) {
-                //     Mail::to($recipient)->send(new NotifTroubleshootFull($full));
-                // }
+                foreach (['dc@balitower.co.id'] as $recipient) {
+                    Mail::to($recipient)->send(new NotifTroubleshootFull($full));
+                }
                 $role_to = 'all';
 
                 $full_troubleshoot = TroubleshootBm::where('id', $request->id)->first();
-                // dd($full_troubleshoot);
                 TroubleshootBmFull::create([
                     'troubleshoot_bm_id' => $full_troubleshoot->id,
                     'work' => $full_troubleshoot->work,
@@ -991,9 +968,9 @@ class OtherController extends Controller
 
             // Get permit yang di reject & kirim notif email
             $notif_email = TroubleshootBm::find($request->id);
-            // foreach (['bayu.prakoso@balitower.co.id', 'badai.sino@balitower.co.id'] as $recipient) {
-            //     Mail::to($recipient)->send(new NotifTroubleshootReject($notif_email));
-            // }
+            foreach (['badai.sino@balitower.co.id'] as $recipient) {
+                Mail::to($recipient)->send(new NotifTroubleshootReject($notif_email));
+            }
 
             DB::commit();
             return $history->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
@@ -1008,8 +985,6 @@ class OtherController extends Controller
     // Update Checkin Checkout Troubleshoot
     public function troubleshoot_checkin_update(Request $request, $id)
     {
-        // dd($request->all());
-
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'company' => ['required', 'string', 'max:255'],
@@ -1026,7 +1001,6 @@ class OtherController extends Controller
         $image = str_replace($replace, '', $request->photo_checkin);
         $image = str_replace(' ', '+', $image);
         $imageName = Str::random(200) .  '.' . $extension;
-        // dd($imageName);
 
         Storage::disk('troubleshootCheckin')->put($imageName, base64_decode($image));
 
@@ -1073,7 +1047,6 @@ class OtherController extends Controller
         $visitorID = TroubleshootBmPersonil::findOrFail($id);
         $pic = $visitorID->troubleshoot_bm_id;
         $jumlah = TroubleshootBmPersonil::where('troubleshoot_bm_id', $pic)->where('checkout', null)->select('id')->count();
-        // dd($jumlah);
 
         $extension = explode('/', explode(':', substr($request->photo_checkout, 0, strpos($request->photo_checkout, ';')))[1])[1];   // .jpg .png .pdf
         $replace = substr($request->photo_checkout, 0, strpos($request->photo_checkout, ',') + 1);
@@ -1087,8 +1060,6 @@ class OtherController extends Controller
         $pic = $get->troubleshoot_bm_id;
 
         $last = DB::table('penomoran_cleanings')->latest()->first();
-        // $penomoran = DB::table('penomoran_cleanings')->where('type', 'troubleshoot')->latest()->first();
-        // $nomer = DB::table('penomoran_cleanings')->where('type', 'troubleshoot')->where('permit_id', $pic)->latest()->first();
 
         DB::beginTransaction();
 
@@ -1121,7 +1092,7 @@ class OtherController extends Controller
                         $cr = 1;
                     }
                 }
-                // dd($ar);
+
                 PenomoranCleaning::firstOrCreate([
                     'number_ar' => $ar,
                     'month_ar' => date('m'),
@@ -1134,44 +1105,6 @@ class OtherController extends Controller
                 ]);
             }
 
-            // if($last == null){
-
-            //     $ar = 1;
-            //     $cr = 1;
-
-            // } elseif($last->number_ar) {
-
-            //     $ar = $last->number_ar;
-            //     $cr = $last->number_cr;
-
-            //     if($nomer == null) {
-
-            //         $ar = $last->number_ar + 1;
-            //         $cr = $last->number_cr + 1;
-
-            //     } elseif($nomer->number_ar){
-
-            //         $ar = $nomer->number_ar;
-            //         $cr = $nomer->number_cr;
-
-            //         if($penomoran->permit_id != $nomer->permit_id) {
-
-            //             $ar = $last->number_ar + 1;
-            //             $cr = $last->number_cr + 1;
-            //         }
-            //     }
-
-            //     $lastyearAR = $last->year_ar;
-            //     $lastyearCR = $last->year_cr;
-            //     $currrentYear = date('Y');
-
-            //     if ( ($currrentYear != $lastyearAR) && ( $currrentYear != $lastyearCR ) ){
-            //         $ar = 1;
-            //         $cr = 1;
-            //     }
-            // }
-            // dd($ar);
-
             DB::commit();
             return redirect()->route('logall')->with('success', 'Checkout Successful');
         } catch (\Exception $e) {
@@ -1182,8 +1115,6 @@ class OtherController extends Controller
 
     public function troubleshoot_checkin_cancel($id)
     {
-        // dd($id);
-
         DB::beginTransaction();
 
         try {
@@ -1201,7 +1132,7 @@ class OtherController extends Controller
 
 
 
-    // convet pdf
+    // convert pdf
     public function troubleshoot_pdf($id) // Convert PDF permit troubleshoot
     {
         $getForm = TroubleshootBm::find($id);

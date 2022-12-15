@@ -9,7 +9,16 @@ class InternalHistory extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'internal_id',
+        'created_by',
+        'role_to',
+        'status',
+        'aktif',
+        'pdf',
+        'note',
+    ];
+    protected $primaryKey = 'id';
     protected $table = 'internal_histories';
 
     public function internal()

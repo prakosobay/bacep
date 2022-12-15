@@ -11,7 +11,13 @@ class AccessRequestInternal extends Model
     use HasFactory, SoftDeletes;
 
     protected $table = 'access_request_internals';
-    protected $guarded = [];
+    protected $primaryKey = 'id';
+    protected $fillable = [
+        'internal_id',
+        'number',
+        'month',
+        'year',
+    ];
 
     public function internal()
     {
