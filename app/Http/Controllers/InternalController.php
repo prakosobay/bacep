@@ -242,8 +242,9 @@ class InternalController extends Controller
                 ->select('users.name as requestor', 'internals.id', 'internals.visit', 'internals.created_at as created', 'internals.work', 'internals.leave')
                 ->where('internals.id', $insertForm->id)
                 ->first();
+
             foreach ([
-                'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
+                'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
                 'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'syukril@balitower.co.id',
                 'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'mufli.gonibala@balitower.co.id',
             ] as $recipient) {
@@ -337,7 +338,7 @@ class InternalController extends Controller
                 $role_to = '';
                 if ($last_update->role_to == 'review') {
                     foreach ([
-                        'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
+                        'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
                         'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'syukril@balitower.co.id',
                         'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'mufli.gonibala@balitower.co.id',
                     ] as $recipient) {

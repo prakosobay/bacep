@@ -169,7 +169,7 @@ class OtherController extends Controller
             $personil = OtherPersonil::insert($p);
 
             foreach ([
-                'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id', 'syukril@balitower.co.id',
+                'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id', 'syukril@balitower.co.id',
                 'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'mufli.gonibala@balitower.co.id',
                 'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'dyah.retno@balitower.co.id',
             ] as $recipient) {
@@ -228,7 +228,7 @@ class OtherController extends Controller
                 $role_to = '';
                 if ($lastupdate->role_to == 'review') {
                     foreach ([
-                        'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
+                        'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
                         'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'syukril@balitower.co.id',
                         'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'mufli.gonibala@balitower.co.id',
                     ] as $recipient) {
@@ -738,7 +738,7 @@ class OtherController extends Controller
 
             $notif_email = TroubleshootBm::find($other_form->id);
             foreach ([
-                'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id', 'syukril@balitower.co.id',
+                'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id', 'syukril@balitower.co.id',
                 'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'mufli.gonibala@balitower.co.id',
                 'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'dyah.retno@balitower.co.id',
             ] as $recipient) {
@@ -829,7 +829,7 @@ class OtherController extends Controller
 
             $notif_email = TroubleshootBm::find($insert->id);
             foreach ([
-                'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id', 'syukril@balitower.co.id',
+                'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id', 'syukril@balitower.co.id',
                 'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'mufli.gonibala@balitower.co.id',
                 'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'dyah.retno@balitower.co.id',
             ] as $recipient) {
@@ -886,7 +886,7 @@ class OtherController extends Controller
             $role_to = '';
             if ($last_update->role_to == 'review') {
                 foreach ([
-                    'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
+                    'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
                     'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'syukril@balitower.co.id',
                     'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'mufli.gonibala@balitower.co.id',
                 ] as $recipient) {
