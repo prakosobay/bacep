@@ -24,6 +24,7 @@ class Eksternal extends Model
         'testing',
         'rollback',
         'reject_note',
+        'type',
     ];
 
     public function requestor()

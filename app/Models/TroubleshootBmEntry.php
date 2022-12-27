@@ -10,23 +10,22 @@ class TroubleshootBmEntry extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $table = 'troubleshoot_bm_entries';
+    protected $primaryKey = 'id';
     protected $fillable = [
-        'server',
+        'troubleshoot_bm_id',
+        'dc',
         'mmr1',
         'mmr2',
         'ups',
         'fss',
-        'cctv',
         'trafo',
-        'baterai',
         'panel',
+        'baterai',
         'generator',
         'yard',
         'parking',
         'lain',
-        'troubleshoot_bm_id',
-        'lt2',
-        'lt3',
     ];
 
     public function troubleshoot_bm()

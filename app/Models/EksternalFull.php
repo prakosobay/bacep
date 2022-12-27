@@ -15,6 +15,7 @@ class EksternalFull extends Model
         'link',
         'status',
         'note',
+        'type',
     ];
     protected $table = 'eksternal_fulls';
     protected $primaryKey = 'id';

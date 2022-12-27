@@ -22,11 +22,12 @@ class EksternalVisitor extends Model
         'photo_checkin',
         'checkout',
         'photo_checkout',
+        'is_done',
     ];
     protected $primaryKey = 'id';
     protected $table = 'eksternal_visitors';
 
-    public function eksternal()
+    public function eksternalId()
     {
         return $this->belongsTo(Eksternal::class, 'eksternal_id');
     }

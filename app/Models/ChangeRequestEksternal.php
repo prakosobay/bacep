@@ -10,16 +10,17 @@ class ChangeRequestEksternal extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $guarded = [];
     protected $table = 'change_request_eksternals';
+    protected $primaryKey = 'id';
+    protected $fillable = [
+        'eksternal_id',
+        'number',
+        'month',
+        'year',
+    ];
 
-    public function eksternal()
+    public function eksternalId()
     {
         return $this->belongsTo(Eksternal::class, 'eksternal_id');
-    }
-
-    public function vendor()
-    {
-        return $this->belongsTo(Vendor::class, 'vendor_id');
     }
 }

@@ -10,7 +10,17 @@ class TroubleshootBmFull extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $guarded = [
+    protected $table = 'troubleshoot_bm_fulls';
+    protected $primaryKey = 'id';
+    protected $fillable = [
+        'troubleshoot_bm_id',
+        'work',
+        'request',
+        'visit',
+        'leave',
+        'link',
+        'note',
+        'status',
     ];
 
     public function troubleshoot()

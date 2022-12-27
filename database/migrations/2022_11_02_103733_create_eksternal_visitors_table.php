@@ -26,6 +26,7 @@ class CreateEksternalVisitorsTable extends Migration
             $table->string('photo_checkin')->nullable();
             $table->time('checkout')->nullable();
             $table->string('photo_checkout')->nullable();
+            $table->boolean('is_done')->default(false);
             $table->softDeletes();
             $table->timestamps();
         });

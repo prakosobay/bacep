@@ -25,6 +25,7 @@ class CreateEksternalsTable extends Migration
             $table->string('testing')->nullable();
             $table->string('rollback')->nullable();
             $table->string('reject_note')->nullable();
+            $table->string('type');
             $table->softDeletes();
             $table->timestamps();
         });

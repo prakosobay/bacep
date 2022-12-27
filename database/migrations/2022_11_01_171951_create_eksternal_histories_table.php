@@ -21,6 +21,7 @@ class CreateEksternalHistoriesTable extends Migration
             $table->string('status');
             $table->boolean('aktif');
             $table->boolean('pdf');
+            $table->string('type');
             $table->timestamps();
         });
     }

@@ -12,19 +12,23 @@ class EntryRack extends Model
 
     protected $table = 'entry_racks';
     protected $primaryKey = 'id';
-    protected $guarded = [];
+    protected $fillable = [
+        'internal_id',
+        'eksternal_id',
+        'm_rack_id',
+    ];
 
-    public function internal()
+    public function internalId()
     {
         return $this->belongsTo(Internal::class, 'internal_id');
     }
 
-    public function eksternal()
+    public function eksternalId()
     {
         return $this->belongsTo(Eksternal::class, 'eksternal_id');
     }
 
-    public function rack()
+    public function mRackId()
     {
         return $this->belongsTo(MasterRack::class, 'm_rack_id');
     }

@@ -16,7 +16,6 @@ class CreateAccessRequestEksternalsTable extends Migration
         Schema::create('access_request_eksternals', function (Blueprint $table) {
             $table->id();
             $table->foreignId('eksternal_id');
-            $table->foreignId('vendor_id');
             $table->unsignedInteger('number');
             $table->unsignedTinyInteger('month');
             $table->unsignedSmallInteger('year');

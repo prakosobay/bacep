@@ -17,12 +17,12 @@ class EksternalRisk extends Model
     protected $primaryKey = 'id';
     protected $table = 'eksternal_risks';
 
-    public function eksternal()
+    public function eksternalId()
     {
         return $this->belongsTo(Eksternal::class, 'eksternal_id');
     }
 
-    public function masterRisk()
+    public function mRiskId()
     {
         return $this->belongsTo(MasterRisks::class, 'm_risk_id');
     }

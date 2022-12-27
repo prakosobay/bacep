@@ -19,6 +19,7 @@ class CreateEksternalFullsTable extends Migration
             $table->string('link');
             $table->string('status');
             $table->string('note')->nullable();
+            $table->string('type');
             $table->softDeletes();
             $table->timestamps();
         });

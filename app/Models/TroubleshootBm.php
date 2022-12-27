@@ -10,7 +10,17 @@ class TroubleshootBm extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $guarded = [];
+    protected $table = 'troubleshoot_bms';
+    protected $primaryKey = 'id';
+    protected $fillable = [
+        'work',
+        'visit',
+        'leave',
+        'background',
+        'desc',
+        'testing',
+        'rollback',
+    ];
 
     public function personils()
     {

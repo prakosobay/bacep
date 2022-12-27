@@ -11,14 +11,31 @@ class Entry extends Model
     use HasFactory, SoftDeletes;
 
     protected $table = 'entries';
-    protected $guarded = [];
+    protected $fillable = [
+        'internal_id',
+        'eksternal_id',
+        'dc',
+        'mmr1',
+        'mmr2',
+        'cctv',
+        'genset',
+        'panel',
+        'baterai',
+        'trafo',
+        'ups',
+        'fss',
+        'office_lt1',
+        'parking',
+        'yard',
+        'lain',
+    ];
 
-    public function internal()
+    public function internalId()
     {
         return $this->belongsTo(Internal::class, 'internal_id');
     }
 
-    public function eksternal()
+    public function eksternalId()
     {
         return $this->belongsTo(Eksternal::class, 'eksternal_id');
     }
