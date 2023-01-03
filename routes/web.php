@@ -287,6 +287,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/approve_cleaning', 'approve_cleaning');
 
         Route::get('penomoran', 'penomoran');
+        Route::get('cleaning/review/{id}/arcr', 'review_arcr')->name('cleaningReviewARCR');
 
         Route::post('cleaning-checkin-cancel/{id}', 'checkin_cancel')->name('cleaningCheckinCancel');
     });

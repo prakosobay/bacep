@@ -236,20 +236,19 @@ class InternalController extends Controller
             }
             InternalVisitor::insert($arrayVisitor);
 
-            $notif_email = DB::table('internals')
-                // ->join('internal_histories', 'internals.id', '=', 'internal_histories.internal_id')
-                ->join('users', 'internals.requestor_id', '=', 'users.id')
-                ->select('users.name as requestor', 'internals.id', 'internals.visit', 'internals.created_at as created', 'internals.work', 'internals.leave')
-                ->where('internals.id', $insertForm->id)
-                ->first();
+            // $notif_email = DB::table('internals')
+            //     ->join('users', 'internals.requestor_id', '=', 'users.id')
+            //     ->select('users.name as requestor', 'internals.id', 'internals.visit', 'internals.created_at as created', 'internals.work', 'internals.leave')
+            //     ->where('internals.id', $insertForm->id)
+            //     ->first();
 
-            foreach ([
-                'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
-                'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'syukril@balitower.co.id',
-                'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'mufli.gonibala@balitower.co.id',
-            ] as $recipient) {
-                Mail::to($recipient)->send(new NotifInternalForm($notif_email));
-            }
+            // foreach ([
+            //     'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
+            //     'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'syukril@balitower.co.id',
+            //     'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'mufli.gonibala@balitower.co.id',
+            // ] as $recipient) {
+            //     Mail::to($recipient)->send(new NotifInternalForm($notif_email));
+            // }
 
             InternalHistory::create([
                 'internal_id' => $insertForm->id,

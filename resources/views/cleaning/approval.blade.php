@@ -40,7 +40,8 @@
                                 @elsecan('isSecurity')
                                     <a href="javascript:void(0)" type="button" id="ok" class="approve btn btn-success btn-sm my-1 mx-1" data-cleaning_id="{{$p->cleaning_id}}">Approve</a>
                                 @endcan
-                                    <a href="/cleaning_pdf/{{$p->cleaning_id}}" class="btn btn-primary btn-sm my-1 mx-1" target="_blank">File</a>
+                                    {{-- <a href="/cleaning_pdf/{{$p->cleaning_id}}" class="btn btn-primary btn-sm my-1 mx-1" target="_blank">File</a> --}}
+                                    <a href="{{ route('cleaningReviewARCR', $p->cleaning_id)}}" class="btn btn-primary btn-sm my-1 mx-1">Form</a>
                             </td>
                         </tr>
                         @endforeach
