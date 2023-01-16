@@ -27,6 +27,31 @@ class OtherController extends Controller
         return view('other.maintenance_form', compact('personil', 'pilihanwork'));
     }
 
+    public function review_arcr($id)
+    {
+        $other = Other::findOrFail($id);
+        $otherPersonil = OtherPersonil::where('other_id', $id)->get()->toArray();
+
+        foreach($otherPersonil as $k => $v) {
+            $get = Visitor::where('visit_nama', $v['name'])->first()->toArray();
+            $loadPersonil[] = $get;
+        }
+
+        $visitors = $loadPersonil;
+        $personil = Visitor::all();
+        $getLastOther = OtherHistory::where('other_id', $id)->where('aktif', 1)->first();
+        $getPersonil = OtherPersonil::where('other_id', $id)->get();
+        $getLastOther->update(['pdf' => true]);
+
+        $getHistory = DB::table('other_histories')
+            ->join('others', 'others.id', '=', 'other_histories.other_id')
+            ->where('other_histories.other_id', '=', $id)
+            ->select('other_histories.*')
+            ->get();
+
+        return view('other.maintenanceReviewARCR', compact('other', 'visitors', 'getLastOther', 'getPersonil', 'getHistory', 'personil', 'otherPersonil'));
+    }
+
     public function show_maintenance_full() // Menampilkan list permit full approved dari sisi visitor
     {
         return view('cleaning.full_visitor');
@@ -162,19 +187,18 @@ class OtherController extends Controller
                         'created_at' => now(),
                         'updated_at' => now(),
                     ];
-
                     $p[] = $data_dump;
                 }
             }
             $personil = OtherPersonil::insert($p);
 
-            foreach ([
-                'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id', 'syukril@balitower.co.id',
-                'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'mufli.gonibala@balitower.co.id',
-                'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'dyah.retno@balitower.co.id',
-            ] as $recipient) {
-                Mail::to($recipient)->send(new NotifMaintenanceForm($otherForm));
-            }
+            // foreach ([
+            //     'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id', 'syukril@balitower.co.id',
+            //     'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'mufli.gonibala@balitower.co.id',
+            //     'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'dyah.retno@balitower.co.id',
+            // ] as $recipient) {
+            //     Mail::to($recipient)->send(new NotifMaintenanceForm($otherForm));
+            // }
 
             $log = OtherHistory::insert([
                 'other_id' => $otherForm->id,
@@ -197,13 +221,145 @@ class OtherController extends Controller
 
     }
 
-    public function maintenance_approve(Request $request) // Flow Approval form maintenance
+    public function maintenance_approve(Request $request, $id) // Flow Approval form maintenance
     {
-        $lastupdate = OtherHistory::where('other_id', '=', $request->other_id)->latest()->first();
-
+        $lastupdate = OtherHistory::where('other_id', $id)->latest()->first();
+        $data = $request->all();
+        // dd($data['visit_nama']);
         DB::beginTransaction();
 
         try {
+
+            $maintenance = Other::findOrFail($id);
+            $maintenance->update([
+                'visit' => $request->visit,
+                'leave' => $request->leave,
+                'loc1' => $request->loc1,
+                'loc2' => $request->loc2,
+                'loc3' => $request->loc3,
+                'loc4' => $request->loc4,
+                'loc5' => $request->loc5,
+                'loc6' => $request->loc6,
+                'loc7' => $request->loc7,
+                'loc8' => $request->loc8,
+                'loc9' => $request->loc9,
+                'loc10' => $request->loc10,
+                'loc11' => $request->loc11,
+                'loc12' => $request->loc12,
+                'loc13' => $request->loc13,
+                'loc14' => $request->loc14,
+                'background' => $request->background,
+                'desc' => $request->describ,
+                'testing' => $request->testing,
+                'rollback' => $request->rollback,
+                'time_start_1' => $request->time_start_1,
+                'time_start_2' => $request->time_start_2,
+                'time_start_3' => $request->time_start_3,
+                'time_start_4' => $request->time_start_4,
+                'time_start_5' => $request->time_start_5,
+                'time_end_1' => $request->time_end_1,
+                'time_end_2' => $request->time_end_2,
+                'time_end_3' => $request->time_end_3,
+                'time_end_4' => $request->time_end_4,
+                'time_end_5' => $request->time_end_5,
+                'activity_1' => $request->activity_1,
+                'activity_2' => $request->activity_2,
+                'activity_3' => $request->activity_3,
+                'activity_4' => $request->activity_4,
+                'activity_5' => $request->activity_5,
+                'detail_1' => $request->detail_1,
+                'detail_2' => $request->detail_2,
+                'detail_3' => $request->detail_3,
+                'detail_4' => $request->detail_4,
+                'detail_5' => $request->detail_5,
+                'item_1' => $request->item_1,
+                'item_2' => $request->item_2,
+                'item_3' => $request->item_3,
+                'item_4' => $request->item_4,
+                'item_5' => $request->item_5,
+                'procedure_1' => $request->procedure_1,
+                'procedure_2' => $request->procedure_2,
+                'procedure_3' => $request->procedure_3,
+                'procedure_4' => $request->procedure_4,
+                'procedure_5' => $request->procedure_5,
+                'risk_1' => $request->risk_1,
+                'risk_2' => $request->risk_2,
+                'risk_3' => $request->risk_3,
+                'risk_4' => $request->risk_4,
+                'risk_5' => $request->risk_5,
+                'poss_1' => $request->poss_1,
+                'poss_2' => $request->poss_2,
+                'poss_3' => $request->poss_3,
+                'poss_4' => $request->poss_4,
+                'poss_5' => $request->poss_5,
+                'impact_1' => $request->impact_1,
+                'impact_2' => $request->impact_2,
+                'impact_3' => $request->impact_3,
+                'impact_4' => $request->impact_4,
+                'impact_5' => $request->impact_5,
+                'mitigation_1' => $request->mitigation_1,
+                'mitigation_2' => $request->mitigation_2,
+                'mitigation_3' => $request->mitigation_3,
+                'mitigation_4' => $request->mitigation_4,
+                'mitigation_5' => $request->mitigation_5,
+            ]);
+
+            foreach($data['visit_nama'] as $k => $v) {
+                $pic = Visitor::where('id', $v)->first()->toArray();
+
+                $arrayVisitor[] = $pic;
+            }
+            $otherPersonils = $arrayVisitor;
+
+            $existing = OtherPersonil::where('other_id', $id)->get()->toArray();
+            dd($existing);
+            // foreach($personils as $k => $v) {
+            //     dd($k -> $v);
+            //     if(isset())
+            //     $update = OtherPersonil::updateOrCreate(
+            //         ['id' => $v,
+            //         ['company' => $data['visit_company'], 'department' => $data['visit_department'], 'respon' => $data['respon'], 'phone' => $data['phone'], 'number' => $data['number']]
+            //     );
+            // }
+
+            OtherPersonil::where('other_id', $id)->upsert([
+                [
+
+                ]
+                ]);
+
+            // OtherPersonil::where('other_id', $id)->upsert([
+            //     [
+            //         'other_id' => $id,
+            //         'name' =>
+            //     ]
+            // ]);
+
+            // $p = [];
+            // foreach ($data['visit_nama'] as $k => $v) {
+            //     $data_dump = [];
+            //     if (isset($data['visit_nama'][$k])) {
+            //         $personil[] = Visitor::find($v)->visit_nama;
+            //         $data_dump = [
+            //             'name' => $personil[$k],
+            //             'company' => $data['visit_company'][$k],
+            //             'respon' => $data['visit_respon'][$k],
+            //             'department' => $data['visit_department'][$k],
+            //             'number' => $data['visit_nik'][$k],
+            //             'phone' => $data['visit_phone'][$k],
+            //             'updated_at' => now(),
+            //         ];
+            //         $p[] = $data_dump;
+            //     }
+            // }
+
+            // foreach($personils as $pic){
+            //     $pic->update()
+            // }
+
+            // foreach($personils as $pic){
+            //     $pic->update([])
+            // }
 
             if($lastupdate->pdf == true){
 
@@ -219,56 +375,56 @@ class OtherController extends Controller
                     $status = 'acknowledge';
                 } elseif ($lastupdate->status == 'acknowledge') {
                     $status = 'final';
-                } elseif ($lastupdate->status == 'final') {
-                    $full_maintenance = Other::find($request->other_id)->first();
                 }
 
-                $notif_email = Other::find($lastupdate->other_id);
+                $notif_email = Other::findOrFail($id);
                 // // Pergantian  role tiap permit & send email notif
                 $role_to = '';
                 if ($lastupdate->role_to == 'review') {
-                    foreach ([
-                        'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
-                        'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'syukril@balitower.co.id',
-                        'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'mufli.gonibala@balitower.co.id',
-                    ] as $recipient) {
+                    // foreach ([
+                    //     'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
+                    //     'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'syukril@balitower.co.id',
+                    //     'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'mufli.gonibala@balitower.co.id',
+                    // ] as $recipient) {
+                    //     Mail::to($recipient)->send(new NotifMaintenanceForm($notif_email));
+                    // }
+                    foreach (['bayu.prakoso@balitower.co.id'] as $recipient) {
                         Mail::to($recipient)->send(new NotifMaintenanceForm($notif_email));
                     }
                     $role_to = 'check';
                 } elseif ($lastupdate->role_to == 'check') {
-                    foreach (['security.bacep@balitower.co.id'] as $recipient) {
-                        Mail::to($recipient)->send(new NotifMaintenanceForm($notif_email));
-                    }
+                    // foreach (['security.bacep@balitower.co.id'] as $recipient) {
+                    //     Mail::to($recipient)->send(new NotifMaintenanceForm($notif_email));
+                    // }
                     $role_to = 'security';
                 } elseif ($lastupdate->role_to == 'security') {
-                    foreach (['bayu.prakoso@balitower.co.id', 'tofiq.hidayat@balitower.co.id'] as $recipient) {
+                    foreach (['bayu.prakoso@balitower.co.id'] as $recipient) {
                         Mail::to($recipient)->send(new NotifMaintenanceForm($notif_email));
                     }
                     $role_to = 'head';
                 } elseif ($lastupdate->role_to = 'head') {
-                    $full = Other::find($request->other_id);
-                    foreach (['dc@balitower.co.id'] as $recipient) {
+                    $full = Other::findOrFail($id);
+                    foreach (['bayu.prakoso@balitower.co.id'] as $recipient) {
                         Mail::to($recipient)->send(new NotifMaintenanceFull($full));
                     }
                     $role_to = 'all';
 
-                    $full_maintenance = Other::where('id', $request->other_id)->first();
                     OtherFull::create([
-                        'other_id' => $full_maintenance->id,
-                        'work' => $full_maintenance->work,
-                        'request' => $full_maintenance->created_at,
-                        'visit' => $full_maintenance->visit,
-                        'leave' => $full_maintenance->leave,
-                        'link' => ("https://dcops.balifiber.id/maintenance-pdf/$full_maintenance->id"),
-                        // 'link' => ("http://localhost:8000/maintenance-pdf/$full_maintenance->id"),
+                        'other_id' => $notif_email->id,
+                        'work' => $notif_email->work,
+                        'request' => $notif_email->created_at,
+                        'visit' => $notif_email->visit,
+                        'leave' => $notif_email->leave,
+                        // 'link' => ("https://dcops.balifiber.id/maintenance-pdf/$full_maintenance->id"),
+                        'link' => ("http://localhost:8000/maintenance-pdf/$notif_email->id"),
                         'note' => null,
                         'status' => 'Full Approved',
                     ]);
                 }
 
                 // Simpan tiap perubahan permit ke table CLeaningHistory
-                $otherHistory = OtherHistory::create([
-                    'other_id' => $request->other_id,
+                OtherHistory::create([
+                    'other_id' => $id,
                     'created_by' => Auth::user()->name,
                     'role_to' => $role_to,
                     'status' => $status,
@@ -278,18 +434,24 @@ class OtherController extends Controller
 
                 DB::commit();
             }
-            return $otherHistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
+            return redirect()->route('approvalView', 'maintenance')->with('success', 'Approved !');
+            // return $otherHistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
         } catch (\Exception $e) {
             DB::rollBack();
             throw $e;
         }
-
     }
 
-    public function maintenance_reject(Request $request) // Untuk reject permit maintenance
+    public function maintenance_reject(Request $request, $id) // Untuk reject permit maintenance
     {
+        $request->validate([
+            'note' => ['required', 'string', 'max:255'],
+        ]);
+
+        $note = $request->note;
+
         // Get permit terbaru by ID Permit
-        $lastupdate = OtherHistory::where('other_id', '=', $request->other_id)->latest()->first();
+        $lastupdate = OtherHistory::where('other_id', $id)->latest()->first();
 
         DB::beginTransaction();
 
@@ -299,8 +461,8 @@ class OtherController extends Controller
                 $lastupdate->update(['aktif' => false]);
 
                 // Simpan tiap perubahan permit ke table CleaningHistory
-                $history = OtherHistory::create([
-                    'other_id' => $request->other_id,
+                OtherHistory::create([
+                    'other_id' => $id,
                     'created_by' => Auth::user()->name,
                     'role_to' => 0,
                     'status' => 'rejected',
@@ -309,14 +471,15 @@ class OtherController extends Controller
                 ]);
 
                 // Get permit yang di reject & kirim notif email
-                $maintenance_reject = Other::find($request->other_id);
-                foreach (['badai.sino@balitower.co.id'] as $recipient) {
-                    Mail::to($recipient)->send(new NotifMaintenanceReject($maintenance_reject));
+                $maintenance_reject = Other::findOrFail($id);
+                foreach (['bayu.prakoso@balitower.co.id'] as $recipient) {
+                    Mail::to($recipient)->send(new NotifMaintenanceReject($maintenance_reject, $note));
                 }
 
                 DB::commit();
 
-                return $history->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
+                // return $history->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
+                return redirect()->route('approvalView', 'maintenance')->with('success', 'Rejected!');
             }
         } catch (\Exception $e) {
             DB::rollBack();
@@ -486,16 +649,14 @@ class OtherController extends Controller
         $getOther = Other::find($id);
         $getLastOther = OtherHistory::where('other_id', $id)->where('aktif', 1)->first();
         $getPersonil = OtherPersonil::where('other_id', $id)->get();
-        // dd($getPersonil);
         $getLastOther->update(['pdf' => true]);
 
         $getHistory = DB::table('other_histories')
             ->join('others', 'others.id', '=', 'other_histories.other_id')
-            // ->join('users', 'other_histories.created_by', '=', 'users.id')
             ->where('other_histories.other_id', '=', $id)
             ->select('other_histories.*')
             ->get();
-        // dd($getHistory);
+
         $penomoran = PenomoranCleaning::where('type', 'maintenance')->where('permit_id', $id)->first();
         $pdf = PDF::loadview('other.maintenance_pdf', compact('getOther', 'getPersonil', 'getHistory', 'getLastOther', 'penomoran'))->setPaper('a4', 'portrait')->setWarnings(false);
         return $pdf->stream();

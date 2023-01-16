@@ -9,6 +9,19 @@
         <div class="card-header py-3">
             <h1 class="h3 mb-2 text-gray-800 text-center">Approval Permit Cleaning</h1>
         </div>
+
+        @if (session('success'))
+            <div class="alert alert-success mx-2 my-2 text-center">
+                <b>{{ session('success') }}</b>
+            </div>
+        @endif
+
+        @if (session('failed'))
+            <div class="alert alert-danger mx-2 my-2 text-center">
+                <b>{{ session('failed') }}</b>
+            </div>
+        @endif
+
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-striped table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -31,7 +44,7 @@
                             <td>{{ $p->cleaning_name}}</td>
                             <td>{{ $p->cleaning_work }}</td>
                             <td>
-                                @can('isApproval')
+                                {{-- @can('isApproval')
                                     <a href="javascript:void(0)" type="button" id="ok" class="approve btn btn-success btn-sm my-1 mx-1" data-cleaning_id="{{$p->cleaning_id}}">Approve</a>
                                     <a href="javascript:void(0)" type="button" id="not" class="reject btn btn-danger btn-sm my-1 mx-1" data-cleaning_id="{{$p->cleaning_id}}">Reject</a>
                                 @elsecan('isHead')
@@ -40,8 +53,8 @@
                                 @elsecan('isSecurity')
                                     <a href="javascript:void(0)" type="button" id="ok" class="approve btn btn-success btn-sm my-1 mx-1" data-cleaning_id="{{$p->cleaning_id}}">Approve</a>
                                 @endcan
-                                    {{-- <a href="/cleaning_pdf/{{$p->cleaning_id}}" class="btn btn-primary btn-sm my-1 mx-1" target="_blank">File</a> --}}
-                                    <a href="{{ route('cleaningReviewARCR', $p->cleaning_id)}}" class="btn btn-primary btn-sm my-1 mx-1">Form</a>
+                                    <a href="/cleaning_pdf/{{$p->cleaning_id}}" class="btn btn-primary btn-sm my-1 mx-1" target="_blank">File</a> --}}
+                                    <a href="{{ route('cleaningReviewARCR', $p->cleaning_id)}}" class="btn btn-primary btn-sm my-1 mx-1">Review</a>
                             </td>
                         </tr>
                         @endforeach

@@ -30,6 +30,7 @@
                 <th>Date of Request</th>
                 <th>Purpose of Work</th>
                 <th>Validity</th>
+                <th>Note</th>
             </tr>
         </thead>
         <tbody>
@@ -38,6 +39,7 @@
                 <td>{{ Carbon\Carbon::parse($data->created_at)->format('d-m-Y')  }}</td>
                 <td>{{ $data->cleaning_work }}</td>
                 <td>{{ Carbon\Carbon::parse($data->validity_from)->format('d-m-Y') }}</td>
+                <td>{{ $note }}</td>
             </tr>
         </tbody>
     </table>

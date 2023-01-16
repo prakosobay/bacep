@@ -11,6 +11,7 @@ class NotifMaintenanceReject extends Mailable
 {
     use Queueable, SerializesModels;
     public $data;
+    public $note;
 
     /**
      * Create a new message instance.
@@ -18,9 +19,10 @@ class NotifMaintenanceReject extends Mailable
      * @var \App\Models\Other
      */
 
-    public function __construct($data)
+    public function __construct($data, $note)
     {
         $this->data = $data;
+        $this->note = $note;
     }
 
     /**

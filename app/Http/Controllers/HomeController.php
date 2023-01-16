@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{AccessRequestInternal, ChangeRequestInternal, Internal, InternalHistory, PenomoranCleaning, User};
+use App\Models\{AccessRequestInternal, ChangeRequestInternal, Cleaning, Internal, InternalHistory, PenomoranCleaning, User};
 use Illuminate\Support\Facades\{DB, Auth, Gate, Session};
 
 class HomeController extends Controller

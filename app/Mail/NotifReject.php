@@ -10,7 +10,7 @@ use Illuminate\Queue\SerializesModels;
 class NotifReject extends Mailable
 {
     use Queueable, SerializesModels;
-    public $data;
+    public $data, $note;
 
     /**
      * The order instance.
@@ -18,9 +18,10 @@ class NotifReject extends Mailable
      * @var \App\Models\Cleaning
      */
 
-    public function __construct($data)
+    public function __construct($data, $note)
     {
         $this->data = $data;
+        $this->note = $note;
     }
 
     /**

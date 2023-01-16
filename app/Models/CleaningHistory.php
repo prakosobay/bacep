@@ -32,7 +32,7 @@ class CleaningHistory extends Model
         return $this->belongsTo(User::class, 'created_by');
     }
 
-    public function cleaning()
+    public function cleaningId()
     {
         return $this->belongsTo(Cleaning::class, 'cleaning_id');
     }

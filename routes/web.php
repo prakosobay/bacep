@@ -260,6 +260,11 @@ Route::middleware(['auth'])->group(function () {
         Route::get('route_history_cleaning', 'data_history');
 
         Route::get('cleaning-form', 'show_form')->name('cleaningForm');
+        Route::get('penomoran', 'penomoran');
+        Route::get('cleaning/review/{id}/arcr', 'review_arcr')->name('cleaningReviewARCR');
+
+        Route::post('cleaning/approve/{id}', 'approve_cleaning')->name('cleaningApprove');
+        Route::post('cleaning/reject/{id}', 'reject_cleaning')->name('cleaningReject');
 
         Route::get('/cleaning/yajra/full/reject', 'data_reject_cleaning');
         Route::get('log_cleaning', 'log_carbon');
@@ -284,10 +289,9 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/route_submit_cleaning', 'submit_data_cleaning');
         Route::post('/cleaning_reject', 'reject_form_cleaning');
         Route::post('/cleaning/full/reject/{id}', 'reject_full_cleaning');
-        Route::post('/approve_cleaning', 'approve_cleaning');
+        // Route::post('/approve_cleaning', 'approve_cleaning');
 
-        Route::get('penomoran', 'penomoran');
-        Route::get('cleaning/review/{id}/arcr', 'review_arcr')->name('cleaningReviewARCR');
+
 
         Route::post('cleaning-checkin-cancel/{id}', 'checkin_cancel')->name('cleaningCheckinCancel');
     });
@@ -328,6 +332,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('other/maintenance/full/reject', 'show_maintenance_reject');
         Route::get('other/maintenance/rutin/{id}', 'get_rutin');
         Route::get('other/maintenance/visitor/{id}', 'get_visitor');
+        Route::get('other/maintenance/review/{id}/arcr', 'review_arcr')->name('maintenanceReviewARCR');
 
         Route::get('maintenance-yajra-history', 'maintenance_yajra_history')->name('maintenanceYajraHistory');
         Route::get('maintenance-yajra-full-approval', 'maintenance_yajra_full_approval')->name('maintenanceYajraFullApproval');
@@ -341,9 +346,9 @@ Route::middleware(['auth'])->group(function () {
         Route::put('maintenance-checkout-update/{id}', 'maintenance_checkout_update')->name('maintenanceCheckoutUpdate');
         Route::put('maintenance-checkin-cancel/{id}', 'maintenance_checkin_cancel')->name('maintenanceCheckinCancel');
 
-        Route::post('maintenance-store', 'maintenance_store')->name('maintenanceStore');
-        Route::post('maintenance-approve', 'maintenance_approve')->name('maintenanceApprove');
-        Route::post('maintenance-reject', 'maintenance_reject')->name('maintenanceReject');
+        Route::post('maintenance/store', 'maintenance_store')->name('maintenanceStore');
+        Route::post('maintenance/approve/{id}', 'maintenance_approve')->name('maintenanceApprove');
+        Route::post('maintenance/reject/{id}', 'maintenance_reject')->name('maintenanceReject');
     });
 
     // Internal
@@ -441,7 +446,7 @@ Route::middleware(['auth'])->group(function () {
 
     // ALL
     Route::get('history/{type_view}', [HomeController::class, 'history']);
-    Route::get('approval/{type_approve}', [HomeController::class, 'approval']);
+    Route::get('approval/{type_approve}', [HomeController::class, 'approval'])->name('approvalView');
     Route::get('full/{type_full}', [HomeController::class, 'full']);
     Route::get('penomoran/{type_nomor}', [HomeController::class, 'penomoran']);
     Route::get('visitor/log/{type_log}', [HomeController::class, 'visitor_log']);
