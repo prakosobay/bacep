@@ -91,12 +91,9 @@
                         <a href="#"><img src="{{asset('gambar/home/bell.svg')}}" alt=""></a>
                     </li>
                     <li class="nav-item mx-3">
-                        <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                            <img src="{{asset('gambar/home/box-arrow-right.svg')}}" alt="">
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#logoutModal">
+                            <img src="{{asset('gambar/home/box-arrow-right.svg')}}" class="img-fluid" alt="">
                         </a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                            @csrf
-                        </form>
                     </li>
                 </ul>
             </div>
@@ -124,7 +121,7 @@
                 <div id="collapseInternal" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Option :</h6>
-                        <a class="collapse-item" href="{{ url('approval/internal')}}">AR CR Form</a>
+                        <a class="collapse-item" href="#">AR CR Form</a>
                         {{-- <a class="collapse-item" href="{{ url('penomoran/internal')}}">Penomoran</a> --}}
                         {{-- <a class="collapse-item" href="{{ url('#')}}">Consumable</a>
                         <a class="collapse-item" href="{{ url('#')}}">Barang Masuk</a> --}}
@@ -141,9 +138,9 @@
                 <div id="collapseEksternal" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Option :</h6>
-                        <a class="collapse-item" href="{{ url('approval/eksternal')}}">AR CR Form</a>
-                        <a class="collapse-item" href="{{ url('#')}}">Consumable</a>
-                        <a class="collapse-item" href="{{ url('#')}}">Barang Masuk</a>
+                        <a class="collapse-item" href="#">AR CR Form</a>
+                        <a class="collapse-item" href="#">Consumable</a>
+                        <a class="collapse-item" href="#">Barang Masuk</a>
                     </div>
                 </div>
             </li>
@@ -157,7 +154,7 @@
                 <div id="collapseSurvey" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Option :</h6>
-                        <a class="collapse-item" href="{{ url('approval/survey')}}">Customer Survey</a>
+                        <a class="collapse-item" href="#">Customer Survey</a>
                     </div>
                 </div>
             </li>
@@ -249,13 +246,13 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a href="{{ route('logout') }}" type="button" class="btn btn-primary sm"
+                    <a href="{{ route('logoutWeb') }}" type="button" class="btn btn-primary sm"
                         onclick="event.preventDefault();
                                         document.getElementById('logout-form').submit();">
                             {{ __('Logout') }}
                     </a>
 
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    <form id="logout-form" action="{{ route('logoutWeb') }}" method="POST" class="d-none">
                         @csrf
                     </form>
                 </div>

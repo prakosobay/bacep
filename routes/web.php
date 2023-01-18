@@ -16,6 +16,10 @@ Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'i
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', [HomeController::class, 'index']);
 
+    Route::controller(AuthController::class)->group(function(){
+        Route::post('logout-web', 'logout')->name('logoutWeb');
+    });
+
     //Detail History
     Route::get('/detail_cleaning/{id}', [CleaningController::class, 'detail_permit_cleaning']);
 

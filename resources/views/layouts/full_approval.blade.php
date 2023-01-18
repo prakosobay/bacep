@@ -88,12 +88,9 @@
                         <a href="#"><img src="{{asset('gambar/home/bell.svg')}}" alt=""></a>
                     </li>
                     <li class="nav-item mx-3">
-                        <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                            <img src="{{asset('gambar/home/box-arrow-right.svg')}}" alt="">
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#logoutModal">
+                            <img src="{{asset('gambar/home/box-arrow-right.svg')}}" class="img-fluid" alt="">
                         </a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                            @csrf
-                        </form>
                     </li>
                 </ul>
             </div>
@@ -121,7 +118,7 @@
                 <div id="collapseInternal" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Option :</h6>
-                        <a class="collapse-item" href="{{ url('full/internal')}}">Internal</a>
+                        <a class="collapse-item" href="#">Internal</a>
                         {{-- <a class="collapse-item" href="{{ url('#')}}">Consumable</a> --}}
                     </div>
                 </div>
@@ -136,7 +133,7 @@
                 <div id="collapsEksternal" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Option :</h6>
-                        <a class="collapse-item" href="{{ url('full/eksternal')}}">Eksternal</a>
+                        <a class="collapse-item" href="#">Eksternal</a>
                     </div>
                 </div>
             </li>
@@ -150,7 +147,7 @@
                 <div id="collapseSurvey" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Option :</h6>
-                        <a class="collapse-item" href="{{ url('full/sales')}}">Customer Survey</a>
+                        <a class="collapse-item" href="#">Customer Survey</a>
                     </div>
                 </div>
             </li>
@@ -223,6 +220,34 @@
                 </div>
             </footer>
             <!-- End of Footer -->
+        </div>
+    </div>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a href="{{ route('logoutWeb') }}" type="button" class="btn btn-primary sm"
+                        onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();">
+                            {{ __('Logout') }}
+                    </a>
+
+                    <form id="logout-form" action="{{ route('logoutWeb') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 
