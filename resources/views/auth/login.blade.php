@@ -15,7 +15,7 @@
 <body>
     <div class="row bg-image">
         <div class="col-lg-4 justify-content-center container form-login d-flex">
-            <form method="POST" display= block action="{{ route('login') }}">
+            <form method="POST" display= block action="{{ route('loginWeb') }}">
                 @csrf
                 <div class ="bungkuslogin">
                     <label for="email" class="col-md-4 col-form-label text-md-right"></label>
@@ -26,7 +26,7 @@
                     <div class="username">
 
                         <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Email') }}</label>
-                        <input type="text" action="{{ route('login') }}" class="form-control @error('email') is-invalid @enderror" placeholder="Email" aria-label="Username" aria-describedby="basic-addon1" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                        <input type="text" action="{{ route('loginWeb') }}" class="form-control @error('email') is-invalid @enderror" placeholder="Email" aria-label="Username" aria-describedby="basic-addon1" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
                         @error('email')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

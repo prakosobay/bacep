@@ -41,7 +41,7 @@
                 @can('isApproval')
                     <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
                         <li class="nav-item mx-5">
-                            <a class="nav-link inter" aria-current="page" href="{{url('/home')}}">Home</a>
+                            <a class="nav-link inter" aria-current="page" href="{{ route('homepage')}}">Home</a>
                         </li>
                         <li class="nav-item mx-5">
                             <a class="nav-link inter" href="{{ url('approval/all')}}">Approval</a>
@@ -59,7 +59,7 @@
                 @elsecan('isHead')
                 <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
                     <li class="nav-item mx-5">
-                        <a class="nav-link inter" aria-current="page" href="{{url('/home')}}">Home</a>
+                        <a class="nav-link inter" aria-current="page" href="{{ route('homepage')}}">Home</a>
                     </li>
                     <li class="nav-item mx-5">
                         <a class="nav-link inter" href="{{ url('approval/all')}}">Approval</a>
@@ -77,7 +77,7 @@
                 @elsecan('isSecurity')
                     <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
                         <li class="nav-item mx-5">
-                            <a class="nav-link inter" aria-current="page" href="{{url('/home')}}">Home</a>
+                            <a class="nav-link inter" aria-current="page" href="{{ route('homepage')}}">Home</a>
                         </li>
                         <li class="nav-item mx-5">
                             <a class="nav-link inter" href="{{ url('approval/all')}}">Approval</a>

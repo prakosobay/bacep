@@ -27,7 +27,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
                     <li class="nav-item mx-5">
-                        <a class="nav-link" aria-current="page" href="{{url('/home')}}">Home</a>
+                        <a class="nav-link" aria-current="page" href="{{ route('homepage')}}">Home</a>
                     </li>
                     <li class="nav-item mx-5">
                         <a class="nav-link" href="#about">About Us</a>

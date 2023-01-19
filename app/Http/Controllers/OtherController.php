@@ -192,13 +192,13 @@ class OtherController extends Controller
             }
             $personil = OtherPersonil::insert($p);
 
-            // foreach ([
-            //     'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id', 'syukril@balitower.co.id',
-            //     'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'mufli.gonibala@balitower.co.id',
-            //     'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'dyah.retno@balitower.co.id',
-            // ] as $recipient) {
-            //     Mail::to($recipient)->send(new NotifMaintenanceForm($otherForm));
-            // }
+            foreach ([
+                'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id', 'syukril@balitower.co.id', 'dennis.oscadifa@balitower.co.id',
+                'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'badai.sino@balitower.co.id',
+                'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'dyah.retno@balitower.co.id',
+            ] as $recipient) {
+                Mail::to($recipient)->send(new NotifMaintenanceForm($otherForm));
+            }
 
             $log = OtherHistory::insert([
                 'other_id' => $otherForm->id,
@@ -382,9 +382,9 @@ class OtherController extends Controller
                 $role_to = '';
                 if ($lastupdate->role_to == 'review') {
                     // foreach ([
-                    //     'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
-                    //     'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'syukril@balitower.co.id',
-                    //     'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'mufli.gonibala@balitower.co.id',
+                        // 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id', 'syukril@balitower.co.id', 'dennis.oscadifa@balitower.co.id',
+                        // 'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id',
+                        // 'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id',
                     // ] as $recipient) {
                     //     Mail::to($recipient)->send(new NotifMaintenanceForm($notif_email));
                     // }
@@ -393,7 +393,7 @@ class OtherController extends Controller
                     }
                     $role_to = 'check';
                 } elseif ($lastupdate->role_to == 'check') {
-                    // foreach (['security.bacep@balitower.co.id'] as $recipient) {
+                    // foreach ('security.bacep@balitower.co.id' as $recipient) {
                     //     Mail::to($recipient)->send(new NotifMaintenanceForm($notif_email));
                     // }
                     $role_to = 'security';

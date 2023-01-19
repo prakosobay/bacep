@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\{AccessRequestInternal, ChangeRequestInternal, Cleaning, Internal, InternalHistory, PenomoranCleaning, User};
 use Illuminate\Support\Facades\{DB, Auth, Gate, Session};
+use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
@@ -12,10 +13,11 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    // public $role;
+    // public function __construct($role)
+    // {
+    //     $this->role = $role;
+    // }
 
     /**
      * Show the application dashboard.
@@ -23,17 +25,20 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
 
-    public function index() // Get role tiap user & masuk ke homepage
-    {
 
-        $role_2 = Auth::user()->roles;
-        $arrole = [];
-        foreach ($role_2 as $rolee) {
-            $arrole[] = $rolee->name;
-        }
-        Session::put('arrole', $arrole);
-        return view('homepage');
-    }
+
+    // public function index() // Get role tiap user & masuk ke homepage
+    // {
+
+    //     $role_2 = Auth::user()->roles;
+    //     $arrole = [];
+    //     foreach ($role_2 as $rolee) {
+    //         $arrole[] = $rolee->name;
+    //     }
+    //     Session::put('arrole', $arrole);
+    //     return redirect()->route('homepage');
+    // }
+
 
     public function dashboard() // Dashboard manajemen barang
     {
@@ -72,9 +77,17 @@ class HomeController extends Controller
     public function approval($type_approve) // Routingan untuk menampilkan permit yang akan di approve tiap rolenya
     {
         if ((Gate::denies('isAdmin') && (Gate::denies('isVisitor')))) {
-            $role_1 = Session::get('arrole');
+            // $role_1 = Session::get('arrole');
+            // $role_1 = session()->pull('key', 'arrole');
             // dd($role_1);
-            $val = [];
+            // $val = [];
+            $roles = Auth::user()->roles;
+            $arrole = [];
+            foreach ($roles as $rolee) {
+                $arrole[] = $rolee->name;
+            }
+            $role_1 = $arrole;
+            // dd($role_1);
             if ($type_approve == 'all') {
                 return view('all_approval');
             } elseif ($type_approve == 'cleaning') {

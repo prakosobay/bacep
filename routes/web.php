@@ -4,20 +4,39 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{HomeController, CleaningController, AdminController};
-use FontLib\Table\Type\name;
 
 // v.1.2.0
-Route::get('/', function () {
-    return view('auth.login');
-})->middleware('guest');
+Route::middleware(['guest'])->group(function () {
+
+    Route::get('/', function () {
+        return view('auth.login');
+    });
+
+    Route::controller(AuthController::class)->group(function(){
+        Route::post('login-web', 'login')->name('loginWeb');
+    });
+});
 
 Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/home', [HomeController::class, 'index']);
 
     Route::controller(AuthController::class)->group(function(){
         Route::post('logout-web', 'logout')->name('logoutWeb');
+        Route::get('homepage', 'homepage')->name('homepage');
+    });
+
+    Route::controller(HomeController::class)->group(function(){
+        Route::get('revisi/{type_view}', 'revisi_view');
+        Route::get('/full_approval/{type_form}', 'approval_full');
+        Route::get('/log/{type_view}', 'log_view');
+        Route::get('table_barang', 'dashboard')->name('table_barang');
+        Route::get('history/{type_view}', 'history');
+        Route::get('approval/{type_approve}', 'approval')->name('approvalView');
+        Route::get('full/{type_full}', 'full');
+        Route::get('penomoran/{type_nomor}', 'penomoran');
+        Route::get('visitor/log/{type_log}', 'visitor_log');
+        Route::get('logall', 'log_all')->name('logall');
     });
 
     //Detail History
@@ -26,14 +45,7 @@ Route::middleware(['auth'])->group(function () {
     //History
     Route::get('/detail_cleaning{id}', [CleaningController::class, 'approve_cleaning']);
 
-    //Full Approval
-    Route::get('/full_approval/{type_form}', [HomeController::class, 'approval_full']);
-
-    //LOG
-    Route::get('/log/{type_view}', [HomeController::class, 'log_view']);
-
     //Revisi personil ob
-    Route::get('revisi/{type_view}', [HomeController::class, 'revisi_view']);
     Route::post('/trevisi', [RutinController::class, 'revisi']);
     Route::get('/rev/{id}', [RutinController::class, 'other_revisi']);
 
@@ -130,11 +142,6 @@ Route::middleware(['auth'])->group(function () {
         Route::post('risk/update/{id}', 'update')->name('riskUpdate');
         Route::post('risk/delete/{id}', 'delete')->name('riskDelete');
     });
-
-
-    //Dashboard Barang
-    Route::get('table_barang', [HomeController::class, 'dashboard'])->name('table_barang');
-
 
     // Dashboard Access Card
     // Route::middleware(['access'])->group(function(){
@@ -447,14 +454,4 @@ Route::middleware(['auth'])->group(function () {
         Route::post('logbook/eksternal/pdf', 'eksternal_pdf')->name('eksternalLogBookPDF');
         Route::post('logbook/eksternal/excel', 'eksternal_excel')->name('eksternalLogBookExcel');
     });
-
-    // ALL
-    Route::get('history/{type_view}', [HomeController::class, 'history']);
-    Route::get('approval/{type_approve}', [HomeController::class, 'approval'])->name('approvalView');
-    Route::get('full/{type_full}', [HomeController::class, 'full']);
-    Route::get('penomoran/{type_nomor}', [HomeController::class, 'penomoran']);
-    Route::get('visitor/log/{type_log}', [HomeController::class, 'visitor_log']);
-
-    //Log
-    Route::get('logall', [HomeController::class, 'log_all'])->name('logall');
 });

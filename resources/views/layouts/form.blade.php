@@ -48,7 +48,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item mr-10">
-                <a class="nav-link" href="{{url('/home')}}"><strong>Home</strong></a>
+                <a class="nav-link" href="{{ route('homepage')}}"><strong>Home</strong></a>
             </li>
             <li class="nav-item mr-10">
                 <a class="nav-link" href="{{url('/perbaikan')}}"><strong>Isian</strong></a>

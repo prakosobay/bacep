@@ -7,9 +7,9 @@
         <div class="card-header">
             <h4 class="judul text-center">Full Approval Form Cleaning</h4>
         </div>
-        <div class="card-header">
+        {{-- <div class="card-header">
             <a href="{{ route('cleaningExportFullApproval') }}" class="btn btn-sm btn-success mx-1 my-1">Export</a>
-        </div>
+        </div> --}}
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-striped table-bordered" id="dataTable" width="100%" cellspacing="0">

@@ -7,9 +7,9 @@
         <div class="card-header py-3">
             <h4 class="judul text-center">Full Approval Form Maintenance</h4>
         </div>
-        <div class="card-header py-3">
+        {{-- <div class="card-header py-3">
             <a href="{{ route('maintenanceExportFullApproval') }}" type="button" class="btn btn-sm btn-success mx-1 my-1">Export</a>
-        </div>
+        </div> --}}
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-striped table-bordered" id="full_maintenance" width="100%" cellspacing="0">

@@ -459,7 +459,7 @@
                         text: 'Data Saved',
                         type: "success",
                     }).then(function(){
-                        location.href = "{{url("/home")}}";
+                        location.href = "{{ url("/homepage")}}";
                     });
                 }else if(data.status == 'FAILED'){
                     Swal.fire({

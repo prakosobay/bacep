@@ -24,9 +24,9 @@ class CleaningFullApprovalExport implements FromView, WithStyles
         return view('exports.cleaning', [
             'fulls' => CleaningFull::query()
                     ->leftJoin('cleanings', 'cleaning_fulls.cleaning_id', '=', 'cleanings.cleaning_id')
-                    ->leftJoin('penomoran_cleanings', 'cleaning_fulls.cleaning_id', '=', 'penomoran_cleanings.permit_id')
-                    ->where('penomoran_cleanings.type', 'cleaning')
-                    ->select('cleaning_fulls.*', 'cleanings.validity_to as leave', 'penomoran_cleanings.*')
+                    // ->leftJoin('penomoran_cleanings', 'cleaning_fulls.cleaning_id', '=', 'penomoran_cleanings.permit_id')
+                    // ->where('penomoran_cleanings.type', 'cleaning')
+                    ->select('cleaning_fulls.*', 'cleanings.validity_to as leave')
                     ->get(),
         ]);
     }
