@@ -4,7 +4,7 @@
     <div class="container-fluid">
         <div class="row justify-content-md-center mt-4">
             <div class="col-11 text-start">
-                <img src="{{asset('gambar/log-visitor/house-fill.svg')}}" alt="" class="img-fluid">
+                <img src="{{ asset('gambar/log-visitor/house-fill.svg')}}" alt="" class="img-fluid">
                 <span class="home-abu">
                     Home
                 </span>

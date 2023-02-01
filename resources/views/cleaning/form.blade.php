@@ -326,14 +326,15 @@
 	<script src="{{ asset('vendor/select2/select2.min.js')}}"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script type="text/javascript">
-		$(".js-select2").each(function(){
+
+		$(".js-select2").each(function() {
 			$(this).select2({
 				minimumResultsForSearch: 20,
 				dropdownParent: $(this).next('.dropDownSelect2')
 			});
 		})
 
-        $('#pilihan1').change(function(){
+        $('#pilihan1').change(function() {
             let id = $(this).val();
             $.ajax({
                 url: "{{url("/detail")}}"+'/'+id,
@@ -348,7 +349,7 @@
             });
         });
 
-        $('#pilihan2').change(function(){
+        $('#pilihan2').change(function() {
             let id = $(this).val();
             $.ajax({
                 url: "{{url("/detail")}}"+'/'+id,
@@ -363,7 +364,7 @@
             });
         });
 
-        $('#working').change(function(){
+        $('#working').change(function() {
             let id = $(this).val();
             $.ajax({
                 url: "{{url("/cleaning")}}"+'/'+id,
@@ -440,12 +441,12 @@
         }
     });
 
-    $(".contact100-form-btn").click(function(e){
+    $(".contact100-form-btn").click(function(e) {
         e.preventDefault();
         var datastring = $("#form_cleaning").serialize();
         $.ajax({
             type:'POST',
-            url:"{{url('route_submit_cleaning')}}",
+            url:"{{ url('route_submit_cleaning')}}",
             data: datastring,
             error: function (request, error) {
                 console.log(error)
@@ -459,7 +460,7 @@
                         text: 'Data Saved',
                         type: "success",
                     }).then(function(){
-                        location.href = "{{ url("/homepage")}}";
+                        location.href = "{{ route("logall")}}";
                     });
                 }else if(data.status == 'FAILED'){
                     Swal.fire({
@@ -481,7 +482,7 @@
 
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+{{-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script> --}}
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}

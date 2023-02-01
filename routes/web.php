@@ -22,8 +22,9 @@ Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'i
 Route::middleware(['auth'])->group(function () {
 
     Route::controller(AuthController::class)->group(function(){
+
         Route::post('logout-web', 'logout')->name('logoutWeb');
-        Route::get('homepage', 'homepage')->name('homepage');
+        Route::get('home', 'homepage')->name('homepage');
     });
 
     Route::controller(HomeController::class)->group(function(){
@@ -125,7 +126,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('card/edit/{id}', 'edit')->name('cardEdit');
     });
 
-    Route::controller(MasterCardTypeController::class)->group(function(){
+    Route::controller(MasterCardTypeController::class)->group(function() {
         Route::get('card-type/show', 'show')->name('cardType');
         Route::get('card-type/yajra', 'yajra')->name('cardTypeYajra');
 
@@ -134,7 +135,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('card-type/delete/{id}', 'delete')->name('cardTypeDelete');
     });
 
-    Route::controller(MasterRiskController::class)->group(function(){
+    Route::controller(MasterRiskController::class)->group(function() {
         Route::get('risk/table', 'table')->name('risk');
         Route::get('risk/yajra', 'yajra')->name('riskYajra');
 
@@ -358,8 +359,8 @@ Route::middleware(['auth'])->group(function () {
         Route::put('maintenance-checkin-cancel/{id}', 'maintenance_checkin_cancel')->name('maintenanceCheckinCancel');
 
         Route::post('maintenance/store', 'maintenance_store')->name('maintenanceStore');
-        Route::post('maintenance/approve/{id}', 'maintenance_approve')->name('maintenanceApprove');
-        Route::post('maintenance/reject/{id}', 'maintenance_reject')->name('maintenanceReject');
+        Route::post('maintenance/approve', 'maintenance_approve')->name('maintenanceApprove');
+        Route::post('maintenance/reject', 'maintenance_reject')->name('maintenanceReject');
     });
 
     // Internal

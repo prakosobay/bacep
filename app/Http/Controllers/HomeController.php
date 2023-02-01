@@ -14,10 +14,10 @@ class HomeController extends Controller
      * @return void
      */
     // public $role;
-    // public function __construct($role)
-    // {
-    //     $this->role = $role;
-    // }
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     /**
      * Show the application dashboard.
@@ -77,16 +77,17 @@ class HomeController extends Controller
     public function approval($type_approve) // Routingan untuk menampilkan permit yang akan di approve tiap rolenya
     {
         if ((Gate::denies('isAdmin') && (Gate::denies('isVisitor')))) {
-            // $role_1 = Session::get('arrole');
-            // $role_1 = session()->pull('key', 'arrole');
+            //
             // dd($role_1);
             // $val = [];
-            $roles = Auth::user()->roles;
-            $arrole = [];
-            foreach ($roles as $rolee) {
-                $arrole[] = $rolee->name;
-            }
-            $role_1 = $arrole;
+            // $roles = auth()->user()->roles;
+            // $arrole = [];
+            // foreach ($roles as $rolee) {
+            //     $arrole[] = $rolee->name;
+            // }
+            // Session::put('arrole', $arrole);
+            $role_1 = Session::get('arrole');
+            // $role_1 = session()->pull('key', 'arrole');
             // dd($role_1);
             if ($type_approve == 'all') {
                 return view('all_approval');
@@ -104,9 +105,10 @@ class HomeController extends Controller
                     ->join('others', 'others.id', '=', 'other_histories.other_id')
                     ->whereIn('other_histories.role_to', $role_1)
                     ->where('other_histories.aktif', '=', 1)
-                    ->select('others.*', 'other_histories.*')
+                    ->select('others.work', 'others.visit', 'others.created_at as requested_at', 'other_histories.*')
                     ->orderBy('other_id', 'desc')
                     ->get();
+                    // dd($getMaintenance);
                 return view('other.maintenance_approval', compact('getMaintenance'));
             } elseif($type_approve == 'troubleshoot') {
                 $getTroubleshoot = DB::table('troubleshoot_bms')
@@ -202,10 +204,10 @@ class HomeController extends Controller
 
     public function log_all() // Routingan untuk menampilkan permit yang sudah full approve versi BM
     {
-        $dept = Auth::user()->department;
-        switch($dept){
+        $slug = Auth::user()->slug;
+        switch($slug){
 
-            case 'Building Management' :
+            case 'bm' :
                 return view('cleaning.full_visitor');
                 break;
 

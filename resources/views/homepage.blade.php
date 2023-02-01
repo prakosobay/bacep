@@ -17,7 +17,6 @@
 <body>
 
     @can('isVisitor')
-
     {{-- navbar --}}
     <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-0 my-0">
         <div class="container">
@@ -48,17 +47,18 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="nav-item mx-3">
-                        <a href="#"><img src="{{asset('gambar/home/bell.svg')}}" alt=""></a>
+                        <a href="#"><img src="{{ asset('gambar/home/bell.svg')}}" alt=""></a>
                     </li>
                     <li class="nav-item mx-3">
                         <a href="#" data-bs-toggle="modal" data-bs-target="#logoutModal">
-                            <img src="{{asset('gambar/home/box-arrow-right.svg')}}" class="img-fluid" alt="">
+                            <img src="{{ asset('gambar/home/box-arrow-right.svg')}}" class="img-fluid" alt="">
                         </a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
+
 
         @can('isInternal')
             <div class="container-fluid" id="banner">
@@ -345,22 +345,22 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
                 <li class="nav-item mx-5">
-                    <a class="nav-link inter" aria-current="page" href="{{url('/home')}}">Home</a>
+                    <a class="nav-link inter" aria-current="page" href="{{ url('/home')}}">Home</a>
                 </li>
                 <li class="nav-item mx-5">
                     <a class="nav-link inter" href="#about">About Us</a>
                 </li>
                 <li class="nav-item mx-5">
-                    <a class="nav-link inter" href="{{url('logall')}}">Log Permit</a>
+                    <a class="nav-link inter" href="{{ route('logall')}}">Log Permit</a>
                 </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="nav-item mx-3">
-                        <a href="#"><img src="{{asset('gambar/home/bell.svg')}}" alt=""></a>
+                        <a href="#"><img src="{{ asset('gambar/home/bell.svg')}}" alt=""></a>
                     </li>
                     <li class="nav-item mx-3">
                         <a href="#" data-bs-toggle="modal" data-bs-target="#logoutModal">
-                            <img src="{{asset('gambar/home/box-arrow-right.svg')}}" class="img-fluid" alt="">
+                            <img src="{{ asset('gambar/home/box-arrow-right.svg')}}" class="img-fluid" alt="">
                         </a>
                     </li>
                 </ul>
@@ -760,14 +760,14 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('vendor/jquery/jquery.min.js')}}"></script>
+    <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 
         <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js')}}"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
+    <script src="{{ asset('js/sb-admin-2.min.js')}}"></script>
 </body>
 </html>
 
