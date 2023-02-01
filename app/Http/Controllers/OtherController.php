@@ -195,7 +195,7 @@ class OtherController extends Controller
             foreach ([
                 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id', 'syukril@balitower.co.id', 'dennis.oscadifa@balitower.co.id',
                 'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'badai.sino@balitower.co.id',
-                'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'dyah.retno@balitower.co.id',
+                'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'riya.ully@balitower.co.id',
             ] as $recipient) {
                 Mail::to($recipient)->send(new NotifMaintenanceForm($otherForm));
             }
@@ -221,11 +221,11 @@ class OtherController extends Controller
 
     }
 
-    /*
     public function maintenance_approve(Request $request, $id) // Flow Approval form maintenance
     {
         $lastupdate = OtherHistory::where('other_id', $id)->latest()->first();
         $data = $request->all();
+        // dd($data['visit_nama']);
         DB::beginTransaction();
 
         try {
@@ -306,16 +306,24 @@ class OtherController extends Controller
 
             foreach ($data['visit_nama'] as $k => $v) {
                 if (isset($data['visit_nama'][$k])) {
-                    $personil[] = Visitor::find($v)->first();
+                    $personil[] = Visitor::findorFail($v);
                 }
             }
-            $otherPersonils = $personil;
-            // dd($otherPersonils);
-            $existing = OtherPersonil::where('other_id', $id)->get();
-            dd($existing);
 
-            for($i = 0; $i < )
-            // }
+            $requestPersonils = $personil;
+            $countPersonil = count($requestPersonils);
+            // dd($requestPersonils);
+            $existPersonils = OtherPersonil::where('other_id', $id)->get();
+            // dd($existPersonils);
+            foreach($requestPersonils as $k => $v) {
+                dd($requestPersonils[$k]);
+                if(isset($requestPersonils[$k])){
+
+                }
+                foreach($existPersonils as $ep) {
+
+                }
+            }
 
             if($lastupdate->pdf == true){
 
@@ -397,8 +405,7 @@ class OtherController extends Controller
             throw $e;
         }
     }
-    */
-
+    /*
     public function maintenance_approve(Request $request)
     {
         $lastupdate = OtherHistory::where('other_id', '=', $request->other_id)->latest()->first();
@@ -427,29 +434,29 @@ class OtherController extends Controller
                 // // Pergantian  role tiap permit & send email notif
                 $role_to = '';
                 if ($lastupdate->role_to == 'review') {
-                    // foreach ([
-                    //     'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
-                    //     'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'syukril@balitower.co.id',
-                    //     'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'mufli.gonibala@balitower.co.id',
-                    // ] as $recipient) {
-                    //     Mail::to($recipient)->send(new NotifMaintenanceForm($notif_email));
-                    // }
+                    foreach ([
+                        'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
+                        'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'syukril@balitower.co.id',
+                        'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'mufli.gonibala@balitower.co.id',
+                    ] as $recipient) {
+                        Mail::to($recipient)->send(new NotifMaintenanceForm($notif_email));
+                    }
                     $role_to = 'check';
                 } elseif ($lastupdate->role_to == 'check') {
-                    // foreach (['security.bacep@balitower.co.id'] as $recipient) {
-                    //     Mail::to($recipient)->send(new NotifMaintenanceForm($notif_email));
-                    // }
+                    foreach (['security.bacep@balitower.co.id'] as $recipient) {
+                        Mail::to($recipient)->send(new NotifMaintenanceForm($notif_email));
+                    }
                     $role_to = 'security';
                 } elseif ($lastupdate->role_to == 'security') {
-                    // foreach (['bayu.prakoso@balitower.co.id', 'tofiq.hidayat@balitower.co.id'] as $recipient) {
-                    //     Mail::to($recipient)->send(new NotifMaintenanceForm($notif_email));
-                    // }
+                    foreach (['tofiq.hidayat@balitower.co.id'] as $recipient) {
+                        Mail::to($recipient)->send(new NotifMaintenanceForm($notif_email));
+                    }
                     $role_to = 'head';
                 } elseif ($lastupdate->role_to = 'head') {
                     $full = Other::find($request->other_id);
-                    // foreach (['dc@balitower.co.id'] as $recipient) {
-                    //     Mail::to($recipient)->send(new NotifMaintenanceFull($full));
-                    // }
+                    foreach (['dc@balitower.co.id'] as $recipient) {
+                        Mail::to($recipient)->send(new NotifMaintenanceFull($full));
+                    }
                     $role_to = 'all';
 
                     $full_maintenance = Other::where('id', $request->other_id)->first();
@@ -459,8 +466,8 @@ class OtherController extends Controller
                         'request' => $full_maintenance->created_at,
                         'visit' => $full_maintenance->visit,
                         'leave' => $full_maintenance->leave,
-                        // 'link' => ("https://dcops.balifiber.id/maintenance-pdf/$full_maintenance->id"),
-                        'link' => ("http://localhost:8000/maintenance-pdf/$full_maintenance->id"),
+                        'link' => ("https://dcops.balifiber.id/maintenance-pdf/$full_maintenance->id"),
+                        // 'link' => ("http://localhost:8000/maintenance-pdf/$full_maintenance->id"),
                         'note' => null,
                         'status' => 'Full Approved',
                     ]);
@@ -484,7 +491,7 @@ class OtherController extends Controller
             throw $e;
         }
     }
-
+    */
     public function maintenance_reject(Request $request, $id) // Untuk reject permit maintenance
     {
         $request->validate([
@@ -515,7 +522,7 @@ class OtherController extends Controller
 
                 // Get permit yang di reject & kirim notif email
                 $maintenance_reject = Other::findOrFail($id);
-                foreach (['bayu.prakoso@balitower.co.id'] as $recipient) {
+                foreach (['badai.sino@balitower.co.id', 'riya.ully@balitower.co.id'] as $recipient) {
                     Mail::to($recipient)->send(new NotifMaintenanceReject($maintenance_reject, $note));
                 }
 
@@ -1103,7 +1110,7 @@ class OtherController extends Controller
                 }
                 $role_to = 'security';
             } elseif ($last_update->role_to == 'security') {
-                foreach (['bayu.prakoso@balitower.co.id', 'tofiq.hidayat@balitower.co.id'] as $recipient) {
+                foreach (['tofiq.hidayat@balitower.co.id'] as $recipient) {
                     Mail::to($recipient)->send(new NotifTroubleshootForm($notif_email));
                 }
                 $role_to = 'head';

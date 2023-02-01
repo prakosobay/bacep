@@ -21,7 +21,7 @@ Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'i
 
 Route::middleware(['auth'])->group(function () {
 
-    Route::controller(AuthController::class)->group(function(){
+    Route::controller(AuthController::class)->group(function() {
 
         Route::post('logout-web', 'logout')->name('logoutWeb');
         Route::get('home', 'homepage')->name('homepage');
@@ -359,7 +359,8 @@ Route::middleware(['auth'])->group(function () {
         Route::put('maintenance-checkin-cancel/{id}', 'maintenance_checkin_cancel')->name('maintenanceCheckinCancel');
 
         Route::post('maintenance/store', 'maintenance_store')->name('maintenanceStore');
-        Route::post('maintenance/approve', 'maintenance_approve')->name('maintenanceApprove');
+        Route::post('maintenance/approve/{id}', 'maintenance_approve')->name('maintenanceApprove');
+        // Route::post('maintenance/approve', 'maintenance_approve')->name('maintenanceApprove');
         Route::post('maintenance/reject', 'maintenance_reject')->name('maintenanceReject');
     });
 
