@@ -19,7 +19,7 @@ Route::middleware(['guest'])->group(function () {
 
 Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::controller(AuthController::class)->group(function() {
 
@@ -27,7 +27,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('home', 'homepage')->name('homepage');
     });
 
-    Route::controller(HomeController::class)->group(function(){
+    Route::controller(HomeController::class)->group(function() {
         Route::get('revisi/{type_view}', 'revisi_view');
         Route::get('/full_approval/{type_form}', 'approval_full');
         Route::get('/log/{type_view}', 'log_view');
@@ -107,7 +107,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('rack/delete/{id}', 'delete')->name('rackDelete');
     });
 
-    Route::controller(MasterSlugController::class)->group(function(){
+    Route::controller(MasterSlugController::class)->group(function() {
         Route::get('slug/table', 'table')->name('slug');
         Route::get('slug/yajra', 'yajra')->name('slugYajra');
 
@@ -301,10 +301,6 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/route_submit_cleaning', 'submit_data_cleaning');
         Route::post('/cleaning_reject', 'reject_form_cleaning');
         Route::post('/cleaning/full/reject/{id}', 'reject_full_cleaning');
-        // Route::post('/approve_cleaning', 'approve_cleaning');
-
-
-
         Route::post('cleaning-checkin-cancel/{id}', 'checkin_cancel')->name('cleaningCheckinCancel');
     });
 
@@ -359,9 +355,8 @@ Route::middleware(['auth'])->group(function () {
         Route::put('maintenance-checkin-cancel/{id}', 'maintenance_checkin_cancel')->name('maintenanceCheckinCancel');
 
         Route::post('maintenance/store', 'maintenance_store')->name('maintenanceStore');
-        Route::post('maintenance/approve/{id}', 'maintenance_approve')->name('maintenanceApprove');
-        // Route::post('maintenance/approve', 'maintenance_approve')->name('maintenanceApprove');
-        Route::post('maintenance/reject', 'maintenance_reject')->name('maintenanceReject');
+        Route::post('maintenance/approval/{id}', 'maintenance_approve')->name('maintenanceApproval');
+        Route::post('maintenance/reject/{id}', 'maintenance_reject')->name('maintenanceReject');
     });
 
     // Internal
@@ -396,7 +391,7 @@ Route::middleware(['auth'])->group(function () {
     });
 
     //  Sales
-    Route::controller(SalesController::class)->group(function(){
+    Route::controller(SalesController::class)->group(function() {
         Route::get('sales/form', 'form')->name('salesForm');
         Route::get('internal/guest/form', 'guest_form')->name('internalGuestForm');
         Route::get('sales/pdf/{id}', 'pdf');
@@ -415,7 +410,7 @@ Route::middleware(['auth'])->group(function () {
     });
 
     //Eksternal
-    Route::controller(EksternalController::class)->group(function(){
+    Route::controller(EksternalController::class)->group(function() {
         Route::get('dashboard/eksternal', 'dashboard')->name('dashboardEksternal');
         Route::get('eksternal/show/form', 'show_form')->name('eksternalShowForm');
         Route::get('eksternal/finished/show', 'finished_show')->name('eksternalFinishedShow');
@@ -449,7 +444,7 @@ Route::middleware(['auth'])->group(function () {
     });
 
     //LogBook
-    Route::controller(LogBookController::class)->group(function(){
+    Route::controller(LogBookController::class)->group(function() {
         Route::post('internal/export', 'internal_export')->name('internalExport');
         Route::post('logbook/internal/pdf', 'internal_pdf')->name('internalLogBookPDF');
         Route::post('logbook/internal/excel', 'internal_excel')->name('internalLogbookExcel');

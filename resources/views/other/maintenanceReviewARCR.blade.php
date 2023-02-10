@@ -31,7 +31,7 @@
 
 	<div class="container-contact100">
 		<div class="wrap-contact100">
-			<form id="maintenance_form" class="contact100-form validate-form" method="POST" action="{{ route('maintenanceApprove', $other->id) }}">
+			<form id="maintenance_form" class="contact100-form validate-form" method="POST" action="{{ route('maintenanceApproval', $other->id) }}">
                 @csrf
 				<span class="contact100-form-title">
 					FORM MAINTENANCE
@@ -310,13 +310,14 @@
                     <tr>
                         <th>Name </th>
                         <td>
-                            <select class="js-select2" name="visit_nama[]" id="nama">
+                            {{-- <select class="js-select2" name="visit_nama[]" id="nama">
                                     <option value="{{ $visitors[0]['id'] }}">{{ $visitors[0]['visit_nama']}}</option>
                                 @foreach ($personil as $p)
                                     <option value="{{ $p->id }}">{{ $p->visit_nama }}</option>
                                 @endforeach
-                            </select>
-                            <div class="dropDownSelect2"></div>
+                            </select> --}}
+                            <input type="text" class="input100" name="visit_nama[]" id="company" value="{{ $visitors[0]['visit_nama']}}" readonly>
+                            {{-- <div class="dropDownSelect2"></div> --}}
                         </td>
                         <th>Company</th>
                         <td>
@@ -352,13 +353,14 @@
                         <tr>
                             <th>Name </th>
                             <td>
-                                <select class="js-select2" name="visit_nama[]" id="nama_2">
+                                {{-- <select class="js-select2" name="visit_nama[]" id="nama_2">
                                     <option value="{{ $visitors[1]['id'] }}">{{ $visitors[1]['visit_nama'] }}</option>
                                     @foreach ($personil as $p)
                                         <option value="{{$p->id}}">{{$p->visit_nama}}</option>
                                     @endforeach
                                 </select>
-                                <div class="dropDownSelect2"></div>
+                                <div class="dropDownSelect2"></div> --}}
+                                <input type="text" class="input100" name="visit_nama[]" id="company_2" value="{{ $visitors[1]['visit_nama'] }}" readonly>
                             </td>
                             <th>Company</th>
                             <td>
@@ -392,13 +394,14 @@
                         <tr>
                             <th>Name </th>
                             <td>
-                                <select class="js-select2" name="visit_nama[]" id="nama_2">
+                                {{-- <select class="js-select2" name="visit_nama[]" id="nama_2">
                                     <option value=""></option>
                                     @foreach ($personil as $p)
                                         <option value="{{$p->id}}">{{$p->visit_nama}}</option>
                                     @endforeach
                                 </select>
-                                <div class="dropDownSelect2"></div>
+                                <div class="dropDownSelect2"></div> --}}
+                                <input type="text" class="input100" name="visit_nama[]" id="nama_2" value="" readonly>
                             </td>
                             <th>Company</th>
                             <td>
@@ -435,13 +438,14 @@
                         <tr>
                             <th>Name </th>
                             <td>
-                                <select class="js-select2" name="visit_nama[]" id="nama_3">
+                                {{-- <select class="js-select2" name="visit_nama[]" id="nama_3">
                                     <option value="{{ $visitors[2]['id'] }}">{{ $visitors[2]['visit_nama'] }}</option>
                                     @foreach ($personil as $p)
                                         <option value="{{$p->id}}">{{$p->visit_nama}}</option>
                                     @endforeach
                                 </select>
-                                <div class="dropDownSelect2"></div>
+                                <div class="dropDownSelect2"></div> --}}
+                                <input type="text" class="input100" name="visit_nama[]" id="company_3" value="{{ $visitors[2]['visit_nama'] }}" readonly>
                             </td>
                             <th>Company</th>
                             <td>
@@ -475,13 +479,14 @@
                         <tr>
                             <th>Name </th>
                             <td>
-                                <select class="js-select2" name="visit_nama[]" id="nama_3">
+                                {{-- <select class="js-select2" name="visit_nama[]" id="nama_3">
                                     <option value=""></option>
                                     @foreach ($personil as $p)
                                         <option value="{{$p->id}}">{{$p->visit_nama}}</option>
                                     @endforeach
                                 </select>
-                                <div class="dropDownSelect2"></div>
+                                <div class="dropDownSelect2"></div> --}}
+                                <input type="text" class="input100" name="visit_nama[]" id="nama_3" value="" readonly>
                             </td>
                             <th>Company</th>
                             <td>
@@ -518,13 +523,14 @@
                         <tr>
                             <th>Name </th>
                             <td>
-                                <select class="js-select2" name="visit_nama[]" id="nama_4">
+                                {{-- <select class="js-select2" name="visit_nama[]" id="nama_4">
                                     <option value="{{ $visitors[3]['id'] }}">{{ $visitors[3]['visit_nama'] }}</option>
                                     @foreach ($personil as $p)
                                         <option value="{{$p->id}}">{{$p->visit_nama}}</option>
                                     @endforeach
                                 </select>
-                                <div class="dropDownSelect2"></div>
+                                <div class="dropDownSelect2"></div> --}}
+                                <input type="text" class="input100" name="visit_nama[]" id="company_4" value="{{ $visitors[3]['visit_nama'] }}" readonly>
                             </td>
                             <th>Company</th>
                             <td>
@@ -558,13 +564,14 @@
                         <tr>
                             <th>Name </th>
                             <td>
-                                <select class="js-select2" name="visit_nama[]" id="nama_4">
+                                {{-- <select class="js-select2" name="visit_nama[]" id="nama_4">
                                     <option value=""></option>
                                     @foreach ($personil as $p)
                                         <option value="{{$p->id}}">{{$p->visit_nama}}</option>
                                     @endforeach
                                 </select>
-                                <div class="dropDownSelect2"></div>
+                                <div class="dropDownSelect2"></div> --}}
+                                <input type="text" class="input100" name="visit_nama[]" id="nama_4" value="" readonly>
                             </td>
                             <th>Company</th>
                             <td>
@@ -601,13 +608,14 @@
                         <tr>
                             <th>Name </th>
                             <td>
-                                <select class="js-select2" name="visit_nama[]" id="nama_5">
+                                {{-- <select class="js-select2" name="visit_nama[]" id="nama_5">
                                     <option value="{{ $visitors[4]['id'] }}">{{ $visitors[4]['visit_nama'] }}</option>
                                     @foreach ($personil as $p)
                                         <option value="{{$p->id}}">{{$p->visit_nama}}</option>
                                     @endforeach
                                 </select>
-                                <div class="dropDownSelect2"></div>
+                                <div class="dropDownSelect2"></div> --}}
+                                <input type="text" class="input100" name="visit_nama[]" id="company_5" value="{{ $visitors[4]['visit_nama'] }}" readonly>
                             </td>
                             <th>Company</th>
                             <td>
@@ -638,13 +646,14 @@
                         <tr>
                             <th>Name </th>
                             <td>
-                                <select class="js-select2" name="visit_nama[]" id="nama_5">
+                                {{-- <select class="js-select2" name="visit_nama[]" id="nama_5">
                                     <option value=""></option>
                                     @foreach ($personil as $p)
                                         <option value="{{$p->id}}">{{$p->visit_nama}}</option>
                                     @endforeach
                                 </select>
-                                <div class="dropDownSelect2"></div>
+                                <div class="dropDownSelect2"></div> --}}
+                                <input type="text" class="input100" name="visit_nama[]" id="nama_5" value="" readonly>
                             </td>
                             <th>Company</th>
                             <td>
@@ -760,7 +769,7 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-6 text-center">
-                            <button type="button" class="btn btn-lg btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            <button type="button" class="btn btn-lg btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $other->id }}">
                                 Reject
                             </button>
                         </div>
@@ -774,14 +783,14 @@
 			</form>
 
             {{-- Modal Reject --}}
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="exampleModal{{ $other->id }}" tabindex="-1" data-id="{{ $other->id }}" aria-labelledby="exampleModalLabel{{ $other->id }}" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Notes</h5>
+                            <h5 class="modal-title" id="exampleModalLabel{{ $other->id }}">Notes</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form action="{{ route('maintenanceReject', $other->id )}}" method="post">
+                        <form action="{{ url('maintenance/reject', $other->id )}}" method="post">
                             @csrf
                             <div class="modal-body">
                                 <div class="form-group">

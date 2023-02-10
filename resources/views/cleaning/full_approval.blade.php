@@ -7,9 +7,9 @@
         <div class="card-header">
             <h4 class="judul text-center">Full Approval Form Cleaning</h4>
         </div>
-        {{-- <div class="card-header">
+        <div class="card-header">
             <a href="{{ route('cleaningExportFullApproval') }}" class="btn btn-sm btn-success mx-1 my-1">Export</a>
-        </div> --}}
+        </div>
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-striped table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -20,6 +20,7 @@
                             <th>Purpose of Work</th>
                             <th>Visitor Name</th>
                             <th>Checkin</th>
+                            <th>Photo Checkin</th>
                             <th>Checkout</th>
                             <th>Link</th>
                         </tr>
@@ -45,6 +46,11 @@
                     { data: 'cleaning_work', name: 'cleaning_work' },
                     { data: 'cleaning_name', name: 'cleaning_name' },
                     { data: 'checkin_personil', name: 'checkin_personil' },
+                    { data: 'image',
+                        render: function(data, type, full, meta) {
+                            return "<img src=\"" + data + "\" height=\"50\"/>";
+                        }
+                    },
                     { data: 'checkout_personil', name: 'checkout_personil' },
                     { data: 'action', name: 'action', orderable: false, searchable: false }
                 ]

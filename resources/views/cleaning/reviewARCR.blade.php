@@ -753,9 +753,6 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-6 text-center">
-                            {{-- <a class="btn btn-lg btn-danger my-1 mx-1" href="{{ route('cleaningReject', $cleaning->cleaning_id) }}" type="submit" id="reject_button">
-                                Reject
-                            </a> --}}
                             <button type="button" class="btn btn-lg btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                 Reject
                             </button>

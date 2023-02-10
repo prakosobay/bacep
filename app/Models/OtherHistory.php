@@ -18,7 +18,7 @@ class OtherHistory extends Model
         return $this->belongsTo(User::class, 'created_by');
     }
 
-    public function other()
+    public function otherId()
     {
         return $this->belongsTo(Other::class, 'other_id');
     }

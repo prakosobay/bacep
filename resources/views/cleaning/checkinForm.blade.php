@@ -291,8 +291,8 @@
         });
 
         Webcam.set({
-            width: 490,
-            height: 390,
+            width: 400,
+            height: 300,
             image_format: 'jpeg',
             jpeg_quality: 90
         });

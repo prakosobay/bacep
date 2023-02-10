@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{AccessRequestInternal, ChangeRequestInternal, Cleaning, Internal, InternalHistory, PenomoranCleaning, User};
+use App\Models\{AccessRequestInternal, ChangeRequestInternal, Cleaning, Internal, InternalHistory, Other, OtherHistory, PenomoranCleaning, User};
 use Illuminate\Support\Facades\{DB, Auth, Gate, Session};
 use Illuminate\Http\Request;
 
@@ -77,17 +77,7 @@ class HomeController extends Controller
     public function approval($type_approve) // Routingan untuk menampilkan permit yang akan di approve tiap rolenya
     {
         if ((Gate::denies('isAdmin') && (Gate::denies('isVisitor')))) {
-            //
-            // dd($role_1);
-            // $val = [];
-            // $roles = auth()->user()->roles;
-            // $arrole = [];
-            // foreach ($roles as $rolee) {
-            //     $arrole[] = $rolee->name;
-            // }
-            // Session::put('arrole', $arrole);
             $role_1 = Session::get('arrole');
-            // $role_1 = session()->pull('key', 'arrole');
             // dd($role_1);
             if ($type_approve == 'all') {
                 return view('all_approval');
@@ -108,7 +98,6 @@ class HomeController extends Controller
                     ->select('others.work', 'others.visit', 'others.created_at as requested_at', 'other_histories.*')
                     ->orderBy('other_id', 'desc')
                     ->get();
-                    // dd($getMaintenance);
                 return view('other.maintenance_approval', compact('getMaintenance'));
             } elseif($type_approve == 'troubleshoot') {
                 $getTroubleshoot = DB::table('troubleshoot_bms')
@@ -153,7 +142,6 @@ class HomeController extends Controller
                     ->whereIn('eksternal_histories.role_to', $role_1)
                     ->groupBy('eksternals.id')
                     ->get();
-                    // dd($getEksternal)
                 return view('eksternal.approval', compact('getEksternal'));
             } else {
                 abort(403);

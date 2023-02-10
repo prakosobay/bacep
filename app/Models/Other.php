@@ -3,8 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\{Model, SoftDeletes};
+use Closure;
 
 class Other extends Model
 {
@@ -14,12 +14,12 @@ class Other extends Model
 
     public function personils()
     {
-        return $this->hasMany(OtherPersonil::class);
+        return $this->hasMany(OtherPersonil::class, 'other_id');
     }
 
     public function histories()
     {
-        return $this->hasMany(OtherHistory::class);
+        return $this->hasMany(OtherHistory::class, 'other_id');
     }
 
     public function full()
@@ -35,5 +35,10 @@ class Other extends Model
     public function penomoranCR()
     {
         return $this->belongsTo(PenomoranCR::class, 'penomorancr_id');
+    }
+
+    public function whereHas($relation, Closure $callback = null, $operator = '>=', $count = 1)
+    {
+        return $this->has($relation, $operator, $count, 'and', $callback);
     }
 }

@@ -34,7 +34,6 @@ class CleaningController extends Controller
             $auth = auth()->user()->slug;
 
             $lasthistoryC = CleaningHistory::where('cleaning_id', $id)->where('aktif', 1)->first();
-            $lasthistoryC->update(['pdf' => true]);
 
             $log = DB::table('cleaning_histories')
                 ->join('cleanings', 'cleanings.cleaning_id', '=', 'cleaning_histories.cleaning_id')
@@ -101,7 +100,6 @@ class CleaningController extends Controller
     public function submit_data_cleaning(Request $request) // Submit form cleaning
     {
         $data = $request->all();
-        // dd($data);
 
         // Convert id work & id nama
         $data['cleaning_name'] = MasterOb::find($data['cleaning_name'])->nama;
@@ -129,8 +127,8 @@ class CleaningController extends Controller
                 'created_by' => Auth::user()->id,
                 'role_to' => 'review',
                 'status' => 'requested',
-                'aktif' => '1',
-                'pdf' => false
+                'aktif' => true,
+                'pdf' => true
             ]);
 
             DB::commit();
@@ -138,7 +136,7 @@ class CleaningController extends Controller
             return $cleaningHistory->exists ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
         } catch (\Exception $e) {
             DB::rollBack();
-            throw $e;
+            return back()->with('failed', $e->getMessage());
         }
     }
 
@@ -230,84 +228,81 @@ class CleaningController extends Controller
                 'cleaning_nik_2' => $request->cleaning_nik_2,
             ]);
 
-            if($lasthistoryC->pdf == true){
-                $lasthistoryC->update(['aktif' => false]);
+            $lasthistoryC->update(['aktif' => false]);
 
-                // Perubahan status tiap permit
-                $status = '';
-                if ($lasthistoryC->status == 'requested') {
-                    $status = 'reviewed';
-                } elseif ($lasthistoryC->status == 'reviewed') {
-                    $status = 'checked';
-                } elseif ($lasthistoryC->status == 'checked') {
-                    $status = 'acknowledge';
-                } elseif ($lasthistoryC->status == 'acknowledge') {
-                    $status = 'final';
-                }
+            // Perubahan status tiap permit
+            $status = '';
+            if ($lasthistoryC->status == 'requested') {
+                $status = 'reviewed';
+            } elseif ($lasthistoryC->status == 'reviewed') {
+                $status = 'checked';
+            } elseif ($lasthistoryC->status == 'checked') {
+                $status = 'acknowledge';
+            } elseif ($lasthistoryC->status == 'acknowledge') {
+                $status = 'final';
+            }
 
-                $cleaning = Cleaning::findOrFail($id);
-                // Pergantian role tiap permit & send email notif
-                $role_to = '';
-                if ($lasthistoryC->role_to == 'review') {
-                    foreach ([
-                        'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id', 'syukril@balitower.co.id', 'dennis.oscadifa@balitower.co.id',
-                        'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id',
-                        'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id',
-                    ] as $recipient) {
-                        Mail::to($recipient)->send(new NotifEmail($cleaning));
-                    }
-                    $role_to = 'check';
-                } elseif ($lasthistoryC->role_to == 'check') {
-                    foreach ([
-                        'security.bacep@balitower.co.id',
-                    ] as $recipient) {
+            $cleaning = Cleaning::findOrFail($id);
+            // Pergantian role tiap permit & send email notif
+            $role_to = '';
+            if ($lasthistoryC->role_to == 'review') {
+                foreach ([
+                    'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id', 'syukril@balitower.co.id', 'dennis.oscadifa@balitower.co.id',
+                    'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id',
+                    'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id',
+                ] as $recipient) {
                     Mail::to($recipient)->send(new NotifEmail($cleaning));
-                    }
-                    $role_to = 'security';
-                } elseif ($lasthistoryC->role_to == 'security') {
-                    foreach (['mufli.gonibala@balitower.co.id', 'tofiq.hidayat@balitower.co.id'] as $recipient) {
-                        Mail::to($recipient)->send(new NotifEmail($cleaning));
-                    }
-                    $role_to = 'head';
-                } elseif ($lasthistoryC->role_to == 'head') {
+                }
+                $role_to = 'check';
+            } elseif ($lasthistoryC->role_to == 'check') {
+                foreach ([
+                    'security.bacep@balitower.co.id',
+                ] as $recipient) {
+                    Mail::to($recipient)->send(new NotifEmail($cleaning));
+                }
+                $role_to = 'security';
+            } elseif ($lasthistoryC->role_to == 'security') {
+                foreach (['mufli.gonibala@balitower.co.id', 'tofiq.hidayat@balitower.co.id'] as $recipient) {
+                    Mail::to($recipient)->send(new NotifEmail($cleaning));
+                }
+                $role_to = 'head';
+            } elseif ($lasthistoryC->role_to == 'head') {
 
-                    // Send Email
-                    foreach (['dc@balitower.co.id'] as $recipient) {
-                        Mail::to($recipient)->send(new NotifFull($cleaning));
-                    }
-
-                    $role_to = 'all';
-
-                    // Simpan permit yang sudah full approved ke table CleaningFull
-                    CleaningFull::create([
-                        'cleaning_id' => $cleaning->cleaning_id,
-                        'cleaning_name' => $cleaning->cleaning_name,
-                        'cleaning_name2' => $cleaning->cleaning_name2,
-                        'cleaning_work' => $cleaning->cleaning_work,
-                        'validity_from' => $cleaning->validity_from,
-                        'date_of_leave' => $cleaning->date_of_leave,
-                        'cleaning_date' => $cleaning->created_at,
-                        'link' => ("https://dcops.balifiber.id/cleaning_pdf/$cleaning->cleaning_id"),
-                        // 'link' => ("http://localhost:8000/cleaning_pdf/$cleaning->cleaning_id"),
-                    ]);
+                // Send Email
+                foreach (['dc@balitower.co.id'] as $recipient) {
+                    Mail::to($recipient)->send(new NotifFull($cleaning));
                 }
 
-                // Simpan tiap perubahan permit ke table CleaningHistory
-                CleaningHistory::create([
-                    'cleaning_id' => $id,
-                    'created_by' => Auth::user()->id,
-                    'role_to' => $role_to,
-                    'status' => $status,
-                    'aktif' => true,
-                    'pdf' => false,
+                $role_to = 'all';
+
+                // Simpan permit yang sudah full approved ke table CleaningFull
+                CleaningFull::create([
+                    'cleaning_id' => $cleaning->cleaning_id,
+                    'cleaning_name' => $cleaning->cleaning_name,
+                    'cleaning_name2' => $cleaning->cleaning_name2,
+                    'cleaning_work' => $cleaning->cleaning_work,
+                    'validity_from' => $cleaning->validity_from,
+                    'date_of_leave' => $cleaning->date_of_leave,
+                    'cleaning_date' => $cleaning->created_at,
+                    'link' => ("https://dcops.balifiber.id/cleaning_pdf/$cleaning->cleaning_id"),
+                    // 'link' => ("http://localhost:8000/cleaning_pdf/$cleaning->cleaning_id"),
                 ]);
             }
+            // Simpan tiap perubahan permit ke table CleaningHistory
+            CleaningHistory::create([
+                'cleaning_id' => $id,
+                'created_by' => Auth::user()->id,
+                'role_to' => $role_to,
+                'status' => $status,
+                'aktif' => true,
+                'pdf' => true,
+            ]);
 
             DB::commit();
             return redirect()->route('approvalView', 'cleaning')->with('success', 'Approved!');
         } catch (\Exception $e) {
             DB::rollBack();
-            throw $e;
+            return back()->with('failed', $e->getMessage());
         }
     }
 
@@ -326,39 +321,47 @@ class CleaningController extends Controller
 
         try {
 
-            if ($lasthistoryC->pdf == true) {
-                $lasthistoryC->update(['aktif' => false]);
+            $lasthistoryC->update(['aktif' => false]);
 
-                // Simpan tiap perubahan permit ke table CleaningHistory
-                CleaningHistory::create([
-                    'cleaning_id' => $id,
-                    'created_by' => Auth::user()->id,
-                    'role_to' => 0,
-                    'status' => 'rejected',
-                    'aktif' => true,
-                    'pdf' => false,
-                ]);
-                DB::commit();
+            // Simpan tiap perubahan permit ke table CleaningHistory
+            CleaningHistory::create([
+                'cleaning_id' => $id,
+                'created_by' => Auth::user()->id,
+                'role_to' => 0,
+                'status' => 'rejected',
+                'aktif' => true,
+                'pdf' => true,
+            ]);
 
-                foreach (['badai.sino@balitower.co.id', 'riya.ully@balitower.co.id'] as $recipient) {
-                    Mail::to($recipient)->send(new NotifReject($cleaning, $note));
-                }
-                return redirect()->route('approvalView', 'cleaning')->with('success', 'Rejected!');
+            DB::commit();
+
+            foreach (['badai.sino@balitower.co.id', 'riya.ully@balitower.co.id'] as $recipient) {
+                Mail::to($recipient)->send(new NotifReject($cleaning, $note));
             }
+            return redirect()->route('approvalView', 'cleaning')->with('success', 'Rejected!');
         } catch (\Exception $e) {
             DB::rollBack();
-            throw $e;
+            return back()->with('failed', $e->getMessage());
         }
     }
 
-    public function checkin_cancel($id)
+    public function checkin_cancel($id) // Cancel Permit jika sudah full approved tapi gajadi jalan
     {
-        $getStatus = CleaningFull::where('cleaning_id', $id)->first();
-        $getStatus->update([
-            'status' => 'Cancel',
-        ]);
+        DB::beginTransaction();
 
-        return redirect()->route('logall')->with('success', 'Canceled');
+        try {
+
+            $getStatus = CleaningFull::where('cleaning_id', $id)->first();
+            $getStatus->update([
+                'status' => 'Cancel',
+            ]);
+
+            DB::commit();
+            return redirect()->route('logall')->with('success', 'Canceled');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->with('failed', "Gagal Cancel");
+        }
     }
 
 
@@ -411,14 +414,14 @@ class CleaningController extends Controller
         $replace = substr($getImage, 0, strpos($getImage, ',') + 1);
         $image = str_replace($replace, '', $getImage);
         $image = str_replace(' ', '+', $image);
-        $imageName = Str::random(200) . '.' . $extension;
+        $imageName = time() . '.' . $extension;
 
         // image2
         $extension2 = explode('/', explode(':', substr($getImage2, 0, strpos($getImage2, ';')))[1])[1];   // .jpg .png .pdf
         $replace2 = substr($getImage2, 0, strpos($getImage2, ',') + 1);
         $image2 = str_replace($replace2, '', $getImage2);
         $image2 = str_replace(' ', '+', $image2);
-        $imageName2 = Str::random(200) . '.' . $extension2;
+        $imageName2 = time() . '.' . $extension2;
 
         // simpan gambar
         Storage::disk('cleaningCheckin')->put($imageName, base64_decode($image));
@@ -451,7 +454,7 @@ class CleaningController extends Controller
             return redirect()->route('logall')->with('status', 'Checkin Berhasil!');
         } catch (\Exception $e) {
             DB::rollBack();
-            throw $e;
+            return back()->with('failed', $e->getMessage());
         }
     }
 
@@ -474,14 +477,14 @@ class CleaningController extends Controller
         $replace = substr($getImage, 0, strpos($getImage, ',') + 1);
         $image = str_replace($replace, '', $getImage);
         $image = str_replace(' ', '+', $image);
-        $imageName = Str::random(200) . '.' . $extension;
+        $imageName = time() . '.' . $extension;
 
         //convert image2
         $extension2 = explode('/', explode(':', substr($getImage2, 0, strpos($getImage2, ';')))[1])[1];   // .jpg .png .pdf
         $replace2 = substr($getImage2, 0, strpos($getImage2, ',') + 1);
         $image2 = str_replace($replace2, '', $getImage2);
         $image2 = str_replace(' ', '+', $image2);
-        $imageName2 = Str::random(200) . '.' . $extension2;
+        $imageName2 = time() . '.' . $extension2;
 
         // simpan gambar
         Storage::disk('cleaningCheckout')->put($imageName, base64_decode($image));
@@ -505,43 +508,43 @@ class CleaningController extends Controller
                 'status' => 'Full Approved',
             ]);
 
-            if($last == null){
+            // if($last == null){
 
-                $ar = 1;
-                $cr = 1;
+            //     $ar = 1;
+            //     $cr = 1;
 
-            } elseif($last) {
+            // } elseif($last) {
 
-                $ar = $last->number_ar + 1;
-                $cr = $last->number_cr + 1;
+            //     $ar = $last->number_ar + 1;
+            //     $cr = $last->number_cr + 1;
 
-                $lastyearAR = $last->year_ar;
-                $lastyearCR = $last->year_cr;
-                $currrentYear = date('Y');
+            //     $lastyearAR = $last->year_ar;
+            //     $lastyearCR = $last->year_cr;
+            //     $currrentYear = date('Y');
 
-                if ( ($currrentYear != $lastyearAR) && ( $currrentYear != $lastyearCR ) ){
-                    $ar = 1;
-                    $cr = 1;
-                }
-            }
+            //     if ( ($currrentYear != $lastyearAR) && ( $currrentYear != $lastyearCR ) ){
+            //         $ar = 1;
+            //         $cr = 1;
+            //     }
+            // }
 
-            PenomoranCleaning::firstOrCreate([
-                'number_ar' => $ar,
-                'month_ar' => date('m'),
-                'year_ar' => date('Y'),
-                'number_cr' => $cr,
-                'month_cr' => date('m'),
-                'year_cr' => date('Y'),
-                'type' => 'cleaning',
-                'permit_id' => $pic,
-            ]);
+            // PenomoranCleaning::firstOrCreate([
+            //     'number_ar' => $ar,
+            //     'month_ar' => date('m'),
+            //     'year_ar' => date('Y'),
+            //     'number_cr' => $cr,
+            //     'month_cr' => date('m'),
+            //     'year_cr' => date('Y'),
+            //     'type' => 'cleaning',
+            //     'permit_id' => $pic,
+            // ]);
 
             DB::commit();
 
             return redirect()->route('logall')->with('status', 'Checkout Berhasil!');
         } catch (\Exception $e) {
             DB::rollBack();
-            throw $e;
+            return back()->with('failed', $e->getMessage());
         }
     }
 
@@ -578,21 +581,29 @@ class CleaningController extends Controller
     // Convert PDF
     public function cetak_cleaning_pdf($id) // convert to pdf
     {
-        $cleaning = Cleaning::find($id);
-        $lasthistoryC = CleaningHistory::where('cleaning_id', $id)->where('aktif', 1)->first();
-        $lasthistoryC->update(['pdf' => true]);
+        DB::beginTransaction();
 
-        $cleaningHistory = DB::table('cleaning_histories')
-            ->join('cleanings', 'cleanings.cleaning_id', '=', 'cleaning_histories.cleaning_id')
-            ->join('users', 'users.id', '=', 'cleaning_histories.created_by')
-            ->where('cleaning_histories.cleaning_id', '=', $id)
-            ->where('cleaning_histories.status', '!=', 'visitor')
-            ->select('cleaning_histories.*', 'users.name', 'created_by', 'users.department', 'users.phone')
-            ->get();
+        try {
 
-        $penomoran = PenomoranCleaning::where('permit_id', $id)->where('type', 'cleaning')->first();
-        $pdf = PDF::loadview('cleaning_pdf', compact('cleaning', 'cleaningHistory', 'lasthistoryC', 'penomoran'))->setPaper('a4', 'portrait')->setWarnings(false);
-        return $pdf->stream();
+            $cleaning = Cleaning::find($id);
+            $lasthistoryC = CleaningHistory::where('cleaning_id', $id)->where('aktif', 1)->first();
+
+            $cleaningHistory = DB::table('cleaning_histories')
+                ->join('cleanings', 'cleanings.cleaning_id', '=', 'cleaning_histories.cleaning_id')
+                ->join('users', 'users.id', '=', 'cleaning_histories.created_by')
+                ->where('cleaning_histories.cleaning_id', '=', $id)
+                ->where('cleaning_histories.status', '!=', 'visitor')
+                ->select('cleaning_histories.*', 'users.name', 'created_by', 'users.department', 'users.phone')
+                ->get();
+
+            $penomoran = PenomoranCleaning::where('permit_id', $id)->where('type', 'cleaning')->first();
+            $pdf = PDF::loadview('cleaning_pdf', compact('cleaning', 'cleaningHistory', 'lasthistoryC', 'penomoran'))->setPaper('a4', 'portrait')->setWarnings(false);
+            return $pdf->stream();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->with('failed', $e->getMessage());
+        }
+
     }
 
     public function cetak_full_cleaning($id) //versi visitor
@@ -620,19 +631,23 @@ class CleaningController extends Controller
     }
 
 
-
     // Datatable Yajra
     public function yajra_full_approval() //versi approval
     {
         $getFull = DB::table('cleaning_fulls')
             ->where('note', null)
-            ->select(['cleaning_id', 'validity_from', 'cleaning_name', 'checkin_personil', 'checkout_personil', 'cleaning_work', 'link']);
+            ->select(['cleaning_id', 'validity_from', 'cleaning_name', 'checkin_personil', 'checkout_personil', 'cleaning_work', 'link', 'photo_checkin_personil', 'photo_checkout_personil']);
         return Datatables::of($getFull)
             ->editColumn('validity_from', function ($full) {
                 return $full->validity_from ? with(new Carbon($full->validity_from))->format('d/m/Y') : '';
             })
+            ->orderColumn('cleaning_id', '-cleaning_id $1')
             ->addColumn('action', 'cleaning.actionLink')
-            ->make(true);
+            ->addColumn('image', function ($data) {
+                $url = asset("storage/bm/cleaning/checkin/{$data->photo_checkin_personil}");
+                return $url;
+            })
+            ->toJson();
     }
 
     public function yajra_log() //versi visitor
@@ -644,6 +659,7 @@ class CleaningController extends Controller
             ->editColumn('validity_from', function ($full) {
                 return $full->validity_from ? with(new Carbon($full->validity_from))->format('d/m/Y') : '';
             })
+            ->orderColumn('cleaning_id', '-cleaning_id $1')
             ->addColumn('action', 'cleaning.actionEdit')
             ->make(true);
     }

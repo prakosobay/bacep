@@ -27,7 +27,7 @@
                 serverSide: true,
                 ajax: '{{ route('maintenanceYajraFullVisitor') }}',
                 columns: [
-                    { data: 'id', name: 'other_personils.id' },
+                    { data: 'id', name: 'others.id' },
                     { data: 'work', name: 'other_fulls.work' },
                     { data: 'visit', name: 'other_fulls.visit' },
                     { data: 'leave', name: 'other_fulls.leave' },
