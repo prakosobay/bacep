@@ -586,6 +586,7 @@ class CleaningController extends Controller
         try {
 
             $cleaning = Cleaning::find($id);
+            $cleaningFull = CleaningFull::where('cleaning_id', $id)->first();
             $lasthistoryC = CleaningHistory::where('cleaning_id', $id)->where('aktif', 1)->first();
 
             $cleaningHistory = DB::table('cleaning_histories')
@@ -597,7 +598,7 @@ class CleaningController extends Controller
                 ->get();
 
             $penomoran = PenomoranCleaning::where('permit_id', $id)->where('type', 'cleaning')->first();
-            $pdf = PDF::loadview('cleaning_pdf', compact('cleaning', 'cleaningHistory', 'lasthistoryC', 'penomoran'))->setPaper('a4', 'portrait')->setWarnings(false);
+            $pdf = PDF::loadview('cleaning_pdf', compact('cleaning', 'cleaningHistory', 'lasthistoryC', 'penomoran', 'cleaningFull'))->setPaper('a4', 'portrait')->setWarnings(false);
             return $pdf->stream();
         } catch (\Exception $e) {
             DB::rollBack();
@@ -625,7 +626,8 @@ class CleaningController extends Controller
 
     public function cetak_all_full_cleaning()
     {
-        $getCleaning = CleaningFull::where('note', null)->get();
+        $getCleaning = CleaningFull::with('cleaning:cleaning_id,validity_from,validity_to')->where('cleaning_id', 32)->where('checkout_personil', '!=', null)->get();
+        // dd($getCleaning);
         $pdf = PDF::loadview('cleaning.export_full_pdf', compact('getCleaning'))->setPaper('a4', 'landscape')->setWarnings(false);
         return $pdf->stream();
     }
@@ -719,6 +721,9 @@ class CleaningController extends Controller
     //Export Excel
     public function export_full_approval()
     {
+        // $query = CleaningFull::with('cleaning:cleaning_id,cleaning_work,validity_from,validity_to')->select('cleaning_id', 'checkin_personil', 'photo_checkin_personil')->get();
+        // dd($query->cleaning);
+        // CleaningFullApprovalExport($query);
         return Excel::download(new CleaningFullApprovalExport, 'Cleaning Full Approval.xlsx');
     }
 }

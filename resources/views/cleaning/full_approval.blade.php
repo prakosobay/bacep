@@ -8,7 +8,8 @@
             <h4 class="judul text-center">Full Approval Form Cleaning</h4>
         </div>
         <div class="card-header">
-            <a href="{{ route('cleaningExportFullApproval') }}" class="btn btn-sm btn-success mx-1 my-1">Export</a>
+            {{-- <a href="{{ route('cleaningExportFullApproval') }}" class="btn btn-sm btn-success mx-1 my-1">Export Excel</a> --}}
+            <a href="{{ route('cleaningExportPDF') }}" class="btn btn-sm btn-danger mx-1 my-1">Export PDF</a>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -48,7 +49,7 @@
                     { data: 'checkin_personil', name: 'checkin_personil' },
                     { data: 'image',
                         render: function(data, type, full, meta) {
-                            return "<img src=\"" + data + "\" height=\"50\"/>";
+                            return "<img src=\"" + data + "\" height=\"100\"/>";
                         }
                     },
                     { data: 'checkout_personil', name: 'checkout_personil' },

@@ -63,22 +63,25 @@
                 </tr>
                 @foreach ($getCleaning as $p)
                     <tr class="table-content">
-                        <td class="table-content" rowspan="2">1</td>
+                        <td class="table-content" rowspan="2">{{ $p->cleaning_id }}</td>
                         <td class="table-content" rowspan="2">{{$p->cleaning_work}}</td>
-                        <td class="table-content" rowspan="2">{{$p->validity_from}}</td>
-                        <td class="table-content" rowspan="2">{{$p->date_of_leave}}</td>
+                        <td class="table-content" rowspan="2">{{$p->cleaning->validity_from}}</td>
+                        <td class="table-content" rowspan="2">{{$p->cleaning->validity_to}}</td>
                         <td class="table-content" >{{$p->cleaning_name}}</td>
                         <td class="table-content" >{{$p->checkin_personil}}</td>
-                        <td class="table-content" >{{$p->photo_checkin_personil}}</td>
+                        <td class="table-content" ><img src="{{ asset('storage/bm/cleaning/checkin/' . $p->photo_checkin_personil ) }}" alt="" style="width: 80px; height: 80px;"></td>
                         <td class="table-content" >{{$p->checkout_personil}}</td>
-                        <td class="table-content"><img src="{{ storage_path("public/storage/".$p->photo_checkout_personil)}}" alt="" style="width: 40px; height: 60px;"></td>
+                        {{-- <td class="table-content"><img src="{{ asset('storage/bm/cleaning/checkin/' . $p->photo_checkin_personil) }}" alt="" style="width: 40px; height: 60px;"></td> --}}
+                        <td>p</td>
+                        {{-- asset("storage/bm/cleaning/checkin/{$data->photo_checkin_personil}"); --}}
                     </tr>
                     <tr class="table-content">
                         <td class="table-content" >{{$p->cleaning_name2}}</td>
                         <td class="table-content">{{$p->checkin_personil2}}</td>
-                        <td class="table-content">{{$p->photo_checkin_personil2}}</td>
+                        <td class="table-content">a</td>
                         <td class="table-content">{{$p->checkout_personil2}}</td>
-                        <td class="table-content"><img src="{{ public_path("gambar/Requested.png") }}" alt="" style="width: 40px; height: 60px;"></td>
+                        {{-- <td class="table-content"><img src="{{ asset('storage/bm/cleaning/checkin/' . $p->photo_checkin_personil) }}" alt="" style="width: 40px; height: 60px;"></td> --}}
+                        <td>p</td>
                     </tr>
                 @endforeach
             </table>

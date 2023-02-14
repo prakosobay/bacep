@@ -111,9 +111,9 @@ class Cleaning extends Model
         return $this->hasMany(CleaningVisitor::class);
     }
 
-    public function full()
+    public function cleaningId()
     {
-        return $this->hasOne(CleaningFull::class);
+        return $this->hasOne(CleaningFull::class, 'cleaning_id');
     }
 
     public function penomoranCleaning()
