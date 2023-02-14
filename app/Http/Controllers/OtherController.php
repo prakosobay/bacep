@@ -748,14 +748,6 @@ class OtherController extends Controller
                 return $full_approval->visit ? with(new Carbon($full_approval->visit))->format('d/m/Y') : '';
             })
             ->addColumn('action', 'other.maintenanceActionLink')
-            // ->addColumn('checkin', function ($full_approval) {
-            //     $checkin = asset("storage/bm/maintenance/checkin/{$full_approval->photo_checkin}");
-            //     return $checkin;
-            // })
-            // ->addColumn('checkout', function ($full_approval) {
-            //     $checkout = asset("storage/bm/maintenance/checkout/{$full_approval->photo_checkout}");
-            //     return $checkout;
-            // })
             ->make(true);
     }
 

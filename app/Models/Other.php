@@ -37,8 +37,8 @@ class Other extends Model
         return $this->belongsTo(PenomoranCR::class, 'penomorancr_id');
     }
 
-    public function whereHas($relation, Closure $callback = null, $operator = '>=', $count = 1)
-    {
-        return $this->has($relation, $operator, $count, 'and', $callback);
-    }
+    // public function whereHas($relation, Closure $callback = null, $operator = '>=', $count = 1)
+    // {
+    //     return $this->has($relation, $operator, $count, 'and', $callback);
+    // }
 }

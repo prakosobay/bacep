@@ -38,10 +38,14 @@
                     <tbody class="isi-table text-center">
                         @foreach($getMaintenance as $p)
                         <tr>
-                            <td>{{ $p->other_id }}</td>
+                            <td>{{ $p->id }}</td>
                             <td>{{ Carbon\Carbon::parse($p->requested_at)->format('d-m-Y') }}</td>
                             <td>{{ Carbon\Carbon::parse($p->visit)->format('d-m-Y') }}</td>
-                            <td></td>
+                            <td>
+                                @foreach( $p->personils as $personil)
+                                - {{ $personil->name }} </br>
+                                @endforeach
+                            </td>
                             <td>{{ $p->work }}</td>
                             <td>
                                 {{-- @can('isApproval')
@@ -54,7 +58,7 @@
                                     <a href="javascript:void(0)" type="button" id="ok" class="approve btn btn-success btn-sm my-1 mx-1" data-other_id="{{$p->other_id}}">Approve</a>
                                 @endcan
                                     <a href="{{ route('maintenancePDF', $p->other_id) }}" class="btn btn-primary btn-sm my-1 mx-1" target="_blank">File</a> --}}
-                                    <a href="{{ route('maintenanceReviewARCR', $p->other_id )}}" class="btn btn-primary btn-sm my-1 mx-1">Review</a>
+                                    <a href="{{ route('maintenanceReviewARCR', $p->id )}}" class="btn btn-primary btn-sm my-1 mx-1">Review</a>
                             </td>
                         </tr>
                         @endforeach

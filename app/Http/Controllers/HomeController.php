@@ -89,15 +89,26 @@ class HomeController extends Controller
                     ->select('cleanings.*')
                     ->orderBy('cleaning_id', 'desc')
                     ->get();
+                    // 16 15 12
                 return view('cleaning.approval', compact('cleaning'));
             } elseif ($type_approve == 'maintenance') {
-                $getMaintenance = DB::table('other_histories')
-                    ->join('others', 'others.id', '=', 'other_histories.other_id')
-                    ->whereIn('other_histories.role_to', $role_1)
-                    ->where('other_histories.aktif', '=', 1)
-                    ->select('others.work', 'others.visit', 'others.created_at as requested_at', 'other_histories.*')
-                    ->orderBy('other_id', 'desc')
-                    ->get();
+                // $getMaintenance = DB::table('other_histories')
+                //     ->join('others', 'others.id', '=', 'other_histories.other_id')
+                //     ->whereIn('other_histories.role_to', $role_1)
+                //     ->where('other_histories.aktif', '=', 1)
+                //     ->select('others.work', 'others.visit', 'others.created_at as requested_at', 'other_histories.*')
+                //     ->orderBy('other_id', 'desc')
+                //     ->get();
+
+                $getMaintenance = Other::whereHas('histories', function ($query) use ($role_1) {
+                    $query->where('aktif', true)->whereIn('role_to', $role_1);
+                })->with([
+                    'histories' => function ($query) {
+                    $query->select('other_id', 'aktif', 'created_by', 'status', 'role_to', 'updated_at')->get();
+                    },
+                    'personils',
+                ])->select('id', 'visit', 'created_at as requested_at', 'work')->get();
+
                 return view('other.maintenance_approval', compact('getMaintenance'));
             } elseif($type_approve == 'troubleshoot') {
                 $getTroubleshoot = DB::table('troubleshoot_bms')
