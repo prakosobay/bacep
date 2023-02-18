@@ -69,19 +69,16 @@
                         <td class="table-content" rowspan="2">{{$p->cleaning->validity_to}}</td>
                         <td class="table-content" >{{$p->cleaning_name}}</td>
                         <td class="table-content" >{{$p->checkin_personil}}</td>
-                        <td class="table-content" ><img src="{{ asset('storage/bm/cleaning/checkin/' . $p->photo_checkin_personil ) }}" alt="" style="width: 80px; height: 80px;"></td>
+                        <td class="table-content" ><img src="{{ storage_path("app/public/bm/cleaning/checkin". '/' . $p->photo_checkin_personil) }}" alt="" style="width: 100px; height: 100px;"></td>
                         <td class="table-content" >{{$p->checkout_personil}}</td>
-                        {{-- <td class="table-content"><img src="{{ asset('storage/bm/cleaning/checkin/' . $p->photo_checkin_personil) }}" alt="" style="width: 40px; height: 60px;"></td> --}}
-                        <td>p</td>
-                        {{-- asset("storage/bm/cleaning/checkin/{$data->photo_checkin_personil}"); --}}
+                        <td class="table-content" ><img src="{{ storage_path("app/public/bm/cleaning/checkout". '/' . $p->photo_checkout_personil) }}" alt="" style="width: 100px; height: 100px;"></td>
                     </tr>
                     <tr class="table-content">
                         <td class="table-content" >{{$p->cleaning_name2}}</td>
                         <td class="table-content">{{$p->checkin_personil2}}</td>
-                        <td class="table-content">a</td>
+                        <td class="table-content" ><img src="{{ storage_path("app/public/bm/cleaning/checkin". '/' . $p->photo_checkin_personil2) }}" alt="" style="width: 100px; height: 100px;"></td>
                         <td class="table-content">{{$p->checkout_personil2}}</td>
-                        {{-- <td class="table-content"><img src="{{ asset('storage/bm/cleaning/checkin/' . $p->photo_checkin_personil) }}" alt="" style="width: 40px; height: 60px;"></td> --}}
-                        <td>p</td>
+                        <td class="table-content" ><img src="{{ storage_path("app/public/bm/cleaning/checkout". '/' . $p->photo_checkout_personil2) }}" alt="" style="width: 100px; height: 100px;"></td>
                     </tr>
                 @endforeach
             </table>

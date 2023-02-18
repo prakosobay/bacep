@@ -69,13 +69,6 @@
                         <th>Name </th>
                         <td>
                             <input type="text" class="input100" name="name" value="{{ $getVisitor->name }}" required>
-                            {{-- <select class="js-select2" name="name" id="nama">
-                                <option selected value="{{ $getVisitor->name }}">{{ $getVisitor->name }}</option>
-                                @foreach($personil as $p)
-                                    <option value="{{ $p->id }}">{{ $p->visit_nama }}</option>
-                                @endforeach
-                            </select>
-                            <div class="dropDownSelect2"></div> --}}
                         </td>
                         <th>Company</th>
                         <td>
@@ -166,8 +159,8 @@
         });
 
         Webcam.set({
-            width: 450,
-            height: 400,
+            width: 400,
+            height: 300,
             image_format: 'jpeg',
             jpeg_quality: 90
         });

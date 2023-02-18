@@ -114,13 +114,13 @@ class CleaningController extends Controller
             $cleaning = Cleaning::create($data);
 
             // Send email notification
-            foreach ([
-                'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id', 'syukril@balitower.co.id', 'dennis.oscadifa@balitower.co.id',
-                'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'badai.sino@balitower.co.id',
-                'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'riya.ully@balitower.co.id',
-            ] as $recipient) {
-                Mail::to($recipient)->send(new NotifEmail($cleaning));
-            }
+            // foreach ([
+            //     'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id', 'syukril@balitower.co.id', 'dennis.oscadifa@balitower.co.id',
+            //     'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'badai.sino@balitower.co.id',
+            //     'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'riya.ully@balitower.co.id',
+            // ] as $recipient) {
+            //     Mail::to($recipient)->send(new NotifEmail($cleaning));
+            // }
 
             $cleaningHistory = CleaningHistory::create([
                 'cleaning_id' => $cleaning->cleaning_id,
@@ -246,32 +246,32 @@ class CleaningController extends Controller
             // Pergantian role tiap permit & send email notif
             $role_to = '';
             if ($lasthistoryC->role_to == 'review') {
-                foreach ([
-                    'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id', 'syukril@balitower.co.id', 'dennis.oscadifa@balitower.co.id',
-                    'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id',
-                    'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id',
-                ] as $recipient) {
-                    Mail::to($recipient)->send(new NotifEmail($cleaning));
-                }
+                // foreach ([
+                //     'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id', 'syukril@balitower.co.id', 'dennis.oscadifa@balitower.co.id',
+                //     'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id',
+                //     'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id',
+                // ] as $recipient) {
+                //     Mail::to($recipient)->send(new NotifEmail($cleaning));
+                // }
                 $role_to = 'check';
             } elseif ($lasthistoryC->role_to == 'check') {
-                foreach ([
-                    'security.bacep@balitower.co.id',
-                ] as $recipient) {
-                    Mail::to($recipient)->send(new NotifEmail($cleaning));
-                }
+                // foreach ([
+                //     'security.bacep@balitower.co.id',
+                // ] as $recipient) {
+                //     Mail::to($recipient)->send(new NotifEmail($cleaning));
+                // }
                 $role_to = 'security';
             } elseif ($lasthistoryC->role_to == 'security') {
-                foreach (['mufli.gonibala@balitower.co.id', 'tofiq.hidayat@balitower.co.id'] as $recipient) {
-                    Mail::to($recipient)->send(new NotifEmail($cleaning));
-                }
+                // foreach (['mufli.gonibala@balitower.co.id', 'tofiq.hidayat@balitower.co.id'] as $recipient) {
+                //     Mail::to($recipient)->send(new NotifEmail($cleaning));
+                // }
                 $role_to = 'head';
             } elseif ($lasthistoryC->role_to == 'head') {
 
                 // Send Email
-                foreach (['dc@balitower.co.id'] as $recipient) {
-                    Mail::to($recipient)->send(new NotifFull($cleaning));
-                }
+                // foreach (['dc@balitower.co.id'] as $recipient) {
+                //     Mail::to($recipient)->send(new NotifFull($cleaning));
+                // }
 
                 $role_to = 'all';
 
@@ -335,9 +335,9 @@ class CleaningController extends Controller
 
             DB::commit();
 
-            foreach (['badai.sino@balitower.co.id', 'riya.ully@balitower.co.id'] as $recipient) {
-                Mail::to($recipient)->send(new NotifReject($cleaning, $note));
-            }
+            // foreach (['badai.sino@balitower.co.id', 'riya.ully@balitower.co.id'] as $recipient) {
+            //     Mail::to($recipient)->send(new NotifReject($cleaning, $note));
+            // }
             return redirect()->route('approvalView', 'cleaning')->with('success', 'Rejected!');
         } catch (\Exception $e) {
             DB::rollBack();
@@ -626,7 +626,7 @@ class CleaningController extends Controller
 
     public function cetak_all_full_cleaning()
     {
-        $getCleaning = CleaningFull::with('cleaning:cleaning_id,validity_from,validity_to')->where('cleaning_id', 32)->where('checkout_personil', '!=', null)->get();
+        $getCleaning = CleaningFull::with('cleaning:cleaning_id,validity_from,validity_to')->where('photo_checkout_personil2', '!=', null)->get();
         // dd($getCleaning);
         $pdf = PDF::loadview('cleaning.export_full_pdf', compact('getCleaning'))->setPaper('a4', 'landscape')->setWarnings(false);
         return $pdf->stream();
@@ -645,9 +645,13 @@ class CleaningController extends Controller
             })
             ->orderColumn('cleaning_id', '-cleaning_id $1')
             ->addColumn('action', 'cleaning.actionLink')
-            ->addColumn('image', function ($data) {
+            ->addColumn('image_checkin', function ($data) {
                 $url = asset("storage/bm/cleaning/checkin/{$data->photo_checkin_personil}");
                 return $url;
+            })
+            ->addColumn('image_checkout', function ($data) {
+                $checkout = asset("storage/bm/cleaning/checkout/{$data->photo_checkout_personil}");
+                return $checkout;
             })
             ->toJson();
     }

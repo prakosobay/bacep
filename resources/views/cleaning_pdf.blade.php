@@ -842,6 +842,7 @@
                 </tr>
             </table>
         </div>
+        @if($cleaningFull->photo_checkout_personil)
         <table cellpadding="2" class="table table-detail">
             <tr >
                 <td class="table-grey" colspan="6"><b>Visitors</b></td>
@@ -858,19 +859,20 @@
                 <td class="table-white">1.</td>
                 <td class="table-center">{{$cleaningFull->cleaning_name}}</td>
                 <td class="table-center">{{$cleaningFull->checkin_personil}}</td>
-                <td class="table-center"><img src="{{ public_path("storage/bm/cleaning/checkin". '/' . $cleaningFull->photo_checkin_personil) }}" alt="" style="width: 80px; height: 80px;"></td>
+                <td class="table-center"><img src="{{ public_path("storage/bm/cleaning/checkin". '/' . $cleaningFull->photo_checkin_personil) }}" alt="" style="width: 120px; height: 120px;"></td>
                 <td class="table-center">{{$cleaningFull->checkout_personil}}</td>
-                <td class="table-center"><img src="{{ public_path("storage/bm/cleaning/checkout". '/' . $cleaningFull->photo_checkout_personil) }}" alt="" style="width: 80px; height: 80px;"></td>
+                <td class="table-center"><img src="{{ public_path("storage/bm/cleaning/checkout". '/' . $cleaningFull->photo_checkout_personil) }}" alt="" style="width: 120px; height: 120px;"></td>
             </tr>
             <tr >
                 <td class="table-white">2. </td>
                 <td class="table-center">{{$cleaningFull->cleaning_name2}}</td>
                 <td class="table-center">{{$cleaningFull->checkin_personil2}}</td>
-                <td class="table-center"><img src="{{ public_path("storage/bm/cleaning/checkin". '/' . $cleaningFull->photo_checkin_personil2) }}" alt="" style="width: 80px; height: 80px;"></td>
+                <td class="table-center"><img src="{{ public_path("storage/bm/cleaning/checkin". '/' . $cleaningFull->photo_checkin_personil2) }}" alt="" style="width: 120px; height: 120px;"></td>
                 <td class="table-center">{{$cleaningFull->checkout_personil2}}</td>
-                <td class="table-center"><img src="{{ public_path("storage/bm/cleaning/checkout". '/' . $cleaningFull->photo_checkout_personil2) }}" alt="" style="width: 80px; height: 80px;"></td>
+                <td class="table-center"><img src="{{ public_path("storage/bm/cleaning/checkout". '/' . $cleaningFull->photo_checkout_personil2) }}" alt="" style="width: 120px; height: 120px;"></td>
             </tr>
         </table>
+        @endif
     </main>
 </body>
 </html>

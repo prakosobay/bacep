@@ -16,6 +16,6 @@ class OtherFull extends Model
 
     public function other()
     {
-        return $this->belongsTo(OtherFull::class, 'other_id');
+        return $this->hasOne(OtherFull::class, 'other_id');
     }
 }

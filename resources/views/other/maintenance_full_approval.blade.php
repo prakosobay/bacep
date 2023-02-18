@@ -20,9 +20,9 @@
                             <th>Purpose of Work</th>
                             <th>Visitor Name</th>
                             <th>Checkin</th>
-                            {{-- <th>Photo Checkin</th> --}}
+                            <th>Photo Checkin</th>
                             <th>Checkout</th>
-                            {{-- <th>Photo Checkout</th> --}}
+                            <th>Photo Checkout</th>
                             <th>Link</th>
                         </tr>
                     </thead>
@@ -47,17 +47,17 @@
                     { data: 'work', name: 'other_fulls.work' },
                     { data: 'name', name: 'other_personils.name' },
                     { data: 'checkin', name: 'other_personils.checkin' },
-                    // { data: 'checkin',
-                    //     render: function(data, type, full, meta) {
-                    //         return "<img src=\"" + data + "\" height=\"50\"/>";
-                    //     }
-                    // },
+                    { data: 'image',
+                        render: function(data, type, full, meta) {
+                            return "<img src=\"" + data + "\" height=\"100\"/>";
+                        }
+                    },
                     { data: 'checkout', name: 'other_personils.checkout' },
-                    // { data: 'checkout',
-                    //     render: function(data, type, full, meta) {
-                    //         return "<img src=\"" + data + "\" height=\"50\"/>";
-                    //     }
-                    // },
+                    { data: 'image',
+                        render: function(data, type, full, meta) {
+                            return "<img src=\"" + data + "\" height=\"100\"/>";
+                        }
+                    },
                     { data: 'action', name: 'action', orderable: false, searchable: false }
                 ]
             });

@@ -189,13 +189,13 @@ class OtherController extends Controller
             }
             $personil = OtherPersonil::insert($p);
 
-            foreach ([
-                'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id', 'syukril@balitower.co.id', 'dennis.oscadifa@balitower.co.id',
-                'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'badai.sino@balitower.co.id',
-                'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'riya.ully@balitower.co.id',
-            ] as $recipient) {
-                Mail::to($recipient)->send(new NotifMaintenanceForm($otherForm));
-            }
+            // foreach ([
+            //     'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id', 'syukril@balitower.co.id', 'dennis.oscadifa@balitower.co.id',
+            //     'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'badai.sino@balitower.co.id',
+            //     'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'riya.ully@balitower.co.id',
+            // ] as $recipient) {
+            //     Mail::to($recipient)->send(new NotifMaintenanceForm($otherForm));
+            // }
 
             $log = OtherHistory::insert([
                 'other_id' => $otherForm->id,
@@ -299,24 +299,6 @@ class OtherController extends Controller
                 'mitigation_5' => $request->mitigation_5,
             ]);
 
-            /*
-            foreach($data['visit_nama'] as $k => $v) {
-                // dd($data['visit_dept'][$k]);
-                if(isset($data['visit_nama'][$k])) {
-                    $existPersonil = OtherPersonil::where('other_id', $id)->first();
-                    $existPersonil->update([
-                        'name' => $data['visit_nama'][$k],
-                        'company' => $data['visit_company'][$k],
-                        'number' => $data['visit_nik'][$k],
-                        'phone' => $data['visit_phone'][$k],
-                        'respon' => $data['visit_respon'][$k],
-                        'department' => $data['visit_department'][$k],
-                    ]);
-                }
-            }
-            $a = OtherPersonil::where('other_id', $id)->get()->toArray();
-            dd($a);
-            */
             $lastupdate->update(['aktif' => false]);
 
             // Perubahan status tiap permit
@@ -335,32 +317,29 @@ class OtherController extends Controller
             // // Pergantian  role tiap permit & send email notif
             $role_to = '';
             if ($lastupdate->role_to == 'review') {
-                foreach ([
-                    'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id', 'syukril@balitower.co.id', 'dennis.oscadifa@balitower.co.id',
-                    'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id',
-                    'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id',
-                ] as $recipient) {
-                    Mail::to($recipient)->send(new NotifMaintenanceForm($notif_email));
-                }
-                foreach (['bayu.prakoso@balitower.co.id'] as $recipient) {
-                    Mail::to($recipient)->send(new NotifMaintenanceForm($notif_email));
-                }
+                // foreach ([
+                //     'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id', 'syukril@balitower.co.id', 'dennis.oscadifa@balitower.co.id',
+                //     'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id',
+                //     'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id',
+                // ] as $recipient) {
+                //     Mail::to($recipient)->send(new NotifMaintenanceForm($notif_email));
+                // }
                 $role_to = 'check';
             } elseif ($lastupdate->role_to == 'check') {
-                foreach (['security.bacep@balitower.co.id'] as $recipient) {
-                    Mail::to($recipient)->send(new NotifMaintenanceForm($notif_email));
-                }
+                // foreach (['security.bacep@balitower.co.id'] as $recipient) {
+                //     Mail::to($recipient)->send(new NotifMaintenanceForm($notif_email));
+                // }
                 $role_to = 'security';
             } elseif ($lastupdate->role_to == 'security') {
-                foreach (['bayu.prakoso@balitower.co.id'] as $recipient) {
-                    Mail::to($recipient)->send(new NotifMaintenanceForm($notif_email));
-                }
+                // foreach (['bayu.prakoso@balitower.co.id'] as $recipient) {
+                //     Mail::to($recipient)->send(new NotifMaintenanceForm($notif_email));
+                // }
                 $role_to = 'head';
             } elseif ($lastupdate->role_to = 'head') {
                 $full = Other::findOrFail($id);
-                foreach (['bayu.prakoso@balitower.co.id'] as $recipient) {
-                    Mail::to($recipient)->send(new NotifMaintenanceFull($full));
-                }
+                // foreach (['bayu.prakoso@balitower.co.id'] as $recipient) {
+                //     Mail::to($recipient)->send(new NotifMaintenanceFull($full));
+                // }
                 $role_to = 'all';
 
                 OtherFull::create([
@@ -507,9 +486,9 @@ class OtherController extends Controller
             ]);
             // Get permit yang di reject & kirim notif email
             $maintenance_reject = Other::where('id', $id)->select('id', 'created_at', 'work', 'visit')->first();
-            foreach (['badai.sino@balitower.co.id', 'riya.ully@balitower.co.id'] as $recipient) {
-                Mail::to($recipient)->send(new NotifMaintenanceReject($maintenance_reject, $note));
-            }
+            // foreach (['badai.sino@balitower.co.id', 'riya.ully@balitower.co.id'] as $recipient) {
+            //     Mail::to($recipient)->send(new NotifMaintenanceReject($maintenance_reject, $note));
+            // }
 
             DB::commit();
 
@@ -721,7 +700,6 @@ class OtherController extends Controller
             ->join('other_fulls', 'others.id', '=', 'other_fulls.other_id')
             ->join('other_personils', 'others.id', '=', 'other_personils.other_id')
             ->where('other_fulls.status', 'Full Approved')
-            ->where('other_personils.checkout',  null)
             ->where('other_personils.deleted_at', null)
             ->select('other_fulls.visit', 'other_fulls.leave', 'other_fulls.work', 'others.id', 'other_personils.id as personil_id', 'other_personils.checkin', 'other_personils.checkout', 'other_personils.name');
         return Datatables::of($full_visitor)
@@ -742,13 +720,29 @@ class OtherController extends Controller
             ->join('other_fulls', 'others.id', '=', 'other_fulls.other_id')
             ->where('other_fulls.status', 'Full Approved')
             ->where('other_personils.deleted_at', null)
-            ->select('other_fulls.*', 'other_personils.checkin', 'other_personils.checkout', 'other_personils.name');
+            ->select('other_fulls.*', 'other_personils.checkin', 'other_personils.checkout', 'other_personils.name', 'other_personils.photo_checkin', 'other_personils.photo_checkout');
         return Datatables::of($full_approval)
             ->editColumn('visit', function ($full_approval) {
                 return $full_approval->visit ? with(new Carbon($full_approval->visit))->format('d/m/Y') : '';
             })
+            ->addColumn('image_checkin', function ($data) {
+                $url = asset("storage/bm/maintenance/checkin/{$data->photo_checkin}");
+                return $url;
+            })
+            ->addColumn('image_checkout', function ($data) {
+                $checkout = asset("storage/bm/maintenance/checkout/{$data->photo_checkout}");
+                return $checkout;
+            })
+            ->orderColumn('other_id', '-other_id $1')
             ->addColumn('action', 'other.maintenanceActionLink')
             ->make(true);
+        // $full_approval = Other::with(['otherId', 'personils' => function ($query) {
+        //     $query->where('deleted_at',  null);
+        // }
+        // ])->select('id');
+        // return DataTables::of($full_approval)
+        //     ->toJson();
+        // dd($full_approval);
     }
 
     public function yajra_full_reject_maintenance() // Get data permit reject

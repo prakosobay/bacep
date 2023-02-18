@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\{Model, SoftDeletes};
-use Closure;
 
 class Other extends Model
 {
@@ -22,9 +21,9 @@ class Other extends Model
         return $this->hasMany(OtherHistory::class, 'other_id');
     }
 
-    public function full()
+    public function otherId()
     {
-        return $this->hasOne(OtherFull::class);
+        return $this->belongsTo(OtherFull::class, 'other_id');
     }
 
     public function penomoranAR()

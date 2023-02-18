@@ -10,6 +10,24 @@
         <div class="card-header">
             {{-- <a href="{{ route('cleaningExportFullApproval') }}" class="btn btn-sm btn-success mx-1 my-1">Export Excel</a> --}}
             <a href="{{ route('cleaningExportPDF') }}" class="btn btn-sm btn-danger mx-1 my-1">Export PDF</a>
+            {{-- <button type="button" class="btn btn-primary btn-sm mx-1 my-1" data-bs-toggle="modal" data-bs-target="#exportPDF">Export PDF</button> --}}
+        </div>
+        <div class="modal fade" id="exportPDF" tabindex="-1" aria-labelledby="exportPDFLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exportPDFLabel">Export PDF</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        ...
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -23,6 +41,7 @@
                             <th>Checkin</th>
                             <th>Photo Checkin</th>
                             <th>Checkout</th>
+                            <th>Photo Checkout</th>
                             <th>Link</th>
                         </tr>
                     </thead>
@@ -47,12 +66,17 @@
                     { data: 'cleaning_work', name: 'cleaning_work' },
                     { data: 'cleaning_name', name: 'cleaning_name' },
                     { data: 'checkin_personil', name: 'checkin_personil' },
-                    { data: 'image',
+                    { data: 'image_checkin',
                         render: function(data, type, full, meta) {
                             return "<img src=\"" + data + "\" height=\"100\"/>";
                         }
                     },
                     { data: 'checkout_personil', name: 'checkout_personil' },
+                    { data: 'image_checkout',
+                        render: function(data, type, full, meta) {
+                            return "<img src=\"" + data + "\" height=\"100\"/>";
+                        }
+                    },
                     { data: 'action', name: 'action', orderable: false, searchable: false }
                 ]
             });
