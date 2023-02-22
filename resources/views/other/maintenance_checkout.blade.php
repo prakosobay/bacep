@@ -72,7 +72,7 @@
                             <input type="text" class="input100" name="name" value="{{ $getVisitor->name }}" readonly>
                         </td>
                         <td colspan="2" rowspan="6">
-                            <img src="{{ url('storage/bm/maintenance/checkin/'.$getVisitor->photo_checkin)}}" alt="">
+                            {{-- <img src="{{ url('storage/bm/maintenance/checkin/'.$getVisitor->photo_checkin)}}" alt=""> --}}
                         </td>
                     </tr>
                     <tr>

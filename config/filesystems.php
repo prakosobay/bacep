@@ -42,44 +42,30 @@ return [
             'visibility' => 'public',
         ],
 
-        'internalCheckin' => [
-            'driver' => 'local',
-            'root' => storage_path('app\public\internal\checkin'),
-            'url' => env('APP_URL').'/storage',
-            'visibility' => 'public',
-        ],
-
-        'internalCheckout' => [
-            'driver' => 'local',
-            'root' => storage_path('app\public\internal\checkout'),
-            'url' => env('APP_URL').'/storage',
-            'visibility' => 'public',
-        ],
-
         'cleaningCheckin' => [
             'driver' => 'local',
-            'root' => storage_path('app\public\bm\cleaning\checkin'),
+            'root' => storage_path('app/public/bm/cleaning/checkin'),
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
         ],
 
         'cleaningCheckout' => [
             'driver' => 'local',
-            'root' => storage_path('app\public\bm\cleaning\checkout'),
+            'root' => storage_path('app/public/bm/cleaning/checkout'),
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
         ],
 
         'maintenanceCheckin' => [
             'driver' => 'local',
-            'root' => storage_path('app\public\bm\maintenance\checkin'),
+            'root' => storage_path('app/public/bm/maintenance/checkin'),
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
         ],
 
         'maintenanceCheckout' => [
             'driver' => 'local',
-            'root' => storage_path('app\public\bm\maintenance\checkout'),
+            'root' => storage_path('app/public/bm/maintenance/checkout'),
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
         ],
