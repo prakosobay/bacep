@@ -714,20 +714,34 @@ class OtherController extends Controller
 
     public function maintenance_yajra_full_approval() // Get data permit full approve versi approval
     {
-        $full_approval = DB::table('others')
-            ->join('other_personils', 'others.id', '=', 'other_personils.other_id')
-            ->join('other_fulls', 'others.id', '=', 'other_fulls.other_id')
-            ->where('other_fulls.status', 'Full Approved')
-            ->where('other_personils.deleted_at', null)
-            ->select('other_fulls.*', 'other_personils.checkin', 'other_personils.checkout', 'other_personils.name');
-        return Datatables::of($full_approval)
-            ->editColumn('visit', function ($full_approval) {
-                return $full_approval->visit ? with(new Carbon($full_approval->visit))->format('d/m/Y') : '';
+        // $full_approval = DB::table('others')
+        //     ->join('other_personils', 'others.id', '=', 'other_personils.other_id')
+        //     ->join('other_fulls', 'others.id', '=', 'other_fulls.other_id')
+        //     ->where('other_fulls.status', 'Full Approved')
+        //     ->where('other_personils.deleted_at', null)
+        //     ->select('other_fulls.*', 'other_personils.checkin', 'other_personils.checkout', 'other_personils.name');
+        $query = Other::with(['personils' => function ($q) {
+            $q->where('deleted_at', null);
+        }])->with(['full' => function ($q) {
+            $q->where('status', 'Full Approved')->select('id', 'other_id', 'note', 'status', 'link');
+        }])->get();
+        dd($query);
+        return Datatables::of($query)
+            ->editColumn('visit', function ($query) {
+                return $query->visit ? with(new Carbon($query->visit))->format('d/m/Y') : '';
+            })
+            ->addColumn('image_checkin', function ($data) {
+                $url = asset("storage/bm/maintenance/checkin/{$data->photo_checkin}");
+                return $url;
+            })
+            ->addColumn('image_checkout', function ($data) {
+                $checkout = asset("storage/bm/maintenance/checkout/{$data->photo_checkout}");
+                return $checkout;
             })
             ->orderColumn('other_id', '-other_id $1')
             ->addColumn('action', 'other.maintenanceActionLink')
             ->make(true);
-        // $full_approval = Other::with(['otherId', 'personils' => function ($query) {
+        // $query = Other::with(['otherId', 'personils' => function ($query) {
         //     $query->where('deleted_at',  null);
         // }
         // ])->select('id');

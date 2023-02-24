@@ -380,12 +380,7 @@
 
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-6 text-center">
-                            <a class="btn btn-lg btn-danger my-1 mx-1" href="{{ route('cleaningReject', $cleaning->cleaning_id) }}" type="submit" id="reject_button">
-                                Reject
-                            </a>
-                        </div>
-                        <div class="col-6 text-center">
+                        <div class="col-12 text-center">
                             <button class="btn btn-lg btn-success my-1 mx-1" id="approve_button" type="submit">
                                 Approve
                             </button>

@@ -47,13 +47,13 @@
                     { data: 'work', name: 'other_fulls.work' },
                     { data: 'name', name: 'other_personils.name' },
                     { data: 'checkin', name: 'other_personils.checkin' },
-                    { data: 'image',
+                    { data: 'image_checkin',
                         render: function(data, type, full, meta) {
                             return "<img src=\"" + data + "\" height=\"100\"/>";
                         }
                     },
                     { data: 'checkout', name: 'other_personils.checkout' },
-                    { data: 'image',
+                    { data: 'image_checkout',
                         render: function(data, type, full, meta) {
                             return "<img src=\"" + data + "\" height=\"100\"/>";
                         }

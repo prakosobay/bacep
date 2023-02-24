@@ -21,9 +21,9 @@ class Other extends Model
         return $this->hasMany(OtherHistory::class, 'other_id');
     }
 
-    public function otherId()
+    public function full()
     {
-        return $this->belongsTo(OtherFull::class, 'other_id');
+        return $this->hasOne(OtherFull::class, 'other_id');
     }
 
     public function penomoranAR()
