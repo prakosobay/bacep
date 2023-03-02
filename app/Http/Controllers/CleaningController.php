@@ -624,14 +624,6 @@ class CleaningController extends Controller
         return $pdf->stream();
     }
 
-    public function cetak_all_full_cleaning()
-    {
-        $getCleaning = CleaningFull::with('cleaning:cleaning_id,validity_from,validity_to')->where('photo_checkout_personil2', '!=', null)->get();
-        // dd($getCleaning);
-        $pdf = PDF::loadview('cleaning.export_full_pdf', compact('getCleaning'))->setPaper('a4', 'landscape')->setWarnings(false);
-        return $pdf->stream();
-    }
-
 
     // Datatable Yajra
     public function yajra_full_approval() //versi approval
@@ -725,9 +717,16 @@ class CleaningController extends Controller
     //Export Excel
     public function export_full_approval()
     {
-        // $query = CleaningFull::with('cleaning:cleaning_id,cleaning_work,validity_from,validity_to')->select('cleaning_id', 'checkin_personil', 'photo_checkin_personil')->get();
-        // dd($query->cleaning);
-        // CleaningFullApprovalExport($query);
+        $export = CleaningFull::with('cleaning:cleaning_id,cleaning_work,validity_from,validity_to')->select('cleaning_id', 'checkin_personil', 'photo_checkin_personil')->get();
+        return response()->json(['export' => $export]);
         return Excel::download(new CleaningFullApprovalExport, 'Cleaning Full Approval.xlsx');
+    }
+
+    // Export PDF
+    public function export_pdf()
+    {
+        $getCleaning = CleaningFull::with('cleaning:cleaning_id,validity_from,validity_to')->where('photo_checkout_personil2', '!=', null)->orderBy('cleaning_id', 'desc')->get();
+        $pdf = PDF::loadview('cleaning.export_full_pdf', compact('getCleaning'))->setPaper('a4', 'landscape')->setWarnings(false);
+        return $pdf->stream();
     }
 }

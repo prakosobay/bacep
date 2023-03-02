@@ -284,7 +284,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/cleaning/action/checkin/{id}', 'checkin_form_cleaning');
         Route::get('/cleaning/action/checkout/{id}', 'checkout_form_cleaning');
         Route::get('/cleaning/action/show/{id}', 'cetak_full_cleaning');
-        Route::get('cleaning/action/export', 'cetak_all_full_cleaning')->name('cleaningExportPDF');
+        Route::get('cleaning/action/export', 'export_pdf')->name('cleaningExportPDF');
         Route::get('/cleaning/reject/show', 'show_reject_cleaning');
 
         Route::get('cleaning/yajra/log', 'cleaning_yajra_log');

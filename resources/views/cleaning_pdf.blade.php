@@ -872,6 +872,7 @@
                 <td class="table-center"><img src="{{ public_path("storage/bm/cleaning/checkout". '/' . $cleaningFull->photo_checkout_personil2) }}" alt="" style="width: 120px; height: 120px;"></td>
             </tr>
         </table>
+        @else
         @endif
     </main>
 </body>
