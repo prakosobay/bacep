@@ -573,7 +573,7 @@ class OtherController extends Controller
         $replace = substr($request->photo_checkout, 0, strpos($request->photo_checkout, ',') + 1);
         $image = str_replace($replace, '', $request->photo_checkout);
         $image = str_replace(' ', '+', $image);
-        $imageName = Str::random(200) .  '.' . $extension;
+        $imageName = time() .  '.' . $extension;
 
         Storage::disk('maintenanceCheckout')->put($imageName, base64_decode($image));
 
