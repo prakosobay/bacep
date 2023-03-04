@@ -42,17 +42,17 @@
                 serverSide: true,
                 ajax: '{{ route('maintenanceYajraFullApproval')}}',
                 columns: [
-                    { data: 'other_id', name: 'other_fulls.other_id' },
-                    { data: 'visit', name: 'other_fulls.visit' },
-                    { data: 'work', name: 'other_fulls.work' },
-                    { data: 'name', name: 'other_personils.name' },
-                    { data: 'checkin', name: 'other_personils.checkin' },
+                    { data: 'other_id', name: 'other_id' },
+                    { data: 'visit', name: 'visit' },
+                    { data: 'work', name: 'work' },
+                    { data: 'name', name: 'name' },
+                    { data: 'checkin', name: 'checkin' },
                     { data: 'image_checkin',
                         render: function(data, type, full, meta) {
                             return "<img src=\"" + data + "\" height=\"100\"/>";
                         }
                     },
-                    { data: 'checkout', name: 'other_personils.checkout' },
+                    { data: 'checkout', name: 'checkout' },
                     { data: 'image_checkout',
                         render: function(data, type, full, meta) {
                             return "<img src=\"" + data + "\" height=\"100\"/>";
