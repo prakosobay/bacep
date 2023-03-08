@@ -164,7 +164,7 @@ class HomeController extends Controller
 
     public function full($type_full) // Routingan untuk menampilkan permit yang sudah full approve versi approval
     {
-        if ((Gate::allows('isApproval')) || (Gate::allows('isHead'))) {
+        if ((Gate::allows('isApproval')) || (Gate::allows('isHead') || (Gate::allows('isAdmin')))) {
             if ($type_full == 'all') {
                 return view('all_full_approval');
             } elseif ($type_full == 'sales') {

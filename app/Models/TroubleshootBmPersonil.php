@@ -21,6 +21,10 @@ class TroubleshootBmPersonil extends Model
         'respon',
         'phone',
         'numberId',
+        'checkin',
+        'photo_checkin',
+        'checkout',
+        'photo_checkout',
     ];
 
     public function troubleshoot()

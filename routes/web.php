@@ -344,13 +344,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('maintenance-yajra-full-approval', 'maintenance_yajra_full_approval')->name('maintenanceYajraFullApproval');
         Route::get('maintenance-yajra-full-visitor', 'maintenance_yajra_full_visitor')->name('maintenanceYajraFullVisitor');
 
-        Route::get('maintenance-export-full-approval', 'maintenance_export_full_approval')->name('maintenanceExportFullApproval');
+        Route::get('maintenance/export/full/approval', 'maintenance_export_full_approval')->name('maintenanceExportFullApproval');
+        Route::get('maintenance/export/full/pdf/approval', 'm_export_pdf_full_approval')->name('maintenanceExportFullPDF');
 
-        Route::get('maintenance-checkin-show/{id}', 'maintenance_checkin_show')->name('maintenanceCheckinShow');
-        Route::get('maintenance-checkout-show/{id}', 'maintenance_checkout_show')->name('maintenanceCheckoutShow');
-        Route::put('maintenance-checkin-update/{id}', 'maintenance_checkin_update')->name('maintenanceCheckinUpdate');
-        Route::put('maintenance-checkout-update/{id}', 'maintenance_checkout_update')->name('maintenanceCheckoutUpdate');
-        Route::put('maintenance-checkin-cancel/{id}', 'maintenance_checkin_cancel')->name('maintenanceCheckinCancel');
+        Route::get('maintenance/checkin/show/{id}', 'maintenance_checkin_show')->name('maintenanceCheckinShow');
+        Route::get('maintenance/checkout/show/{id}', 'maintenance_checkout_show')->name('maintenanceCheckoutShow');
+        Route::put('maintenance/checkin/update/{id}', 'maintenance_checkin_update')->name('maintenanceCheckinUpdate');
+        Route::put('maintenance/checkout/update/{id}', 'maintenance_checkout_update')->name('maintenanceCheckoutUpdate');
+        Route::put('maintenance/checkin/cancel/{id}', 'maintenance_checkin_cancel')->name('maintenanceCheckinCancel');
 
         Route::post('maintenance/store', 'maintenance_store')->name('maintenanceStore');
         Route::post('maintenance/approval/{id}', 'maintenance_approve')->name('maintenanceApproval');

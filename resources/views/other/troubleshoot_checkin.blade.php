@@ -78,13 +78,6 @@
                         <th>Name </th>
                         <td>
                             <input type="text" class="input100" name="name" value="{{ $getVisitor->nama }}" required>
-                            {{-- <select class="js-select2" name="name" id="nama">
-                                <option selected value="{{ $getVisitor->name }}">{{ $getVisitor->name }}</option>
-                                @foreach($personil as $p)
-                                    <option value="{{ $p->id }}">{{ $p->visit_nama }}</option>
-                                @endforeach
-                            </select>
-                            <div class="dropDownSelect2"></div> --}}
                         </td>
                         <th>Company</th>
                         <td>
@@ -171,28 +164,28 @@
     });
 
     Webcam.set({
-        width: 450,
-        height: 400,
+        width: 400,
+        height: 300,
         image_format: 'jpeg',
         jpeg_quality: 90
     });
 
     Webcam.attach( '#my_camera' );
-        function take_snapshot() {
-            Webcam.snap( function(data_uri) {
-                $("#image").val(data_uri);
-                document.getElementById('results').innerHTML = '<img src="'+data_uri+'"/>';
-            });
-            var tanggal = new Date();
-            var jam = tanggal.getHours();
-            var menit = tanggal.getMinutes();
-            var detik = tanggal.getSeconds();
-            jam = jam < 10 ? '0' +jam : jam;
-            menit = menit < 10 ? '0'+menit : menit;
-            detik = detik < 10 ? '0'+detik : detik;
-            var waktu = jam + ':' + menit + ':' + detik;
-            $("#checkin").val(waktu);
-        }
+    function take_snapshot() {
+        Webcam.snap( function(data_uri) {
+            $("#image").val(data_uri);
+            document.getElementById('results').innerHTML = '<img src="'+data_uri+'"/>';
+        });
+        var tanggal = new Date();
+        var jam = tanggal.getHours();
+        var menit = tanggal.getMinutes();
+        var detik = tanggal.getSeconds();
+        jam = jam < 10 ? '0' +jam : jam;
+        menit = menit < 10 ? '0'+menit : menit;
+        detik = detik < 10 ? '0'+detik : detik;
+        var waktu = jam + ':' + menit + ':' + detik;
+        $("#checkin").val(waktu);
+    }
 </script>
 </body>
 </html>

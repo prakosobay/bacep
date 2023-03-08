@@ -72,7 +72,7 @@
                             <input type="text" class="input100" name="name" value="{{ $getVisitor->name }}" readonly>
                         </td>
                         <td colspan="2" rowspan="6">
-                            {{-- <img src="{{ url('storage/bm/maintenance/checkin/'.$getVisitor->photo_checkin)}}" alt=""> --}}
+                            <img src="{{ url('storage/bm/maintenance/checkin/'.$getVisitor->photo_checkin)}}" alt="" width="400px">
                         </td>
                     </tr>
                     <tr>
@@ -177,21 +177,21 @@
         });
 
         Webcam.attach( '#my_camera' );
-            function take_snapshot() {
-                Webcam.snap( function(data_uri) {
-                    $("#image").val(data_uri);
-                    document.getElementById('results').innerHTML = '<img src="'+data_uri+'"/>';
-                });
-                var tanggal = new Date();
-                var jam = tanggal.getHours();
-                var menit = tanggal.getMinutes();
-                var detik = tanggal.getSeconds();
-                jam = jam < 10 ? '0' +jam : jam;
-                menit = menit < 10 ? '0'+menit : menit;
-                detik = detik < 10 ? '0'+detik : detik;
-                var waktu = jam + ':' + menit + ':' + detik;
-                $("#checkout").val(waktu);
-            }
+        function take_snapshot() {
+            Webcam.snap( function(data_uri) {
+                $("#image").val(data_uri);
+                document.getElementById('results').innerHTML = '<img src="'+data_uri+'"/>';
+            });
+            var tanggal = new Date();
+            var jam = tanggal.getHours();
+            var menit = tanggal.getMinutes();
+            var detik = tanggal.getSeconds();
+            jam = jam < 10 ? '0' +jam : jam;
+            menit = menit < 10 ? '0'+menit : menit;
+            detik = detik < 10 ? '0'+detik : detik;
+            var waktu = jam + ':' + menit + ':' + detik;
+            $("#checkout").val(waktu);
+        }
 
     </script>
 <!--===============================================================================================-->
@@ -201,14 +201,14 @@
 
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+{{-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
 <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
     gtag('config', 'UA-23581568-13');
-</script>
+</script> --}}
 
 </body>
 </html>

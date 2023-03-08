@@ -46,6 +46,12 @@
                     </div>
                 @endif
 
+                @if (session('gagal'))
+                    <div class="alert alert-warning my-2 mx-2">
+                        {{ session('gagal') }}
+                    </div>
+                @endif
+
                 {{-- Purpose of Work (Tujuan Pekerjaan)--}}
 				<div class="wrap-input100 validate-input bg1" data-validate="Pilih Tujuan Pekerjaan">
 					<span class="label-input100">Purpose of Work (Tujuan Pekerjaan) *</span>

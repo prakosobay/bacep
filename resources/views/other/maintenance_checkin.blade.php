@@ -40,6 +40,16 @@
                     </div>
                 @endif
 
+                @if (count($errors) > 0)
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
                 {{-- Purpose of Work --}}
 				<div class="wrap-input100 validate-input bg1">
 					<span class="label-input100">Purpose of Work (Tujuan Pekerjaan) *</span>

@@ -65,8 +65,8 @@
                     <tr class="table-content">
                         <td class="table-content" rowspan="2">{{ $p->cleaning_id }}</td>
                         <td class="table-content" rowspan="2">{{$p->cleaning_work}}</td>
-                        <td class="table-content" rowspan="2">{{$p->cleaning->validity_from}}</td>
-                        <td class="table-content" rowspan="2">{{$p->cleaning->validity_to}}</td>
+                        <td class="table-content" rowspan="2">{{ Carbon\Carbon::parse($p->cleaning->validity_from)->format('d-m-Y') }}</td>
+                        <td class="table-content" rowspan="2">{{ Carbon\Carbon::parse($p->cleaning->validity_to)->format('d-m-Y') }}</td>
                         <td class="table-content" >{{$p->cleaning_name}}</td>
                         <td class="table-content" >{{$p->checkin_personil}}</td>
                         <td class="table-content" ><img src="{{ public_path("storage/bm/cleaning/checkin". '/' . $p->photo_checkin_personil) }}" alt="" style="width: 80px; height: 80px;"></td>

@@ -150,7 +150,6 @@
             page-break-before: always;
         }
     </style>
-
 </head>
 <body>
 
@@ -479,7 +478,7 @@
             </table>
 
         </div>
-
+        <div style="page-break-after:always;">
             {{-- Header CR --}}
             <table class="table table-bordered">
                 <tr >
@@ -819,6 +818,51 @@
                     <td class="col_footer">Hal : 1/1</td>
                 </tr>
             </table>
+        </div>
+
+        <table cellpadding="2" class="table table-detail">
+            <tr >
+                <td class="table-grey" colspan="6"><b>Visitors</b></td>
+            </tr>
+            <tr class="table-grey">
+                <td class="table-grey"><b>No.</b></td>
+                <td class="table-grey"><b>Name</b></td>
+                <td class="table-grey"><b>Checkin</b></td>
+                <td class="table-grey"><b>Poto Checkin</b></td>
+                <td class="table-grey"><b>Checkout</b></td>
+                <td class="table-grey"><b>Poto Checkout</b></td>
+            </tr>
+            @foreach( $personils as $p => $k)
+                @if(isset($personils[$p]['photo_checkout']) && !empty($personils[$p]['photo_checkout']))
+                    <tr >
+                        <td class="table-white">{{ $loop->iteration }}</td>
+                        <td class="table-center">{{$k->name}}</td>
+                        <td class="table-center">{{$k->checkin}}</td>
+                        <td class="table-center"><img src="{{ public_path("storage/bm/maintenance/checkin". '/' . $k->photo_checkin) }}" alt="" style="width: 120px; height: 120px;"></td>
+                        <td class="table-center">{{$k->checkout}}</td>
+                        <td class="table-center"><img src="{{ public_path("storage/bm/maintenance/checkout". '/' . $k->photo_checkout) }}" alt="" style="width: 120px; height: 120px;"></td>
+                    </tr>
+                @elseif(isset($personils[$p]['photo_checkin']) && !empty($personils[$p]['photo_checkin']))
+                    <tr >
+                        <td class="table-white">{{ $loop->iteration }}</td>
+                        <td class="table-center">{{$k->name}}</td>
+                        <td class="table-center">{{$k->checkin}}</td>
+                        <td class="table-center"><img src="{{ public_path("storage/bm/maintenance/checkin". '/' . $k->photo_checkin) }}" alt="" style="width: 120px; height: 120px;"></td>
+                        <td class="table-center"></td>
+                        <td class="table-center"></td>
+                    </tr>
+                @else
+                    <tr >
+                        <td class="table-white">{{ $loop->iteration }}</td>
+                        <td class="table-center">{{$k->name}}</td>
+                        <td class="table-center">{{$k->checkin}}</td>
+                        <td class="table-center"></td>
+                        <td class="table-center">{{$k->checkout}}</td>
+                        <td class="table-center"></td>
+                    </tr>
+                @endif
+            @endforeach
+        </table>
     </main>
 </body>
 </html>

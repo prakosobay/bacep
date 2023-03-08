@@ -21,7 +21,9 @@
                             <th>Purpose of Work</th>
                             <th>Visitor Name</th>
                             <th>Checkin</th>
+                            <th>Photo Checkin</th>
                             <th>Checkout</th>
+                            <th>Photo Checkout</th>
                             <th>Link</th>
                         </tr>
                     </thead>
@@ -47,7 +49,17 @@
                     { data: 'work', name: 'troubleshoot_bm_fulls.work' },
                     { data: 'nama', name: 'troubleshoot_bm_personils.nama' },
                     { data: 'checkin', name: 'troubleshoot_bm_personils.checkin' },
+                    { data: 'image_checkin',
+                        render: function(data, type, full, meta) {
+                            return "<img src=\"" + data + "\" height=\"100\"/>";
+                        }
+                    },
                     { data: 'checkout', name: 'troubleshoot_bm_personils.checkout' },
+                    { data: 'image_checkout',
+                        render: function(data, type, full, meta) {
+                            return "<img src=\"" + data + "\" height=\"100\"/>";
+                        }
+                    },
                     { data: 'action', name: 'action', orderable: false, searchable: false }
                 ]
             });
