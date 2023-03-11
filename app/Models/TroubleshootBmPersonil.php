@@ -27,7 +27,7 @@ class TroubleshootBmPersonil extends Model
         'photo_checkout',
     ];
 
-    public function troubleshoot()
+    public function troubleshootBmId()
     {
         return $this->belongsTo(TroubleshootBm::class, 'troubleshoot_bm_id');
     }

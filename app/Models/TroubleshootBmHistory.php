@@ -26,7 +26,7 @@ class TroubleshootBmHistory extends Model
         return $this->belongsTo(User::class, 'created_by');
     }
 
-    public function troubleshoot()
+    public function troubleshootBmId()
     {
         return $this->belongsTo(TroubleshootBm::class, 'troubleshoot_bm_id');
     }

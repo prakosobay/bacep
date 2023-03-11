@@ -15,9 +15,9 @@
     </div>
 
     <div class="container mx-3 my-3">
-        @if (session('failed'))
+        @if (session('gagal'))
             <div class="alert alert-danger">
-                {{ session('failed') }}
+                {{ session('gagal') }}
             </div>
         @endif
     </div>
@@ -59,8 +59,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="impact" class="form-label"><b>Impact :</b></label>
-                                    <select name="impact" id="impact" class="form-control">
-                                        <option selected>Pilih 1</option>
+                                    <select name="impact" id="impact" class="form-control" required>
+                                        <option selected></option>
                                         <option value="Low">Low</option>
                                         <option value="Medium">Medium</option>
                                         <option value="High">High</option>
@@ -82,7 +82,7 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-striped table-hover" id="rackTable" width="100%">
+                <table class="table table-striped table-hover" id="riskTable" width="100%">
                     <thead>
                         <tr>
                             <th>No.</th>
@@ -90,11 +90,26 @@
                             <th>Possibility</th>
                             <th>Impact</th>
                             <th>Mitigation</th>
-                            <th>Updated By</th>
-                            <th>Updated At</th>
                             <th>Action</th>
                         </tr>
                     </thead>
+                    <tbody>
+                        @foreach ( $risks as $risk )
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $risk->risk }}</td>
+                                <td>{{ $risk->poss }}</td>
+                                <td>{{ $risk->impact }}</td>
+                                <td>{{ $risk->mitigation }}</td>
+                                <td>
+                                    <form action="{{ route('riskDelete', $risk->id) }}" method="POST" onsubmit="return confirm('Are You Sure Want to Delete This Relasi ?')" >
+                                        @csrf
+                                        <button type="submit"class="btn btn-danger btn-sm mx-1 my-1">Hapus</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
                 </table>
             </div>
         </div>
@@ -103,21 +118,7 @@
 @push('scripts')
 <script>
     $(function() {
-        $('#rackTable').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: '{{ route('riskYajra')}}',
-            columns: [
-                { data: 'id', name: 'id' },
-                { data: 'risk', name: 'risk' },
-                { data: 'poss', name: 'poss' },
-                { data: 'impact', name: 'impact' },
-                { data: 'mitigation', name: 'mitigation' },
-                { data: 'updatedby', name: 'updatedby' },
-                { data: 'updated_at', name: 'updated_at' },
-                { data: 'action', name: 'action', orderable: false, searchable: false }
-            ]
-        });
+        $('#riskTable').DataTable();
     });
 </script>
 @endpush

@@ -26,6 +26,7 @@ class TroubleshootBmEntry extends Model
         'yard',
         'parking',
         'lain',
+        'cctv',
     ];
 
     public function troubleshoot_bm()

@@ -11,15 +11,23 @@ class MasterRisks extends Model
     use HasFactory, SoftDeletes;
 
     protected $table = 'm_risks';
-    protected $guarded = [];
+    protected $fillable = [
+        'name',
+        'risk',
+        'poss',
+        'impact',
+        'mitigation',
+        'updated_by',
+        'created_by',
+    ];
 
-    public function internals()
+    public function updatedBy()
     {
-        return $this->hasMany(InternalRisk::class, 'm_risk_id');
+        return $this->belongsTo(User::class, 'updated_by');
     }
 
-    public function eksternals()
+    public function created_by()
     {
-        return $this->hasMany(EksternalRisk::class, 'm_risk_id');
+        return $this->belongsTo(User::class, 'created_by');
     }
 }

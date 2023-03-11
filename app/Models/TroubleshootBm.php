@@ -44,7 +44,7 @@ class TroubleshootBm extends Model
 
     public function full()
     {
-        return $this->hasOne(TroubleshootBmFull::class);
+        return $this->hasOne(TroubleshootBmFull::class, 'troubleshoot_bm_id');
     }
 
     public function entry()

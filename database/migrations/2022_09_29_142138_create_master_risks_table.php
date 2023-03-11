@@ -19,8 +19,8 @@ class CreateMasterRisksTable extends Migration
             $table->string('poss');
             $table->string('impact');
             $table->string('mitigation');
-            $table->foreignId('created_by');
-            $table->foreignId('updated_by');
+            $table->foreignId('created_by')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('updated_by')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
             $table->softDeletes();
             $table->timestamps();
         });

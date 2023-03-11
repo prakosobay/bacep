@@ -137,6 +137,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::controller(MasterRiskController::class)->group(function() {
         Route::get('risk/table', 'table')->name('risk');
         Route::get('risk/yajra', 'yajra')->name('riskYajra');
+        Route::get('master/risk/{id}', 'get_risk');
 
         Route::post('risk/store', 'store')->name('riskStore');
         Route::post('risk/update/{id}', 'update')->name('riskUpdate');
@@ -304,10 +305,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Other
     Route::controller(OtherController::class)->group(function () {
+
         // Troubleshoot
         Route::get('troubleshoot-show', 'troubleshoot_form')->name('troubleshootForm');
         Route::get('troubleshoot/show/ar', 'troubleshoot_form_ar')->name('troubleshootAR');
         Route::get('troubleshoot-finished-show', 'troubleshoot_finished_show')->name('troubleshootFinishedShow');
+        Route::get('troubleshoot/review/{id}', 't_review')->name('tReview');
 
         Route::get('troubleshoot-pdf/{id}', 'troubleshoot_pdf')->name('troubleshootPDF');
         Route::get('other/troubleshoot/yajra/history', 'yajra_troubleshoot_history');
@@ -323,11 +326,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('troubleshoot-checkin-cancel/{id}', 'troubleshoot_checkin_cancel')->name('troubleshootCheckinCancel');
 
         Route::get('troubleshoot-export-full-approval', 'troubleshoot_export_full_approval')->name('troubleshootExportFullApproval');
+        Route::get('troubleshoot/export/full/pdf/approval', 't_export_pdf_full_approval')->name('troubleshootExportFullPDF');
 
         Route::post('troubleshoot-store', 'troubleshoot_store')->name('troubleshootStore');
         Route::post('troubleshoot/ar/store', 'ar_store')->name('troubleshootStoreAR');
-        Route::post('troubleshoot-approve', 'troubleshoot_approve')->name('troubleshootApprove');
-        Route::post('troubleshoot-reject', 'troubleshoot_reject')->name('troubleshootReject');
+        // Route::post('troubleshoot/approve', 'troubleshoot_approve')->name('troubleshootApprove');
+        Route::post('troubleshoot/approve{id}', 't_approve')->name('tApprove');
+        Route::post('troubleshoot/reject/{id}', 't_reject')->name('tReject');
 
 
         // --------------------------------------------------------- MAINTENANCE -------------------------------------------------------

@@ -1,8 +1,8 @@
 {{-- <a href="{{ route('riskEdit', $model->id) }}" class="btn btn-sm btn-primary mx-1 my-1" type="button">Update</a> --}}
 
-<button type="button" class="btn btn-primary btn-sm mx-1 my-1" data-bs-toggle="modal" data-id="{{ $model->id }}" data-bs-target="#exampleModal{{ $model->id }}">
+{{-- <button type="button" class="btn btn-primary btn-sm mx-1 my-1" data-bs-toggle="modal" data-id="{{ $model->id }}" data-bs-target="#exampleModal{{ $model->id }}">
     Edit
-  </button>
+  </button> --}}
 
   <!-- Modal -->
 <div class="modal fade" id="exampleModal{{ $model->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

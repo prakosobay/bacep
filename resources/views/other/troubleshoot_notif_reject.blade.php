@@ -29,6 +29,7 @@
                 <th>Date of Request</th>
                 <th>Purpose of Work</th>
                 <th>Date of Visit</th>
+                <th>Note</th>
             </tr>
         </thead>
         <tbody>
@@ -37,6 +38,7 @@
                 <td>{{ Carbon\Carbon::parse($content->created_at)->format('d-m-Y')  }}</td>
                 <td>{{ $content->work }}</td>
                 <td>{{ Carbon\Carbon::parse($content->visit)->format('d-m-Y') }}</td>
+                <td>{{ $note->note }}</td>
             </tr>
         </tbody>
     </table>

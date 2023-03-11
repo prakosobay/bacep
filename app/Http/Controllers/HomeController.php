@@ -101,14 +101,13 @@ class HomeController extends Controller
                 //     ->get();
 
                 $getMaintenance = Other::whereHas('histories', function ($query) use ($role_1) {
-                    $query->where('aktif', true)->whereIn('role_to', $role_1);
-                })->with([
-                    'histories' => function ($query) {
-                    $query->select('other_id', 'aktif', 'created_by', 'status', 'role_to', 'updated_at')->get();
-                    },
-                    'personils',
-                ])->select('id', 'visit', 'created_at as requested_at', 'work')->get();
-
+                        $query->where('aktif', true)->whereIn('role_to', $role_1);
+                    })->with([
+                        'histories' => function ($query) {
+                        $query->select('other_id', 'aktif', 'created_by', 'status', 'role_to', 'updated_at')->get();
+                        }
+                    ])->select('id', 'visit', 'created_at as requested_at', 'work')->get();
+                    // return $getMaintenance;
                 return view('other.maintenance_approval', compact('getMaintenance'));
             } elseif($type_approve == 'troubleshoot') {
                 $getTroubleshoot = DB::table('troubleshoot_bms')

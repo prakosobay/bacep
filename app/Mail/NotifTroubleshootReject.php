@@ -11,6 +11,7 @@ class NotifTroubleshootReject extends Mailable
 {
     use Queueable, SerializesModels;
     public $content;
+    public $note;
 
     /**
      * Create a new message instance.
@@ -18,9 +19,10 @@ class NotifTroubleshootReject extends Mailable
      * @return void
      */
 
-    public function __construct($content)
+    public function __construct($content, $note)
     {
         $this->content = $content;
+        $this->note = $note;
     }
 
     /**

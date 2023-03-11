@@ -4,36 +4,41 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\MasterRisks;
-use Illuminate\Support\Facades\{DB, Email};
+use Illuminate\Support\Facades\{DB};
 use Yajra\DataTables\Datatables;
 
 class MasterRiskController extends Controller
 {
+    public function getUserId()
+    {
+        $get = auth()->user()->id;
+        return $get;
+    }
+
     public function store(Request $request)
     {
-        // dd($request->all());
+
         $request->validate([
             'risk' => ['required', 'string', 'max:255'],
             'poss' => ['required', 'string', 'max:255'],
             'impact' => ['required', 'string', 'max:255'],
             'mitigation' => ['required', 'string', 'max:255'],
         ]);
-
+        // dd($request->all());
         DB::beginTransaction();
 
         try {
 
-            MasterRisks::firstOrCreate([
+            MasterRisks::create([
                 'risk' => $request->risk,
                 'poss' => $request->poss,
                 'impact' => $request->impact,
                 'mitigation' => $request->mitigation,
-                'created_by' => auth()->user()->id,
-                'updated_by' => auth()->user()->id,
+                'created_by' => $this->getUserId(),
+                'updated_by' => $this->getUserId(),
             ]);
 
             DB::commit();
-
             return redirect()->route('risk')->with('success', 'Successful');
         } catch (\Exception $e) {
             DB::rollBack();
@@ -61,7 +66,7 @@ class MasterRiskController extends Controller
                 'poss' => $request->poss,
                 'impact' => $request->impact,
                 'mitigation' => $request->mitigation,
-                'updated_by' => auth()->user()->id,
+                'updated_by' => $this->getUserId(),
             ]);
 
             DB::commit();
@@ -93,15 +98,19 @@ class MasterRiskController extends Controller
 
     public function table()
     {
-        return view('risk.table');
+        $risks = MasterRisks::with('updatedBy:id,name')->get();
+        return view('risk.table', compact('risks'));
+    }
+
+    public function get_risk($id) // Data Visitor
+    {
+        $risk = MasterRisks::findOrFail($id);
+        return isset($risk) && !empty($risk) ? Response()->json(['status' => 'SUCCESS', 'risk' => $risk]) : response(['status' => 'FAILED', 'risk' => []]);
     }
 
     public function yajra()
     {
-        $risk = DB::table('m_risks')
-            ->join('users', 'users.id', '=', 'm_risks.created_by')
-            ->select('m_risks.*', 'users.name as updatedby')
-            ->where('m_risks.deleted_at', null);
+        $risk = MasterRisks::with('createdBy:id,name')->get();
         return Datatables::of($risk)
             ->addColumn('action', 'risk.actionEdit')
             ->make(true);
