@@ -812,8 +812,7 @@ class OtherController extends Controller
     public function troubleshoot_form() // Menampilkan form troubleshoot
     {
         $personil = Visitor::all();
-        $risks = MasterRisks::all();
-        return view('other.troubleshoot_form', compact('personil', 'risks'));
+        return view('other.troubleshoot_form', compact('personil'));
     }
 
     public function troubleshoot_form_ar()
@@ -884,23 +883,6 @@ class OtherController extends Controller
         $get = TroubleshootBmHistory::with('createdBy:id,name')->where('troubleshoot_bm_id', $id)->get();
         return $get;
     }
-
-    public function t_makeFull($id, $form)
-    {
-        $full = TroubleshootBmFull::create([
-            'troubleshoot_bm_id' => $id,
-            'work' => $form->work,
-            'request' => $form->created_at,
-            'visit' => $form->visit,
-            'leave' => $form->leave,
-            'link' => ("https://dcops.balifiber.id/troubleshoot-pdf/$form->id"),
-            'note' => null,
-            'status' => 'Full Approved',
-        ]);
-
-        return $full;
-    }
-
 
 
     // Retrieving Data From DB
@@ -1052,7 +1034,7 @@ class OtherController extends Controller
             return $log_troubleshoot ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
         } catch (\Exception $e) {
             DB::rollBack();
-            return back()->with('gagal', 'Gagal Submit');
+            return back()->with('gagal', $e->getMessage());
         }
     }
 
@@ -1140,7 +1122,7 @@ class OtherController extends Controller
             return redirect()->route('logall')->with('success', 'Submited');
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->route('logall')->with('gagal', 'Gagal');
+            return redirect()->route('logall')->with('gagal', $e->getMessage());
         }
     }
 /*
@@ -1231,7 +1213,7 @@ class OtherController extends Controller
         $lastUpdate = $this->t_lastUpdate($id);
         $form = $this->t_getForm($id);
         $data = $request->all();
-        // dd($data['id_detail']);
+
         DB::beginTransaction();
 
         try {
@@ -1247,29 +1229,30 @@ class OtherController extends Controller
                 'rollback' => $data['rollback'],
             ]);
 
-            foreach($data['id_detail'] as $k => $v) {
-                if(isset($data['id_detail'][$k])) {
-                    $detail = TroubleshootBmDetail::where('id', $data['id_detail'][$k])->first();
-                    $detail->update([
-                        'time_start' => $data['time_start'][$k],
-                        'time_end' => $data['time_end'][$k],
-                        'activity' => $data['activity'][$k],
-                        'item' => $data['item'][$k],
-                    ]);
-                }
+            if(!empty($data['id_detail'])) {
+                foreach($data['id_detail'] as $k => $v) {
+                    if(isset($data['id_detail'][$k])) {
+                        $detail = TroubleshootBmDetail::where('id', $data['id_detail'][$k])->first();
+                        $detail->update([
+                            'time_start' => $data['time_start'][$k],
+                            'time_end' => $data['time_end'][$k],
+                            'activity' => $data['activity'][$k],
+                            'item' => $data['item'][$k],
+                        ]);
+                    }
 
-                if(isset($data['id_risk'][$k])) {
-                    $risk = TroubleshootBmRisk::where('id', $data['id_risk'][$k])->first();
-                    $risk->update([
-                        'risk' => $data['risk'][$k],
-                        'poss' => $data['poss'][$k],
-                        'impact' => $data['impact'][$k],
-                        'mitigation' => $data['mitigation'][$k],
-                    ]);
+                    if(isset($data['id_risk'][$k])) {
+                        $risk = TroubleshootBmRisk::where('id', $data['id_risk'][$k])->first();
+                        $risk->update([
+                            'risk' => $data['risk'][$k],
+                            'poss' => $data['poss'][$k],
+                            'impact' => $data['impact'][$k],
+                            'mitigation' => $data['mitigation'][$k],
+                        ]);
+                    }
                 }
             }
 
-            // return $form;
             // Perubahan status tiap permit
             $status = '';
             if ($lastUpdate->status == 'requested') {
@@ -1285,49 +1268,34 @@ class OtherController extends Controller
             // // Pergantian  role tiap permit & send email notif
             $role_to = '';
             if ($lastUpdate->role_to == 'review') {
-                // foreach ([
-                //     'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id', 'syukril@balitower.co.id',
-                //     'ilham.pangestu@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'dennis.oscadifa@balitower.co.id',
-                //     'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id',
-                // ] as $recipient) {
-                //     Mail::to($recipient)->send(new NotifTroubleshootForm($form));
-                // }
-                foreach (['bayu.prakoso@balitower.co.id'] as $recipient) {
+                foreach ([
+                    'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id', 'syukril@balitower.co.id',
+                    'ilham.pangestu@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'dennis.oscadifa@balitower.co.id',
+                    'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id',
+                ] as $recipient) {
                     Mail::to($recipient)->send(new NotifTroubleshootForm($form));
                 }
                 $role_to = 'check';
             } elseif ($lastUpdate->role_to == 'check') {
-                // foreach (['security.bacep@balitower.co.id'] as $recipient) {
-                //     Mail::to($recipient)->send(new NotifTroubleshootForm($form));
-                // }
-                foreach (['bayu.prakoso@balitower.co.id'] as $recipient) {
+                foreach (['security.bacep@balitower.co.id'] as $recipient) {
                     Mail::to($recipient)->send(new NotifTroubleshootForm($form));
                 }
                 $role_to = 'security';
             } elseif ($lastUpdate->role_to == 'security') {
-                // foreach (['tofiq.hidayat@balitower.co.id', 'mufli.gonibala@balitower.co.id'] as $recipient) {
-                //     Mail::to($recipient)->send(new NotifTroubleshootForm($form));
-                // }
-                foreach (['bayu.prakoso@balitower.co.id'] as $recipient) {
+                foreach (['tofiq.hidayat@balitower.co.id', 'mufli.gonibala@balitower.co.id'] as $recipient) {
                     Mail::to($recipient)->send(new NotifTroubleshootForm($form));
                 }
                 $role_to = 'head';
             } elseif ($lastUpdate->role_to = 'head') {
-                // $full = Other::findOrFail($id);
-                // foreach (['dc@balitower.co.id'] as $recipient) {
-                //     Mail::to($recipient)->send(new NotifTroubleshootFull($form));
-                // }
-                foreach (['bayu.prakoso@balitower.co.id'] as $recipient) {
-                    Mail::to($recipient)->send(new NotifTroubleshootForm($form));
+                foreach (['dc@balitower.co.id'] as $recipient) {
+                    Mail::to($recipient)->send(new NotifTroubleshootFull($form));
                 }
                 $role_to = 'all';
-                $f = $this->t_makeFull($id, $form);
-                return $f;
+                $this->t_makeFull($id, $form);
             }
 
             // Simpan tiap perubahan permit ke table CLeaningHistory
             $this->t_makeLog($id, $status, $role_to);
-            // return ($log);
             DB::commit();
             return redirect()->route('approvalView', 'troubleshoot')->with('success', 'Approved');
         } catch (\Exception $e) {
@@ -1370,6 +1338,22 @@ class OtherController extends Controller
             DB::rollBack();
             return back()->with('gagal', $e);
         }
+    }
+
+    public function t_makeFull($id, $form)
+    {
+        $full = TroubleshootBmFull::create([
+            'troubleshoot_bm_id' => $id,
+            'work' => $form->work,
+            'request' => $form->created_at,
+            'visit' => $form->visit,
+            'leave' => $form->leave,
+            'link' => ("https://dcops.balifiber.id/troubleshoot-pdf/$form->id"),
+            'note' => null,
+            'status' => 'Full Approved',
+        ]);
+
+        return $full;
     }
 
 

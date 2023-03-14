@@ -228,67 +228,63 @@
                     <tbody class="bg1">
                         <tr>
                             <th>
-                                <select class="js-select2" id="risk_select" name="risk[]" required>
-                                    <option selected></option>
-                                    @foreach ( $risks as $risk )
-                                        <option value="{{ $risk->id }}">{{ $risk->risk }}</option>
-                                    @endforeach
+                                <select class="js-select2" id="risk" name="risk[]">
+                                    <option value=""></option>
+                                    <option value="Bersenggolan dengan panel">Bersenggolan dengan panel</option>
+                                    <option value="Bersenggolan dengan perangkat">Bersenggolan dengan perangkat</option>
+                                    <option value="Korsleting">Korsleting</option>
+                                    <option value="Menghirup debu">Menghirup debu</option>
+                                    <option value="Pekerjaan Tertunda">Pekerjaan tertunda</option>
+                                    <option value="Peralatan Rusak">Peralatan rusak</option>
+                                    <option value="Sampah berserakan">Sampah berserakan</option>
+                                    <option value="Sesak Nafas">Sesak nafas</option>
+                                    <option value="Terjatuh dari tangga">Jatuh dari tangga</option>
+                                    <option value="Terjepit">Terjepit</option>
+                                    <option value="Tersengat Listrik">Tersengat listrik</option>
                                 </select>
                                 <div class="dropDownSelect2"></div>
                             </th>
                             <th>
-                                <input type="text" class="input100" name="poss[]" id="poss" value="" readonly>
+                                <select class="js-select2" id="poss" name="poss[]">
+                                    <option value=""></option>
+                                    <option value="Memar, patah tulang, terkilir">Memar, patah tulang, terkilir</option>
+                                    <option value="Kebakaran">Kebakaran</option>
+                                    <option value="Pernafasan terganggu">Pernafasan terganggu</option>
+                                    <option value="Mengalami luka bakar, pingsan, kematian">Mengalami luka bakar, pingsan, kematian</option>
+                                    <option value="Sistem kelistrikan menjadi lumpuh">Sistem kelistrikan menjadi lumpuh</option>
+                                    <option value="Mengalami luka bakar">Mengalami luka bakar</option>
+                              </select>
+                              <div class="dropDownSelect2"></div>
                             </th>
                             <th>
-                               <input type="text" class="input100" name="impact[]" id="impact" value="" readonly>
+                                <select class="js-select2" id="impact" name="impact[]">
+                                    <option value=""></option>
+                                    <option value="Low">Low</option>
+                                    <option value="Medium">Medium</option>
+                                    <option value="High">High</option>
+                               </select>
+                               <div class="dropDownSelect2"></div>
                             </th>
                             <th>
-                                <input type="text" class="input100" name="mitigation[]" id="mitigation" value="" readonly>
-                            </th>
-                        </tr>
-                        <tr>
-                            <th>
-                                <select class="js-select2" id="risk_select2" name="risk[]" required>
-                                    <option selected></option>
-                                    @foreach ( $risks as $risk )
-                                        <option value="{{ $risk->id }}">{{ $risk->risk }}</option>
-                                    @endforeach
-                                </select>
-                                <div class="dropDownSelect2"></div>
-                            </th>
-                            <th>
-                                <input type="text" class="input100" name="poss[]" id="poss2" value="" readonly>
-                            </th>
-                            <th>
-                               <input type="text" class="input100" name="impact[]" id="impact2" value="" readonly>
-                            </th>
-                            <th>
-                                <input type="text" class="input100" name="mitigation[]" id="mitigation2" value="" readonly>
-                            </th>
-                        </tr>
-                        <tr>
-                            <th>
-                                <select class="js-select2" id="risk_select3" name="risk[]">
-                                    <option selected></option>
-                                    @foreach ( $risks as $risk )
-                                        <option value="{{ $risk->id }}">{{ $risk->risk }}</option>
-                                    @endforeach
-                                </select>
-                                <div class="dropDownSelect2"></div>
-                            </th>
-                            <th>
-                                <input type="text" class="input100" name="poss[]" id="poss3" value="" readonly>
-                            </th>
-                            <th>
-                               <input type="text" class="input100" name="impact[]" id="impact3" value="" readonly>
-                            </th>
-                            <th>
-                                <input type="text" class="input100" name="mitigation[]" id="mitigation3" value="" readonly>
+                                <select class="js-select2" id="mitigation" name="mitigation[]">
+                                    <option value=""></option>
+                                    <option value="Memastikan aliran listrik untuk lift sudah dimatikan">Memastikan aliran listrik untuk lift sudah dimatikan</option>
+                                    <option value="Memastikan tidak ada kabel yang terkelupas">Memastikan tidak ada kabel yang terkelupas</option>
+                                    <option value="Pastikan pekerjaan yang dilakukan sesuai prosedur">Pastikan pekerjaan yang dilakukan sesuai prosedur</option>
+                                    <option value="Menggunakan Masker">Menggunakan Masker</option>
+                                    <option value="Pastikan tangga berada di lantai yang rata">Pastikan tangga berada di lantai yang rata</option>
+                                    <option value="Bekerja dengan hati hati">Bekerja dengan hati hati</option>
+                                    <option value="Menjaga jarak dari sumber listrik">Menjaga jarak dari sumber listrik</option>
+                                    <option value="Menjaga jarak dari perangkat critical">Menjaga jarak dari perangkat critical</option>
+                                    <option value="Menjaga jarak dengan panel alarm">Menjaga jarak dengan panel alarm</option>
+                                    <option value="Menggunakan APD">Menggunakan APD</option>
+                              </select>
+                              <div class="dropDownSelect2"></div>
                             </th>
                         </tr>
                     </tbody>
                 </table>
-                {{-- <button id="risk_button"><b>Add More Fields</b></button> --}}
+                <button id="risk_button"><b>Add More Fields</b></button>
 
                 {{-- PIC --}}
                 <table class="table table-bordered bg1 mt-3">
@@ -536,7 +532,7 @@
         let row_detail_time = $('#table_detail_time');
         let detail_operation = $('#detail_operation');
         let row_detail_operation = $('#table_detail_operation');
-        // let risk = $('#risk_button');
+        let risk = $('#risk_button');
         let row_risk = $('#table_risk');
         let personil = $('#button_personil');
         let row_personil = $('#table_personil');
@@ -557,13 +553,13 @@
             }
         });
 
-        // $(risk).click(function(e){
-        //     e.preventDefault();
-        //     if(row < max_row){
-        //         $(row_risk).append('<tr><th><select class="js-select2" id="risk" name="risk[]">    <option value=""></option>    <option value="Bersenggolan dengan panel">Bersenggolan dengan panel</option>    <option value="Bersenggolan dengan perangkat">Bersenggolan dengan perangkat</option>    <option value="Korsleting">Korsleting</option>    <option value="Menghirup debu">Menghirup debu</option>    <option value="Pekerjaan Tertunda">Pekerjaan tertunda</option>    <option value="Peralatan Rusak">Peralatan rusak</option>    <option value="Sampah berserakan">Sampah berserakan</option>    <option value="Sesak Nafas">Sesak nafas</option>    <option value="Terjatuh dari tangga">Jatuh dari tangga</option>    <option value="Terjepit">Terjepit</option>    <option value="Tersengat Listrik">Tersengat listrik</option></select><div class="dropDownSelect2"></div></th><th><select class="js-select2" id="poss" name="poss[]">    <option value=""></option>    <option value="Memar, patah tulang, terkilir">Memar, patah tulang, terkilir</option>    <option value="Kebakaran">Kebakaran</option>    <option value="Pernafasan terganggu">Pernafasan terganggu</option>    <option value="Mengalami luka bakar, pingsan, kematian">Mengalami luka bakar, pingsan, kematian</option>    <option value="Sistem kelistrikan menjadi lumpuh">Sistem kelistrikan menjadi lumpuh</option>    <option value="Mengalami luka bakar">Mengalami luka bakar</option>  </select>  <div class="dropDownSelect2"></div></th><th><select class="js-select2" id="impact" name="impact[]">    <option value=""></option>    <option value="Low">Low</option>    <option value="Medium">Medium</option>    <option value="High">High</option>   </select>   <div class="dropDownSelect2"></div></th><th><select class="js-select2" id="mitigation" name="mitigation[]">    <option value=""></option>    <option value="Memastikan aliran listrik untuk lift sudah dimatikan">Memastikan aliran listrik untuk lift sudah dimatikan</option>    <option value="Memastikan tidak ada kabel yang terkelupas">Memastikan tidak ada kabel yang terkelupas</option>    <option value="Pastikan pekerjaan yang dilakukan sesuai prosedur">Pastikan pekerjaan yang dilakukan sesuai prosedur</option>    <option value="Menggunakan Masker">Menggunakan Masker</option>    <option value="Pastikan tangga berada di lantai yang rata">Pastikan tangga berada di lantai yang rata</option>    <option value="Bekerja dengan hati hati">Bekerja dengan hati hati</option>    <option value="Menjaga jarak dari sumber listrik">Menjaga jarak dari sumber listrik</option>    <option value="Menjaga jarak dari perangkat critical">Menjaga jarak dari perangkat critical</option>    <option value="Menjaga jarak dengan panel alarm">Menjaga jarak dengan panel alarm</option>    <option value="Menggunakan APD">Menggunakan APD</option>  </select>  <div class="dropDownSelect2"></div></th></tr>');
-        //         row++
-        //     }
-        // });
+        $(risk).click(function(e){
+            e.preventDefault();
+            if(row < max_row){
+                $(row_risk).append('<tr><th><select class="js-select2" id="risk" name="risk[]">    <option value=""></option>    <option value="Bersenggolan dengan panel">Bersenggolan dengan panel</option>    <option value="Bersenggolan dengan perangkat">Bersenggolan dengan perangkat</option>    <option value="Korsleting">Korsleting</option>    <option value="Menghirup debu">Menghirup debu</option>    <option value="Pekerjaan Tertunda">Pekerjaan tertunda</option>    <option value="Peralatan Rusak">Peralatan rusak</option>    <option value="Sampah berserakan">Sampah berserakan</option>    <option value="Sesak Nafas">Sesak nafas</option>    <option value="Terjatuh dari tangga">Jatuh dari tangga</option>    <option value="Terjepit">Terjepit</option>    <option value="Tersengat Listrik">Tersengat listrik</option></select><div class="dropDownSelect2"></div></th><th><select class="js-select2" id="poss" name="poss[]">    <option value=""></option>    <option value="Memar, patah tulang, terkilir">Memar, patah tulang, terkilir</option>    <option value="Kebakaran">Kebakaran</option>    <option value="Pernafasan terganggu">Pernafasan terganggu</option>    <option value="Mengalami luka bakar, pingsan, kematian">Mengalami luka bakar, pingsan, kematian</option>    <option value="Sistem kelistrikan menjadi lumpuh">Sistem kelistrikan menjadi lumpuh</option>    <option value="Mengalami luka bakar">Mengalami luka bakar</option>  </select>  <div class="dropDownSelect2"></div></th><th><select class="js-select2" id="impact" name="impact[]">    <option value=""></option>    <option value="Low">Low</option>    <option value="Medium">Medium</option>    <option value="High">High</option>   </select>   <div class="dropDownSelect2"></div></th><th><select class="js-select2" id="mitigation" name="mitigation[]">    <option value=""></option>    <option value="Memastikan aliran listrik untuk lift sudah dimatikan">Memastikan aliran listrik untuk lift sudah dimatikan</option>    <option value="Memastikan tidak ada kabel yang terkelupas">Memastikan tidak ada kabel yang terkelupas</option>    <option value="Pastikan pekerjaan yang dilakukan sesuai prosedur">Pastikan pekerjaan yang dilakukan sesuai prosedur</option>    <option value="Menggunakan Masker">Menggunakan Masker</option>    <option value="Pastikan tangga berada di lantai yang rata">Pastikan tangga berada di lantai yang rata</option>    <option value="Bekerja dengan hati hati">Bekerja dengan hati hati</option>    <option value="Menjaga jarak dari sumber listrik">Menjaga jarak dari sumber listrik</option>    <option value="Menjaga jarak dari perangkat critical">Menjaga jarak dari perangkat critical</option>    <option value="Menjaga jarak dengan panel alarm">Menjaga jarak dengan panel alarm</option>    <option value="Menggunakan APD">Menggunakan APD</option>  </select>  <div class="dropDownSelect2"></div></th></tr>');
+                row++
+            }
+        });
 
         $(personil).click(function(e){
             e.preventDefault();
@@ -579,54 +575,6 @@
 				dropdownParent: $(this).next('.dropDownSelect2')
 			});
 		});
-
-        $('#risk_select').change(function(){
-            let id = $(this).val();
-            $.ajax({
-                url: "{{url("master/risk")}}"+'/'+id,
-                dataType:"json",
-                type: "get",
-                success: function(response){
-                    const {risk} = response;
-                    // console.log(risk)
-                $('#poss').val(risk.poss);
-                $('#impact').val(risk.impact);
-                $('#mitigation').val(risk.mitigation);
-                }
-            });
-        });
-
-        $('#risk_select2').change(function(){
-            let id = $(this).val();
-            $.ajax({
-                url: "{{url("master/risk")}}"+'/'+id,
-                dataType:"json",
-                type: "get",
-                success: function(response){
-                    const {risk} = response;
-                    // console.log(risk)
-                $('#poss2').val(risk.poss);
-                $('#impact2').val(risk.impact);
-                $('#mitigation2').val(risk.mitigation);
-                }
-            });
-        });
-
-        $('#risk_select3').change(function(){
-            let id = $(this).val();
-            $.ajax({
-                url: "{{url("master/risk")}}"+'/'+id,
-                dataType:"json",
-                type: "get",
-                success: function(response){
-                    const {risk} = response;
-                    // console.log(risk)
-                $('#poss3').val(risk.poss);
-                $('#impact3').val(risk.impact);
-                $('#mitigation3').val(risk.mitigation);
-                }
-            });
-        });
 
         $('#nama').change(function(){
             let id = $(this).val();
