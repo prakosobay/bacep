@@ -35,7 +35,7 @@
 				</span>
 
                 @if (session('gagal'))
-                    <div class="alert alert-warning my-2 mx-2">
+                    <div class="alert alert-danger text-center">
                         {{ session('gagal') }}
                     </div>
                 @endif
@@ -44,20 +44,20 @@
 				<div class="wrap-input100 validate-input bg1">
 					<span class="label-input100">Purpose of Work (Tujuan Pekerjaan) *</span>
                     <div>
-					    <input type="text" class="input100" value="{{ $getVisitor->troubleshoot->work }}" readonly>
+					    <input type="text" class="input100" value="{{ $getVisitor->troubleshootBmId->work }}" readonly>
                     </div>
 				</div>
 
                 {{-- Visit --}}
                 <div class="wrap-input100 validate-input bg1 rs1-wrap-input100">
 					<span class="label-input100">Date of Visit (Tanggal Mulai Pekerjaan)</span>
-                    <input class="input100" type="date" value="{{ $getVisitor->troubleshoot->visit }}" readonly>
+                    <input class="input100" type="date" value="{{ $getVisitor->troubleshootBmId->visit }}" readonly>
 				</div>
 
                 {{-- Leave --}}
                 <div class="wrap-input100 validate-input bg1 rs1-wrap-input100">
 					<span class="label-input100">Date of Leave (Tanggal Selesai Pekerjaan)</span>
-                    <input class="input100" type="date" value="{{ $getVisitor->troubleshoot->leave }}" readonly>
+                    <input class="input100" type="date" value="{{ $getVisitor->troubleshootBmId->leave }}" readonly>
 				</div>
 
                 {{-- Visitor --}}
@@ -128,7 +128,6 @@
                         </th>
                     </tr>
                 </table>
-
 
 				<div class="container-contact100-form-btn">
 					<button type="submit" class="contact100-form-btn">

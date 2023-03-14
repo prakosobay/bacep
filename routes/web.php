@@ -319,10 +319,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('troubleshoot-yajra-full-visitor', 'troubleshoot_yajra_full_visitor')->name('troubleshootYajraFullVisitor');
         Route::get('other/troubleshoot/yajra/full/reject', 'other_troubleshoot_yajra_full_reject');
 
-        Route::get('troubleshoot-checkin-show/{id}', 'troubleshoot_checkin_show')->name('troubleshootCheckinShow');
-        Route::get('troubleshoot-checkout-show/{id}', 'troubleshoot_checkout_show')->name('troubleshootCheckoutShow');
-        Route::put('troubleshoot-checkin-update/{id}', 'troubleshoot_checkin_update')->name('troubleshootCheckinUpdate');
-        Route::put('troubleshoot-checkout-update/{id}', 'troubleshoot_checkout_update')->name('troubleshootCheckoutUpdate');
+        Route::get('troubleshoot-checkin-show/{id}', 't_checkin_show')->name('troubleshootCheckinShow');
+        Route::get('troubleshoot-checkout-show/{id}', 't_checkout_show')->name('troubleshootCheckoutShow');
+        Route::put('troubleshoot-checkin-update/{id}', 't_checkin_update')->name('troubleshootCheckinUpdate');
+        Route::put('troubleshoot-checkout-update/{id}', 't_checkout_update')->name('troubleshootCheckoutUpdate');
         Route::post('troubleshoot-checkin-cancel/{id}', 'troubleshoot_checkin_cancel')->name('troubleshootCheckinCancel');
 
         Route::get('troubleshoot-export-full-approval', 'troubleshoot_export_full_approval')->name('troubleshootExportFullApproval');

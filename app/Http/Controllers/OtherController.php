@@ -826,15 +826,15 @@ class OtherController extends Controller
         return view('other.troubleshoot_list_reject');
     }
 
-    public function troubleshoot_checkin_show($id)
+    public function t_checkin_show($id)
     {
-        $getVisitor = TroubleshootBmPersonil::findOrFail($id);
+        $getVisitor = TroubleshootBmPersonil::with('troubleshootBmId:id,work,visit,leave')->where('id', $id)->first();
         return view('other.troubleshoot_checkin', compact('getVisitor'));
     }
 
-    public function troubleshoot_checkout_show($id)
+    public function t_checkout_show($id)
     {
-        $getVisitor = TroubleshootBmPersonil::findOrFail($id);
+        $getVisitor = TroubleshootBmPersonil::with('troubleshootBmId:id,work,visit,leave')->where('id', $id)->first();
         return view('other.troubleshoot_checkout', compact('getVisitor'));
     }
 
@@ -1326,7 +1326,7 @@ class OtherController extends Controller
 
             // Get permit yang di reject & kirim notif email
             $form = $this->t_getForm($id);
-            $mail = 'bayu.prakoso@balitower.co.id';
+            // $mail = 'bayu.prakoso@balitower.co.id';
             // foreach (['bayu.prakoso@balitower.co.id'] as $recipient) {
                 // Mail::to($mail)->send(new NotifTroubleshootReject($form, $note));
             // }
@@ -1359,7 +1359,7 @@ class OtherController extends Controller
 
 
     // Update Checkin Checkout Troubleshoot
-    public function troubleshoot_checkin_update(Request $request, $id)
+    public function t_checkin_update(Request $request, $id)
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
@@ -1397,23 +1397,23 @@ class OtherController extends Controller
             ]);
 
             Visitor::firstOrCreate([
+                'visit_nik' => $request->number,
                 'visit_nama' => $request->name,
                 'visit_company' => $request->company,
                 'visit_department' => $request->department,
                 'visit_respon' => $request->respon,
                 'visit_phone' => $request->phone,
-                'visit_nik' => $request->number,
             ]);
 
             DB::commit();
             return redirect()->route('logall')->with('success', 'Checkin Successful');
         } catch (\Exception $e) {
             DB::rollBack();
-            return back()->with('gagal', 'Checkin Gagal');
+            return back()->with('gagal', $e->getMessage());
         }
     }
 
-    public function troubleshoot_checkout_update(Request $request, $id)
+    public function t_checkout_update(Request $request, $id)
     {
         $request->validate([
             'checkout' => ['required'],
@@ -1422,7 +1422,7 @@ class OtherController extends Controller
 
         $visitorID = TroubleshootBmPersonil::findOrFail($id);
         $pic = $visitorID->troubleshoot_bm_id;
-        $jumlah = TroubleshootBmPersonil::where('troubleshoot_bm_id', $pic)->where('checkout', null)->select('id')->count();
+        // $jumlah = TroubleshootBmPersonil::where('troubleshoot_bm_id', $pic)->where('checkout', null)->select('id')->count();
 
         $extension = explode('/', explode(':', substr($request->photo_checkout, 0, strpos($request->photo_checkout, ';')))[1])[1];   // .jpg .png .pdf
         $replace = substr($request->photo_checkout, 0, strpos($request->photo_checkout, ',') + 1);
@@ -1432,17 +1432,13 @@ class OtherController extends Controller
 
         Storage::disk('troubleshootCheckout')->put($imageName, base64_decode($image));
 
-        $get = TroubleshootBmPersonil::findOrFail($id);
-        $pic = $get->troubleshoot_bm_id;
-
         // $last = DB::table('penomoran_cleanings')->latest()->first();
 
         DB::beginTransaction();
 
         try {
 
-            $update = TroubleshootBmPersonil::findOrFail($id);
-            $update->update([
+            $visitorID->update([
                 'checkout' => $request->checkout,
                 'photo_checkout' => $imageName,
             ]);
@@ -1501,7 +1497,7 @@ class OtherController extends Controller
             return redirect()->route('logall')->with('success', 'Canceled');
         } catch (\Exception $e) {
             DB::rollBack();
-            return back()->with('gagal', 'Gagal Cancel');
+            return back()->with('gagal', $e->getMessage());
         }
     }
 
@@ -1510,34 +1506,27 @@ class OtherController extends Controller
     // convert pdf
     public function troubleshoot_pdf($id) // Convert PDF permit troubleshoot
     {
-        $getForm = TroubleshootBm::find($id);
+        $getForm = TroubleshootBm::with(['details', 'entry', 'risks', 'personils', 'histories.createdBy:id,name'])->where('id', $id)->first();
+        // return $getForm;
         $getLastHistory = TroubleshootBmHistory::where('troubleshoot_bm_id', $id)->where('aktif', 1)->first();
-        $getEntry = DB::table('troubleshoot_bm_entries')->where('troubleshoot_bm_id', $id)->first();
         $getLastHistory->update(['pdf' => true]);
 
-        $getHistory = DB::table('troubleshoot_bm_histories')
-            ->join('troubleshoot_bms', 'troubleshoot_bms.id', '=', 'troubleshoot_bm_histories.troubleshoot_bm_id')
-            ->join('users', 'troubleshoot_bm_histories.created_by', '=', 'users.id')
-            ->where('troubleshoot_bm_histories.troubleshoot_bm_id', '=', $id)
-            ->select('troubleshoot_bm_histories.*', 'users.name as createdby')
-            ->get();
-
         $penomoran = PenomoranCleaning::where('permit_id', $id)->where('type', 'troubleshoot')->first();
-        $pdf = PDF::loadview('other.troubleshoot_pdf', compact('getForm', 'getLastHistory', 'getHistory', 'penomoran'))->setPaper('a4', 'portrait')->setWarnings(false);
+        $pdf = PDF::loadview('other.troubleshoot_pdf', compact('getForm', 'getLastHistory', 'penomoran'))->setPaper('a4', 'portrait')->setWarnings(false);
         return $pdf->stream();
     }
 
     // Export PDF
     public function t_export_pdf_full_approval()
     {
-        $data = TroubleshootBmPersonil::with('troubleshootBmId.full', function ($q) {
+        $data = TroubleshootBmPersonil::with(['troubleshootBmId.full' => function ($q) {
             $q->where('status', 'Full Approved');
-        })
+        }])
         ->where('deleted_at', null)
         ->where('checkout', '!=', null)
         ->orderBy('id', 'desc')
         ->get();
-        return $data;
+        // return $data;
         $pdf = PDF::loadview('other.troubleshoot_export_full_pdf', compact('data'))->setPaper('a4', 'landscape')->setWarnings(false);
         return $pdf->stream();
     }
@@ -1606,6 +1595,9 @@ class OtherController extends Controller
         return Datatables::of($full)
             ->editColumn('visit', function ($full) {
                 return $full->visit ? with(new Carbon($full->visit))->format('d/m/Y') : '';
+            })
+            ->editColumn('leave', function ($full) {
+                return $full->leave ? with(new Carbon($full->leave))->format('d/m/Y') : '';
             })
             ->addColumn('action', 'other.troubleshootActionEdit')
             ->make(true);

@@ -48,7 +48,7 @@
                 @endif
 
                 @if (session('gagal'))
-                    <div class="alert alert-warning my-2 mx-2">
+                    <div class="alert alert-danger text-center">
                         {{ session('gagal') }}
                     </div>
                 @endif
@@ -56,17 +56,17 @@
                 {{-- Purpose of Work (Tujuan Pekerjaan)--}}
 				<div class="wrap-input100 validate-input bg1" data-validate="Pilih Tujuan Pekerjaan">
 					<span class="label-input100">Purpose of Work (Tujuan Pekerjaan) *</span>
-					<input class="input100" type="text" value="{{ $getVisitor->troubleshoot->work }}" readonly>
+					<input class="input100" type="text" value="{{ $getVisitor->troubleshootBmId->work }}" readonly>
 				</div>
 
                 {{-- Validity --}}
                 <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate = "Pilih Tanggal Pekerjaan">
 					<span class="label-input100">Date of Visit (Tanggal Mulai Pekerjaan) *</span>
-                    <input class="input100" type="date" value="{{ $getVisitor->troubleshoot->visit }}" readonly>
+                    <input class="input100" type="date" value="{{ $getVisitor->troubleshootBmId->visit }}" readonly>
 				</div>
 				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate = "Pilih Tanggal Pekerjaan">
 					<span class="label-input100">Date of Leave (Tanggal Selesai Pekerjaan) *</span>
-					<input class="input100" type="date" value="{{ $getVisitor->troubleshoot->leave }}" readonly>
+					<input class="input100" type="date" value="{{ $getVisitor->troubleshootBmId->leave }}" readonly>
 				</div>
 
                 {{-- Visitor --}}
@@ -97,7 +97,7 @@
                     <tr>
                         <th>Phone Number</th>
                         <td>
-                            <input type="text" class="input100" name="phone" value="{{ $getVisitor->phone }}" required>
+                            <input type="text" class="input100" name="phone" value="{{ $getVisitor->phone }}" placeholder="+62 8xxx" required>
                         </td>
                         <th>Responsibility </th>
                         <td>
