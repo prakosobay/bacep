@@ -1009,14 +1009,13 @@ class OtherController extends Controller
             }
             TroubleshootBmPersonil::insert($insert_personil);
 
-            // $notif_email = TroubleshootBm::find($other_form->id);
-            // foreach ([
-            //     'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id', 'syukril@balitower.co.id', 'dennis.oscadifa@balitower.co.id',
-            //     'ilham.pangestu@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'badai.sino@balitower.co.id',
-            //     'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'riya.ully@balitower.co.id',
-            // ] as $recipient) {
-            //     Mail::to($recipient)->send(new NotifTroubleshootForm($notif_email));
-            // }
+            foreach ([
+                'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id', 'syukril@balitower.co.id', 'dennis.oscadifa@balitower.co.id',
+                'ilham.pangestu@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'badai.sino@balitower.co.id',
+                'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'riya.ully@balitower.co.id',
+            ] as $recipient) {
+                Mail::to($recipient)->send(new NotifTroubleshootForm($other_form));
+            }
 
             $log_troubleshoot = TroubleshootBmHistory::insert([
                 'troubleshoot_bm_id' => $other_form->id,
@@ -1100,14 +1099,13 @@ class OtherController extends Controller
             }
             TroubleshootBmPersonil::insert($insert_personil);
 
-            // $notif_email = TroubleshootBm::find($insert->id);
-            // foreach ([
-            //     'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id', 'syukril@balitower.co.id', 'dennis.oscadifa@balitower.co.id',
-            //     'ilham.pangestu@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'mufli.gonibala@balitower.co.id', 'badai.sino@balitower.co.id',
-            //     'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'riya.ully@balitower.co.id',
-            // ] as $recipient) {
-            //     Mail::to($recipient)->send(new NotifTroubleshootForm($notif_email));
-            // }
+            foreach ([
+                'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id', 'syukril@balitower.co.id', 'dennis.oscadifa@balitower.co.id',
+                'ilham.pangestu@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'mufli.gonibala@balitower.co.id', 'badai.sino@balitower.co.id',
+                'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'riya.ully@balitower.co.id',
+            ] as $recipient) {
+                Mail::to($recipient)->send(new NotifTroubleshootForm($insert));
+            }
 
             TroubleshootBmHistory::create([
                 'troubleshoot_bm_id' => $insert->id,
@@ -1526,7 +1524,7 @@ class OtherController extends Controller
         ->where('checkout', '!=', null)
         ->orderBy('id', 'desc')
         ->get();
-        // return $data;
+
         $pdf = PDF::loadview('other.troubleshoot_export_full_pdf', compact('data'))->setPaper('a4', 'landscape')->setWarnings(false);
         return $pdf->stream();
     }
