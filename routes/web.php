@@ -18,7 +18,7 @@ Route::middleware(['guest'])->group(function () {
 
 Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);
 
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth'])->group(function () {
 
     Route::controller(AuthController::class)->group(function() {
 

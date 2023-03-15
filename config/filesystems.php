@@ -72,28 +72,14 @@ return [
 
         'troubleshootCheckin' => [
             'driver' => 'local',
-            'root' => storage_path('app\public\bm\troubleshoot\checkin'),
+            'root' => storage_path('app/public/bm/troubleshoot/checkin'),
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
         ],
 
         'troubleshootCheckout' => [
             'driver' => 'local',
-            'root' => storage_path('app\public\bm\troubleshoot\checkout'),
-            'url' => env('APP_URL').'/storage',
-            'visibility' => 'public',
-        ],
-
-        'eksternalCheckin' => [
-            'driver' => 'local',
-            'root' => storage_path('app\public\eksternal\checkin'),
-            'url' => env('APP_URL').'/storage',
-            'visibility' => 'public',
-        ],
-
-        'eksternalCheckout' => [
-            'driver' => 'local',
-            'root' => storage_path('app\public\eksternal\checkout'),
+            'root' => storage_path('app/public/bm/troubleshoot/checkout'),
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
         ],

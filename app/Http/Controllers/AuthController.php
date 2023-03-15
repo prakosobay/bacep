@@ -23,7 +23,7 @@ class AuthController extends Controller
             foreach ($roles as $rolee) {
                 $arrole[] = $rolee->name;
             }
-            // $role_1 = $arrole;
+
             Session::put('arrole', $arrole);
 
             return redirect()->route('homepage');

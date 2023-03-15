@@ -67,7 +67,7 @@ class AuthServiceProvider extends ServiceProvider
             foreach ($user->roles as $rolee) {
                 $arrole[] = $rolee->name;
             }
-            return $arrole[0] == 'internal';
+            return $arrole[0] == 'Internal';
         });
     }
 }

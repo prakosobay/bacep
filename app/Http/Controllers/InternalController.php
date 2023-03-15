@@ -17,13 +17,28 @@ use Psy\Command\WhereamiCommand;
 
 class InternalController extends Controller
 {
+    public function getUser()
+    {
+        $get = auth()->user();
+        return $get;
+    }
+
+    public function getCompany()
+    {
+        $get = MasterCompany::where('name', $this->getUser()->company)->first();
+        return $get;
+    }
+
+    public function getRisks()
+    {
+        $get = MasterRisks::orderBy('risk', 'asc')->get();
+        return $get;
+    }
 
     // Show Pages
     public function internal_form()
     {
-        $getCompany = auth()->user()->company;
-        $getID = MasterCompany::where('name', $getCompany)->first();
-        $risks = MasterRisks::all();
+        $risks = $this->getRisks();
         $getDC = DB::table('m_racks')
             ->join('m_rooms', 'm_racks.m_room_id', '=', 'm_rooms.id')
             ->select('m_racks.*', 'm_rooms.name as room_name')
