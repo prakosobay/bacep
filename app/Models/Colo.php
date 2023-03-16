@@ -33,4 +33,9 @@ class Colo extends Model
     {
         return $this->belongsTo(MasterCard::class, 'm_card_id');
     }
+
+    public function visitors()
+    {
+        return $this->hasMany(ColoVisitor::class, 'colo_id');
+    }
 }

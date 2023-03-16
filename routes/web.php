@@ -371,6 +371,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('last-selected/{id}', 'last_selected')->name('lastSelected');
         Route::get('internal/form', 'internal_form');
         Route::get('internal/get/risk/{id}', 'get_risk');
+        Route::get('internal/get/pic/{id}', 'getPic');
 
         Route::get('internal-action-checkin-form/{id}', 'internal_action_checkin_form')->name('checkinInternal');
         Route::get('internal-action-checkout-form/{id}', 'internal_action_checkout_form')->name('checkoutInternal');
@@ -381,7 +382,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/internal/pdf/{id}', 'internal_pdf');
         Route::get('internal/getVisitor/{id}', 'getVisitor');
 
-        Route::get('internal/yajra/show/{dept}', 'internal_yajra_show');
+        Route::get('internal/yajra/visitor/{dept}', 'internal_yajra_visitor');
         Route::get('internal/yajra/history', 'internal_yajra_history')->name('internalYajraHistory');
         Route::get('internal/yajra/full/approval', 'internal_yajra_full_approval')->name('internalYajraFullApproval');
         Route::get('internal/yajra/finished/{dept}', 'internal_yajra_finished');

@@ -12,9 +12,15 @@ class MasterRack extends Model
 
     protected $table = 'm_racks';
     protected $primaryKey = 'id';
-    protected $guarded = [];
+    protected $fillable = [
+        'm_room_id',
+        'm_company_id',
+        'number',
+        'updated_by',
+        'created_by,'
+    ];
 
-    public function room()
+    public function mRoomId()
     {
         return $this->belongsTo(MasterRoom::class, 'm_room_id');
     }
@@ -29,7 +35,7 @@ class MasterRack extends Model
         return $this->belongsTo(User::class, 'updated_at');
     }
 
-    public function company()
+    public function mCompanyId()
     {
         return $this->belongsTo(MasterCompany::class, 'm_company_id');
     }

@@ -36,7 +36,7 @@
                         <a class="nav-link" href="#about">About Us</a>
                     </li>
                     <li class="nav-item mx-5">
-                        <a class="nav-link" href="{{ route('dashboardInternal', auth()->user()->department )}}">Log Permit</a>
+                        <a class="nav-link" href="{{ route('dashboardInternal', $dept )}}">Log Permit</a>
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
@@ -58,7 +58,7 @@
         <!-- DataTales Example -->
         <div class="card shadow mb-1">
             <div class="card-header py-3">
-                <h4 class="judul text-center">{{ Auth::user()->department }} Log Permit</h4>
+                <h4 class="judul text-center">{{ $dept }} Log Permit</h4>
             </div>
 
             <div class="container-fluid">
@@ -80,13 +80,13 @@
                     <div class="container-fluid">
                         <div class="card-body">
                             <button class="btn btn-primary btn-sm mx-1 my-2" data-bs-toggle="modal" data-bs-target="#internalModal">Create Form</button>
-                            <a type="button" class="btn btn-sm btn-info mx-1 my-2" href="{{ route('dashboardInternal', auth()->user()->department )}}">Log Form</a>
-                            <a type="button" class="btn btn-sm btn-success mx-1 my-2" href="{{ route('finishedInternal', auth()->user()->department)}}">Finished Permit</a>
-                            {{-- <a type="button" class="btn btn-sm btn-secondary mx-1 my-2" href="{{ route('lastInternal', auth()->user()->department )}}">Last Requested Form</a> --}}
+                            <a type="button" class="btn btn-sm btn-info mx-1 my-2" href="{{ route('dashboardInternal', $dept )}}">Log Form</a>
+                            <a type="button" class="btn btn-sm btn-success mx-1 my-2" href="{{ route('finishedInternal', $dept)}}">Finished Permit</a>
+                            {{-- <a type="button" class="btn btn-sm btn-secondary mx-1 my-2" href="{{ route('lastInternal', $dept )}}">Last Requested Form</a> --}}
                         </div>
                     </div>
 
-                    @if($type == 'Enterprise Sales')
+                    @if($dept == 'Enterprise Sales')
                         {{-- Modal --}}
                         <div class="modal fade" id="internalModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
@@ -97,9 +97,6 @@
                                     </div>
                                     <div class="modal-body">
                                         <a class="btn btn-sm btn-success mx-1 my-1" href="{{ route('salesForm')}}">Access Request Form</a>
-                                        {{-- <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('order/form')}}">Consumable Form</a>
-                                        <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('internal/formBarang')}}">AR CR + Barang Form</a>
-                                        <a class="btn btn-sm btn-success mx-1 my-1" href="{{ url('internal/formConsumableBarang')}}">AR CR + Consumable + Barang Form</a> --}}
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -140,12 +137,13 @@
                                     <tr class="judul-table text-center">
                                         <th>Purpose of Work</th>
                                         <th>Requestor</th>
-                                        <th>Date of Visit</th>
-                                        <th>Date of Leave</th>
-                                        <th>Name</th>
+                                        <th>Visit</th>
+                                        <th>Leave</th>
+                                        <th>Visitor</th>
                                         <th>Checkin</th>
                                         <th>Checkout</th>
                                         <th>Card Number</th>
+                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -207,6 +205,7 @@
                     { data: 'checkin', name: 'checkin' },
                     { data: 'checkout', name: 'checkout' },
                     { data: 'card_number', name: 'card_number' },
+                    { data: 'status', name: 'status' },
                     { data: 'action', name: 'action', orderable: false, searchable: false }
                 ]
             });

@@ -21,7 +21,7 @@
             @endif
 
             @if (session('failed'))
-                <div class="alert alert-warning mt-1">
+                <div class="alert alert-danger mt-1">
                     {{ session('failed') }}
                 </div>
             @endif
@@ -98,7 +98,7 @@
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="nik" class="form-label"><b>ID Number :</b></label>
-                                <input type="number" class="form-control @error('nik') is-invalid @enderror" id="nik" name="nik" value="{{ old('nik')}}" required>
+                                <input type="text" class="form-control @error('nik') is-invalid @enderror" id="nik" name="nik" value="{{ old('nik')}}" required>
                                 @error('nik')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

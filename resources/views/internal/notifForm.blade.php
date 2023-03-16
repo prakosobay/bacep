@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Notifikasi Approval</title>
+    <title>Request Permit Notification</title>
     <style>
         table, th, td {
                 border-width: 300px;
@@ -19,8 +19,8 @@
 </head>
 <body>
     <div class="card">
-        <h3 class="">Hallo, DC Team!</h3>
-        <p>Mohon untuk review dan check permit dari {{ $content->requestor }} yang telah di submit.
+        <h3 class="">Dear Data Center Team, </h3>
+        <p>Mohon untuk review dan check permit dari {{ $content->requestorId->name }} yang telah di submit.
             Link terlampir </p>
             <table>
                 <thead>
@@ -30,15 +30,21 @@
                         <th>Requestor Name</th>
                         <th>Purpose of Work</th>
                         <th>Date of Visit</th>
+                        <th>Visitor</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>{{ $content->id }}</td>
-                        <td>{{ Carbon\Carbon::parse($content->created)->format('d-m-Y')  }}</td>
-                        <td>{{ $content->requestor }}</td>
+                        <td>{{ Carbon\Carbon::parse($content->created_at)->format('d-m-Y')  }}</td>
+                        <td>{{ $content->requestorId->name }}</td>
                         <td>{{ $content->work }}</td>
                         <td>{{ Carbon\Carbon::parse($content->visit)->format('d-m-Y') }}</td>
+                        <td>
+                            @foreach ( $content->visitors as $pic )
+                                {{ $pic->mVisitorId->visit_nama }}<br>
+                            @endforeach
+                        </td>
                     </tr>
                 </tbody>
             </table>

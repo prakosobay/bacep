@@ -24,7 +24,7 @@ class CreateColosTable extends Migration
             $table->string('rollback')->nullable();
             $table->boolean('is_survey')->nullable();
             $table->foreignId('requestor_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId('m_card_id')->constrained('m_cards')->onUpdate('cascade')->onDelete('cascade')->nullable();
+            $table->foreignId('m_card_id')->nullable()->constrained('m_cards')->onUpdate('cascade')->onDelete('cascade');
             $table->softDeletes();
             $table->timestamps();
         });

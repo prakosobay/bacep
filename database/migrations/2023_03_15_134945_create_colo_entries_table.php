@@ -16,7 +16,6 @@ class CreateColoEntriesTable extends Migration
         Schema::create('colo_entries', function (Blueprint $table) {
             $table->id();
             $table->foreignId('colo_id')->constrained('colos')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId('m_room_id')->constrained('m_rooms')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('m_rack_id')->constrained('m_racks')->onUpdate('cascade')->onDelete('cascade');
             $table->softDeletes();
             $table->timestamps();

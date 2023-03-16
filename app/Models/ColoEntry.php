@@ -12,18 +12,12 @@ class ColoEntry extends Model
     protected $table = 'colo_entries';
     protected $fillable = [
         'colo_id',
-        'm_room_id',
         'm_rack_id',
     ];
 
     public function coloId()
     {
         return $this->belongsTo(Colo::class, 'colo_id');
-    }
-
-    public function mRoomId()
-    {
-        return $this->belongsTo(MasterRoom::class, 'm_room_id');
     }
 
     public function mRackId()

@@ -31,7 +31,6 @@ class StoreInternalRequest extends FormRequest
             'desc' => ['required', 'string', 'max:255'],
             'rollback' => ['nullable', 'string', 'max:255'],
             'testing' => ['nullable', 'string', 'max:255'],
-            'rack' => ['required'],
         ];
     }
 }

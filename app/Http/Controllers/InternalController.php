@@ -11,7 +11,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 use Barryvdh\DomPDF\Facade as PDF;
-use App\Models\{AccessRequestInternal, ChangeRequestInternal, Internal, InternalEntry, InternalDetail, InternalRisk, InternalHistory, InternalFull, InternalVisitor, MasterCard, MasterCompany, MasterRack, MasterRisks, MasterRoom, Entry, EntryRack, MasterCardType};
+use App\Models\{AccessRequestInternal, ChangeRequestInternal, Colo, ColoDetail, ColoEntry, ColoHistory, ColoRisk, ColoVisitor, Internal, InternalEntry, InternalDetail, InternalRisk, InternalHistory, InternalFull, InternalVisitor, MasterCard, MasterCompany, MasterRack, MasterRisks, MasterRoom, Entry, EntryRack, MasterCardType, Visitor};
 use App\Mail\{NotifInternalForm, NotifInternalReject, NotifInternalFull};
 use Psy\Command\WhereamiCommand;
 
@@ -35,42 +35,42 @@ class InternalController extends Controller
         return $get;
     }
 
-    // Show Pages
+    public function getVisitors()
+    {
+        $get = Visitor::orderBy('visit_nama', 'asc')->get();
+        return $get;
+    }
+
+    //Ajax RISK
+    public function get_risk($id)
+    {
+        $risk = MasterRisks::findOrFail($id);
+        return isset($risk) && !empty($risk) ? Response()->json(['status' => 'SUCCESS', 'risk' => $risk]) : response(['status' => 'FAILED', 'risk' => []]);
+    }
+
+    // Ajax PIC
+    public function getPic($id)
+    {
+        $pic = Visitor::findOrFail($id);
+        return isset($pic) && !empty($pic) ? response()->json(['status' => 'SUCCESS', 'pic' => $pic]) : response()->json(['status' => 'FAILED', 'pic' => []]);
+    }
+
+    // Show Internal Form
     public function internal_form()
     {
         $risks = $this->getRisks();
-        $getDC = DB::table('m_racks')
-            ->join('m_rooms', 'm_racks.m_room_id', '=', 'm_rooms.id')
-            ->select('m_racks.*', 'm_rooms.name as room_name')
-            ->where('m_rooms.name', 'Server Room')
-            ->orderBy('id', 'asc' )
-            ->get();
+        $getRacks = MasterRack::whereHas('mCompanyId', function ($q) {
+            $q->where('name', $this->getUser()->company);
+        })->with(['mRoomId:id,name', 'mCompanyId:id,name'])->get();
+        $visitors = $this->getVisitors();
 
-        $getMMR1 = DB::table('m_racks')
-            ->join('m_rooms', 'm_racks.m_room_id', '=', 'm_rooms.id')
-            ->select('m_racks.*', 'm_rooms.name as room_name')
-            ->where('m_rooms.name', 'MMR 1')
-            ->get();
-
-        $getMMR2 = DB::table('m_racks')
-            ->join('m_rooms', 'm_racks.m_room_id', '=', 'm_rooms.id')
-            ->select('m_racks.*', 'm_rooms.name as room_name')
-            ->where('m_rooms.name', 'MMR 2')
-            ->get();
-
-        $getCCTV = DB::table('m_racks')
-            ->join('m_rooms', 'm_racks.m_room_id', '=', 'm_rooms.id')
-            ->select('m_racks.*', 'm_rooms.name as room_name')
-            ->where('m_rooms.name', 'CCTV Room')
-            ->get();
-
-        return view('internal.form', compact('risks', 'getDC', 'getMMR1', 'getMMR2', 'getCCTV'));
+        return view('internal.form', compact('risks', 'getRacks', 'visitors'));
     }
 
     public function dashboard()
     {
-        $type = auth()->user()->department;
-        return view('internal.dashboard', compact('type'));
+        $dept = $this->getUser()->department;
+        return view('internal.dashboard', compact('dept'));
     }
 
     public function finished_show()
@@ -126,28 +126,21 @@ class InternalController extends Controller
         return view('internal.penomoran', compact('ar', 'cr'));
     }
 
-    //Ajax RISK
-    public function get_risk($id)
-    {
-        $risk = MasterRisks::findOrFail($id);
-        return isset($risk) && !empty($risk) ? Response()->json(['status' => 'SUCCESS', 'risk' => $risk]) : response(['status' => 'FAILED', 'risk' => []]);
-    }
 
     // Submit
     public function internal_create(StoreInternalRequest $request)
     {
         $getForm = $request->all();
-
+        // dd($getForm);
         DB::beginTransaction();
 
         try {
 
-            $insertForm = Internal::create([
-                'requestor_id' => auth()->user()->id,
+            $insertForm = Colo::create([
+                'requestor_id' => $this->getUser()->id,
                 'work' => $getForm['work'],
                 'visit' => $getForm['visit'],
                 'leave' => $getForm['leave'],
-                'isColo' => true,
                 'isSurvey' => false,
                 'background' => $getForm['background'],
                 'desc' => $getForm['desc'],
@@ -155,41 +148,20 @@ class InternalController extends Controller
                 'rollback' => $getForm['rollback'],
             ]);
 
-            Entry::create([
-                'internal_id' => $insertForm->id,
-                'eksternal_id' => '',
-                'dc' => $request->dc,
-                'mmr1' => $request->mmr1,
-                'mmr2' => $request->mmr2,
-                'cctv' => $request->cctv,
-                'genset' => null,
-                'panel' => null,
-                'baterai' => null,
-                'trafo' => null,
-                'office1' => null,
-                'fss' => null,
-                'ups' => null,
-                'yard' => null,
-                'parking' => null,
-                'lain' => null,
-            ]);
-
             $arrayRacks = [];
             foreach($getForm['rack'] as $k => $v) {
                 $insertArray = [];
-                if (isset($getForm['rack'][$k])) {
-
+                if(isset($fetForm['rack'][$k])) {
                     $insertArray = [
-                        'internal_id' => $insertForm->id,
+                        'colo_id' => $insertForm->id,
                         'm_rack_id' => $getForm['rack'][$k],
                         'created_at' => now(),
                         'updated_at' => now(),
                     ];
-
                     $arrayRacks[] = $insertArray;
                 }
             }
-            EntryRack::insert($arrayRacks);
+            ColoEntry::insert($arrayRacks);
 
             $arrayDetail = [];
             foreach ($getForm['time_start'] as $k => $v) {
@@ -197,12 +169,13 @@ class InternalController extends Controller
                 if (isset($getForm['time_start'][$k])) {
 
                     $insertArray = [
-                        'internal_id' => $insertForm->id,
+                        'colo_id' => $insertForm->id,
                         'time_start' => $getForm['time_start'][$k],
                         'time_end' => $getForm['time_end'][$k],
                         'activity' => $getForm['activity'][$k],
                         'service_impact' => $getForm['service_impact'][$k],
                         'item' => $getForm['item'][$k],
+                        'procedure' => $getForm['activity'][$k],
                         'created_at' => now(),
                         'updated_at' => now(),
                     ];
@@ -210,7 +183,7 @@ class InternalController extends Controller
                     $arrayDetail[] = $insertArray;
                 }
             }
-            InternalDetail::insert($arrayDetail);
+            ColoDetail::insert($arrayDetail);
 
             $arrayRisk = [];
             foreach ($getForm['risk'] as $k => $v) {
@@ -218,7 +191,7 @@ class InternalController extends Controller
                 if (isset($getForm['risk'][$k])) {
 
                     $insertArray = [
-                        'internal_id' => $insertForm->id,
+                        'colo_id' => $insertForm->id,
                         'm_risk_id' => $getForm['risk'][$k],
                         'created_at' => now(),
                         'updated_at' => now(),
@@ -227,7 +200,7 @@ class InternalController extends Controller
                     $arrayRisk[] = $insertArray;
                 }
             }
-            InternalRisk::insert($arrayRisk);
+            ColoRisk::insert($arrayRisk);
 
             $arrayVisitor = [];
             foreach ($getForm['name'] as $k => $v) {
@@ -235,13 +208,8 @@ class InternalController extends Controller
                 if (isset($getForm['name'][$k])) {
 
                     $insertArray = [
-                        'internal_id' => $insertForm->id,
-                        'name' => $getForm['name'][$k],
-                        'phone' => $getForm['phone'][$k],
-                        'nik' => $getForm['number'][$k],
-                        'respon' => $getForm['respon'][$k],
-                        'department' => $getForm['department'][$k],
-                        'company' => $getForm['company'][$k],
+                        'colo_id' => $insertForm->id,
+                        'm_visitor_id' => $getForm['name'][$k],
                         'created_at' => now(),
                         'updated_at' => now(),
                     ];
@@ -249,13 +217,7 @@ class InternalController extends Controller
                     $arrayVisitor[] = $insertArray;
                 }
             }
-            InternalVisitor::insert($arrayVisitor);
-
-            // $notif_email = DB::table('internals')
-            //     ->join('users', 'internals.requestor_id', '=', 'users.id')
-            //     ->select('users.name as requestor', 'internals.id', 'internals.visit', 'internals.created_at as created', 'internals.work', 'internals.leave')
-            //     ->where('internals.id', $insertForm->id)
-            //     ->first();
+            ColoVisitor::insert($arrayVisitor);
 
             // foreach ([
             //     'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
@@ -264,22 +226,25 @@ class InternalController extends Controller
             // ] as $recipient) {
             //     Mail::to($recipient)->send(new NotifInternalForm($notif_email));
             // }
+            // return $insertForm;
+            Mail::to('bayu.prakoso@balitower.co.id')->send(new NotifInternalForm($insertForm));
 
-            InternalHistory::create([
-                'internal_id' => $insertForm->id,
-                'created_by' => Auth::user()->id,
+            ColoHistory::create([
+                'colo_id' => $insertForm->id,
+                'created_by' => $this->getUser()->id,
                 'role_to' => 'review',
                 'status' => 'requested',
                 'aktif' => true,
-                'pdf' => false,
+                'note' => null,
             ]);
 
             DB::commit();
 
-            return redirect()->route('dashboardInternal', auth()->user()->department)->with('success', 'Form Has Been Submited');
+            return redirect()->route('dashboardInternal', $this->getUser()->department)->with('success', 'Form Has Been Submited');
         } catch (\Exception $e) {
             DB::rollBack();
-            throw $e->getMessage();
+            // return back()->with('failed', $e->getMessage());
+            throw $e;
         }
     }
 
@@ -656,19 +621,27 @@ class InternalController extends Controller
             ->make(true);
     }
 
-    public function internal_yajra_show($dept)
+    public function internal_yajra_visitor($dept)
     {
-        $full = DB::table('internals')
-            ->join('internal_visitors', 'internals.id', '=', 'internal_visitors.internal_id')
-            ->join('internal_fulls', 'internals.id', '=', 'internal_fulls.internal_id')
-            ->join('users', 'internals.requestor_id', '=', 'users.id')
-            ->leftJoin('m_cards', 'internals.m_card_id', '=', 'm_cards.id')
-            ->select('internal_fulls.link', 'internal_visitors.name as visitor', 'internal_visitors.checkin', 'internal_visitors.checkout', 'internals.work', 'internals.leave', 'internal_visitors.id', 'internals.visit', 'internal_fulls.status', 'users.name as requestor', 'm_cards.number as card_number', 'internals.isSurvey')
-            ->where('internal_visitors.deleted_at', null)
-            ->where('users.department', $dept)
-            ->where('internal_visitors.checkout', null)
-            ->where('internal_fulls.status', 'Full Approved');
-
+        // $full = DB::table('internals')
+        //     ->join('internal_visitors', 'internals.id', '=', 'internal_visitors.internal_id')
+        //     ->join('internal_fulls', 'internals.id', '=', 'internal_fulls.internal_id')
+        //     ->join('users', 'internals.requestor_id', '=', 'users.id')
+        //     ->leftJoin('m_cards', 'internals.m_card_id', '=', 'm_cards.id')
+        //     ->select('internal_fulls.link', 'internal_visitors.name as visitor', 'internal_visitors.checkin', 'internal_visitors.checkout', 'internals.work', 'internals.leave', 'internal_visitors.id', 'internals.visit', 'internal_fulls.status', 'users.name as requestor', 'm_cards.number as card_number', 'internals.isSurvey')
+        //     ->where('internal_visitors.deleted_at', null)
+        //     ->where('users.department', $dept)
+        //     ->where('internal_visitors.checkout', null)
+        //     ->where('internal_fulls.status', 'Full Approved');
+        $full = Colo::whereHas([
+            'visitors' => function ($q) {
+                $q->where('deleted_at', null);
+            },
+            'requestorId' => function ($q) use($dept){
+                $q->where('department', $dept);
+            },
+            ])->get();
+            return $full;
         return Datatables::of($full)
             ->editColumn('visit', function ($full) {
                 return $full->visit ? with(new Carbon($full->visit))->format('d/m/Y') : '';
