@@ -151,7 +151,7 @@ class InternalController extends Controller
             $arrayRacks = [];
             foreach($getForm['rack'] as $k => $v) {
                 $insertArray = [];
-                if(isset($fetForm['rack'][$k])) {
+                if(isset($getForm['rack'][$k])) {
                     $insertArray = [
                         'colo_id' => $insertForm->id,
                         'm_rack_id' => $getForm['rack'][$k],
@@ -161,7 +161,7 @@ class InternalController extends Controller
                     $arrayRacks[] = $insertArray;
                 }
             }
-            ColoEntry::insert($arrayRacks);
+            $p = ColoEntry::insert($arrayRacks);
 
             $arrayDetail = [];
             foreach ($getForm['time_start'] as $k => $v) {
@@ -179,7 +179,6 @@ class InternalController extends Controller
                         'created_at' => now(),
                         'updated_at' => now(),
                     ];
-
                     $arrayDetail[] = $insertArray;
                 }
             }
@@ -196,7 +195,6 @@ class InternalController extends Controller
                         'created_at' => now(),
                         'updated_at' => now(),
                     ];
-
                     $arrayRisk[] = $insertArray;
                 }
             }
@@ -227,7 +225,7 @@ class InternalController extends Controller
             //     Mail::to($recipient)->send(new NotifInternalForm($notif_email));
             // }
             // return $insertForm;
-            Mail::to('bayu.prakoso@balitower.co.id')->send(new NotifInternalForm($insertForm));
+            // Mail::to('bayu.prakoso@balitower.co.id')->send(new NotifInternalForm($insertForm));
 
             ColoHistory::create([
                 'colo_id' => $insertForm->id,
@@ -623,6 +621,7 @@ class InternalController extends Controller
 
     public function internal_yajra_visitor($dept)
     {
+        // dd($dept);
         // $full = DB::table('internals')
         //     ->join('internal_visitors', 'internals.id', '=', 'internal_visitors.internal_id')
         //     ->join('internal_fulls', 'internals.id', '=', 'internal_fulls.internal_id')
@@ -637,20 +636,20 @@ class InternalController extends Controller
             'visitors' => function ($q) {
                 $q->where('deleted_at', null);
             },
-            'requestorId' => function ($q) use($dept){
-                $q->where('department', $dept);
-            },
+            // 'requestorId' => function ($q) use($dept){
+            //     $q->where('department', $dept);
+            // },
             ])->get();
             return $full;
-        return Datatables::of($full)
-            ->editColumn('visit', function ($full) {
-                return $full->visit ? with(new Carbon($full->visit))->format('d/m/Y') : '';
-            })
-            ->editColumn('leave', function ($full) {
-                return $full->leave ? with(new Carbon($full->leave))->format('d/m/Y') : '';
-            })
-            ->addColumn('action', 'internal.actionEdit')
-            ->make(true);
+        // return Datatables::of($full)
+        //     ->editColumn('visit', function ($full) {
+        //         return $full->visit ? with(new Carbon($full->visit))->format('d/m/Y') : '';
+        //     })
+        //     ->editColumn('leave', function ($full) {
+        //         return $full->leave ? with(new Carbon($full->leave))->format('d/m/Y') : '';
+        //     })
+        //     ->addColumn('action', 'internal.actionEdit')
+        //     ->make(true);
     }
 
     public function internal_yajra_finished($dept)

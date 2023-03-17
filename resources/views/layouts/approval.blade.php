@@ -121,7 +121,7 @@
                 <div id="collapseInternal" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Option :</h6>
-                        <a class="collapse-item" href="#">AR CR Form</a>
+                        <a class="collapse-item" href="{{ route('approvalView', 'colo')}}">Internal</a>
                         {{-- <a class="collapse-item" href="{{ url('penomoran/internal')}}">Penomoran</a> --}}
                         {{-- <a class="collapse-item" href="{{ url('#')}}">Consumable</a>
                         <a class="collapse-item" href="{{ url('#')}}">Barang Masuk</a> --}}

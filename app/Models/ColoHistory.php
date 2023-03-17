@@ -24,7 +24,7 @@ class ColoHistory extends Model
         return $this->belongsTo(Colo::class, 'colo_id');
     }
 
-    public function created_by()
+    public function createdBy()
     {
         return $this->belongsTo(User::class, 'created_by');
     }

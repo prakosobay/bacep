@@ -38,4 +38,14 @@ class Colo extends Model
     {
         return $this->hasMany(ColoVisitor::class, 'colo_id');
     }
+
+    public function histories()
+    {
+        return $this->hasMany(ColoHistory::class, 'colo_id');
+    }
+
+    public function coloEntries()
+    {
+        return $this->hasMany(ColoEntry::class, 'colo_id');
+    }
 }

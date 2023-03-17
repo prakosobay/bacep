@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\{NotifSalesForm, NotifInternalFull, NotifInternalReject};
-use App\Models\{AccessRequestInternal, ChangeRequestInternal, EntryRack, Internal, InternalFull, InternalHistory, InternalVisitor, MasterCard, Entry};
+use App\Models\{AccessRequestInternal, ChangeRequestInternal, Colo, ColoEntry, ColoHistory, ColoVisitor, EntryRack, Internal, InternalFull, InternalHistory, InternalVisitor, MasterCard, Entry, Visitor};
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\{Crypt, DB, Mail, Storage, Gate};
 use Yajra\Datatables\Datatables;
@@ -15,7 +15,8 @@ class SalesController extends Controller
 {
     public function form()
     {
-        return view('sales.form');
+        $visitors = Visitor::orderBy('visit_nama', 'asc')->get();
+        return view('sales.form', compact('visitors'));
     }
 
     public function guest_form()
@@ -105,91 +106,53 @@ class SalesController extends Controller
         $request->validate([
             'visit' => ['required', 'date'],
             'leave' => ['required', 'date', 'after_or_equal:visit'],
-            'name' => ['nullable', 'max:255'],
-            'number' => ['nullable', 'max:255'],
-            'company' => ['nullable', 'max:255'],
-            'department' => ['nullable', 'max:255'],
-            'respon' => ['nullable', 'max:255'],
-            'phone' => ['nullable', 'max:14'],
         ]);
 
         $getForm = $request->all();
-
+        // dd($getForm);
         DB::beginTransaction();
 
         try {
 
-            $insertForm = Internal::create([
+            $insertForm = Colo::create([
                 'requestor_id' => auth()->user()->id,
                 'work' => 'Survey Data Center',
                 'visit' => $getForm['visit'],
                 'leave' => $getForm['leave'],
-                'isColo' => false,
-                'isSurvey' => true,
-            ]);
-
-            Entry::create([
-                'internal_id' => $insertForm->id,
-                'eksternal_id' => '',
-                'dc' => true,
-                'mmr1' => true,
-                'mmr2' => true,
-                'cctv' => true,
-                'genset' => true,
-                'panel' => true,
-                'baterai' => true,
-                'trafo' => true,
-                'office1' => true,
-                'fss' => true,
-                'ups' => true,
-                'yard' => true,
-                'parking' => true,
-                'lain' => true,
+                'is_survey' => true,
             ]);
 
             $arrayVisitor = [];
             foreach ($getForm['name'] as $k => $v) {
                 $insertArray = [];
                 if (isset($getForm['name'][$k])) {
-
                     $insertArray = [
-                        'internal_id' => $insertForm->id,
-                        'name' => $getForm['name'][$k],
-                        'phone' => $getForm['phone'][$k],
-                        'nik' => $getForm['number'][$k],
-                        'respon' => $getForm['respon'][$k],
-                        'department' => $getForm['department'][$k],
-                        'company' => $getForm['company'][$k],
+                        'colo_id' => $insertForm->id,
+                        'm_visitor_id' => $getForm['name'][$k],
                         'created_at' => now(),
                         'updated_at' => now(),
                     ];
-
                     $arrayVisitor[] = $insertArray;
                 }
             }
-            InternalVisitor::insert($arrayVisitor);
-
-            $notif_email = DB::table('internals')
-                ->join('users', 'internals.requestor_id', '=', 'users.id')
-                ->select('users.name as requestor', 'internals.id', 'internals.visit', 'internals.created_at as created', 'internals.work', 'internals.leave')
-                ->where('internals.id', $insertForm->id)
-                ->first();
-            foreach ([
-                'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
-                'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'syukril@balitower.co.id',
-                'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'mufli.gonibala@balitower.co.id',
-            ] as $recipient) {
-                Mail::to($recipient)->send(new NotifSalesForm($notif_email));
-            }
-
-            InternalHistory::create([
-                'internal_id' => $insertForm->id,
+            $p = ColoVisitor::insert($arrayVisitor);
+            // dd($p);
+            // foreach ([
+            //     'taufik.ismail@balitower.co.id', 'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
+            //     'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'syukril@balitower.co.id',
+            //     'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'mufli.gonibala@balitower.co.id',
+            // ] as $recipient) {
+            //     Mail::to($recipient)->send(new NotifSalesForm($notif_email));
+            // }
+            ColoHistory::create([
+                'colo_id' => $insertForm->id,
                 'created_by' => auth()->user()->id,
                 'role_to' => 'review',
                 'status' => 'requested',
                 'aktif' => true,
-                'pdf' => false,
             ]);
+
+            // Mail::to('bayu.prakoso@balitower.co.id')->send(new NotifSalesForm($insertForm));
 
             DB::commit();
             return redirect()->route('dashboardInternal', auth()->user()->department)->with('success', 'Form Has Been Submited');

@@ -72,7 +72,7 @@
                 </div>
 
                 {{-- Visitor --}}
-                <div class="mb-3">
+                {{-- <div class="mb-3">
                     <table class="table table-bordered table-hover" id="table_visitor">
                         <thead>
                             <tr>
@@ -101,6 +101,148 @@
                         </tbody>
                     </table>
                     <button id="button_visitor"><b>Add More Fields</b></button>
+                </div> --}}
+
+                <div class="mb-3">
+                    <table class="table table-bordered table-hover" id="table_visitor">
+                        <thead>
+                            <tr>
+                                <th colspan="4">Visitor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>Name</th>
+                                <td>
+                                    <select name="name[]" id="name" class="form-select" required>
+                                        <option selected></option>
+                                        @foreach ( $visitors as $pic )
+                                            <option value="{{ $pic->id }}">{{ $pic->visit_nama }}</option>
+                                        @endforeach
+                                    </select>
+                                </td>
+                                <th>Phone Number</th>
+                                <td><input type="text" class="form-control" name="" value="" id="phone" readonly></td>
+                            </tr>
+                            <tr>
+                                <th>Number ID</th>
+                                <td><input type="text" class="form-control" name="" value="" id="number" readonly></td>
+                                <th>Company</th>
+                                <th><input type="text" class="form-control" name="" value="" id="company" readonly></th>
+                            </tr>
+                            <tr>
+                                <th>Department</th>
+                                <td><input type="text" class="form-control" name="" value="" id="department" readonly></td>
+                                <th>Responsibility</th>
+                                <td><input type="text" class="form-control" name="" value="" id="respon" readonly></td>
+                            </tr>
+
+                            <tr>
+                                <th>Name</th>
+                                <td>
+                                    <select name="name[]" id="name2" class="form-select">
+                                        <option selected></option>
+                                        @foreach ( $visitors as $pic )
+                                            <option value="{{ $pic->id }}">{{ $pic->visit_nama }}</option>
+                                        @endforeach
+                                    </select>
+                                </td>
+                                <th>Phone Number</th>
+                                <td><input type="text" class="form-control" name="" value="" id="phone2" readonly></td>
+                            </tr>
+                            <tr>
+                                <th>Number ID</th>
+                                <td><input type="text" class="form-control" name="" value="" id="number2" readonly></td>
+                                <th>Company</th>
+                                <th><input type="text" class="form-control" name="" value="" id="company2" readonly></th>
+                            </tr>
+                            <tr>
+                                <th>Department</th>
+                                <td><input type="text" class="form-control" name="" value="" id="department2" readonly></td>
+                                <th>Responsibility</th>
+                                <td><input type="text" class="form-control" name="" value="" id="respon2" readonly></td>
+                            </tr>
+
+                            <tr>
+                                <th>Name</th>
+                                <td>
+                                    <select name="name[]" id="name3" class="form-select">
+                                        <option selected></option>
+                                        @foreach ( $visitors as $pic )
+                                            <option value="{{ $pic->id }}">{{ $pic->visit_nama }}</option>
+                                        @endforeach
+                                    </select>
+                                </td>
+                                <th>Phone Number</th>
+                                <td><input type="text" class="form-control" name="" value="" id="phone3" readonly></td>
+                            </tr>
+                            <tr>
+                                <th>Number ID</th>
+                                <td><input type="text" class="form-control" name="" value="" id="number3" readonly></td>
+                                <th>Company</th>
+                                <th><input type="text" class="form-control" name="" value="" id="company3" readonly></th>
+                            </tr>
+                            <tr>
+                                <th>Department</th>
+                                <td><input type="text" class="form-control" name="" value="" id="department3" readonly></td>
+                                <th>Responsibility</th>
+                                <td><input type="text" class="form-control" name="" value="" id="respon3" readonly></td>
+                            </tr>
+
+                            <tr>
+                                <th>Name</th>
+                                <td>
+                                    <select name="name[]" id="name4" class="form-select">
+                                        <option selected></option>
+                                        @foreach ( $visitors as $pic )
+                                            <option value="{{ $pic->id }}">{{ $pic->visit_nama }}</option>
+                                        @endforeach
+                                    </select>
+                                </td>
+                                <th>Phone Number</th>
+                                <td><input type="text" class="form-control" name="" value="" id="phone4" readonly></td>
+                            </tr>
+                            <tr>
+                                <th>Number ID</th>
+                                <td><input type="text" class="form-control" name="" value="" id="number4" readonly></td>
+                                <th>Company</th>
+                                <th><input type="text" class="form-control" name="" value="" id="company4" readonly></th>
+                            </tr>
+                            <tr>
+                                <th>Department</th>
+                                <td><input type="text" class="form-control" name="" value="" id="department4" readonly></td>
+                                <th>Responsibility</th>
+                                <td><input type="text" class="form-control" name="" value="" id="respon4" readonly></td>
+                            </tr>
+
+                            <tr>
+                                <th>Name</th>
+                                <td>
+                                    <select name="name[]" id="name5" class="form-select">
+                                        <option selected></option>
+                                        @foreach ( $visitors as $pic )
+                                            <option value="{{ $pic->id }}">{{ $pic->visit_nama }}</option>
+                                        @endforeach
+                                    </select>
+                                </td>
+                                <th>Phone Number</th>
+                                <td><input type="text" class="form-control" name="" value="" id="phone5" readonly></td>
+                            </tr>
+                            <tr>
+                                <th>Number ID</th>
+                                <td><input type="text" class="form-control" name="" value="" id="number5" readonly></td>
+                                <th>Company</th>
+                                <th><input type="text" class="form-control" name="" value="" id="company5" readonly></th>
+                            </tr>
+                            <tr>
+                                <th>Department</th>
+                                <td><input type="text" class="form-control" name="" value="" id="department5" readonly></td>
+                                <th>Responsibility</th>
+                                <td><input type="text" class="form-control" name="" value="" id="respon5" readonly></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    {{-- <button id="button_visitor"><b>Add More Fields</b></button> --}}
                 </div>
 
                 @if (count($errors) > 0)
@@ -123,6 +265,96 @@
 @stack('script')
 <script>
 $(document).ready(function(){
+
+    $('#name').change(function(){
+        let id = $(this).val();
+        $.ajax({
+            url: "{{ url("internal/get/pic") }}"+'/'+id,
+            dataType:"json",
+            type: "get",
+            success: function(response){
+                const {pic} = response;
+                console.log(pic)
+            $('#phone').val(pic.visit_phone);
+            $('#number').val(pic.visit_nik);
+            $('#company').val(pic.visit_company);
+            $('#department').val(pic.visit_department);
+            $('#respon').val(pic.visit_respon);
+            }
+        });
+    });
+
+    $('#name2').change(function(){
+        let id = $(this).val();
+        $.ajax({
+            url: "{{ url("internal/get/pic") }}"+'/'+id,
+            dataType:"json",
+            type: "get",
+            success: function(response){
+                const {pic} = response;
+                console.log(pic)
+            $('#phone2').val(pic.visit_phone);
+            $('#number2').val(pic.visit_nik);
+            $('#company2').val(pic.visit_company);
+            $('#department2').val(pic.visit_department);
+            $('#respon2').val(pic.visit_respon);
+            }
+        });
+    });
+
+    $('#name3').change(function(){
+        let id = $(this).val();
+        $.ajax({
+            url: "{{ url("internal/get/pic") }}"+'/'+id,
+            dataType:"json",
+            type: "get",
+            success: function(response){
+                const {pic} = response;
+                console.log(pic)
+            $('#phone3').val(pic.visit_phone);
+            $('#number3').val(pic.visit_nik);
+            $('#company3').val(pic.visit_company);
+            $('#department3').val(pic.visit_department);
+            $('#respon3').val(pic.visit_respon);
+            }
+        });
+    });
+
+    $('#name4').change(function(){
+        let id = $(this).val();
+        $.ajax({
+            url: "{{ url("internal/get/pic") }}"+'/'+id,
+            dataType:"json",
+            type: "get",
+            success: function(response){
+                const {pic} = response;
+                console.log(pic)
+            $('#phone4').val(pic.visit_phone);
+            $('#number4').val(pic.visit_nik);
+            $('#company4').val(pic.visit_company);
+            $('#department4').val(pic.visit_department);
+            $('#respon4').val(pic.visit_respon);
+            }
+        });
+    });
+
+    $('#name5').change(function(){
+        let id = $(this).val();
+        $.ajax({
+            url: "{{ url("internal/get/pic") }}"+'/'+id,
+            dataType:"json",
+            type: "get",
+            success: function(response){
+                const {pic} = response;
+                console.log(pic)
+            $('#phone5').val(pic.visit_phone);
+            $('#number5').val(pic.visit_nik);
+            $('#company5').val(pic.visit_company);
+            $('#department5').val(pic.visit_department);
+            $('#respon5').val(pic.visit_respon);
+            }
+        });
+    });
 
     let max_row = 6;
     let row = 1;

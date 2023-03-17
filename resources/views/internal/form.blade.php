@@ -250,58 +250,58 @@
                             <tr>
                                 <td>
                                     <select name="risk[]" class="form-control" id="risk" required>
-                                        <option selected>Choose 1</option>
+                                        <option selected></option>
                                         @foreach ( $risks as $risk )
                                             <option value="{{ $risk->id }}">{{ $risk->risk }}</option>
                                         @endforeach
                                     </select>
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control" name="poss[]" value="" id="poss" readonly>
+                                    <input type="text" class="form-control" name="" value="" id="poss" readonly>
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control" name="impact[]" value="" id="impact" readonly>
+                                    <input type="text" class="form-control" name="" value="" id="impact" readonly>
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control" name="mitigation[]" value="" id="mitigation" readonly>
+                                    <input type="text" class="form-control" name="" value="" id="mitigation" readonly>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <select name="risk[]" class="form-control" id="risk2" required>
-                                        <option selected>Choose 1</option>
+                                    <select name="risk[]" class="form-control" id="risk2" >
+                                        <option selected></option>
                                         @foreach ( $risks as $risk )
                                             <option value="{{ $risk->id }}">{{ $risk->risk }}</option>
                                         @endforeach
                                     </select>
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control" name="poss[]" value="" id="poss2" readonly>
+                                    <input type="text" class="form-control" name="" value="" id="poss2" readonly>
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control" name="impact[]" value="" id="impact2" readonly>
+                                    <input type="text" class="form-control" name="" value="" id="impact2" readonly>
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control" name="mitigation[]" value="" id="mitigation2" readonly>
+                                    <input type="text" class="form-control" name="" value="" id="mitigation2" readonly>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <select name="risk[]" class="form-control" id="risk3" required>
-                                        <option selected>Choose 1</option>
+                                    <select name="risk[]" class="form-control" id="risk3" >
+                                        <option selected></option>
                                         @foreach ( $risks as $risk )
                                             <option value="{{ $risk->id }}">{{ $risk->risk }}</option>
                                         @endforeach
                                     </select>
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control" name="poss[]" value="" id="poss3" readonly>
+                                    <input type="text" class="form-control" name="" value="" id="poss3" readonly>
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control" name="impact[]" value="" id="impact3" readonly>
+                                    <input type="text" class="form-control" name="" value="" id="impact3" readonly>
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control" name="mitigation[]" value="" id="mitigation3" readonly>
+                                    <input type="text" class="form-control" name="" value="" id="mitigation3" readonly>
                                 </td>
                             </tr>
                         </tbody>
@@ -360,19 +360,19 @@
                                     </select>
                                 </td>
                                 <th>Phone Number</th>
-                                <td><input type="text" class="form-control" name="phone[]" value="" id="phone" readonly></td>
+                                <td><input type="text" class="form-control" name="" value="" id="phone" readonly></td>
                             </tr>
                             <tr>
                                 <th>Number ID</th>
-                                <td><input type="text" class="form-control" name="number[]" value="" id="number" readonly></td>
+                                <td><input type="text" class="form-control" name="" value="" id="number" readonly></td>
                                 <th>Company</th>
-                                <th><input type="text" class="form-control" name="company[]" value="" id="company" readonly></th>
+                                <th><input type="text" class="form-control" name="" value="" id="company" readonly></th>
                             </tr>
                             <tr>
                                 <th>Department</th>
-                                <td><input type="text" class="form-control" name="department[]" value="" id="department" readonly></td>
+                                <td><input type="text" class="form-control" name="" value="" id="department" readonly></td>
                                 <th>Responsibility</th>
-                                <td><input type="text" class="form-control" name="respon[]" value="" id="respon" readonly></td>
+                                <td><input type="text" class="form-control" name="" value="" id="respon" readonly></td>
                             </tr>
 
                             <tr>
@@ -386,19 +386,19 @@
                                     </select>
                                 </td>
                                 <th>Phone Number</th>
-                                <td><input type="text" class="form-control" name="phone[]" value="" id="phone2" readonly></td>
+                                <td><input type="text" class="form-control" name="" value="" id="phone2" readonly></td>
                             </tr>
                             <tr>
                                 <th>Number ID</th>
-                                <td><input type="text" class="form-control" name="number[]" value="" id="number2" readonly></td>
+                                <td><input type="text" class="form-control" name="" value="" id="number2" readonly></td>
                                 <th>Company</th>
-                                <th><input type="text" class="form-control" name="company[]" value="" id="company2" readonly></th>
+                                <th><input type="text" class="form-control" name="" value="" id="company2" readonly></th>
                             </tr>
                             <tr>
                                 <th>Department</th>
-                                <td><input type="text" class="form-control" name="department[]" value="" id="department2" readonly></td>
+                                <td><input type="text" class="form-control" name="" value="" id="department2" readonly></td>
                                 <th>Responsibility</th>
-                                <td><input type="text" class="form-control" name="respon[]" value="" id="respon2" readonly></td>
+                                <td><input type="text" class="form-control" name="" value="" id="respon2" readonly></td>
                             </tr>
 
                             <tr>
@@ -412,19 +412,19 @@
                                     </select>
                                 </td>
                                 <th>Phone Number</th>
-                                <td><input type="text" class="form-control" name="phone[]" value="" id="phone3" readonly></td>
+                                <td><input type="text" class="form-control" name="" value="" id="phone3" readonly></td>
                             </tr>
                             <tr>
                                 <th>Number ID</th>
-                                <td><input type="text" class="form-control" name="number[]" value="" id="number3" readonly></td>
+                                <td><input type="text" class="form-control" name="" value="" id="number3" readonly></td>
                                 <th>Company</th>
-                                <th><input type="text" class="form-control" name="company[]" value="" id="company3" readonly></th>
+                                <th><input type="text" class="form-control" name="" value="" id="company3" readonly></th>
                             </tr>
                             <tr>
                                 <th>Department</th>
-                                <td><input type="text" class="form-control" name="department[]" value="" id="department3" readonly></td>
+                                <td><input type="text" class="form-control" name="" value="" id="department3" readonly></td>
                                 <th>Responsibility</th>
-                                <td><input type="text" class="form-control" name="respon[]" value="" id="respon3" readonly></td>
+                                <td><input type="text" class="form-control" name="" value="" id="respon3" readonly></td>
                             </tr>
 
                             <tr>
@@ -438,19 +438,19 @@
                                     </select>
                                 </td>
                                 <th>Phone Number</th>
-                                <td><input type="text" class="form-control" name="phone[]" value="" id="phone4" readonly></td>
+                                <td><input type="text" class="form-control" name="" value="" id="phone4" readonly></td>
                             </tr>
                             <tr>
                                 <th>Number ID</th>
-                                <td><input type="text" class="form-control" name="number[]" value="" id="number4" readonly></td>
+                                <td><input type="text" class="form-control" name="" value="" id="number4" readonly></td>
                                 <th>Company</th>
-                                <th><input type="text" class="form-control" name="company[]" value="" id="company4" readonly></th>
+                                <th><input type="text" class="form-control" name="" value="" id="company4" readonly></th>
                             </tr>
                             <tr>
                                 <th>Department</th>
-                                <td><input type="text" class="form-control" name="department[]" value="" id="department4" readonly></td>
+                                <td><input type="text" class="form-control" name="" value="" id="department4" readonly></td>
                                 <th>Responsibility</th>
-                                <td><input type="text" class="form-control" name="respon[]" value="" id="respon4" readonly></td>
+                                <td><input type="text" class="form-control" name="" value="" id="respon4" readonly></td>
                             </tr>
 
                             <tr>
@@ -464,19 +464,19 @@
                                     </select>
                                 </td>
                                 <th>Phone Number</th>
-                                <td><input type="text" class="form-control" name="phone[]" value="" id="phone5" readonly></td>
+                                <td><input type="text" class="form-control" name="" value="" id="phone5" readonly></td>
                             </tr>
                             <tr>
                                 <th>Number ID</th>
-                                <td><input type="text" class="form-control" name="number[]" value="" id="number5" readonly></td>
+                                <td><input type="text" class="form-control" name="" value="" id="number5" readonly></td>
                                 <th>Company</th>
-                                <th><input type="text" class="form-control" name="company[]" value="" id="company5" readonly></th>
+                                <th><input type="text" class="form-control" name="" value="" id="company5" readonly></th>
                             </tr>
                             <tr>
                                 <th>Department</th>
-                                <td><input type="text" class="form-control" name="department[]" value="" id="department5" readonly></td>
+                                <td><input type="text" class="form-control" name="" value="" id="department5" readonly></td>
                                 <th>Responsibility</th>
-                                <td><input type="text" class="form-control" name="respon[]" value="" id="respon5" readonly></td>
+                                <td><input type="text" class="form-control" name="" value="" id="respon5" readonly></td>
                             </tr>
                         </tbody>
                     </table>

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{AccessRequestInternal, ChangeRequestInternal, Cleaning, Internal, InternalHistory, Other, OtherHistory, PenomoranCleaning, User};
+use App\Models\{AccessRequestInternal, ChangeRequestInternal, Cleaning, Colo, Internal, InternalHistory, Other, OtherHistory, PenomoranCleaning, User};
 use Illuminate\Support\Facades\{DB, Auth, Gate, Session};
 use Illuminate\Http\Request;
 
@@ -117,18 +117,32 @@ class HomeController extends Controller
                     ->select('troubleshoot_bm_histories.*', 'troubleshoot_bms.*')
                     ->get();
                 return view('other.troubleshoot_approval', compact('getTroubleshoot'));
-            } elseif($type_approve == 'internal'){
-                $getInternal = DB::table('internals')
-                    ->join('internal_histories', 'internals.id', '=', 'internal_histories.internal_id')
-                    ->join('users', 'internals.requestor_id', '=', 'users.id')
-                    ->leftJoin('entry_racks', 'internals.id', '=', 'entry_racks.internal_id')
-                    ->join('m_racks', 'entry_racks.m_rack_id', '=', 'm_racks.id')
-                    ->select('users.name as req_name', 'internals.*', 'internal_histories.aktif', 'internal_histories.role_to', 'm_racks.number as rack_number')
-                    ->whereIn('internal_histories.role_to', $role_1)
-                    ->where('internal_histories.aktif', '=', 1)
-                    ->where('internals.isColo', true)
-                    ->groupBy('internals.id' )
+            } elseif($type_approve == 'colo'){
+                // $getInternal = DB::table('internals')
+                //     ->join('internal_histories', 'internals.id', '=', 'internal_histories.internal_id')
+                //     ->join('users', 'internals.requestor_id', '=', 'users.id')
+                //     ->leftJoin('entry_racks', 'internals.id', '=', 'entry_racks.internal_id')
+                //     ->join('m_racks', 'entry_racks.m_rack_id', '=', 'm_racks.id')
+                //     ->select('users.name as req_name', 'internals.*', 'internal_histories.aktif', 'internal_histories.role_to', 'm_racks.number as rack_number')
+                //     ->whereIn('internal_histories.role_to', $role_1)
+                //     ->where('internal_histories.aktif', '=', 1)
+                //     ->where('internals.isColo', true)
+                //     ->groupBy('internals.id' )
+                //     ->get();
+                $getInternal = Colo::whereHas('histories', function($q) use($role_1) {
+                        $q->where('aktif', true)->whereIn('role_to', $role_1);
+                    })
+                    ->with([
+                        'requestorId:id,name',
+                        'histories' => function ($q) {
+                            $q->select('colo_id', 'aktif', 'created_by', 'status', 'role_to', 'created_at')->with(
+                                'createdBy:id,name'
+                            );
+                        },
+                        'coloEntries'
+                    ])
                     ->get();
+                    return $getInternal;
                 return view('internal.approval', compact('getInternal'));
             }  elseif($type_approve == 'survey') {
                 $getSurvey = DB::table('internals')
