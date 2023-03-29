@@ -66,7 +66,7 @@
                         </div>
                         <tr>
                             <td>{{ $p->id }}</td>
-                            <td>{{ $p->req_name }}</td>
+                            <td>{{ $p->requestorId->name }}</td>
                             <td>{{ Carbon\Carbon::parse($p->created_at)->format('d-m-Y') }}</td>
                             <td>{{ Carbon\Carbon::parse($p->visit)->format('d-m-Y') }}</td>
                             <td>{{ Carbon\Carbon::parse($p->leave)->format('d-m-Y') }}</td>

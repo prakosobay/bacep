@@ -139,10 +139,9 @@ class HomeController extends Controller
                                 'createdBy:id,name'
                             );
                         },
-                        'coloEntries'
                     ])
                     ->get();
-                    return $getInternal;
+                    // return $getInternal;
                 return view('internal.approval', compact('getInternal'));
             }  elseif($type_approve == 'survey') {
                 $getSurvey = DB::table('internals')
