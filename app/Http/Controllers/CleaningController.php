@@ -115,7 +115,7 @@ class CleaningController extends Controller
 
             // Send email notification
             foreach ([
-                'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id', 'syukril@balitower.co.id', 'dennis.oscadifa@balitower.co.id',
+                'eri.iskandar@balitower.co.id', 'syukril@balitower.co.id', 'dennis.oscadifa@balitower.co.id',
                 'ilham.pangestu@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'badai.sino@balitower.co.id',
                 'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'riya.ully@balitower.co.id',
             ] as $recipient) {
@@ -247,7 +247,7 @@ class CleaningController extends Controller
             $role_to = '';
             if ($lasthistoryC->role_to == 'review') {
                 foreach ([
-                    'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id', 'syukril@balitower.co.id', 'dennis.oscadifa@balitower.co.id',
+                    'eri.iskandar@balitower.co.id', 'syukril@balitower.co.id', 'dennis.oscadifa@balitower.co.id',
                     'ilham.pangestu@balitower.co.id', 'yufdi.syafnizal@balitower.co.id',
                     'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id',
                 ] as $recipient) {
