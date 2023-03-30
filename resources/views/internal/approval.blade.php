@@ -30,7 +30,7 @@
                             <th>Date of Visit</th>
                             <th>Date of Leave</th>
                             <th>Purpose</th>
-                            <th>No. Rack</th>
+                            <th>Location</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -72,10 +72,12 @@
                             <td>{{ Carbon\Carbon::parse($p->leave)->format('d-m-Y') }}</td>
                             <td>{{ $p->work }}</td>
                             <td>
-                                {{ $p->rack_number }}
+                                @foreach ( $p->coloEntries as $q )
+                                    - {{ $q->mRackId->number . '/' . $q->mRackId->mRoomId->name }}</br>
+                                @endforeach
                             </td>
                             <td>
-                                @can('isApproval')
+                                {{-- @can('isApproval')
                                     <form action="{{ url('internal/approve', $p->id)}}" method="post">
                                         @csrf
                                         <button id="ok" class="btn btn-success btn-sm my-1 mx-1">Approve</button>
@@ -97,8 +99,9 @@
                                         <button id="ok" class="btn btn-success btn-sm my-1 mx-1">Approve</button>
                                     </form>
 
-                                @endcan
-                                    <a href="/internal/pdf/{{$p->id}}" class="btn btn-primary btn-sm my-1 mx-1" target="_blank">File</a>
+                                @endcan --}}
+                                    {{-- <a href="/internal/pdf/{{$p->id}}" class="btn btn-primary btn-sm my-1 mx-1" target="_blank">File</a> --}}
+                                    <a href="{{ route('internal.review', $p->id)}}" class="btn-primary btn btn-sm my-1 mx-1">Review</a>
                             </td>
                         </tr>
                         @endforeach

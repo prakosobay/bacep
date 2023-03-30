@@ -55,6 +55,12 @@ class InternalController extends Controller
         return isset($pic) && !empty($pic) ? response()->json(['status' => 'SUCCESS', 'pic' => $pic]) : response()->json(['status' => 'FAILED', 'pic' => []]);
     }
 
+    public function getColo($id)
+    {
+        $get = Colo::findOrFail($id);
+        return $get;
+    }
+
     // Show Internal Form
     public function internal_form()
     {
@@ -65,6 +71,15 @@ class InternalController extends Controller
         $visitors = $this->getVisitors();
 
         return view('internal.form', compact('risks', 'getRacks', 'visitors'));
+    }
+
+    public function review($id)
+    {
+        $colo = $this->getColo($id);
+        $risks = $this->getRisks();
+        $visitors = $this->getVisitors();
+        // return $colo->coloVisitors[0]->mVisitorId;
+        return view('internal.review', compact('colo', 'risks', 'visitors'));
     }
 
     public function dashboard()

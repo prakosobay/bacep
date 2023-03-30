@@ -372,6 +372,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('internal/form', 'internal_form');
         Route::get('internal/get/risk/{id}', 'get_risk');
         Route::get('internal/get/pic/{id}', 'getPic');
+        Route::get('internal/review/{id}', 'review')->name('internal.review');
 
         Route::get('internal-action-checkin-form/{id}', 'internal_action_checkin_form')->name('checkinInternal');
         Route::get('internal-action-checkout-form/{id}', 'internal_action_checkout_form')->name('checkoutInternal');
