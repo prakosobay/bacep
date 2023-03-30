@@ -139,6 +139,9 @@ class HomeController extends Controller
                                 'createdBy:id,name'
                             );
                         },
+                        'coloEntries.mRackId' => function ($q) {
+                            $q->select('id', 'm_room_id', 'number')->with('mRoomId:id,name');
+                        }
                     ])
                     ->get();
                     // return $getInternal;

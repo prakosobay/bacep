@@ -48,4 +48,19 @@ class Colo extends Model
     {
         return $this->hasMany(ColoEntry::class, 'colo_id');
     }
+
+    public function coloRisks()
+    {
+        return $this->hasMany(ColoRisk::class, 'colo_id');
+    }
+
+    public function coloDetails()
+    {
+        return $this->hasMany(ColoDetail::class, 'colo_id');
+    }
+
+    public function coloVisitors()
+    {
+        return $this->hasMany(ColoVisitor::class, 'colo_id');
+    }
 }
