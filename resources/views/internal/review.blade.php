@@ -57,6 +57,17 @@
 
                 <div class="row">
                     <div class="col-4 my-4">
+                        @foreach ($colo->coloEntries as $p )
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" checked disabled>
+                            <label for="dc" class="form-check-label">{{ $p->mRackId->mRoomId->name }} Rack {{ $p->mRackId->number }}</label>
+                        </div>
+                        @endforeach
+                    </div>
+                </div>
+
+                {{-- <div class="row">
+                    <div class="col-4 my-4">
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="1" id="dc" name="dc">
                             <label for="dc" class="form-check-label">Server Room</label>
@@ -77,18 +88,7 @@
                             <label for="cctv" class="form-check-label">CCTV Room</label>
                         </div>
                     </div>
-
-                    {{-- <div class="col-4">
-                        <div class="form-group mt-5">
-                            <label for="rack">Rack</label>
-                            <select name="rack[]" class="js-example-responsive-theme-multiple form-control" id="rack" multiple="multiple" required>
-                                @foreach ( $getRacks as $rack )
-                                    <option value="{{ $rack->id }}">{{ $rack->mRoomId->name }} / {{ $rack->number }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div> --}}
-                </div>
+                </div> --}}
 
                 {{-- Date of Visit & Leave --}}
                 <div class="row">
@@ -111,13 +111,13 @@
                     <div class="col-6">
                         <div class="form-group mb-3">
                             <label for="background" class="form-label">Background and Objectives</label>
-                            <input type="text" class="form-control" id="background" name="background" value="{{ $colo->background }}" readonly>
+                            <input type="text" class="form-control" id="background" name="background" value="{{ $colo->background }}" required>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-group mb-3">
                             <label for="desc" class="form-label">Work Description</label>
-                            <input type="text" class="form-control @error('desc') is-invalid @enderror" id="desc" name="desc" value="{{ $colo->desc }}" readonly>
+                            <input type="text" class="form-control" id="desc" name="desc" value="{{ $colo->desc }}" required>
                         </div>
                     </div>
                 </div>
@@ -127,14 +127,14 @@
                     <div class="col-6">
                         <div class="form-group mb-3">
                             <label for="testing" class="form-label">Testing and Verification</label>
-                            <input type="text" class="form-control" id="testing" name="testing" value="{{ $colo->testing }}" readonly>
+                            <input type="text" class="form-control" id="testing" name="testing" value="{{ $colo->testing }}">
                         </div>
 
                     </div>
                     <div class="col-6">
                         <div class="form-group mb-5">
                             <label for="rollback" class="form-label">Rollback and Operation</label>
-                            <input type="text" class="form-control" id="rollback" name="rollback" value="{{ $colo->rollback }}" readonly>
+                            <input type="text" class="form-control" id="rollback" name="rollback" value="{{ $colo->rollback }}">
                         </div>
                     </div>
                 </div>
@@ -234,14 +234,7 @@
                             @foreach ( $colo->coloVisitors as $p )
                                 <tr>
                                     <th>Name</th>
-                                    <td>
-                                        <select name="name[]" id="name" class="form-select" required>
-                                            <option selected value="{{ $p->mVisitorId->id }}">{{ $p->mVisitorId->visit_nama }}</option>
-                                            @foreach ( $visitors as $pic )
-                                                <option value="{{ $pic->id }}">{{ $pic->visit_nama }}</option>
-                                            @endforeach
-                                        </select>
-                                    </td>
+                                    <td><input type="text" class="form-control" name="" value="{{ $p->mVisitorId->visit_nama }}" id="phone" readonly></td>
                                     <th>Phone Number</th>
                                     <td><input type="text" class="form-control" name="" value="{{ $p->mVisitorId->visit_phone }}" id="phone" readonly></td>
                                 </tr>
@@ -260,7 +253,6 @@
                             @endforeach
                         </tbody>
                     </table>
-                    {{-- <button id="button_visitor"><b>Add More Fields</b></button> --}}
                 </div>
 
                 {{-- Submit --}}

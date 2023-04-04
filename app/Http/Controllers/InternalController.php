@@ -78,7 +78,7 @@ class InternalController extends Controller
         $colo = $this->getColo($id);
         $risks = $this->getRisks();
         $visitors = $this->getVisitors();
-        // return $colo->coloVisitors[0]->mVisitorId;
+        // return $colo->coloEntries;
         return view('internal.review', compact('colo', 'risks', 'visitors'));
     }
 
