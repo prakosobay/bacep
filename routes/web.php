@@ -390,7 +390,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('internal/yajra/last/form/{dept}', 'internal_yajra_last_form');
 
         Route::post('internal/create', 'internal_create')->name('internalStore');
-        Route::post('internal/approve/{id}', 'internal_approve');
+        Route::post('internal/approve/{id}', 'internal_approve')->name('internal.approve');
         Route::post('internal/reject/{id}', 'internal_reject');
 
         Route::get('internal_penomoran', 'penomoran');
