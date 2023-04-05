@@ -663,6 +663,7 @@
                     <input type="text" class="input100" name="cleaning_nik_2" id="id_number2" value="{{ $cleaning->cleaning_nik_2 }}" readonly>
 				</div>
 
+                {{-- Approval Table --}}
                 <table class="table table-hover" id="approval_table">
                     <tr >
                         <th >Requested By :</th>

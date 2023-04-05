@@ -3,7 +3,7 @@
 <div class="container my-5">
     <div class="card">
         <h1 class="text-center my-3 h1Permit">Access Request &  Change Request Form</h1>
-        <form action="{{ route('internalStore')}}" method="POST" class="validate-form">
+        <form action="{{ route('internal.approve', $colo->id )}}" method="POST" class="validate-form">
             @csrf
             <div class="container form-container">
 
@@ -55,40 +55,17 @@
                     </div>
                 </div>
 
+                {{-- Entry Area --}}
                 <div class="row">
                     <div class="col-4 my-4">
                         @foreach ($colo->coloEntries as $p )
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" checked disabled>
-                            <label for="dc" class="form-check-label">{{ $p->mRackId->mRoomId->name }} Rack {{ $p->mRackId->number }}</label>
+                            <label for="dc" class="form-check-label"><b>{{ $p->mRackId->mRoomId->name }} Rack {{ $p->mRackId->number }}</b></label>
                         </div>
                         @endforeach
                     </div>
                 </div>
-
-                {{-- <div class="row">
-                    <div class="col-4 my-4">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="1" id="dc" name="dc">
-                            <label for="dc" class="form-check-label">Server Room</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="1" id="mmr1" name="mmr1">
-                            <label for="mmr1" class="form-check-label">MMR 1</label>
-                        </div>
-                    </div>
-
-                    <div class="col-4 my-4">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="1" id="mmr2" name="mmr2">
-                            <label for="mmr2" class="form-check-label">MMR 2</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="1" id="cctv" name="cctv">
-                            <label for="cctv" class="form-check-label">CCTV Room</label>
-                        </div>
-                    </div>
-                </div> --}}
 
                 {{-- Date of Visit & Leave --}}
                 <div class="row">
@@ -255,9 +232,31 @@
                     </table>
                 </div>
 
-                {{-- Submit --}}
-                <button type="submit" class="btn btn-lg btn-success mx-2">Submit</button>
-                <button type="reset" class="btn btn-lg btn-warning mx-2">Reset</button>
+                {{-- Approval Table --}}
+                <table class="table table-hover" id="approval_table">
+                    <tr >
+                        <th >Requested By :</th>
+                        <th >Reviewed By :</th>
+                        <th >Checked By :</th>
+                        <th >Acknowledge By :</th>
+                    </tr>
+                </table>
+
+                {{-- Button --}}
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-6 text-center">
+                            <button type="button" class="btn btn-lg btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                Reject
+                            </button>
+                        </div>
+                        <div class="col-6 text-center">
+                            <button class="btn btn-lg btn-success my-1 mx-1" id="approve_button" type="submit">
+                                Approve
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </form>
     </div>
@@ -273,169 +272,6 @@ $(document).ready(function(){
         theme : 'classic',
         width: 'resolve',
     });
-
-    $('#risk').change(function(){
-        let id = $(this).val();
-        $.ajax({
-            url: "{{ url("internal/get/risk") }}"+'/'+id,
-            dataType:"json",
-            type: "get",
-            success: function(response){
-                const {risk} = response;
-                console.log(risk)
-            $('#poss').val(risk.poss);
-            $('#impact').val(risk.impact);
-            $('#mitigation').val(risk.mitigation);
-            }
-        });
-    });
-
-    $('#risk2').change(function(){
-        let id = $(this).val();
-        $.ajax({
-            url: "{{ url("internal/get/risk") }}"+'/'+id,
-            dataType:"json",
-            type: "get",
-            success: function(response){
-                const {risk} = response;
-                console.log(risk)
-            $('#poss2').val(risk.poss);
-            $('#impact2').val(risk.impact);
-            $('#mitigation2').val(risk.mitigation);
-            }
-        });
-    });
-
-    $('#risk3').change(function(){
-        let id = $(this).val();
-        $.ajax({
-            url: "{{ url("internal/get/risk") }}"+'/'+id,
-            dataType:"json",
-            type: "get",
-            success: function(response){
-                const {risk} = response;
-                console.log(risk)
-            $('#poss3').val(risk.poss);
-            $('#impact3').val(risk.impact);
-            $('#mitigation3').val(risk.mitigation);
-            }
-        });
-    });
-
-    $('#name').change(function(){
-        let id = $(this).val();
-        $.ajax({
-            url: "{{ url("internal/get/pic") }}"+'/'+id,
-            dataType:"json",
-            type: "get",
-            success: function(response){
-                const {pic} = response;
-                console.log(pic)
-            $('#phone').val(pic.visit_phone);
-            $('#number').val(pic.visit_nik);
-            $('#company').val(pic.visit_company);
-            $('#department').val(pic.visit_department);
-            $('#respon').val(pic.visit_respon);
-            }
-        });
-    });
-
-    $('#name2').change(function(){
-        let id = $(this).val();
-        $.ajax({
-            url: "{{ url("internal/get/pic") }}"+'/'+id,
-            dataType:"json",
-            type: "get",
-            success: function(response){
-                const {pic} = response;
-                console.log(pic)
-            $('#phone2').val(pic.visit_phone);
-            $('#number2').val(pic.visit_nik);
-            $('#company2').val(pic.visit_company);
-            $('#department2').val(pic.visit_department);
-            $('#respon2').val(pic.visit_respon);
-            }
-        });
-    });
-
-    $('#name3').change(function(){
-        let id = $(this).val();
-        $.ajax({
-            url: "{{ url("internal/get/pic") }}"+'/'+id,
-            dataType:"json",
-            type: "get",
-            success: function(response){
-                const {pic} = response;
-                console.log(pic)
-            $('#phone3').val(pic.visit_phone);
-            $('#number3').val(pic.visit_nik);
-            $('#company3').val(pic.visit_company);
-            $('#department3').val(pic.visit_department);
-            $('#respon3').val(pic.visit_respon);
-            }
-        });
-    });
-
-    $('#name4').change(function(){
-        let id = $(this).val();
-        $.ajax({
-            url: "{{ url("internal/get/pic") }}"+'/'+id,
-            dataType:"json",
-            type: "get",
-            success: function(response){
-                const {pic} = response;
-                console.log(pic)
-            $('#phone4').val(pic.visit_phone);
-            $('#number4').val(pic.visit_nik);
-            $('#company4').val(pic.visit_company);
-            $('#department4').val(pic.visit_department);
-            $('#respon4').val(pic.visit_respon);
-            }
-        });
-    });
-
-    $('#name5').change(function(){
-        let id = $(this).val();
-        $.ajax({
-            url: "{{ url("internal/get/pic") }}"+'/'+id,
-            dataType:"json",
-            type: "get",
-            success: function(response){
-                const {pic} = response;
-                console.log(pic)
-            $('#phone5').val(pic.visit_phone);
-            $('#number5').val(pic.visit_nik);
-            $('#company5').val(pic.visit_company);
-            $('#department5').val(pic.visit_department);
-            $('#respon5').val(pic.visit_respon);
-            }
-        });
-    });
-
-    let max_row = 15;
-    let row = 1;
-    let button_detail = $('#button_detail');
-    let table_detail = $('#table_detail');
-    let button_risk = $('#button_risk');
-    let table_risk = $('#table_risk');
-    let button_visitor = $('#button_visitor');
-    let table_visitor = $('#table_visitor');
-
-    $(button_detail).click(function(e){
-        e.preventDefault();
-        if(row < max_row){
-            $(table_detail).append('<tr><td><input type="time" class="form-control" id="time_start" name="time_start[]"></td><td><input type="time" class="form-control" id="time_end" name="time_end[]"></td><td><input type="text" class="form-control" id="activity" name="activity[]"></td><td><input type="text" class="form-control" id="service_impact" name="service_impact[]"></td><td><input type="text" class="form-control" id="item" name="item[]"></td></tr>');
-            row++;
-        }
-    });
-
-    // $(button_visitor).click(function(e){
-    //     e.preventDefault();
-    //     if(row < max_row){
-    //         $(table_visitor).append('<tr><th>Name</th><td><input type="text" class="form-control" name="name[]" ></td><th>Phone Number</th><td><input type="text" class="form-control" name="phone[]" ></td></tr><tr><th>Number ID</th><td><input type="text" class="form-control" name="number[]" ></td><th>Company</th><th><input type="text" class="form-control" name="company[]" ></th></tr><tr><th>Department</th><td><input type="text" class="form-control" name="department[]" ></td><th>Responsibility</th><td><input type="text" class="form-control" name="respon[]" ></td></tr>');
-    //         row++;
-    //     }
-    // });
 });
 </script>
 @endsection

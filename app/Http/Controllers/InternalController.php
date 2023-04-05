@@ -11,7 +11,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 use Barryvdh\DomPDF\Facade as PDF;
-use App\Models\{AccessRequestInternal, ChangeRequestInternal, Colo, ColoDetail, ColoEntry, ColoHistory, ColoRisk, ColoVisitor, Internal, InternalEntry, InternalDetail, InternalRisk, InternalHistory, InternalFull, InternalVisitor, MasterCard, MasterCompany, MasterRack, MasterRisks, MasterRoom, Entry, EntryRack, MasterCardType, Visitor};
+use App\Models\{AccessRequestInternal, ChangeRequestInternal, Colo, ColoDetail, ColoEntry, ColoFull, ColoHistory, ColoRisk, ColoVisitor, Internal, InternalEntry, InternalDetail, InternalRisk, InternalHistory, InternalFull, InternalVisitor, MasterCard, MasterCompany, MasterRack, MasterRisks, MasterRoom, Entry, EntryRack, MasterCardType, Visitor};
 use App\Mail\{NotifInternalForm, NotifInternalReject, NotifInternalFull};
 use Psy\Command\WhereamiCommand;
 
@@ -78,7 +78,7 @@ class InternalController extends Controller
         $colo = $this->getColo($id);
         $risks = $this->getRisks();
         $visitors = $this->getVisitors();
-        // return $colo->coloEntries;
+        // return $colo->histories;
         return view('internal.review', compact('colo', 'risks', 'visitors'));
     }
 
@@ -294,100 +294,83 @@ class InternalController extends Controller
     // Approve
     public function internal_approve($id) // Function flow approval
     {
-        $last_update = InternalHistory::where('internal_id', $id)->latest()->first();
-
-        $notif_email = DB::table('internals')
-                ->join('internal_histories', 'internals.id', '=', 'internal_histories.internal_id')
-                ->join('users', 'internals.requestor_id', '=', 'users.id')
-                ->select('users.name as requestor', 'internal_histories.aktif', 'internals.id', 'internals.visit', 'internals.created_at as created', 'internals.work', 'internals.leave')
-                ->where('internals.id', $id)
-                ->where('aktif', 1)
-                ->first();
+        $colo = $this->getColo($id);
+        $last_update = ColoHistory::where('colo_id', $id)->latest()->first();
+        // return $last_update;
 
         // dd($notif_email);
         DB::beginTransaction();
 
         try {
 
-            if ($last_update->pdf == true) {
-                $last_update->update(['aktif' => false]);
+            // $last_update->update(['aktif' => false]);
 
-                // Perubahan status tiap permit
-                $status = '';
-                if ($last_update->status == 'requested') {
-                    $status = 'reviewed';
-                } elseif ($last_update->status == 'reviewed') {
-                    $status = 'checked';
-                } elseif ($last_update->status == 'checked') {
-                    $status = 'acknowledge';
-                } elseif ($last_update->status == 'acknowledge') {
-                    $status = 'final';
-                } elseif ($last_update->status == 'final') {
-                    $full_internal = Internal::find($id)->first();
-                }
-
-                // Pergantian  role tiap permit & send email notif
-                $role_to = '';
-                if ($last_update->role_to == 'review') {
-                    foreach ([
-                        'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
-                        'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'syukril@balitower.co.id',
-                        'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'mufli.gonibala@balitower.co.id',
-                    ] as $recipient) {
-                        Mail::to($recipient)->send(new NotifInternalForm($notif_email));
-                    }
-                    $role_to = 'check';
-                } elseif ($last_update->role_to == 'check') {
-                    foreach ([
-                        'security.bacep@balitower.co.id',
-                    ] as $recipient) {
-                        Mail::to($recipient)->send(new NotifInternalForm($notif_email));
-                    }
-                    $role_to = 'security';
-                } elseif ($last_update->role_to == 'security') {
-                    foreach ([
-                        'bayu.prakoso@balitower.co.id', 'tofiq.hidayat@balitower.co.id',
-                    ] as $recipient) {
-                        Mail::to($recipient)->send(new NotifInternalForm($notif_email));
-                    }
-                    $role_to = 'head';
-                } elseif ($last_update->role_to = 'head') {
-                    $full = Internal::find($id);
-                    foreach ([
-                        'dc@balitower.co.id',
-                    ] as $recipient) {
-                        Mail::to($recipient)->send(new NotifInternalFull($notif_email));
-                    }
-                    $role_to = 'all';
-
-                    $full = Internal::findOrFail($id);
-                    InternalFull::create([
-                        'internal_id' => $full->id,
-                        'link' => ("https://dcops.balifiber.id/internal/pdf/$full->id"),
-                        // 'link' => ("http://localhost:8000/internal/pdf/$full->id"),
-                        'note' => null,
-                        'status' => 'Full Approved',
-                    ]);
-                }
-
-                // Simpan tiap perubahan permit ke table CLeaningHistory
-                InternalHistory::create([
-                    'internal_id' => $id,
-                    'created_by' => Auth::user()->id,
-                    'role_to' => $role_to,
-                    'status' => $status,
-                    'aktif' => true,
-                    'pdf' => false,
-                ]);
-
-                DB::commit();
-
-                alert()->success('Approved', 'Permit has been approved!');
-                return back()->with('success', 'Approved!');
-            } else {
-
-                return back()->with('failed', 'Cek PDF Dahulu!');
+            // Perubahan status tiap permit
+            $status = '';
+            if ($last_update->status == 'requested') {
+                $status = 'reviewed';
+            } elseif ($last_update->status == 'reviewed') {
+                $status = 'checked';
+            } elseif ($last_update->status == 'checked') {
+                $status = 'acknowledge';
+            } elseif ($last_update->status == 'acknowledge') {
+                $status = 'final';
             }
+
+            // Pergantian  role tiap permit & send email notif
+            $role_to = '';
+            if ($last_update->role_to == 'review') {
+                // foreach ([
+                //     'eri.iskandar@balitower.co.id', 'hilman.fariqi@balitower.co.id',
+                //     'ilham.pangestu@balitower.co.id', 'yoga.agus@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'syukril@balitower.co.id',
+                //     'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'mufli.gonibala@balitower.co.id',
+                // ] as $recipient) {
+                //     Mail::to($recipient)->send(new NotifInternalForm($notif_email));
+                // }
+                $role_to = 'check';
+            } elseif ($last_update->role_to == 'check') {
+                foreach ([
+                    'bayu.prakoso@balitower.co.id',
+                ] as $recipient) {
+                    Mail::to($recipient)->send(new NotifInternalForm($colo));
+                }
+                $role_to = 'security';
+            } elseif ($last_update->role_to == 'security') {
+                // foreach ([
+                //     'bayu.prakoso@balitower.co.id', 'tofiq.hidayat@balitower.co.id',
+                // ] as $recipient) {
+                //     Mail::to($recipient)->send(new NotifInternalForm($notif_email));
+                // }
+                $role_to = 'head';
+            } elseif ($last_update->role_to = 'head') {
+                // foreach ([
+                //     'dc@balitower.co.id',
+                // ] as $recipient) {
+                //     Mail::to($recipient)->send(new NotifInternalFull($notif_email));
+                // }
+                $role_to = 'all';
+
+                ColoFull::create([
+                    'colo_id' => $colo->id,
+                    'link' => ("https://dcops.balifiber.id/internal/pdf/$colo->id"),
+                    // 'link' => ("http://localhost:8000/internal/pdf/$full->id"),
+                    'note' => null,
+                    'status' => 'Full Approved',
+                ]);
+            }
+
+            // Simpan tiap perubahan permit ke table CLeaningHistory
+            ColoHistory::create([
+                'colo_id' => $id,
+                'created_by' => Auth::user()->id,
+                'role_to' => $role_to,
+                'status' => $status,
+                'aktif' => true,
+            ]);
+
+            DB::commit();
+            return redirect()->route('approvalView')->with('success', 'Approved');
+
         } catch (\Exception $e) {
             DB::rollBack();
             return back()->with('failed', $e->getMessage());
