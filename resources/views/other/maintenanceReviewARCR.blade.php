@@ -155,19 +155,19 @@
                 {{-- Isian --}}
                 <div class="wrap-input100 bg1 rs1-alert-validate">
 					<span class="label-input100">Background and Objective (Latar Belakang dan Tujuan) *</span>
-					<input type="text" class="input100" name="background" id="background" value="{{ $other->background }}" readonly>
+					<input type="text" class="input100" id="background" value="{{ $other->background }}" readonly>
 				</div>
                 <div class="wrap-input100 bg1 rs1-alert-validate">
 					<span class="label-input100">Description of Scope of Work (Deskripsikan Lingkup Pekerjaan) *</span>
-					<input type="text" class="input100" name="describ" id="describ" value="{{ $other->desc }}" readonly>
+					<input type="text" class="input100" id="describ" value="{{ $other->desc }}" readonly>
 				</div>
                 <div class="wrap-input100 bg1">
 					<span class="label-input100">Testing and Verification (Pengujian dan Verifikasi)</span>
-					<input type="text" class="input100" name="testing" id="testing" value="{{ $other->testing }}" readonly>
+					<input type="text" class="input100" id="testing" value="{{ $other->testing }}" readonly>
 				</div>
                 <div class="wrap-input100 bg1">
 					<span class="label-input100">Rollback Operation/Other Infomation (Operasi Pembatalan/Infomasi Lain)</span>
-					<input type="text" class="input100" name="rollback" id="rollback" value="{{ $other->rollback }}" readonly>
+					<input type="text" class="input100" id="rollback" value="{{ $other->rollback }}" readonly>
 				</div>
 
                 <!-- Detail Time Activity -->
@@ -288,10 +288,10 @@
                             <th><input type="text" class="input100" id="mitigation_plan_4" value="{{ $other->mitigation_4 }}" readonly></th>
                         </tr>
                         <tr>
-                            <th><input type="text" class="input100" id="risk_description_5" value="{{ $other->risk_5 }}"></th>
-                            <th><input type="text" class="input100" id="possibility_5" value="{{ $other->poss_5 }}"></th>
-                            <th><input type="text" class="input100" id="impact_5" value="{{ $other->impact_5 }}"></th>
-                            <th><input type="text" class="input100" id="mitigation_plan_5" value="{{ $other->mitigation_5 }}"></th>
+                            <th><input type="text" class="input100" id="risk_description_5" value="{{ $other->risk_5 }}" readonly></th>
+                            <th><input type="text" class="input100" id="possibility_5" value="{{ $other->poss_5 }}" readonly></th>
+                            <th><input type="text" class="input100" id="impact_5" value="{{ $other->impact_5 }}" readonly></th>
+                            <th><input type="text" class="input100" id="mitigation_plan_5" value="{{ $other->mitigation_5 }}" readonly></th>
                         </tr>
                     </tbody>
                 </table>
