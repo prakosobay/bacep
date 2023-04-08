@@ -195,12 +195,14 @@ class OtherController extends Controller
             $personil = OtherPersonil::insert($p);
 
             foreach ([
-                'eri.iskandar@balitower.co.id', 'syukril@balitower.co.id', 'dennis.oscadifa@balitower.co.id',
+                'eri.iskandar@balitower.co.id', 'syukril@balitower.co.id',
                 'ilham.pangestu@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'badai.sino@balitower.co.id',
                 'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'riya.ully@balitower.co.id',
             ] as $recipient) {
                 Mail::to($recipient)->send(new NotifMaintenanceForm($otherForm));
             }
+
+            // Mail::to('bayu.prakoso@balitower.co.id')->send(new NotifMaintenanceForm($otherForm));
 
             $log = OtherHistory::insert([
                 'other_id' => $otherForm->id,
@@ -218,7 +220,8 @@ class OtherController extends Controller
             return $log ? response()->json(['status' => 'SUCCESS']) : response()->json(['status' => 'FAILED']);
         } catch (\Exception $e) {
             DB::rollBack();
-            return back()->with('failed', $e->getMessage());
+            // return back()->with('failed', $e->getMessage());
+            throw $e;
         }
     }
 
@@ -234,24 +237,6 @@ class OtherController extends Controller
             $maintenance->update([
                 'visit' => $request->visit,
                 'leave' => $request->leave,
-                'loc1' => $request->loc1,
-                'loc2' => $request->loc2,
-                'loc3' => $request->loc3,
-                'loc4' => $request->loc4,
-                'loc5' => $request->loc5,
-                'loc6' => $request->loc6,
-                'loc7' => $request->loc7,
-                'loc8' => $request->loc8,
-                'loc9' => $request->loc9,
-                'loc10' => $request->loc10,
-                'loc11' => $request->loc11,
-                'loc12' => $request->loc12,
-                'loc13' => $request->loc13,
-                'loc14' => $request->loc14,
-                'background' => $request->background,
-                'desc' => $request->describ,
-                'testing' => $request->testing,
-                'rollback' => $request->rollback,
                 'time_start_1' => $request->time_start_1,
                 'time_start_2' => $request->time_start_2,
                 'time_start_3' => $request->time_start_3,
@@ -324,7 +309,7 @@ class OtherController extends Controller
             if ($lastupdate->role_to == 'review') {
                 foreach ([
                     'eri.iskandar@balitower.co.id', 'syukril@balitower.co.id',
-                    'ilham.pangestu@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'dennis.oscadifa@balitower.co.id',
+                    'ilham.pangestu@balitower.co.id', 'yufdi.syafnizal@balitower.co.id',
                     'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id',
                 ] as $recipient) {
                     Mail::to($recipient)->send(new NotifMaintenanceForm($notif_email));
@@ -1010,7 +995,7 @@ class OtherController extends Controller
             TroubleshootBmPersonil::insert($insert_personil);
 
             foreach ([
-                'eri.iskandar@balitower.co.id', 'syukril@balitower.co.id', 'dennis.oscadifa@balitower.co.id',
+                'eri.iskandar@balitower.co.id', 'syukril@balitower.co.id',
                 'ilham.pangestu@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'badai.sino@balitower.co.id',
                 'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'riya.ully@balitower.co.id',
             ] as $recipient) {
@@ -1100,7 +1085,7 @@ class OtherController extends Controller
             TroubleshootBmPersonil::insert($insert_personil);
 
             foreach ([
-                'eri.iskandar@balitower.co.id', 'syukril@balitower.co.id', 'dennis.oscadifa@balitower.co.id',
+                'eri.iskandar@balitower.co.id', 'syukril@balitower.co.id',
                 'ilham.pangestu@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'mufli.gonibala@balitower.co.id', 'badai.sino@balitower.co.id',
                 'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'riya.ully@balitower.co.id',
             ] as $recipient) {
@@ -1268,7 +1253,7 @@ class OtherController extends Controller
             if ($lastUpdate->role_to == 'review') {
                 foreach ([
                     'eri.iskandar@balitower.co.id', 'syukril@balitower.co.id',
-                    'ilham.pangestu@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'dennis.oscadifa@balitower.co.id',
+                    'ilham.pangestu@balitower.co.id', 'yufdi.syafnizal@balitower.co.id',
                     'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id',
                 ] as $recipient) {
                     Mail::to($recipient)->send(new NotifTroubleshootForm($form));
