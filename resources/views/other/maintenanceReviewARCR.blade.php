@@ -60,24 +60,24 @@
                     <div class="wrap-contact100-form-radio">
                         <div class="contact100-form-radio">
                             <label class="label-radio100">
-                                <input class="input100" id="loc1" name="loc1" value="{{ $other->loc1 }}" readonly>
+                                <input class="input100" id="loc1" value="{{ $other->loc1 }}" readonly>
                             </label>
                         </div>
 
                         <div class="contact100-form-radio">
                             <label class="label-radio100">
-                                <input class="input100" id="loc2" name="loc2" value="{{ $other->loc2 }}" readonly>
+                                <input class="input100" id="loc2" value="{{ $other->loc2 }}" readonly>
                             </label>
                         </div>
 
                         <div class="contact100-form-radio">
                             <label class="label-radio100">
-                                <input class="input100" id="loc3" name="loc3" value="{{ $other->loc3 }}" readonly>
+                                <input class="input100" id="loc3" value="{{ $other->loc3 }}" readonly>
                             </label>
                         </div>
                         <div class="contact100-form-radio">
                             <label class="label-radio100">
-                                <input class="input100" id="loc4" name="loc4" value="{{ $other->loc4 }}" readonly>
+                                <input class="input100" id="loc4" value="{{ $other->loc4 }}" readonly>
                             </label>
                         </div>
                     </div>
@@ -86,25 +86,25 @@
                     <div class="wrap-contact100-form-radio">
                         <div class="contact100-form-radio">
                             <label class="label-radio100">
-                                <input class="input100" id="loc5" name="loc5" value="{{ $other->loc5 }}" readonly>
+                                <input class="input100" id="loc5" value="{{ $other->loc5 }}" readonly>
                             </label>
                         </div>
 
                         <div class="contact100-form-radio">
                             <label class="label-radio100">
-                                <input class="input100" id="loc6" name="loc6" value="{{ $other->loc6 }}" readonly>
+                                <input class="input100" id="loc6" value="{{ $other->loc6 }}" readonly>
                             </label>
                         </div>
 
                         <div class="contact100-form-radio">
                             <label class="label-radio100">
-                                <input class="input100" id="loc7" name="loc7" value="{{ $other->loc7 }}" readonly>
+                                <input class="input100" id="loc7" value="{{ $other->loc7 }}" readonly>
                             </label>
                         </div>
 
                         <div class="contact100-form-radio">
                             <label class="label-radio100">
-                                <input class="input100" id="loc8" name="loc8" value="{{ $other->loc8 }}" readonly>
+                                <input class="input100" id="loc8" value="{{ $other->loc8 }}" readonly>
                             </label>
                         </div>
                     </div>
@@ -113,19 +113,19 @@
                     <div class="wrap-contact100-form-radio">
                         <div class="contact100-form-radio">
                             <label class="label-radio100">
-                                <input class="input100" id="loc9" name="loc9" value="{{ $other->loc9 }}" readonly>
+                                <input class="input100" id="loc9" value="{{ $other->loc9 }}" readonly>
                             </label>
                         </div>
 
                         <div class="contact100-form-radio">
                             <label class="label-radio100">
-                                <input class="input100" id="loc10" name="loc10" value="{{ $other->loc10 }}" readonly>
+                                <input class="input100" id="loc10" value="{{ $other->loc10 }}" readonly>
                             </label>
                         </div>
 
                         <div class="contact100-form-radio">
                             <label class="label-radio100">
-                                <input class="input100" id="loc11" name="loc11" value="{{ $other->loc11 }}" readonly>
+                                <input class="input100" id="loc11" value="{{ $other->loc11 }}" readonly>
                             </label>
                         </div>
                     </div>
@@ -134,19 +134,19 @@
                     <div class="wrap-contact100-form-radio">
                         <div class="contact100-form-radio">
                             <label class="label-radio100">
-                                <input class="input100" id="loc12" name="loc12" value="{{ $other->loc12 }}" readonly>
+                                <input class="input100" id="loc12" value="{{ $other->loc12 }}" readonly>
                             </label>
                         </div>
 
                         <div class="contact100-form-radio">
                             <label class="label-radio100">
-                                <input class="input100" id="loc13" name="loc13" value="{{ $other->loc13 }}" readonly>
+                                <input class="input100" id="loc13" value="{{ $other->loc13 }}" readonly>
                             </label>
                         </div>
 
                         <div class="contact100-form-radio">
                             <label class="label-radio100">
-                                <input class="input100" id="loc14" name="loc14" value="{{ $other->loc14 }}" readonly>
+                                <input class="input100" id="loc14" value="{{ $other->loc14 }}" readonly>
                             </label>
                         </div>
                     </div>
@@ -155,19 +155,19 @@
                 {{-- Isian --}}
                 <div class="wrap-input100 bg1 rs1-alert-validate">
 					<span class="label-input100">Background and Objective (Latar Belakang dan Tujuan) *</span>
-					<input type="text" class="input100" name="background" id="background" value="{{ $other->background }}" required>
+					<input type="text" class="input100" name="background" id="background" value="{{ $other->background }}" readonly>
 				</div>
                 <div class="wrap-input100 bg1 rs1-alert-validate">
 					<span class="label-input100">Description of Scope of Work (Deskripsikan Lingkup Pekerjaan) *</span>
-					<input type="text" class="input100" name="describ" id="describ" value="{{ $other->desc }}" required>
+					<input type="text" class="input100" name="describ" id="describ" value="{{ $other->desc }}" readonly>
 				</div>
                 <div class="wrap-input100 bg1">
 					<span class="label-input100">Testing and Verification (Pengujian dan Verifikasi)</span>
-					<input type="text" class="input100" name="testing" id="testing" value="{{ $other->testing }}">
+					<input type="text" class="input100" name="testing" id="testing" value="{{ $other->testing }}" readonly>
 				</div>
                 <div class="wrap-input100 bg1">
 					<span class="label-input100">Rollback Operation/Other Infomation (Operasi Pembatalan/Infomasi Lain)</span>
-					<input type="text" class="input100" name="rollback" id="rollback" value="{{ $other->rollback }}">
+					<input type="text" class="input100" name="rollback" id="rollback" value="{{ $other->rollback }}" readonly>
 				</div>
 
                 <!-- Detail Time Activity -->
@@ -228,24 +228,24 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <th><input type="text" class="input100" name="item_1" id="item_1" value="{{ $other->item_1 }}" required></th>
-                            <th ><input type="text" class="input100" name="procedure_1" id="working_procedure_1" value="{{ $other->procedure_1 }}" required></th>
+                            <th><input type="text" class="input100" id="item_1" value="{{ $other->item_1 }}" readonly></th>
+                            <th ><input type="text" class="input100" id="working_procedure_1" value="{{ $other->procedure_1 }}" readonly></th>
                         </tr>
                         <tr>
-                            <th><input type="text" class="input100" name="item_2" id="item_2" value="{{ $other->item_2 }}"></th>
-                            <th ><input type="text" class="input100" name="procedure_2" id="working_procedure_2" value="{{ $other->procedure_2 }}"></th>
+                            <th><input type="text" class="input100" id="item_2" value="{{ $other->item_2 }}" readonly></th>
+                            <th ><input type="text" class="input100" id="working_procedure_2" value="{{ $other->procedure_2 }}" readonly></th>
                         </tr>
                         <tr>
-                            <th><input type="text" class="input100" name="item_3" id="item_3" value="{{ $other->item_3 }}"></th>
-                            <th ><input type="text" class="input100" name="procedure_3" id="working_procedure_3" value="{{ $other->procedure_3 }}"></th>
+                            <th><input type="text" class="input100" id="item_3" value="{{ $other->item_3 }}" readonly></th>
+                            <th ><input type="text" class="input100" id="working_procedure_3" value="{{ $other->procedure_3 }}" readonly></th>
                         </tr>
                         <tr>
-                            <th><input type="text" class="input100" name="item_4" id="item_4" value="{{ $other->item_4 }}"></th>
-                            <th ><input type="text" class="input100" name="procedure_4" id="working_procedure_4" value="{{ $other->procedure_4 }}"></th>
+                            <th><input type="text" class="input100" id="item_4" value="{{ $other->item_4 }}" readonly></th>
+                            <th ><input type="text" class="input100" id="working_procedure_4" value="{{ $other->procedure_4 }}" readonly></th>
                         </tr>
                         <tr>
-                            <th><input type="text" class="input100" name="item_5" id="item_5" value="{{ $other->item_5 }}"></th>
-                            <th ><input type="text" class="input100" name="procedure_5" id="working_procedure_5" value="{{ $other->procedure_5 }}"></th>
+                            <th><input type="text" class="input100" id="item_5" value="{{ $other->item_5 }}" readonly></th>
+                            <th ><input type="text" class="input100" id="working_procedure_5" value="{{ $other->procedure_5 }}" readonly></th>
                         </tr>
                     </tbody>
                 </table>
@@ -264,34 +264,34 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <th><input type="text" class="input100" name="risk_1" id="risk_description_1" value="{{ $other->risk_1 }}" required></th>
-                            <th><input type="text" class="input100" name="poss_1" id="possibility_1" value="{{ $other->poss_1 }}" required></th>
-                            <th><input type="text" class="input100" name="impact_1" id="impact_1" value="{{ $other->impact_1 }}" required></th>
-                            <th><input type="text" class="input100" name="mitigation_1" id="mitigation_plan_1" value="{{ $other->mitigation_1 }}" required></th>
+                            <th><input type="text" class="input100" id="risk_description_1" value="{{ $other->risk_1 }}" readonly></th>
+                            <th><input type="text" class="input100" id="possibility_1" value="{{ $other->poss_1 }}" readonly></th>
+                            <th><input type="text" class="input100" id="impact_1" value="{{ $other->impact_1 }}" readonly></th>
+                            <th><input type="text" class="input100" id="mitigation_plan_1" value="{{ $other->mitigation_1 }}" readonly></th>
                         </tr>
                         <tr>
-                            <th><input type="text" class="input100" name="risk_2" id="risk_description_2" value="{{ $other->risk_2 }}"></th>
-                            <th><input type="text" class="input100" name="poss_2" id="possibility_2" value="{{ $other->poss_2 }}"></th>
-                            <th><input type="text" class="input100" name="impact_2" id="impact_2" value="{{ $other->impact_2 }}"></th>
-                            <th><input type="text" class="input100" name="mitigation_2" id="mitigation_plan_2" value="{{ $other->mitigation_2 }}"></th>
+                            <th><input type="text" class="input100" id="risk_description_2" value="{{ $other->risk_2 }}" readonly></th>
+                            <th><input type="text" class="input100" id="possibility_2" value="{{ $other->poss_2 }}" readonly></th>
+                            <th><input type="text" class="input100" id="impact_2" value="{{ $other->impact_2 }}" readonly></th>
+                            <th><input type="text" class="input100" id="mitigation_plan_2" value="{{ $other->mitigation_2 }}" readonly></th>
                         </tr>
                         <tr>
-                            <th><input type="text" class="input100" name="risk_3" id="risk_description_3" value="{{ $other->risk_3 }}"></th>
-                            <th><input type="text" class="input100" name="poss_3" id="possibility_3" value="{{ $other->poss_3 }}"></th>
-                            <th><input type="text" class="input100" name="impact_3" id="impact_3" value="{{ $other->impact_3 }}"></th>
-                            <th><input type="text" class="input100" name="mitigation_3" id="mitigation_plan_3" value="{{ $other->mitigation_3 }}"></th>
+                            <th><input type="text" class="input100" id="risk_description_3" value="{{ $other->risk_3 }}" readonly></th>
+                            <th><input type="text" class="input100" id="possibility_3" value="{{ $other->poss_3 }}" readonly></th>
+                            <th><input type="text" class="input100" id="impact_3" value="{{ $other->impact_3 }}" readonly></th>
+                            <th><input type="text" class="input100" id="mitigation_plan_3" value="{{ $other->mitigation_3 }}" readonly></th>
                         </tr>
                         <tr>
-                            <th><input type="text" class="input100" name="risk_4" id="risk_description_4" value="{{ $other->risk_4 }}"></th>
-                            <th><input type="text" class="input100" name="poss_4" id="possibility_4" value="{{ $other->poss_4 }}"></th>
-                            <th><input type="text" class="input100" name="impact_4" id="impact_4" value="{{ $other->impact_4 }}"></th>
-                            <th><input type="text" class="input100" name="mitigation_4" id="mitigation_plan_4" value="{{ $other->mitigation_4 }}"></th>
+                            <th><input type="text" class="input100" id="risk_description_4" value="{{ $other->risk_4 }}" readonly></th>
+                            <th><input type="text" class="input100" id="possibility_4" value="{{ $other->poss_4 }}" readonly></th>
+                            <th><input type="text" class="input100" id="impact_4" value="{{ $other->impact_4 }}" readonly></th>
+                            <th><input type="text" class="input100" id="mitigation_plan_4" value="{{ $other->mitigation_4 }}" readonly></th>
                         </tr>
                         <tr>
-                            <th><input type="text" class="input100" name="risk_5" id="risk_description_5" value="{{ $other->risk_5 }}"></th>
-                            <th><input type="text" class="input100" name="poss_5" id="possibility_5" value="{{ $other->poss_5 }}"></th>
-                            <th><input type="text" class="input100" name="impact_5" id="impact_5" value="{{ $other->impact_5 }}"></th>
-                            <th><input type="text" class="input100" name="mitigation_5" id="mitigation_plan_5" value="{{ $other->mitigation_5 }}"></th>
+                            <th><input type="text" class="input100" id="risk_description_5" value="{{ $other->risk_5 }}"></th>
+                            <th><input type="text" class="input100" id="possibility_5" value="{{ $other->poss_5 }}"></th>
+                            <th><input type="text" class="input100" id="impact_5" value="{{ $other->impact_5 }}"></th>
+                            <th><input type="text" class="input100" id="mitigation_plan_5" value="{{ $other->mitigation_5 }}"></th>
                         </tr>
                     </tbody>
                 </table>
