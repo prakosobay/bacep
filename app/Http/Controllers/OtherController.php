@@ -195,7 +195,7 @@ class OtherController extends Controller
             $personil = OtherPersonil::insert($p);
 
             foreach ([
-                'eri.iskandar@balitower.co.id', 'syukril@balitower.co.id',
+                'eri.iskandar@balitower.co.id', 'syukril@balitower.co.id', 'dennis.ocsadifa@balitower.co.id',
                 'ilham.pangestu@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'badai.sino@balitower.co.id',
                 'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'riya.ully@balitower.co.id',
             ] as $recipient) {
@@ -276,7 +276,7 @@ class OtherController extends Controller
             $role_to = '';
             if ($lastupdate->role_to == 'review') {
                 foreach ([
-                    'eri.iskandar@balitower.co.id', 'syukril@balitower.co.id',
+                    'eri.iskandar@balitower.co.id', 'syukril@balitower.co.id', 'dennis.ocsadifa@balitower.co.id',
                     'ilham.pangestu@balitower.co.id', 'yufdi.syafnizal@balitower.co.id',
                     'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id',
                 ] as $recipient) {
@@ -959,7 +959,7 @@ class OtherController extends Controller
             TroubleshootBmPersonil::insert($insert_personil);
 
             foreach ([
-                'eri.iskandar@balitower.co.id', 'syukril@balitower.co.id',
+                'eri.iskandar@balitower.co.id', 'syukril@balitower.co.id', 'dennis.ocsadifa@balitower.co.id',
                 'ilham.pangestu@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'badai.sino@balitower.co.id',
                 'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'riya.ully@balitower.co.id',
             ] as $recipient) {
@@ -1049,7 +1049,7 @@ class OtherController extends Controller
             TroubleshootBmPersonil::insert($insert_personil);
 
             foreach ([
-                'eri.iskandar@balitower.co.id', 'syukril@balitower.co.id',
+                'eri.iskandar@balitower.co.id', 'syukril@balitower.co.id', 'dennis.ocsadifa@balitower.co.id',
                 'ilham.pangestu@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'mufli.gonibala@balitower.co.id', 'badai.sino@balitower.co.id',
                 'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'riya.ully@balitower.co.id',
             ] as $recipient) {
@@ -1216,7 +1216,7 @@ class OtherController extends Controller
             $role_to = '';
             if ($lastUpdate->role_to == 'review') {
                 foreach ([
-                    'eri.iskandar@balitower.co.id', 'syukril@balitower.co.id',
+                    'eri.iskandar@balitower.co.id', 'syukril@balitower.co.id', 'dennis.ocsadifa@balitower.co.id',
                     'ilham.pangestu@balitower.co.id', 'yufdi.syafnizal@balitower.co.id',
                     'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id',
                 ] as $recipient) {
@@ -1224,9 +1224,8 @@ class OtherController extends Controller
                 }
                 $role_to = 'check';
             } elseif ($lastUpdate->role_to == 'check') {
-                foreach (['security.bacep@balitower.co.id'] as $recipient) {
-                    Mail::to($recipient)->send(new NotifTroubleshootForm($form));
-                }
+
+                Mail::to('security.bacep@balitower.co.id')->send(new NotifTroubleshootForm($form));
                 $role_to = 'security';
             } elseif ($lastUpdate->role_to == 'security') {
                 foreach (['tofiq.hidayat@balitower.co.id', 'mufli.gonibala@balitower.co.id'] as $recipient) {
@@ -1234,9 +1233,8 @@ class OtherController extends Controller
                 }
                 $role_to = 'head';
             } elseif ($lastUpdate->role_to = 'head') {
-                foreach (['dc@balitower.co.id'] as $recipient) {
-                    Mail::to($recipient)->send(new NotifTroubleshootFull($form));
-                }
+
+                Mail::to('dc@balitower.co.id')->send(new NotifTroubleshootFull($form));
                 $role_to = 'all';
                 $this->t_makeFull($id, $form);
             }

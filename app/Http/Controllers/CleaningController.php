@@ -115,7 +115,7 @@ class CleaningController extends Controller
 
             // Send email notification
             foreach ([
-                'eri.iskandar@balitower.co.id', 'syukril@balitower.co.id', 'dennis.oscadifa@balitower.co.id',
+                'eri.iskandar@balitower.co.id', 'syukril@balitower.co.id', 'dennis.ocsadifa@balitower.co.id',
                 'ilham.pangestu@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'badai.sino@balitower.co.id',
                 'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'riya.ully@balitower.co.id',
             ] as $recipient) {
@@ -247,7 +247,7 @@ class CleaningController extends Controller
             $role_to = '';
             if ($lasthistoryC->role_to == 'review') {
                 foreach ([
-                    'eri.iskandar@balitower.co.id', 'syukril@balitower.co.id', 'dennis.oscadifa@balitower.co.id',
+                    'eri.iskandar@balitower.co.id', 'syukril@balitower.co.id', 'dennis.ocsadifa@balitower.co.id',
                     'ilham.pangestu@balitower.co.id', 'yufdi.syafnizal@balitower.co.id',
                     'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id',
                 ] as $recipient) {
@@ -255,11 +255,8 @@ class CleaningController extends Controller
                 }
                 $role_to = 'check';
             } elseif ($lasthistoryC->role_to == 'check') {
-                foreach ([
-                    'security.bacep@balitower.co.id',
-                ] as $recipient) {
-                    Mail::to($recipient)->send(new NotifEmail($cleaning));
-                }
+
+                Mail::to('security.bacep@balitower.co.id')->send(new NotifEmail($cleaning));
                 $role_to = 'security';
             } elseif ($lasthistoryC->role_to == 'security') {
                 foreach (['mufli.gonibala@balitower.co.id', 'tofiq.hidayat@balitower.co.id'] as $recipient) {
@@ -269,10 +266,7 @@ class CleaningController extends Controller
             } elseif ($lasthistoryC->role_to == 'head') {
 
                 // Send Email
-                foreach (['dc@balitower.co.id'] as $recipient) {
-                    Mail::to($recipient)->send(new NotifFull($cleaning));
-                }
-
+                Mail::to('dc@balitower.co.id')->send(new NotifFull($cleaning));
                 $role_to = 'all';
 
                 // Simpan permit yang sudah full approved ke table CleaningFull
