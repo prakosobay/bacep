@@ -261,6 +261,26 @@ class InternalController extends Controller
         }
     }
 
+    public function createFull($id)
+    {
+        ColoFull::create([
+            'colo_id' => $id,
+            'link' => ("https://dcops.balifiber.id/internal/pdf/$id"),
+            'status' => 'Full Approved',
+        ]);
+    }
+
+    public function createHistory($id, $role_to, $status)
+    {
+        ColoHistory::create([
+            'colo_id' => $id,
+            'created_by' => Auth::user()->id,
+            'role_to' => $role_to,
+            'status' => $status,
+            'aktif' => true,
+        ]);
+    }
+
     // pdf
     public function internal_pdf($id)
     {
@@ -296,14 +316,12 @@ class InternalController extends Controller
     {
         $colo = $this->getColo($id);
         $last_update = ColoHistory::where('colo_id', $id)->latest()->first();
-        // return $last_update;
 
-        // dd($notif_email);
         DB::beginTransaction();
 
         try {
 
-            // $last_update->update(['aktif' => false]);
+            $last_update->update(['aktif' => false]);
 
             // Perubahan status tiap permit
             $status = '';
@@ -350,23 +368,12 @@ class InternalController extends Controller
                 // }
                 $role_to = 'all';
 
-                ColoFull::create([
-                    'colo_id' => $colo->id,
-                    'link' => ("https://dcops.balifiber.id/internal/pdf/$colo->id"),
-                    // 'link' => ("http://localhost:8000/internal/pdf/$full->id"),
-                    'note' => null,
-                    'status' => 'Full Approved',
-                ]);
+                // Simpan permit ke table full approve
+                $this->createFull($colo->id);
             }
 
             // Simpan tiap perubahan permit ke table CLeaningHistory
-            ColoHistory::create([
-                'colo_id' => $id,
-                'created_by' => Auth::user()->id,
-                'role_to' => $role_to,
-                'status' => $status,
-                'aktif' => true,
-            ]);
+            $this->createHistory($colo->id, $role_to, $status);
 
             DB::commit();
             return redirect()->route('approvalView')->with('success', 'Approved');
