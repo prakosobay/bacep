@@ -113,27 +113,13 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseInternal"
                     aria-expanded="true" aria-controls="collapseInternal">
                     <i class="fas fa-fw fa-cog"></i>
-                    <span>Internal</span>
+                    <span>Colocation</span>
                 </a>
                 <div id="collapseInternal" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Option :</h6>
-                        <a class="collapse-item" href="#">AR CR Form</a>
+                        <a class="collapse-item" href="#">AR CR</a>
                         {{-- <a class="collapse-item" href="{{ url('#')}}">Consumable</a> --}}
-                    </div>
-                </div>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEksternal"
-                    aria-expanded="true" aria-controls="collapseEksternal">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Eksternal</span>
-                </a>
-                <div id="collapseEksternal" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Option :</h6>
-                        <a class="collapse-item" href="#">Eksternal</a>
                     </div>
                 </div>
             </li>

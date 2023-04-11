@@ -57,14 +57,14 @@
 
                 {{-- Entry Area --}}
                 <div class="row">
-                    <div class="col-4 my-4">
-                        @foreach ($colo->coloEntries as $p )
+                    @foreach ($colo->coloEntries as $p )
+                    <div class="col-4 mx-1 my-1">
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" checked disabled>
                             <label for="dc" class="form-check-label"><b>{{ $p->mRackId->mRoomId->name }} Rack {{ $p->mRackId->number }}</b></label>
                         </div>
-                        @endforeach
                     </div>
+                    @endforeach
                 </div>
 
                 {{-- Date of Visit & Leave --}}
