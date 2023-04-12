@@ -31,9 +31,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/full_approval/{type_form}', 'approval_full');
         Route::get('/log/{type_view}', 'log_view');
         Route::get('table_barang', 'dashboard')->name('table_barang');
-        Route::get('history/{type_view}', 'history');
+        Route::get('history/{type_view}', 'history')->name('historyView');
         Route::get('approval/{type_approve}', 'approval')->name('approvalView');
-        Route::get('full/{type_full}', 'full');
+        Route::get('full/{type_full}', 'full')->name('fullView');
         Route::get('penomoran/{type_nomor}', 'penomoran');
         Route::get('visitor/log/{type_log}', 'visitor_log');
         Route::get('logall', 'log_all')->name('logall');

@@ -52,22 +52,31 @@ class HomeController extends Controller
     public function history($type_view) // Routingan log permit versi approval
     {
         if ((Gate::denies('isAdmin') && (Gate::denies('isVisitor')))) {
-            if ($type_view == 'all') {
+
+            switch ($type_view) {
+
+                case 'all' :
+                    return view('all_history');
+                    break;
+
+                case 'cleaning' :
+                    return view('cleaning.history');
+                    break;
+
+                case 'maintenance' :
+                    return view('other.maintenance_history');
+                    break;
+
+                case 'troubleshoot' :
+                    return view('other.troubleshoot_history');
+                    break;
+
+                case 'colo' :
+                    return view('internal.history');
+                    break;
+
+                default :
                 return view('all_history');
-            } elseif ($type_view == 'survey') {
-                return view('sales.history');
-            } elseif ($type_view == 'cleaning') {
-                return view('cleaning.history');
-            } elseif ($type_view == 'maintenance') {
-                return view('other.maintenance_history');
-            } elseif($type_view == 'troubleshoot') {
-                return view('other.troubleshoot_history');
-            } elseif($type_view == 'internal'){
-                return view('internal.history');
-            } elseif($type_view == 'eksternal') {
-                return view('eksternal.history');
-            } else {
-                abort(403);
             }
         } else {
             abort(403);
@@ -92,13 +101,6 @@ class HomeController extends Controller
                     // 16 15 12
                 return view('cleaning.approval', compact('cleaning'));
             } elseif ($type_approve == 'maintenance') {
-                // $getMaintenance = DB::table('other_histories')
-                //     ->join('others', 'others.id', '=', 'other_histories.other_id')
-                //     ->whereIn('other_histories.role_to', $role_1)
-                //     ->where('other_histories.aktif', '=', 1)
-                //     ->select('others.work', 'others.visit', 'others.created_at as requested_at', 'other_histories.*')
-                //     ->orderBy('other_id', 'desc')
-                //     ->get();
 
                 $getMaintenance = Other::whereHas('histories', function ($query) use ($role_1) {
                         $query->where('aktif', true)->whereIn('role_to', $role_1);
@@ -107,7 +109,6 @@ class HomeController extends Controller
                         $query->select('other_id', 'aktif', 'created_by', 'status', 'role_to', 'updated_at')->get();
                         }
                     ])->select('id', 'visit', 'created_at as requested_at', 'work')->get();
-                    // return $getMaintenance;
                 return view('other.maintenance_approval', compact('getMaintenance'));
             } elseif($type_approve == 'troubleshoot') {
                 $getTroubleshoot = DB::table('troubleshoot_bms')
@@ -118,17 +119,7 @@ class HomeController extends Controller
                     ->get();
                 return view('other.troubleshoot_approval', compact('getTroubleshoot'));
             } elseif($type_approve == 'colo'){
-                // $getInternal = DB::table('internals')
-                //     ->join('internal_histories', 'internals.id', '=', 'internal_histories.internal_id')
-                //     ->join('users', 'internals.requestor_id', '=', 'users.id')
-                //     ->leftJoin('entry_racks', 'internals.id', '=', 'entry_racks.internal_id')
-                //     ->join('m_racks', 'entry_racks.m_rack_id', '=', 'm_racks.id')
-                //     ->select('users.name as req_name', 'internals.*', 'internal_histories.aktif', 'internal_histories.role_to', 'm_racks.number as rack_number')
-                //     ->whereIn('internal_histories.role_to', $role_1)
-                //     ->where('internal_histories.aktif', '=', 1)
-                //     ->where('internals.isColo', true)
-                //     ->groupBy('internals.id' )
-                //     ->get();
+
                 $getInternal = Colo::whereHas('histories', function($q) use($role_1) {
                         $q->where('aktif', true)->whereIn('role_to', $role_1);
                     })
@@ -144,7 +135,6 @@ class HomeController extends Controller
                         }
                     ])
                     ->get();
-                    // return $getInternal;
                 return view('internal.approval', compact('getInternal'));
             }  elseif($type_approve == 'survey') {
                 $getSurvey = DB::table('internals')
@@ -180,24 +170,34 @@ class HomeController extends Controller
     public function full($type_full) // Routingan untuk menampilkan permit yang sudah full approve versi approval
     {
         if ((Gate::allows('isApproval')) || (Gate::allows('isHead') || (Gate::allows('isAdmin')))) {
-            if ($type_full == 'all') {
+
+            switch($type_full) {
+
+                case 'all' :
+                    return view('all_full_approval');
+                    break;
+
+                case 'cleaning' :
+                    return view('cleaning.full_approval');
+                    break;
+
+                case 'maintenance' :
+                    return view('other.maintenance_full_approval');
+                    break;
+
+                case 'troubleshoot' :
+                    return view('other.troubleshoot_full_approval');
+                    break;
+
+                case 'colo' :
+                    return view('internal.fullApproval');
+                    break;
+
+                default :
                 return view('all_full_approval');
-            } elseif ($type_full == 'sales') {
-                return view('sales.fullApproval');
-            } elseif ($type_full == 'cleaning') {
-                return view('cleaning.full_approval');
-            } elseif ($type_full == 'maintenance') {
-                return view('other.maintenance_full_approval');
-            } elseif($type_full == 'troubleshoot') {
-                return view('other.troubleshoot_full_approval');
-            } elseif($type_full == 'internal') {
-                $users = User::where('slug', 'visitor')->get();
-                return view('internal.fullApproval', compact('users'));
-            } elseif($type_full == 'eksternal') {
-                return view('eksternal.fullApproval');
-            } else {
-                abort(403);
             }
+        } else {
+            abort(403);
         }
     }
 
