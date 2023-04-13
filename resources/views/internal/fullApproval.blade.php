@@ -4,7 +4,7 @@
 <div class="container-fluid">
     <!-- DataTales Example -->
     <div class="card shadow py-3">
-        <h4 class="judul text-center">Full Approval Permit Internal</h4>
+        <h4 class="judul text-center">Full Approval Permit Colo</h4>
         <div class="card-header py-2">
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Export PDF
@@ -96,7 +96,7 @@
 </div>
 
 @push('scripts')
-    <script>
+    {{-- <script>
         $(function() {
             $('#internal').DataTable({
                 processing: true,
@@ -114,6 +114,6 @@
                 ]
             });
         });
-    </script>
+    </script> --}}
 @endpush
 @endsection

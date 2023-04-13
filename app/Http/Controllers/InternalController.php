@@ -61,6 +61,12 @@ class InternalController extends Controller
         return $get;
     }
 
+    public function getCurrentHistory($id)
+    {
+        $get = ColoHistory::where('colo_id', $id)->where('aktif', 1)->first();
+        return $get;
+    }
+
     // Show Internal Form
     public function internal_form()
     {
@@ -78,8 +84,13 @@ class InternalController extends Controller
         $colo = $this->getColo($id);
         $risks = $this->getRisks();
         $visitors = $this->getVisitors();
+        $log = $this->getCurrentHistory($id);
+
+        if($colo->is_survey == 1) {
+            return view('sales.review', compact('colo', 'visitors', 'log'));
+        }
         // return $colo->histories;
-        return view('internal.review', compact('colo', 'risks', 'visitors'));
+        return view('internal.review', compact('colo', 'risks', 'visitors', 'log'));
     }
 
     public function dashboard()
@@ -312,14 +323,40 @@ class InternalController extends Controller
     }
 
     // Approve
-    public function internal_approve($id) // Function flow approval
+    public function internal_approve(Request $request, $id) // Function flow approval
     {
         $colo = $this->getColo($id);
+        $data = $request->all();
+        // dd($data);
         $last_update = ColoHistory::where('colo_id', $id)->latest()->first();
 
         DB::beginTransaction();
 
         try {
+
+            if($colo->is_survey == 0) {
+
+                $colo->update([
+                    'background' => $request->background,
+                    'desc' => $request->desc,
+                    'testing' => $request->testing,
+                    'rollback' => $request->rollback,
+                ]);
+
+                foreach ($data['detail_id'] as $k => $v) {
+                    if (isset($data['detail_id'][$k])) {
+                        $get = ColoDetail::where('colo_id', $id)->where('id', $data['detail_id'][$k])->first();
+                        $get->update([
+                            'time_start' => $data['time_start'][$k],
+                            'time_end' => $data['time_end'][$k],
+                            'activity' => $data['activity'][$k],
+                            'service_impact' => $data['service_impact'][$k],
+                            'item' => $data['item'][$k],
+                            'procedure' => $data['activity'][$k],
+                        ]);
+                    }
+                }
+            }
 
             $last_update->update(['aktif' => false]);
 
@@ -345,6 +382,7 @@ class InternalController extends Controller
                 // ] as $recipient) {
                 //     Mail::to($recipient)->send(new NotifInternalForm($notif_email));
                 // }
+                Mail::to('bayu.prakoso@balitower.co.id')->send(new NotifInternalForm($colo));
                 $role_to = 'check';
             } elseif ($last_update->role_to == 'check') {
                 foreach ([
@@ -376,7 +414,7 @@ class InternalController extends Controller
             $this->createHistory($colo->id, $role_to, $status);
 
             DB::commit();
-            return redirect()->route('approvalView')->with('success', 'Approved');
+            return redirect()->route('approvalView', 'colo')->with('success', 'Approved');
 
         } catch (\Exception $e) {
             DB::rollBack();
@@ -593,14 +631,19 @@ class InternalController extends Controller
     // Yajra
     public function internal_yajra_history()
     {
-        $history = DB::table('internal_histories')
-            ->leftJoin('internals', 'internal_histories.internal_id', '=', 'internals.id')
-            ->leftJoin('users', 'internal_histories.created_by', '=', 'users.id')
-            ->where('internals.isColo', true)
-            ->select('internal_histories.status', 'internal_histories.role_to', 'internal_histories.aktif', 'internal_histories.updated_at', 'internals.visit', 'users.name as updatedby', 'internals.id as id');
+        // $history = DB::table('internal_histories')
+        //     ->leftJoin('internals', 'internal_histories.internal_id', '=', 'internals.id')
+        //     ->leftJoin('users', 'internal_histories.created_by', '=', 'users.id')
+        //     ->where('internals.isColo', true)
+        //     ->select('internal_histories.status', 'internal_histories.role_to', 'internal_histories.aktif', 'internal_histories.updated_at', 'internals.visit', 'users.name as updatedby', 'internals.id as id');
+        $history = ColoHistory::with(['createdBy:id,name', 'coloId:id,visit'])->get();
+        return $history;
         return Datatables::of($history)
             ->editColumn('visit', function ($history) {
-                return $history->visit ? with(new Carbon($history->visit))->format('d/m/Y') : '';
+                return $history->coloId->visit ? with(new Carbon($history->coloId->visit))->format('d/m/Y') : '';
+            })
+            ->editColumn('created_at', function ($history) {
+                return $history->created_at ? with(new Carbon($history->created_at))->format('d/m/Y : H:i') : '';
             })
             ->make(true);
     }

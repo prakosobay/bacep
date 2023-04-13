@@ -73,35 +73,11 @@
                             <td>{{ $p->work }}</td>
                             <td>
                                 @foreach ( $p->coloEntries as $q )
-                                    - {{ $q->mRackId->number . '/' . $q->mRackId->mRoomId->name }}</br>
+                                    - Rack {{ $q->mRackId->number . '/' . $q->mRackId->mRoomId->name }}</br>
                                 @endforeach
                             </td>
                             <td>
-                                {{-- @can('isApproval')
-                                    <form action="{{ url('internal/approve', $p->id)}}" method="post">
-                                        @csrf
-                                        <button id="ok" class="btn btn-success btn-sm my-1 mx-1">Approve</button>
-                                    </form>
-
-                                    <button class="btn btn-danger btn-sm my-1 mx-1" data-bs-toggle="modal" data-bs-target="#reject{{ $p->id }}" data-id="{{ $p->id }}">Reject</button>
-
-                                @elsecan('isHead')
-                                    <form action="{{ url('internal/approve', $p->id)}}" method="post">
-                                        @csrf
-                                        <button id="ok" class="btn btn-success btn-sm my-1 mx-1">Approve</button>
-                                    </form>
-
-                                    <button class="btn btn-danger btn-sm my-1 mx-1" data-bs-toggle="modal" data-bs-target="#reject{{ $p->id }}" data-id="{{ $p->id }}">Reject</button>
-
-                                @elsecan('isSecurity')
-                                    <form action="{{ url('internal/approve', $p->id)}}" method="post">
-                                        @csrf
-                                        <button id="ok" class="btn btn-success btn-sm my-1 mx-1">Approve</button>
-                                    </form>
-
-                                @endcan --}}
-                                    {{-- <a href="/internal/pdf/{{$p->id}}" class="btn btn-primary btn-sm my-1 mx-1" target="_blank">File</a> --}}
-                                    <a href="{{ route('internal.review', $p->id)}}" class="btn-primary btn btn-sm my-1 mx-1">Review</a>
+                                <a href="{{ route('internal.review', $p->id)}}" class="btn-primary btn btn-sm my-1 mx-1">Review</a>
                             </td>
                         </tr>
                         @endforeach

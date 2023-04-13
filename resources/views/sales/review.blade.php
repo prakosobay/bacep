@@ -2,7 +2,7 @@
 @section('content')
 <div class="container my-5">
     <div class="card">
-        <h1 class="text-center my-3 h1Permit">Access Request &  Change Request Form</h1>
+        <h1 class="text-center my-3 h1Permit">Review Access Request</h1>
         <form action="{{ route('internal.approve', $colo->id )}}" method="POST" class="validate-form">
             @csrf
             <div class="container form-container">
@@ -57,14 +57,7 @@
 
                 {{-- Entry Area --}}
                 <div class="row">
-                    @foreach ($colo->coloEntries as $p )
-                    <div class="col-4 mx-1 my-1">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" checked disabled>
-                            <label for="dc" class="form-check-label"><b>{{ $p->mRackId->mRoomId->name }} Rack {{ $p->mRackId->number }}</b></label>
-                        </div>
-                    </div>
-                    @endforeach
+
                 </div>
 
                 {{-- Date of Visit & Leave --}}
@@ -81,123 +74,6 @@
                             <input type="date" class="form-control" id="leave" value="{{ $colo->leave }}" readonly>
                         </div>
                     </div>
-                </div>
-
-                {{-- background & description --}}
-                <div class="row">
-                    <div class="col-6">
-                        <div class="form-group mb-3">
-                            <label for="background" class="form-label">Background and Objectives</label>
-                            <input type="text" class="form-control" id="background" name="background" value="{{ $colo->background }}" required>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="form-group mb-3">
-                            <label for="desc" class="form-label">Work Description</label>
-                            <input type="text" class="form-control" id="desc" name="desc" value="{{ $colo->desc }}" required>
-                        </div>
-                    </div>
-                </div>
-
-                {{-- testing & rollback --}}
-                <div class="row">
-                    <div class="col-6">
-                        <div class="form-group mb-3">
-                            <label for="testing" class="form-label">Testing and Verification</label>
-                            <input type="text" class="form-control" id="testing" name="testing" value="{{ $colo->testing }}">
-                        </div>
-
-                    </div>
-                    <div class="col-6">
-                        <div class="form-group mb-5">
-                            <label for="rollback" class="form-label">Rollback and Operation</label>
-                            <input type="text" class="form-control" id="rollback" name="rollback" value="{{ $colo->rollback }}">
-                        </div>
-                    </div>
-                </div>
-
-                {{-- Detail Time Activity --}}
-                <div class="mb-3">
-                    <table class="table table-bordered table-hover" id="table_detail">
-                        <thead>
-                            <tr>
-                                <th colspan="5">Detail Time Activity</th>
-                            </tr>
-                            <tr>
-                                <th>Time Start</th>
-                                <th>Time End</th>
-                                <th>Activity</th>
-                                <th>Service Impact</th>
-                                <th>Item</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ( $colo->coloDetails as $p )
-                                <tr>
-                                    <td>
-                                        <input type="time" class="form-control" id="time_start" name="time_start[]" value="{{ $p->time_start }}">
-                                    </td>
-                                    <td>
-                                        <input type="time" class="form-control" id="time_end" name="time_end[]" value="{{ $p->time_end }}">
-                                    </td>
-                                    <td>
-                                        <input type="text" class="form-control" id="activity" name="activity[]" value="{{ $p->activity }}">
-                                    </td>
-                                    <td>
-                                        <input type="text" class="form-control" id="service_impact" name="service_impact[]" value="{{ $p->service_impact }}">
-                                    </td>
-                                    <td>
-                                        <input type="text" class="form-control" id="item" name="item[]" value="{{ $p->item }}">
-                                        <input type="text" name="detail_id[]" value="{{ $p->id }}" hidden>
-                                    </td>
-                                </tr>
-                            @endforeach
-
-                        </tbody>
-                    </table>
-                </div>
-
-                {{-- Risk Service Area Impact--}}
-                <div class="mb-3">
-                    <table class="table table-bordered table-hover" id="table_risk">
-                        <thead>
-                            <tr>
-                                <th colspan="4">Risk Service Area Impact</th>
-                            </tr>
-                            <tr>
-                                <th>Risk Description</th>
-                                <th>Possibility</th>
-                                <th>Impact</th>
-                                <th>Mitigation</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ( $colo->coloRisks as $p )
-                                <tr>
-                                    <td>
-                                        {{-- <select name="risk[]" class="form-control" id="risk" readonly>
-                                            <option selected value="{{ $p->mRiskId->id }}">{{ $p->mRiskId->risk }}</option>
-                                            @foreach ( $risks as $risk )
-                                                <option value="{{ $risk->id }}">{{ $risk->risk }}</option>
-                                            @endforeach
-                                        </select> --}}
-                                        <input type="text" class="form-control" value="{{ $p->mRiskId->risk }}" readonly>
-                                    </td>
-                                    <td>
-                                        <input type="text" class="form-control" name="" value="{{ $p->mRiskId->poss }}" id="poss" readonly>
-                                    </td>
-                                    <td>
-                                        <input type="text" class="form-control" name="" value="{{ $p->mRiskId->impact }}" id="impact" readonly>
-                                    </td>
-                                    <td>
-                                        <input type="text" class="form-control" name="" value="{{ $p->mRiskId->mitigation }}" id="mitigation" readonly>
-                                    </td>
-                                </tr>
-                            @endforeach
-
-                        </tbody>
-                    </table>
-                    {{-- <button id="button_risk"><b>Add More Fields</b></button> --}}
                 </div>
 
                 {{-- Visitor --}}
