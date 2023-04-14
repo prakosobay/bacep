@@ -59,12 +59,12 @@ class User extends Authenticatable
 
     public function internals()
     {
-        return $this->hasMany(Internal::class);
+        return $this->hasMany(Colo::class);
     }
 
     public function internalHistories()
     {
-        return $this->hasMany(InternalHistory::class);
+        return $this->hasMany(ColoHistory::class, 'created_by');
     }
 
     public function cleaningHistory()

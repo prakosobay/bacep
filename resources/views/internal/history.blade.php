@@ -37,10 +37,10 @@
                 serverSide: true,
                 ajax: "{{ route('internalYajraHistory')}}",
                 columns: [
-                    { data: 'id', name: 'colos.id' },
+                    { data: 'colo_id', name: 'colo_id' },
                     { data: 'visit', name: 'colos.visit' },
                     { data: 'status', name: 'status' },
-                    { data: 'created_by', name: 'created_by' },
+                    { data: 'updatedby', name: 'users.name' },
                     { data: 'created_at', name: 'created_at' },
                     { data: 'aktif', name: 'aktif' },
                     { data: 'role_to', name: 'role_to' },
