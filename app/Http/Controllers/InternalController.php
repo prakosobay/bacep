@@ -631,19 +631,16 @@ class InternalController extends Controller
     // Yajra
     public function internal_yajra_history()
     {
-        // $history = DB::table('internal_histories')
-        //     ->leftJoin('internals', 'internal_histories.internal_id', '=', 'internals.id')
-        //     ->leftJoin('users', 'internal_histories.created_by', '=', 'users.id')
-        //     ->where('internals.isColo', true)
-        //     ->select('internal_histories.status', 'internal_histories.role_to', 'internal_histories.aktif', 'internal_histories.updated_at', 'internals.visit', 'users.name as updatedby', 'internals.id as id');
-        $history = ColoHistory::with(['createdBy:id,name', 'coloId:id,visit'])->get();
-        return $history;
+        $history = DB::table('colo_histories')
+            ->join('colos', 'colo_histories.colo_id', 'colos.id')
+            ->join('users', 'colo_histories.created_by', 'users.id')
+            ->select('colos.visit', 'users.name as updatedby', 'colo_histories.*');
         return Datatables::of($history)
             ->editColumn('visit', function ($history) {
-                return $history->coloId->visit ? with(new Carbon($history->coloId->visit))->format('d/m/Y') : '';
+                return $history->visit ? with(new Carbon($history->visit))->format('d-m-Y') : '';
             })
             ->editColumn('created_at', function ($history) {
-                return $history->created_at ? with(new Carbon($history->created_at))->format('d/m/Y : H:i') : '';
+                return $history->created_at ? with(new Carbon($history->created_at))->format('d-m-Y - H:i') : '';
             })
             ->make(true);
     }
