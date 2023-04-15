@@ -12,5 +12,17 @@ class Visitor extends Model
 
     protected $table = 'visitors';
     protected $primaryKey = 'id';
-    protected $guarded = [];
+    protected $fillable = [
+        'visit_nama',
+        'visit_company',
+        'visit_department',
+        'visit_respon',
+        'visit_phone',
+        'visit_nik',
+    ];
+
+    public function coloVisitors()
+    {
+        return $this->hasMany(ColoVisitor::class, 'm_visitor_id');
+    }
 }

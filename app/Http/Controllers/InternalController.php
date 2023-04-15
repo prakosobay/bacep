@@ -647,18 +647,26 @@ class InternalController extends Controller
 
     public function internal_yajra_full_approval()
     {
-        $full = DB::table('internals')
-            ->join('internal_visitors', 'internals.id', '=', 'internal_visitors.internal_id')
-            ->join('internal_fulls', 'internals.id', '=', 'internal_fulls.internal_id')
-            ->leftJoin('users', 'internals.requestor_id', '=', 'users.id')
-            ->select('internal_fulls.link', 'internal_visitors.name as visitor', 'internal_visitors.checkin', 'internal_visitors.checkout', 'internals.work', 'internals.id', 'internals.visit', 'internal_fulls.status', 'users.name as requestor')
-            ->where('internal_visitors.deleted_at', null)
-            ->where('internals.isColo', true)
-            ->where('internal_fulls.status', 'Full Approved');
-            // ->groupBy('internal_id');
+        // $full = DB::table('colos')
+        //     ->join('colo_visitors', 'colos.id', 'colo_visitors.colo_id')
+        //     ->join('colo_fulls', 'colos.id', 'colo_fulls.colo_id')
+        //     ->leftJoin('users', 'colos.requestor_id', 'users.id')
+        //     ->select('colo_fulls.*', 'colo_visitors.name as visitor', 'colo_visitors.checkin', 'colo_visitors.checkout', 'colos.work', 'colos.id', 'colos.visit', 'users.name as requestor')
+        //     ->where('colo_visitors.deleted_at', null)
+        //     ->where('colo_fulls.status', 'Full Approved')
+        //     ->get();
+        $full = Colo::with([
+            'requestorId:id,name',
+            'mCardId:id,number',
+            'coloVisitors.mVisitorId:id,visit_nama',
+            'coloFull:id,link,status',
+        ])->get();
+            return $full;
+            // ->groupBy('colo_id');
+            // $full = Colos::with([''])
         return Datatables::of($full)
             ->editColumn('visit', function ($full) {
-                return $full->visit ? with(new Carbon($full->visit))->format('d/m/Y') : '';
+                return $full->visit ? with(new Carbon($full->visit))->format('d-m-Y') : '';
             })
             ->addColumn('action', 'internal.actionLink')
             ->make(true);
