@@ -192,6 +192,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('consum-export-masuk', 'export_masuk')->name('consumExportMasuk');
         Route::get('consum-export-keluar', 'export_keluar')->name('consumExportKeluar');
 
+        Route::get('consum/export/table/pdf', 'export_table_pdf')->name('consumExportTablePDF');
+
         Route::get('consum/yajra/show', 'consum_yajra_show');
         Route::get('consum/yajra/masuk', 'consum_yajra_masuk');
         Route::get('consum/yajra/keluar', 'consum_yajra_keluar');

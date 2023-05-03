@@ -368,7 +368,8 @@ class ConsumController extends Controller
     // Export From Excel
     public function export_table() // Export data consumable to excel
     {
-        return Excel::download(new ConsumExport, 'Consumable.xlsx');
+        $consum = Consum::select('id', 'nama_barang', 'itemcode', 'jumlah', 'satuan', 'kondisi', 'note', 'lokasi')->get();
+        return Excel::download(new ConsumExport($consum), 'Consumable.xlsx');
     }
 
     public function export_masuk() // Export data consum masuk to excel
@@ -379,6 +380,15 @@ class ConsumController extends Controller
     public function export_keluar() // Export data consum keluar to excel
     {
         return Excel::download(new ConsumKeluarExport, 'ConsumKeluar.xlsx');
+    }
+
+
+
+
+    // Export PDF
+    public function export_pdf()
+    {
+
     }
 
 

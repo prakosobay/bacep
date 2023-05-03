@@ -5,15 +5,19 @@
     <h1 class="h3 my-3 text-gray-800 text-center">Data Barang Consumable</h1>
     <div class="card shadow mb-4">
         <div class="card-header py-1">
-            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Import CSV
             </button>
 
-            <a href="{{ route('consumExportTable') }}" type="button" class="btn btn-secondary btn-sm mx-1 my-1">
-                Export
+            <a href="{{ route('consumExportTable') }}" type="button" class="btn btn-success btn-sm mx-1 my-1">
+                Export Excel
             </a>
 
-            <a href="{{ route('consumCreateShow') }}" type="button" class="btn btn-success btn-sm mx-1 my-1" >
+            {{-- <a href="{{ route('consumExportTablePDF') }}" type="button" class="btn btn-danger btn-sm mx-1 my-1">
+                Export PDF
+            </a> --}}
+
+            <a href="{{ route('consumCreateShow') }}" type="button" class="btn btn-primary btn-sm mx-1 my-1" >
                 <strong>Tambahkan Barang Consumable Baru</strong>
             </a>
 
