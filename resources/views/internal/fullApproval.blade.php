@@ -96,7 +96,7 @@
 </div>
 
 @push('scripts')
-    {{-- <script>
+    <script>
         $(function() {
             $('#internal').DataTable({
                 processing: true,
@@ -114,6 +114,6 @@
                 ]
             });
         });
-    </script> --}}
+    </script>
 @endpush
 @endsection

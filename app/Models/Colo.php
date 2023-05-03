@@ -34,9 +34,9 @@ class Colo extends Model
         return $this->belongsTo(MasterCard::class, 'm_card_id');
     }
 
-    public function visitors()
+    public function coloFull()
     {
-        return $this->hasMany(ColoVisitor::class, 'colo_id');
+        return $this->hasOne(ColoFull::class, 'colo_id');
     }
 
     public function histories()

@@ -18,7 +18,7 @@ Route::middleware(['guest'])->group(function () {
 
 Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::controller(AuthController::class)->group(function() {
 
@@ -191,6 +191,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('consum-export-table', 'export_table')->name('consumExportTable');
         Route::get('consum-export-masuk', 'export_masuk')->name('consumExportMasuk');
         Route::get('consum-export-keluar', 'export_keluar')->name('consumExportKeluar');
+
+        Route::get('consum/export/table/pdf', 'export_table_pdf')->name('consumExportTablePDF');
 
         Route::get('consum/yajra/show', 'consum_yajra_show');
         Route::get('consum/yajra/masuk', 'consum_yajra_masuk');

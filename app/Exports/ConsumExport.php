@@ -2,24 +2,24 @@
 
 namespace App\Exports;
 
-use App\Models\Consum;
-use Maatwebsite\Excel\Concerns\FromCollection;
-use Maatwebsite\Excel\Concerns\WithHeadings;
-use PhpOffice\PhpSpreadsheet\Shared\Date;
-use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
-use Maatwebsite\Excel\Concerns\WithColumnFormatting;
-use Maatwebsite\Excel\Concerns\WithMapping;
-use Maatwebsite\Excel\Concerns\WithStyles;
+use Maatwebsite\Excel\Concerns\{FromCollection, ShouldAutoSize, WithHeadings, WithStyles};
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class ConsumExport implements FromCollection, WithHeadings, WithStyles
+class ConsumExport implements FromCollection, WithHeadings, WithStyles, ShouldAutoSize
 {
     /**
     * @return \Illuminate\Support\Collection
     */
+
+    protected $consum;
     public function collection()
     {
-        return Consum::all();
+        return $this->consum;
+    }
+
+    public function __construct($consum)
+    {
+        $this->consum = $consum;
     }
 
     public function headings(): array
@@ -36,10 +36,23 @@ class ConsumExport implements FromCollection, WithHeadings, WithStyles
         ];
     }
 
+    public function map($consum): array
+    {
+        return [
+            $consum->id,
+            $consum->nama_barang,
+            isset($consum->itemcode) ? $consum->itemcode : null,
+            $consum->jumlah,
+            $consum->satuan,
+            $consum->kondisi,
+            $consum->note,
+            $consum->lokasi,
+        ];
+    }
+
     public function styles(Worksheet $sheet)
     {
         return [
-            // Style the first row as bold text.
             1    => ['font' => ['bold' => true]],
         ];
     }
