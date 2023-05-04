@@ -7,8 +7,8 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <a href="{{ route('consumExportKeluar') }}" type="button" class="btn btn-secondary mr-5 btn-sm" >
-                <strong>Export</strong>
+            <a href="{{ route('consumExportKeluar') }}" type="button" class="btn btn-success mr-1 btn-sm" >
+                <strong>Export Excel</strong>
             </a>
 
             <button type="button" class="btn btn-primary btn-sm mr-5" data-toggle="modal" data-target="#import_keluar">

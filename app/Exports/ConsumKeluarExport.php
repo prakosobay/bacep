@@ -2,21 +2,26 @@
 
 namespace App\Exports;
 
-use App\Models\ConsumKeluar;
-use Maatwebsite\Excel\Concerns\FromCollection;
-use Maatwebsite\Excel\Concerns\WithHeadings;
-use Maatwebsite\Excel\Concerns\WithStyles;
+use Maatwebsite\Excel\Concerns\{FromCollection, ShouldAutoSize, WithHeadings, WithStyles};
 
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class ConsumKeluarExport implements FromCollection, WithHeadings, WithStyles
+class ConsumKeluarExport implements FromCollection, WithHeadings, WithStyles, ShouldAutoSize
 {
     /**
     * @return \Illuminate\Support\Collection
     */
+    protected $keluar;
+    private $count = 1;
+
+    public function __construct($keluar)
+    {
+        $this->keluar = $keluar;
+    }
+
     public function collection()
     {
-        return ConsumKeluar::all();
+        return $this->keluar;
     }
 
     public function headings(): array
@@ -37,6 +42,19 @@ class ConsumKeluarExport implements FromCollection, WithHeadings, WithStyles
         return [
             // Style the first row as bold text.
             1    => ['font' => ['bold' => true]],
+        ];
+    }
+
+    public function map($keluar): array
+    {
+        return [
+            $this->count++,
+            $keluar->consum_id,
+            $keluar->nama_barang,
+            $keluar->jumlah,
+            $keluar->ket,
+            $keluar->pencatat,
+            $keluar->tanggal,
         ];
     }
 }
