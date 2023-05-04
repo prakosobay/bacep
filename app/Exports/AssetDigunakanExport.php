@@ -2,19 +2,26 @@
 
 namespace App\Exports;
 
-use Maatwebsite\Excel\Concerns\FromCollection;
-use App\Models\AssetUse;
-use Maatwebsite\Excel\Concerns\WithStyles;
+use Maatwebsite\Excel\Concerns\{FromCollection, ShouldAutoSize, WithStyles, WithHeadings};
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class AssetDigunakanExport implements FromCollection, WithStyles
+class AssetDigunakanExport implements FromCollection, WithStyles, WithHeadings, ShouldAutoSize
 {
     /**
     * @return \Illuminate\Support\Collection
     */
+
+    protected $digunakan;
+    private $count = 1;
+
+    public function __construct($digunakan)
+    {
+        $this->digunakan = $digunakan;
+    }
+
     public function collection()
     {
-        return AssetUse::all();
+        return $this->digunakan;
     }
 
     public function headings(): array
@@ -27,6 +34,19 @@ class AssetDigunakanExport implements FromCollection, WithStyles
             'Ket',
             'Pencatat',
             'tanggal',
+        ];
+    }
+
+    public function map($digunakan): array
+    {
+        return [
+            $this->count++,
+            $digunakan->asset_id,
+            $digunakan->nama_barang,
+            $digunakan->jumlah,
+            $digunakan->ket,
+            $digunakan->pencatat,
+            $digunakan->tanggal,
         ];
     }
 

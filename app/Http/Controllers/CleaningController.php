@@ -115,8 +115,8 @@ class CleaningController extends Controller
 
             // Send email notification
             foreach ([
-                'eri.iskandar@balitower.co.id', 'syukril@balitower.co.id', 'dennis.ocsadifa@balitower.co.id',
-                'ilham.pangestu@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'badai.sino@balitower.co.id',
+                'eri.iskandar@balitower.co.id', 'syukril@balitower.co.id', 'dennis.ocsadifa@balitower.co.id', 'cahyo.utomo@balitower.co.id', 'josua.marcellino@balitower.co.id',
+                'ilham.pangestu@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'badai.sino@balitower.co.id', 'sonang.sitinjak@balitower.co.id',
                 'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'riya.ully@balitower.co.id',
             ] as $recipient) {
                 Mail::to($recipient)->send(new NotifEmail($cleaning));
@@ -247,9 +247,9 @@ class CleaningController extends Controller
             $role_to = '';
             if ($lasthistoryC->role_to == 'review') {
                 foreach ([
-                    'eri.iskandar@balitower.co.id', 'syukril@balitower.co.id', 'dennis.ocsadifa@balitower.co.id',
-                    'ilham.pangestu@balitower.co.id', 'yufdi.syafnizal@balitower.co.id',
-                    'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id',
+                    'eri.iskandar@balitower.co.id', 'syukril@balitower.co.id', 'dennis.ocsadifa@balitower.co.id', 'sonang.sitinjak@balitower.co.id',
+                    'ilham.pangestu@balitower.co.id', 'yufdi.syafnizal@balitower.co.id', 'josua.marcellino@balitower.co.id',
+                    'khaidir.alamsyah@balitower.co.id', 'hendrik.andy@balitower.co.id', 'bayu.prakoso@balitower.co.id', 'cahyo.utomo@balitower.co.id',
                 ] as $recipient) {
                     Mail::to($recipient)->send(new NotifEmail($cleaning));
                 }

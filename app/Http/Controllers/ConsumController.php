@@ -374,12 +374,14 @@ class ConsumController extends Controller
 
     public function export_masuk() // Export data consum masuk to excel
     {
-        return Excel::download(new ConsumMasukExport, 'ConsumMasuk.xlsx');
+        $masuk = ConsumMasuk::select('id', 'consum_id', 'nama_barang', 'jumlah', 'ket', 'pencatat', 'tanggal')->get();
+        return Excel::download(new ConsumMasukExport($masuk), 'ConsumMasuk.xlsx');
     }
 
     public function export_keluar() // Export data consum keluar to excel
     {
-        return Excel::download(new ConsumKeluarExport, 'ConsumKeluar.xlsx');
+        $keluar = ConsumKeluar::select('id', 'consum_id', 'nama_barang', 'jumlah', 'ket', 'pencatat', 'tanggal')->get();
+        return Excel::download(new ConsumKeluarExport($keluar), 'ConsumKeluar.xlsx');
     }
 
 
