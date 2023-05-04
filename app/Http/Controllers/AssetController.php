@@ -383,7 +383,7 @@ class AssetController extends Controller
 
     public function update_itemcode(Request $request, $id)
     {
-        $validate = $request->validate([
+        $request->validate([
             'itemcode' => ['required', 'numeric', 'digits:6'],
         ]);
 
@@ -433,22 +433,26 @@ class AssetController extends Controller
     // Export excel
     public function export_asset() // Export data barang asset
     {
-        return Excel::download(new AssetExport, 'Asset.xlsx');
+        $table = Asset::select('id', 'nama_barang', 'itemcode', 'jumlah', 'digunakan', 'sisa', 'satuan', 'kondisi', 'note', 'lokasi')->get();
+        return Excel::download(new AssetExport($table), 'Asset.xlsx');
     }
 
     public function export_asset_masuk() // Export data barang masuk asset
     {
-        return Excel::download(new AssetMasukExport, 'AssetMasuk.xlsx');
+        $masuk = AssetMasuk::select('id', 'asset_id', 'nama_barang', 'jumlah', 'ket', 'pencatat', 'tanggal')->get();
+        return Excel::download(new AssetMasukExport($masuk), 'AssetMasuk.xlsx');
     }
 
     public function export_asset_keluar() // Export data barang keluar asset
     {
-        return Excel::download(new AssetKeluarExport, 'AssetKeluar.xlsx');
+        $keluar = AssetKeluar::select('id', 'asset_id', 'nama_barang', 'jumlah', 'ket', 'pencatat', 'tanggal')->get();
+        return Excel::download(new AssetKeluarExport($keluar), 'AssetKeluar.xlsx');
     }
 
     public function export_asset_digunakan()
     {
-        return Excel::download(new AssetDigunakanExport, 'AssetDigunakan.xlsx');
+        $digunakan = AssetUse::select('id', 'asset_id', 'nama_barang', 'jumlah', 'ket', 'pencatat', 'tanggal')->get();
+        return Excel::download(new AssetDigunakanExport($digunakan), 'AssetDigunakan.xlsx');
     }
 
 

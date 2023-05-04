@@ -7,7 +7,7 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <a href="{{ route('assetExportDigunakan')}}" type="button" class="btn btn-success mr-5 btn-sm" >
+            <a href="{{ route('assetExportDigunakan')}}" type="button" class="btn btn-success mr-1 btn-sm" >
                 <strong>Export Excel</strong>
             </a>
 

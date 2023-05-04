@@ -2,19 +2,26 @@
 
 namespace App\Exports;
 
-use App\Models\AssetKeluar;
-use Maatwebsite\Excel\Concerns\FromCollection;
-use Maatwebsite\Excel\Concerns\WithStyles;
+use Maatwebsite\Excel\Concerns\{FromCollection, ShouldAutoSize, WithStyles, WithHeadings};
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class AssetKeluarExport implements FromCollection, WithStyles
+class AssetKeluarExport implements FromCollection, WithStyles, WithHeadings, ShouldAutoSize
 {
     /**
     * @return \Illuminate\Support\Collection
     */
+
+    protected $keluar;
+    private $count = 1;
+
+    public function __construct($keluar)
+    {
+        $this->keluar = $keluar;
+    }
+
     public function collection()
     {
-        return AssetKeluar::all();
+        return $this->keluar;
     }
 
     public function headings(): array
@@ -27,6 +34,19 @@ class AssetKeluarExport implements FromCollection, WithStyles
             'Ket',
             'Pencatat',
             'Tanggal',
+        ];
+    }
+
+    public function map($keluar): array
+    {
+        return [
+            $this->count++,
+            $keluar->asset_id,
+            $keluar->nama_barang,
+            $keluar->jumlah,
+            $keluar->ket,
+            $keluar->pencatat,
+            $keluar->tanggal,
         ];
     }
 

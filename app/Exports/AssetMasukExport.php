@@ -2,20 +2,26 @@
 
 namespace App\Exports;
 
-use App\Models\AssetMasuk;
-use Maatwebsite\Excel\Concerns\FromCollection;
-use Maatwebsite\Excel\Concerns\WithHeadings;
-use Maatwebsite\Excel\Concerns\WithStyles;
+use Maatwebsite\Excel\Concerns\{FromCollection, ShouldAutoSize, WithStyles, WithHeadings};
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class AssetMasukExport implements FromCollection, WithHeadings, WithStyles
+class AssetMasukExport implements FromCollection, WithHeadings, WithStyles, ShouldAutoSize
 {
     /**
     * @return \Illuminate\Support\Collection
     */
+
+    protected $masuk;
+    private $count = 1;
+
+    public function __construct($masuk)
+    {
+        $this->masuk = $masuk;
+    }
+
     public function collection()
     {
-        return AssetMasuk::all();
+        return $this->masuk;
     }
 
     public function headings(): array
@@ -27,7 +33,20 @@ class AssetMasukExport implements FromCollection, WithHeadings, WithStyles
             'Jumlah',
             'Ket',
             'Pencatat',
-            'Lokasi',
+            'Tanggal',
+        ];
+    }
+
+    public function map($masuk): array
+    {
+        return [
+            $this->count++,
+            $masuk->asset_id,
+            $masuk->nama_barang,
+            $masuk->jumlah,
+            $masuk->ket,
+            $masuk->pencatat,
+            $masuk->tanggal,
         ];
     }
 
