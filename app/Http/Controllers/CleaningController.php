@@ -9,7 +9,7 @@ use Illuminate\Support\{Str, Carbon};
 use Maatwebsite\Excel\Facades\Excel;
 use Barryvdh\DomPDF\Facade as PDF;
 use App\Mail\{NotifEmail, NotifReject, NotifFull};
-use App\Models\{MasterOb, PilihanWork, Cleaning, CleaningHistory, CleaningFull, PenomoranCleaning};
+use App\Models\{AccessRequestNumber, ChangeRequestNumber, MasterOb, PilihanWork, Cleaning, CleaningHistory, CleaningFull, PenomoranCleaning};
 use Yajra\Datatables\Datatables;
 
 class CleaningController extends Controller
@@ -463,36 +463,50 @@ class CleaningController extends Controller
             'checkout_personil2' => ['required'],
         ]);
 
-        $getImage = $data['photo_personil'];
-        $getImage2 = $data['photo_personil2'];
-
-        // convert image1
-        $extension = explode('/', explode(':', substr($getImage, 0, strpos($getImage, ';')))[1])[1];   // .jpg .png .pdf
-        $replace = substr($getImage, 0, strpos($getImage, ',') + 1);
-        $image = str_replace($replace, '', $getImage);
-        $image = str_replace(' ', '+', $image);
-        $imageName = time() . '_1' . '.' . $extension;
-
-        //convert image2
-        $extension2 = explode('/', explode(':', substr($getImage2, 0, strpos($getImage2, ';')))[1])[1];   // .jpg .png .pdf
-        $replace2 = substr($getImage2, 0, strpos($getImage2, ',') + 1);
-        $image2 = str_replace($replace2, '', $getImage2);
-        $image2 = str_replace(' ', '+', $image2);
-        $imageName2 = time() . '_2' . '.' . $extension2;
-
-        // simpan gambar
-        Storage::disk('cleaningCheckout')->put($imageName, base64_decode($image));
-        Storage::disk('cleaningCheckout')->put($imageName2, base64_decode($image2));
-
-        $getFullCheckout = CleaningFull::where('cleaning_id', $id)->first();
-        $pic = $getFullCheckout->cleaning_id;
-
-        $last = DB::table('penomoran_cleanings')->latest()->first();
-        $penomoran = DB::table('penomoran_cleanings')->where('type', 'cleaning')->latest()->first();
-
         DB::beginTransaction();
 
         try {
+
+            $arNumber = $this->generateAR();
+            $crNumber = $this->generateCR();
+            AccessRequestNumber::create([
+                'permit_id' => $id,
+                'kode' => 'AR/BM/',
+                'number' => $arNumber . '/' . date('m') . '/' .  date('Y'),
+            ]);
+
+            ChangeRequestNumber::create([
+                'permit_id' => $id,
+                'kode' => 'CR/BM/',
+                'number' => $crNumber . '/' . date('m') . '/' . date('Y'),
+            ]);
+
+            $getImage = $data['photo_personil'];
+            $getImage2 = $data['photo_personil2'];
+
+            // convert image1
+            $extension = explode('/', explode(':', substr($getImage, 0, strpos($getImage, ';')))[1])[1];   // .jpg .png .pdf
+            $replace = substr($getImage, 0, strpos($getImage, ',') + 1);
+            $image = str_replace($replace, '', $getImage);
+            $image = str_replace(' ', '+', $image);
+            $imageName = time() . '_1' . '.' . $extension;
+
+            //convert image2
+            $extension2 = explode('/', explode(':', substr($getImage2, 0, strpos($getImage2, ';')))[1])[1];   // .jpg .png .pdf
+            $replace2 = substr($getImage2, 0, strpos($getImage2, ',') + 1);
+            $image2 = str_replace($replace2, '', $getImage2);
+            $image2 = str_replace(' ', '+', $image2);
+            $imageName2 = time() . '_2' . '.' . $extension2;
+
+            // simpan gambar
+            Storage::disk('cleaningCheckout')->put($imageName, base64_decode($image));
+            Storage::disk('cleaningCheckout')->put($imageName2, base64_decode($image2));
+
+            $getFullCheckout = CleaningFull::where('cleaning_id', $id)->first();
+            // $pic = $getFullCheckout->cleaning_id;
+
+            // $last = DB::table('penomoran_cleanings')->latest()->first();
+            // $penomoran = DB::table('penomoran_cleanings')->where('type', 'cleaning')->latest()->first();
 
             $getFullCheckout->update([
                 'checkout_personil' => $data['checkout_personil'],
@@ -570,6 +584,21 @@ class CleaningController extends Controller
         }
     }
 
+
+    // Penomoran
+    public function generateAR()
+    {
+        $count = AccessRequestNumber::select('id')->count();
+        $ar = str_pad(($count + 1), 5, '0', STR_PAD_LEFT);
+        return $ar;
+    }
+
+    public function generateCR()
+    {
+        $count = ChangeRequestNumber::select('id')->count();
+        $cr = str_pad(($count + 1), 5, '0', STR_PAD_LEFT);
+        return $cr;
+    }
 
 
     // Convert PDF
