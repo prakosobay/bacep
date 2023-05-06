@@ -109,6 +109,7 @@
                 </a>
             </li>
 
+            {{-- Colocation --}}
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseInternal"
                     aria-expanded="true" aria-controls="collapseInternal">
@@ -123,7 +124,7 @@
                 </div>
             </li>
 
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSurvey"
                     aria-expanded="true" aria-controls="collapseSurvey">
                     <i class="fas fa-fw fa-cog"></i>
@@ -135,9 +136,9 @@
                         <a class="collapse-item" href="#">Customer Survey</a>
                     </div>
                 </div>
-            </li>
+            </li> --}}
 
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseVendor"
                     aria-expanded="true" aria-controls="collapseVendor">
                     <i class="fas fa-fw fa-cog"></i>
@@ -153,8 +154,9 @@
                         <a class="collapse-item" href="#">Malika</a>
                     </div>
                 </div>
-            </li>
+            </li> --}}
 
+            {{-- BM --}}
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
@@ -169,13 +171,6 @@
                         <a class="collapse-item" href="{{ url('history/troubleshoot')}}">Troubleshoot</a>
                     </div>
                 </div>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="">
-                    <i class="far fa-user-circle"></i>
-                    <span>Permit Guest</span>
-                </a>
             </li>
 
             <!-- Sidebar Toggler (Sidebar) -->

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{HomeController, CleaningController, AdminController};
+use Maatwebsite\Excel\Row;
 
 Route::middleware(['guest'])->group(function () {
 
@@ -449,6 +450,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('order/form', 'order_form');
         Route::post('order/approve/{id}', 'order_approval');
         Route::post('order/store', 'order_store');
+    });
+
+    //Penomoran
+    Route::controller(PenomoranController::class)->group(function () {
+        Route::get('penomoran-ar', 'showAR')->name('penomoranShowAR');
+        Route::get('penomoran-cr', 'showCR')->name('penomoranShowCR');
     });
 
     //LogBook

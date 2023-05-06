@@ -9,7 +9,7 @@ use Illuminate\Support\{Str, Carbon};
 use Maatwebsite\Excel\Facades\Excel;
 use Barryvdh\DomPDF\Facade as PDF;
 use App\Mail\{NotifEmail, NotifReject, NotifFull};
-use App\Models\{AccessRequestNumber, MasterOb, PilihanWork, Cleaning, CleaningHistory, CleaningFull, PenomoranCleaning};
+use App\Models\{AccessRequestNumber, ChangeRequestNumber, MasterOb, PilihanWork, Cleaning, CleaningHistory, CleaningFull, PenomoranCleaning};
 use Yajra\Datatables\Datatables;
 
 class CleaningController extends Controller
@@ -468,13 +468,18 @@ class CleaningController extends Controller
         try {
 
             $arNumber = $this->generateAR();
-            // dd($arNumber);
-            $create = AccessRequestNumber::create([
+            $crNumber = $this->generateCR();
+            AccessRequestNumber::create([
                 'permit_id' => $id,
                 'kode' => 'AR/BM/',
-                'number' => $arNumber . '/' . date('m') . '/'.  date('Y'),
+                'number' => $arNumber . '/' . date('m') . '/' .  date('Y'),
             ]);
-            dd($create);
+
+            ChangeRequestNumber::create([
+                'permit_id' => $id,
+                'kode' => 'CR/BM/',
+                'number' => $crNumber . '/' . date('m') . '/' . date('Y'),
+            ]);
 
             $getImage = $data['photo_personil'];
             $getImage2 = $data['photo_personil2'];
@@ -498,10 +503,10 @@ class CleaningController extends Controller
             Storage::disk('cleaningCheckout')->put($imageName2, base64_decode($image2));
 
             $getFullCheckout = CleaningFull::where('cleaning_id', $id)->first();
-            $pic = $getFullCheckout->cleaning_id;
+            // $pic = $getFullCheckout->cleaning_id;
 
-            $last = DB::table('penomoran_cleanings')->latest()->first();
-            $penomoran = DB::table('penomoran_cleanings')->where('type', 'cleaning')->latest()->first();
+            // $last = DB::table('penomoran_cleanings')->latest()->first();
+            // $penomoran = DB::table('penomoran_cleanings')->where('type', 'cleaning')->latest()->first();
 
             $getFullCheckout->update([
                 'checkout_personil' => $data['checkout_personil'],
@@ -510,7 +515,6 @@ class CleaningController extends Controller
                 'photo_checkout_personil2' => $imageName2,
                 'status' => 'Full Approved',
             ]);
-
 
             // if($last == null){
 
@@ -581,13 +585,21 @@ class CleaningController extends Controller
     }
 
 
-
+    // Penomoran
     public function generateAR()
     {
         $count = AccessRequestNumber::select('id')->count();
-        $add = $count + 1;
-        return $add;
+        $ar = str_pad(($count + 1), 5, '0', STR_PAD_LEFT);
+        return $ar;
     }
+
+    public function generateCR()
+    {
+        $count = ChangeRequestNumber::select('id')->count();
+        $cr = str_pad(($count + 1), 5, '0', STR_PAD_LEFT);
+        return $cr;
+    }
+
 
     // Convert PDF
     public function cetak_cleaning_pdf($id) // convert to pdf
